@@ -589,38 +589,38 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch5_after_riftcall' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch5_after_riftcall' }},
             { 'event_type': 'show_npc', 'params': { 'npc_id': 'astra_wynn', 'location': 'city_number_5_region_city_shopitems' }},
-            { 'event_type': 'award_task', 'params': { 'task_id': 'mmet_astra_wynn_go_back' }},
+            { 'event_type': 'award_task', 'params': { 'task_id': 'meet_astra_wynn_go_back' }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch5_meet_dorian_pikefall' }}
         ]
     },
     {
-        'task_id': 'mmet_astra_wynn_go_back',
+        'task_id': 'meet_astra_wynn_go_back',
         'type': 'meet',
         'to_type': 'npc',
         'to_id': 'astra_wynn',
         'task_acquire_events': [
-            { 'event_type': 'remove_task', 'params': { 'task_id': 'mmet_astra_wynn_go_forward' }}
+            { 'event_type': 'remove_task', 'params': { 'task_id': 'meet_astra_wynn_go_forward' }}
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'astra_wynn', 'dialog_id': 'astra_ch5_teleporting_to_highsteeple_crossing' }},
             { 'event_type': 'show_npc', 'params': { 'npc_id': 'astra_wynn', 'location': 'city_number_3_region_city_shopitems' }},
             { 'event_type': 'set_player_location', 'params': { 'location': 'city_number_3_region_city_shopitems' }},
-            { 'event_type': 'award_task', 'params': { 'task_id': 'mmet_astra_wynn_go_forward' }}
+            { 'event_type': 'award_task', 'params': { 'task_id': 'meet_astra_wynn_go_forward' }}
         ]
     },
     {
-        'task_id': 'mmet_astra_wynn_go_forward',
+        'task_id': 'meet_astra_wynn_go_forward',
         'type': 'meet',
         'to_type': 'npc',
         'to_id': 'astra_wynn',
         'task_acquire_events': [
-            { 'event_type': 'remove_task', 'params': { 'task_id': 'mmet_astra_wynn_go_back' }}
+            { 'event_type': 'remove_task', 'params': { 'task_id': 'meet_astra_wynn_go_back' }}
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'astra_wynn', 'dialog_id': 'astra_ch5_teleporting_to_brinewood_harbor' }},
             { 'event_type': 'show_npc', 'params': { 'npc_id': 'astra_wynn', 'location': 'city_number_5_region_city_shopitems' }},
             { 'event_type': 'set_player_location', 'params': { 'location': 'city_number_5_region_city_shopitems' }},
-            { 'event_type': 'award_task', 'params': { 'task_id': 'mmet_astra_wynn_go_back' }}
+            { 'event_type': 'award_task', 'params': { 'task_id': 'meet_astra_wynn_go_back' }}
         ]
     },
     {

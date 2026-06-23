@@ -372,7 +372,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch7_airship_ready' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch7_airship_ready' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch7_airship_ready' }},
-            { 'event_type': 'remove_task', 'params': { 'task_id': 'mmet_astra_wynn_go_back' }},
+            { 'event_type': 'remove_task', 'params': { 'task_id': 'meet_astra_wynn_go_back' }},
             { 'event_type': 'advance_chapter' }
         ]
     }
