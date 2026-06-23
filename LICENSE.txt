@@ -1,21 +1,67 @@
-MIT License
+AITextAdventure Personal Use License
 
-Copyright (c) [year] [fullname]
+Version 1.0 
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Copyright (c) 2026 Jessie Lulham 
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Permission is granted to any individual or organization to download, install, and use this software for personal, educational, or internal evaluation purposes, subject to the terms below. 
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+1. PERMITTED USES
+
+You may: 
+
+- Use the software for personal, non-commercial purposes.
+
+- Modify the software for your own private use.
+
+- Create derivative works for your own personal use. 
+
+2. RESTRICTIONS 
+
+You may NOT: 
+
+- Redistribute, share, publish, upload, transmit, or otherwise make the software available to any third party.
+
+- Sell, rent, lease, sublicense, or commercially exploit the software.
+
+- Include the software, in whole or in part, within another product, service, or software package.
+
+- Distribute modified versions of the software.
+
+- Remove or alter any copyright, license, or ownership notices. 
+
+3. COMMERCIAL USE 
+
+Any commercial use of this software requires prior written permission from the copyright holder. 
+
+Commercial use includes, but is not limited to: 
+
+- Selling software or services based on this software.
+
+- Using this software within revenue-generating products or services.
+
+- Bundling this software with commercial offerings.
+
+- Hosting or offering the software as a service to third parties. 
+
+For commercial licensing inquiries, contact:
+
+lulhamjessie@aol.com 
+
+4. OWNERSHIP 
+
+This software is licensed, not sold. All rights, title, and interest in the software remain the exclusive property of the copyright holder. 
+
+5. TERMINATION 
+
+This license automatically terminates if any of its terms are violated. Upon termination, all copies of the software must be destroyed. 
+
+6. DISCLAIMER OF WARRANTY
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+7. LIMITATION OF LIABILITY
+
+IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+By downloading, installing, or using this software, you agree to the terms of this license.
