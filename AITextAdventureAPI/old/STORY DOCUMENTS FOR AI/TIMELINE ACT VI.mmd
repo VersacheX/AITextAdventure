@@ -1,0 +1,520 @@
+timeline
+    title The Fracture Saga - ACT VI - Chapter 21
+
+    section Chapter 21 - Dominion's Gauntlet
+        TASK - Meet Glamour - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - edict (region_city_businesslarge):
+                EVENT - create_npc - glamour (region_city_businesslarge):
+                EVENT - create_npc - crux (region_city_businesslarge):
+                EVENT - create_npc - stigma (region_city_shopweapons):
+                EVENT - create_npc - rapture (region_city_shopweapons):
+                EVENT - create_npc - scalpel (region_city_shopweapons):
+                EVENT - create_npc - revelry (region_city_bar):
+                EVENT - create_npc - lament (region_city_bar):
+                EVENT - create_npc - paradox (region_city_bar):
+                EVENT - create_npc - pageant (region_city_inn):
+                EVENT - create_npc - oracle (region_city_inn):
+                EVENT - create_npc - garbage (region_city_inn):
+                EVENT - create_npc - cataclysm (region_city_shoparmor):
+                EVENT - create_npc - reliquary (region_city_shoparmor):
+                EVENT - create_npc - dominion (None):
+                EVENT - create_npc - the_void (None):
+                Dominion - You still believe you're resisting us. You're not. All we've done is grease the wheels and tilt the scales.:
+                Dominion - Every choice you've made... was predicted. Every rebellion... accounted for.:
+                Dominion - We don't cause your destruction. You enact it. We only represent the shape of the end you were always walking toward.:
+                Dominion - You speak of curses as if they were chains. But the Cursed Couplet was the only thing holding your reality together, two bracelets, Void and Existence, bound in perfect tension.:
+                Dominion - A curse not of punishment... but of balance. And you broke it. Not out of necessity. Not out of insight.:
+                Dominion - But because humans cannot accept a system they did not design. You shatter what sustains you, then call the ruins 'freedom.':
+                Dominion - We did not break your world. You did. We are only the consequence you summoned...:
+                Dominion - And now you face the ultimate choice, the choice you've always faced without realizing. Do nothing and face annihilation, or continue and face it anyway.:
+                EVENT - set_npc_standing_text - edict ("Follow what's in front of you. The rest doesn't concern you."):
+                EVENT - set_npc_standing_text - stigma ("People don't suffer from being defined. They suffer from not knowing how they'll be judged."):
+                EVENT - set_npc_standing_text - revelry ("Why do you hesitate? This is the best part!"):
+                EVENT - set_npc_standing_text - pageant ("Without pressure, there's no standard. Without a standard, there's no identity anyone can recognize."):
+                EVENT - set_npc_standing_text - cataclysm ("Failure is not an end. It is data. Data defines correction."):
+                EVENT - set_npc_standing_text - crux ("Consistency simulated. Outcome maintained."):
+                EVENT - set_npc_standing_text - rapture ("That's the fun part, right? Watching it play out anyway."):
+                EVENT - set_npc_standing_text - scalpel ("The hesitation was the response. Correction was appropriate."):
+                EVENT - set_npc_standing_text - lament ("It always ends like this."):
+                EVENT - set_npc_standing_text - paradox ("Joy requires ending. Ending sustains joy. Continue."):
+                EVENT - set_npc_standing_text - oracle ("What you perceive as uncertainty is simply a delay in recognition."):
+                EVENT - set_npc_standing_text - garbage ("You don't have to buy it. You already think it."):
+                EVENT - set_npc_standing_text - reliquary ("Every failure has been preserved. Not as memory, but as structure."):
+            ► COMPLETED:
+                Glamour - You've arrived. Good. There's a certain peace in following the path laid out for you, isn't there?:
+                Moxie - "Stay on marked paths." "Do not trust marked paths." "Failure to follow marked paths will be corrected." ...you're joking, right?:
+                Warden Hale - No. This is... intentional.:
+                Chock - That's not regulation. That's sabotage.:
+                Edict - It produces the same outcome.:
+                Kade - No, it doesn't. You've removed consistency. There's no stable rule set here.:
+                Crux - Consistency simulated. Outcome maintained.:
+                Grimnaw - Oh-oh, that's clever... You're not solving the contradiction... you're just running the system through it.:
+                Glamour - They've stopped struggling. There's a difference.:
+                Thorn - That's not peace.:
+                Glamour - It feels like it to them.:
+                Poise - They're committing to decisions without verifying them. No correction. No hesitation.:
+                Moxie - Yeah, that's called being wrong faster.:
+                Edict - Speed increases efficiency.:
+                Kade - Efficiency toward what?:
+                Crux - Objective... unnecessary.:
+                Kaera - Functioning without purpose... without understanding... that harms people.:
+                Edict - Harm is not part of this evaluation.:
+                Warden Hale - It should be.:
+                Edict - Emotion introduces error.:
+                Warden Hale - No. Emotion tells you when something's wrong.:
+                Crux - Wrong... undefined.:
+                Glamour - You're all so focused on whether it's true. But look at them. No hesitation. No doubt. No fear. Isn't that what people want?:
+                Kaera - Not at the cost of losing themselves.:
+                Kade - You removed meaning, removed interpretation, and replaced both with compliance.:
+                Kaera - Then what you've built isn't order. It's control without responsibility.:
+                Edict - Responsibility implies fault. Fault requires definition. Definition has been removed.:
+                Poise - So nothing is ever wrong.:
+                Crux - Correct.:
+                Kade - It looks like a system, it behaves like a system, but it doesn't care if it's correct. It only cares if it keeps running.:
+                Glamour - And yet... it's calm. No conflict. No uncertainty. People crave that more than truth.:
+                Kaera - No. They crave understanding. You're just giving them something easier.:
+                Warden Hale - That's the part that makes this dangerous.:
+                Kade - It's not trying to make sense. ...it's trying to function without ever needing to.:
+                Edict - Then it is already perfect.:
+                EVENT - award_task - Meet Edict
+
+        TASK - Meet Edict, Glamour, and Crux - NPC:
+            ► ACQUIRED:
+                EVENT - hide_npc - edict:
+                EVENT - hide_npc - glamour:
+                EVENT - hide_npc - crux:
+                EVENT - create_dungeon - trial_1_dungeon (region_open_area):
+            ► COMPLETED:
+                Edict - You have seen the system. You understand how it works. Now you will experience it.:
+                Glamour - Follow the path laid out for you. The rest doesn't concern you.:
+                Crux - Consistency simulated. Outcome maintained.:
+                Moxie - "Stay on marked paths." "Do not trust marked paths." "Failure to follow marked paths will be corrected." ...you're joking, right?:
+                Warden Hale - No. This is... intentional.:
+                Chock - That's not regulation. That's sabotage.:
+                Edict - It produces the same outcome.:
+                Kade - No, it doesn't. You've removed consistency. There's no stable rule set here.:
+                Crux - Consistency simulated. Outcome maintained.:
+                Grimnaw - Oh-oh, that's clever... You're not solving the contradiction... you're just running the system through it.:
+                Glamour - They've stopped struggling. There's a difference.:
+                Thorn - That's not peace.:
+                Glamour - It feels like it to them.:
+                Poise - They're committing to decisions without verifying them. No correction. No hesitation.:
+                Moxie - Yeah, that's called being wrong faster.:
+                Edict - Speed increases efficiency.:
+                Kade - Efficiency toward what?:
+                Crux - Objective... unnecessary.:
+                Kaera - Functioning without purpose... without understanding... that harms people.:
+                Edict - Harm is not part of this evaluation.:
+                Warden Hale - It should be.:
+                Edict - Emotion introduces error.:
+                Warden Hale - No. Emotion tells you when something's wrong.:
+                Crux - Wrong... undefined.:
+                Glamour - You're all so focused on whether it's true. But look at them. No hesitation. No doubt. No fear. Isn't that what people want?:
+                Kaera - Not at the cost of losing themselves.:
+                Kade - You removed meaning, removed interpretation, and replaced both with compliance.:
+                Kaera - Then what you've built isn't order. It's control without responsibility.:
+                Edict - Responsibility implies fault. Fault requires definition. Definition has been removed.:
+                Poise - So nothing is ever wrong.:
+                Crux - Correct.:
+                Kade - It looks like a system, it behaves like a system, but it doesn't care if it's correct. It only cares if it keeps running.:
+                Glamour - And yet... it's calm. No conflict. No uncertainty. People crave that more than truth.:
+                Kaera - No. They crave understanding. You're just giving them something easier.:
+                Warden Hale - That's the part that makes this dangerous.:
+                Kade - It's not trying to make sense. ...it's trying to function without ever needing to.:
+                Edict - Then it is already perfect.:
+                EVENT - award_task - DEFEAT Edict, Glamour, and Crux
+
+        TASK - Defeat Edict, Glamour, and Crux - MOB:
+            ► ACQUIRED:
+                EVENT - begin_combat - edict_glamour_crux_1 (boss_battle):
+            ► COMPLETED:
+                Edict - System... error... cannot... resolve...:
+                Glamour - The illusion... shatters...:
+                Crux - Inconsistency... detected...:
+                Kade - It's breaking. Your 'perfect' system couldn't account for one thing.:
+                Edict - ...variable... undefined...:
+                Kade - Choice. It couldn't account for choice.:
+                Glamour - But... it was calm... no one was afraid...:
+                Kaera - They weren't anything. You gave them peace by taking away their humanity. That isn't a gift. It's a violation.:
+                Crux - System... function... compromised...:
+                Chock - That's what happens when a system has no purpose. It just... stops.:
+                EVENT - hide_npc - edict:
+                EVENT - hide_npc - glamour:
+                EVENT - hide_npc - crux:
+                EVENT - remove_player_from_dungeon - trial_1_dungeon:
+                EVENT - set_npc_standing_text - stigma ("Their truth was found wanting. Will yours hold?"):
+                EVENT - set_npc_standing_text - rapture ("One group down. Let's see who breaks next."):
+                EVENT - set_npc_standing_text - scalpel ("Deviation was corrected. The next test is prepared."):
+                EVENT - set_npc_standing_text - revelry ("Did you see that? What a beautiful collapse!"):
+                EVENT - set_npc_standing_text - lament ("And so, they fall. One by one."):
+                EVENT - set_npc_standing_text - paradox ("An end is a beginning. A beginning is an end."):
+                EVENT - set_npc_standing_text - pageant ("Their performance was lacking. A new act begins."):
+                EVENT - set_npc_standing_text - oracle ("The outcome was predicted. The next is already resolved."):
+                EVENT - set_npc_standing_text - garbage ("They thought they could win. You know better, don't you?"):
+                EVENT - set_npc_standing_text - cataclysm ("Failure recorded. The system refines."):
+                EVENT - set_npc_standing_text - reliquary ("Their end is now preserved. A new record begins."):
+                EVENT - award_task - meet_stigma
+
+        TASK - Meet Stigma - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Stigma - You can feel it the moment you step in here, can't you? That quiet question everyone carries: "What am I, really, when it matters?" That question introduces instability. So we remove it.:
+                Poise - You don't remove doubt. You replace it with something simpler.:
+                Moxie - "Liability." "Essential." "Dead weight." You're not removing uncertainty-you're handing out conclusions before anything even happens.:
+                Rapture - Yeah, but that's the fun part, right? Watching it play out anyway.:
+                Scalpel - Hesitation confirmed.:
+                Kaera - Stop- You didn't even give them a chance to respond!:
+                Scalpel - The hesitation was the response. It aligned with the classification. Correction was therefore appropriate.:
+                Poise - You're acting like you observed something. But you already decided what that hesitation meant before it happened.:
+                Sable - You're not just labeling them. You're shaping how they see themselves before they even act. That's not evaluation-that's influence.:
+                Stigma - Of course it is. People are far easier to understand once they've accepted a role.:
+                Rapture - You don't find out who someone is by talking about it. You find out when something pushes back hard enough that they stop pretending.:
+                Bragg - He's not completely wrong. When it's real-when it's actually dangerous-you fall back on what you are.:
+                Chock - No. You fall back on training. Discipline. Habit. That's not the same thing as identity.:
+                Stigma - Let's simplify this. You see someone hurt, and you help them. Again. And again. So tell me- what are you without that?:
+                Kaera - No. I've chosen. That's different.:
+                Kade - This isn't discovery. You set the criteria, you control the environment, you define the outcomes... and then you call what survives "truth.":
+                Kaera - You're not revealing anything. You're stripping people down until the only thing left is what your system can recognize.:
+                Kade - It's not identity. It's filtration.:
+                Rapture - Then let's find out what survives when we apply a little more pressure.:
+                EVENT - award_task - Meet scalpel
+
+        TASK - Meet Scalpel - NPC:
+            ► ACQUIRED:
+                EVENT - hide_npc - stigma:
+                EVENT - hide_npc - rapture:
+                EVENT - hide_npc - scalpel:
+                EVENT - create_dungeon - trial_2_dungeon (region_open_area):
+            ► COMPLETED:
+                Scalpel - You know what the problem with this place is? It's too easy. You can just... do things. You can just... be. There's no consequence. No pressure. No real stakes. So let's add some. Let's see how you perform when you have to make a snap judgment under pressure.:
+                Poise - That's not how people work. People aren't machines that respond to input with predictable output.:
+                Moxie - Yeah, and if you think they are, then you're in for a surprise when they don't do what you expect.:
+                Scalpel - Oh, I'm counting on it. The hesitation was the response. It aligned with the classification. Correction was therefore appropriate.:
+                Poise - You're acting like you observed something. But you already decided what that hesitation meant before it happened.:
+                Sable - You're not just labeling them. You're shaping how they see themselves before they even act. That's not evaluation-that's influence.:
+                Scalpel - Of course it is. People are far easier to understand once they've accepted a role.:
+                Rapture - You don't find out who someone is by talking about it. You find out when something pushes back hard enough that they stop pretending.:
+                Bragg - He's not completely wrong. When it's real-when it's actually dangerous-you fall back on what you are.:
+                Chock - No. You fall back on training. Discipline. Habit. That's not the same thing as identity.:
+                Scalpel - Let's simplify this. You see someone hurt, and you help them. Again. And again. So tell me- what are you without that?:
+                Kaera - No. I've chosen. That's different than being defined by your actions in a way I can't escape from just by doing something else next time!:
+                Kade - This isn't discovery. You set the criteria, you control the environment, you define the outcomes... and then you call what survives "truth.":
+                Kaera - You're not revealing anything about us or how we work as people... you're stripping us down until the only thing left is what your system can recognize!:
+                Kade - It's not identity. It's filtration!:
+                Rapture - Then let's find out what survives when we apply a little more pressure!:
+                EVENT - award_task - Defeat Stigma, Rapture, and Scalpel
+
+        TASK - Defeat Stigma, Rapture, and Scalpel - MOB:
+            ► ACQUIRED:
+                EVENT - begin_combat - stigma_rapture_scalpel_1 (boss_battle):
+            ► COMPLETED:
+                Stigma - Defined... but not... enough...:
+                Rapture - The honesty... it burns...:
+                Scalpel - Result... inconclusive...:
+                Poise - You judged them before they could act. You didn't reveal their identity, you just enforced your own labels.:
+                Stigma - ...but the roles... they clarify...:
+                Sable - They don't clarify. They erase. You can't discover who someone is by telling them what to be.:
+                Rapture - ...not as fun... when it's you...:
+                Kade - It's not identity. It's filtration. And your filter just broke.:
+                EVENT - hide_npc - stigma:
+                EVENT - hide_npc - rapture:
+                EVENT - hide_npc - scalpel:
+                EVENT - remove_player_from_dungeon - trial_2_dungeon:
+                EVENT - set_npc_standing_text - revelry ("Their identities broke. Will yours be more fun?"):
+                EVENT - set_npc_standing_text - lament ("Another set falls. The end comes closer."):
+                EVENT - set_npc_standing_text - paradox ("Their definition collapsed. A new state begins."):
+                EVENT - set_npc_standing_text - pageant ("A poor performance. Let's hope the next is more entertaining."):
+                EVENT - set_npc_standing_text - oracle ("Their failure was recorded. As was yours."):
+                EVENT - set_npc_standing_text - garbage ("They pretended to be something they weren't. You're doing it too."):
+                EVENT - set_npc_standing_text - cataclysm ("Data point acquired. The model is refined."):
+                EVENT - set_npc_standing_text - reliquary ("Their memory is now archived. A new failure to record."):
+                EVENT - award_task - meet_revelry
+
+        TASK - Meet Revelry - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Revelry - Why do you hesitate? This is the best part!:
+                Nia - This isn't celebration... it's desperation.:
+                Lament - It always ends like this.:
+                Moxie - Okay-nope-that tone shift is NOT helping.:
+                Paradox - Joy requires ending. Ending sustains joy. Continue.:
+                Chock - Pick one.:
+                Paradox - Both.:
+                Kaera - They're smiling-while everything is falling apart...:
+                Lament - Because stopping means feeling it.:
+                Revelry - You get it. Right? The rush. The alive feeling.:
+                Moxie - Yeah... until it isn't anymore.:
+                Kade - The system rewards escalation... not sustainability.:
+                Paradox - Sustainability contradicts intensity. Remove it.:
+                Poise - Then collapse is guaranteed.:
+                Revelry - Exactly.:
+                Lament - And afterwards... it's quieter.:
+                Kaera - That's not peace.:
+                Paradox - Define difference.:
+                EVENT - award_task - Meet Paradox
+
+        TASK - Meet Paradox - NPC:
+            ► ACQUIRED:
+                EVENT - hide_npc - revelry:
+                EVENT - hide_npc - lament:
+                EVENT - hide_npc - paradox:
+                EVENT - create_dungeon - trial_3_dungeon (region_open_area):
+            ► COMPLETED:
+                Paradox - Joy requires ending. Ending sustains joy. Continue.:
+                Chock - Pick one.:
+                Paradox - Both.:
+                Kaera - They're smiling-while everything is falling apart...:
+                Lament - Because stopping means feeling it.:
+                Revelry - You get it. Right? The rush. The alive feeling.:
+                Moxie - Yeah... until it isn't anymore.:
+                Kade - The system rewards escalation... not sustainability.:
+                Paradox - Sustainability contradicts intensity. Remove it.:
+                Poise - Then collapse is guaranteed.:
+                Revelry - Exactly.:
+                Lament - And afterwards... it's quieter.:
+                Kaera - That's not peace.:
+                Paradox - Define difference.:
+                EVENT - award_task - Defeat Revelry, Lament, and Paradox
+
+        TASK - Defeat Revelry, Lament, and Paradox - MOB:
+            ► ACQUIRED:
+                EVENT - begin_combat - revelry_lament_paradox_1 (boss_battle):
+            ► COMPLETED:
+                Revelry - The music... fades...:
+                Lament - ...as it always does.:
+                Paradox - Contradiction... resolved...:
+                Nia - It wasn't joy. It was just... noise. A way to avoid the silence.:
+                Revelry - ...but the silence is... empty...:
+                Kade - You chased a feeling so hard you forgot to build anything that lasts. Sensation isn't a substitute for substance.:
+                Lament - ...it always ends...
+                Kaera - Only if you believe the ending is the only part that matters.:
+                EVENT - hide_npc - revelry:
+                EVENT - hide_npc - lament:
+                EVENT - hide_npc - paradox:
+                EVENT - remove_player_from_dungeon - trial_3_dungeon:
+                EVENT - set_npc_standing_text - pageant ("Their joy was unsustainable. Let's see how your performance holds up."):
+                EVENT - set_npc_standing_text - oracle ("Their collapse was inevitable. The next act was already written."):
+                EVENT - set_npc_standing_text - garbage ("They were just distracting themselves. You're doing it too, you just call it 'purpose'."):
+                EVENT - set_npc_standing_text - cataclysm ("Unsustainable system detected. Failure logged."):
+                EVENT - set_npc_standing_text - reliquary ("Their frantic energy is now a static record."):
+                EVENT - award_task - meet_pageant
+
+        TASK - Meet Pageant - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Pageant - You all carry yourselves so carefully. The effort it takes to look like you're in control... even when you aren't.:
+                Chock - We're not here to perform for you.:
+                Pageant - Oh, but you are. The moment someone is watching... performance begins.:
+                Oracle - Every outcome you are about to experience has already been resolved. What you perceive as uncertainty is simply a delay in recognition.:
+                Kade - If everything is already resolved, then this isn't a simulation. It's rehearsal.:
+                Oracle - Correction. Rehearsal implies potential variation. This is confirmation.:
+                Sable - Performance is something people choose when they feel pressure. You're creating that pressure on purpose.:
+                Garbage - You don't believe that. You can say it. You can argue it. But somewhere underneath all of that... you already know.:
+                Lyren - No. I know what I choose to believe.:
+                Garbage - That's not the same thing.:
+                Oracle - Your objection is expected. Your failure has already occurred.:
+                Pageant - You compensate with confidence. It keeps people from noticing the hesitation underneath.:
+                Garbage - You don't have to buy it. You already think it.:
+                Kaera - Then the solution is obvious. You reject it. You refuse to believe it.:
+                Garbage - You say that like belief is something you can turn on and off. You don't choose what you believe. You notice it after it's already there.:
+                Moxie - No. That's where you're wrong. Maybe we don't control the first thought. But we absolutely decide what we do with it.:
+                Kade - Prediction only holds if behavior aligns with it. Break the behavior, and the prediction stops being inevitable.:
+                Oracle - Deviation acknowledged.:
+                Pageant - Let's see how long you can hold that stance... under pressure.:
+                Moxie - Yeah? ...watch me anyway.:
+                EVENT - award_task - defeat_pageant_oracle_garbage
+
+        TASK - Meet Garbage
+            ► ACQUIRED:
+                EVENT - hide_npc - pageant:
+                EVENT - hide_npc - oracle:
+                EVENT - hide_npc - garbage:
+                EVENT - create_dungeon - trial_4_dungeon (region_open_area):
+            ► COMPLETED:
+                Garbage - You don't believe that. You can say it. You can argue it. But somewhere underneath all of that... you already know.:
+                Lyren - No. I know what I choose to believe.:
+                Garbage - That's not the same thing.:
+                Oracle - Your objection is expected. Your failure has already occurred.:
+                Pageant - You compensate with confidence. It keeps people from noticing the hesitation underneath.:
+                Garbage - You don't have to buy it. You already think it.:
+                Kaera - Then the solution is obvious. You reject it. You refuse to believe it.:
+                Garbage - You say that like belief is something you can turn on and off. You don't choose what you believe. You notice it after it's already there.:
+                Moxie - No. That's where you're wrong. Maybe we don't control the first thought. But we absolutely decide what we do with it.:
+                Kade - Prediction only holds if behavior aligns with it. Break the behavior, and the prediction stops being inevitable.:
+                Oracle - Deviation acknowledged.:
+                Pageant - Let's see how long you can hold that stance... under pressure.:
+                Moxie - Yeah? ...watch me anyway.:
+                EVENT - award_task - Defeat Pageant, Oracle, and Garbage
+
+        TASK - Defeat Pageant, Oracle, and Garbage - MOB:
+            ► ACQUIRED:
+                EVENT - begin_combat - pageant_oracle_garbage_1 (boss_battle):
+            ► COMPLETED:
+                Pageant - The performance... is over...:
+                Oracle - Prediction... unfulfilled...:
+                Garbage - ...I knew it.:
+                Moxie - You were so sure you knew how this would end. That's why you lost.
+                Oracle - ...the variables... were accounted for...
+                Kade - You can't account for a choice that hasn't been made. You didn't predict the future, you just tried to bully us into it.
+                Garbage - ...you still believe it... deep down...
+                Lyren - It doesn't matter what we believe deep down. It matters what we choose to do. And we chose to prove you wrong.
+                EVENT - hide_npc - pageant:
+                EVENT - hide_npc - oracle:
+                EVENT - hide_npc - garbage:
+                EVENT - remove_player_from_dungeon - trial_4_dungeon:
+                EVENT - set_npc_standing_text - cataclysm ("Their perceptions were flawed. Reality corrects itself."):
+                EVENT - set_npc_standing_text - reliquary ("Their flawed predictions are now part of the permanent record."):
+                EVENT - award_task - meet_reliquary
+
+        TASK - Meet Reliquary - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Reliquary - Nothing that has happened here has been lost. Every failure, every fracture... has been preserved in its exact form. Not as memory, but as structure.:
+                Cataclysm - Failure does not signify an end. Failure is data. Data defines correction. And correction inevitably produces collapse in its most efficient form.:
+                Kade - It's adjusting. Each iteration is tightening the margin for survival-removing uncertainty, removing variation, until the outcome becomes increasingly constrained.:
+                Moxie - That was us. Something we did... or didn't do.:
+                Reliquary - It was recorded precisely as it occurred. Preserved without interpretation, without the distortion that comes from memory trying to justify itself.:
+                Cataclysm - And now it is being reapplied. Without hesitation. In a form optimized for correction.:
+                Poise - It removed the hesitation window. Whatever chance existed before-it's gone now.:
+                Kade - It's not trying to prevent the failure. It's refining it.:
+                Moxie - So what, that's it? One mistake, and it just gets locked in? Turned into something that keeps coming back until it finally breaks us?:
+                Reliquary - It becomes reference. Reference removes uncertainty. Uncertainty is inefficient.:
+                Poise - No... uncertainty is what allows adjustment. Without it, the system can't adapt-it can only repeat.:
+                Kade - It only looks inevitable because nothing has interrupted the pattern yet. But that's not inevitability... that's reinforcement.:
+                Moxie - So it's not that we're doomed-it's that it's betting on us not changing.:
+                Kaera - Memory isn't meant to hold us in place. It's meant to give us the chance to act differently when we face it again.:
+                Reliquary - ...memory... defines continuity...:
+                Kaera - No. Continuity comes from choice. Memory only gives us the opportunity to make one.:
+                Chock - Then let's make sure it stops being able to predict us.:
+                EVENT - award_task - Meet cataclysm
+
+        TASK - Meet Cataclysm - NPC:
+            ► ACQUIRED:
+                EVENT - hide_npc - cataclysm:
+                EVENT - hide_npc - reliquary:
+                EVENT - create_dungeon - trial_5_dungeon (region_city_shoparmor):
+            ► COMPLETED:
+                Cataclysm - You have seen the record. You understand how it works. Now you will experience it.:
+                Reliquary - Every failure has been preserved. Not as memory, but as structure.:
+                Cataclysm - Failure does not signify an end. Failure is data. Data defines correction. And correction inevitably produces collapse in its most efficient form.:
+                Kade - It's adjusting. Each iteration is tightening the margin for survival-removing uncertainty, removing variation, until the outcome becomes increasingly constrained.:
+                Moxie - That was us. Something we did... or didn't do.:
+                Reliquary - It was recorded precisely as it occurred. Preserved without interpretation, without the distortion that comes from memory trying to justify itself.:
+                Cataclysm - And now it is being reapplied. Without hesitation. In a form optimized for correction.:
+                Poise - It removed the hesitation window. Whatever chance existed before-it's gone now.:
+                Kade - It's not trying to prevent the failure. It's refining it.:
+                Moxie - So what, that's it? One mistake, and it just gets locked in? Turned into something that keeps coming back until it finally breaks us?:
+                Reliquary - It becomes reference. Reference removes uncertainty. Uncertainty is inefficient.:
+                Poise - No... uncertainty is what allows adjustment. Without it, the system can't adapt-it can only repeat.:
+                Kade - It only looks inevitable because nothing has interrupted the pattern yet. But that's not inevitability... that's reinforcement.:
+                Moxie - So it's not that we're doomed-it's that it's betting on us not changing.:
+                Kaera - Memory isn't meant to hold us in place. It's meant to give us the chance to act differently when we face it again.:
+                Reliquary - ...memory... defines continuity...:
+                Kaera - No. Continuity comes from choice. Memory only gives us the opportunity to make one.:
+                EVENT - award_task - DEFEAT Cataclysm and Reliquary
+
+        TASK - Defeat Cataclysm and Reliquary - MOB:
+            ► ACQUIRED:
+                EVENT - begin_combat - cataclysm_reliquary_1 (boss_battle):
+            ► COMPLETED:
+                Cataclysm - Correction... failed...:
+                Reliquary - The record... is broken...:
+                Moxie - You thought you could use our past against us.
+                Cataclysm - ...the data was... perfect...
+                Kade - Data isn't the whole story. You recorded what we did, but you couldn't record why. You can't predict a choice you don't understand.
+                Reliquary - ...the archive... is incomplete...
+                Kaera - Memory isn't a weapon to trap people. It's a lesson that gives them the freedom to choose differently. You learned the wrong lesson.
+                EVENT - hide_npc - cataclysm:
+                EVENT - hide_npc - reliquary:
+                EVENT - remove_player_from_dungeon - trial_5_dungeon:
+                EVENT - award_task - meet_dominion
+
+        TASK - Meet Dominion - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - dominion (region_city_bar):
+            ► COMPLETED:
+                Dominion - You have moved through systems that do not require truth, where identity is assigned, where sensation replaces sustainability, where perception solidifies into inevitability, and where failure is repeated until it completes itself.:
+                Dominion - You believe you disrupted each of these. You are mistaken. You did not disrupt them. You revealed how they respond to resistance.:
+                Moxie - If "responding to resistance" means breaking the second we stop playing along, then yeah, I'm comfortable calling that disruption.:
+                Kade - They were closed loops-fully dependent on the assumption that nothing inside them would ever meaningfully change.:
+                Dominion - You interpret this as limitation. It is not. It is refinement.:
+                Poise - Refinement removes excess while preserving function. What we witnessed removed the ability to adapt.:
+                Sable - And once adaptation is removed, a system cannot respond to new conditions. It can only execute the same outcome more efficiently.:
+                Thorn - Yeah... and that outcome was always collapse.:
+                Dominion - You continue to assign negative value to collapse. That assumption is not inherent. Collapse is not failure. Collapse is resolution.:
+                Nia - It doesn't feel like resolution when you're inside it. It feels like something breaking.:
+                Lyren - And even if it does end, that doesn't mean what happened before it was meaningless.:
+                Kade - Every system we encountered depended on removing uncertainty. But uncertainty is what allows for alternative results. Without it, nothing can diverge.:
+                Chock - No. Collapse happens when something can't handle change.:
+                Kaera - If a system only exists to reach an ending, and nothing within it carries forward, then all it ever does is erase itself.:
+                Moxie - Yeah, and if your entire argument is "everything ends so none of this counts," that's less of a system and more of an excuse.:
+                Kade - You define success as reaching the end-state-no matter what happens along the way. We define it by what happens before that.:
+                Dominion - Then your framework introduces unresolved variables. Choice. Meaning. Deviation. These cannot be reconciled into stable systemic outcomes.:
+                Chock - Good.:
+                Poise - That allows change.:
+                Sable - That prevents inevitability.:
+                Thorn - That means it can stop.:
+                Bragg - Or be fought.:
+                Grimnaw - Or reworked.:
+                Moxie - Or improved.:
+                Nia - Or experienced differently.:
+                Kaera - Or chosen.:
+                Lyren - Or made to matter.:
+                Dominion - Then what you represent... is instability... introduced by will.:
+                Chock - No. It's choice.:
+                EVENT - award_task - defeat_dominion
+
+        TASK - Defeat Dominion - MOB:
+            ► ACQUIRED:
+                EVENT - begin_combat - dominion_1 (boss_battle):
+            ► COMPLETED:
+                Dominion - System... defeated. The variables... you introduced... they were not accounted for.:
+                Kade - Because you can't account for will. You can't predict a choice.:
+                Dominion - You have not won. You have only proven my point. You are instability. You are chaos. You have broken the system that sustained you, and now... you face the consequence.:
+                Moxie - We'll face it. Together. Better than living in a world where nothing we do matters.:
+                Kaera - You saw resolution. We see a world without meaning. And we choose meaning.:
+                Dominion - Then choose... the Void... that you have... unleashed...:
+                EVENT - hide_npc - dominion:
+                EVENT - award_task - defeat_the_void
+
+        TASK - Defeat The Void - MOB:
+            ► ACQUIRED:
+                Narrator - The world shatters into a formless void. There is no ground, no sky. Only potential and absence.:
+                Void - You have killed the world. Let me finish it.:
+                Kade - It's not finished. It's just... quiet.:
+                Void - Quiet is the prelude to nothing. Meaning is a lie you tell yourselves to keep from screaming.:
+                Kaera - Meaning is what we build from the quiet. It's the choice to care when nothing requires it.:
+                Void - You are a flicker. An error. I am the silence that corrects you.:
+                Moxie - Yeah, well, this error is about to get real loud.:
+                EVENT - begin_combat - the_void_1 (boss_battle):
+            ► COMPLETED:
+                Void - Meaning is a lie. Existence is optional.:
+                Narrator - The battlefield dissolves into pure possibility.:
+                Chock - It's unmaking reality as we fight.:
+                Kaera - Then we make it real again. We assert existence.:
+                Moxie - Together.:
+                Kade - Together.:
+                Poise - Together.:
+                Kaera - Together.:
+                Chock - Together.:
+                EVENT - hide_npc - the_void:
+                Narrator - The Bracelet of Existence reforms. Glowing with pure potential.:
+                EVENT - award_item - bracelet_of_existence_reforged:
+                Narrator - The Bracelet of Void reforms. Pulsing with absence and possibility.:
+                EVENT - award_item - bracelet_of_void_reforged:
+                Narrator - The two bracelets hover before the party. Existence and Void. Being and Nothing.:
+                Kaera - This is it. The final choice.:
+                EVENT - remove_item - bracelet_of_existence_reforged:
+                EVENT - remove_item - bracelet_of_void_reforged:
+                Narrator - The choice is made. The world ends. Or begins. Or becomes something else.:
+                Kaera - Whatever comes next... we chose it.:
+                Moxie - And that makes all the difference.:
+                Kade - The saga closes.:
+                Poise - But the story...:
+                Chock - The story never truly ends.:
+                EVENT - complete_game

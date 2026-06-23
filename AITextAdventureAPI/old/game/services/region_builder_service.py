@@ -1,0 +1,212 @@
+"""Helper wrappers to keep build_region_around concise.
+
+This module exposes small, well-named helpers used by the top-level
+`build_region_around` so the orchestration reads like a sequence of steps.
+The heavier logic remains in the dedicated frontier/shape services.
+"""
+from typing import Tuple, Set, Iterable, Callable
+import random
+import math
+import logging
+from collections import deque
+
+from game.objects.city import City
+from game.objects.player import Player
+from game.services.region_frontier_service import (
+	randomized_frontier_perimeter_pathing,
+	perimeter_driven_growth
+)
+from game.services.region_shape_service import make_filled_circle, make_filled_star, make_filled_diamond, make_filled_hex, make_filled_square
+
+logger = logging.getLogger(__name__)
+
+
+def create_region_city(region_settings: dict) -> City:
+	"""Create and configure an empty region City from settings."""
+	rseed = (random.SystemRandom().randint(0, 2**32 - 1) ^ 0xA5A5A5) + 1
+	rc = City(
+		rseed,
+		road_spacing=region_settings.get("road_spacing", 0),
+		alley_spacing=region_settings.get("alley_spacing", 0),
+		alley_offset=region_settings.get("alley_offset", 0),
+	)
+	# apply other region-level flags
+	rc.max_size = region_settings.get("max_size", rc.max_size)
+	rc.population_density = region_settings.get("population_density", rc.population_density)
+	rc.hasResidence = region_settings.get("hasResidence", rc.hasResidence)
+	rc.hasBusiness = region_settings.get("hasBusiness", rc.hasBusiness)
+	rc.hasShops = region_settings.get("hasShops", rc.hasShops)
+	rc.hasBar = region_settings.get("hasBar", rc.hasBar)
+	rc.hasInn = region_settings.get("hasInn", rc.hasInn)
+	rc.hasHyperway = region_settings.get("hasHyperway", rc.hasHyperway)
+	rc.hasOther1 = region_settings.get("hasOther1", rc.hasOther1)
+	rc.hasOther2 = region_settings.get("hasOther2", rc.hasOther2)
+	rc.region_name = region_settings.get("region_name", None)
+	rc.city_name = region_settings.get("city_name", None)
+	rc.display_name = region_settings.get("display_name", rc.city_name)
+	rc.child_city = None
+
+	#print(f"all rc info: region_name={rc.region_name}, city_name={rc.city_name}, display_name={rc.display_name}, max_size={rc.max_size}, population_density={rc.population_density}, hasResidence={rc.hasResidence}, hasBusiness={rc.hasBusiness}, hasShops={rc.hasShops}, hasBar={rc.hasBar}, hasInn={rc.hasInn}")
+	return rc
+
+def create_region(	
+	rc: City,
+	origin: Tuple[int, int],
+	shifted_location: Tuple[int, int],
+	main_tiles: Set[Tuple[int, int]],
+	neighbor_offsets: Iterable[Tuple[int, int]],
+	center_x: int,
+	center_y: int,
+	ignored_set: Set[Tuple[int, int]],
+	region_settings: dict,
+	player_game: object,
+) -> Set[Tuple[int, int]]:
+	region_tiles = set()
+	#print(f"Creating region using: origin={origin}, shifted_location={shifted_location}, main_tiles={len(main_tiles)}, ignored_set={len(ignored_set)}")
+	max_size = region_settings.get("max_size", rc.max_size)
+	if main_tiles and len(main_tiles) > 0:
+		# get the midpoint of the main tiles and the radius to cover them
+		midpoint_x = sum(x for x, y in main_tiles) // len(main_tiles)
+		midpoint_y = sum(y for x, y in main_tiles) // len(main_tiles)
+		radius = max(
+			int(math.sqrt((x - midpoint_x) ** 2 + (y - midpoint_y) ** 2))
+			for x, y in main_tiles
+		) + 1
+		#print (f"midpoint_x: {midpoint_x}, midpoint_y: {midpoint_y}, radius: {radius}")
+	else:
+		#midpoint_x, midpoint_y = origin
+		radius = 0
+	if not radius:
+		radius = 10
+
+	# set radius = half sqrt of max size
+	if max_size and max_size > 0:
+		radius = int(max(radius, int(math.sqrt(max_size) / 2)) /3)
+		
+	current_tiles = main_tiles.copy()
+
+	random.seed(random.SystemRandom().randint(0, 2**32 - 1))
+
+	rng = random.random()
+	# NOTE TO MAKE OTHER BASE REGIONS SUCH AS TETRIS SHAPES: S, T, L, |, etc.
+	#input (f'making something at : ({center_x},{center_y}) with radius {radius}, rng:{rng}')
+	if rng < 0.20:
+		frontier = make_filled_hex(center_x, center_y, radius, current_tiles, ignored_set)
+	elif rng < 0.40:
+		frontier = make_filled_diamond(center_x, center_y, radius, current_tiles, ignored_set)
+	elif rng < 0.60:
+		frontier = make_filled_square(center_x, center_y, radius, current_tiles, ignored_set)
+	elif rng < 0.80:
+		frontier = make_filled_circle(center_x, center_y, radius, current_tiles, ignored_set)
+	else:
+		points = random.randint(3,7)
+
+		frontier = make_filled_star(center_x, center_y, radius, points, 1.0, current_tiles, ignored_set)
+
+	# the next step is to use perimeter growth to fill out the region
+	#frontier_path = randomized_frontier_perimeter_pathing(center_x, center_y, current_tiles, ignored_set, neighbor_offsets, rc.max_size)
+	frontier_path = perimeter_driven_growth( current_tiles, ignored_set, neighbor_offsets, max_size )
+
+	frontier.update(frontier_path)
+
+	rc.child_city = {}
+	rc.ensure_required_buildings(player_game, frontier)
+	#self.tiles: Dict[Tuple[int, int], Tile] = {}
+	for x, y in frontier:
+		if not (x,y) in rc.tiles.keys():  #self.tiles: Dict[Tuple[int, int], Tile] = {}
+			#print (f'Creating tile at ({x},{y}) for region city "{rc.region_name}".')
+			rc.create_tile(player_game, x, y)
+		# else:
+		# 	input (f'Tile at ({x},{y}) already exists for region city "{rc.region_name}", skipping creation.')
+
+	#input (f'Filled region city "{rc.region_name}" with {len(frontier)} tiles before filling bound uncreated space.')
+	rc.populate_tiles(player_game)
+	#input (f'Created region city "{rc.region_name}" with {len(frontier)} tiles.')
+
+def fill_bound_uncreated_space (
+	rc: City,
+	origin: Tuple[int, int],
+	shifted_location: Tuple[int, int],
+	current_tiles: Set[Tuple[int, int]],
+	ignored_set: Set[Tuple[int, int]],
+	) -> Set[Tuple[int, int]]:
+	"""Scan the bounding box between origin and shifted_location for uncreated tile chunks fully bound by current_tiles."""
+	#determine bounding box
+	res = set()
+	minx = min(origin[0], shifted_location[0])
+	maxx = max(origin[0], shifted_location[0])
+	miny = min(origin[1], shifted_location[1])
+	maxy = max(origin[1], shifted_location[1])
+	for x in range(minx, maxx +1):
+		for y in range(miny, maxy +1):
+			if (x, y) in current_tiles or (x, y) in ignored_set:
+				continue
+			#check if this tile is fully bound by current_tiles
+			bound = True
+			for dx, dy in [(-1,0), (1,0), (0,-1), (0,1)]:
+				n = (x + dx, y + dy)
+				if n not in current_tiles and n not in ignored_set:
+					bound = False
+					break
+			if bound:
+				current_tiles.add((x, y))
+				res.add((x, y))
+
+def is_origin_created(origin: Tuple[int, int], frontier: deque) -> bool:
+	for fx, fy in frontier:
+		if (fx, fy) == origin:
+			return True
+	return False
+
+def get_distance_to_frontier(origin: Tuple[int, int], frontier: deque) -> int:
+	"""Calculate the distance from the origin to the nearest point in the frontier."""
+	if not frontier:
+		return float('inf')
+	distance = min(math.sqrt((fx - origin[0]) ** 2 + (fy - origin[1]) ** 2) for fx, fy in frontier)
+	#print(f"Distance to frontier from origin {origin}: {distance}")
+	return distance
+
+
+def prepare_main_context(main_city: City, origin: Tuple[int, int], ignored_locations: Iterable[Tuple[int, int]] = None):
+	"""Compute bounding box, main tile set, perimeter and neighbor offsets."""
+	ignored_set = set(ignored_locations) if ignored_locations else set()
+
+	if main_city is not None:
+		xs = [x for (x, _) in main_city.tiles.keys()] if main_city.tiles else []
+		ys = [y for (_, y) in main_city.tiles.keys()] if main_city.tiles else []
+		if xs and ys:
+			minx, maxx = min(xs), max(xs)
+			miny, maxy = min(ys), max(ys)
+	else:
+		minx = origin[0] - 8
+		maxx = origin[0] + 8
+		miny = origin[1] - 8
+		maxy = origin[1] + 8
+
+	main_tiles = set(main_city.tiles.keys()) if main_city is not None else set()
+
+	# perimeter: child tiles that touch empty space
+	perimeter = set()
+	for (x, y) in main_tiles:
+		for dx, dy in ((1,0), (-1,0), (0,1), (0, -1)):
+			n = (x + dx, y + dy)
+			if n in ignored_set:
+				continue
+			if n not in main_tiles:
+				perimeter.add((x, y))
+	neighbor_offsets = [(1,0), (-1,0), (0,1), (0, -1), (1,1), (1, -1), (-1,1), (-1, -1)]
+	center_x = (minx + maxx) //2
+	center_y = (miny + maxy) //2
+	#input (f'origin: {origin},minx {minx},maxx {maxx},miny {miny}, maxy:{maxy}')
+	return {
+		"ignored_set": ignored_set,
+		"minx": minx,
+		"maxx": maxx,
+		"miny": miny,
+		"maxy": maxy,
+		"main_tiles": main_tiles,
+		"perimeter": perimeter,
+		"neighbor_offsets": neighbor_offsets,
+		"center_x": center_x,
+		"center_y": center_y,
+	}

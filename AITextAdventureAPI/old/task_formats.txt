@@ -1,0 +1,116 @@
+### THIS DOCUMENT IS DESIGNED TO TEACH ALL AVAILABLE TASK/EVENT COMMANDS AND OBJECT SHAPES TO THE AI FOR STORY CREATION.
+	# events not shown here are only used during the intro story and are not designed to be used by the AI for story creation.
+	# create_character_npc, player_character_join, complete_intro_story are canon to the intro story and never used again after chapter 4, as such are not described here
+
+
+#TASK DELIVER
+		'task_id': 'main_story_ch_1_deliver_ornate_bracers',
+		'type': 'deliver',
+		'item_id': 'ornate_bracers',
+		'to_type': 'npc',
+		'to_id': 'brawn',
+		'task_acquire_events': [],
+		'task_complete_events': []
+#TASK MEET
+		'task_id': 'main_story_ch_1_meet_brawn',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'brawn',
+		'task_acquire_events': [],
+		'task_complete_events': []
+
+#TASK DEFEAT
+		'task_id': 'main_story_ch_1_defeat_seth',
+	        'type': 'defeat',
+	        'to_type': 'mob',
+		'to_id': 'seth_1',
+		'task_acquire_events': [],
+		'task_complete_events': []
+
+#TASK COMPLETE INTRO STORY  #### ONLY USED FOR REGIONAL STORIES. ALL OF THESE STORIES UNLOCK A THE END OF CHAPTER 4.
+		'task_id': 'desert_large_city_initialize',
+		'type': 'complete_intro_story',
+
+#EVENTS
+	'event_type': 'initiate_dialog','params': { 'npc_id': None,'dialog_id': 'chapter_1_start'} #npc_id none to initiate narrative  # Can be used for any npc
+	'event_type': 'initiate_character_dialog','params': {'npc_id': 'technique','dialog_id': 'technique_got_jacked'} # can also be used for any npc... as well as player characters, but will only add dialog if the npc has joined the players. 'twisted_character' can be used at keystone moments for any of the 5 player characters
+
+	'event_type': 'create_npc','params': {'npc_id': 'seth','location': None}	
+	'event_type': 'set_npc_standing_text','params': {'npc_id': 'rook','standing_text': ["You look like fresh meat for the grinder."]}	
+	'event_type': 'set_npc_met','params': {'npc_id': 'mira'}	#allows an unmet npc to be added to the npc list (to help find them)
+	'event_type': 'hide_npc','params': {'npc_id': 'seth'}
+    'event_type': 'show_npc', 'params': { 'npc_id': 'sylvi', 'location': 'region_city_shopitems' } # can also be used to simply move an npc to a new location
+	
+	
+	'event_type': 'begin_combat', 'params': {'boss_mob_id': 'seth_1','combat_type': 'boss_battle'}
+	'event_type': 'award_money','params': {'amount': '200'}
+	'event_type': 'remove_item','params': {	'item_id': 'ornate_bracers'}
+	'event_type': 'award_item','params': {	'item_id': 'cursed_couplet'}
+	
+	'event_type': 'award_task','params': {'task_id': 'main_story_ch_1_find_the_item_shop'} # move to next task in task chain... can split to side stories
+	'event_type': 'advance_chapter' # end each chapter
+
+	'event_type': 'create_dungeon', 'params': {'dungeon_id': 'seth_hideout','location': 'region_open_area'}
+	'event_type': 'dungeon_add_treasure','params': {'dungeon_id': 'seth_hideout','item_id': 'ornate_bracers','location': 'final_chamber'}
+	'event_type': 'unlock_dungeon','params': {'dungeon_id': 'nobles_mansion_ch3'}
+	'event_type': 'lock_dungeon','params': {'dungeon_id': 'nobles_mansion_ch3'}
+	'event_type': 'set_dungeon_locked_text','params': {'dungeon_id': 'nobles_mansion_ch3','locked_text': ["Seth: If you want me to get you in here to find your ingredients, you better report to rook first."]}
+	'event_type': 'dungeon_add_npc','params': {'dungeon_id': 'nobles_mansion_ch3','npc_id': 'seth','location': 'final_chamber'	}
+	'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'rift_dungeon_ch4', 'location': 'entrance' }
+	'event_type': 'remove_player_from_dungeon', 'params': { 'dungeon_id': 'rift_dungeon_ch4' }
+	'event_type': 'set_aircraft','params': {'location': 'region_city_open_area'}
+
+
+
+
+# DIALOG EXAMPLES
+		'npc_id': 'mira',
+		'dialog_id': 'mira_ch2_intro',
+		'dialog': [
+			"Well now… you actually brought it.",
+			"This cursed couplet is older than half the ruins in this region.",
+			"Bound and sealed in this cursed form as it has been for so long.",
+			"If you want the Grift Stone, you’ll need to bring me something to uncouple it first.",
+			"Go speak to Leera. She knows things even the ancients didn't fully understand."
+		]
+
+	{
+		'npc_id': 'faith',
+		'dialog_id': 'faith_ch2_deliver_couplet',
+		'dialog': [
+			"We should be careful. Some bindings are not meant to be broken lightly."
+		]
+	},
+
+# NPC EXAMPLE
+	{
+		'npc_id': 'mira',
+		'name': 'Mira',
+		'description': (
+			'A cunning and elusive black market dealer/smuggler.'
+			"  Mira specializes in rare and illegal artifacts."
+			"  She is known for her sharp negotiation skills and ability to evade capture."
+			"  She is cold, calculating, and can be incredibly seductive."
+		)
+	},
+
+
+location types:
+# if params['location'] contains city_index_ then parse city_index_##_{building_type} for ## is the city index on playergame. if has suffix _region as city_index_##_region_{building_type} using cities bounding region
+
+# if params['location'] contains {desert|grassland|shallows|mountains|swamp|snow|forest}_{large_city|mid_city|small_city}{'_region' (if want the city's bounding region)}{building_type}
+
+region_* or region_city_* where * is tile type or building type options:
+open_area
+bar
+inn
+shopweapons
+shopitems
+shoparmor
+residencelarge
+residencesmall
+businesslarge
+businesssmall
+hyperway
+other1
+other2

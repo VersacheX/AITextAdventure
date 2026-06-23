@@ -1,0 +1,123 @@
+# Level11-20 hostile seeds for Hailward Hold (mid-city)
+# Export a list named SEEDS_LV11TO20 used by constants_enemies_mid_city.py
+SEEDS_LV11TO20 = [
+ {"id": "frozen_courier2", "name": "Frozen Courier", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":11, "rarity": "common", "base_xp":90,
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (10,50),
+ "basic_attack": "paper swipe", "strong_attack": "cold dash", "player_abilities": None,
+ "base_str":3, "base_dex":6, "base_con":3, "base_int":2, "base_hp":120, "base_ap":4,
+ "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":0},
+
+ {"id": "courier_runt", "name": "Courier Runt", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":11, "rarity": "uncommon", "base_xp":110,
+ "common_drop": "herb_med", "rare_drop": None, "money_range": (12,60),
+ "basic_attack": "snatch toss", "strong_attack": "sled shove", "player_abilities": None,
+ "base_str":3, "base_dex":7, "base_con":3, "base_int":3, "base_hp":140, "base_ap":5,
+ "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
+
+ {"id": "ice_scav", "name": "Ice Scavenger", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":11, "rarity": "common", "base_xp":88,
+ "common_drop": "herb_med", "rare_drop": None, "money_range": (8,44),
+ "basic_attack": "scrap jab", "strong_attack": "cold swipe", "player_abilities": None,
+ "base_str":2, "base_dex":5, "base_con":4, "base_int":2, "base_hp":110, "base_ap":3,
+ "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
+
+ {"id": "tide_jaw", "name": "Tide Jaw", "hostile_type": "creature", "role": "hazard", "min_spawn_level":12, "rarity": "rare", "base_xp":260,
+ "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (30,160),
+ "basic_attack": "tentacle swipe", "strong_attack": "ink burst", "player_abilities": ["void_veil"],
+ "base_str":8, "base_dex":5, "base_con":9, "base_int":4, "base_hp":220, "base_ap":8,
+ "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":1},
+
+ {"id": "runebinder", "name": "Runebinder", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":12, "rarity": "rare", "base_xp":200,
+ "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (28,140),
+ "basic_attack": "sigil snap", "strong_attack": "runic barrage", "player_abilities": ["arcane_blast"],
+ "base_str":2, "base_dex":3, "base_con":4, "base_int":10, "base_hp":100, "base_ap":8,
+ "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
+
+ {"id": "shameless_street_scout", "name": "Shameless Street Scout", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":12, "rarity": "common", "base_xp":92,
+ "common_drop": "herb_med", "rare_drop": None, "money_range": (8,44),
+ "basic_attack": "quick jab", "strong_attack": "tripwire kick", "player_abilities": None,
+ "base_str":2, "base_dex":7, "base_con":3, "base_int":2, "base_hp":130, "base_ap":4,
+ "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":0},
+
+ {"id": "rift_wrecker", "name": "Rift Wrecker", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":13, "rarity": "rare", "base_xp":160,
+ "common_drop": "herb_major", "rare_drop": "sawed_off", "money_range": (30,160),
+ "basic_attack": "wrecking swing", "strong_attack": "ballista slam", "player_abilities": None,
+ "base_str":8, "base_dex":2, "base_con":6, "base_int":1, "base_hp":88, "base_ap":5,
+ "str_per_level":3, "dex_per_level":0, "con_per_level":2, "int_per_level":0},
+
+ {"id": "rift_wrecker_veteran", "name": "Rift Wrecker (veteran)", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":13, "rarity": "uncommon", "base_xp":200,
+ "common_drop": "stimulant_large", "rare_drop": None, "money_range": (34,160),
+ "basic_attack": "veteran wreck", "strong_attack": "ballista maul", "player_abilities": None,
+ "base_str":10, "base_dex":2, "base_con":8, "base_int":1, "base_hp":120, "base_ap":6,
+ "str_per_level":3, "dex_per_level":0, "con_per_level":3, "int_per_level":0},
+
+ {"id": "salty_dock_rigger", "name": "Salty Dock Rigger", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":13, "rarity": "common", "base_xp":140,
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (18,90),
+ "basic_attack": "rope lash", "strong_attack": "crane swing", "player_abilities": None,
+ "base_str":6, "base_dex":3, "base_con":6, "base_int":2, "base_hp":180, "base_ap":5,
+ "str_per_level":2, "dex_per_level":0, "con_per_level":2, "int_per_level":0},
+
+ {"id": "frost_herald", "name": "Frost Herald", "hostile_type": "elemental", "role": "hazard", "min_spawn_level":14, "rarity": "rare", "base_xp":320,
+ "common_drop": "stimulant_med", "rare_drop": "tome_int", "money_range": (30,140),
+ "basic_attack": "crystalline shard", "strong_attack": "herald blast", "player_abilities": ["frost_nova"],
+ "base_str":6, "base_dex":5, "base_con":8, "base_int":8, "base_hp":200, "base_ap":9,
+ "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
+
+ {"id": "frost_mender", "name": "Frost Mender", "hostile_type": "humanoid", "role": "support", "min_spawn_level":14, "rarity": "common", "base_xp":120,
+ "common_drop": "herb_med", "rare_drop": None, "money_range": (14,68),
+ "basic_attack": "mend swipe", "strong_attack": "healing flare", "player_abilities": None,
+ "base_str":3, "base_dex":3, "base_con":6, "base_int":6, "base_hp":150, "base_ap":6,
+ "str_per_level":1, "dex_per_level":1, "con_per_level":2, "int_per_level":1},
+
+ {"id": "glacial_courier", "name": "Glacial Courier", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":14, "rarity": "common", "base_xp":120,
+ "common_drop": "herb_minor", "rare_drop": None, "money_range": (12,64),
+ "basic_attack": "package throw", "strong_attack": "sled bash", "player_abilities": None,
+ "base_str":2, "base_dex":5, "base_con":3, "base_int":2, "base_hp":140, "base_ap":4,
+ "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
+
+ {"id": "iron_guardian", "name": "Iron Guardian", "hostile_type": "construct", "role": "support", "min_spawn_level":15, "rarity": "uncommon", "base_xp":320,
+ "common_drop": "stimulant_large", "rare_drop": "kevlar_vest", "money_range": (60,240),
+ "basic_attack": "piston slam", "strong_attack": "colossal crush", "player_abilities": ["reinforce_frame"],
+ "base_str":14, "base_dex":1, "base_con":18, "base_int":1, "base_hp":300, "base_ap":4,
+ "str_per_level":4, "dex_per_level":0, "con_per_level":3, "int_per_level":0},
+
+ {"id": "cairn_keeper", "name": "Cairn Keeper", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":15, "rarity": "uncommon", "base_xp":300,
+ "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (40,200),
+ "basic_attack": "stone lash", "strong_attack": "blinding cairn", "player_abilities": ["prism_burst"],
+ "base_str":7, "base_dex":4, "base_con":9, "base_int":8, "base_hp":220, "base_ap":9,
+ "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
+
+ {"id": "glacier_stalker", "name": "Glacier Stalker", "hostile_type": "shadow", "role": "hazard", "min_spawn_level":15, "rarity": "uncommon", "base_xp":140,
+ "common_drop": "herb_med", "rare_drop": "lockpick", "money_range": (8,48),
+ "basic_attack": "shadow pounce", "strong_attack": "vanishing rip", "player_abilities": ["shadow_flicker"],
+ "base_str":4, "base_dex":9, "base_con":3, "base_int":4, "base_hp":96, "base_ap":6,
+ "str_per_level":1, "dex_per_level":3, "con_per_level":1, "int_per_level":1},
+
+ {"id": "abyssal_reaver", "name": "Abyssal Reaver", "hostile_type": "eldritch", "role": "hazard", "min_spawn_level":16, "rarity": "uncommon", "base_xp":360,
+ "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (60,260),
+ "basic_attack": "psychic rip", "strong_attack": "abyssal crush", "player_abilities": ["abyssal_storm"],
+ "base_str":9, "base_dex":6, "base_con":10, "base_int":12, "base_hp":320, "base_ap":10,
+ "str_per_level":3, "dex_per_level":1, "con_per_level":3, "int_per_level":3},
+
+ {"id": "wight_captain", "name": "Wight Captain", "hostile_type": "undead", "role": "hazard", "min_spawn_level":16, "rarity": "uncommon", "base_xp":420,
+ "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (60,260),
+ "basic_attack": "rotten slash", "strong_attack": "necrotic command", "player_abilities": ["void_veil"],
+ "base_str":8, "base_dex":6, "base_con":10, "base_int":6, "base_hp":300, "base_ap":9,
+ "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":1},
+
+ {"id": "frozen_colossus", "name": "Frozen Colossus", "hostile_type": "construct", "role": "support", "min_spawn_level":16, "rarity": "common", "base_xp":300,
+ "common_drop": "stimulant_large", "rare_drop": "kevlar_vest", "money_range": (60,260),
+ "basic_attack": "piston slam", "strong_attack": "hydraulic crush", "player_abilities": ["reinforce_frame"],
+ "base_str":14, "base_dex":1, "base_con":18, "base_int":1, "base_hp":300, "base_ap":6,
+ "str_per_level":4, "dex_per_level":0, "con_per_level":3, "int_per_level":0},
+
+ {"id": "iceborn_huntsman", "name": "Iceborn Huntsman", "hostile_type": "creature", "role": "damage", "min_spawn_level":17, "rarity": "common", "base_xp":220,
+ "common_drop": "herb_major", "rare_drop": None, "money_range": (40,180),
+ "basic_attack": "barbed shot", "strong_attack": "ice maul", "player_abilities": None,
+ "base_str":8, "base_dex":6, "base_con":8, "base_int":4, "base_hp":380, "base_ap":8,
+ "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":1},
+
+ {"id": "ice_seraph", "name": "Ice Seraph", "hostile_type": "celestial", "role": "damage", "min_spawn_level":18, "rarity": "superrare", "base_xp":620,
+ "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (100,420),
+ "basic_attack": "glacial talon", "strong_attack": "seraphic shard", "player_abilities": ["stellar_fall"],
+ "base_str":10, "base_dex":8, "base_con":12, "base_int":12, "base_hp":360, "base_ap":12,
+ "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":3},
+]

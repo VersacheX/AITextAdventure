@@ -1,0 +1,357 @@
+ATTAINABLE CHARAACTERS
+
+
+ATTAINABLE_PLAYER_CHARACTERS = [
+    #{'id': 'sable', 'name': 'Sable'}
+	{ 
+        ## total power points = 15 + 15* 29  = 465
+        ## total stat points = 10 + 6*29 = 184
+        'id': 'sable', 
+        'name': 'Sable',
+        'arm_armor': 'sandcall_bracers',
+        'head_armor': 'mirage_crown',
+        'body_armor': 'duneweave_mantle',
+        'leg_armor': 'oasis_walker_greaves',
+        'equipped_weapon': 'sandglass_staff',
+        'max_hp': 891, # 20 + 20 * 29 = 600            + 365
+        'current_hp': 891,
+        'max_ap': 400, # 5 + 5 * 29 = 150              + 100
+        'current_ap': 400,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 38,
+        'dexterity': 38,        
+        'intelligence': 224,                            # + 184
+        'constitution': 38,
+        'level': 30,
+        'abilities': ['earth_earth_earth_magic_lv3_earthshaker', 'air_earth_electric_magic_lv3_gale_shock', 
+                      'earth_air_magic_lv2_sandstream', 'earth_light_magic_lv2_prism_shard', 'earth_earth_magic_lv2_quake_field',
+                      'earth_magic_lv1_tremor', 'light_magic_lv1_luminous_spike'
+
+        ]
+
+    }
+]
+ATTAINABLE_PLAYER_CHARACTERS = [
+    #{'id': 'thorn', 'name': 'Thorn'}
+    { 
+        ## total power points = 15 + 15* 29  = 465
+        ## total stat points = 10 + 6*29 = 184
+        'id': 'thorn', 
+        'name': 'Thorn',
+        'arm_armor': 'thornbound_gauntlets',
+        'head_armor': 'barkhide_helm',
+        'body_armor': 'heartwood_carapace',
+        'leg_armor': 'rootwalker_greaves',
+        'equipped_weapon': 'wildroot_fangblade',
+        'max_hp': 1169, # 20 + 20 * 29 = 600            + 365
+        'current_hp': 1169,
+        'max_ap': 250, # 5 + 5 * 29 = 150              + 100
+        'current_ap': 250,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 158,                                # +120
+        'dexterity': 38,        
+        'intelligence':38,
+        'constitution': 102,                            # + 64
+        'level': 30,
+        'abilities': ['earth_earth_earth_technique_lv3_earthshaker', 'light_earth_water_technique_lv3_solar_haven', 
+                      'earth_water_technique_lv2_mire_cleave', 'earth_earth_technique_lv2_terra_slam', 'earth_light_technique_lv2_rally_up',
+                      'earth_technique_lv1_armor_up', 'air_technique_lv1_sonic_strike'
+
+        ]
+
+    }
+]
+ATTAINABLE_PLAYER_CHARACTERS = [
+    #{'id': 'nia', 'name': 'Nia'}
+    { 
+        ## total power points = 15 + 15* 29  = 465
+        ## total stat points = 10 + 6*29 = 184
+        'id': 'nia', 
+        'name': 'Nia',
+        'arm_armor': 'stormstep_bracers',
+        'head_armor': 'zephyr_hood',
+        'body_armor': 'galestride_vest',
+        'leg_armor': 'windrunner_greaves',
+        'equipped_weapon': 'whisperwind_blades',
+        'max_hp': 941, # 20 + 20 * 29 = 600            + 365
+        'current_hp': 941,
+        'max_ap': 350, # 5 + 5 * 29 = 150              + 100
+        'current_ap': 350,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 38,                                # +120
+        'dexterity': 224,        
+        'intelligence':38,
+        'constitution': 38,                            # + 64
+        'level': 30,
+        'abilities': ['air_air_air_skill_lv3_gale_slash', 'air_earth_electric_skill_lv3_gale_shockwave', 
+                      'air_dark_skill_lv2_gale_of_doubt', 'air_light_skill_lv2_dawn_cut', 'air_air_skill_lv2_gust_blitz',
+                      'air_skill_lv1_smoke_bomb', 'electric_skill_lv1_lightning_strike'
+
+        ]
+
+    }
+]
+ATTAINABLE_PLAYER_CHARACTERS = [
+    #{'id': 'bragg', 'name': 'Bragg'}
+    { 
+        ## total power points = 15 + 15* 29  = 465
+        ## total stat points = 10 + 6*29 = 184
+        'id': 'bragg', 
+        'name': 'Bragg',
+        'head_armor': 'coresight_visor',
+        'body_armor': 'forgeplate_harness',
+        'arm_armor': 'shockforge_gauntlets',
+        'leg_armor': 'stonebinder_greaves',
+        'equipped_weapon': 'corebreaker_hammer',
+        'max_hp': 941, # 20 + 20 * 29 = 600            + 365
+        'current_hp': 941,
+        'max_ap': 350, # 5 + 5 * 29 = 150              + 100
+        'current_ap': 350,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 38,                                # +120
+        'dexterity': 102,        
+        'intelligence':158,
+        'constitution': 38,                            # + 64
+        'level': 30,
+        'abilities': ['dark_earth_electric_tech_lv3_petrifying_shock', 'earth_electric_water_tech_lv3_tectonic_current', 
+                      'fire_earth_tech_lv2_forge_pulse', 'earth_earth_tech_lv2_seismic_rupture', 'electric_earth_tech_lv2_grounded_spike',
+                      'fire_tech_lv1_flux_dampener', 'earth_tech_lv1_fault_inhibitor'
+
+        ]
+
+    }
+]
+ATTAINABLE_PLAYER_CHARACTERS = [
+    #{'id': 'ripple', 'name': 'Ripple'},
+    { 
+        ## total power points = 15 + 15* 29  = 465
+        ## total stat points = 10 + 6*29 = 184
+        'id': 'ripple', 
+        'name': 'Ripple',
+        'head_armor': 'tidecaller_veil',
+        'body_armor': 'abyssal_flow_robe',
+        'arm_armor': 'currentweaver_bracers',
+        'leg_armor': 'tidebound_greaves',
+        'equipped_weapon': 'moontide_staff',
+        'max_hp': 1019, # 20 + 20 * 29 = 600            + 365
+        'current_hp': 1019,
+        'max_ap': 400, # 5 + 5 * 29 = 150              + 100
+        'current_ap': 400,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 38,                                # +120
+        'dexterity': 38,        
+        'intelligence':158,
+        'constitution': 102,                            # + 64
+        'level': 30,
+        'abilities': ['light_light_dark_faith_lv3_dusk_balm', 'water_water_water_faith_lv3_poseidon_wrath', 
+                      'water_light_faith_lv2_holy_fountain', 'air_water_faith_lv2_mute_cleansing', 'water_water_faith_lv2_deluge_benedict',
+                      'light_faith_lv1_minor_heal', 'water_faith_lv1_mending_streams'
+
+        ]
+
+    }
+]
+ATTAINABLE_PLAYER_CHARACTERS = [
+    { 
+        ## total power points = 15 + 15* 29  = 465
+        ## total stat points = 10 + 6*29 = 184
+        'id': 'korin', 
+        'name': 'Kor-in',
+        'arm_armor': 'glacial_vambraces_mk2',
+        'head_armor': 'glacial_crown',
+        'body_armor': 'glacial_breastplate',
+        'leg_armor': 'glacial_shins_mk2',
+        'equipped_weapon': 'glacial_spear',
+        'max_hp': 1169, # 20 + 20 * 29 = 600            + 365
+        'current_hp': 1169,
+        'max_ap': 250, # 5 + 5 * 29 = 150              + 100
+        'current_ap': 250,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 158,                                # +120
+        'dexterity': 38,        
+        'intelligence':38,
+        'constitution': 102,                            # + 64
+        'level': 30,
+        'abilities': ['dark_ice_air_technique_lv3_frost_bite_strike', 'ice_earth_water_technique_lv3_glacial_guard', 
+                      'ice_earth_technique_lv2_permafrost_crush', 'ice_ice_technique_lv2_frost_smash', 'ice_air_technique_lv2_hailwind_edge',
+                      'ice_light_technique_lv2_crystal_lance', 'ice_technique_lv1_frozen_slash','earth_technique_lv1_armor_up'
+
+        ]
+
+    }
+]
+ATTAINABLE_PLAYER_CHARACTERS = [
+    #{'id': 'grimnaw', 'name': 'Grimnaw'},
+    { 
+        ## total power points = 15 + 15* 29  = 465
+        ## total stat points = 10 + 6*29 = 184
+        'id': 'grimnaw', 
+        'name': 'Grimnaw',
+        'head_armor': 'rotlens_goggles',
+        'body_armor': 'mireforged_carapace',
+        'arm_armor': 'hexsplice_gauntlets',
+        'leg_armor': 'bogwalker_greaves',
+        'equipped_weapon': 'cursespark_engine_rod',
+        'max_hp': 941, # 20 + 20 * 29 = 600            + 365
+        'current_hp': 941,
+        'max_ap': 350, # 5 + 5 * 29 = 150              + 100
+        'current_ap': 350,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 38,                                # +120
+        'dexterity': 102,        
+        'intelligence':158,
+        'constitution': 38,                            # + 64
+        'level': 30,
+        'abilities': ['dark_earth_electric_tech_lv3_petrifying_shock', 'dark_dark_dark_tech_lv3_shadow_enhancer', 
+                      'ice_dark_tech_lv2_shadowfrost_emitter', 'dark_dark_tech_lv2_abyssal_core', 'dark_air_lv2_echo_displacer',
+                      'fire_tech_lv1_flux_dampener', 'electric_tech_lv1_taze_charge'
+
+        ]
+
+    }
+]
+
+######### ENDGAME CHARACTERS ############
+ATTAINABLE_PLAYER_CHARACTERS = [
+  {
+    "id": "lyren",
+    "name": "Lyren Vale",
+    "level": 35,
+    "arm_armor": "petalwoven_bracers",
+    "head_armor": "softbloom_cowl",
+    "body_armor": "heartroot_wrap",
+    "leg_armor": "dewthread_sandals",
+    "equipped_weapon": "gentlecurrent_staff",
+    "max_hp": 1120,
+    "current_hp": 1120,
+    "max_ap": 360,
+    "current_ap": 360,
+    "unused_ability_slots": 0,
+    "unused_stat_points": 0,
+    "unused_power_points": 0,
+    "strength": 40,
+    "dexterity": 40,
+    "intelligence": 180,
+    "constitution": 140,
+    "abilities": [
+      "water_light_faith_lv2_holy_fountain",
+      "air_light_faith_lv2_serene_breath",
+      "ice_light_faith_lv2_purging_veil",
+      "earth_light_faith_lv2_clarity_balm",
+      "light_faith_lv1_minor_heal",
+      "light_light_faith_lv4_soulflare_bloom"
+    ]
+  },
+
+  {
+    "id": "marshal_vek",
+    "name": "Marshal Vek Drast",
+    "mbti": "ENTJ",
+    "act": 3,
+    "level": 45,
+    "arm_armor": "ironmarch_gauntlets",
+    "head_armor": "commanders_helm",
+    "body_armor": "edictbound_plate",
+    "leg_armor": "marchforge_greaves",
+    "equipped_weapon": "dominion_halberd",
+    "max_hp": 1500,
+    "current_hp": 1500,
+    "max_ap": 420,
+    "current_ap": 420,
+    "unused_ability_slots": 0,
+    "unused_stat_points": 0,
+    "unused_power_points": 0,
+    "strength": 220,
+    "dexterity": 60,
+    "intelligence": 60,
+    "constitution": 160,
+    "abilities": [
+      "fire_technique_lv1_scorch_slash",
+      "earth_technique_lv1_armor_up",
+      "ice_technique_lv1_frozen_slash",
+      "earth_earth_technique_lv2_terra_slam",
+      "light_earth_technique_lv2_rally_up",
+      "fire_fire_technique_lv3_inferno_drive",
+      "earth_earth_earth_technique_lv4_judgment_break"
+    ]
+  },
+
+  {
+    "id": "warden_hale",
+    "name": "Warden Hale Brimholt",
+    "level": 50,
+    "arm_armor": "oathbinder_vambraces",
+    "head_armor": "sentinel_mask",
+    "body_armor": "memoryforge_plate",
+    "leg_armor": "dutystride_greaves",
+    "equipped_weapon": "ledgerbrand_mace",
+    "max_hp": 1700,
+    "current_hp": 1700,
+    "max_ap": 460,
+    "current_ap": 460,
+    "unused_ability_slots": 0,
+    "unused_stat_points": 0,
+    "unused_power_points": 0,
+    "strength": 60,
+    "dexterity": 40,
+    "intelligence": 200,
+    "constitution": 160,
+    "abilities": [
+      "light_faith_lv1_minor_heal",
+      "water_faith_lv1_mending_streams",
+      "earth_faith_lv1_earthen_blessing",
+      "water_light_faith_lv2_holy_fountain",
+      "air_light_faith_lv2_serene_breath",
+      "electric_light_faith_lv2_shock_catharsis",
+      "light_light_faith_lv4_eternal_vigil"
+    ]
+  },
+
+  {
+    "id": "seraphine",
+    "name": "Seraphine Dawnwell",
+    "level": 60,
+    "arm_armor": "chronoweave_bracers",
+    "head_armor": "hourglass_veil",
+    "body_armor": "epochthread_robe",
+    "leg_armor": "timelock_sandals",
+    "equipped_weapon": "aurora_staff",
+    "max_hp": 1900,
+    "current_hp": 1900,
+    "max_ap": 520,
+    "current_ap": 520,
+    "unused_ability_slots": 0,
+    "unused_stat_points": 0,
+    "unused_power_points": 0,
+    "strength": 40,
+    "dexterity": 80,
+    "intelligence": 260,
+    "constitution": 160,
+    "abilities": [
+      "light_magic_lv1_luminous_spike",
+      "ice_magic_lv1_frostbolt",
+      "air_magic_lv1_shredding_gust",
+      "electric_fire_magic_lv2_arclance",
+      "ice_light_magic_lv2_crystal_spear",
+      "air_light_magic_lv2_skyflare",
+      "light_light_magic_lv3_radiant_storm",
+      "light_light_light_magic_lv4_chronosurge"
+    ]
+  }
+]
+
+

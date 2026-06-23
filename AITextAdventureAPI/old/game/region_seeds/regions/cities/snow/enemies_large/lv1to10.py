@@ -1,0 +1,123 @@
+# Level1-10 hostile seeds for Frostgate Spire (large-city)
+# Export a list named SEEDS_LV1TO10 used by constants_enemies_large_city.py
+SEEDS_LV1TO10 = [
+ {"id": "frostling_scrub", "name": "Frostling Scrub", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":1, "rarity": "common", "base_xp":6,
+ "common_drop": "herb_minor", "rare_drop": None, "money_range": (0,4),
+ "basic_attack": "nicks with a cracked knuckle", "strong_attack": "snowy shove", "player_abilities": None,
+ "base_str":1, "base_dex":3, "base_con":1, "base_int":1, "base_hp":8, "base_ap":1,
+ "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":0},
+
+ {"id": "ice_mumbler", "name": "Ice Mumbler (keeps warm by gossip)", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":1, "rarity": "common", "base_xp":8,
+ "common_drop": "herb_minor", "rare_drop": None, "money_range": (1,6),
+ "basic_attack": "grim mutter", "strong_attack": "flailing mitt", "player_abilities": None,
+ "base_str":1, "base_dex":2, "base_con":2, "base_int":3, "base_hp":10, "base_ap":2,
+ "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":1},
+
+ {"id": "frozen_gull", "name": "Frozen Gull", "hostile_type": "creature", "role": "damage", "min_spawn_level":1, "rarity": "common", "base_xp":7,
+ "common_drop": "herb_minor", "rare_drop": None, "money_range": (0,4),
+ "basic_attack": "peck at your boot", "strong_attack": "wing buffet of shame", "player_abilities": None,
+ "base_str":1, "base_dex":4, "base_con":1, "base_int":1, "base_hp":8, "base_ap":1,
+ "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":0},
+
+ {"id": "frost_warden", "name": "Frost Warden", "hostile_type": "humanoid", "role": "support", "min_spawn_level":1, "rarity": "uncommon", "base_xp":28,
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (2,12),
+ "basic_attack": "rim jab", "strong_attack": "warding sweep", "player_abilities": ["reinforce_frame"],
+ "base_str":3, "base_dex":3, "base_con":4, "base_int":2, "base_hp":16, "base_ap":3,
+ "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
+
+ {"id": "rime_phantom", "name": "Rime Phantom", "hostile_type": "spirit", "role": "hazard", "min_spawn_level":1, "rarity": "rare", "base_xp":60,
+ "common_drop": "herb_minor", "rare_drop": "tome_int", "money_range": (4,28),
+ "basic_attack": "cold reach", "strong_attack": "phantasmal chill", "player_abilities": ["night_whisper"],
+ "base_str":1, "base_dex":4, "base_con":2, "base_int":6, "base_hp":20, "base_ap":5,
+ "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":2},
+
+ {"id": "ice_hewer", "name": "Ice Hewer", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":2, "rarity": "common", "base_xp":16,
+ "common_drop": "herb_minor", "rare_drop": "cloth_gloves", "money_range": (2,12),
+ "basic_attack": "pick swing", "strong_attack": "axe cleave", "player_abilities": None,
+ "base_str":4, "base_dex":2, "base_con":4, "base_int":1, "base_hp":18, "base_ap":2,
+ "str_per_level":1, "dex_per_level":0, "con_per_level":1, "int_per_level":0},
+
+ {"id": "ice_spirit", "name": "Ice Spiritling", "hostile_type": "spirit", "role": "hazard", "min_spawn_level":2, "rarity": "rare", "base_xp":72,
+ "common_drop": "herb_minor", "rare_drop": "tome_int", "money_range": (6,36),
+ "basic_attack": "nipping chill", "strong_attack": "frost bind", "player_abilities": ["night_whisper"],
+ "base_str":1, "base_dex":5, "base_con":2, "base_int":7, "base_hp":48, "base_ap":6,
+ "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":2},
+
+ {"id": "ice_crab", "name": "Ice Crab", "hostile_type": "creature", "role": "damage", "min_spawn_level":2, "rarity": "common", "base_xp":12,
+ "common_drop": "herb_minor", "rare_drop": None, "money_range": (0,6),
+ "basic_attack": "pinch", "strong_attack": "crushing claw", "player_abilities": None,
+ "base_str":2, "base_dex":3, "base_con":3, "base_int":1, "base_hp":12, "base_ap":2,
+ "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
+
+ {"id": "snow_slip", "name": "Snow Slip", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":2, "rarity": "common", "base_xp":14,
+ "common_drop": "lockpick", "rare_drop": None, "money_range": (1,10),
+ "basic_attack": "quick grab", "strong_attack": "backstab in mitts", "player_abilities": None,
+ "base_str":1, "base_dex":6, "base_con":1, "base_int":2, "base_hp":12, "base_ap":3,
+ "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":0},
+
+ {"id": "tome_trader", "name": "Tome Trader", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":3, "rarity": "common", "base_xp":22,
+ "common_drop": "herb_minor", "rare_drop": "tome_int", "money_range": (3,22),
+ "basic_attack": "flings ledger", "strong_attack": "ink-slap", "player_abilities": None,
+ "base_str":2, "base_dex":3, "base_con":2, "base_int":6, "base_hp":22, "base_ap":3,
+ "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":1},
+
+ {"id": "tome_trader_scribe", "name": "Tome Trader Scribe", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":4, "rarity": "common", "base_xp":30,
+ "common_drop": "herb_minor", "rare_drop": "tome_int", "money_range": (4,28),
+ "basic_attack": "ink blot", "strong_attack": "paper cut", "player_abilities": None,
+ "base_str":2, "base_dex":3, "base_con":2, "base_int":7, "base_hp":26, "base_ap":3,
+ "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":1},
+
+ {"id": "snow_merchant_bard", "name": "Snow Merchant Bard", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":4, "rarity": "common", "base_xp":18,
+ "common_drop": "herb_minor", "rare_drop": None, "money_range": (1,12),
+ "basic_attack": "off-key ballad", "strong_attack": "crescendo slap", "player_abilities": None,
+ "base_str":1, "base_dex":3, "base_con":2, "base_int":6, "base_hp":16, "base_ap":2,
+ "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":1},
+
+ {"id": "glacier_brawler", "name": "Glacier Brawler (sings off-key)", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":4, "rarity": "uncommon", "base_xp":36,
+ "common_drop": "herb_med", "rare_drop": None, "money_range": (4,20),
+ "basic_attack": "frosted hook", "strong_attack": "barstool slam", "player_abilities": None,
+ "base_str":5, "base_dex":3, "base_con":5, "base_int":1, "base_hp":36, "base_ap":3,
+ "str_per_level":2, "dex_per_level":0, "con_per_level":2, "int_per_level":0},
+
+ {"id": "glacial_guard", "name": "Glacial Guard", "hostile_type": "humanoid", "role": "support", "min_spawn_level":4, "rarity": "rare", "base_xp":120,
+ "common_drop": "herb_med", "rare_drop": "short_sword", "money_range": (10,60),
+ "basic_attack": "shield bash", "strong_attack": "frozen pike", "player_abilities": ["reinforce_frame"],
+ "base_str":4, "base_dex":3, "base_con":6, "base_int":2, "base_hp":100, "base_ap":4,
+ "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":0},
+
+ {"id": "shiver_blade", "name": "Shiver Blade (dramatic)", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":5, "rarity": "uncommon", "base_xp":52,
+ "common_drop": "lockpick", "rare_drop": "pipe_wrench", "money_range": (8,44),
+ "basic_attack": "glacier stab", "strong_attack": "frozen flourish", "player_abilities": ["shadow_flicker"],
+ "base_str":2, "base_dex":7, "base_con":2, "base_int":3, "base_hp":30, "base_ap":5,
+ "str_per_level":1, "dex_per_level":3, "con_per_level":0, "int_per_level":1},
+
+ {"id": "frostwork_gull", "name": "Frostwork Gull", "hostile_type": "construct", "role": "damage", "min_spawn_level":6, "rarity": "uncommon", "base_xp":48,
+ "common_drop": "herb_med", "rare_drop": None, "money_range": (2,20),
+ "basic_attack": "metallic peck", "strong_attack": "screeching arc", "player_abilities": None,
+ "base_str":2, "base_dex":5, "base_con":3, "base_int":1, "base_hp":30, "base_ap":3,
+ "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
+
+ {"id": "frozen_jester", "name": "Frozen Jester", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":6, "rarity": "uncommon", "base_xp":46,
+ "common_drop": "herb_med", "rare_drop": None, "money_range": (2,24),
+ "basic_attack": "slapstick swipe", "strong_attack": "pie of frost", "player_abilities": None,
+ "base_str":2, "base_dex":3, "base_con":3, "base_int":6, "base_hp":28, "base_ap":3,
+ "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":1},
+
+ {"id": "cold_smuggler", "name": "Cold Smuggler", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":7, "rarity": "uncommon", "base_xp":56,
+ "common_drop": "lockpick", "rare_drop": "stimulant_large", "money_range": (12,70),
+ "basic_attack": "slick jab", "strong_attack": "frozen parcel", "player_abilities": None,
+ "base_str":3, "base_dex":5, "base_con":3, "base_int":3, "base_hp":30, "base_ap":4,
+ "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
+
+ {"id": "tide_banshee", "name": "Frost Banshee", "hostile_type": "spirit", "role": "hazard", "min_spawn_level":9, "rarity": "rare", "base_xp":160,
+ "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (8,48),
+ "basic_attack": "keening wail", "strong_attack": "soul-freeze", "player_abilities": ["night_whisper"],
+ "base_str":1, "base_dex":4, "base_con":2, "base_int":10, "base_hp":44, "base_ap":8,
+ "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":3},
+
+ {"id": "spine_of_spire", "name": "Spine of the Spire", "hostile_type": "construct", "role": "support", "min_spawn_level":10, "rarity": "superrare", "base_xp":520,
+ "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,340),
+ "basic_attack": "spine lash", "strong_attack": "colossal rupture", "player_abilities": ["reinforce_frame"],
+ "base_str":10, "base_dex":2, "base_con":12, "base_int":4, "base_hp":300, "base_ap":8,
+ "str_per_level":3, "dex_per_level":0, "con_per_level":3, "int_per_level":1},
+]

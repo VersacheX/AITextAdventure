@@ -1,0 +1,353 @@
+﻿timeline
+    title The Fracture Saga - Regional Hero Arcs
+
+
+    section Desert Arc - Sable vs Zaruun
+        TASK - Desert Primary Initialize - Event:
+            ► ACQUIRED:
+            Complete intro story:
+            ► COMPLETED:
+            EVENT - create_npc - sable - region_bar:
+            Sable - How's it going? I'm Sable, the friendliest sand witch around. I'm out here selling miracles to need. Maybe one day you'll need one of my miracles too. Maybe I'll need one from you.:
+            EVENT - award_task - meet_sable
+
+        TASK - Meet Sable - NPC:
+            ► ACQUIRED:
+            Sable already exists at location:
+            ► COMPLETED:
+            Sable - Zaruun is out there, cracking open the desert. I need the Dune Sundial to hone in on him. He's been causing sinkholes all over the desert. Please find the Sundial.:
+            EVENT - award_task - deliver_dune_sundial_to_sable
+
+        TASK - Deliver Dune Sundial to Sable - NPC:
+            ► ACQUIRED:
+            Deliver item dune_sundial to Sable:
+            ► COMPLETED:
+            Sable - Well now… you look like someone who can handle a little sandstorm of trouble. Zaruun's been cracking the desert open again — sinkholes, screaming dunes, the whole mess. He thinks the desert wants to return to emptiness. I think he's an idiot with an ego. Go knock some sense into him before he hollows the whole region.:
+            EVENT - remove_item - dune_sundial:
+            EVENT - set_npc_standing_text - sable - Zaruun is still out there, cracking open the desert. Go stop him. I've heard he's holed up somewhere in the desert nearby. Be careful.:
+            EVENT - award_task - defeat_zaruun
+
+        TASK - Meet Zaruun - NPC:
+            ► ACQUIRED:
+            EVENT - create_dungeon - zaruun_lair - region_open_area:
+            EVENT - create_npc - zaruun - None:
+            ► COMPLETED:
+            Zaruun - So the witch sends another fool. The desert is thinning — can't you feel it? I merely help it shed its last illusions. Turn back, or be swallowed with the rest.:
+            EVENT - award_task - defeat_zaruun_boss_fight
+
+        TASK - Defeat Zaruun - MOB:
+            ► ACQUIRED:
+            EVENT - begin_combat - boss_battle - zaruun_1:
+            ► COMPLETED:
+            Zaruun - You delay the desert's truth… but the void waits beneath every grain.:
+            EVENT - hide_npc - zaruun:
+            EVENT - complete_region_quest - desert:
+            EVENT - award_task - report_to_sable
+
+        TASK - Report to Sable - NPC:
+            ► ACQUIRED:
+            Returning to Sable:
+            ► COMPLETED:
+            Sable - Well done, traveler. Zaruun's gone, and the desert can breathe again — for now. You've got grit. I like that. I'll tag along. Someone needs to keep you alive.:
+            EVENT - hide_npc - sable:
+            EVENT - character_join - sable
+
+    section Forest Arc - Thorn vs Elder Marrowroot
+        TASK - Forest Primary Initialize - Event:
+            ► ACQUIRED:
+            Complete intro story:
+            ► COMPLETED:
+            EVENT - create_npc - thorn - region_bar:
+            Thorn - Heya! I Thorn. You new around here? I am guardian forest. You be good to forest.:
+            EVENT - award_task - meet_thorn
+
+        TASK - Meet Thorn - NPC:
+            ► ACQUIRED:
+            Thorn already exists at location:
+            ► COMPLETED:
+            Thorn - You. Outsider. Good. Need help. Marrowroot's ripping up roots, screaming about 'approaching edge.' Forest's scared. I'm angry. Find me Grove Lattice to break his wards.:
+            EVENT - award_task - deliver_grove_lattice_to_thorn
+
+        TASK - Deliver Grove Lattice to Thorn - NPC:
+            ► ACQUIRED:
+            Deliver item grove_lattice to Thorn:
+            ► COMPLETED:
+            Thorn - You. Outsider. Good. Need help. Marrowroot's ripping up roots, screaming about the 'approaching edge.' Forest's scared. I'm angry. Go into his grove. Break him. Before he uproots the whole region.:
+            EVENT - remove_item - grove_lattice:
+            EVENT - set_npc_standing_text - thorn - Marrowroot's gone mad. He's corrupts the forest. Stop him. Whhy you wait?:
+            EVENT - award_task - defeat_marrowroot
+
+        TASK - Meet Marrowroot - NPC:
+            ► ACQUIRED:
+            EVENT - create_dungeon - marrowroot_lair - region_open_area:
+            EVENT - create_npc - marrowroot - None:
+            ► COMPLETED:
+            Marrowroot - You walk where roots recoil. The void touches the world. I will pull the forest back before it is devoured.:
+            EVENT - award_task - defeat_marrowroot_boss_fight
+
+        TASK - Defeat Marrowroot - MOB:
+            ► ACQUIRED:
+            EVENT - begin_combat - boss_battle - marrowroot_1:
+            ► COMPLETED:
+            Marrowroot - The roots… still feel it… the edge…:
+            EVENT - hide_npc - marrowroot:
+            EVENT - complete_region_quest - forest:
+            EVENT - award_task - report_to_thorn
+
+        TASK - Report to Thorn - NPC:
+            ► ACQUIRED:
+            Returning to Thorn:
+            ► COMPLETED:
+            Thorn - He's gone. Forest calmer now. You strong. I follow. World needs guarding.:
+            EVENT - hide_npc - thorn:
+            EVENT - character_join - thorn
+
+    section Grassland Arc - Nia vs Serene
+        TASK - Grassland Primary Initialize - Event:
+            ► ACQUIRED:
+            Complete intro story:
+            ► COMPLETED:
+            EVENT - create_npc - nia - region_bar:
+            Nia - Hey stranger! I'm Nia, I like to dance with the wind and go with the natural flow.:
+            EVENT - award_task - meet_nia
+
+        TASK - Meet Nia - NPC:
+            ► ACQUIRED:
+            Nia already exists at location:
+            ► COMPLETED:
+            Nia - Hey stranger! You look like someone who can handle themselves. The wind feels... off. Like it's carrying whispers of things yet to come. If you're up for an adventure, find me the Heirloom Ring.:
+            EVENT - award_task - deliver_heirloom_ring_to_nia
+
+        TASK - Deliver Heirloom Ring to Nia - NPC:
+            ► ACQUIRED:
+            Deliver item heirloom_ring to Nia:
+            ► COMPLETED:
+            Nia - Hey stranger! You hear that? The wind's whispering wrong. Serene's been stealing voices and future‑echoes again. She thinks she owns the wind. I need someone who can shut her down before she steals tomorrow entirely.:
+            EVENT - remove_item - heirloom_ring:
+            EVENT - set_npc_standing_text - nia - The wind feels... unsettled. Serene is at it again. We need to stop her before she steals tomorrow entirely. Can you help me track her down?:
+            EVENT - award_task - defeat_serene
+
+        TASK - Meet Serene - NPC:
+            ► ACQUIRED:
+            EVENT - create_dungeon - serene_lair - region_open_area:
+            EVENT - create_npc - serene - None:
+            ► COMPLETED:
+            Serene - A new voice approaches… I'll take it. The wind has no future left — only what I choose.:
+            EVENT - award_task - defeat_serene_boss_fight
+
+        TASK - Defeat Serene - MOB:
+            ► ACQUIRED:
+            EVENT - begin_combat - boss_battle - serene_1:
+            ► COMPLETED:
+            Serene - My echoes… scattered… tomorrow slips away…:
+            EVENT - hide_npc - serene:
+            EVENT - complete_region_quest - grassland:
+            EVENT - award_task - report_to_nia
+
+        TASK - Report to Nia - NPC:
+            ► ACQUIRED:
+            Returning to Nia:
+            ► COMPLETED:
+            Nia - Nice work! The wind sounds like itself again. You're fun. I'm coming with you. Someone has to keep the future interesting.:
+            EVENT - hide_npc - nia:
+            EVENT - character_join - nia
+
+    section Mountain Arc - Bragg vs Rokhuld
+        TASK - Mountains Primary Initialize - Event:
+            ► ACQUIRED:
+            Complete intro story:
+            ► COMPLETED:
+            EVENT - create_npc - bragg - region_bar:
+            Bragg - Heyo! I'm Bragg, I build golems around these parts and help to stabilize the mining networks.:
+            EVENT - award_task - meet_bragg
+
+        TASK - Meet Bragg - NPC:
+            ► ACQUIRED:
+            Bragg already exists at location:
+            ► COMPLETED:
+            Bragg - If you find a Coreforge Shard, bring it to me. Rokhuld's on a rampage below. I need to stop him before he breaks the whole mountain!:
+            EVENT - award_task - deliver_coreforge_shard_to_bragg
+
+        TASK - Deliver Coreforge Shard to Bragg - NPC:
+            ► ACQUIRED:
+            Deliver item coreforge_shard to Bragg:
+            ► COMPLETED:
+            Bragg - Ah! A traveler with working limbs. Perfect. Rokhuld's smashing his way toward the mountain's heart. Says the world's ending is buried down there. He's breaking my golems, my tunnels, my patience. Go stop him before he cracks the whole peak.:
+            EVENT - remove_item - coreforge_shard:
+            EVENT - set_npc_standing_text - bragg - Rokhuld's on a rampage below. Stop him before he breaks the whole mountain! What a dick head. Why are you still standing around?:
+            EVENT - award_task - defeat_rokhuld
+
+        TASK - Meet Rokhuld - NPC:
+            ► ACQUIRED:
+            EVENT - create_dungeon - rokhuld_lair - region_open_area:
+            EVENT - create_npc - rokhuld - None:
+            ► COMPLETED:
+            Rokhuld - You stand between me and truth. The mountain hides the world's final breath. I will break it open.:
+            EVENT - award_task - defeat_rokhuld_boss_fight
+
+        TASK - Defeat Rokhuld - MOB:
+            ► ACQUIRED:
+            EVENT - begin_combat - boss_battle - rokhuld_1:
+            ► COMPLETED:
+            Rokhuld - Stone… holds… for now…:
+            EVENT - hide_npc - rokhuld:
+            EVENT - complete_region_quest - mountains:
+            EVENT - award_task - report_to_bragg
+
+        TASK - Report to Bragg - NPC:
+            ► ACQUIRED:
+            Returning to Bragg:
+            ► COMPLETED:
+            Bragg - Ha! You flattened him like a loose cobblestone. You've got talent. I'll come along — someone needs to build things while you break them.:
+            EVENT - hide_npc - bragg:
+            EVENT - character_join - bragg
+
+    section Shallows Arc - Ripple vs Uul'thar
+        TASK - Shallows Primary Initialize - Event:
+            ► ACQUIRED:
+            Complete intro story:
+            ► COMPLETED:
+            EVENT - create_npc - ripple - region_bar:
+            Ripple - Heyyyyyy! I'm Ripple the Tide Oracle. I interpret the movements of the sea to help guide travelers. Do you need guidance?:
+            EVENT - award_task - meet_ripple
+
+        TASK - Meet Ripple - NPC:
+            ► ACQUIRED:
+            Ripple already exists at location:
+            ► COMPLETED:
+            Ripple - The sea is restless... We must act swiftly. Find me the moontide orb.:
+            EVENT - award_task - deliver_moontide_orb_to_ripple
+
+        TASK - Deliver Moontide Orb to Ripple - NPC:
+            ► ACQUIRED:
+            Deliver item moontide_orb to Ripple:
+            ► COMPLETED:
+            Ripple - Traveler… the tides are trembling. Something ancient rose from the trench — Uul'thar. It bends the sea like wet parchment. I cannot calm the waters while it exists. Please… descend and end it.:
+            EVENT - remove_item - moontide_orb:
+            EVENT - set_npc_standing_text - ripple - The sea is restless... We must act swiftly. Uul'thar must be stopped before it rewrites the tides forever.:
+            EVENT - award_task - defeat_uulthar
+
+        TASK - Meet Uul'thar - NPC:
+            ► ACQUIRED:
+            EVENT - create_dungeon - uulthar_lair - region_open_area:
+            EVENT - create_npc - uulthar - None:
+            ► COMPLETED:
+            Uul'thar - Small thing… walking on borrowed water. The sea remembers the before. I will show it the after.:
+            EVENT - award_task - defeat_uulthar_boss_fight
+
+        TASK - Defeat Uul'thar - MOB:
+            ► ACQUIRED:
+            EVENT - begin_combat - boss_battle - uulthar_1:
+            ► COMPLETED:
+            Uul'thar - The deep… still… calls…:
+            EVENT - hide_npc - uulthar:
+            EVENT - complete_region_quest - shallows:
+            EVENT - award_task - report_to_ripple
+
+        TASK - Report to Ripple - NPC:
+            ► ACQUIRED:
+            Returning to Ripple:
+            ► COMPLETED:
+            Ripple - The tides breathe again. Thank you. I will walk with you now. The void's whispers grow louder.:
+            EVENT - hide_npc - ripple:
+            EVENT - character_join - ripple
+
+    section Snow Arc - Kor-in vs Lady Aeriola
+        TASK - Snow Primary Initialize - Event:
+            ► ACQUIRED:
+            Complete intro story:
+            ► COMPLETED:
+            EVENT - create_npc - korin - region_bar:
+            Kor-in - Ho there! I'm Korin. One of the best ice trappers around. I lost my family to a psychotic sorceress a few years back. Which is why I'm always holed up in here. If you ever hear anything about her whereabouts come let me know.:
+            EVENT - award_task - meet_korin
+
+        TASK - Meet Kor-in - NPC:
+            ► ACQUIRED:
+            Kor-in already exists at location:
+            ► COMPLETED:
+            Kor-in - Aeriola is on a rampage. I need a Boreal Clasp to break her wards.:
+            EVENT - award_task - deliver_boreal_clasp_to_korin
+
+        TASK - Deliver Boreal Clasp to Kor-in - NPC:
+            ► ACQUIRED:
+            Deliver item boreal_clasp to Kor-in:
+            ► COMPLETED:
+            Kor-in - You there. You smell like warmth. Good. I need someone alive. Lady Aeriola froze half the valley last night. She wants the world still — unmoving — like a corpse. My family vanished in one of her frozen 'moments.' End her madness before she freezes time itself.:
+            EVENT - remove_item - boreal_clasp:
+            EVENT - set_npc_standing_text - korin - The world is frozen in her grasp. We must act swiftly. Will you help me stop Lady Aeriola?:
+            EVENT - award_task - defeat_aeriola
+
+        TASK - Meet Aeriola - NPC:
+            ► ACQUIRED:
+            EVENT - create_dungeon - aeriola_lair - region_open_area:
+            EVENT - create_npc - aeriola - None:
+            ► COMPLETED:
+            Aeriola - A warm one approaches. How quaint. The world thrashes in chaos. I will quiet it. You will join the stillness.:
+            EVENT - award_task - defeat_aeriola_boss_fight
+
+        TASK - Defeat Aeriola - MOB:
+            ► ACQUIRED:
+            EVENT - begin_combat - boss_battle - aeriola_1:
+            ► COMPLETED:
+            Aeriola - Warmth… persists. The final winter… delayed.:
+            EVENT - hide_npc - aeriola:
+            EVENT - complete_region_quest - snow:
+            EVENT - award_task - report_to_korin
+
+        TASK - Report to Kor-in - NPC:
+            ► ACQUIRED:
+            Returning to Kor-in:
+            ► COMPLETED:
+            Kor-in - She's gone. Good. The snow feels honest again. You fight well. I'll travel with you — until the world stops breathing.:
+            EVENT - hide_npc - korin:
+            EVENT - character_join - korin
+
+    section Swamp Arc - Grimnaw vs Lich-King Miregloom
+        TASK - Swamp Primary Initialize - Event:
+            ► ACQUIRED:
+            Complete intro story:
+            ► COMPLETED:
+            EVENT - create_npc - grimnaw - region_bar:
+            Grimnaw - How goes it? I'm Grinmaw. If it's dark twisted tech I'm about it. It's amazing the power of the ancient.:
+            EVENT - award_task - meet_grimnaw
+
+        TASK - Meet Grimnaw - NPC:
+            ► ACQUIRED:
+            Grimnaw already exists at location:
+            ► COMPLETED:
+            Grimnaw - Get me the Mirethread Pendant and I can grant you access to find Miregloom.:
+            EVENT - award_task - deliver_mirethread_pendant_to_grimnaw
+
+        TASK - Deliver Mirethread Pendant to Grimnaw - NPC:
+            ► ACQUIRED:
+            Deliver item mirethread_pendant to Grimnaw:
+            ► COMPLETED:
+            Grimnaw - Heheheh! You! Yes, you'll do nicely. Miregloom's raising the dead again. Claims the swamp is the world's first grave. He's bad for business. Go knock his bones loose.:
+            EVENT - remove_item - mirethread_pendant:
+            EVENT - set_npc_standing_text - grimnaw - Miregloom is raising the dead again. Stop him before the swamp becomes a graveyard.:
+            EVENT - award_task - defeat_miregloom
+
+        TASK - Meet Miregloom - NPC:
+            ► ACQUIRED:
+            EVENT - create_dungeon - miregloom_lair - region_open_area:
+            EVENT - create_npc - miregloom - None:
+            ► COMPLETED:
+            Miregloom - Another soul wanders into my rot. The world will decay soon. I merely begin the process.:
+            EVENT - award_task - defeat_miregloom_boss_fight
+
+        TASK - Defeat Miregloom - MOB:
+            ► ACQUIRED:
+            EVENT - begin_combat - boss_battle - miregloom_1:
+            ► COMPLETED:
+            Miregloom - Rot… postponed…:
+            EVENT - hide_npc - miregloom:
+            EVENT - complete_region_quest - swamp:
+            EVENT - award_task - report_to_grimnaw
+
+        TASK - Report to Grimnaw - NPC:
+            ► ACQUIRED:
+            Returning to Grimnaw:
+            ► COMPLETED:
+            Grimnaw - Hah! You did it! Swamp smells better already. I'll tag along. Someone needs to keep the relics in line.:
+            EVENT - hide_npc - grimnaw:
+            EVENT - character_join - grimnaw

@@ -1,0 +1,831 @@
+timeline
+    title The Fracture Saga - ACT III - Chapters 8 to 13
+
+    section Chapter 8 - Glamour's City of Shattered Attention
+        TASK - Meet Veyla - NPC:
+            > ACQUIRED:
+                EVENT - create_npc - veyla (region_city_inn):
+                EVENT - create_npc - rusk (region_city_shoparmor):
+                EVENT - create_npc - jinn (region_city_shopitems):
+                EVENT - create_npc - ember (region_city_bar):
+                EVENT - show_npc - tess (region_city_bar):
+                EVENT - show_npc - sam (region_city_bar):
+                EVENT - set_npc_standing_text - veyla ("Everything is too loud... too bright... I can't... focus..."):
+                EVENT - set_npc_standing_text - rusk ("This district used to have rules! Now it's just noise and madness!"):
+                EVENT - set_npc_standing_text - jinn ("Focus lenses! Clarity guaranteed! ...Results may vary."):
+                EVENT - set_npc_standing_text - ember ("In a city full of echoes, someone has to stay real."):
+                EVENT - set_npc_standing_text - tess ("This place is incredible! So many colors! So much noise!"):
+                EVENT - set_npc_standing_text - sam ("Tess, stay close. This city feels like it's trying to eat us."):
+                Seth - Alright, settle down back there! The Rustwing's holdin' together with spit and prayer as it is.:
+                Chock - "Holdin' together" is generous. This thing rattles worse than a drunk with the shakes.:
+                Sable - I don’t like this… feels like the air itself is lying to us.:
+                Nia - Everything’s spinning too fast. My head’s full of static.:
+                Bragg - My tools are screamin’. Somethin’ out here is messin’ with reality real bad.:
+                Seth - See? This is exactly why I was happy to hand you lot the keys. Too much weird metaphysical bullshit for me.:
+                Kaera - The fractures are getting worse. I can feel the strain on everything… even the ship.:
+                Kor-in - (quietly) ...Like walking on thinning ice.:
+                Ripple - The currents feel wrong. Like the world is forgetting how to hold itself together.:
+                Moxie - Ooooh, I'm kind of enjoying this. Bad decisions make great stories.:
+                Kade - Don’t lick the turbulence, Moxie. We have enough problems.:
+                Thorn - Smells like something died and decided not to stay dead.:
+                Grimnaw - (muttering) The decay has a very specific… texture. Not good.:
+                Narrator - Suddenly, a violent shudder rocks the Rustwing. Alarms blare as the engine sputters, choked by shimmering, distorted air.:
+                Seth - BRACE! WE’RE GOING DOWN!:
+                EVENT - set_player_location - region_open_area:
+                Narrator - Chapter 8 - The world is what appears to us… and we are shaped by what we attend to.:
+            > COMPLETED:
+                Veyla - Your faces… I know them… no wait...:
+                Veyla - Everything's too bright, too loud, too MUCH. I can't hold a thought for more than..:
+                Veyla - Wait, what were we talking about?:
+                Moxie - She's scattered like shattered glass. I love it.:
+                Chock - Focus, lady. Deep breaths.:
+                Veyla - I used to sing. Now I just… echo. The city took my voice and made copies.:
+                Veyla - The Theatre of Echoed Faces…:
+                Veyla - That's where Glamour's projection hides. I think. Maybe. I remember… fragments.:
+                EVENT - set_npc_standing_text - veyla ("The Theatre of Echoed Faces… that's where Glamour's projection hides. I think. Maybe. I remember… fragments."):
+                EVENT - award_task - meet_jinn
+
+        TASK - Meet Jinn - NPC:
+            > ACQUIRED:
+                (no acquired events):
+            > COMPLETED:
+                Jinn - Focus lenses! Guaranteed clarity! They don't work.:
+                Jinn - But hey, the placebo effect is real, right?:
+                Moxie - I like him. He's honest about his dishonesty.:
+                Kade - He's a con artist in a city of illusions. Perfect fit.:
+                Jinn - You want to find Glamour? I know where the projection hides. But it'll cost you.:
+                Jinn - Or… you could just clear those pylons for Rusk. That'd make us all happy.:
+                EVENT - set_npc_standing_text - jinn ("Theatre of Echoed Faces. That's where Glamour's core projection manifests. Good luck not losing your mind."):
+                EVENT - award_task - meet_rusk
+                
+        TASK - Meet Rusk - NPC:
+            > ACQUIRED:
+                (no acquired events):
+            > COMPLETED:
+                Rusk - QUIET HOURS! QUIET HOURS! …No one listens anymore.:
+                Rusk - This district used to have ORDER. Rules. Structure. Now it's just… screaming.:
+                Chock - Guy's wound tighter than a spring.:
+                Poise - He's trying to hold reality together with willpower alone.:
+                Rusk - If you want to help, shut down the malfunctioning sensory pylons. They're overloading everyone's minds.:
+                Rusk - Speak to Ember, they're about the only person around Here who isn't losing their mind.:
+                Sable - Someone who still has their head on straight? I'll take it.:
+                Thorn - (grunting) Better than nothing. Let's find them.:
+                EVENT - set_npc_standing_text - rusk ("The pylons are scattered throughout the district. Destroy them before everyone loses their minds completely."):
+                EVENT - award_task - meet_ember
+
+        TASK - Meet Ember - NPC:
+            > ACQUIRED:
+                (no acquired events):
+            > COMPLETED:
+                Ember - You look lost. That's good. Lost people can still find their way.:
+                Ember - I'm Ember. I sing to remind people what real sounds like.:
+                Kaera - Your voice… it's grounding. Like an anchor.:
+                Ember - That's the idea. In a city of echoes, someone has to be real.:
+                Chock - You're not swept up in all this?:
+                Ember - Oh, I feel it. The pull. The chaos. But I choose to stay steady.:
+                Tess - (Eyes narrowed, scanning the crowd) This isn't just chaos. It's a system. Everyone's attention is being pulled, like currency. I wonder who's collecting.:
+                Sam - (Quietly) The sensory overload is a weapon. It prevents pattern recognition. They're being managed, not entertained.:
+                Ember - You see it too. Good. Don't let it manage you.:
+                Chock - They're still bickering. Good. Means reality's still intact.:
+                Kaera - Their bond grounds them. We should stay close.:
+                EVENT - set_npc_standing_text - ember ("Stay real, friends. The city wants to copy you. Don't let it."):
+                EVENT - set_npc_standing_text - tess ("This whole city is a giant confidence game, but I can't figure out who's running the table."):
+                EVENT - set_npc_standing_text - sam ("The chaos is a smokescreen. The real trick is happening somewhere we're not looking."):
+                EVENT - award_task - meet_glamour
+
+        TASK - Meet Glamour - Dungeon:
+            > ACQUIRED:
+                EVENT - create_npc - glamour (None):
+                EVENT - create_dungeon - theatre_of_echoed_faces (region_city_open_area):
+            > COMPLETED:
+                Moxie - I see three of me. Are they all real?:
+                Poise - The air hums with fractured attention. Stay focused.:
+                Glamour - Look at me. LOOK AT ME. You can't look away.:
+                Glamour - Attention is the only currency that matters here. And you're all bankrupt.:
+                Moxie - It's pulling focus like gravity. I can barely think.:
+                Chock - Then stop thinking and start hitting!:
+                Sable - This... this is what the desert warned me about. Everything screaming for your eyes.:
+                Nia - The wind is screaming too many versions of us. It's dizzying.:
+                Bragg - My head feels like it's splitting. Make it shut up!:                
+                Glamour - (laughing, voice echoing from every mirror) Why fight it? Just watch. Just admire. Just give in.:
+                Glamour - You're all so much more beautiful when you're distracted.:                
+                Narrator - The illusions intensify, then suddenly fracture. Glamour's form flickers and shatters like glass.:
+                EVENT - hide_npc - glamour:
+                Narrator - A colder presence replaces her. Sharp. Surgical. Emotionless.:
+                Scalpel - Glamour was soft. She needed your eyes. I only need one clean cut.:
+                Kade - Oh that's... that's a problem.:
+                Chock - New boss. Same fists.:
+                EVENT - award_task - defeat_scalpel_projection
+
+        TASK - Defeat Scalpel Projection - MOB:
+            > ACQUIRED:
+                EVENT - begin_combat - scalpel_projection_1 (boss_battle):
+            > COMPLETED:
+                Scalpel - Glamour was soft. I am not.:
+                Scalpel - This pathetic spire of distractions doesn't matter. The real entertainment awaits at The Radpost.:
+                Scalpel - Come find me there... if you still have the stomach for it.:
+                Sable - The Radpost? That sounds deep in the desert... This just keeps getting worse.:
+                Moxie - Ooh, this one’s all business. No flair, just blades. I respect the commitment.:
+                Nia - Great. From too much noise to too much blood.:
+                Poise - Precision without emotion… This one will be dangerous.:
+                Kade - Cold, efficient, and sadistic. My favorite kind of nightmare.:
+                Thorn - (grunting) Then we follow. No point stopping now.:
+                EVENT - set_npc_standing_text - veyla ("Something colder has arrived. I can feel it cutting through the air."):
+                EVENT - set_npc_standing_text - rusk ("The chaos is gone, but now there's… precision. Cold precision."):
+                EVENT - set_npc_standing_text - jinn ("Scalpel. That's what they call it. And it doesn't play games."):
+                EVENT - set_npc_standing_text - ember ("I'm traveling to the next city. Someone needs to remind people to stay human."):
+                EVENT - advance_chapter
+
+    section Chapter 9 - Scalpel's Domain
+        TASK - Meet Brann - NPC:
+            > ACQUIRED:
+                EVENT - create_npc - brann (region_city_bar):
+                EVENT - create_npc - lira (region_city_inn):
+                EVENT - show_npc - ember (region_city_inn):
+                EVENT - show_npc - tess (region_city_inn):
+                EVENT - show_npc - sam (region_city_inn):
+                EVENT - set_npc_standing_text - brann ("The arena will test you. Don't let Scalpel make you enjoy it."):
+                EVENT - set_npc_standing_text - lira ("I can't keep patching them up... they're all breaking."):
+                EVENT - set_npc_standing_text - ember ("The arena's influence is spreading. We need to stop it before it consumes the next city."):
+                EVENT - set_npc_standing_text - tess ("I want to go to the arena! It sounds so exciting!"):
+                EVENT - set_npc_standing_text - sam ("Tess, the arena is dangerous. We need to be careful."):
+                Narrator - Chapter 9 - The danger isn’t when it hurts… it’s when you start to enjoy it.:
+            > COMPLETED:
+                Brann - Scalpel twists thrill into hunger. Don't feed it.:
+                Brann - I used to fight for glory. Now I fight because I can't stop.:
+                Chock - You were a champion?:
+                Brann - Was. Now I'm just another addict.:
+                Brann - If you're going in there, understand the rules - escalation. Every fight gets faster, harder, deadlier.:
+                Kade - Of course it's a death spiral designed to break people. Why wouldn't it be?:
+                Poise - Controlled violence with intent. This one is dangerous.:
+                Kaera - This place feeds on pain. We must be careful not to become what it wants.:
+                EVENT - set_npc_standing_text - brann ("The arena will test you. Don't let Scalpel make you enjoy it."):
+                EVENT - award_task - meet_lira
+
+        TASK - Meet Lira - NPC:
+            > ACQUIRED:
+                (no acquired events):
+            > COMPLETED:
+                Lira - I can't keep up… they won't stop fighting.:
+                Lira - Every day I stitch them back together. Every day they go back in.:
+                Kaera - This is cruelty disguised as sport.:
+                Lira - If you can… please. Rescue the trapped fighters. Some of them are caught in the shifting walls.:
+                Chock - People getting trapped in walls? That's new levels of fucked up.:
+                Thorn - (growling) Then we break the walls. Simple.:
+                Sable - This place is devouring people whole. We can't let it keep winning.:
+                EVENT - set_npc_standing_text - lira ("The walls shift when Scalpel watches. People get trapped. Please help them."):
+                EVENT - award_task - meet_ember_in_scapel_domain
+
+        TASK - Meet Ember (with sam and tess) - NPC:
+            > ACQUIRED:
+                (no acquired events):
+            > COMPLETED:
+                Ember - You came here too. Good. Someone needs to witness what violence really costs.:
+                Lira - They've been here for days. Singing to the dying. Helping me carry the weight.:
+                Kaera - You're a healer.:
+                Ember - I'm a reminder. That even in blood, there's still humanity.:
+                Tess - (Watching the arena entrance, a calculating look in her eyes) This isn't just a fight. It's a performance. They're selling the *idea* of violence. The crowd isn't just watching, they're buying in.:
+                Sam - It's a feedback loop. The fighters' adrenaline fuels the crowd's bloodlust, which in turn pushes the fighters further. The system is designed for escalation, not victory.:
+                Chock - You two sound way too analytical about a slaughterhouse.:
+                Moxie - Oh this is delicious. They're not just watching the show, they're reverse-engineering the grift.:
+                Ember - (voice gentle but firm) Be careful. Analyzing the poison doesn't make you immune to it. This place wants you to see the system, to admire its efficiency, and then to crave it.:
+                Kaera - Ember is right. We need to end this quickly before the corruption takes deeper root.:
+                Poise - Their excitement is a different kind. Not of bloodlust, but of understanding. It is still a vulnerability.:
+                Kade - The psychological bleed is already starting. Fascinating... and troubling.:
+                EVENT - set_npc_standing_text - ember ("The arena calls, but stay human. Don't let Scalpel's domain own your desires."):
+                EVENT - set_npc_standing_text - tess ("I've seen this kind of hustle before. You get the marks hooked on the emotion, then you own them."):
+                EVENT - set_npc_standing_text - sam ("The system is elegant in its cruelty. I want to see how it breaks."):
+                EVENT - award_task - meet_glamour_and_scalpel
+
+        TASK - Meet Glamour and Scalpel - MOB:
+            > ACQUIRED:
+                EVENT - create_dungeon - bloodspark_arena_gauntlet (region_city_open_area):
+            > COMPLETED:
+                Narrator - The air in the arena chamber grows thick and feverish. Lights swirl unnaturally as two presences manifest.:
+                Glamour - (voice echoing from every direction, seductive and hungry) There you are~ Look at them. Look at all of you. So many pretty eyes fixed on me. Don’t you feel it? The need to be seen? To be adored?:
+                Glamour - Feed me your attention. Feed me everything.:
+                Scalpel - (cold, precise, slicing through the chaos) Enough theatrics.:
+                Scalpel - Glamour plays with the surface. I cut to the core.:
+                Scalpel - You’ve interfered long enough. Now you will learn what real precision feels like.:
+                Chock - Two at once? Finally, something worth punching!:
+                Moxie - Ooooh, this is going to be *fun*. One wants us to watch, the other wants to dissect us. I can’t pick a favorite!
+                Poise - Their synergy is dangerous. One pulls focus while the other strikes. Stay sharp.
+                Kaera - There is no humanity left in either of them. Only hunger and cruelty.
+                Glamour - (laughing wildly) Yes! Get angry! Get excited! Look at me!
+                Scalpel - (voice like a scalpel across glass) Look all you want. It changes nothing. :
+                Scalpel - You will bleed. You will break. And you will do it beautifully.
+                EVENT - award_task - defeat_glamour_and_scalpel
+
+        TASK - Defeat Glamour and Scalpel - MOB:
+            > ACQUIRED:
+                EVENT - begin_combat - glamour_scalpel_1 (boss_battle):
+            > COMPLETED:
+                EVENT - hide_npc - scalpel:
+                Narrator - The arena falls eerily silent. The frenzied crowd slowly regains awareness, as if waking from a fever dream. The air feels lighter, but the weight of what just happened lingers.:
+                EVENT award_item - bracelet_of_existence:
+                Kaera - (softly, eyes widening as the bracelet appears) The Bracelet of Existence...:
+                Chock - Heavy. Feels like it’s got the weight of the whole damn world in it.:
+                Moxie - Ooooh, it’s practically humming. I can feel the power crawling up my arms. This thing is *alive*.:
+                Kade - Finally. After all this chaos… one of the two pieces we need. Don’t lose it.:
+                Poise - The air around it feels… stable. Like reality itself is trying to hold on tighter.:
+                Sable - One more step closer to understanding what’s tearing the world apart.:
+                Thorn - (grunting approvingly) Good. We’re collecting pieces. Keep going.:
+                Kaera - We should return to Ember. She’ll want to know the arena has quieted...:
+                EVENT - set_npc_standing_text - brann ("The arena feels... different now. Maybe there’s hope."):
+                EVENT - set_npc_standing_text - lira ("The wounded are finally resting. Thank the stars."):
+                EVENT - set_npc_standing_text - Tess ("The high is gone. Now comes the crash. I've seen this look on people's faces before. They're vulnerable."):
+                EVENT - set_npc_standing_text - Sam ("The system broke. Now we see the cost. Every grift has a price."):
+                EVENT - award_task - return_to_ember_after_scalpel
+
+        TASK - Return to Ember - NPC:
+            > ACQUIRED:
+                (no acquired events):
+            > COMPLETED:
+                Ember - You’re back… and the air feels different. Did you succeed?:
+                Kaera - Glamour and Scalpel are gone. The arena has fallen silent.:
+                Ember - (soft smile, relieved) Then some humanity has been reclaimed today. Thank you.:
+                Ember - (turning to Tess and Sam, voice warm and grounding) You two… you saw the trap for what it was. You held on.:
+                Tess - (shaking her head, a flicker of her usual charm returning) Barely. It's a nasty piece of work, getting people to crave their own destruction. I almost respect it.:
+                Sam - It was an efficient system. But unsustainable. All such systems eventually collapse under their own weight.:
+                Ember - It was never you. Scalpel’s domain pushes those thoughts into your mind. You are stronger than its lies.:
+                Moxie - They were adorable when they were bloodthirsty. But I like them better like this.:
+                Poise - The corruption is receding. They’ll recover.:
+                Ember - I’ve done what I can here. I’m heading to Crosswind Bazaar next. People there are being drowned in forced joy and manic celebration.:
+                Sable - Crosswind Bazaar… that’s a loud, chaotic place. You sure you want to walk straight into more of this madness alone?:
+                Nia - After what we just saw? It feels risky. But if anyone can keep their head there, it’s you.:
+                Thorn - (grunting) More crowds. More frenzy. Not sure I like the sound of it.:
+                Kade - Logically, it makes sense. We’re already committed to this path. Might as well keep moving.:
+                EVENT - set_npc_standing_text - tess ("I feel... more like myself again. Time to find the next angle."):
+                EVENT - set_npc_standing_text - sam ("The immediate threat is neutralized. Now to analyze the fallout."):
+                EVENT - advance_chapter
+
+    section Chapter 10 - Human Chaos
+        TASK - Meet Serin - NPC:
+            > ACQUIRED:
+                EVENT - create_npc - serin (region_city_bar):
+                EVENT - create_npc - pox (region_city_shopitems):
+                EVENT - create_npc - nara (region_city_bar):
+                EVENT - show_npc - ember (region_city_bar):
+                EVENT - set_npc_standing_text - pox ("Joy tonics! Rage shots! Anything to keep the wave going. Don't let the emptiness catch you."):
+                EVENT - set_npc_standing_text - nara ("Can't stop... won't stop... have to keep moving..."):
+                EVENT - set_npc_standing_text - ember ("They're burning so brightly... but the fire is consuming them. Someone has to offer a gentler light."):
+                EVENT - set_npc_standing_text - mira ("Got something to ride the high longer? Or something to finally crash it? Your choice, traveler."):
+                Narrator - Chapter 10 - When feeling becomes mandatory, humanity becomes optional.:
+            > COMPLETED:
+                Serin - Keep moving! Keep dancing! Don't stop! Don't you dare stop!:
+                Serin - If you stop smiling the joy leaves you... and then the emptiness comes...:
+                Moxie - This is beautiful chaos. I almost respect it.:
+                Chock - She's smiling like a maniac but looks ready to drop dead.:
+                Kaera - You're exhausted. Your body is breaking.:
+                Serin - Better to burn out than feel nothing!:
+                Serin - You should speak to Pox, you can go all night, just let your body vibe.:
+                EVENT - set_npc_standing_text - serin ("Dance! Laugh! Never stop! The crash is worse than the high!"):
+                EVENT - award_task - meet_pox
+
+        TASK - Meet Pox - NPC:
+            > ACQUIRED:
+                (no acquired events):
+            > COMPLETED:
+                Pox - I make stimulants. Joy tonics. Rage shots. Anything to keep the party going.:
+                Pox - People pay anything to avoid the crash. Even if it kills them faster.:
+                Kade - You're literally selling addiction as entertainment.:
+                Pox - I'm selling survival. The city runs on momentum now. Slow down and you die inside.:
+                EVENT - set_npc_standing_text - pox ("The Festival Heart keeps the wave going. Break it and the whole city crashes."):
+                EVENT - award_task - meet_ember_in_festival
+
+        TASK - Meet Ember in Festival - NPC:
+            > ACQUIRED:
+                (no acquired events):
+            > COMPLETED:
+                Ember - They're burning themselves alive with joy. I’m trying to remind them they can feel something real and gentle.:
+                Ember - That’s what it wants. It wants you addicted to the wave.:
+                Kaera - Please stay with us. This place will consume you.:
+                Ember - I know. But someone has to stay and witness what happens when joy becomes poison.:
+                Nara - (laughing wildly) I don't care! I feel alive! I feel everything!:
+                Narrator - Nara dances wildly, sweating, eyes bloodshot, but still forcing laughter.:
+                Kaera - She's on the verge of collapse...:
+                Poise - Her body is breaking but she can't stop.:
+                Narrator - {Fill here, a fight breaks out on the street}:
+                Narrator - The crowd surges violently outside, fueled by manic energy. {fill text}:
+                Rioter1 - MORE! GIVE US MORE! I CAN STILL FEEL SOMETHING!:
+                Rioter2 - DON'T STOP THE MUSIC! IF IT STOPS I'LL DIE INSIDE!:
+                Vek - (shoving through the crowd, voice cutting like a whip) Back off! You're trampling people! Have you all lost your damn minds?!:
+                Chock - (stepping up beside the stranger, cracking his knuckles) Finally, something that makes sense. These idiots need to be knocked out of it!:
+                Poise - This is escalating too fast. The emotional contagion is turning into a riot.:
+                Narrator - The rioters surge forward, eyes wild with manic hunger, completely lost to the wave.:
+                EVENT - set_npc_standing_text - nara ("Can't stop... won't stop..."):
+                EVENT - set_npc_standing_text - ember ("I'll keep singing. Maybe one person will slow down long enough to feel something real."):
+                EVENT - award_task - defeat_rioters
+
+        TASK - Defeat Rioters - MOB:
+            > ACQUIRED:
+                EVENT - begin_combat - festival_rioters_1 (combat):
+            > COMPLETED:
+                Narrator - The crowd surges violently, eyes glazed with manic frenzy. Rioters lash out at anything that moves.:
+                Vek - (shoving through the chaos, voice booming) Stand down! You're killing each other over nothing!:
+                Chock - Finally, someone who gets it! Let's knock some sense into these idiots!:
+                Bragg - This ain't a fight — it's a damn stampede!:
+                Nia - The wind is screaming with them... they're completely lost!:
+                Moxie - This is like trying to fight a tornado made of people!:
+                EVENT - award_task - defeat_rioters2
+
+        TASK - Defeat Rioters 2 - MOB:
+            > ACQUIRED:
+                EVENT - begin_combat - festival_rioters_2 (combat):
+            > COMPLETED:
+                Narrator - The second wave crashes harder. Bodies slam together. The manic energy turns feral.:
+                Vek - (breathing heavily, wiping blood from her lip) These people are gone. The wave has them completely.:
+                Chock - Yeah... this ain't right. They're not even fighting us. They're just breaking.:
+                Poise - The emotional infection is spreading faster than we can contain.:
+                Kor-in - (quietly) Like frostbite... it numbs you before it destroys you.:
+                Ember - (voice strained, stepping back from the fray) I... I don't think I can help here. Not anymore.:
+                Ember - This coruption here is too deep. I'm heading to Blackwake Bay. The ports are drowning in the same kind of frenzy. Someone still needs to remind people what real feeling is.:
+                Kaera - Be careful, Ember. We'll meet you there when we can.:
+                Sable - Another city, another storm. This is never going to end, is it?:
+                EVENT - hide_npc - ember:
+                EVENT - award_task - defeat_rioters3
+
+        TASK - Defeat Rioters 3 - MOB:
+            ► ACQUIRED:
+                EVENT - begin_combat - festival_rioters_3 (combat):
+            ► COMPLETED:
+                Vek - (wiping sweat and blood, breathing hard) ...It's finally breaking. The wave is dying down.:
+                Vek - I can handle the rest from here. Go. Find your singer before she walks into worse.:                
+                Chock - You sure? You look like hell.:
+                Vek - I've looked worse. This is my city. I'll clean it up.:                
+                Kaera - Thank you, Vek. We won’t forget this.:
+                Sable - One more storm to chase...:
+                Thorn - (grunting) Then we follow Ember. No point stopping now.:
+                Nia - Blackwake Bay it is. Hope the ports aren’t as crazy as this.:
+                Moxie - Crazy is fine. Boring is the real killer.:
+                Kade - Logically, we’re already committed. Might as well keep momentum.:
+                Poise - The corruption is spreading. We move.:
+                EVENT - hide_npc - ember:
+                EVENT - create_npc - Vek (region_city_bar):
+                EVENT - set_npc_standing_text - vek ("I can handle the rest. Go find your singer before she walks into worse."):
+                EVENT - advance_chapter
+
+    section Chapter 11 - Rapture & Revelry
+        TASK - Meet Ember in Rapture Revelry - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - kael (region_city_bar):
+                EVENT - create_npc - hessa (region_city_inn):
+                EVENT - show_npc - ember (region_city_inn):
+                EVENT - set_npc_standing_text - kael ("The Festival Heart is the anchor. Break it and the whole city crashes."):
+                EVENT - set_npc_standing_text - hessa ("I can't keep patching them up... they're all breaking."):
+
+                Narrator - Chapter 11 - When you chase feeling long enough… you stop being able to feel at all.:
+            ► COMPLETED:
+                Ember - This place is a pressure cooker of emotion. It's like the whole city is on the edge of breaking.:
+                Ember - While here I've learned Rapture and Revelry are feeding off it. They're amplifying the extremes.:
+                Kaera - We need to find them and stop this before it spirals out of control.:
+                Poise - The emotional bleed is accelerating. We should move before it gets worse.:
+                Kade - Logically, we’re already committed. Might as well keep momentum.:
+                Ember - Talk to the people from this town and try to find out what they know.:
+                EVENT - set_npc_standing_text - ember ("Rapture and Revelry are feeding off the city's emotions, amplifying the extremes. We need to stop them before it spirals out of control."):
+                EVENT - meet_kael
+
+        TASK - Meet Kael - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Kael - You're the ones who fought the rioters. Good. We need fighters.:
+                Kael - This city is burning itself out. Rapture feeds the violence, Revelry feeds the party. It's an endless loop of adrenaline and exhaustion.:
+                Moxie - One feeds the violence, the other feeds the party. It's actually kind of brilliant in a horrible way.:
+                Poise - Their synergy is extremely dangerous. We need to break the cycle at its source.:
+                Kaera - Ember was right. This place is devouring people's souls under the guise of celebration.:
+                Thorn - (grunting) Then we hit it hard and fast. No point letting it fester.:
+                Kael - The worst of it is concentrated in the heart of the Festival of Delight. That's where their power is focused. Hessa has been watching the timelines. She'll know the best way to strike.:
+                EVENT - set_npc_standing_text - kael ("Hessa can see the paths. She's waiting for you. Break the cycle, for Ember."):
+                EVENT - award_task - meet_hessa
+
+        TASK - Meet Hessa - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Hessa - I've seen a thousand futures burn. In every one, this city is the kindling.:
+                Hessa - Rapture and Revelry have turned the Festival of Delight into a living pyre. The deeper you go, the more reality itself starts to fracture under the weight of their excess.:
+                Kaera - Then we end it here. No more lives lost to this madness.:
+                Poise - We must be precise. Their power feeds on emotional extremes. Calm focus will be our greatest weapon.:
+                Narrator - Ember comes in from the street, looking weary but resolute.:
+                Ember - I’ve spoken with enough people here... seen what this 'festival' is doing to them.:
+                Ember - I’m staying. They need someone to remind them what real feeling feels like - not this forced euphoria.:
+                Ember - I’ll keep doing what I can for those who are breaking.:
+                Moxie - You sure? This place is swallowing people whole.:
+                Ember - (small, tired smile) That’s exactly why I can’t leave. Someone has to stay and witness.:
+                Ember - Someone has to keep caring when it hurts.:
+                Kaera - (gently, with respect) Then we’ll carry your hope with us. Stay safe, Ember.:
+                Chock - (nodding once) A soldier’s choice. Respect.:
+                EVENT - set_npc_standing_text - hessa ("The Festival of Delight is the heart of their power. The deeper you go, the more reality fractures under the weight of their excess."):
+                EVENT - set_npc_standing_text - ember ("I’m staying. They need someone to remind them what real feeling feels like - not this forced euphoria. I’ll keep doing what I can for those who are breaking."):
+                EVENT - award_task - meet_revelry
+
+        TASK - Meet Revelry - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_npc - rapture (None):
+                EVENT - create_npc - revelry (None):
+                EVENT - create_dungeon - festival_of_delight (region_open_area):
+            ► COMPLETED:
+                Narrator - The air in the Festival Heart is electric, thick with the smell of ozone and spilled wine.:
+                Narrator - Manic laughter and screams echo in a sickening harmony. At the center, two figures pulse with chaotic energy.:
+                Revelry - (A whirlwind of color and sound) MORE! ALWAYS MORE! Can you feel it? The joy! The freedom! Why would you ever want it to stop?:
+                Rapture - (A predator of sensation, still and coiled) They don't want it to stop. They want the thrill. The edge. The moment the bone snaps and the world feels real.:
+                Revelry - We give them what they crave! A world without consequence! A party that never ends!:
+                Rapture - We give them truth. Pain is truth. Fear is truth. The rest is just noise.:
+                Chock - You're monsters. You're twisting people into puppets.:
+                Revelry - (Laughs, a sound like breaking glass) We're liberators! We free them from their boring, quiet lives! We gave them a fire to dance in!:
+                Rapture - And you are the fuel. Your fear, your anger, your desperate hope... it all burns so beautifully.:
+                EVENT - award_task - defeat_rapture_and_revelry
+
+        TASK - Defeat Rapture and Revelry - MOB:
+            ► ACQUIRED:
+                EVENT - begin_combat - rapture_revelry_1 (boss_battle):
+            ► COMPLETED:
+                Narrator - The manic energy suddenly implodes. The Festival Heart falls deathly silent as Rapture and Revelry shatter apart like glass under too much pressure.:
+                Narrator - The artificial euphoria that had gripped the people at the festival begins to unravel. Manic laughter dies out.:
+                Narrator - The streets grow quieter as people blink, confused, as if waking from a fever dream.:        
+                Chock - (breathing heavily) Finally. Those two were a special kind of sick.:
+                Kade - The emotional feedback loop is collapsing. Their influence is breaking.:
+                Kaera - (looking toward the city) Ember... she’s still out there with the others. I hope she’s safe.:
+                Moxie - (unusually subdued) They’re all going to feel everything at once now. The real stuff. The ugly stuff.:
+                Poise - Better to feel pain than live in a lie. They have a chance to heal.:        
+                Thorn - (grunting) Better lost than broken. At least now they can start again.:
+                Kaera - We should get back. The people will need help recovering... and I need to find Ember.:
+                EVENT - hide_npc - revelry:
+                EVENT - show_npc - tess (region_city_inn):
+                EVENT - show_npc - sam (region_city_inn):
+                EVENT - hide_npc - ember:
+                EVENT - set_npc_standing_text - tess ("I... I feel like I can breathe again. Like I can think again."):
+                EVENT - set_npc_standing_text - Hessa ("The Festival Heart is broken. The city is reeling. We need to help them heal."):
+                EVENT - set_npc_standing_text - Kael ("The city is vulnerable now. We need to protect it while it recovers."):
+                EVENT - award_task - meet_sam_after_rapture_revelry
+
+        TASK - Meet Sam after Rapture and Revelry - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Sam - (looking exhausted but relieved) You're back. We saw the lights from the Festival Heart go dark... then everything just... stopped.:
+                Sam - The screaming, the laughing - all of it.:
+                Tess - (voice shaky) The rioters lost control completely. It turned into a mob.:
+                Tess - People were trampling each other trying to get closer to the center... it was chaos.:
+                Tess - Ember was right in the middle of it. She was still trying to reach people — still singing...:
+                Tess - Still trying to remind them what real feelings felt like instead of that forced madness...:    
+                Narrator - The group notices Ember's body lying nearby, covered by a worn cloak. She looks peaceful, but clearly gone.:    
+                Sam - (voice tight, looking down) ...She didn't make it. One of the surges caught her while she was trying to pull someone out of the crowd.:
+                Kaera - (quiet, heavy, voice breaking) ...Ember...:
+                Kaera - (tears already falling) She stayed until the very end. Even as everything was collapsing around her, she was still trying to give people something real to hold onto.:
+                Kaera - She told me... not to let the world forget how to feel — even the sadness.:
+                Tess - (eyes welling up instantly) No... She was still out here with us. Helping people. Singing to the ones who were breaking down...:
+                Sam - (voice tight) She knew the risk. She chose to stay anyway.:        
+                Kaera - (voice cracking, tears falling) She stayed until the end. Even as everything was collapsing...:
+                Kaera - she was still trying to give people something real to hold onto. She told me not to let the world forget how to feel — even the sadness.:
+                Chock - (looking down, fists clenched) Damn it. She had more heart than most warriors I’ve known...:
+                Chock - She stood her ground when the rest of us went for the throat.
+                Poise - (soft, respectful) Her presence was steady. She reminded us why we fight. We will carry that with us.:
+                Moxie - (unusually quiet, no smirk) ...She was tough. Braver than I gave her credit for.:
+                Moxie - I thought she'd pull through just to annoy us with another song.:
+                Kade - (looking away, voice low) The emotional backlash from those two Voidwalkers was catastrophic.:
+                Kade - She was in the wrong place at the exact wrong time. ...She shouldn't have had to die for this.:
+                Sam - Ember once said if anything happened to her, she has a brother in Quantford Hollow named Rell. Some kind of performer.:
+                Sam - She wanted him to know that no matter how dark the night there will always be light in the morning.:
+                Kaera - Then we honor that. We go to Quantford Hollow.:
+                Chock - Damn right. I'm not letting her last request die with her.:
+                Moxie - Road trip it is. Hopefully Rell throws better parties than this shithole.:
+                Sable - Another town. Another ghost to deliver bad news to. Wonderful.:
+                EVENT - award_task - meet_vek_again:
+                EVENT - advance_chapter
+
+        TASK - Meet Vek Again - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Vek - (nodding solemnly) I heard what happened at the Festival. Ember fought harder than most. You have my condolences.:
+                Kaera - Thank you, Vek. She gave everything so others could feel again.:
+                Vek - The city is still raw, but we're stabilizing. People are starting to remember who they were before the madness took them.:
+                Chock - Good. World needs more people like you keeping order when it all goes to hell.:
+                Moxie - And here I thought you'd be the type to enjoy a little chaos.:
+                Vek - Chaos has its place. Just not when it eats people alive.:
+                Kaera - We're heading to Quantford Hollow next. Ember had a brother there — Rell. We need to tell him what happened.:
+                Vek - Rell... yeah, I've crossed paths with him. He's a good man, but this news will hit him hard.:
+                Vek - Before you go, there's one last problem. A camp of nihilists still preaching that "nothing matters" in the old festival grounds.:
+                Vek - They're feeding on the leftover despair. Deal with them, and I'll feel better about you heading out.:
+                Sable - Of course there are still stragglers...:
+                Chock - Finally, something I can hit.:
+                EVENT - set_npc_standing_text - vek ("Ember was a good person. I'm sorry for your loss."):
+                EVENT - award_task - meet_nihilist_leader
+
+        TASK - Meet Nihilist Leader - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - nihilist_leader None:
+                EVENT - create_dungeon - nihilist_camp (region_open_area):
+            ► COMPLETED:
+                Nihilist Leader - (voice hollow, eyes empty) Why fight? Why feel? In the end, everything collapses. Everything rots.:
+                Nihilist Leader - Ember proved it — even the brightest song ends in silence.:
+                Moxie - Wow. You really know how to bring down the mood.:
+                Kade - Nihilism as a sales pitch. How original.:
+                Chock - Talking's over. You want silence? I'll give you some.:
+                Poise - His words carry weight... but they are poison.:
+                Kaera - Grief does not justify dragging others into despair. We will not let you spread this further.:
+                Nihilist Leader - (laughing bitterly) Then strike me down. It changes nothing. The wave is coming...:
+                EVENT - award_task - defeat_nihilist_leader
+
+        TASK - Defeat Nihilist Leader - MOB:
+            ► ACQUIRED:
+                EVENT - begin_combat - nihilist_leader_1 (combat):
+            ► COMPLETED:
+                Nihilist Leader - (gasping as he falls) See...? Even victory... feels empty...:
+                Chock - Keep telling yourself that.:
+                Moxie - Dramatic to the end. I almost respect it.:
+                Kaera - No one's pain should become a weapon against the living.:
+                Sable - Another echo of the same sickness... Let's hope this was the last of them.:
+                EVENT - hide_npc - nihilist_leader:
+                EVENT - award_task - meet_vek_after_nihilist
+
+        TASK - Meet Vek after Nihilist - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Vek - (arms crossed, nodding with respect) You handled them cleanly. The city's safer for it. Thank you.:
+                Kaera - We couldn't leave this place still bleeding.:
+                Vek - I've been thinking... I've done what I can here. The resistance needs strong hands across the continents.:
+                Vek - If you'll have me, I'd like to join you on the Rustwing. Someone needs to keep order while the rest of you do the impossible.:
+                Chock - (grinning) Finally. Someone who knows how to throw a punch and keep a cool head.:
+                Moxie - Welcome to the circus, Commander.:
+                Kade - Your tactical experience will be useful. Try not to lecture us too much.:
+                Kaera - Your strength and sense of duty are welcome, Vek. We would be honored.:
+                Vek - Then it's settled.:
+                EVENT - hide_npc - vek:
+                EVENT - character_join - vek:
+
+
+
+    section Chapter 12 - Lament
+        TASK - Meet Rell - Event:
+            ► ACQUIRED:
+                EVENT - create_npc - lament (None):
+                EVENT - create_npc - rell (region_city_inn):
+                EVENT - show_npc - veyla (region_city_bar):
+                EVENT - show_npc - serin (region_city_bar):
+                EVENT - set_npc_standing_text - serin ("I should be smiling... everyone needs me to smile... but it hurts now. Everything just hurts."):
+                EVENT - set_npc_standing_text - veyla ("I can feel something heavy in the air. Like a storm is coming."):
+                Narrator - Chapter 12 - In facing loss, time no longer moves forward… it folds inward.:
+            ► COMPLETED:
+                Rell - (mid-performance, then stopping abruptly as he sees the group) ...You... Those faces...:
+                Kaera - (gently) You must be Rell, we heard of a performer here related to Ember... I'm sorry. Ember didn't make it.:
+                Kaera - She stayed in the heart of the Festival of Delight, singing against the storm until the very end.:
+                Rell - (the instrument slips from his hands) ...No. Not her. She always said she'd outlast the madness. She promised...:
+                Moxie - (unusually subdued) She was one of the few real things left in that circus. The world feels cheaper without her.:
+                Thorn - (grunting) She had steel in her. Respect.:
+                Rell - (sinking onto a stool, head in hands) My sister... always trying to carry the weight for everyone else.:
+                Rell - I told her it would kill her one day. She just laughed and said someone had to.:
+                Narrator - The air grows colder. Shadows lengthen unnaturally. A low, resonant hum fills the room as Lament begins to manifest — a swirling vortex of grief and fractured memory.:
+                Lament - (voice like wind through broken glass, everywhere and nowhere) Such beautiful pain... I felt it from across the veil. The anchor's song has finally gone silent.:
+                Lament - (taking form as a tall, veiled figure wrapped in flowing black and silver threads) I am Lament. The echo of every loss that was never allowed to heal.:
+                Lament - The grief that refuses to end.:
+                Lament - (tilting her head toward the party) You carry one of the Bracelets... and now you carry her absence. How exquisite. How devastating.:
+                Kaera - Show yourself plainly. What do you want?:
+                Lament - I want nothing. I am what remains when joy is weaponized and hope is trampled. I am what this world is becoming.:
+                Lament - Witness it. Feel the grief of every city, every soul crushed under the weight of false ecstasy and hollow order. Only then will you understand what you truly face.:
+                Narrator - Lament dissolves into swirling mist, leaving behind an oppressive silence and the faint sound of distant, looping sobs.:
+                Rell - (wiping his eyes, voice hardened) ...If my sister died trying to fight this, then I won't sit here singing pretty lies anymore.:
+                Rell - Tell me what you need. I'll help however I can.:
+                EVENT - set_npc_standing_text - rell ("Ember's gone... but her fight isn't over. What do you need from me?"):
+                EVENT - create_npc - archivist_fragment (region_city_inn):
+                EVENT - award_task - meet_archivist_fragment
+
+        TASK - Meet Archivist Fragment - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Archivist - I remember you dying. Twice.:
+                Archivist - Time loops here. Lament's influence breaks causality.:
+                Archivist - The village mourns someone called Ember. The grief never ends. It loops.:
+                Kade - How do we fix it?:
+                Archivist - You don't. You survive it. The Library of Contradictions holds the key.:
+                Archivist - But first… you must face the grief.:
+                Narrator - The village gathers in the square. Over and over. Remembering Ember.:
+                Narrator - Each loop, the grief is fresh. The loss unprocessed.:
+                Villager - They sang for us. They reminded us to feel.:
+                Villager - And the festival crushed them. Like it crushes everything soft.:
+                Kaera - The loop won't let them move past the grief.:
+                Poise - Lament feeds on this. Unending sorrow.:
+                Nia - Ember died trying to help. And now their death causes more pain.:
+                Chock - We have to break the loop. For them.:
+                Kade - We should investigate what's going on around here after Lament's appearance, it seemed much healthier before:
+                EVENT - set_npc_standing_text - archivist_fragment ("Past and future collapse into paradox. The Library remembers everything. Even things that never happened."):
+                EVENT - award_task - meet_veyla
+
+        TASK - Meet Veyla - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Veyla - (still scattered, clutching her head) The silence... it's almost worse than the noise. I keep hearing Ember's song in my head... but it's fading.:
+                Veyla - She tried so hard to keep us grounded. Now everything feels... hollow.:
+                Sable - The weight of her loss is already settling on this place.:
+                Nia - The wind carries grief now. It's heavier than before.:
+                Narrator - The air suddenly grows cold and thick. Shadows twist unnaturally as Lament manifests once more.:
+                Lament - (voice echoing like distant, overlapping sobs) Such fragile anchors you mortals cling to. One voice silenced, and the whole town begins to unravel.:
+                Lament - You carry the Bracelet of Existence... a pitiful spark of meaning in a world begging to forget itself.:
+                Narrator - Lament fades into mist, leaving an oppressive chill behind.:
+                Kaera - She's testing us. Or luring us.:
+                Poise - Either way, we cannot ignore the pull.:
+                EVENT - award_task - meet_serin
+
+        TASK - Meet Serin - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Serin - (forcing a brittle, twitching smile that doesn't reach her eyes) I... I should be happy, right? We won. The music stopped. Why does everything feel so heavy now?:
+                Serin - Ember used to sing real songs... but now when I try to remember them, there's just this... emptiness. Like something is pulling on my chest.:
+                Thorn - (grunting) Fake joy always leaves a poison behind. Looks like it's still got its hooks in you.:
+                Bragg - You're shaking like a leaf. Sit down before you collapse.:
+                Narrator - The temperature plummets. Shadows stretch unnaturally across the room as Lament manifests in a swirl of dark, fraying threads.:
+                Lament - (voice like wind through cracked tombstones) Look at her. Still performing. Still pretending. This is the gift my sister Revelry leaves behind — hollow shells smiling through the rot.:
+                Lament - Bring the Bracelet of Existence to The Necropolis. Let me show you the true shape of grief. Perhaps then you can help these broken things... or perhaps you will finally understand what it means to break.:
+                Moxie - (dryly) She's really selling the whole "come to my evil lair" pitch.:
+                Kade - It's obviously a trap. But it might be the only lead we have on ending these loops for good.:
+                Kaera - We won't let this stand. We'll speak to Rell first, then head to the Necropolis.:
+                EVENT - award_task - meet_rell
+        
+        TASK - Meet Rell Again - NPC:        
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Rell - (looking up as the party returns) You're back already... Did you find anything?:
+                Kaera - We spoke with Veyla and Serin. Lament appeared. She wants the Bracelet of Existence — says she'll show us the true shape of grief in The Necropolis.:
+                Kaera - We believe it's connected to these loops. We have to go.:
+                Rell - (clenching his fists) My sister died fighting those monsters... and now this thing wants to use her death as bait?:
+                Rell - Go. Do what you have to. Just... don't let her sacrifice be for nothing.:
+                Chock - We won't. We'll end this loop and come back.:
+                Moxie - Tell you what — when we return, you better have a real song ready. Not one of these sad ones.:
+                Sable - We'll carry her memory with us. She won't be forgotten.:
+                Rell - (nodding slowly) Then go. I'll be here... trying to remember how to play without her echo in my head.:
+                EVENT - advance_chapter
+
+    section Chapter 13 - Garbage
+        TASK - Meet Marlo Finch - NPC:
+            ► ACQUIRED:
+                EVENT - show_npc - marlo_finch (region_city_shoparmor):                                
+                EVENT - create_npc - garbage (None):
+                EVENT - create_npc - crypt_warden (region_city_inn):
+                EVENT - create_npc - echo_merchant (region_city_shopitems):
+                EVENT - create_npc - veiled_widow (region_city_bar):
+                EVENT - show_npc - seth (region_city_bar):
+                EVENT - set_npc_standing_text - seth ("The Necropolis is a graveyard of forgotten things. It's where the city buries its secrets and its failures."):
+                EVENT - set_npc_standing_text - crypt_warden ("I used to be someone. Now I'm just... a shadow in the Necropolis."):
+                EVENT - set_npc_standing_text - echo_merchant ("I sell mirrors that show you your true self. Most people can't handle the truth."):
+                EVENT - set_npc_standing_text - veiled_widow ("I lost someone in the first Fracture. Now I lose them every day... over and over."):
+                Narrator - Chapter 13 - The worst lie isn’t what the world tells you… it’s what you start telling yourself.:
+            ► COMPLETED:
+                Marlo - You came. Good. I tracked the Bracelet's resonance here.:
+                Marlo - Lament and Garbage are feeding off each other. Grief creates self-loathing. Self-loathing deepens grief. It's a perfect cycle of decay.:
+                Marlo - Keep the Bracelet of Existence. It's resisting their influence better than anything I've seen. Don't give it up.:
+                Kade - Noted. Any idea where their center of power is?:
+                Marlo - The Grand Mausoleum at the heart of the necropolis. That's where the worst of it festers.:
+                Marlo - If you want to get in you should speak to the Crypt Warden. He's been... changed by his time there, but he knows the place better than anyone.:
+                EVENT - set_npc_standing_text - marlo_finch ("The Grand Mausoleum is their sanctum. Be careful."):
+                EVENT - create_dungeon - grand_mausoleum (region_city_district):
+                EVENT - lock_dungeon - grand_mausoleum:
+                EVENT - set_dungeon_locked_text - grand_mausoleum ("The Grand Mausoleum is locked tight. You'll need to find a way in."):
+                EVENT - award_task - meet_crypt_warden
+
+        TASK - Meet Crypt Warden - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Crypt Warden - (voice hollow) Names... I used to remember names. Now they're all just... dust.:
+                Crypt Warden - Lament walks these halls. She collects our regrets like flowers.:
+                Chock - Sounds like a real charmer.:
+                Poise - The thrall is heavy here. Identities are fraying.:
+                Narrator - The air ripples. Lament appears in a swirl of black threads and weeping mist.:
+                Lament - (soft, sorrowful) Such devoted mourners. They carry their failures like crowns. Will you join them?:
+                Lament - Bring the Bracelet to the Grand Mausoleum. Let me show you what true emptiness feels like.:
+                Narrator - Lament fades. The Warden slumps further.:
+                Crypt Warden - ...She's always watching. Always whispering.:
+                Crypt Warden - If you want the key to The Grand Mausoleum, the Veiled Widow has it, but you will need to bring her the Voice of Lost Loved Ones from the Echo Merchant.:
+                EVENT - set_npc_standing_text - crypt_warden ("The Grand Mausoleum... that's where they wait."):
+                EVENT - award_task - meet_echo_merchant
+
+        TASK - Meet Echo Merchant - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Echo Merchant - (holding up fractured mirrors) Want to see who you really are? Only a few coins.:
+                Echo Merchant - Most people break after one look. Garbage loves those ones.:
+                Chock - We were actually told to see you. We need something called the Voice of Lost Loved Ones.:
+                Echo Merchant - (nodding, voice low) Ah, the Voice. It's a special mirror. It doesn't just show you your reflection... it shows you the voices of those you've lost.:
+                Moxie - Oh that is so creepy. I love it.:
+                Narrator - Garbage's presence manifests as a rotting, many-mouthed shadow behind the merchant.:
+                Garbage - (whispering from multiple directions) Look closer. You were always worthless. Always a fraud. Always alone.:
+                Kade - (visibly shaken for a moment) ...Shut up.:
+                Moxie - (forced grin) Nice try, but I've got better insults for myself.:
+                Echo Merchant - (voice trembling) See? Even they can't escape it.:
+                Echo Merchant - Here, take the Voice of Lost Loved Ones.  I just hope the Veiled Widow gives you the key.:
+                EVENT - set_npc_standing_text - echo_merchant ("The mirrors don't lie... but they do break people."):
+                EVENT - award_item - voice_of_lost_loved_ones:
+                EVENT - award_task - meet_veiled_widow
+
+        TASK - Meet Veiled Widow - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Veiled Widow - (voice cracking) I lost him in the first Fracture. Now I lose him every day... over and over.:
+                Veiled Widow - Lament says this pain is honest. Garbage says I deserve it.:
+                Narrator - Both Lament and Garbage briefly manifest, their voices overlapping.:
+                Lament - Grief is the only truth left.:
+                Garbage - And you are the rot that remains.:
+                Kaera - Enough. We will not let you consume them.:
+                Garbage - Look at the little saint, trying to heal a wound that wants to fester. You can't fix what is fundamentally broken.:
+                Chock - I can fix your face with my fist. Keep talking.:
+                Kade - Your entire existence is a parasitic feedback loop. Predictable. And boring.:
+                Lament - Your defiance is a fleeting spark. It will be swallowed by the sorrow you refuse to acknowledge.:
+                Garbage - You think you're heroes? You're just garbage that hasn't been thrown away yet.:
+                Lament - Come to the Mausoleum. We will show you the beauty in the end.:
+                Narrator - Garbage and Lament fade, leaving the Widow trembling.:
+                Kaera - (gently holding out the mirror) We brought you this. A way to remember his voice, not just the loss.:
+                EVENT - remove_item - voice_of_lost_loved_ones:
+                Veiled Widow - (taking the mirror, her hands shaking as a faint, warm voice emanates from it) That voice... I haven't heard it clearly in so long. They want me to drown in my grief, but this... this is a memory worth holding. Thank you. Take this key. End their reign of sorrow.:
+                Ripple - Her grief is a tide, but even tides can be calmed. She needed an anchor, not an endless storm.:
+                EVENT award_item - key_to_grand_mausoleum:
+                EVENT unlock_dungeon - grand_mausoleum:
+                EVENT - set_npc_standing_text - veiled_widow ("The Grand Mausoleum... that's where they make their home."):
+                EVENT - award_task - meet_lament
+
+        TASK - Meet Lament w/ Garbage - MOB:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Lament - (voice soft yet crushing, echoing from every tomb) You carry her song still... Ember’s final note. How noble. How utterly futile.:
+                Garbage - (multiple rotting mouths speaking at once) And yet you still pretend you matter. Pretend *any* of this matters. How deliciously pathetic.:
+                Chock - (gripping his weapon) We've heard enough of your bullshit. Time to end this.:
+                Moxie - (grinning fiercely) Two for the price of one? My favorite kind of bad decision.:
+                Kaera - (voice steady but pained) For Ember. For every person you’ve broken with false joy and endless grief.:
+                Thorn - (growling) You feed on pain like parasites. We’re done being your meal.:
+                Nia - (winds swirling around her) The storm ends here. No more feeding on broken hearts.:
+                Bragg - (hammer crackling with energy) You’ve had your fun tearing people down. My turn.:
+                Lament - (tilting her head, almost sorrowful) You fight so hard to feel meaningful. But meaning is the first illusion we strip away.:
+                Garbage - (laughing with wet, crumbling voices) Look at you — heroes carrying a shiny bracelet like it can save you. You’re all just future garbage waiting to be thrown away.:
+                Poise - (quietly, deadly calm) Words won’t save you this time.:
+                Kade - (cold smirk) Your cycle is predictable. Grief breeds self-loathing. Self-loathing deepens grief. Elegant. But fragile.:
+                Lament - (voice rising into a wail) Then come. Let us show you the beauty in surrender.:
+                Garbage - (bodies shifting and reforming) Break them. Make them see what they truly are.:
+                EVENT - award_task - defeat_lament_and_garbage
+
+        TASK - Defeat Lament and Garbage - MOB:
+            ► ACQUIRED:
+                EVENT - begin_combat - lament_garbage_1 (boss_battle):
+            ► COMPLETED:
+                EVENT - hide_npc - lament:
+                Narrator - The Grand Mausoleum trembles violently. Cracks of light pierce the oppressive darkness as the symbiotic cycle between grief and self-loathing finally shatters. The air grows lighter. The constant whispering of failure and loss begins to fade.:
+                Kaera - (breathing hard, looking at the fading remnants) It’s done... The weight is lifting.:
+                Chock - (wiping sweat and blood) About damn time. Felt like fighting two sides of the same miserable coin.:
+                Moxie - (laughing breathlessly) They really hated that we refused to hate ourselves. Sensitive types.:
+                Poise - (sheathing her weapons) Their power fed on each other. Break one pillar, the whole structure collapses.:
+                Kade - (scanning the area) The Bracelet held strong. It resisted their corruption better than anything else we’ve seen.:
+                Sable - (quietly) Ember would be proud. She fought the same fight — refusing to let despair or false joy win.:
+                Thorn - (grunting) One less shadow on the world. Good.:
+                Ripple - (softly) The tide of grief recedes... for now.:
+                Grimnaw - (adjusting his goggles) Identities are stabilizing. People might remember who they were before the rot set in.:
+                Narrator - In the distance, the familiar roar of engines echoes across the necropolis. The Rustwing descends, patched and battle-worn but flying true.:
+                EVENT - award_task - meet_seth_about_airship
+
+        TASK - Meet Seth About Airship - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Seth - OI! You lot look like death warmed over!:
+                Chock - SETH!:
+                Seth - The one and only. Missed me?:
+                Moxie - How did you fix the ship?:
+                Seth - Blood, sweat, and a lot of stolen parts. She's not pretty, but she flies.:
+                Kade - You came back.:
+                Seth - Course I did. Someone's gotta keep you idiots alive.:
+                Kaera - We thought you'd abandoned us.:
+                Seth - Nah. Just had to make sure the ship could actually carry your sorry arses.:
+                Seth - Look. I know things are rough. The world's falling apart. You're falling apart.:
+                Seth - So here's the deal. The ship's yours.:
+                Tess - What?:
+                Seth - You heard me. The Rustwing. She's yours now.:
+                Seth - I'm tired of flying her anyway. Too much responsibility.:
+                Sam - You're… giving us the airship?:
+                Seth - On loan. With interest. Emotional interest.:
+                Chock - I don't understand.:
+                Seth - You've got work to do. The world's not gonna save itself.:
+                Seth - And I figure… if anyone's gonna stop this collapse, it's you.:
+                Moxie - That's surprisingly touching.:
+                Seth - Don't get used to it. Now get in before I change my mind.:
+                EVENT - set_aircraft - region_city_open_area:
+                EVENT - can_aircraft_fly - True:
+                Narrator - The Rustwing hums with possibility. Freedom. Choice.:
+                Kaera - We can go anywhere.:
+                Kade - That's… that's terrifying.:
+                Poise - And liberating.:
+                Chock - So where to?:
+                Seth - Anywhere but here. Trust me.:
+                Seth - The world's wide open. Find meaning. Find purpose. Find whatever keeps you going.:
+                Moxie - What about you?:
+                Seth - Me? I'm gonna find a bar and pretend the world isn't ending.:
+                Seth - Don't crash her! She's temperamental!:
+                Kaera - The body has fallen. Sensation. Impulse. Identity.:
+                Kade - With this airship we can really expand our reach and find out what the fuck is going on here and maybe find a way home.:
+                EVENT - advance_chapter

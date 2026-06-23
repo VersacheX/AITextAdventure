@@ -1,0 +1,538 @@
+CITIES
+
+##############DESERT CITIES
+CITY_NAME = "The Desert Metropolis"
+CITY_DESCRIPTION = (
+	"A sprawling urban expanse in the heart of a vast desert, where towering skyscrapers of glass and steel rise above sandy streets. "
+	"The city is a bustling hub of commerce and culture, with a mix of modern architecture and remnants of old-world charm. "
+	"Neon lights flicker against the backdrop of endless dunes, creating a surreal blend of technology and nature. "
+	"The air is dry and warm, carrying the scent of spices and machinery. "
+	"Amidst the urban chaos, pockets of greenery and oases provide respite for weary travelers."
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Local", "type": "bar", "char": "µ", "seed_range":1000, "threshold":0.03, "hostile_prob":0.4, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#8b3e3e"},
+	{ "name": "inn", "display_name": "The Cozy Inn", "type": "inn", "char": "@", "seed_range":1000, "threshold":0.06, "hostile_prob":0.00, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#9bd0ff"},
+	{ "name": "shopweapons", "display_name": "Stuff That Does Damage", "type": "shop", "char": "Æ", "seed_range":1000, "threshold":0.16, "hostile_prob":0.01, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#c28f5b"},
+	{ "name": "shopitems", "display_name": "Stuff With Utility", "type": "shop", "char": "₨", "seed_range":1000, "threshold":0.34, "hostile_prob":0.01, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#c28f5b"},
+	{ "name": "shoparmor", "display_name": "Stuff You Never Hope You Have To Use", "type": "shop", "char": "¥", "seed_range":1000, "threshold":0.5, "hostile_prob":0.01, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#c28f5b"},
+	{ "name": "residencelarge", "display_name": "The Condos", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.7, "hostile_prob":0.01, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#dfe7d8"},
+	{ "name": "residencesmall", "display_name": "The Simps", "type": "residence", "char": "î", "seed_range":4, "threshold":0.9, "hostile_prob":0.1, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#ffd"},
+	{ "name": "businesslarge", "display_name": "The Offices", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.95, "hostile_prob":0.01, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#c0c0c0"},
+	{ "name": "businesssmall", "display_name": "Some Random Service", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.01, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#c0c0c0"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range":1000, "threshold":0.02, "hostile_prob":0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070"},
+	{ "name": "other1", "display_name": "The Black Market Guild", "type": "other1", "char": "O", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082"},
+	{ "name": "other2", "display_name": "Broker's Hideout", "type": "other2", "char": "0", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082"},
+	# 
+]
+
+CITY_NAME = "Nightveil Spire"
+CITY_DESCRIPTION = (
+	"Nightveil Spire is a sprawling metropolis shrouded in perpetual twilight, where towering obsidian skyscrapers pierce the darkened sky. "
+	"The city is a labyrinth of narrow alleys and bustling marketplaces, illuminated by the eerie glow of bioluminescent flora and arcane streetlights. "
+	"Citizens of Nightveil Spire are a mix of shadowy figures and enigmatic beings, all drawn to the city's promise of power and mystery. "
+	"Amidst the urban sprawl, ancient ruins and arcane relics hint at a forgotten past, while modern technology and magic intertwine to create a unique blend of old and new. "
+	"Nightveil Spire is a city of contrasts, where danger lurks in the shadows and opportunity shines in the darkest corners."
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Velvet Lantern", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.04, "hostile_prob":0.45, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#2b1b2b"},
+	{ "name": "inn", "display_name": "The Gilded Curtain", "type": "inn", "char": "@", "seed_range":6, "threshold":0.07, "hostile_prob":0.00, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#4a3f55"},
+	{ "name": "shopweapons", "display_name": "Razor & Rune", "type": "shop", "char": "Æ", "seed_range":10, "threshold":0.18, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5a2e2e"},
+	{ "name": "shopitems", "display_name": "Curios & Curatives", "type": "shop", "char": "₨", "seed_range":10, "threshold":0.36, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#3b3b4f"},
+	{ "name": "shoparmor", "display_name": "Wardwright", "type": "shop", "char": "¥", "seed_range":10, "threshold":0.52, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b6b5b"},
+	{ "name": "residencelarge", "display_name": "Ironspine Flats", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.72, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#2f2f2f"},
+	{ "name": "residencesmall", "display_name": "Lantern Rooms", "type": "residence", "char": "î", "seed_range":4, "threshold":0.9, "hostile_prob":0.12, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#3d2f2f"},
+	{ "name": "businesslarge", "display_name": "Obsidian Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.96, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#1f1f2f"},
+	{ "name": "businesssmall", "display_name": "Brokerage & Sundries", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#2b2b2b"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range":1000, "threshold":0.02, "hostile_prob":0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070"},
+	{ "name": "other1", "display_name": "The Archive Vaults", "type": "other1", "char": "O", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082"},
+	{ "name": "other2", "display_name": "Broker’s Network", "type": "other2", "char": "0", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082"},
+]
+
+CITY_NAME = "The radpost"
+CITY_DESCRIPTION = (
+	"A battered outpost in the wasteland, serving as a hub for scavengers and survivors. "
+	"Amidst the ruins, makeshift buildings constructed from salvaged materials provide shelter and trade opportunities. "
+	"The air is thick with dust and the distant hum of mutated creatures. "
+	"Despite the harsh conditions, the outpost thrives as a beacon of hope and resilience in a desolate world."
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "Dust & Drums Tap", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.035, "hostile_prob":0.38, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#5b2e2e" },
+	{ "name": "inn", "display_name": "Wasteland Rest Stop", "type": "inn", "char": "@", "seed_range":6, "threshold":0.05, "hostile_prob":0.01, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#7fb8ff" },
+	{ "name": "shopweapons", "display_name": "Scavenger's Arsenal", "type": "shop", "char": "Æ", "seed_range":10, "threshold":0.20, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#b05f3f" },
+	{ "name": "shopitems", "display_name": "Junkyard Jewels", "type": "shop", "char": "₨", "seed_range":10, "threshold":0.30, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#c18f6a" },
+	{ "name": "shoparmor", "display_name": "Fortified Finds", "type": "shop", "char": "¥", "seed_range":10, "threshold":0.48, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#8f6b4a" },
+	{ "name": "residencelarge", "display_name": "Barricaded Suites", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.74, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#e8efe6"},
+	{ "name": "residencesmall", "display_name": "Shelter Row", "type": "residence", "char": "î", "seed_range":4, "threshold":0.88, "hostile_prob":0.11, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#ffecb3" },
+	{ "name": "businesslarge", "display_name": "Market Hub", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.94, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#a7a7a7" },
+	{ "name": "businesssmall", "display_name": "Trade Post", "type": "business", "char": "ï", "seed_range":4, "threshold":0.98, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#c7c7c7" },
+
+	# region extras
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range":1000, "threshold":0.02, "hostile_prob":0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070"},
+	{ "name": "other1", "display_name": "The Neon Spine", "type": "other1", "char": "O", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082"},
+	{ "name": "other2", "display_name": "Black Bazaar", "type": "other2", "char": "0", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082"},
+]
+
+##############FOREST CITIES
+CITY_NAME = "Aurelion Veil"
+CITY_DESCRIPTION = (
+    "A sprawling city nestled within the ancient boughs of colossal trees, Aurelion Veil is a sanctuary where nature and civilization intertwine. "
+    "The city's architecture is a harmonious blend of living wood and crafted stone, with homes and shops carved directly into the trunks "
+    "and branches of the great trees. Bioluminescent flora illuminate the streets, casting a gentle glow that guides residents and visitors "
+    "alike through the winding pathways. The air is filled with the scent of moss and blooming flowers, creating an atmosphere of tranquility "
+    "amidst the bustling market squares and lively taverns. Aurelion Veil is renowned for its skilled artisans, herbalists, and mystics who "
+    "draw upon the forest's magic to create wondrous goods and potions. The city thrives on a deep respect for nature, with communal gardens "
+    "and sacred groves serving as places of reflection and celebration. Visitors to Aurelion Veil are often captivated by its serene beauty "
+    "and the harmonious coexistence of its inhabitants with the surrounding wilderness."        
+)
+BUILDINGS = [
+ {"name": "bar", "display_name": "The Gilded Bramble", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.04, "hostile_prob":0.30, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#2a4a3a"},
+ {"name": "inn", "display_name": "Evensong Rest", "type": "inn", "char": "@", "seed_range":10, "threshold":0.09, "hostile_prob":0.00, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#4b6b5a"},
+ {"name": "shopweapons", "display_name": "Thistle & Fang", "type": "shop", "char": "Æ", "seed_range":12, "threshold":0.22, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5a2f2f"},
+ {"name": "shopitems", "display_name": "Silvershard Curios", "type": "shop", "char": "₨", "seed_range":12, "threshold":0.40, "hostile_prob":0.04, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#344b4b"},
+ {"name": "shoparmor", "display_name": "Grovewarden Armory", "type": "shop", "char": "¥", "seed_range":12, "threshold":0.56, "hostile_prob":0.04, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b6b5b"},
+ {"name": "residencelarge", "display_name": "Palais of Boughs", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.78, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#2e5b3a"},
+ {"name": "residencesmall", "display_name": "Sylvan Chambers", "type": "residence", "char": "î", "seed_range":4, "threshold":0.94, "hostile_prob":0.12, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#3b6b4a"},
+ {"name": "businesslarge", "display_name": "Council of Veil", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.99, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#243a2f"},
+ {"name": "businesssmall", "display_name": "Ledger & Lantern", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#274b3a"},
+ {"name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range":1000, "threshold":0.02, "hostile_prob":0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070"},
+ {"name": "other1", "display_name": "Hollow Exchange", "type": "other1", "char": "O", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082"},
+ {"name": "other2", "display_name": "Branchbound Broker's Den", "type": "other2", "char": "0", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082"},
+]
+
+CITY_NAME = "Boiling Bubble"
+CITY_DESCRIPTION = (
+	"A mist-shrouded hamlet nestled within an ancient forest, where the air is thick with the scent of herbs and magic. "
+	"Winding cobblestone paths weave between quaint cottages and towering trees, their branches adorned with glowing lanterns. "
+	"The townsfolk, a mix of witches, herbalists, and mystical creatures, bustle about their daily routines, tending to enchanted gardens "
+	"and brewing potent potions. At the heart of the village lies the Boiling Bubble Inn, a cozy tavern known for its bubbling cauldrons of "
+	"magical brews and lively gatherings. The atmosphere is one of warmth and mystery, where every corner holds the promise of a new enchantment."
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Midnight Kettle", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.04, "hostile_prob":0.20, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar_witch.svg", "color": "#6b3a3a"},
+	{ "name": "inn", "display_name": "The Sleeping Owl Annex", "type": "inn", "char": "@", "seed_range":6, "threshold":0.07, "hostile_prob":0.00, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn_witch.svg", "color": "#4b2e2e"},
+	{ "name": "shopweapons", "display_name": "Brooms & Baubles (Tools)", "type": "shop", "char": "Æ", "seed_range":10, "threshold":0.18, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop_brooms.svg", "color": "#7a5a2a"},
+	{ "name": "shopitems", "display_name": "Mist & Mortar (Supplies)", "type": "shop", "char": "₨", "seed_range":10, "threshold":0.36, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/apothecary.svg", "color": "#6b4f3b"},
+	{ "name": "shoparmor", "display_name": "Ward & Weave (Charms)", "type": "shop", "char": "¥", "seed_range":10, "threshold":0.52, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/herbal.svg", "color": "#2f5a3f"},
+	{ "name": "residencelarge", "display_name": "Loft of Whispered Rites", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.72, "hostile_prob":0.06, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large_witch.svg", "color": "#e6e0e6"},
+	{ "name": "residencesmall", "display_name": "Witch Cottage", "type": "residence", "char": "î", "seed_range":4, "threshold":0.92, "hostile_prob":0.12, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small_witch.svg", "color": "#ffeebb"},
+	{ "name": "businesslarge", "display_name": "Coven Hall (Guild)", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.96, "hostile_prob":0.10, "can_buy": False, "can_sell": False, "image": "/assets/tiles/coven.svg", "color": "#3b2f5c"},
+	{ "name": "businesssmall", "display_name": "Sorcerer's Spire (Study)", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.12, "can_buy": False, "can_sell": False, "image": "/assets/tiles/tower.svg", "color": "#2f2b4a"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
+	{ "name": "other1", "display_name": "The Emberlight Conclave", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
+	{ "name": "other2", "display_name": "Moonbrew Experimentarium", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+]
+
+CITY_NAME = "Thornshade Hamlet"
+CITY_DESCRIPTION = (
+	"A small hamlet nestled within a dense forest, Thornshade Hamlet is known for its towering trees and "
+	"the soft glow of bioluminescent flora that lights its winding paths. The village is a haven for travelers "
+	"seeking respite from the wilds, offering cozy inns and a lively tavern where stories are shared over hearty meals. "
+	"Locals are friendly and knowledgeable about the surrounding woods, often guiding adventurers to hidden groves "
+	"and ancient ruins. The air is filled with the scent of pine and earth, and the gentle rustling of leaves creates "
+	"a soothing backdrop to life in this tranquil settlement."
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Moss & Lantern", "type": "bar", "char": "µ", "seed_range":5, "threshold":0.02, "hostile_prob":0.25, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#27412f"},
+	{ "name": "inn", "display_name": "Hearthfall Inn", "type": "inn", "char": "@", "seed_range":7, "threshold":0.04, "hostile_prob":0.00, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#3b5a4a"},
+	{ "name": "shopweapons", "display_name": "Thorn & Thread", "type": "shop", "char": "Æ", "seed_range":9, "threshold":0.12, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5a2f2f"},
+	{ "name": "shopitems", "display_name": "Curio Hollow", "type": "shop", "char": "₨", "seed_range":9, "threshold":0.28, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#35524a"},
+	{ "name": "shoparmor", "display_name": "Barkshield Crafts", "type": "shop", "char": "¥", "seed_range":9, "threshold":0.44, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b6b5b"},
+	{ "name": "residencelarge", "display_name": "Elmhold", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.60, "hostile_prob":0.01, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#2e4b3a"},
+	{ "name": "residencesmall", "display_name": "Thatch Cottages", "type": "residence", "char": "î", "seed_range":4, "threshold":0.85, "hostile_prob":0.08, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#3b5a3a"},
+	{ "name": "businesslarge", "display_name": "Guild Bower", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.90, "hostile_prob":0.01, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#2a3a2a"},
+	{ "name": "businesssmall", "display_name": "Ledger & Lantern", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#274b3a"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
+	{ "name": "other1", "display_name": "Grovekeeper’s Archive", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
+	{ "name": "other2", "display_name": "Hollowshade Listening Post", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+]
+
+##############GRASSLAND CITIES
+CITY_NAME = "Crosswind Bazaar"
+CITY_DESCRIPTION = (
+	"A bustling trade hub nestled within the vast grasslands, where colorful tents and sturdy stone buildings form a lively marketplace. "
+	"The air is filled with the sounds of haggling merchants, clinking coins, and the distant calls of exotic animals. "
+	"Caravans from far-off lands converge here, bringing with them a rich tapestry of goods, spices, and artifacts. "
+	"The streets are lined with vendors selling everything from finely crafted weapons to rare textiles, while the aroma of sizzling street food wafts through the air. "
+	"At the heart of the bazaar lies the Wayfarer's Rest Inn, a welcoming haven for travelers seeking respite from their journeys. "
+	"The atmosphere is one of vibrant energy and endless possibility, where every corner holds the promise of a new discovery."
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Sundered Keg", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.04, "hostile_prob":0.36, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#6b3e2f"},
+	{ "name": "inn", "display_name": "Wayfarer's Rest", "type": "inn", "char": "@", "seed_range":10, "threshold":0.08, "hostile_prob":0.00, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#7a6b5c"},
+	{ "name": "shopweapons", "display_name": "Windsong Armory", "type": "shop", "char": "Æ", "seed_range":12, "threshold":0.20, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5a2f2f"},
+	{ "name": "shopitems", "display_name": "Nomad Curios", "type": "shop", "char": "₨", "seed_range":12, "threshold":0.38, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#4b5b4b"},
+	{ "name": "shoparmor", "display_name": "Hearth & Hide", "type": "shop", "char": "¥", "seed_range":12, "threshold":0.54, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b6b5b"},
+	{ "name": "residencelarge", "display_name": "Steppe Spires", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.75, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#dfe7c8"},
+	{ "name": "residencesmall", "display_name": "Caravan Rows", "type": "residence", "char": "î", "seed_range":4, "threshold":0.92, "hostile_prob":0.10, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#efd"},
+	{ "name": "businesslarge", "display_name": "Consulate Quarter", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.98, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#c0c0c0"},
+	{ "name": "businesssmall", "display_name": "Market Annex", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#c0b88f"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
+	{ "name": "other1", "display_name": "Spicewind Menagerie", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
+	{ "name": "other2", "display_name": "The Caravaner’s Exchange", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+]
+
+CITY_NAME = "Highsteeple Crossing" # mid-sized grasslands city with pious, sanctimonious rulers
+CITY_DESCRIPTION = (
+	"Highsteeple Crossing is a bustling mid-sized city nestled in the heart of the expansive grasslands."
+	"Known for its towering spires and grand cathedrals, the city serves as a religious and cultural hub for the surrounding region."
+	"he streets are lined with cobblestone pathways, and the air is filled with the scent of incense and blooming wildflowers."
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Cloister Tap", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.04, "hostile_prob":0.35, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#5b3b3b"},
+	{ "name": "inn", "display_name": "The Vestry Rest", "type": "inn", "char": "@", "seed_range":6, "threshold":0.07, "hostile_prob":0.00, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#6b5b4f"},
+	{ "name": "shopweapons", "display_name": "Pious Blades", "type": "shop", "char": "Æ", "seed_range":10, "threshold":0.18, "hostile_prob":0.04, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#7a2f2f"},
+	{ "name": "shopitems", "display_name": "Reliquary & Oddments", "type": "shop", "char": "₨", "seed_range":10, "threshold":0.36, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#4b5b4b"},
+	{ "name": "shoparmor", "display_name": "Vestments & Vambraces", "type": "shop", "char": "¥", "seed_range":10, "threshold":0.52, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b6b5b"},
+	{ "name": "residencelarge", "display_name": "Aldermanic Row", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.70, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#dfe7c8"},
+	{ "name": "residencesmall", "display_name": "Cantor Cottages", "type": "residence", "char": "î", "seed_range":4, "threshold":0.9, "hostile_prob":0.10, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#efe7d0"},
+	{ "name": "businesslarge", "display_name": "The Diocese Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.95, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#c0c0c0"},
+	{ "name": "businesssmall", "display_name": "Ledger & Sermon", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#c0b88f"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
+	{ "name": "other1", "display_name": "Highspire Doctrine Hall", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
+	{ "name": "other2", "display_name": "The Sanctum of Quiet Oaths", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+]
+
+CITY_NAME = "Quantford Hollow"
+CITY_DESCRIPTION = (
+	"A quiet village nestled within a sprawling grassland, Quantford Hollow is known for its thatched-roof cottages and tranquil ambiance. "
+	"The town is surrounded by rolling hills and vibrant meadows, making it a picturesque retreat from the hustle and bustle of larger cities. "
+	"Locals here are friendly and welcoming, often gathering at the central inn or the quaint marketplace to share stories and trade goods. "
+	"Despite its peaceful appearance, the town has a rich history filled with tales of ancient magic and hidden treasures, attracting adventurers and wanderers alike."	
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Hollow Lantern", "type": "bar", "char": "µ", "seed_range":5, "threshold":0.02, "hostile_prob":0.20, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#4b3b2f"},
+	{ "name": "inn", "display_name": "The Roofed Loft", "type": "inn", "char": "@", "seed_range":7, "threshold":0.04, "hostile_prob":0.00, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#6b6b5a"},
+	{ "name": "shopweapons", "display_name": "Thorn & Peg", "type": "shop", "char": "Æ", "seed_range":6, "threshold":0.12, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5a2f2f"},
+	{ "name": "shopitems", "display_name": "Quant Curios", "type": "shop", "char": "₨", "seed_range":6, "threshold":0.28, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#3b5b4a"},
+	{ "name": "shoparmor", "display_name": "Hide & Patch", "type": "shop", "char": "¥", "seed_range":6, "threshold":0.44, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b6b5b"},
+	{ "name": "residencelarge", "display_name": "Hollowstead", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.60, "hostile_prob":0.01, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#dfe7c8"},
+	{ "name": "residencesmall", "display_name": "Thatched Rows", "type": "residence", "char": "î", "seed_range":4, "threshold":0.85, "hostile_prob":0.06, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#efe7c8"},
+	{ "name": "businesslarge", "display_name": "Guild Bower", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.88, "hostile_prob":0.01, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#c0c0c0"},
+	{ "name": "businesssmall", "display_name": "Ledger Nook", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#c0b88f"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
+	{ "name": "other1", "display_name": "Hollowfield Heritage", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
+	{ "name": "other2", "display_name": "Meadowlight Reading Room", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+]
+
+##############MOUNTAIN CITIES
+CITY_NAME = "Ironveil Foundry"
+CITY_DESCRIPTION  = (
+	"Ironveil Foundry is a sprawling industrial city nestled within a rugged mountain range. "
+	"Once a thriving hub of manufacturing and innovation, the city is now a shadow of its former self, "
+	"with abandoned factories and rusting machinery dominating the landscape. "
+	"Despite its decline, Ironveil Foundry retains a gritty charm, with its soot-streaked buildings and "
+	"narrow alleyways telling tales of a bygone era. The air is thick with the scent of oil and metal, "
+	"and the distant rumble of machinery can still be heard echoing through the streets. "
+	"Adventurers who venture into Ironveil Foundry will find a city steeped in history and mystery, "
+	"where the remnants of its industrial past intertwine with the arcane, "
+	"creating a unique and captivating atmosphere."	
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Coal Lantern", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.05, "hostile_prob":0.40, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#3b2b2b"},
+	{ "name": "inn", "display_name": "Smokestack Rest", "type": "inn", "char": "@", "seed_range":10, "threshold":0.08, "hostile_prob":0.01, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#5a4f4a"},
+	{ "name": "shopweapons", "display_name": "Grim Gear", "type": "shop", "char": "Æ", "seed_range":12, "threshold":0.22, "hostile_prob":0.06, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b3b2f"},
+	{ "name": "shopitems", "display_name": "Engineer's Nook", "type": "shop", "char": "₨", "seed_range":12, "threshold":0.40, "hostile_prob":0.04, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#44504f"},
+	{ "name": "shoparmor", "display_name": "Plate & Rivet", "type": "shop", "char": "¥", "seed_range":12, "threshold":0.56, "hostile_prob":0.04, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#606060"},
+	{ "name": "residencelarge", "display_name": "Rivermill Quarters", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.78, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#c8c8c8"},
+	{ "name": "residencesmall", "display_name": "Worker Shacks", "type": "residence", "char": "î", "seed_range":4, "threshold":0.94, "hostile_prob":0.12, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#bdb4aa"},
+	{ "name": "businesslarge", "display_name": "Foundry Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.99, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#33333a"},
+	{ "name": "businesssmall", "display_name": "Brokerage Row", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#5b544f"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
+	{ "name": "other1", "display_name": "The Rustweld Archives", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
+	{ "name": "other2", "display_name": "Embercoil Relay Station", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+]
+
+CITY_NAME = "Gallows Rift"
+CITY_DESCRIPTION = (
+	"A sprawling settlement built into the jagged cliffs and rocky outcrops of a vast mountain range. "
+	"Once a mining town, Gallows Rift has transformed into a bustling hub for traders, adventurers, and outcasts seeking refuge from the dangers of the wilds. "
+	"The city's architecture is a mix of makeshift shanties and sturdy stone buildings, all interconnected by a labyrinth of rickety bridges and narrow pathways that cling to the mountainside. "
+	"Despite its rough exterior, Gallows Rift is a place of opportunity and camaraderie, where diverse cultures converge and tales of daring exploits are shared around flickering campfires. "
+	"However, the city's precarious location also means that danger is never far away, with treacherous cliffs, sudden rockslides, and lurking predators posing constant threats to its inhabitants."
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Iron Maw", "type": "bar", "char": "µ", "seed_range":5, "threshold":0.05, "hostile_prob":0.45, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#3b2f2f"},
+	{ "name": "inn", "display_name": "Rook's Rest", "type": "inn", "char": "@", "seed_range":6, "threshold":0.07, "hostile_prob":0.03, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#5a4b42"},
+	{ "name": "shopweapons", "display_name": "Scrap & Spike", "type": "shop", "char": "Æ", "seed_range":9, "threshold":0.18, "hostile_prob":0.07, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b2f2f"},
+	{ "name": "shopitems", "display_name": "Oddments of the Rift", "type": "shop", "char": "₨", "seed_range":9, "threshold":0.34, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#4b3b3a"},
+	{ "name": "shoparmor", "display_name": "Patch & Plate", "type": "shop", "char": "¥", "seed_range":9, "threshold":0.50, "hostile_prob":0.06, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#575757"},
+	{ "name": "residencelarge", "display_name": "Garrison Halls", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.70, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#a8a8a8"},
+	{ "name": "residencesmall", "display_name": "Rift Shacks", "type": "residence", "char": "î", "seed_range":4, "threshold":0.88, "hostile_prob":0.12, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#7b6b5b"},
+	{ "name": "businesslarge", "display_name": "The Pit Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.95, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#4a4a4a"},
+	{ "name": "businesssmall", "display_name": "Skewed Ledger", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#50433d"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
+	{ "name": "other1", "display_name": "The Cliffbound Concord Lodge", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
+	{ "name": "other2", "display_name": "Riftwalker’s Ember Camp", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+]
+
+CITY_NAME = "Hollerforge Hollow"
+CITY_DESCRIPTION = (
+	"A rugged mining town nestled within a vast mountain hollow, Hollerforge Hollow is a hub of industry and resilience."
+	"The town is characterized by its sturdy timber buildings, winding cobblestone streets, and the ever-present hum of mining activity."
+	"Towering cliffs encircle the settlement, their faces scarred by centuries of excavation."
+	"The air is thick with the scent of pine and earth, mingling with the smoke from forge fires and the distant clang of pickaxes."
+	"Despite the harsh environment, the townsfolk are known for their hearty spirit and tight-knit community, often gathering at the local tavern to share stories and celebrate their hard-won successes."
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Still & Spindle", "type": "bar", "char": "µ", "seed_range":5, "threshold":0.02, "hostile_prob":0.22, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#4b342b"},
+	{ "name": "inn", "display_name": "Holler's Rest", "type": "inn", "char": "@", "seed_range":7, "threshold":0.04, "hostile_prob":0.01, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#6b5a4a"},
+	{ "name": "shopweapons", "display_name": "Spike & Splint", "type": "shop", "char": "Æ", "seed_range":6, "threshold":0.12, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5a2b2b"},
+	{ "name": "shopitems", "display_name": "Hollow Oddments", "type": "shop", "char": "₨", "seed_range":6, "threshold":0.28, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#3b4b3b"},
+	{ "name": "shoparmor", "display_name": "Patch & Plate", "type": "shop", "char": "¥", "seed_range":6, "threshold":0.44, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b6b5b"},
+	{ "name": "residencelarge", "display_name": "Hearthstead", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.60, "hostile_prob":0.01, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#dfe1d8"},
+	{ "name": "residencesmall", "display_name": "Thatched Hollows", "type": "residence", "char": "î", "seed_range":4, "threshold":0.85, "hostile_prob":0.06, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#efe7d8"},
+	{ "name": "businesslarge", "display_name": "Timberwright Guild", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.88, "hostile_prob":0.01, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#b4b0a8"},
+	{ "name": "businesssmall", "display_name": "Ledger Nook", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#c0b88f"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
+	{ "name": "other1", "display_name": "Forgehand Fellowship", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
+	{ "name": "other2", "display_name": "The Deepdelve Muster Hall", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+]
+
+##############SHALLOWS CITIES
+CITY_NAME = "Brineward Harbor"
+CITY_DESCRIPTION = (
+	"Brineward Harbor is a bustling port city nestled along the jagged coastline, known for its vibrant markets and diverse populace."
+	" The city thrives on maritime trade, with ships from distant lands docking at its busy piers. "
+	"Narrow cobblestone streets wind through districts filled with colorful stalls, taverns, and inns, where sailors and merchants alike gather to share tales and goods. "
+	"The air is thick with the scent of saltwater and exotic spices, while the sound of seagulls and lively chatter fills the atmosphere. "
+	"Brineward Harbor is a melting pot of cultures, where adventurers can find rare artifacts, hearty meals, and opportunities for fortune amidst the lively chaos of the harbor."	
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Lantern & Leech", "type": "bar", "char": "µ", "seed_range":7, "threshold":0.05, "hostile_prob":0.38, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#2f4b4b"},
+	{ "name": "inn", "display_name": "Harborfall Inn", "type": "inn", "char": "@", "seed_range":11, "threshold":0.10, "hostile_prob":0.01, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#4b6b6b"},
+	{ "name": "shopweapons", "display_name": "Harpoon & Hinge", "type": "shop", "char": "Æ", "seed_range":14, "threshold":0.22, "hostile_prob":0.06, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5b2f2f"},
+	{ "name": "shopitems", "display_name": "Curio Dockworks", "type": "shop", "char": "₨", "seed_range":14, "threshold":0.40, "hostile_prob":0.04, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#2f5b5b"},
+	{ "name": "shoparmor", "display_name": "Salvage & Scale", "type": "shop", "char": "¥", "seed_range":14, "threshold":0.58, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#606060"},
+	{ "name": "residencelarge", "display_name": "Docksman's Quays", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.80, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#c8e7e7"},
+	{ "name": "residencesmall", "display_name": "Kettle Row", "type": "residence", "char": "î", "seed_range":4, "threshold":0.95, "hostile_prob":0.12, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#dfe7df"},
+	{ "name": "businesslarge", "display_name": "Maritime Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.98, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#5b6b6b"},
+	{ "name": "businesssmall", "display_name": "Quayside Brokers", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#6b6b5b"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
+	{ "name": "other1", "display_name": "The Saltwind Exchange Hall", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
+	{ "name": "other2", "display_name": "Harborlight Relic Vault", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+]
+
+CITY_NAME = "Blackwake Bay"
+CITY_DESCRIPTION  = (
+	"A bustling port town nestled within a sheltered bay, Blackwake Bay is a hub of maritime activity and intrigue. "
+	"Its docks are alive with the sounds of creaking ships, shouting dockworkers, and the salty tang of the sea air. "
+	"The town is a labyrinth of narrow alleys, crowded marketplaces, and weathered taverns, where sailors and merchants from distant lands converge to trade goods and share tales of the high seas. "
+	"Blackwake Bay is known for its vibrant culture, rich history, and the ever-present undercurrent of danger that lurks in its shadows. "
+	"Pirates, smugglers, and adventurers alike are drawn to this coastal haven, seeking fortune and excitement amidst its bustling streets and treacherous waters."
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Rusted Lantern", "type": "bar", "char": "µ", "seed_range":5, "threshold":0.05, "hostile_prob":0.40, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#2f3b3b"},
+	{ "name": "inn", "display_name": "The Crow's Berth", "type": "inn", "char": "@", "seed_range":6, "threshold":0.08, "hostile_prob":0.02, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#4b5a5a"},
+	{ "name": "shopweapons", "display_name": "Harpoon & Hook", "type": "shop", "char": "Æ", "seed_range":10, "threshold":0.20, "hostile_prob":0.07, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5b2f2f"},
+	{ "name": "shopitems", "display_name": "Booty & Bric-a-brac", "type": "shop", "char": "₨", "seed_range":10, "threshold":0.36, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#2f5b4f"},
+	{ "name": "shoparmor", "display_name": "Scale & Salvage", "type": "shop", "char": "¥", "seed_range":10, "threshold":0.52, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#606060"},
+	{ "name": "residencelarge", "display_name": "Harbor Blocks", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.74, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#c8dfe0"},
+	{ "name": "residencesmall", "display_name": "Skiff Row", "type": "residence", "char": "î", "seed_range":4, "threshold":0.92, "hostile_prob":0.10, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#dfe7df"},
+	{ "name": "businesslarge", "display_name": "The Wharf Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.98, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#4b6b6b"},
+	{ "name": "businesssmall", "display_name": "Tally & Tar", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#6b6b5b"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
+	{ "name": "other1", "display_name": "Blackwake Tidecourt", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
+	{ "name": "other2", "display_name": "The Smuggler’s Lanternhouse", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+]
+
+CITY_NAME = "Tidekin Cove"
+CITY_DESCRIPTION = (
+	"Tidekin Cove is a bustling harbor town nestled along the jagged coastline, known for its vibrant markets and salty air. "
+	"The town is a maze of narrow alleys, weathered docks, and lively taverns, where merchants from distant lands trade exotic goods. "
+	"Fishermen haul in their daily catch, while sailors share tales of the sea over mugs of brine ale. "
+	"Colorful banners flutter in the sea breeze, and the scent of saltwater mingles with the aroma of fresh seafood. "
+	"Despite its lively atmosphere, Tidekin Cove has an undercurrent of mystery, with hidden coves and secret passages rumored to be used by smugglers and adventurers alike. "
+	"Visitors to the town are captivated by its unique blend of maritime culture and vibrant community spirit."
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Salted Shell", "type": "bar", "char": "µ", "seed_range":5, "threshold":0.03, "hostile_prob":0.25, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#2f5b5b"},
+	{ "name": "inn", "display_name": "Harbormoss Inn", "type": "inn", "char": "@", "seed_range":7, "threshold":0.05, "hostile_prob":0.00, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#4b6b6b"},
+	{ "name": "shopweapons", "display_name": "Hook & Tine", "type": "shop", "char": "Æ", "seed_range":9, "threshold":0.14, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5b3b2f"},
+	{ "name": "shopitems", "display_name": "Drift Oddments", "type": "shop", "char": "₨", "seed_range":9, "threshold":0.30, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#2f6b5b"},
+	{ "name": "shoparmor", "display_name": "Scale & Patch", "type": "shop", "char": "¥", "seed_range":9, "threshold":0.46, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b6b5b"},
+	{ "name": "residencelarge", "display_name": "Quayside Hall", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.65, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#c8e7e0"},
+	{ "name": "residencesmall", "display_name": "Tide Rows", "type": "residence", "char": "î", "seed_range":4, "threshold":0.88, "hostile_prob":0.08, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#dfe7df"},
+	{ "name": "businesslarge", "display_name": "Cove Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.92, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#5b7b7b"},
+	{ "name": "businesssmall", "display_name": "Ledger Wharf", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#6b6b5b"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
+	{ "name": "other1", "display_name": "The Brinewharf Signal Post", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
+	{ "name": "other2", "display_name": "Cove‑Runner’s Hideaway", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+]
+
+##############SNOW CITIES
+CITY_NAME = "Frostgate Spire"
+CITY_DESCRIPTION = (
+	"Frostgate Spire is a towering city of ice and steel, "
+	"rising majestically from the frozen tundra. Its spires and "
+	"turrets glisten with frost, reflecting the pale light of the "
+	"northern sun. The city is a bustling hub of trade and culture, "
+	"where merchants from distant lands converge to barter goods and "
+	"stories. The streets are lined with shops and taverns, their "
+	"windows aglow with warm light against the cold. Despite the "
+	"harsh climate, Frostgate Spire is a place of vibrant life and "
+	"endless adventure."
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Blue Lantern", "type": "bar", "char": "µ", "seed_range":7, "threshold":0.06, "hostile_prob":0.36, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#2b4b5b"},
+	{ "name": "inn", "display_name": "Hearth of Frost", "type": "inn", "char": "@", "seed_range":12, "threshold":0.10, "hostile_prob":0.02, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#5b7b8b"},
+	{ "name": "shopweapons", "display_name": "Rivet & Ice", "type": "shop", "char": "Æ", "seed_range":15, "threshold":0.24, "hostile_prob":0.06, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b3b47"},
+	{ "name": "shopitems", "display_name": "Frostworks Emporium", "type": "shop", "char": "₨", "seed_range":15, "threshold":0.42, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#3b5b6b"},
+	{ "name": "shoparmor", "display_name": "Scale & Pelt", "type": "shop", "char": "¥", "seed_range":15, "threshold":0.60, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#606f7b"},
+	{ "name": "residencelarge", "display_name": "Spireholds", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.88, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#dfeef5"},
+	{ "name": "residencesmall", "display_name": "Snowrows", "type": "residence", "char": "î", "seed_range":4, "threshold":0.96, "hostile_prob":0.14, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#e8f0f5"},
+	{ "name": "businesslarge", "display_name": "Clime Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.99, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#5b6b7b"},
+	{ "name": "businesssmall", "display_name": "Ledger Spindles", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#7b8b8b"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
+	{ "name": "other1", "display_name": "The Glacial Concordium", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
+	{ "name": "other2", "display_name": "Frostlight Artificer’s Annex", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+]
+
+CITY_NAME = "Hailward Hold"
+CITY_DESCRIPTION = (
+	"Nestled within a frozen fjord, Hailward Hold is a bustling city of ice-carved stone and timbered longhouses. "
+	"Frost-laden streets wind between towering halls adorned with intricate runic carvings, while the air is filled with the scent of smoked fish and pine. "
+	"Citizens clad in furs and leather trade goods in lively markets, their breath misting in the crisp air as they navigate the city's labyrinthine alleys. "
+	"At the heart of the hold stands the Jarl's Keep, a formidable structure of ice and stone, overlooking the bustling harbor where longships are moored against the icy waters. "
+	"Despite the harsh climate, Hailward Hold thrives as a center of commerce and culture, its people resilient and resourceful in the face of winter's embrace."
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Skald's Lantern", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.05, "hostile_prob":0.32, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#3b4b5b"},
+	{ "name": "inn", "display_name": "Hall of Hearths", "type": "inn", "char": "@", "seed_range":9, "threshold":0.08, "hostile_prob":0.02, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#6b7b8b"},
+	{ "name": "shopweapons", "display_name": "Rivet & Rune", "type": "shop", "char": "Æ", "seed_range":11, "threshold":0.20, "hostile_prob":0.07, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b3b3b"},
+	{ "name": "shopitems", "display_name": "Frostwright's Goods", "type": "shop", "char": "₨", "seed_range":11, "threshold":0.36, "hostile_prob":0.04, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#3b5b6b"},
+	{ "name": "shoparmor", "display_name": "Pelt & Plate", "type": "shop", "char": "¥", "seed_range":11, "threshold":0.52, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5b6b6b"},
+	{ "name": "residencelarge", "display_name": "Holdquarters", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.72, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#dfeefe"},
+	{ "name": "residencesmall", "display_name": "Frostrows", "type": "residence", "char": "î", "seed_range":4, "threshold":0.9, "hostile_prob":0.11, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#eef5f8"},
+	{ "name": "businesslarge", "display_name": "Clan Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.96, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#5b6b7b"},
+	{ "name": "businesssmall", "display_name": "Ledger & Tally", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#7b7f7f"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
+	{ "name": "other1", "display_name": "Runeflare Assembly Yard", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
+	{ "name": "other2", "display_name": "The Icebound Speaker’s Circle", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+]
+
+CITY_NAME = "Bleakwatch Outpost"
+CITY_DESCRIPTION = (
+	"Bleakwatch Outpost is a remote settlement perched on the edge of a frozen wasteland. "
+	"Once a bustling hub for explorers and traders, it now serves as a solitary refuge against the relentless cold. "
+	"The outpost is characterized by its sturdy wooden structures, fortified against the harsh winds and snowstorms that frequently batter the area. "
+	"Narrow streets wind between buildings, often obscured by drifting snow, while the distant howls of arctic creatures echo through the icy air. "
+	"Despite its isolation, Bleakwatch Outpost is a place of resilience and camaraderie, where inhabitants band together to survive the unforgiving environment. "
+	"Visitors to the outpost are greeted with a mix of wary glances and warm hospitality, as locals share stories of survival and adventure in this frozen frontier."
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Lantern Trap", "type": "bar", "char": "µ", "seed_range":4, "threshold":0.02, "hostile_prob":0.28, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#2b3b3b"},
+	{ "name": "inn", "display_name": "Wayfarer's Rest", "type": "inn", "char": "@", "seed_range":6, "threshold":0.04, "hostile_prob":0.01, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#5b6b6b"},
+	{ "name": "shopweapons", "display_name": "Spike & Husk", "type": "shop", "char": "Æ", "seed_range":7, "threshold":0.10, "hostile_prob":0.04, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5b2f2f"},
+	{ "name": "shopitems", "display_name": "Trader's Cache", "type": "shop", "char": "₨", "seed_range":7, "threshold":0.26, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#3b5b5b"},
+	{ "name": "shoparmor", "display_name": "Pelt & Plate", "type": "shop", "char": "¥", "seed_range":7, "threshold":0.42, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#666666"},
+	{ "name": "residencelarge", "display_name": "Watcher's Hall", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.60, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#dfe7ee"},
+	{ "name": "residencesmall", "display_name": "Hutline", "type": "residence", "char": "î", "seed_range":4, "threshold":0.86, "hostile_prob":0.07, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#eef3f5"},
+	{ "name": "businesslarge", "display_name": "Supply Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.90, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#5b6b6b"},
+	{ "name": "businesssmall", "display_name": "Ledger Post", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#7b7b7b"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
+	{ "name": "other1", "display_name": "The Windbreak Vigil Station", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
+	{ "name": "other2", "display_name": "Frostline Survivor’s Exchange", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+]
+
+##############SWAMP CITIES
+CITY_NAME = "The Necropolis"
+CITY_DESCRIPTION = (
+	"A sprawling city of the dead, where ancient crypts and mausoleums rise from the misty swamplands. "
+	"Shrouded in perpetual twilight, the Necropolis is a labyrinth of narrow canals, moss-covered stone pathways, "
+	"and towering obelisks that pierce the foggy sky. The air is thick with the scent of damp earth and decaying foliage, "
+	"and the distant echoes of mournful chants and rustling leaves create an eerie symphony. "
+	"Residents clad in tattered robes and bone jewelry navigate the shadowy streets, trading in relics of the past "
+	"and practicing ancient rites to commune with the spirits that linger in this haunted city."
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Sluice & Skull", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.06, "hostile_prob":0.35, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#3b2f2f"},
+	{ "name": "inn", "display_name": "Mirehold Rest", "type": "inn", "char": "@", "seed_range":12, "threshold":0.10, "hostile_prob":0.05, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#4b3b3b"},
+	{ "name": "shopweapons", "display_name": "Boneworks & Blades", "type": "shop", "char": "Æ", "seed_range":16, "threshold":0.22, "hostile_prob":0.08, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b3b2f"},
+	{ "name": "shopitems", "display_name": "Vial & Talisman", "type": "shop", "char": "₨", "seed_range":16, "threshold":0.40, "hostile_prob":0.06, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#2f4b3b"},
+	{ "name": "shoparmor", "display_name": "Hide & Husk", "type": "shop", "char": "¥", "seed_range":16, "threshold":0.58, "hostile_prob":0.06, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#575757"},
+	{ "name": "residencelarge", "display_name": "Crypt Quarters", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.82, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#c8c8c8"},
+	{ "name": "residencesmall", "display_name": "Bog Shacks", "type": "residence", "char": "î", "seed_range":4, "threshold":0.96, "hostile_prob":0.14, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#dfe7d0"},
+	{ "name": "businesslarge", "display_name": "Mortuary Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.98, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#5b5b5b"},
+	{ "name": "businesssmall", "display_name": "Ledger of Wights", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.05, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#6b6b5b"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
+	{ "name": "other1", "display_name": "The Ossuary Concord", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
+	{ "name": "other2", "display_name": "Veil‑Whisper Reliquary", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+]
+
+CITY_NAME = "Bayou Nocturne"
+CITY_DESCRIPTION = (
+	"Bayou Nocturne is a shadowed city of winding canals and moss-draped alleys, where lantern light flickers against the mist. "
+	"Built upon ancient swamp grounds, its wooden walkways creak underfoot, and the air is thick with the scent of brine and spice. "
+	"The city is a haven for traders, mystics, and those seeking refuge from the outside world, with a rich tapestry of cultures blending together. "
+	"At its heart lies the Gator & Gavel, a bustling tavern where deals are struck and secrets exchanged under the watchful eyes of voodoo charms. "
+	"Bayou Nocturne is a place where the past and present intertwine, and every shadow holds a story waiting to be uncovered."
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Gator & Gavel", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.05, "hostile_prob":0.30, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#3b2f2f"},
+	{ "name": "inn", "display_name": "Bayou Rest", "type": "inn", "char": "@", "seed_range":9, "threshold":0.08, "hostile_prob":0.03, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#4b5b4b"},
+	{ "name": "shopweapons", "display_name": "Hook & Hex", "type": "shop", "char": "Æ", "seed_range":12, "threshold":0.18, "hostile_prob":0.06, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5b3b2f"},
+	{ "name": "shopitems", "display_name": "Crescent Curios", "type": "shop", "char": "₨", "seed_range":12, "threshold":0.36, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#2f5b4b"},
+	{ "name": "shoparmor", "display_name": "Hide & Scale", "type": "shop", "char": "¥", "seed_range":12, "threshold":0.52, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#606060"},
+	{ "name": "residencelarge", "display_name": "Lantern Quarters", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.75, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#c8d8d0"},
+	{ "name": "residencesmall", "display_name": "Shacklines", "type": "residence", "char": "î", "seed_range":4, "threshold":0.92, "hostile_prob":0.10, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#dfe7df"},
+	{ "name": "businesslarge", "display_name": "Bay Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.98, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#5b6b5b"},
+	{ "name": "businesssmall", "display_name": "Tally & Taro", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#6b6b5b"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
+	{ "name": "other1", "display_name": "Mirelight Bargain Court", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
+	{ "name": "other2", "display_name": "The Lantern‑Sworn Parlour", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+]
+
+CITY_NAME = "Gnashwater Hollow"
+CITY_DESCRIPTION = (
+    "A fetid swamp city built on stilts and rotten pilings, Gnashwater Hollow is a haven for outcasts, traders, and those seeking refuge from the law. "
+	"The air is thick with mist and the scent of decay, while the streets are a labyrinth of wooden walkways and rickety bridges connecting dilapidated buildings. "
+	"The city's economy thrives on black market dealings, exotic goods salvaged from the swamp, and the services of mercenaries and bounty hunters. "
+	"Despite its grim appearance, Gnashwater Hollow is a place of opportunity for those willing to navigate its treacherous waters."
+)
+BUILDINGS = [
+	{ "name": "bar", "display_name": "The Gulper's Maw", "type": "bar", "char": "µ", "seed_range":4, "threshold":0.03, "hostile_prob":0.45, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#2f2b2b"},
+	{ "name": "inn", "display_name": "Boneshade Rest", "type": "inn", "char": "@", "seed_range":6, "threshold":0.05, "hostile_prob":0.08, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#3b4b3b"},
+	{ "name": "shopweapons", "display_name": "Jaw & Spike", "type": "shop", "char": "Æ", "seed_range":6, "threshold":0.12, "hostile_prob":0.12, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5b2f2f"},
+	{ "name": "shopitems", "display_name": "Bogcurio", "type": "shop", "char": "₨", "seed_range":6, "threshold":0.28, "hostile_prob":0.08, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#2f4b3b"},
+	{ "name": "shoparmor", "display_name": "Hide & Husk", "type": "shop", "char": "¥", "seed_range":6, "threshold":0.44, "hostile_prob":0.09, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#606060"},
+	{ "name": "residencelarge", "display_name": "Pit Halls", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.58, "hostile_prob":0.06, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#bcd0c8"},
+	{ "name": "residencesmall", "display_name": "Shackline", "type": "residence", "char": "î", "seed_range":4, "threshold":0.86, "hostile_prob":0.18, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#dfe7d0"},
+	{ "name": "businesslarge", "display_name": "Toll Mort", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.94, "hostile_prob":0.05, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#4b4b4b"},
+	{ "name": "businesssmall", "display_name": "Snap Ledger", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.06, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#6b6b5b"},
+	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
+	{ "name": "other1", "display_name": "The Bogrunner Exchange", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
+	{ "name": "other2", "display_name": "Rotwharf Broker’s Den", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+]
+
+
+
+
+Chapter	Act / Theme	Assigned City	Biome	Why it fits (tight summary)
+1	Act I – Awakening (existential chaos)	The Desert Metropolis	Desert	Half‑formed, chaotic urban sprawl; bars, bounty work, black‑market hooks feel natural here.
+2	Black Market & Uncoupling	Boiling Bubble	Forest	Witchy hamlet, potions, cursed artifacts—perfect for Mira/Leera/Kess and the cursed couplet arc.
+3	Street Justice	Highsteeple Crossing	Grassland	Bounties, nobles, law, sanctimony—fits Talla, nobles’ mansion, and “justice” framing.
+4	Fracture Point	Ironveil Foundry	Mountain	Industrial‑arcane city where maps twist, rifts open, and Catalyst’s fall can literally shake the infrastructure.
+5	Act II start – Riftwaters Crossing	Brineward Harbor	Shallows	Coastal trade hub on jagged coastline; natural staging point for Riftwaters, teleport talk, and Astra’s jump.
+6	The Riftlands Unveiled	Bleakwatch Outpost	Snow	Edge‑of‑nowhere frontier, storms and rifts worsening; resistance ops and breach sites feel right here.
+7	Seth’s Airship & Requirement	Gnashwater Hollow	Swamp	Lawless, black‑market swamp city—perfect for a resistance hub, shady contacts, and prepping the Rustwing.
+
+
+8	ACT III - Glamour → Scalpel emerges	Nightveil Spire	Desert	Perpetual twilight, bioluminescent streets, arcane spectacle—Glamour’s sensory intoxication turning to Scalpel’s cruelty.
+9	Scalpel’s Domain	The radpost	Desert	Battered outpost, survivalist cruelty, surgical brutality in a wasteland—Scalpel’s cold, precise worldview.
+10	Human Chaos (no boss)	Crosswind Bazaar	Grassland	Overcrowded trade hub; riots, thrill‑violence, manic contagion in a dense marketplace.
+11	Rapture + Revelry	Blackwake Bay	Shallows	Pirate taverns, crowded alleys, dangerous revelry—peak frenzy and spectacle before burnout.
+12	Lament	Quantford Hollow	Grassland	Quiet, picturesque village; perfect for the grief‑after‑mania tone, a soft place to feel the crash.
+13	Garbage (identity rot)	The Necropolis	Swamp	City of the dead, mausoleums, rot—embodies “I am nothing,” internalized decay, and identity collapse.
+
+
+14	ACT IV - Stigma	Hailward Hold	Snow	Rigid social order, Jarl’s Keep, carved halls—ideal for moralizing hierarchy and enforced ideals.
+15	Pageant + Edict (rave‑state)	Tidekin Cove	Shallows	Harbor town with banners, taverns, hidden passages—reframed as neon‑lit, mask‑mandated “party‑as‑control” island.
+
+
+16	ACT V - The Path Without Meaning	Thornshade Hamlet	Forest	Normally tranquil, bioluminescent hamlet—now emotionally hollow, actions feel weightless.
+17	Paradox + Crux	Gallows Rift	Mountain	Labyrinth of bridges and cliffs; structurally precarious, perfect for contradictory rules and broken logic.
+18	Cataclysm (controlled collapse)	Frostgate Spire	Snow	Towering ice‑and‑steel metropolis—institutions and trade hub systematically breaking themselves apart.
+19	Reconstructing the Self	 Aurelion Veil	Forest	Memory is etched into this living‑wood city; a place to reassess identity in an environment that never forgets. (no voidwalker)
+20	Fall of Time (Oracle/Reliquary)	Bayou Nocturne	Swamp	City where past and present intertwine; canals, charms, and secrets—perfect for time recursion and destiny collapse. the characters reassess their identity and it is challenged with past and future inevitability.
+
+21	ACT VI - Fall of Existence (Dominion/Void)	Hollerforge Hollow	Mountain	Mining hollow as “reality’s foundry”; Dominion’s gauntlet as the last structured hub before the metaphysical melt into Void.

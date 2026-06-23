@@ -1,0 +1,545 @@
+timeline
+    title The Fracture Saga - ACT I - Chapters 1 to 4
+
+    section Chapter 1 - Awakening
+        TASK - Find the Inn (Meet Oren) :
+            ► ACQUIRED :
+                Narrator - You don't know how you got here.:
+			    Narrator - In one moment you and your compadres were in a bar knocking back a few µ.:
+			    Narrator - And the next, reality shifted around you.  You find yourself here with three of your friends missing.:
+			    Narrator - This place looks like chaos.  The streets are littered, buildings look looted, and people can be seen breaking out in fights.":
+                EVENT - player_character_join - begin_game_add_pc:
+                EVENT - player_character_join - begin_game_add_pc:
+                Narrator - A thuggish man in a black bandana and a leather jacket runs out to you from the alley.:
+                EVENT - create_npc - seth (None):
+                Seth - Ey! You there! Yeah, you look lost.:
+			    Seth - These streets aren't safe, especially for scrums like you.:
+			    Seth - You'll be safe inside though... As long as its not the µ or the Ṣ.:
+                Seth - You can get to the @inn if you need to put your head down... It's tuff out here!:
+                Narrator - It looks like your cash is gone. That thug must have stolen some of it when you weren't looking.:
+			    Narrator - You should get somewhere safe to check your things.  Most buildings are safe, except for the bars.:
+			    Narrator - Find a residence or business (î Î ï Ï), then press (i) to manage your party.:
+			    Narrator - Make sure to spend any power points you have to upgrade your stats and ensure your characters learn any abilities:
+			    Narrator - If you get low head to the @inn.:
+                Chock - Ooooooooh! I'm gonna find that guy and take him to pound town!:
+                EVENT - create_npc - oren (region_city_inn):
+                EVENT - create_npc - rook (region_city_shopitems):
+                EVENT - create_npc - diego (region_city_shopweapons):
+                EVENT - create_npc - brawn (region_city_shoparmor):
+                EVENT - set_npc_standing_text - rook ("You look like fresh meat for the grinder."):
+                EVENT - set_npc_standing_text - diego ("Information is the most valuable currency. Know where to look and who to ask."):
+                EVENT - set_npc_standing_text - brawn ("Quality armor is an investment in your survival. Don't skimp on your protection."):
+                Narrator - Chapter 1 - We do not begin by knowing where we are.  We begin by finding ourselves already there.:
+            ► COMPLETED :
+                Oren - Oh!, Hey there. You look like you're not from here like me. I'm Oren, just wandering and exploring. Not sure if it's reaality wandering me, or if I'm wandering reality. I seem to always find a way to the @inn. Every city has an @inn. If you ever intend to find the other side in another one, head to the ₨ to get you there.:
+                Kade - Somehow I think we're there.:
+                EVENT - unlock_npc_log:
+                EVENT - set_npc_standing_text - oren ("Why are you still here? .. Why am I still here? Where is here.?. What is here?.? ...Remember to go to the ₨... I remember her saying."):
+                EVENT - award_task - find_item_shop
+
+        TASK - Find Item Shop (Meet Rook) :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Rook - You're looking short on funds there my guy. I'm Rook, the bounty hunter. I'll tell ya what, I'll cut ya a deal. I have a bounty for a nearby bandit Seth's head. He's camped up in the outskirts nearby. Bring it back to me and I'll give ya some cash. Tell you what, I'll give you a little up front so you can get started. I recommend buying some Caffeine Shots and Pocket Salves.:
+                Poise - Oh I am down on that. Nobody can ever get enough caffeine. Let's Go!:
+                Chock - I've been waiting to hear somebody say I get paid to bust that guy up all day! Let's go get 'em!:
+                EVENT - award_money - 200:
+                EVENT - set_npc_standing_text - rook ("Bring him to me and I'll give you half the bounty. He's camped up in a hideout somewhere in the outskirts."):
+                EVENT - award_task - meet_seth
+
+        TASK - Meet Seth (Dungeon Encounter) :
+            ► ACQUIRED :
+                EVENT - create_dungeon - seth_hideout (region_open_area):
+            ► COMPLETED :
+                Seth - So Rook sent you to run me down? That guy's got it bad for me. This personal vendetta of his is really getting old. Well, you're here now. Let's see what you've got!:
+                Chock - You got it coming, Seth! We're taking you down!:
+                EVENT - award_task - defeat_seth
+
+        TASK - Defeat Seth (Boss Battle) :
+            ► ACQUIRED :
+                EVENT - begin_combat - seth_1 (boss_battle):
+            ► COMPLETED :
+                Seth - Ha!Ha! You guys are good. I don't intend to hang around for you to finish the job. See you later!:
+                Poise - That guy was fast!:
+                Moxie - Hahaha! Look at him run!:
+                EVENT - hide_npc - seth:
+                EVENT - award_task - report_to_rook
+
+        TASK - Report to Rook :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Rook - So ya managed to find him. He's pretty crafty, it's no doubt he got away. Still funny to hear he got his ass kicked. Tell you what, I'll give you half of what I intended. With all that cash you should head to the bar and get a µ.:
+                Kade - I wouldn't mind knocking back a few drinks!:
+                Chock - You know I'm beginning to like this place!:
+                EVENT - award_money - 400:
+                EVENT - hide_npc - rook:
+                EVENT - award_task - meet_tess_and_sam
+
+        TASK - Meet Tess (Bar) :
+            ► ACQUIRED :
+                EVENT - create_npc - tess (region_city_bar):
+                EVENT - create_npc - sam (region_city_bar):
+                EVENT - set_npc_standing_text - sam ("Those new arrivals look like they can handle themselves. Maybe they can help us out."):
+            ► COMPLETED :
+                Tess - Oooh! Here they are Sam. The ones Sylvi was talking about.:
+                Moxie - Hahaha! My reputation always preceeding me.:
+                Sam - Heard they went and busted up Seth pretty good for Rook. They could be useful.:
+                Chock - That guy had it coming. I knew the moment I saw him I wanted to punch him in the face.:
+                Tess - They definitely look like they can handle themselves. Tell you what guys, you help us out and we'll help you out. Head over and speak to Diego at the Æ. Tell him Tess and Sam sent you. He'll tell you what you need to know from there.:
+                Kade - I'm interested to find out what kind of cool gear this world has.:
+                EVENT - set_npc_standing_text - tess ("Diego'll be at the Æ. Tell him Tess and Sam sent you."):
+                EVENT - award_task - meet_diego:
+                EVENT - award_task - side_quest_get_logger_from_sam
+
+        TASK - Meet Sam for Logger:
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Sam - Tess mentioned you were helping out. If you're going to be dealing with all sorts of characters, you should have this.:
+                Sam - It's a Mnemonic Logger. It'll keep track of everyone you meet. Might help you separate the snakes from the saints.:
+                Sam - Just... try to stay out of trouble. This city has enough of it.:
+                EVENT - award_item - mnemonic_logger:
+                EVENT - unlock_npc_log:
+                Chock - A log? Good. Information is a weapon. Let's make sure ours is sharp.:
+                Kade - Fascinating. A device for cataloging social encounters. I wonder if it logs sarcasm levels.:
+                Kaera - This could be a blessing. Understanding who people are is the first step to helping them.:
+                Poise - A list of targets and allies. Efficient. I like it.:
+                Moxie - Ooh, a little black book! Does it have pictures? Let's see who we can annoy first.:
+                EVENT - set_npc_standing_text - sam ("I hope Diego has an update for us.")
+
+        TASK - Meet Diego (Weapon Shop) :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Diego - Hmmmmm! I can't say I've seen your faces before, and I've seen a lot of ugly faces. Those trouble makers Tess and Sam sent you? Interesting. I'm Diego. Ex-merc, glorified information salesman. Those girls asked me to track down a relic for them called The Grift Stone. I managed to track it to a black market dealer named Mira. She stays in a nearby city and likes to frequent the µ unloading shady shit to shady people. She won't give it up easy though. Talk to Brawn at the Armory and maybe pick up some ¥ while you're there. He's a real armor officionado, he'll most likely have something she'd be interested in.:
+                Chock - Wouldn't mind a peek at some armor, I could do with a little upgrade.:
+                Moxie - Oooh hoo hoooo!!! I wonder what interesting items Mira has for sale!:
+                EVENT - set_npc_standing_text - tess ("That makes sense, Brawn does deal with some specialized armors."):
+                EVENT - set_npc_standing_text - sam ("Hmmmmm... A relic dealer that frequents µ... Sounds like a dangerous place."):
+                EVENT - set_npc_standing_text - diego ("Brawn at the Armory might have something Mira wants. Go see him and maybe pick up some ¥ while you're there."):
+                EVENT - award_task - meet_brawn
+
+        TASK - Meet Brawn (Armor Shop) :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Brawn - Ho there! ... So Diego sent you? Ha! He said I have something for you to trade with Mira? As a matter of fact I have something she would love. You're going to have to do something for me first though. I'm pretty sure Seth jacked a pair of my ornate bracers. Head back to his hideout and see if you can find them in there.:
+                EVENT - set_npc_standing_text - tess ("Hahahaha! Seth's so much trouble. Come back after you give the bracers to Brawn. These updates are epic."):
+                EVENT - set_npc_standing_text - sam ("Those ornate bracers must be something special if Brawn wants them back so badly. Hope you find them quickly."):
+                EVENT - set_npc_standing_text - diego ("Still not sure what you're arrival here means. Maybe Mira will know things I don't with her deep connections in the black market."):
+                EVENT - set_npc_standing_text - brawn ("What are you standing around here for?"):
+                EVENT - award_task - deliver_ornate_bracers
+
+        TASK - Deliver Ornate Bracers to Brawn :
+            ► ACQUIRED :
+                EVENT - dungeon_add_treasure - seth_hideout (ornate_bracers, final_chamber):
+            ► COMPLETED :
+                Chock - You know these things don't look like they can take much of a hit.:
+                Brawn - Aha! you found them!!! Aren't they beautiful. Ok Mira will be interested in this cursed couplet I came across. She's in Boiling Bubble at the moment and loves to hang out at the bar. If you run into her give her the couplet for the Grift Stone... Remember to give her my regards.:
+                Moxie - I might be interested in it too?!? That thing looks powerful.:
+                EVENT - set_npc_standing_text - tess ("Oooooooh! That's a cute couplet..."):
+                EVENT - set_npc_standing_text - sam ("That couplet looks ancient. I wonder what powers it holds?"):
+                EVENT - set_npc_standing_text - diego ("Still not sure what you're arrival here means. Maybe Mira will know things I don't with her deep connections in the black market."):
+                EVENT - set_npc_standing_text - brawn ("Remember to give Mira my regards?"):
+                EVENT - remove_item - ornate_bracers:
+                EVENT - award_item - cursed_couplet:
+                EVENT - advance_chapter
+
+    section Chapter 2 - Black Market & Uncoupling
+        TASK - Deliver Cursed Couplet to Mira :
+            ► ACQUIRED :
+                EVENT - set_npc_standing_text - tess ("Find Mira in the city bar. She deals in rare and illegal artifacts."):
+                EVENT - set_npc_standing_text - sam ("Keep your nose clean. The city guard cracks down hard."):
+                EVENT - set_npc_standing_text - brawn ("If you ever find anything nice out there, you should bring it by and show it off."):
+                EVENT - set_npc_standing_text - diego ("You're better off avoiding trouble. Stay out of the black market dealings."):
+                EVENT - hide_npc - oren:
+                EVENT - create_npc - mira (region_city_bar):
+                EVENT - set_npc_met - mira:
+                EVENT - create_npc - leera (region_city_inn):
+                EVENT - set_npc_standing_text - leera ("Knowledge is the key to unbinding what is bound."):
+                EVENT - create_npc - juno (region_city_shopitems):
+                EVENT - set_npc_standing_text - juno ("You can be rich every day of your life and stand in one place. If you know how to play the odds, risk is just a lesson in patience."):
+                EVENT - create_npc - kess_thornwrite (region_city_shopweapons):
+                EVENT - set_npc_standing_text - kess_thornwrite ("Looking for something to take the edge off? I might have just the thing."):
+                Narrator - Chapter 2 - Contradiction is the root of all movement and life.:
+            ► COMPLETED :
+                Mira - Well now… you actually brought it. This cursed couplet is older than half the ruins in this region. Bound and sealed in this cursed form as it has been for so long. If you want the Grift Stone, you'll need to bring me something to uncouple it first. Go speak to Leera. She knows things even the ancients didn't fully understand.:
+                EVENT - set_npc_standing_text - mira ("words to the effect of k come back when the couplet is uncoupled"):
+                Chock - Finally, some action. Let's see what this cursed trinket actually does.:
+                Kade - Hmph. Smuggler's trinket. Hope it doesn't explode when I touch it.:
+                Moxie - Ohhh, dangerous curios. My favorite kind. Let me at it!:
+                Poise - Keep your distance. Objects with voices rarely mean well.:
+                Kaera - We should be careful. Some bindings are not meant to be broken lightly.:
+                EVENT - award_task - uncouple_couplet
+
+        TASK - Uncouple Couplet (Meet Leera) :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Leera - Oh… the couplet sings around you. Two voices trapped in one breath. Void and Existence. Absence and Presence. Chaos and order. Objects bound which have no place together. To uncouple them they must understand their very nature to each other once again. Return to Mira with this truth. She will know what must come next.:
+                EVENT - set_npc_standing_text - leera ("Return to Mira with this truth. She will know what must come next."):
+                Moxie - Paradoxes in jewelry? Delicious. I can almost taste the spells.:
+                Kaera - Void and Existence… such concepts demand reverence. We must proceed with respect.:
+                Kade - Riddles and metaphors. Great. Real helpful.:
+                EVENT - set_npc_standing_text - leera ("Return to Mira with this truth. She will know what must come next."):
+                EVENT - award_task - return_to_mira_after_leera
+
+        TASK - Return to Mira After Leera :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Mira - So Leera whispered her riddles at you. Void and Existence… Nature toward each other... Yes, that tracks. They've been dormant so long they must be reminded. You'll need someone who deals in risks and rare odds, Juno. Word is she recently acquired something interesting... Which I now share an interest in, the Resonance Shard:
+                EVENT - set_npc_standing_text - mira ("Find Juno. Word is she recently acquired something… interesting."):
+                EVENT - set_npc_standing_text - leera ("The couplet’s truth has been spoken. Your path now winds through risk and chance."):
+                EVENT - award_task - meet_juno
+
+        TASK - Meet Juno :
+            ► ACQUIRED :
+                EVENT - set_npc_standing_text - mira ("Juno's playing her games again. Bring her what she wants and don't get swindled."):
+            ► COMPLETED :
+                Juno - Mira sent you? That means trouble or profit. Usually both. Yes, I have what you're looking for, but I'm not giving it away for free. Kess owes me a concoction. Something volatile, something contraband. Bring it to me, and the shard is yours.:
+                Kade - A shard for a concoction? Classic black market barter. This should be entertaining.:
+                Moxie - A resonance shard! Oh my, oh my — the possibilities...:
+                EVENT - set_npc_standing_text - juno ("Bring me that concoction Kess owes me, and the shard is yours."):
+                EVENT - award_task - meet_kess_thornwrite
+
+        TASK - Meet Kess Thornwrite :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Kess - Juno wants *that* concoction? Oh stars… she's bold. I can brew it, sure, but I'm missing a key ingredient. I sent someone to fetch it from a nearby ruin… but they never came back. If you bring me the item, I'll finish the brew. Try not to die on me. I don't want that on my head.:
+                EVENT - set_npc_standing_text - kess_thornwrite ("Bring me the missing ingredient from the nearby ruin, and I'll finish the brew."):
+                EVENT - award_task - main_story_ch_2_deliver_rare_ingredient
+
+        TASK - Deliver Rare Ingredient  (kess_thornwrite):
+            ► ACQUIRED :
+                EVENT - create_dungeon - abandoned_ruin_ch2 (region_open_area):
+                EVENT - create_npc - the_demigorgon (None):
+                EVENT - award_task - meet_demigorgon
+            ► COMPLETED :
+                Kess - You found it! Perfect. Give me a moment... ... ... There. One dangerously potent concoction for Juno. Try not to inhale it. Or do. I'm not your mother.:
+                EVENT - remove_item - rare_ingredient_ch2:
+                Chock - That ruin had teeth. Good fight. Good pay if anyone's counting.:
+                Poise - The shadows there were wrong. I don't miss them.:
+                Kade - Found something useful. Also, something that made me itch in a new way.:
+                EVENT - set_npc_standing_text - kess_thornwrite ("Take the concoction to Juno. She's expecting it."):
+                EVENT - award_item - volatile_concoction_ch2:
+                EVENT - award_task - return_to_juno_after_kess
+
+        TASK - Meet Demigorgon :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                EVENT - player_character_join - ch2_add_pc:
+                EVENT - award_task - defeat_demigorgon
+
+        TASK - Defeat Demigorgon (Boss Battle) :
+            ► ACQUIRED :
+                EVENT - begin_combat - demigorgon_1 (boss_battle):
+            ► COMPLETED :
+                EVENT - hide_npc - the_demigorgon:
+                Chock - That thing hit like a freight. Keep your guard up — there might be more where it came from. I don't like how it bent the air around it. Feels... not natural.:
+                Moxie - Strange hum, teeth like carved stone — deliciously alien. Kess Thornwrite would want a sample of that residue. Dangerous, yes, but informative.:
+                Kade - Saw scorch marks and odd sigils. Someone's been experimenting with things they don't understand. Don't touch the residue. Bag it and report it to someone who can handle it safely.:
+                Kaera - That creature radiated a dark energy unlike anything I've seen. We must be cautious. Such forces can corrupt even the purest of hearts.:
+                Poise - The way it moved... unnatural. Like it was part shadow, part solid. We need to stay vigilant. There could be more lurking in the darkness.:
+                Chock - I still can't wrap my head around how we ended up here. One moment we were in our world celebrating, the next... this. This place has its own rules. We need to learn them fast if we're going to survive.:
+                Moxie - This place is falling apart, maybe our other friends are around too. Reality here is unstable. We need to find a way back before we get trapped.:
+                Kade - This place is chaos... fights breaking out everywhere. We need to stay sharp. These ruptures in reality... they might be our ticket home, if we can figure them out.:
+                Kaera - Know that the gods are here with us, even in this strange land.:
+                Poise - This world is unlike any I've seen. We need to adapt quickly.:
+                EVENT - award_item - demigorgon_tooth:
+                EVENT - award_item - rare_ingredient_ch2
+
+        TASK - Return to Juno After Kess (Deliver Concoction) :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Juno - Ahh… Kess actually delivered. Miracles do happen. Here. The resonance shard Leera spoke of. Handle it carefully. Take it back to Mira. She'll know how to use it.:
+                EVENT - set_npc_standing_text - juno ("Take the shard back to Mira. She'll know how to use it."):
+                EVENT - set_npc_standing_text - kess_thornwrite ("That ruin was dangerous. Be careful with what you bring back next time."):
+                EVENT - remove_item - volatile_concoction_ch2:
+                EVENT - award_item - resonance_shard_ch2:
+                EVENT - award_task - return_to_mira_for_decoupling
+
+        TASK - Return to Mira for Decoupling (Deliver Resonance Shard) :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Mira - You brought the shard. Good. Hold the couplet still… ... ... There. The curse is broken. The couplet is now two bracelets -The Bracelet of Void… and the Bracelet of Existence. As promised, here is the Grift Stone. You can take the hyperway back to Tess for a small fee.:
+                EVENT - remove_item - resonance_shard_ch2:
+                EVENT - remove_item - cursed_couplet:
+                EVENT - award_item - grift_stone:
+                Kaera - I feel… a shift. Good work. May whatever was bound find peace.:
+                Moxie - A pulse of violet light? Absolutely exquisite.:
+                Chock - Two bracelets, you say? Hopefully one of them packs a decent punch.:
+                Poise - We did the work. Let's see where this leads.:
+                Kade - Grift Stone secured. Now, back to Tess — and whatever mess follows.:
+                EVENT - set_npc_standing_text - mira ("The curse is broken. The couplet is now two bracelets -The Bracelet of Void… and the Bracelet of Existence."):
+                EVENT - set_npc_standing_text - leera ("The bindings are undone. May the freed spirits find peace."):
+                EVENT - set_npc_standing_text - juno ("Risk and chance have their rewards. Well done."):
+                EVENT - award_task - return_to_tess_with_grift_stone
+
+        TASK - Return to Tess with Grift Stone (Deliver Item) :
+            ► ACQUIRED :
+                EVENT - set_npc_standing_text - sam ("Tess is eager to see what you've brought back. Don't keep her waiting."):
+            ► COMPLETED :
+                Tess - You're back! And you actually got the Grift Stone? Damn… you guys are full of surprises. Listen, word's been spreading. Someone in Highsteeple Crossing showed up out of nowhere... like you did. If you're looking for answers, that's your next lead.:
+                EVENT - remove_item - grift_stone:
+                Chock - Another stranger showing up out of nowhere? Maybe we know them, Hahah! Hey if you ever need me again Tess, just holler.:
+                Moxie - Someone materialized 'like you did'? How fascinating. Let's stay sharp though. We never know who we're chasing... or from where? ooowoooooo.:
+                Kade - It's highly likely that all 6 of us ended up here. This is deeply curious. We must investigate further.:
+                Kaera - This is no coincidence. We must seek out this newcomer. Tess seems to think they are important. We should trust her judgment.:
+                Poise - The threads of fate are weaving a complex tapestry. Perhaps it is another of our friends from our own universe.:
+                EVENT - set_npc_standing_text - tess ("Thanks for helping with the Grift Stone. You actually have some talent."):
+                EVENT - set_npc_standing_text - sam ("Someone in a Highsteeple Crossing showed up out of nowhere… like you did. If you're looking for answers, that's your next lead."):
+                EVENT - advance_chapter
+
+    section Chapter 3 - Street Justice
+        TASK - Setup NPCs (Meet Talla Renn) :
+            ► ACQUIRED :
+                EVENT - create_npc - talla_renn (region_city_shoparmor):
+                EVENT - set_npc_met - talla_renn:
+                EVENT - show_npc - rook (region_city_shoparmor):
+                EVENT - set_npc_standing_text - rook ("Looking for someone tough? Talla Renn might have a job for you. She's always in need of reliable help to keep the streets safe."):
+                EVENT - show_npc - oren (region_city_inn):
+                EVENT - set_npc_standing_text - oren ("I've been having these strange dreams... or are they memories? I've seen you before. Have I been standing here this long? Is this here or was that there?? or when?"):
+                EVENT - create_npc - sylvi (region_city_shopitems):
+                EVENT - set_npc_standing_text - sylvi ("Heard you folks did some pretty wild things around here not long ago. People are still talking about that stunt you pulled at the old ruins! ... and you raised quite the fuss chasing down Seth."):
+                EVENT - create_character_npc - pending_character (region_city_bar):
+                EVENT - award_task - meet_character_4:
+                Narrator - Chapter 3 - As far as consciousness reaches backward… so far reaches identity.:
+            ► COMPLETED :
+                Talla - You're the ones everyone's been talking about. I could use some capable hands to help keep the peace around here. There's a bounty on a bandit named Seth. Bring him in, and I'll see what I can do to help your situation. Have a word with Rook about how to find him.:
+                Chock - Oh yeah!!! I have a thing for that guy. Let's get him! Bringing in bounties is right up my alley.:
+                Kaera - I hope this Seth fellow can be redeemed. Perhaps bringing him in will give us a chance to help him find a better path.:
+                EVENT - set_npc_standing_text - talla_renn ("I could use some capable hands to help keep the peace around here."):
+                EVENT - award_task - meet_rook_after_talla
+
+        SIDEQUEST - Meet Character 4 (Amnesiac Ally) :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                EVENT - initiate_dialog - pending_character_ch3_lost_memory:
+                (Pending) Chock - Where... am I? I feel like I should know this place, but it's all a blur.:
+			    (Pending) Chock - "My memories... they're slipping away. Who am I? Why am I here?:
+			    (Pending) Chock - I need to find answers. Maybe someone here can help me remember.  I just know I'm not from here.:
+			    (Pending) Kade - Ugh, my head... What is this place? I don't remember how I got here.:
+			    (Pending) Kade - Feels like my memories are being erased. Who the hell am I? And why can't I remember anything?:
+			    (Pending) Kade - I need to figure this out fast. Maybe someone around here knows something.  This place is weird.:
+			    (Pending) Moxie - This place... it's unfamiliar, yet strangely captivating. But why can't I remember how I got here?:
+			    (Pending) Moxie - My memories feel like they're fading away. Who am I? What is my purpose?:
+			    (Pending) Moxie - I need to find someone who can help me unlock these lost memories.  There's something important I'm missing.:                
+			    (Pending) Kaera - This place... it feels foreign, there is no peace here. But why can't I remember how I arrived?:
+			    (Pending) Kaera - My memories are slipping away like grains of sand. Who am I? What is my destiny?:
+			    (Pending) Kaera - I must find someone who can help me restore my lost memories.  I feel there's a greater purpose I'm meant to fulfill.:
+			    (Pending) Poise - This place... it's unfamiliar, yet there's a strange sense of purpose here. But why can't I remember how I got here?:
+			    (Pending) Poise - My memories feel fragmented, like pieces of a puzzle I can't quite solve. Who am I? What is my path?:
+			    (Pending) Poise - I need to find someone who can help me piece together these lost memories.  There's something important I'm meant to do.:
+                Chock - Don't worry, we'll figure this out... I got you.:
+                Kade - Yeah, yeah, we'll help you out. Just don't expect me to go easy on you.:
+                Moxie - Hahaha! that must be rough. I can think of a thousand ways to remind you.:
+                Kaera - We will help you find your way. Together, we can overcome any obstacle.:
+                Poise - You're not alone. I will meditate long and hard on this.:
+                Chock - You should follow us around for a while, it'll all come back.:
+                Kade - Just stick with us, you'll remember in no time.:
+                Moxie - I'm gonna remind you, and remind you, and remind you.:
+                Kaera - Stay close to us, and your memories will return.:
+                Poise - Follow our lead, and your memories will come back to you.:
+                EVENT - initiate_dialog - pending_character_ch3_good_where_im_at:
+                (Pending) Chock - Thanks, but I think I'll stay here for now. I need to figure things out on my own.:
+                (Pending) Kade - Yeah! Not gonna happen though. Fuckin random.:
+                (Pending) Moxie - Haha, no rush! I'll just chill here and think things over.:
+                (Pending) Kaera - I'll stay here for the moment. I trust that the right path will reveal itself in time.:
+                (Pending) Poise - I'll stay here for now. I must meditate to gather my thoughts and plan my next move.:
+                EVENT - award_task - deliver_memory_tonic
+
+        TASK - Meet Rook After Talla :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Kade - If you have a bead on Seth, I can use my aerial drone to track him down.:
+                Rook - Last I heard, he was holed up in an old hideout out in the open area. Be careful though, he's got a few new tricks up his sleeve.:
+                EVENT - award_task - bring_in_seth
+
+        TASK - Bring in Seth :
+            ► ACQUIRED :
+                EVENT - create_dungeon - seth_hideout_ch3 (region_open_area):
+            ► COMPLETED :
+                Seth - You again! Hey I'm sorry about all the trouble I gave you before. I heard about how you guys appeared here out of nowhere. Weird stuff. Listen, I might be able to help you with the person in the bar's memory problem, I'm pretty sure he's one of you. There's a noble's mansion not far from here. They've got some rare herbs that could help with memory restoration. I can get you in there, but you'll need to do something for me in return. Report to Rook that you scarred me off.:
+                EVENT - hide_npc - seth:
+                EVENT - award_task - main_story_ch_3_deliver_scribe_mint:
+                EVENT - award_task - report_to_rook
+                
+        TASK - Deliver Scribe Mint:
+            ► ACQUIRED :
+                EVENT - create_dungeon - nobles_mansion_ch3 (region_open_area):
+                EVENT - lock_dungeon - nobles_mansion_ch3:
+                EVENT - set_dungeon_locked_text - nobles_mansion_ch3 ("Seth -If you want me to get you in here to find your ingredients, you better report to rook first."):
+                EVENT - set_npc_standing_text - seth ("Heyyyyy, you made it. The mint should be somewhere around here."):
+                EVENT - award_task - deliver_scribe_mint_to_kess:
+                EVENT - award_task - meet_relic_guardian
+            ► COMPLETED :
+                Kess - Ah, scribe mint! Excellent choice. This herb is known for its ability to help with memory retention and recall. I'll prepare a special concoction for you using this. Now, I also need scarred thyme for a more potent brew. It's a bit harder to come by.:
+                EVENT - remove_item - scribe_mint_ch3:
+                EVENT - award_task - deliver_scarred_thyme_to_kess
+
+        TASK - Deliver Scarred Thyme to Kess :
+            ► ACQUIRED :
+                (After delivering scribe mint):
+            ► COMPLETED :
+                Kess - Scarred thyme! Perfect! With both the scribe mint and scarred thyme, I can create a powerful memory tonic for you. ... ... Here you go, anybody who drinks this will remember every last detail... It won't be nice, but it'll work.:
+                EVENT - remove_item - scarred_thyme_ch3:
+                EVENT - award_item - memory_tonic_ch3
+
+        TASK - Report to Rook (Seth Escaped) :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Rook - Well fuck! He got away again... You're actually not a very good bounty hunter at all. Listen, I can't be your goto for information buddy... If you want to get in the know you really need to talk to people. Sylvi Emberlane is an amazing source of gossip. You should check around town and see what you can find.:
+                EVENT - set_npc_standing_text - sylvi ("I've never seen that person at the bar before, They're about as mysterious as you."):
+                EVENT - unlock_dungeon - nobles_mansion_ch3
+
+
+        TASK - Meet Relic Guardian :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                EVENT - award_task - defeat_relic_guardian
+
+        TASK - Defeat Relic Guardian (Boss Battle) :
+            ► ACQUIRED :
+                EVENT - begin_combat - relic_guardian_1 (boss_battle):
+            ► COMPLETED :
+                EVENT - hide_npc - relic_guardian:
+                EVENT - hide_npc - seth:
+                EVENT - dungeon_add_npc - seth (nobles_mansion_ch3, final_chamber):
+                EVENT - award_item - scribe_mint:
+                Seth - Woooo, with that thing gone, you should loot up this place has a lot of nice stuff.:
+                EVENT - set_npc_standing_text - seth ("Thanks for dealing with that guardian.")
+
+        TASK - Deliver Memory Tonic (Restore Amnesiac) :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Chock - Look what we found! This tonic might help restore your memories.:
+                Kade - Check it out. This thing might help you remember who you are.:
+                Moxie - Whewwww! Down this thing and it'll all come flooding back.:
+                Kaera - I have faith in this remedy.:
+                Poise - An elixer to open the mind. I hope it brings you back to us.:
+                EVENT - remove_item - memory_tonic_ch3:
+                EVENT - hide_npc - pending_character:
+                EVENT - add_pending_character:
+                Kaera - Oh! That's, ummmmm, nice... eheh!:
+                Chock - HAHAHAHA! Bit ruder than usual, but it's good to have you back.:
+                EVENT - set_npc_standing_text - sylvi ("Word is, rifts have been opening up in Ironveil Foundry. People are saying strange things are coming through."):
+                EVENT - advance_chapter
+
+    section Chapter 4 - Fracture Point
+        TASK - Meet Velka (Inn) :
+            ► ACQUIRED :
+                EVENT - create_npc - velka (region_city_inn):
+                EVENT - set_npc_met - velka:
+                EVENT - create_npc - drin (region_city_bar):
+                EVENT - set_npc_standing_text - drin ("Reality's been acting weird lately. I don't know what's going on, but it's freaking me out."):
+                EVENT - create_npc - kirn (region_city_shopitems):
+                EVENT - set_npc_standing_text - kirn ("I've been trying to avoid the open areas. Something's been warping reality around me. I don't know what it is, but it's been messing with the places I go."):
+                EVENT - create_npc - marlo_finch (region_city_other1):
+                EVENT - set_npc_standing_text - marlo_finch ("You look like you've been through a lot. If you need help navigating the city, I'm your guy. I keep track of all the weird happenings around here. If something's going on, I probably know about it."):
+                Narrator - Chapter 4 - Some things only become real the moment they break.:
+            ► COMPLETED :
+                Velka - The maps are wrong. They're shifting under my hands. Arcane lines are rewriting themselves — something is twisting the city's shape. You should talk to Drin. I heard him telling stories of his illusions becoming real. Normally I would just laugh at the though of a street illusion con artist suddenly being shocked by his illusions manifesting... ...but if it's true, then that's a whole new level of weird. You can find him in the bar.:
+                Chock - If the maps are fighting back, something's provoking them. Let's move. I want to see what's bending reality.:
+                Kaera - A disturbance like this… it feels alive. We should hurry. The city is calling for help.:
+                Kade - Great. Reality's glitching again. Let's go before the whole place desyncs.:
+                EVENT - set_npc_standing_text - velka ("Drin felt the distortion first. Find him in the bar."):
+                EVENT - award_task - meet_drin
+
+        TASK - Meet Drin (Bar) :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Drin - You feel that? The air's got edges. My illusions are acting on their own, becoming real without my say‑so. It happened when Kirn showed up with that strange bracelet. I don't know what it is, but it's warping reality around her. She's hanging out at the ₨, you should check it out.:
+                EVENT - set_npc_standing_text - drin ("Kirn's carrying something dangerous. Find her in the shop."):
+                EVENT - award_task - meet_kirn
+
+        TASK - Meet Kirn (Shop Items) :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Kirn - Holy smokes you scared me for a second there. You're not from around here, are you? I'm Kirn. I deliver things. I know every nook and cranny of this city, but I've been trying to steer clear of the open areas lately. I picked up a delivery route that shouldn't exist — streets folding into each other. This bracelet… it warped reality around me. I'm not keeping it. I don't know where it came from, but it's been messing with the places I go. Here, take it. I'm not couriering this thing anymore.:
+                EVENT - set_npc_standing_text - kirn ("I don't know where this bracelet came from, but it's been messing with the places I go. Here, take it. I'm not couriering this thing anymore."):
+                EVENT - award_item - bracelet_of_void:
+                EVENT - create_npc - catalyst (None):
+                EVENT - create_npc - final_character (None):
+                EVENT - create_dungeon - rift_dungeon_ch4 (region_city_open_area):
+                EVENT - set_player_in_dungeon - rift_dungeon_ch4 (entrance):
+                EVENT - dungeon_add_npc - final_character (rift_dungeon_ch4, corridor):
+                EVENT - award_task - meet_final_character:
+                EVENT - award_task - meet_catalyst
+
+        TASK - Meet Final Character (Inside Rift) :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                EVENT - player_character_join - final_character_ch4_intro:
+                EVENT - hide_npc - final_character:
+                EVENT - player_character_join - final_character_ch4_join
+
+        TASK - Meet Catalyst (Dungeon Boss Intro) :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Catalyst - This fracture remembers what your world has forgotten. Order. Silence. Eternity. I am the Catalyst. The fracture's herald and harbinger. You cannot stop the collapse, but you can beg for a swift end.:
+                EVENT - award_task - defeat_catalyst
+
+        TASK - Defeat Catalyst (Boss Fight) :
+            ► ACQUIRED :
+                EVENT - begin_combat - catalyst_1 (boss_battle):
+            ► COMPLETED :
+                EVENT - hide_npc - catalyst:
+                EVENT - remove_player_from_dungeon - rift_dungeon_ch4:
+                EVENT - complete_intro_story:
+                EVENT - initiate_dialog - catalyst_defeated_world_shaking_event:
+                Chock - The world is shaking! I can feel it in my bones!:
+                Kaera - I can feel something different now. The world HAS changed... It feels ... bigger!:
+                Poise - The energy that poured out when Catalyst fell... it's unlike anything I've ever felt. It's as if the very fabric of reality had been torn open, and came pouring out.:
+                EVENT - award_task - after_rift
+
+        TASK - Meet Marlo Finch After Rift:
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Marlo - Hey hold up a second there, I'm Marlo Finch. Arcane Auditor to the Grand Council. That bracelet you've been carrying... That bracelet is a ledger of collapse, I'm going to need to audit it before it unravels reality. After you took it from Kirn she told me what happened. How you dissapeared into a rift, then not long after, the rift collapsed and shook the whole city. Waters rose where there were none before. The world is changed. I need to take that bracelet off your hands and examine it before it causes any more damage.:
+                EVENT - remove_item - bracelet_of_void:
+                Marlo - This little thing has opened rifts in nearby wilds surrounding many cities. You should make a point of checking the µ of wilds surrounding cities. There are local hero's up to the challenge of helping you out. One of these rifts may help you find a way home. In any case, while you are here, I need you to help me find the Bracelet of Existence, the other half of this nasty thing. Go back to Mira and find out where the other bracelet went. These things need to be put back together.:
+                EVENT - award_task - return_to_mira
+
+        TASK - Return to Mira (Outro) :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Mira - You say Marlo Finch confiscated the Bracelet of Void and is now looking for the Bracelet of Existence? I sold that off days ago. You should visit Kirn again, he might be able to dig up information on the courier that carried it.:
+                EVENT - award_task - deliver_rift_dust_to_kess:
+                EVENT - award_task - deliver_unstable_relic_to_mira:
+                EVENT - advance_chapter
+
+        TASK - Deliver Rift Dust to Kess :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Kess - Ooooh! Rift Dust! Now *this* is the good stuff. You can practically taste the dimensional instability… don’t actually taste it though. Give me a moment — I know exactly what to make with this. *He mixes, shakes, ignites, and grins far too wide.* Here! A Boreal Clasp. Stabilizes the body when reality gets wobbly.:
+                EVENT - remove_item - rift_dust:
+                EVENT - award_item - boreal_clasp:
+                EVENT - set_npc_standing_text - kess_thornwrite ("If you find more rift‑touched materials, bring them my way. Reality‑bending reagents are my specialty.")
+
+        TASK - Deliver Unstable Relic to Mira :
+            ► ACQUIRED :
+                (No acquired events):
+            ► COMPLETED :
+                Mira - Well now… this is a dangerous little treasure. Unstable, humming, and probably illegal in three different dimensions. Exactly my kind of artifact. Here — take this Mirethread Pendant. It's woven from the same kind of energy. Should keep you from unraveling.:
+                EVENT - remove_item - unstable_relic:
+                EVENT - award_item - mirethread_pendant:
+                EVENT - set_npc_standing_text - mira ("If you come across more relics like that, don't hesitate. I always pay well for dangerous curios.")

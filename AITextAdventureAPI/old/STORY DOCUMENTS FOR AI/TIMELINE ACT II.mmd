@@ -1,0 +1,306 @@
+timeline
+    title The Fracture Saga - ACT II - Chapters 5 to 7
+
+    section Chapter 5 - Riftwaters Crossing
+        TASK - Return to Kirn - Tracking Signal:
+            > ACQUIRED:
+                EVENT - set_npc_standing_text - velka ("The maps are shifting. Something is twisting the city's shape."):
+                EVENT - set_npc_standing_text - drin ("My illusions are becoming real. It's that bracelet Kirn has."):
+                EVENT - set_npc_standing_text - marlo_finch ("That bracelet is a ledger of collapse. I need to audit it."):
+                EVENT - set_npc_standing_text - sylvi ("Looking for a way across the Riftwaters? Not many can make that journey."):
+                Narrator - Chapter 5 - Life can only be understood backward... but it must be lived forward.:
+            > COMPLETED:
+                Kirn - You're back... good. I was hoping the signal wasn't a fluke. I placed a tracking sigil on the Bracelet of Existence. After the fracture, the sigil went dead... until now. It's faint, but it's there... and it's coming from somewhere across the Riftwaters. Velka can trace the signal with her maps. Go speak to her.:
+                Moxie - Ooooh, a ghost signal. I hope it screams.:
+                Chock - If it screams, I punch it. Simple.:
+                Kade - Please don't punch the signal. Or do. I'm curious what happens.:
+                EVENT - set_npc_standing_text - kirn ("Just take the bracelet. I don't want it anymore. Talk to Velka, she knows things."):
+                EVENT - award_task - meet_velka
+
+        TASK - Meet Velka - Map of Signal Location:
+            > ACQUIRED:
+                (no acquired task):
+            > COMPLETED:
+                Velka - The world has changed more than you know. Continents have split, merged, and rewritten themselves. The signal you're chasing lies beyond the Riftwaters... storms that tear reality apart. I can give you the map of the signal's location, but teleportation is the only way to reach it. The seas are too unstable.:
+                EVENT - award_item - tracking_map:
+                Kaera - Then we must find someone who can cross storms without crossing the sea.:
+                Kirn - Sylvi Emberlane might know someone.:
+                Poise - Storms that tear reality apart... sounds like a warm-up.:
+                EVENT - set_npc_standing_text - velka ("The signal is across the Riftwaters. You'll need more than a map to get there. Find Sylvi Emberlane."):
+                EVENT - award_task - speak_to_sylvi_emberlane
+
+        TASK - Meet Sylvi Emberlane - NPC:
+            > ACQUIRED:
+                (no acquired task):
+            > COMPLETED:
+                Sylvi - Teleportation across the Riftwaters? Oh honey... that's not something you ask just anyone. But I might know someone who knows someone. There's a woman. A Riftcaller. She doesn't walk through doors -- she walks through reflections. Name's Astra Wynn. She won't talk to strangers. But she owes me a favor. Bring me my Stormglass Ember, and I'll call her.:
+                Moxie - A reflection-walker? Delicious.:
+                Chock - Why does everything in this world bite, hum, or explode?:
+                Sylvi - Because it's fun, sweetheart.:
+                EVENT - set_npc_standing_text - sylvi ("Bring me my Stormglass Ember from Stormglass Alley, and I'll summon Astra Wynn for you."):
+                EVENT - award_task - meet_static_wraiths
+
+        TASK - Meet Static Wraiths - Item:
+            > ACQUIRED:
+                EVENT - create_npc - static_wraith (stormglass_alley):
+                EVENT - create_dungeon - stormglass_alley (region_city_open_area):
+            > COMPLETED:
+                Chock - These things are annoying. Like angry lightbulbs.:
+                Moxie - They hum in the wrong key. I hate it.:
+                Kade - They're literally made of static. Of course they hum.:
+                Poise - Focus. They're fast.:
+                EVENT - award_task - defeat_static_wraiths
+
+        TASK - Defeat Static Wraiths - Item:
+            > ACQUIRED:
+                EVENT - begin_combat - static_wraith_mob (stormglass_alley):
+            > COMPLETED:
+                EVENT - award_item - stormglass_ember:
+                EVENT - award_task - return_to_sylvi
+
+        TASK - Deliver Stormglass Ember to Sylvi - NPC:
+            > ACQUIRED:
+                (no acquired task):
+            > COMPLETED:
+                Sylvi - You actually found it. Good. Try not to drop it -- it bites.:
+                Narrator - Sylvi whispers into the ember. It fractures into mirrored shards. The air ripples.:
+                Moxie - Ohhh that's pretty. Do it again.:
+                Sylvi - If I do it again, reality might fold in half.:
+                Chock - ...Do it again.:
+                EVENT - set_npc_standing_text - sylvi ("Astra Wynn will be here shortly. Don't wander off."):
+                EVENT - remove_item - stormglass_ember:
+                EVENT - award_task - meet_astra_wynn
+
+        TASK - Meet Astra Wynn - Riftcaller NPC:
+            > ACQUIRED:
+                EVENT - create_npc - astra_wynn (city_number_3_region_city_shopitems):
+            > COMPLETED:
+                Astra - Sylvi. You called.:
+                Sylvi - They need a Riftcall. Across the Riftwaters.:
+                Astra - Dangerous. Reckless. I like it. I can anchor to the signal you're chasing. No amplifiers needed -- but the jump won't be gentle.:
+                Kade - Gentle hasn't been on the menu for a while.:
+                Kaera - We trust your guidance.:
+                Astra - Oh, don't. I barely trust myself.:
+                Astra - Stand still. The Riftwaters distort identity. Try not to think about who you were. I will anchor you to the signal's echo. Where you land... depends on how well reality cooperates.:
+                Moxie - Reality never cooperates. That's why it's fun.:
+                Poise - Quiet your mind. Or at least try.:
+                Narrator - The world folds. The sky bends. Reality snaps sideways.:
+                EVENT - create_dungeon - rift_dungeon_outskirts (region_open_area):
+                EVENT - set_player_in_dungeon - rift_dungeon_outskirts (final_chamber):
+                Chock - Teleported straight into a fight. Figures.:
+                Moxie - The rift welcomed us with open teeth.:
+                Kade - I think my spine inverted for a second.:
+                Kaera - Stay close. This place feels... wrong.:
+                EVENT - show_npc - astra_wynn (city_number_5_region_city_shopitems):
+                EVENT - award_task - mmet_astra_wynn_go_back:
+                EVENT - award_task - meet_dorian_pikefall
+
+        TASK - Meet Astra Wynn Go Back NPC:
+            > ACQUIRED:
+                EVENT - remove_task - meet_astra_wynn_go_forward:
+            > COMPLETED:
+                Astra Wynn - Hold on tight. This is going to be a bumpy ride.:
+                EVENT - show_npc - astra_wynn (city_number_3_region_city_shopitems):
+                EVENT - set_player_location - city_number_3_region_city_shopitems:
+                EVENT - award_task - meet_astra_wynn_go_forward
+
+        TASK - Meet Astra Wynn Go Forward NPC:
+            > ACQUIRED:
+                EVENT - remove_task - meet_astra_wynn_go_back:
+            > COMPLETED:
+                Astra Wynn - Here we go. Don't forget to scream if you see something scary.:
+                EVENT - show_npc - astra_wynn (city_number_5_region_city_shopitems):
+                EVENT - set_player_location - city_number_5_region_city_shopitems:
+                EVENT - award_task - mmet_astra_wynn_go_back
+
+        TASK - Meet Dorian Pikefall - Collector NPC:
+            > ACQUIRED:
+                EVENT - create_npc - dorian_pikefall (region_city_shopitems):
+            > COMPLETED:
+                Dorian - Oh thank the stars! Actual people! You're not thieves, are you? Please tell me you're not here to rob me too...:
+                Kade - Honestly, would we tell you if we were?:
+                Dorian - I- I'm Dorian Pikefall. Collector. Traveler. Victim of extremely poor timing.:
+                Moxie - He's cute when he's terrified.:
+                Chock - He looks like he's always terrified.:
+                Kaera - Please be gentle with him. He's clearly been through something.:
+                Dorian - I had it... The Bracelet of Existence. I was transporting it for a client. Then it was stolen from me near the breach site. Some shimmering distortion... like a tear in the air. It just took it.:
+                Poise - His pulse is erratic. He's telling the truth.:
+                Dorian - The storms... they're getting worse. The sky cracked open last night. I heard voices in the thunder.:
+                Kaera - The land cries out. Something is deeply wrong here.:
+                Chock - Good. I was getting bored.:
+                Moxie - Voices in the thunder? Ooooh, maybe they're hiring.:
+                Kade - Or maybe it's the sound of the world dying. Again.:
+                Poise - Stay alert. The air tastes wrong. Like metal and memory.:
+                Dorian - If you're looking for answers about that bracelet... you should talk to Seth. He's usually at the bar in Bleakwatch Outpost. Sketchy type, but he knows things.:
+                EVENT - award_item - dorians_sketch_of_distortion:
+                EVENT - set_npc_standing_text - dorian_pikefall - "I saw something strange near the breach site. A shimmering distortion carrying something that glowed like your bracelet. Seth at Bleakwatch Outpost might know more.":
+                EVENT - advance_chapter
+    
+    section Chapter 6 - The Riftlands Unveiled
+        TASK - Meet Seth - Resistance Contact NPC:
+            > ACQUIRED:
+                EVENT - show_npc - seth (region_city_bar):
+                Narrator - Chapter 6 - Life, left to itself, tends toward chaos... unless something holds it together.:
+            > COMPLETED:
+                Seth - Oh hey! You made it. Didn't think you'd get across the Riftwaters in one piece. Look... I didn't tell you everything. I'm part of a group. A resistance. We're trying to stop the collapse.:
+                Chock - You doubted us? I'm offended.:
+                Poise - You? In a resistance?:
+                Seth - Yeah yeah, laugh it up. I'm useful sometimes.:
+                Moxie - Define "useful.":
+                Seth - ...I know people.:
+                Kaera - Seth, if you're trying to help, we're grateful. Even if your methods are... unconventional.:
+                Seth - See? Kaera gets it.:
+                Chock - She's being polite. Don't get excited.:
+                Seth - I have a contact who can help you investigate the breach. Meet me at the city outskirts bar.:
+                EVENT - set_npc_standing_text - seth ("I have a contact who can help you investigate the breach. Meet me at the city outskirts bar."):
+                EVENT - award_task - meet_seth_local_contact
+
+        TASK - Meet Seth's Local Contact - NPC:
+            > ACQUIRED:
+                EVENT - create_npc - resistance_contact (region_bar):
+            > COMPLETED:
+                Contact - You're the outsiders Seth told me about. Good. We need hands. Something is stirring in the wilds. Something that's twisting the land.:
+                Kade - Great. More unstable terrain. My favorite.:
+                Chock - Point me at whatever needs punching.:
+                Kaera - Let's proceed carefully. The land is wounded.:
+                Contact - ...You people are strange.:
+                Moxie - Thank you. We try.:
+                EVENT - set_npc_standing_text - resistance_contact ("Clear the breach site. Something crawled out of it, and we need it stopped."):
+                EVENT - award_task - aid_in_resistance_operation
+
+        TASK - Meet Riftspawn Aberrant - Dungeon:
+            > ACQUIRED:
+                EVENT - create_npc - riftspawn_aberrant (None):
+                EVENT - create_dungeon - riftland_breach_site (region_open_area):
+            > COMPLETED:
+                Aberrant - distorted screeching:
+                Kade - Oh that's disgusting. I love it.:
+                Chock - It's got too many limbs. I'm taking some off.:
+                Moxie - Look at it bend reality! Adorable.:
+                Poise - Focus. It's predicting our movements.:
+                Kaera - Its aura is fractured... like it's in pain.:
+                EVENT - award_task - defeat_riftspawn_aberrant
+
+        Task - Defeat Riftspawn Aberrant - Combat:
+            > ACQUIRED:
+                EVENT - begin_combat - riftspawn_aberrant_1 (boss_battle):
+            > COMPLETED:
+                EVENT - hide_npc - riftspawn_aberrant:
+                Kaera - This creature... it was shaped by the same force that warped the Riftwaters.:
+                Moxie - And now it's shaped like paste.:
+                Chock - Good fight. Weird fight. But good.:
+                Kade - I want a sample. Nobody touch anything.:
+                Poise - Too late. Moxie touched it.:
+                Moxie - You know I can't resist touching things.:
+                EVENT - award_item - riftland_stabilizer_core:
+                EVENT - award_task - report_findings_to_seth
+
+        TASK - Report Findings to Seth - NPC:
+            > ACQUIRED:
+                (no acquired task):
+            > COMPLETED:
+                Seth - So it's true... the Riftlands are destabilizing faster than we thought. And if the Bracelet of Existence is here... someone is using it.:
+                Moxie - Or breaking it.:
+                Chock - Or wearing it as jewelry.:
+                Kade - Or weaponizing it.:
+                Poise - Or losing control of it.:
+                Kaera - Whatever the case, we must find it.:
+                Seth - Either way... we're gonna need my airship.:
+                Chock - You have an airship?:
+                Seth - ...Yes?:
+                Moxie - Oh this is going to be FUN.:
+                Seth - Alright, cards on the table. My crew and I? We're trying to stop the collapse. The rifts, the storms, the distortions... they're all connected.:
+                Poise - We suspected as much. Patterns don't break themselves. Someone breaks them.:
+                Moxie - Ooooh, a secret resistance? Seth, you should've led with that. I love a dramatic reveal.:
+                Chock - Hah! I knew you were hiding something. You've got that shifty look.:
+                Kaera - If your intentions are righteous, then we stand with you. But deception breeds danger.:
+                Kade - Just tell us the plan before Chock punches the wrong person again.:
+                Seth - The Riftlands are unstable. Too unstable. If we try to fly without stabilizing the region... the airship will tear itself apart.:
+                Kade - So we fix the region. Great. Add "world maintenance" to our job list.:
+                Moxie - If the airship explodes mid-flight, I call dibs on haunting Seth.:
+                Seth - That Riftland Stabilizer Core looks like it may be useful in strengthing the Rustwing against these storms.  Let me take it off your hands to make a few upgrades.:
+                Poise - A machine cannot run on broken parts. Neither can a world.:
+                EVENT - remove_item - riftland_stabilizer_core:
+                Seth - There are seven local resistance members. Each one is holds things together in their local region. Help them, and the land stabilizes. Ignore them, and we all die horribly. You can find them in city outskirt bars.:
+                Moxie - Motivating. Nothing like imminent doom to get the blood pumping.:
+                Chock - Seven heroes? Sounds like seven fights. I'm in.:
+                Kaera - These guardians must be under great strain. We should aid them swiftly.:
+                Kade - Let's just hope they're competent. I'm tired of cleaning up after amateurs.:
+                Seth - I'm not taking off until all seven are handled. You want to find that bracelet? Earn it.:
+                Moxie - Ugh, homework. Fine.:
+                Chock - Seven? Easy. I'll do eight just to show off.:
+                EVENT - set_npc_standing_text - seth ("I'll prepare the airship. But we need to stabilize the region first."):
+                EVENT - advance_chapter
+
+    section Chapter 7 - Seth's Airship & The Requirement
+        TASK - CompleteRegionalQuests - Gate:
+            > ACQUIRED:
+                EVENT - create_npc - lyren (region_city_inn):
+                EVENT - award_task - meet_lyren:
+                Narrator - Chapter 7 - A world is not healed by isolated will, but by many working as one.:
+            > COMPLETED:
+                EVENT - award_task - meet_seth_to_prepare_airship_for_departure
+
+        TASK - Meet Lyren - Resistance Contact NPC:
+            > ACQUIRED:
+                (no acquired task):
+            > COMPLETED:
+                Lyren - (softly, eyes distant) The land... it aches. Not just the ground. The hearts walking upon it. I can feel every fracture like a wound that never closed.:
+                Kaera - You speak as if the world itself is alive. As if it is suffering.:
+                Lyren - It is. And it grows worse with every passing day. Seth believes the airship can carry us forward... but a machine alone cannot mend what is broken. We need anchors. Pieces of what once held meaning.:
+                Moxie - Oooh, cryptic *and* poetic. I like her already.:
+                Chock - Skip the poetry. What do you need?:
+                Lyren - (small, gentle smile) A Fragrant Hibiscus... said to bloom only where hope once refused to die. And an Ancient Relic from the old ruin -- something that still remembers what the world was before the fractures.:
+                Lyren - Bring them to me. They may help us stabilize the region long enough for Seth to prepare the Rustwing.:
+                Poise - (nodding quietly) Symbols have power. We will find them.:
+                Kade - Great. Treasure hunt for sentimental value. My favorite.:
+                EVENT - set_npc_standing_text - lyren ("The land is breaking down faster than we can fix it. Help stabilize the region before Seth can prepare the airship for departure."):
+                EVENT - dungeon_add_treasure - fragrant_hibiscus (seth_hideout_ch3 - final_chamber):
+                EVENT - dungeon_add_treasure - ancient_relic (abandoned_ruin_ch2 - final_chamber):
+                EVENT - award_task - deliver_fragrant_hibiscus_to_lyren
+
+        TASK - Deliver Fragrant Hibiscus to Lyren - Item:
+            > ACQUIRED:
+                (no acquired task):
+            > COMPLETED:
+                Lyren - (taking the hibiscus carefully, closing her eyes as she breathes in its scent):
+                Lyren - ...It's still alive. Even after everything... it kept its fragrance. Like a small act of defiance.:
+                Lyren - (softly, almost to herself) These were the first flowers my mother planted after... I thought they'd all gone.:
+                Kaera - (gently) Then this one still carries her hope.:
+                Lyren - (nodding slowly) That's what I needed. Not just the flower itself...:
+                Lyren - but proof that something can still remember what it was supposed to be. Even when the world tries to forget.:
+                Moxie - (grinning) You really do turn everything into poetry, don't you?:
+                Lyren - (looking at him with quiet intensity) Everything broken still holds its original shape somewhere inside.:
+                Lyren - 6If we forget that... then the Fracture has already won.:
+                EVENT - remove_item - fragrant_hibiscus:
+                EVENT - award_task - deliver_ancient_relic_to_lyren
+
+
+        TASK - Deliver Ancient Relic to Lyren - Item:
+            > ACQUIRED:
+                (no acquired task):
+            > COMPLETED:
+                Lyren - (holding the relic with both hands, voice barely above a whisper) This one remembers... before the fractures. Before fear became the only constant.:
+                Poise - Will it be enough?:
+                Lyren - Enough to heal the world? It will take all of us choosing to stand together.:
+                Kaera - Then that is what we will do.:
+                Chock - Damn right. I didn't come this far to watch everything fall apart.:
+                Moxie - Group hug? No? Too soon?:
+                Kade - Let's not get carried away. But... she's right. Isolated efforts won't cut it anymore.:
+                Lyren - (softly) Thank you. All of you. I will come with you, I cannot sit by while the world burns.:
+                EVENT - remove_item - ancient_relic:
+                EVENT - hide_npc - lyren:
+                EVENT - character_join - lyren
+
+        TASK - Meet Seth to Prepare Airship for Departure - Event:
+            > ACQUIRED:
+                (no acquired task):
+            > COMPLETED:
+                Seth - Alright! She's ready! Everyone aboard!:
+                Chock - Finally! Let's fly this bucket!:
+                Moxie - If we crash, I'm blaming Seth AND physics.:
+                Kaera - May the winds guide us safely.:
+                Poise - Eyes open. Worlds don't shift quietly.:
+                Kade - Strap in. Or don't. Your funeral.:
+                EVENT - remove_task - meet_astra_wynn_go_back:
+                EVENT - advance_chapter

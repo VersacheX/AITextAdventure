@@ -1,0 +1,448 @@
+timeline
+    title The Fracture Saga - ACT IV - Chapters 14 to 15
+
+    section Chapter 14 - Stigma
+        TASK - Meet Tess - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - ravel (region_city_bar):
+                EVENT - create_npc - hask (region_city_shoparmor):
+                EVENT - show_npc - tess (region_city_bar):
+                EVENT - show_npc - sam (region_city_bar):
+                EVENT - create_npc - caius (city_number_15_region_city_inn):
+                EVENT - create_npc - jett (city_number_15_region_city_shopitems):
+                EVENT - create_npc - elian (city_number_15_region_city_bar):
+                EVENT - create_dungeon - the_citadel (city_number_15_region_city_open_area)
+                EVENT - lock_dungeon - the_citadel:
+                EVENT - set_dungeon_locked_text - the_citadel ("The Citadel is locked tight. Only one who conforms may enter."):
+                EVENT - set_npc_standing_text - sam ("You don't have to choose a side, Tess. Just be yourself."):
+                EVENT - set_npc_standing_text - caius ("The city is divided. Choose your side, or be left out."):
+                EVENT - set_npc_standing_text - jett ("The red side is for those who embrace their past. The blue side is for those who reject it. Which will you choose?"):
+                EVENT - set_npc_standing_text - elian ("The city is a stage. The red side plays the role of memory, the blue side plays the role of reputation. Which will you perform?"):
+                EVENT - set_npc_standing_text - ravel ("I refuse to choose. I won't let them define me."):
+                EVENT - set_npc_standing_text - hask ("Order requires unity. Unity requires a single, authentic self. Choose wisely."):
+                Narrator - Chapter 14 - You are judged for what you were... and punished for not becoming what you’re supposed to be.:
+            ► COMPLETED:
+                Tess - Look at this. A whole city built on a binary choice. Memory or Reputation.:
+                Tess - It's the oldest con in the book - limit the options to control the outcome.:
+                Sam - The system is designed to enforce self-policing. They're not just choosing a mask; they're choosing a cage.:
+                Sam - The real power isn't in the masks, but in the act of choosing one.:
+                Tess - Exactly! And everyone's so committed to the performance. I wonder who's selling the tickets to this show.:
+                Kaera - You see this as a performance? These people seem trapped.:
+                Tess - Of course it's a performance! The best traps always are. They make you think you're choosing your own identity, but the house always wins.:
+                Sam - The woman over there—Ravel. She's the only variable not accounted for in the system. She's not playing.:
+                Sam - That makes her either a threat or an opportunity. We should start with her.:
+                Moxie - (Grinning) Finally, someone speaking my language. Let's go poke the system.:                
+                EVENT - set_npc_standing_text - tess ("This whole city is a rigged game. I love it. Let's find out who's dealing."):
+                EVENT - set_npc_standing_text - sam ("The binary choice is a fallacy. The true power lies with those who set the terms. We need to find them."):
+                EVENT - award_task - meet_ravel
+
+        TASK - Meet Ravel - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Ravel - ...You're not from here. Your eyes aren't split down the middle.:
+                Ravel - This city wants you to choose - Red for Memory, Blue for Reputation. Both are prisons.:
+                Kaera - (gently) Forcing people to pick a side like this… it breaks something inside them.:
+                Moxie - (grinning) Classic false dichotomy. Create two bad options, make everyone fight over which cage feels better.:
+                Kade - (arms crossed) And the ones who refuse to choose become the enemy. Efficient social control.:
+                Ravel - (A flicker of respect in her eyes) You see it. Most don't. They're too afraid of being left out.:
+                Ravel - I tried wearing both masks. Nearly lost myself. Now I wear nothing... and they hate me for it.:
+                Kaera - It takes strength to stand whole when the world demands you fracture.:
+                Lyren - (softly) Everything broken still carries pieces of what it was meant to be… You don’t have to choose their broken version of you.:
+                Ravel - (Looking toward the armor shop) Hask, the enforcer, watches me. He calls me an error.:
+                Ravel - He says a new leader is coming to 'cleanse' the city. Stigma.:
+                Tess - (A sharp, dangerous grin) "Cleanse." That's a fun word for a hostile takeover.:
+                Tess - So, Stigma creates the problem, lets it fester, and then rides in as the savior. It's a beautiful grift. I almost respect it.:
+                Thorn - (low growl) Sounds like another predator wearing a savior’s skin.:
+                EVENT - set_npc_standing_text - ravel ("Hask thinks order is about appearances. He's wrong. It's about being whole."):
+                EVENT - set_npc_standing_text - sam ("Ravel's refusal to choose is a threat to the system. She's a wild card that could disrupt everything."):
+                EVENT = set_npc_standing_text - tess ("Ravel's not playing by the rules. She's a wildcard. I like her."):
+                EVENT - award_task - Meet Hask
+
+        TASK - Meet Hask - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Hask - You've been speaking with the dissenter, Ravel.:
+                Hask - I saw you. Her refusal to choose is a crack in the foundation of this city.:
+                Chock - She seemed more put-together than anyone else we've met here.:
+                Hask - She is an error. And errors must be corrected.:
+                Hask - True unity requires a single, authentic self - nothing less.:
+                Hask - No messy contradictions. No defiance.:
+                Hask - A new leader is coming. Someone who understands that real order demands purity.:
+                Hask - She will cleanse this city of its pathetic division.:
+                Kaera - (calm but firm) Forcing people into one shape is not unity. It is tyranny wearing a mask of order.:
+                Poise - (quiet, dangerous calm) A blade that cuts away everything that doesn't fit eventually leaves nothing but dust.:
+                Moxie - (smirking) Funny. The more you talk about "purity," the more you sound like you're terrified of anything real.:
+                Kade - Your system is fragile. One unapproved thought and it all collapses. That's not strength. That's brittle.:
+                Lyren - (soft but resolute) Broken things can still be beautiful. Forcing them to be "perfect" only makes the fractures deeper.:
+                Chock - (stepping forward, cracking his knuckles) You want unity? Try earning it instead of demanding it at gunpoint.:
+                EVENT - set_npc_standing_text - hask ("Stigma will bring true unity. The division ends with her."):
+                EVENT - create_npc - stigma (region_city_bar):
+                EVENT - award_task - meet_stigma
+
+        TASK - Meet Stigma - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Stigma - (stepping forward with a warm, radiant smile that somehow feels both kind and dangerous):
+                Stigma - Hask speaks the truth, though he lacks poetry.:
+                Stigma - You've sought out the cracks in this city. Good. It shows you're looking for something real.:
+                Stigma - (gesturing gracefully to the divided streets outside):
+                Stigma - Most people who arrive here quickly pick a color - red or blue - and disappear into it.:
+                Stigma - But you... you resist. You question. You intrigue me.:
+                Kaera - (wary but polite) Who are you?:
+                Stigma - (soft laugh, eyes sparkling) I am Stigma. And I am building something better than this fractured place.:
+                Stigma - A family. A home. One not bound by the cages of memory or the performance of reputation.:                
+                Moxie - (grinning) A cult leader with style. I’m listening.:
+                Kade - (arms crossed, skeptical) A noble goal. But how exactly do you plan to build this "family"?:
+                Stigma - (leaning in slightly, voice warm and intimate) By showing people there are worse prisons than the ones they already know.:
+                Stigma - The city of Tidekin Cove, to the south, is a monument to false performance - ruled by a tyrant named Edict who demands perfect compliance.:
+                Stigma - Go there. See it with your own eyes. Breathe their air. Then return to me, and you will be ready to understand what I’m truly offering.:                
+                Kaera - You want us to fly to another city just to prove a point?:
+                Stigma - (smiling gently) I want you to prove you’re not afraid to look into the abyss. Caius at the inn there will be waiting for you.:
+                Stigma - Find him. Observe. Then come back to me.:
+                Stigma - (her smile deepens with quiet intensity) I think you’ll like what you see... or rather, what you finally stop pretending not to see.:                
+                EVENT - set_npc_standing_text - stigma ("Tidekin Cove is a test. See the lies, and then we can talk about the truth."):
+                EVENT - set_npc_standing_text - ravel ("Stigma... she's offering belonging. But at what cost?"):
+                EVENT - set_npc_standing_text - hask ("Stigma will bring true unity. The division ends with her."):
+                EVENT - set_npc_standing_text - tess ("She seems so sure... maybe picking a side isn't so bad if it's with her."):
+                EVENT - set_npc_standing_text - sam ("I don't trust her. Something about that smile feels too perfect."):
+                EVENT - set_npc_standing_text - jett ("Stigma talks about a new family... but we've heard promises like that before."):
+                EVENT - set_npc_standing_text - elian ("A new leader promising to end the masks... or just give us prettier ones?"):
+                EVENT - award_task - meet_caius_in_tidekin
+
+        TASK - Meet Caius in Tidekin - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Caius - You're the ones she sent. Stigma's new favorites.:
+                Caius - I can see it in your eyes... that hopeful little spark she gives everyone.:
+                Caius - You've seen this place. You've breathed the air. That's all she wanted.:
+                Caius - Now go back. Tell her what you saw. Tell her the system is perfect.:                
+                Moxie - Perfect? This place is a high-strung nightmare. Everyone's smiling like their face is stapled in place.:
+                Caius - (leaning in closer, whispering urgently) Exactly. And Stigma wants to "fix" it by burning it all down and replacing it with her own version.:
+                Caius - Edict is cold, controlling, and obsessed with order... but at least his rules are clear.:
+                Caius - Stigma? She gets inside your head. She makes you believe you're broken unless you belong to her 'family.' She's not saving anyone. She's collecting them.:                
+                Kaera - (frowning) You're saying she's no better than Edict?:
+                Caius - (shaking his head) She's worse. Edict demands performance. Stigma demands your soul.:
+                Caius - She'll smile while she rewrites who you are. I've seen what happens to people who fully drink her poison... they stop being people.:                
+                Kade - (coldly) So we've been played.:
+                Chock - (grunting) Great. Another manipulator pretending to be the solution.:
+                Poise - Then the real question is, which poison do we choose... or do we burn both?:                
+                Caius - (whispering) Just get out while you still can. Tell her whatever she wants to hear.:
+                Caius - Before Edict realizes you're here... and before Stigma decides you're too useful to let go.:                
+                EVENT - set_npc_standing_text - caius ("Go back to Stigma. Tell her you understand. Before Edict understands you're here."):
+                EVENT - set_npc_standing_text - jett ("Word travels fast. You went to Tidekin Cove... came back looking like you saw something ugly. Stigma’s ‘family’ isn’t sounding so friendly anymore, is it?"):
+                EVENT - set_npc_standing_text - elian ("You returned from Tidekin Cove quieter than when you left. Whatever you saw there has shaken your faith in Stigma’s promises."):
+                EVENT - set_npc_standing_text - ravel ("Your faces say you didn’t like what you found. Maybe you’re starting to see through her."):
+                EVENT - set_npc_standing_text - hask ("You've returned from Tidekin Cove. If You saw the rot there and still stand with Stigma, then You are truly ready for the cleansing."):
+                EVENT - set_npc_standing_text - sam ("Something in You eyes changed. I don’t trust Stigma’s smile anymore."):
+                EVENT - set_npc_standing_text - tess ("You just got back from Tidekin Cove... You look like You saw behind the curtain. I still want to believe Stigma can fix things... but I’m starting to wonder."):
+                EVENT - award_task - return_to_stigma
+
+        TASK - Return to Stigma - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Stigma - (eyes lighting up) You’re back. And you have the stink of Edict’s city on you. Good. Tell me what did you see?:
+                Stigma - The forced smiles? The hollow performances? That is the enemy. Not just Edict, but the very idea of him.:                
+                Kaera - (voice heavy) We saw fear wearing a mask of perfection. But we also saw something else.:
+                Kade - (cold, direct) We saw another manipulator. One who smiles while she rewrites people from the inside.:
+                Moxie - (no longer grinning) You talk about freedom and family, but everything you do is about control. You just hide it better than he does.:                
+                Stigma - Control? I offer belonging. I offer healing.:
+                Stigma - I offer a place where you don’t have to choose between painful memory and empty performance.:
+                Stigma - You felt it in Tidekin Cove, didn’t you? The suffocating weight of expectation. I can free you from all of that.:                
+                Chock - By making us choose *you* instead? By turning us into another one of your perfect little masks?:
+                Poise - You prey on people’s fear of being incomplete. That’s not salvation. That’s predation.:
+                Lyren - You speak of family... but families don’t demand you erase parts of yourself to belong.:                
+                Stigma - (her warm smile finally cracks, revealing something colder underneath):
+                Stigma - So that’s how it is.:
+                Stigma - Even after everything... you still cling to your broken little selves.:
+                Stigma - (voice shifting, now laced with venom):
+                Stigma - Then I was wrong about you. You’re not ready to be saved.:
+                Stigma - You’re just more garbage waiting to be thrown away.:                
+                Kade - We’re done being your tools.:
+                Chock - Time to end this.:
+                EVENT - award_task - defeat_stigma_in_tidekin
+
+        TASK - defeat_stigma_in_tidekin - MOB:
+            ► ACQUIRED:
+                EVENT - begin_combat - stigma_boss_battle_1 (boss_battle):
+            ► COMPLETED:
+                Narrator - Stigma’s form flickers and shatters under the final blow. The warm, magnetic aura she projected collapses into something cold and hollow.:
+                Narrator - For a moment, her true face is visible — desperate, furious, and deeply afraid.:
+                Narrator - Then her body fractures like glass, dissolving into threads of pink and violet light that scatter into the wind.:                
+                Stigma - (gasping, voice breaking) You... fools... I was trying to save you from becoming nothing...:
+                Stigma - (laughing bitterly as her form unravels) Fine. Run back to Edict and his cold little kingdom of rules. See how long that lasts.:
+                Stigma - (voice fading into an echo) You’ll come crawling back... when the masks start to feel comfortable again...:                
+                Narrator - The last traces of Stigma’s presence vanish. The air feels suddenly heavier, as if a false warmth has been stripped away, leaving only raw truth behind.:                
+                Kaera - She wasn’t saving anyone. She was collecting broken people... and making them more broken. Turning their pain into chains she could hold.:
+                Kaera - I wanted to believe someone could offer real belonging in all this chaos... but not like that.:                
+                Moxie - Cult leaders are always the same. They just dress it up nicer. “Join my family.” “Let me fix you.” Same poison, prettier bottle.:
+                Moxie - At least now we know what she really was — a pretty parasite.:                
+                Kade - We’ve been played from the start. She created the division, then positioned herself as the only solution. Classic controlled opposition.:
+                Kade - Edict might be a tyrant, but at least his control is honest. Stigma wanted to own who we are.:                
+                Chock - (cracking his knuckles, voice low and angry) Talking about unity while trying to erase everything that makes someone themselves...:
+                Chock - Yeah. I’ve had enough of her “family.”:
+                Chock - Time to find the bastard in the Citadel. Let’s see if he’s any better.:                
+                Poise - (quiet, steady) She fed on fear of being incomplete. That kind of hunger doesn’t die easily.:
+                Poise - Even if she escaped, her ideas may still linger here.:                
+                Lyren - Everything she touched still carries the echo of what it was meant to be... but she tried to silence those echoes. That’s the real crime.:
+                Lyren - We carry real connection. Not the version she wanted to force on us.:                
+                Thorn - (low growl) Another predator wearing a savior’s skin. Good riddance.:
+                Nia - (voice tight) She made belonging feel like safety... but it was just another cage with better lighting.:                
+                Kade - We’ve seen both sides of this sickness. Time to face the one still sitting on the throne.:
+                Chock - Edict’s next. Let’s end this properly.:
+                EVENT - hide_npc - stigma:
+                EVENT - advance_chapter
+
+    section Chapter 15 - Pageant & Edict
+        TASK - Meet Caius - NPC:
+            ► ACQUIRED:
+                Narrator - Chapter 15 - If you perform long enough... you forget there was ever a real you.:
+            ► COMPLETED:
+                Caius - You came back? Are you insane? Stigma’s 'great cleansing' is a massacre in the making.:
+                Caius - She’s not saving this city - she’s going to burn it down and rebuild it in her image.
+                Caius - She talks about family and freedom, but she’s just collecting broken people. Edict is cold and controlling...:
+                Caius - but at least his rules are honest. Stigma gets inside your head.:
+                Moxie - So we’ve been played.:
+                Kaera - Then the real enemy might not be Edict alone.:
+                Caius - If you want to stop this before it explodes, you need to reach Edict.:
+                Caius - But he’s locked in the Citadel. The only one who can get you close is Pageant - her master of ceremonies.:
+                Caius - She runs the underground nightclub 'The Velvet Veil.' Find her.:
+                Caius - But be careful... her mask never slips, but something rotten always leaks through.:                
+                EVENT - set_npc_standing_text - caius ("Pageant holds the key to Edict’s inner sanctum. But trust nothing that smiles too perfectly here."):
+                EVENT - award_task - meet_pageant
+
+        TASK - Meet Pageant - NPC (Nightclub Dungeon):
+            ► ACQUIRED:
+                EVENT - create_npc - pageant (None):
+                EVENT - create_dungeon - velvet_veil_nightclub (region_city_open_area):
+            ► COMPLETED:
+                Narrator - The Velvet Veil is a pulsing den of lights, mirrors, and forced ecstasy.:
+                Narrator - At the center stage stands Pageant - a figure in a flawless, ever-smiling full-face mask.:                
+                Pageant - Welcome, darlings~ New performers sent by our mutual friend? How delightful.:
+                Pageant - (tilting her head, mask reflecting distorted versions of the party):
+                Pageant - Edict demands perfection. Stigma demands devotion.:
+                Pageant - Me? I simply ask that you *perform* beautifully.:
+                Moxie - That mask is doing a lot of heavy lifting. Something tells me the face underneath isn’t nearly as pretty.:
+                Pageant - (laughing, but the laugh cracks slightly) Clever girl. Most people never notice the seams.:
+                Pageant - Edict respects a well-made mask. Stigma wants to become the mask. I... I just enjoy wearing them.:
+                Pageant - If you truly wish an audience with Edict, prove you can perform under pressure.
+                Pageant - Enter the inner stage. Survive my little show. Then I’ll open the way.:
+                EVENT - award_task - defeat_pageant
+
+        TASK - defeat_pageant - MOB (Nightclub Dungeon):
+            ► ACQUIRED:
+                EVENT - begin_combat - pageant_boss_battle_1 (boss_battle):
+            ► COMPLETED:
+                Narrator - As the battle rages, the mask begins to crack, revealing glimpses of something desperate and broken beneath the surface.:                
+                Pageant - (voice cracking, still trying to maintain the facade) You... you’re not supposed to see this side of me...:
+                Pageant - (laughing bitterly as she falters) I just wanted to be admired... I just wanted to be loved...:
+                Narrator - The mask shatters completely. For a brief moment, Pageant’s real face is visible - hollow-eyed, exhausted, and terrified of being unseen.:                
+                Pageant - (whispering, voice distorting) Without the performance... who am I? Just... nothing...:
+                Narrator - Pageant's form begins to dissolve into shimmering fragments of light and shattered glass:
+                Pageant -At least... they clapped...:                
+                Narrator - Pageant’s body fractures into countless reflective shards that spin wildly before fading into nothingness, leaving only the echo of forced applause ringing in the empty nightclub.:
+                Kaera - She was so afraid of being ordinary... She turned admiration into a cage and locked herself inside it.:
+                Kaera - No one should have to perform just to feel worthy of existing.:                
+                Moxie - (low whistle) Damn. Even her breakdown was theatrical. That’s commitment.:
+                Moxie - Too bad the audience is walking out.:                
+                Kade - She weaponized belonging until it consumed her. The mask wasn’t armor — it was the prison.:
+                Kade - Without it, there was nothing left to sustain her.:                
+                Chock - (grunting) All that flash and performance... and she still couldn’t stand on her own.:
+                Chock - Pathetic. At least she went down swinging.:                
+                Lyren - (gently, almost mourning) Everything she touched still carries the echo of what it was meant to be...
+                Lyren - but she silenced those echoes behind perfection.:
+                Lyren - I hope wherever she went, she finally finds peace without needing applause.:                
+                Thorn - (low growl) Another predator wearing beauty as a weapon. Good riddance.:
+                EVENT - set_npc_standing_text - caius ("That mask was her prison. She was so afraid of being ordinary that she locked herself in a cage of admiration.  You should take that thing to Elian"):
+                EVENT - set_npc_standing_text - jett ("Pageant’s mask was a masterpiece of deception. It’s a shame it couldn’t protect her from the truth."):
+                EVENT - hide_npc - pageant:
+                EVENT - award_item - pageant_mask:
+                EVENT - award_task - meet_elian
+
+        TASK - Meet Elian:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Elian - You... you actually broke Pageant’s stage?:
+                Elian - Edict watches everything through his screens. But Pageant was the gatekeeper.:
+                Elian - You just punched a hole in the performance.:
+                Kaera - Then help us reach him. Before more people are forced to wear masks they don’t believe in.:                
+                Moxie - Finally, someone who gets it. All that glitter and forced smiles... and for what? A perfect performance no one actually feels.:
+                Moxie - Her mask cracking was the most honest thing she ever did.:                
+                Kade - She wasn’t just a performer. She was infrastructure. The smiling face of the machine.:
+                Kade - Taking her down creates a weakness in their system. We should exploit it quickly.:                
+                Elian - You’re right... all of you.:
+                Elian - Jett in the Heap might know a back way into the Citadel.:
+                Elian - They salvage everything Edict throws away... including secrets.:
+                Elian - But be warned - once you stand before Edict, there’s no more performing. He sees through everything.:                
+                Kaera - We won’t wear his masks either.:                
+                EVENT - set_npc_standing_text - elian ("The stage is cracking. Maybe this time the truth gets a chance to speak."):
+                EVENT - set_npc_standing_text - caius ("Pageant’s fall proves even the gatekeepers can break. The Citadel is vulnerable now."):
+                EVENT - award_task - meet_jett
+
+        TASK - Meet Jett:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Jett - So you’re the ones who smashed Pageant’s little stage. Bold. Stupid. I like it.:
+                Jett - Edict throws away anything that doesn’t fit his perfect system. We live in what he discards.:
+                Jett - That mask you’re carrying... Pageant’s mask. Yeah, that’ll get you into the Citadel.:
+                Kade - (holding up the cracked mask) Figured as much. It’s a key, isn’t it?:
+                Moxie - (grinning) Nothing like wearing your enemy’s face to crash their party.:
+                Jett - (chuckling darkly) Exactly. The guards and scanners will read it as legitimate. For a while, anyway.:
+                Chock - Good. I’m done with these games. Let’s hit them where it hurts.:
+                Jett - Once you’re inside… you’re on your own. Edict doesn’t do second chances. Hell, he barely does warnings.:
+                Jett - Most people who go in there are still performing, even when they think they’re rebelling.:
+                Lyren - (softly) Then we won’t perform. We’ll simply be.:
+                Kaera - No masks. No cages. Just us.:
+                Jett - (nodding slowly) Ballsy. I almost hope you crazy bastards pull it off.:
+                EVENT - unlock_dungeon - the_citadel:
+                EVENT - set_npc_standing_text - jett ("The Heap remembers what the Citadel wants forgotten."):
+                EVENT - award_task - Meet Ravel For Warden Hale:
+                EVENT - award_task - meet_edict
+
+        TASK - Meet Ravel For Warden Hale:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Ravel - You broke Pageant's stage... you actually broke it. I never thought I'd see the day.:
+                Ravel - You're not just fighting the masks. You're fighting the whole rotten system. But there are others... others who resisted long before I did.:
+                Kaera - Who? We need to find anyone who stands against Edict.:
+                Ravel - Warden Hale. He was a keeper of the old ways, a man who believed in duty and memory, not performance.:
+                Ravel - Edict couldn't stand him. Hale was a living reminder that this city had a soul before it had a script.:
+                Ravel - So Edict locked him away. Made an example of him.:
+                Poise - A man who values duty over performance. Where is he?:
+                Ravel - I don't know. The prison is a black site. But Jett... Jett, in the Heap. They see everything the Citadel throws away.:
+                Ravel - If anyone knows where Edict hides his inconvenient truths, it's them.:
+                EVENT - award_task - Meet Jett For Warden Hale
+
+        TASK - Meet Jett For Warden Hale:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Jett - Warden Hale. Now that's a name I haven't heard in a while. The old guard.:
+                Jett - The last man in this city who actually gave a damn about remembering.:
+                Kade - We need to find him. Ravel sent us.:
+                Jett - (chuckles, a dry, scraping sound) Ravel's all heart, no plan. Hale's in Edict's little black box, the 'Correctional Facility.':
+                Jett - It's where he sends people who are too real for his stage.:
+                Jett - You want to find it, you need to find someone who listens to the whispers, not the broadcasts.:
+                Chock - Then who? Stop wasting our time.:
+                Jett - The poet. Elian. He hears things. The guards talk, they get drunk, they let things slip.:
+                Jett - Elian writes it all down between the lines of his poems. Go talk to him. He'll know how to find the prison.:
+                EVENT - award_task - Meet Elian For Warden Hale
+
+        TASK - Meet Elian For Warden Hale:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Elian - You're looking for Warden Hale? You're trying to pull a memory from a city that burns them?:
+                Elian - I hear whispers... The guards from the prison, they come here to drink.:
+                Elian - They talk about their warden, a man named Hask. He's the key.:
+                Moxie - Hask? The walking rulebook we met earlier? He's not going to just tell us where the prison is.:
+                Elian - No. But he's proud. He's a true believer in Edict's system. He sees dissent as a personal insult.:
+                Elian - He despises Ravel. He thinks her defiance is a stain on the city's perfection.:
+                Elian - If you go to him... and you praise her... praise her strength, her wholeness... it will break his composure.:
+                Elian - His pride will make him boast about the place where such 'errors' are corrected.:
+                EVENT - award_task - Meet Hask for Warden Hale
+
+        TASK - Meet Hask for Warden Hale:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Hask - (eyes narrow as you approach) You again. Still consorting with the city's cracks?:
+                Kaera - We spoke with Ravel. She has a strength you don't see often here. A wholeness.:
+                Hask - 'Wholeness'? She is a flaw. A chaotic variable in a perfect equation. Her 'strength' is a disease.:
+                Chock - She stands for something real. Unlike the puppets in this city.:
+                Hask - (voice rising, losing its cold authority) Real? She is an error! And we have a place for errors!:
+                Hask - A place where they are corrected, where the flaws are ground down until only compliance remains!:
+                Hask - You think her defiance is admirable? Let me tell you what we do with admirable defiance.:
+                Hask - We lock it in the dark, in the Correctional Facility in the outskirts, and we let it rot until it begs for a mask to wear!:
+                Kade - (quietly, to the group) Got it.:
+                Hask - (realizes he's said too much, his face hardening) Get out of my sight. You are all contaminated.:
+                EVENT - award_task - Meet Prison Warden
+
+        TASK - Meet Prison Warden:
+            ► ACQUIRED:
+                EVENT - create_npc - prison_warden (None):
+                EVENT - create_dungeon - edicts_prison (region_city_open_area):
+            ► COMPLETED:
+                Prison Warden - Unauthorized entry. Compliance rating - zero. You are here for the anomaly, Hale.:
+                Kaera - He's a man, not an anomaly. Let him go.:
+                Prison Warden - He is a deviation from the required state. He represents a past that has been deemed non-compliant.:
+                Prison Warden - He will be corrected or erased. That is the protocol.:
+                Chock - We're not asking. We're telling you. Step aside.:
+                Prison Warden - Negative. Access to the asset is denied. Initiating containment protocol.:
+                EVENT - award_task - Defeat Prison Warden
+
+        TASK - Defeat Prison Warden:
+            ► ACQUIRED:
+                EVENT - begin_combat - prison_warden_boss_battle (boss_battle):
+            ► COMPLETED:
+                Narrator - With a final, grinding screech of metal, the hulking warden collapses. The air, thick with the hum of containment fields, goes silent.:
+                Narrator - A heavy door slides open, revealing a cell. Inside, Warden Hale looks up, his face etched with exhaustion but his eyes holding a core of unbroken dignity.:
+                Warden Hale - (voice raspy but firm) You... you came. I recorded your arrival in the city. A new variable. I had hoped... but did not expect.:
+                Warden Hale - Edict's obsession with 'perfection' is a sickness. He seeks to erase not just our flaws, but our history. Our very identity. He believes a world without messy memories is a world without pain.:
+                Kaera - He's wrong. A world without memory is a world without a soul.:
+                Warden Hale - (nods slowly, gathering his strength) Precisely. Thank you. Now, we must leave. Edict will know the protocol has been breached. He will know his most valuable prisoner is free.:
+                EVENT - hide_npc - prison_warden:
+                EVENT - character_join - warden_hale
+
+        TASK - Meet Edict - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - edict (the_sanctimony):
+            ► COMPLETED:
+                Narrator - Deep in the Citadel, Edict sits upon a throne of monitors and ledgers — a withered, rigid man wired into the heart of the city’s control system.:                
+                Edict - Unscheduled arrivals. Your compliance rating is... concerning.:
+                Stigma - (stepping out from the shadows behind Edict, smiling coldly):
+                Stigma - They’ve come further than I expected. Still clinging to their messy little selves.:               
+                Pageant - (tilting her head as she follows from the shadows, voice sweet but cracked):
+                Pageant - And they brought my mask back. How thoughtful. Did you miss me, darlings?:
+                Kaera - You two are working together? After everything?:                
+                Edict - We have... an understanding. She handles inspiration. I handle structure.:
+                Stigma - (turning her gaze on Kaera) Look at you. Still playing caretaker.:
+                Stigma - You heal everyone else because you’re terrified of facing how broken *you* feel inside.:
+                Pageant - (laughing lightly, mask reflecting distorted versions of the party) Moxie... Darling...:
+                Pageant - With all that chaos and wit, deep down you’re still performing for attention, aren’t you? Just like me.:
+                Pageant - Without an audience, you’re nothing.:
+                Edict - (staring directly at Kade and Chock) Kade. You build systems because you cannot trust people.:
+                Edict - And Chock... you demand honor from everyone while hiding how much you fear becoming the tyrant you hate.:
+                Stigma - (voice dripping with false warmth) Join us. We can give you what you truly want. Belonging. Purpose. A role that finally fits.:
+                Chock - (stepping forward, fists clenched) I’ve heard enough of your poison. You don’t offer belonging. You offer chains.:
+                Moxie - (smirking, but eyes sharp) Cute. You’re all just scared little things hiding behind your favorite masks.:
+                Moxie - We’ve seen better performances.:
+                Kade - Your “unity” is just different flavors of control. We reject both.:
+                Lyren - (soft but steady) You can’t force people to be whole by breaking them first.:
+                Kaera - (voice firm, protective) We choose our own path. No more cages.:
+                Edict - (voice flat and final) Enough talk. If you reject our vision, then you are simply another variable to be removed.:
+                Stigma - (smile turning predatory) Shall we show them what real unity looks like?:
+                Pageant - Time for the final act, darlings~:
+                EVENT - award_task - defeat_pageant_edict_stigma
+
+        TASK - Defeat Pageant, Edict, and Stigma - MOB:
+            ► ACQUIRED:
+                EVENT - begin_combat - pageant_edict_stigma_1 (boss_battle):
+            ► COMPLETED:
+                Narrator - With a final, discordant shriek, the three figures shatter.:
+                Narrator - The throne of monitors explodes, and the Citadel's oppressive hum dies into an unnerving silence.:
+                Edict - (A ghostly whisper from the collapsing machinery) You... fools... You don't know what you've done...:
+                EVENT - hide_npc - edict:
+                Narrator - A low, gut-wrenching groan echoes not from the Citadel, but from the world itself. The ground trembles violently.:
+                Kaera - The collapse... it's not just the city! It's everything!:
+                Narrator - A catastrophic event cascade begins. The oceans of the world boil away in an instant, leaving behind a dry, barren seabed.:
+                Narrator - The Rustwing, once docked, is now beached and broken miles from any remaining settlement.:
+                EVENT - remove_ocean:
+                Narrator - Reality warps one last time, ripping the party from the collapsing island and hurling them through a void of static and dying light.:
+                Moxie - I HATE TELEPORTATION!:
+                Kade - WHERE IS IT SENDING US?!:
+                Narrator - The party crashes into a misty, silent forest. Thornshade Hamlet. They are stranded. The world's water is gone.:
+                EVENT - set_player_location - city_number_16_region_open_area:
+                Poise - We need to find shelter. This forest feels... wrong. The air is thick with meaninglessness.:
+                Moxie - Ugh. From neon nightmares to sad‑fog forest. Can we get ONE location that isn’t trying to kill the vibe or my spine?:
+                Chock - ...All that noise, all those masks… and now this? Quiet’s worse. Feels like the world’s holding its breath.:
+                Ripple - ...No tides. No pull. The world’s heartbeat is gone.:
+                Vek - Stay sharp. Quiet places hide loud problems.:
+                EVENT - advance_chapter

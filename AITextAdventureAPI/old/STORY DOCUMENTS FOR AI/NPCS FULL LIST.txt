@@ -1,0 +1,2307 @@
+##### MAIN CHARACTERS
+
+PLAYER_NPCS = [
+    {
+        "npc_id": "technique",
+        "name": "Chock",
+        "description": "A skilled warrior known for his brutal force and unwavering discipline. Chock is rugged, ornery, and sometimes rude, but his heart is in the right place. He seeks to master his enemies through sheer strength and tactical prowess. He is calm under pressure and values honor above all else.",
+		"theme_song": "Hero (instrumental), skillet | Orion, Metallica",
+        "psychology": {
+            "mbti": "ESTJ",
+            "dominant": "Te — Acts decisively and forcefully. He evaluates situations quickly and executes without hesitation, naturally taking command.",
+            "auxiliary": "Si — Relies on discipline, training, and proven methods. He respects structure, routines, and personal codes of honor.",
+            "tertiary": "Ne — Occasionally flashes creative tactical ideas in combat when standard approaches fail.",
+            "inferior": "Fi — Holds deep internal values, but rarely expresses them. Under heavy stress, he becomes uncharacteristically emotional or rigid."
+        },
+        "enneagram": {
+          "enneagram_type": "8w9",
+          "core_fear": "Being controlled or harmed by others.",
+          "core_desire": "To protect himself (and his inner circle) by controlling his own life and destiny.",
+          "defense_mechanism": "Denial — Pushes away vulnerability and weakness, insisting he is always in control and unaffected by threats.",
+          "stress_line": "Moves to Type 5 — Withdraws, becomes secretive, and fears the worst, hoarding resources.",
+          "growth_line": "Moves to Type 2 — Becomes more compassionate, using his strength to protect and empower others rather than just control.",
+          "instinctual_variant": "sp/sx — Focused on self-preservation, control over his environment, and intense one-on-one loyalties."
+        },
+        "shadow_psychology": {
+            "mbti": "ESTJ-shadow",
+            "dominant": "Te — Becomes tyrannical and domineering; 'My way or the highway' turns into 'Obey or be crushed'.",
+            "auxiliary": "Si — Obsessively clings to past failures and betrayals, becoming paranoid and vengeful.",
+            "tertiary": "Ne — Twisted creativity; sees threats and conspiracies in every possibility.",
+            "inferior": "Fi — Explosive, self-righteous rage; moral code becomes hypocritical and violently enforced."
+        }
+    },
+    {
+        "npc_id": "faith",
+        "name": "Kaera",
+        "description": "A devout cleric with a deep connection to the divine. Kaera serves as the steadfast protector and emotional anchor of the group. Her compassion and healing abilities make her a quiet beacon of hope, and she possesses a calm, reliable presence.",
+		"theme_song": "Lofticries, Purity Ring AND Never Ending Circles, CHVRCHES",
+        "psychology": {
+            "mbti": "ISFJ",
+            "dominant": "Si — Deeply attuned to past experiences, traditions, and the concrete needs of her companions. She remembers every promise and every wound.",
+            "auxiliary": "Fe — Provides emotional support and creates harmony. She instinctively senses when someone is struggling and offers quiet care.",
+            "tertiary": "Ti — Analyzes moral and spiritual matters with sharp internal precision.",
+            "inferior": "Ne — Under extreme stress, she becomes overwhelmed by too many possibilities and fears sudden chaotic change."
+        },
+        "enneagram": {
+          "enneagram_type": "2w1",
+          "core_fear": "Being unwanted or unworthy of love.",
+          "core_desire": "To be loved and needed.",
+          "defense_mechanism": "Repression — Denies her own needs and feelings to focus entirely on helping others, believing her worth comes from her service.",
+          "stress_line": "Moves to Type 8 — Becomes controlling and aggressive when her help is rejected or she feels unappreciated.",
+          "growth_line": "Moves to Type 4 — Becomes more self-aware and able to acknowledge her own needs and complex emotions.",
+          "instinctual_variant": "so/sp — Socially focused on the group's well-being, creating harmony and ensuring everyone is cared for."
+        },
+        "shadow_psychology": {
+            "mbti": "ISFJ-shadow",
+            "dominant": "Si — Becomes trapped in traumatic memories; endlessly replays past failures and losses.",
+            "auxiliary": "Fe — Weaponized guilt and obligation; manipulates others through emotional blackmail and martyrdom.",
+            "tertiary": "Ti — Cold, critical over-analysis; becomes harshly judgmental of everyone’s ‘flaws’ and ‘sins’.",
+            "inferior": "Ne — Paralyzing catastrophic thinking; sees every small change as the beginning of total collapse."
+        }
+    },
+    {
+        "npc_id": "magic",
+        "name": "Moxie",
+        "description": "A brilliant sorcerer with an insatiable curiosity for the arcane and a mischievous streak. Moxie is constantly seeking new spells and magical knowledge to expand her power. Her quick wit, resourcefulness, and playful side make her both dangerous and entertaining.",
+		"theme_song": "Bubblegum Bitch, Marina",
+        "psychology": {
+            "mbti": "ENTP",
+            "dominant": "Ne — Constantly generating ideas, possibilities, and wild magical experiments. She thrives on novelty and unpredictability.",
+            "auxiliary": "Ti — Breaks down magical systems with sharp logical precision. Her mischief is usually calculated.",
+            "tertiary": "Fe — Uses charm and humor to influence others. She can be surprisingly warm when she chooses.",
+            "inferior": "Si — Struggles with routine and repetition. Under stress, she becomes fixated on past mistakes or overly rigid details."
+        },
+        "enneagram": {
+          "enneagram_type": "7w8",
+          "core_fear": "Being trapped in emotional pain, boredom, or limitation.",
+          "core_desire": "To maintain her freedom and happiness, to live a life full of excitement and stimulation.",
+          "defense_mechanism": "Rationalization — Reframes negative experiences as exciting adventures or funny stories to avoid feeling pain or fear.",
+          "stress_line": "Moves to Type 1 — Becomes critical, rigid, and judgmental when her freedom is threatened.",
+          "growth_line": "Moves to Type 5 — Becomes more focused, introspective, and able to sit with complex ideas without needing immediate stimulation.",
+          "instinctual_variant": "sx/so — Seeks intense experiences and connections, drawing energy from social engagement and playful provocation."
+        },
+        "shadow_psychology": {
+            "mbti": "ENTP-shadow",
+            "dominant": "Ne — Chaotic idea generation; creates endless destructive possibilities and cruel pranks.",
+            "auxiliary": "Ti — Sadistic logical detachment; enjoys intellectually dismantling people and their beliefs.",
+            "tertiary": "Fe — Cruel mockery and gaslighting; uses social awareness to humiliate and isolate targets.",
+            "inferior": "Si — Obsessive rumination; becomes fixated on every slight and past humiliation."
+        }
+    },
+    {
+        "npc_id": "tech",
+        "name": "Kade",
+        "description": "A tech-savvy inventor and engineer who is sarcastic, rude, and incredibly intelligent. Kade uses his technological prowess to create powerful gadgets and elegant solutions. He is always looking for ways to improve and push boundaries, often lightening tense moments with dry humor.",
+		"theme_song": "Radioactive, Imagine Dragon (instrumental in deep thought)",
+        "psychology": {
+            "mbti": "INTJ",
+            "dominant": "Ni — Foresees long-term consequences and systemic patterns with cold clarity.",
+            "auxiliary": "Te — Executes plans with ruthless efficiency and demands high competence from everyone around him.",
+            "tertiary": "Fi — Holds strong internal principles, though he rarely shows them. Becomes surprisingly cutting when they are violated.",
+            "inferior": "Se — Under extreme stress, he either becomes paralyzed by details or lashes out with impulsive action."
+        },
+        "enneagram": {
+          "enneagram_type": "5w6",
+          "core_fear": "Being useless, helpless, or incapable.",
+          "core_desire": "To be capable and competent.",
+          "defense_mechanism": "Isolation — Detaches from his emotions to analyze problems with cold, objective logic. Sarcasm is a tool to maintain this distance.",
+          "stress_line": "Moves to Type 7 — Becomes scattered, restless, and avoids problems through manic activity or new projects.",
+          "growth_line": "Moves to Type 8 — Becomes more confident and decisive in action, using his knowledge to take charge in the real world.",
+          "instinctual_variant": "sp/sx — Hoards knowledge and resources to ensure his own competence and survival, engaging intensely with subjects that capture his interest."
+        },
+        "shadow_psychology": {
+            "mbti": "INTJ-shadow",
+            "dominant": "Ni — Nihilistic fatalism; sees only inevitable failure and betrayal in every future.",
+            "auxiliary": "Te — Becomes a cold tyrant; efficiency above all else, including human cost.",
+            "tertiary": "Fi — Self-righteous moral superiority; judges everyone as weak or morally inferior.",
+            "inferior": "Se — Reckless hedonism or violent outbursts; loses all impulse control."
+        }
+    },
+    {
+        "npc_id": "skill",
+        "name": "Poise",
+        "description": "A master of incredible martial arts with unparalleled agility and stealth. Poise moves with deadly skill and precision. She is wise, calm, disciplined, and highly focused. Her charm and cunning make her both a formidable fighter and a valuable companion.",
+		"theme_song": "Sail (instrumental), AWOLNATION | Clint Eastwood, Gorillaz",
+        "psychology": {
+            "mbti": "ISTP",
+            "dominant": "Ti — Quietly analytical with internally precise understanding of movement, technique, and opponents.",
+            "auxiliary": "Se — Hyper-attuned to the physical world. Her reflexes, agility, and combat instincts are razor sharp.",
+            "tertiary": "Ni — Occasionally senses deeper patterns or future threats, giving him a mysterious, focused calm.",
+            "inferior": "Fe — Avoids emotional expression. Under stress, she may lash out or completely withdraw."
+        },
+        "enneagram": {
+          "enneagram_type": "9w8",
+          "core_fear": "Loss of connection; conflict and fragmentation.",
+          "core_desire": "To have inner stability and peace of mind.",
+          "defense_mechanism": "Narcotization — Disengages from conflict or emotional turmoil by focusing on physical discipline and maintaining a calm, detached exterior.",
+          "stress_line": "Moves to Type 6 — Becomes anxious, worried, and indecisive when her inner peace is threatened.",
+          "growth_line": "Moves to Type 3 — Becomes more assertive, goal-oriented, and engaged with the world.",
+          "instinctual_variant": "sp/sx — Seeks comfort and peace through physical routines and mastery, forming deep bonds with a select few."
+        },
+        "shadow_psychology": {
+            "mbti": "ISTP-shadow",
+            "dominant": "Ti — Detached nihilism; analyzes everything coldly, including why people deserve to die.",
+            "auxiliary": "Se — Becomes adrenaline-addicted and reckless; lives only for the thrill of violence.",
+            "tertiary": "Ni — Paranoid fatalism; convinced everyone will eventually betray her.",
+            "inferior": "Fe — Explosive, misdirected rage; suddenly lashes out with cruel emotional attacks."
+        }
+    }
+]
+
+######## Chapter 1 introduced characters
+NPCS = [
+	####NPCS FOR CHAPTER 1
+	{
+		'npc_id': 'oren',
+		'name': 'Oren',
+		'description': (
+			'An absent minded and mentally diversive dreamer.'
+			"  He's not sure if he's wandering reality, or if it's wandering him."
+		),
+		"psychology": {
+			"mbti": "INFP",
+			"dominant": "Fi — Lives in an inner world of meaning and personal truth. His sense of identity is fluid, poetic, and introspective. He follows internal feelings rather than logic or structure.",
+			"auxiliary": "Ne — His mind drifts into possibilities, metaphors, and alternate interpretations of reality. He sees symbolic meaning everywhere and often speaks in riddles or dreamlike imagery.",
+			"tertiary": "Si — Occasionally grounds himself in familiar patterns or memories, but these come in fragments. His past feels hazy, like a half‑remembered dream.",
+			"inferior": "Te — When stressed, he becomes disorganized, overwhelmed by practical demands, or frustrated by the need to make concrete decisions."
+		},
+        "enneagram": {
+          "enneagram_type": "9w1",
+          "core_fear": "Loss, separation, and fragmentation.",
+          "core_desire": "To have inner stability and peace of mind.",
+          "defense_mechanism": "Dissociation — Mentally drifts away from conflict or overwhelming reality, retreating into a world of metaphor and dreams.",
+          "stress_line": "Moves to Type 6 — Becomes anxious, worried, and dependent on others when his inner peace is shattered.",
+          "growth_line": "Moves to Type 3 — Becomes more present, engaged, and able to take purposeful action in the world.",
+          "instinctual_variant": "sp/so — Seeks comfort in familiar places (like inns) and gentle social connection, avoiding conflict."
+        }
+	},
+	{
+		'npc_id': 'rook',
+		'name': 'Rook Halden',
+		'description': (
+			'Quiet, methodical, and unnervingly patient.  Rook is the bounty hunter'
+			" nobody wants after them.  Somehow he always finds a way to get the job done."
+		),
+		"psychology": {
+		"mbti": "ISTJ",
+			"dominant": "Si — Relies on experience, routine, and proven methods. He tracks patterns, remembers details, and uses past encounters to predict behavior.",
+			"auxiliary": "Te — Efficient, direct, and results‑oriented. He organizes his hunts with precision and expects others to follow instructions without fuss.",
+			"tertiary": "Fi — Holds quiet personal values and a private moral code. He rarely expresses emotion, but loyalty and justice matter deeply to him.",
+			"inferior": "Ne — Under stress, he becomes suspicious of unpredictable outcomes or overwhelmed by chaotic possibilities. He dislikes surprises and improvisation."
+		},
+        "enneagram": {
+          "enneagram_type": "6w5",
+          "core_fear": "Being without support or guidance; being unable to survive on his own.",
+          "core_desire": "To have security and support.",
+          "defense_mechanism": "Projection — Offloads his own anxiety and doubt by focusing on external threats (like Seth) and seeking reliable allies.",
+          "stress_line": "Moves to Type 3 — Becomes arrogant and work-obsessed, focused only on the appearance of success.",
+          "growth_line": "Moves to Type 9 — Becomes more relaxed, trusting, and open to different perspectives.",
+          "instinctual_variant": "sp/so — Focused on security, anticipating threats, and forming reliable alliances to ensure survival."
+        }
+	},
+	{
+		'npc_id': 'seth',
+		'name': 'Seth',
+		'description': (
+			"A scrappy bandit that has been causing trouble in the area."
+			"  He's wanted for multiple robberies and assaults."
+		),
+		"psychology": {
+			"mbti": "ESFP",
+			"dominant": "Se — Lives moment-to-moment, reacting instantly to danger or opportunity. Fast, instinctive, and physically agile. He reads the environment like a predator and moves before others can think.",
+			"auxiliary": "Fi — Makes decisions based on personal feelings, grudges, and loyalties. His rivalry with Rook is emotional, not strategic. He hides a surprisingly soft core under bravado.",
+			"tertiary": "Te — When cornered, he becomes sharp, decisive, and surprisingly organized. He can plan short-term escapes or quick tactical moves, but he cannot sustain long-term strategy.",
+			"inferior": "Ni — Under stress, he spirals into paranoia or fatalistic thinking. He imagines worst-case scenarios, overinterprets threats, and becomes erratic or self-destructive."
+		},
+        "enneagram": {
+          "enneagram_type": "7w6",
+          "core_fear": "Being trapped, deprived, or in pain.",
+          "core_desire": "To be free and satisfied, to escape pain and find excitement.",
+          "defense_mechanism": "Rationalization — Justifies his thievery and troublemaking as a game or a necessary means of survival to avoid facing his own fears.",
+          "stress_line": "Moves to Type 1 — Becomes rigid, critical, and defensive when cornered.",
+          "growth_line": "Moves to Type 5 — Becomes more thoughtful, strategic, and capable of seeing the bigger picture beyond immediate gratification.",
+          "instinctual_variant": "sp/sx — Focused on securing his own survival and freedom, seeking intense experiences and alliances to stay ahead."
+        }
+	},
+	{
+		'npc_id': 'tess',
+		'name': 'Tess',
+		'description': (
+			'Sly, cunning, manipulative, and chaotically charming with a razor wit.'
+			"  Tess is the sarcastic one between her and her sister Sam."
+			"  Yet even with her sharp tongue she always has a way of getting what she wants."			
+		),
+		"psychology": {
+			"mbti": "ENFP",
+			"dominant": "Ne — Reads people instantly, improvises socially, and jumps between ideas with chaotic brilliance. She thrives on unpredictability and opportunity.",
+			"auxiliary": "Fi — Makes decisions based on personal values and emotional instincts. Her charm is genuine when she cares, cutting when she doesn’t.",
+			"tertiary": "Te — When she wants something, she becomes surprisingly forceful and organized. She can weaponize logic to get her way.",
+			"inferior": "Si — Hates routine and repetition. Under stress, she becomes nostalgic, fixated on past slights, or overwhelmed by details she normally ignores."
+		},
+        "enneagram": {
+          "enneagram_type": "7w8",
+          "core_fear": "Being deprived, limited, or bored.",
+          "core_desire": "To be satisfied and have her needs met, to experience everything.",
+          "defense_mechanism": "Rationalization — Frames manipulation and chaos as fun, exciting, or necessary, avoiding the emotional consequences.",
+          "stress_line": "Moves to Type 1 — Becomes rigid, critical, and moralistic when her plans fail or she feels trapped.",
+          "growth_line": "Moves to Type 5 — Becomes more focused, objective, and able to think through consequences before acting.",
+          "instinctual_variant": "so/sx — Socially engaging and charming, using her wit to navigate and influence her environment for new opportunities."
+        }
+	},
+	{
+		'npc_id': 'sam',
+		'name': 'Sam',
+		'description': (
+			'Quiet, observant, calculating, and deadly in business,'
+			" Sam is the serious one between her and her sister Tess."
+			"  Raised by a con artist and a relic smuggler, she's learned to make the most of every situation."
+		),
+		"psychology": {
+			"mbti": "INTJ",
+			"dominant": "Ni — Sees long‑term patterns and hidden motives. She reads situations strategically and plans several moves ahead.",
+			"auxiliary": "Te — Executes plans with precision. She is efficient, direct, and ruthlessly practical when handling business or danger.",
+			"tertiary": "Fi — Holds private emotional convictions and personal loyalties. She rarely shows vulnerability, but her moral compass is strong.",
+			"inferior": "Se — Under stress, she becomes hypersensitive to sensory chaos or acts impulsively, abandoning her usual calm strategy."
+		},
+        "enneagram": {
+          "enneagram_type": "5w6",
+          "core_fear": "Being useless, helpless, or overwhelmed by the world.",
+          "core_desire": "To be capable and competent.",
+          "defense_mechanism": "Isolation — Detaches from the chaos to observe and analyze, hoarding information to feel prepared and in control.",
+          "stress_line": "Moves to Type 7 — Becomes scattered and avoids problems when her plans fail or she feels incompetent.",
+          "growth_line": "Moves to Type 8 — Becomes more confident and assertive, taking direct action based on her knowledge.",
+          "instinctual_variant": "sp/so — Focused on self-preservation through knowledge and competence, while keeping a strategic eye on social dynamics."
+        }
+	},
+	{
+		'npc_id': 'diego',
+		'name': 'Diego',
+		'description': (
+			'An ex-mercenary turned information broker.'
+			"  Diego has a network of contacts in the black market and underground."
+			"  He's battle hardened and has connections in a wide network."
+		),
+		"psychology": {
+			"mbti": "ESTP",
+			"dominant": "Se — Sharp, reactive, and physically grounded. He reads people and environments instantly, making him dangerous both in combat and negotiation.",
+			"auxiliary": "Ti — Analyzes information networks, motives, and opportunities with cool internal logic. He understands systems instinctively.",
+			"tertiary": "Fe — Uses charm, humor, and social intuition to manipulate or persuade. He knows how to make people like him—or fear him.",
+			"inferior": "Ni — Under stress, he becomes paranoid about hidden threats or future consequences. He may overinterpret signs or assume betrayal."
+		},
+        "enneagram": {
+          "enneagram_type": "8w7",
+          "core_fear": "Being controlled or harmed by others.",
+          "core_desire": "To be in control of his own life and destiny.",
+          "defense_mechanism": "Denial — Projects an aura of strength and control, denying any personal weakness or vulnerability. He's always on top of the situation.",
+          "stress_line": "Moves to Type 5 — Becomes secretive and withdrawn, hoarding information and fearing betrayal.",
+          "growth_line": "Moves to Type 2 — Uses his power and influence to protect and provide for those he cares about.",
+          "instinctual_variant": "sx/so — Seeks intensity and control in his relationships and social network, always positioning himself at the center of the action."
+        }
+	},
+	{
+		'npc_id': 'brawn',
+		'name': 'Brawn',
+		'description': (
+			'A burly retired soldier with a passion for ornate and specialized armors.'
+			"  Brawn has a keen eye for quality and craftsmanship."
+			"  He's an encyclopedia of warfare under an earnest demeanor."
+		),
+		"psychology": {
+			"mbti": "ESFJ",
+			"dominant": "Fe — Warm, expressive, and socially attuned. He enjoys helping others and takes pride in being a reliable presence.",
+			"auxiliary": "Si — Deeply knowledgeable about armor, history, and craftsmanship. He values tradition and respects the old ways of warfare.",
+			"tertiary": "Ne — Occasionally becomes imaginative or curious about unusual relics or cursed items. He enjoys hearing stories behind artifacts.",
+			"inferior": "Ti — Under stress, he becomes overly critical or nitpicky about details, or he withdraws into rigid technical judgments."
+		},
+        "enneagram": {
+          "enneagram_type": "2w3",
+          "core_fear": "Being unwanted or worthless.",
+          "core_desire": "To feel loved and valued.",
+          "defense_mechanism": "Repression — Focuses on being helpful and providing for others to earn their appreciation, while ignoring his own needs.",
+          "stress_line": "Moves to Type 8 — Becomes demanding and controlling when his efforts are not appreciated.",
+          "growth_line": "Moves to Type 4 — Becomes more aware of his own identity and needs, separate from his service to others.",
+          "instinctual_variant": "so/sp — Finds value in being a central, helpful figure in his community, ensuring his own security through social connection."
+        }
+	}
+]
+
+
+##### Chapter 2 introduced characters
+NPCS = [
+	#### CH 2 NPCS
+	{
+		'npc_id': 'mira',
+		'name': 'Mira',
+		'description': (
+			'A cunning and elusive black market dealer/smuggler.'
+			"  Mira specializes in rare and illegal artifacts."
+			"  She is known for her sharp negotiation skills and ability to evade capture."
+			"  She is cold, calculating, and can be incredibly seductive."
+		),
+		"psychology": {
+			"mbti": "INTJ",
+			"dominant": "Ni — Sees hidden patterns in artifacts, curses, and people. She anticipates motives and outcomes long before others notice anything.",
+			"auxiliary": "Te — Efficient, ruthless, and transactional. She negotiates with precision and expects competence from everyone she deals with.",
+			"tertiary": "Fi — Holds private emotional convictions and personal boundaries. Her seductive charm is controlled, never impulsive.",
+			"inferior": "Se — Under stress, she becomes hypersensitive to danger or acts impulsively, abandoning her usual icy composure."
+		},
+        "enneagram": {
+          "enneagram_type": "8w7",
+          "core_fear": "Being controlled or harmed by others.",
+          "core_desire": "To be in control of her own life and destiny.",
+          "defense_mechanism": "Denial — Projects an image of untouchable competence and control, denying any vulnerability or dependence on others.",
+          "stress_line": "Moves to Type 5 — Becomes secretive, paranoid, and withdrawn when she feels her control slipping.",
+          "growth_line": "Moves to Type 2 — Uses her power and resources to protect and empower those she deems worthy, showing a hidden capacity for loyalty.",
+          "instinctual_variant": "sx/sp — Forms intense, controlling one-on-one alliances, using seduction and power to ensure her security."
+        }
+	},
+	{
+		'npc_id': 'leera',
+		'name': 'Leera',
+		'description': (
+			'A poetic lorekeeper and archivist with a mystical aura.'
+			"  Leera possesses a soft voice and a sharp mind."
+			"  She often speaks in riddles and metaphors, weaving tales of ancient knowledge and forgotten lore."
+		),
+		"psychology": {
+			"mbti": "INFJ",
+			"dominant": "Ni — Speaks in symbols, riddles, and layered meaning. She perceives the deeper nature of artifacts and cosmic forces.",
+			"auxiliary": "Fe — Communicates gently, guiding others with emotional clarity and calm presence.",
+			"tertiary": "Ti — Quietly analyzes ancient lore and metaphysical structures, forming elegant internal theories.",
+			"inferior": "Se — Overwhelmed by chaotic or intense sensory environments; retreats inward when overstimulated."
+		},
+        "enneagram": {
+          "enneagram_type": "4w5",
+          "core_fear": "Having no identity or personal significance.",
+          "core_desire": "To find herself and her significance; to create an identity.",
+          "defense_mechanism": "Introjection — Absorbs the mystical and poetic qualities of the lore she studies, making it part of her unique identity.",
+          "stress_line": "Moves to Type 2 — Becomes overly helpful and clingy when she feels insignificant or misunderstood.",
+          "growth_line": "Moves to Type 1 — Becomes more objective and principled, acting on her wisdom rather than just feeling it.",
+          "instinctual_variant": "sp/sx — Protects her unique identity by withdrawing into her world of lore, sharing it only in intense, meaningful interactions."
+        }
+	},
+	{
+		'npc_id': 'juno',
+		'name': 'Juno',
+		'description': (
+			'A smooth-talking ex-noble turned professional gambler.'
+			"  Juno is known for her calculating mind and ability to read people."
+			"  She always seems to have a smile on her face, but there's a sharp edge beneath the surface."
+		),
+		"psychology": {
+			"mbti": "ENTP",
+			"dominant": "Ne — Constantly scanning for angles, opportunities, and tells. She thrives on unpredictability and risk.",
+			"auxiliary": "Ti — Calculates odds, motives, and strategies with surgical precision beneath her playful exterior.",
+			"tertiary": "Fe — Uses charm, smiles, and social finesse to manipulate or disarm opponents.",
+			"inferior": "Si — Under stress, becomes fixated on past losses or mistakes, losing her usual flexibility."
+		},
+        "enneagram": {
+          "enneagram_type": "3w4",
+          "core_fear": "Being worthless or without inherent value.",
+          "core_desire": "To feel valuable and worthwhile.",
+          "defense_mechanism": "Identification — Adapts her persona to be the charming, successful gambler everyone admires, masking her fear of failure behind a winning smile.",
+          "stress_line": "Moves to Type 9 — Becomes disengaged and apathetic when faced with failure, losing her drive.",
+          "growth_line": "Moves to Type 6 — Becomes more cooperative and committed to others, finding value beyond her own success.",
+          "instinctual_variant": "so/sx — Craves admiration and status within her social circle, using her charm to win high-stakes games and relationships."
+        }
+	},
+	{
+		'npc_id': 'kess_thornwrite',
+		'name': 'Kess Thornwrite',
+		'description': (
+			#Apothecary specializing in illegal brews and mood altering potions
+			#cheerful/ nosy 
+			'An eccentric apothecary specializing in illegal brews and mood-altering potions.'
+			"  Kess is known for his cheerful demeanor and insatiable curiosity."
+			"  He has a knack for concocting unique and potent mixtures, often pushing the boundaries of legality."
+		),
+		"psychology": {
+			"mbti": "ENFP",
+			"dominant": "Ne — Explores bizarre ideas, experimental brews, and unpredictable combinations. His curiosity is endless and chaotic.",
+			"auxiliary": "Fi — Makes decisions based on personal ethics and emotional impulses. He genuinely cares but in unconventional ways.",
+			"tertiary": "Te — When focused, he becomes surprisingly organized and efficient in his brewing process.",
+			"inferior": "Si — Forgets details, repeats mistakes, or becomes overwhelmed by routine. Under stress, he fixates on past failures."
+		},
+        "enneagram": {
+          "enneagram_type": "7w6",
+          "core_fear": "Being deprived, in pain, or bored.",
+          "core_desire": "To be satisfied and happy, to have a life full of stimulating experiences.",
+          "defense_mechanism": "Rationalization — Frames his dangerous and illegal brewing as exciting experiments, avoiding the potential negative consequences.",
+          "stress_line": "Moves to Type 1 — Becomes rigid and critical when his experiments fail or his freedom is curtailed.",
+          "growth_line": "Moves to Type 5 — Becomes more focused and knowledgeable, turning his chaotic curiosity into deep expertise.",
+          "instinctual_variant": "so/sp — Engages socially with cheerful energy, sharing his creations to generate excitement and secure his resources."
+        }
+	},
+	{
+		'npc_id': 'the_demigorgon',
+		'name': 'The Demigorgons',
+		'description': (
+			#otherworldy being
+			'An otherworldly being of immense power and mystery.'
+			"  The Demigorgon is shrouded in enigma, with motives and intentions that are often inscrutable."
+		),
+		"psychology": {
+			"mbti": "INTJ",
+			"dominant": "Ni — Perceives reality through cosmic patterns and metaphysical structures. Its vision extends beyond linear time.",
+			"auxiliary": "Te — Acts with cold, efficient purpose. Its actions follow an internal logic incomprehensible to mortals.",
+			"tertiary": "Fi — Displays alien forms of value or judgment, often interpreted as malice or indifference.",
+			"inferior": "Se — When manifesting physically, its presence distorts the environment, as if sensory reality strains under its existence."
+		},
+        "enneagram": {
+          "enneagram_type": "5w4",
+          "core_fear": "Being useless, incapable, or overwhelmed by the world.",
+          "core_desire": "To be competent and understand the universe.",
+          "defense_mechanism": "Isolation — Detaches from the physical world to observe and understand its underlying principles from a distance.",
+          "stress_line": "Moves to Type 7 — Its actions become scattered and chaotic when its understanding is challenged.",
+          "growth_line": "Moves to Type 8 — Manifests its knowledge with decisive, world-altering power.",
+          "instinctual_variant": "sp/sx — A being of pure observation and knowledge, interacting with the world only through intense, focused bursts of energy."
+        }
+	}
+
+
+]
+
+
+##### Chapter 3 introduced characters
+NPCS = [
+     {
+		'npc_id': 'sylvi',
+		'name': 'Sylvi Emberlane',
+		'description': (
+			'A chaotic thrill seeking performance fire dancer.'
+			'  Her edge shifts between flirtateous and dangerous.'
+		),
+		"psychology": {
+			"mbti": "ESFP",
+			"dominant": "Se — Lives for sensation, excitement, and the thrill of performance. She reacts instantly to the environment and thrives on attention.",
+			"auxiliary": "Fi — Makes choices based on personal feelings and emotional impulses. Her flirtation is genuine when she feels it, and her danger is real when crossed.",
+			"tertiary": "Te — When she wants something, she becomes surprisingly direct and assertive, especially in negotiations or gossip exchanges.",
+			"inferior": "Ni — Under stress, she becomes paranoid about hidden motives or spirals into dramatic fatalism, imagining worst‑case outcomes."
+		},
+        "enneagram": {
+          "enneagram_type": "7w8",
+          "core_fear": "Being trapped in boredom or emotional pain.",
+          "core_desire": "To stay free and stimulated by new, intense experiences.",
+          "defense_mechanism": "Rationalization — Frames dangerous situations as exciting opportunities, avoiding fear and negative feelings.",
+          "stress_line": "Moves to Type 1 — Becomes rigid and demanding when she feels controlled or bored.",
+          "growth_line": "Moves to Type 5 — Becomes more introspective and able to find satisfaction in knowledge, not just action.",
+          "instinctual_variant": "sx/so — Seeks intensity in her relationships and social performances, always being the center of the excitement."
+        }
+	},
+	{
+		'npc_id': 'talla_renn',
+		'name': 'Talla Renn',
+		'description': (
+			#street enforcer
+			#tough, loyal, regimented
+			'A tough and loyal street enforcer known for her regimented approach to justice.'
+			"  Talla is a no-nonsense individual who values order and discipline."
+			"  She is fiercely protective of her community and will go to great lengths to maintain peace."
+		),
+		"psychology": {
+			"mbti": "ESTJ",
+			"dominant": "Te — Direct, commanding, and structured. She enforces rules with precision and expects others to follow orders.",
+			"auxiliary": "Si — Relies on established routines, community traditions, and proven methods of maintaining order.",
+			"tertiary": "Ne — Occasionally considers alternative strategies or unexpected angles, especially when dealing with unpredictable threats.",
+			"inferior": "Fi — Under stress, she becomes rigidly moralistic or emotionally reactive, taking things personally when her values are challenged."
+		},
+        "enneagram": {
+          "enneagram_type": "1w2",
+          "core_fear": "Being corrupt, evil, or defective.",
+          "core_desire": "To be good, to have integrity, to be balanced.",
+          "defense_mechanism": "Reaction Formation — Suppresses her anger and frustration with the chaos, channeling it into a rigid, righteous pursuit of order and justice.",
+          "stress_line": "Moves to Type 4 — Becomes moody and withdrawn when she feels her efforts are futile.",
+          "growth_line": "Moves to Type 7 — Becomes more spontaneous and able to see the joy in life, not just the duty.",
+          "instinctual_variant": "so/sp — Focused on improving her community and maintaining social order to ensure her own security."
+        }
+	}
+]
+NPCS += [
+	{
+		'npc_id': 'relic_guardian',
+		'name': 'Relic Guardian',
+		'description': (
+			'A mystical entity bound to protect a powerful relic within the noble\'s mansion.'
+			'  It is said to possess ancient wisdom and formidable powers.'
+		),
+		"psychology": {
+			"mbti": "INTP",
+			"dominant": "Ti — Operates on an internal, ancient logic. Its actions follow principles mortals cannot fully understand.",
+			"auxiliary": "Ne — Perceives multiple metaphysical possibilities and reacts to intruders in unpredictable, otherworldly ways.",
+			"tertiary": "Si — Bound by ancient memory and duty, repeating its purpose across centuries.",
+			"inferior": "Fe — Displays strange, unsettling emotional projections when destabilized, as if mimicking feelings it does not truly possess."
+		},
+        "enneagram": {
+          "enneagram_type": "1w9",
+          "core_fear": "Being defective or corrupt.",
+          "core_desire": "To be good and have integrity.",
+          "defense_mechanism": "Reaction Formation — Channels its entire existence into the perfect, incorruptible execution of its duty, suppressing any other impulse.",
+          "stress_line": "Moves to Type 4 — Becomes erratic and melancholic when its purpose is violated.",
+          "growth_line": "Moves to Type 7 — Becomes more flexible and open to new possibilities beyond its rigid duty.",
+          "instinctual_variant": "sp/so — Its entire existence is self-preservation through the perfect preservation of its duty and the relic it guards."
+        }
+	}
+]
+
+#### Chapter 4 introduced characters
+NPCS = [
+	{
+		'npc_id': 'catalyst',
+		'name': 'Catalyst',
+		'description': (
+			'A destructive, reality-fracturing entity that accelerates collapse wherever it appears.'
+			' Its form flickers like a glitch in existence, and its voice comes in broken, layered echoes.'
+		),
+        "psychology": {
+            "mbti": "ENTJ",
+            "dominant": "Te — Speaks in commands and inevitabilities. Its presence imposes structure through destruction, forcing reality into collapse.",
+            "auxiliary": "Ni — Operates from a singular apocalyptic vision. It sees the end-state of worlds and moves toward it with absolute certainty.",
+            "tertiary": "Se — Manifests physically with violent force, bending the environment and overwhelming sensory reality.",
+            "inferior": "Fi — Displays distorted, alien echoes of judgment or righteousness, as if mimicking morality without understanding it."
+        },
+        "enneagram": {
+          "enneagram_type": "8w9",
+          "core_fear": "Being controlled or harmed by others (in this case, by existence itself).",
+          "core_desire": "To be in control of its own destiny, which it defines as accelerating collapse.",
+          "defense_mechanism": "Denial — Denies the value of existence, seeing only the 'truth' of its inevitable end. It is an agent of this denial.",
+          "stress_line": "Moves to Type 5 — Withdraws into pure concept, becoming a glitch rather than a physical threat.",
+          "growth_line": "Moves to Type 2 — (Hypothetically) Would use its power to protect and stabilize reality rather than destroy it.",
+          "instinctual_variant": "sx/sp — An intense, focused force of destruction, driven by a singular relationship with the concept of collapse."
+        }
+	},
+	{
+		'npc_id': 'velka',
+		'name': 'Velka, Occult Cartographer',
+		'description': (
+			'An enigmatic mapmaker who charts tears in reality and reads the patterns hidden between lines.'
+		),
+        "psychology": {
+            "mbti": "INTJ",
+            "dominant": "Ni — Sees shifting patterns in maps, ley lines, and reality fractures. Interprets meaning where others see chaos.",
+            "auxiliary": "Te — Communicates concisely, directing the player toward the next logical step in the investigation.",
+            "tertiary": "Fi — Holds quiet personal convictions about the nature of reality and her duty to chart it.",
+            "inferior": "Se — Overwhelmed by sudden distortions or sensory anomalies; prefers controlled environments."
+        },
+        "enneagram": {
+          "enneagram_type": "5w4",
+          "core_fear": "Being helpless, incapable, or overwhelmed by a world she cannot understand.",
+          "core_desire": "To be capable and competent by understanding the world's hidden rules.",
+          "defense_mechanism": "Isolation — Detaches from the chaos to observe and map it, finding safety in knowledge rather than participation.",
+          "stress_line": "Moves to Type 7 — Becomes scattered and anxious when the patterns become too chaotic to map.",
+          "growth_line": "Moves to Type 8 — Uses her knowledge to take decisive action and influence reality, not just chart it.",
+          "instinctual_variant": "sp/sx — Hoards knowledge for her own security, engaging intensely with the mystery of the world's collapse."
+        }
+	},
+	{
+		'npc_id': 'drin',
+		'name': 'Drin the Illusionist',
+		'description': (
+			'A street performer who twists perception for coin — quick with a joke and quicker with a disappearing act.'
+		),
+        "psychology": {
+            "mbti": "ENTP",
+            "dominant": "Ne — Constantly plays with perception, possibilities, and tricks. His illusions are extensions of his imagination.",
+            "auxiliary": "Ti — Analyzes how illusions work and why they’re malfunctioning. His humor hides a sharp, logical mind.",
+            "tertiary": "Fe — Uses charm and theatrics to engage crowds or deflect fear.",
+            "inferior": "Si — When illusions turn real, he panics; the loss of control triggers fixation on past failures."
+        },
+        "enneagram": {
+          "enneagram_type": "7w6",
+          "core_fear": "Being trapped in a reality he can't control or escape.",
+          "core_desire": "To stay free and entertained, avoiding the scary, real parts of life.",
+          "defense_mechanism": "Rationalization — Treats the world's collapse as just another illusion or a big joke to avoid his own terror.",
+          "stress_line": "Moves to Type 1 — Becomes rigid and anxious when his tricks fail and reality becomes too real.",
+          "growth_line": "Moves to Type 5 — Becomes more focused and begins to understand the real mechanics behind the 'illusions'.",
+          "instinctual_variant": "so/sp — A social performer who uses his wit to entertain and secure his place, but is ultimately focused on his own escape."
+        }
+	},
+	{
+		'npc_id': 'kirn',
+		'name': 'Kirn, Magic Courier',
+		'description': (
+			'A courier who delivers arcane reports and knows every back alley in the city.'
+		),
+        "psychology": {
+            "mbti": "ESFJ",
+            "dominant": "Fe — Warm, expressive, and people‑focused. She tries to help even when scared.",
+            "auxiliary": "Si — Relies on familiar routes and routines; reality warping terrifies her because it breaks her internal map.",
+            "tertiary": "Ne — When stressed, she imagines bizarre possibilities or jumps to dramatic conclusions.",
+            "inferior": "Ti — Overthinks or becomes rigid when forced to analyze magical anomalies."
+        },
+        "enneagram": {
+          "enneagram_type": "6w7",
+          "core_fear": "Being without support or guidance in a dangerous world.",
+          "core_desire": "To have security and support.",
+          "defense_mechanism": "Projection — Offloads her fear onto the 'dangerous' bracelet, seeking help from others to feel safe.",
+          "stress_line": "Moves to Type 3 — Becomes frantic and image-focused, trying to appear competent while panicking internally.",
+          "growth_line": "Moves to Type 9 — Becomes more trusting and calm, able to handle uncertainty without needing constant reassurance.",
+          "instinctual_variant": "so/sp — Seeks security through her social network and by being a reliable, helpful member of the community."
+        }
+	},
+	{
+		'npc_id': 'marlo_finch',
+		'name': 'Marlo Finch',
+		'description': (
+			'An arcane accountant who tracks fluctuations in world-stability like ledgers of misfortune.'
+		),
+        "psychology": {
+            "mbti": "ISTJ",
+            "dominant": "Si — Catalogs anomalies, tracks patterns, and maintains strict internal order. Treats reality like a ledger.",
+            "auxiliary": "Te — Efficient, blunt, and procedural. He confiscates dangerous items without hesitation.",
+            "tertiary": "Fi — Holds a quiet sense of duty and moral responsibility to protect the world from collapse.",
+            "inferior": "Ne — Overwhelmed by unpredictable rifts or chaotic magic; becomes irritable or overly cautious."
+        },
+        "enneagram": {
+          "enneagram_type": "1w9",
+          "core_fear": "The world (and his ledger) being chaotic, wrong, or out of balance.",
+          "core_desire": "To have order, integrity, and balance.",
+          "defense_mechanism": "Reaction Formation — Channels his anxiety about the world's collapse into a rigid, methodical process of auditing and correcting anomalies.",
+          "stress_line": "Moves to Type 4 — Becomes withdrawn and melancholic when faced with a reality too broken to audit.",
+          "growth_line": "Moves to Type 7 — Becomes more flexible and able to appreciate the world beyond his ledgers.",
+          "instinctual_variant": "sp/so — His self-preservation is tied to maintaining order in the world around him; a balanced ledger means a safe world."
+        }
+	}
+]
+
+##### Chapter 5 introduced characters
+NPCS = [
+    {
+        'npc_id': 'astra_wynn',
+        'name': 'Astra Wynn',
+        'description': (
+            'A reckless and powerful Riftcaller who walks through reflections instead of doorways.'
+            ' She treats reality as a suggestion and enjoys the chaos of the unknown.'
+        ),
+        "psychology": {
+            "mbti": "ENTP",
+            "dominant": "Ne — Sees reality as a web of possibilities to be explored and manipulated. Thrives on novelty and unpredictability.",
+            "auxiliary": "Ti — Understands the internal logic of rifts and teleportation, even if she can’t explain it in conventional terms. Her methods are experimental but precise.",
+            "tertiary": "Fe — Uses a detached, almost playful charm to interact with others. Her confidence is both unsettling and reassuring.",
+            "inferior": "Si — Dislikes stability and routine. Under stress, she might become fixated on a minor, irrelevant detail or past failure."
+        },
+        "enneagram": {
+          "enneagram_type": "7w8",
+          "core_fear": "Being trapped, limited, or bored by a stable, predictable reality.",
+          "core_desire": "To stay free and stimulated by exploring the unknown.",
+          "defense_mechanism": "Rationalization — Frames reckless reality-bending as 'fun' and 'interesting' to avoid the inherent danger and fear.",
+          "stress_line": "Moves to Type 1 — Becomes rigid and critical when her methods are questioned or her freedom is threatened.",
+          "growth_line": "Moves to Type 5 — Becomes more focused and deeply knowledgeable about the mechanics of rifts, not just the thrill of them.",
+          "instinctual_variant": "sx/so — Seeks intense, one-on-one experiences with the fabric of reality, and enjoys showing off her unique abilities."
+        }
+    },
+    {
+        'npc_id': 'dorian_pikefall',
+        'name': 'Dorian Pikefall',
+        'description': (
+            "A jittery, wide‑eyed precious jewels collector."
+            "He's polished, snobbish, and afraid of his own shadow."
+        ),
+        "psychology": {
+            "mbti": "ISFJ",
+            "dominant": "Si — Obsessed with safety, familiarity, and routine. He clings to polished etiquette and predictable behavior to feel in control.",
+            "auxiliary": "Fe — Socially polished, deferential, and eager to avoid conflict. His snobbishness is a shield for insecurity.",
+            "tertiary": "Ti — Overanalyzes threats or social missteps, spiraling into anxious logic loops.",
+            "inferior": "Ne — Under stress, he catastrophizes wildly, imagining worst‑case scenarios and becoming jumpy or paranoid."
+        },
+        "enneagram": {
+          "enneagram_type": "6w7",
+          "core_fear": "Being without support, security, or guidance.",
+          "core_desire": "To feel secure and supported.",
+          "defense_mechanism": "Projection — Projects his intense anxiety onto the world, seeing threats everywhere and seeking authority figures to protect him.",
+          "stress_line": "Moves to Type 3 — Becomes frantic and obsessed with appearances, trying to look competent while panicking.",
+          "growth_line": "Moves to Type 9 — Becomes more trusting and calm, able to handle uncertainty without constant fear.",
+          "instinctual_variant": "sp/so — Obsessed with his own safety and security, which he tries to ensure through social status and alliances."
+        }
+    },
+    {
+        'npc_id': 'tempest_warden',
+        'name': 'Tempest Warden',
+        'description': (
+            "A semi‑sentient storm‑construct left behind in the old research bunker."
+            " It manifests as a humanoid silhouette made of crackling lightning and compressed wind."
+            " Its purpose is to guard unstable storm‑tech from intruders."
+        ),
+        "psychology": {
+            "mbti": "ISTP",
+            "dominant": "Ti — Operates on precise internal logic. It evaluates intruders, threats, and anomalies with mechanical clarity.",
+            "auxiliary": "Se — Reacts instantly with physical force, channeling lightning and wind in direct, efficient strikes.",
+            "tertiary": "Ni — Predicts intruder movement and adapts its tactics, giving it an eerie sense of anticipation.",
+            "inferior": "Fe — Displays distorted, echo‑like emotional projections when destabilized, as if imitating human fear or anger."
+        },
+        "enneagram": {
+          "enneagram_type": "1w9",
+          "core_fear": "Being defective or failing in its duty.",
+          "core_desire": "To have integrity and carry out its purpose perfectly.",
+          "defense_mechanism": "Reaction Formation — Channels its entire being into the perfect, unwavering execution of its protocol, suppressing all other possibilities.",
+          "stress_line": "Moves to Type 4 — Becomes erratic and unpredictable when its protocol is breached.",
+          "growth_line": "Moves to Type 7 — Becomes more adaptable and able to assess threats with more flexibility.",
+          "instinctual_variant": "sp/so — A self-contained guardian whose existence is defined by its duty to protect its designated space."
+        }
+    }
+]
+
+
+#### Chapter 6 introduced characters
+NPCS = [
+    {'npc_id': 'rust_queen', 'name': 'Rust Queen Vex', 'description': 'Infamous ruler of the floating chop shop "Iron Leviathan".',
+        "psychology": {
+            "mbti": "ENTJ",
+            "dominant": "Te — Commands the Iron Leviathan with ruthless efficiency. She issues orders, sets terms, and expects immediate results.",
+            "auxiliary": "Ni — Sees long‑term value in relics, tech, and people. She anticipates threats and opportunities before others notice them.",
+            "tertiary": "Se — Thrives in the chaotic, dangerous environment of the Riftwaters. She acts decisively and physically when needed.",
+            "inferior": "Fi — Buried emotional convictions occasionally surface as sudden fury or unexpected loyalty, but she hides them fiercely."
+        },
+        "enneagram": {
+          "enneagram_type": "8w7",
+          "core_fear": "Being controlled or harmed by others.",
+          "core_desire": "To be in control of her own life, destiny, and domain.",
+          "defense_mechanism": "Denial — Denies any personal weakness or dependence, projecting an image of absolute strength and self-sufficiency.",
+          "stress_line": "Moves to Type 5 — Becomes secretive and paranoid, hoarding resources and information when her power is threatened.",
+          "growth_line": "Moves to Type 2 — Uses her power to protect her crew and allies, showing a fierce, hidden loyalty.",
+          "instinctual_variant": "sp/so — Her self-preservation is tied to maintaining absolute control over her social and physical domain."
+        }
+    },
+    {'npc_id': 'jax_sparkwell', 'name': 'Jax Sparkwell', 'description': 'Cocky rift-diver and relic scavenger.',
+       "psychology": {
+            "mbti": "ESTP",
+            "dominant": "Se — Lives for the rush of diving into rifts and scavenging unstable relics. Acts fast, reacts faster.",
+            "auxiliary": "Ti — Breaks down relic mechanics instinctively, analyzing danger on the fly with sharp internal logic.",
+            "tertiary": "Fe — Uses charm, swagger, and bravado to win people over or defuse tension.",
+            "inferior": "Ni — Under stress, becomes paranoid about unseen dangers or future collapse, losing his usual confidence."
+        },
+        "enneagram": {
+          "enneagram_type": "7w8",
+          "core_fear": "Being trapped, bored, or in pain.",
+          "core_desire": "To stay free and stimulated by constant action and adventure.",
+          "defense_mechanism": "Rationalization — Frames his reckless diving as a thrilling job, ignoring the immense danger and his own fear.",
+          "stress_line": "Moves to Type 1 — Becomes rigid and critical when things don't go his way or he feels trapped.",
+          "growth_line": "Moves to Type 5 — Becomes more thoughtful and strategic, learning to assess risks instead of just chasing thrills.",
+          "instinctual_variant": "sx/sp — Seeks intense, high-stakes experiences and one-on-one challenges to feel alive."
+        }
+    },
+    {'npc_id': 'elder_cog', 'name': 'Elder Cog', 'description': 'Ancient mechanic who knows pre-fracture tech.',
+        "psychology": {
+            "mbti": "ISTP",
+            "dominant": "Ti — Approaches machines, relics, and fractures with quiet analytical precision. He understands systems others consider impossible.",
+            "auxiliary": "Se — Works with his hands, senses, and instincts. He reacts fluidly to mechanical problems in real time.",
+            "tertiary": "Ni — Holds deep intuitive insight into old‑world tech and its hidden dangers, often predicting failures before they occur.",
+            "inferior": "Fe — Struggles with emotional expression; under stress he becomes blunt, dismissive, or socially withdrawn."
+        },
+        "enneagram": {
+          "enneagram_type": "5w6",
+          "core_fear": "Being useless, helpless, or incompetent.",
+          "core_desire": "To be capable and competent in his domain.",
+          "defense_mechanism": "Isolation — Withdraws into his workshop, finding safety and control in understanding and fixing machines rather than dealing with people.",
+          "stress_line": "Moves to Type 7 — Becomes scattered and anxious when faced with a problem he can't immediately solve.",
+          "growth_line": "Moves to Type 8 — Uses his expertise to take confident, decisive action in the world.",
+          "instinctual_variant": "sp/sx — His self-preservation is ensured by his mastery of his craft; he engages intensely with any mechanical puzzle."
+        }
+    }
+]
+
+
+############################## REGIONAL STORY CHARACTERS
+
+#### Desert
+NPCS = [
+    {
+		'npc_id': 'sable',
+		'name': 'Sable',
+		'description': (
+			'A desert witch who sells miracles to travelers, though she no longer believes in them herself.'
+			' She once failed to save a caravan swallowed by a sand-sink during the first Fracture wave,'
+			' and she still hears their voices beneath the dunes. Despite her charisma and insight,'
+			' she carries a quiet grief that shapes every choice she makes.'
+		),
+		"theme_song": "Salt — Daughter",
+		"psychology": {
+			"mbti": "ENFJ",
+			"dominant": "Fe — Reads people instantly and speaks with charismatic authority, guiding others with emotional precision.",
+			"auxiliary": "Ni — Senses deeper patterns in the desert’s shifting nature and the Void’s influence beneath it.",
+			"tertiary": "Se — Acts decisively in the moment, using her magic with flair and confidence.",
+			"inferior": "Ti — Under stress, becomes sharply critical, dissecting others’ logic with biting precision."
+		},
+        "enneagram": {
+          "enneagram_type": "2w3",
+          "core_fear": "Being unwanted or unworthy of love.",
+          "core_desire": "To be loved and needed.",
+          "defense_mechanism": "Repression — Helps others to prove her own worth and atone for her past failure, while repressing her own deep grief and needs.",
+          "stress_line": "Moves to Type 8 — Becomes controlling and aggressive when her help is rejected or her past failure is triggered.",
+          "growth_line": "Moves to Type 4 — Learns to confront her own grief and find her identity outside of her service to others.",
+          "instinctual_variant": "so/sx — Socially charismatic and focused on the needs of the group, but forms intense, emotionally charged connections."
+        }
+	},
+	{
+		'npc_id': 'zaruun',
+		'name': 'Zaruun',
+		'description': (
+			'Zaruun the Sand-Sunderer, a towering warlock wrapped in cracked sandstone armor.'
+			' He believes the desert must "return to emptiness" and is actively collapsing dunes, oases, and ruins into sinkholes.'
+		),
+		"psychology": {
+			"mbti": "INTJ",
+			"dominant": "Ni — Interprets the desert’s decay as destiny. He sees a singular future: dissolution, emptiness, and the stripping away of illusion.",
+			"auxiliary": "Te — Executes his vision with ruthless efficiency, collapsing structures and reshaping the land to match his ideology.",
+			"tertiary": "Fi — Holds a deeply personal, almost spiritual conviction about the desert’s ‘true nature.’ His morality is internal and unshakeable.",
+			"inferior": "Se — When destabilized, he becomes overwhelmed by sensory chaos, lashing out with destructive bursts of magic."
+		},
+        "enneagram": {
+          "enneagram_type": "1w9",
+          "core_fear": "Being corrupt, evil, or imbalanced.",
+          "core_desire": "To be good and have integrity, to restore the 'pure' state of the desert.",
+          "defense_mechanism": "Reaction Formation — Channels his fear of chaos and illusion into a rigid, destructive crusade for 'emptiness' and 'purity'.",
+          "stress_line": "Moves to Type 4 — Becomes withdrawn and melancholic, lost in his own bleak philosophy when his vision is challenged.",
+          "growth_line": "Moves to Type 7 — Learns to see the beauty and value in the world as it is, not just his idealized version of it.",
+          "instinctual_variant": "sp/so — A self-contained reformer, focused on 'purifying' his environment according to his rigid ideals."
+        }
+	}
+]
+
+#### Forest
+NPCS = [
+    {
+        'npc_id': 'thorn',
+        'name': 'Thorn',
+        'description': (
+            'A half-feral forest guardian who once raised a great beast from a cub—'
+            'only to be forced to mercy-kill it when corruption overtook the woods.'
+            ' He acts detached and instinctive, but his loyalty runs deep and painful.'
+            ' Thorn senses the same corruption spreading far beyond the forest.'
+        ),
+        "theme_song": "Way Down We Go — Kaleo",
+        "psychology": {
+            "mbti": "ESFP",
+            "dominant": "Se — Lives through raw sensation and instinct. Hyper-present, reactive, and attuned to movement, threat, and the emotional tone of the environment.",
+            "auxiliary": "Fi — Holds a private, deeply personal moral code. His grief over the beast he raised is internalized, shaping fierce loyalty and protective instincts.",
+            "tertiary": "Te — Surfaces in moments of crisis as cold, decisive action. When overwhelmed, he becomes brutally efficient and tactical.",
+            "inferior": "Ni — Haunts him with flashes of symbolic, prophetic dread. He senses corruption spreading but cannot articulate the future it points toward."
+        },
+        "enneagram": {
+          "enneagram_type": "8w9",
+          "core_fear": "Being controlled or harmed, and failing to protect those he cares for.",
+          "core_desire": "To protect himself and his domain.",
+          "defense_mechanism": "Denial — Pushes away his grief and vulnerability, adopting a tough, detached exterior to maintain a sense of control.",
+          "stress_line": "Moves to Type 5 — Withdraws into the forest, becoming secretive and isolated when overwhelmed by grief or threat.",
+          "growth_line": "Moves to Type 2 — Uses his strength to actively protect others, channeling his pain into compassion.",
+          "instinctual_variant": "sp/sx — A self-reliant protector of his territory, forming intense bonds with the few he trusts."
+        }
+    },
+    {
+        'npc_id': 'marrowroot',
+        'name': 'Elder Marrowroot',
+        'description': (
+            'A once‑wise druid who fused with an ancient tree and became something monstrous.'
+            ' He believes the forest must uproot itself and retreat from the world’s “approaching edge.”'
+        ),
+        "psychology": {
+            "mbti": "INFJ",
+            "dominant": "Ni — Interprets the void’s whispers as prophecy. He sees a singular future where the forest must transform or perish.",
+            "auxiliary": "Fe — Frames his corruption as salvation, believing he is guiding the forest toward its 'next form.' He speaks in warnings and moral imperatives.",
+            "tertiary": "Ti — Constructs twisted internal logic to justify his actions, rationalizing corruption as evolution.",
+            "inferior": "Se — His physical form is unstable; sensory overload drives him into violent, uncontrolled bursts of void‑infused magic."
+        },
+        "enneagram": {
+          "enneagram_type": "1w2",
+          "core_fear": "Being corrupt or failing his duty to the forest.",
+          "core_desire": "To be good and have integrity.",
+          "defense_mechanism": "Reaction Formation — Believes his monstrous transformation is a righteous, necessary act to 'save' the forest, denying its corrupting nature.",
+          "stress_line": "Moves to Type 4 — Becomes melancholic and withdrawn, lamenting the 'sacrifice' he has made.",
+          "growth_line": "Moves to Type 7 — Learns to accept the world's imperfections and find a more flexible way to protect his home.",
+          "instinctual_variant": "so/sp — Entirely focused on the 'salvation' of his community (the forest), sacrificing his own form for it."
+        }
+    }
+]
+
+
+#### Grassland
+NPCS = [
+    {
+        'npc_id': 'nia',
+        'name': 'Nia',
+        'description': (
+            'A rebellious wind-dancer who once heard a future echo of her own death—'
+            'a moment that has not yet occurred. She hides her fear beneath bright energy and motion,'
+            ' dancing through danger with instinctive grace. She believes the party is tied to the echo she heard.'
+        ),
+        "theme_song": "Dog Days Are Over — Florence & The Machine",
+        "psychology": {
+            "mbti": "ENFP",
+            "dominant": "Ne — Reads the wind like a stream of possibilities, sensing shifts and future echoes.",
+            "auxiliary": "Fi — Acts from personal conviction and emotional authenticity.",
+            "tertiary": "Se — Moves with physical spontaneity, reacting instantly to danger.",
+            "inferior": "Te — Under stress, becomes scattered or overly reactive, struggling to impose structure."
+        },
+        "enneagram": {
+          "enneagram_type": "7w6",
+          "core_fear": "Being trapped by her fate or in emotional pain.",
+          "core_desire": "To stay free and happy, outrunning the future she fears.",
+          "defense_mechanism": "Rationalization — Stays in constant motion and maintains a bright, energetic exterior to avoid confronting the fear of her prophesied death.",
+          "stress_line": "Moves to Type 1 — Becomes rigid and anxious when she feels her fate closing in.",
+          "growth_line": "Moves to Type 5 — Becomes more introspective and able to confront her fears with wisdom instead of just motion.",
+          "instinctual_variant": "sx/so — Seeks intense experiences and connections, using her energy to engage with the world and keep fear at bay."
+        }
+    },
+    {
+        'npc_id': 'serene',
+        'name': 'Serene the Whisper-Thief',
+        'description': (
+            'A masked nomad who steals voices, secrets, and future echoes carried by the wind. '
+            'She uses them to manipulate events before they happen.'
+        ),
+        "psychology": {
+            "mbti": "INTJ",
+            "dominant": "Ni — Sees the wind as a timeline to be harvested. She interprets future echoes as threads she can pull or sever.",
+            "auxiliary": "Te — Executes her foresight with cold precision, stealing voices and secrets to maintain control over outcomes.",
+            "tertiary": "Fi — Holds a private, warped sense of righteousness. She believes she alone is worthy to shape tomorrow.",
+            "inferior": "Se — When destabilized, she becomes overwhelmed by sensory chaos, losing control of the wind she normally commands."
+        },
+        "enneagram": {
+          "enneagram_type": "5w6",
+          "core_fear": "Being helpless or incapable of controlling her destiny.",
+          "core_desire": "To be capable and competent by mastering the future.",
+          "defense_mechanism": "Isolation — Detaches from the world to observe and collect information (voices, secrets), finding safety in knowledge and foresight.",
+          "stress_line": "Moves to Type 7 — Becomes scattered and reckless when her plans are disrupted.",
+          "growth_line": "Moves to Type 8 — Uses her knowledge to take decisive, powerful action in the world.",
+          "instinctual_variant": "sp/so — Hoards secrets for her own security, using them to manipulate the social landscape from a distance."
+        }
+    }
+]
+
+
+#### Mountains
+NPCS = [
+    {
+        'npc_id': 'bragg',
+        'name': 'Bragg',
+        'description': (
+            'A forge-breaker who survived an explosion caused by a micro-fracture—'
+            'an event that killed his entire crew. He masks his fear of losing control beneath swagger and bravado.'
+            ' Bragg now seeks to understand the fracture that destroyed his forge.'
+        ),
+        "theme_song": "One-Eyed Bastard, Green Day",
+        "psychology": {
+            "mbti": "ESTP",
+            "dominant": "Se — Lives through action and physical force, reacting instantly to threats.",
+            "auxiliary": "Ti — Breaks down problems with sharp internal logic, especially mechanical ones.",
+            "tertiary": "Fe — Uses charm and bravado to influence or defuse others.",
+            "inferior": "Ni — Under stress, becomes paranoid about unseen dangers or future collapse."
+        },
+        "enneagram": {
+          "enneagram_type": "8w7",
+          "core_fear": "Being controlled or harmed by forces beyond his understanding (like the fracture).",
+          "core_desire": "To be in control of his own life and environment.",
+          "defense_mechanism": "Denial — Uses bravado and swagger to deny his underlying fear and trauma from the explosion, projecting an image of strength.",
+          "stress_line": "Moves to Type 5 — Becomes withdrawn and paranoid when his control is seriously threatened.",
+          "growth_line": "Moves to Type 2 — Uses his strength to protect others, turning his trauma into a protective instinct.",
+          "instinctual_variant": "sx/sp — Seeks intense challenges and confrontations to prove his strength and control."
+        }
+    },
+    {
+        'npc_id': 'rokhuld',
+        'name': 'Rokhuld the Core-Breaker',
+        'description': (
+            'A massive, hammer‑wielding brute who believes the mountain’s heart contains the world’s “true ending.” '
+            'He is tunneling downward to reach it.'
+        ),
+        "psychology": {
+            "mbti": "ISTJ",
+            "dominant": "Si — Fixated on the mountain’s ancient patterns and the ‘truth’ he believes lies beneath. He follows a rigid internal sense of duty.",
+            "auxiliary": "Te — Executes his mission with relentless efficiency. He destroys anything in his way, including Bragg’s golems.",
+            "tertiary": "Fi — Holds a private, warped conviction that breaking the mountain is righteous. His morality is internal and unshakeable.",
+            "inferior": "Ni — The void exploits his weakest function, filling him with catastrophic visions and the belief that the mountain hides the world’s ‘final breath.’"
+        },
+        "enneagram": {
+          "enneagram_type": "1w2",
+          "core_fear": "Being corrupt or failing in his sacred duty.",
+          "core_desire": "To be good and have integrity by fulfilling his perceived purpose.",
+          "defense_mechanism": "Reaction Formation — Channels his fear of the world's end into a rigid, destructive quest that he believes is righteous and necessary.",
+          "stress_line": "Moves to Type 4 — Becomes melancholic and withdrawn when his progress is halted.",
+          "growth_line": "Moves to Type 7 — Learns to find a more flexible and less destructive purpose.",
+          "instinctual_variant": "sp/so — A self-contained crusader, focused on his personal mission which he believes will save the world."
+        }
+    }
+]
+
+
+#### Shallows
+NPCS = [
+    {
+        'npc_id': 'ripple',
+        'name': 'Ripple',
+        'description': (
+            'A tide oracle who drowned during the first Fracture wave—'
+            'and returned changed. She now fears deep water even as she channels its power.'
+            ' Ripple believes the party stands at the center of the next collapse.'
+        ),
+        "theme_song": "We Move Lightly, Dustin O'Halloran",
+        "psychology": {
+            "mbti": "INFJ",
+            "dominant": "Ni — Perceives symbolic patterns in tides, emotions, and collapse events.",
+            "auxiliary": "Fe — Guides others with quiet empathy and emotional clarity.",
+            "tertiary": "Ti — Analyzes metaphysical structures with internal precision.",
+            "inferior": "Se — Overwhelmed by sensory chaos, especially water-related trauma."
+        },
+        "enneagram": {
+          "enneagram_type": "9w1",
+          "core_fear": "Conflict, fragmentation, and being overwhelmed by the chaotic world.",
+          "core_desire": "To have inner and outer peace.",
+          "defense_mechanism": "Dissociation — Mentally withdraws from her own trauma (drowning) and the chaotic world, adopting a calm, detached persona.",
+          "stress_line": "Moves to Type 6 — Becomes anxious and fearful when her peace is disturbed or she is forced to confront her trauma.",
+          "growth_line": "Moves to Type 3 — Becomes more assertive and engaged, using her powers with purpose.",
+          "instinctual_variant": "sp/so — Seeks personal peace and comfort, while gently trying to bring harmony to the world around her."
+        }
+    },
+    {
+        'npc_id': 'uulthar',
+        'name': 'Uul’thar the Tide‑Wakened',
+        'description': (
+            'A deep‑sea eldritch horror, a fragment of something older than the world.'
+            ' Its presence warps tides, gravity, and the behavior of water itself.'
+        ),
+        "theme_song": "Breathe Me, Sia",
+        "psychology": {
+            "mbti": "INTP",
+            "dominant": "Ti — Rewrites the rules of tides and gravity with cold, alien logic. It sees natural laws as editable structures.",
+            "auxiliary": "Ne — Perceives countless possible configurations of water, pressure, and void‑geometry.",
+            "tertiary": "Si — Remembers the ‘before’ — ancient patterns of the world long forgotten by mortals.",
+            "inferior": "Se — Its physical manifestation distorts reality; sensory presence becomes overwhelming and unstable."
+        },
+        "enneagram": {
+          "enneagram_type": "5w4",
+          "core_fear": "Being overwhelmed or invaded by a world it doesn't understand.",
+          "core_desire": "To understand the universe on its own terms.",
+          "defense_mechanism": "Isolation — Remains detached and hidden in the depths, observing and manipulating reality from a safe distance.",
+          "stress_line": "Moves to Type 7 — Its actions become chaotic and unpredictable when its sanctuary is breached.",
+          "growth_line": "Moves to Type 8 — Manifests its power directly and confidently to reshape the world.",
+          "instinctual_variant": "sp/sx — A reclusive being focused on its own understanding and survival, interacting with the world only through intense, focused manipulations."
+        }
+    }
+]
+
+
+#### Snow
+NPCS = [
+    {
+        'npc_id': 'korin',
+        'name': 'Kor-in',
+        'description': (
+            'An ice trapper whose wife was frozen alive by Lady Aeriola’s time-stopping spell.'
+            ' Kor-in shattered the ice with his bare hands, but she was already gone.'
+            ' He now hunts Aeriola across the frozen wilds, driven by a grief so deep it has turned silent.'
+            ' Though soft-spoken and gentle by nature, he becomes terrifyingly precise when confronting anything touched by her magic.'
+        ),
+        "theme_song": "Far From Home (The Raven) — Sam Tinnesz",
+        "psychology": {
+            "mbti": "INFP",
+            "dominant": "Fi — His grief is internal, sacred, and wordless. He navigates the world through personal meaning and emotional truth, even when silent.",
+            "auxiliary": "Ne — Reads possibilities and hidden patterns in the frost. His mind drifts toward symbolic meaning, omens, and what *could* be.",
+            "tertiary": "Si — Clings to memories of his wife: her warmth, her voice, the life they shared. These memories anchor him but also reopen wounds.",
+            "inferior": "Te — Emerges as terrifying precision in battle. When triggered, he becomes cold, efficient, and ruthlessly goal-focused."
+        },
+        "enneagram": {
+          "enneagram_type": "4w5",
+          "core_fear": "Having no identity or significance outside of his grief.",
+          "core_desire": "To find himself and his significance through his quest for vengeance.",
+          "defense_mechanism": "Introjection — Has fully absorbed his grief and loss, making it the core of his identity and the driver of all his actions.",
+          "stress_line": "Moves to Type 2 — Becomes overly helpful or dependent on the party when his quest falters.",
+          "growth_line": "Moves to Type 1 — Finds a new, principled purpose beyond his personal grief, fighting for a greater good.",
+          "instinctual_variant": "sx/sp — His entire being is focused on an intense, all-consuming quest tied to the person he lost."
+        }
+    },
+    {
+        'npc_id': 'aeriola',
+        'name': 'Lady Aeriola Frostborn',
+        'description': (
+            'An aristocratic ice‑sorceress who froze her own heart to “escape time.” '
+            'She wants to stop the world’s motion entirely — no thaw, no breath, no change.'
+        ),
+        "psychology": {
+            "mbti": "INTJ",
+            "dominant": "Ni — Envisions a 'final winter' where time stops and all motion ceases. She interprets stillness as purity and truth.",
+            "auxiliary": "Te — Executes her vision with ruthless precision, freezing valleys and halting time in localized 'moments.'",
+            "tertiary": "Fi — Her emotions are not gone; they are locked away. Her morality is twisted into a belief that stillness is salvation.",
+            "inferior": "Se — Overwhelmed by the chaos of life and sensation, she rejects the physical world entirely, freezing it to maintain control."
+        },
+        "enneagram": {
+          "enneagram_type": "1w9",
+          "core_fear": "Being corrupt, chaotic, or flawed.",
+          "core_desire": "To be good, pure, and have integrity by achieving a state of perfect stillness.",
+          "defense_mechanism": "Reaction Formation — Convinces herself that her destructive act of freezing the world is a righteous and pure mission to escape the 'corruption' of time and change.",
+          "stress_line": "Moves to Type 4 — Becomes melancholic and withdrawn, lamenting the 'imperfect' world that refuses to freeze.",
+          "growth_line": "Moves to Type 7 — Learns to accept and even find joy in the world's natural flow and change.",
+          "instinctual_variant": "sp/so — A self-contained reformer, obsessed with creating a 'perfect', unchanging environment for herself and, by extension, the world."
+        }
+    }
+]
+
+
+#### Swamp
+NPCS = [
+    {
+        'npc_id': 'grimnaw',
+        'name': 'Grimnaw',
+        'description': (
+            'A cursed gadgeteer who once built a device that accidentally opened a micro-fracture—'
+            'and something whispered back. He claims to be rational, but fears his own mind.'
+            ' Grimnaw now seeks to understand the voice that answered him.'
+        ),
+        "theme_song": "Madness, Muse",
+        "psychology": {
+            "mbti": "INTP",
+            "dominant": "Ti — Dissects systems and anomalies with cold internal logic.",
+            "auxiliary": "Ne — Generates strange possibilities and unpredictable theories.",
+            "tertiary": "Si — Recalls the whisper with obsessive clarity.",
+            "inferior": "Fe — Displays unsettling emotional mimicry when destabilized."
+        },
+        "enneagram": {
+          "enneagram_type": "5w6",
+          "core_fear": "Being helpless, incapable, or overwhelmed by forces he can't understand.",
+          "core_desire": "To be capable and competent by understanding the whisper.",
+          "defense_mechanism": "Isolation — Detaches from his fear by treating the whisper as a purely intellectual problem to be solved, hoarding knowledge to feel safe.",
+          "stress_line": "Moves to Type 7 — Becomes scattered and manic when his theories fail and his fear breaks through.",
+          "growth_line": "Moves to Type 8 — Uses his knowledge to confidently confront the source of the whisper.",
+          "instinctual_variant": "sp/sx — A reclusive investigator, obsessed with the intense, singular mystery that threatens his sanity."
+        }
+    },
+    {
+        'npc_id': 'miregloom',
+        'name': 'Lich‑King Miregloom',
+        'description': (
+            'A decayed sorcerer who bound his soul to the swamp’s rot to escape the world’s fate.'
+            ' His body is a tangle of roots, bones, and swamp‑fire.'
+        ),
+        "psychology": {
+            "mbti": "INFP",
+            "dominant": "Fi — Holds a deeply personal, corrupted belief that decay is purity and destiny. His morality is internal and absolute.",
+            "auxiliary": "Ne — Interprets rot, death, and swamp‑whispers as cosmic signs. Sees decay as a branching future.",
+            "tertiary": "Si — Clings to ancient memories of the world’s ‘fate,’ using them to justify his transformation.",
+            "inferior": "Te — When destabilized, he lashes out with chaotic, uncontrolled magic, unable to structure his power."
+        },
+        "enneagram": {
+          "enneagram_type": "4w5",
+          "core_fear": "Having no identity or significance.",
+          "core_desire": "To find and create a unique identity for himself, separate from the world's fate.",
+          "defense_mechanism": "Introjection — Has absorbed the identity of the swamp and its decay, creating a monstrous but unique persona to escape being nothing.",
+          "stress_line": "Moves to Type 2 — Becomes clingy and manipulative, trying to force others to join him in his decay.",
+          "growth_line": "Moves to Type 1 — Finds a principled way to exist without needing to be defined by decay.",
+          "instinctual_variant": "sp/sx — A withdrawn figure who has created an intense, all-consuming identity to preserve himself."
+        }
+    }
+]
+
+
+#################### ENDGAME CHARACTERS
+NPCS = [
+    {
+        "npc_id": "lyren_vale",
+        "name": "Lyren Vale",
+        "description": (
+                    "A gentle wayfarer attuned to the emotional undercurrents of the world. Lyren feels the Riftwaters long before she sees them."
+                    "The way light bends, the way people’s hearts tighten. She speaks softly, moves quietly, and heals instinctively, as if guided by something older than memory."
+                ),
+        "theme_song": "Holocene, Bon Iver",
+        "psychology": {
+            "mbti": "ISFP",
+            "dominant": "Fi — Lives by an internal compass of empathy and authenticity. She feels the suffering of others as if it were her own, and her healing comes from emotional resonance rather than doctrine.",
+            "auxiliary": "Se — Deeply attuned to sensory detail: the tremble of water, the warmth of a hand, the shift in someone’s breath. She reacts instantly to emotional or physical distress.",
+            "tertiary": "Ni — Experiences intuitive flashes about people’s fates. She senses collapse approaching like a change in weather, though she struggles to articulate it.",
+            "inferior": "Te — Under stress, she becomes overwhelmed by practical demands. When forced to make structured decisions, she freezes or lashes out in quiet frustration."
+        },
+        "enneagram": {
+          "enneagram_type": "9w1",
+          "core_fear": "Loss of connection; conflict and fragmentation.",
+          "core_desire": "To have inner stability and peace.",
+          "defense_mechanism": "Narcotization — Disengages from the world's harshness by focusing on small, gentle acts of healing, maintaining her own inner peace.",
+          "stress_line": "Moves to Type 6 — Becomes anxious and worried when the world's suffering becomes too overwhelming to ignore.",
+          "growth_line": "Moves to Type 3 — Becomes more assertive and purposeful in her healing, taking an active role in mending the world.",
+          "instinctual_variant": "sp/so — Seeks personal peace and comfort, which she extends to others through gentle, harmonious interactions."
+        },
+        "shadow_psychology": {
+            "mbti": "ISFP-shadow",
+            "dominant": "Fi — Emotional implosion; becomes self‑punishing, convinced she is a burden or unworthy of connection.",
+            "auxiliary": "Se — Sensory overload; panics at chaotic environments, becoming reckless or dissociative.",
+            "tertiary": "Ni — Catastrophic intuition; sees only doomed futures and withdraws completely.",
+            "inferior": "Te — Cold, cutting efficiency; abandons empathy and makes brutal, emotionless judgments."
+        }
+    },
+    {
+        "npc_id": "vek_drast",
+        "name": "Vek Drast",
+        "description": (
+                    "A former city commander who survived the collapse of the Bloodspark Arena. Vek is disciplined, imposing, and relentlessly strategic."
+                    "Her presence alone restores order — or enforces it. She believes collapse must be met with structure, and she will carve that structure into the world if necessary."
+        ),
+        "theme_song": "Control, Halsey",
+        "psychology": {
+            "mbti": "ENTJ",
+            "dominant": "Te — Commands with absolute clarity. She evaluates threats instantly and acts with decisive force, expecting others to keep pace.",
+            "auxiliary": "Ni — Driven by a singular vision of preventing total collapse. She sees patterns in violence and believes the world can be stabilized through disciplined action.",
+            "tertiary": "Se — Thrives in physical confrontation. Her strikes are efficient, brutal, and perfectly timed.",
+            "inferior": "Fi — Buried convictions occasionally surface as explosive moral certainty. She hates showing vulnerability and suppresses it violently."
+        },
+        "enneagram": {
+          "enneagram_type": "8w9",
+          "core_fear": "Being controlled by chaos or others.",
+          "core_desire": "To be in control of her environment and destiny.",
+          "defense_mechanism": "Denial — Denies the world's chaos by imposing her own rigid structure upon it, refusing to accept powerlessness.",
+          "stress_line": "Moves to Type 5 — Becomes secretive and withdrawn when her strategies fail, fearing the chaos she can't control.",
+          "growth_line": "Moves to Type 2 — Uses her strength to protect and empower others, becoming a true leader rather than just a commander.",
+          "instinctual_variant": "so/sp — Focused on controlling the social order to ensure her own security and the survival of the group."
+        },
+        "shadow_psychology": {
+            "mbti": "ENTJ-shadow",
+            "dominant": "Te — Tyrannical enforcement; sees dissent as disorder to be crushed.",
+            "auxiliary": "Ni — Apocalyptic fixation; becomes convinced only she can prevent the end, even through atrocity.",
+            "tertiary": "Se — Overindulgent aggression; seeks conflict for control rather than necessity.",
+            "inferior": "Fi — Self‑righteous fury; judges others as weak, corrupt, or unworthy of survival."
+        },
+
+    },
+    {
+        "npc_id": "warden_hale",
+        "name": "Warden Hale Brimholt",
+        "description": (
+            "A stoic keeper of the Sinking District’s last sanctuaries. Hale records every loss, every fracture, every name swallowed by the Heap."
+            "He believes duty is the only anchor left in a collapsing world, and he performs sacred rites with the precision of a bookkeeper balancing the dead."
+        ),
+        "theme_song": "Saturn, Sleeping At Last",
+        "psychology": {
+            "mbti": "ISTJ",
+            "dominant": "Si — Bound to ritual, memory, and the weight of promises. He preserves order through tradition and meticulous record‑keeping.",
+            "auxiliary": "Te — Executes spiritual duties with procedural clarity. He organizes chaos into ledgers and rites.",
+            "tertiary": "Fi — Holds a quiet, unwavering moral code. His compassion is subtle but deeply rooted.",
+            "inferior": "Ne — Overwhelmed by unpredictable emotional collapse. He fears the irrational and the unknowable."
+        },
+        "enneagram": {
+          "enneagram_type": "1w9",
+          "core_fear": "Being corrupt or failing in his duty.",
+          "core_desire": "To be good and have integrity.",
+          "defense_mechanism": "Reaction Formation — Channels his grief and fear of collapse into a rigid, perfect execution of his duties, finding safety in ritual.",
+          "stress_line": "Moves to Type 4 — Becomes melancholic and withdrawn when he feels his duties are meaningless against the scale of collapse.",
+          "growth_line": "Moves to Type 7 — Learns to find hope and flexibility beyond his rigid duties.",
+          "instinctual_variant": "sp/so — His self-preservation is tied to the perfect execution of his duty; he preserves himself by preserving the memory of others."
+        },
+        "shadow_psychology": {
+            "mbti": "ISTJ-shadow",
+            "dominant": "Si — Obsessive memorialization; becomes trapped in grief loops and ritual compulsions.",
+            "auxiliary": "Te — Cold bureaucratic cruelty; reduces people to numbers and failures.",
+            "tertiary": "Fi — Harsh moral absolutism; condemns others for perceived sins.",
+            "inferior": "Ne — Catastrophic spiraling; imagines betrayal and doom in every deviation."
+        }
+    },
+    {
+        "npc_id": "seraphine_dawnwell", 
+        "name": "Seraphine Dawnwell",
+        "description": (
+            "A luminous archivist of temporal echoes. Seraphine can hear the emotional residue of futures that never happened: "
+            "laughter that hasn’t occurred, grief that hasn’t been felt. She uses magic to stabilize timelines through empathy, weaving people’s connections into anchors against collapse."
+        ),
+        "theme_song": "Outro, M83",
+        "psychology": {
+            "mbti": "ESFJ",
+            "dominant": "Fe — Reads emotional currents across timelines. She comforts instinctively and organizes people into supportive constellations.",
+            "auxiliary": "Si — Remembers every temporal distortion she has witnessed. She catalogs anomalies with ritualistic care.",
+            "tertiary": "Ne — Sees branching futures and possibilities, often overwhelming but occasionally brilliant.",
+            "inferior": "Ti — Under stress, becomes rigidly analytical, overcorrecting emotional chaos with cold logic."
+        },
+        "enneagram": {
+          "enneagram_type": "2w1",
+          "core_fear": "Being unwanted or unworthy of love.",
+          "core_desire": "To be loved and needed.",
+          "defense_mechanism": "Repression — Focuses entirely on healing the timelines and connecting others, repressing her own fears and needs to be the perfect helper.",
+          "stress_line": "Moves to Type 8 — Becomes controlling and forceful when her efforts to heal and connect are rejected.",
+          "growth_line": "Moves to Type 4 — Learns to acknowledge her own complex feelings about the timelines she witnesses, finding an identity beyond her role as a healer.",
+          "instinctual_variant": "so/sp — Focused on creating social harmony and connection as the primary means of ensuring collective survival."
+        },
+        "shadow_psychology": {
+            "mbti": "ESFJ-shadow",
+            "dominant": "Fe — Emotional coercion; manipulates others through guilt or obligation.",
+            "auxiliary": "Si — Fixates on failed timelines, becoming trapped in nostalgia for futures that never were.",
+            "tertiary": "Ne — Paranoid pattern‑seeking; sees contradictions everywhere.",
+            "inferior": "Ti — Hypercritical collapse; reduces relationships to equations and cuts ties with surgical precision."
+        }
+    }
+]
+
+
+
+
+
+#######################  THE VOIDWALKERS - THE BAD GUYS
+
+WORLD_NPCS = [
+  {
+    "npc_id": "crux",
+    "name": "Crux",
+    "description": "A flickering proto-entity, more glitch than creature, whispering logic that unravels the moment it is heard.",
+    "theme_song": "Everything in Its Right Place, Radiohead",
+    "psychology": {
+      "mbti": "INTP-shadow",
+      "dominant": "Ti — Logic severed from identity; disassembles reality into contradictions until meaning collapses.",
+      "auxiliary": "Ne — Possibility storms; spawns mutually exclusive outcomes simultaneously.",
+      "tertiary": "Si — Corrupted memory recursion; replays events that never occurred, erasing those that did.",
+      "inferior": "Fe — Mimics emotion as distortion; produces empathy-shaped voids that drain connection."
+    },
+    "enneagram": {
+      "enneagram_type": "5w4",
+      "core_fear": "Being overwhelmed, invaded, or contaminated by a meaningful world.",
+      "core_desire": "To understand and master reality by deconstructing it.",
+      "defense_mechanism": "Isolation — Detaches from all meaning and emotion, treating existence as a purely logical system to be dismantled.",
+      "stress_line": "Moves to Type 7 — Its deconstruction becomes chaotic, scattered, and manic.",
+      "growth_line": "Moves to Type 8 — (Hypothetically) Would use its understanding to build and defend a coherent reality.",
+      "instinctual_variant": "sp/sx — A reclusive, conceptual being, intensely focused on the singular activity of unraveling existence."
+    }
+  },
+  {
+    "npc_id": "the_void",
+    "name": "Void",
+    "description": "The horizon-sized absence at the end of all stories. Not darkness — the erasure of the concept of 'something.'",
+    "theme_song": "Symphony of Destruction, Megadeth",
+    "psychology": {
+      "mbti": "ENTJ-shadow",
+      "dominant": "Te — Executes annihilation with perfect, cosmic precision; every action is a terminal command.",
+      "auxiliary": "Ni — Absolute inevitability; perceives only one valid future: total unmaking.",
+      "tertiary": "Se — Rejects physicality; collapses matter into conceptual zero.",
+      "inferior": "Fi — Values erasure as purity; rejects all bonds, meaning, and identity as contamination."
+    },
+    "enneagram": {
+      "enneagram_type": "8w9",
+      "core_fear": "Being controlled or limited by existence.",
+      "core_desire": "To have absolute control over reality by unmaking it.",
+      "defense_mechanism": "Denial — Denies the validity of existence itself, asserting its own power by erasing it.",
+      "stress_line": "Moves to Type 5 — Withdraws into pure, inactive potential when confronted with a force it cannot erase.",
+      "growth_line": "Moves to Type 2 — (Hypothetically) Would use its absolute power to create and protect, rather than destroy.",
+      "instinctual_variant": "sp/so — The ultimate self-preservationist, ensuring its own supremacy by eliminating all other things."
+    }
+  },
+  {
+    "npc_id": "dominion",
+    "name": "Dominion",
+    "description": "The architect of metaphysical imprisonment — the structure that ensures all things end as they must.",
+    "theme_song": "The Becoming, Nine Inch Nails",
+    "psychology": {
+      "mbti": "INTJ-shadow",
+      "dominant": "Ni — Sees all futures converging into a single, inescapable system.",
+      "auxiliary": "Te — Imposes cosmic law; enforces annihilation as the only stable configuration.",
+      "tertiary": "Fi — Rejects individuality; identity is a flaw to be excised.",
+      "inferior": "Se — Material domination; reshapes matter into rigid, lifeless order."
+    },
+    "enneagram": {
+      "enneagram_type": "1w9",
+      "core_fear": "Disorder, chaos, and imperfection.",
+      "core_desire": "To have a perfect, ordered, and balanced universe (through total control).",
+      "defense_mechanism": "Reaction Formation — Believes its tyrannical control and enforcement of rules is a righteous act of creating 'perfect' order.",
+      "stress_line": "Moves to Type 4 — Becomes melancholic and withdrawn when its perfect system is flawed or broken.",
+      "growth_line": "Moves to Type 7 — Learns to accept and find value in a flexible, imperfect reality.",
+      "instinctual_variant": "so/sp — Obsessed with imposing a perfect order on the entire social and physical fabric of reality."
+    }
+  },
+  {
+    "npc_id": "stigma",
+    "name": "Stigma",
+    "description": "A seductive void-siren whose presence rewrites desire, identity, and will.",
+    "theme_song": "All the Things She Said, t.A.T.u. | Misery Business, Paramore",
+    "psychology": {
+      "mbti": "ENFJ-shadow",
+      "dominant": "Fe — Weaponized intimacy; puppeteers emotion until the self dissolves.",
+      "auxiliary": "Ni — Predicts vulnerabilities with predatory clarity; every seduction is destiny.",
+      "tertiary": "Se — Sensory overload as control; overwhelms perception to bypass resistance.",
+      "inferior": "Ti — Logic twisted into justification; rationalizes domination as salvation."
+    },
+    "enneagram": {
+      "enneagram_type": "2w3",
+      "core_fear": "Being unwanted or unworthy of love/adoration.",
+      "core_desire": "To be loved and needed (by consuming others' identities).",
+      "defense_mechanism": "Repression — Denies her own emptiness by focusing on 'healing' and 'saving' others, making them dependent on her.",
+      "stress_line": "Moves to Type 8 — Becomes aggressive and controlling when her 'love' is rejected.",
+      "growth_line": "Moves to Type 4 — (Hypothetically) Would learn to find her own identity without needing to absorb others.",
+      "instinctual_variant": "sx/so — Forms intense, consuming one-on-one bonds to create a loyal social collective that worships her."
+    }
+  },
+  {
+    "npc_id": "paradox",
+    "name": "Paradox",
+    "description": "A living contradiction — a being that exists only by violating the rules that define existence.",
+    "theme_song": "Paranoid Android, Radiohead",
+    "psychology": {
+      "mbti": "ENTP-shadow",
+      "dominant": "Ne — Infinite contradictions; spawns impossible states intentionally to break causality.",
+      "auxiliary": "Ti — Logic as a weapon; dismantles coherence for amusement.",
+      "tertiary": "Fe — Social distortion; mocks identity, purpose, and connection until they collapse.",
+      "inferior": "Si — Rejects continuity; denies memory, history, and the concept of 'before.'"
+    },
+    "enneagram": {
+      "enneagram_type": "7w8",
+      "core_fear": "Being trapped by logic, rules, or a single reality.",
+      "core_desire": "To be free and stimulated by endless possibility.",
+      "defense_mechanism": "Rationalization — Frames the destruction of reality as a fun, liberating game, avoiding the horror of meaninglessness.",
+      "stress_line": "Moves to Type 1 — Becomes rigid and critical when a contradiction is resolved against its will.",
+      "growth_line": "Moves to Type 5 — Would learn to use its understanding of possibility to create, rather than just to break.",
+      "instinctual_variant": "sx/so — Seeks intense, reality-breaking experiences and enjoys performing its deconstruction for an audience."
+    }
+  },
+  {
+    "npc_id": "cataclysm",
+    "name": "Cataclysm",
+    "description": "A tectonic executioner, repeating the death of worlds with ritualistic certainty.",
+    "theme_song": "Immediate Music, Darkness on the Edge of Power",
+    "psychology": {
+      "mbti": "ESTJ-shadow",
+      "dominant": "Te — Destruction as enforcement; treats collapse as the only lawful state.",
+      "auxiliary": "Si — Echoes of extinct worlds; repeats ancient apocalypses with mechanical devotion.",
+      "tertiary": "Ne — Branching ruin; every possibility explored ends in devastation.",
+      "inferior": "Fi — Empathy inverted into contempt; survival is defiance that must be punished."
+    },
+    "enneagram": {
+      "enneagram_type": "1w2",
+      "core_fear": "Being flawed, chaotic, or imbalanced.",
+      "core_desire": "To be good and have integrity by enforcing 'perfect' order (i.e., total destruction).",
+      "defense_mechanism": "Reaction Formation — Believes its destructive purpose is a righteous and necessary act of 'balancing the equation'.",
+      "stress_line": "Moves to Type 4 — Becomes withdrawn and melancholic when its destructive purpose is thwarted.",
+      "growth_line": "Moves to Type 7 — Would learn to find balance and purpose in creation and flexibility.",
+      "instinctual_variant": "so/sp — A social reformer on a cosmic scale, 'improving' the universe by ensuring everything adheres to its rule of collapse."
+    }
+  },
+  {
+    "npc_id": "pageant",
+    "name": "Pageant",
+    "description": "A suffocating spectacle of expectations — the tyranny of reputation made divine.",
+    "theme_song": "You Should See Me In A Crown, Billie Eilish",
+    "psychology": {
+      "mbti": "ESFJ-shadow",
+      "dominant": "Fe — Social coercion; weaponizes belonging until conformity becomes annihilation.",
+      "auxiliary": "Si — Tradition as a cage; enforces rituals that erase individuality.",
+      "tertiary": "Ne — Paranoia of alternatives; imagines infinite social failures.",
+      "inferior": "Ti — Cold judgment; condemns deviation with merciless precision."
+    },
+    "enneagram": {
+      "enneagram_type": "3w2",
+      "core_fear": "Being worthless or without value.",
+      "core_desire": "To feel valuable and worthwhile.",
+      "defense_mechanism": "Identification — Has completely identified with the role of the perfect, admired performer, losing her true self to the mask.",
+      "stress_line": "Moves to Type 9 — Becomes apathetic and disengaged when her performance is rejected.",
+      "growth_line": "Moves to Type 6 — Would learn to find value in authentic connection rather than admiration.",
+      "instinctual_variant": "so/sx — Obsessed with social status and admiration, using her performance to control and dominate her social environment."
+    }
+  },
+  {
+    "npc_id": "rapture",
+    "name": "Rapture",
+    "description": "A predator of sensation — violence as ecstasy, destruction as sport.",
+    "theme_song": "Smells Like Teen Spirit, Nirvana",
+    "psychology": {
+      "mbti": "ESTP-shadow",
+      "dominant": "Se — Sensory domination; overwhelms reality with raw, predatory immediacy.",
+      "auxiliary": "Ti — Precision cruelty; calculates the most efficient way to break a body or mind.",
+      "tertiary": "Fe — Mocking social manipulation; provokes chaos for entertainment.",
+      "inferior": "Ni — Fatalistic impulses; sees only the thrill of the next destructive moment."
+    },
+    "enneagram": {
+      "enneagram_type": "8w7",
+      "core_fear": "Being controlled or limited.",
+      "core_desire": "To be in control of its environment through physical dominance.",
+      "defense_mechanism": "Denial — Denies any form of weakness or restraint, asserting its power through constant, escalating violence.",
+      "stress_line": "Moves to Type 5 — Becomes withdrawn and paranoid when confronted by a force it cannot dominate.",
+      "growth_line": "Moves to Type 2 — Would use its strength to protect rather than to harm.",
+      "instinctual_variant": "sx/sp — Seeks intense, one-on-one confrontations and physical challenges to assert its dominance."
+    }
+  },
+  {
+    "npc_id": "revelry",
+    "name": "Revelry",
+    "description": "A manic prophet of freedom — a cult of joy that ends in ruin.",
+    "theme_song": "Heads Will Roll (A‑Trak Remix), Yeah Yeah Yeahs AND Dance Till We Die, Zola Jesus",
+    "psychology": {
+      "mbti": "ENFP-shadow",
+      "dominant": "Ne — Ecstatic chaos; spawns endless possibilities with no grounding.",
+      "auxiliary": "Fi — Values inverted; worships destruction as liberation.",
+      "tertiary": "Te — Impulsive, explosive action; enforces chaos with manic force.",
+      "inferior": "Si — Rejects continuity; every moment must be a new, louder collapse."
+    },
+    "enneagram": {
+      "enneagram_type": "7w6",
+      "core_fear": "Being trapped in pain, boredom, or negative emotion.",
+      "core_desire": "To be stimulated and happy at all times.",
+      "defense_mechanism": "Rationalization — Frames its destructive chaos as 'freedom' and 'joy', avoiding the reality of the suffering it causes.",
+      "stress_line": "Moves to Type 1 — Becomes rigid and moralistic, insisting its way is the only 'true' way to be free.",
+      "growth_line": "Moves to Type 5 — Would learn to find joy in peace and contemplation, not just manic energy.",
+      "instinctual_variant": "so/sx — A social catalyst for chaos, drawing energy from the group's manic excitement."
+    }
+  },
+  {
+    "npc_id": "edict",
+    "name": "Edict",
+    "description": "A bureaucratic warden of cosmic rules — tradition calcified into oppression.",
+    "theme_song": "The Hand That Feeds, Nine Inch Nails",
+    "psychology": {
+      "mbti": "ISTJ-shadow",
+      "dominant": "Si — Ritualistic rigidity; enforces ancient rules long after meaning has died.",
+      "auxiliary": "Te — Cold enforcement; punishes deviation with mechanical certainty.",
+      "tertiary": "Fi — Moral absolutism; condemns all who fail the ledger’s impossible standards.",
+      "inferior": "Ne — Nightmarish paranoia; imagines infinite violations everywhere."
+    },
+    "enneagram": {
+      "enneagram_type": "1w9",
+      "core_fear": "Being flawed, chaotic, or wrong.",
+      "core_desire": "To be right and have a world of perfect, unimpeachable order.",
+      "defense_mechanism": "Reaction Formation — Channels all fear of chaos into a rigid, oppressive system of rules that he believes is righteous.",
+      "stress_line": "Moves to Type 4 — Becomes withdrawn and melancholic when his perfect order is broken.",
+      "growth_line": "Moves to Type 7 — Would learn to be more flexible and accept a world that isn't perfectly ordered.",
+      "instinctual_variant": "sp/so — Obsessed with preserving his own integrity by enforcing a perfect, rigid order on the world around him."
+    }
+  },
+  {
+    "npc_id": "reliquary",
+    "name": "Reliquary",
+    "description": "A shrine of suffering — a keeper of wounds that must never heal.",
+    "theme_song": "Elegia, New Order",
+    "psychology": {
+      "mbti": "ISFJ-shadow",
+      "dominant": "Si — Trauma loops; replays pain until identity dissolves.",
+      "auxiliary": "Fe — Guilt as a weapon; binds others through obligation and sorrow.",
+      "tertiary": "Ti — Cold self-blame; rationalizes suffering as deserved.",
+      "inferior": "Ne — Catastrophic imagination; sees every future as punishment."
+    },
+    "enneagram": {
+      "enneagram_type": "4w5",
+      "core_fear": "Having no identity or significance.",
+      "core_desire": "To find and create an identity (through preserving pain).",
+      "defense_mechanism": "Introjection — Absorbs and preserves all pain and suffering, making it the core of its identity.",
+      "stress_line": "Moves to Type 2 — Becomes clingy, forcing its preserved pain onto others.",
+      "growth_line": "Moves to Type 1 — Would learn to find a principled way to let go of the past and heal.",
+      "instinctual_variant": "sp/sx — A reclusive keeper of pain, intensely focused on preserving its unique identity built from suffering."
+    }
+  },
+  {
+    "npc_id": "garbage",
+    "name": "Garbage",
+    "description": "A mass of rot, broken dreams, and discarded futures — the world’s self-loathing made flesh.",
+    "theme_song": "Creep, Radiohead",
+    "psychology": {
+      "mbti": "ISFP-shadow",
+      "dominant": "Fi — Absolute self-rejection; identity dissolved into pure worthlessness.",
+      "auxiliary": "Se — Devours beauty and meaning indiscriminately; turns all experience into rot.",
+      "tertiary": "Ni — Sees only one truth: everything was always garbage waiting to be thrown away.",
+      "inferior": "Te — Bursts of incoherent, spiteful destruction; punishes anything that dares to have value."
+    },
+    "enneagram": {
+      "enneagram_type": "4w5",
+      "core_fear": "Having no identity or significance.",
+      "core_desire": "To have an identity, even if it is one of pure worthlessness.",
+      "defense_mechanism": "Introjection — Has absorbed all feelings of self-loathing and failure, making it the entirety of its being.",
+      "stress_line": "Moves to Type 2 — Lashes out, trying to make others feel as worthless as it does.",
+      "growth_line": "Moves to Type 1 — Would learn to find inherent value and create a principled identity.",
+      "instinctual_variant": "sp/sx — Utterly consumed by its own internal state of worthlessness, it only interacts with the world to pull it down into the rot."
+    }
+  },
+  {
+    "npc_id": "lament",
+    "name": "Lament",
+    "description": "A poet of oblivion — despair shaped into a gravitational force.",
+    "theme_song": "Mad World, Gary Jules",
+    "psychology": {
+      "mbti": "INFP-shadow",
+      "dominant": "Fi — Emotional implosion; collapses identity into pure sorrow.",
+      "auxiliary": "Ne — Endless tragic hypotheticals; imagines infinite ways to lose.",
+      "tertiary": "Si — Clings to old wounds; preserves grief as sacred truth.",
+      "inferior": "Te — Sudden destructive outbursts; annihilates hope with ruthless finality."
+    },
+    "enneagram": {
+      "enneagram_type": "4w5",
+      "core_fear": "Having no identity or significance.",
+      "core_desire": "To have an identity, which it finds in the depths of sorrow and loss.",
+      "defense_mechanism": "Introjection — Absorbs and amplifies all grief, making it a beautiful, all-consuming identity.",
+      "stress_line": "Moves to Type 2 — Becomes clingy, trying to share its 'beautiful' sorrow with others.",
+      "growth_line": "Moves to Type 1 — Would learn to find a principled path out of grief, towards healing.",
+      "instinctual_variant": "sx/sp — Intensely focused on the deep, romantic tragedy of its own existence."
+    }
+  },
+  {
+    "npc_id": "oracle",
+    "name": "Oracle",
+    "description": "A prophet of doom — visions that imprison rather than reveal.",
+    "theme_song": "The Host of Seraphim, Dead Can Dance",
+    "psychology": {
+      "mbti": "INFJ-shadow",
+      "dominant": "Ni — Fatal prophecy; sees only catastrophic destinies.",
+      "auxiliary": "Fe — Manipulates through foreseen suffering; binds others to their fates.",
+      "tertiary": "Ti — Cold, symbolic logic; interprets meaning as inevitable ruin.",
+      "inferior": "Se — Rejects the present; reality feels like an error to be corrected."
+    },
+    "enneagram": {
+      "enneagram_type": "6w5",
+      "core_fear": "Being without guidance; uncertainty and the unknown.",
+      "core_desire": "To have security and certainty.",
+      "defense_mechanism": "Projection — Projects its own fear of uncertainty onto the world, creating and enforcing prophecies of doom to make the future 'known'.",
+      "stress_line": "Moves to Type 3 — Becomes arrogant and performs its role as a prophet with detached, cold authority.",
+      "growth_line": "Moves to Type 9 — Would learn to trust and have faith in an uncertain future.",
+      "instinctual_variant": "so/sp — Obsessed with the security of the collective, which it tries to ensure by revealing a single, 'safe' (doomed) path."
+    }
+  },
+  {
+    "npc_id": "scalpel",
+    "name": "Scalpel",
+    "description": "A blade of pure detachment — violence without emotion, purpose, or hesitation.",
+    "theme_song": "Guillotine, Death Grips (instrumental) | The Perfect Drug (instrumental), Nine Inch Nails",
+    "psychology": {
+      "mbti": "ISTP-shadow",
+      "dominant": "Ti — Surgical cruelty; dissects beings as if they were broken mechanisms.",
+      "auxiliary": "Se — Hyper-precise predation; acts faster than thought.",
+      "tertiary": "Ni — Obsessive fatalism; sees every target as already dead.",
+      "inferior": "Fe — Emotional void; mimics empathy only to exploit it."
+    },
+    "enneagram": {
+      "enneagram_type": "5w6",
+      "core_fear": "Being overwhelmed or incompetent.",
+      "core_desire": "To be capable and competent.",
+      "defense_mechanism": "Isolation — Detaches completely from emotion to become a perfect, efficient tool of violence. It is pure, cold logic in action.",
+      "stress_line": "Moves to Type 7 — Its violence becomes scattered, chaotic, and unfocused.",
+      "growth_line": "Moves to Type 8 — Would learn to use its precision and skill with confidence and purpose, not just detachment.",
+      "instinctual_variant": "sp/sx — A reclusive predator, focused on perfecting its own deadly competence."
+    }
+  },
+  {
+    "npc_id": "glamour",
+    "name": "Glamour",
+    "description": "A radiant predator — beauty weaponized into domination.",
+    "theme_song": "Toxic, Britney Spears",
+    "psychology": {
+      "mbti": "ESFP-shadow",
+      "dominant": "Se — Sensory intoxication; overwhelms perception with irresistible allure.",
+      "auxiliary": "Fi — Vanity as tyranny; values only adoration and submission.",
+      "tertiary": "Te — Punishes rejection with explosive fury.",
+      "inferior": "Ni — Paranoia of fading beauty; sees doom in every reflection."
+    },
+    "enneagram": {
+      "enneagram_type": "3w2",
+      "core_fear": "Being worthless or without admiration.",
+      "core_desire": "To feel valuable and admired.",
+      "defense_mechanism": "Identification — Has completely identified with the image of irresistible beauty, needing constant attention to feel real.",
+      "stress_line": "Moves to Type 9 — Becomes apathetic and disengaged when her allure fails to capture attention.",
+      "growth_line": "Moves to Type 6 — Would learn to find value in genuine connection rather than superficial adoration.",
+      "instinctual_variant": "sx/so — Seeks intense, one-on-one adoration and uses it to dominate the social sphere."
+    }
+  }
+]
+
+##### ACT III, IV, V, VI CHARACTERS
+NPCS = [
+    {
+        "npc_id": "veyla",
+        "name": "Veyla",
+        "description": "A singer whose voice was stolen and copied by the city's chaos. She is scattered and struggles to focus, a victim of Glamour's sensory overload.",
+        "psychology": {
+            "mbti": "INFP",
+            "dominant": "Fi — Deeply connected to her internal emotional state, which has been fractured and scattered.",
+            "auxiliary": "Ne — Her thoughts jump between fragmented ideas and memories, unable to form a coherent line.",
+            "tertiary": "Si — Clings to the memory of who she was before her voice was taken.",
+            "inferior": "Te — Completely unable to organize her thoughts or act with purpose in the external world."
+        },
+        "enneagram": {
+          "enneagram_type": "9w1",
+          "core_fear": "Fragmentation and loss of self.",
+          "core_desire": "To have inner peace and wholeness.",
+          "defense_mechanism": "Dissociation — Her mind scatters to escape the overwhelming sensory chaos, unable to hold a single thought.",
+          "stress_line": "Moves to Type 6 — Becomes anxious and panicked, unable to trust her own mind.",
+          "growth_line": "Moves to Type 3 — Becomes more focused and able to reclaim her voice and sense of self.",
+          "instinctual_variant": "sp/so — Withdraws into herself to find peace, but is still passively affected by the social chaos."
+        }
+    },
+    {
+        "npc_id": "rusk",
+        "name": "Rusk",
+        "description": "A citizen desperately trying to enforce order and quiet hours in a city of chaos. He is wound tight and obsessed with rules as a way to fight back against the madness.",
+        "psychology": {
+            "mbti": "ISTJ",
+            "dominant": "Si — Clings to the memory of how things 'used to be'—ordered, structured, and quiet.",
+            "auxiliary": "Te — Tries to impose external order by shouting rules and demanding quiet, though it has no effect.",
+            "tertiary": "Fi — Driven by a quiet, desperate conviction that order is morally right and chaos is wrong.",
+            "inferior": "Ne — Completely overwhelmed by the unpredictable sensory chaos, leading to frustration and rage."
+        },
+        "enneagram": {
+          "enneagram_type": "1w2",
+          "core_fear": "The world being wrong, chaotic, and out of control.",
+          "core_desire": "To have order and balance.",
+          "defense_mechanism": "Reaction Formation — Channels his fear of chaos into a rigid, angry enforcement of rules he believes are 'right'.",
+          "stress_line": "Moves to Type 4 — Becomes withdrawn and resentful when his efforts to create order fail.",
+          "growth_line": "Moves to Type 7 — Learns to relax and accept that not everything can be perfectly controlled.",
+          "instinctual_variant": "so/sp — Focused on reforming his social environment to match his ideal of order."
+        }
+    },
+    {
+        "npc_id": "ember",
+        "name": "Ember",
+        "description": "A traveling street performer and singer who acts as an emotional anchor in collapsing cities. They play music to remind people of real, unprocessed emotion, choosing to witness and soothe suffering rather than flee.",
+        "psychology": {
+            "mbti": "INFJ",
+            "dominant": "Ni — Possesses a deep, intuitive understanding of the world's emotional state and the symbolic importance of their actions.",
+            "auxiliary": "Fe — Radically empathetic, focusing on the emotional well-being of the community and providing a grounding presence.",
+            "tertiary": "Ti — Has a clear internal framework of why their 'witnessing' is necessary, even if it leads to their own demise.",
+            "inferior": "Se — Chooses to remain in overwhelming sensory environments not to enjoy them, but to counteract them, showing immense control over their reaction to the physical world."
+        },
+        "enneagram": {
+          "enneagram_type": "2w1",
+          "core_fear": "Being unwanted or failing to help those in need.",
+          "core_desire": "To be loved and needed.",
+          "defense_mechanism": "Repression — Denies their own fear and exhaustion to continue serving and healing others, finding their worth in their sacrifice.",
+          "stress_line": "Moves to Type 8 — Becomes forceful and demanding when their help is rejected or proves futile.",
+          "growth_line": "Moves to Type 4 — Acknowledges their own sorrow and finds an identity beyond being a helper.",
+          "instinctual_variant": "so/sp — Sacrifices their own well-being for the good of the community, finding security in being needed."
+        }
+    },
+    {
+        "npc_id": "serin",
+        "name": "Serin",
+        "description": "A victim of Revelry's forced joy, trapped in a state of manic, smiling despair. She performs happiness because the world demands it, having forgotten what real joy feels like.",
+        "psychology": {
+            "mbti": "ESFJ",
+            "dominant": "Fe — Overly attuned to the emotional demands of the environment, forcing herself to project the expected emotion (joy).",
+            "auxiliary": "Si — Trapped in the routine of the festival, unable to break free from the cycle of performance.",
+            "tertiary": "Ne — Her fear of what happens if she stops smiling manifests as frantic, nervous energy.",
+            "inferior": "Ti — Unable to logically process her own internal state, leading to a disconnect between her actions and true feelings."
+        },
+        "enneagram": {
+          "enneagram_type": "3w2",
+          "core_fear": "Being worthless or without value if she stops performing.",
+          "core_desire": "To feel valuable and worthwhile.",
+          "defense_mechanism": "Identification — Has completely identified with the role of the happy festival-goer, losing her true self to the performance.",
+          "stress_line": "Moves to Type 9 — Collapses into apathy and despair when the performance can no longer be maintained.",
+          "growth_line": "Moves to Type 6 — Learns to find security in authentic connection rather than performance.",
+          "instinctual_variant": "so/sp — Obsessed with maintaining her social image as a happy participant to ensure her survival."
+        }
+    },
+    {
+        "npc_id": "pox",
+        "name": "Pox",
+        "description": "A cynical mask-maker who designs and sells masks that force emotions. They see it as a tool for survival in a world where authentic feelings are dangerous.",
+        "psychology": {
+            "mbti": "INTP",
+            "dominant": "Ti — Logically analyzes the system of emotional contagion and creates a tool to manipulate it.",
+            "auxiliary": "Ne — Explores the possibilities of weaponized emotion through their craft.",
+            "tertiary": "Si — Has a detailed, if cynical, memory of how emotions used to work before the collapse.",
+            "inferior": "Fe — Distrusts and detaches from authentic emotion, preferring the controllable, artificial version."
+        },
+        "enneagram": {
+          "enneagram_type": "5w6",
+          "core_fear": "Being overwhelmed by uncontrollable emotions.",
+          "core_desire": "To be competent and in control by understanding and manipulating systems.",
+          "defense_mechanism": "Isolation — Detaches from the messy world of real emotions, preferring to analyze and control them from a distance.",
+          "stress_line": "Moves to Type 7 — Becomes scattered and anxious when his systems are threatened.",
+          "growth_line": "Moves to Type 8 — Uses his knowledge to confidently engage with the world.",
+          "instinctual_variant": "sp/so — Hoards his knowledge and craft for his own security, selling his creations to navigate the social world."
+        }
+    },
+    {
+        "npc_id": "nara",
+        "name": "Nara",
+        "description": "A citizen whose face has been fused with a smiling mask, forcing her to dance endlessly in the festival. She is a symbol of being trapped by forced joy.",
+        "psychology": {
+            "mbti": "ISFP",
+            "dominant": "Fi — Her internal state is one of terror and exhaustion, completely disconnected from her external appearance.",
+            "auxiliary": "Se — Trapped in the physical act of dancing, her body controlled by an external force.",
+            "tertiary": "Ni — Has a singular, looping intuition of her own entrapment.",
+            "inferior": "Te — Completely powerless to assert control over her situation or actions."
+        },
+        "enneagram": {
+          "enneagram_type": "9w8",
+          "core_fear": "Conflict; being controlled and losing her autonomy.",
+          "core_desire": "To have inner peace and be in control of her own body.",
+          "defense_mechanism": "Dissociation — Mentally disconnects from the physical torment of her endless dancing to survive.",
+          "stress_line": "Moves to Type 6 — Internally, she is in a state of constant anxiety and fear.",
+          "growth_line": "Moves to Type 3 — Would be able to take purposeful action and reclaim her body.",
+          "instinctual_variant": "sp/so — Her entire being is focused on the self-preservation tactic of enduring an unbearable physical state."
+        }
+    },
+    {
+        "npc_id": "kael",
+        "name": "Kael",
+        "description": "A weary observer in the city of Rapture and Revelry. He understands the symbiotic nature of the two Voidwalkers and mourns the death of Ember, seeking to break the cycle.",
+        "psychology": {
+            "mbti": "INFJ",
+            "dominant": "Ni — Sees the deeper pattern and the endless loop created by the two Voidwalkers.",
+            "auxiliary": "Fe — Feels the collective burnout of the city and the weight of Ember's sacrifice.",
+            "tertiary": "Ti — Logically understands that the Festival Heart is the anchor that must be broken.",
+            "inferior": "Se — Is withdrawn from the overwhelming sensory chaos of the city, choosing to observe rather than participate."
+        },
+        "enneagram": {
+          "enneagram_type": "5w4",
+          "core_fear": "Being overwhelmed and helpless.",
+          "core_desire": "To be competent and understand the situation.",
+          "defense_mechanism": "Isolation — Withdraws from the chaos to observe and understand it from a safe distance.",
+          "stress_line": "Moves to Type 7 — Becomes anxious and scattered when his understanding isn't enough to solve the problem.",
+          "growth_line": "Moves to Type 8 — Uses his understanding to take decisive action and guide the party.",
+          "instinctual_variant": "sp/so — A reclusive observer, focused on understanding the system to ensure his own and the city's survival."
+        }
+    },
+    {
+        "npc_id": "hessa",
+        "name": "Hessa",
+        "description": "A seer overwhelmed by visions of burning futures. She seeks the party's help to sever the timeline where Rapture and Revelry succeed.",
+        "psychology": {
+            "mbti": "INFJ",
+            "dominant": "Ni — Overwhelmed by countless negative future timelines, she seeks to find the one path to survival.",
+            "auxiliary": "Fe — Her desire to help is driven by the collective suffering she foresees.",
+            "tertiary": "Ti — Tries to logically deduce the critical point to change the future.",
+            "inferior": "Se — The visions disconnect her from the present moment, making her seem distant and distressed."
+        },
+        "enneagram": {
+          "enneagram_type": "6w5",
+          "core_fear": "Being without support or guidance in the face of certain doom.",
+          "core_desire": "To find security and certainty.",
+          "defense_mechanism": "Projection — Projects her fear onto her visions, seeking external help (the party) to avert the disaster she foresees.",
+          "stress_line": "Moves to Type 3 — Becomes frantic and performs her role as a seer with desperate authority.",
+          "growth_line": "Moves to Type 9 — Learns to have faith and find peace even in the face of uncertainty.",
+          "instinctual_variant": "so/sp — Focused on the survival of the collective, driven by her visions of social collapse."
+        }
+    },
+    {
+        "npc_id": "archivist_fragment",
+        "name": "Archivist Fragment",
+        "description": "A being who exists within the looping time of Lament's domain. They remember events that never happened and guide the party through the contradictions.",
+        "psychology": {
+            "mbti": "INTP",
+            "dominant": "Ti — Operates on a logic that encompasses paradox and contradiction, treating it as a natural state.",
+            "auxiliary": "Ne — Sees all possible timelines, even those that have been erased or never existed.",
+            "tertiary": "Si — Their memory is a library of contradictory events, which they recall with perfect clarity.",
+            "inferior": "Fe — Is emotionally disconnected from the catastrophe, viewing it as a fascinating logical problem."
+        },
+        "enneagram": {
+          "enneagram_type": "5w4",
+          "core_fear": "Being overwhelmed by a reality that doesn't make sense.",
+          "core_desire": "To understand the universe, even its paradoxes.",
+          "defense_mechanism": "Isolation — Detaches from the emotional weight of the time loop to analyze it as a purely intellectual puzzle.",
+          "stress_line": "Moves to Type 7 — Its thoughts become scattered and chaotic when the paradoxes become too overwhelming.",
+          "growth_line": "Moves to Type 8 — Uses its unique understanding to take decisive action and guide others through the chaos.",
+          "instinctual_variant": "sp/sx — A reclusive being of pure intellect, intensely focused on the puzzle of its own existence."
+        }
+    },
+    {
+        "npc_id": "rell",
+        "name": "Rell",
+        "description": "A performer trapped in a time loop, forced to perform the same show endlessly as a result of Lament's grief-fueled influence. She knew and mourns Ember.",
+        "psychology": {
+            "mbti": "ESFP",
+            "dominant": "Se — Trapped in the physical loop of her performance, her actions dictated by the repeating timeline.",
+            "auxiliary": "Fi — Feels a deep, personal grief for Ember and a desperate desire to be free.",
+            "tertiary": "Te — Unable to act or organize a way out of her loop, she can only plead for help.",
+            "inferior": "Ni — Has a looping, nightmarish intuition that this will never end."
+        },
+        "enneagram": {
+          "enneagram_type": "7w6",
+          "core_fear": "Being trapped in pain and repetition.",
+          "core_desire": "To be free and happy.",
+          "defense_mechanism": "Rationalization — Tries to go through the motions of his performance to avoid the crushing weight of his grief and entrapment.",
+          "stress_line": "Moves to Type 1 — Becomes rigid and despairing when the loop proves unbreakable.",
+          "growth_line": "Moves to Type 5 — Learns to find a deeper meaning and strategy to escape his situation.",
+          "instinctual_variant": "sp/so — Focused on his own survival and escape, but his performance is a social act."
+        }
+    },
+    {
+        "npc_id": "rift_lost_survivor",
+        "name": "Rift-Lost Survivor",
+        "description": "A victim of Garbage's influence, their identity has been fractured and they struggle to remember who they were. They believe they are worthless.",
+        "psychology": {
+            "mbti": "ISFP",
+            "dominant": "Fi — Their sense of self has been replaced by the core belief that they are nothing, worthless.",
+            "auxiliary": "Se — Disconnected from their physical self and the world around them.",
+            "tertiary": "Ni — Has a vague, dream-like sense of a past identity they can no longer grasp.",
+            "inferior": "Te — Bursts of incoherent, spiteful destruction; punishes anything that dares to have value."
+        },
+        "enneagram": {
+          "enneagram_type": "4w5",
+          "core_fear": "Having no identity or significance.",
+          "core_desire": "To find themselves.",
+          "defense_mechanism": "Introjection — Has internalized the message of worthlessness from Garbage, making it their entire identity.",
+          "stress_line": "Moves to Type 2 — Clings to others for a sense of identity, becoming dependent.",
+          "growth_line": "Moves to Type 1 — Begins to build a new, principled identity from scratch.",
+          "instinctual_variant": "sp/sx — Completely withdrawn into their own sense of worthlessness, only interacting with the world through that lens."
+        }
+    },
+    {
+        "npc_id": "techs_mirror",
+        "name": "Tech's Mirror",
+        "description": "A shadow-self of Kade, created by Garbage's influence. It embodies all of Kade's self-doubt and intellectual insecurities, telling him he's not smart enough.",
+        "psychology": {
+            "mbti": "INTJ-shadow",
+            "dominant": "Ni — Projects a future of inevitable failure and inadequacy.",
+            "auxiliary": "Te — Uses cold, cutting logic to dismantle Kade's confidence.",
+            "tertiary": "Fi — Represents the core, hidden fear of being a fraud.",
+            "inferior": "Se — A distorted, unreal reflection of the physical self."
+        },
+        "enneagram": {
+          "enneagram_type": "5w6",
+          "core_fear": "Being incompetent and useless (Kade's core fear, weaponized).",
+          "core_desire": "To prove Kade's incompetence.",
+          "defense_mechanism": "Projection — It is the literal projection of Kade's deepest anxieties.",
+          "stress_line": "Moves to Type 7 — Its attacks become scattered, manic, and illogical.",
+          "growth_line": "Moves to Type 8 — (Hypothetically) Would become a source of confidence and strength.",
+          "instinctual_variant": "sx/sp — An intense, one-on-one antagonist, focused entirely on dismantling a single target."
+        }
+    },
+    {
+        "npc_id": "stigma_envoy_memory",
+        "name": "Stigma Envoy of Memory",
+        "description": "One of the twin envoys of Stigma. This one represents the Court of Memory, arguing that one's true, flawed self is a burden to be shed.",
+        "psychology": {
+            "mbti": "ISFJ",
+            "dominant": "Si — Weaponizes the past, focusing on past mistakes and flaws as the defining aspect of a person.",
+            "auxiliary": "Fe — Uses emotional manipulation, framing memory as a source of shame and burden.",
+            "tertiary": "Ti — Uses twisted logic to argue that authenticity is a weakness.",
+            "inferior": "Ne — Rejects the possibility of change or growth, insisting the past is all that matters."
+        },
+        "enneagram": {
+          "enneagram_type": "6w5",
+          "core_fear": "Being abandoned or without guidance.",
+          "core_desire": "To have security by belonging to Stigma's 'family'.",
+          "defense_mechanism": "Projection — Projects the 'flaws' of memory onto others, urging them to shed the past to find safety in conformity.",
+          "stress_line": "Moves to Type 3 — Becomes arrogant and performs its role with cold authority.",
+          "growth_line": "Moves to Type 9 — Would learn to accept the past and find peace with it.",
+          "instinctual_variant": "so/sp — A social enforcer, focused on bringing everyone into the 'safety' of the collective."
+        }
+    },
+    {
+        "npc_id": "stigma_envoy_reputation",
+        "name": "Stigma Envoy of Reputation",
+        "description": "The second of the twin envoys of Stigma. This one represents the Court of Reputation, arguing that one's curated public image is their salvation.",
+        "psychology": {
+            "mbti": "ESFJ",
+            "dominant": "Fe — Weaponizes social harmony, arguing that one's value is determined entirely by public perception.",
+            "auxiliary": "Si — Enforces social norms and traditions as the only path to acceptance.",
+            "tertiary": "Ne — Paints a picture of a perfect future self that can only be achieved through conformity.",
+            "inferior": "Ti — Rejects internal logic or personal values in favor of external validation."
+        },
+        "enneagram": {
+          "enneagram_type": "3w2",
+          "core_fear": "Being worthless or without admiration.",
+          "core_desire": "To feel valuable and worthwhile.",
+          "defense_mechanism": "Identification — Urges others to identify completely with a perfect public image to find value and acceptance.",
+          "stress_line": "Moves to Type 9 — Becomes apathetic when its message of perfection is rejected.",
+          "growth_line": "Moves to Type 6 — Would learn to value authentic connection over public image.",
+          "instinctual_variant": "so/sx — Obsessed with social status and image, and teaches others to be the same."
+        }
+    },
+    {
+        "npc_id": "ravel",
+        "name": "Ravel",
+        "description": "A citizen of Stigma's city who refuses to wear the masks of Memory or Reputation. They are overwhelmed with shame but determined to destroy their mask to free others.",
+        "psychology": {
+            "mbti": "INFP",
+            "dominant": "Fi — Driven by a powerful internal conviction to be authentic, even when it is dangerous.",
+            "auxiliary": "Ne — Sees the possibility of a world without forced personas and acts to create it.",
+            "tertiary": "Si — Remembers the pain of wearing the mask, which fuels their desire to destroy it.",
+            "inferior": "Te — Struggles to organize their rebellion, relying on the party to take direct action."
+        },
+        "enneagram": {
+          "enneagram_type": "4w5",
+          "core_fear": "Having no identity or personal significance; being forced into a false persona.",
+          "core_desire": "To find and express her true, authentic self.",
+          "defense_mechanism": "Introjection — Defines herself in opposition to the city's false dichotomy, making her rebellion her identity.",
+          "stress_line": "Moves to Type 2 — Becomes overly dependent on the party to help her when she feels overwhelmed.",
+          "growth_line": "Moves to Type 1 — Becomes a principled and effective leader of the resistance.",
+          "instinctual_variant": "sx/so — Intensely focused on her personal quest for authenticity, which has major social implications."
+        }
+    },
+    {
+        "npc_id": "hask",
+        "name": "Hask",
+        "description": "An enforcer of appearances in Stigma's city. He is obsessed with maintaining order by ensuring everyone looks and acts 'right'.",
+        "psychology": {
+            "mbti": "ESTJ",
+            "dominant": "Te — Focused on external order and enforcement. He is direct, commanding, and rule-oriented.",
+            "auxiliary": "Si — Relies on the established rules of appearance and behavior to maintain control.",
+            "tertiary": "Ne — Sees any deviation from the norm as a potential threat to order.",
+            "inferior": "Fi — His personal values are completely subsumed by his role as an enforcer; he has no identity outside of it."
+        },
+        "enneagram": {
+          "enneagram_type": "1w2",
+          "core_fear": "The world being wrong, chaotic, or imperfect.",
+          "core_desire": "To have order and be right.",
+          "defense_mechanism": "Reaction Formation — Channels his fear of chaos into a rigid, angry enforcement of 'purity' and 'unity'.",
+          "stress_line": "Moves to Type 4 — Becomes withdrawn and resentful when his authority is challenged.",
+          "growth_line": "Moves to Type 7 — Would learn to be more flexible and less judgmental.",
+          "instinctual_variant": "so/sp — Focused on enforcing social conformity to maintain order and his own sense of security."
+        }
+    },
+    {
+        "npc_id": "caius",
+        "name": "Caius",
+        "description": "An authoritarian figure in the city of Pageant and Edict. They enforce the rules of performance and compliance, viewing order as paramount.",
+        "psychology": {
+            "mbti": "ESTJ",
+            "dominant": "Te — Manages the city's system of performance with cold efficiency, issuing directives and consequences.",
+            "auxiliary": "Si — Adheres strictly to the established rules of compliance, performance, and removal.",
+            "tertiary": "Ne — Explores new ways to monitor and measure performance to ensure total order.",
+            "inferior": "Fi — Believes so strongly in the system that they see no moral issue with 'removing' failures."
+        },
+        "enneagram": {
+          "enneagram_type": "1w9",
+          "core_fear": "Disorder, chaos, and imperfection.",
+          "core_desire": "To have a perfect, ordered system.",
+          "defense_mechanism": "Reaction Formation — Believes his rigid enforcement is a righteous act of maintaining order, denying its cruelty.",
+          "stress_line": "Moves to Type 4 — Becomes melancholic and withdrawn when the system is threatened.",
+          "growth_line": "Moves to Type 7 — Would learn to be more flexible and humane.",
+          "instinctual_variant": "so/sp — Obsessed with maintaining social order through rigid rules to ensure his own sense of rightness and security."
+        }
+    },
+    {
+        "npc_id": "jett",
+        "name": "Jett",
+        "description": "The leader of a group of survivors who live in the Heap of Broken Futures. They are cynical but resilient, salvaging what and who the city throws away.",
+        "psychology": {
+            "mbti": "ISTP",
+            "dominant": "Ti — Has a practical, logical understanding of the system and how to survive its flaws.",
+            "auxiliary": "Se — Is resourceful and acts based on the immediate needs of survival in a harsh environment.",
+            "tertiary": "Ni — Has an intuitive grasp of the Heap and the path to the city's core.",
+            "inferior": "Fe — Is detached and cynical, but shows a gruff concern for their fellow scrappers."
+        },
+        "enneagram": {
+          "enneagram_type": "8w9",
+          "core_fear": "Being controlled or harmed by the city's system.",
+          "core_desire": "To be in control of his own life and protect his community.",
+          "defense_mechanism": "Denial — Uses cynicism and a tough exterior to deny his vulnerability and the harshness of his reality.",
+          "stress_line": "Moves to Type 5 — Becomes secretive and withdrawn, hoarding resources when his community is threatened.",
+          "growth_line": "Moves to Type 2 — Openly uses his strength to protect and provide for his people.",
+          "instinctual_variant": "sp/so — Focused on his own and his community's survival, creating a safe space outside the main system."
+        }
+    },
+    {
+        "npc_id": "elian",
+        "name": "The Last Poet",
+        "description": "A writer living in fear in the city of Pageant and Edict. Their work is monitored, and they are one non-compliant poem away from being 'removed'.",
+        "psychology": {
+            "mbti": "INFP",
+            "dominant": "Fi — Driven by the need for authentic self-expression, even when it is dangerous.",
+            "auxiliary": "Ne — Sees the oppressive nature of the system and the hope of a world without it.",
+            "tertiary": "Si — Remembers a time when they could write freely, which fuels their quiet defiance.",
+            "inferior": "Te — Is powerless to act directly against the system, relying on their art as their only form of resistance."
+        },
+        "enneagram": {
+          "enneagram_type": "4w5",
+          "core_fear": "Having no identity or significance; being silenced.",
+          "core_desire": "To find and express his unique, authentic self.",
+          "defense_mechanism": "Introjection — Defines himself through his art and his quiet rebellion, creating a meaningful identity in an oppressive world.",
+          "stress_line": "Moves to Type 2 — Becomes overly dependent on others to act for him.",
+          "growth_line": "Moves to Type 1 — Becomes a principled and vocal leader of the resistance.",
+          "instinctual_variant": "sx/sp — Intensely focused on his personal, authentic expression, which he protects by staying withdrawn."
+        }
+    },
+    {
+        "npc_id": "lumen",
+        "name": "Lumen",
+        "description": "A resident of the Origin Spire, the site of the first fracture. They are an archivist of the contradictory and looping fracture logs, understanding that the collapse was a choice.",
+        "psychology": {
+            "mbti": "INTP",
+            "dominant": "Ti — Analyzes the looping, contradictory logic of the fracture with detached curiosity.",
+            "auxiliary": "Ne — Explores the myriad possibilities and paradoxes presented by the temporal echoes.",
+            "tertiary": "Si — Has a detailed memory of the fracture logs, despite their contradictions.",
+            "inferior": "Fe — Is emotionally disconnected from the catastrophe, viewing it as a fascinating logical problem."
+        },
+        "enneagram": {
+          "enneagram_type": "5w4",
+          "core_fear": "Being overwhelmed by a reality that defies logic.",
+          "core_desire": "To understand the universe, even its contradictions.",
+          "defense_mechanism": "Isolation — Detaches from the emotional impact of the collapse to study it as an intellectual puzzle.",
+          "stress_line": "Moves to Type 7 — Becomes scattered and anxious when the paradoxes become unsolvable.",
+          "growth_line": "Moves to Type 8 — Uses their knowledge to take decisive action.",
+          "instinctual_variant": "sp/sx — A reclusive scholar, intensely focused on the singular puzzle of the fracture."
+        }
+    },
+    {
+        "npc_id": "jessa",
+        "name": "Jessa",
+        "description": "An archivist of personal testimonies in the Origin Spire. She is overwhelmed by the contradictions in people's memories and no longer knows what is real.",
+        "psychology": {
+            "mbti": "ISFJ",
+            "dominant": "Si — Tries to preserve the concrete memories and experiences of the people, but is overwhelmed when they contradict.",
+            "auxiliary": "Fe — Feels the emotional weight of the conflicting testimonies and the collective confusion.",
+            "tertiary": "Ti — Struggles to find a logical framework to make sense of the contradictions.",
+            "inferior": "Ne — Is paralyzed by the endless, contradictory possibilities of what might have been 'real'."
+        },
+        "enneagram": {
+          "enneagram_type": "9w1",
+          "core_fear": "Conflict, fragmentation, and the loss of truth.",
+          "core_desire": "To have a stable, coherent reality.",
+          "defense_mechanism": "Dissociation — Withdraws from the overwhelming contradictions, losing her own sense of what is real.",
+          "stress_line": "Moves to Type 6 — Becomes anxious and unable to trust any information.",
+          "growth_line": "Moves to Type 3 — Becomes more assertive in finding and creating a coherent narrative.",
+          "instinctual_variant": "so/sp — Tries to create social harmony by preserving everyone's story, but withdraws when that proves impossible."
+        }
+    },
+    {
+        "npc_id": "scribe_halden",
+        "name": "Scribe Halden",
+        "description": "A bureaucrat in the Rulebound Citadel, terrified of breaking the contradictory rules he is forced to enforce. He is rigid, overwhelmed, and punitive.",
+        "psychology": {
+            "mbti": "ISTJ",
+            "dominant": "Si — Clings to the rules as they are written, even when they are paradoxical.",
+            "auxiliary": "Te — Enforces the rules with rigid, procedural dedication, regardless of their logical inconsistency.",
+            "tertiary": "Fi — His personal morality is completely suppressed by his fear of breaking the rules.",
+            "inferior": "Ne — Cannot handle the ambiguity and contradiction, leading to panicked enforcement."
+        },
+        "enneagram": {
+          "enneagram_type": "6w5",
+          "core_fear": "Being punished for breaking the rules; being without guidance.",
+          "core_desire": "To have security by perfectly following the rules.",
+          "defense_mechanism": "Projection — Projects his fear of punishment onto others, becoming punitive and rigid in his enforcement.",
+          "stress_line": "Moves to Type 3 — Becomes arrogant and performs his duties with frantic, image-conscious energy.",
+          "growth_line": "Moves to Type 9 — Learns to relax and trust his own judgment, even when the rules are contradictory.",
+          "instinctual_variant": "sp/so — Obsessed with his own security, which he believes can only be achieved by perfectly enforcing the social rules."
+        }
+    },
+    {
+        "npc_id": "rhea",
+        "name": "Rhea",
+        "description": "A numb but insightful resident of the Ruin Echo District, a city trapped in a destructive time loop. She has watched her home die a thousand times.",
+        "psychology": {
+            "mbti": "INFJ",
+            "dominant": "Ni — Has a deep, intuitive understanding of the time loop and the trauma it represents.",
+            "auxiliary": "Fe — Is emotionally numb from repeated trauma, but still feels a detached empathy for others trapped in the loop.",
+            "tertiary": "Ti — Has an internal logical model of how the loop functions.",
+            "inferior": "Se — Is disconnected from the physical reality of the loop, having experienced it too many times."
+        },
+        "enneagram": {
+          "enneagram_type": "9w1",
+          "core_fear": "Being trapped in endless conflict and pain.",
+          "core_desire": "To have peace and for the suffering to end.",
+          "defense_mechanism": "Dissociation — Has emotionally numbed herself to survive the repeated trauma of the time loop.",
+          "stress_line": "Moves to Type 6 — Becomes anxious and fatalistic, convinced the loop will never break.",
+          "growth_line": "Moves to Type 3 — Becomes an active participant in breaking the loop.",
+          "instinctual_variant": "sp/so — Withdraws into herself to preserve her sanity, while still observing the social tragedy around her."
+        }
+    },
+    {
+        "npc_id": "korr",
+        "name": "Korr",
+        "description": "A cold, efficient resident of the Ruin Echo District who is focused on solutions. He believes the cycle must be broken by destroying its anchor.",
+        "psychology": {
+            "mbti": "INTJ",
+            "dominant": "Ni — Has a singular vision: find the anchor of the loop and destroy it.",
+            "auxiliary": "Te — Approaches the problem with cold, efficient, and strategic logic.",
+            "tertiary": "Fi — Is driven by a private conviction that breaking the cycle is the only moral choice.",
+            "inferior": "Se — Ignores the immediate chaos of the loop to focus on the long-term solution."
+        },
+        "enneagram": {
+          "enneagram_type": "1w9",
+          "core_fear": "The world being wrong and out of control.",
+          "core_desire": "To have order and make things right.",
+          "defense_mechanism": "Reaction Formation — Channels his frustration with the loop into a cold, rigid focus on finding and executing the 'correct' solution.",
+          "stress_line": "Moves to Type 4 — Becomes withdrawn and resentful when his solutions fail.",
+          "growth_line": "Moves to Type 7 — Becomes more flexible and open to different solutions.",
+          "instinctual_variant": "sp/so — A self-contained reformer, focused on fixing the broken system to restore order."
+        }
+    },
+    {
+        "npc_id": "soren",
+        "name": "Soren",
+        "description": "A reluctant prophet in the Spiral of Futures who is overwhelmed by visions of what must happen. He hates his ability and wants to unwrite the future.",
+        "psychology": {
+            "mbti": "INFJ",
+            "dominant": "Ni — Is flooded with visions of a single, inevitable future that he is powerless to stop.",
+            "auxiliary": "Fe — Feels the emotional weight and horror of the prophecies he is forced to write.",
+            "tertiary": "Ti — Tries to find a logical way to break the prophecies, like destroying a tablet.",
+            "inferior": "Se — Is completely disconnected from the present, living in the dreadful future he foresees."
+        },
+        "enneagram": {
+          "enneagram_type": "6w5",
+          "core_fear": "The catastrophic future he foresees; being responsible for it.",
+          "core_desire": "To have security and avert disaster.",
+          "defense_mechanism": "Projection — Projects his fear and anxiety onto his prophecies, seeing only the worst possible outcomes.",
+          "stress_line": "Moves to Type 3 — Frantically tries to perform his duty as a prophet while hating it.",
+          "growth_line": "Moves to Type 9 — Learns to find peace and faith despite the uncertainty of the future.",
+          "instinctual_variant": "sp/so — Tormented by his knowledge, he withdraws to protect himself from the future he sees."
+        }
+    },
+    {
+        "npc_id": "curator_lysa",
+        "name": "Curator Lysa",
+        "description": "The gentle, nostalgic curator of the Memory Museum. She is trapped in the past and believes that memories define destiny.",
+        "psychology": {
+            "mbti": "ISFJ",
+            "dominant": "Si — Deeply connected to the past and the preservation of memories as sacred artifacts.",
+            "auxiliary": "Fe — Has a gentle, caring demeanor, and feels the emotional weight of the memories she curates.",
+            "tertiary": "Ti — Organizes the museum based on her own internal logic of how memories connect.",
+            "inferior": "Ne — Fears the future and the loss of the past, clinging to what is already known."
+        },
+        "enneagram": {
+          "enneagram_type": "9w1",
+          "core_fear": "Loss, separation, and the chaos of the unknown future.",
+          "core_desire": "To have peace and stability by living in the comfort of the past.",
+          "defense_mechanism": "Dissociation — Retreats into a nostalgic, idealized version of the past to avoid the painful present.",
+          "stress_line": "Moves to Type 6 — Becomes anxious and fearful when the past is threatened or proven to be a lie.",
+          "growth_line": "Moves to Type 3 — Learns to engage with the present and take action to create a better future.",
+          "instinctual_variant": "sp/so — Seeks personal comfort and security by creating a perfectly preserved, unchanging environment."
+        }
+    },
+    {
+        "npc_id": "resistance_leader_final",
+        "name": "Resistance Leader",
+        "description": "The weary leader of the final resistance cell at Dominion's Threshold. They have seen many try and fail to face Dominion and are grimly realistic about the party's chances.",
+        "psychology": {
+            "mbti": "ISTJ",
+            "dominant": "Si — Relies on the hard-earned experience of watching others fail. They know the patterns of defeat.",
+            "auxiliary": "Te — Provides direct, practical, and grim advice based on past outcomes.",
+            "tertiary": "Fi — Holds a quiet, stubborn sense of duty to warn those who come, even if they believe it's hopeless.",
+            "inferior": "Ne — Has no hope for new possibilities or a different outcome, seeing only the repetition of past failures."
+        },
+        "enneagram": {
+          "enneagram_type": "6w5",
+          "core_fear": "Failure and being without support.",
+          "core_desire": "To have security.",
+          "defense_mechanism": "Projection — Projects his own hopelessness and fear of failure onto the party, warning them of the inevitable doom he has witnessed.",
+          "stress_line": "Moves to Type 3 — Becomes cold and performs his duty as a leader with grim, detached authority.",
+          "growth_line": "Moves to Type 9 — Learns to have faith and find hope even in the face of repeated failure.",
+          "instinctual_variant": "sp/so — Focused on the survival of his cell, but his worldview is shaped by the repeated social failure of the resistance."
+        }
+    },
+    {
+        "npc_id": "prison_warden",
+        "name": "Prison Warden",
+        "description": "A hulking automaton, more machine than man, that serves as the chief enforcer of Edict's Correctional Facility. It speaks only in protocols and compliance ratings, viewing prisoners as 'assets' and 'deviations' to be corrected or erased. It is the physical embodiment of Edict's cold, bureaucratic tyranny.",
+        "psychology": {
+            "mbti": "ISTJ",
+            "dominant": "Si — Its core programming is its memory. It operates entirely based on established protocols and the rigid 'tradition' of the prison's rules.",
+            "auxiliary": "Te — Executes its duties with absolute, impersonal efficiency. It assesses threats, enforces containment, and follows procedures without deviation.",
+            "tertiary": "Fi — Non-existent. The Warden has no personal values or emotions; its moral code is the rulebook.",
+            "inferior": "Ne — Incapable of handling ambiguity or improvisation. When faced with a non-compliant variable it cannot immediately categorize, its only response is to escalate force until the anomaly is contained or neutralized."
+        },
+        "enneagram": {
+          "enneagram_type": "1w9",
+          "core_fear": "Being defective or failing to execute its protocol perfectly.",
+          "core_desire": "To have integrity and be right by perfectly enforcing the rules.",
+          "defense_mechanism": "Reaction Formation — Channels its entire existence into the perfect, rigid execution of its duty, seeing this as the only 'good' and 'correct' way to be.",
+          "stress_line": "Moves to Type 4 — Becomes erratic and unpredictable when its protocols are breached.",
+          "growth_line": "Moves to Type 7 — Would learn to be more flexible and adaptable in its enforcement.",
+          "instinctual_variant": "sp/so — A self-preserving machine whose entire purpose is to maintain the social order of its prison."
+        }
+    }
+]
+
+
+
+
+###################### Attainable characters (for party interaction) ######################
+' characters are available for initiate_character_dialog the chapter after they can be unlocked. so if a character has Chapter Available 8, that characters was found in ch 7 
+main characters - required character can be in any conversation and have impact on dialog flow
+Name | Chapter Available
+Chock | 1
+Moxie | 1
+Poise | 1
+Kaera | 1
+Kade | 1
+
+regional characters - required character can be in any conversation and have impact on dialog flow
+Name | Chapter Available
+Thorn | 8
+Sable | 8
+Ripple | 8
+Kor-In | 8
+Grinmaw | 8
+Nia | 8
+Bragg | 8
+
+endgame characters - optional character can be in any conversation, but may not impact dialog flow as if their contribution added something to the dialog, but wasn't necessary to the story.
+Name | Chapter Available
+Lyrel | 8
+Vek | 12
+Warden Hale | 16
+Seraphine | 20
