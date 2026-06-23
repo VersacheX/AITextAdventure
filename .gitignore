@@ -219,3 +219,4 @@ __marimo__/
 /.vs
 /.github
 /.vscode
+/AITextAdventureAPI/ai_local_db.sqlite3
