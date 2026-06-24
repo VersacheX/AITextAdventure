@@ -97,6 +97,7 @@ class City:
 		# keys are (x, y, floor) -> List[Dict]
 		self.subloc_map: Dict[Tuple[int, int, int], List[Dict]] = {}
 		self.visited: bool = False # whether player has visited this city/region before (used to control generation and descriptions)
+		self.description: str = "No description provided."
 
 	def get_center_position(self) -> Tuple[int, int]:
 		"""Return the center position (x,y) of the city based on current tiles."""

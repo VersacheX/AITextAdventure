@@ -417,11 +417,12 @@ def build_region_map (player_game, region_settings: dict, origin: Tuple[int,int]
 		main_city = create_region_city(city_settings)
 
 		attr_region_city = f"{region_city.region_name.upper()}_{city_name.upper()}_CITY_NAME"
+		attr_region_city_description = f"{region_city.region_name.upper()}_{city_name.upper()}_CITY_DESCRIPTION"
 		city_display_name = getattr(const, attr_region_city)
+		city_description = getattr(const, attr_region_city_description)
 		main_city.display_name = city_display_name
+		main_city.description = city_description
 		main_city.parent_region_name = region_city.region_name
-
-
 		
 		main_city.ensure_required_buildings(player_game,locations)	
 		for x, y in locations:
