@@ -707,7 +707,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'kess_thornwrite', 'dialog_id': 'kess_ch20_forgotten_promises' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_exactly_needs' }},
 			{ 'event_type': 'remove_item', 'params': { 'item_id': 'forgotten_promises' }},
-			{ 'event_type': 'award_item', 'params': { 'item_id': 'memory_tonic' }},
+			{ 'event_type': 'award_item', 'params': { 'item_id': 'memory_tonic_ch20' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_deliver_memory_tonic_to_curator_lysa' }}
 		]
 	},
@@ -716,7 +716,7 @@ TASKS = [
 		'type': 'deliver',
 		'to_type': 'npc',
 		'to_id': 'curator_lysa',
-		'item_id': 'memory_tonic',
+		'item_id': 'memory_tonic_ch20',
 		'task_acquire_events': [],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch20_lysa_drinks' }},
