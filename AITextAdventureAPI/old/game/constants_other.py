@@ -22,7 +22,7 @@ BENEFICIAL_PLAYER_ABILITY_EFFECTS = [
     "heal",
     "status",
     "*_buff",
-    "revive"
+    "revive", 
     "cure",
 ]
 
