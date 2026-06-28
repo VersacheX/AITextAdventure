@@ -140,9 +140,7 @@ DUNGEON_NPCS = [
 ]
 
 DUNGEON_ITEMS = [
- {'id': 'scarred_thyme', 'location': 'treasure_room'},
- {'id': 'stimulant_large', 'location': 'treasure_room'},
- {'id': 'heirloom_ring', 'location': 'treasure_room'}
+ {'id': 'stimulant_large', 'location': 'treasure_room'} 
 ]
 
 # boss mob definition used by main story task flow

@@ -141,9 +141,7 @@ DUNGEON_ITEMS = [
  {'id': 'exoshell_armor', 'location': 'treasure_room'},
  {'id': 'exoshell_gauntlets', 'location': 'treasure_room'},
  {'id': 'exoshell_legs', 'location': 'treasure_room'},
- {'id': 'katana', 'location': 'treasure_room'},
- {'id': 'grove_lattice', 'location': 'treasure_room'},
- {'id': 'coreforge_shard', 'location': 'treasure_room'}
+ {'id': 'katana', 'location': 'treasure_room'}
 ]
 
 BOSS_MOB = {

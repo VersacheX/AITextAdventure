@@ -51,6 +51,7 @@ timeline
         TASK - Meet Seth (Dungeon Encounter) :
             ► ACQUIRED :
                 EVENT - create_dungeon - seth_hideout (region_open_area):
+                EVENT - dungeon_add_treasure - seth_hideout (dune_sundial, treasure_room):
             ► COMPLETED :
                 Seth - So Rook sent you to run me down? That guy's got it bad for me. This personal vendetta of his is really getting old. Well, you're here now. Let's see what you've got!:
                 Chock - You got it coming, Seth! We're taking you down!:
@@ -216,6 +217,8 @@ timeline
         TASK - Deliver Rare Ingredient  (kess_thornwrite):
             ► ACQUIRED :
                 EVENT - create_dungeon - abandoned_ruin_ch2 (region_open_area):
+                EVENT - dungeon_add_treasure - abandoned_ruin_ch2 (grove_lattice, treasure_room):
+                EVENT - dungeon_add_treasure - abandoned_ruin_ch2 (coreforge_shard, treasure_room):
                 EVENT - create_npc - the_demigorgon (None):
                 EVENT - award_task - meet_demigorgon
             ► COMPLETED :
@@ -367,6 +370,7 @@ timeline
         TASK - Bring in Seth :
             ► ACQUIRED :
                 EVENT - create_dungeon - seth_hideout_ch3 (region_open_area):
+                EVENT - dungeon_add_treasure - seth_hideout_ch3 (moontide_orb, treasure_room):
             ► COMPLETED :
                 Seth - You again! Hey I'm sorry about all the trouble I gave you before. I heard about how you guys appeared here out of nowhere. Weird stuff. Listen, I might be able to help you with the person in the bar's memory problem, I'm pretty sure he's one of you. There's a noble's mansion not far from here. They've got some rare herbs that could help with memory restoration. I can get you in there, but you'll need to do something for me in return. Report to Rook that you scarred me off.:
                 EVENT - hide_npc - seth:
@@ -376,6 +380,8 @@ timeline
         TASK - Deliver Scribe Mint:
             ► ACQUIRED :
                 EVENT - create_dungeon - nobles_mansion_ch3 (region_open_area):
+                EVENT - dungeon_add_treasure - nobles_mansion_ch3 (scarred_thyme, treasure_room):
+                EVENT - dungeon_add_treasure - nobles_mansion_ch3 (heirloom_ring, treasure_room):
                 EVENT - lock_dungeon - nobles_mansion_ch3:
                 EVENT - set_dungeon_locked_text - nobles_mansion_ch3 ("Seth -If you want me to get you in here to find your ingredients, you better report to rook first."):
                 EVENT - set_npc_standing_text - seth ("Heyyyyy, you made it. The mint should be somewhere around here."):
@@ -475,6 +481,10 @@ timeline
                 EVENT - create_npc - catalyst (None):
                 EVENT - create_npc - final_character (None):
                 EVENT - create_dungeon - rift_dungeon_ch4 (region_city_open_area):
+                EVENT - dungeon_add_treasure - rift_dungeon_ch4 (rift_dust,treasure_room):
+                EVENT - dungeon_add_treasure - rift_dungeon_ch4 (unstable_relic,treasure_room):
+                EVENT - dungeon_add_treasure - rift_dungeon_ch4 (phase_crystal,treasure_room):
+                EVENT - dungeon_add_treasure - rift_dungeon_ch4 (rift_core,treasure_room):
                 EVENT - set_player_in_dungeon - rift_dungeon_ch4 (entrance):
                 EVENT - dungeon_add_npc - final_character (rift_dungeon_ch4, corridor):
                 EVENT - award_task - meet_final_character:

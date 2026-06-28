@@ -277,11 +277,6 @@ DUNGEON_NPCS = [
 ############################################################
 
 DUNGEON_ITEMS = [
-    {'id': 'rift_dust', 'location': 'treasure_room'},
-    {'id': 'phase_crystal', 'location': 'treasure_room'},
-    {'id': 'rift_core', 'location': 'treasure_room'},    
-    {'id': 'unstable_relic', 'location': 'treasure_room'},
-
     {'id': 'stimulant_large', 'location': 'treasure_room'},
     {'id': 'tome_int', 'location': 'treasure_room'},
     {'id': 'tome_dex', 'location': 'treasure_room'},

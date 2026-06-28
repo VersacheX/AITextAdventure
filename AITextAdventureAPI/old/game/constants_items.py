@@ -132,6 +132,12 @@ SPECIAL_ITEM_SEEDS = [
     {"id": "scarred_thyme", "name": "Scarred Thyme", "description": "A peculiar herb with leaves that appear to have tiny scars.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
     {"id": "scribe_mint", "name": "Scribe Mint", "description": "A rare mint used in potions with a sharp refreshing taste.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
     {"id": "memory_tonic_ch3", "name": "Lost but not forgotten Tonic", "description": "A tonic that is said to restore lost memories.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    ## CH 4 special items
+    {"id":"rift_dust", "name":"Rift Dust", "description":"A small vial of shimmering dust that seems to warp light around it.  This looks like it could be mixed into an illicit potion.", "effect_description":"", "value":0, "min_spawn_level":1, "rarity":"notfound"},
+    {"id":"unstable_relic", "name":"Unstable Relic", "description":"An ancient relic that crackles with unpredictable energy.  It looks like it would fetch a high price on the black market.", "effect_description":"", "value":0, "min_spawn_level":1, "rarity":"notfound"},
+    {"id":"phase_crystal", "name":"Phase Crystal", "description":"A crystal that phases in and out of visibility, pulsing with an inner light.", "effect_description":"", "value":0, "min_spawn_level":1, "rarity":"notfound"},
+    {"id":"rift_core", "name":"Rift Core", "description":"A dense core of condensed rift energy, humming with unstable power.", "effect_description":"", "value":0, "min_spawn_level":1, "rarity":"notfound"},
+
     ## CH 5 special items
     {"id": "tracking_map", "name": "Tracking Map", "description": "A magical map used set to track the Bracelet of Existence.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
     {"id": "stormglass_ember", "name": "Stormglass Ember", "description": "A fragment of stormglass that glows with inner light.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
@@ -160,11 +166,7 @@ SPECIAL_ITEM_SEEDS = [
     {"id": "mirethread_pendant", "name": "Mirethread Pendant", "description": "A pendant braided from preserved reeds and small vertebrae, smelling faintly of peat and iron.", "effect_description": "", "value":0, "min_spawn_level":1, "rarity": "notfound"},
 
     # SPECIAL RIFT ITEMS FOUND IN THE FIRST FRACTURE
-    {"id":"rift_dust", "name":"Rift Dust", "description":"A small vial of shimmering dust that seems to warp light around it.  This looks like it could be mixed into an illicit potion.", "effect_description":"", "value":0, "min_spawn_level":1, "rarity":"notfound"},
-    {"id":"unstable_relic", "name":"Unstable Relic", "description":"An ancient relic that crackles with unpredictable energy.  It looks like it would fetch a high price on the black market.", "effect_description":"", "value":0, "min_spawn_level":1, "rarity":"notfound"},
 
-    {"id":"phase_crystal", "name":"Phase Crystal", "description":"A crystal that phases in and out of visibility, pulsing with an inner light.", "effect_description":"", "value":0, "min_spawn_level":1, "rarity":"notfound"},
-    {"id":"rift_core", "name":"Rift Core", "description":"A dense core of condensed rift energy, humming with unstable power.", "effect_description":"", "value":0, "min_spawn_level":1, "rarity":"notfound"},
     {"id":"bracelet_of_void", "name":"Bracelet of the Void", "description":"A dark bracelet that seems to absorb light, with an unsettling aura.", "effect_description":"", "value":0, "min_spawn_level":1, "rarity":"notfound"},
     {"id":"bracelet_of_existence", "name":"Bracelet of Existence", "description":"A radiant bracelet that emits a soft glow, it eminates the power of life and creation.", "effect_description":"", "value":0, "min_spawn_level":1, "rarity":"notfound"},
 ]

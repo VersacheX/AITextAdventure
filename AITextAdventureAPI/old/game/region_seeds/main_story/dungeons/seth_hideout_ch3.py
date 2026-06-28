@@ -141,8 +141,7 @@ DUNGEON_ITEMS = [
  {'id': 'stimulant_large', 'location': 'treasure_room'},
  {'id': 'panacea', 'location': 'final_chamber'},
  {'id': 'herb_major', 'location': 'treasure_room' },
- {'id': 'plasma_mitts', 'location': 'treasure_room' },
- {'id': 'moontide_orb', 'location': 'treasure_room'}
+ {'id': 'plasma_mitts', 'location': 'treasure_room' }
 ]
 
 BOSS_MOB = {

@@ -659,7 +659,8 @@ TASKS = [
 					'dungeon_id': 'seth_hideout_ch3',
 					'location': 'region_open_area'
 				}
-			}
+			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'seth_hideout_ch3', 'item_id': 'moontide_orb', 'location': 'treasure_room'}}
 		],
 		'task_complete_events': [
 			{
@@ -704,6 +705,8 @@ TASKS = [
 					'location': 'region_open_area'
 				}
 			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'nobles_mansion_ch3', 'item_id': 'scarred_thyme', 'location': 'treasure_room'}},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'nobles_mansion_ch3', 'item_id': 'heirloom_ring', 'location': 'treasure_room'}},
 			{
 				'event_type': 'lock_dungeon',
 				'params': {

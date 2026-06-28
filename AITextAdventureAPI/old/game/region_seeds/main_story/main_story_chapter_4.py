@@ -521,6 +521,10 @@ TASKS = [
             },
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'final_character', 'location': None } },
             { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'rift_dungeon_ch4', 'location': 'region_city_open_area' } },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rift_dungeon_ch4', 'item_id': 'rift_dust', 'location': 'treasure_room'}},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rift_dungeon_ch4', 'item_id': 'unstable_relic', 'location': 'treasure_room'}},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rift_dungeon_ch4', 'item_id': 'phase_crystal', 'location': 'treasure_room'}},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rift_dungeon_ch4', 'item_id': 'rift_core', 'location': 'treasure_room'}},
             { 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'rift_dungeon_ch4', 'location': 'entrance' } },
 
             # Final Character appears inside rift

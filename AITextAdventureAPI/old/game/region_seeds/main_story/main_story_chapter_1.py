@@ -735,7 +735,8 @@ TASKS = [
 					'dungeon_id': 'seth_hideout',
 					'location': 'region_open_area'
 				}
-			}
+			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'seth_hideout', 'item_id': 'dune_sundial', 'location': 'treasure_room'}}
 		],
 		'task_complete_events': [
 			{

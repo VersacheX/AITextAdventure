@@ -208,8 +208,7 @@ DUNGEON_ITEMS = [
     {'id': 'taser', 'location': 'treasure_room'},
     {'id': 'leather_armor', 'location': 'treasure_room'},
     {'id': 'leather_bracers', 'location': 'treasure_room'},
-    {'id': 'leather_chaps', 'location': 'treasure_room'},
-    {'id': 'dune_sundial', 'location': 'treasure_room'}
+    {'id': 'leather_chaps', 'location': 'treasure_room'}
 ]
 
 BOSS_MOB = { 'id': 'seth_1',
