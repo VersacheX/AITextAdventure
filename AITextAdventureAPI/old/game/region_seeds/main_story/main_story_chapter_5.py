@@ -105,21 +105,21 @@ NPC_DIALOG = [
         'npc_id': 'magic',
         'dialog_id': 'magic_ch5_after_kirn',
         'dialog': [
-            "Ooooh, a ghost signal. I hope it screams."
+            "A ghost signal waking up after everything went to hell? Now that's interesting. I wonder what else decided to come back online..."
         ]
     },
     {
         'npc_id': 'technique',
         'dialog_id': 'technique_ch5_after_kirn',
         'dialog': [
-            "If it screams, I punch it. Simple."
+            "Across the Riftwaters, huh? Sounds like a pain in the ass already. But if that's where the bracelet is, then that's where we're going."
         ]
     },
     {
         'npc_id': 'tech',
         'dialog_id': 'tech_ch5_after_kirn',
         'dialog': [
-            "Please don't punch the signal. Or do. I'm curious what happens."
+            "Great. Another unstable crossing. Just what we needed. At least we have a lead instead of wandering blind again."
         ]
     },
     {
@@ -166,51 +166,81 @@ NPC_DIALOG = [
         'npc_id': 'magic',
         'dialog_id': 'magic_ch5_after_sylvi',
         'dialog': [
-            "A reflection-walker? Delicious."
+            "A reflection-walker? Now that sounds like real power. I’d love to see how that works."
         ]
     },
     {
         'npc_id': 'technique',
         'dialog_id': 'technique_ch5_after_sylvi',
         'dialog': [
-            "Why does everything in this world bite, hum, or explode?"
+            "Everything in this damn world is either trying to kill us, mess with our heads, or both. Starting to get real tired of it."
         ]
     },
     {
         'npc_id': 'sylvi',
         'dialog_id': 'sylvi_ch5_response_to_technique',
         'dialog': [
-            "Because it's fun, sweetheart."
+            "(laughs) That’s the spirit of the place, big guy. Keeps things interesting, doesn’t it?"
         ]
     },
     {
         'npc_id': 'technique',
         'dialog_id': 'technique_ch5_static_wraiths',
         'dialog': [
-            "These things are annoying. Like angry lightbulbs."
+            "These bastards are damn annoying. Like angry lightbulbs that don’t know when to die."
         ]
     },
     {
         'npc_id': 'magic',
         'dialog_id': 'magic_ch5_static_wraiths',
         'dialog': [
-            "They hum in the wrong key. I hate it."
+            "That humming… it’s completely off. Sets my teeth on edge. I really don’t like it."
         ]
     },
     {
         'npc_id': 'tech',
         'dialog_id': 'tech_ch5_static_wraiths',
         'dialog': [
-            "They're literally made of static. Of course they hum."
+            "Of course they hum. They’re literally made of static. What did you expect, opera?"
+        ]
+    },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_ch5_defeated_static_wraiths',
+        'dialog': [
+            "Finally. Those things were a real pain in the ass. Felt like fighting a swarm of pissed-off hornets made of lightning."
+        ]
+    },
+    
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_ch5_defeated_static_wraiths',
+        'dialog': [
+            "Look at this… the Stormglass Ember. Still warm. You can feel the residual energy pulsing through it. Beautiful."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_ch5_defeated_static_wraiths',
+        'dialog': [
+            "Yeah, beautiful. Just don’t drop it. Last thing we need is another reality-tearing accident because we broke the wrong shiny object."
         ]
     },
     {
         'npc_id': 'skill',
-        'dialog_id': 'skill_ch5_static_wraiths',
+        'dialog_id': 'skill_ch5_defeated_static_wraiths',
         'dialog': [
-            "Focus. They're fast."
+            "It’s stable for now. We should get it back to Sylvi before anything else decides to crawl out of these alleys."
         ]
     },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_ch5_defeated_static_wraiths_2',
+        'dialog': [
+            "Agreed. I’ve had enough of this place."
+        ]
+    },
+
     {
         'npc_id': 'sylvi',
         'dialog_id': 'sylvi_ch5_receives_ember',
@@ -240,10 +270,10 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'technique',
-        'dialog_id': 'technique_ch5_ember_fractures_response',
+        'npc_id': 'magic',
+        'dialog_id': 'magic_ch5_ember_fractures_response',
         'dialog': [
-            "…Do it again."
+            "...Do it again."
         ]
     },
     {
@@ -480,7 +510,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch5_after_kirn' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch5_after_kirn' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch5_after_kirn' }},
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'kirn', 'standing_text': ["Just take the bracelet. I don't want it anymore. Talk to Velka, she knows things."]}},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'kirn', 'standing_text': ["Talk to Velka about following the tracking sigil, she knows things."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch5_meet_velka' }}
         ]
     },
@@ -542,6 +572,11 @@ TASKS = [
         ],
         'task_complete_events': [
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'static_wraith' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch5_defeated_static_wraiths' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch5_defeated_static_wraiths' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch5_defeated_static_wraiths' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch5_defeated_static_wraiths' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch5_defeated_static_wraiths_2' }},
             { 'event_type': 'award_item', 'params': { 'item_id': 'stormglass_ember' }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch5_deliver_ember_to_sylvi' }}
         ]
@@ -558,7 +593,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch5_narrator_ember_fractures' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch5_ember_fractures' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'sylvi', 'dialog_id': 'sylvi_ch5_ember_fractures_response' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch5_ember_fractures_response' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch5_ember_fractures_response' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'sylvi', 'standing_text': ["Astra Wynn will be here shortly. Don't wander off."]}},
             { 'event_type': 'remove_item', 'params': { 'item_id': 'stormglass_ember' }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch5_meet_astra_wynn' }}

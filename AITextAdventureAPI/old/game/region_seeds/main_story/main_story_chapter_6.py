@@ -143,7 +143,7 @@ NPC_DIALOG = [
         'npc_id': 'seth',
         'dialog_id': 'seth_ch6_contact_intro',
         'dialog': [
-            "I have a contact who can help you investigate the breach. Meet me at the city outskirts bar."
+            "I have a contact who can help you investigate the breach. Meet him at the city outskirts bar."
         ]
     },
     {
@@ -157,21 +157,21 @@ NPC_DIALOG = [
         'npc_id': 'tech',
         'dialog_id': 'tech_ch6_after_contact',
         'dialog': [
-            "Great. More unstable terrain. My favorite."
+            "Wonderful. More unstable terrain. Exactly what I wanted today."
         ]
     },
     {
         'npc_id': 'technique',
         'dialog_id': 'technique_ch6_after_contact',
         'dialog': [
-            "Point me at whatever needs punching."
+            "Alright. Unstable ground means we stay sharp and move smart. Let’s get this done right."
         ]
     },
     {
         'npc_id': 'faith',
         'dialog_id': 'faith_ch6_after_contact',
         'dialog': [
-            "Let's proceed carefully. The land is wounded."
+            "We should move carefully. Something here feels… off. Like the land itself is unsettled."
         ]
     },
     {
@@ -248,7 +248,7 @@ NPC_DIALOG = [
         'npc_id': 'technique',
         'dialog_id': 'technique_ch6_after_aberrant',
         'dialog': [
-            "Good fight. Weird fight. But good."
+            "Good fight... Weird fight. But good."
         ]
     },
     {
@@ -278,11 +278,6 @@ NPC_DIALOG = [
         'dialog': [
             "So it's true… the Riftlands are destabilizing faster than we thought. And if the Bracelet of Existence is here… someone is using it."
         ]
-    },
-    {
-        'npc_id': 'magic',
-        'dialog_id': 'magic_ch6_bracelet_theory',
-        'dialog': ["Or breaking it."]
     },
     {
         'npc_id': 'technique',
@@ -361,7 +356,7 @@ NPC_DIALOG = [
         'dialog_id': 'seth_ch6_stabilization_4',
         'dialog': [
             "There are seven local resistance members.",
-            "Each one is holds things together in their local region. Help them, and the land stabilizes.",
+            "Each one holds things together in their local region. Help them, and the land stabilizes.",
             "Ignore them, and we all die horribly. You can find them in city outskirt bars."
         ]
     },
@@ -494,7 +489,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_kaera_gets_it' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch6_to_seth' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_contact_intro' }},
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'seth', 'standing_text': ["I have a contact who can help you investigate the breach. Meet me at the city outskirts bar."]}},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'seth', 'standing_text': ["I have a contact who can help you investigate the breach. Meet him at the city outskirts bar."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch6_meet_seth_local_contact' }}
         ]
     },
@@ -564,7 +559,6 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_report_findings' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch6_bracelet_theory' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch6_bracelet_theory' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch6_bracelet_theory' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch6_bracelet_theory' }},

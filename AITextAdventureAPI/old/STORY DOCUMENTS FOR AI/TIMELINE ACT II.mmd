@@ -11,10 +11,10 @@ timeline
                 Narrator - Chapter 5 - Life can only be understood backward... but it must be lived forward.:
             > COMPLETED:
                 Kirn - You're back... good. I was hoping the signal wasn't a fluke. I placed a tracking sigil on the Bracelet of Existence. After the fracture, the sigil went dead... until now. It's faint, but it's there... and it's coming from somewhere across the Riftwaters. Velka can trace the signal with her maps. Go speak to her.:
-                Moxie - Ooooh, a ghost signal. I hope it screams.:
-                Chock - If it screams, I punch it. Simple.:
-                Kade - Please don't punch the signal. Or do. I'm curious what happens.:
-                EVENT - set_npc_standing_text - kirn ("Just take the bracelet. I don't want it anymore. Talk to Velka, she knows things."):
+                Moxie - A ghost signal waking up after everything went to hell? Now that's interesting. I wonder what else decided to come back online...:
+                Chock - Across the Riftwaters, huh? Sounds like a pain in the ass already. But if that's where the bracelet is, then that's where we're going.:
+                Kade - Great. Another unstable crossing. Just what we needed. At least we have a lead instead of wandering blind again.:
+                EVENT - set_npc_standing_text - kirn ("Talk to Velka about following the tracking sigil, she knows things."):
                 EVENT - award_task - meet_velka
 
         TASK - Meet Velka - Map of Signal Location:
@@ -33,10 +33,13 @@ timeline
             > ACQUIRED:
                 (no acquired task):
             > COMPLETED:
-                Sylvi - Teleportation across the Riftwaters? Oh honey... that's not something you ask just anyone. But I might know someone who knows someone. There's a woman. A Riftcaller. She doesn't walk through doors -- she walks through reflections. Name's Astra Wynn. She won't talk to strangers. But she owes me a favor. Bring me my Stormglass Ember, and I'll call her.:
-                Moxie - A reflection-walker? Delicious.:
-                Chock - Why does everything in this world bite, hum, or explode?:
-                Sylvi - Because it's fun, sweetheart.:
+                Sylvi - Teleportation across the Riftwaters? Oh honey... that's not something you ask just anyone.:
+                Syvli - But I might know someone who knows someone. There's a woman. A Riftcaller.:
+                Sylvi - She doesn't walk through doors -- she walks through reflections. Name's Astra Wynn.:
+                Sylvi - She won't talk to strangers. But she owes me a favor. Bring me my Stormglass Ember, and I'll call her.:
+                Moxie - A reflection-walker? Now that sounds like real power. I’d love to see how that works.:
+                Chock - Everything in this damn world is either trying to kill us, mess with our heads, or both. Starting to get real tired of it.:
+                Sylvi - (laughs) That’s the spirit of the place, big guy. Keeps things interesting, doesn’t it?:
                 EVENT - set_npc_standing_text - sylvi ("Bring me my Stormglass Ember from Stormglass Alley, and I'll summon Astra Wynn for you."):
                 EVENT - award_task - meet_static_wraiths
 
@@ -45,16 +48,21 @@ timeline
                 EVENT - create_npc - static_wraith (stormglass_alley):
                 EVENT - create_dungeon - stormglass_alley (region_city_open_area):
             > COMPLETED:
-                Chock - These things are annoying. Like angry lightbulbs.:
-                Moxie - They hum in the wrong key. I hate it.:
-                Kade - They're literally made of static. Of course they hum.:
-                Poise - Focus. They're fast.:
+                Chock - These bastards are damn annoying. Like angry lightbulbs that don’t know when to die.:
+                Moxie - That humming… it’s completely off. Sets my teeth on edge. I really don’t like it.:
+                Kade - Of course they hum. They’re literally made of static. What did you expect, opera?:
+                Poise - Stay focused. They’re fast — don’t let them flank you.:
                 EVENT - award_task - defeat_static_wraiths
 
         TASK - Defeat Static Wraiths - Item:
             > ACQUIRED:
                 EVENT - begin_combat - static_wraith_mob (stormglass_alley):
             > COMPLETED:
+                Chock - Finally. Those things were a real pain in the ass. Felt like fighting a swarm of pissed-off hornets made of lightning.:
+                Moxie - Look at this… the Stormglass Ember. Still warm. You can feel the residual energy pulsing through it. Beautiful.:
+                Kade - Yeah, beautiful. Just don’t drop it. Last thing we need is another reality-tearing accident because we broke the wrong shiny object.:
+                Poise - It’s stable for now. We should get it back to Sylvi before anything else decides to crawl out of these alleys.:
+                Chock - Agreed. I’ve had enough of this place.:
                 EVENT - award_item - stormglass_ember:
                 EVENT - award_task - return_to_sylvi
 
@@ -66,7 +74,7 @@ timeline
                 Narrator - Sylvi whispers into the ember. It fractures into mirrored shards. The air ripples.:
                 Moxie - Ohhh that's pretty. Do it again.:
                 Sylvi - If I do it again, reality might fold in half.:
-                Chock - ...Do it again.:
+                Moxie - ...Do it again.:
                 EVENT - set_npc_standing_text - sylvi ("Astra Wynn will be here shortly. Don't wander off."):
                 EVENT - remove_item - stormglass_ember:
                 EVENT - award_task - meet_astra_wynn
@@ -151,8 +159,8 @@ timeline
                 Kaera - Seth, if you're trying to help, we're grateful. Even if your methods are... unconventional.:
                 Seth - See? Kaera gets it.:
                 Chock - She's being polite. Don't get excited.:
-                Seth - I have a contact who can help you investigate the breach. Meet me at the city outskirts bar.:
-                EVENT - set_npc_standing_text - seth ("I have a contact who can help you investigate the breach. Meet me at the city outskirts bar."):
+                Seth - I have a contact who can help you investigate the breach. Meet him at the city outskirts bar.:
+                EVENT - set_npc_standing_text - seth ("I have a contact who can help you investigate the breach. Meet him at the city outskirts bar."):
                 EVENT - award_task - meet_seth_local_contact
 
         TASK - Meet Seth's Local Contact - NPC:
@@ -160,13 +168,13 @@ timeline
                 EVENT - create_npc - resistance_contact (region_bar):
             > COMPLETED:
                 Contact - You're the outsiders Seth told me about. Good. We need hands. Something is stirring in the wilds. Something that's twisting the land.:
-                Kade - Great. More unstable terrain. My favorite.:
-                Chock - Point me at whatever needs punching.:
-                Kaera - Let's proceed carefully. The land is wounded.:
+                Kade - Wonderful. More unstable terrain. Exactly what I wanted today.:
+                Chock - Alright. Unstable ground means we stay sharp and move smart. Let’s get this done right.:
+                Kaera - We should move carefully. Something here feels… off. Like the land itself is unsettled.:
                 Contact - ...You people are strange.:
                 Moxie - Thank you. We try.:
                 EVENT - set_npc_standing_text - resistance_contact ("Clear the breach site. Something crawled out of it, and we need it stopped."):
-                EVENT - award_task - aid_in_resistance_operation
+                EVENT - award_task - meet_riftspawn_aberrant
 
         TASK - Meet Riftspawn Aberrant - Dungeon:
             > ACQUIRED:
@@ -188,7 +196,7 @@ timeline
                 EVENT - hide_npc - riftspawn_aberrant:
                 Kaera - This creature... it was shaped by the same force that warped the Riftwaters.:
                 Moxie - And now it's shaped like paste.:
-                Chock - Good fight. Weird fight. But good.:
+                Chock - Good fight... Weird fight. But good.:
                 Kade - I want a sample. Nobody touch anything.:
                 Poise - Too late. Moxie touched it.:
                 Moxie - You know I can't resist touching things.:
@@ -200,7 +208,6 @@ timeline
                 (no acquired task):
             > COMPLETED:
                 Seth - So it's true... the Riftlands are destabilizing faster than we thought. And if the Bracelet of Existence is here... someone is using it.:
-                Moxie - Or breaking it.:
                 Chock - Or wearing it as jewelry.:
                 Kade - Or weaponizing it.:
                 Poise - Or losing control of it.:
@@ -221,7 +228,7 @@ timeline
                 Seth - That Riftland Stabilizer Core looks like it may be useful in strengthing the Rustwing against these storms.  Let me take it off your hands to make a few upgrades.:
                 Poise - A machine cannot run on broken parts. Neither can a world.:
                 EVENT - remove_item - riftland_stabilizer_core:
-                Seth - There are seven local resistance members. Each one is holds things together in their local region. Help them, and the land stabilizes. Ignore them, and we all die horribly. You can find them in city outskirt bars.:
+                Seth - There are seven local resistance members. Each one holds things together in their local region. Help them, and the land stabilizes. Ignore them, and we all die horribly. You can find them in city outskirt bars.:
                 Moxie - Motivating. Nothing like imminent doom to get the blood pumping.:
                 Chock - Seven heroes? Sounds like seven fights. I'm in.:
                 Kaera - These guardians must be under great strain. We should aid them swiftly.:
