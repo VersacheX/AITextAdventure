@@ -1,70 +1,108 @@
 """
-Main menu screen: new game, load game, logout, exit.
+MainMenuScreen: New Game / Load Game / Logout / Exit.
+
+Mirrors `old/console_game.py`'s `main_menu()` choices, rebuilt as a
+`BaseScreen` with real buttons instead of a blocking `input()` loop.
+"New Game" links forward to the not-yet-built `"new_game"` screen (Character
+Creation is later on the roadmap); "Load Game" is fully implemented in
+`tui/screens/load_game_screen.py` with a live, scrollable save list.
 """
-from typing import Optional, Dict, Any
-from tui.core.screen_manager import Screen, ScreenType
-from tui.core.renderer import clear_screen, make_box, center_box_in_terminal
-from tui.core.input_handler import InputHandler
+from __future__ import annotations
+
+from textual.app import ComposeResult
+from textual.containers import Vertical
+from textual.widgets import Button, Static
+
+from tui.screens.base_screen import BaseScreen
+from tui.screens.confirm_screen import ConfirmScreen
+from tui.services.session import get_session
 
 
-class MainMenuScreen(Screen):
+class MainMenuScreen(BaseScreen):
+    """Main menu shown after authentication."""
+
+    DEFAULT_CSS = """
+    MainMenuScreen {
+        align: center middle;
+    }
+
+    #menu-panel {
+        width: 44;
+        height: auto;
+        border: round $accent;
+        padding: 1 2;
+    }
+
+    #menu-title {
+        text-align: center;
+        text-style: bold;
+    }
+
+    #menu-identity {
+        text-align: center;
+        color: $text 60%;
+        margin-bottom: 1;
+    }
+
+    #menu-panel Button {
+        width: 1fr;
+        margin-bottom: 1;
+    }
     """
-    Main menu after authentication.
-    """
 
-    def __init__(self, manager):
-        super().__init__(manager)
-        self.options = [
-            ("1", "New Game", "new_game"),
-            ("2", "Load Game", "load_game"),
-            ("3", "Logout", "logout"),
-            ("Q", "Exit", "exit")
-        ]
+    def compose_content(self) -> ComposeResult:
+        with Vertical(id="menu-panel"):
+            yield Static("=== Fracture ===", id="menu-title")
+            yield Static(self._identity_label(), id="menu-identity")
+            yield Button("New Game", id="new_game", variant="primary")
+            yield Button("Load Game", id="load_game")
+            yield Button("Logout", id="logout")
+            yield Button("Exit", id="exit")
 
-    def render(self) -> None:
-        """Render the main menu."""
-        clear_screen()
+    def on_screen_resume(self) -> None:
+        # Refresh the identity label whenever this screen becomes active
+        # again (e.g. after logging out and back in as someone else), not
+        # just on first mount.
+        self.query_one("#menu-identity", Static).update(self._identity_label())
 
-        # Title
-        title = ["=== Fracture ===", "", "Main Menu:"]
-        title_box = make_box(title, 60, center_content=True)
+    @staticmethod
+    def _identity_label() -> str:
+        session = get_session()
+        if session is None:
+            return "Not signed in"
+        if session.is_guest:
+            return f"Guest ({session.mode})"
+        return f"{session.username} ({session.mode})"
 
-        # Options
-        options_content = [""]
-        for key, label, _ in self.options:
-            options_content.append(f"{key}) {label}")
-        options_content.append("")
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        button_id = event.button.id
+        if button_id == "new_game":
+            self.app.goto_screen("new_game")
+        elif button_id == "load_game":
+            self.app.goto_screen("load_game")
+        elif button_id == "logout":
+            self._logout()
+        elif button_id == "exit":
+            self._confirm_exit()
 
-        options_box = make_box(options_content, 60)
+    def _logout(self) -> None:
+        from client_api_requests.save_service_adapter import get_adapter
+        from tui.services.game_state import set_active_game
+        from tui.services.session import set_session
 
-        # Combine and center
-        all_lines = title_box + [""] + options_box
-        centered = center_box_in_terminal(all_lines)
+        try:
+            get_adapter().logout()
+        except RuntimeError:
+            pass  # no adapter configured yet -- nothing to log out of
 
-        for line in centered:
-            print(line)
+        set_session(None)
+        set_active_game(None)
+        self.notify("Logged out.", title="Logout")
+        self.app.goto_screen("auth")
 
-    def handle_input(self, key: Optional[str] = None) -> Optional[str]:
-        """Handle main menu input."""
-        if key is None:
-            key = InputHandler.get_key()
+    def _confirm_exit(self) -> None:
+        def handle_result(confirmed: bool | None) -> None:
+            if confirmed:
+                self.app.exit()
 
-        for opt_key, label, action in self.options:
-            if key == opt_key.lower():
-                if action == "exit":
-                    if InputHandler.get_confirmation("Exit game? (y/n): "):
-                        self.manager.quit()
-                    return None
-
-                elif action == "logout":
-                    print("\nLogging out...")
-                    input("Press Enter to continue...")
-                    return "replace:auth"
-
-                elif action == "new_game":
-                    return "push:new_game"
-
-                elif action == "load_game":
-                    return "push:load_game"
-
-        return None
+        self.app.push_screen(ConfirmScreen("Exit Fracture?"), handle_result)

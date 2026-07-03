@@ -1,0 +1,11 @@
+/* Global stylesheet for the Fracture TUI.
+
+   Only rules that should apply across every screen belong here. Screen-
+   specific layout lives in each screen's own DEFAULT_CSS so screens stay
+   self-contained and easy to move/refactor independently. */
+
+$dim-text: grey;
+
+Screen {
+    background: $surface;
+}

@@ -1,130 +1,79 @@
+﻿"""
+AuthScreen: Login / Register / Guest menu.
+
+Mirrors the choices offered by `old/console_game.py`'s `auth_menu()`
+(Login, Register, Continue as guest), rebuilt as a `BaseScreen` with real
+focusable/clickable widgets instead of a blocking `input()` loop.
+
+Note: Server Selection (local vs. online) isn't built yet, so this screen
+calls `ensure_default_local_adapter()` on mount as a temporary shim — see
+`tui/services/adapter_bootstrap.py` for details and removal plan.
 """
-Authentication screen: login, register, or guest access.
-"""
-from typing import Optional, Dict, Any
-from tui.core.screen_manager import Screen, ScreenType
-from tui.core.renderer import clear_screen, make_box, center_box_in_terminal
-from tui.core.input_handler import InputHandler
+from __future__ import annotations
+
+from textual.app import ComposeResult
+from textual.containers import Vertical
+from textual.widgets import Button, Static
+
+from tui.screens.base_screen import BaseScreen
+from tui.services.adapter_bootstrap import ensure_default_local_adapter
 
 
-class AuthScreen(Screen):
+class AuthScreen(BaseScreen):
+    """Menu screen offering Login, Register, or Guest access."""
+
+    DEFAULT_CSS = """
+    AuthScreen {
+        align: center middle;
+    }
+
+    #auth-panel {
+        width: 44;
+        height: auto;
+        border: round $accent;
+        padding: 1 2;
+    }
+
+    #auth-title {
+        text-align: center;
+        text-style: bold;
+        margin-bottom: 1;
+    }
+
+    #auth-panel Button {
+        width: 1fr;
+        margin-bottom: 1;
+    }
     """
-    Authentication screen for login/register/guest access.
 
-    Uses the configured save adapter for authentication.
-    """
+    def compose_content(self) -> ComposeResult:
+        with Vertical(id="auth-panel"):
+            yield Static("=== Authentication ===", id="auth-title")
+            yield Button("Login", id="login", variant="primary")
+            yield Button("Register", id="register")
+            yield Button("Continue as Guest", id="guest")
+            yield Button("Back", id="back")
 
-    def __init__(self, manager):
-        super().__init__(manager)
-        self.user_context: Optional[Dict[str, Any]] = None
-        self.options = [
-            ("1", "Login", "login"),
-            ("2", "Register", "register"),
-            ("3", "Continue as Guest", "guest"),
-            ("4", "Back", "back"),
-            ("Q", "Exit", "exit")
-        ]
+    def on_mount(self) -> None:
+        # TEMPORARY: see tui/services/adapter_bootstrap.py. Server Selection
+        # will own this once implemented.
+        ensure_default_local_adapter()
 
-    def render(self) -> None:
-        """Render the authentication screen."""
-        clear_screen()
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        button_id = event.button.id
+        if button_id == "login":
+            self.app.goto_screen("login")
+        elif button_id == "register":
+            self.app.goto_screen("register")
+        elif button_id == "guest":
+            self._continue_as_guest()
+        elif button_id == "back":
+            self.app.go_back()
 
-        # Title
-        title = ["=== Authentication ===", ""]
-        title_box = make_box(title, 60, center_content=True)
+    def _continue_as_guest(self) -> None:
+        from tui.services.session import Session, set_session
+        from tui.services.adapter_bootstrap import current_adapter_mode
 
-        # Options
-        options_content = [""]
-        for key, label, _ in self.options:
-            options_content.append(f"{key}) {label}")
-        options_content.append("")
-
-        options_box = make_box(options_content, 60)
-
-        # Combine and center
-        all_lines = title_box + [""] + options_box
-        centered = center_box_in_terminal(all_lines)
-
-        for line in centered:
-            print(line)
-
-    def handle_input(self, key: Optional[str] = None) -> Optional[str]:
-        """Handle authentication input."""
-        if key is None:
-            key = InputHandler.get_key()
-
-        for opt_key, label, action in self.options:
-            if key == opt_key.lower():
-                if action == "exit":
-                    self.manager.quit()
-                    return None
-
-                elif action == "back":
-                    return "replace:server_select"
-
-                elif action == "login":
-                    return self._handle_login()
-
-                elif action == "register":
-                    return self._handle_register()
-
-                elif action == "guest":
-                    print("\nContinuing as guest...")
-                    input("Press Enter to continue...")
-                    return "replace:main_menu"
-
-        return None
-
-    def _handle_login(self) -> Optional[str]:
-        """Handle login flow."""
-        print("\n=== Login ===")
-        username = InputHandler.get_text("Username: ")
-        password = InputHandler.get_text("Password: ")
-
-        try:
-            from client_api_requests.save_service_adapter import get_adapter
-            adapter = get_adapter()
-            adapter.login(username, password)
-
-            # Store user context
-            self.user_context = {
-                "username": username,
-                "authenticated": True
-            }
-
-            print(f"\nLogged in as {username}")
-            input("Press Enter to continue...")
-            return "replace:main_menu"
-
-        except Exception as e:
-            print(f"\nLogin failed: {e}")
-            input("Press Enter to continue...")
-            return None
-
-    def _handle_register(self) -> Optional[str]:
-        """Handle registration flow."""
-        print("\n=== Register ===")
-        username = InputHandler.get_text("Choose a username: ")
-        password = InputHandler.get_text("Choose a password: ")
-
-        try:
-            from client_api_requests.save_service_adapter import get_adapter
-            adapter = get_adapter()
-            adapter.register(username, password)
-
-            # Auto-login after registration
-            adapter.login(username, password)
-
-            self.user_context = {
-                "username": username,
-                "authenticated": True
-            }
-
-            print(f"\nRegistered and logged in as {username}")
-            input("Press Enter to continue...")
-            return "replace:main_menu"
-
-        except Exception as e:
-            print(f"\nRegistration failed: {e}")
-            input("Press Enter to continue...")
-            return None
+        set_session(Session(mode=current_adapter_mode(), username=None, is_guest=True))
+        self.notify("Continuing as guest.", title="Guest mode")
+        self.app.goto_screen("main_menu")

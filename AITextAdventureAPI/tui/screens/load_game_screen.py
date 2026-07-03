@@ -1,114 +1,199 @@
 """
-Load game screen: display saved games and load selection.
+LoadGameScreen: scrollable list of the signed-in user's saves.
+
+Replaces `old/console_game.py`'s `load_game_menu()`, which printed a fixed,
+non-scrolling numbered list and read a line of text input. This version
+uses Textual's `ListView`, which is natively scrollable (mouse wheel and
+keyboard) and already turns arrow-key+Enter or a mouse click into a single
+`ListView.Selected` message -- no custom pagination or key handling needed.
+
+Fetching the save list and loading a selected save's blob are both
+blocking I/O calls (HTTP via `APISaveService`, or SQLite via
+`LocalSaveService`) and run in background workers per project convention
+(see `tui/screens/login_screen.py`).
+
+Note: this deliberately calls `SaveService.list_saves()` directly instead
+of `client_api_requests.load_game_service.load_player_games()` -- that
+helper's `except` branch calls a bare `input(...)`, which would hang a
+background worker thread indefinitely under Textual. Loading a specific
+save still reuses `load_player_game()`, which has no such issue.
 """
-from typing import Optional, Dict, Any, List
-from tui.core.screen_manager import Screen, ScreenType
-from tui.core.renderer import clear_screen, make_box, center_box_in_terminal
-from tui.core.input_handler import InputHandler
+from __future__ import annotations
+
+from typing import Any, Dict, List
+
+from textual import work
+from textual.app import ComposeResult
+from textual.containers import Horizontal, Vertical
+from textual.widgets import Button, Label, ListItem, ListView, Static
+
+from tui.screens.base_screen import BaseScreen
 
 
-class LoadGameScreen(Screen):
+def _format_save_row(save: Dict[str, Any]) -> str:
+    name = save.get("name") or "Unnamed Save"
+    character = save.get("main_character") or "Unknown"
+    level = save.get("level")
+    money = save.get("money")
+    updated = save.get("updated_at") or "unknown"
+    level_part = f"Level {level}" if level is not None else "Level ?"
+    money_part = f"${money}" if money is not None else "$?"
+    return f"{name} \u2014 {character}\n{level_part}   {money_part}   Updated {updated}"
+
+
+class SaveListItem(ListItem):
+    """A single save entry in the scrollable list, carrying its save id."""
+
+    def __init__(self, save: Dict[str, Any]) -> None:
+        super().__init__(Label(_format_save_row(save)))
+        self.save_id = save.get("id")
+
+
+class LoadGameScreen(BaseScreen):
+    """Scrollable save-selection screen."""
+
+    DEFAULT_CSS = """
+    LoadGameScreen {
+        align: center middle;
+    }
+
+    #load-panel {
+        width: 70;
+        height: 28;
+        border: round $accent;
+        padding: 1 2;
+    }
+
+    #load-title {
+        text-align: center;
+        text-style: bold;
+        margin-bottom: 1;
+    }
+
+    #load-status {
+        text-align: center;
+        color: $text 60%;
+        margin-bottom: 1;
+    }
+
+    #save-list {
+        height: 1fr;
+        border: round $primary;
+    }
+
+    SaveListItem Label {
+        padding: 0 1;
+    }
+
+    #load-buttons {
+        height: auto;
+        margin-top: 1;
+    }
+
+    #load-buttons Button {
+        margin-right: 1;
+    }
     """
-    Load game selection screen.
-    """
 
-    def __init__(self, manager):
-        super().__init__(manager)
-        self.saves: List[Dict[str, Any]] = []
+    def compose_content(self) -> ComposeResult:
+        with Vertical(id="load-panel"):
+            yield Static("=== Load Game ===", id="load-title")
+            yield Static("Loading saves...", id="load-status")
+            yield ListView(id="save-list")
+            with Horizontal(id="load-buttons"):
+                yield Button("Refresh", id="refresh")
+                yield Button("Back", id="back")
 
-    def on_enter(self, context: Optional[Dict[str, Any]] = None) -> None:
-        """Load save list when entering screen."""
-        super().on_enter(context)
-        self._load_saves()
+    def on_mount(self) -> None:
+        self._refresh_saves()
 
-    def _load_saves(self) -> None:
-        """Fetch available saves."""
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        if event.button.id == "refresh":
+            self._refresh_saves()
+        elif event.button.id == "back":
+            self.app.go_back()
+
+    def on_list_view_selected(self, event: ListView.Selected) -> None:
+        item = event.item
+        if isinstance(item, SaveListItem) and item.save_id is not None:
+            self._load_save(item.save_id)
+
+    def _refresh_saves(self) -> None:
+        self.query_one("#load-status", Static).update("Loading saves...")
+        list_view = self.query_one("#save-list", ListView)
+        list_view.clear()
+        list_view.disabled = True
+        self.query_one("#refresh", Button).disabled = True
+        self._fetch_saves()
+
+    @work(thread=True)
+    def _fetch_saves(self) -> None:
+        from client_api_requests.save_service_adapter import get_adapter
+
         try:
-            from client_api_requests.load_game_service import load_player_games
-            from client_api_requests.save_service_adapter import get_adapter
-
             adapter = get_adapter()
-            self.saves = load_player_games(save_adapter=adapter) or []
+            raw = adapter.list_saves()
+            saves = raw if isinstance(raw, list) else []
+        except Exception as exc:  # noqa: BLE001 - surfaced to the user below
+            self.app.call_from_thread(self._on_fetch_error, str(exc))
+            return
 
-        except Exception as e:
-            print(f"Error loading saves: {e}")
-            self.saves = []
+        self.app.call_from_thread(self._on_fetch_success, saves)
 
-    def render(self) -> None:
-        """Render the load game screen."""
-        clear_screen()
+    def _on_fetch_success(self, saves: List[Dict[str, Any]]) -> None:
+        list_view = self.query_one("#save-list", ListView)
+        status = self.query_one("#load-status", Static)
 
-        # Title
-        title = ["=== Load Game ===", ""]
-        title_box = make_box(title, 80, center_content=True)
-
-        # Saves list
-        saves_content = [""]
-        if not self.saves:
-            saves_content.append("No saved games found.")
+        list_view.clear()
+        if not saves:
+            status.update("No saved games found.")
         else:
-            for idx, save in enumerate(self.saves, start=1):
-                name = save.get('name', 'Unknown')
-                char = save.get('main_character', 'Unknown')
-                level = save.get('level', 0)
-                money = save.get('money', 0)
-                updated = save.get('updated_at', 'Unknown')
+            for save in saves:
+                list_view.append(SaveListItem(save))
+            status.update(f"{len(saves)} save(s). Use \u2191/\u2193 + Enter, or click, to load.")
+            list_view.focus()
 
-                line = f"{idx}) {name} - {char} Lv.{level} ${money} ({updated})"
-                saves_content.append(line)
+        list_view.disabled = False
+        self.query_one("#refresh", Button).disabled = False
 
-        saves_content.append("")
-        saves_content.append("Enter number to load, or ESC to cancel")
+    def _on_fetch_error(self, message: str) -> None:
+        self.query_one("#load-status", Static).update(f"Failed to load saves: {message}")
+        self.query_one("#save-list", ListView).disabled = False
+        self.query_one("#refresh", Button).disabled = False
 
-        saves_box = make_box(saves_content, 80)
+    def _load_save(self, save_id: Any) -> None:
+        self.query_one("#load-status", Static).update("Loading save...")
+        self.query_one("#save-list", ListView).disabled = True
+        self.query_one("#refresh", Button).disabled = True
+        self._fetch_and_apply_save(save_id)
 
-        # Combine and center
-        all_lines = title_box + [""] + saves_box
-        centered = center_box_in_terminal(all_lines)
+    @work(thread=True)
+    def _fetch_and_apply_save(self, save_id: Any) -> None:
+        from client_api_requests.save_service_adapter import get_adapter
+        from client_api_requests.load_game_service import load_player_game
 
-        for line in centered:
-            print(line)
-
-    def handle_input(self, key: Optional[str] = None) -> Optional[str]:
-        """Handle load game input."""
-        if key is None:
-            key = InputHandler.get_key()
-
-        if key == 'esc':
-            return "pop"
-
-        if key.isdigit() and self.saves:
-            idx = int(key) - 1
-            if 0 <= idx < len(self.saves):
-                return self._load_save(self.saves[idx])
-
-        return None
-
-    def _load_save(self, save: Dict[str, Any]) -> Optional[str]:
-        """Load the selected save."""
         try:
-            from client_api_requests.load_game_service import load_player_game
-            from client_api_requests.save_service_adapter import get_adapter
-
             adapter = get_adapter()
-            save_id = save.get('id')
+            player_game = load_player_game(save_id, save_adapter=adapter)
+        except Exception as exc:  # noqa: BLE001 - surfaced to the user below
+            self.app.call_from_thread(self._on_load_error, str(exc))
+            return
 
-            print(f"\nLoading save {save_id}...")
-            pg = load_player_game(save_id, save_adapter=adapter)
+        if player_game is None:
+            self.app.call_from_thread(self._on_load_error, "save data could not be read")
+            return
 
-            if pg is None:
-                print("Failed to load save.")
-                input("Press Enter to continue...")
-                return None
+        self.app.call_from_thread(self._on_load_success, player_game)
 
-            print("Save loaded successfully!")
-            input("Press Enter to continue...")
+    def _on_load_success(self, player_game: Any) -> None:
+        from tui.services.game_state import set_active_game
 
-            # In full implementation, would transition to overworld
-            # For now, return to menu
-            return "pop"
+        set_active_game(player_game)
+        self.notify("Save loaded.", title="Load Game")
+        self.app.goto_screen("overworld")
 
-        except Exception as e:
-            print(f"\nError loading save: {e}")
-            input("Press Enter to continue...")
-            return None
+    def _on_load_error(self, message: str) -> None:
+        self.notify(f"Could not load save: {message}", title="Load Game", severity="error")
+        self.query_one("#load-status", Static).update("Select a save to load.")
+        self.query_one("#save-list", ListView).disabled = False
+        self.query_one("#refresh", Button).disabled = False

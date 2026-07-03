@@ -1,104 +1,100 @@
 ﻿# Fracture TUI (Text User Interface)
 
-Modern text-based interface for the Fracture game, built on clean screen management principles.
+A flicker-free, Textual-based interface for the Fracture game, replacing the
+`old/console_game.py` + `old/game_screens/*.py` prototype (raw `print()` /
+`readchar` loops with `os.system('cls')` full-screen clears).
+
+## Why Textual
+
+Textual renders through a compositor that diffs frames and only repaints the
+terminal cells that actually changed. There is **no manual screen-clearing
+loop anywhere in this package** — that is the mechanism that eliminates
+flicker, and it must stay that way. Never add `os.system('cls')` or an
+equivalent full-screen clear/reprint cycle to this package.
 
 ## Architecture
 
-### Core Components
+### `FractureApp` (`tui/app.py`) — the screen manager
 
-- **ScreenManager**: Manages screen stack and transitions
-- **Screen**: Base class for all screens
-- **Renderer**: Rendering utilities (boxes, borders, text formatting)
-- **InputHandler**: Consistent keyboard input handling
+`FractureApp` subclasses Textual's `App`, which already implements a
+stack-based screen manager (`push_screen` / `pop_screen` / `switch_screen`).
+`FractureApp` wraps that stack with two small, explicit methods so screens
+have one obvious navigation API:
 
-### Screen Flow
-ServerSelect → Auth → MainMenu → NewGame/LoadGame → Overworld ↓                      ↓ Guest                  Combat/Dungeon
+- `self.app.goto_screen("name")` — push a registered screen by name. If the
+  screen isn't registered yet, shows a "coming soon" toast instead of
+  crashing (useful while building screens incrementally).
+- `self.app.go_back()` — pop the current screen, if there's somewhere to go
+  back to.
 
-### Screens Implemented
+Screens are registered in `FractureApp.SCREENS`, a `dict[str, type[Screen]]`.
 
-1. **ServerSelectScreen**: Choose local or online play mode
-2. **AuthScreen**: Login, register, or guest access
-3. **MainMenuScreen**: New game, load game, logout
-4. **NewGameScreen**: Character creation
-5. **LoadGameScreen**: Save selection and loading
+### `BaseScreen` (`tui/screens/base_screen.py`)
 
-### Screens Planned
+Every screen must inherit from `BaseScreen`, not Textual's `Screen`
+directly. It provides:
 
-- **OverworldScreen**: Main game exploration
-- **CombatScreen**: Turn-based combat
-- **InventoryScreen**: Item management
-- **DungeonScreen**: Dungeon exploration
+- Shared `Header`/`Footer` chrome via `compose_content()` (override this
+  instead of `compose()`).
+- A shared `escape` → `go_back` binding.
 
-## Usage
+### Screen status
 
-### Running the TUI
-python -m tui.main
+| Screen                                 | Status       | Key          |
+|----------------------------------------|--------------|--------------|
+| Title / opening                        | ✅ Implemented | `title`      |
+| Server Selection                       | ⏳ Next       | `server_select` |
+| Login / Register                       | ⏳ Planned     | `auth`       |
+| Main Menu                             | ⏳ Planned     | `main_menu`  |
+| Character Creation / Selection         | ⏳ Planned (later) | —            |
 
-
-### Project Structure
-tui/├── init.py 
-	# EntryPoint
-	├── main.py                 
-	├── README.md 
-	├── core/ │   
-		├── screen_manager.py   
-	  	├── renderer.py         
-		└── input_handler.py    
-	└── screens/ 
-		├── init.py 
-		├── server_select_screen.py 
-		├── auth_screen.py 
-		├── main_menu_screen.py 
-		├── new_game_screen.py 
-		└── load_game_screen.py
+## Running
+pip install -r tui/requirements.txt python run_tui.py
 
 
-## Design Principles
+### Debugging
 
-### Screen Management
+Because Textual owns the whole terminal, **do not use `print()` or
+`input()` for debugging inside a running screen** — it will corrupt the
+display. Instead, run the app in dev mode with a separate log console:
 
-Screens use a stack-based approach:
-- **Push**: Add screen on top (overlays)
-- **Pop**: Remove current screen (close dialog/menu)
-- **Replace**: Swap current screen (state transitions)
+terminal 1
+textual console
+terminal 2
+textual run --dev tui/app.py
 
-### Input Handling
 
-Screens return action strings from `handle_input()`:
-- `None`: Input handled, stay on screen
-- `"pop"`: Close current screen
-- `"push:<type>"`: Open new screen
-- `"replace:<type>"`: Replace current screen
+Or use `self.log(...)` from within a widget/screen, which is routed to the
+`textual console` window instead of stdout.
 
-### Rendering
+## Cleanup: files to delete
 
-All rendering uses consistent utilities:
-- Box drawing with `make_box()`
-- Text wrapping with `wrap_text()`
-- Dialog boxes with `make_dialog_box()`
-- Centering with `center_box_in_terminal()`
+The following files were part of the original non-Textual prototype
+(`os.system('cls')` + blocking `readchar` loops) and have been reduced to
+short deprecation stubs. They are no longer used by anything and should be
+deleted from disk (this tooling can create/overwrite files but cannot
+delete them):
 
-## Integration Points
+- `tui/main.py`
+- `tui/core/__init__.py`
+- `tui/core/screen_manager.py`
+- `tui/core/renderer.py`
+- `tui/core/input_handler.py`
+- `tui/screens/server_select_screen.py`
+- `tui/screens/auth_screen.py`
+- `tui/screens/main_menu_screen.py`
+- `tui/screens/new_game_screen.py`
+- `tui/screens/load_game_screen.py`
 
-### Save Adapters
+## Next steps
 
-The TUI integrates with the existing save system:
-- `LocalSaveService` for offline play
-- `APISaveService` for online play
-- Configured at server selection
+1. Verify `TitleScreen` for flicker/visual correctness.
+2. Build **Server Selection** (`server_select`) — local vs. online, wiring
+   `LocalSaveService` / `APISaveService` the same way `old/console_game.py`'s
+   `auth_menu()` did.
+3. Build **Login / Register** (`auth`).
+4. Build **Main Menu** (`main_menu`).
+5. Character Creation / Selection (later).
 
-### Game Objects
-
-Uses existing game logic:
-- `Player`, `PlayerGame` for state
-- `Combat`, `Dungeon` systems
-- Item, ability, and equipment management
-
-## Next Steps
-
-1. Implement `OverworldScreen` (viewport rendering, movement)
-2. Integrate `CombatScreen` (adapt existing combat simulator)
-3. Add `InventoryScreen` (item management UI)
-4. Implement `DungeonScreen` (minimap, exploration)
-5. Add save/autosave functionality
-6. Implement settings/options screen
+Each screen will be built and checked individually before moving to the
+next, per project convention.
