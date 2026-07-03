@@ -1,0 +1,7 @@
+# TUI-specific dependencies
+readchar>=4.0.0
+
+# Existing game dependencies
+# (These should already be in main requirements.txt)
+# requests
+# python-dotenv
