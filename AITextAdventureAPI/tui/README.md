@@ -59,6 +59,30 @@ the same pattern as `old/client_api_requests/save_service_adapter.py`
 - `game_state.py` — holds the active `PlayerGame` for downstream screens
   (Overworld, Combat, Inventory) once New Game / Load Game populates it.
 
+### `tui/screens/inventory_screen.py` — inventory + party management
+
+`InventoryScreen` is the first screen to use the legacy-style character row
+plus docked overlays, but rebuilt as Textual widgets instead of a blocking
+`readchar` loop. It keeps the selected party member in the main character row
+and mounts overlay widgets on the bottom of the screen for tasks like items
+and equipment.
+
+Current overlay behavior:
+
+- `ItemsOverlay` filters inventory by item type (`all`, `utility`, `weapon`,
+  `armor`, `special`) and docks to the bottom of the screen.
+- `EquipOverlay` filters equipment by slot (`all`, `weapon`, `head`, `body`,
+  `arms`, `legs`) and shows stat comparisons against the currently equipped
+  item.
+- In both overlays, `Tab` / `Shift-Tab` change the filter, `←` / `→` change
+  the selected party member, and `Enter` or clicking an item opens a modal
+  action popup.
+- The action popup is used to confirm equip/use/discard choices without
+  leaving the inventory screen.
+
+The overlays are intentionally docked to the bottom and sized to preserve the
+character row above them. They do not use full-screen clears.
+
 ### Screen status
 
 | Screen                                 | Status         | Key             |
@@ -68,6 +92,7 @@ the same pattern as `old/client_api_requests/save_service_adapter.py`
 | Login / Register / Guest               | ✅ Implemented | `auth`, `login`, `register` |
 | Main Menu                              | ✅ Implemented | `main_menu`     |
 | Load Game                              | ✅ Implemented | `load_game`     |
+| Inventory / Party Management           | ✅ Implemented | `inventory`     |
 | Overworld                               | ⏳ Next         | `overworld`     |
 | New Game / Character Creation          | ⏳ Planned (later) | `new_game`   |
 
@@ -102,10 +127,12 @@ delete them):
 
 ## Next steps
 
-1. Build **Overworld** (`overworld`) — map/legend/stats/menu, using
+1. Continue expanding the remaining inventory overlays and polish their
+   interactions with the character row.
+2. Build **Overworld** (`overworld`) — map/legend/stats/menu, using
    `old/game_screens/overworld_screen.py`'s `display_viewport()` as the
    layout reference.
-2. New Game / Character Creation (later).
+3. New Game / Character Creation (later).
 
 Each screen will be built and checked individually before moving to the
 next, per project convention.

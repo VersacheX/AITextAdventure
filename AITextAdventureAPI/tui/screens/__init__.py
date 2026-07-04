@@ -13,6 +13,7 @@ Implemented so far:
     - MainMenuScreen ("main_menu")
     - LoadGameScreen ("load_game")
     - OverworldScreen ("overworld")
+    - InventoryScreen ("inventory")
 
 Planned next (in this order):
     - New Game / Character Creation ("new_game")

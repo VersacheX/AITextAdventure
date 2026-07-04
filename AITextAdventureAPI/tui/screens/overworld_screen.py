@@ -200,7 +200,7 @@ class OverworldScreen(BaseScreen):
 
     @on(Button.Pressed, "#btn-inventory")
     def _on_inventory(self) -> None:
-        self.notify("Inventory not yet implemented.", title="Inventory")
+        self.app.goto_screen("inventory")
 
     @on(Button.Pressed, "#btn-tasks")
     def _on_tasks(self) -> None:
@@ -309,39 +309,30 @@ class OverworldScreen(BaseScreen):
 
     def _refresh_map(self) -> None:
         pg = self._player_game()
-        map_widget = self.query_one("#map-content", Static)
-        header_widget = self.query_one("#location-header", Static)
-
-        if pg is None:
-            map_widget.update("No game loaded.")
-            header_widget.update("")
-            return
-
-        view_w, view_h = self._map_dimensions()
         try:
-            lines = build_viewport_lines(pg, view_w, view_h)
-            map_widget.update("\n".join(lines))
-            header_widget.update(build_header(pg))
-        except Exception as exc:
-            map_widget.update(f"Map error: {exc}")
+            w, h = self._map_dimensions()
+            if pg is None:
+                self.query_one("#map-content", Static).update(
+                    "[dim]No game loaded[/dim]"
+                )
+                self.query_one("#location-header", Static).update("")
+                return
+            lines = build_viewport_lines(pg, w, h)
+            self.query_one("#map-content", Static).update("\n".join(lines))
+            self.query_one("#location-header", Static).update(build_header(pg))
+        except Exception:
+            pass
 
     def _refresh_side(self) -> None:
         pg = self._player_game()
-        legend_widget = self.query_one("#legend-panel", Static)
-        stats_widget = self.query_one("#stats-panel", Static)
-
-        if pg is None:
-            legend_widget.update("")
-            stats_widget.update("")
-            return
-
         try:
-            _, cur_area = pg.get_region_and_active_area_for_position()
-            legend_widget.update("\n".join(build_legend_lines(cur_area)))
+            if pg is None:
+                self.query_one("#legend-panel", Static).update("")
+                self.query_one("#stats-panel",  Static).update("")
+                return
+            legend_lines = build_legend_lines(get_active_area(pg))
+            self.query_one("#legend-panel", Static).update("\n".join(legend_lines))
+            stats_lines = build_stats_lines(pg)
+            self.query_one("#stats-panel",  Static).update("\n".join(stats_lines))
         except Exception:
-            legend_widget.update("")
-
-        try:
-            stats_widget.update("\n".join(build_stats_lines(pg)))
-        except Exception:
-            stats_widget.update("")
+            pass

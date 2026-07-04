@@ -27,6 +27,7 @@ from tui.screens.login_screen import LoginScreen, RegisterScreen
 from tui.screens.main_menu_screen import MainMenuScreen
 from tui.screens.load_game_screen import LoadGameScreen
 from tui.screens.overworld_screen import OverworldScreen
+from tui.screens.inventory_screen import InventoryScreen
 
 _STYLES_PATH = Path(__file__).parent / "styles" / "app.tcss"
 
@@ -50,6 +51,7 @@ class FractureApp(App):
         "main_menu": MainMenuScreen,
         "load_game": LoadGameScreen,
         "overworld": OverworldScreen,
+        "inventory": InventoryScreen,
         # Registered incrementally as each screen is built:
         # "new_game": NewGameScreen,
     }
