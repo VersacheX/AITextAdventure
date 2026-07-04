@@ -28,7 +28,7 @@ from tui.screens.main_menu_screen import MainMenuScreen
 from tui.screens.load_game_screen import LoadGameScreen
 from tui.screens.overworld_screen import OverworldScreen
 from tui.screens.inventory_screen import InventoryScreen
-from tui.screens.dev.data_mgmt_screen import DataMgmtScreen
+from tui.screens.dev.data_mgmt import DataMgmtScreen
 
 _STYLES_PATH = Path(__file__).parent / "styles" / "app.tcss"
 
