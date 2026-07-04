@@ -1,3 +1,52 @@
+### This readme is for story_suggestion_server.py and story_suggestion_cli.py
+
+### to run the server:
+(base) dmin@DESKTOP-3K6IPDC:/mnt/d/dev/source/repos/AITextAdventure$ cd aitextadventureapi
+(base) dmin@DESKTOP-3K6IPDC:/mnt/d/dev/source/repos/AITextAdventure/aitextadventureapi$ source .venv_wsl/bin/activate
+(.venv_wsl) (base) dmin@DESKTOP-3K6IPDC:/mnt/d/dev/source/repos/AITextAdventure/aitextadventureapi$ cd ai_fastapi_server
+(.venv_wsl) (base) dmin@DESKTOP-3K6IPDC:/mnt/d/dev/source/repos/AITextAdventure/aitextadventureapi/ai_fastapi_server$ uvicorn story_suggestion_server:app --host 0.0.0.0 --port 8000
+
+### Running the CLI client:
+(.venv_wsl) (base) dmin@DESKTOP-3K6IPDC:/mnt/d/dev/source/repos/AITextAdventure/aitextadventureapi/ai_fastapi_server$ python story_suggestion_cli.py --act "ACT I" --chapter 1 --task "TASK_NAME" --prompt "Make this dialogue more suspenseful." --temperature 0.8 --max-tokens 512
+
+### Parameters:
+- `--act`: The act name to analyze (e.g., "ACT I", "ACT II").
+- `--chapter`: The chapter number(s) to analyze (can be specified multiple times).
+- `--task`: The specific task name(s) to analyze (can be specified multiple times).
+- `--prompt`: Custom instruction for the model (e.g., "Make this dialogue more suspenseful.").
+- `--temperature`: Sampling temperature for the model (default: 0.7).
+- `--max-tokens`: Maximum number of tokens to generate (default: 512).
+- `--no-stream`: Disable streaming output (default: streaming is enabled).
+- `--server`: Specify the server URL (default: http://127.0.0.1:8000).
+
+### Server response format:
+- If streaming is enabled, the server will send Server-Sent Events (SSE) with chunks of generated suggestions.
+- If streaming is disabled, the server will return a JSON response containing the suggestions.
+'''
+- json response format:
+{
+  "suggestions": [
+    {
+      "task": "TASK_NAME",
+      "original": "Original dialogue line.",
+      "suggestion": "Improved/Replaced dialogue line.",
+      "why": "Explanation of changes based on character psychology."
+    },
+    ...
+  ]
+}
+'''
+
+### Future features:
+- Add more sophisticated parsing of NPC files to extract detailed character profiles.
+- Allow for full custom prompting to forgo character and act/chapter/task lookup. i.e. add endpoint for direct prompting
+
+### Referenced files:
+\AITextAdventureAPI\ai_fastapi_server\story_suggestion_cli.py
+\AITextAdventureAPI\ai_fastapi_server\story_suggestion_server.py
+
+############################### story_suggestion_server.py
+
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import StreamingResponse, JSONResponse
 from pydantic import BaseModel
@@ -189,17 +238,15 @@ def startup_event():
 def build_prompt(npcs_text: str, timeline_snippet: str, custom_instruction: Optional[str] = None) -> Dict[str, str]:
     system_message = (
         "You are a professional story editor specializing in character voice analysis. "
-        "You review game dialogue and suggest improvements based on deep character psychology. "
-        "If a line can benefit from replacement, suggest a replacement instead of an improvement. "
-        "Choose up to 4 lines per task to suggest improvements/replacement for, non-sequentially, preferring those that are generic/troupe or inconsistent with character profiles."
+        "You review game dialogue and suggest improvements based on deep character psychology."
     )
     
     # Default analysis focus
     default_focus = (
         "Review the timeline dialogue below. Identify any lines that feel:\n"
-        "- Generic, cliche, or troupe\n"
+        "- Generic or cliche\n"
         "- Inconsistent with the character's MBTI/Enneagram profile\n"
-        "- Flat, lacking emotional depth, or a one liner in too many one liners or at the wrong time\n\n"
+        "- Flat or lacking emotional depth\n\n"
     )
     
     # Use custom prompt if provided, otherwise use default
@@ -320,3 +367,92 @@ def story_suggestions(req: SuggestRequest):
         print(f"[ENDPOINT ERROR] {type(e).__name__}: {e}", file=sys.stderr)
         traceback.print_exc(file=sys.stderr)
         raise HTTPException(status_code=500, detail=str(e))
+#################################################################
+
+
+### story_suggestion_cli
+
+#!/usr/bin/env python3
+"""
+CLI client to call the story suggestion endpoint.
+Adjust default file paths to match your repo if necessary.
+"""
+import argparse
+import requests
+import sys
+import json
+
+DEFAULT_SERVER = "http://127.0.0.1:8000"
+
+def stream_sse(resp):
+    # simple SSE stream reader
+    try:
+        for line in resp.iter_lines(decode_unicode=True):
+            if line:
+                if line.startswith("data: "):
+                    payload = line[len("data: "):]
+                    if payload.strip() == "[DONE]":
+                        print("\n[STREAM DONE]")
+                        break
+                    try:
+                        obj = json.loads(payload)
+                        chunk = obj.get("chunk", "")
+                        print(chunk, end="", flush=True)
+                    except Exception:
+                        print(payload)
+    except KeyboardInterrupt:
+        print("\nAborted by user")
+
+def main():
+    parser = argparse.ArgumentParser(description="Story suggestion CLI (cached)")
+    parser.add_argument("--server", default=DEFAULT_SERVER)
+    parser.add_argument("--act", default="ACT I", help="Act name (e.g. 'ACT I', 'ACT II')")
+    parser.add_argument("--chapter", action="append", type=int, help="Chapter number(s)", default=None)
+    parser.add_argument("--task", action="append", help="Task name(s) to extract", default=None)
+    parser.add_argument("--prompt", help="Custom instruction (e.g. 'Make this darker', 'Add more tension')")  # NEW
+    parser.add_argument("--no-stream", dest="stream", action="store_false")
+    parser.add_argument("--temperature", type=float, default=0.7)
+    parser.add_argument("--max-tokens", type=int, default=512)
+    args = parser.parse_args()
+
+    payload = {
+        "act": args.act,
+        "temperature": args.temperature,
+        "max_tokens": args.max_tokens,
+        "stream": args.stream
+    }
+    if args.chapter:
+        payload["chapters"] = args.chapter
+    if args.task:
+        payload["tasks"] = args.task
+    if args.prompt:
+        payload["custom_prompt"] = args.prompt  # NEW
+
+    url = args.server.rstrip("/") + "/v1/story/suggestions"
+    headers = {"Content-Type": "application/json"}
+    
+    if args.stream:
+        try:
+            with requests.post(url, json=payload, headers=headers, stream=True, timeout=(10, 600)) as resp:
+                if resp.status_code != 200:
+                    print("Server error:", resp.status_code, resp.text, file=sys.stderr)
+                    sys.exit(1)
+                stream_sse(resp)
+        except requests.exceptions.RequestException as e:
+            print(f"Request failed: {e}", file=sys.stderr)
+            sys.exit(1)
+    else:
+        try:
+            resp = requests.post(url, json=payload, headers=headers, timeout=(10, 600))
+            if resp.status_code != 200:
+                print("Server error:", resp.status_code, resp.text, file=sys.stderr)
+                sys.exit(1)
+            print(json.dumps(resp.json(), indent=2))
+        except requests.exceptions.RequestException as e:
+            print(f"Request failed: {e}", file=sys.stderr)
+            sys.exit(1)
+
+if __name__ == "__main__":
+    main()
+
+#############################################

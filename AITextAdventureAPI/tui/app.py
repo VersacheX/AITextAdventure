@@ -28,6 +28,7 @@ from tui.screens.main_menu_screen import MainMenuScreen
 from tui.screens.load_game_screen import LoadGameScreen
 from tui.screens.overworld_screen import OverworldScreen
 from tui.screens.inventory_screen import InventoryScreen
+from tui.screens.dev.data_mgmt_screen import DataMgmtScreen
 
 _STYLES_PATH = Path(__file__).parent / "styles" / "app.tcss"
 
@@ -52,6 +53,7 @@ class FractureApp(App):
         "load_game": LoadGameScreen,
         "overworld": OverworldScreen,
         "inventory": InventoryScreen,
+        "dev_data_mgmt": DataMgmtScreen,
         # Registered incrementally as each screen is built:
         # "new_game": NewGameScreen,
     }
@@ -60,8 +62,13 @@ class FractureApp(App):
         ("ctrl+q", "quit", "Quit"),
     ]
 
+    #: Screen pushed on startup. `run_dev_tui.py` overrides this to
+    #: "dev_data_mgmt" so it boots straight into the data browser instead of
+    #: the normal title → auth → main menu flow.
+    start_screen: str = "title"
+
     def on_mount(self) -> None:
-        self.goto_screen("title")
+        self.goto_screen(self.start_screen)
 
     def goto_screen(self, name: str) -> bool:
         """Push the named screen onto the stack.
@@ -87,9 +94,12 @@ class FractureApp(App):
             self.pop_screen()
 
 
-def run() -> None:
-    """Entry point used by `run_tui.py`."""
-    FractureApp().run()
+def run(start_screen: str = "title") -> None:
+    """Entry point used by `run_tui.py` (and `run_dev_tui.py`, which passes
+    `start_screen="dev_data_mgmt"` to skip straight to the data browser)."""
+    app = FractureApp()
+    app.start_screen = start_screen
+    app.run()
 
 
 if __name__ == "__main__":

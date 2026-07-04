@@ -4,6 +4,7 @@ InventoryScreen: character management screen.
 Layout:
   ┌── info bar (chapter / money) ──────────────────────────────────┐
   │ [Items (i)] [Equip (e)] [Party (p)] [Learn (l)] [Upgrade (u)]  │  action bar
+  │ [Monster Log (m)] [NPC Log (n)*] [Save (s)]                   │  *unlocked only
   ├────────────────────────────────────────────────────────────────┤
   │  Card 0  │  Card 1  │ ► Card 2 ◄ │  Card 3  │  Card 4         │  character row
   │  ...                                                           │
@@ -15,9 +16,14 @@ Layout:
 B toggles the abilities list for the selected character (only when no overlay).
 Escape closes any open overlay first, then returns to the previous screen.
 
-Overlay widgets (Items, Equip, Party, Learn, Upgrade) float above the
-character cards on the "overlay" CSS layer.  Each overlay adds the CSS class
-"inv-overlay" in its on_mount so this screen can close them generically.
+Overlay widgets (Items, Equip, Party, Learn, Upgrade, Monster Log, NPC Log)
+float above the character cards on the "overlay" CSS layer.  Each overlay
+adds the CSS class "inv-overlay" in its on_mount so this screen can close
+them generically.
+
+The NPC Log button/binding is only shown when the active game's
+`npc_log_locked` is False, mirroring `old/game_screens/inventory_screen.py`
+(`(n)pc's` only appears once unlocked through story progression).
 """
 from __future__ import annotations
 
@@ -153,6 +159,8 @@ class InventoryScreen(BaseScreen):
         Binding("right", "move_right",        "Next",      show=True),
         Binding("d",     "move_right",        "Next",      show=False),
         Binding("b",     "toggle_abilities",  "Abilities", show=True),
+        Binding("m",     "open_monster_log",  "Monster Log", show=True),
+        Binding("n",     "open_npc_log",      "NPC Log",   show=True),
     ]
 
     _selected: int
@@ -211,12 +219,16 @@ class InventoryScreen(BaseScreen):
         yield Static(f"Chapter: {chapter}  |  Money: {money}", id="info-bar")
 
         with Horizontal(id="action-bar"):
-            yield Button("Items (i)",   id="btn-items",   variant="default")
-            yield Button("Equip (e)",   id="btn-equip",   variant="default")
-            yield Button("Party (p)",   id="btn-party",   variant="default")
-            yield Button("Learn (l)",   id="btn-learn",   variant="default")
-            yield Button("Upgrade (u)", id="btn-upgrade", variant="default")
-            yield Button("Save (s)",    id="btn-save",    variant="default")
+            yield Button("Items (i)",       id="btn-items",       variant="default")
+            yield Button("Equip (e)",       id="btn-equip",       variant="default")
+            yield Button("Party (p)",       id="btn-party",       variant="default")
+            yield Button("Learn (l)",       id="btn-learn",       variant="default")
+            yield Button("Upgrade (u)",     id="btn-upgrade",     variant="default")
+            yield Button("Monster Log (m)", id="btn-monster-log", variant="default")
+            yield Button(
+                "NPC Log (n)", id="btn-npc-log", variant="default", disabled=True
+            )
+            yield Button("Save (s)",        id="btn-save",        variant="default")
 
         with Horizontal(id="characters-row"):
             for slot in range(_MAX_DISPLAY):
@@ -231,12 +243,14 @@ class InventoryScreen(BaseScreen):
         self._offset       = 0
         self._abilities_on = frozenset()
         self.call_after_refresh(self._refresh_cards)
+        self.call_after_refresh(self._refresh_npc_log_button)
 
     def on_resize(self, event: events.Resize) -> None:
         self._refresh_cards()
 
     def on_screen_resume(self) -> None:
         self._refresh_cards()
+        self._refresh_npc_log_button()
 
     # ── overlay management ────────────────────────────────────────────────────
 
@@ -263,6 +277,31 @@ class InventoryScreen(BaseScreen):
             return
         from tui.screens.equip_overlay import EquipOverlay
         self.mount(EquipOverlay(pg, self._close_overlay))
+
+    def _open_monster_log_overlay(self) -> None:
+        pg = get_active_game()
+        if pg is None:
+            self.notify("No active game.", title="Monster Log")
+            return
+        if self._overlay_active():
+            self._close_overlay()
+            return
+        from tui.screens.monster_log_overlay import MonsterLogOverlay
+        self.mount(MonsterLogOverlay(pg, self._close_overlay))
+
+    def _open_npc_log_overlay(self) -> None:
+        pg = get_active_game()
+        if pg is None:
+            self.notify("No active game.", title="NPC Log")
+            return
+        if getattr(pg, "npc_log_locked", True):
+            self.notify("The NPC log has not been unlocked yet.", title="NPC Log")
+            return
+        if self._overlay_active():
+            self._close_overlay()
+            return
+        from tui.screens.npc_log_overlay import NPCLogOverlay
+        self.mount(NPCLogOverlay(pg, self._close_overlay))
 
     # ── escape: close overlay first, then go back ─────────────────────────────
 
@@ -311,6 +350,12 @@ class InventoryScreen(BaseScreen):
         self._abilities_on = frozenset(shown)
         self._refresh_cards()
 
+    def action_open_monster_log(self) -> None:
+        self._open_monster_log_overlay()
+
+    def action_open_npc_log(self) -> None:
+        self._open_npc_log_overlay()
+
     def _notify_overlays_player_changed(self) -> None:
         """Tell any open overlay that the active character has changed."""
         for w in self.query(".inv-overlay"):
@@ -358,11 +403,29 @@ class InventoryScreen(BaseScreen):
     def _on_upgrade(self) -> None:
         self.notify("Upgrade stats overlay — coming soon.", title="Upgrade")
 
+    @on(Button.Pressed, "#btn-monster-log")
+    def _on_monster_log(self) -> None:
+        self._open_monster_log_overlay()
+
+    @on(Button.Pressed, "#btn-npc-log")
+    def _on_npc_log(self) -> None:
+        self._open_npc_log_overlay()
+
     @on(Button.Pressed, "#btn-save")
     def _on_save(self) -> None:
         self.notify("Save — coming soon.", title="Save")
 
     # ── rendering ─────────────────────────────────────────────────────────────
+
+    def _refresh_npc_log_button(self) -> None:
+        """Enable the NPC Log button only once `player_game.npc_log_locked`
+        is False, mirroring the legacy `(n)pc's` action-bar gating."""
+        pg     = get_active_game()
+        locked = getattr(pg, "npc_log_locked", True) if pg is not None else True
+        try:
+            self.query_one("#btn-npc-log", Button).disabled = bool(locked)
+        except Exception:
+            pass
 
     def _refresh_cards(self) -> None:
         pg      = get_active_game()
@@ -387,6 +450,8 @@ class InventoryScreen(BaseScreen):
                 )
             except Exception:
                 pass
+
+        self._refresh_npc_log_button()
 
         try:
             if total:
