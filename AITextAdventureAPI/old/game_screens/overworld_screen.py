@@ -337,8 +337,6 @@ def simulate_check_random_encounter(active_city, player_game, force_combat:bool 
 
     return players_won
 
-
-
 ########TODO
 def handle_pending_boss_encounter(player_game: PlayerGame) -> bool:
     """

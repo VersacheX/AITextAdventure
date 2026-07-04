@@ -7,10 +7,13 @@ navigated to via `self.app.goto_screen("<name>")`.
 
 Implemented so far:
     - TitleScreen ("title")
+    - ServerSelectScreen ("server_select")
+    - AuthScreen ("auth")
+    - LoginScreen / RegisterScreen ("login" / "register")
+    - MainMenuScreen ("main_menu")
+    - LoadGameScreen ("load_game")
+    - OverworldScreen ("overworld")
 
 Planned next (in this order):
-    - Server Selection
-    - Login / Register
-    - Main Menu
-    - Character Creation / Selection
+    - New Game / Character Creation ("new_game")
 """

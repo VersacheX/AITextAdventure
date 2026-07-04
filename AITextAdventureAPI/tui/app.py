@@ -21,10 +21,12 @@ from pathlib import Path
 from textual.app import App
 
 from tui.screens.title_screen import TitleScreen
+from tui.screens.server_select_screen import ServerSelectScreen
 from tui.screens.auth_screen import AuthScreen
 from tui.screens.login_screen import LoginScreen, RegisterScreen
 from tui.screens.main_menu_screen import MainMenuScreen
 from tui.screens.load_game_screen import LoadGameScreen
+from tui.screens.overworld_screen import OverworldScreen
 
 _STYLES_PATH = Path(__file__).parent / "styles" / "app.tcss"
 
@@ -41,15 +43,15 @@ class FractureApp(App):
 
     SCREENS = {
         "title": TitleScreen,
+        "server_select": ServerSelectScreen,
         "auth": AuthScreen,
         "login": LoginScreen,
         "register": RegisterScreen,
         "main_menu": MainMenuScreen,
         "load_game": LoadGameScreen,
-        # Registered incrementally as each screen is built, in this order:
-        # "server_select": ServerSelectScreen,  (to be inserted between "title" and "auth")
+        "overworld": OverworldScreen,
+        # Registered incrementally as each screen is built:
         # "new_game": NewGameScreen,
-        # "overworld": OverworldScreen,
     }
 
     BINDINGS = [
@@ -64,8 +66,8 @@ class FractureApp(App):
 
         Returns True if `name` was registered and pushed. If it isn't
         registered yet, shows a friendly toast instead of raising — this is
-        what lets screens built now (e.g. TitleScreen) link forward to
-        screens that don't exist yet without erroring.
+        what lets screens built now link forward to screens that don't exist
+        yet without erroring.
         """
         if name not in self.SCREENS:
             self.notify(

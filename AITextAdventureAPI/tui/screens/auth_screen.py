@@ -5,9 +5,9 @@ Mirrors the choices offered by `old/console_game.py`'s `auth_menu()`
 (Login, Register, Continue as guest), rebuilt as a `BaseScreen` with real
 focusable/clickable widgets instead of a blocking `input()` loop.
 
-Note: Server Selection (local vs. online) isn't built yet, so this screen
-calls `ensure_default_local_adapter()` on mount as a temporary shim — see
-`tui/services/adapter_bootstrap.py` for details and removal plan.
+By the time this screen is reached, `ServerSelectScreen` has already
+configured the active save adapter (Local or Online) via
+`tui.services.server_config` -- this screen only handles identity.
 """
 from __future__ import annotations
 
@@ -16,7 +16,6 @@ from textual.containers import Vertical
 from textual.widgets import Button, Static
 
 from tui.screens.base_screen import BaseScreen
-from tui.services.adapter_bootstrap import ensure_default_local_adapter
 
 
 class AuthScreen(BaseScreen):
@@ -54,11 +53,6 @@ class AuthScreen(BaseScreen):
             yield Button("Continue as Guest", id="guest")
             yield Button("Back", id="back")
 
-    def on_mount(self) -> None:
-        # TEMPORARY: see tui/services/adapter_bootstrap.py. Server Selection
-        # will own this once implemented.
-        ensure_default_local_adapter()
-
     def on_button_pressed(self, event: Button.Pressed) -> None:
         button_id = event.button.id
         if button_id == "login":
@@ -72,8 +66,8 @@ class AuthScreen(BaseScreen):
 
     def _continue_as_guest(self) -> None:
         from tui.services.session import Session, set_session
-        from tui.services.adapter_bootstrap import current_adapter_mode
+        from tui.services.server_config import current_mode
 
-        set_session(Session(mode=current_adapter_mode(), username=None, is_guest=True))
+        set_session(Session(mode=current_mode(), username=None, is_guest=True))
         self.notify("Continuing as guest.", title="Guest mode")
         self.app.goto_screen("main_menu")

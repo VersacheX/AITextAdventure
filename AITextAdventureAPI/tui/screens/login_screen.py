@@ -7,11 +7,12 @@ Both screens share this single implementation (`RegisterScreen` just sets
 button label, and which `SaveService` method gets called differ.
 
 The actual `adapter.login()` / `adapter.register()` call is blocking I/O
-(HTTP request or local SQLite access, depending on which adapter is
-configured — see `client_api_requests.save_services`). Per project
-convention, that call runs in a background worker (`@work(thread=True)`)
-so a slow/unreachable server cannot freeze the compositor; the result is
-marshaled back to the UI thread with `self.app.call_from_thread(...)`.
+(HTTP request or local SQLite access, depending on which adapter
+`ServerSelectScreen` configured — see `client_api_requests.save_services`).
+Per project convention, that call runs in a background worker
+(`@work(thread=True)`) so a slow/unreachable server cannot freeze the
+compositor; the result is marshaled back to the UI thread with
+`self.app.call_from_thread(...)`.
 """
 from __future__ import annotations
 
@@ -21,7 +22,6 @@ from textual.containers import Vertical
 from textual.widgets import Button, Input, Static
 
 from tui.screens.base_screen import BaseScreen
-from tui.services.adapter_bootstrap import current_adapter_mode, ensure_default_local_adapter
 
 
 class LoginScreen(BaseScreen):
@@ -78,8 +78,6 @@ class LoginScreen(BaseScreen):
                 yield Button("Back", id="back")
 
     def on_mount(self) -> None:
-        # TEMPORARY: see tui/services/adapter_bootstrap.py.
-        ensure_default_local_adapter()
         self.query_one("#username", Input).focus()
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
@@ -126,8 +124,9 @@ class LoginScreen(BaseScreen):
 
     def _on_submit_success(self, username: str) -> None:
         from tui.services.session import Session, set_session
+        from tui.services.server_config import current_mode
 
-        set_session(Session(mode=current_adapter_mode(), username=username, is_guest=False))
+        set_session(Session(mode=current_mode(), username=username, is_guest=False))
         verb = "Logged in" if self.MODE == "login" else "Registered and logged in"
         self.notify(f"{verb} as {username}.", title="Success")
         self.app.goto_screen("main_menu")

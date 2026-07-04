@@ -12,11 +12,14 @@ blocking I/O calls (HTTP via `APISaveService`, or SQLite via
 `LocalSaveService`) and run in background workers per project convention
 (see `tui/screens/login_screen.py`).
 
-Note: this deliberately calls `SaveService.list_saves()` directly instead
-of `client_api_requests.load_game_service.load_player_games()` -- that
-helper's `except` branch calls a bare `input(...)`, which would hang a
-background worker thread indefinitely under Textual. Loading a specific
-save still reuses `load_player_game()`, which has no such issue.
+Note: this deliberately avoids `client_api_requests.load_game_service`
+entirely (for both listing and loading) -- that module imports `ClientAPI`
+at module scope, which eagerly imports `requests`, and its list-saves
+helper's `except` branch also calls a bare `input(...)` that would hang a
+background worker thread indefinitely under Textual. Listing calls
+`SaveService.list_saves()` directly; loading a specific save uses
+`tui.services.save_transfer.load_player_game()`, a small adapter-only
+reimplementation -- see that module's docstring for details.
 """
 from __future__ import annotations
 
@@ -170,11 +173,11 @@ class LoadGameScreen(BaseScreen):
     @work(thread=True)
     def _fetch_and_apply_save(self, save_id: Any) -> None:
         from client_api_requests.save_service_adapter import get_adapter
-        from client_api_requests.load_game_service import load_player_game
+        from tui.services.save_transfer import load_player_game
 
         try:
             adapter = get_adapter()
-            player_game = load_player_game(save_id, save_adapter=adapter)
+            player_game = load_player_game(save_id, adapter)
         except Exception as exc:  # noqa: BLE001 - surfaced to the user below
             self.app.call_from_thread(self._on_load_error, str(exc))
             return

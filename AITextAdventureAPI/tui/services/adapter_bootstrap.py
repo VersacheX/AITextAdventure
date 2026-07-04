@@ -1,43 +1,25 @@
 ﻿"""
-TEMPORARY adapter bootstrap shim.
+DEPRECATED: replaced by `tui.services.server_config`.
 
-Server Selection (not yet implemented — see `tui/README.md` roadmap) will
-be responsible for explicitly configuring the save adapter (local vs.
-online) via `client_api_requests.save_service_adapter.set_adapter(...)`
-before ever pushing the "auth" screen, exactly like `old/console_game.py`'s
-`auth_menu()` did.
-
-Until that screen exists, `ensure_default_local_adapter()` configures a
-local (SQLite-backed) adapter automatically the first time an auth-related
-screen mounts, so Auth/Login/Register are usable standalone right now.
-
-Delete this module (and its call sites in `auth_screen.py` /
-`login_screen.py`) once Server Selection always configures the adapter
-first.
+`ServerSelectScreen` (`tui/screens/server_select_screen.py`) now always
+configures the save adapter via `server_config.configure_local()` /
+`configure_online()` before `auth` is ever reached, so the "configure a
+default local adapter on first auth-screen mount" shim this module
+provided is no longer needed. Nothing in `tui/` imports this module
+anymore; it is kept only as a pointer for anything external that might
+still reference it, and can be deleted outright.
 """
 from __future__ import annotations
 
-from client_api_requests.save_service_adapter import get_adapter, set_adapter
-from client_api_requests.save_services.local_save_service import LocalSaveService
-from client_api_requests.local_storage_service import LocalStorageAdapter
+from tui.services.server_config import configure_local, current_mode  # noqa: F401
 
 
 def ensure_default_local_adapter() -> None:
-    """Configure a local save adapter if none has been set yet (no-op otherwise)."""
-    try:
-        get_adapter()
-    except RuntimeError:
-        set_adapter(LocalSaveService(LocalStorageAdapter()))
+    """Deprecated — use `tui.services.server_config.configure_local()`
+    from `ServerSelectScreen` instead."""
+    configure_local()
 
 
 def current_adapter_mode() -> str:
-    """Best-effort guess at whether the configured adapter is local or online.
-
-    Used to populate `Session.mode` without Server Selection needing to pass
-    explicit constructor arguments through screen navigation.
-    """
-    try:
-        adapter = get_adapter()
-    except RuntimeError:
-        return "local"
-    return "local" if isinstance(adapter, LocalSaveService) else "online"
+    """Deprecated — use `tui.services.server_config.current_mode()` instead."""
+    return current_mode()

@@ -3,9 +3,9 @@ TitleScreen: the opening / splash screen shown when the TUI starts.
 
 This is the first screen pushed by `FractureApp.on_mount()`. It shows the
 game banner and advances on any (unmodified) keypress or a mouse click —
-classic "press any key to continue" behavior. Advancing goes to the "auth"
-screen (Login/Register/Guest). Once Server Selection is built, it will be
-inserted between this screen and "auth" (see `tui/README.md` roadmap).
+classic "press any key to continue" behavior. Advancing goes to the
+"server_select" screen (Local/Online), which is followed by "auth"
+(Login/Register/Guest).
 """
 from __future__ import annotations
 
@@ -82,7 +82,7 @@ class TitleScreen(BaseScreen):
         self.query_one("#prompt", Static).set_class(not self._blink_on, "dim")
 
     def action_continue(self) -> None:
-        self.app.goto_screen("auth")
+        self.app.goto_screen("server_select")
 
     def on_key(self, event: events.Key) -> None:
         key = event.key
@@ -91,7 +91,7 @@ class TitleScreen(BaseScreen):
         if key in ("enter", "escape") or "+" in key:
             return
         event.stop()
-        self.app.goto_screen("auth")
+        self.app.goto_screen("server_select")
 
     def on_click(self) -> None:
-        self.app.goto_screen("auth")
+        self.app.goto_screen("server_select")

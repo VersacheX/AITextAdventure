@@ -1,0 +1,215 @@
+﻿"""
+LocationOverlay: top-left floating action widget overlaid on the map.
+
+This is a Widget, not a Screen. It is mounted directly into OverworldScreen
+on Textual's "overlay" CSS layer so the map, legend, and stats remain fully
+visible underneath. Because it is not a pushed Screen, WASD bindings on
+OverworldScreen fire normally — the player can move while the overlay is open.
+
+Key implementation notes
+────────────────────────
+compose() vs on_mount for ListView population
+    Items are yielded inside the ListView context manager in compose(), NOT
+    added via lv.append() in on_mount. When a Widget is dynamically mounted
+    into a running screen via self.mount(), on_mount can fire before child
+    widgets are fully attached, causing query_one() to raise NoMatches.
+    Yielding items in compose() is always synchronous and safe.
+
+Loot position restore
+    loot_sublocation(player_game, name) uses player_game.x/y/z as its lookup
+    key. Because the player can move while the overlay is open, those coords
+    may differ from where the subloc was detected. We snapshot (x, y, z) in
+    location_actions.get_location_actions() and temporarily restore them
+    around the loot call so the lookup always finds the right subloc record.
+"""
+from __future__ import annotations
+
+from typing import Any, Callable, List
+
+from textual import on
+from textual.app import ComposeResult
+from textual.containers import Vertical
+from textual.widget import Widget
+from textual.widgets import Button, Label, ListItem, ListView, Static
+
+from tui.services.location_actions import LocationAction
+
+
+class _ActionItem(ListItem):
+    """Single action row carrying its LocationAction payload."""
+
+    def __init__(self, action: LocationAction) -> None:
+        super().__init__(Label(action.label))
+        self.action = action
+
+
+class LocationOverlay(Widget):
+    """Floating action-menu widget overlaid on the map panel."""
+
+    # Do not steal focus — WASD stays with OverworldScreen
+    can_focus = False
+
+    DEFAULT_CSS = """
+    LocationOverlay {
+        layer: overlay;
+        width: 38;
+        height: auto;
+        max-height: 22;
+        offset: 1 5;
+        background: $surface;
+        border: round $accent;
+    }
+
+    #ov-title {
+        text-align: center;
+        text-style: bold;
+        background: $boost;
+        padding: 0 1;
+        width: 100%;
+    }
+
+    #ov-list {
+        height: auto;
+        max-height: 16;
+    }
+
+    #ov-close {
+        width: 100%;
+        height: 1;
+        border-top: solid $accent 50%;
+    }
+    """
+
+    def __init__(
+        self,
+        pg: Any,
+        active_area: Any,
+        actions: List[LocationAction],
+        on_action: Callable[[bool], None],
+    ) -> None:
+        super().__init__()
+        self._pg = pg
+        self._active_area = active_area
+        self._actions = actions
+        self._on_action = on_action
+
+    def compose(self) -> ComposeResult:
+        # Items are yielded here — not in on_mount — so they are part of the
+        # initial compose tree and are guaranteed to exist when the widget mounts.
+        with Vertical():
+            yield Static("── Actions ──", id="ov-title")
+            with ListView(id="ov-list"):
+                for action in self._actions:
+                    yield _ActionItem(action)
+            yield Button("✕  Close  [E]", id="ov-close", variant="default")
+
+    # ── close ─────────────────────────────────────────────────────────────
+
+    @on(Button.Pressed, "#ov-close")
+    def _close(self) -> None:
+        self.remove()
+
+    # ── selection ─────────────────────────────────────────────────────────
+
+    @on(ListView.Selected, "#ov-list")
+    def _on_selected(self, event: ListView.Selected) -> None:
+        if isinstance(event.item, _ActionItem):
+            self._execute(event.item.action)
+
+    # ── dispatch ──────────────────────────────────────────────────────────
+
+    def _execute(self, action: LocationAction) -> None:
+        kind = action.kind
+        if kind == "npc":
+            self._do_npc(action)
+        elif kind == "shop":
+            self.app.notify("Shop not yet implemented.", title=action.label)
+        elif kind == "sublocation":
+            self._do_sublocation(action)
+        elif kind == "floor_up":
+            self._do_floor("u")
+        elif kind == "floor_down":
+            self._do_floor("j")
+        elif kind == "travel":
+            self.app.notify("Fast Travel not yet implemented.", title="Hyperway")
+        elif kind == "aircraft_enter":
+            self._pg.enter_aircraft()
+            self._on_action(True)
+        elif kind == "aircraft_land":
+            self._pg.land_aircraft()
+            self._on_action(True)
+
+    def _do_npc(self, action: LocationAction) -> None:
+        npc_id = (action.data or {}).get("npc_id")
+        try:
+            self._pg.handle_npc_interaction_at_player_location(npc_id)
+        except Exception:
+            pass
+        self._on_action(True)
+
+    def _do_sublocation(self, action: LocationAction) -> None:
+        from tui.screens.confirm_screen import ConfirmScreen
+
+        data = action.data or {}
+        name = data.get("name")
+        has_loot = data.get("has_loot", False)
+        # snapshot position recorded when the action list was built
+        stored_x = data.get("x", self._pg.x)
+        stored_y = data.get("y", self._pg.y)
+        stored_z = data.get("z", self._pg.z)
+
+        if not has_loot:
+            sl = data.get("subloc", {})
+            prompt = sl.get("prompt") or f"You examine the {name}."
+            self.app.notify(prompt, title=name or "Examine")
+            return
+
+        sl = data.get("subloc", {})
+        item = sl.get("loot")
+        money = int(sl.get("money", 0) or 0)
+
+        parts: list[str] = []
+        if item:
+            parts.append(f"the {item.name}")
+        if money > 0:
+            parts.append(f"{money:,} gold")
+        msg = f"Pick up {' and '.join(parts)}?"
+
+        def _on_confirm(confirmed: bool | None) -> None:
+            if confirmed:
+                # loot_sublocation looks up the subloc by pg.x/y/z — restore
+                # the tile position so it finds the right record even if the
+                # player has moved since the overlay was shown.
+                orig_x, orig_y, orig_z = self._pg.x, self._pg.y, self._pg.z
+                self._pg.x = stored_x
+                self._pg.y = stored_y
+                self._pg.z = stored_z
+                try:
+                    result = self._active_area.loot_sublocation(self._pg, name)
+                finally:
+                    self._pg.x = orig_x
+                    self._pg.y = orig_y
+                    self._pg.z = orig_z
+                if result:
+                    self.app.notify(result, title="Looted")
+                self._on_action(True)
+
+        self.app.push_screen(
+            ConfirmScreen(msg, yes_label="Take", no_label="Leave"),
+            _on_confirm,
+        )
+
+    def _do_floor(self, cmd: str) -> None:
+        from services.player_movement_service import handle_floor_action
+
+        try:
+            ok = handle_floor_action(cmd, self._active_area, self._pg)
+        except Exception as exc:
+            self.app.notify(str(exc), title="Floor Error", severity="error")
+            return
+
+        if ok:
+            self._on_action(True)
+        else:
+            label = "top floor" if cmd == "u" else "bottom floor"
+            self.app.notify(f"Already at the {label}.", title="Floor")

@@ -14,6 +14,10 @@ loop anywhere in this package** — that is the mechanism that eliminates
 flicker, and it must stay that way. Never add `os.system('cls')` or an
 equivalent full-screen clear/reprint cycle to this package.
 
+## Scope of Work
+
+All new development happens inside `AITextAdventureAPI/tui` and its subfolders — do not modify files under `AITextAdventureAPI/old` directly. If a screen needs a service to integrate with the legacy `old/` game engine (save adapters, player/game objects, combat, etc.), build a thin wrapper under `AITextAdventureAPI/tui/services/` that imports from `old/` rather than changing `old/` itself.
+
 ## Architecture
 
 ### `FractureApp` (`tui/app.py`) — the screen manager
