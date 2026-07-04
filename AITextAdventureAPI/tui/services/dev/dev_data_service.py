@@ -26,6 +26,7 @@ CATEGORIES: Tuple[str, ...] = (
     "equipment",
     "dungeon",
     "city",
+    "npc",
 )
 
 CATEGORY_LABELS: Dict[str, str] = {
@@ -36,6 +37,7 @@ CATEGORY_LABELS: Dict[str, str] = {
     "equipment":    "Equipment",
     "dungeon":      "Dungeons",
     "city":         "Cities",
+    "npc":          "NPCs",
 }
 
 _CACHE: Dict[str, List["DevRecord"]] = {}
@@ -97,6 +99,39 @@ def _load_all() -> None:
     _CACHE["equipment"]    = _build_equipment(const)
     _CACHE["dungeon"]      = _build_dungeons(const)
     _CACHE["city"]         = _build_cities(const)
+    _CACHE["npc"] = _build_npcs(const)
+
+
+# ── npcs ───────────────────────────────────────────────────────────
+
+def _build_npcs(const: Any) -> List[DevRecord]:
+    records: List[DevRecord] = []
+
+    for npc in getattr(const, "NPCS", []) or []:
+        cid   = str(npc.get("npc_id", "?"))
+        name  = str(npc.get("name", cid))
+        desc  = str(npc.get("description", ""))
+
+        psych = npc.get("psychology") or {}
+        enneagram = npc.get("enneagram") or {}
+
+        lines = [desc, ""]
+        if psych:
+            lines.append(f"MBTI: {psych.get('mbti', '?')}")
+        if enneagram:
+            lines.append(f"Enneagram: {enneagram.get('enneagram_type', '?')}")
+            lines.append(f"Core fear: {enneagram.get('core_fear', '?')}")
+            lines.append(f"Core desire: {enneagram.get('core_desire', '?')}")
+
+        records.append(DevRecord(
+            category="npc",
+            id=cid,
+            name=name,
+            subtitle="NPC",
+            detail="\n".join(lines),
+        ))
+
+    return records
 
 
 # ── characters ───────────────────────────────────────────────────────────

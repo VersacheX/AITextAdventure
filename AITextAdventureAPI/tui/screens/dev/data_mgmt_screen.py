@@ -27,14 +27,14 @@ worker (`@work(thread=True)`) with the result marshaled back via
 """
 from __future__ import annotations
 
-from typing import Any, List
+from typing import List
 
 from rich.markup import escape as rich_escape
-from textual import on, work
+from textual import work
 from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal, Vertical
-from textual.widgets import Input, Label, ListItem, ListView, Static, Tab, Tabs
+from textual.widgets import Input, Label, ListItem, ListView, Static, Tabs, Tab
 
 from tui.screens.base_screen import BaseScreen
 from tui.services.dev.dev_data_service import (
@@ -49,7 +49,7 @@ from tui.services.dev.dev_data_service import (
 class _RecordRow(ListItem):
     def __init__(self, record: DevRecord) -> None:
         name = rich_escape(record.name)
-        sub  = rich_escape(record.subtitle)
+        sub = rich_escape(record.subtitle)
         label = f"{name}  [dim]{sub}[/dim]" if sub else name
         super().__init__(Label(label))
         self.record = record
@@ -71,6 +71,7 @@ class DataMgmtScreen(BaseScreen):
         height: 3;
         background: $panel;
         border-bottom: solid $accent;
+        padding: 0 1;
     }
 
     #dm-filter-row {
@@ -121,9 +122,11 @@ class DataMgmtScreen(BaseScreen):
     # ── compose ───────────────────────────────────────────────────────────
 
     def compose_content(self) -> ComposeResult:
-        with Tabs(id="dm-tabs"):
-            for category in CATEGORIES:
-                yield Tab(CATEGORY_LABELS[category], id=f"tab-{category}")
+        # Use Textual's Tabs widget instead of manual Button tab bar.
+        yield Tabs(
+            *[Tab(CATEGORY_LABELS[category], id=f"tab-{category}") for category in CATEGORIES],
+            id="dm-tabs",
+        )
         with Horizontal(id="dm-filter-row"):
             yield Input(placeholder="Filter by name, id, or description...", id="dm-filter")
             yield Static("Loading...", id="dm-status")
@@ -150,6 +153,13 @@ class DataMgmtScreen(BaseScreen):
 
     def _on_load_success(self) -> None:
         self._loaded = True
+        # set initial active tab UI using Tabs widget
+        try:
+            tabs = self.query_one("#dm-tabs", Tabs)
+            tabs.active = f"tab-{self._category}"
+        except Exception:
+            # non-fatal: if styling doesn't apply, continue anyway
+            pass
         self._rebuild_list()
         self.query_one("#dm-filter", Input).focus()
 
@@ -161,20 +171,21 @@ class DataMgmtScreen(BaseScreen):
 
     # ── tab / filter events ───────────────────────────────────────────────
 
-    @on(Tabs.TabActivated, "#dm-tabs")
-    def _on_tab_activated(self, event: Tabs.TabActivated) -> None:
+    def on_tabs_tab_activated(self, event: Tabs.TabActivated) -> None:
+        """Handle tab activation from the Tabs widget."""
         tab_id = event.tab.id or ""
-        category = tab_id.removeprefix("tab-")
-        if category in CATEGORIES:
-            self._category = category
+        if tab_id.startswith("tab-"):
+            category = tab_id.removeprefix("tab-")
+            if category in CATEGORIES:
+                self._category = category
+                self._rebuild_list()
+
+    def on_input_changed(self, event: Input.Changed) -> None:
+        # keep API similar to previous @on(Input.Changed) handler
+        if event.input.id == "dm-filter":
             self._rebuild_list()
 
-    @on(Input.Changed, "#dm-filter")
-    def _on_filter_changed(self, event: Input.Changed) -> None:
-        self._rebuild_list()
-
-    @on(ListView.Highlighted, "#dm-list")
-    def _on_highlighted(self, event: ListView.Highlighted) -> None:
+    def on_list_view_highlighted(self, event: ListView.Highlighted) -> None:
         record = event.item.record if isinstance(event.item, _RecordRow) else None
         self._update_detail(record)
 
@@ -183,8 +194,8 @@ class DataMgmtScreen(BaseScreen):
     def _rebuild_list(self) -> None:
         if not self._loaded:
             return
-        query  = self.query_one("#dm-filter", Input).value.strip()
-        lv     = self.query_one("#dm-list", ListView)
+        query = self.query_one("#dm-filter", Input).value.strip()
+        lv = self.query_one("#dm-list", ListView)
         lv.clear()
         records: List[DevRecord] = search_records(self._category, query)
         for record in records:
@@ -193,7 +204,7 @@ class DataMgmtScreen(BaseScreen):
         self._update_detail(records[0] if records else None)
 
     def _highlighted_record(self) -> DevRecord | None:
-        lv    = self.query_one("#dm-list", ListView)
+        lv = self.query_one("#dm-list", ListView)
         child = lv.highlighted_child
         return child.record if isinstance(child, _RecordRow) else None
 
@@ -203,7 +214,7 @@ class DataMgmtScreen(BaseScreen):
             panel.update("[dim]No matching records.[/dim]")
             return
         name = rich_escape(record.name)
-        sub  = rich_escape(record.subtitle)
+        sub = rich_escape(record.subtitle)
         detail = rich_escape(record.detail)
         header = f"[bold]{name}[/bold]"
         if sub:
