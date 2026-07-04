@@ -12,9 +12,18 @@ dungeon seed modules on first use, records are built once per process via
 `preload()` and cached in `_CACHE` afterwards -- callers should invoke
 `preload()` from a background worker (see `tui/screens/dev/data_mgmt_screen.py`)
 so that first, relatively heavy import doesn't block the compositor.
+
+The "character_dialog" category is a special case: rather than a flat list
+of `DevRecord`, it's a hierarchical Act -> Chapter -> Task -> stage -> line
+tree (see `DialogueActNode` and friends below), built only from
+`game.constants.MAIN_STORY_SETTINGS` since Act/Chapter is a main-story-only
+concept -- region/city side-quest dialogue remains browsable via the flat
+"Timeline" category instead. Use `get_dialogue_tree()` / `filter_dialogue_tree()`
+rather than `get_records()` / `search_records()` for this category.
 """
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from typing import Any, Dict, List, Tuple
 
@@ -27,20 +36,23 @@ CATEGORIES: Tuple[str, ...] = (
     "dungeon",
     "city",
     "npc",
+    "character_dialog",
 )
 
 CATEGORY_LABELS: Dict[str, str] = {
-    "character":    "Characters",
-    "timeline":     "Timeline",
-    "item":         "Items",
-    "special_item": "Special Items",
-    "equipment":    "Equipment",
-    "dungeon":      "Dungeons",
-    "city":         "Cities",
-    "npc":          "NPCs",
+    "character":        "Characters",
+    "timeline":         "Timeline",
+    "item":             "Items",
+    "special_item":     "Special Items",
+    "equipment":        "Equipment",
+    "dungeon":          "Dungeons",
+    "city":             "Cities",
+    "npc":              "NPCs",
+    "character_dialog": "Dialogue",
 }
 
 _CACHE: Dict[str, List["DevRecord"]] = {}
+_DIALOG_TREE: List["DialogueActNode"] = []
 
 
 @dataclass
@@ -63,6 +75,86 @@ class DevRecord:
             or q in self.subtitle.lower()
             or q in self.detail.lower()
         )
+
+
+@dataclass
+class DialogueLine:
+    """One spoken line within a task's acquire/complete stage."""
+
+    speaker: str
+    text: str
+
+
+@dataclass
+class DialogueStageNode:
+    """Either the 'Acquired' or 'Completed' stage of a task, with its lines."""
+
+    label: str
+    lines: List[DialogueLine]
+
+
+@dataclass
+class DialogueTaskNode:
+    """One task within a chapter, holding its non-empty acquire/complete stages."""
+
+    task_id: str
+    label: str
+    stages: List[DialogueStageNode]
+
+
+@dataclass
+class DialogueChapterNode:
+    """One main-story chapter, holding every task that has dialogue in it."""
+
+    chapter_id: str
+    label: str
+    tasks: List[DialogueTaskNode]
+
+
+@dataclass
+class DialogueActNode:
+    """Top-level grouping of chapters, per `_ACT_CHAPTER_RANGES` below."""
+
+    label: str
+    chapters: List[DialogueChapterNode]
+
+
+# Chapter -> Act grouping, mirroring
+# `old/STORY DOCUMENTS FOR AI/ACT TIMELINE.mmd`. Chapters without a code
+# seed yet (e.g. 21, still design-doc only) simply won't appear in the tree.
+_ACT_CHAPTER_RANGES: Tuple[Tuple[str, int, int], ...] = (
+    ("Act I - The World in Becoming",  1,  4),
+    ("Act II - The Humanist Act",      5,  7),
+    ("Act III - Fall of the Body",     8,  13),
+    ("Act IV - Fall of the Heart",     14, 15),
+    ("Act V.1 - Fall of the Mind",     16, 19),
+    ("Act V.2 - Fall of Time",         20, 20),
+    ("Act VI - Fall of Existence",     21, 21),
+)
+
+_CHAPTER_TITLES: Dict[int, str] = {
+    1:  "Awakening",
+    2:  "Black Market & Uncoupling",
+    3:  "Street Justice",
+    4:  "Fracture Point",
+    5:  "Riftwaters Crossing",
+    6:  "The Riftlands Unveiled",
+    7:  "Seth's Airship & The Requirement",
+    8:  "Glamour's City of Shattered Attention",
+    9:  "Scalpel's Domain",
+    10: "Human Chaos",
+    11: "Rapture & Revelry",
+    12: "Lament",
+    13: "Garbage",
+    14: "Stigma",
+    15: "Pageant & Edict",
+    16: "Path Without Meaning",
+    17: "Paradox & Crux",
+    18: "Reconstructing the Self",
+    19: "Cataclysm",
+    20: "Oracle & Reliquary",
+    21: "Dominion's Gauntlet",
+}
 
 
 def preload() -> None:
@@ -88,6 +180,54 @@ def search_records(category: str, query: str) -> List[DevRecord]:
     return [r for r in get_records(category) if r.matches(query)]
 
 
+def get_dialogue_tree() -> List[DialogueActNode]:
+    """Return the cached Act -> Chapter -> Task -> stage -> line tree,
+    building + caching (alongside every other category) on first use."""
+    if not _CACHE:
+        _load_all()
+    return _DIALOG_TREE
+
+
+def filter_dialogue_tree(
+    tree: List[DialogueActNode],
+    act_query: str = "",
+    chapter_query: str = "",
+    task_query: str = "",
+    character_query: str = "",
+) -> List[DialogueActNode]:
+    """Return a pruned copy of `tree` containing only branches that match
+    every non-empty query (case-insensitive substring match, AND'd together)."""
+    aq  = act_query.strip().lower()
+    cq  = chapter_query.strip().lower()
+    tq  = task_query.strip().lower()
+    chq = character_query.strip().lower()
+
+    result: List[DialogueActNode] = []
+    for act in tree:
+        if aq and aq not in act.label.lower():
+            continue
+        chapters: List[DialogueChapterNode] = []
+        for chapter in act.chapters:
+            if cq and cq not in chapter.label.lower() and cq not in chapter.chapter_id.lower():
+                continue
+            tasks: List[DialogueTaskNode] = []
+            for task in chapter.tasks:
+                if tq and tq not in task.label.lower() and tq not in task.task_id.lower():
+                    continue
+                stages: List[DialogueStageNode] = []
+                for stage in task.stages:
+                    lines = [ln for ln in stage.lines if not chq or chq in ln.speaker.lower()]
+                    if lines:
+                        stages.append(DialogueStageNode(label=stage.label, lines=lines))
+                if stages:
+                    tasks.append(DialogueTaskNode(task_id=task.task_id, label=task.label, stages=stages))
+            if tasks:
+                chapters.append(DialogueChapterNode(chapter_id=chapter.chapter_id, label=chapter.label, tasks=tasks))
+        if chapters:
+            result.append(DialogueActNode(label=act.label, chapters=chapters))
+    return result
+
+
 def _load_all() -> None:
     """Build and cache records for every category from `game.constants`."""
     import game.constants as const
@@ -100,6 +240,10 @@ def _load_all() -> None:
     _CACHE["dungeon"]      = _build_dungeons(const)
     _CACHE["city"]         = _build_cities(const)
     _CACHE["npc"] = _build_npcs(const)
+    _CACHE["character_dialog"] = []  # tree category; see get_dialogue_tree() instead
+
+    _DIALOG_TREE.clear()
+    _DIALOG_TREE.extend(_build_dialogue_tree(const))
 
 
 # ── npcs ───────────────────────────────────────────────────────────
@@ -111,17 +255,34 @@ def _build_npcs(const: Any) -> List[DevRecord]:
         cid   = str(npc.get("npc_id", "?"))
         name  = str(npc.get("name", cid))
         desc  = str(npc.get("description", ""))
+        theme_song = str(npc.get("theme_song", ""))
 
         psych = npc.get("psychology") or {}
         enneagram = npc.get("enneagram") or {}
+        shadow_psychology = npc.get("shadow_psychology") or {}
 
         lines = [desc, ""]
         if psych:
             lines.append(f"MBTI: {psych.get('mbti', '?')}")
+            lines.append(f"Dominant: {psych.get('dominant', '?')}")
+            lines.append(f"Auxiliary: {psych.get('auxiliary', '?')}")
+            lines.append(f"Tertiary: {psych.get('tertiary', '?')}")
+            lines.append(f"Inferior: {psych.get('inferior', '?')}")
         if enneagram:
             lines.append(f"Enneagram: {enneagram.get('enneagram_type', '?')}")
             lines.append(f"Core fear: {enneagram.get('core_fear', '?')}")
             lines.append(f"Core desire: {enneagram.get('core_desire', '?')}")
+            lines.append(f"Defense mechanism: {enneagram.get('defense_mechanism', '?')}")
+            lines.append(f"Stress line: {enneagram.get('stress_line', '?')}")
+            lines.append(f"Growth line: {enneagram.get('growth_line', '?')}")
+            lines.append(f"Instinctual variant: {enneagram.get('instinctual_variant', '?')}")
+        if shadow_psychology:
+            lines.append(f"Shadow MBTI: {shadow_psychology.get('mbti', '?')}")
+            lines.append(f"Shadow Dominant: {shadow_psychology.get('dominant', '?')}")
+            lines.append(f"Shadow Auxiliary: {shadow_psychology.get('auxiliary', '?')}")
+            lines.append(f"Shadow Tertiary: {shadow_psychology.get('tertiary', '?')}")
+            lines.append(f"Shadow Inferior: {shadow_psychology.get('inferior', '?')}")
+
 
         records.append(DevRecord(
             category="npc",
@@ -245,6 +406,108 @@ def _build_timeline(const: Any) -> List[DevRecord]:
         ))
 
     return records
+
+
+# ── character dialogue (Act → Chapter → Task → stage → line) ────────────
+# Only `game.constants.MAIN_STORY_SETTINGS` (main-story chapters) is used
+# here, since Act/Chapter is a main-story-only concept -- region/city
+# side-quest dialogue is still fully browsable via the flat "Timeline" tab.
+
+def _chapter_number_from_id(chapter_id: str) -> int | None:
+    match = re.search(r"(\d+)$", chapter_id or "")
+    return int(match.group(1)) if match else None
+
+
+def _act_for_chapter(chapter_num: int | None) -> str:
+    if chapter_num is not None:
+        for label, start, end in _ACT_CHAPTER_RANGES:
+            if start <= chapter_num <= end:
+                return label
+    return "Other"
+
+
+def _speaker_name(npc_id: Any, name_by_id: Dict[str, str]) -> str:
+    if npc_id is None:
+        return "Narrator"
+    npc_id = str(npc_id)
+    if npc_id in name_by_id:
+        return name_by_id[npc_id]
+    if npc_id in ("pending_character", "final_character", "twisted_character"):
+        return f"({npc_id.replace('_', ' ').title()})"
+    return npc_id.replace("_", " ").title()
+
+
+def _build_dialogue_tree(const: Any) -> List[DialogueActNode]:
+    dialog_index: Dict[Tuple[Any, Any], List[str]] = {}
+    for dlg in getattr(const, "NPC_DIALOG", []) or []:
+        if not isinstance(dlg, dict):
+            continue
+        key = (dlg.get("npc_id"), dlg.get("dialog_id"))
+        dialog_index[key] = list(dlg.get("dialog") or [])
+
+    name_by_id: Dict[str, str] = {}
+    for npc in list(getattr(const, "NPCS", []) or []) + list(getattr(const, "PLAYER_NPCS", []) or []):
+        if isinstance(npc, dict) and npc.get("npc_id"):
+            name_by_id[str(npc["npc_id"])] = str(npc.get("name", npc["npc_id"]))
+
+    acts: Dict[str, Dict[str, DialogueChapterNode]] = {}
+
+    for chapter_settings in getattr(const, "MAIN_STORY_SETTINGS", []) or []:
+        if not isinstance(chapter_settings, dict):
+            continue
+        chapter_id    = str(chapter_settings.get("chapter_id", "?"))
+        chapter_num   = _chapter_number_from_id(chapter_id)
+        act_label     = _act_for_chapter(chapter_num)
+        chapter_label = (
+            f"Chapter {chapter_num} - {_CHAPTER_TITLES[chapter_num]}"
+            if chapter_num in _CHAPTER_TITLES
+            else chapter_id.replace("_", " ").title()
+        )
+
+        task_nodes: List[DialogueTaskNode] = []
+        for task in chapter_settings.get("tasks", []) or []:
+            if not isinstance(task, dict):
+                continue
+            task_id = str(task.get("task_id", "?"))
+
+            stages: List[DialogueStageNode] = []
+            for stage_key, stage_label in (("task_acquire_events", "Acquired"), ("task_complete_events", "Completed")):
+                lines: List[DialogueLine] = []
+                for ev in task.get(stage_key) or []:
+                    if not isinstance(ev, dict):
+                        continue
+                    if ev.get("event_type") not in ("initiate_dialog", "initiate_character_dialog"):
+                        continue
+                    params    = ev.get("params") or {}
+                    dlg_lines = dialog_index.get((params.get("npc_id"), params.get("dialog_id")))
+                    if not dlg_lines:
+                        continue
+                    speaker = _speaker_name(params.get("npc_id"), name_by_id)
+                    lines.extend(DialogueLine(speaker=speaker, text=str(t)) for t in dlg_lines)
+                if lines:
+                    stages.append(DialogueStageNode(label=stage_label, lines=lines))
+
+            if stages:
+                task_nodes.append(DialogueTaskNode(
+                    task_id=task_id,
+                    label=_humanize_task_id(task_id),
+                    stages=stages,
+                ))
+
+        if not task_nodes:
+            continue
+
+        chapters = acts.setdefault(act_label, {})
+        chapters[chapter_id] = DialogueChapterNode(
+            chapter_id=chapter_id,
+            label=chapter_label,
+            tasks=task_nodes,
+        )
+
+    return [
+        DialogueActNode(label=act_label, chapters=list(chapters.values()))
+        for act_label, chapters in acts.items()
+    ]
 
 
 # ── items / special items ───────────────────────────────────────────────
