@@ -124,6 +124,11 @@ WORLD_BOSS_MOBS = [
 	    'id': 'oracle_reliquary_2',
 	    'name': 'Oracle and Reliquary - Reset',
 	    'hostiles': ['oracle_boss_2', 'reliquary_boss_2']
+    },
+    { 
+        'id': 'dominion_1',
+        'name': 'Dominion - System Incarnate',
+        'hostiles': ['dominion']
     }
 ]
 

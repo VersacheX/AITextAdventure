@@ -156,6 +156,17 @@ _CHAPTER_TITLES: Dict[int, str] = {
     21: "Dominion's Gauntlet",
 }
 
+# Regional Primary Story metadata
+_REGION_STORY_META: Dict[str, Tuple[str, str]] = {
+    "desert":    ("Desert",    "Sable vs Zaruun the Sand-Sunderer"),
+    "forest":    ("Forest",    "Thorn vs Elder Marrowroot"),
+    "grassland": ("Grassland", "Nia vs Serene the Whisper-Thief"),
+    "mountains": ("Mountains", "Bragg vs Rokhuld the Core-Breaker"),
+    "shallows":  ("Shallows",  "Ripple vs Uul'thar the Tide-Wakened"),
+    "snow":      ("Snow",      "Kor-in vs Lady Aeriola Frostborn"),
+    "swamp":     ("Swamp",     "Grimnaw vs Lich-King Miregloom"),
+}
+
 
 def preload() -> None:
     """Eagerly build and cache every category from `game.constants`.
@@ -438,6 +449,7 @@ def _speaker_name(npc_id: Any, name_by_id: Dict[str, str]) -> str:
 
 
 def _build_dialogue_tree(const: Any) -> List[DialogueActNode]:
+    """Build the dialogue tree from both MAIN_STORY_SETTINGS and PRIMARY_STORIES."""
     dialog_index: Dict[Tuple[Any, Any], List[str]] = {}
     for dlg in getattr(const, "NPC_DIALOG", []) or []:
         if not isinstance(dlg, dict):
@@ -452,6 +464,7 @@ def _build_dialogue_tree(const: Any) -> List[DialogueActNode]:
 
     acts: Dict[str, Dict[str, DialogueChapterNode]] = {}
 
+    # Build main story chapters
     for chapter_settings in getattr(const, "MAIN_STORY_SETTINGS", []) or []:
         if not isinstance(chapter_settings, dict):
             continue
@@ -464,35 +477,7 @@ def _build_dialogue_tree(const: Any) -> List[DialogueActNode]:
             else chapter_id.replace("_", " ").title()
         )
 
-        task_nodes: List[DialogueTaskNode] = []
-        for task in chapter_settings.get("tasks", []) or []:
-            if not isinstance(task, dict):
-                continue
-            task_id = str(task.get("task_id", "?"))
-
-            stages: List[DialogueStageNode] = []
-            for stage_key, stage_label in (("task_acquire_events", "Acquired"), ("task_complete_events", "Completed")):
-                lines: List[DialogueLine] = []
-                for ev in task.get(stage_key) or []:
-                    if not isinstance(ev, dict):
-                        continue
-                    if ev.get("event_type") not in ("initiate_dialog", "initiate_character_dialog"):
-                        continue
-                    params    = ev.get("params") or {}
-                    dlg_lines = dialog_index.get((params.get("npc_id"), params.get("dialog_id")))
-                    if not dlg_lines:
-                        continue
-                    speaker = _speaker_name(params.get("npc_id"), name_by_id)
-                    lines.extend(DialogueLine(speaker=speaker, text=str(t)) for t in dlg_lines)
-                if lines:
-                    stages.append(DialogueStageNode(label=stage_label, lines=lines))
-
-            if stages:
-                task_nodes.append(DialogueTaskNode(
-                    task_id=task_id,
-                    label=_humanize_task_id(task_id),
-                    stages=stages,
-                ))
+        task_nodes = _build_task_nodes_from_chapter(chapter_settings, dialog_index, name_by_id)
 
         if not task_nodes:
             continue
@@ -504,10 +489,82 @@ def _build_dialogue_tree(const: Any) -> List[DialogueActNode]:
             tasks=task_nodes,
         )
 
+    # Build regional primary stories as a separate "act"
+    regional_act_label = "Regional Hero Arcs"
+    regional_chapters: Dict[str, DialogueChapterNode] = {}
+
+    for primary_story in getattr(const, "PRIMARY_STORIES", []) or []:
+        if not isinstance(primary_story, dict):
+            continue
+        
+        story_id = str(primary_story.get("story_id", "?"))
+        # Extract region name from story_id (e.g., "desert_primary_story" -> "desert")
+        region_match = re.match(r"(\w+)_primary_story", story_id)
+        region_key = region_match.group(1) if region_match else story_id
+        
+        if region_key in _REGION_STORY_META:
+            region_name, arc_subtitle = _REGION_STORY_META[region_key]
+            chapter_label = f"{region_name} Arc - {arc_subtitle}"
+        else:
+            chapter_label = _humanize_task_id(story_id)
+
+        # Build task nodes from the primary story's tasks
+        task_nodes = _build_task_nodes_from_chapter(primary_story, dialog_index, name_by_id)
+
+        if task_nodes:
+            regional_chapters[story_id] = DialogueChapterNode(
+                chapter_id=story_id,
+                label=chapter_label,
+                tasks=task_nodes,
+            )
+
+    if regional_chapters:
+        acts[regional_act_label] = regional_chapters
+
     return [
         DialogueActNode(label=act_label, chapters=list(chapters.values()))
         for act_label, chapters in acts.items()
     ]
+
+
+def _build_task_nodes_from_chapter(
+    chapter_or_story: Dict[str, Any],
+    dialog_index: Dict[Tuple[Any, Any], List[str]],
+    name_by_id: Dict[str, str],
+) -> List[DialogueTaskNode]:
+    """Extract task nodes with dialogue from a chapter or primary story settings dict."""
+    task_nodes: List[DialogueTaskNode] = []
+    
+    for task in chapter_or_story.get("tasks", []) or []:
+        if not isinstance(task, dict):
+            continue
+        task_id = str(task.get("task_id", "?"))
+
+        stages: List[DialogueStageNode] = []
+        for stage_key, stage_label in (("task_acquire_events", "Acquired"), ("task_complete_events", "Completed")):
+            lines: List[DialogueLine] = []
+            for ev in task.get(stage_key) or []:
+                if not isinstance(ev, dict):
+                    continue
+                if ev.get("event_type") not in ("initiate_dialog", "initiate_character_dialog"):
+                    continue
+                params    = ev.get("params") or {}
+                dlg_lines = dialog_index.get((params.get("npc_id"), params.get("dialog_id")))
+                if not dlg_lines:
+                    continue
+                speaker = _speaker_name(params.get("npc_id"), name_by_id)
+                lines.extend(DialogueLine(speaker=speaker, text=str(t)) for t in dlg_lines)
+            if lines:
+                stages.append(DialogueStageNode(label=stage_label, lines=lines))
+
+        if stages:
+            task_nodes.append(DialogueTaskNode(
+                task_id=task_id,
+                label=_humanize_task_id(task_id),
+                stages=stages,
+            ))
+    
+    return task_nodes
 
 
 # ── items / special items ───────────────────────────────────────────────
