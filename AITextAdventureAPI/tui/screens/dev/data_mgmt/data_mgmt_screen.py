@@ -13,13 +13,14 @@ from textual import work
 from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal, ScrollableContainer, Vertical
-from textual.widgets import Button, Input, ListView, Static, Tab, Tabs, Tree
+from textual.widgets import Button, Input, Label, ListView, RadioButton, RadioSet, Static, Tab, Tabs, Tree
 
 from tui.screens.base_screen import BaseScreen
 from tui.screens.dev.data_mgmt.handlers import (
     handle_button_pressed,
     handle_input_changed,
     handle_list_view_highlighted,
+    handle_radio_set_changed,
     handle_tab_activated,
     handle_tree_node_highlighted,
     rebuild_dialog_tree_for_screen,
@@ -68,6 +69,41 @@ class DataMgmtScreen(BaseScreen):
     #dm-dialog-filter-row Input {
         width: 1fr;
         margin-right: 1;
+    }
+
+    #dm-equipment-filter-row {
+        width: 1fr;
+        height: auto;
+        display: none;
+        padding: 0;
+    }
+
+    #dm-equipment-type-radio {
+        width: auto;
+        height: 3;
+        border: none;
+        background: transparent;
+        padding: 0 1;
+    }
+
+    #dm-equipment-type-radio > RadioButton {
+        width: auto;
+        margin-right: 2;
+        padding: 0 1;
+    }
+
+    #dm-equipment-slot-radio {
+        width: auto;
+        height: 3;
+        border: none;
+        background: transparent;
+        padding: 0 1;
+    }
+
+    #dm-equipment-slot-radio > RadioButton {
+        width: auto;
+        margin-right: 2;
+        padding: 0 1;
     }
 
     #dm-expand, #dm-collapse, #dm-copy {
@@ -140,6 +176,21 @@ class DataMgmtScreen(BaseScreen):
                 yield Input(placeholder="Chapter...", id="dm-filter-chapter")
                 yield Input(placeholder="Task...", id="dm-filter-task")
                 yield Input(placeholder="Character...", id="dm-filter-character")
+            with Vertical(id="dm-equipment-filter-row"):
+                with Horizontal():
+                    yield Label("Type:", markup=False)
+                    with RadioSet(id="dm-equipment-type-radio"):
+                        yield RadioButton("All", value=True, id="equip-type-all")
+                        yield RadioButton("Weapon", id="equip-type-weapon")
+                        yield RadioButton("Armor", id="equip-type-armor")
+                with Horizontal():
+                    yield Label("Slot:", markup=False)
+                    with RadioSet(id="dm-equipment-slot-radio"):
+                        yield RadioButton("All", value=True, id="equip-slot-all")
+                        yield RadioButton("Head", id="equip-slot-head")
+                        yield RadioButton("Body", id="equip-slot-body")
+                        yield RadioButton("Arms", id="equip-slot-arms")
+                        yield RadioButton("Legs", id="equip-slot-legs")
             yield Button("++", id="dm-expand", variant="default")
             yield Button("--", id="dm-collapse", variant="default")
             yield Button("Copy", id="dm-copy", variant="default")
@@ -190,6 +241,9 @@ class DataMgmtScreen(BaseScreen):
 
     def on_input_changed(self, event: Input.Changed) -> None:
         handle_input_changed(self, event)
+
+    def on_radio_set_changed(self, event: RadioSet.Changed) -> None:
+        handle_radio_set_changed(self, event)
 
     def on_list_view_highlighted(self, event: ListView.Highlighted) -> None:
         handle_list_view_highlighted(self, event)

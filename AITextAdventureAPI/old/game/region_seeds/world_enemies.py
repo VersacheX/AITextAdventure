@@ -63,6 +63,15 @@ WORLD_NPCS = [
       "auxiliary": "Ni — Absolute inevitability; perceives only one valid future: total unmaking.",
       "tertiary": "Se — Rejects physicality; collapses matter into conceptual zero.",
       "inferior": "Fi — Values erasure as purity; rejects all bonds, meaning, and identity as contamination."
+    },
+    "enneagram": {
+      "enneagram_type": "8w9",
+      "core_fear": "Being controlled or limited by existence.",
+      "core_desire": "To have absolute control over reality by unmaking it.",
+      "defense_mechanism": "Denial — Denies the validity of existence itself, asserting its own power by erasing it.",
+      "stress_line": "Moves to Type 5 — Withdraws into pure, inactive potential when confronted with a force it cannot erase.",
+      "growth_line": "Moves to Type 2 — (Hypothetically) Would use its absolute power to create and protect, rather than destroy.",
+      "instinctual_variant": "sp/so — The ultimate self-preservationist, ensuring its own supremacy by eliminating all other things."
     }
   },
   {
@@ -76,6 +85,15 @@ WORLD_NPCS = [
       "auxiliary": "Te — Imposes cosmic law; enforces annihilation as the only stable configuration.",
       "tertiary": "Fi — Rejects individuality; identity is a flaw to be excised.",
       "inferior": "Se — Material domination; reshapes matter into rigid, lifeless order."
+    },
+    "enneagram": {
+      "enneagram_type": "1w9",
+      "core_fear": "Disorder, chaos, and imperfection.",
+      "core_desire": "To have a perfect, ordered, and balanced universe (through total control).",
+      "defense_mechanism": "Reaction Formation — Believes its tyrannical control and enforcement of rules is a righteous act of creating 'perfect' order.",
+      "stress_line": "Moves to Type 4 — Becomes melancholic and withdrawn when its perfect system is flawed or broken.",
+      "growth_line": "Moves to Type 7 — Learns to accept and find value in a flexible, imperfect reality.",
+      "instinctual_variant": "so/sp — Obsessed with imposing a perfect order on the entire social and physical fabric of reality."
     }
   }
 ]

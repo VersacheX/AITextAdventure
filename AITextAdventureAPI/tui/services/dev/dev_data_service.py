@@ -191,6 +191,47 @@ def search_records(category: str, query: str) -> List[DevRecord]:
     return [r for r in get_records(category) if r.matches(query)]
 
 
+def filter_equipment_records(type_query: str = "", slot_query: str = "") -> List[DevRecord]:
+    """
+    Filter equipment records by type (Weapon/Armor) and armor slot.
+    
+    Args:
+        type_query: Filter by equipment type (e.g., "Weapon", "Armor")
+        slot_query: Filter by armor slot (e.g., "head", "body", "arms", "legs")
+    
+    Returns:
+        List of matching DevRecord objects.
+    """
+    preload()  # ensure catalog is loaded
+    
+    all_equipment = _CACHE.get("equipment", [])
+    if not type_query and not slot_query:
+        return all_equipment
+    
+    type_lower = type_query.lower()
+    slot_lower = slot_query.lower()
+    
+    filtered = []
+    for record in all_equipment:
+        # Check type match
+        type_match = not type_query or type_lower in record.subtitle.lower()
+        
+        # Check slot match (only for armor)
+        slot_match = True
+        if slot_query:
+            if "armor" in record.subtitle.lower():
+                # For armor, check if slot is in detail or subtitle
+                slot_match = slot_lower in record.detail.lower() or slot_lower in record.subtitle.lower()
+            else:
+                # For weapons, slot filter doesn't apply
+                slot_match = False
+        
+        if type_match and slot_match:
+            filtered.append(record)
+    
+    return filtered
+
+
 def get_dialogue_tree() -> List[DialogueActNode]:
     """Return the cached Act -> Chapter -> Task -> stage -> line tree,
     building + caching (alongside every other category) on first use."""
