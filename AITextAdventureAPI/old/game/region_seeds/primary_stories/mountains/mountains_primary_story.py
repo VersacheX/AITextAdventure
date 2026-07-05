@@ -78,6 +78,54 @@ ATTAINABLE_PLAYER_CHARACTERS = [
 
     }
 ]
+"""
+Bragg Character Review
+Overall Verdict: 8.6 / 10 – Strong, fun, and fitting.
+Bragg is a solid, likable “big personality” tank character. He brings grounded, practical energy that balances the more mystical or philosophical party members.
+How Well He Matches His Base (ESTP 8w7)
+Strong Matches:
+
+Se-dominant: Action-oriented, physical, immediate reactions. Loves smashing things and fixing (or breaking) stuff.
+Bravado masking trauma: The explosion that killed his crew is a perfect wound for an 8w7. He covers fear of losing control with swagger and humor.
+Forge-breaker / Builder vibe: Mechanical expertise mixed with destructive force feels very ESTP.
+
+Current Lines (Mountain Arc + Group Scenes):
+
+“Ah! A traveler with working limbs. Perfect.”
+“Rokhuld’s smashing his way toward the mountain’s heart. Says the world’s ending is buried down there.”
+“He’s breaking my golems, my tunnels, my patience. Go stop him before he cracks the whole peak.”
+“Ha! You flattened him like a loose cobblestone.”
+“You’ve got talent. I’ll come along — someone needs to build things while you break them.”
+
+These are good — they show his practical, gruff charm and builder/destroyer duality.
+Strengths
+
+Distinct voice: Blunt, confident, a bit cocky but helpful.
+Good contrast with more introspective characters (Kor-in, Ripple, Grimnaw).
+Natural party integration — he respects strength and wants to contribute practically.
+
+Areas for Improvement
+1. Deepen the Trauma
+We know about the explosion, but we don’t feel it much yet. A few lines hinting at his fear of sudden collapse or losing people would make him richer.
+2. Vary the Swagger
+He’s a bit one-note “tough builder” right now. Lean into ESTP charm, impulsiveness, or momentary vulnerability under stress.
+Suggested Line Tweaks / Additions:
+Mountain Arc (Meet Bragg):
+
+Bragg: (wiping soot from his hands, grinning) Ah! Fresh limbs with working brains. Perfect. Rokhuld’s smashing my golems to dust. Says the world’s end is buried in the mountain’s heart… I lost enough people to one explosion already. Go crack his skull before he cracks my whole damn peak.
+
+After Defeating Rokhuld:
+
+Bragg: Ha! You flattened him like a loose cobblestone. Good work. …Reminds me of the old crew. They would’ve liked you. (quiet for a beat) Anyway — I’ll tag along. Someone’s gotta build things while you lot break the world.
+
+In Group Scenes (e.g. Chapter 8 ship crash):
+
+Bragg: (laughing nervously as the ship shakes) Just like the old forge right before she blew! Hold on to something solid!
+
+
+Final Thoughts
+Bragg has strong “party tank with heart” energy. He’s fun, useful, and believable. With a little more vulnerability tied to his trauma, he’ll feel even more alive.
+"""
 
 NPCS = [
     {

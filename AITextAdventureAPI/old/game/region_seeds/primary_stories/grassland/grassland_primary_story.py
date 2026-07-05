@@ -75,6 +75,189 @@ ATTAINABLE_PLAYER_CHARACTERS = [
 
     }
 ]
+"""
+⭐ Nia Character Review
+Overall Verdict: 9.2 / 10 — One of the most thematically powerful party members.
+
+Nia is already compelling: a wind‑dancer who heard a future echo of her own death. That alone gives her more narrative gravity than most “energetic rogue” archetypes ever get. But what makes her exceptional is how her personality, her magic, and her existential fear all orbit the same core idea:
+
+She is terrified of stillness.
+
+Stillness is where the echo lives.
+Stillness is where the future catches up.
+Stillness is where she might die.
+
+Everything she does — the jokes, the motion, the bright energy — is a rebellion against inevitability.
+
+🧠 MBTI Fit: ENFP (Excellent)
+Her MBTI alignment is extremely tight.
+
+Dominant Ne — Wind as Possibility
+She reads the wind like a living probability field.
+Her lines show this clearly:
+
+“The wind’s whispering wrong.”
+“She thinks she owns the wind.”
+
+She treats the environment as a stream of signals, not a static world.
+
+Auxiliary Fi — Personal conviction
+Her rebellion isn’t random — it’s moral.
+She fights Serene because Serene steals futures.
+She fights fate because fate steals choice.
+
+Tertiary Se — Physical spontaneity
+She moves first, thinks later.
+Her combat style is improvisational, instinctive, kinetic.
+
+Inferior Te — Stress collapse
+When the future echo presses too close, she becomes:
+
+rigid
+
+anxious
+
+scattered
+
+reactive
+
+This is perfect ENFP stress behavior.
+
+🔮 Enneagram Fit: 7w6 (Very Strong)
+Nia is one of the cleanest 7w6 characters I’ve seen in a narrative like this.
+
+Core Fear:
+Being trapped — by fate, by stillness, by the moment she saw.
+
+Core Desire:
+Freedom, motion, possibility.
+
+Defense Mechanism: Rationalization
+She reframes fear as excitement.
+She reframes danger as adventure.
+She reframes the future echo as “interesting.”
+
+Stress Line → Type 1
+When cornered by fate, she becomes:
+
+rigid
+
+moralistic
+
+perfectionistic
+
+angry at herself for “hesitating”
+
+Growth Line → Type 5
+When she grows, she becomes:
+
+introspective
+
+wise
+
+able to sit still long enough to understand her fear
+
+able to choose her future instead of outrunning it
+
+This gives her a beautiful arc.
+
+🌪️ Narrative Function: The Future Rebel
+Nia’s role in the story is bigger than her lines currently show.
+
+She is:
+
+1. The party’s “possibility sensor.”
+She feels shifts before they happen.
+She senses collapse before it manifests.
+She hears echoes of futures that haven’t arrived.
+
+2. The thematic counterpoint to Serene.
+Serene controls the wind — the future — the whispers.
+Nia dances with it.
+
+Serene wants inevitability.
+Nia wants choice.
+
+3. The emotional accelerant.
+She pushes the party forward.
+She refuses stagnation.
+She refuses despair.
+
+4. The existential wildcard.
+She knows she’s supposed to die.
+She doesn’t know when.
+She doesn’t know how.
+She doesn’t know if the party is the cause or the cure.
+
+This makes her one of the most narratively volatile characters in the cast.
+
+🎤 Current Lines (from your document)
+“The wind’s whispering wrong.”
+“She thinks she owns the wind.”
+“I need someone who can shut her down before she steals tomorrow entirely.”
+“Nice work! The wind sounds like itself again.”
+“You’re fun. I’m coming with you. Someone has to keep the future interesting.”
+
+These are good — but they don’t yet show:
+
+her fear
+
+her future echo
+
+her rebellion
+
+her internal conflict
+
+her connection to the party’s fate
+
+She’s missing the emotional depth she could have.
+
+✨ Suggested Enhanced Lines (In‑Character)
+Meet Nia (Grasslands Arc)
+Nia: (grinning, but eyes sharp) Hey stranger! You hear that? The wind’s whispering wrong.
+Nia: Serene’s stealing voices again. Futures, too. She thinks she owns tomorrow.
+Nia: I won’t let her. Not after what I heard… not after what the wind showed me.
+
+Hint at her future echo
+Nia: (voice dropping) The wind told me something once. A moment. My moment.
+Nia: I’m not letting it happen. Not if I can outrun it.
+
+After defeating Serene
+Nia: Nice work! The wind sounds like itself again.
+Nia: And hey — you’re fun. Dangerous fun.
+Nia: I’m coming with you. Someone has to keep the future interesting… and maybe keep mine from catching up.
+
+🔍 Where She Can Shine Later
+Nia should have reactive lines in:
+
+Act IV – Fall of the Heart
+She should sense emotional collapse before others do.
+
+Act V – Fall of the Mind
+She should feel paradoxes in the wind.
+
+Act VI – Fall of Existence
+She should hear the final echo — the one she’s been running from.
+
+This is where her arc can peak.
+
+🧩 Psychological Depth Summary
+Nia is a rebellious ENFP 7w6 wind‑dancer whose entire identity is built around outrunning a future she once glimpsed. She is:
+
+bright
+
+chaotic
+
+terrified
+
+hopeful
+
+kinetic
+
+existentially important
+
+She is one of your strongest characters — she just needs more lines that reveal her fear and her connection to the party’s fate.
+"""
 
 NPCS = [
     {

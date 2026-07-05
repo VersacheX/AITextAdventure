@@ -77,6 +77,66 @@ ATTAINABLE_PLAYER_CHARACTERS = [
 
     }
 ]
+"""
+Kor-in & Lady Aeriola Frostborn Review
+Overall Verdict: Strong potential with a compelling tragic core.
+This pairing has real emotional weight. Kor-in’s quiet, grief-driven hunt against Aeriola’s cold, ideological extremism creates a classic personal vengeance vs. philosophical evil dynamic.
+Kor-in Assessment
+INFP 4w5 – Very Good Fit
+Strengths:
+
+Deep, internalized grief that drives him without making him overly dramatic.
+Soft-spoken and gentle by nature, but becomes terrifyingly precise when confronting Aeriola’s magic — excellent use of inferior Te.
+The image of him shattering ice with his bare hands to try to save his wife is powerful and memorable.
+
+Current Lines (Snow Arc):
+
+“You there. You smell like warmth. Good. I need someone alive.”
+“Lady Aeriola froze half the valley last night. She wants the world still — unmoving — like a corpse.”
+“My family vanished in one of her frozen 'moments.' End her madness before she freezes time itself.”
+“She's gone. Good. The snow feels honest again.”
+“You fight well. I'll travel with you — until the world stops breathing.”
+
+These are solid, but they lean a little functional. They tell us what happened, but don’t quite let us feel the depth of his grief.
+Suggestions to Deepen Him:
+
+Lean harder into his Fi-Si loop (sacred, wordless grief tied to memories of his wife).
+Show the contrast between his gentle nature and the cold precision he shows when fighting Aeriola’s magic.
+
+Improved/Additional Lines:
+
+Kor-in: (quiet, almost whispering) You smell like warmth… like she did. Good. I need someone still breathing.
+After defeating Aeriola: Kor-in: (staring at the melting ice, voice hollow) She’s gone. The snow feels honest again… but it will never feel warm.
+
+Lady Aeriola Frostborn Assessment
+INTJ 1w9 – Excellent Antagonist
+Strengths:
+
+Clear, chilling motivation: She froze her own heart to “escape time” and now wants to impose perfect stillness on the world.
+Strong philosophical conflict with the party’s themes of choice, change, and meaning.
+Reaction Formation is well realized — she believes freezing everything is a righteous act of purity.
+
+Current Concept: She’s a “titty twister” indeed — an aristocratic, cold, self-righteous villain who thinks she’s saving the world by ending it. That’s deliciously hateable.
+Potential Lines for Her:
+
+“Motion is corruption. Change is decay. Only in perfect stillness can purity endure.”
+“Your warmth is a disease. I will grant you the mercy of ice.”
+“Why do you fight so desperately to keep suffering? I offer an end to all of it.”
+
+
+Overall Pairing Verdict
+This is one of the strongest Regional Hero Arcs conceptually. The contrast between:
+
+Kor-in’s deep, personal, human grief, and
+Aeriola’s cold, ideological desire for perfect stillness
+
+…creates excellent thematic tension.
+Recommendations:
+
+Give Kor-in 1–2 lines that show the raw pain beneath his calm exterior.
+Make Aeriola’s philosophy more explicit and self-righteous in her boss fight dialogue.
+Consider a quiet moment after the fight where Kor-in confronts what his vengeance actually means now that it’s done.
+"""
 
 NPCS = [
     {

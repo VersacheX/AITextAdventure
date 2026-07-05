@@ -77,6 +77,61 @@ ATTAINABLE_PLAYER_CHARACTERS = [
 
     }
 ]
+"""
+Ripple Character Review
+Overall Verdict: 8.4 / 10 – Good foundation with room to shine more.
+Ripple has a clear, ethereal voice that fits the mystical side of the party. She serves as a calm, empathetic counterbalance to more chaotic or analytical members like Moxie, Grimnaw, and Kade.
+How Well She Matches Her Base (INFJ 9w1)
+Strong Matches:
+
+Ni + Fe: Her lines focus on symbolic patterns in tides, emotions, and the world’s collapse. She speaks with quiet empathy and a desire for harmony.
+Dissociation & Trauma: The drowning backstory is well implied in her fear of deep water and her role as a “tide oracle who returned changed.”
+Peace-Seeking 9w1: Calm, soothing presence. She wants to calm the waters (literal and metaphorical).
+
+Current Lines (Shallows Arc):
+
+“Traveler… the tides are trembling.”
+“Something ancient rose from the trench — Uul’thar. It bends the sea like wet parchment.”
+“I cannot calm the waters while it exists. Please… descend and end it.”
+“The tides breathe again. Thank you.”
+“I will walk with you now. The void’s whispers grow louder.”
+
+These are solid and atmospheric, but they lean a bit generic.
+Strengths
+
+Ethereal, mystical tone that feels distinct.
+Good thematic tie-in with water, collapse, and emotional tides.
+Her joining the party feels natural (she needs help with Uul’thar and then offers to travel with the group).
+
+Areas for Improvement
+1. More Distinct Voice
+Her current lines are calm and poetic, but could lean harder into her trauma and unique perspective.
+2. Show the Internal Conflict
+As someone who drowned and returned changed, she should have subtle hints of fear or dissociation, especially around water or overwhelming chaos.
+3. Stronger Party Integration
+After joining, she fades into the background. Give her more reactive lines in later chapters.
+
+Suggested Line Improvements
+Shallows Arc (Meet Ripple):
+
+Ripple: (voice soft, almost whispering) Traveler… the tides are trembling. Something ancient stirs in the trench. Uul’thar… it bends the sea like wet parchment. I feel it in my bones — the same cold that once pulled me under.
+
+After Defeating Uul’thar:
+
+Ripple: (breathing shakily, eyes distant) The tides breathe again… Thank you. For a moment I feared I would drown in that pressure once more.
+
+When Joining the Party:
+
+Ripple: I will walk with you now. The void’s whispers grow louder… but so does the current of your choices. Perhaps together we can keep the waters from swallowing everything.
+
+Later Game Example (Chapter 19 or 21):
+
+Ripple: (softly, almost to herself) The world is forgetting how to hold itself together… just like the sea forgot how to hold me.
+
+
+Final Thoughts
+Ripple has strong potential as the party’s emotional/mystical compass. She just needs a bit more personal texture — her trauma, her dissociation, and her quiet hope for peace should shine through more clearly.
+"""
 
 NPCS = [
     {

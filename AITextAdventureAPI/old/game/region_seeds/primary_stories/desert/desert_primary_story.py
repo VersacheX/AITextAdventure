@@ -78,6 +78,194 @@ ATTAINABLE_PLAYER_CHARACTERS = [
 
     }
 ]
+"""
+⭐ Sable Character Review
+Overall Verdict: 9.4 / 10 — One of the strongest thematic characters in the cast.
+
+Sable is a desert witch who sells miracles she no longer believes in.
+That alone is a devastating character hook.
+
+But the real brilliance is how her personality, magic, trauma, and worldview all orbit the same core truth:
+
+She is a healer who cannot heal herself.
+
+She guides others with charisma, insight, and emotional precision — yet she carries a grief so deep she has buried it under sand, silence, and service.
+
+Her lines across Acts III–VI show:
+
+quiet sorrow
+
+sharp intuition
+
+charismatic leadership
+
+flashes of bitterness
+
+deep empathy
+
+a refusal to let the world collapse without fighting
+
+She is the emotional backbone of the party.
+
+🧠 MBTI Fit: ENFJ (Extremely Strong)
+Dominant Fe — Emotional leadership
+Sable reads people instantly and responds with emotional clarity:
+
+“Someone who still has their head on straight? I’ll take it.”
+“Another city, another storm. This is never going to end, is it?”
+
+She guides the group’s emotional tone, especially in collapse-heavy chapters.
+
+Auxiliary Ni — Pattern intuition
+She senses deeper metaphysical patterns:
+
+“This… this is what the desert warned me about.”
+“Everything screaming for your eyes.”
+
+Her Ni is symbolic, prophetic, and tied to the desert’s shifting nature.
+
+Tertiary Se — Decisive action
+She acts with confidence and flair:
+
+“One more step closer to understanding what’s tearing the world apart.”
+
+She’s grounded in the moment, especially in combat or crisis.
+
+Inferior Ti — Sharp, cutting logic under stress
+When overwhelmed, she becomes biting, critical, and surgical:
+
+“This place is devouring people whole. We can’t let it keep winning.”
+
+Her Ti emerges as cold precision — a contrast to her usual warmth.
+
+💔 Enneagram Fit: 2w3 (Perfect)
+Core Fear:
+Being unwanted, unworthy, or failing those who depend on her.
+
+Core Desire:
+To be needed, valued, and emotionally indispensable.
+
+Defense Mechanism: Repression
+She hides her grief — the caravan she failed to save — beneath charisma and service.
+
+She helps others to avoid confronting her own pain.
+
+Stress Line → Type 8
+When triggered, she becomes:
+
+controlling
+
+aggressive
+
+confrontational
+
+fiercely protective
+
+We see flashes of this in collapse-heavy chapters.
+
+Growth Line → Type 4
+When she grows, she becomes:
+
+introspective
+
+emotionally honest
+
+willing to confront her grief
+
+able to find identity beyond service
+
+This is her true arc.
+
+🏜️ Narrative Function: The Desert Oracle of Grief
+Sable’s role is enormous — even if subtle.
+
+1. She is the party’s emotional stabilizer.
+When others spiral, she grounds them.
+
+2. She is the thematic mirror of the world’s collapse.
+She failed to save a caravan.
+The world is failing to save itself.
+Her grief is the world’s grief.
+
+3. She is the “miracle seller” who no longer believes in miracles.
+This is one of the strongest character contradictions in your entire cast.
+
+4. She is the desert’s voice.
+Her intuition ties directly into the Void’s influence beneath the dunes.
+
+5. She is the emotional counterpoint to characters like Moxie and Kade.
+Where they are chaotic or analytical, she is empathetic and symbolic.
+
+🎤 Current Lines (from your document)
+“I don’t like this… feels like the air itself is lying to us.”
+“This… this is what the desert warned me about.”
+“Another city, another storm. This is never going to end, is it?”
+“One more step closer to understanding what’s tearing the world apart.”
+“Ember would be proud.”
+
+These lines are excellent — but they can be sharpened to reveal:
+
+her grief
+
+her guilt
+
+her intuition
+
+her symbolic connection to collapse
+
+her emotional leadership
+
+her buried trauma
+
+✨ Suggested Enhanced Lines (In-Character)
+Act III – Glamour’s City
+Sable: (quiet, uneasy) The air’s lying. The desert taught me that feeling — when reality starts to slip sideways.
+Sable: This place screams for your eyes. It’s the same hunger the dunes had before the sink swallowed them.
+
+Act IV – Stigma’s City
+Sable: Masks and miracles… both are lies people cling to when the truth hurts too much.
+Sable: I used to sell hope. Now I just try to keep people from drowning in it.
+
+Act V – Fall of the Mind
+Sable: (softly) The world feels like the dunes before the collapse. Too quiet. Too heavy.
+Sable: I hear echoes under the sand again. I thought they were gone.
+
+Act VI – Fall of Existence
+Sable: I couldn’t save the caravan. I couldn’t save the dunes.
+Sable: But I can save this. I have to.
+
+🧩 Where Sable Can Shine Later
+1. When the party faces Lament
+Sable should feel the grief loops more deeply than others.
+
+2. When corruption spreads across cities
+She should compare it to the desert’s collapse.
+
+3. When the party fractures emotionally
+She should be the one who tries to hold them together — even if it hurts her.
+
+4. When the final choice arrives
+She should confront her past failure directly.
+
+🏜️ Psychological Depth Summary
+Sable is a charismatic ENFJ 2w3 desert witch whose grief, intuition, and emotional leadership form one of the strongest arcs in your entire narrative. She is:
+
+empathetic
+
+symbolic
+
+wounded
+
+charismatic
+
+intuitive
+
+quietly grieving
+
+emotionally essential
+
+She is the heart of the party — even when she doesn’t believe she deserves to be.
+"""
 
 #DUNGEONS = ['zaruun_lair']
 

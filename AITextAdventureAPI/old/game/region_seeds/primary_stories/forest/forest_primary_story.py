@@ -83,6 +83,220 @@ ATTAINABLE_PLAYER_CHARACTERS = [
 
     }
 ]
+"""
+🌲 Thorn Character Review
+Overall Verdict: 9.3 / 10 — One of the strongest emotional anchors in the cast.
+
+Thorn is a half‑feral guardian archetype done right: not a caricature, not a simple “wild man,” but a deeply wounded protector whose instincts, grief, and loyalty form a coherent psychological system.
+
+His lines across Acts III–VI show:
+
+sensory attunement
+
+instinctive threat detection
+
+quiet grief
+
+fierce protectiveness
+
+a refusal to articulate pain
+
+flashes of prophetic dread (inferior Ni)
+
+He’s a character who feels the world breaking before others understand it.
+
+🧠 MBTI Fit: ESFP (Excellent)
+Dominant Se — Hyper-present, sensory-driven
+Thorn reacts to the world through sensation:
+
+“Smells like something died and decided not to stay dead.”
+“(grunting) Then we follow. No point stopping now.”
+
+He doesn’t theorize — he perceives.
+He doesn’t plan — he moves.
+He doesn’t explain — he acts.
+
+This is textbook Se.
+
+Auxiliary Fi — Private moral code
+His grief over the beast he raised is internalized, not spoken.
+His loyalty is quiet, fierce, and personal.
+
+He doesn’t moralize like Kaera.
+He doesn’t analyze like Kade.
+He feels and acts from those feelings.
+
+Tertiary Te — Brutal efficiency under pressure
+When overwhelmed, Thorn becomes:
+
+decisive
+
+tactical
+
+cold
+
+efficient
+
+This shows up in fights and crisis moments:
+
+“(grunting) Then we follow.”
+“One less shadow on the world. Good.”
+
+Inferior Ni — Haunting flashes of dread
+Thorn senses corruption spreading but cannot articulate the future:
+
+“Smells like something died and decided not to stay dead.”
+“The decay has a very specific… texture.”
+
+He feels the pattern without understanding it.
+
+This is perfect inferior Ni: symbolic dread without clarity.
+
+💥 Enneagram Fit: 8w9 (Very Strong)
+Core Fear:
+Being powerless to protect what he loves.
+
+Core Desire:
+To maintain control of his domain and keep corruption out.
+
+Defense Mechanism: Denial
+He pushes away grief, vulnerability, and fear.
+
+He doesn’t talk about the beast he raised.
+He doesn’t talk about the mercy-kill.
+He doesn’t talk about the forest’s corruption.
+
+He acts instead.
+
+Stress Line → Type 5
+When overwhelmed, Thorn withdraws:
+
+quiet
+
+brooding
+
+hyper-observant
+
+isolating
+
+This fits his “half-feral guardian” vibe perfectly.
+
+Growth Line → Type 2
+When he grows, he becomes:
+
+protective
+
+nurturing
+
+quietly supportive
+
+willing to use his strength for others
+
+We see flashes of this in Act IV and Act VI.
+
+🌳 Narrative Function: The Instinctive Guardian
+Thorn’s role in the story is bigger than his lines suggest. He is:
+
+1. The corruption sensor
+He detects metaphysical decay before others:
+
+“Smells like something died and decided not to stay dead.”
+“The decay has a very specific… texture.”
+
+He’s your early-warning system.
+
+2. The emotional ballast
+When others spiral (Kaera’s empathy, Moxie’s chaos, Kade’s analysis), Thorn grounds the group with instinctive certainty.
+
+3. The grief parallel to the world’s collapse
+His personal story mirrors the macro story:
+
+He raised something beautiful.
+
+Corruption overtook it.
+
+He had to kill it.
+
+Now the world is doing the same thing.
+
+Thorn’s arc is the world’s arc.
+
+4. The “feral loyalty” archetype done right
+He’s not a brute.
+He’s not comic relief.
+He’s not a simple fighter.
+
+He’s a wounded protector who chooses the party as his new “forest.”
+
+🎤 Current Lines (from your document)
+“Smells like something died and decided not to stay dead.”
+“(grunting) Then we follow. No point stopping now.”
+“One less shadow on the world. Good.”
+“Better lost than broken.”
+“Another predator wearing a savior’s skin. Good riddance.”
+
+These lines are strong — but they can be sharpened to reveal:
+
+his grief
+
+his instinctive dread
+
+his protective nature
+
+his connection to corruption
+
+his symbolic understanding of collapse
+
+✨ Suggested Enhanced Lines (In-Character)
+Act III – Corruption Rising
+Thorn: (low, uneasy) The air’s wrong. Feels like the forest felt before it turned.
+Thorn: Something’s dying… and refusing to stay dead.
+
+Act IV – Stigma’s City
+Thorn: Masks. Lies. Pretty cages. I’ve seen predators dress up like this before.
+Thorn: They smile while they rot.
+
+Act V – Fall of the Mind
+Thorn: (quiet) The corruption’s not just in the ground anymore. It’s in people.
+Thorn: Makes them forget who they were. Makes them easy to break.
+
+Act VI – Fall of Existence
+Thorn: I raised a beast once. Loved it. Lost it.
+Thorn: The world feels the same now. Big. Sick. Dying.
+Thorn: But I won’t mercy-kill this one. Not yet.
+
+🧩 Where Thorn Can Shine Later
+1. When the party faces Dominion
+Thorn should sense the existential collapse before others.
+
+2. When corruption spreads across cities
+He should compare it to the forest’s decay.
+
+3. When the party fractures emotionally
+He should be the one who refuses to leave.
+
+4. When the final choice arrives
+He should reference the beast he raised — and how he refuses to repeat that ending.
+
+🌲 Psychological Depth Summary
+Thorn is a feral ESFP 8w9 guardian whose grief, instinct, and dread form a coherent emotional system. He is:
+
+sensory-driven
+
+loyal
+
+wounded
+
+prophetic in flashes
+
+protective
+
+quietly grieving
+
+symbolically tied to the world’s corruption
+
+He is one of your strongest characters — and with a few more lines revealing his internal conflict, he becomes unforgettable.
+"""
 
 NPCS = [
     {

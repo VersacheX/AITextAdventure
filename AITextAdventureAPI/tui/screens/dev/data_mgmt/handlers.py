@@ -181,8 +181,7 @@ def rebuild_list_for_screen(screen: "DataMgmtScreen") -> None:
     for record in records:
         lv.append(_RecordRow(record))
     screen.query_one("#dm-status", Static).update(f"{len(records)} result(s)")
-    panel = screen.query_one("#dm-detail-text", Static)
-    update_detail_for_record(panel, records[0] if records else None)
+    update_detail_for_record(screen, records[0] if records else None)
 
 
 def rebuild_dialog_tree_for_screen(screen: "DataMgmtScreen") -> None:
@@ -203,8 +202,7 @@ def rebuild_dialog_tree_for_screen(screen: "DataMgmtScreen") -> None:
     )
     screen._last_filtered = filtered
     screen.query_one("#dm-status", Static).update(f"{total_lines} line(s)")
-    panel = screen.query_one("#dm-detail-text", Static)
-    update_detail_for_single_dialogue(panel, None)
+    update_detail_for_single_dialogue(screen, None)
 
 
 def handle_copy_action(screen: "DataMgmtScreen") -> None:

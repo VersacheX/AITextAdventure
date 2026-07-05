@@ -51,7 +51,8 @@ class DataMgmtScreen(BaseScreen):
     }
 
     #dm-filter-row {
-        height: 3;
+        height: auto;
+        min-height: 3;
         padding: 0 1;
         border-bottom: solid $accent 30%;
     }
@@ -75,35 +76,53 @@ class DataMgmtScreen(BaseScreen):
         width: 1fr;
         height: auto;
         display: none;
-        padding: 0;
+        padding: 1 0;
     }
 
-    #dm-equipment-type-radio {
+    #dm-equipment-filter-row Label {
         width: auto;
-        height: 3;
-        border: none;
-        background: transparent;
         padding: 0 1;
+        content-align: left middle;
     }
 
-    #dm-equipment-type-radio > RadioButton {
-        width: auto;
-        margin-right: 2;
-        padding: 0 1;
+    #dm-equipment-filter-row Horizontal {
+        height: auto;
+        width: 1fr;
+        align: left middle;
     }
 
+    #dm-equipment-type-radio,
     #dm-equipment-slot-radio {
-        width: auto;
-        height: 3;
+        width: 1fr;
+        height: auto;
+        layout: horizontal;
         border: none;
         background: transparent;
+    }
+
+    #dm-equipment-type-radio RadioButton,
+    #dm-equipment-slot-radio RadioButton {
+        width: auto;
+        min-width: 8;
+        margin-right: 1;
+    }
+
+    RadioButton {
+        border: tall $accent 50%;
+        background: $surface;
+        color: $text;
         padding: 0 1;
     }
 
-    #dm-equipment-slot-radio > RadioButton {
-        width: auto;
-        margin-right: 2;
-        padding: 0 1;
+    RadioButton:hover {
+        
+        background: $surface-lighten-1;
+    }
+
+    RadioButton.-selected {
+        
+        background: $accent;
+        color: $text;
     }
 
     #dm-expand, #dm-collapse, #dm-copy {
@@ -178,13 +197,13 @@ class DataMgmtScreen(BaseScreen):
                 yield Input(placeholder="Character...", id="dm-filter-character")
             with Vertical(id="dm-equipment-filter-row"):
                 with Horizontal():
-                    yield Label("Type:", markup=False)
+                    yield Label("Type:")
                     with RadioSet(id="dm-equipment-type-radio"):
                         yield RadioButton("All", value=True, id="equip-type-all")
                         yield RadioButton("Weapon", id="equip-type-weapon")
                         yield RadioButton("Armor", id="equip-type-armor")
                 with Horizontal():
-                    yield Label("Slot:", markup=False)
+                    yield Label("Slot:")
                     with RadioSet(id="dm-equipment-slot-radio"):
                         yield RadioButton("All", value=True, id="equip-slot-all")
                         yield RadioButton("Head", id="equip-slot-head")

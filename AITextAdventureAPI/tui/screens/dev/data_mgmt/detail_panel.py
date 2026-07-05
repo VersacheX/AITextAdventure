@@ -3,16 +3,20 @@ Detail panel rendering logic for displaying DevRecord and DialogueLine data.
 """
 from __future__ import annotations
 
-from typing import List
+from typing import TYPE_CHECKING, List
 
 from rich.markup import escape as rich_escape
 from textual.widgets import Static
 
 from tui.services.dev.dev_data_service import DevRecord, DialogueLine
 
+if TYPE_CHECKING:
+    from tui.screens.dev.data_mgmt.data_mgmt_screen import DataMgmtScreen
 
-def update_detail_for_record(panel: Static, record: DevRecord | None) -> None:
+
+def update_detail_for_record(screen: "DataMgmtScreen", record: DevRecord | None) -> None:
     """Update detail panel with a DevRecord."""
+    panel = screen.query_one("#dm-detail-text", Static)
     if record is None:
         panel.update("[dim]No matching records.[/dim]")
         return
@@ -25,8 +29,9 @@ def update_detail_for_record(panel: Static, record: DevRecord | None) -> None:
     panel.update(f"{header}\n\n{detail}")
 
 
-def update_detail_for_single_dialogue(panel: Static, line: DialogueLine | None) -> None:
+def update_detail_for_single_dialogue(screen: "DataMgmtScreen", line: DialogueLine | None) -> None:
     """Update detail panel with a single DialogueLine."""
+    panel = screen.query_one("#dm-detail-text", Static)
     if line is None:
         panel.update("[dim]← select a dialogue line from the tree[/dim]")
         return
@@ -35,8 +40,9 @@ def update_detail_for_single_dialogue(panel: Static, line: DialogueLine | None) 
     panel.update(f"[bold]{speaker}[/bold]\n\n{text}")
 
 
-def update_detail_for_multiple_dialogue(panel: Static, lines: List[DialogueLine]) -> None:
+def update_detail_for_multiple_dialogue(screen: "DataMgmtScreen", lines: List[DialogueLine]) -> None:
     """Update detail panel with multiple DialogueLines (subtree selection)."""
+    panel = screen.query_one("#dm-detail-text", Static)
     if not lines:
         panel.update("[dim]No dialogue lines under this node.[/dim]")
         return
