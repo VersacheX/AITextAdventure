@@ -20,8 +20,10 @@ from tui.screens.dev.data_mgmt.dialog_tree import (
     rebuild_dialog_tree,
 )
 from tui.screens.dev.data_mgmt.utils import (
-    collect_expanded_paths,
     copy_to_clipboard,
+    get_node_children,
+    is_node_expanded,
+    node_label_text,
     serialize_filtered_tree,
     serialize_node_visible,
 )
@@ -101,16 +103,52 @@ def handle_button_pressed(screen: "DataMgmtScreen", event: Button.Pressed) -> No
         try:
             tree = screen.query_one("#dm-dialog-tree", Tree)
             expand_all_nodes(tree)
+            # Mark all expanded nodes as explicitly expanded by user
+            _mark_all_as_user_expanded(screen, tree)
         except Exception:
             pass
     elif bid == "dm-collapse":
         try:
             tree = screen.query_one("#dm-dialog-tree", Tree)
             collapse_all_nodes(tree)
+            # Mark all collapsed nodes as explicitly collapsed by user
+            _mark_all_as_user_collapsed(screen, tree)
         except Exception:
             pass
     elif bid == "dm-copy":
         handle_copy_action(screen)
+
+
+def _mark_all_as_user_expanded(screen: "DataMgmtScreen", tree: Tree) -> None:
+    """Mark all currently expanded nodes as explicitly expanded by the user."""
+    def visit(node) -> None:
+        if node is tree.root:
+            for child in get_node_children(node):
+                visit(child)
+            return
+        label = node_label_text(node)
+        if label and is_node_expanded(node):
+            screen._user_expanded.add(label)
+            screen._user_collapsed.discard(label)
+        for child in get_node_children(node):
+            visit(child)
+    visit(tree.root)
+
+
+def _mark_all_as_user_collapsed(screen: "DataMgmtScreen", tree: Tree) -> None:
+    """Mark all currently collapsed nodes as explicitly collapsed by the user."""
+    def visit(node) -> None:
+        if node is tree.root:
+            for child in get_node_children(node):
+                visit(child)
+            return
+        label = node_label_text(node)
+        if label and not is_node_expanded(node):
+            screen._user_collapsed.add(label)
+            screen._user_expanded.discard(label)
+        for child in get_node_children(node):
+            visit(child)
+    visit(tree.root)
 
 
 def handle_copy_action(screen: "DataMgmtScreen") -> None:
@@ -164,14 +202,11 @@ def rebuild_list_for_screen(screen: "DataMgmtScreen") -> None:
 
 
 def rebuild_dialog_tree_for_screen(screen: "DataMgmtScreen") -> None:
-    """Rebuild the dialogue tree with filtered data, preserving expansion state."""
+    """Rebuild the dialogue tree with filtered data, preserving explicit user expansion state."""
     if not screen._loaded:
         return
     
     tree = screen.query_one("#dm-dialog-tree", Tree)
-    
-    # Capture current expansion state before rebuilding
-    expanded_paths = collect_expanded_paths(tree.root)
     
     total_lines, filtered = rebuild_dialog_tree(
         tree,
@@ -179,7 +214,8 @@ def rebuild_dialog_tree_for_screen(screen: "DataMgmtScreen") -> None:
         chapter_query=screen.query_one("#dm-filter-chapter", Input).value.strip(),
         task_query=screen.query_one("#dm-filter-task", Input).value.strip(),
         character_query=screen.query_one("#dm-filter-character", Input).value.strip(),
-        expanded_paths=expanded_paths,
+        user_expanded=screen._user_expanded,
+        user_collapsed=screen._user_collapsed,
     )
     screen._last_filtered = filtered
     screen.query_one("#dm-status", Static).update(f"{total_lines} line(s)")

@@ -172,6 +172,7 @@ class DataMgmtScreen(BaseScreen):
         self._category: str = CATEGORIES[0]
         self._loaded: bool = False
         self._last_filtered: Any = None  # store last filtered tree nodes for copy
+        self._expanded_paths: set[str] = set()
 
     # ── compose ───────────────────────────────────────────────────────────
 

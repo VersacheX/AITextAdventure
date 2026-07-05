@@ -7,7 +7,7 @@ behavior to handlers, dialog_tree, detail_panel, and utils modules.
 """
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Set
 
 from textual import work
 from textual.app import ComposeResult
@@ -124,6 +124,9 @@ class DataMgmtScreen(BaseScreen):
         self._category: str = CATEGORIES[0]
         self._loaded: bool = False
         self._last_filtered: Any = None
+        # Track explicit user expansion/collapse actions across filter changes
+        self._user_expanded: Set[str] = set()
+        self._user_collapsed: Set[str] = set()
 
     def compose_content(self) -> ComposeResult:
         yield Tabs(
