@@ -173,12 +173,17 @@ class NpcDetailPanel(Widget):
         portrait_ansi: Optional[str] = None
 
         if resolved is not None:
+            # Prefer chafa (better dithering); fall back to Python renderer.
+            from tui.services.dev.npc_image_renderer import (  # noqa: PLC0415
+                chafa_available, image_to_braille_ansi, render_with_chafa,
+            )
+
             try:
                 from PIL import Image as PilImage  # noqa: PLC0415
                 img = PilImage.open(resolved)
                 img_w, img_h = img.size
 
-                # Fit to max cols first, then cap rows
+                # Aspect-ratio constrained sizing
                 cols = _IMG_MAX_COLS
                 rows = max(1, round(cols * img_h / (img_w * 2)))
                 if rows > _IMG_MAX_ROWS:
@@ -186,7 +191,12 @@ class NpcDetailPanel(Widget):
                     cols = max(1, round(rows * img_w * 2 / img_h))
                     cols = min(cols, _IMG_MAX_COLS)
 
-                portrait_ansi = image_to_braille_ansi(img, cols=cols, rows=rows)
+                if chafa_available():
+                    portrait_ansi = render_with_chafa(resolved, cols=cols, rows=rows)
+
+                if portrait_ansi is None:
+                    portrait_ansi = image_to_braille_ansi(img, cols=cols, rows=rows)
+
             except Exception:
                 portrait_ansi = None
 

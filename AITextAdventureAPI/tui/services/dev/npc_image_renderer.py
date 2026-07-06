@@ -203,3 +203,64 @@ def render_asset(
         return image_to_braille_ansi(img, cols=cols, rows=rows)
     except Exception:
         return None
+
+
+def render_with_chafa(
+    image_path: Path,
+    cols: int = 38,
+    rows: int = 20,
+) -> Optional[str]:
+    """Render *image_path* using the ``chafa`` binary (must be on PATH).
+
+    Uses ``--format symbols --symbols braille`` so chafa's error-diffusion
+    dithering drives the braille dot selection — better quality than the
+    Python per-cell threshold renderer.  Output is truecolor ANSI compatible
+    with Rich's Text.from_ansi() inside a Textual Static widget.
+
+    Returns ``None`` if chafa is not installed, returns a non-zero exit code,
+    or any other error occurs — callers fall back to image_to_braille_ansi().
+    """
+    import shutil
+    import subprocess
+
+    if not shutil.which("chafa"):
+        return None
+
+    try:
+        result = subprocess.run(
+            [
+                "chafa",
+                "--format", "symbols",
+                #"--symbols", "braille+dot",          # dot-level detail on edges/faces
+                "--fill", "vhalf+hhalf+block",  # quarter/half-blocks fill smooth areas
+                "--dither", "none",
+                "--size", f"{cols}x{rows}",
+                "--stretch",
+                "--colors", "full",
+                "--color-space", "din99d",  # perceptually uniform — better gradients
+                "--work", "9",              # max quality; runs in a worker so fine
+                str(image_path),
+            ],
+            capture_output=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=10,
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            return result.stdout
+    except Exception:
+        pass
+    return None
+
+
+# Cache whether chafa is available so shutil.which() is only called once.
+_CHAFA_AVAILABLE: Optional[bool] = None
+
+
+def chafa_available() -> bool:
+    """Return True if the ``chafa`` binary is on PATH (result is cached)."""
+    global _CHAFA_AVAILABLE
+    if _CHAFA_AVAILABLE is None:
+        import shutil
+        _CHAFA_AVAILABLE = shutil.which("chafa") is not None
+    return _CHAFA_AVAILABLE

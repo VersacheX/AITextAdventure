@@ -83,18 +83,16 @@ class PortraitFullscreen(Screen):
         """Background thread: compute braille ANSI and push result to compositor."""
         worker = get_current_worker()
         try:
-            from tui.services.dev.npc_image_renderer import image_to_braille_ansi  # noqa: PLC0415
+            from tui.services.dev.npc_image_renderer import (  # noqa: PLC0415
+                chafa_available, image_to_braille_ansi, render_with_chafa,
+            )
 
             t_cols = self.app.size.width
             t_rows = self.app.size.height
             img = self._pil_image
-
             img_w, img_h = img.size  # type: ignore[union-attr]
 
-            # Aspect-ratio constrained sizing.
-            # Terminal cells are ~1:2 (w:h in screen pixels); braille maps
-            # 2px wide × 4px tall per cell, making each source pixel square.
-            # Display aspect = cols / (rows * 2)  →  solve for cols/rows.
+            # Aspect-ratio constrained sizing
             cols = t_cols
             rows = max(1, round(cols * img_h / (img_w * 2)))
             if rows > t_rows:
@@ -105,7 +103,14 @@ class PortraitFullscreen(Screen):
             if worker.is_cancelled:
                 return
 
-            ansi = image_to_braille_ansi(img, cols=cols, rows=rows)
+            ansi: Optional[str] = None
+
+            # chafa produces better dithering; fall back to Python renderer
+            if chafa_available():
+                ansi = render_with_chafa(self._image_path, cols=cols, rows=rows)
+
+            if ansi is None:
+                ansi = image_to_braille_ansi(img, cols=cols, rows=rows)
 
             if worker.is_cancelled:
                 return
