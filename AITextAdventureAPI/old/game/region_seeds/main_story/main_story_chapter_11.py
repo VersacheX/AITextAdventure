@@ -124,7 +124,8 @@ NPCS = [
           "auxiliary": "Ti — Precision cruelty; calculates the most efficient way to break a body or mind.",
           "tertiary": "Fe — Mocking social manipulation; provokes chaos for entertainment.",
           "inferior": "Ni — Fatalistic impulses; sees only the thrill of the next destructive moment."
-        }
+        },
+        'image': 'voidwalkers:rapture1.jpeg'
     },
     {
         "npc_id": "revelry",
@@ -137,7 +138,8 @@ NPCS = [
           "auxiliary": "Fi — Values inverted; worships destruction as liberation.",
           "tertiary": "Te — Impulsive, explosive action; enforces chaos with manic force.",
           "inferior": "Si — Rejects continuity; every moment must be a new, louder collapse."
-        }
+        },
+        'image': 'voidwalkers:revelry1.jpeg'
     }
 ]
 

@@ -24,7 +24,8 @@ NPCS = [
           "stress_line": "Moves to Type 1 — Becomes rigid and demanding when she feels controlled or bored.",
           "growth_line": "Moves to Type 5 — Becomes more introspective and able to find satisfaction in knowledge, not just action.",
           "instinctual_variant": "sx/so — Seeks intensity in her relationships and social performances, always being the center of the excitement."
-        }
+        },
+        'image': 'npcs:sylvi1'
 	},
 	{
 		'npc_id': 'talla_renn',
@@ -51,7 +52,8 @@ NPCS = [
           "stress_line": "Moves to Type 4 — Becomes moody and withdrawn when she feels her efforts are futile.",
           "growth_line": "Moves to Type 7 — Becomes more spontaneous and able to see the joy in life, not just the duty.",
           "instinctual_variant": "so/sp — Focused on improving her community and maintaining social order to ensure her own security."
-        }
+        },
+		'image': 'npcs:talla_renn1'
 	},
 	{
 		'npc_id': 'relic_guardian',
@@ -75,7 +77,8 @@ NPCS = [
           "stress_line": "Moves to Type 4 — Becomes erratic and melancholic when its purpose is violated.",
           "growth_line": "Moves to Type 7 — Becomes more flexible and open to new possibilities beyond its rigid duty.",
           "instinctual_variant": "sp/so — Its entire existence is self-preservation through the perfect preservation of its duty and the relic it guards."
-        }
+        },
+		'image': 'bosses:relic_guardian1'
 	}
 ]
 

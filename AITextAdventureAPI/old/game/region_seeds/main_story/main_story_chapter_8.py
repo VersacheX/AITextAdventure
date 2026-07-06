@@ -116,7 +116,8 @@ NPCS = [
           "auxiliary": "Se — Hyper-precise predation; acts faster than thought.",
           "tertiary": "Ni — Obsessive fatalism; sees every target as already dead.",
           "inferior": "Fe — Emotional void; mimics empathy only to exploit it."
-        }
+        },
+        'image': 'voidwalkers:scalpel1.jpeg'
     },
       {
         "npc_id": "glamour",
@@ -129,7 +130,8 @@ NPCS = [
           "auxiliary": "Fi — Vanity as tyranny; values only adoration and submission.",
           "tertiary": "Te — Punishes rejection with explosive fury.",
           "inferior": "Ni — Paranoia of fading beauty; sees doom in every reflection."
-        }
+        },
+        'image': 'voidwalkers:glamour1.jpeg'
     }
 ]
 

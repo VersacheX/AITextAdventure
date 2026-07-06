@@ -164,7 +164,8 @@ NPCS = [
           "stress_line": "Moves to Type 2 — Becomes overly helpful or dependent on the party when his quest falters.",
           "growth_line": "Moves to Type 1 — Finds a new, principled purpose beyond his personal grief, fighting for a greater good.",
           "instinctual_variant": "sx/sp — His entire being is focused on an intense, all-consuming quest tied to the person he lost."
-        }
+        },
+        'image': 'kor_in1.jpeg'
     },
     {
         'npc_id': 'aeriola',

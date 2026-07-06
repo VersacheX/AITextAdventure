@@ -152,7 +152,8 @@ NPCS = [
           "stress_line": "Moves to Type 5 — Becomes withdrawn and paranoid when his control is seriously threatened.",
           "growth_line": "Moves to Type 2 — Uses his strength to protect others, turning his trauma into a protective instinct.",
           "instinctual_variant": "sx/sp — Seeks intense challenges and confrontations to prove his strength and control."
-        }
+        },
+        'image': 'bragg1.jpeg'
     },
     {
         'npc_id': 'rokhuld',

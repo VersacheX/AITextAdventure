@@ -20,6 +20,8 @@ REGION_SETTINGS = {
 OPEN_AREA_TILE = "▒"
 IMPASSABLE_TILE = "¤"
 IMPASSABLE_CHANCE = 0.05
+OPEN_AREA_COLOR = "#8fbf5f"
+IMPASSABLE_COLOR = "#6b6b3d"
 
 # Import per-level seed lists
 from game.region_seeds.regions.enemies.grassland.lv1to10 import SEEDS_LV1TO10
@@ -57,5 +59,7 @@ __all__ = [
  'SUBLOCATION_DEFS',
  'RANDOM_HOSTILE_SEEDS',
  'RANDOM_HOSTILE_LINKS',
- "OPEN_AREA_TILE"
+ "OPEN_AREA_TILE",
+ "OPEN_AREA_COLOR",
+ "IMPASSABLE_COLOR"
 ]

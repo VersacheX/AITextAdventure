@@ -166,24 +166,34 @@ timeline
                 EVENT - set_npc_standing_text - kess_thornwrite ("Looking for something to take the edge off? I might have just the thing."):
                 Narrator - Chapter 2 - Contradiction is the root of all movement and life.:
             ► COMPLETED :
-                Mira - Well now… you actually brought it. This cursed couplet is older than half the ruins in this region. Bound and sealed in this cursed form as it has been for so long. If you want the Grift Stone, you'll need to bring me something to uncouple it first. Go speak to Leera. She knows things even the ancients didn't fully understand.:
+                Mira - Well now… you actually brought it.:
+                Mira - This cursed couplet is older than half the ruins in this region.:
+                Mira - Bound and sealed in this cursed form as it has been for so long.:                
+                Mira - If you want this Grift Stone for Tess, you’ll need to do a little something extra for me first.:
+                Mira - Sweetheart, nothing rare comes cheap. And nothing powerful comes without a favor attached.:
+                Mira - Tess wants this stone? Fine. But if you want me to part with it, you’re going to earn it.:
+                EVENT - remove_item - cursed_couplet:
                 EVENT - set_npc_standing_text - mira ("words to the effect of k come back when the couplet is uncoupled"):
-                Chock - Finally, some action. Let's see what this cursed trinket actually does.:
-                Kade - Hmph. Smuggler's trinket. Hope it doesn't explode when I touch it.:
-                Moxie - Ohhh, dangerous curios. My favorite kind. Let me at it!:
-                Poise - Keep your distance. Objects with voices rarely mean well.:
-                Kaera - We should be careful. Some bindings are not meant to be broken lightly.:
+                Chock - A riddle? Great. I came here to fight, not to think:
+                Kade - Fantastic. We’re running errands for smugglers now.:
+                Moxie - Riddles? Delicious. Let’s go shake the universe for a clue.:
+                Poise - If this is the price, we pay it. Keep moving.:
+                - Knowledge is never wasted. Even when it comes from smugglers.:
                 EVENT - award_task - uncouple_couplet
 
         TASK - Uncouple Couplet (Meet Leera) :
             ► ACQUIRED :
                 (No acquired events):
             ► COMPLETED :
-                Leera - Oh… the couplet sings around you. Two voices trapped in one breath. Void and Existence. Absence and Presence. Chaos and order. Objects bound which have no place together. To uncouple them they must understand their very nature to each other once again. Return to Mira with this truth. She will know what must come next.:
+                Leera - Ah… you seek a riddle for Mira. Then listen carefully.:
+                Leera - Void and Existence. Absence and Presence. Chaos and order.:
+                Leera - What exists before it is understood… yet changes once it is named?:
+                Leera - Apparant in absence, but never there in presence. Some truths hum even when buried.:
+            	Leera - Return to Mira with this truth.:
                 EVENT - set_npc_standing_text - leera ("Return to Mira with this truth. She will know what must come next."):
-                Moxie - Paradoxes in jewelry? Delicious. I can almost taste the spells.:
-                Kaera - Void and Existence… such concepts demand reverence. We must proceed with respect.:
-                Kade - Riddles and metaphors. Great. Real helpful.:
+                Moxie - Ohhh, metaphysics. My favorite flavor of nonsense.:
+                Kaera - Void and Existence... These are deep questions...:
+                Kade - Riddles and philosophy. Wonderful.:
                 EVENT - set_npc_standing_text - leera ("Return to Mira with this truth. She will know what must come next."):
                 EVENT - award_task - return_to_mira_after_leera
 
@@ -271,13 +281,16 @@ timeline
             ► ACQUIRED :
                 (No acquired events):
             ► COMPLETED :
-                Mira - You brought the shard. Good. Hold the couplet still… ... ... There. The curse is broken. The couplet is now two bracelets -The Bracelet of Void… and the Bracelet of Existence. As promised, here is the Grift Stone. You can take the hyperway back to Tess for a small fee.:
+                Mira - You brought the shard. Good.:
+                Mira - ...:
+                Mira - ...:
+                Mira - This is exactly what I needed. you came for the Grift Stone, and I keep my deals.:
+                Mira - As promised, here is the Grift Stone.  You can take the hyperway back to Tess for a small fee.:
                 EVENT - remove_item - resonance_shard_ch2:
-                EVENT - remove_item - cursed_couplet:
                 EVENT - award_item - grift_stone:
-                Kaera - I feel… a shift. Good work. May whatever was bound find peace.:
-                Moxie - A pulse of violet light? Absolutely exquisite.:
-                Chock - Two bracelets, you say? Hopefully one of them packs a decent punch.:
+                Kaera - Let’s return it quickly. Tess is waiting.:
+                Moxie - Shards, smugglers, secrets… delicious chaos.:
+                Chock - About time we got something solid out of this.:
                 Poise - We did the work. Let's see where this leads.:
                 Kade - Grift Stone secured. Now, back to Tess — and whatever mess follows.:
                 EVENT - set_npc_standing_text - mira ("The curse is broken. The couplet is now two bracelets -The Bracelet of Void… and the Bracelet of Existence."):
@@ -321,7 +334,7 @@ timeline
                 EVENT - set_npc_standing_text - talla_renn ("I could use some capable hands to help keep the peace around here."):
                 EVENT - award_task - meet_rook_after_talla
 
-        SIDEQUEST - Meet Character 4 (Amnesiac Ally) :
+        TASK - Meet Character 4 (Amnesiac Ally) :
             ► ACQUIRED :
                 (No acquired events):
             ► COMPLETED :
@@ -522,7 +535,13 @@ timeline
             ► ACQUIRED :
                 (No acquired events):
             ► COMPLETED :
-                Marlo - Hey hold up a second there, I'm Marlo Finch. Arcane Auditor to the Grand Council. That bracelet you've been carrying... That bracelet is a ledger of collapse, I'm going to need to audit it before it unravels reality. After you took it from Kirn she told me what happened. How you dissapeared into a rift, then not long after, the rift collapsed and shook the whole city. Waters rose where there were none before. The world is changed. I need to take that bracelet off your hands and examine it before it causes any more damage.:
+                Marlo - Hey hold up a second there, I'm Marlo Finch.  Arcane Auditor to the Grand Council.:
+	            Marlo - That bracelet you've been carrying...  That bracelet is a ledger of collapse, I’m going to need to audit it before it unravels reality.:
+	            Marlo - After you took it from Kirn she told me what happened.  How you dissapeared into a rift, then not long after, the rift collapsed and shook the whole city.:
+	            Marlo - Waters rose where there were none before.  The world is changed.  I need to take that bracelet off your hands and examine it before it causes any more damage.:
+	            Marlo - This little thing has opened rifts in nearby wilds surrounding many cities.:
+                Marlo - Kirn said he got it from Mira.:
+                Marlo - Go back to Mira and find out what you can about it. There will be a reward if you manage to track it down.:
                 EVENT - remove_item - bracelet_of_void:
                 Marlo - This little thing has opened rifts in nearby wilds surrounding many cities. You should make a point of checking the µ of wilds surrounding cities. There are local hero's up to the challenge of helping you out. One of these rifts may help you find a way home. In any case, while you are here, I need you to help me find the Bracelet of Existence, the other half of this nasty thing. Go back to Mira and find out where the other bracelet went. These things need to be put back together.:
                 EVENT - award_task - return_to_mira

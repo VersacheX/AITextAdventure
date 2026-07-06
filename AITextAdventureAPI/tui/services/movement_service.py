@@ -76,7 +76,21 @@ def try_move(key: str, pg: Any) -> Tuple[bool, str]:
     if cmd not in allowed:
         return False, ""  # silently blocked (wall/impassable/building entrance)
 
+    # Store original position for locked dungeon detection
+    orig_pos = (pg.x, pg.y)
+
     moved = handle_movement_key(cmd, active_area, allowed, 4, pg)
+    
+    # Check if moved onto a locked dungeon and revert if needed
+    if moved:
+        dungeon = pg.get_dungeon_at_position()
+        if dungeon and dungeon.is_locked():
+            # Add standing text to dialog queue
+            pg.add_dungeon_standing_text(dungeon)
+            # Revert position
+            pg.x, pg.y = orig_pos
+            return False, "dungeon is locked"
+
     return moved, "" if moved else "move was blocked"
 
 

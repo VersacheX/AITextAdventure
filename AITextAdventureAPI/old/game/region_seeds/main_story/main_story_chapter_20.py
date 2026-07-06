@@ -48,7 +48,8 @@ NPCS = [
 			"stress_line": "Moves to Type 4 - becomes grandiose, melodramatic, and increasingly obsessive about the perfection of its prophetic vision when challenged.",
 			"growth_line": "Moves to Type 7 - (hypothetically) would discover genuine possibility and the joy of a future it does not already know.",
 			"instinctual_variant": "so/sp - its entire identity is constructed around being the authoritative social arbiter of truth; it preserves itself by preserving the narrative."
-		}
+		},
+        'image': 'voidwalkers:oracle1.jpeg'
 	},
 	{
 		"npc_id": "reliquary",
@@ -75,7 +76,8 @@ NPCS = [
 			"stress_line": "Moves to Type 7 - becomes desperate and scattered when its archive is threatened, generating memories faster than it can contain them.",
 			"growth_line": "Moves to Type 8 - (hypothetically) would learn to let the past empower rather than imprison, wielding memory as strength rather than a cage.",
 			"instinctual_variant": "sp/so - fixates on self-preservation through the act of preserving others; its survival is inseparable from the survival of its collection."
-		}
+		},
+        'image': 'voidwalkers:reliquary1.jpeg'
 	}
 ]
 

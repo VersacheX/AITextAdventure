@@ -64,6 +64,7 @@ class DevRecord:
     name: str
     subtitle: str = ""
     detail: str = ""
+    image: str = ""   # filename only (e.g. "ripple1.png"); resolved at render time
 
     def matches(self, query: str) -> bool:
         if not query:
@@ -308,12 +309,16 @@ def _build_npcs(const: Any) -> List[DevRecord]:
         name  = str(npc.get("name", cid))
         desc  = str(npc.get("description", ""))
         theme_song = str(npc.get("theme_song", ""))
+        image = str(npc.get("image", ""))
 
         psych = npc.get("psychology") or {}
         enneagram = npc.get("enneagram") or {}
         shadow_psychology = npc.get("shadow_psychology") or {}
 
         lines = [desc, ""]
+        if theme_song:
+            lines.append(f"Theme: {theme_song}")
+            lines.append("")
         if psych:
             lines.append(f"MBTI: {psych.get('mbti', '?')}")
             lines.append(f"Dominant: {psych.get('dominant', '?')}")
@@ -321,6 +326,7 @@ def _build_npcs(const: Any) -> List[DevRecord]:
             lines.append(f"Tertiary: {psych.get('tertiary', '?')}")
             lines.append(f"Inferior: {psych.get('inferior', '?')}")
         if enneagram:
+            lines.append("")
             lines.append(f"Enneagram: {enneagram.get('enneagram_type', '?')}")
             lines.append(f"Core fear: {enneagram.get('core_fear', '?')}")
             lines.append(f"Core desire: {enneagram.get('core_desire', '?')}")
@@ -329,12 +335,12 @@ def _build_npcs(const: Any) -> List[DevRecord]:
             lines.append(f"Growth line: {enneagram.get('growth_line', '?')}")
             lines.append(f"Instinctual variant: {enneagram.get('instinctual_variant', '?')}")
         if shadow_psychology:
+            lines.append("")
             lines.append(f"Shadow MBTI: {shadow_psychology.get('mbti', '?')}")
             lines.append(f"Shadow Dominant: {shadow_psychology.get('dominant', '?')}")
             lines.append(f"Shadow Auxiliary: {shadow_psychology.get('auxiliary', '?')}")
             lines.append(f"Shadow Tertiary: {shadow_psychology.get('tertiary', '?')}")
             lines.append(f"Shadow Inferior: {shadow_psychology.get('inferior', '?')}")
-
 
         records.append(DevRecord(
             category="npc",
@@ -342,6 +348,7 @@ def _build_npcs(const: Any) -> List[DevRecord]:
             name=name,
             subtitle="NPC",
             detail="\n".join(lines),
+            image=image,
         ))
 
     return records

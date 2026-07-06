@@ -18,7 +18,7 @@ ALLEY = "alley"
 BUILDING = "building"
 
 # Player/aircraft markers
-PLAYER_CHAR = "@"
+PLAYER_CHAR = "☺"
 AIRCRAFT_CHAR = "A"
 UNKNOWN_CHAR = "?"
 
@@ -88,7 +88,7 @@ def build_legend_lines(cur_area: Any) -> List[str]:
 
     lines = ["─── Legend ───"]
     for b in sorted(unique.values(), key=lambda b: b.get("char", "")):
-        char = b.get("char", "?")
+        char = _colorize(b.get("char", "?"), b.get("color"))
         display = b.get("display_name", "Unknown")
         lines.append(f" {char}  {display}")
     return lines
@@ -108,10 +108,24 @@ def build_header(player_game: Any) -> str:
     return f"{region_name}  ─  {city_name}"
 
 
+# ── color markup helper ─────────────────────────────────────────────────────
+
+def _colorize(ch: str, color: Optional[str]) -> str:
+    """Wrap `ch` in Textual markup for `color` (a `#rrggbb` string), escaping
+    any square brackets in the character itself so it can't be misread as a
+    markup tag. If `color` is falsy, the character is returned unescaped.
+    """
+    if not color:
+        return ch
+    safe_ch = ch.replace("[", "\\[")
+    return f"[{color}]{safe_ch}[/]"
+
+
 # ── per-tile character ──────────────────────────────────────────────────────
 
 def _tile_char(x: int, y: int, player_game: Any) -> str:
-    """Return the display character for world coordinate (x, y).
+    """Return the display character (optionally wrapped in Textual color
+    markup) for world coordinate (x, y).
     Priority: player marker → aircraft marker → tile type.
     Mirrors the inner loop of `old/game_screens/overworld_screen.display_viewport()`.
     """
@@ -159,7 +173,8 @@ def _tile_char(x: int, y: int, player_game: Any) -> str:
     if tile_type == BUILDING:
         bld = getattr(t, "building", None)
         ch = bld.get("char") if isinstance(bld, dict) else None
-        return ch if ch else "B"
+        color = bld.get("color") if isinstance(bld, dict) else None
+        return _colorize(ch if ch else "B", color)
 
     if tile_type == "open_area":
         try:
@@ -169,9 +184,9 @@ def _tile_char(x: int, y: int, player_game: Any) -> str:
             _, active = player_game.get_region_and_active_area_for_position((x, y))
             if active and const:
                 type_name = getattr(active, "city_name", None) or getattr(active, "region_name", "")
-                attr = f"{type_name.upper()}_OPEN_AREA_CHAR"
-                ch = getattr(const, attr, None)
-                return ch if ch else "."
+                ch = getattr(const, f"{type_name.upper()}_OPEN_AREA_CHAR", None) or "."
+                color = getattr(const, f"{type_name.upper()}_OPEN_AREA_COLOR", None)
+                return _colorize(ch, color)
         except Exception:
             pass
         return "."
@@ -181,9 +196,9 @@ def _tile_char(x: int, y: int, player_game: Any) -> str:
             _, active = player_game.get_region_and_active_area_for_position((x, y))
             if active and const:
                 type_name = getattr(active, "city_name", None) or getattr(active, "region_name", "")
-                attr = f"{type_name.upper()}_IMPASSABLE_CHAR"
-                ch = getattr(const, attr, None)
-                return ch if ch else "#"
+                ch = getattr(const, f"{type_name.upper()}_IMPASSABLE_CHAR", None) or "#"
+                color = getattr(const, f"{type_name.upper()}_IMPASSABLE_COLOR", None)
+                return _colorize(ch, color)
         except Exception:
             pass
         return "#"

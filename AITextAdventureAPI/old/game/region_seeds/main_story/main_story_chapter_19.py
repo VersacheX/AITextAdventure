@@ -76,7 +76,8 @@ NPCS = [
 			"stress_line": "Moves to Type 8 — Becomes fierce, controlling, and fiercely defensive of her glade when the party first threatens to introduce painful truth.",
 			"growth_line": "Moves to Type 4 — Discovers her own identity and voice outside of her role as protector; learns that authentic song requires her whole self, including the broken parts.",
 			"instinctual_variant": "so/sp — Entirely oriented around the social wellbeing of her community; her self-preservation is tied to the act of communal preservation."
-		}
+		},
+        'image': 'seraphine1.jpeg'
 	},
 	{
 		"npc_id": "twisted_darkwood",

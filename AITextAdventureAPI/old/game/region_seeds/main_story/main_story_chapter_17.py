@@ -70,7 +70,8 @@ NPCS = [
 			"stress_line": "Moves to Type 1 — Becomes violently rigid and punishing when the party refuses to be trapped in its paradoxes.",
 			"growth_line": "Moves to Type 5 — (Hypothetically) Would turn its understanding of contradiction into genuine intellectual discovery.",
 			"instinctual_variant": "sx/so — Forms devastating one-on-one conceptual attacks on each party member, then uses the collective disorientation to dominate."
-		}
+		},
+        'image': 'voidwalkers:paradox1.jpeg'
 	}
 ]
 

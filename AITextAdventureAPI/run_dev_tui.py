@@ -1,29 +1,35 @@
-"""
-Convenience runner for the Fracture TUI's developer Data Management screen.
+﻿"""
+run_dev_tui.py — Development runner that boots directly into the data
+management screen instead of the normal title → auth → main menu flow.
 
-Boots directly into the data-management hub (browse/search characters,
-timeline, items, special items, equipment, dungeons, and cities) instead of
-the normal title -> auth -> main menu flow, for quick content review during
-development.
+This launcher is used by developers to quickly access save-file browsing,
+save inspection, deletion, and load-game testing without needing to log in
+every time.
 
-Usage:
+To use:
     python run_dev_tui.py
 """
-import sys
+from __future__ import annotations
+
 import os
+import sys
+from pathlib import Path
 
-_THIS_DIR = os.path.dirname(__file__)
+# Locate the AITextAdventureAPI folder relative to this script, so imports
+# like `tui.app`, `tui.screens`, `game.objects`, etc. can resolve.
+api_root = Path(__file__).parent
+old_root = api_root / "old"
 
-# Add this directory so the `tui` package can be imported.
-sys.path.insert(0, _THIS_DIR)
+# Both old/ and the repo root need to be on sys.path so bare imports like
+# `game.objects.player` find the right modules.
+if str(api_root) not in sys.path:
+    sys.path.insert(0, str(api_root))
+if str(old_root) not in sys.path:
+    sys.path.insert(0, str(old_root))
 
-# Add `old/` so its bare-import modules (e.g. `client_api_requests.*`,
-# `game.objects.*`) resolve. Everything under `old/` imports as if `old/`
-# itself were a sys.path root (see e.g. `old/console_game.py`,
-# `old/run_equipment_screen_test.py`), not as `old.client_api_requests...`.
-sys.path.insert(0, os.path.join(_THIS_DIR, "old"))
-
-from tui.app import run
+from tui.app import FractureApp
 
 if __name__ == "__main__":
-    run(start_screen="dev_data_mgmt")
+    app = FractureApp()
+    app.start_screen = "dev_data_mgmt"
+    app.run()

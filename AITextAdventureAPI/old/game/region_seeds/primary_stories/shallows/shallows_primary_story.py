@@ -136,7 +136,7 @@ Ripple has strong potential as the party’s emotional/mystical compass. She jus
 NPCS = [
     {
         'npc_id': 'ripple',
-        'name': 'Ripple',
+        'name': 'Ripple',        
         'description': (
             'A tide oracle who drowned during the first Fracture wave—'
             'and returned changed. She now fears deep water even as she channels its power.'
@@ -158,7 +158,8 @@ NPCS = [
           "stress_line": "Moves to Type 6 — Becomes anxious and fearful when her peace is disturbed or she is forced to confront her trauma.",
           "growth_line": "Moves to Type 3 — Becomes more assertive and engaged, using her powers with purpose.",
           "instinctual_variant": "sp/so — Seeks personal peace and comfort, while gently trying to bring harmony to the world around her."
-        }
+        },
+        'image': 'ripple1.jpeg'
     },
     {
         'npc_id': 'uulthar',

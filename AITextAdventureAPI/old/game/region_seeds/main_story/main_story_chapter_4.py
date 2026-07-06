@@ -357,10 +357,13 @@ NPC_DIALOG = [
         'npc_id': 'marlo_finch',
         'dialog_id': 'marlo_finch_ch4_after_rift',
         'dialog': [
-            "Hey hold up a second there, I'm Marlo Finch.  Arcane Auditor to the Grand Council.",            
-            "That bracelet you've been carrying...  That bracelet is a ledger of collapse, I’m going to need to audit it before it unravels reality.",
-            "After you took it from Kirn she told me what happened.  How you dissapeared into a rift, then not long after, the rift collapsed and shook the whole city.",
-            "Waters rose where there were none before.  The world is changed.  I need to take that bracelet off your hands and examine it before it causes any more damage."
+	        "Hey hold up a second there, I'm Marlo Finch.  Arcane Auditor to the Grand Council.",
+	        "That bracelet you've been carrying...  That bracelet is a ledger of collapse, I’m going to need to audit it before it unravels reality.",
+	        "After you took it from Kirn she told me what happened.  How you dissapeared into a rift, then not long after, the rift collapsed and shook the whole city.",
+	        "Waters rose where there were none before.  The world is changed.  I need to take that bracelet off your hands and examine it before it causes any more damage.",
+	        "This little thing has opened rifts in nearby wilds surrounding many cities.",
+            "Kirn said he got it from Mira.",
+            "Go back to Mira and find out what you can about it. There will be a reward if you manage to track it down."
         ]
     },
     {

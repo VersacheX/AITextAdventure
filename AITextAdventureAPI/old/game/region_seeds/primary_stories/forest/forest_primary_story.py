@@ -324,7 +324,8 @@ NPCS = [
           "stress_line": "Moves to Type 5 — Withdraws into the forest, becoming secretive and isolated when overwhelmed by grief or threat.",
           "growth_line": "Moves to Type 2 — Uses his strength to actively protect others, channeling his pain into compassion.",
           "instinctual_variant": "sp/sx — A self-reliant protector of his territory, forming intense bonds with the few he trusts."
-        }
+        },
+        'image': 'thorn1.jpeg'
     },
     {
         'npc_id': 'marrowroot',

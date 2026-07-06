@@ -71,13 +71,7 @@ NPCS = [
           "growth_line": "Moves to Type 3 — Becomes more assertive and purposeful in her healing, taking an active role in mending the world.",
           "instinctual_variant": "sp/so — Seeks personal peace and comfort, which she extends to others through gentle, harmonious interactions."
         },
-        "shadow_psychology": {
-            "mbti": "ISFP-shadow",
-            "dominant": "Fi — Emotional implosion; becomes self‑punishing, convinced she is a burden or unworthy of connection.",
-            "auxiliary": "Se — Sensory overload; panics at chaotic environments, becoming reckless or dissociative.",
-            "tertiary": "Ni — Catastrophic intuition; sees only doomed futures and withdraws completely.",
-            "inferior": "Te — Cold, cutting efficiency; abandons empathy and makes brutal, emotionless judgments."
-        }
+        'image': 'lyren1.jpeg'
     }
 ]
 

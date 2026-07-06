@@ -72,7 +72,8 @@ WORLD_NPCS = [
       "stress_line": "Moves to Type 5 — Withdraws into pure, inactive potential when confronted with a force it cannot erase.",
       "growth_line": "Moves to Type 2 — (Hypothetically) Would use its absolute power to create and protect, rather than destroy.",
       "instinctual_variant": "sp/so — The ultimate self-preservationist, ensuring its own supremacy by eliminating all other things."
-    }
+    },
+        'image': 'voidwalkers:the_void1.jpeg'
   },
   {
     "npc_id": "dominion",
@@ -94,7 +95,8 @@ WORLD_NPCS = [
       "stress_line": "Moves to Type 4 — Becomes melancholic and withdrawn when its perfect system is flawed or broken.",
       "growth_line": "Moves to Type 7 — Learns to accept and find value in a flexible, imperfect reality.",
       "instinctual_variant": "so/sp — Obsessed with imposing a perfect order on the entire social and physical fabric of reality."
-    }
+    },
+        'image': 'voidwalkers:dominion1.jpeg'
   }
 ]
 

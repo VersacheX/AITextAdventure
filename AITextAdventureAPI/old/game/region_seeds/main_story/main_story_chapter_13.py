@@ -42,7 +42,8 @@ NPCS = [
           "stress_line": "Moves to Type 2 — Lashes out, trying to make others feel as worthless as it does.",
           "growth_line": "Moves to Type 1 — Would learn to find inherent value and create a principled identity.",
           "instinctual_variant": "sp/sx — Utterly consumed by its own internal state of worthlessness, it only interacts with the world to pull it down into the rot."
-        }
+        },
+        'image': 'voidwalkers:garbage1.jpeg'
     },
     {
         "npc_id": "crypt_warden",

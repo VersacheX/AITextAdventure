@@ -27,7 +27,8 @@ NPCS = [
           "stress_line": "Moves to Type 5 — Becomes secretive, paranoid, and withdrawn when she feels her control slipping.",
           "growth_line": "Moves to Type 2 — Uses her power and resources to protect and empower those she deems worthy, showing a hidden capacity for loyalty.",
           "instinctual_variant": "sx/sp — Forms intense, controlling one-on-one alliances, using seduction and power to ensure her security."
-        }
+        },
+        'image': 'npcs:mira1'
 	},
 	{
 		'npc_id': 'leera',
@@ -52,7 +53,8 @@ NPCS = [
           "stress_line": "Moves to Type 2 — Becomes overly helpful and clingy when she feels insignificant or misunderstood.",
           "growth_line": "Moves to Type 1 — Becomes more objective and principled, acting on her wisdom rather than just feeling it.",
           "instinctual_variant": "sp/sx — Protects her unique identity by withdrawing into her world of lore, sharing it only in intense, meaningful interactions."
-        }
+        },
+        'image': 'npcs:leera1'
 	},
 	{
 		'npc_id': 'juno',
@@ -77,7 +79,8 @@ NPCS = [
           "stress_line": "Moves to Type 9 — Becomes disengaged and apathetic when faced with failure, losing her drive.",
           "growth_line": "Moves to Type 6 — Becomes more cooperative and committed to others, finding value beyond her own success.",
           "instinctual_variant": "so/sx — Craves admiration and status within her social circle, using her charm to win high-stakes games and relationships."
-        }
+        },
+        'image': 'npcs:juno1'
 	},
 	{
 		'npc_id': 'kess_thornwrite',
@@ -104,7 +107,8 @@ NPCS = [
           "stress_line": "Moves to Type 1 — Becomes rigid and critical when his experiments fail or his freedom is curtailed.",
           "growth_line": "Moves to Type 5 — Becomes more focused and knowledgeable, turning his chaotic curiosity into deep expertise.",
           "instinctual_variant": "so/sp — Engages socially with cheerful energy, sharing his creations to generate excitement and secure his resources."
-        }
+        },
+		'image': 'npcs:kess1'
 	},
 	{
 		'npc_id': 'the_demigorgon',
@@ -129,7 +133,8 @@ NPCS = [
           "stress_line": "Moves to Type 7 — Its actions become scattered and chaotic when its understanding is challenged.",
           "growth_line": "Moves to Type 8 — Manifests its knowledge with decisive, world-altering power.",
           "instinctual_variant": "sp/sx — A being of pure observation and knowledge, interacting with the world only through intense, focused bursts of energy."
-        }
+        },
+		'image': 'bosses:demigorgon1'
 	}
 
 
@@ -151,75 +156,76 @@ NPC_DIALOG = [
 			"Well now… you actually brought it.",
 			"This cursed couplet is older than half the ruins in this region.",
 			"Bound and sealed in this cursed form as it has been for so long.",
-			"If you want the Grift Stone, you’ll need to bring me something to uncouple it first.",
-			"Go speak to Leera. She knows things even the ancients didn't fully understand."
+			"If you want this Grift Stone for Tess, you’ll need to do a little something extra for me first.",
+            "Sweetheart, nothing rare comes cheap. And nothing powerful comes without a favor attached.",
+            "Tess wants this stone? Fine. But if you want me to part with it, you’re going to earn it."
 		]
 	},
 	{
 		'npc_id': 'technique',
 		'dialog_id': 'technique_ch2_deliver_couplet',
 		'dialog': [
-			"Finally, some action. Let's see what this cursed trinket actually does."
+			"A riddle? Great. I came here to fight, not to think."
 		]
 	},
 	{
 		'npc_id': 'tech',
 		'dialog_id': 'tech_ch2_deliver_couplet',
 		'dialog': [
-			"Hmph. Smuggler's trinket. Hope it doesn't explode when I touch it."
+			"Fantastic. We’re running errands for smugglers now."
 		]
 	},
 	{
 		'npc_id': 'magic',
 		'dialog_id': 'magic_ch2_deliver_couplet',
 		'dialog': [
-			"Ohhh, dangerous curios. My favorite kind. Let me at it!"
+			"Riddles? Delicious. Let’s go shake the universe for a clue."
 		]
 	},
 	{
 		'npc_id': 'skill',
 		'dialog_id': 'skill_ch2_deliver_couplet',
 		'dialog': [
-			"Keep your distance. Objects with voices rarely mean well."
+			"If this is the price, we pay it. Keep moving."
 		]
 	},
 	{
 		'npc_id': 'faith',
 		'dialog_id': 'faith_ch2_deliver_couplet',
 		'dialog': [
-			"We should be careful. Some bindings are not meant to be broken lightly."
+			"Knowledge is never wasted. Even when it comes from smugglers."
 		]
 	},
 	{
 		'npc_id': 'leera',
 		'dialog_id': 'leera_ch2_couplet_lore',
 		'dialog': [
-			"Oh… the couplet sings around you. Two voices trapped in one breath.",
-			"Void and Existence. Absence and Presence. Chaos and order.",
-			"Objects bound which have no place together.",
-			"To uncouple them they must understand their very nature to each other once again.",
-			"Return to Mira with this truth. She will know what must come next."
+                "Ah… you seek a riddle for Mira. Then listen carefully.",
+                "Void and Existence. Absence and Presence. Chaos and order.",
+                "What exists before it is understood… yet changes once it is named?",
+                "Apparant in absence, but never there in presence. Some truths hum even when buried.",
+            	"Return to Mira with this truth."
 		]
 	},
 	{
 		'npc_id': 'magic',
 		'dialog_id': 'magic_ch2_after_leera',
 		'dialog': [
-			"Paradoxes in jewelry? Delicious. I can almost taste the spells."
+			"Ohhh, metaphysics. My favorite flavor of nonsense."
 		]
 	},
 	{
 		'npc_id': 'faith',
 		'dialog_id': 'faith_ch2_after_leera',
 		'dialog': [
-			"Void and Existence… such concepts demand reverence. We must proceed with respect."
+			"Void and Existence... These are deep questions..."
 		]
 	},
 	{
 		'npc_id': 'tech',
 		'dialog_id': 'tech_ch2_after_leera',
-		'dialog': [
-			"Riddles and metaphors. Great. Real helpful."
+		'dialog': [			
+			"Riddles and philosophy. Wonderful."
 		]
 	},
 	{
@@ -398,10 +404,9 @@ NPC_DIALOG = [
 		'dialog_id': 'mira_ch2_decoupling',
 		'dialog': [
 			"You brought the shard. Good.",
-			"Hold the couplet still…",
-			"...","...",
-			"There. The curse is broken. The couplet is now two bracelets:",
-			"The Bracelet of Void… and the Bracelet of Existence.",
+			"...",
+			"...",
+			"This is exactly what I needed. you came for the Grift Stone, and I keep my deals.",
 			"As promised, here is the Grift Stone.  You can take the hyperway back to Tess for a small fee."
 		]
 	},
@@ -409,21 +414,21 @@ NPC_DIALOG = [
 		'npc_id': 'faith',
 		'dialog_id': 'faith_ch2_decoupling',
 		'dialog': [
-			"I feel… a shift. Good work. May whatever was bound find peace."
+			"Let’s return it quickly. Tess is waiting."
 		]
 	},
 	{
 		'npc_id': 'magic',
 		'dialog_id': 'magic_ch2_decoupling',
 		'dialog': [
-			"A pulse of violet light? Absolutely exquisite."
+			"Shards, smugglers, secrets… delicious chaos."
 		]
 	},
 	{
 		'npc_id': 'technique',
 		'dialog_id': 'technique_ch2_decoupling',
 		'dialog': [
-			"Two bracelets, you say? Hopefully one of them packs a decent punch."
+			"About time we got something solid out of this."
 		]
 	},
 	{
@@ -621,6 +626,12 @@ TASKS = [
 				'params': {
 					'npc_id': 'mira',
 					'dialog_id': 'mira_ch2_intro'
+				}
+			},
+			{
+				'event_type': 'remove_item',
+				'params': {
+					'item_id': 'cursed_couplet'
 				}
 			},
 			{
@@ -1157,12 +1168,6 @@ TASKS = [
 				'event_type': 'remove_item',
 				'params': {
 					'item_id': 'resonance_shard_ch2'
-				}
-			},
-			{
-				'event_type': 'remove_item',
-				'params': {
-					'item_id': 'cursed_couplet'
 				}
 			},
 			{

@@ -44,7 +44,8 @@ NPCS = [
 			"stress_line": "Moves to Type 4 — Becomes cold, withdrawn, and increasingly singular in focus as resistance to its protocol mounts.",
 			"growth_line": "Moves to Type 7 — (Hypothetically) Would discover that existence has value beyond efficiency, and that the equation includes beauty.",
 			"instinctual_variant": "sp/so — Operates entirely on systemic self-preservation logic; its social mandate is the enforcement of ordered collapse on all things."
-		}
+		},
+        'image': 'voidwalkers:cataclysm1.jpeg'
 	}
 ]
 

@@ -38,6 +38,8 @@ from textual.widgets import Button, Static
 
 from tui.screens.base_screen import BaseScreen
 from tui.services.game_state import get_active_game
+from tui.screens.upgrade_overlay import UpgradeOverlay
+from tui.screens.learn_overlay import LearnOverlay  # <- Add to imports at the top
 
 _MAX_DISPLAY: int = 5
 
@@ -154,13 +156,19 @@ class InventoryScreen(BaseScreen):
     show_header = False
 
     BINDINGS = [
-        Binding("left",  "move_left",        "Prev",      show=True),
-        Binding("a",     "move_left",         "Prev",      show=False),
-        Binding("right", "move_right",        "Next",      show=True),
-        Binding("d",     "move_right",        "Next",      show=False),
-        Binding("b",     "toggle_abilities",  "Abilities", show=True),
-        Binding("m",     "open_monster_log",  "Monster Log", show=True),
-        Binding("n",     "open_npc_log",      "NPC Log",   show=True),
+        Binding("left",  "move_left",        "Prev",         show=True),
+        Binding("a",     "move_left",        "Prev",         show=False),
+        Binding("right", "move_right",       "Next",         show=True),
+        Binding("d",     "move_right",       "Next",         show=False),
+        Binding("b",     "toggle_abilities", "Abilities",    show=True),
+        Binding("i",     "open_items",       "Items",        show=False),
+        Binding("e",     "open_equip",       "Equip",        show=False),
+        Binding("p",     "open_party",       "Party",        show=False),
+        Binding("l",     "open_learn",       "Learn",        show=False),
+        Binding("u",     "open_upgrade",     "Upgrade",      show=False),
+        Binding("m",     "open_monster_log", "Monster Log",  show=True),
+        Binding("n",     "open_npc_log",     "NPC Log",      show=True),
+        Binding("s",     "open_save",        "Save",         show=True),
     ]
 
     _selected: int
@@ -260,23 +268,32 @@ class InventoryScreen(BaseScreen):
     def _close_overlay(self, _message: str | None = None) -> None:
         for w in self.query(".inv-overlay"):
             w.remove()
+        # Refresh cards to show updated stats/abilities
         self._refresh_cards()
 
     def _open_items_overlay(self) -> None:
-        pg = get_active_game()
-        if pg is None:
-            self.notify("No active game.", title="Items")
-            return
-        from tui.screens.items_overlay import ItemsOverlay
-        self.mount(ItemsOverlay(pg, self._close_overlay))
+        """Open items overlay or close if already open."""
+        if self._overlay_active():
+            self._close_overlay()
+        else:
+            pg = get_active_game()
+            if pg is None:
+                self.notify("No active game.", title="Items")
+                return
+            from tui.screens.items_overlay import ItemsOverlay
+            self.mount(ItemsOverlay(pg, self._close_overlay))
 
     def _open_equip_overlay(self) -> None:
-        pg = get_active_game()
-        if pg is None:
-            self.notify("No active game.", title="Equip")
-            return
-        from tui.screens.equip_overlay import EquipOverlay
-        self.mount(EquipOverlay(pg, self._close_overlay))
+        """Open equip overlay or close if already open."""
+        if self._overlay_active():
+            self._close_overlay()
+        else:
+            pg = get_active_game()
+            if pg is None:
+                self.notify("No active game.", title="Equip")
+                return
+            from tui.screens.equip_overlay import EquipOverlay
+            self.mount(EquipOverlay(pg, self._close_overlay))
 
     def _open_monster_log_overlay(self) -> None:
         pg = get_active_game()
@@ -302,6 +319,76 @@ class InventoryScreen(BaseScreen):
             return
         from tui.screens.npc_log_overlay import NPCLogOverlay
         self.mount(NPCLogOverlay(pg, self._close_overlay))
+
+    def _open_upgrade_overlay(self) -> None:
+        """Open the upgrade stats overlay for the selected character."""
+        pg = get_active_game()
+        if pg is None:
+            self.notify("No active game.", title="Upgrade")
+            return
+
+        players = list(getattr(pg, "characters", []))
+        if not players or self._selected >= len(players):
+            self.notify("No character selected.", title="Upgrade")
+            return
+
+        player = players[self._selected]
+
+        # Check if player has any points to allocate
+        stat_points = int(getattr(player, "unused_stat_points", 0) or 0)
+        power_points = int(getattr(player, "unused_power_points", 0) or 0)
+
+        if stat_points <= 0 and power_points <= 0:
+            self.notify(
+                "No stat or power points available for the selected character.",
+                title="Upgrade",
+            )
+            return
+
+        if self._overlay_active():
+            self._close_overlay()
+
+        self.mount(UpgradeOverlay(player, pg, self._close_overlay))
+
+    def _open_learn_overlay(self) -> None:
+        """Open the learn abilities overlay for the selected character."""
+        pg = get_active_game()
+        if pg is None:
+            self.notify("No active game.", title="Learn")
+            return
+
+        players = list(getattr(pg, "characters", []))
+        if not players or self._selected >= len(players):
+            self.notify("No character selected.", title="Learn")
+            return
+
+        player = players[self._selected]
+
+        # Check if player has any ability slots
+        slots = int(getattr(player, "unused_ability_slots", 0) or 0)
+        if slots <= 0:
+            self.notify(
+                "No ability slots available for the selected character.",
+                title="Learn",
+            )
+            return
+
+        if self._overlay_active():
+            self._close_overlay()
+
+        self.mount(LearnOverlay(player, pg, self._close_overlay))
+
+    def _open_save_overlay(self) -> None:
+        """Open the save-game overlay, or close it if already open."""
+        pg = get_active_game()
+        if pg is None:
+            self.notify("No active game to save.", title="Save")
+            return
+        if self._overlay_active():
+            self._close_overlay()
+            return
+        from tui.screens.save_overlay import SaveOverlay
+        self.mount(SaveOverlay(pg, self._close_overlay))
 
     # ── escape: close overlay first, then go back ─────────────────────────────
 
@@ -358,25 +445,27 @@ class InventoryScreen(BaseScreen):
 
     def _notify_overlays_player_changed(self) -> None:
         """Tell any open overlay that the active character has changed."""
-        for w in self.query(".inv-overlay"):
-            if hasattr(w, "on_player_changed"):
-                w.on_player_changed()
+        pg = get_active_game()
+        if pg is None:
+            return
+        
+        players = list(getattr(pg, "characters", []))
+        if 0 <= self._selected < len(players):
+            new_player = players[self._selected]
+            
+            for w in self.query(".inv-overlay"):
+                if hasattr(w, "on_player_changed"):
+                    w.on_player_changed(new_player)
 
     # ── button handlers ───────────────────────────────────────────────────────
 
     @on(Button.Pressed, "#btn-items")
     def _on_items(self) -> None:
-        if self._overlay_active():
-            self._close_overlay()
-        else:
-            self._open_items_overlay()
+        self._open_items_overlay()
 
     @on(Button.Pressed, "#btn-equip")
     def _on_equip(self) -> None:
-        if self._overlay_active():
-            self._close_overlay()
-        else:
-            self._open_equip_overlay()
+        self._open_equip_overlay()
 
     @on(Button.Pressed, "#btn-party")
     def _on_party(self) -> None:
@@ -397,11 +486,11 @@ class InventoryScreen(BaseScreen):
                         title="Learn",
                     )
                     return
-        self.notify("Learn abilities overlay — coming soon.", title="Learn")
+        self._open_learn_overlay()
 
     @on(Button.Pressed, "#btn-upgrade")
     def _on_upgrade(self) -> None:
-        self.notify("Upgrade stats overlay — coming soon.", title="Upgrade")
+        self._open_upgrade_overlay()
 
     @on(Button.Pressed, "#btn-monster-log")
     def _on_monster_log(self) -> None:
@@ -413,7 +502,32 @@ class InventoryScreen(BaseScreen):
 
     @on(Button.Pressed, "#btn-save")
     def _on_save(self) -> None:
-        self.notify("Save — coming soon.", title="Save")
+        self._open_save_overlay()
+
+    # Add action methods for keyboard shortcuts
+    def action_open_items(self) -> None:
+        """I key binding."""
+        self._open_items_overlay()
+
+    def action_open_equip(self) -> None:
+        """E key binding."""
+        self._open_equip_overlay()
+
+    def action_open_party(self) -> None:
+        """P key binding."""
+        self.notify("Party overlay — coming soon.", title="Party")
+
+    def action_open_learn(self) -> None:
+        """L key binding."""
+        self._open_learn_overlay()
+
+    def action_open_upgrade(self) -> None:
+        """U key binding."""
+        self._open_upgrade_overlay()
+
+    def action_open_save(self) -> None:
+        """S key binding."""
+        self._open_save_overlay()
 
     # ── rendering ─────────────────────────────────────────────────────────────
 

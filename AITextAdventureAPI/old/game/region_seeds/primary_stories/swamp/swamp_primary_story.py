@@ -151,7 +151,8 @@ NPCS = [
           "stress_line": "Moves to Type 7 — Becomes scattered and manic when his theories fail and his fear breaks through.",
           "growth_line": "Moves to Type 8 — Uses his knowledge to confidently confront the source of the whisper.",
           "instinctual_variant": "sp/sx — A reclusive investigator, obsessed with the intense, singular mystery that threatens his sanity."
-        }
+        },
+        'image': 'grimnaw1.jpeg'
     },
     {
         'npc_id': 'miregloom',

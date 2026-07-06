@@ -153,7 +153,8 @@ NPCS = [
           "stress_line": "Moves to Type 8 — Becomes aggressive and controlling when her 'love' is rejected.",
           "growth_line": "Moves to Type 4 — (Hypothetically) Would learn to find her own identity without needing to absorb others.",
           "instinctual_variant": "sx/so — Forms intense, consuming one-on-one bonds to create a loyal social collective that worships her."
-        }
+        },
+        'image': 'voidwalkers:stigma1.jpeg'
     }
 ]
 

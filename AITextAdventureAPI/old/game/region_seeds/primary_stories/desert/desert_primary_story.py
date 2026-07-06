@@ -295,7 +295,8 @@ NPCS = [
           "stress_line": "Moves to Type 8 — Becomes controlling and aggressive when her help is rejected or her past failure is triggered.",
           "growth_line": "Moves to Type 4 — Learns to confront her own grief and find her identity outside of her service to others.",
           "instinctual_variant": "so/sx — Socially charismatic and focused on the needs of the group, but forms intense, emotionally charged connections."
-        }
+        },
+        'image': 'sable1.jpeg'
 	},
 	{
 		'npc_id': 'zaruun',
@@ -319,7 +320,8 @@ NPCS = [
           "stress_line": "Moves to Type 4 — Becomes withdrawn and melancholic, lost in his own bleak philosophy when his vision is challenged.",
           "growth_line": "Moves to Type 7 — Learns to see the beauty and value in the world as it is, not just his idealized version of it.",
           "instinctual_variant": "sp/so — A self-contained reformer, focused on 'purifying' his environment according to his rigid ideals."
-        }
+        },
+        'image': 'bosses:zaruun1'
 	}
 ]
 

@@ -284,7 +284,8 @@ NPCS = [
           "stress_line": "Moves to Type 1 — Becomes rigid and anxious when she feels her fate closing in.",
           "growth_line": "Moves to Type 5 — Becomes more introspective and able to confront her fears with wisdom instead of just motion.",
           "instinctual_variant": "sx/so — Seeks intense experiences and connections, using her energy to engage with the world and keep fear at bay."
-        }
+        },
+        'image': 'nia1.jpeg'
     },
     {
         'npc_id': 'serene',

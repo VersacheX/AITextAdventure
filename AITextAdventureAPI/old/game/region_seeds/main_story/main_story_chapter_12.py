@@ -61,7 +61,8 @@ NPCS = [
           "stress_line": "Moves to Type 2 — Becomes clingy, trying to share its 'beautiful' sorrow with others.",
           "growth_line": "Moves to Type 1 — Would learn to find a principled path out of grief, towards healing.",
           "instinctual_variant": "sx/sp — Intensely focused on the deep, romantic tragedy of its own existence."
-        }
+        },
+        'image': 'voidwalkers:lament1.jpeg'
     },
     {
         "npc_id": "archivist_fragment",

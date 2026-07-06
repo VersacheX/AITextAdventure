@@ -103,7 +103,8 @@ NPCS = [
           "stress_line": "Moves to Type 5 — Becomes secretive and withdrawn when her strategies fail, fearing the chaos she can't control.",
           "growth_line": "Moves to Type 2 — Uses her strength to protect and empower others, becoming a true leader rather than just a commander.",
           "instinctual_variant": "so/sp — Focused on controlling the social order to ensure her own security and the survival of the group."
-        }
+        },
+        'image': 'vek1.jpeg'
     }
 ]
 

@@ -26,8 +26,11 @@ from tui.screens.auth_screen import AuthScreen
 from tui.screens.login_screen import LoginScreen, RegisterScreen
 from tui.screens.main_menu_screen import MainMenuScreen
 from tui.screens.load_game_screen import LoadGameScreen
+from tui.screens.new_game_screen import NewGameScreen
 from tui.screens.overworld_screen import OverworldScreen
 from tui.screens.inventory_screen import InventoryScreen
+from tui.screens.tasks_screen import TasksScreen
+from tui.screens.dungeon_screen import DungeonScreen
 from tui.screens.dev.data_mgmt import DataMgmtScreen
 
 _STYLES_PATH = Path(__file__).parent / "styles" / "app.tcss"
@@ -51,11 +54,12 @@ class FractureApp(App):
         "register": RegisterScreen,
         "main_menu": MainMenuScreen,
         "load_game": LoadGameScreen,
+        "new_game": NewGameScreen,
         "overworld": OverworldScreen,
         "inventory": InventoryScreen,
+        "tasks": TasksScreen,
+        "dungeon": DungeonScreen,
         "dev_data_mgmt": DataMgmtScreen,
-        # Registered incrementally as each screen is built:
-        # "new_game": NewGameScreen,
     }
 
     BINDINGS = [
@@ -79,28 +83,24 @@ class FractureApp(App):
         yet without erroring.
         """
         if name not in self.SCREENS:
-            self.notify(
-                f"Screen '{name}' isn't implemented yet.",
-                title="Coming soon",
-                severity="information",
-            )
+            self.notify(f"Screen '{name}' not yet implemented.", severity="warning")
             return False
         self.push_screen(name)
         return True
 
-    def go_back(self) -> None:
-        """Pop the current screen, if there is somewhere to go back to."""
+    def go_back(self) -> bool:
+        """Pop the current screen off the stack.
+
+        Returns True if a screen was popped. If we're already at the
+        outermost screen (stack size 1), does nothing and returns False.
+        """
         if len(self.screen_stack) > 1:
             self.pop_screen()
+            return True
+        return False
 
 
-def run(start_screen: str = "title") -> None:
-    """Entry point used by `run_tui.py` (and `run_dev_tui.py`, which passes
-    `start_screen="dev_data_mgmt"` to skip straight to the data browser)."""
+def run() -> None:
+    """Entry point for the Fracture TUI."""
     app = FractureApp()
-    app.start_screen = start_screen
     app.run()
-
-
-if __name__ == "__main__":
-    run()

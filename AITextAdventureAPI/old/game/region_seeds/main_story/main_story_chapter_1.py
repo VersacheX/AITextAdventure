@@ -25,7 +25,8 @@ NPCS = [
           "stress_line": "Moves to Type 6 — Becomes anxious, worried, and dependent on others when his inner peace is shattered.",
           "growth_line": "Moves to Type 3 — Becomes more present, engaged, and able to take purposeful action in the world.",
           "instinctual_variant": "sp/so — Seeks comfort in familiar places (like inns) and gentle social connection, avoiding conflict."
-        }
+        },
+		'image': 'npcs:oren1'
 	},
 	{
 		'npc_id': 'rook',
@@ -49,7 +50,8 @@ NPCS = [
           "stress_line": "Moves to Type 3 — Becomes arrogant and work-obsessed, focused only on the appearance of success.",
           "growth_line": "Moves to Type 9 — Becomes more relaxed, trusting, and open to different perspectives.",
           "instinctual_variant": "sp/so — Focused on security, anticipating threats, and forming reliable alliances to ensure survival."
-        }
+        },
+		'image': 'npcs:rook1'
 	},
 	{
 		'npc_id': 'seth',
@@ -73,7 +75,8 @@ NPCS = [
           "stress_line": "Moves to Type 1 — Becomes rigid, critical, and defensive when cornered.",
           "growth_line": "Moves to Type 5 — Becomes more thoughtful, strategic, and capable of seeing the bigger picture beyond immediate gratification.",
           "instinctual_variant": "sp/sx — Focused on securing his own survival and freedom, seeking intense experiences and alliances to stay ahead."
-        }
+        },
+		'image': 'npcs:seth1'
 	},
 	{
 		'npc_id': 'tess',
@@ -98,7 +101,8 @@ NPCS = [
           "stress_line": "Moves to Type 1 — Becomes rigid, critical, and moralistic when her plans fail or she feels trapped.",
           "growth_line": "Moves to Type 5 — Becomes more focused, objective, and able to think through consequences before acting.",
           "instinctual_variant": "so/sx — Socially engaging and charming, using her wit to navigate and influence her environment for new opportunities."
-        }
+        },
+        'image': 'npcs:tess1'
 	},
 	{
 		'npc_id': 'sam',
@@ -123,7 +127,8 @@ NPCS = [
           "stress_line": "Moves to Type 7 — Becomes scattered and avoids problems when her plans fail or she feels incompetent.",
           "growth_line": "Moves to Type 8 — Becomes more confident and assertive, taking direct action based on her knowledge.",
           "instinctual_variant": "sp/so — Focused on self-preservation through knowledge and competence, while keeping a strategic eye on social dynamics."
-        }
+        },
+        'image': 'npcs:sam1'
 	},
 	{
 		'npc_id': 'diego',
@@ -148,7 +153,8 @@ NPCS = [
           "stress_line": "Moves to Type 5 — Becomes secretive and withdrawn, hoarding information and fearing betrayal.",
           "growth_line": "Moves to Type 2 — Uses his power and influence to protect and provide for those he cares about.",
           "instinctual_variant": "sx/so — Seeks intensity and control in his relationships and social network, always positioning himself at the center of the action."
-        }
+        },
+		'image': 'npcs:diego1'
 	},
 	{
 		'npc_id': 'brawn',
@@ -173,7 +179,8 @@ NPCS = [
           "stress_line": "Moves to Type 8 — Becomes demanding and controlling when his efforts are not appreciated.",
           "growth_line": "Moves to Type 4 — Becomes more aware of his own identity and needs, separate from his service to others.",
           "instinctual_variant": "so/sp — Finds value in being a central, helpful figure in his community, ensuring his own security through social connection."
-        }
+        },
+		'image': 'npcs:brawn1'
 	}
 ]
 

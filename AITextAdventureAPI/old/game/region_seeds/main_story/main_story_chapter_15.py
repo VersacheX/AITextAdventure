@@ -67,7 +67,8 @@ NPCS = [
           "stress_line": "Moves to Type 4 — Becomes melancholic and withdrawn when he feels his duties are meaningless against the scale of collapse.",
           "growth_line": "Moves to Type 7 — Learns to find hope and flexibility beyond his rigid duties.",
           "instinctual_variant": "sp/so — His self-preservation is tied to the perfect execution of his duty; he preserves himself by preserving the memory of others."
-        }
+        },
+        'image': 'warden_hale1.jpeg'
     },
     {
         "npc_id": "pageant",
@@ -88,7 +89,8 @@ NPCS = [
           "stress_line": "Moves to Type 9 — Becomes apathetic and disengaged when her performance is rejected.",
           "growth_line": "Moves to Type 6 — Would learn to find value in authentic connection rather than admiration.",
           "instinctual_variant": "so/sx — Obsessed with social status and admiration, using her performance to control and dominate her social environment."
-        }
+        },
+        'image': 'voidwalkers:pageant1.jpeg'
     },
     {
         "npc_id": "edict",
@@ -109,7 +111,8 @@ NPCS = [
           "stress_line": "Moves to Type 4 — Becomes withdrawn and melancholic when his perfect order is broken.",
           "growth_line": "Moves to Type 7 — Would learn to be more flexible and accept a world that isn't perfectly ordered.",
           "instinctual_variant": "sp/so — Obsessed with preserving his own integrity by enforcing a perfect, rigid order on the world around him."
-        }
+        },
+        'image': 'voidwalkers:edict1.jpeg'
     },
     {
         "npc_id": "prison_warden",

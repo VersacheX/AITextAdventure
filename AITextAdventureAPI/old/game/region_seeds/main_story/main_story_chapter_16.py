@@ -242,7 +242,8 @@ NPCS = [
 			"stress_line": "Moves to Type 7 — Becomes frantic and scattering when the party refuses to accept its nihilism.",
 			"growth_line": "Moves to Type 8 — (Hypothetically) Would learn to use its understanding of systems to build rather than destroy.",
 			"instinctual_variant": "sp/sx — Utterly consumed by its own internal state of negation; engages with the world only to pull it down into the void."
-		}
+		},
+        'image': 'voidwalkers:crux1.jpeg'
 	}
 ]
 

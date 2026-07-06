@@ -163,14 +163,15 @@ class DataMgmtScreen(BaseScreen):
     }
 
     #dm-detail-panel {
-        width: 54;
+        width: 80;
         height: 100%;
-        padding: 0 1;
+        padding: 0;
         border-left: solid $accent 30%;
     }
 
     #dm-detail-text {
         height: 100%;
+        padding: 0 1;
     }
     """
 

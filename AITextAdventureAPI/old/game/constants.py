@@ -11,13 +11,13 @@ from game.constants_items import ARMOR_SEEDS, UTILITY_ITEM_SEEDS, WEAPON_SEEDS, 
 from game.constants_other import PLAYER_ABILITY_SEEDS, STATUS_EFFECTS, GENERIC_STATUS_EFFECT, ABILITY_STATUS_KEY_DISPLAY_NAMES, ABILTITY_EFFECT_DISPLAY_NAME, BENEFICIAL_ITEM_EFFECTS, BENEFICIAL_PLAYER_ABILITY_EFFECTS, ELEMENTAL_CHAR_KEYS, HARMFUL_STATUS_EFFECTS
 
 ###REGIONS
-from game.region_seeds.regions.constants_desert import REGION_SETTINGS as DESERT_REGION_SETTINGS, OPEN_AREA_TILE as DESERT_OPEN_AREA_CHAR, IMPASSABLE_TILE as DESERT_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as DESERT_IMPASSABLE_CHANCE
-from game.region_seeds.regions.constants_forest import REGION_SETTINGS as FOREST_REGION_SETTINGS, OPEN_AREA_TILE as FOREST_OPEN_AREA_CHAR, IMPASSABLE_TILE as FOREST_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as FOREST_IMPASSABLE_CHANCE
-from game.region_seeds.regions.constants_grassland import REGION_SETTINGS as GRASSLAND_REGION_SETTINGS, OPEN_AREA_TILE as GRASSLAND_OPEN_AREA_CHAR, IMPASSABLE_TILE as GRASSLAND_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as GRASSLAND_IMPASSABLE_CHANCE
-from game.region_seeds.regions.constants_mountains import REGION_SETTINGS as MOUNTAINS_REGION_SETTINGS, OPEN_AREA_TILE as MOUNTAINS_OPEN_AREA_CHAR, IMPASSABLE_TILE as MOUNTAINS_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as MOUNTAINS_IMPASSABLE_CHANCE
-from game.region_seeds.regions.constants_shallows import REGION_SETTINGS as SHALLOWS_REGION_SETTINGS, OPEN_AREA_TILE as SHALLOWS_OPEN_AREA_CHAR, IMPASSABLE_TILE as SHALLOWS_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as SHALLOWS_IMPASSABLE_CHANCE
-from game.region_seeds.regions.constants_swamp import REGION_SETTINGS as SWAMP_REGION_SETTINGS, OPEN_AREA_TILE as SWAMP_OPEN_AREA_CHAR, IMPASSABLE_TILE as SWAMP_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as SWAMP_IMPASSABLE_CHANCE
-from game.region_seeds.regions.constants_snow import REGION_SETTINGS as SNOW_REGION_SETTINGS, OPEN_AREA_TILE as SNOW_OPEN_AREA_CHAR, IMPASSABLE_TILE as SNOW_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as SNOW_IMPASSABLE_CHANCE
+from game.region_seeds.regions.constants_desert import REGION_SETTINGS as DESERT_REGION_SETTINGS, OPEN_AREA_TILE as DESERT_OPEN_AREA_CHAR, IMPASSABLE_TILE as DESERT_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as DESERT_IMPASSABLE_CHANCE, OPEN_AREA_COLOR as DESERT_OPEN_AREA_COLOR, IMPASSABLE_COLOR as DESERT_IMPASSABLE_COLOR
+from game.region_seeds.regions.constants_forest import REGION_SETTINGS as FOREST_REGION_SETTINGS, OPEN_AREA_TILE as FOREST_OPEN_AREA_CHAR, IMPASSABLE_TILE as FOREST_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as FOREST_IMPASSABLE_CHANCE, OPEN_AREA_COLOR as FOREST_OPEN_AREA_COLOR, IMPASSABLE_COLOR as FOREST_IMPASSABLE_COLOR
+from game.region_seeds.regions.constants_grassland import REGION_SETTINGS as GRASSLAND_REGION_SETTINGS, OPEN_AREA_TILE as GRASSLAND_OPEN_AREA_CHAR, IMPASSABLE_TILE as GRASSLAND_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as GRASSLAND_IMPASSABLE_CHANCE, OPEN_AREA_COLOR as GRASSLAND_OPEN_AREA_COLOR, IMPASSABLE_COLOR as GRASSLAND_IMPASSABLE_COLOR
+from game.region_seeds.regions.constants_mountains import REGION_SETTINGS as MOUNTAINS_REGION_SETTINGS, OPEN_AREA_TILE as MOUNTAINS_OPEN_AREA_CHAR, IMPASSABLE_TILE as MOUNTAINS_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as MOUNTAINS_IMPASSABLE_CHANCE, OPEN_AREA_COLOR as MOUNTAINS_OPEN_AREA_COLOR, IMPASSABLE_COLOR as MOUNTAINS_IMPASSABLE_COLOR
+from game.region_seeds.regions.constants_shallows import REGION_SETTINGS as SHALLOWS_REGION_SETTINGS, OPEN_AREA_TILE as SHALLOWS_OPEN_AREA_CHAR, IMPASSABLE_TILE as SHALLOWS_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as SHALLOWS_IMPASSABLE_CHANCE, OPEN_AREA_COLOR as SHALLOWS_OPEN_AREA_COLOR, IMPASSABLE_COLOR as SHALLOWS_IMPASSABLE_COLOR
+from game.region_seeds.regions.constants_swamp import REGION_SETTINGS as SWAMP_REGION_SETTINGS, OPEN_AREA_TILE as SWAMP_OPEN_AREA_CHAR, IMPASSABLE_TILE as SWAMP_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as SWAMP_IMPASSABLE_CHANCE, OPEN_AREA_COLOR as SWAMP_OPEN_AREA_COLOR, IMPASSABLE_COLOR as SWAMP_IMPASSABLE_COLOR
+from game.region_seeds.regions.constants_snow import REGION_SETTINGS as SNOW_REGION_SETTINGS, OPEN_AREA_TILE as SNOW_OPEN_AREA_CHAR, IMPASSABLE_TILE as SNOW_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as SNOW_IMPASSABLE_CHANCE, OPEN_AREA_COLOR as SNOW_OPEN_AREA_COLOR, IMPASSABLE_COLOR as SNOW_IMPASSABLE_COLOR
 
 from game.region_seeds.regions.buildings.constants_buildings_desert import SUBLOCATION_DEFS as DESERT_SUBLOCATION_DEFS, SUBLOC_MAP as DESERT_SUBLOC_MAP, BUILDINGS as DESERT_BUILDINGS, DRINK_MENU as DESERT_DRINK_MENU # type: ignore
 from game.region_seeds.regions.buildings.constants_buildings_forest import SUBLOCATION_DEFS as FOREST_SUBLOCATION_DEFS, SUBLOC_MAP as FOREST_SUBLOC_MAP, BUILDINGS as FOREST_BUILDINGS, DRINK_MENU as FOREST_DRINK_MENU # type: ignore
@@ -149,9 +149,9 @@ DUNGEON_SETTINGS = [
 from game.region_seeds.world_enemies import WORLD_BOSS_MOBS, WORLD_HOSTILES, WORLD_NPCS
 
 ###CITIES
-from game.region_seeds.cities.constants_mid_city import OPEN_AREA_TILE as MID_CITY_OPEN_AREA_CHAR, REGION_SETTINGS as MID_CITY_REGION_SETTINGS, IMPASSABLE_TILE as MID_CITY_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as MID_CITY_IMPASSABLE_CHANCE
-from game.region_seeds.cities.constants_small_city import OPEN_AREA_TILE as SMALL_CITY_OPEN_AREA_CHAR, REGION_SETTINGS as SMALL_CITY_REGION_SETTINGS, IMPASSABLE_TILE as SMALL_CITY_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as SMALL_CITY_IMPASSABLE_CHANCE 
-from game.region_seeds.cities.constants_large_city import OPEN_AREA_TILE as LARGE_CITY_OPEN_AREA_CHAR, REGION_SETTINGS as LARGE_CITY_REGION_SETTINGS, IMPASSABLE_TILE as LARGE_CITY_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as LARGE_CITY_IMPASSABLE_CHANCE 
+from game.region_seeds.cities.constants_mid_city import OPEN_AREA_TILE as MID_CITY_OPEN_AREA_CHAR, REGION_SETTINGS as MID_CITY_REGION_SETTINGS, IMPASSABLE_TILE as MID_CITY_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as MID_CITY_IMPASSABLE_CHANCE, OPEN_AREA_COLOR as MID_CITY_OPEN_AREA_COLOR, IMPASSABLE_COLOR as MID_CITY_IMPASSABLE_COLOR
+from game.region_seeds.cities.constants_small_city import OPEN_AREA_TILE as SMALL_CITY_OPEN_AREA_CHAR, REGION_SETTINGS as SMALL_CITY_REGION_SETTINGS, IMPASSABLE_TILE as SMALL_CITY_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as SMALL_CITY_IMPASSABLE_CHANCE, OPEN_AREA_COLOR as SMALL_CITY_OPEN_AREA_COLOR, IMPASSABLE_COLOR as SMALL_CITY_IMPASSABLE_COLOR 
+from game.region_seeds.cities.constants_large_city import OPEN_AREA_TILE as LARGE_CITY_OPEN_AREA_CHAR, REGION_SETTINGS as LARGE_CITY_REGION_SETTINGS, IMPASSABLE_TILE as LARGE_CITY_IMPASSABLE_CHAR, IMPASSABLE_CHANCE as LARGE_CITY_IMPASSABLE_CHANCE, OPEN_AREA_COLOR as LARGE_CITY_OPEN_AREA_COLOR, IMPASSABLE_COLOR as LARGE_CITY_IMPASSABLE_COLOR 
 
 from game.region_seeds.player_abilities.ability_requirements import ABILITY_TYPE_REQUIREMENTS
 
@@ -362,7 +362,8 @@ PLAYER_NPCS = [
             "auxiliary": "Si — Obsessively clings to past failures and betrayals, becoming paranoid and vengeful.",
             "tertiary": "Ne — Twisted creativity; sees threats and conspiracies in every possibility.",
             "inferior": "Fi — Explosive, self-righteous rage; moral code becomes hypocritical and violently enforced."
-        }
+        },
+        'image': 'chock1.jpeg'
     },
     {
         "npc_id": "faith",
@@ -394,7 +395,8 @@ PLAYER_NPCS = [
             "auxiliary": "Fe — Weaponized guilt and obligation; manipulates others through emotional blackmail and martyrdom.",
             "tertiary": "Ti — Cold, critical over-analysis; becomes harshly judgmental of everyone’s ‘flaws’ and ‘sins’.",
             "inferior": "Ne — Paralyzing catastrophic thinking; sees every small change as the beginning of total collapse."
-        }
+        },
+        'image': 'kaera1.jpeg'
     },
     {
         "npc_id": "magic",
@@ -423,7 +425,8 @@ PLAYER_NPCS = [
             "auxiliary": "Ti — Sadistic logical detachment; enjoys intellectually dismantling people and their beliefs.",
             "tertiary": "Fe — Cruel mockery and gaslighting; uses social awareness to humiliate and isolate targets.",
             "inferior": "Si — Obsessive rumination; becomes fixated on every slight and past humiliation."
-        }
+        },
+        'image': 'moxie1.jpeg'
     },
     {
         "npc_id": "tech",
@@ -452,7 +455,8 @@ PLAYER_NPCS = [
             "auxiliary": "Te — Becomes a cold tyrant; efficiency above all else, including human cost.",
             "tertiary": "Fi — Self-righteous moral superiority; judges everyone as weak or morally inferior.",
             "inferior": "Se — Reckless hedonism or violent outbursts; loses all impulse control."
-        }
+        },
+        'image': 'kade1.jpeg'
     },
     {
         "npc_id": "skill",
@@ -481,7 +485,8 @@ PLAYER_NPCS = [
             "auxiliary": "Se — Becomes adrenaline-addicted and reckless; lives only for the thrill of violence.",
             "tertiary": "Ni — Paranoid fatalism; convinced everyone will eventually betray her.",
             "inferior": "Fe — Explosive, misdirected rage; suddenly lashes out with cruel emotional attacks."
-        }
+        },
+        'image': 'poise1.jpeg'
     }
 ]
 
@@ -847,6 +852,11 @@ __all__ = [
  "DESERT_IMPASSABLE_CHANCE", "FOREST_IMPASSABLE_CHANCE", "GRASSLAND_IMPASSABLE_CHANCE",
  "MOUNTAINS_IMPASSABLE_CHANCE", "SHALLOWS_IMPASSABLE_CHANCE", "SWAMP_IMPASSABLE_CHANCE", "SNOW_IMPASSABLE_CHANCE",
 
+ "DESERT_OPEN_AREA_COLOR", "FOREST_OPEN_AREA_COLOR", "GRASSLAND_OPEN_AREA_COLOR",
+ "MOUNTAINS_OPEN_AREA_COLOR", "SHALLOWS_OPEN_AREA_COLOR", "SWAMP_OPEN_AREA_COLOR", "SNOW_OPEN_AREA_COLOR",
+ "DESERT_IMPASSABLE_COLOR", "FOREST_IMPASSABLE_COLOR", "GRASSLAND_IMPASSABLE_COLOR",
+ "MOUNTAINS_IMPASSABLE_COLOR", "SHALLOWS_IMPASSABLE_COLOR", "SWAMP_IMPASSABLE_COLOR", "SNOW_IMPASSABLE_COLOR",
+
  "DESERT_REGION_SETTINGS", "FOREST_REGION_SETTINGS", "GRASSLAND_REGION_SETTINGS",
  "MOUNTAINS_REGION_SETTINGS", "SHALLOWS_REGION_SETTINGS", "SWAMP_REGION_SETTINGS", "SNOW_REGION_SETTINGS",
 
@@ -943,5 +953,7 @@ __all__ = [
 	"MID_CITY_IMPASSABLE_CHAR", "SMALL_CITY_IMPASSABLE_CHAR", "LARGE_CITY_IMPASSABLE_CHAR",
 	"MID_CITY_IMPASSABLE_CHANCE", "SMALL_CITY_IMPASSABLE_CHANCE", "LARGE_CITY_IMPASSABLE_CHANCE",
 	"MID_CITY_REGION_SETTINGS", "SMALL_CITY_REGION_SETTINGS", "LARGE_CITY_REGION_SETTINGS",
+	"MID_CITY_OPEN_AREA_COLOR", "SMALL_CITY_OPEN_AREA_COLOR", "LARGE_CITY_OPEN_AREA_COLOR",
+	"MID_CITY_IMPASSABLE_COLOR", "SMALL_CITY_IMPASSABLE_COLOR", "LARGE_CITY_IMPASSABLE_COLOR",
 
 ]
