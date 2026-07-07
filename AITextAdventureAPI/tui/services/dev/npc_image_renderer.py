@@ -230,12 +230,15 @@ def render_with_chafa(
         result = subprocess.run(
             [
                 "chafa",
-                "--format", "symbols",
+                "--format", "symbols",                
+                "--symbols", "braille+dot+hhalf+vhalf+block+braille+border+geometric",  # half-blocks + braille + border chars
                 #"--symbols", "braille+dot",          # dot-level detail on edges/faces
-                "--fill", "vhalf+hhalf+block",  # quarter/half-blocks fill smooth areas
+                "--fill",        "block+vhalf+hhalf",               # fill flat areas with braille dots
+                #"--dither",      "fstein",                # Floyd-Steinberg — best for portraits
+                #"--fill", "vhalf+hhalf+block",  # quarter/half-blocks fill smooth areas
                 "--dither", "none",
                 "--size", f"{cols}x{rows}",
-                "--stretch",
+                #"--stretch",
                 "--colors", "full",
                 "--color-space", "din99d",  # perceptually uniform — better gradients
                 "--work", "9",              # max quality; runs in a worker so fine
