@@ -7,8 +7,9 @@ press Escape to close.
 
 Performance notes
 ─────────────────
-- The PIL Image is opened once on mount and kept in memory.
-- The braille render runs inside a @work(thread=True, exclusive=True) worker
+- Portrait rendering uses get_portrait_ansi(), which checks the two-level
+  cache (memory + disk sidecar) before spawning any subprocess or pixel decode.
+- The render runs inside a @work(thread=True, exclusive=True) worker
   so the compositor is never blocked.  exclusive=True means any in-progress
   render is cancelled before a new one starts (handles rapid resize events).
 - The worker result is applied back on the main thread via call_from_thread.
@@ -16,7 +17,6 @@ Performance notes
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Optional
 
 from rich.text import Text
 from textual import work
@@ -28,7 +28,7 @@ from textual.worker import get_current_worker
 
 
 class PortraitFullscreen(Screen):
-    """Full-screen modal that renders a braille portrait at aspect-correct size.
+    """Full-screen modal that renders a portrait at aspect-correct size.
 
     Does not inherit BaseScreen — no header/footer chrome so the image fills
     as much of the terminal as possible.  Escape or a mouse click anywhere
@@ -55,79 +55,71 @@ class PortraitFullscreen(Screen):
     def __init__(self, image_path: Path) -> None:
         super().__init__()
         self._image_path = image_path
-        self._pil_image: Optional[object] = None
 
     def compose(self) -> ComposeResult:
         yield Static("[dim]Loading…[/dim]", id="fs-portrait")
 
     def on_mount(self) -> None:
-        """Open the image from disk once, then kick off the initial render."""
-        try:
-            from PIL import Image as PilImage  # noqa: PLC0415
-            self._pil_image = PilImage.open(self._image_path).convert("RGB")
-            self._pil_image.load()  # force pixel data into memory; no more disk I/O
-        except Exception:
-            self.query_one("#fs-portrait", Static).update(
-                "[dim](could not open image)[/dim]"
-            )
-            return
         self._render_worker()
 
     def on_resize(self) -> None:
         """Re-render on resize; exclusive=True cancels any in-progress job."""
-        if self._pil_image is not None:
-            self._render_worker()
+        self._render_worker()
 
     @work(thread=True, exclusive=True)
     def _render_worker(self) -> None:
-        """Background thread: compute braille ANSI and push result to compositor."""
+        """Background thread: compute portrait ANSI and push result to compositor."""
         worker = get_current_worker()
+
+        t_cols = self.app.size.width
+        t_rows = self.app.size.height
+
+        # Read dimensions for aspect-ratio calculation (header-only, fast)
         try:
-            from tui.services.dev.npc_image_renderer import (  # noqa: PLC0415
-                chafa_available, image_to_braille_ansi, render_with_chafa,
-            )
-
-            t_cols = self.app.size.width
-            t_rows = self.app.size.height
-            img = self._pil_image
-            img_w, img_h = img.size  # type: ignore[union-attr]
-
-            # Aspect-ratio constrained sizing
-            cols = t_cols
-            rows = max(1, round(cols * img_h / (img_w * 2)))
-            if rows > t_rows:
-                rows = t_rows
-                cols = max(1, round(rows * img_w * 2 / img_h))
-                cols = min(cols, t_cols)
-
-            if worker.is_cancelled:
-                return
-
-            ansi: Optional[str] = None
-
-            # chafa produces better dithering; fall back to Python renderer
-            if chafa_available():
-                ansi = render_with_chafa(self._image_path, cols=cols, rows=rows)
-
-            if ansi is None:
-                ansi = image_to_braille_ansi(img, cols=cols, rows=rows)
-
-            if worker.is_cancelled:
-                return
-
-            v_pad = max(0, (t_rows - rows) // 2)
-            rich_text = Text.from_ansi("\n" * v_pad + ansi)
-
-            self.app.call_from_thread(
-                self.query_one("#fs-portrait", Static).update, rich_text
-            )
-
+            from PIL import Image as PilImage  # noqa: PLC0415
+            img_w, img_h = PilImage.open(self._image_path).size
         except Exception:
+            if not worker.is_cancelled:
+                self.app.call_from_thread(
+                    self.query_one("#fs-portrait", Static).update,
+                    "[dim](could not open image)[/dim]",
+                )
+            return
+
+        if worker.is_cancelled:
+            return
+
+        # Aspect-ratio constrained sizing (same logic as before)
+        cols = t_cols
+        rows = max(1, round(cols * img_h / (img_w * 2)))
+        if rows > t_rows:
+            rows = t_rows
+            cols = max(1, round(rows * img_w * 2 / img_h))
+            cols = min(cols, t_cols)
+
+        if worker.is_cancelled:
+            return
+
+        from tui.services.dev.npc_image_renderer import get_portrait_ansi  # noqa: PLC0415
+        ansi = get_portrait_ansi(self._image_path, cols, rows)
+
+        if ansi is None:
             if not worker.is_cancelled:
                 self.app.call_from_thread(
                     self.query_one("#fs-portrait", Static).update,
                     "[dim](render failed)[/dim]",
                 )
+            return
+
+        if worker.is_cancelled:
+            return
+
+        v_pad = max(0, (t_rows - rows) // 2)
+        rich_text = Text.from_ansi("\n" * v_pad + ansi)
+
+        self.app.call_from_thread(
+            self.query_one("#fs-portrait", Static).update, rich_text
+        )
 
     def on_click(self) -> None:
         """Click anywhere to dismiss."""

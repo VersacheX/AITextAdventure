@@ -41,7 +41,8 @@ NPCS = [
           "stress_line": "Moves to Type 5 — Withdraws into pure concept, becoming a glitch rather than a physical threat.",
           "growth_line": "Moves to Type 2 — (Hypothetically) Would use its power to protect and stabilize reality rather than destroy it.",
           "instinctual_variant": "sx/sp — An intense, focused force of destruction, driven by a singular relationship with the concept of collapse."
-        }
+        },
+        'image': 'bosses:catalyst1'
 	},
 	{
 		'npc_id': 'velka',
@@ -385,7 +386,8 @@ NPC_DIALOG = [
         'dialog_id': 'mira_ch4_outro',
         'dialog': [
             "You say Marlo Finch confiscated the Bracelet of Void and is now looking for the Bracelet of Existence?",
-            "I sold that off days ago.  You should visit Kirn again, he might be able to dig up information on the courier that carried it."
+            "I split that couplet in two... But you're gonna have to track the other one down yourself, I don't sell out my buyers.",
+            "I haven't had it for days.  You should visit Kirn again, he might be able to dig up information on the courier that carried it."
         ]
     },
 

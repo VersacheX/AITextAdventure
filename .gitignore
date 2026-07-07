@@ -226,3 +226,7 @@ __marimo__/
 
 #"D:\dev\source\repos\AITextAdventure\AITextAdventureAPI\build"
 /AITextAdventureAPI/build
+
+#ansi files
+/AITextAdventureAPI/tui/assets/*.*
+/AITextAdventureAPI/tui/assets/*/*.*

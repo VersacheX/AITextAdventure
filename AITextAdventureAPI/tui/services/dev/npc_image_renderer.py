@@ -114,10 +114,10 @@ def image_to_braille_ansi(
                 s = cell_lums[:]
                 s.sort()
                 median = s[4]
-                
+
                 # === LOCAL CONTRAST ADAPTIVE THRESHOLD ===
                 contrast = s[7] - s[0]          # range of luminance in this cell
-                
+
                 if contrast < 35:               # flat area (skin, sky, clothing)
                     multiplier = 0.23           # lower threshold = more dots lit → softer, artistic
                 elif contrast > 110:            # high contrast (eyes, hair, edges, jewelry)
@@ -227,10 +227,14 @@ def render_with_chafa(
         return None
 
     try:
+        """
+        DO NOT CHANGE FORMAT, SYMBOLS, FILL
+        NEVER SET DITHERING ON
+        """
         result = subprocess.run(
             [
                 "chafa",
-                "--format", "symbols",                
+                "--format", "symbols",
                 "--symbols", "braille+dot+hhalf+vhalf+block+braille+border+geometric",  # half-blocks + braille + border chars
                 #"--symbols", "braille+dot",          # dot-level detail on edges/faces
                 "--fill",        "block+vhalf+hhalf",               # fill flat areas with braille dots
@@ -267,3 +271,46 @@ def chafa_available() -> bool:
         import shutil
         _CHAFA_AVAILABLE = shutil.which("chafa") is not None
     return _CHAFA_AVAILABLE
+
+
+def get_portrait_ansi(image_path: Path, cols: int, rows: int) -> Optional[str]:
+    """Cache-aware entry point for portrait rendering.
+
+    Lookup order: memory cache → disk sidecar → render from source.
+    Renderer preference: chafa (if available) → Python braille fallback.
+    Caches result at both levels before returning.
+    Returns None only if the image cannot be rendered at all.
+    """
+    from tui.services.dev.npc_image_cache import get_cached, store  # noqa: PLC0415
+
+    renderer_key = "chafa" if chafa_available() else "braille"
+
+    cached = get_cached(image_path, cols, rows, renderer_key)
+    if cached is not None:
+        return cached
+
+    ansi: Optional[str] = None
+    actual_renderer = renderer_key
+
+    if renderer_key == "chafa":
+        ansi = render_with_chafa(image_path, cols=cols, rows=rows)
+        if ansi is None:
+            actual_renderer = "braille"
+
+    if ansi is None:
+        try:
+            from PIL import Image as PilImage  # noqa: PLC0415
+            img = PilImage.open(image_path)
+            ansi = image_to_braille_ansi(img, cols=cols, rows=rows)
+        except Exception:
+            return None
+
+    store(image_path, cols, rows, actual_renderer, ansi)
+
+    # If chafa was attempted but fell back to braille, also store under the
+    # "chafa" key so we don't retry the subprocess on every subsequent call
+    # this session.
+    if renderer_key == "chafa" and actual_renderer == "braille":
+        store(image_path, cols, rows, "chafa", ansi)
+
+    return ansi

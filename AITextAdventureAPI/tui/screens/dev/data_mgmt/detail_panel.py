@@ -26,13 +26,13 @@ from typing import TYPE_CHECKING, List, Optional
 
 from rich.markup import escape as rich_escape
 from rich.text import Text
+from textual import work
 from textual.app import ComposeResult
 from textual.containers import Horizontal, Vertical
 from textual.widget import Widget
 from textual.widgets import Static
 
 from tui.services.dev.dev_data_service import DevRecord, DialogueLine
-from tui.services.dev.npc_image_renderer import image_to_braille_ansi
 
 if TYPE_CHECKING:
     from tui.screens.dev.data_mgmt.data_mgmt_screen import DataMgmtScreen
@@ -165,44 +165,37 @@ class NpcDetailPanel(Widget):
         super().__init__()
         self._record = record
 
-    def compose(self) -> ComposeResult:
-        r = self._record
+        # Resolve asset path (pure path logic — no I/O)
+        self._resolved: Optional[Path] = (
+            _resolve_asset(record.image) if record.image else None
+        )
+        self._cols: int = 0
+        self._rows: int = 0
 
-        # ── portrait: aspect-constrained, max 20 rows, 50% panel width ───
-        resolved: Optional[Path] = _resolve_asset(r.image) if r.image else None
-        portrait_ansi: Optional[str] = None
-
-        if resolved is not None:
-            # Prefer chafa (better dithering); fall back to Python renderer.
-            from tui.services.dev.npc_image_renderer import (  # noqa: PLC0415
-                chafa_available, image_to_braille_ansi, render_with_chafa,
-            )
-
+        # Read image dimensions only (PIL lazy header read, ~1ms, no pixel decode)
+        if self._resolved is not None:
             try:
                 from PIL import Image as PilImage  # noqa: PLC0415
-                img = PilImage.open(resolved)
-                img_w, img_h = img.size
-
-                # Aspect-ratio constrained sizing
+                img_w, img_h = PilImage.open(self._resolved).size
                 cols = _IMG_MAX_COLS
                 rows = max(1, round(cols * img_h / (img_w * 2)))
                 if rows > _IMG_MAX_ROWS:
                     rows = _IMG_MAX_ROWS
                     cols = max(1, round(rows * img_w * 2 / img_h))
                     cols = min(cols, _IMG_MAX_COLS)
-
-                if chafa_available():
-                    portrait_ansi = render_with_chafa(resolved, cols=cols, rows=rows)
-
-                if portrait_ansi is None:
-                    portrait_ansi = image_to_braille_ansi(img, cols=cols, rows=rows)
-
+                self._cols = cols
+                self._rows = rows
             except Exception:
-                portrait_ansi = None
+                self._resolved = None
 
-        # ── quick stats from detail string ────────────────────────────────
+    def compose(self) -> ComposeResult:
+        # NO rendering here — compositor thread only, layout skeleton only.
+        # _ClickablePortrait is pre-mounted with a placeholder so _apply_portrait
+        # can call portrait.update() in-place (synchronous, safe from call_from_thread).
+        # Never use col.mount() from a call_from_thread callback — mount() is async
+        # and silently does nothing when called synchronously from a thread callback.
+        r = self._record
         mbti_line, enneagram_line = _extract_quick_stats(r.detail)
-
         info_parts = [
             f"[bold]{rich_escape(r.name)}[/bold]",
             f"[dim]{rich_escape(r.id)}[/dim]",
@@ -213,18 +206,51 @@ class NpcDetailPanel(Widget):
         if enneagram_line:
             info_parts.append(rich_escape(enneagram_line))
 
-        # ── header row: portrait | info ───────────────────────────────────
         with Horizontal(id="npc-header-row"):
             with Vertical(id="npc-portrait-col"):
-                if portrait_ansi and resolved is not None:
-                    yield _ClickablePortrait(Text.from_ansi(portrait_ansi), resolved)
+                if self._resolved is not None:
+                    # Pre-mount the clickable portrait widget with a loading placeholder.
+                    # The worker will call portrait.update() once the ANSI is ready.
+                    yield _ClickablePortrait(Text("[dim]  Loading…[/dim]"), self._resolved)
                 else:
                     yield Static("[dim]  (no image)[/dim]", id="npc-portrait")
             with Vertical(id="npc-info-col"):
                 yield Static("\n".join(info_parts), id="npc-name-bar")
-
-        # ── full detail below ─────────────────────────────────────────────
         yield Static(rich_escape(r.detail), id="npc-detail-body")
+
+    def on_mount(self) -> None:
+        if self._resolved is not None and self._cols > 0:
+            self._render_portrait()
+
+    @work(thread=True, exclusive=True)
+    def _render_portrait(self) -> None:
+        from tui.services.dev.npc_image_cache import get_cached  # noqa: PLC0415
+        from tui.services.dev.npc_image_renderer import chafa_available, get_portrait_ansi  # noqa: PLC0415
+
+        # Check cache BEFORE rendering so we can show an accurate notification.
+        renderer_key = "chafa" if chafa_available() else "braille"
+        was_cached = get_cached(self._resolved, self._cols, self._rows, renderer_key) is not None
+
+        ansi = get_portrait_ansi(self._resolved, self._cols, self._rows)
+        if ansi is not None:
+            if was_cached:
+                self.app.call_from_thread(
+                    self.app.notify, "⚡ Portrait loaded from cache", timeout=2.0
+                )
+            else:
+                self.app.call_from_thread(
+                    self.app.notify, "💾 Portrait rendered and saved to .ansi", timeout=3.0
+                )
+            self.app.call_from_thread(self._apply_portrait, ansi)
+
+    def _apply_portrait(self, ansi: str) -> None:
+        # Update the pre-mounted _ClickablePortrait in-place.
+        # Static.update() is synchronous — safe to call via call_from_thread.
+        try:
+            portrait = self.query_one("#npc-portrait", _ClickablePortrait)
+            portrait.update(Text.from_ansi(ansi))
+        except Exception:
+            pass
 
 
 # ── public API ──────────────────────────────────────────────────────────────
