@@ -123,4 +123,5 @@ class PortraitFullscreen(Screen):
 
     def on_click(self) -> None:
         """Click anywhere to dismiss."""
-        self.dismiss()
+        if self.app.screen is self:
+            self.dismiss()

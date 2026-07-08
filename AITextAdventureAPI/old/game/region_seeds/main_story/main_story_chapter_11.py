@@ -69,7 +69,8 @@ NPCS = [
           "stress_line": "Moves to Type 3 — Becomes arrogant and focused on the appearance of success when his plans fail.",
           "growth_line": "Moves to Type 9 — Becomes more trusting and open to new ideas.",
           "instinctual_variant": "sp/so — Focused on his own and his city's survival, he seeks to build a reliable social defense system."
-        }
+        },
+        "image": "npcs:kael1"
     },
     {
         "npc_id": "hessa",
@@ -90,7 +91,8 @@ NPCS = [
           "stress_line": "Moves to Type 3 — Becomes frantic and performs her role as a seer with desperate authority.",
           "growth_line": "Moves to Type 9 — Learns to have faith and find peace even in the face of uncertainty.",
           "instinctual_variant": "so/sp — Focused on the survival of the collective, driven by her visions of social collapse."
-        }
+        },
+        "image": "npcs:hessa1"
     },
     {
         "npc_id": "nihilist_leader",
@@ -111,7 +113,8 @@ NPCS = [
           "stress_line": "Moves to Type 7 — His nihilism becomes scattered and manic, lashing out in chaotic ways.",
           "growth_line": "Moves to Type 8 — Would use his understanding to take confident action and create meaning.",
           "instinctual_variant": "sp/so — A reclusive intellectual who shares his nihilistic worldview as a way of navigating a social world he sees as meaningless."
-        }
+        },
+        'image': 'bosses:nihilist_leader1'
     },
     {
         "npc_id": "rapture",
@@ -279,7 +282,7 @@ NPC_DIALOG = [
         'npc_id': 'ember',
         'dialog_id': 'ember_ch11_response_to_magic',
         'dialog': [
-            "(small, tired smile) That’s exactly why I can’t leave. Someone has to stay and witness.",
+            "(small, tired smile) That’s exactly why I can’t leave. If I run now… who’s left to remember what this actually costs?",
             "Someone has to keep caring when it hurts."
         ]
     },

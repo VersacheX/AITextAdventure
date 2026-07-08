@@ -181,7 +181,7 @@ NPC_DIALOG = [
         'npc_id': 'ember',
         'dialog_id': 'ember_ch10_intro',
         'dialog': [
-            "They're burning themselves alive with joy. I'm trying to remind them they can feel something real and gentle.",
+            "They’re burning themselves alive with joy. I’m trying to remind them there’s still such a thing as real feeling… even when it’s painful.",
             "That's what it wants. It wants you addicted to the wave."
         ]
     },
@@ -196,7 +196,7 @@ NPC_DIALOG = [
         'npc_id': 'ember',
         'dialog_id': 'ember_ch10_response',
         'dialog': [
-            "I know. But someone has to stay and witness what happens when joy becomes poison."
+            "I know. But if no one stays to see what this is really doing to them… then it just wins."
         ]
     },
     {
@@ -359,7 +359,7 @@ NPC_DIALOG = [
         'dialog_id': 'ember_ch10_departs',
         'dialog': [
             "(voice strained, stepping back from the fray) I... I don't think I can help here. Not anymore. This coruption here is too deep.",
-            "I'm heading to Blackwake Bay. The ports are drowning in the same kind of frenzy. Someone still needs to remind people what real feeling is."
+            "I’m heading to Blackwake Bay. The ports are drowning in the same kind of frenzy. Someone still needs to remind them what real feeling feels like."
         ]
     },
     {

@@ -64,7 +64,8 @@ NPCS = [
           "stress_line": "Moves to Type 6 — Becomes anxious and paranoid, unable to trust his own memories.",
           "growth_line": "Moves to Type 3 — Becomes more assertive and able to reclaim his identity.",
           "instinctual_variant": "sp/so — Seeks personal peace by retreating into his duties, while still being part of the Necropolis's grim social fabric."
-        }
+        },
+        "image": "npcs:crypt_warden1"
     },
     {
         "npc_id": "echo_merchant",
@@ -85,7 +86,8 @@ NPCS = [
           "stress_line": "Moves to Type 7 — Becomes scattered and anxious when his business is threatened.",
           "growth_line": "Moves to Type 8 — Uses his understanding of the system to take confident action.",
           "instinctual_variant": "sp/so — Hoards his resources and knowledge for his own security, using his business to navigate the social landscape."
-        }
+        },
+        "image": "npcs:echo_merchant1"
     },
     {
         "npc_id": "veiled_widow",
@@ -106,7 +108,8 @@ NPCS = [
           "stress_line": "Moves to Type 2 — Becomes overly dependent on others when her grief becomes too much to bear alone.",
           "growth_line": "Moves to Type 1 — Finds a new, principled purpose beyond her personal grief.",
           "instinctual_variant": "sx/sp — Intensely focused on her personal loss and the one-on-one connection she had with the person she lost."
-        }
+        },
+        "image": "npcs:veiled_widow1"
     }
 ]
 

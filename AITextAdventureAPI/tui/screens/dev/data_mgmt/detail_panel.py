@@ -228,6 +228,29 @@ class NpcDetailPanel(Widget):
             pass
 
 
+class TimelineDetailPanel(Widget):
+    """Scrollable detail panel for timeline task content.
+
+    ``height: auto`` lets the content grow past the outer ScrollableContainer,
+    giving real scroll overflow — same mechanism as NpcDetailPanel.
+    """
+
+    DEFAULT_CSS = """
+    TimelineDetailPanel {
+        width: 100%;
+        height: auto;
+        padding: 1 2;
+    }
+    """
+
+    def __init__(self, text: str) -> None:
+        super().__init__()
+        self._text = text
+
+    def compose(self) -> ComposeResult:
+        yield Static(self._text, id="dm-timeline-detail-text")
+
+
 # ── public API ──────────────────────────────────────────────────────────────
 
 def update_detail_for_record(screen: "DataMgmtScreen", record: DevRecord | None) -> None:
@@ -309,26 +332,26 @@ def _format_timeline_task_detail(task_node: TimelineTaskNode) -> str:
 
 
 def update_detail_for_timeline_task(screen: "DataMgmtScreen", task_node: TimelineTaskNode) -> None:
-    """Update the detail panel with a single TimelineTaskNode."""
+    """Update the detail panel with a single TimelineTaskNode (scrollable)."""
     detail_panel = screen.query_one("#dm-detail-panel")
-    static = _ensure_static(detail_panel)
+    detail_panel.remove_children()
     header = (
         f"[bold]{rich_escape(task_node.label)}[/bold]"
         f"\n[dim]{rich_escape(task_node.task_id)}[/dim]"
     )
     detail = _format_timeline_task_detail(task_node)
-    static.update(f"{header}\n\n{rich_escape(detail)}")
+    detail_panel.mount(TimelineDetailPanel(f"{header}\n\n{rich_escape(detail)}"))
 
 
 def update_detail_for_timeline_subtree(
     screen: "DataMgmtScreen",
     task_nodes: List[TimelineTaskNode],
 ) -> None:
-    """Update the detail panel with an aggregate view of task nodes from a subtree."""
+    """Update the detail panel with an aggregate view of task nodes from a subtree (scrollable)."""
     detail_panel = screen.query_one("#dm-detail-panel")
-    static = _ensure_static(detail_panel)
+    detail_panel.remove_children()
     if not task_nodes:
-        static.update("[dim]← select a task from the tree[/dim]")
+        detail_panel.mount(TimelineDetailPanel("[dim]← select a task from the tree[/dim]"))
         return
     parts = [
         f"[bold]{rich_escape(t.label)}[/bold]  "
@@ -336,7 +359,7 @@ def update_detail_for_timeline_subtree(
         f"[dim]({rich_escape(t.source_path)})[/dim]"
         for t in task_nodes
     ]
-    static.update("\n".join(parts))
+    detail_panel.mount(TimelineDetailPanel("\n".join(parts)))
 
 
 def update_detail_for_npc_group(
@@ -365,7 +388,7 @@ def _reset_to_static(detail_panel: Widget, text: str) -> None:
 
 
 def _ensure_static(detail_panel: Widget) -> Static:
-    """Return ``#dm-detail-text``, rebuilding it if ``NpcDetailPanel`` is mounted."""
+    """Return ``#dm-detail-text``, rebuilding it if any other panel type is mounted."""
     try:
         return detail_panel.query_one("#dm-detail-text", Static)
     except Exception:

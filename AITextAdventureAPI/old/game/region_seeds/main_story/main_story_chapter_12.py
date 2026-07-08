@@ -40,7 +40,8 @@ NPCS = [
           "stress_line": "Moves to Type 2 — Becomes overly dependent on others when his grief becomes too much to bear alone.",
           "growth_line": "Moves to Type 1 — Finds a new, principled purpose beyond his personal grief.",
           "instinctual_variant": "sx/sp — Intensely focused on his personal loss and the one-on-one connection he had with his sister."
-        }
+        },
+        "image": "npcs:rell1"
     },
     {
         "npc_id": "lament",
@@ -83,7 +84,8 @@ NPCS = [
           "stress_line": "Moves to Type 7 — Its thoughts become scattered and chaotic when the paradoxes become too overwhelming.",
           "growth_line": "Moves to Type 8 — Uses its unique understanding to take decisive action and guide others through the chaos.",
           "instinctual_variant": "sp/sx — A reclusive being of pure intellect, intensely focused on the puzzle of its own existence."
-        }
+        },
+        'image': 'npcs:archivist_fragment1'
     }
 ]
 

@@ -366,7 +366,7 @@ NPC_DIALOG = [
         'npc_id': 'ember',
         'dialog_id': 'ember_ch8_intro',
         'dialog': [
-            "You look lost. That's good. Lost people can still find their way. I'm Ember. I sing to remind people what real sounds like."
+            "You look lost. Most people do these days. I’m Ember. I sing so they remember there’s still such a thing as real feeling."
         ]
     },
     {
@@ -380,7 +380,7 @@ NPC_DIALOG = [
         'npc_id': 'ember',
         'dialog_id': 'ember_ch8_explains',
         'dialog': [
-            "That's the idea. In a city of echoes, someone has to be real."
+            "Someone has to stay honest. Otherwise this whole city becomes nothing but noise."
         ]
     },
     {
@@ -394,7 +394,7 @@ NPC_DIALOG = [
         'npc_id': 'ember',
         'dialog_id': 'ember_ch8_response_to_technique',
         'dialog': [
-            "Oh, I feel it. The pull. The chaos. But I choose to stay steady."
+            "I feel it pulling at me too. But if I let it take me, who’s left to push back?"
         ]
     },
     {

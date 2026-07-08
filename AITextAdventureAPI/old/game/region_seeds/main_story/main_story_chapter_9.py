@@ -198,7 +198,7 @@ NPC_DIALOG = [
         'npc_id': 'ember',
         'dialog_id': 'ember_ch9_response',
         'dialog': [
-            "I'm a reminder. That even in blood, there's still humanity."
+            "I’m a reminder. That even when everything’s bleeding, people can still choose not to become monsters."
         ]
     },
     {
@@ -235,7 +235,7 @@ NPC_DIALOG = [
         'npc_id': 'ember',
         'dialog_id': 'ember_ch9_warning',
         'dialog': [
-            "(voice gentle but firm) Be careful. Analyzing the poison doesn't make you immune to it.",
+            "Be careful. Understanding the machine doesn’t protect you from becoming another gear in it.",
             "This place wants you to see the system, to admire its efficiency, and then to crave it."
         ]
     },

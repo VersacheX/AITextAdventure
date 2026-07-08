@@ -66,6 +66,13 @@ _REGION_STORY_META: Dict[str, Tuple[str, str]] = {
 }
 
 
+# Act label for each STORY_GROUPS key that doesn't use chapter-range grouping
+_STORY_GROUP_ACT_LABELS: Dict[str, str] = {
+    "regional_stories": "Regional Hero Arcs",
+    "city_stories":     "City Stories",
+}
+
+
 # ── Public filter API ─────────────────────────────────────────────────────
 
 def filter_dialogue_tree(
@@ -105,6 +112,26 @@ def filter_dialogue_tree(
         if chapters:
             result.append(DialogueActNode(label=act.label, chapters=chapters))
     return result
+
+
+def _label_for_story(story_id: str, group_key: str) -> str:
+    """Derive a human-readable chapter label from a story_id and its group key."""
+    if group_key == "regional_stories":
+        region_match = re.match(r"(\w+)_primary_story", story_id)
+        region_key   = region_match.group(1) if region_match else story_id
+        if region_key in _REGION_STORY_META:
+            region_name, arc_subtitle = _REGION_STORY_META[region_key]
+            return f"{region_name} Arc - {arc_subtitle}"
+        return _humanize_task_id(story_id)
+
+    if group_key == "city_stories":
+        city_match = re.match(r"(\w+)_(\w+)_city_story", story_id)
+        if city_match:
+            region, size = city_match.group(1), city_match.group(2)
+            return f"{region.title()} {size.title()} City"
+        return _humanize_task_id(story_id)
+
+    return _humanize_task_id(story_id)
 
 
 # ── Builder ───────────────────────────────────────────────────────────────
@@ -174,7 +201,11 @@ def _build_task_nodes_from_chapter(
 
 
 def _build_dialogue_tree(const: Any) -> List[DialogueActNode]:
-    """Build the dialogue tree from MAIN_STORY_SETTINGS and PRIMARY_STORIES."""
+    """Build the dialogue tree from STORY_GROUPS (main_story, regional_stories, city_stories).
+
+    Falls back to individual MAIN_STORY_SETTINGS / PRIMARY_STORIES list access
+    if STORY_GROUPS is not present so older constants still work.
+    """
     dialog_index: Dict[Tuple[Any, Any], List[str]] = {}
     for dlg in getattr(const, "NPC_DIALOG", []) or []:
         if not isinstance(dlg, dict):
@@ -189,10 +220,50 @@ def _build_dialogue_tree(const: Any) -> List[DialogueActNode]:
 
     acts: Dict[str, Dict[str, DialogueChapterNode]] = {}
 
-    for chapter_settings in getattr(const, "MAIN_STORY_SETTINGS", []) or []:
-        if not isinstance(chapter_settings, dict):
-            continue
-        chapter_id    = str(chapter_settings.get("chapter_id", "?"))
+    story_groups = getattr(const, "STORY_GROUPS", None)
+
+    if story_groups:
+        # Preferred path — driven by STORY_GROUPS in declared order
+        for group_key, story_list in story_groups.items():
+            if not story_list:
+                continue
+            for story_settings in story_list:
+                if not isinstance(story_settings, dict):
+                    continue
+                _process_story(
+                    story_settings, group_key,
+                    dialog_index, name_by_id, acts,
+                )
+    else:
+        # Fallback path — individual list access (pre-STORY_GROUPS constants)
+        for chapter_settings in getattr(const, "MAIN_STORY_SETTINGS", []) or []:
+            if isinstance(chapter_settings, dict):
+                _process_story(chapter_settings, "main_story", dialog_index, name_by_id, acts)
+        for primary_story in getattr(const, "PRIMARY_STORIES", []) or []:
+            if isinstance(primary_story, dict):
+                _process_story(primary_story, "regional_stories", dialog_index, name_by_id, acts)
+
+    return [
+        DialogueActNode(label=act_label, chapters=list(chapters.values()))
+        for act_label, chapters in acts.items()
+    ]
+
+
+def _process_story(
+    story_settings: Dict[str, Any],
+    group_key: str,
+    dialog_index: Dict[Tuple[Any, Any], List[str]],
+    name_by_id: Dict[str, str],
+    acts: Dict[str, Dict[str, DialogueChapterNode]],
+) -> None:
+    """Normalize one story settings dict into the acts accumulator."""
+    task_nodes = _build_task_nodes_from_chapter(story_settings, dialog_index, name_by_id)
+    if not task_nodes:
+        return
+
+    if group_key == "main_story":
+        # Main story: group by act ranges derived from chapter number
+        chapter_id    = str(story_settings.get("chapter_id", "?"))
         chapter_num   = _chapter_number_from_id(chapter_id)
         act_label     = _act_for_chapter(chapter_num)
         chapter_label = (
@@ -200,42 +271,20 @@ def _build_dialogue_tree(const: Any) -> List[DialogueActNode]:
             if chapter_num in _CHAPTER_TITLES
             else chapter_id.replace("_", " ").title()
         )
-        task_nodes = _build_task_nodes_from_chapter(chapter_settings, dialog_index, name_by_id)
-        if not task_nodes:
-            continue
         chapters = acts.setdefault(act_label, {})
         chapters[chapter_id] = DialogueChapterNode(
             chapter_id=chapter_id,
             label=chapter_label,
             tasks=task_nodes,
         )
-
-    regional_act_label = "Regional Hero Arcs"
-    regional_chapters: Dict[str, DialogueChapterNode] = {}
-
-    for primary_story in getattr(const, "PRIMARY_STORIES", []) or []:
-        if not isinstance(primary_story, dict):
-            continue
-        story_id     = str(primary_story.get("story_id", "?"))
-        region_match = re.match(r"(\w+)_primary_story", story_id)
-        region_key   = region_match.group(1) if region_match else story_id
-        if region_key in _REGION_STORY_META:
-            region_name, arc_subtitle = _REGION_STORY_META[region_key]
-            chapter_label = f"{region_name} Arc - {arc_subtitle}"
-        else:
-            chapter_label = _humanize_task_id(story_id)
-        task_nodes = _build_task_nodes_from_chapter(primary_story, dialog_index, name_by_id)
-        if task_nodes:
-            regional_chapters[story_id] = DialogueChapterNode(
-                chapter_id=story_id,
-                label=chapter_label,
-                tasks=task_nodes,
-            )
-
-    if regional_chapters:
-        acts[regional_act_label] = regional_chapters
-
-    return [
-        DialogueActNode(label=act_label, chapters=list(chapters.values()))
-        for act_label, chapters in acts.items()
-    ]
+    else:
+        # Regional / city: flat list under a single act label
+        act_label  = _STORY_GROUP_ACT_LABELS.get(group_key, group_key.replace("_", " ").title())
+        story_id   = str(story_settings.get("story_id", "?"))
+        chapter_label = _label_for_story(story_id, group_key)
+        chapters = acts.setdefault(act_label, {})
+        chapters[story_id] = DialogueChapterNode(
+            chapter_id=story_id,
+            label=chapter_label,
+            tasks=task_nodes,
+        )
