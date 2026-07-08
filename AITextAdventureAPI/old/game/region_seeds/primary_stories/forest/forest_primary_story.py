@@ -349,7 +349,8 @@ NPCS = [
           "stress_line": "Moves to Type 4 — Becomes melancholic and withdrawn, lamenting the 'sacrifice' he has made.",
           "growth_line": "Moves to Type 7 — Learns to accept the world's imperfections and find a more flexible way to protect his home.",
           "instinctual_variant": "so/sp — Entirely focused on the 'salvation' of his community (the forest), sacrificing his own form for it."
-        }
+        },
+        'image': 'bosses:marrowroot1.jpeg'
     }
 ]
 

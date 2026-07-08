@@ -40,7 +40,8 @@ NPCS = [
           "stress_line": "Moves to Type 6 — Becomes anxious and panicked, unable to trust her own mind.",
           "growth_line": "Moves to Type 3 — Becomes more focused and able to reclaim her voice and sense of self.",
           "instinctual_variant": "sp/so — Withdraws into herself to find peace, but is still passively affected by the social chaos."
-        }
+        },
+        'image': 'npcs:veyla1'
     },
     {
         "npc_id": "rusk",
@@ -61,7 +62,8 @@ NPCS = [
           "stress_line": "Moves to Type 4 — Becomes withdrawn and resentful when his efforts to create order fail.",
           "growth_line": "Moves to Type 7 — Learns to relax and accept that not everything can be perfectly controlled.",
           "instinctual_variant": "so/sp — Focused on reforming his social environment to match his ideal of order."
-        }
+        },
+        'image': 'npcs:rusk1'
     },
     {
         "npc_id": "jinn",
@@ -82,7 +84,8 @@ NPCS = [
           "stress_line": "Moves to Type 1 — Becomes rigid and critical when her methods are questioned or her freedom is threatened.",
           "growth_line": "Moves to Type 5 — Becomes more focused and deeply knowledgeable about the mechanics of rifts, not just the thrill of them.",
           "instinctual_variant": "sx/so — Seeks intense, one-on-one experiences with the fabric of reality, and enjoys showing off her unique abilities."
-        }
+        },
+        'image': 'npcs:jinn1'
     },
     {
         "npc_id": "ember",
@@ -103,7 +106,8 @@ NPCS = [
           "stress_line": "Moves to Type 8 — Becomes forceful and demanding when their help is rejected or proves futile.",
           "growth_line": "Moves to Type 4 — Acknowledges their own sorrow and finds an identity beyond being a helper.",
           "instinctual_variant": "so/sp — Sacrifices their own well-being for the good of the community, finding security in being needed."
-        }
+        },
+        'image': 'npcs:ember1'
     },
     {
         "npc_id": "scalpel",

@@ -3,7 +3,7 @@ DataMgmtScreen: developer data-management hub for browsing/searching every
 seed-data catalog in the game.
 
 This is the main screen coordinating the UI composition and delegating
-behavior to handlers, dialog_tree, detail_panel, and utils modules.
+behavior to handlers, dialog_tree, timeline_tree, detail_panel, and utils modules.
 """
 from __future__ import annotations
 
@@ -25,11 +25,14 @@ from tui.screens.dev.data_mgmt.handlers import (
     handle_tree_node_highlighted,
     rebuild_dialog_tree_for_screen,
     rebuild_list_for_screen,
+    rebuild_timeline_tree_for_screen,
     set_dialog_mode,
+    set_filter_mode,
 )
 from tui.services.dev.dev_data_service import CATEGORIES, CATEGORY_LABELS, DialogueLine, preload
 
-_DIALOG_CATEGORY = "character_dialog"
+_DIALOG_CATEGORY   = "character_dialog"
+_TIMELINE_CATEGORY = "timeline"
 
 
 class DataMgmtScreen(BaseScreen):
@@ -162,6 +165,11 @@ class DataMgmtScreen(BaseScreen):
         display: none;
     }
 
+    #dm-timeline-tree {
+        height: 100%;
+        display: none;
+    }
+
     #dm-detail-panel {
         width: 80;
         height: 100%;
@@ -180,9 +188,13 @@ class DataMgmtScreen(BaseScreen):
         self._category: str = CATEGORIES[0]
         self._loaded: bool = False
         self._last_filtered: Any = None
-        # Track explicit user expansion/collapse actions across filter changes
+        self._last_timeline_filtered: Any = None
+        # Dialogue tree expansion state
         self._user_expanded: Set[str] = set()
         self._user_collapsed: Set[str] = set()
+        # Timeline tree expansion state (independent from dialogue)
+        self._timeline_user_expanded: Set[str] = set()
+        self._timeline_user_collapsed: Set[str] = set()
 
     def compose_content(self) -> ComposeResult:
         yield Tabs(
@@ -221,6 +233,9 @@ class DataMgmtScreen(BaseScreen):
                 dialog_tree: Tree[DialogueLine] = Tree("Dialogue", id="dm-dialog-tree")
                 dialog_tree.show_root = False
                 yield dialog_tree
+                timeline_tree: Tree = Tree("Timeline", id="dm-timeline-tree")
+                timeline_tree.show_root = False
+                yield timeline_tree
             with ScrollableContainer(id="dm-detail-panel"):
                 yield Static("", id="dm-detail-text")
 
@@ -241,9 +256,11 @@ class DataMgmtScreen(BaseScreen):
         self._loaded = True
         tabs = self.query_one("#dm-tabs", Tabs)
         tabs.active = f"tab-{self._category}"
-        set_dialog_mode(self, self._category == _DIALOG_CATEGORY)
+        set_filter_mode(self, self._category)
         if self._category == _DIALOG_CATEGORY:
             rebuild_dialog_tree_for_screen(self)
+        elif self._category == _TIMELINE_CATEGORY:
+            rebuild_timeline_tree_for_screen(self)
         else:
             rebuild_list_for_screen(self)
         self.query_one("#dm-filter", Input).focus()

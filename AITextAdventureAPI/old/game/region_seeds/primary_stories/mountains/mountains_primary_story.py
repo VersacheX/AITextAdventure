@@ -177,7 +177,8 @@ NPCS = [
           "stress_line": "Moves to Type 4 — Becomes melancholic and withdrawn when his progress is halted.",
           "growth_line": "Moves to Type 7 — Learns to find a more flexible and less destructive purpose.",
           "instinctual_variant": "sp/so — A self-contained crusader, focused on his personal mission which he believes will save the world."
-        }
+        },
+        'image': 'bosses:rokhuld1.jpeg'
     }
 ]
 

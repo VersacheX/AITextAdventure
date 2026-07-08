@@ -200,6 +200,8 @@ class NpcDetailPanel(Widget):
             f"[bold]{rich_escape(r.name)}[/bold]",
             f"[dim]{rich_escape(r.id)}[/dim]",
         ]
+        if r.subtitle:
+            info_parts.append(f"[dim]{rich_escape(r.subtitle)}[/dim]")
         if mbti_line:
             info_parts.append("")
             info_parts.append(rich_escape(mbti_line))
@@ -296,6 +298,72 @@ def update_detail_for_multiple_dialogue(screen: "DataMgmtScreen", lines: List[Di
     for ln in lines:
         parts.append(f"[bold]{rich_escape(ln.speaker)}[/bold]\n{rich_escape(ln.text)}")
     static.update("\n\n".join(parts))
+
+
+def _format_timeline_task_detail(task_node: TimelineTaskNode) -> str:
+    """Format the raw task dict into a human-readable detail string."""
+    task     = task_node.task
+    ttype    = str(task.get("type", "?"))
+    to_type  = task.get("to_type")
+    to_id    = task.get("to_id")
+    acquire  = task.get("task_acquire_events", []) or []
+    complete = task.get("task_complete_events", []) or []
+
+    lines = [
+        f"Source: {task_node.source_path}",
+        f"Type: {ttype}",
+    ]
+    if to_type or to_id:
+        lines.append(f"Target: {to_type or '?'} → {to_id or '?'}")
+    if task.get("item_id"):
+        lines.append(f"Item: {task['item_id']}")
+    if task.get("coordinates"):
+        lines.append(f"Coordinates: {task['coordinates']}")
+
+    lines.append("")
+    lines.append(f"Acquire events ({len(acquire)}):")
+    for ev in acquire:
+        if isinstance(ev, dict):
+            lines.append(f"  - {ev.get('event_type', '?')}  {ev.get('params', {})}")
+
+    lines.append("")
+    lines.append(f"Complete events ({len(complete)}):")
+    for ev in complete:
+        if isinstance(ev, dict):
+            lines.append(f"  - {ev.get('event_type', '?')}  {ev.get('params', {})}")
+
+    return "\n".join(lines)
+
+
+def update_detail_for_timeline_task(screen: "DataMgmtScreen", task_node: TimelineTaskNode) -> None:
+    """Update the detail panel with a single TimelineTaskNode."""
+    detail_panel = screen.query_one("#dm-detail-panel")
+    static = _ensure_static(detail_panel)
+    header = (
+        f"[bold]{rich_escape(task_node.label)}[/bold]"
+        f"\n[dim]{rich_escape(task_node.task_id)}[/dim]"
+    )
+    detail = _format_timeline_task_detail(task_node)
+    static.update(f"{header}\n\n{rich_escape(detail)}")
+
+
+def update_detail_for_timeline_subtree(
+    screen: "DataMgmtScreen",
+    task_nodes: List[TimelineTaskNode],
+) -> None:
+    """Update the detail panel with an aggregate view of task nodes from a subtree."""
+    detail_panel = screen.query_one("#dm-detail-panel")
+    static = _ensure_static(detail_panel)
+    if not task_nodes:
+        static.update("[dim]← select a task from the tree[/dim]")
+        return
+    parts = [
+        f"[bold]{rich_escape(t.label)}[/bold]  "
+        f"[dim]{rich_escape(t.task_id)}[/dim]  "
+        f"[dim]({rich_escape(t.source_path)})[/dim]"
+        for t in task_nodes
+    ]
+    static.update("\n".join(parts))
 
 
 # ── helpers ──────────────────────────────────────────────────────────────────

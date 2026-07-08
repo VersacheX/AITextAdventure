@@ -40,7 +40,8 @@ NPCS = [
           "stress_line": "Moves to Type 1 — Becomes rigid and self-critical when he can't get his fix of combat.",
           "growth_line": "Moves to Type 5 — Becomes more introspective and able to find meaning beyond the immediate thrill.",
           "instinctual_variant": "sx/sp — Seeks intense, one-on-one experiences (combat) to feel alive and secure his place."
-        }
+        },
+        'image': 'npcs:brann1'
     },
     {
         "npc_id": "lira",
@@ -61,7 +62,8 @@ NPCS = [
           "stress_line": "Moves to Type 8 — Becomes controlling and angry when her help is futile and the fighters return to the arena.",
           "growth_line": "Moves to Type 4 — Learns to acknowledge her own feelings of hopelessness and find an identity beyond being a caregiver.",
           "instinctual_variant": "so/sp — Focused on the well-being of her community (the fighters), finding her security in being needed by them."
-        }
+        },
+        'image': 'npcs:lira1'
     }
 ]
 

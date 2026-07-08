@@ -8,7 +8,7 @@ from typing import List, Set
 from textual.widgets import Tree
 from textual.widgets.tree import TreeNode
 
-from tui.services.dev.dev_data_service import DialogueLine
+from tui.services.dev.dev_data_service import DialogueLine, TimelineTaskNode
 
 
 def serialize_node_visible(node: TreeNode, depth: int) -> List[str]:
@@ -17,10 +17,18 @@ def serialize_node_visible(node: TreeNode, depth: int) -> List[str]:
     Only descend into children when the UI node is expanded.
     """
     out: List[str] = []
-    # If node carries a DialogueLine (leaf), include full speaker:text
-    if isinstance(getattr(node, "data", None), DialogueLine):
-        ln: DialogueLine = node.data
+    data = getattr(node, "data", None)
+
+    # Dialogue leaf
+    if isinstance(data, DialogueLine):
+        ln: DialogueLine = data
         out.append("  " * depth + f"{ln.speaker}: {ln.text}")
+        return out
+
+    # Timeline task leaf
+    if isinstance(data, TimelineTaskNode):
+        tn: TimelineTaskNode = data
+        out.append("  " * depth + f"{tn.label}  [{tn.task_id}]  ({tn.source_path})")
         return out
 
     # Non-leaf node: append its label
@@ -198,6 +206,18 @@ def serialize_filtered_tree(filtered) -> str:
                     out.append(f"      {stage.label}")
                     for ln in stage.lines:
                         out.append(f"        {ln.speaker}: {ln.text}")
+    return "\n".join(out)
+
+
+def serialize_timeline_tree(filtered) -> str:
+    """Serialize the group/bucket/task timeline tree into plain text (model-driven)."""
+    out: List[str] = []
+    for group in filtered:
+        out.append(group.label)
+        for bucket in group.buckets:
+            out.append(f"  {bucket.label}")
+            for task in bucket.tasks:
+                out.append(f"    {task.label}  [{task.task_id}]")
     return "\n".join(out)
 
 

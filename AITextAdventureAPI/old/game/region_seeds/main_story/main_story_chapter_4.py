@@ -65,7 +65,8 @@ NPCS = [
           "stress_line": "Moves to Type 7 — Becomes scattered and anxious when the patterns become too chaotic to map.",
           "growth_line": "Moves to Type 8 — Uses her knowledge to take decisive action and influence reality, not just chart it.",
           "instinctual_variant": "sp/sx — Hoards knowledge for her own security, engaging intensely with the mystery of the world's collapse."
-        }
+        },
+        'image': 'npcs:velka1'
 	},
 	{
 		'npc_id': 'drin',
@@ -88,7 +89,8 @@ NPCS = [
           "stress_line": "Moves to Type 1 — Becomes rigid and anxious when his tricks fail and reality becomes too real.",
           "growth_line": "Moves to Type 5 — Becomes more focused and begins to understand the real mechanics behind the 'illusions'.",
           "instinctual_variant": "so/sp — A social performer who uses his wit to entertain and secure his place, but is ultimately focused on his own escape."
-        }
+        },
+        'image': 'npcs:drin1'
 	},
 	{
 		'npc_id': 'kirn',
@@ -111,7 +113,8 @@ NPCS = [
           "stress_line": "Moves to Type 3 — Becomes frantic and image-focused, trying to appear competent while panicking internally.",
           "growth_line": "Moves to Type 9 — Becomes more trusting and calm, able to handle uncertainty without needing constant reassurance.",
           "instinctual_variant": "so/sp — Seeks security through her social network and by being a reliable, helpful member of the community."
-        }
+        },
+        'image': 'npcs:kirn1'
 	},
 	{
 		'npc_id': 'marlo_finch',
@@ -134,7 +137,8 @@ NPCS = [
           "stress_line": "Moves to Type 4 — Becomes withdrawn and melancholic when faced with a reality too broken to audit.",
           "growth_line": "Moves to Type 7 — Becomes more flexible and able to appreciate the world beyond his ledgers.",
           "instinctual_variant": "sp/so — His self-preservation is tied to maintaining order in the world around him; a balanced ledger means a safe world."
-        }
+        },
+        'image': 'npcs:marlo_finch1'
 	}
 ]
 

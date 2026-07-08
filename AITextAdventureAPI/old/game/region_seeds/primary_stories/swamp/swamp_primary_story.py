@@ -176,7 +176,8 @@ NPCS = [
           "stress_line": "Moves to Type 2 — Becomes clingy and manipulative, trying to force others to join him in his decay.",
           "growth_line": "Moves to Type 1 — Finds a principled way to exist without needing to be defined by decay.",
           "instinctual_variant": "sp/sx — A withdrawn figure who has created an intense, all-consuming identity to preserve himself."
-        }
+        },
+        'image': 'bosses:miregloom1.jpeg'
     }
 ]
 

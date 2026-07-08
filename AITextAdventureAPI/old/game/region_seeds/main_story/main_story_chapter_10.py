@@ -40,7 +40,8 @@ NPCS = [
           "stress_line": "Moves to Type 1 — Becomes rigid and critical of anyone who threatens to stop the fun.",
           "growth_line": "Moves to Type 5 — Becomes more introspective and able to sit with her feelings without needing constant stimulation.",
           "instinctual_variant": "so/sx — A social catalyst, drawing energy from the group's excitement and seeking intense connections within it."
-        }
+        },
+        'image': 'npcs:serin1'
     },
     {
         "npc_id": "pox",
@@ -61,7 +62,8 @@ NPCS = [
           "stress_line": "Moves to Type 7 — Becomes scattered and anxious when his business is threatened or the system becomes too chaotic.",
           "growth_line": "Moves to Type 8 — Uses his understanding of the system to take confident, decisive action.",
           "instinctual_variant": "sp/so — Hoards his resources and knowledge for his own security, using his business to navigate the social landscape."
-        }
+        },
+        'image': 'npcs:pox1'
     },
     {
         "npc_id": "nara",
@@ -82,7 +84,8 @@ NPCS = [
           "stress_line": "Moves to Type 1 — Becomes rigid and self-critical when her body starts to fail her.",
           "growth_line": "Moves to Type 5 — Becomes more introspective and able to find joy in quieter, more sustainable ways.",
           "instinctual_variant": "sx/so — Seeks intense experiences and connections within the festival, losing herself in the collective energy."
-        }
+        },
+        'image': 'npcs:nara1'
     },
     {
         "npc_id": "vek",

@@ -309,7 +309,8 @@ NPCS = [
           "stress_line": "Moves to Type 7 — Becomes scattered and reckless when her plans are disrupted.",
           "growth_line": "Moves to Type 8 — Uses her knowledge to take decisive, powerful action in the world.",
           "instinctual_variant": "sp/so — Hoards secrets for her own security, using them to manipulate the social landscape from a distance."
-        }
+        },
+        'image': 'bosses:serene1.jpeg'
     }
 ]
 

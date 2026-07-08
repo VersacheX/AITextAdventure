@@ -183,7 +183,8 @@ NPCS = [
           "stress_line": "Moves to Type 7 — Its actions become chaotic and unpredictable when its sanctuary is breached.",
           "growth_line": "Moves to Type 8 — Manifests its power directly and confidently to reshape the world.",
           "instinctual_variant": "sp/sx — A reclusive being focused on its own understanding and survival, interacting with the world only through intense, focused manipulations."
-        }
+        },
+        'image': 'bosses:uulthar1.jpeg'
     }
 ]
 

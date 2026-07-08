@@ -41,7 +41,8 @@ NPCS = [
           "stress_line": "Moves to Type 1 — Becomes rigid and critical when her methods are questioned or her freedom is threatened.",
           "growth_line": "Moves to Type 5 — Becomes more focused and deeply knowledgeable about the mechanics of rifts, not just the thrill of them.",
           "instinctual_variant": "sx/so — Seeks intense, one-on-one experiences with the fabric of reality, and enjoys showing off her unique abilities."
-        }
+        },
+        'image': 'npcs:astra_wynn1'
     },
     {
         'npc_id': 'dorian_pikefall',
@@ -65,7 +66,8 @@ NPCS = [
           "stress_line": "Moves to Type 3 — Becomes frantic and obsessed with appearances, trying to look competent while panicking.",
           "growth_line": "Moves to Type 9 — Becomes more trusting and calm, able to handle uncertainty without constant fear.",
           "instinctual_variant": "sp/so — Obsessed with his own safety and security, which he tries to ensure through social status and alliances."
-        }
+        },
+        'image': 'npcs:dorian_pikefall1'
     },
     {
         'npc_id': 'static_wraith',
@@ -79,7 +81,8 @@ NPCS = [
         },
         "enneagram": {
           "enneagram_type": "N/A",
-        }
+        },
+        'image': 'bosses:static_wraith1'
     }
 ]
 

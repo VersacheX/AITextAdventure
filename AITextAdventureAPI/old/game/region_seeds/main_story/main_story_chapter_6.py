@@ -5,8 +5,8 @@
 # [ LOCATION — BLEAKWATCH OUTPOST / RIFTLANDS ]
 # -----------------------------------
 # @ = player
-# S = Seth (resistance contact)
-# C = Resistance Contact
+# S = Seth
+# C = Rhett
 # A = Riftspawn Aberrant
 #
 # High level: The player meets with Seth, who reveals he is part of a
@@ -19,11 +19,11 @@ ATTAINABLE_PLAYER_CHARACTERS = [
 
 NPCS = [
     {
-        'npc_id': 'resistance_contact',
-        'name': 'Resistance Contact',
+        'npc_id': 'rhett',
+        'name': 'Rhett',
         'description': (
             'A grim and weary operative of the resistance.'
-            ' They are focused and pragmatic, with little time for pleasantries.'
+            ' He is focused and pragmatic, with little time for pleasantries.'
         ),
         "psychology": {
             "mbti": "ISTP",
@@ -40,7 +40,8 @@ NPCS = [
           "stress_line": "Moves to Type 7 — Becomes scattered and anxious when faced with a problem he can't immediately solve.",
           "growth_line": "Moves to Type 8 — Uses his expertise to take confident, decisive action in the world.",
           "instinctual_variant": "sp/sx — His self-preservation is ensured by his mastery of his craft; he engages intensely with any mechanical puzzle."
-        }
+        },
+        'image': 'npcs:rhett1'
     },
     {
         'npc_id': 'riftspawn_aberrant',
@@ -64,7 +65,8 @@ NPCS = [
           "stress_line": "Moves to Type 1 — Becomes rigid and critical when things don't go his way or he feels trapped.",
           "growth_line": "Moves to Type 5 — Becomes more thoughtful and strategic, learning to assess risks instead of just chasing thrills.",
           "instinctual_variant": "sx/sp — Seeks intense, high-stakes experiences and one-on-one challenges to feel alive."
-        }
+        },
+        'image': 'bosses:riftspawn_aberrant1'
     }
 ]
 
@@ -147,7 +149,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'resistance_contact',
+        'npc_id': 'rhett',
         'dialog_id': 'contact_ch6_intro',
         'dialog': [
             "You're the outsiders Seth told me about. Good. We need hands. Something is stirring in the wilds. Something that's twisting the land."
@@ -175,7 +177,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'resistance_contact',
+        'npc_id': 'rhett',
         'dialog_id': 'contact_ch6_response',
         'dialog': [
             "…You people are strange."
@@ -497,18 +499,18 @@ TASKS = [
         'task_id': 'main_story_ch6_meet_seth_local_contact',
         'type': 'meet',
         'to_type': 'npc',
-        'to_id': 'resistance_contact',
+        'to_id': 'rhett',
         'task_acquire_events': [
-            { 'event_type': 'create_npc', 'params': { 'npc_id': 'resistance_contact', 'location': 'region_bar' }}
+            { 'event_type': 'create_npc', 'params': { 'npc_id': 'rhett', 'location': 'region_bar' }}
         ],
         'task_complete_events': [
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'resistance_contact', 'dialog_id': 'contact_ch6_intro' }},
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rhett', 'dialog_id': 'contact_ch6_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch6_after_contact' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch6_after_contact' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch6_after_contact' }},
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'resistance_contact', 'dialog_id': 'contact_ch6_response' }},
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rhett', 'dialog_id': 'contact_ch6_response' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch6_after_contact' }},
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'resistance_contact', 'standing_text': ["Clear the breach site. Something crawled out of it, and we need it stopped."]}},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rhett', 'standing_text': ["Clear the breach site. Something crawled out of it, and we need it stopped."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch6_meet_riftspawn_aberrant' }}
         ]
     },

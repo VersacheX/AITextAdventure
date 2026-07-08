@@ -69,10 +69,8 @@ def get_location_actions(pg: Any, active_area: Any) -> List[LocationAction]:
                 sl.get("loot") is not None
                 or int(sl.get("money", 0) or 0) > 0
             )
-            if mode == "searchable" and has_loot:
-                label = f"Loot: {name}"
-            elif mode == "searchable":
-                label = f"Search: {name} (empty)"
+            if mode == "searchable":
+                label = f"Search: {name}"
             else:
                 label = prompt
             actions.append(LocationAction(

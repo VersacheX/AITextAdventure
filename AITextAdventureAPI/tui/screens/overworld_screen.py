@@ -79,7 +79,6 @@ class OverworldScreen(BaseScreen):
         Binding("right", "move_east", "East", show=False),
         Binding("i", "open_inventory", "Inventory", show=True),
         Binding("t", "open_tasks", "Tasks", show=True),
-        Binding("e", "interact", "Interact", show=True),
         Binding("escape", "go_back", "Menu", show=True),
     ]
 
@@ -179,6 +178,7 @@ class OverworldScreen(BaseScreen):
     def on_screen_resume(self) -> None:
         """Called when returning from inventory/tasks/dungeon screens."""
         self._check_dialogs_and_refresh()
+        self._update_overlay()
 
     def on_resize(self, event: events.Resize) -> None:
         self._refresh_all()
@@ -310,40 +310,33 @@ class OverworldScreen(BaseScreen):
     # ── movement handling ─────────────────────────────────────────────────
 
     def _handle_move(self, key: str) -> None:
-        """Process a movement key. Wraps the core movement service call with
-        encounter checking and screen updates."""
         pg = self._player_game()
         if pg is None:
             return
 
-        # Don't allow movement if a dialog is visible
         if self._dialog_visible():
             return
 
         moved, reason = try_move(key, pg)
         if not moved:
-            # Optionally show reason in status bar or as a toast
             if reason:
                 self.notify(reason, severity="warning", timeout=2)
             return
 
-        # Movement succeeded → refresh view immediately
         self._refresh_all()
+        self._update_overlay()
 
-        # Check if the player just stepped onto a dungeon entrance
         dungeon = pg.get_dungeon_at_position()
         if dungeon is not None:
             self._enter_dungeon(pg, dungeon)
             return
 
-        # Check for encounters after movement
         active_area = get_active_area(pg)
         encounter_messages = check_and_handle_encounters(pg, active_area)
 
         if encounter_messages:
             self._trigger_combat(pg, active_area)
 
-        # Ensure tiles around player exist (background worker)
         self._ensure_tiles_worker(pg)
 
     # ── dungeon entry ─────────────────────────────────────────────────────
@@ -409,30 +402,45 @@ class OverworldScreen(BaseScreen):
 
     def _remove_overlay(self) -> None:
         try:
-            ov = self.query_one(LocationOverlay)
-            ov.remove()
+            self.query_one(LocationOverlay).remove()
         except Exception:
             pass
 
-    def _update_overlay(self, pg: Any, active_area: Any) -> None:
-        """Mount the location action overlay if actions are available."""
-        self._remove_overlay()
+    def _update_overlay(self) -> None:
+        """Rebuild the location overlay for the player's current tile.
 
-        actions = get_location_actions(pg, active_area)
-        if not actions:
-            self.notify("No actions available here.", timeout=2)
+        Called automatically after every move and on screen resume.
+        Silently removes the overlay when there is nothing to interact with.
+        Does nothing while another overlay (shop, fast travel, etc.) is open.
+        """
+        # Suppress location actions while a shop / travel / other ow-overlay is up
+        if self.query(".ow-overlay"):
             return
+
+        pg = self._player_game()
+        if pg is None:
+            self._remove_overlay()
+            return
+
+        active_area = get_active_area(pg)
+        actions     = get_location_actions(pg, active_area)
+
+        if not actions:
+            self._remove_overlay()
+            return
+
+        self._remove_overlay()
 
         def _on_action_complete(took_action: bool) -> None:
             self._remove_overlay()
             if took_action:
-                # Check for dialogs after action
                 self._check_dialogs_and_refresh()
             else:
                 self._refresh_all()
+            # Rebuild overlay for the (possibly new) tile position
+            self._update_overlay()
 
-        overlay = LocationOverlay(pg, active_area, actions, _on_action_complete)
-        self.mount(overlay)
+        self.mount(LocationOverlay(pg, active_area, actions, _on_action_complete))
 
     # ── rendering ─────────────────────────────────────────────────────────
 
@@ -489,7 +497,8 @@ class OverworldScreen(BaseScreen):
         if pg is None:
             return
         self._ensure_tiles_worker(pg)
-        self._refresh_all()        
+        self._refresh_all()
+        self._update_overlay()
 
     def _player_game(self) -> Any:
         from tui.services.game_state import get_active_game  # noqa: PLC0415

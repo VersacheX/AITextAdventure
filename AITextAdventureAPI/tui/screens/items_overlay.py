@@ -9,7 +9,7 @@ Mirrors the behaviour of `old/game_screens/select_items_screen.py`:
   - Enter or clicking a row opens ItemActionScreen modal (use / discard / cancel).
     Only utility items may be used; non-utility shows a modal without the Use button.
   - Delete directly discards one unit without a modal.
-  - Escape closes the overlay.
+  - Escape or the ✕ button closes the overlay.
 
 The CSS class "inv-overlay" is added in on_mount so InventoryScreen can
 query and remove any open overlay generically.
@@ -19,12 +19,12 @@ from __future__ import annotations
 from typing import Any, Callable
 
 from rich.markup import escape as rich_escape
-from textual import on
+from textual import events, on
 from textual.app import ComposeResult
 from textual.binding import Binding
-from textual.containers import Vertical
+from textual.containers import Horizontal, Vertical
 from textual.widget import Widget
-from textual.widgets import Label, ListItem, ListView, Static
+from textual.widgets import Button, Label, ListItem, ListView, Static
 
 from tui.screens.item_action_screen import ItemActionScreen
 
@@ -83,7 +83,7 @@ class ItemsOverlay(Widget):
     Left / Right change the active party member while the overlay stays open.
     Enter (or click) opens ItemActionScreen — use (utility only) / discard / cancel.
     Delete discards one unit directly.
-    Escape closes.
+    Escape or ✕ closes.
     """
 
     can_focus = True
@@ -114,12 +114,25 @@ class ItemsOverlay(Widget):
         height: 100%;
     }
 
-    #ov-header {
+    #ov-title-bar {
         height: 1;
+        background: $boost;
+    }
+
+    #ov-header {
+        width: 1fr;
         text-align: center;
         text-style: bold;
-        background: $boost;
         padding: 0 1;
+    }
+
+    #ov-close-x {
+        width: 3;
+        min-width: 3;
+        height: 1;
+        border: none;
+        color: $error;
+        background: $boost;
     }
 
     #ov-filter-bar {
@@ -151,7 +164,9 @@ class ItemsOverlay(Widget):
 
     def compose(self) -> ComposeResult:
         with Vertical():
-            yield Static("── Items ──", id="ov-header")
+            with Horizontal(id="ov-title-bar"):
+                yield Static("── Items ──", id="ov-header")
+                yield Button("✕", id="ov-close-x", variant="default")
             yield Static(self._filter_bar_text(), id="ov-filter-bar")
             yield ListView(id="ov-list")
             yield Static(
@@ -163,6 +178,19 @@ class ItemsOverlay(Widget):
         self.add_class("inv-overlay")
         self._rebuild_list()
         self.query_one("#ov-list", ListView).focus()
+
+    def on_key(self, event: events.Key) -> None:
+        """Explicitly intercept Escape so it reliably closes even when a child
+        widget has focus and Textual's binding resolution doesn't reach us."""
+        if event.key == "escape":
+            event.stop()
+            self.action_request_close()
+
+    # ── close button ─────────────────────────────────────────────────────
+
+    @on(Button.Pressed, "#ov-close-x")
+    def _on_close_x(self) -> None:
+        self.action_request_close()
 
     # ── filter helpers ────────────────────────────────────────────────────
 
@@ -319,18 +347,10 @@ class ItemsOverlay(Widget):
             if total == 0:
                 return
             new_sel = max(0, min(screen._selected + delta, total - 1))
-            if new_sel == screen._selected:
-                return
             screen._selected = new_sel
-            if screen._selected < screen._offset:
-                screen._offset = screen._selected
-            if screen._selected >= screen._offset + 5:   # _MAX_DISPLAY = 5
-                screen._offset = screen._selected - 4
             screen._refresh_cards()
         except Exception:
-            return
-
-    # ── helpers ───────────────────────────────────────────────────────────
+            pass
 
     def _resolve_player(self) -> Any | None:
         try:
@@ -339,7 +359,7 @@ class ItemsOverlay(Widget):
             if not isinstance(screen, InventoryScreen):
                 return None
             players = list(getattr(self._pg, "characters", []))
-            idx = screen._selected
+            idx     = screen._selected
             return players[idx] if 0 <= idx < len(players) else None
         except Exception:
             return None

@@ -1,4 +1,4 @@
-"""
+﻿"""
 Event handlers for tab activation, input changes, list/tree highlighting, and button presses.
 """
 from __future__ import annotations
@@ -13,6 +13,8 @@ from tui.screens.dev.data_mgmt.detail_panel import (
     update_detail_for_multiple_dialogue,
     update_detail_for_record,
     update_detail_for_single_dialogue,
+    update_detail_for_timeline_subtree,
+    update_detail_for_timeline_task,
 )
 from tui.screens.dev.data_mgmt.dialog_tree import (
     collect_dialogue_lines_from_node,
@@ -20,27 +22,33 @@ from tui.screens.dev.data_mgmt.dialog_tree import (
     expand_all_nodes,
     rebuild_dialog_tree,
 )
+from tui.screens.dev.data_mgmt.timeline_tree import (
+    collect_timeline_tasks_from_node,
+    rebuild_timeline_tree,
+)
 from tui.screens.dev.data_mgmt.utils import (
     copy_to_clipboard,
     get_node_children,
-    is_node_expanded,
-    node_label_text,
     serialize_filtered_tree,
     serialize_node_visible,
+    serialize_timeline_tree,
 )
 from tui.services.dev.dev_data_service import (
     CATEGORIES,
     DialogueLine,
+    TimelineTaskNode,
     filter_equipment_records,
     get_dialogue_tree,
+    get_timeline_tree,
     search_records,
 )
 
 if TYPE_CHECKING:
     from tui.screens.dev.data_mgmt.data_mgmt_screen import DataMgmtScreen
 
-_DIALOG_CATEGORY = "character_dialog"
+_DIALOG_CATEGORY    = "character_dialog"
 _EQUIPMENT_CATEGORY = "equipment"
+_TIMELINE_CATEGORY  = "timeline"
 
 
 def handle_tab_activated(screen: "DataMgmtScreen", event: Tabs.TabActivated) -> None:
@@ -50,46 +58,46 @@ def handle_tab_activated(screen: "DataMgmtScreen", event: Tabs.TabActivated) -> 
         category = tab_id.removeprefix("tab-")
         if category in CATEGORIES:
             screen._category = category
-            is_dialog = category == _DIALOG_CATEGORY
-            set_dialog_mode(screen, is_dialog)
             set_filter_mode(screen, category)
             if category == _DIALOG_CATEGORY:
                 rebuild_dialog_tree_for_screen(screen)
+            elif category == _TIMELINE_CATEGORY:
+                rebuild_timeline_tree_for_screen(screen)
             else:
                 rebuild_list_for_screen(screen)
 
 
 def set_dialog_mode(screen: "DataMgmtScreen", is_dialog: bool) -> None:
-    """Swap the flat list + single search box for the dialogue tree + filters."""
-    screen.query_one("#dm-filter", Input).display = not is_dialog
-    screen.query_one("#dm-dialog-filter-row").display = is_dialog
-    screen.query_one("#dm-list", ListView).display = not is_dialog
-    screen.query_one("#dm-dialog-tree", Tree).display = is_dialog
-    screen.query_one("#dm-expand", Button).display = is_dialog
-    screen.query_one("#dm-collapse", Button).display = is_dialog
-    screen.query_one("#dm-copy", Button).display = is_dialog
+    """Kept for compatibility — prefer set_filter_mode() for new call sites."""
+    category = _DIALOG_CATEGORY if is_dialog else screen._category
+    set_filter_mode(screen, category)
 
 
 def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
-    """Swap filter UI based on category: default search / dialogue filters / equipment filters."""
-    is_dialog = category == _DIALOG_CATEGORY
+    """Configure filter UI and panel visibility for the active category."""
+    is_dialog    = category == _DIALOG_CATEGORY
     is_equipment = category == _EQUIPMENT_CATEGORY
+    is_timeline  = category == _TIMELINE_CATEGORY
 
-    screen.query_one("#dm-filter", Input).display = not (is_dialog or is_equipment)
-    screen.query_one("#dm-dialog-filter-row").display = is_dialog
+    screen.query_one("#dm-filter", Input).display         = not (is_dialog or is_equipment)
+    screen.query_one("#dm-dialog-filter-row").display     = is_dialog
     screen.query_one("#dm-equipment-filter-row", Vertical).display = is_equipment
-    screen.query_one("#dm-list", ListView).display = not is_dialog
-    screen.query_one("#dm-dialog-tree", Tree).display = is_dialog
-    screen.query_one("#dm-expand", Button).display = is_dialog
-    screen.query_one("#dm-collapse", Button).display = is_dialog
-    screen.query_one("#dm-copy", Button).display = is_dialog
+    screen.query_one("#dm-list", ListView).display        = not (is_dialog or is_timeline)
+    screen.query_one("#dm-dialog-tree", Tree).display     = is_dialog
+    screen.query_one("#dm-timeline-tree", Tree).display   = is_timeline
+    screen.query_one("#dm-expand", Button).display        = is_dialog or is_timeline
+    screen.query_one("#dm-collapse", Button).display      = is_dialog or is_timeline
+    screen.query_one("#dm-copy", Button).display          = is_dialog or is_timeline
 
 
 def handle_input_changed(screen: "DataMgmtScreen", event: Input.Changed) -> None:
     """Handle filter input changes."""
     input_id = event.input.id
     if input_id == "dm-filter":
-        rebuild_list_for_screen(screen)
+        if screen._category == _TIMELINE_CATEGORY:
+            rebuild_timeline_tree_for_screen(screen)
+        else:
+            rebuild_list_for_screen(screen)
     elif input_id in ("dm-filter-act", "dm-filter-chapter", "dm-filter-task", "dm-filter-character"):
         rebuild_dialog_tree_for_screen(screen)
 
@@ -139,25 +147,37 @@ def handle_list_view_highlighted(screen: "DataMgmtScreen", event: ListView.Highl
 
 
 def handle_tree_node_highlighted(screen: "DataMgmtScreen", event: Tree.NodeHighlighted) -> None:
-    """Handle tree node selection (dialogue category)."""
-    if screen._category != _DIALOG_CATEGORY:
-        return
-    node = event.node
-    data = node.data
-    if isinstance(data, DialogueLine):
-        update_detail_for_single_dialogue(screen, data)
-    else:
-        lines = collect_dialogue_lines_from_node(node)
-        update_detail_for_multiple_dialogue(screen, lines)
+    """Handle tree node selection for dialogue and timeline categories independently."""
+    category = screen._category
+    node     = event.node
+    data     = node.data
+
+    if category == _DIALOG_CATEGORY:
+        if isinstance(data, DialogueLine):
+            update_detail_for_single_dialogue(screen, data)
+        else:
+            lines = collect_dialogue_lines_from_node(node)
+            update_detail_for_multiple_dialogue(screen, lines)
+
+    elif category == _TIMELINE_CATEGORY:
+        if isinstance(data, TimelineTaskNode):
+            update_detail_for_timeline_task(screen, data)
+        else:
+            tasks = collect_timeline_tasks_from_node(node)
+            update_detail_for_timeline_subtree(screen, tasks)
 
 
 def handle_button_pressed(screen: "DataMgmtScreen", event: Button.Pressed) -> None:
     """Handle button clicks (expand/collapse/copy)."""
-    bid = event.button.id or ""
+    bid      = event.button.id or ""
+    category = screen._category
+
     if bid == "dm-expand":
-        expand_all_nodes(screen.query_one("#dm-dialog-tree", Tree))
+        tree_id = "#dm-timeline-tree" if category == _TIMELINE_CATEGORY else "#dm-dialog-tree"
+        expand_all_nodes(screen.query_one(tree_id, Tree))
     elif bid == "dm-collapse":
-        collapse_all_nodes(screen.query_one("#dm-dialog-tree", Tree))
+        tree_id = "#dm-timeline-tree" if category == _TIMELINE_CATEGORY else "#dm-dialog-tree"
+        collapse_all_nodes(screen.query_one(tree_id, Tree))
     elif bid == "dm-copy":
         handle_copy_action(screen)
 
@@ -205,10 +225,32 @@ def rebuild_dialog_tree_for_screen(screen: "DataMgmtScreen") -> None:
     update_detail_for_single_dialogue(screen, None)
 
 
+def rebuild_timeline_tree_for_screen(screen: "DataMgmtScreen") -> None:
+    """Rebuild the timeline tree with filtered data, preserving expansion state."""
+    if not screen._loaded:
+        return
+
+    query = screen.query_one("#dm-filter", Input).value.strip()
+    tree  = screen.query_one("#dm-timeline-tree", Tree)
+
+    total_tasks, filtered = rebuild_timeline_tree(
+        tree,
+        query=query,
+        user_expanded=screen._timeline_user_expanded,
+        user_collapsed=screen._timeline_user_collapsed,
+    )
+    screen._last_timeline_filtered = filtered
+    screen.query_one("#dm-status", Static).update(f"{total_tasks} task(s)")
+    update_detail_for_timeline_subtree(screen, [])
+
+
 def handle_copy_action(screen: "DataMgmtScreen") -> None:
-    """Copy visible tree content to clipboard."""
+    """Copy visible tree content to clipboard (dialogue or timeline)."""
+    is_timeline = screen._category == _TIMELINE_CATEGORY
+    tree_id     = "#dm-timeline-tree" if is_timeline else "#dm-dialog-tree"
+
     try:
-        tree = screen.query_one("#dm-dialog-tree", Tree)
+        tree = screen.query_one(tree_id, Tree)
     except Exception:
         tree = None
 
@@ -217,23 +259,26 @@ def handle_copy_action(screen: "DataMgmtScreen") -> None:
     if tree is not None:
         highlighted = getattr(tree, "highlighted_node", None) or getattr(tree, "focused_node", None)
 
-    if highlighted and highlighted is not tree.root:
+    if highlighted and highlighted is not getattr(tree, "root", None):
         lines = serialize_node_visible(highlighted, depth=0)
-        text = "\n".join(lines)
+        text  = "\n".join(lines)
     else:
         if tree is not None:
-            lines = []
-            root = tree.root
-            children = get_node_children(root)
+            lines    = []
+            children = get_node_children(tree.root)
             for child in children:
                 lines.extend(serialize_node_visible(child, depth=0))
             text = "\n".join(lines)
         else:
-            if screen._last_filtered:
-                text = serialize_filtered_tree(screen._last_filtered)
+            if is_timeline:
+                filtered = screen._last_timeline_filtered or get_timeline_tree()
+                text = serialize_timeline_tree(filtered)
             else:
-                full = get_dialogue_tree()
-                text = serialize_filtered_tree(full)
+                if screen._last_filtered:
+                    text = serialize_filtered_tree(screen._last_filtered)
+                else:
+                    full = get_dialogue_tree()
+                    text = serialize_filtered_tree(full)
 
     copied = copy_to_clipboard(text)
     status = "Copied to clipboard" if copied else "Saved to temp file (fallback)"

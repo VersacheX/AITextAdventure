@@ -189,7 +189,8 @@ NPCS = [
           "stress_line": "Moves to Type 4 — Becomes melancholic and withdrawn, lamenting the 'imperfect' world that refuses to freeze.",
           "growth_line": "Moves to Type 7 — Learns to accept and even find joy in the world's natural flow and change.",
           "instinctual_variant": "sp/so — A self-contained reformer, obsessed with creating a 'perfect', unchanging environment for herself and, by extension, the world."
-        }
+        },
+        'image': 'bosses:aeriola1.jpeg'
     }
 ]
 

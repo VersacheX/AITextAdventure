@@ -53,6 +53,7 @@ CATEGORY_LABELS: Dict[str, str] = {
 
 _CACHE: Dict[str, List["DevRecord"]] = {}
 _DIALOG_TREE: List["DialogueActNode"] = []
+_TIMELINE_TREE: List[TimelineGroupNode] = []
 
 
 @dataclass
@@ -65,6 +66,7 @@ class DevRecord:
     subtitle: str = ""
     detail: str = ""
     image: str = ""   # filename only (e.g. "ripple1.png"); resolved at render time
+    source_group: str = ""  # NPC_GROUPS key (e.g. "main_story"); empty for non-NPC records
 
     def matches(self, query: str) -> bool:
         if not query:
@@ -120,6 +122,36 @@ class DialogueActNode:
     chapters: List[DialogueChapterNode]
 
 
+# ── timeline tree model ───────────────────────────────────────────────────
+
+@dataclass
+class TimelineTaskNode:
+    """One task leaf in the timeline tree, carrying its raw seed dict."""
+
+    task_id: str
+    label: str
+    source_path: str   # e.g. "regional:desert", "extended:desert_large", "main:ch1"
+    task: Dict[str, Any]
+
+
+@dataclass
+class TimelineBucketNode:
+    """One source bucket under a timeline group (e.g. 'desert', 'ch1')."""
+
+    bucket_id: str
+    label: str
+    tasks: List[TimelineTaskNode]
+
+
+@dataclass
+class TimelineGroupNode:
+    """Top-level timeline group: 'regional', 'extended', or 'main'."""
+
+    group_id: str
+    label: str
+    buckets: List[TimelineBucketNode]
+
+
 # Chapter -> Act grouping, mirroring
 # `old/STORY DOCUMENTS FOR AI/ACT TIMELINE.mmd`. Chapters without a code
 # seed yet (e.g. 21, still design-doc only) simply won't appear in the tree.
@@ -166,6 +198,12 @@ _REGION_STORY_META: Dict[str, Tuple[str, str]] = {
     "shallows":  ("Shallows",  "Ripple vs Uul'thar the Tide-Wakened"),
     "snow":      ("Snow",      "Kor-in vs Lady Aeriola Frostborn"),
     "swamp":     ("Swamp",     "Grimnaw vs Lich-King Miregloom"),
+}
+
+_TIMELINE_GROUP_LABELS: Dict[str, str] = {
+    "regional": "Regional",
+    "extended": "Extended",
+    "main":     "Main",
 }
 
 
@@ -281,23 +319,74 @@ def filter_dialogue_tree(
     return result
 
 
+def get_timeline_tree() -> List[TimelineGroupNode]:
+    """Return the cached group → bucket → task tree, building on first use."""
+    if not _CACHE:
+        _load_all()
+    return _TIMELINE_TREE
+
+
+def filter_timeline_tree(
+    tree: List[TimelineGroupNode],
+    query: str = "",
+) -> List[TimelineGroupNode]:
+    """Return a pruned copy of ``tree`` matching ``query`` (case-insensitive substring).
+
+    When a group or bucket label itself matches, all its children are kept.
+    Otherwise individual task_id / label / source_path are matched.
+    """
+    if not query:
+        return tree
+    q = query.strip().lower()
+    result: List[TimelineGroupNode] = []
+    for group in tree:
+        group_matches = q in group.label.lower() or q in group.group_id.lower()
+        filtered_buckets: List[TimelineBucketNode] = []
+        for bucket in group.buckets:
+            bucket_matches = q in bucket.label.lower() or q in bucket.bucket_id.lower()
+            if group_matches or bucket_matches:
+                filtered_buckets.append(bucket)
+            else:
+                tasks = [
+                    t for t in bucket.tasks
+                    if q in t.task_id.lower()
+                    or q in t.label.lower()
+                    or q in t.source_path.lower()
+                ]
+                if tasks:
+                    filtered_buckets.append(TimelineBucketNode(
+                        bucket_id=bucket.bucket_id,
+                        label=bucket.label,
+                        tasks=tasks,
+                    ))
+        if filtered_buckets:
+            result.append(TimelineGroupNode(
+                group_id=group.group_id,
+                label=group.label,
+                buckets=filtered_buckets,
+            ))
+    return result
+
+
 def _load_all() -> None:
     """Build and cache records for every category from `game.constants`."""
     import game.constants as const
 
-    _CACHE["character"]    = _build_characters(const)
-    _CACHE["timeline"]     = _build_timeline(const)
-    _CACHE["item"]         = _build_items(const)
-    _CACHE["special_item"] = _build_special_items(const)
-    _CACHE["equipment"]    = _build_equipment(const)
-    _CACHE["dungeon"]      = _build_dungeons(const)
-    _CACHE["city"]         = _build_cities(const)
-    _CACHE["npc"] = _build_npcs(const)
+    _CACHE["character"]        = _build_characters(const)
+    _CACHE["timeline"]         = []  # tree category; use get_timeline_tree() instead
+    _CACHE["item"]             = _build_items(const)
+    _CACHE["special_item"]     = _build_special_items(const)
+    _CACHE["equipment"]        = _build_equipment(const)
+    _CACHE["dungeon"]          = _build_dungeons(const)
+    _CACHE["city"]             = _build_cities(const)
+    _CACHE["npc"]              = _build_npcs(const)
     _CACHE["character_dialog"] = []  # tree category; see get_dialogue_tree() instead
 
     _DIALOG_TREE.clear()
     _DIALOG_TREE.extend(_build_dialogue_tree(const))
 
+    _TIMELINE_TREE.clear()
+    _TIMELINE_TREE.extend(_build_timeline_tree(const))
 
 # ── npcs ───────────────────────────────────────────────────────────
 
@@ -423,6 +512,92 @@ def _humanize_task_id(task_id: str) -> str:
     return task_id.replace("_", " ").strip().title()
 
 
+# ── timeline tree builder ─────────────────────────────────────────────────
+
+def _humanize_bucket_label(bucket_id: str) -> str:
+    """Human-readable label for a TASK_GROUPS bucket key.
+
+    ``ch1`` → ``Chapter 1 - Awakening``, ``desert_large`` → ``Desert Large``.
+    """
+    ch_match = re.match(r"^ch(\d+)$", bucket_id)
+    if ch_match:
+        ch_num = int(ch_match.group(1))
+        title  = _CHAPTER_TITLES.get(ch_num, "")
+        return f"Chapter {ch_num}{' - ' + title if title else ''}"
+    return bucket_id.replace("_", " ").title()
+
+
+def _build_timeline_tree(const: Any) -> List[TimelineGroupNode]:
+    """Build the group → bucket → task tree from ``const.TASK_GROUPS``.
+
+    Deduplicates tasks by task_id; first-seen group/bucket wins
+    (iteration order: regional → extended → main).
+    Falls back to flat ``const.TASKS`` wrapped in a single synthetic group
+    if TASK_GROUPS is absent, so the screen never breaks.
+    """
+    task_groups = getattr(const, "TASK_GROUPS", None)
+    if not task_groups:
+        tasks = [
+            TimelineTaskNode(
+                task_id=str(t.get("task_id", "?")),
+                label=_humanize_task_id(str(t.get("task_id", "?"))),
+                source_path="all",
+                task=t,
+            )
+            for t in getattr(const, "TASKS", []) or []
+            if isinstance(t, dict)
+        ]
+        if not tasks:
+            return []
+        return [TimelineGroupNode(
+            group_id="all",
+            label="All",
+            buckets=[TimelineBucketNode(bucket_id="all", label="All", tasks=tasks)],
+        )]
+
+    seen_ids: Dict[str, str] = {}   # task_id → first-seen source_path
+    result: List[TimelineGroupNode] = []
+
+    for group_key, family in task_groups.items():
+        if not isinstance(family, dict):
+            continue
+        group_label   = _TIMELINE_GROUP_LABELS.get(group_key, group_key.replace("_", " ").title())
+        bucket_nodes: List[TimelineBucketNode] = []
+
+        for bucket_key, task_list in family.items():
+            bucket_label = _humanize_bucket_label(bucket_key)
+            source_path  = f"{group_key}:{bucket_key}"
+            task_nodes: List[TimelineTaskNode] = []
+
+            for task in task_list or []:
+                if not isinstance(task, dict):
+                    continue
+                task_id = str(task.get("task_id", "?"))
+                if task_id in seen_ids:
+                    continue  # dedupe: first-seen group/bucket wins
+                seen_ids[task_id] = source_path
+                task_nodes.append(TimelineTaskNode(
+                    task_id=task_id,
+                    label=_humanize_task_id(task_id),
+                    source_path=source_path,
+                    task=task,
+                ))
+
+            if task_nodes:
+                bucket_nodes.append(TimelineBucketNode(
+                    bucket_id=bucket_key,
+                    label=bucket_label,
+                    tasks=task_nodes,
+                ))
+
+        if bucket_nodes:
+            result.append(TimelineGroupNode(
+                group_id=group_key,
+                label=group_label,
+                buckets=bucket_nodes,
+            ))
+
+    return result
 def _build_timeline(const: Any) -> List[DevRecord]:
     records: List[DevRecord] = []
 

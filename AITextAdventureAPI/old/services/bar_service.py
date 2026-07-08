@@ -56,11 +56,10 @@ def buy(player_game, drink: any) -> Dict[str, Any]:
     hf = drink.get("hp_fraction",0)
     af = drink.get("ap_fraction",0)
     for player in player_game.characters:
-        if hf and player.max_hp >0:
+        if hf and player.max_hp > 0:
             amt = max(0, int(player.max_hp * float(hf)))
             healed = player.heal(amt)
-            input ("Healed for "+str(healed))
-        if af and player.max_ap >0:
+        if af and player.max_ap > 0:
             amt = max(0, int(player.max_ap * float(af)))
             player.current_ap = min(player.max_ap, player.current_ap + amt)
             ap_restored = amt

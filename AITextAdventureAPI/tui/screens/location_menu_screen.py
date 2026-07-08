@@ -96,12 +96,13 @@ class LocationOverlay(Widget):
     def compose(self) -> ComposeResult:
         # Items are yielded here — not in on_mount — so they are part of the
         # initial compose tree and are guaranteed to exist when the widget mounts.
+        title = _get_location_title(self._pg, self._active_area)
         with Vertical():
-            yield Static("── Actions ──", id="ov-title")
+            yield Static(f"── {title} ──", id="ov-title")
             with ListView(id="ov-list"):
                 for action in self._actions:
                     yield _ActionItem(action)
-            yield Button("✕  Close  [E]", id="ov-close", variant="default")
+            yield Button("✕  Close", id="ov-close", variant="default")
 
     # ── close ─────────────────────────────────────────────────────────────
 
@@ -123,7 +124,7 @@ class LocationOverlay(Widget):
         if kind == "npc":
             self._do_npc(action)
         elif kind == "shop":
-            self.app.notify("Shop not yet implemented.", title=action.label)
+            self._do_shop(action)
         elif kind == "sublocation":
             self._do_sublocation(action)
         elif kind == "floor_up":
@@ -131,7 +132,7 @@ class LocationOverlay(Widget):
         elif kind == "floor_down":
             self._do_floor("j")
         elif kind == "travel":
-            self.app.notify("Fast Travel not yet implemented.", title="Hyperway")
+            self._do_fast_travel()
         elif kind == "aircraft_enter":
             self._pg.enter_aircraft()
             self._on_action(True)
@@ -146,6 +147,38 @@ class LocationOverlay(Widget):
         except Exception:
             pass
         self._on_action(True)
+
+    def _do_shop(self, action: LocationAction) -> None:
+        from tui.screens.shop_overlay import ShopOverlay  # noqa: PLC0415
+
+        business_def = (action.data or {}).get("business_def", {})
+        screen = self.screen
+
+        def _on_done(acted: bool) -> None:
+            self._on_action(acted)
+
+        self.remove()
+        screen.mount(ShopOverlay(self._pg, business_def, self._active_area, _on_done))
+
+    def _do_fast_travel(self) -> None:
+        from tui.screens.fast_travel_overlay import FastTravelOverlay  # noqa: PLC0415
+
+        try:
+            stations = self._pg.get_all_hyperways() or []
+        except Exception:
+            stations = []
+
+        if not stations:
+            self.app.notify("No hyperway stations found.", title="Fast Travel", severity="warning")
+            return
+
+        screen = self.screen
+
+        def _on_done(acted: bool) -> None:
+            self._on_action(acted)
+
+        self.remove()
+        screen.mount(FastTravelOverlay(self._pg, stations, _on_done))
 
     def _do_sublocation(self, action: LocationAction) -> None:
         from tui.screens.confirm_screen import ConfirmScreen
@@ -213,3 +246,17 @@ class LocationOverlay(Widget):
         else:
             label = "top floor" if cmd == "u" else "bottom floor"
             self.app.notify(f"Already at the {label}.", title="Floor")
+
+def _get_location_title(pg: Any, active_area: Any) -> str:
+    """Return the display name of the player's current tile, or 'Open Area'."""
+    try:
+        tile = (getattr(active_area, "tiles", {}) or {}).get((pg.x, pg.y))
+        if tile is not None:
+            building = getattr(tile, "building", None)
+            if isinstance(building, dict):
+                name = building.get("display_name") or building.get("name", "")
+                if name:
+                    return str(name)
+    except Exception:
+        pass
+    return "Open Area"

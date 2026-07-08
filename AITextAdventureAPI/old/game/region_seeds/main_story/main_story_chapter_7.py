@@ -5,7 +5,7 @@
 # [ LOCATION - BLEAKWATCH OUTPOST ]
 # -----------------------------------
 # @ = player
-# S = Seth (resistance contact)
+# S = Seth 
 # L = Lyren (new character)
 #
 # High level: The player must complete all regional hero quests to

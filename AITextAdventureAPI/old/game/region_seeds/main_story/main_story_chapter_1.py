@@ -243,7 +243,7 @@ NPC_DIALOG = [
 		'dialog_id': 'oren_intro',
 		'dialog': [
 			"Oh!, Hey there.  You look like you're not from here like me.  I'm Oren, just wandering and exploring.",
-			"Not sure if it's reaality wandering me, or if I'm wandering reality.",
+			"Not sure if it's reality wandering me, or if I'm wandering reality.",
 			"I seem to always find a way to the @inn.  Every city has an @inn.",
 			"If you ever intend to find the other side in another one, head to the ₨ to get you there."
 		]
