@@ -1,9 +1,8 @@
-"""
+﻿"""
 DataMgmtScreen: developer data-management hub for browsing/searching every
 seed-data catalog in the game.
 
-This is the main screen coordinating the UI composition and delegating
-behavior to handlers, dialog_tree, timeline_tree, detail_panel, and utils modules.
+Delegates all behavior to handlers, treehandlers, detail_panel, and utils.
 """
 from __future__ import annotations
 
@@ -25,14 +24,15 @@ from tui.screens.dev.data_mgmt.handlers import (
     handle_tree_node_highlighted,
     rebuild_dialog_tree_for_screen,
     rebuild_list_for_screen,
+    rebuild_npc_tree_for_screen,
     rebuild_timeline_tree_for_screen,
-    set_dialog_mode,
     set_filter_mode,
 )
-from tui.services.dev.dev_data_service import CATEGORIES, CATEGORY_LABELS, DialogueLine, preload
+from tui.services.dev.dataservices import CATEGORIES, CATEGORY_LABELS, DialogueLine, preload
 
 _DIALOG_CATEGORY   = "character_dialog"
 _TIMELINE_CATEGORY = "timeline"
+_NPC_CATEGORY      = "npc"
 
 
 class DataMgmtScreen(BaseScreen):
@@ -118,12 +118,10 @@ class DataMgmtScreen(BaseScreen):
     }
 
     RadioButton:hover {
-        
         background: $surface-lighten-1;
     }
 
     RadioButton.-selected {
-        
         background: $accent;
         color: $text;
     }
@@ -170,6 +168,11 @@ class DataMgmtScreen(BaseScreen):
         display: none;
     }
 
+    #dm-npc-tree {
+        height: 100%;
+        display: none;
+    }
+
     #dm-detail-panel {
         width: 80;
         height: 100%;
@@ -186,15 +189,20 @@ class DataMgmtScreen(BaseScreen):
     def __init__(self) -> None:
         super().__init__()
         self._category: str = CATEGORIES[0]
-        self._loaded: bool = False
-        self._last_filtered: Any = None
-        self._last_timeline_filtered: Any = None
-        # Dialogue tree expansion state
-        self._user_expanded: Set[str] = set()
-        self._user_collapsed: Set[str] = set()
-        # Timeline tree expansion state (independent from dialogue)
+        self._loaded: bool  = False
+
+        # Per-tree filtered model caches (for copy-to-clipboard fallback)
+        self._last_filtered: Any           = None
+        self._last_timeline_filtered: Any  = None
+        self._last_npc_filtered: Any       = None
+
+        # Independent expansion state per tree so switching tabs doesn't clobber state
+        self._user_expanded: Set[str]          = set()
+        self._user_collapsed: Set[str]         = set()
         self._timeline_user_expanded: Set[str] = set()
         self._timeline_user_collapsed: Set[str] = set()
+        self._npc_user_expanded: Set[str]      = set()
+        self._npc_user_collapsed: Set[str]     = set()
 
     def compose_content(self) -> ComposeResult:
         yield Tabs(
@@ -236,6 +244,9 @@ class DataMgmtScreen(BaseScreen):
                 timeline_tree: Tree = Tree("Timeline", id="dm-timeline-tree")
                 timeline_tree.show_root = False
                 yield timeline_tree
+                npc_tree: Tree = Tree("NPCs", id="dm-npc-tree")
+                npc_tree.show_root = False
+                yield npc_tree
             with ScrollableContainer(id="dm-detail-panel"):
                 yield Static("", id="dm-detail-text")
 
@@ -244,7 +255,7 @@ class DataMgmtScreen(BaseScreen):
 
     @work(thread=True)
     def _load_catalog(self) -> None:
-        """Runs off the UI thread -- building the catalog imports hundreds of seed modules."""
+        """Runs off the UI thread — imports hundreds of seed modules."""
         try:
             preload()
         except Exception as exc:  # noqa: BLE001
@@ -261,13 +272,14 @@ class DataMgmtScreen(BaseScreen):
             rebuild_dialog_tree_for_screen(self)
         elif self._category == _TIMELINE_CATEGORY:
             rebuild_timeline_tree_for_screen(self)
+        elif self._category == _NPC_CATEGORY:
+            rebuild_npc_tree_for_screen(self)
         else:
             rebuild_list_for_screen(self)
         self.query_one("#dm-filter", Input).focus()
 
     def _on_load_error(self, message: str) -> None:
         from rich.markup import escape as rich_escape
-
         self.query_one("#dm-status", Static).update("Load failed")
         self.query_one("#dm-detail-text", Static).update(
             f"[red]Failed to load seed data:[/red]\n{rich_escape(message)}"

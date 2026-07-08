@@ -32,46 +32,31 @@ from textual.containers import Horizontal, Vertical
 from textual.widget import Widget
 from textual.widgets import Static
 
-from tui.services.dev.dev_data_service import DevRecord, DialogueLine
+from tui.services.dev.dataservices import DevRecord, DialogueLine, NpcRecordNode, TimelineTaskNode
 
 if TYPE_CHECKING:
     from tui.screens.dev.data_mgmt.data_mgmt_screen import DataMgmtScreen
 
-# tui/assets/ resolved once relative to this file — correct from any cwd.
-_ASSETS_DIR = Path(__file__).parent.parent.parent.parent / "assets"
-
-# Portrait fits 50% of the 80-char detail panel, capped at 20 rows.
-# Braille: 1 cell = 2px wide × 4px tall.
+_ASSETS_DIR  = Path(__file__).parent.parent.parent.parent / "assets"
 _IMG_MAX_COLS = 38
 _IMG_MAX_ROWS = 20
 
 
 def _resolve_asset(filename: str) -> Path | None:
-    """Return the resolved Path for an asset filename, or None if not found.
-
-    Supports colon-separated convention: ``folder:stem``
-    e.g. ``voidwalkers:stigma1``  →  ``tui/assets/voidwalkers/stigma1.{ext}``
-
-    A plain filename with no colon is resolved directly under _ASSETS_DIR.
-    """
     if not filename:
         return None
-
     _EXTS = (".jpeg", ".jpg", ".png", ".gif")
-
     if ":" in filename:
         folder, stem = filename.split(":", 1)
         base = _ASSETS_DIR / folder.strip() / stem.strip()
     else:
         base = _ASSETS_DIR / filename
-
     if base.exists():
         return base
     for ext in _EXTS:
         alt = base.with_suffix(ext)
         if alt.exists():
             return alt
-
     return None
 
 
@@ -103,7 +88,6 @@ class _ClickablePortrait(Static):
         height: auto;
         padding: 0;
     }
-
     _ClickablePortrait:hover {
         opacity: 0.85;
     }
@@ -134,26 +118,22 @@ class NpcDetailPanel(Widget):
         height: auto;
         layout: vertical;
     }
-
     #npc-header-row {
         width: 100%;
         height: auto;
         layout: horizontal;
         border-bottom: solid $accent 30%;
     }
-
     #npc-portrait-col {
         width: 1fr;
         height: auto;
     }
-
     #npc-info-col {
         width: 1fr;
         height: auto;
         padding: 1 2;
         border-left: solid $accent 20%;
     }
-
     #npc-detail-body {
         width: 100%;
         height: auto;
@@ -189,11 +169,6 @@ class NpcDetailPanel(Widget):
                 self._resolved = None
 
     def compose(self) -> ComposeResult:
-        # NO rendering here — compositor thread only, layout skeleton only.
-        # _ClickablePortrait is pre-mounted with a placeholder so _apply_portrait
-        # can call portrait.update() in-place (synchronous, safe from call_from_thread).
-        # Never use col.mount() from a call_from_thread callback — mount() is async
-        # and silently does nothing when called synchronously from a thread callback.
         r = self._record
         mbti_line, enneagram_line = _extract_quick_stats(r.detail)
         info_parts = [
@@ -211,8 +186,6 @@ class NpcDetailPanel(Widget):
         with Horizontal(id="npc-header-row"):
             with Vertical(id="npc-portrait-col"):
                 if self._resolved is not None:
-                    # Pre-mount the clickable portrait widget with a loading placeholder.
-                    # The worker will call portrait.update() once the ANSI is ready.
                     yield _ClickablePortrait(Text("[dim]  Loading…[/dim]"), self._resolved)
                 else:
                     yield Static("[dim]  (no image)[/dim]", id="npc-portrait")
@@ -362,6 +335,25 @@ def update_detail_for_timeline_subtree(
         f"[dim]{rich_escape(t.task_id)}[/dim]  "
         f"[dim]({rich_escape(t.source_path)})[/dim]"
         for t in task_nodes
+    ]
+    static.update("\n".join(parts))
+
+
+def update_detail_for_npc_group(
+    screen: "DataMgmtScreen",
+    npc_nodes: List[NpcRecordNode],
+) -> None:
+    """Update the detail panel with an aggregate view of NPCs from a group selection."""
+    detail_panel = screen.query_one("#dm-detail-panel")
+    static = _ensure_static(detail_panel)
+    if not npc_nodes:
+        static.update("[dim]← select an NPC from the tree[/dim]")
+        return
+    parts = [
+        f"[bold]{rich_escape(n.label)}[/bold]  "
+        f"[dim]{rich_escape(n.npc_id)}[/dim]  "
+        f"[dim]({rich_escape(n.source_group)})[/dim]"
+        for n in npc_nodes
     ]
     static.update("\n".join(parts))
 

@@ -1,9 +1,6 @@
-﻿"""
-Timeline tree building, filtering, and traversal logic.
-
-Mirrors dialog_tree.py but operates on the independent
-TimelineGroupNode → TimelineBucketNode → TimelineTaskNode model built by
-dev_data_service._build_timeline_tree().  Has no relation to the dialogue tree.
+"""
+Timeline tree: widget population, filtering, and node traversal.
+Operates on #dm-timeline-tree using the TimelineGroupNode model.
 """
 from __future__ import annotations
 
@@ -18,7 +15,7 @@ from tui.screens.dev.data_mgmt.utils import (
     restore_user_expansion_state,
     save_user_expansion_state,
 )
-from tui.services.dev.dev_data_service import (
+from tui.services.dev.dataservices import (
     TimelineTaskNode,
     filter_timeline_tree,
     get_timeline_tree,
@@ -31,14 +28,12 @@ def rebuild_timeline_tree(
     user_expanded: Set[str],
     user_collapsed: Set[str],
 ) -> tuple[int, list]:
-    """Rebuild the timeline tree widget with filtered data, preserving explicit user expansion state.
+    """Rebuild the timeline tree widget, preserving explicit user expansion state.
 
     Group nodes default to expanded; bucket nodes default to collapsed.
-    An active filter auto-expands all branches temporarily.
 
     Returns:
-        (total_tasks, filtered_model) where filtered_model is the list of TimelineGroupNode
-        used for copy operations.
+        (total_tasks, filtered_model)
     """
     save_user_expansion_state(tree, user_expanded, user_collapsed)
     tree.clear()
@@ -67,9 +62,8 @@ def rebuild_timeline_tree(
 def collect_timeline_tasks_from_node(node: TreeNode) -> List[TimelineTaskNode]:
     """Recursively collect all TimelineTaskNode objects from a subtree."""
     collected: List[TimelineTaskNode] = []
-    data = node.data
-    if isinstance(data, TimelineTaskNode):
-        collected.append(data)
+    if isinstance(node.data, TimelineTaskNode):
+        collected.append(node.data)
     for child in get_node_children(node):
         collected.extend(collect_timeline_tasks_from_node(child))
     return collected

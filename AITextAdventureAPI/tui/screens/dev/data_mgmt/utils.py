@@ -1,5 +1,6 @@
-"""
+﻿"""
 Utility functions for serialization, clipboard operations, and node inspection.
+Shared by all tree handlers.
 """
 from __future__ import annotations
 
@@ -8,45 +9,39 @@ from typing import List, Set
 from textual.widgets import Tree
 from textual.widgets.tree import TreeNode
 
-from tui.services.dev.dev_data_service import DialogueLine, TimelineTaskNode
+from tui.services.dev.dataservices import DialogueLine, NpcRecordNode, TimelineTaskNode
 
 
 def serialize_node_visible(node: TreeNode, depth: int) -> List[str]:
-    """
-    Return list of text lines for `node` and its visible children.
-    Only descend into children when the UI node is expanded.
-    """
+    """Return text lines for ``node`` and its visible children (expanded only)."""
     out: List[str] = []
     data = getattr(node, "data", None)
 
-    # Dialogue leaf
     if isinstance(data, DialogueLine):
-        ln: DialogueLine = data
-        out.append("  " * depth + f"{ln.speaker}: {ln.text}")
+        out.append("  " * depth + f"{data.speaker}: {data.text}")
         return out
 
-    # Timeline task leaf
     if isinstance(data, TimelineTaskNode):
-        tn: TimelineTaskNode = data
-        out.append("  " * depth + f"{tn.label}  [{tn.task_id}]  ({tn.source_path})")
+        out.append("  " * depth + f"{data.label}  [{data.task_id}]  ({data.source_path})")
         return out
 
-    # Non-leaf node: append its label
+    if isinstance(data, NpcRecordNode):
+        out.append("  " * depth + f"{data.label}  [{data.npc_id}]  ({data.source_group})")
+        return out
+
     label = node_label_text(node)
     out.append("  " * depth + label)
 
-    # Descend only if node is expanded
     if not is_node_expanded(node):
         return out
 
-    children = get_node_children(node)
-    for child in children:
+    for child in get_node_children(node):
         out.extend(serialize_node_visible(child, depth + 1))
     return out
 
 
 def is_node_expanded(node: TreeNode) -> bool:
-    """Robustly check whether a TreeNode is expanded/open across Textual versions."""
+    """Robustly check whether a TreeNode is expanded across Textual versions."""
     for attr in ("is_expanded", "expanded", "is_open", "open"):
         val = getattr(node, attr, None)
         if val is not None:
@@ -64,13 +59,12 @@ def is_node_expanded(node: TreeNode) -> bool:
 
 
 def node_label_text(node: TreeNode) -> str:
-    """Get a string label for a UI tree node in a best-effort way."""
+    """Get a string label for a tree node in a best-effort way."""
     for attr in ("label", "_label", "renderable", "text"):
         val = getattr(node, attr, None)
         if val is None:
             continue
         try:
-            # Convert to string and strip any rich markup/ANSI codes for comparison
             return str(val).strip()
         except Exception:
             continue
@@ -88,49 +82,51 @@ def get_node_children(node: TreeNode) -> List[TreeNode]:
     return list(children) if children else []
 
 
+def expand_all_nodes(tree: Tree) -> None:
+    """Recursively expand every node in the tree."""
+    _traverse_and_apply(tree.root, expand=True)
+
+
+def collapse_all_nodes(tree: Tree) -> None:
+    """Recursively collapse every node in the tree."""
+    _traverse_and_apply(tree.root, expand=False)
+
+
+def _traverse_and_apply(node: TreeNode, *, expand: bool) -> None:
+    try:
+        if expand:
+            node.expand()
+        else:
+            node.collapse()
+    except Exception:
+        pass
+    for child in get_node_children(node):
+        _traverse_and_apply(child, expand=expand)
+
+
 def save_user_expansion_state(tree: Tree, user_expanded: Set[str], user_collapsed: Set[str]) -> None:
-    """
-    Save the **current** expansion state by comparing it to known user actions.
-    
-    This updates user_expanded/user_collapsed to reflect any changes the user
-    made during the current tree view (e.g., manually expanding or collapsing nodes).
-    
-    This is called before tree rebuild to preserve user intent across filter changes.
-    
-    Args:
-        tree: The Tree widget to inspect.
-        user_expanded: Set tracking nodes the user explicitly expanded (modified in-place).
-        user_collapsed: Set tracking nodes the user explicitly collapsed (modified in-place).
-    """
+    """Snapshot current expansion state into the tracking sets."""
     root = tree.root
-    
+
     def collect(node: TreeNode) -> None:
         if node is root:
             for child in get_node_children(node):
                 collect(child)
             return
-        
         label = node_label_text(node)
         if not label:
             for child in get_node_children(node):
                 collect(child)
             return
-        
-        expanded = is_node_expanded(node)
-        
-        # Update tracking based on current state
-        if expanded:
-            # Node is expanded: remove from collapsed set (if present), ensure in expanded set
+        if is_node_expanded(node):
             user_collapsed.discard(label)
             user_expanded.add(label)
         else:
-            # Node is collapsed: remove from expanded set (if present), ensure in collapsed set
             user_expanded.discard(label)
             user_collapsed.add(label)
-        
         for child in get_node_children(node):
             collect(child)
-    
+
     collect(root)
 
 
@@ -140,61 +136,35 @@ def restore_user_expansion_state(
     user_collapsed: Set[str],
     filter_active: bool,
 ) -> None:
-    """
-    Restore expansion state based on explicit user actions and active filters.
-    
-    **Option 3 behavior**: 
-    - Nodes in `user_expanded` are always expanded (user explicitly opened them).
-    - Nodes in `user_collapsed` are always collapsed (user explicitly closed them).
-    - If a filter is active, matching nodes and their ancestors auto-expand **temporarily**
-      (this expansion does NOT add them to user_expanded).
-    - When the filter is cleared, only user_expanded nodes remain open.
-    
-    Args:
-        tree: The Tree widget to restore expansion state to.
-        user_expanded: Set of labels the user explicitly expanded.
-        user_collapsed: Set of labels the user explicitly collapsed.
-        filter_active: True if any filter query is active.
-    """
+    """Restore expansion state from tracking sets; auto-expand all if filter is active."""
     root = tree.root
-    
+
     def restore(node: TreeNode, ancestors_match_filter: bool = False) -> None:
-        label = node_label_text(node)
-        
-        # Determine if this node or its children match the filter
+        label            = node_label_text(node)
         node_has_children = bool(get_node_children(node))
-        
-        # User intent takes precedence
         if label in user_expanded:
-            # User explicitly expanded this node
             try:
                 node.expand()
             except Exception:
                 pass
         elif label in user_collapsed:
-            # User explicitly collapsed this node
             try:
                 node.collapse()
             except Exception:
                 pass
         elif filter_active and node_has_children:
-            # No explicit user action: if filter is active and this node has children,
-            # we expand it temporarily to reveal matches (but don't track it as user action)
             try:
                 node.expand()
             except Exception:
                 pass
-        # else: leave at default state (collapsed for non-acts)
-        
-        # Recurse into children
         for child in get_node_children(node):
             restore(child, ancestors_match_filter=ancestors_match_filter or filter_active)
-    
+
     restore(root)
 
 
 def serialize_filtered_tree(filtered) -> str:
-    """Serialize the act/chapter/task/stage/lines structure into plain text (model-driven)."""
+    """Serialize act/chapter/task/stage/lines into plain text."""
     out: List[str] = []
     for act in filtered:
         out.append(f"{act.label}")
@@ -210,7 +180,7 @@ def serialize_filtered_tree(filtered) -> str:
 
 
 def serialize_timeline_tree(filtered) -> str:
-    """Serialize the group/bucket/task timeline tree into plain text (model-driven)."""
+    """Serialize timeline group/bucket/task into plain text."""
     out: List[str] = []
     for group in filtered:
         out.append(group.label)
@@ -221,29 +191,28 @@ def serialize_timeline_tree(filtered) -> str:
     return "\n".join(out)
 
 
-def copy_to_clipboard(text: str) -> tuple[bool, str]:
-    """
-    Try to copy text to clipboard using pyperclip, then tkinter, then fallback to temp file.
+def serialize_npc_tree(filtered) -> str:
+    """Serialize NPC group/npc into plain text."""
+    out: List[str] = []
+    for group in filtered:
+        out.append(group.label)
+        for npc in group.npcs:
+            out.append(f"  {npc.label}  [{npc.npc_id}]")
+    return "\n".join(out)
 
-    Returns:
-        (success, status_message) where success is True if copied to clipboard.
-    """
+
+def copy_to_clipboard(text: str) -> tuple[bool, str]:
+    """Try pyperclip → tkinter → temp file. Returns (success, status_message)."""
     if not text:
         return False, "Nothing to copy"
-
-    # Try pyperclip
     try:
         import pyperclip
-
         pyperclip.copy(text)
         return True, "Copied to clipboard"
     except Exception:
         pass
-
-    # Try tkinter
     try:
         import tkinter as tk
-
         root = tk.Tk()
         root.withdraw()
         root.clipboard_clear()
@@ -253,12 +222,9 @@ def copy_to_clipboard(text: str) -> tuple[bool, str]:
         return True, "Copied to clipboard"
     except Exception:
         pass
-
-    # Fallback: write to temp file
     try:
         import os
         import tempfile
-
         fd, path = tempfile.mkstemp(prefix="dialogue_copy_", suffix=".txt")
         with os.fdopen(fd, "w", encoding="utf-8") as f:
             f.write(text)

@@ -6,7 +6,7 @@ from __future__ import annotations
 from rich.markup import escape as rich_escape
 from textual.widgets import Label, ListItem
 
-from tui.services.dev.dev_data_service import DevRecord
+from tui.services.dev.dataservices import DevRecord
 
 
 class _RecordRow(ListItem):
