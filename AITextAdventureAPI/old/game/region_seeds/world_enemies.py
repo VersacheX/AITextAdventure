@@ -73,7 +73,8 @@ WORLD_NPCS = [
       "growth_line": "Moves to Type 2 — (Hypothetically) Would use its absolute power to create and protect, rather than destroy.",
       "instinctual_variant": "sp/so — The ultimate self-preservationist, ensuring its own supremacy by eliminating all other things."
     },
-        'image': 'voidwalkers:the_void1.jpeg'
+    'image': 'voidwalkers:the_void1.jpeg',
+    'song_id': 'symphony_of_destruction_instrumental_mega_death'
   },
   {
     "npc_id": "dominion",
@@ -96,7 +97,8 @@ WORLD_NPCS = [
       "growth_line": "Moves to Type 7 — Learns to accept and find value in a flexible, imperfect reality.",
       "instinctual_variant": "so/sp — Obsessed with imposing a perfect order on the entire social and physical fabric of reality."
     },
-        'image': 'voidwalkers:dominion1.jpeg'
+    'image': 'voidwalkers:dominion1.jpeg',
+    'song_id': 'the_becoming_instrumental_nine_inch_nails'
   }
 ]
 

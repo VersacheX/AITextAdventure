@@ -339,7 +339,7 @@ PLAYER_NPCS = [
         "npc_id": "technique",
         "name": "Chock",
         "description": "A skilled warrior known for his brutal force and unwavering discipline. Chock is rugged, ornery, and sometimes rude, but his heart is in the right place. He seeks to master his enemies through sheer strength and tactical prowess. He is calm under pressure and values honor above all else.",
-		"tehem_song": "Hero (instrumental), skillet | Orion, Metallica",
+		"theme_song": "Hero (instrumental), skillet | Orion, Metallica",
         "psychology": {
             "mbti": "ESTJ",
             "dominant": "Te — Acts decisively and forcefully. He evaluates situations quickly and executes without hesitation, naturally taking command.",
@@ -363,7 +363,8 @@ PLAYER_NPCS = [
             "tertiary": "Ne — Twisted creativity; sees threats and conspiracies in every possibility.",
             "inferior": "Fi — Explosive, self-righteous rage; moral code becomes hypocritical and violently enforced."
         },
-        'image': 'chock1.jpeg'
+        'image': 'chock1.jpeg',
+		'song_id': 'hero_instrumental_skillet'
     },
     {
         "npc_id": "faith",
@@ -396,7 +397,8 @@ PLAYER_NPCS = [
             "tertiary": "Ti — Cold, critical over-analysis; becomes harshly judgmental of everyone’s ‘flaws’ and ‘sins’.",
             "inferior": "Ne — Paralyzing catastrophic thinking; sees every small change as the beginning of total collapse."
         },
-        'image': 'kaera1.jpeg'
+        'image': 'kaera1.jpeg',
+		'song_id': 'never_ending_circles_chvrches'
     },
     {
         "npc_id": "magic",
@@ -426,7 +428,8 @@ PLAYER_NPCS = [
             "tertiary": "Fe — Cruel mockery and gaslighting; uses social awareness to humiliate and isolate targets.",
             "inferior": "Si — Obsessive rumination; becomes fixated on every slight and past humiliation."
         },
-        'image': 'moxie1.jpeg'
+        'image': 'moxie1.jpeg',
+		'song_id': 'bubblegum_bitch_marina'
     },
     {
         "npc_id": "tech",
@@ -456,7 +459,8 @@ PLAYER_NPCS = [
             "tertiary": "Fi — Self-righteous moral superiority; judges everyone as weak or morally inferior.",
             "inferior": "Se — Reckless hedonism or violent outbursts; loses all impulse control."
         },
-        'image': 'kade1.jpeg'
+        'image': 'kade1.jpeg',
+		'song_id': 'radioactive_instrumental_imagine_dragon'
     },
     {
         "npc_id": "skill",
@@ -486,7 +490,8 @@ PLAYER_NPCS = [
             "tertiary": "Ni — Paranoid fatalism; convinced everyone will eventually betray her.",
             "inferior": "Fe — Explosive, misdirected rage; suddenly lashes out with cruel emotional attacks."
         },
-        'image': 'poise1.jpeg'
+        'image': 'poise1.jpeg',
+		'song_id': 'sail_instrumental_awolnation'
     }
 ]
 

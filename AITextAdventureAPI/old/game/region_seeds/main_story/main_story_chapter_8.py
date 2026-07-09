@@ -121,7 +121,8 @@ NPCS = [
           "tertiary": "Ni — Obsessive fatalism; sees every target as already dead.",
           "inferior": "Fe — Emotional void; mimics empathy only to exploit it."
         },
-        'image': 'voidwalkers:scalpel1.jpeg'
+        'image': 'voidwalkers:scalpel1.jpeg',
+        'song_id': 'the_perfect_drug_nine_inch_nails'
     },
       {
         "npc_id": "glamour",
@@ -135,7 +136,8 @@ NPCS = [
           "tertiary": "Te — Punishes rejection with explosive fury.",
           "inferior": "Ni — Paranoia of fading beauty; sees doom in every reflection."
         },
-        'image': 'voidwalkers:glamour1.jpeg'
+        'image': 'voidwalkers:glamour1.jpeg',
+        'song_id': 'toxic_britney_spears'
     }
 ]
 

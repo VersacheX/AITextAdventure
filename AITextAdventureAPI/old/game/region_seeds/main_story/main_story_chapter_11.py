@@ -120,7 +120,7 @@ NPCS = [
         "npc_id": "rapture",
         "name": "Rapture",
         "description": "A predator of sensation — violence as ecstasy, destruction as sport.",
-        "theme_song": "Smells Like Teen Spirit, Nirvana",
+        "theme_song": "Smells Like Teen Spirit, Nirvana or Zero, Smashing Pumpkins",
         "psychology": {
           "mbti": "ESTP-shadow",
           "dominant": "Se — Sensory domination; overwhelms reality with raw, predatory immediacy.",
@@ -128,7 +128,8 @@ NPCS = [
           "tertiary": "Fe — Mocking social manipulation; provokes chaos for entertainment.",
           "inferior": "Ni — Fatalistic impulses; sees only the thrill of the next destructive moment."
         },
-        'image': 'voidwalkers:rapture1.jpeg'
+        'image': 'voidwalkers:rapture1.jpeg',
+        'song_id': 'zero_instrumental_smashing_pumpkins'
     },
     {
         "npc_id": "revelry",
@@ -142,7 +143,8 @@ NPCS = [
           "tertiary": "Te — Impulsive, explosive action; enforces chaos with manic force.",
           "inferior": "Si — Rejects continuity; every moment must be a new, louder collapse."
         },
-        'image': 'voidwalkers:revelry1.jpeg'
+        'image': 'voidwalkers:revelry1.jpeg',
+        'song_id': 'heads_will_roll_yeah_yeah_yeahs'
     }
 ]
 

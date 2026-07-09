@@ -27,6 +27,7 @@ NPCS = [
         "npc_id": "garbage",
         "name": "Garbage",
         "description": "A Voidwalker that embodies self-loathing, fraudulence, and the feeling of worthlessness. It manifests as a rotting, many-mouthed shadow, whispering insecurities and lies to break its victims' spirits.",
+        "theme_song": "Creep, Radiohead",
         "psychology": {
             "mbti": "ESTP",
             "dominant": "Se - Focuses on the immediate, tangible flaws and failures of its targets, exploiting them in the moment.",

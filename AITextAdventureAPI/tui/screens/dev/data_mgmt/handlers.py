@@ -98,6 +98,9 @@ def set_dialog_mode(screen: "DataMgmtScreen", is_dialog: bool) -> None:
 
 
 def handle_tab_activated(screen: "DataMgmtScreen", event: Tabs.TabActivated) -> None:
+    # NOTE: NPC theme music intentionally continues playing when switching away
+    # from the NPC tab. Music only stops/changes when a new NPC leaf is selected
+    # or the screen is unmounted. Do NOT add a music.stop() call here.
     tab_id = event.tab.id or ""
     if tab_id.startswith("tab-"):
         category = tab_id.removeprefix("tab-")
@@ -190,6 +193,7 @@ def handle_tree_node_highlighted(screen: "DataMgmtScreen", event: Tree.NodeHighl
     elif category == _NPC_CATEGORY:
         if isinstance(data, NpcRecordNode):
             update_detail_for_record(screen, data.record)
+            screen._npc_music.on_npc_changed(data.record)
         else:
             npc_nodes = collect_npc_records_from_node(node)
             update_detail_for_npc_group(screen, npc_nodes)
@@ -198,30 +202,47 @@ def handle_tree_node_highlighted(screen: "DataMgmtScreen", event: Tree.NodeHighl
 def handle_button_pressed(screen: "DataMgmtScreen", event: Button.Pressed) -> None:
     bid = event.button.id or ""
     if bid == "dm-expand":
-        expand_all_nodes(screen.query_one(_active_tree_id(screen), Tree))
+        tree_id = _active_tree_id(screen)
+        expand_all_nodes(screen.query_one(tree_id, Tree))
     elif bid == "dm-collapse":
-        collapse_all_nodes(screen.query_one(_active_tree_id(screen), Tree))
+        tree_id = _active_tree_id(screen)
+        collapse_all_nodes(screen.query_one(tree_id, Tree))
     elif bid == "dm-copy":
-        handle_copy_action(screen)
+        _handle_copy(screen)
 
 
-def rebuild_list_for_screen(screen: "DataMgmtScreen") -> None:
-    if not screen._loaded:
-        return
-    if screen._category == _EQUIPMENT_CATEGORY:
-        records = filter_equipment_records(
-            type_query=get_equipment_type_filter(screen),
-            slot_query=get_equipment_slot_filter(screen),
-        )
+def _handle_copy(screen: "DataMgmtScreen") -> None:
+    category = screen._category
+    text = ""
+
+    if category == _DIALOG_CATEGORY:
+        if screen._last_filtered is not None:
+            text = serialize_filtered_tree(screen._last_filtered)
+        else:
+            tree = screen.query_one("#dm-dialog-tree", Tree)
+            text = "\n".join(serialize_node_visible(tree.root, depth=0))
+
+    elif category == _TIMELINE_CATEGORY:
+        if screen._last_timeline_filtered is not None:
+            text = serialize_timeline_tree(screen._last_timeline_filtered)
+        else:
+            tree = screen.query_one("#dm-timeline-tree", Tree)
+            text = "\n".join(serialize_node_visible(tree.root, depth=0))
+
+    elif category == _NPC_CATEGORY:
+        if screen._last_npc_filtered is not None:
+            text = serialize_npc_tree(screen._last_npc_filtered)
+        else:
+            tree = screen.query_one("#dm-npc-tree", Tree)
+            text = "\n".join(serialize_node_visible(tree.root, depth=0))
+
     else:
-        query   = screen.query_one("#dm-filter", Input).value.strip()
-        records = search_records(screen._category, query)
-    lv = screen.query_one("#dm-list", ListView)
-    lv.clear()
-    for record in records:
-        lv.append(_RecordRow(record))
-    screen.query_one("#dm-status", Static).update(f"{len(records)} result(s)")
-    update_detail_for_record(screen, records[0] if records else None)
+        if screen._last_filtered is not None:
+            text = serialize_filtered_tree(screen._last_filtered)
+
+    if text:
+        copy_to_clipboard(text)
+        screen.notify("Copied to clipboard", timeout=2.0)
 
 
 def rebuild_dialog_tree_for_screen(screen: "DataMgmtScreen") -> None:
@@ -272,6 +293,35 @@ def rebuild_npc_tree_for_screen(screen: "DataMgmtScreen") -> None:
     screen._last_npc_filtered = filtered
     screen.query_one("#dm-status", Static).update(f"{total_npcs} NPC(s)")
     update_detail_for_npc_group(screen, [])
+
+
+def rebuild_list_for_screen(screen: "DataMgmtScreen") -> None:
+    """Rebuild the flat ListView for the active non-tree category."""
+    if not screen._loaded:
+        return
+    category  = screen._category
+    query     = ""
+    try:
+        query = screen.query_one("#dm-filter", Input).value.strip()
+    except Exception:
+        pass
+
+    list_view = screen.query_one("#dm-list", ListView)
+    list_view.clear()
+
+    if category == _EQUIPMENT_CATEGORY:
+        records = filter_equipment_records(
+            get_equipment_type_filter(screen),
+            get_equipment_slot_filter(screen),
+        )
+    else:
+        records = search_records(category, query)
+
+    screen._last_filtered = records
+    for record in records:
+        list_view.append(_RecordRow(record))
+
+    screen.query_one("#dm-status", Static).update(f"{len(records)} record(s)")
 
 
 def handle_copy_action(screen: "DataMgmtScreen") -> None:

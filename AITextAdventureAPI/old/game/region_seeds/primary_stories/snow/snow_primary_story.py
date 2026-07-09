@@ -165,7 +165,8 @@ NPCS = [
           "growth_line": "Moves to Type 1 — Finds a new, principled purpose beyond his personal grief, fighting for a greater good.",
           "instinctual_variant": "sx/sp — His entire being is focused on an intense, all-consuming quest tied to the person he lost."
         },
-        'image': 'kor_in1.jpeg'
+        'image': 'kor_in1.jpeg',
+        'song_id': 'far_from_home_sam_tinnesz'
     },
     {
         'npc_id': 'aeriola',

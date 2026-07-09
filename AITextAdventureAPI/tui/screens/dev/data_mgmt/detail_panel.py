@@ -22,7 +22,7 @@ Image rendering requires Pillow only.  Falls back gracefully on any error.
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Optional
 
 from rich.markup import escape as rich_escape
 from rich.text import Text
@@ -228,27 +228,187 @@ class NpcDetailPanel(Widget):
             pass
 
 
-class TimelineDetailPanel(Widget):
-    """Scrollable detail panel for timeline task content.
+# ── Timeline detail ───────────────────────────────────────────────────────
 
-    ``height: auto`` lets the content grow past the outer ScrollableContainer,
-    giving real scroll overflow — same mechanism as NpcDetailPanel.
+# Maps raw event_type strings to a short human label + which param keys matter.
+_EVENT_TYPE_META: Dict[str, tuple[str, List[str]]] = {
+    "award_task":               ("Award Task",           ["task_id"]),
+    "award_item":               ("Award Item",           ["item_id"]),
+    "award_money":              ("Award Money",          ["amount"]),
+    "remove_item":              ("Remove Item",          ["item_id"]),
+    "initiate_dialog":          ("Dialogue",             ["npc_id", "dialog_id"]),
+    "initiate_character_dialog":("Character Dialogue",   ["npc_id", "dialog_id"]),
+    "set_npc_standing_text":    ("NPC Standing Text",    ["npc_id", "standing_text"]),
+    "hide_npc":                 ("Hide NPC",             ["npc_id"]),
+    "show_npc":                 ("Show NPC",             ["npc_id", "location"]),
+    "create_npc":               ("Create NPC",           ["npc_id", "location"]),
+    "character_join":           ("Character Join",       ["character_id"]),
+    "player_character_join":    ("Player Character Join",["character_id"]),
+    "add_pending_character":    ("Add Pending Character",[]),
+    "create_character_npc":     ("Create Character NPC", ["location"]),
+    "set_player_location":      ("Set Player Location",  ["location", "region_id"]),
+    "set_aircraft":             ("Set Aircraft",         ["aircraft_id"]),
+    "allow_ocean_flight":       ("Allow Ocean Flight",   []),
+    "can_aircraft_fly":         ("Set Aircraft Flyable", ["can_fly"]),
+    "begin_combat":             ("Begin Combat",         ["hostile_id", "region_id"]),
+    "advance_chapter":          ("Advance Chapter",      []),
+    "complete_intro_story":     ("Complete Intro Story", []),
+    "complete_region_quest":    ("Complete Region Quest",["region_id"]),
+    "create_dungeon":           ("Create Dungeon",       ["dungeon_id", "location"]),
+    "lock_dungeon":             ("Lock Dungeon",         ["dungeon_id"]),
+    "unlock_dungeon":           ("Unlock Dungeon",       ["dungeon_id"]),
+    "set_dungeon_locked_text":  ("Set Dungeon Lock Text",["dungeon_id", "locked_text"]),
+    "set_player_in_dungeon":    ("Place Player in Dungeon", ["dungeon_id", "location"]),
+    "remove_player_from_dungeon":("Remove Player from Dungeon", ["dungeon_id"]),
+    "dungeon_add_treasure":     ("Dungeon Add Treasure", ["dungeon_id", "item_id"]),
+    "dungeon_add_npc":          ("Dungeon Add NPC",      ["dungeon_id", "npc_id"]),
+    "set_npc_met":              ("Set NPC Met",          ["npc_id"]),
+    "unlock_npc_log":           ("Unlock NPC Log",       []),
+    "remove_ocean":             ("Remove Ocean",         []),
+    "unlock_hyperway":          ("Unlock Hyperway",      []),
+    "lock_hyperway":            ("Lock Hyperway",        []),
+    "cancel_task":              ("Cancel Task",          ["task_id"]),
+    "remove_task":              ("Remove Task",          ["task_id"]),
+}
+
+
+def _format_event(ev: Dict[str, Any]) -> str:
+    """Format a single task event dict into a concise readable line."""
+    raw_type = str(ev.get("event_type", "?"))
+    params   = ev.get("params") or {}
+
+    meta = _EVENT_TYPE_META.get(raw_type)
+    if meta is None:
+        # Unknown type — show type + raw params
+        label      = raw_type.replace("_", " ").title()
+        param_str  = "  ".join(f"{k}={v}" for k, v in params.items()) if params else ""
+        return f"{label}" + (f"  [{param_str}]" if param_str else "")
+
+    label, key_order = meta
+
+    # Pull only the meaningful keys in declared order, then any extras not listed
+    parts: List[str] = []
+    seen: set = set()
+    for k in key_order:
+        if k in params:
+            v = params[k]
+            if isinstance(v, list):
+                v = "; ".join(str(x) for x in v)
+            parts.append(f"{k}={v}")
+            seen.add(k)
+    for k, v in params.items():
+        if k not in seen:
+            if isinstance(v, list):
+                v = "; ".join(str(x) for x in v)
+            parts.append(f"{k}={v}")
+
+    param_str = "  ".join(parts)
+    return f"{label}" + (f"  [{param_str}]" if param_str else "")
+
+
+class TimelineDetailPanel(Widget):
+    """Sectioned detail panel for a single timeline task.
+
+    Layout:
+      ┌─ Task header (id, source, type, target) ─┐
+      ├─ Acquired events ─────────────────────────┤
+      ├─ Completed events ────────────────────────┘
+
+    ``height: auto`` lets content overflow the outer ScrollableContainer.
     """
 
     DEFAULT_CSS = """
     TimelineDetailPanel {
         width: 100%;
         height: auto;
-        padding: 1 2;
+        layout: vertical;
+    }
+    .tl-section {
+        width: 100%;
+        height: auto;
+        padding: 0 2 1 2;
+        border-bottom: solid $accent 20%;
+    }
+    .tl-section-header {
+        width: 100%;
+        height: auto;
+        padding: 0 0 0 0;
+        color: $accent;
+        text-style: bold;
+    }
+    .tl-event-row {
+        width: 100%;
+        height: auto;
+        padding: 0 0 0 2;
+        color: $text 85%;
+    }
+    .tl-empty {
+        width: 100%;
+        height: auto;
+        padding: 0 0 0 2;
+        color: $text 40%;
     }
     """
 
-    def __init__(self, text: str) -> None:
+    def __init__(self, task_node: TimelineTaskNode | None, summary_text: str = "") -> None:
         super().__init__()
-        self._text = text
+        self._task_node    = task_node
+        self._summary_text = summary_text  # used when showing a subtree summary
 
     def compose(self) -> ComposeResult:
-        yield Static(self._text, id="dm-timeline-detail-text")
+        if self._task_node is None:
+            yield Static(self._summary_text or "[dim]← select a task from the tree[/dim]",
+                         classes="tl-section")
+            return
+
+        node    = self._task_node
+        task    = node.task
+        ttype   = str(task.get("type", "?"))
+        to_type = task.get("to_type")
+        to_id   = task.get("to_id")
+        acquire = task.get("task_acquire_events") or []
+        complete = task.get("task_complete_events") or []
+
+        # ── Header section ────────────────────────────────────────────
+        header_lines = [
+            f"[bold]{rich_escape(node.label)}[/bold]",
+            f"[dim]{rich_escape(node.task_id)}[/dim]",
+            "",
+            f"Source:  [dim]{rich_escape(node.source_path)}[/dim]",
+            f"Type:    [dim]{rich_escape(ttype)}[/dim]",
+        ]
+        if to_type or to_id:
+            header_lines.append(
+                f"Target:  [dim]{rich_escape(str(to_type or '?'))} → "
+                f"{rich_escape(str(to_id or '?'))}[/dim]"
+            )
+        if task.get("item_id"):
+            header_lines.append(f"Item:    [dim]{rich_escape(str(task['item_id']))}[/dim]")
+        if task.get("coordinates"):
+            header_lines.append(f"Coords:  [dim]{rich_escape(str(task['coordinates']))}[/dim]")
+
+        with Vertical(classes="tl-section"):
+            yield Static("\n".join(header_lines))
+
+        # ── Acquired events ───────────────────────────────────────────
+        with Vertical(classes="tl-section"):
+            yield Static(f"Acquired  ({len(acquire)})", classes="tl-section-header")
+            if acquire:
+                for ev in acquire:
+                    if isinstance(ev, dict):
+                        yield Static(f"  {rich_escape(_format_event(ev))}", classes="tl-event-row")
+            else:
+                yield Static("  (none)", classes="tl-empty")
+
+        # ── Completed events ──────────────────────────────────────────
+        with Vertical(classes="tl-section"):
+            yield Static(f"Completed  ({len(complete)})", classes="tl-section-header")
+            if complete:
+                for ev in complete:
+                    if isinstance(ev, dict):
+                        yield Static(f"  {rich_escape(_format_event(ev))}", classes="tl-event-row")
+            else:
+                yield Static("  (none)", classes="tl-empty")
 
 
 # ── public API ──────────────────────────────────────────────────────────────
@@ -296,70 +456,30 @@ def update_detail_for_multiple_dialogue(screen: "DataMgmtScreen", lines: List[Di
     static.update("\n\n".join(parts))
 
 
-def _format_timeline_task_detail(task_node: TimelineTaskNode) -> str:
-    """Format the raw task dict into a human-readable detail string."""
-    task     = task_node.task
-    ttype    = str(task.get("type", "?"))
-    to_type  = task.get("to_type")
-    to_id    = task.get("to_id")
-    acquire  = task.get("task_acquire_events", []) or []
-    complete = task.get("task_complete_events", []) or []
-
-    lines = [
-        f"Source: {task_node.source_path}",
-        f"Type: {ttype}",
-    ]
-    if to_type or to_id:
-        lines.append(f"Target: {to_type or '?'} → {to_id or '?'}")
-    if task.get("item_id"):
-        lines.append(f"Item: {task['item_id']}")
-    if task.get("coordinates"):
-        lines.append(f"Coordinates: {task['coordinates']}")
-
-    lines.append("")
-    lines.append(f"Acquire events ({len(acquire)}):")
-    for ev in acquire:
-        if isinstance(ev, dict):
-            lines.append(f"  - {ev.get('event_type', '?')}  {ev.get('params', {})}")
-
-    lines.append("")
-    lines.append(f"Complete events ({len(complete)}):")
-    for ev in complete:
-        if isinstance(ev, dict):
-            lines.append(f"  - {ev.get('event_type', '?')}  {ev.get('params', {})}")
-
-    return "\n".join(lines)
-
-
 def update_detail_for_timeline_task(screen: "DataMgmtScreen", task_node: TimelineTaskNode) -> None:
-    """Update the detail panel with a single TimelineTaskNode (scrollable)."""
+    """Update the detail panel with a single TimelineTaskNode (sectioned)."""
     detail_panel = screen.query_one("#dm-detail-panel")
     detail_panel.remove_children()
-    header = (
-        f"[bold]{rich_escape(task_node.label)}[/bold]"
-        f"\n[dim]{rich_escape(task_node.task_id)}[/dim]"
-    )
-    detail = _format_timeline_task_detail(task_node)
-    detail_panel.mount(TimelineDetailPanel(f"{header}\n\n{rich_escape(detail)}"))
+    detail_panel.mount(TimelineDetailPanel(task_node))
 
 
 def update_detail_for_timeline_subtree(
     screen: "DataMgmtScreen",
     task_nodes: List[TimelineTaskNode],
 ) -> None:
-    """Update the detail panel with an aggregate view of task nodes from a subtree (scrollable)."""
+    """Update the detail panel with an aggregate summary of task nodes from a subtree."""
     detail_panel = screen.query_one("#dm-detail-panel")
     detail_panel.remove_children()
     if not task_nodes:
-        detail_panel.mount(TimelineDetailPanel("[dim]← select a task from the tree[/dim]"))
+        detail_panel.mount(TimelineDetailPanel(None))
         return
-    parts = [
+    summary = "\n".join(
         f"[bold]{rich_escape(t.label)}[/bold]  "
         f"[dim]{rich_escape(t.task_id)}[/dim]  "
         f"[dim]({rich_escape(t.source_path)})[/dim]"
         for t in task_nodes
-    ]
-    detail_panel.mount(TimelineDetailPanel("\n".join(parts)))
+    )
+    detail_panel.mount(TimelineDetailPanel(None, summary_text=summary))
 
 
 def update_detail_for_npc_group(

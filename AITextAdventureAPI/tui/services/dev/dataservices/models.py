@@ -18,6 +18,7 @@ class DevRecord:
     detail: str = ""
     image: str = ""        # filename only (e.g. "ripple1.png"); resolved at render time
     source_group: str = "" # NPC_GROUPS key (e.g. "main_story"); empty for non-NPC records
+    song_id: str = ""      # audio track reference key (e.g. "hero_instrumental_skillet")
 
     def matches(self, query: str) -> bool:
         if not query:

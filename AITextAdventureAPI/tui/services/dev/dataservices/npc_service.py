@@ -64,6 +64,7 @@ def _make_npc_record(npc: Dict[str, Any], subtitle: str, source_group: str) -> D
     desc       = str(npc.get("description", ""))
     theme_song = str(npc.get("theme_song", ""))
     image      = str(npc.get("image", ""))
+    song_id    = str(npc.get("song_id", ""))
 
     psych  = npc.get("psychology") or {}
     ennea  = npc.get("enneagram") or {}
@@ -111,6 +112,7 @@ def _make_npc_record(npc: Dict[str, Any], subtitle: str, source_group: str) -> D
         detail="\n".join(lines),
         image=image,
         source_group=source_group,
+        song_id=song_id,
     )
 
 

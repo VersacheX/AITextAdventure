@@ -6,6 +6,7 @@ Delegates all behavior to handlers, treehandlers, detail_panel, and utils.
 """
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any, Set
 
 from textual import work
@@ -14,6 +15,7 @@ from textual.binding import Binding
 from textual.containers import Horizontal, ScrollableContainer, Vertical
 from textual.widgets import Button, Input, Label, ListView, RadioButton, RadioSet, Static, Tab, Tabs, Tree
 
+from tui.audio import NPCMusicController
 from tui.screens.base_screen import BaseScreen
 from tui.screens.dev.data_mgmt.handlers import (
     handle_button_pressed,
@@ -33,6 +35,12 @@ from tui.services.dev.dataservices import CATEGORIES, CATEGORY_LABELS, DialogueL
 _DIALOG_CATEGORY   = "character_dialog"
 _TIMELINE_CATEGORY = "timeline"
 _NPC_CATEGORY      = "npc"
+
+# Resolved once at import time — avoids repeated Path arithmetic at runtime.
+_MUSIC_DIR = Path(__file__).resolve().parents[3] / "assets" / "music"
+
+_DETAIL_WIDTH_NORMAL  = 80   # columns in normal mode
+_DETAIL_WIDTH_MAX     = "1fr"  # full share in expanded mode
 
 
 class DataMgmtScreen(BaseScreen):
@@ -137,6 +145,16 @@ class DataMgmtScreen(BaseScreen):
         border: solid $accent 30%;
     }
 
+    #dm-detail-expand {
+        margin-left: 1;
+        padding: 0 1;
+        min-width: 3;
+        height: auto;
+        color: $text;
+        background: $surface;
+        border: solid $accent 30%;
+    }
+
     #dm-status {
         width: auto;
         min-width: 14;
@@ -190,6 +208,7 @@ class DataMgmtScreen(BaseScreen):
         super().__init__()
         self._category: str = CATEGORIES[0]
         self._loaded: bool  = False
+        self._detail_maximised: bool = False
 
         # Per-tree filtered model caches (for copy-to-clipboard fallback)
         self._last_filtered: Any           = None
@@ -203,6 +222,13 @@ class DataMgmtScreen(BaseScreen):
         self._timeline_user_collapsed: Set[str] = set()
         self._npc_user_expanded: Set[str]      = set()
         self._npc_user_collapsed: Set[str]     = set()
+
+        # NPC theme-music controller — active for the lifetime of this screen.
+        self._npc_music = NPCMusicController(
+            music_dir=_MUSIC_DIR,
+            fadeout_ms=700,
+            volume=0.7,
+        )
 
     def compose_content(self) -> ComposeResult:
         yield Tabs(
@@ -234,6 +260,7 @@ class DataMgmtScreen(BaseScreen):
             yield Button("++", id="dm-expand", variant="default")
             yield Button("--", id="dm-collapse", variant="default")
             yield Button("Copy", id="dm-copy", variant="default")
+            yield Button("⤢", id="dm-detail-expand", variant="default")
             yield Static("Loading...", id="dm-status")
         with Horizontal(id="dm-main-row"):
             with Vertical(id="dm-list-panel"):
@@ -252,6 +279,9 @@ class DataMgmtScreen(BaseScreen):
 
     def on_mount(self) -> None:
         self._load_catalog()
+
+    def on_unmount(self) -> None:
+        self._npc_music.shutdown()
 
     @work(thread=True)
     def _load_catalog(self) -> None:
@@ -285,6 +315,21 @@ class DataMgmtScreen(BaseScreen):
             f"[red]Failed to load seed data:[/red]\n{rich_escape(message)}"
         )
 
+    def _toggle_detail_panel(self) -> None:
+        """Swap the detail panel between fixed-width (80) and full-width (1fr)."""
+        self._detail_maximised = not self._detail_maximised
+        detail_panel = self.query_one("#dm-detail-panel")
+        list_panel   = self.query_one("#dm-list-panel")
+        btn          = self.query_one("#dm-detail-expand", Button)
+        if self._detail_maximised:
+            detail_panel.styles.width = "1fr"
+            list_panel.display        = False
+            btn.label                 = "⤡"
+        else:
+            detail_panel.styles.width = str(_DETAIL_WIDTH_NORMAL)
+            list_panel.display        = True
+            btn.label                 = "⤢"
+
     def on_tabs_tab_activated(self, event: Tabs.TabActivated) -> None:
         handle_tab_activated(self, event)
 
@@ -301,4 +346,7 @@ class DataMgmtScreen(BaseScreen):
         handle_tree_node_highlighted(self, event)
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
+        if event.button.id == "dm-detail-expand":
+            self._toggle_detail_panel()
+            return
         handle_button_pressed(self, event)

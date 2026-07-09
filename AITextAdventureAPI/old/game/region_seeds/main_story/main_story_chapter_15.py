@@ -73,7 +73,8 @@ NPCS = [
     {
         "npc_id": "pageant",
         "name": "Pageant",
-        "description": "A suffocating spectacle of expectations — the tyranny of reputation made divine.",
+        "description": "A suffocating spectacle of expectations — the tyranny of reputation made divine.",        
+        "theme_song": "You Should See Me In A Crown, Billie Eilish",
         "psychology": {
             "mbti": "ESFJ-shadow",
             "dominant": "Fe — Social coercion; weaponizes belonging until conformity becomes annihilation.",
@@ -90,12 +91,14 @@ NPCS = [
           "growth_line": "Moves to Type 6 — Would learn to find value in authentic connection rather than admiration.",
           "instinctual_variant": "so/sx — Obsessed with social status and admiration, using her performance to control and dominate her social environment."
         },
-        'image': 'voidwalkers:pageant1.jpeg'
+        'image': 'voidwalkers:pageant1.jpeg',
+        'song_id': 'you_should_see_me_in_a_crown_billie_eilish'
     },
     {
         "npc_id": "edict",
         "name": "Edict",
         "description": "A bureaucratic warden of cosmic rules — tradition calcified into oppression.",
+        "theme_song": "The Hand That Feeds, Nine Inch Nails",
         "psychology": {
             "mbti": "ISTJ-shadow",
             "dominant": "Si — Ritualistic rigidity; enforces ancient rules long after meaning has died.",
@@ -112,11 +115,12 @@ NPCS = [
           "growth_line": "Moves to Type 7 — Would learn to be more flexible and accept a world that isn't perfectly ordered.",
           "instinctual_variant": "sp/so — Obsessed with preserving his own integrity by enforcing a perfect, rigid order on the world around him."
         },
-        'image': 'voidwalkers:edict1.jpeg'
+        'image': 'voidwalkers:edict1.jpeg',
+        'song_id': 'the_hand_that_feeds_nine_inch_nails'
     },
     {
         "npc_id": "prison_warden",
-        "name": "Prison Warden",
+        "name": "Prison Warden",        
         "description": "A hulking automaton, more machine than man, that serves as the chief enforcer of Edict's Correctional Facility. It speaks only in protocols and compliance ratings, viewing prisoners as 'assets' and 'deviations' to be corrected or erased. It is the physical embodiment of Edict's cold, bureaucratic tyranny.",
         "psychology": {
             "mbti": "ISTJ",
