@@ -30,12 +30,14 @@ from tui.services.dev.dataservices.timeline_service import filter_timeline_tree
 # NPC
 from tui.services.dev.dataservices.npc_service import filter_npc_tree
 
-# Catalog (CATEGORIES, preload, get_records, tree getters …)
+# Catalog (CATEGORIES, preload, get_records, tree getters)
 from tui.services.dev.dataservices.catalog import (
     CATEGORIES,
     CATEGORY_LABELS,
     filter_equipment_records,
+    get_dialog_index,
     get_dialogue_tree,
+    get_npc_names,
     get_npc_tree,
     get_records,
     get_timeline_tree,
@@ -56,4 +58,6 @@ __all__ = [
     "get_dialogue_tree", "filter_dialogue_tree",
     "get_timeline_tree", "filter_timeline_tree",
     "get_npc_tree", "filter_npc_tree",
+    # dialog lookup
+    "get_dialog_index", "get_npc_names",
 ]

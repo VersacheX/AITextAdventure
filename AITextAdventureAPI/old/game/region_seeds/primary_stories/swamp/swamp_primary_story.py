@@ -152,7 +152,8 @@ NPCS = [
           "growth_line": "Moves to Type 8 — Uses his knowledge to confidently confront the source of the whisper.",
           "instinctual_variant": "sp/sx — A reclusive investigator, obsessed with the intense, singular mystery that threatens his sanity."
         },
-        'image': 'grimnaw1.jpeg'
+        'image': 'grimnaw1.jpeg',
+        'song_id': 'madness_muse'
     },
     {
         'npc_id': 'miregloom',

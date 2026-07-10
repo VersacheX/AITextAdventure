@@ -18,6 +18,7 @@ from tui.screens.dev.data_mgmt.detail_panel import (
     update_detail_for_timeline_subtree,
     update_detail_for_timeline_task,
 )
+from tui.screens.dev.data_mgmt.npc_music_player import NpcMusicPlayerWidget
 from tui.screens.dev.data_mgmt.treehandlers.dialog_handler import (
     collect_dialogue_lines_from_node,
     rebuild_dialog_tree,
@@ -90,6 +91,8 @@ def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
     screen.query_one("#dm-expand", Button).display                 = is_tree
     screen.query_one("#dm-collapse", Button).display               = is_tree
     screen.query_one("#dm-copy", Button).display                   = is_tree
+    # NPC music player bar — only visible on the NPC tab
+    screen.query_one(NpcMusicPlayerWidget).display                 = is_npc
 
 
 def set_dialog_mode(screen: "DataMgmtScreen", is_dialog: bool) -> None:
@@ -192,8 +195,9 @@ def handle_tree_node_highlighted(screen: "DataMgmtScreen", event: Tree.NodeHighl
 
     elif category == _NPC_CATEGORY:
         if isinstance(data, NpcRecordNode):
-            update_detail_for_record(screen, data.record)
-            screen._npc_music.on_npc_changed(data.record)
+            # Store selection and drive detail + music through the screen's
+            # unified method so playlist index and player label stay in sync.
+            screen.select_npc_record(data.record, start_music=True)
         else:
             npc_nodes = collect_npc_records_from_node(node)
             update_detail_for_npc_group(screen, npc_nodes)
@@ -292,15 +296,16 @@ def rebuild_npc_tree_for_screen(screen: "DataMgmtScreen") -> None:
     )
     screen._last_npc_filtered = filtered
     screen.query_one("#dm-status", Static).update(f"{total_npcs} NPC(s)")
-    update_detail_for_npc_group(screen, [])
+    # Restore previous selection or auto-pick a random NPC with a song
+    screen.restore_npc_selection()
 
 
 def rebuild_list_for_screen(screen: "DataMgmtScreen") -> None:
     """Rebuild the flat ListView for the active non-tree category."""
     if not screen._loaded:
         return
-    category  = screen._category
-    query     = ""
+    category = screen._category
+    query    = ""
     try:
         query = screen.query_one("#dm-filter", Input).value.strip()
     except Exception:

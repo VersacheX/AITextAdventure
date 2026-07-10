@@ -159,7 +159,8 @@ NPCS = [
           "growth_line": "Moves to Type 3 — Becomes more assertive and engaged, using her powers with purpose.",
           "instinctual_variant": "sp/so — Seeks personal peace and comfort, while gently trying to bring harmony to the world around her."
         },
-        'image': 'ripple1.jpeg'
+        'image': 'ripple1.jpeg',
+        'song_id': 'we_move_lightly_dustin_ohalloran'
     },
     {
         'npc_id': 'uulthar',

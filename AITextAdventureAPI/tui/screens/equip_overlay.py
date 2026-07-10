@@ -4,17 +4,17 @@ EquipOverlay: floating equipment-management widget for InventoryScreen.
 Mirrors `old/game_screens/select_equipment_screen.py`, following the same
 docked/filtered-list pattern already proven in `items_overlay.py`:
   - Filters by slot: all / weapon / head / body / arms / legs.
-    Tab / Shift-Tab cycle filters (the header line shows the live count and
-    active filter so it's obvious the filter changed).
+    Tab / Shift-Tab cycle filters.
   - Up / Down navigate the list.
   - Left / Right change the selected party member without closing the overlay.
-  - Enter or clicking a row opens ItemActionScreen modal (equip / discard / cancel).
+  - Click highlights a row only. Enter or the Equip button opens ItemActionScreen.
   - Delete directly discards the highlighted item.
   - Escape closes the overlay.
 
-Right panel shows the selected character's current loadout, unused awards
-(S/SP/PP), active statuses, and a stat diff for the highlighted item
-(green = better, red = worse, dim = no change).
+Right panel is split into two columns:
+  - Left col: selected item stats/description.
+  - Right col: selected character's current loadout, awards, statuses, and
+    stat diff vs the highlighted item (green=better, red=worse, dim=no change).
 
 The CSS class "inv-overlay" is added in on_mount so InventoryScreen can
 query and remove any open overlay generically.
@@ -29,7 +29,7 @@ from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal, Vertical
 from textual.widget import Widget
-from textual.widgets import Label, ListItem, ListView, Static
+from textual.widgets import Button, Label, ListItem, ListView, Static
 
 from tui.screens.item_action_screen import ItemActionScreen
 
@@ -44,7 +44,7 @@ _EQUIP_FILTER_LABEL: dict[str, str] = {
 }
 
 
-# ── pure helpers ─────────────────────────────────────────────────────────────
+# ── pure helpers ──────────────────────────────────────────────────────────────
 
 def _apply_equip_filter(inventory: list, filter_key: str) -> list:
     try:
@@ -132,7 +132,60 @@ def _format_status(status: dict) -> str:
     return f"{name}{suffix} [dim]({dur_str})[/dim]"
 
 
-def _build_detail(player: Any, item: Any | None) -> str:
+def _build_item_info(item: Any | None) -> str:
+    """Left column: item name, description, and all stats."""
+    if item is None:
+        return "[dim]← Select an item[/dim]"
+
+    lines: list[str] = []
+    iname = rich_escape(str(getattr(item, "name", "?")))
+    lines.append(f"[bold]{iname}[/bold]")
+
+    desc = getattr(item, "description", "") or getattr(item, "desc", "")
+    if desc:
+        lines.append(rich_escape(str(desc)))
+
+    lines.append("")
+
+    try:
+        from game.objects.weapon import Weapon
+        from game.objects.armor import Armor, ArmorType
+        if isinstance(item, Weapon):
+            lines.append("[dim]── Weapon ──[/dim]")
+            dmg  = int(getattr(item, "damage", 0) or 0)
+            crit = float(getattr(item, "critical_chance", 0.0) or 0)
+            lines.append(f"DMG:   {dmg}")
+            if crit:
+                lines.append(f"CRIT%: {crit:.1f}")
+        elif isinstance(item, Armor):
+            slot = getattr(item, "slot", None)
+            slot_label = slot.name if hasattr(slot, "name") else str(slot or "?")
+            lines.append(f"[dim]── Armor · {slot_label} ──[/dim]")
+            lines.append(f"DEF:   {int(getattr(item, 'defense', 0) or 0)}")
+    except Exception:
+        pass
+
+    for attr, lbl in (
+        ("strength",     "STR"),
+        ("dexterity",    "DEX"),
+        ("intelligence", "INT"),
+        ("constitution", "CON"),
+        ("durability",   "DUR"),
+    ):
+        v = int(getattr(item, attr, 0) or 0)
+        if v:
+            lines.append(f"{lbl}:   {v}")
+
+    value = getattr(item, "value", None)
+    if value:
+        lines.append("")
+        lines.append(f"[dim]Value: {value}g  |  Sell: {int(value * 0.5)}g[/dim]")
+
+    return "\n".join(lines)
+
+
+def _build_char_detail(player: Any, item: Any | None) -> str:
+    """Right column: character loadout + stat diff vs highlighted item."""
     lines: list[str] = []
     pname = rich_escape(str(getattr(player, "name", "?")))
     lvl   = getattr(player, "level", 0)
@@ -175,8 +228,6 @@ def _build_detail(player: Any, item: Any | None) -> str:
                 lines.append(f"  {_format_status(st)}")
 
     if item is None:
-        lines.append("")
-        lines.append("[dim]← highlight an item to compare[/dim]")
         return "\n".join(lines)
 
     try:
@@ -187,7 +238,7 @@ def _build_detail(player: Any, item: Any | None) -> str:
 
     lines.append("")
     iname = rich_escape(str(getattr(item, "name", "?")))
-    lines.append(f"[bold]── {iname} ──[/bold]")
+    lines.append(f"[bold]── vs {iname} ──[/bold]")
 
     if isinstance(item, Weapon):
         current = w
@@ -244,7 +295,7 @@ class EquipOverlay(Widget):
 
     Tab / Shift-Tab cycle equipment-slot filters (all/weapon/head/body/arms/legs).
     Left / Right change the active party member while the overlay stays open.
-    Enter (or click) opens a modal showing the stat diff with equip / discard options.
+    Click highlights a row only. Enter or the Equip button opens the action modal.
     Delete directly discards without a modal.
     Escape closes the overlay.
     """
@@ -256,7 +307,7 @@ class EquipOverlay(Widget):
         Binding("down",      "cursor_down",   "Down",     show=False),
         Binding("left",      "prev_member",   "◄ Member", show=True),
         Binding("right",     "next_member",   "Member ►", show=True),
-        Binding("enter",     "open_action",   "Action",   show=True),
+        Binding("enter",     "open_action",   "Equip",    show=True),
         Binding("delete",    "discard_item",  "Discard",  show=True),
         Binding("tab",       "next_filter",   "Filter→",  show=True),
         Binding("shift+tab", "prev_filter",   "←Filter",  show=True),
@@ -268,7 +319,7 @@ class EquipOverlay(Widget):
         layer: overlay;
         dock: bottom;
         width: 100%;
-        height: 20;
+        height: 26;
         background: $surface;
         border-top: solid $accent;
         layout: vertical;
@@ -303,11 +354,45 @@ class EquipOverlay(Widget):
     }
 
     #eq-detail-panel {
-        width: 46;
+        width: 66;
+        height: 100%;
+        border-left: solid $accent 30%;
+        layout: vertical;
+    }
+
+    #eq-detail-cols {
+        height: 1fr;
+    }
+
+    #eq-item-col {
+        width: 1fr;
         height: 100%;
         padding: 0 1;
         overflow-y: auto;
-        border-left: solid $accent 30%;
+        border-right: solid $accent 20%;
+    }
+
+    #eq-char-col {
+        width: 1fr;
+        height: 100%;
+        padding: 0 1;
+        overflow-y: auto;
+    }
+
+    #eq-action-row {
+        height: 3;
+        padding: 0 1;
+        align: left middle;
+        border-top: solid $accent 20%;
+    }
+
+    #eq-btn-equip {
+        width: 12;
+        margin-right: 1;
+    }
+
+    #eq-btn-discard {
+        width: 12;
     }
 
     #eq-hint {
@@ -333,9 +418,15 @@ class EquipOverlay(Widget):
         with Horizontal(id="eq-main-row"):
             with Vertical(id="eq-list-panel"):
                 yield ListView(id="eq-list")
-            yield Static("", id="eq-detail-panel")
+            with Vertical(id="eq-detail-panel"):
+                with Horizontal(id="eq-detail-cols"):
+                    yield Static("[dim]← Select an item[/dim]", id="eq-item-col")
+                    yield Static("[dim]No character selected[/dim]", id="eq-char-col")
+                with Horizontal(id="eq-action-row"):
+                    yield Button("Equip", id="eq-btn-equip", variant="primary", disabled=True)
+                    yield Button("Discard", id="eq-btn-discard", variant="error", disabled=True)
         yield Static(
-            "[dim]Enter/click:action  Del:discard  Tab/Shift-Tab:filter  ◄►:member  Esc:close[/dim]",
+            "[dim]Enter/Equip btn:equip  Del/Discard btn:discard  Tab/Shift-Tab:filter  ◄►:member  Esc:close[/dim]",
             id="eq-hint",
         )
 
@@ -391,11 +482,28 @@ class EquipOverlay(Widget):
 
     def _update_detail(self, item: Any | None) -> None:
         player = self._resolve_player()
-        panel  = self.query_one("#eq-detail-panel", Static)
-        if player is None:
-            panel.update("[dim]No character selected[/dim]")
-            return
-        panel.update(_build_detail(player, item))
+
+        try:
+            self.query_one("#eq-item-col", Static).update(_build_item_info(item))
+        except Exception:
+            pass
+
+        try:
+            char_text = (
+                _build_char_detail(player, item)
+                if player is not None
+                else "[dim]No character selected[/dim]"
+            )
+            self.query_one("#eq-char-col", Static).update(char_text)
+        except Exception:
+            pass
+
+        has_item = item is not None
+        try:
+            self.query_one("#eq-btn-equip",   Button).disabled = not has_item
+            self.query_one("#eq-btn-discard", Button).disabled = not has_item
+        except Exception:
+            pass
 
     # ── events ────────────────────────────────────────────────────────────
 
@@ -406,9 +514,18 @@ class EquipOverlay(Widget):
 
     @on(ListView.Selected, "#eq-list")
     def _on_selected(self, event: ListView.Selected) -> None:
-        """Mouse click or Enter on a row — open the action modal."""
+        """Click only highlights the row — use Enter or the Equip button to act."""
         event.stop()
+
+    @on(Button.Pressed, "#eq-btn-equip")
+    def _on_equip_btn(self) -> None:
         self._open_action_modal()
+
+    @on(Button.Pressed, "#eq-btn-discard")
+    def _on_discard_btn(self) -> None:
+        item = self._highlighted_item()
+        if item is not None:
+            self._do_discard(item)
 
     # ── actions ───────────────────────────────────────────────────────────
 

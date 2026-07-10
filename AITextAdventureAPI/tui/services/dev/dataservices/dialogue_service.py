@@ -15,8 +15,14 @@ from tui.services.dev.dataservices.models import (
     DialogueTaskNode,
 )
 
-# ── Module-level tree cache (mutated by catalog._load_all) ────────────────
+# ── Module-level caches (mutated by catalog._load_all) ────────────────────
 _DIALOG_TREE: List[DialogueActNode] = []
+
+# (npc_id, dialog_id) → list of spoken lines
+_DIALOG_INDEX: Dict[Tuple[Any, Any], List[str]] = {}
+
+# npc_id → display name
+_NAME_BY_ID: Dict[str, str] = {}
 
 
 # ── Act / chapter metadata ────────────────────────────────────────────────
@@ -65,12 +71,16 @@ _REGION_STORY_META: Dict[str, Tuple[str, str]] = {
     "swamp":     ("Swamp",     "Grimnaw vs Lich-King Miregloom"),
 }
 
-
 # Act label for each STORY_GROUPS key that doesn't use chapter-range grouping
 _STORY_GROUP_ACT_LABELS: Dict[str, str] = {
     "regional_stories": "Regional Hero Arcs",
     "city_stories":     "City Stories",
 }
+
+# The five player-character npc_ids that pending_character resolves to at runtime
+_PENDING_CHARACTER_IDS: Tuple[str, ...] = (
+    "technique", "magic", "tech", "skill", "faith",
+)
 
 
 # ── Public filter API ─────────────────────────────────────────────────────
@@ -203,27 +213,60 @@ def _build_task_nodes_from_chapter(
 def _build_dialogue_tree(const: Any) -> List[DialogueActNode]:
     """Build the dialogue tree from STORY_GROUPS (main_story, regional_stories, city_stories).
 
+    Also populates the module-level _DIALOG_INDEX and _NAME_BY_ID caches so
+    the timeline detail panel can look up dialog lines for events.
+
     Falls back to individual MAIN_STORY_SETTINGS / PRIMARY_STORIES list access
     if STORY_GROUPS is not present so older constants still work.
     """
+    # ── Build dialog index ────────────────────────────────────────────────
+    # Start from the top-level NPC_DIALOG (main story + regional + city dialog
+    # that constants.py aggregates at the top level).
     dialog_index: Dict[Tuple[Any, Any], List[str]] = {}
-    for dlg in getattr(const, "NPC_DIALOG", []) or []:
-        if not isinstance(dlg, dict):
-            continue
-        key = (dlg.get("npc_id"), dlg.get("dialog_id"))
-        dialog_index[key] = list(dlg.get("dialog") or [])
 
+    def _index_npc_dialog(dialog_list: Any) -> None:
+        """Index a list of NPC dialog dicts into dialog_index."""
+        for dlg in (dialog_list or []):
+            if not isinstance(dlg, dict):
+                continue
+            key = (dlg.get("npc_id"), dlg.get("dialog_id"))
+            dialog_index[key] = list(dlg.get("dialog") or [])
+
+    _index_npc_dialog(getattr(const, "NPC_DIALOG", []))
+
+    # Also index npc_dialog embedded inside each story settings dict,
+    # because city stories (and some regional ones) store their NPC_DIALOG
+    # there rather than (or in addition to) the top-level aggregate.
+    story_groups = getattr(const, "STORY_GROUPS", None)
+    if story_groups:
+        for story_list in story_groups.values():
+            for story_settings in (story_list or []):
+                if isinstance(story_settings, dict):
+                    _index_npc_dialog(story_settings.get("npc_dialog"))
+    else:
+        for chapter_settings in getattr(const, "MAIN_STORY_SETTINGS", []) or []:
+            if isinstance(chapter_settings, dict):
+                _index_npc_dialog(chapter_settings.get("npc_dialog"))
+        for primary_story in getattr(const, "PRIMARY_STORIES", []) or []:
+            if isinstance(primary_story, dict):
+                _index_npc_dialog(primary_story.get("npc_dialog"))
+
+    # ── Build name map ────────────────────────────────────────────────────
     name_by_id: Dict[str, str] = {}
     for npc in list(getattr(const, "NPCS", []) or []) + list(getattr(const, "PLAYER_NPCS", []) or []):
         if isinstance(npc, dict) and npc.get("npc_id"):
             name_by_id[str(npc["npc_id"])] = str(npc.get("name", npc["npc_id"]))
 
+    # Persist to module-level caches for use by detail_panel event renderer
+    _DIALOG_INDEX.clear()
+    _DIALOG_INDEX.update(dialog_index)
+    _NAME_BY_ID.clear()
+    _NAME_BY_ID.update(name_by_id)
+
+    # ── Build act tree ────────────────────────────────────────────────────
     acts: Dict[str, Dict[str, DialogueChapterNode]] = {}
 
-    story_groups = getattr(const, "STORY_GROUPS", None)
-
     if story_groups:
-        # Preferred path — driven by STORY_GROUPS in declared order
         for group_key, story_list in story_groups.items():
             if not story_list:
                 continue
@@ -235,7 +278,6 @@ def _build_dialogue_tree(const: Any) -> List[DialogueActNode]:
                     dialog_index, name_by_id, acts,
                 )
     else:
-        # Fallback path — individual list access (pre-STORY_GROUPS constants)
         for chapter_settings in getattr(const, "MAIN_STORY_SETTINGS", []) or []:
             if isinstance(chapter_settings, dict):
                 _process_story(chapter_settings, "main_story", dialog_index, name_by_id, acts)

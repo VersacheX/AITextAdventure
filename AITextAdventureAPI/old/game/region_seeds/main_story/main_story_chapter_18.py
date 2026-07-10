@@ -29,6 +29,7 @@ NPCS = [
 			" schedules its correction with the cold, procedural certainty of a bureaucratic system that has"
 			" achieved total self-belief. It speaks in declarative, all-caps proclamations, each one a verdict."
 		),
+		"theme_song": "Immediate Music, Darkness on the Edge of Power",
 		"psychology": {
 			"mbti": "ISTJ-shadow",
 			"dominant": "Si - Enforces an eternal, unchangeable protocol of ordered collapse, treating the accumulated inefficiencies of existence as violations requiring systematic correction.",
@@ -45,7 +46,8 @@ NPCS = [
 			"growth_line": "Moves to Type 7 — (Hypothetically) Would discover that existence has value beyond efficiency, and that the equation includes beauty.",
 			"instinctual_variant": "sp/so — Operates entirely on systemic self-preservation logic; its social mandate is the enforcement of ordered collapse on all things."
 		},
-        'image': 'voidwalkers:cataclysm1.jpeg'
+        'image': 'voidwalkers:cataclysm1.jpeg',
+		'song_id': 'darkness_on_the_edge_of_power_immediate_music'
 	}
 ]
 

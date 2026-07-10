@@ -22,7 +22,7 @@ Image rendering requires Pillow only.  Falls back gracefully on any error.
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple
 
 from rich.markup import escape as rich_escape
 from rich.text import Text
@@ -32,14 +32,26 @@ from textual.containers import Horizontal, Vertical
 from textual.widget import Widget
 from textual.widgets import Static
 
-from tui.services.dev.dataservices import DevRecord, DialogueLine, NpcRecordNode, TimelineTaskNode
+from tui.services.dev.dataservices import (
+    DevRecord,
+    DialogueLine,
+    NpcRecordNode,
+    TimelineTaskNode,
+    get_dialog_index,
+    get_npc_names,
+)
 
 if TYPE_CHECKING:
     from tui.screens.dev.data_mgmt.data_mgmt_screen import DataMgmtScreen
 
-_ASSETS_DIR  = Path(__file__).parent.parent.parent.parent / "assets"
+_ASSETS_DIR   = Path(__file__).parent.parent.parent.parent / "assets"
 _IMG_MAX_COLS = 38
 _IMG_MAX_ROWS = 20
+
+# The five player-character npc_ids that pending_character resolves to at runtime
+_PENDING_CHARACTER_IDS: Tuple[str, ...] = (
+    "technique", "magic", "tech", "skill", "faith",
+)
 
 
 def _resolve_asset(filename: str) -> Path | None:
@@ -61,11 +73,7 @@ def _resolve_asset(filename: str) -> Path | None:
 
 
 def _extract_quick_stats(detail: str) -> tuple[str, str]:
-    """Parse the pre-formatted detail string and return (mbti_line, enneagram_line).
-
-    Looks for the first lines starting with 'MBTI:' and 'Enneagram:'.
-    Returns empty strings if not found.
-    """
+    """Parse the pre-formatted detail string and return (mbti_line, enneagram_line)."""
     mbti = ""
     enneagram = ""
     for line in detail.splitlines():
@@ -145,14 +153,12 @@ class NpcDetailPanel(Widget):
         super().__init__()
         self._record = record
 
-        # Resolve asset path (pure path logic — no I/O)
         self._resolved: Optional[Path] = (
             _resolve_asset(record.image) if record.image else None
         )
         self._cols: int = 0
         self._rows: int = 0
 
-        # Read image dimensions only (PIL lazy header read, ~1ms, no pixel decode)
         if self._resolved is not None:
             try:
                 from PIL import Image as PilImage  # noqa: PLC0415
@@ -202,7 +208,6 @@ class NpcDetailPanel(Widget):
         from tui.services.dev.npc_image_cache import get_cached  # noqa: PLC0415
         from tui.services.dev.npc_image_renderer import chafa_available, get_portrait_ansi  # noqa: PLC0415
 
-        # Check cache BEFORE rendering so we can show an accurate notification.
         renderer_key = "chafa" if chafa_available() else "braille"
         was_cached = get_cached(self._resolved, self._cols, self._rows, renderer_key) is not None
 
@@ -219,8 +224,6 @@ class NpcDetailPanel(Widget):
             self.app.call_from_thread(self._apply_portrait, ansi)
 
     def _apply_portrait(self, ansi: str) -> None:
-        # Update the pre-mounted _ClickablePortrait in-place.
-        # Static.update() is synchronous — safe to call via call_from_thread.
         try:
             portrait = self.query_one("#npc-portrait", _ClickablePortrait)
             portrait.update(Text.from_ansi(ansi))
@@ -228,83 +231,130 @@ class NpcDetailPanel(Widget):
             pass
 
 
-# ── Timeline detail ───────────────────────────────────────────────────────
+# ── Timeline event formatting ─────────────────────────────────────────────
 
-# Maps raw event_type strings to a short human label + which param keys matter.
-_EVENT_TYPE_META: Dict[str, tuple[str, List[str]]] = {
-    "award_task":               ("Award Task",           ["task_id"]),
-    "award_item":               ("Award Item",           ["item_id"]),
-    "award_money":              ("Award Money",          ["amount"]),
-    "remove_item":              ("Remove Item",          ["item_id"]),
-    "initiate_dialog":          ("Dialogue",             ["npc_id", "dialog_id"]),
-    "initiate_character_dialog":("Character Dialogue",   ["npc_id", "dialog_id"]),
-    "set_npc_standing_text":    ("NPC Standing Text",    ["npc_id", "standing_text"]),
-    "hide_npc":                 ("Hide NPC",             ["npc_id"]),
-    "show_npc":                 ("Show NPC",             ["npc_id", "location"]),
-    "create_npc":               ("Create NPC",           ["npc_id", "location"]),
-    "character_join":           ("Character Join",       ["character_id"]),
-    "player_character_join":    ("Player Character Join",["character_id"]),
-    "add_pending_character":    ("Add Pending Character",[]),
-    "create_character_npc":     ("Create Character NPC", ["location"]),
-    "set_player_location":      ("Set Player Location",  ["location", "region_id"]),
-    "set_aircraft":             ("Set Aircraft",         ["aircraft_id"]),
-    "allow_ocean_flight":       ("Allow Ocean Flight",   []),
-    "can_aircraft_fly":         ("Set Aircraft Flyable", ["can_fly"]),
-    "begin_combat":             ("Begin Combat",         ["hostile_id", "region_id"]),
-    "advance_chapter":          ("Advance Chapter",      []),
-    "complete_intro_story":     ("Complete Intro Story", []),
-    "complete_region_quest":    ("Complete Region Quest",["region_id"]),
-    "create_dungeon":           ("Create Dungeon",       ["dungeon_id", "location"]),
-    "lock_dungeon":             ("Lock Dungeon",         ["dungeon_id"]),
-    "unlock_dungeon":           ("Unlock Dungeon",       ["dungeon_id"]),
-    "set_dungeon_locked_text":  ("Set Dungeon Lock Text",["dungeon_id", "locked_text"]),
-    "set_player_in_dungeon":    ("Place Player in Dungeon", ["dungeon_id", "location"]),
-    "remove_player_from_dungeon":("Remove Player from Dungeon", ["dungeon_id"]),
-    "dungeon_add_treasure":     ("Dungeon Add Treasure", ["dungeon_id", "item_id"]),
-    "dungeon_add_npc":          ("Dungeon Add NPC",      ["dungeon_id", "npc_id"]),
-    "set_npc_met":              ("Set NPC Met",          ["npc_id"]),
-    "unlock_npc_log":           ("Unlock NPC Log",       []),
-    "remove_ocean":             ("Remove Ocean",         []),
-    "unlock_hyperway":          ("Unlock Hyperway",      []),
-    "lock_hyperway":            ("Lock Hyperway",        []),
-    "cancel_task":              ("Cancel Task",          ["task_id"]),
-    "remove_task":              ("Remove Task",          ["task_id"]),
-}
+def _speaker_label(npc_id: Optional[str], name_map: Dict[str, str]) -> str:
+    """Resolve an npc_id to a display name, handling special placeholders."""
+    if not npc_id:
+        return "Narrator"
+    if npc_id in name_map:
+        return name_map[npc_id]
+    return npc_id.replace("_", " ").title()
 
 
-def _format_event(ev: Dict[str, Any]) -> str:
-    """Format a single task event dict into a concise readable line."""
+def _format_dialog_event(
+    ev: Dict[str, Any],
+    is_character_dialog: bool,
+    dialog_index: Dict[Tuple[Any, Any], List[str]],
+    name_map: Dict[str, str],
+) -> List[str]:
+    """
+    Format an initiate_dialog or initiate_character_dialog event into readable lines.
+
+    Rules:
+    - npc_id=None or missing → "Narrator"
+    - npc_id="pending_character" (dialog only) → expand to all 5 player-character
+      possibilities, each with their own lines if found in the index.
+    - Otherwise look up (npc_id, dialog_id) in the dialog index and emit lines.
+    - Returns a list of strings; each will become one Static row.
+    """
+    params    = ev.get("params") or {}
+    npc_id    = params.get("npc_id") or None
+    dialog_id = params.get("dialog_id") or ""
+    prefix    = "Character Dialog" if is_character_dialog else "Dialog"
+
+    # pending_character expands to all 5 player-character possibilities
+    if npc_id == "pending_character":
+        out: List[str] = []
+        for cid in _PENDING_CHARACTER_IDS:
+            lines = dialog_index.get((cid, dialog_id), [])
+            cname = name_map.get(cid, cid.title())
+            if lines:
+                out.append(f"  {prefix}  {cname}  (pending)")
+                for ln in lines:
+                    out.append(f"    \"{rich_escape(str(ln))}\"")
+            else:
+                out.append(f"  {prefix}  {cname}  (pending)  [{rich_escape(dialog_id)}]")
+        return out
+
+    speaker  = _speaker_label(npc_id, name_map)
+    dlg_lines = dialog_index.get((npc_id, dialog_id), [])
+
+    if dlg_lines:
+        out = [f"  {prefix}  {rich_escape(speaker)}"]
+        for ln in dlg_lines:
+            out.append(f"    \"{rich_escape(str(ln))}\"")
+        return out
+
+    # No lines found — show the reference so it's still informative
+    return [f"  {prefix}  {rich_escape(speaker)}  [{rich_escape(dialog_id)}]"]
+
+
+def _format_event_lines(
+    ev: Dict[str, Any],
+    dialog_index: Dict[Tuple[Any, Any], List[str]],
+    name_map: Dict[str, str],
+) -> List[str]:
+    """
+    Format a single task event dict into one or more readable display lines.
+
+    Output format by event type:
+    - initiate_dialog / initiate_character_dialog:
+        Dialog  Speaker
+          "line one"
+          "line two"
+    - set_npc_standing_text:
+        NPC Standing Text  velka  "text"
+    - award_task / remove_task / cancel_task:
+        Award Task  task_id
+    - award_item / remove_item:
+        Award Item  item_id
+    - award_money:
+        Award Money  amount
+    - Everything else:
+        Event Label  key=value  key=value  ...
+    """
     raw_type = str(ev.get("event_type", "?"))
     params   = ev.get("params") or {}
 
-    meta = _EVENT_TYPE_META.get(raw_type)
-    if meta is None:
-        # Unknown type — show type + raw params
-        label      = raw_type.replace("_", " ").title()
-        param_str  = "  ".join(f"{k}={v}" for k, v in params.items()) if params else ""
-        return f"{label}" + (f"  [{param_str}]" if param_str else "")
+    if raw_type == "initiate_dialog":
+        return _format_dialog_event(ev, False, dialog_index, name_map)
 
-    label, key_order = meta
+    if raw_type == "initiate_character_dialog":
+        return _format_dialog_event(ev, True, dialog_index, name_map)
 
-    # Pull only the meaningful keys in declared order, then any extras not listed
-    parts: List[str] = []
-    seen: set = set()
-    for k in key_order:
-        if k in params:
-            v = params[k]
-            if isinstance(v, list):
-                v = "; ".join(str(x) for x in v)
-            parts.append(f"{k}={v}")
-            seen.add(k)
-    for k, v in params.items():
-        if k not in seen:
-            if isinstance(v, list):
-                v = "; ".join(str(x) for x in v)
-            parts.append(f"{k}={v}")
+    if raw_type == "set_npc_standing_text":
+        npc_id  = params.get("npc_id") or ""
+        speaker = _speaker_label(npc_id, name_map) if npc_id else "?"
+        texts   = params.get("standing_text") or []
+        if isinstance(texts, list):
+            joined = "  ".join(str(t) for t in texts)
+        else:
+            joined = str(texts)
+        return [f"  NPC Standing Text  {rich_escape(speaker)}  \"{rich_escape(joined)}\""]
 
-    param_str = "  ".join(parts)
-    return f"{label}" + (f"  [{param_str}]" if param_str else "")
+    if raw_type in ("award_task", "remove_task", "cancel_task"):
+        label   = raw_type.replace("_", " ").title()
+        task_id = str(params.get("task_id", "?"))
+        return [f"  {label}  {rich_escape(task_id)}"]
 
+    if raw_type in ("award_item", "remove_item"):
+        label   = raw_type.replace("_", " ").title()
+        item_id = str(params.get("item_id", "?"))
+        return [f"  {label}  {rich_escape(item_id)}"]
+
+    if raw_type == "award_money":
+        return [f"  Award Money  {params.get('amount', '?')}"]
+
+    # Generic fallback: Event Label  key=value  key=value
+    label     = raw_type.replace("_", " ").title()
+    param_str = "  ".join(
+        f"{k}={rich_escape(str(v))}" for k, v in params.items()
+    )
+    return [f"  {label}" + (f"  {param_str}" if param_str else "")]
+
+
+# ── Timeline detail widget ────────────────────────────────────────────────
 
 class TimelineDetailPanel(Widget):
     """Sectioned detail panel for a single timeline task.
@@ -312,7 +362,7 @@ class TimelineDetailPanel(Widget):
     Layout:
       ┌─ Task header (id, source, type, target) ─┐
       ├─ Acquired events ─────────────────────────┤
-      ├─ Completed events ────────────────────────┘
+      └─ Completed events ────────────────────────┘
 
     ``height: auto`` lets content overflow the outer ScrollableContainer.
     """
@@ -339,7 +389,6 @@ class TimelineDetailPanel(Widget):
     .tl-event-row {
         width: 100%;
         height: auto;
-        padding: 0 0 0 2;
         color: $text 85%;
     }
     .tl-empty {
@@ -353,21 +402,27 @@ class TimelineDetailPanel(Widget):
     def __init__(self, task_node: TimelineTaskNode | None, summary_text: str = "") -> None:
         super().__init__()
         self._task_node    = task_node
-        self._summary_text = summary_text  # used when showing a subtree summary
+        self._summary_text = summary_text
 
     def compose(self) -> ComposeResult:
         if self._task_node is None:
-            yield Static(self._summary_text or "[dim]← select a task from the tree[/dim]",
-                         classes="tl-section")
+            yield Static(
+                self._summary_text or "[dim]← select a task from the tree[/dim]",
+                classes="tl-section",
+            )
             return
 
-        node    = self._task_node
-        task    = node.task
-        ttype   = str(task.get("type", "?"))
-        to_type = task.get("to_type")
-        to_id   = task.get("to_id")
-        acquire = task.get("task_acquire_events") or []
+        node     = self._task_node
+        task     = node.task
+        ttype    = str(task.get("type", "?"))
+        to_type  = task.get("to_type")
+        to_id    = task.get("to_id")
+        acquire  = task.get("task_acquire_events") or []
         complete = task.get("task_complete_events") or []
+
+        # Pull the shared indexes (already built; zero cost after first load)
+        dialog_index = get_dialog_index()
+        name_map     = get_npc_names()
 
         # ── Header section ────────────────────────────────────────────
         header_lines = [
@@ -396,7 +451,8 @@ class TimelineDetailPanel(Widget):
             if acquire:
                 for ev in acquire:
                     if isinstance(ev, dict):
-                        yield Static(f"  {rich_escape(_format_event(ev))}", classes="tl-event-row")
+                        for line in _format_event_lines(ev, dialog_index, name_map):
+                            yield Static(line, classes="tl-event-row")
             else:
                 yield Static("  (none)", classes="tl-empty")
 
@@ -406,7 +462,8 @@ class TimelineDetailPanel(Widget):
             if complete:
                 for ev in complete:
                     if isinstance(ev, dict):
-                        yield Static(f"  {rich_escape(_format_event(ev))}", classes="tl-event-row")
+                        for line in _format_event_lines(ev, dialog_index, name_map):
+                            yield Static(line, classes="tl-event-row")
             else:
                 yield Static("  (none)", classes="tl-empty")
 

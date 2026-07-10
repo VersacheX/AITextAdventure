@@ -42,7 +42,8 @@ NPCS = [
 			"stress_line": "Moves to Type 7 — Becomes scattered and avoidant when the logs' contradictions become too overwhelming to synthesize.",
 			"growth_line": "Moves to Type 8 — Uses her understanding to take decisive, protective action.",
 			"instinctual_variant": "sp/sx — Deeply self-contained, driven by an intense personal mission to understand and transmit the truth of the first fracture."
-		}
+		},
+		"image": "npc:lumen1"
 	},
 	{
 		"npc_id": "jessa",
@@ -67,7 +68,8 @@ NPCS = [
 			"stress_line": "Moves to Type 3 — Becomes obsessively focused on the appearance of productivity when her archiving feels pointless.",
 			"growth_line": "Moves to Type 9 — Finds peace in accepting that some truths are held in tension rather than resolved.",
 			"instinctual_variant": "sp/so — Finds safety in the social structure of her archive role, and self-preservation in the act of meticulous record-keeping."
-		}
+		},
+		"image": "npc:jessa1"
 	},
 	{
 		"npc_id": "scribe_halden",
@@ -92,7 +94,8 @@ NPCS = [
 			"stress_line": "Moves to Type 4 — Becomes withdrawn and melancholic when the paradoxes of his role become undeniable.",
 			"growth_line": "Moves to Type 7 — Would learn to find freedom and flexibility beyond the letter of the law.",
 			"instinctual_variant": "so/sp — Enforces social conformity as a means of maintaining both the communal structure and his own sense of purpose."
-		}
+		},
+		"image": "npc:scribe_halden1"
 	},
 	{
 		"npc_id": "vex",
@@ -227,6 +230,7 @@ NPCS = [
 			" unravels the logic that gives purpose its structure. It speaks in a voice of static and shattered"
 			" glass, targeting each person's core drive and methodically dismantling it."
 		),
+		'theme_song': 'Everything In Its Right Place, Radiohead',
 		"psychology": {
 			"mbti": "INTP-shadow",
 			"dominant": "Ti - Applies merciless internal logic to deconstruct every claim of meaning, purpose, or identity, revealing what it frames as the hollow mechanism beneath.",
@@ -243,7 +247,8 @@ NPCS = [
 			"growth_line": "Moves to Type 8 — (Hypothetically) Would learn to use its understanding of systems to build rather than destroy.",
 			"instinctual_variant": "sp/sx — Utterly consumed by its own internal state of negation; engages with the world only to pull it down into the void."
 		},
-        'image': 'voidwalkers:crux1.jpeg'
+        'image': 'voidwalkers:crux1.jpeg',
+		'song_id': 'everything_in_its_right_place_radiohead'
 	}
 ]
 

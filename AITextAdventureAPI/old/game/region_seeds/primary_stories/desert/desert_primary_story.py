@@ -273,13 +273,13 @@ NPCS = [
 	{
 		'npc_id': 'sable',
 		'name': 'Sable',
+		"theme_song": "Salt — Daughter or skin, Grimes",
 		'description': (
 			'A desert witch who sells miracles to travelers, though she no longer believes in them herself.'
 			' She once failed to save a caravan swallowed by a sand-sink during the first Fracture wave,'
 			' and she still hears their voices beneath the dunes. Despite her charisma and insight,'
 			' she carries a quiet grief that shapes every choice she makes.'
 		),
-		"theme_song": "Salt — Daughter",
 		"psychology": {
 			"mbti": "ENFJ",
 			"dominant": "Fe — Reads people instantly and speaks with charismatic authority, guiding others with emotional precision.",
@@ -296,7 +296,8 @@ NPCS = [
           "growth_line": "Moves to Type 4 — Learns to confront her own grief and find her identity outside of her service to others.",
           "instinctual_variant": "so/sx — Socially charismatic and focused on the needs of the group, but forms intense, emotionally charged connections."
         },
-        'image': 'sable1.jpeg'
+        'image': 'sable1.jpeg',
+		'song_id': 'skin_grimes'
 	},
 	{
 		'npc_id': 'zaruun',

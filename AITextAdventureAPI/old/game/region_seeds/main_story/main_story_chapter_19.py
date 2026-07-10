@@ -61,6 +61,7 @@ NPCS = [
 			" has no room for shadow, loss, or truth, and the people inside it are preserved rather than living."
 			" She is exhausted, devoted, and terrified of what happens if she stops."
 		),
+        "theme_song": "Outro, M83",
 		"psychology": {
 			"mbti": "ENFJ",
 			"dominant": "Fe - Pours herself entirely into the emotional wellbeing of her community, making their feelings her reason for existing.",
@@ -77,7 +78,8 @@ NPCS = [
 			"growth_line": "Moves to Type 4 — Discovers her own identity and voice outside of her role as protector; learns that authentic song requires her whole self, including the broken parts.",
 			"instinctual_variant": "so/sp — Entirely oriented around the social wellbeing of her community; her self-preservation is tied to the act of communal preservation."
 		},
-        'image': 'seraphine1.jpeg'
+        'image': 'seraphine1.jpeg',
+		'song_id': 'outro_m83'
 	},
 	{
 		"npc_id": "twisted_darkwood",
@@ -104,7 +106,8 @@ NPCS = [
 			"stress_line": "Moves to Type 3 — Becomes desperately performative when challenged, generating increasingly vivid false memories to overwhelm resistance.",
 			"growth_line": "Moves to Type 9 — (Hypothetically) Would dissolve into the peace of letting the true past simply be what it was.",
 			"instinctual_variant": "sp/so — Obsessively focused on self-preservation through the preservation of its false archive."
-		}
+		},
+		'image': 'bosses:twisted_darkwood1'
 	}
 ]
 

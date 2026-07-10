@@ -69,6 +69,55 @@ def _collect_buildings(city: Any) -> list[str]:
 _DEFAULT_DESC = "No description provided."
 
 
+def _resolve_city_description(city: Any) -> str:
+    """Return the city description, trying multiple sources in priority order.
+
+    1. The value stored directly on the City object (set by region_builder.py).
+    2. Direct constants lookup via game.constants — same key the region builder
+       uses: ``{REGION}_{CITY_TYPE}_CITY_DESCRIPTION``.
+    3. The TUI dataservices catalog (``record_builders._build_cities`` already
+       pulled every CITY_DESCRIPTION at startup) — most reliable when the
+       game.constants import path is unavailable in the TUI runtime.
+    """
+    stored = str(getattr(city, "description", "") or "").strip()
+    if stored and stored != _DEFAULT_DESC:
+        return stored
+
+    region_name = getattr(city, "parent_region_name", None)
+    city_name   = getattr(city, "city_name", None)
+
+    if not region_name or not city_name:
+        return ""
+
+    # ── attempt 1: direct game.constants attribute ────────────────────────
+    try:
+        import game.constants as const  # noqa: PLC0415
+        attr = f"{region_name.upper()}_{city_name.upper()}_CITY_DESCRIPTION"
+        fallback = getattr(const, attr, None)
+        if fallback and str(fallback).strip():
+            return str(fallback).strip()
+    except Exception:
+        pass
+
+    # ── attempt 2: dataservices catalog (already loaded) ─────────────────
+    # record_builders._build_cities produces DevRecords with id="{region}_{size}"
+    # and detail starting with the description before the first blank line.
+    try:
+        from tui.services.dev.dataservices.catalog import get_records  # noqa: PLC0415
+        city_id = f"{region_name}_{city_name}"
+        for record in get_records("city"):
+            if record.id == city_id:
+                detail = record.detail or ""
+                # detail format: "{description}\n\nBuildings (N):\n  ..."
+                desc_part = detail.split("\n\n")[0].strip()
+                if desc_part and desc_part != _DEFAULT_DESC and "No description" not in desc_part:
+                    return desc_part
+    except Exception:
+        pass
+
+    return ""
+
+
 def _build_city_detail(city: Any | None) -> str:
     if city is None:
         return "[dim]No cities visited yet.[/dim]"
@@ -79,8 +128,19 @@ def _build_city_detail(city: Any | None) -> str:
         "",
     ]
 
-    desc = str(getattr(city, "description", "") or "").strip()
-    if desc and desc != _DEFAULT_DESC:
+    region_name = getattr(city, "parent_region_name", None)
+    city_type   = getattr(city, "city_name", None)
+    if region_name or city_type:
+        meta_parts: list[str] = []
+        if region_name:
+            meta_parts.append(rich_escape(str(region_name).capitalize()))
+        if city_type:
+            meta_parts.append(rich_escape(str(city_type).replace("_", " ").title()))
+        lines.append(f"[dim]{' · '.join(meta_parts)}[/dim]")
+        lines.append("")
+
+    desc = _resolve_city_description(city)
+    if desc:
         lines.append(rich_escape(desc))
     else:
         lines.append(f"[dim]{_DEFAULT_DESC}[/dim]")
@@ -129,7 +189,7 @@ class CityLogOverlay(Widget):
         layer: overlay;
         dock: bottom;
         width: 100%;
-        height: 20;
+        height: 22;
         background: $surface;
         border-top: solid $accent;
         layout: vertical;
@@ -159,8 +219,8 @@ class CityLogOverlay(Widget):
     #city-detail-panel {
         width: 65;
         height: 100%;
-        padding: 0;
         border-left: solid $accent 30%;
+        overflow-y: auto;
     }
 
     #city-detail-text {
@@ -220,6 +280,11 @@ class CityLogOverlay(Widget):
         self.query_one("#city-detail-text", Static).update(
             _build_city_detail(city)
         )
+        # scroll back to top whenever the selection changes
+        try:
+            self.query_one("#city-detail-panel", ScrollableContainer).scroll_home(animate=False)
+        except Exception:
+            pass
 
     # ── events ────────────────────────────────────────────────────────────────
 

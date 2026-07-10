@@ -285,7 +285,8 @@ NPCS = [
           "growth_line": "Moves to Type 5 — Becomes more introspective and able to confront her fears with wisdom instead of just motion.",
           "instinctual_variant": "sx/so — Seeks intense experiences and connections, using her energy to engage with the world and keep fear at bay."
         },
-        'image': 'nia1.jpeg'
+        'image': 'nia1.jpeg',
+        'song_id': 'dog_days_are_over_florence_and_the_machine'
     },
     {
         'npc_id': 'serene',

@@ -14,7 +14,9 @@ from tui.services.dev.dataservices.models import (
     TimelineGroupNode,
 )
 from tui.services.dev.dataservices.dialogue_service import (
+    _DIALOG_INDEX,
     _DIALOG_TREE,
+    _NAME_BY_ID,
     _build_dialogue_tree,
 )
 from tui.services.dev.dataservices.timeline_service import (
@@ -121,6 +123,20 @@ def get_npc_tree() -> List[NpcGroupNode]:
     if not _CACHE:
         _load_all()
     return _NPC_TREE
+
+
+def get_dialog_index() -> Dict[Tuple[Any, Any], List[str]]:
+    """Return the (npc_id, dialog_id) → lines index built from NPC_DIALOG."""
+    if not _CACHE:
+        _load_all()
+    return _DIALOG_INDEX
+
+
+def get_npc_names() -> Dict[str, str]:
+    """Return the npc_id → display name map built from NPCS + PLAYER_NPCS."""
+    if not _CACHE:
+        _load_all()
+    return _NAME_BY_ID
 
 
 def _load_all() -> None:

@@ -28,10 +28,8 @@ def _build_characters(const: Any) -> List[DevRecord]:
             lines.append(f"Core fear: {enneagram.get('core_fear', '?')}")
             lines.append(f"Core desire: {enneagram.get('core_desire', '?')}")
         records.append(DevRecord(
-            category="character",
-            id=cid,
-            name=name,
-            subtitle="Origin party member",
+            category="character", id=cid, name=name,
+            subtitle=psych.get("mbti", ""),
             detail="\n".join(lines),
         ))
 
@@ -71,19 +69,12 @@ def _build_characters(const: Any) -> List[DevRecord]:
 def _build_items(const: Any) -> List[DevRecord]:
     records: List[DevRecord] = []
     for seed in getattr(const, "UTILITY_ITEM_SEEDS", []) or []:
-        rid    = str(seed.get("id", "?"))
-        name   = str(seed.get("name", rid))
-        rarity = str(seed.get("rarity", "?"))
-        lvl    = seed.get("min_spawn_level", "?")
-        lines = [
-            str(seed.get("description", "")), "",
-            f"Effect: {seed.get('effect', '?')}",
-            f"Value: {seed.get('value', 0)}   Uses: {seed.get('uses', 1)}",
-            f"Rarity: {rarity}   Min level: {lvl}",
-        ]
+        iid  = str(seed.get("id", "?"))
+        name = str(seed.get("name", iid))
         records.append(DevRecord(
-            category="item", id=rid, name=name,
-            subtitle=f"{rarity} · Lv.{lvl}", detail="\n".join(lines),
+            category="item", id=iid, name=name,
+            subtitle=f"value:{seed.get('value',0)}",
+            detail=str(seed.get("description", "")),
         ))
     return records
 
@@ -91,80 +82,79 @@ def _build_items(const: Any) -> List[DevRecord]:
 def _build_special_items(const: Any) -> List[DevRecord]:
     records: List[DevRecord] = []
     for seed in getattr(const, "SPECIAL_ITEM_SEEDS", []) or []:
-        rid    = str(seed.get("id", "?"))
-        name   = str(seed.get("name", rid))
-        rarity = str(seed.get("rarity", "?"))
-        lines  = [str(seed.get("description", ""))]
-        effect_desc = seed.get("effect_description")
-        if effect_desc:
-            lines.append("")
-            lines.append(f"Effect: {effect_desc}")
+        iid  = str(seed.get("id", "?"))
+        name = str(seed.get("name", iid))
         records.append(DevRecord(
-            category="special_item", id=rid, name=name,
-            subtitle=rarity, detail="\n".join(lines),
+            category="special_item", id=iid, name=name,
+            subtitle="special",
+            detail=str(seed.get("description", "")),
         ))
     return records
 
 
 def _build_equipment(const: Any) -> List[DevRecord]:
     records: List[DevRecord] = []
-    for seed in getattr(const, "WEAPON_SEEDS", []) or []:
-        rid    = str(seed.get("id", "?"))
-        name   = str(seed.get("name", rid))
-        rarity = str(seed.get("rarity", "?"))
-        lvl    = seed.get("min_spawn_level", "?")
-        lines = [
-            str(seed.get("description", "")), "",
-            f"Damage: {seed.get('damage', 0)} ({seed.get('damage_type', '?')})   "
-            f"Crit: {seed.get('critical_chance', 0)}%",
-            f"STR {seed.get('strength', 0)}  DEX {seed.get('dexterity', 0)}  "
-            f"INT {seed.get('intelligence', 0)}",
-            f"Value: {seed.get('value', 0)}   Rarity: {rarity}   Min level: {lvl}",
-        ]
-        records.append(DevRecord(
-            category="equipment", id=rid, name=name,
-            subtitle=f"Weapon · {rarity} · Lv.{lvl}", detail="\n".join(lines),
-        ))
-    armor_seeds = getattr(const, "ARMOR_SEEDS", {}) or {}
-    for slot, seeds in armor_seeds.items():
-        for seed in seeds or []:
-            rid    = str(seed.get("id", "?"))
-            name   = str(seed.get("name", rid))
-            rarity = str(seed.get("rarity", "?"))
-            lvl    = seed.get("min_spawn_level", "?")
-            lines = [
-                str(seed.get("description", "")), "",
-                f"Defense: {seed.get('defense', 0)}   Slot: {slot}",
-                f"STR {seed.get('strength', 0)}  DEX {seed.get('dexterity', 0)}  "
-                f"INT {seed.get('intelligence', 0)}  CON {seed.get('constitution', 0)}",
-                f"Value: {seed.get('value', 0)}   Rarity: {rarity}   Min level: {lvl}",
-            ]
+
+    # WEAPON_SEEDS is a flat list; ARMOR_SEEDS is a dict keyed by slot.
+    weapon_seeds = getattr(const, "WEAPON_SEEDS", []) or []
+    if isinstance(weapon_seeds, list):
+        for seed in weapon_seeds:
+            iid  = str(seed.get("id", "?"))
+            name = str(seed.get("name", iid))
             records.append(DevRecord(
-                category="equipment", id=rid, name=name,
-                subtitle=f"Armor ({slot}) · {rarity} · Lv.{lvl}", detail="\n".join(lines),
+                category="equipment", id=iid, name=name,
+                subtitle="weapon",
+                detail=str(seed.get("description", "")),
             ))
+    elif isinstance(weapon_seeds, dict):
+        for slot, seed_list in weapon_seeds.items():
+            for seed in seed_list or []:
+                iid  = str(seed.get("id", "?"))
+                name = str(seed.get("name", iid))
+                records.append(DevRecord(
+                    category="equipment", id=iid, name=name,
+                    subtitle=f"weapon · {slot}",
+                    detail=str(seed.get("description", "")),
+                ))
+
+    armor_seeds = getattr(const, "ARMOR_SEEDS", {}) or {}
+    if isinstance(armor_seeds, dict):
+        for slot, seed_list in armor_seeds.items():
+            for seed in seed_list or []:
+                iid  = str(seed.get("id", "?"))
+                name = str(seed.get("name", iid))
+                records.append(DevRecord(
+                    category="equipment", id=iid, name=name,
+                    subtitle=f"armor · {slot}",
+                    detail=str(seed.get("description", "")),
+                ))
+    elif isinstance(armor_seeds, list):
+        for seed in armor_seeds:
+            iid  = str(seed.get("id", "?"))
+            name = str(seed.get("name", iid))
+            records.append(DevRecord(
+                category="equipment", id=iid, name=name,
+                subtitle="armor",
+                detail=str(seed.get("description", "")),
+            ))
+
     return records
 
 
 def _build_dungeons(const: Any) -> List[DevRecord]:
     records: List[DevRecord] = []
-    for seed in getattr(const, "DUNGEON_SETTINGS", []) or []:
-        if not isinstance(seed, dict):
-            continue
-        did      = str(seed.get("dungeon_id", "?"))
-        name     = str(seed.get("display_name", did))
-        hostiles = seed.get("hostile_seeds", []) or []
-        boss     = seed.get("boss_hostiles", []) or []
-        npcs     = seed.get("npcs", []) or []
-        items    = seed.get("items", []) or []
-        lines = [
-            f"Floors: {seed.get('floor_count', '?')}   Rooms/floor: {seed.get('rooms_per_floor', '?')}",
-            f"Hostiles: {len(hostiles)}   Boss hostiles: {len(boss)}",
-        ]
+    for ds in getattr(const, "DUNGEON_SETTINGS", []) or []:
+        did      = str(ds.get("id", "?"))
+        name     = str(ds.get("display_name", did))
+        hostiles = ds.get("hostile_seeds") or []
+        boss     = ds.get("boss_hostiles") or []
+        npcs     = ds.get("npcs") or []
+        items    = ds.get("items") or []
+        lines    = [str(ds.get("description", ""))]
         if hostiles:
             lines.append("")
-            lines.append("Hostiles:")
-            lines.extend(f"  - {h.get('name', h.get('id', '?'))}" for h in hostiles if isinstance(h, dict))
+            lines.append(f"Hostiles ({len(hostiles)}):")
+            lines.extend(f"  - {h.get('name', h.get('id', '?'))}" for h in hostiles[:10] if isinstance(h, dict))
         if boss:
             lines.append("")
             lines.append("Boss:")
@@ -183,20 +173,24 @@ def _build_dungeons(const: Any) -> List[DevRecord]:
 
 
 def _build_cities(const: Any) -> List[DevRecord]:
+    """Build city DevRecords from CITY_DATA dict, falling back to the old
+    per-attribute pattern when CITY_DATA is not present (e.g. older saves
+    loaded without the updated constants).
+    """
     records: List[DevRecord] = []
-    regions = getattr(const, "AVAILABLE_REGIONS", []) or []
-    sizes   = getattr(const, "AVAILABLE_CITIES", []) or []
-    for region in regions:
-        for size in sizes:
-            prefix  = f"{region.upper()}_{size.upper()}"
-            city_id = f"{region}_{size}"
-            fields: Dict[str, Any] = {
-                f: getattr(const, f"{prefix}_{f}", None) for f in _CITY_FIELDS
-            }
-            name        = fields.get("CITY_NAME") or city_id.replace("_", " ").title()
-            description = fields.get("CITY_DESCRIPTION") or "No description available."
-            buildings   = fields.get("BUILDINGS") or []
-            lines = [str(description)]
+
+    city_data: Dict[str, Any] = getattr(const, "CITY_DATA", None) or {}
+
+    if city_data:
+        # ── fast path: use the pre-built dict ────────────────────────────────
+        for city_id, entry in city_data.items():
+            name        = str(entry.get("name") or city_id.replace("_", " ").title())
+            description = str(entry.get("description") or "No description available.")
+            buildings   = entry.get("buildings") or []
+            # derive subtitle from city_id: "desert_large_city" → "Desert · Large City"
+            parts       = city_id.split("_", 1)
+            subtitle    = f"{parts[0].title()} · {parts[1].replace('_', ' ').title()}" if len(parts) == 2 else city_id
+            lines       = [description]
             if buildings:
                 lines.append("")
                 lines.append(f"Buildings ({len(buildings)}):")
@@ -205,8 +199,36 @@ def _build_cities(const: Any) -> List[DevRecord]:
                     for b in buildings if isinstance(b, dict)
                 )
             records.append(DevRecord(
-                category="city", id=city_id, name=str(name),
-                subtitle=f"{region.title()} · {size.replace('_', ' ').title()}",
+                category="city", id=city_id, name=name,
+                subtitle=subtitle,
                 detail="\n".join(lines),
             ))
+    else:
+        # ── fallback: old getattr pattern ────────────────────────────────────
+        regions = getattr(const, "AVAILABLE_REGIONS", []) or []
+        sizes   = getattr(const, "AVAILABLE_CITIES", []) or []
+        for region in regions:
+            for size in sizes:
+                prefix  = f"{region.upper()}_{size.upper()}"
+                city_id = f"{region}_{size}"
+                fields: Dict[str, Any] = {
+                    f: getattr(const, f"{prefix}_{f}", None) for f in _CITY_FIELDS
+                }
+                name        = fields.get("CITY_NAME") or city_id.replace("_", " ").title()
+                description = fields.get("CITY_DESCRIPTION") or "No description available."
+                buildings   = fields.get("BUILDINGS") or []
+                lines = [str(description)]
+                if buildings:
+                    lines.append("")
+                    lines.append(f"Buildings ({len(buildings)}):")
+                    lines.extend(
+                        f"  - {b.get('display_name', b.get('name', '?'))} ({b.get('type', '?')})"
+                        for b in buildings if isinstance(b, dict)
+                    )
+                records.append(DevRecord(
+                    category="city", id=city_id, name=str(name),
+                    subtitle=f"{region.title()} · {size.replace('_', ' ').title()}",
+                    detail="\n".join(lines),
+                ))
+
     return records

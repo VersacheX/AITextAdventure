@@ -754,6 +754,210 @@ SUBTYPE_META = {
  "open_area": {"domain": "passage", "hostile_prob":0.5, "connect_pool": ["alley", "street", "residence", "business"], "exclude_directions": [], "descend_to": None},
 }
 
+
+# ── City data registry ────────────────────────────────────────────────────────
+# Keyed by "{region}_{city_type}" (e.g. "desert_large_city").
+# Provides a single dict lookup to replace scattered {REGION}_{SIZE}_* attribute
+# access in overlay/service code.  All individual constants remain for backward
+# compatibility with existing code that uses them directly.
+CITY_DATA: dict = {
+    # ── desert ──────────────────────────────────────────────────────────────
+    "desert_large_city": {
+        "name":             DESERT_LARGE_CITY_CITY_NAME,
+        "description":      DESERT_LARGE_CITY_CITY_DESCRIPTION,
+        "buildings":        DESERT_LARGE_CITY_BUILDINGS,
+        "room_menu":        DESERT_LARGE_CITY_ROOM_MENU,
+        "drink_menu":       DESERT_LARGE_CITY_DRINK_MENU,
+        "subloc_map":       DESERT_LARGE_CITY_SUBLOC_MAP,
+        "sublocation_defs": DESERT_LARGE_CITY_SUBLOCATION_DEFS,
+    },
+    "desert_mid_city": {
+        "name":             DESERT_MID_CITY_CITY_NAME,
+        "description":      DESERT_MID_CITY_CITY_DESCRIPTION,
+        "buildings":        DESERT_MID_CITY_BUILDINGS,
+        "room_menu":        DESERT_MID_CITY_ROOM_MENU,
+        "drink_menu":       DESERT_MID_CITY_DRINK_MENU,
+        "subloc_map":       DESERT_MID_CITY_SUBLOC_MAP,
+        "sublocation_defs": DESERT_MID_CITY_SUBLOCATION_DEFS,
+    },
+    "desert_small_city": {
+        "name":             DESERT_SMALL_CITY_CITY_NAME,
+        "description":      DESERT_SMALL_CITY_CITY_DESCRIPTION,
+        "buildings":        DESERT_SMALL_CITY_BUILDINGS,
+        "room_menu":        DESERT_SMALL_CITY_ROOM_MENU,
+        "drink_menu":       DESERT_SMALL_CITY_DRINK_MENU,
+        "subloc_map":       DESERT_SMALL_CITY_SUBLOC_MAP,
+        "sublocation_defs": DESERT_SMALL_CITY_SUBLOCATION_DEFS,
+    },
+    # ── forest ───────────────────────────────────────────────────────────────
+    "forest_large_city": {
+        "name":             FOREST_LARGE_CITY_CITY_NAME,
+        "description":      FOREST_LARGE_CITY_CITY_DESCRIPTION,
+        "buildings":        FOREST_LARGE_CITY_BUILDINGS,
+        "room_menu":        FOREST_LARGE_CITY_ROOM_MENU,
+        "drink_menu":       FOREST_LARGE_CITY_DRINK_MENU,
+        "subloc_map":       FOREST_LARGE_CITY_SUBLOC_MAP,
+        "sublocation_defs": FOREST_LARGE_CITY_SUBLOCATION_DEFS,
+    },
+    "forest_mid_city": {
+        "name":             FOREST_MID_CITY_CITY_NAME,
+        "description":      FOREST_MID_CITY_CITY_DESCRIPTION,
+        "buildings":        FOREST_MID_CITY_BUILDINGS,
+        "room_menu":        FOREST_MID_CITY_ROOM_MENU,
+        "drink_menu":       FOREST_MID_CITY_DRINK_MENU,
+        "subloc_map":       FOREST_MID_CITY_SUBLOC_MAP,
+        "sublocation_defs": FOREST_MID_CITY_SUBLOCATION_DEFS,
+    },
+    "forest_small_city": {
+        "name":             FOREST_SMALL_CITY_CITY_NAME,
+        "description":      FOREST_SMALL_CITY_CITY_DESCRIPTION,
+        "buildings":        FOREST_SMALL_CITY_BUILDINGS,
+        "room_menu":        FOREST_SMALL_CITY_ROOM_MENU,
+        "drink_menu":       FOREST_SMALL_CITY_DRINK_MENU,
+        "subloc_map":       FOREST_SMALL_CITY_SUBLOC_MAP,
+        "sublocation_defs": FOREST_SMALL_CITY_SUBLOCATION_DEFS,
+    },
+    # ── grassland ────────────────────────────────────────────────────────────
+    "grassland_large_city": {
+        "name":             GRASSLAND_LARGE_CITY_CITY_NAME,
+        "description":      GRASSLAND_LARGE_CITY_CITY_DESCRIPTION,
+        "buildings":        GRASSLAND_LARGE_CITY_BUILDINGS,
+        "room_menu":        GRASSLAND_LARGE_CITY_ROOM_MENU,
+        "drink_menu":       GRASSLAND_LARGE_CITY_DRINK_MENU,
+        "subloc_map":       GRASSLAND_LARGE_CITY_SUBLOC_MAP,
+        "sublocation_defs": GRASSLAND_LARGE_CITY_SUBLOCATION_DEFS,
+    },
+    "grassland_mid_city": {
+        "name":             GRASSLAND_MID_CITY_CITY_NAME,
+        "description":      GRASSLAND_MID_CITY_CITY_DESCRIPTION,
+        "buildings":        GRASSLAND_MID_CITY_BUILDINGS,
+        "room_menu":        GRASSLAND_MID_CITY_ROOM_MENU,
+        "drink_menu":       GRASSLAND_MID_CITY_DRINK_MENU,
+        "subloc_map":       GRASSLAND_MID_CITY_SUBLOC_MAP,
+        "sublocation_defs": GRASSLAND_MID_CITY_SUBLOCATION_DEFS,
+    },
+    "grassland_small_city": {
+        "name":             GRASSLAND_SMALL_CITY_CITY_NAME,
+        "description":      GRASSLAND_SMALL_CITY_CITY_DESCRIPTION,
+        "buildings":        GRASSLAND_SMALL_CITY_BUILDINGS,
+        "room_menu":        GRASSLAND_SMALL_CITY_ROOM_MENU,
+        "drink_menu":       GRASSLAND_SMALL_CITY_DRINK_MENU,
+        "subloc_map":       GRASSLAND_SMALL_CITY_SUBLOC_MAP,
+        "sublocation_defs": GRASSLAND_SMALL_CITY_SUBLOCATION_DEFS,
+    },
+    # ── mountains ────────────────────────────────────────────────────────────
+    "mountains_large_city": {
+        "name":             MOUNTAINS_LARGE_CITY_CITY_NAME,
+        "description":      MOUNTAINS_LARGE_CITY_CITY_DESCRIPTION,
+        "buildings":        MOUNTAINS_LARGE_CITY_BUILDINGS,
+        "room_menu":        MOUNTAINS_LARGE_CITY_ROOM_MENU,
+        "drink_menu":       MOUNTAINS_LARGE_CITY_DRINK_MENU,
+        "subloc_map":       MOUNTAINS_LARGE_CITY_SUBLOC_MAP,
+        "sublocation_defs": MOUNTAINS_LARGE_CITY_SUBLOCATION_DEFS,
+    },
+    "mountains_mid_city": {
+        "name":             MOUNTAINS_MID_CITY_CITY_NAME,
+        "description":      MOUNTAINS_MID_CITY_CITY_DESCRIPTION,
+        "buildings":        MOUNTAINS_MID_CITY_BUILDINGS,
+        "room_menu":        MOUNTAINS_MID_CITY_ROOM_MENU,
+        "drink_menu":       MOUNTAINS_MID_CITY_DRINK_MENU,
+        "subloc_map":       MOUNTAINS_MID_CITY_SUBLOC_MAP,
+        "sublocation_defs": MOUNTAINS_MID_CITY_SUBLOCATION_DEFS,
+    },
+    "mountains_small_city": {
+        "name":             MOUNTAINS_SMALL_CITY_CITY_NAME,
+        "description":      MOUNTAINS_SMALL_CITY_CITY_DESCRIPTION,
+        "buildings":        MOUNTAINS_SMALL_CITY_BUILDINGS,
+        "room_menu":        MOUNTAINS_SMALL_CITY_ROOM_MENU,
+        "drink_menu":       MOUNTAINS_SMALL_CITY_DRINK_MENU,
+        "subloc_map":       MOUNTAINS_SMALL_CITY_SUBLOC_MAP,
+        "sublocation_defs": MOUNTAINS_SMALL_CITY_SUBLOCATION_DEFS,
+    },
+    # ── shallows ─────────────────────────────────────────────────────────────
+    "shallows_large_city": {
+        "name":             SHALLOWS_LARGE_CITY_CITY_NAME,
+        "description":      SHALLOWS_LARGE_CITY_CITY_DESCRIPTION,
+        "buildings":        SHALLOWS_LARGE_CITY_BUILDINGS,
+        "room_menu":        SHALLOWS_LARGE_CITY_ROOM_MENU,
+        "drink_menu":       SHALLOWS_LARGE_CITY_DRINK_MENU,
+        "subloc_map":       SHALLOWS_LARGE_CITY_SUBLOC_MAP,
+        "sublocation_defs": SHALLOWS_LARGE_CITY_SUBLOCATION_DEFS,
+    },
+    "shallows_mid_city": {
+        "name":             SHALLOWS_MID_CITY_CITY_NAME,
+        "description":      SHALLOWS_MID_CITY_CITY_DESCRIPTION,
+        "buildings":        SHALLOWS_MID_CITY_BUILDINGS,
+        "room_menu":        SHALLOWS_MID_CITY_ROOM_MENU,
+        "drink_menu":       SHALLOWS_MID_CITY_DRINK_MENU,
+        "subloc_map":       SHALLOWS_MID_CITY_SUBLOC_MAP,
+        "sublocation_defs": SHALLOWS_MID_CITY_SUBLOCATION_DEFS,
+    },
+    "shallows_small_city": {
+        "name":             SHALLOWS_SMALL_CITY_CITY_NAME,
+        "description":      SHALLOWS_SMALL_CITY_CITY_DESCRIPTION,
+        "buildings":        SHALLOWS_SMALL_CITY_BUILDINGS,
+        "room_menu":        SHALLOWS_SMALL_CITY_ROOM_MENU,
+        "drink_menu":       SHALLOWS_SMALL_CITY_DRINK_MENU,
+        "subloc_map":       SHALLOWS_SMALL_CITY_SUBLOC_MAP,
+        "sublocation_defs": SHALLOWS_SMALL_CITY_SUBLOCATION_DEFS,
+    },
+    # ── snow ─────────────────────────────────────────────────────────────────
+    "snow_large_city": {
+        "name":             SNOW_LARGE_CITY_CITY_NAME,
+        "description":      SNOW_LARGE_CITY_CITY_DESCRIPTION,
+        "buildings":        SNOW_LARGE_CITY_BUILDINGS,
+        "room_menu":        SNOW_LARGE_CITY_ROOM_MENU,
+        "drink_menu":       SNOW_LARGE_CITY_DRINK_MENU,
+        "subloc_map":       SNOW_LARGE_CITY_SUBLOC_MAP,
+        "sublocation_defs": SNOW_LARGE_CITY_SUBLOCATION_DEFS,
+    },
+    "snow_mid_city": {
+        "name":             SNOW_MID_CITY_CITY_NAME,
+        "description":      SNOW_MID_CITY_CITY_DESCRIPTION,
+        "buildings":        SNOW_MID_CITY_BUILDINGS,
+        "room_menu":        SNOW_MID_CITY_ROOM_MENU,
+        "drink_menu":       SNOW_MID_CITY_DRINK_MENU,
+        "subloc_map":       SNOW_MID_CITY_SUBLOC_MAP,
+        "sublocation_defs": SNOW_MID_CITY_SUBLOCATION_DEFS,
+    },
+    "snow_small_city": {
+        "name":             SNOW_SMALL_CITY_CITY_NAME,
+        "description":      SNOW_SMALL_CITY_CITY_DESCRIPTION,
+        "buildings":        SNOW_SMALL_CITY_BUILDINGS,
+        "room_menu":        SNOW_SMALL_CITY_ROOM_MENU,
+        "drink_menu":       SNOW_SMALL_CITY_DRINK_MENU,
+        "subloc_map":       SNOW_SMALL_CITY_SUBLOC_MAP,
+        "sublocation_defs": SNOW_SMALL_CITY_SUBLOCATION_DEFS,
+    },
+    # ── swamp ─────────────────────────────────────────────────────────────────
+    "swamp_large_city": {
+        "name":             SWAMP_LARGE_CITY_CITY_NAME,
+        "description":      SWAMP_LARGE_CITY_CITY_DESCRIPTION,
+        "buildings":        SWAMP_LARGE_CITY_BUILDINGS,
+        "room_menu":        SWAMP_LARGE_CITY_ROOM_MENU,
+        "drink_menu":       SWAMP_LARGE_CITY_DRINK_MENU,
+        "subloc_map":       SWAMP_LARGE_CITY_SUBLOC_MAP,
+        "sublocation_defs": SWAMP_LARGE_CITY_SUBLOCATION_DEFS,
+    },
+    "swamp_mid_city": {
+        "name":             SWAMP_MID_CITY_CITY_NAME,
+        "description":      SWAMP_MID_CITY_CITY_DESCRIPTION,
+        "buildings":        SWAMP_MID_CITY_BUILDINGS,
+        "room_menu":        SWAMP_MID_CITY_ROOM_MENU,
+        "drink_menu":       SWAMP_MID_CITY_DRINK_MENU,
+        "subloc_map":       SWAMP_MID_CITY_SUBLOC_MAP,
+        "sublocation_defs": SWAMP_MID_CITY_SUBLOCATION_DEFS,
+    },
+    "swamp_small_city": {
+        "name":             SWAMP_SMALL_CITY_CITY_NAME,
+        "description":      SWAMP_SMALL_CITY_CITY_DESCRIPTION,
+        "buildings":        SWAMP_SMALL_CITY_BUILDINGS,
+        "room_menu":        SWAMP_SMALL_CITY_ROOM_MENU,
+        "drink_menu":       SWAMP_SMALL_CITY_DRINK_MENU,
+        "subloc_map":       SWAMP_SMALL_CITY_SUBLOC_MAP,
+        "sublocation_defs": SWAMP_SMALL_CITY_SUBLOCATION_DEFS,
+    },
+}
 ##### POSSIBLE GAME PIECES #####
 
 # Walls / cliffs → █ ▓ ▒ ░
@@ -936,7 +1140,7 @@ _gather_hostile_seed_sources(HOSTILE_SEED_PATHS)
 
 
 __all__ = [
-	"TASKS", "TASK_GROUPS", "NPCS", "NPC_GROUPS", 
+	"TASKS", "TASK_GROUPS", "NPCS", "NPC_GROUPS", "CITY_DATA", 
 	"MAIN_STORY_SETTINGS","PRIMARY_STORIES","CITY_STORIES", "STORY_GROUPS"
 	"NPC_DIALOG", "ATTAINABLE_PLAYER_CHARACTERS","DUNGEON_ENTRANCE_CHAR",
 

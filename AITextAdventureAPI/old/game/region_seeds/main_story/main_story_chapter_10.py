@@ -91,6 +91,7 @@ NPCS = [
         "npc_id": "vek",
         "name": "Marshal Vek Drast",
         "description": "A tough, no-nonsense city enforcer with a powerful sense of order and duty. She is trying to keep her city from tearing itself apart from the inside out.",
+        'theme_song': 'Control, Halsey',
         "psychology": {
             "mbti": "ENTJ",
             "dominant": "Te - Decisive, commanding, and focused on imposing order on the chaos around her. She takes charge instinctively.",
@@ -107,7 +108,8 @@ NPCS = [
           "growth_line": "Moves to Type 2 — Uses her strength to protect and empower others, becoming a true leader rather than just a commander.",
           "instinctual_variant": "so/sp — Focused on controlling the social order to ensure her own security and the survival of the group."
         },
-        'image': 'vek1.jpeg'
+        'image': 'vek1.jpeg',
+        'song_id': 'control_halsey'
     }
 ]
 

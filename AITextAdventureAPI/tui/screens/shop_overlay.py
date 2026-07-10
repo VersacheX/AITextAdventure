@@ -161,6 +161,150 @@ def _item_detail(item: Any) -> str:
     return "\n".join(lines)
 
 
+# ── party stat comparison ─────────────────────────────────────────────────────
+
+_COMPARE_ATTRS = [
+    ("damage",          "DMG"),
+    ("defense",         "DEF"),
+    ("strength",        "STR"),
+    ("dexterity",       "DEX"),
+    ("intelligence",    "INT"),
+    ("constitution",    "CON"),
+    ("critical_chance", "CRIT%"),
+    ("durability",      "DUR"),
+]
+
+
+def _get_equipped_stat(char: Any, slot: Any, attr: str) -> int:
+    """Return the value of `attr` on the item currently equipped in `slot`."""
+    try:
+        equipped = None
+        # Try equipment dict first, then individual slot attributes
+        equipment = getattr(char, "equipment", None)
+        if isinstance(equipment, dict):
+            slot_key = slot.name if hasattr(slot, "name") else str(slot)
+            equipped = equipment.get(slot_key)
+        if equipped is None:
+            slot_key = slot.name if hasattr(slot, "name") else str(slot)
+            equipped = getattr(char, slot_key.lower(), None)
+        if equipped is None:
+            return 0
+        return int(getattr(equipped, attr, 0) or 0)
+    except Exception:
+        return 0
+
+
+def _party_stat_comparison(item: Any, pg: Any) -> str:
+    """Return a Rich-markup string showing per-character stat deltas."""
+    if item is None or isinstance(item, dict):
+        return ""
+    slot = getattr(item, "slot", None)
+    if slot is None:
+        return ""
+
+    try:
+        party = pg.get_active_party()
+    except Exception:
+        return ""
+    if not party:
+        return ""
+
+    # Collect which attrs this item actually has values for
+    relevant = [(attr, lbl) for attr, lbl in _COMPARE_ATTRS if getattr(item, attr, None)]
+    if not relevant:
+        return ""
+
+    lines: List[str] = ["[dim]─ Party comparison ─[/dim]"]
+    for char in party:
+        name = rich_escape(str(getattr(char, "name", "?")))
+        delta_parts: List[str] = []
+        for attr, lbl in relevant:
+            new_val = int(getattr(item, attr, 0) or 0)
+            cur_val = _get_equipped_stat(char, slot, attr)
+            diff = new_val - cur_val
+            if diff > 0:
+                delta_parts.append(f"[green]+{diff} {lbl}[/green]")
+            elif diff < 0:
+                delta_parts.append(f"[red]{diff} {lbl}[/red]")
+            else:
+                delta_parts.append(f"[dim]±0 {lbl}[/dim]")
+        lines.append(f"[bold]{name}[/bold]: " + "  ".join(delta_parts))
+
+    return "\n".join(lines)
+
+
+# ── party stat comparison ─────────────────────────────────────────────────────
+
+_COMPARE_ATTRS = [
+    ("damage",          "DMG"),
+    ("defense",         "DEF"),
+    ("strength",        "STR"),
+    ("dexterity",       "DEX"),
+    ("intelligence",    "INT"),
+    ("constitution",    "CON"),
+    ("critical_chance", "CRIT%"),
+    ("durability",      "DUR"),
+]
+
+
+def _get_equipped_stat(char: Any, slot: Any, attr: str) -> int:
+    """Return the value of `attr` on the item currently equipped in `slot`."""
+    try:
+        equipped = None
+        # Try equipment dict first, then individual slot attributes
+        equipment = getattr(char, "equipment", None)
+        if isinstance(equipment, dict):
+            slot_key = slot.name if hasattr(slot, "name") else str(slot)
+            equipped = equipment.get(slot_key)
+        if equipped is None:
+            slot_key = slot.name if hasattr(slot, "name") else str(slot)
+            equipped = getattr(char, slot_key.lower(), None)
+        if equipped is None:
+            return 0
+        return int(getattr(equipped, attr, 0) or 0)
+    except Exception:
+        return 0
+
+
+def _party_stat_comparison(item: Any, pg: Any) -> str:
+    """Return a Rich-markup string showing per-character stat deltas."""
+    if item is None or isinstance(item, dict):
+        return ""
+    slot = getattr(item, "slot", None)
+    if slot is None:
+        return ""
+
+    try:
+        party = pg.get_active_party()
+    except Exception:
+        return ""
+    if not party:
+        return ""
+
+    # Collect which attrs this item actually has values for
+    relevant = [(attr, lbl) for attr, lbl in _COMPARE_ATTRS if getattr(item, attr, None)]
+    if not relevant:
+        return ""
+
+    lines: List[str] = ["[dim]─ Party comparison ─[/dim]"]
+    for char in party:
+        name = rich_escape(str(getattr(char, "name", "?")))
+        delta_parts: List[str] = []
+        for attr, lbl in relevant:
+            new_val = int(getattr(item, attr, 0) or 0)
+            cur_val = _get_equipped_stat(char, slot, attr)
+            diff = new_val - cur_val
+            if diff > 0:
+                delta_parts.append(f"[green]+{diff} {lbl}[/green]")
+            elif diff < 0:
+                delta_parts.append(f"[red]{diff} {lbl}[/red]")
+            else:
+                delta_parts.append(f"[dim]±0 {lbl}[/dim]")
+        lines.append(f"[bold]{name}[/bold]: " + "  ".join(delta_parts))
+
+    return "\n".join(lines)
+
+
 # ── list-item widget ──────────────────────────────────────────────────────────
 
 class _ShopItem(ListItem):

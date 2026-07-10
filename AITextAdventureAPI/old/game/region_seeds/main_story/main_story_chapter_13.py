@@ -44,7 +44,8 @@ NPCS = [
           "growth_line": "Moves to Type 1 — Would learn to find inherent value and create a principled identity.",
           "instinctual_variant": "sp/sx — Utterly consumed by its own internal state of worthlessness, it only interacts with the world to pull it down into the rot."
         },
-        'image': 'voidwalkers:garbage1.jpeg'
+        'image': 'voidwalkers:garbage1.jpeg',
+        'song_id': 'creep_radiohead'
     },
     {
         "npc_id": "crypt_warden",

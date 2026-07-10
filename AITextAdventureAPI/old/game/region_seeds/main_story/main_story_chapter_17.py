@@ -44,7 +44,8 @@ NPCS = [
 			"stress_line": "Moves to Type 6 — Becomes erratic and reactive when its paradox is genuinely threatened.",
 			"growth_line": "Moves to Type 3 — (Hypothetically) Would learn to act with singular, directed purpose.",
 			"instinctual_variant": "sp/so — Its entire existence is an act of self-preservation against the resolution that would end it."
-		}
+		},
+		'image': 'bosses:displacer_gargantuan1',
 	},
 	{
 		"npc_id": "paradox",
@@ -55,6 +56,7 @@ NPCS = [
 			" Where Crux deconstructs, Paradox entangles. It speaks in perfect logical contradictions that"
 			" somehow feel undeniable, and it takes a specific, predatory joy in watching coherent minds unravel."
 		),
+		"theme_song": "Paranoid Android, Radiohead",
 		"psychology": {
 			"mbti": "ENTP-shadow",
 			"dominant": "Ne - Generates an endless, weaponized cascade of equally valid and equally impossible interpretations for every thought, belief, and action.",
@@ -71,7 +73,8 @@ NPCS = [
 			"growth_line": "Moves to Type 5 — (Hypothetically) Would turn its understanding of contradiction into genuine intellectual discovery.",
 			"instinctual_variant": "sx/so — Forms devastating one-on-one conceptual attacks on each party member, then uses the collective disorientation to dominate."
 		},
-        'image': 'voidwalkers:paradox1.jpeg'
+        'image': 'voidwalkers:paradox1.jpeg',
+		'song_id': 'paranoid_android_radiohead'
 	}
 ]
 

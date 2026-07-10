@@ -52,6 +52,7 @@ NPCS = [
             "A stoic keeper of the Sinking District’s last sanctuaries. Hale records every loss, every fracture, every name swallowed by the Heap."
             "He believes duty is the only anchor left in a collapsing world, and he performs sacred rites with the precision of a bookkeeper balancing the dead."
         ),
+        "theme_song": "Saturn, Sleeping At Last",
         "psychology": {
             "mbti": "ISTJ",
             "dominant": "Si — Bound to ritual, memory, and the weight of promises. He preserves order through tradition and meticulous record‑keeping.",
@@ -68,7 +69,8 @@ NPCS = [
           "growth_line": "Moves to Type 7 — Learns to find hope and flexibility beyond his rigid duties.",
           "instinctual_variant": "sp/so — His self-preservation is tied to the perfect execution of his duty; he preserves himself by preserving the memory of others."
         },
-        'image': 'warden_hale1.jpeg'
+        'image': 'warden_hale1.jpeg',
+        'song_id': 'sleeping_at_last_saturn'
     },
     {
         "npc_id": "pageant",
@@ -137,7 +139,8 @@ NPCS = [
           "stress_line": "Moves to Type 4 — Becomes erratic and unpredictable when its protocols are breached.",
           "growth_line": "Moves to Type 7 — Would learn to be more flexible and adaptable in its enforcement.",
           "instinctual_variant": "sp/so — A self-preserving machine whose entire purpose is to maintain the social order of its prison."
-        }
+        },
+        'image': 'bosses:prison_warden1'
     }
 ]
 

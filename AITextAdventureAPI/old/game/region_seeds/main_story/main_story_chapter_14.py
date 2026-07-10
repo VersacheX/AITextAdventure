@@ -37,7 +37,8 @@ NPCS = [
           "stress_line": "Moves to Type 2 — Becomes overly dependent on the party to help her when she feels overwhelmed.",
           "growth_line": "Moves to Type 1 — Becomes a principled and effective leader of the resistance.",
           "instinctual_variant": "sx/so — Intensely focused on her personal quest for authenticity, which has major social implications."
-        }
+        },
+        'image': 'npcs:ravel1'
     },
     {
         'npc_id': 'hask',
@@ -61,7 +62,8 @@ NPCS = [
           "stress_line": "Moves to Type 4 — Becomes withdrawn and resentful when his authority is challenged.",
           "growth_line": "Moves to Type 7 — Would learn to be more flexible and less judgmental.",
           "instinctual_variant": "so/sp — Focused on enforcing social conformity to maintain order and his own sense of security."
-        }
+        },
+        'image': 'npcs:hask1'
     },
     {
         'npc_id': 'caius',
@@ -84,13 +86,15 @@ NPCS = [
           "stress_line": "Moves to Type 4 — Becomes melancholic and withdrawn when the system is threatened.",
           "growth_line": "Moves to Type 7 — Would learn to be more flexible and humane.",
           "instinctual_variant": "so/sp — Obsessed with maintaining social order through rigid rules to ensure his own sense of rightness and security."
-        }
+        },
+        'image': 'npcs:caius1'
     },
     {
         'npc_id': 'jett',
         'name': 'Jett',
         'description': (
             "The leader of a group of survivors who live in the Heap of Broken Futures. They are cynical but resilient, salvaging what and who the city throws away."
+            " She is a pragmatic and resourceful individual, always looking for ways to ensure the survival of her community."
         ),
         "psychology": {
             "mbti": "ISTP",
@@ -107,11 +111,12 @@ NPCS = [
           "stress_line": "Moves to Type 5 — Becomes secretive and withdrawn, hoarding resources when his community is threatened.",
           "growth_line": "Moves to Type 2 — Openly uses his strength to protect and provide for his people.",
           "instinctual_variant": "sp/so — Focused on his own and his community's survival, creating a safe space outside the main system."
-        }
+        },
+        'image': 'npcs:jett1'
     },
     {
         'npc_id': 'elian',
-        'name': 'The Last Poet',
+        'name': 'Elian',
         'description': (
             "A writer living in fear in the city of Pageant and Edict. Their work is monitored, and they are one non-compliant poem away from being 'removed'."
         ),
@@ -130,7 +135,8 @@ NPCS = [
           "stress_line": "Moves to Type 2 — Becomes overly dependent on others to act for him.",
           "growth_line": "Moves to Type 1 — Becomes a principled and vocal leader of the resistance.",
           "instinctual_variant": "sx/sp — Intensely focused on his personal, authentic expression, which he protects by staying withdrawn."
-        }
+        },
+        'image': 'npcs:elian1'
     },
     {
         'npc_id': 'stigma',
@@ -138,6 +144,7 @@ NPCS = [
         'description': (
             "A seductive void-siren whose presence rewrites desire, identity, and will."
         ),
+        "theme_song": "All the Things She Said, t.A.T.u. | Misery Business, Paramore",
         "psychology": {
             "mbti": "ENFJ-shadow",
             "dominant": "Fe - Weaponized intimacy; puppeteers emotion until the self dissolves.",
@@ -154,7 +161,8 @@ NPCS = [
           "growth_line": "Moves to Type 4 — (Hypothetically) Would learn to find her own identity without needing to absorb others.",
           "instinctual_variant": "sx/so — Forms intense, consuming one-on-one bonds to create a loyal social collective that worships her."
         },
-        'image': 'voidwalkers:stigma1.jpeg'
+        'image': 'voidwalkers:stigma1.jpeg',
+        'song_id': 'all_the_things_she_said_tatu'
     }
 ]
 

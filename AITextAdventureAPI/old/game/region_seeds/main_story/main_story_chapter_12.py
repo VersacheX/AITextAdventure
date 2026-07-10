@@ -47,6 +47,7 @@ NPCS = [
         "npc_id": "lament",
         "name": "Lament",
         "description": "A Voidwalker who embodies the concept of unending, unprocessed grief. She is drawn to sorrow and seeks to trap others in loops of loss, believing that grief is the only honest state of being.",
+        "theme_song": "Mad World, Gary Jules",
         "psychology": {
             "mbti": "INFJ",
             "dominant": "Ni - Possesses a deep, almost cosmic understanding of sorrow and its patterns, seeing it as the ultimate endpoint of all things.",
@@ -63,7 +64,8 @@ NPCS = [
           "growth_line": "Moves to Type 1 — Would learn to find a principled path out of grief, towards healing.",
           "instinctual_variant": "sx/sp — Intensely focused on the deep, romantic tragedy of its own existence."
         },
-        'image': 'voidwalkers:lament1.jpeg'
+        'image': 'voidwalkers:lament1.jpeg',
+        'song_id': 'mad_world_gary_jules'
     },
     {
         "npc_id": "archivist_fragment",

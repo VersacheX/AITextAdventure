@@ -33,6 +33,7 @@ NPCS = [
 			" It speaks in calm, absolute declarations, each one a verdict delivered without malice. Its horror"
 			" is not cruelty but certainty."
 		),
+		"theme_song": "The Host of Seraphim, Dead Can Dance",
 		"psychology": {
 			"mbti": "INTJ-shadow",
 			"dominant": "Ni - Forces singular prophetic vision onto all possibilities, collapsing infinite potential into a single predetermined endpoint that it then enforces as the only truth.",
@@ -49,7 +50,8 @@ NPCS = [
 			"growth_line": "Moves to Type 7 - (hypothetically) would discover genuine possibility and the joy of a future it does not already know.",
 			"instinctual_variant": "so/sp - its entire identity is constructed around being the authoritative social arbiter of truth; it preserves itself by preserving the narrative."
 		},
-        'image': 'voidwalkers:oracle1.jpeg'
+        'image': 'voidwalkers:oracle1.jpeg',
+		'song_id': 'dead_can_dance_host_of_seraphim'
 	},
 	{
 		"npc_id": "reliquary",
@@ -60,7 +62,8 @@ NPCS = [
 			" Its horror is the horror of a museum that never closes, where every wound is kept pristine under"
 			" glass and no one is permitted to heal. It speaks of preservation as an act of love and cannot"
 			" understand why its collection would not want to remain."
-		),
+		),		
+		"theme_song": "Elegia, New Order",
 		"psychology": {
 			"mbti": "ISFJ-shadow",
 			"dominant": "Si - Obsessively preserves every instance of pain and failure as sacred, unchangeable historical record; existence is only valid insofar as it can be perfectly archived.",
@@ -77,7 +80,8 @@ NPCS = [
 			"growth_line": "Moves to Type 8 - (hypothetically) would learn to let the past empower rather than imprison, wielding memory as strength rather than a cage.",
 			"instinctual_variant": "sp/so - fixates on self-preservation through the act of preserving others; its survival is inseparable from the survival of its collection."
 		},
-        'image': 'voidwalkers:reliquary1.jpeg'
+        'image': 'voidwalkers:reliquary1.jpeg',
+		'song_id': 'elegia_new_order'
 	}
 ]
 

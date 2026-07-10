@@ -121,6 +121,15 @@ NPCS = [
           "tertiary": "Ni — Obsessive fatalism; sees every target as already dead.",
           "inferior": "Fe — Emotional void; mimics empathy only to exploit it."
         },
+        "enneagram": {
+          "enneagram_type": "5w6",
+          "core_fear": "Being overwhelmed or incompetent.",
+          "core_desire": "To be capable and competent.",
+          "defense_mechanism": "Isolation — Detaches completely from emotion to become a perfect, efficient tool of violence. It is pure, cold logic in action.",
+          "stress_line": "Moves to Type 7 — Its violence becomes scattered, chaotic, and unfocused.",
+          "growth_line": "Moves to Type 8 — Would learn to use its precision and skill with confidence and purpose, not just detachment.",
+          "instinctual_variant": "sp/sx — A reclusive predator, focused on perfecting its own deadly competence."
+        },
         'image': 'voidwalkers:scalpel1.jpeg',
         'song_id': 'the_perfect_drug_nine_inch_nails'
     },
@@ -135,6 +144,15 @@ NPCS = [
           "auxiliary": "Fi — Vanity as tyranny; values only adoration and submission.",
           "tertiary": "Te — Punishes rejection with explosive fury.",
           "inferior": "Ni — Paranoia of fading beauty; sees doom in every reflection."
+        },
+        "enneagram": {
+          "enneagram_type": "3w2",
+          "core_fear": "Being worthless or without admiration.",
+          "core_desire": "To feel valuable and admired.",
+          "defense_mechanism": "Identification — Has completely identified with the image of irresistible beauty, needing constant attention to feel real.",
+          "stress_line": "Moves to Type 9 — Becomes apathetic and disengaged when her allure fails to capture attention.",
+          "growth_line": "Moves to Type 6 — Would learn to find value in genuine connection rather than superficial adoration.",
+          "instinctual_variant": "sx/so — Seeks intense, one-on-one adoration and uses it to dominate the social sphere."
         },
         'image': 'voidwalkers:glamour1.jpeg',
         'song_id': 'toxic_britney_spears'

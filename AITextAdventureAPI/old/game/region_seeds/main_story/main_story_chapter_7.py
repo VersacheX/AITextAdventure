@@ -71,7 +71,8 @@ NPCS = [
           "growth_line": "Moves to Type 3 — Becomes more assertive and purposeful in her healing, taking an active role in mending the world.",
           "instinctual_variant": "sp/so — Seeks personal peace and comfort, which she extends to others through gentle, harmonious interactions."
         },
-        'image': 'lyren1.jpeg'
+        'image': 'lyren1.jpeg',
+        'song_id': 'holocene_bon_iver'
     }
 ]
 

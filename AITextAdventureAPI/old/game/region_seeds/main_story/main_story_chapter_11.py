@@ -128,6 +128,15 @@ NPCS = [
           "tertiary": "Fe — Mocking social manipulation; provokes chaos for entertainment.",
           "inferior": "Ni — Fatalistic impulses; sees only the thrill of the next destructive moment."
         },
+        "enneagram": {
+          "enneagram_type": "8w7",
+          "core_fear": "Being controlled or limited.",
+          "core_desire": "To be in control of its environment through physical dominance.",
+          "defense_mechanism": "Denial — Denies any form of weakness or restraint, asserting its power through constant, escalating violence.",
+          "stress_line": "Moves to Type 5 — Becomes withdrawn and paranoid when confronted by a force it cannot dominate.",
+          "growth_line": "Moves to Type 2 — Would use its strength to protect rather than to harm.",
+          "instinctual_variant": "sx/sp — Seeks intense, one-on-one confrontations and physical challenges to assert its dominance."
+        },
         'image': 'voidwalkers:rapture1.jpeg',
         'song_id': 'zero_instrumental_smashing_pumpkins'
     },
@@ -142,6 +151,15 @@ NPCS = [
           "auxiliary": "Fi — Values inverted; worships destruction as liberation.",
           "tertiary": "Te — Impulsive, explosive action; enforces chaos with manic force.",
           "inferior": "Si — Rejects continuity; every moment must be a new, louder collapse."
+        },
+        "enneagram": {
+          "enneagram_type": "7w6",
+          "core_fear": "Being trapped in pain, boredom, or negative emotion.",
+          "core_desire": "To be stimulated and happy at all times.",
+          "defense_mechanism": "Rationalization — Frames its destructive chaos as 'freedom' and 'joy', avoiding the reality of the suffering it causes.",
+          "stress_line": "Moves to Type 1 — Becomes rigid and moralistic, insisting its way is the only 'true' way to be free.",
+          "growth_line": "Moves to Type 5 — Would learn to find joy in peace and contemplation, not just manic energy.",
+          "instinctual_variant": "so/sx — A social catalyst for chaos, drawing energy from the group's manic excitement."
         },
         'image': 'voidwalkers:revelry1.jpeg',
         'song_id': 'heads_will_roll_yeah_yeah_yeahs'

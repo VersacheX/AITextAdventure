@@ -6,8 +6,9 @@ Delegates all behavior to handlers, treehandlers, detail_panel, and utils.
 """
 from __future__ import annotations
 
+import random as _random
 from pathlib import Path
-from typing import Any, Set
+from typing import Any, List, Optional, Set
 
 from textual import work
 from textual.app import ComposeResult
@@ -30,17 +31,23 @@ from tui.screens.dev.data_mgmt.handlers import (
     rebuild_timeline_tree_for_screen,
     set_filter_mode,
 )
-from tui.services.dev.dataservices import CATEGORIES, CATEGORY_LABELS, DialogueLine, preload
+from tui.screens.dev.data_mgmt.npc_music_player import NpcMusicPlayerWidget
+from tui.services.dev.dataservices import (
+    CATEGORIES,
+    CATEGORY_LABELS,
+    DevRecord,
+    DialogueLine,
+    NpcRecordNode,
+    get_npc_tree,
+    preload,
+)
 
 _DIALOG_CATEGORY   = "character_dialog"
 _TIMELINE_CATEGORY = "timeline"
 _NPC_CATEGORY      = "npc"
 
-# Resolved once at import time — avoids repeated Path arithmetic at runtime.
-_MUSIC_DIR = Path(__file__).resolve().parents[3] / "assets" / "music"
-
-_DETAIL_WIDTH_NORMAL  = 80   # columns in normal mode
-_DETAIL_WIDTH_MAX     = "1fr"  # full share in expanded mode
+_MUSIC_DIR          = Path(__file__).resolve().parents[3] / "assets" / "music"
+_DETAIL_WIDTH_NORMAL = 80
 
 
 class DataMgmtScreen(BaseScreen):
@@ -173,21 +180,21 @@ class DataMgmtScreen(BaseScreen):
     }
 
     #dm-list {
-        height: 100%;
+        height: 1fr;
     }
 
     #dm-dialog-tree {
-        height: 100%;
+        height: 1fr;
         display: none;
     }
 
     #dm-timeline-tree {
-        height: 100%;
+        height: 1fr;
         display: none;
     }
 
     #dm-npc-tree {
-        height: 100%;
+        height: 1fr;
         display: none;
     }
 
@@ -223,12 +230,19 @@ class DataMgmtScreen(BaseScreen):
         self._npc_user_expanded: Set[str]      = set()
         self._npc_user_collapsed: Set[str]     = set()
 
+        # NPC selection and playlist state
+        self._last_selected_npc_record: Optional[DevRecord] = None
+        self._npc_playlist: List[DevRecord] = []
+        self._npc_playlist_index: int = 0
+
         # NPC theme-music controller — active for the lifetime of this screen.
         self._npc_music = NPCMusicController(
             music_dir=_MUSIC_DIR,
             fadeout_ms=700,
             volume=0.7,
         )
+
+    # ── Compose ───────────────────────────────────────────────────────────
 
     def compose_content(self) -> ComposeResult:
         yield Tabs(
@@ -264,6 +278,8 @@ class DataMgmtScreen(BaseScreen):
             yield Static("Loading...", id="dm-status")
         with Horizontal(id="dm-main-row"):
             with Vertical(id="dm-list-panel"):
+                # NPC player bar — hidden on non-NPC tabs via set_filter_mode
+                yield NpcMusicPlayerWidget(id="npc-player")
                 yield ListView(id="dm-list")
                 dialog_tree: Tree[DialogueLine] = Tree("Dialogue", id="dm-dialog-tree")
                 dialog_tree.show_root = False
@@ -277,11 +293,19 @@ class DataMgmtScreen(BaseScreen):
             with ScrollableContainer(id="dm-detail-panel"):
                 yield Static("", id="dm-detail-text")
 
+    # ── Lifecycle ─────────────────────────────────────────────────────────
+
     def on_mount(self) -> None:
+        # Hide player until NPC tab is active
+        self.query_one(NpcMusicPlayerWidget).display = False
         self._load_catalog()
+        # Poll for song-end every 500ms to drive autoplay
+        self.set_interval(0.5, self._on_music_poll)
 
     def on_unmount(self) -> None:
         self._npc_music.shutdown()
+
+    # ── Data loading ──────────────────────────────────────────────────────
 
     @work(thread=True)
     def _load_catalog(self) -> None:
@@ -309,14 +333,167 @@ class DataMgmtScreen(BaseScreen):
         self.query_one("#dm-filter", Input).focus()
 
     def _on_load_error(self, message: str) -> None:
-        from rich.markup import escape as rich_escape
+        from rich.markup import escape as rich_escape  # noqa: PLC0415
         self.query_one("#dm-status", Static).update("Load failed")
         self.query_one("#dm-detail-text", Static).update(
             f"[red]Failed to load seed data:[/red]\n{rich_escape(message)}"
         )
 
+    # ── NPC selection / playlist ──────────────────────────────────────────
+
+    def rebuild_npc_playlist(self) -> None:
+        """Collect every NPC with a resolvable audio file into the playlist."""
+        playlist: List[DevRecord] = []
+        for group in get_npc_tree():
+            for npc_node in group.npcs:
+                r = npc_node.record
+                if r.song_id and self._npc_music.resolve_song(r.song_id) is not None:
+                    playlist.append(r)
+        self._npc_playlist = playlist
+        # Keep index pointing at the currently playing NPC if possible
+        if self._last_selected_npc_record and playlist:
+            try:
+                self._npc_playlist_index = next(
+                    i for i, r in enumerate(playlist)
+                    if r.id == self._last_selected_npc_record.id
+                )
+            except StopIteration:
+                self._npc_playlist_index = 0
+
+    def select_npc_record(self, record: DevRecord, *, start_music: bool = True) -> None:
+        """Update detail panel and optionally start music for *record*.
+
+        Used both by tree selection events and by the player widget.
+        """
+        from tui.screens.dev.data_mgmt.detail_panel import update_detail_for_record  # noqa: PLC0415
+
+        self._last_selected_npc_record = record
+
+        # Update playlist index to match
+        for i, r in enumerate(self._npc_playlist):
+            if r.id == record.id:
+                self._npc_playlist_index = i
+                break
+
+        update_detail_for_record(self, record)
+
+        if start_music:
+            started = self._npc_music.play_record(
+                record.id, record.song_id, force=True
+            )
+            if started:
+                self._update_player_label(record)
+
+    def restore_npc_selection(self) -> None:
+        """Called when the NPC tab gains focus.
+
+        - If a previous NPC is remembered: repopulate the detail panel
+          (portrait re-renders) WITHOUT restarting music.
+        - If no previous selection: pick a random NPC with a song and play it.
+        """
+        from tui.screens.dev.data_mgmt.detail_panel import update_detail_for_record  # noqa: PLC0415
+
+        self.rebuild_npc_playlist()
+
+        if self._last_selected_npc_record is not None:
+            # Restore detail — do NOT call on_npc_changed, music keeps playing
+            update_detail_for_record(self, self._last_selected_npc_record)
+            self._update_player_label(self._last_selected_npc_record)
+            return
+
+        # No previous selection — pick a random NPC with a song
+        if not self._npc_playlist:
+            return
+
+        record = _random.choice(self._npc_playlist)
+        self._npc_playlist_index = self._npc_playlist.index(record)
+        self._last_selected_npc_record = record
+        update_detail_for_record(self, record)
+        self._npc_music.play_record(record.id, record.song_id, force=True)
+        self._update_player_label(record)
+
+    def _update_player_label(self, record: DevRecord) -> None:
+        try:
+            player = self.query_one(NpcMusicPlayerWidget)
+            player.update_now_playing(record.name, record.song_id)
+            player.set_paused(self._npc_music.is_paused)
+        except Exception:
+            pass
+
+    # ── Music poll timer ──────────────────────────────────────────────────
+
+    def _on_music_poll(self) -> None:
+        """Called every 500ms to detect end-of-track and drive autoplay."""
+        if self._category != _NPC_CATEGORY:
+            return
+        if not self._npc_music.poll_song_ended():
+            return
+
+        try:
+            player = self.query_one(NpcMusicPlayerWidget)
+        except Exception:
+            return
+
+        if not player.is_autoplay:
+            # Autoplay off — re-play the same song (loop behaviour)
+            if self._last_selected_npc_record:
+                self._npc_music.play_record(
+                    self._last_selected_npc_record.id,
+                    self._last_selected_npc_record.song_id,
+                    force=True,
+                )
+            return
+
+        # Autoplay on — advance to next track
+        self._advance_playlist(forward=True, random_mode=player.is_random)
+
+    def _advance_playlist(self, *, forward: bool, random_mode: bool) -> None:
+        """Move to the next or previous track in the playlist."""
+        if not self._npc_playlist:
+            return
+
+        if random_mode:
+            # Pick a random track that isn't the current one (if possible)
+            if len(self._npc_playlist) > 1:
+                current_id = self._last_selected_npc_record.id if self._last_selected_npc_record else ""
+                candidates = [r for r in self._npc_playlist if r.id != current_id]
+                record = _random.choice(candidates)
+            else:
+                record = self._npc_playlist[0]
+        else:
+            step   = 1 if forward else -1
+            self._npc_playlist_index = (self._npc_playlist_index + step) % len(self._npc_playlist)
+            record = self._npc_playlist[self._npc_playlist_index]
+
+        self.select_npc_record(record, start_music=True)
+
+    # ── Player widget messages ────────────────────────────────────────────
+
+    def on_npc_music_player_widget_request_prev(
+        self, _: NpcMusicPlayerWidget.RequestPrev
+    ) -> None:
+        # Prev/next buttons are always sequential — random mode only applies to autoplay.
+        self._advance_playlist(forward=False, random_mode=False)
+
+    def on_npc_music_player_widget_request_next(
+        self, _: NpcMusicPlayerWidget.RequestNext
+    ) -> None:
+        # Prev/next buttons are always sequential — random mode only applies to autoplay.
+        self._advance_playlist(forward=True, random_mode=False)
+
+    def on_npc_music_player_widget_request_toggle_pause(
+        self, _: NpcMusicPlayerWidget.RequestTogglePause
+    ) -> None:
+        paused = self._npc_music.toggle_pause()
+        try:
+            self.query_one(NpcMusicPlayerWidget).set_paused(paused)
+        except Exception:
+            pass
+
+    # ── Detail panel toggle ───────────────────────────────────────────────
+
     def _toggle_detail_panel(self) -> None:
-        """Swap the detail panel between fixed-width (80) and full-width (1fr)."""
+        """Swap the detail panel between fixed-width and full-width."""
         self._detail_maximised = not self._detail_maximised
         detail_panel = self.query_one("#dm-detail-panel")
         list_panel   = self.query_one("#dm-list-panel")
@@ -329,6 +506,8 @@ class DataMgmtScreen(BaseScreen):
             detail_panel.styles.width = str(_DETAIL_WIDTH_NORMAL)
             list_panel.display        = True
             btn.label                 = "⤢"
+
+    # ── Textual event routing ─────────────────────────────────────────────
 
     def on_tabs_tab_activated(self, event: Tabs.TabActivated) -> None:
         handle_tab_activated(self, event)

@@ -153,7 +153,8 @@ NPCS = [
           "growth_line": "Moves to Type 2 — Uses his strength to protect others, turning his trauma into a protective instinct.",
           "instinctual_variant": "sx/sp — Seeks intense challenges and confrontations to prove his strength and control."
         },
-        'image': 'bragg1.jpeg'
+        'image': 'bragg1.jpeg',
+        'song_id': 'one_eyed_bastard_green_day'
     },
     {
         'npc_id': 'rokhuld',
