@@ -299,11 +299,26 @@ class DataMgmtScreen(BaseScreen):
         # Hide player until NPC tab is active
         self.query_one(NpcMusicPlayerWidget).display = False
         self._load_catalog()
-        # Poll for song-end every 500ms to drive autoplay
+        # Poll for song-end every 500ms to drive autoplay/loop regardless of tab
         self.set_interval(0.5, self._on_music_poll)
 
     def on_unmount(self) -> None:
         self._npc_music.shutdown()
+
+    def on_screen_resume(self) -> None:
+        """Called when this screen returns to the top of the stack (e.g. after
+        portrait fullscreen or any other pushed screen is dismissed).
+
+        If a track was playing before the sub-screen appeared and has since
+        ended naturally while suspended, restart it so music continues."""
+        if self._last_selected_npc_record is None:
+            return
+        if self._npc_music.is_playing():
+            return
+        # Track ended or was never running — resume from where we left off
+        record = self._last_selected_npc_record
+        self._npc_music.play_record(record.id, record.song_id, force=True)
+        self._update_player_label(record)
 
     # ── Data loading ──────────────────────────────────────────────────────
 
@@ -423,9 +438,11 @@ class DataMgmtScreen(BaseScreen):
     # ── Music poll timer ──────────────────────────────────────────────────
 
     def _on_music_poll(self) -> None:
-        """Called every 500ms to detect end-of-track and drive autoplay."""
-        if self._category != _NPC_CATEGORY:
-            return
+        """Called every 500ms to detect end-of-track and drive autoplay/loop.
+
+        Runs regardless of the active tab — music should continue playing when
+        the user switches to dialog, timeline, or any other tab.
+        """
         if not self._npc_music.poll_song_ended():
             return
 
@@ -435,7 +452,7 @@ class DataMgmtScreen(BaseScreen):
             return
 
         if not player.is_autoplay:
-            # Autoplay off — re-play the same song (loop behaviour)
+            # Autoplay off — loop the same track
             if self._last_selected_npc_record:
                 self._npc_music.play_record(
                     self._last_selected_npc_record.id,

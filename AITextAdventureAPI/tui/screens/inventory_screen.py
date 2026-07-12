@@ -3,20 +3,18 @@ InventoryScreen: character management screen.
 
 Layout:
   ┌── info bar (chapter / money) ──────────────────────────────────┐
-  │ [Items (i)] [Equip (e)] [Party (p)] [Learn (l)] [Upgrade (u)]  │  action bar
-  │ [Abilities (a)] [Monster Log (m)] [NPC Log (n)*] [City Log (c)] [Save (s)]    │  *unlocked only
+  │ [Items] [Equip] [Party] [Abilities] [Learn] [Upgrade]          │  action bar
+  │ [Monster Log] [NPC Log*] [City Log] [Load] [Save]              │  *unlocked only
   ├────────────────────────────────────────────────────────────────┤
   │  Card 0  │  Card 1  │ ► Card 2 ◄ │  Card 3  │  Card 4         │  character row
-  │  ...                                                           │
   ├────────────────────────────────────────────────────────────────┤
   │ pager / status bar                                             │
   └────────────────────────────────────────────────────────────────┘
 
 ← / → (or A / D) navigate between characters, also while an overlay is open.
-B toggles the abilities list for the selected character (only when no overlay).
 Escape closes any open overlay first, then returns to the previous screen.
 
-Overlay widgets (Items, Equip, Party, Learn, Upgrade, Abilities, Monster Log,
+Overlay widgets (Items, Equip, Party, Abilities, Learn, Upgrade, Monster Log,
 NPC Log, City Log) float above the character cards on the "overlay" CSS layer.
 Each overlay adds the CSS class "inv-overlay" in its on_mount so this screen
 can close them generically.
@@ -43,28 +41,9 @@ from tui.screens.upgrade_overlay import UpgradeOverlay
 from tui.screens.learn_overlay import LearnOverlay
 
 _MAX_DISPLAY: int = 5
-BINDINGS = [
-    Binding("left",  "move_left",        "Prev",         show=True),
-    Binding("a",     "move_left",        "Prev",         show=False),
-    Binding("right", "move_right",       "Next",         show=True),
-    Binding("d",     "move_right",       "Next",         show=False),
-    Binding("b",     "toggle_abilities", "Abilities",    show=True),
-    Binding("i",     "open_items",       "Items",        show=False),
-    Binding("e",     "open_equip",       "Equip",        show=False),
-    Binding("p",     "open_party",       "Party",        show=False),
-    Binding("k",     "open_abilities",   "Use Ability",  show=True),
-    Binding("l",     "open_learn",       "Learn",        show=False),
-    Binding("u",     "open_upgrade",     "Upgrade",      show=False),
-    Binding("m",     "open_monster_log", "Monster Log",  show=True),
-    Binding("n",     "open_npc_log",     "NPC Log",      show=True),
-    Binding("c",     "open_city_log",    "City Log",     show=True),
-    Binding("o",     "open_load",        "Load",         show=True),
-    Binding("s",     "open_save",        "Save",         show=True),
-]
 
-def _build_card_text(
-    player: Any, player_game: Any, *, show_abilities: bool = False
-) -> str:
+
+def _build_card_text(player: Any, player_game: Any) -> str:
     """Return Rich-markup text content for one character card."""
     lines: list[str] = []
 
@@ -128,16 +107,6 @@ def _build_card_text(
     pp_str = f"PP:{up_pow}"  if up_pow  else "[dim]PP:0[/dim]"
     lines.append(f"[yellow]{s_str}  {sp_str}  {pp_str}[/yellow]")
 
-    if show_abilities:
-        abilities = getattr(player, "abilities", []) or []
-        lines.append("")
-        lines.append("[dim]── Abilities ──[/dim]")
-        if abilities:
-            for a in abilities[:10]:
-                lines.append(f"  {rich_escape(str(getattr(a, 'name', a)))}")
-        else:
-            lines.append("  [dim]None[/dim]")
-
     return "\n".join(lines)
 
 
@@ -165,7 +134,6 @@ class InventoryScreen(BaseScreen):
     Character management screen.
 
     ← / → change the selected character whether or not an overlay is open.
-    B toggles the abilities panel (only when no overlay is open).
     Overlay widgets add the CSS class "inv-overlay" so _close_overlay() can
     remove any of them without a type import.
     """
@@ -174,28 +142,26 @@ class InventoryScreen(BaseScreen):
     show_header = False
 
     BINDINGS = [
-        Binding("left",  "move_left",        "Prev",         show=True),
-        Binding("a",     "move_left",        "Prev",         show=False),
-        Binding("right", "move_right",       "Next",         show=True),
-        Binding("d",     "move_right",       "Next",         show=False),
-        Binding("b",     "toggle_abilities", "Abilities",    show=True),
-        Binding("i",     "open_items",       "Items",        show=False),
-        Binding("e",     "open_equip",       "Equip",        show=False),
-        Binding("p",     "open_party",       "Party",        show=False),
-        Binding("k",     "open_abilities",   "Use Ability",  show=True),
-        Binding("l",     "open_learn",       "Learn",        show=False),
-        Binding("u",     "open_upgrade",     "Upgrade",      show=False),
-        Binding("m",     "open_monster_log", "Monster Log",  show=True),
-        # show=True here; check_action gates visibility+enable dynamically
-        Binding("n",     "open_npc_log",     "NPC Log",      show=True),
-        Binding("c",     "open_city_log",    "City Log",     show=True),
-        Binding("o",     "open_load",        "Load",         show=True),
-        Binding("s",     "open_save",        "Save",         show=True),
+        Binding("left",  "move_left",        "Prev",        show=True),
+        Binding("a",     "move_left",        "Prev",        show=False),
+        Binding("right", "move_right",       "Next",        show=True),
+        Binding("d",     "move_right",       "Next",        show=False),
+        Binding("i",     "open_items",       "Items",       show=False),
+        Binding("e",     "open_equip",       "Equip",       show=False),
+        Binding("p",     "open_party",       "Party",       show=False),
+        Binding("b",     "open_abilities",   "Abilities",   show=True),
+        Binding("l",     "open_learn",       "Learn",       show=False),
+        Binding("u",     "open_upgrade",     "Upgrade",     show=False),
+        Binding("m",     "open_monster_log", "Monster Log", show=True),
+        Binding("n",     "open_npc_log",     "NPC Log",     show=True),
+        Binding("c",     "open_city_log",    "City Log",    show=True),
+        Binding("x",     "open_dungeon_log", "Dungeon Log", show=True),
+        Binding("o",     "open_load",        "Load",        show=True),
+        Binding("s",     "open_save",        "Save",        show=True),
     ]
 
     _selected: int
     _offset: int
-    _abilities_on: frozenset
 
     DEFAULT_CSS = """
     InventoryScreen { layout: vertical; }
@@ -249,18 +215,18 @@ class InventoryScreen(BaseScreen):
         yield Static(f"Chapter: {chapter}  |  Money: {money}", id="info-bar")
 
         with Horizontal(id="action-bar"):
-            yield Button("Items (i)",       id="btn-items",       variant="default")
-            yield Button("Equip (e)",       id="btn-equip",       variant="default")
-            yield Button("Party (p)",       id="btn-party",       variant="default")
-            yield Button("Learn (l)",       id="btn-learn",       variant="default")
-            yield Button("Upgrade (u)",     id="btn-upgrade",     variant="default")
-            yield Button("Monster Log (m)", id="btn-monster-log", variant="default")
-            yield Button(
-                "NPC Log (n)", id="btn-npc-log", variant="default"
-            )
-            yield Button("City Log (c)",    id="btn-city-log",    variant="default")
-            yield Button("Load (o)",        id="btn-load",        variant="default")
-            yield Button("Save (s)",        id="btn-save",        variant="default")
+            yield Button("Items (i)",        id="btn-items",       variant="default")
+            yield Button("Equip (e)",        id="btn-equip",       variant="default")
+            yield Button("Party (p)",        id="btn-party",       variant="default")
+            yield Button("Abilities (b)",    id="btn-abilities",   variant="default")
+            yield Button("Learn (l)",        id="btn-learn",       variant="default")
+            yield Button("Upgrade (u)",      id="btn-upgrade",     variant="default")
+            yield Button("Monster Log (m)",  id="btn-monster-log", variant="default")
+            yield Button("NPC Log (n)",      id="btn-npc-log",     variant="default")
+            yield Button("City Log (c)",     id="btn-city-log",    variant="default")
+            yield Button("Dungeon Log (x)",  id="btn-dungeon-log", variant="default")
+            yield Button("Load (o)",         id="btn-load",        variant="default")
+            yield Button("Save (s)",         id="btn-save",        variant="default")
 
         with Horizontal(id="characters-row"):
             for slot in range(_MAX_DISPLAY):
@@ -271,9 +237,8 @@ class InventoryScreen(BaseScreen):
     # ── lifecycle ─────────────────────────────────────────────────────────────
 
     def on_mount(self) -> None:
-        self._selected     = 0
-        self._offset       = 0
-        self._abilities_on = frozenset()
+        self._selected = 0
+        self._offset   = 0
         self.call_after_refresh(self._refresh_cards)
         self.call_after_refresh(self._refresh_npc_log_button)
 
@@ -289,9 +254,8 @@ class InventoryScreen(BaseScreen):
     def check_action(self, action: str, parameters: tuple) -> bool | None:
         """Gate NPC log binding: invisible + disabled while npc_log_locked."""
         if action == "open_npc_log":
-            pg = get_active_game()
+            pg     = get_active_game()
             locked = getattr(pg, "npc_log_locked", True) if pg else True
-            # None hides the binding from the Footer entirely; False only disables it.
             return None if locked else True
         return True
 
@@ -335,8 +299,23 @@ class InventoryScreen(BaseScreen):
         if pg is None:
             self.notify("No active game.", title="Party")
             return
-        from tui.screens.party_overlay import PartyOverlay  # noqa: PLC0415
+        from tui.screens.party_overlay import PartyOverlay
         self.mount(PartyOverlay(pg, self._close_overlay))
+
+    def _open_abilities_overlay(self) -> None:
+        if self._overlay_active():
+            self._close_overlay()
+            return
+        pg = get_active_game()
+        if pg is None:
+            self.notify("No active game.", title="Abilities")
+            return
+        players = list(getattr(pg, "characters", []))
+        if not players:
+            self.notify("No characters in party.", title="Abilities")
+            return
+        from tui.screens.abilities_overlay import AbilitiesOverlay
+        self.mount(AbilitiesOverlay(pg, self._close_overlay, self._selected))
 
     def _open_monster_log_overlay(self) -> None:
         pg = get_active_game()
@@ -371,23 +350,8 @@ class InventoryScreen(BaseScreen):
         if pg is None:
             self.notify("No active game.", title="City Log")
             return
-        from tui.screens.city_log_overlay import CityLogOverlay  # noqa: PLC0415
+        from tui.screens.city_log_overlay import CityLogOverlay
         self.mount(CityLogOverlay(pg, self._close_overlay))
-    
-    def _open_abilities_overlay(self) -> None:
-        if self._overlay_active():
-            self._close_overlay()
-            return
-        pg = get_active_game()
-        if pg is None:
-            self.notify("No active game.", title="Abilities")
-            return
-        players = list(getattr(pg, "characters", []))
-        if not players:
-            self.notify("No characters in party.", title="Abilities")
-            return
-        from tui.screens.abilities_overlay import AbilitiesOverlay
-        self.mount(AbilitiesOverlay(pg, self._close_overlay, self._selected))
 
     def _open_upgrade_overlay(self) -> None:
         pg = get_active_game()
@@ -447,8 +411,19 @@ class InventoryScreen(BaseScreen):
         if self._overlay_active():
             self._close_overlay()
             return
-        from tui.screens.load_overlay import LoadOverlay  # noqa: PLC0415
+        from tui.screens.load_overlay import LoadOverlay
         self.mount(LoadOverlay(self._close_overlay))
+
+    def _open_dungeon_log_overlay(self) -> None:
+        if self._overlay_active():
+            self._close_overlay()
+            return
+        pg = get_active_game()
+        if pg is None:
+            self.notify("No active game.", title="Dungeon Log")
+            return
+        from tui.screens.dungeon_log_overlay import DungeonLogOverlay
+        self.mount(DungeonLogOverlay(pg, self._close_overlay))
 
     # ── escape: close overlay first, then go back ─────────────────────────────
 
@@ -486,17 +461,6 @@ class InventoryScreen(BaseScreen):
         self._refresh_cards()
         self._notify_overlays_player_changed()
 
-    def action_toggle_abilities(self) -> None:
-        if self._overlay_active():
-            return
-        shown = set(self._abilities_on)
-        if self._selected in shown:
-            shown.discard(self._selected)
-        else:
-            shown.add(self._selected)
-        self._abilities_on = frozenset(shown)
-        self._refresh_cards()
-
     def action_open_monster_log(self) -> None:
         self._open_monster_log_overlay()
 
@@ -505,6 +469,9 @@ class InventoryScreen(BaseScreen):
 
     def action_open_city_log(self) -> None:
         self._open_city_log_overlay()
+
+    def action_open_abilities(self) -> None:
+        self._open_abilities_overlay()
 
     def _notify_overlays_player_changed(self) -> None:
         pg = get_active_game()
@@ -530,6 +497,10 @@ class InventoryScreen(BaseScreen):
     @on(Button.Pressed, "#btn-party")
     def _on_party(self) -> None:
         self._open_party_overlay()
+
+    @on(Button.Pressed, "#btn-abilities")
+    def _on_abilities(self) -> None:
+        self._open_abilities_overlay()
 
     @on(Button.Pressed, "#btn-learn")
     def _on_learn(self) -> None:
@@ -572,9 +543,9 @@ class InventoryScreen(BaseScreen):
     def _on_save(self) -> None:
         self._open_save_overlay()
 
-    @on(Button.Pressed, "#btn-abilities")
-    def _on_abilities(self) -> None:
-        self._open_abilities_overlay()
+    @on(Button.Pressed, "#btn-dungeon-log")
+    def _on_dungeon_log(self) -> None:
+        self._open_dungeon_log_overlay()
 
     def action_open_items(self) -> None:
         self._open_items_overlay()
@@ -596,6 +567,9 @@ class InventoryScreen(BaseScreen):
 
     def action_open_load(self) -> None:
         self._open_load_overlay()
+
+    def action_open_dungeon_log(self) -> None:
+        self._open_dungeon_log_overlay()
 
     # ── rendering ─────────────────────────────────────────────────────────────
 
@@ -654,9 +628,8 @@ class InventoryScreen(BaseScreen):
             except Exception:
                 continue
             if player_idx < total:
-                player    = players[player_idx]
-                show_abil = player_idx in self._abilities_on
-                card.update(_build_card_text(player, pg, show_abilities=show_abil))
+                player = players[player_idx]
+                card.update(_build_card_text(player, pg))
                 card.set_class(player_idx == sel, "selected")
             else:
                 card.update("[dim]—[/dim]")

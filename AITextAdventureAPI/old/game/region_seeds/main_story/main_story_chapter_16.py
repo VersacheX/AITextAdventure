@@ -43,7 +43,7 @@ NPCS = [
 			"growth_line": "Moves to Type 8 — Uses her understanding to take decisive, protective action.",
 			"instinctual_variant": "sp/sx — Deeply self-contained, driven by an intense personal mission to understand and transmit the truth of the first fracture."
 		},
-		"image": "npc:lumen1"
+		"image": "npcs:lumen1"
 	},
 	{
 		"npc_id": "jessa",
@@ -69,7 +69,7 @@ NPCS = [
 			"growth_line": "Moves to Type 9 — Finds peace in accepting that some truths are held in tension rather than resolved.",
 			"instinctual_variant": "sp/so — Finds safety in the social structure of her archive role, and self-preservation in the act of meticulous record-keeping."
 		},
-		"image": "npc:jessa1"
+		"image": "npcs:jessa1"
 	},
 	{
 		"npc_id": "scribe_halden",
@@ -95,7 +95,7 @@ NPCS = [
 			"growth_line": "Moves to Type 7 — Would learn to find freedom and flexibility beyond the letter of the law.",
 			"instinctual_variant": "so/sp — Enforces social conformity as a means of maintaining both the communal structure and his own sense of purpose."
 		},
-		"image": "npc:scribe_halden1"
+		"image": "npcs:scribe_halden1"
 	},
 	{
 		"npc_id": "vex",
@@ -120,7 +120,8 @@ NPCS = [
 			"stress_line": "Moves to Type 1 — Becomes rigid and judgmental when her freedom is genuinely threatened.",
 			"growth_line": "Moves to Type 5 — Develops the patience and depth to understand systems deeply before exploiting them.",
 			"instinctual_variant": "sx/so — Thrives on the thrill of close calls and builds loyalty through shared transgression."
-		}
+		},
+		'image': 'npcs:vex1'
 	},
 	{
 		"npc_id": "rhea",
@@ -145,7 +146,8 @@ NPCS = [
 			"stress_line": "Moves to Type 2 — Becomes dependent on others to act on her perceptions when she cannot.",
 			"growth_line": "Moves to Type 1 — Develops the discipline to act on what she senses, breaking the cycle through principled effort.",
 			"instinctual_variant": "sp/sx — Intensely focused on her own inner experience of the loop, driven by a deep personal need to find the way out."
-		}
+		},
+		'image': 'npcs:rhea1'
 	},
 	{
 		"npc_id": "korr",
@@ -170,7 +172,8 @@ NPCS = [
 			"stress_line": "Moves to Type 5 — Withdraws and hoards information when the loop becomes too overwhelming.",
 			"growth_line": "Moves to Type 2 — Opens up to others and uses his strength to protect the community around him.",
 			"instinctual_variant": "sp/so — Focused on personal survival, but builds quiet community through the shared act of enduring."
-		}
+		},
+		'image': 'npcs:korr1'
 	},
 	{
 		"npc_id": "soren",
@@ -195,7 +198,8 @@ NPCS = [
 			"stress_line": "Moves to Type 7 — Becomes scattered and anxious when the rot spreads faster than his understanding.",
 			"growth_line": "Moves to Type 8 — Uses his knowledge to take decisive protective action for the city.",
 			"instinctual_variant": "sp/sx — Intensely focused on the self-preservation of authentic memory as a personal mission."
-		}
+		},
+		'image': 'npcs:soren1'
 	},
 	{
 		"npc_id": "curator_lysa",
@@ -220,7 +224,8 @@ NPCS = [
 			"stress_line": "Moves to Type 2 — Becomes dependent on others when the futures she sees are too devastating to bear alone.",
 			"growth_line": "Moves to Type 1 — Finds a principled purpose in curating and protecting meaningful futures rather than just witnessing them.",
 			"instinctual_variant": "sx/sp — Intensely personal relationship with each future she perceives; protects her inner world fiercely."
-		}
+		},
+		'image': 'npcs:curator_lysa1'
 	},
 	{
 		"npc_id": "crux",

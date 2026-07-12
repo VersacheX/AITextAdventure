@@ -1,20 +1,19 @@
 ﻿"""
 EquipOverlay: floating equipment-management widget for InventoryScreen.
 
-Mirrors `old/game_screens/select_equipment_screen.py`, following the same
-docked/filtered-list pattern already proven in `items_overlay.py`:
   - Filters by slot: all / weapon / head / body / arms / legs.
     Tab / Shift-Tab cycle filters.
-  - Up / Down navigate the list.
-  - Left / Right change the selected party member without closing the overlay.
-  - Click highlights a row only. Enter or the Equip button opens ItemActionScreen.
-  - Delete directly discards the highlighted item.
-  - Escape closes the overlay.
+  - List is sorted: level → total stat points → primary stat (DMG or DEF) → crit.
+  - Up / Down navigate the list; Left / Right change party member.
+  - Click highlights only. Enter or the Equip button opens ItemActionScreen.
+  - Delete discards directly.
+  - Escape closes.
 
-Right panel is split into two columns:
-  - Left col: selected item stats/description.
-  - Right col: selected character's current loadout, awards, statuses, and
-    stat diff vs the highlighted item (green=better, red=worse, dim=no change).
+Right panel — two columns:
+  Left col : full item detail (name, description, type, elements, rarity,
+             level, all stats, durability, value).
+  Right col: selected character's equipped gear + colour-coded stat diff
+             vs the highlighted item (green=better, red=worse, dim=no change).
 
 The CSS class "inv-overlay" is added in on_mount so InventoryScreen can
 query and remove any open overlay generically.
@@ -43,8 +42,63 @@ _EQUIP_FILTER_LABEL: dict[str, str] = {
     "legs":   "Legs",
 }
 
+_RARITY_MARKUP: dict[str, str] = {
+    "common":    "[dim]Common[/dim]",
+    "uncommon":  "[cyan]Uncommon[/cyan]",
+    "rare":      "[blue]Rare[/blue]",
+    "superrare": "[bold magenta]Super Rare[/bold magenta]",
+    "notfound":  "[dim]?[/dim]",
+}
 
-# ── pure helpers ──────────────────────────────────────────────────────────────
+
+# ── sorting ───────────────────────────────────────────────────────────────────
+
+def _total_stat_power(item: Any) -> int:
+    """Derived stat: sum of all bonus stat buffs on an equipment object."""
+    return sum(
+        int(getattr(item, s, 0) or 0)
+        for s in ("strength", "dexterity", "intelligence", "constitution")
+    )
+
+
+def _item_sort_key(item: Any) -> tuple:
+    """Sort: level asc, TSP desc, primary stat desc (DMG or DEF), crit desc."""
+    level = int(getattr(item, "min_spawn_level", 0) or 0)
+    tsp   = _total_stat_power(item)
+    try:
+        from game.objects.weapon import Weapon
+        primary = int(getattr(item, "damage",   0) or 0) if isinstance(item, Weapon) \
+                  else int(getattr(item, "defense", 0) or 0)
+    except Exception:
+        primary = 0
+    crit = float(getattr(item, "critical_chance", 0.0) or 0.0)
+    return (level, -tsp, -primary, -crit)
+
+
+# ── element formatting (mirrors legacy shop_menu_screen._format_elements) ─────
+
+def _format_elements(elems: Any) -> str:
+    try:
+        from game.constants_other import ELEMENTAL_CHAR_KEYS
+    except ImportError:
+        ELEMENTAL_CHAR_KEYS = {}
+    if not elems:
+        return ""
+    if not isinstance(elems, (list, tuple)):
+        elems = [elems]
+    out = ""
+    for e in elems:
+        if isinstance(e, dict):
+            key = e.get("id") or e.get("name") or ""
+        elif isinstance(e, str):
+            key = e
+        else:
+            key = str(getattr(e, "id", getattr(e, "value", "")))
+        out += ELEMENTAL_CHAR_KEYS.get(str(key).lower(), f"({key})")
+    return out
+
+
+# ── filter + sort ─────────────────────────────────────────────────────────────
 
 def _apply_equip_filter(inventory: list, filter_key: str) -> list:
     try:
@@ -53,23 +107,34 @@ def _apply_equip_filter(inventory: list, filter_key: str) -> list:
     except ImportError:
         return list(inventory)
     if filter_key == "all":
-        return [it for it in inventory if isinstance(it, (Weapon, Armor))]
-    if filter_key == "weapon":
-        return [it for it in inventory if isinstance(it, Weapon)]
-    slot_map: dict[str, Any] = {
-        "head": ArmorType.HEAD,
-        "body": ArmorType.BODY,
-        "arms": ArmorType.ARMS,
-        "legs": ArmorType.LEGS,
-    }
-    slot = slot_map.get(filter_key)
-    if slot is None:
-        return [it for it in inventory if isinstance(it, (Weapon, Armor))]
-    return [it for it in inventory if isinstance(it, Armor) and it.slot == slot]
+        items = [it for it in inventory if isinstance(it, (Weapon, Armor))]
+    elif filter_key == "weapon":
+        items = [it for it in inventory if isinstance(it, Weapon)]
+    else:
+        slot_map: dict[str, Any] = {
+            "head": ArmorType.HEAD,
+            "body": ArmorType.BODY,
+            "arms": ArmorType.ARMS,
+            "legs": ArmorType.LEGS,
+        }
+        slot  = slot_map.get(filter_key)
+        items = [it for it in inventory if isinstance(it, Armor) and it.slot == slot] \
+                if slot else [it for it in inventory if isinstance(it, (Weapon, Armor))]
+    items.sort(key=_item_sort_key)
+    return items
 
+
+# ── list-row label ────────────────────────────────────────────────────────────
 
 def _equip_item_label(item: Any) -> str:
-    name  = rich_escape(str(getattr(item, "name", "?")))
+    name      = rich_escape(str(getattr(item, "name", "?")))
+    level     = int(getattr(item, "min_spawn_level", 0) or 0)
+    rarity    = str(getattr(item, "rarity", "") or "")
+    rarity_val = rarity.value if hasattr(rarity, "value") else str(rarity)
+    elems     = getattr(item, "elements", None)
+    elem_s    = _format_elements(elems)
+    tsp       = _total_stat_power(item)
+
     stats: list[str] = []
     try:
         from game.objects.weapon import Weapon
@@ -84,18 +149,112 @@ def _equip_item_label(item: Any) -> str:
             stats.append(f"DEF:{int(getattr(item, 'defense', 0) or 0)}")
     except Exception:
         pass
-    for attr, short in (("strength","S"),("dexterity","D"),("intelligence","I"),("constitution","C")):
-        try:
-            v = int(getattr(item, attr, 0) or 0)
-            if v:
-                stats.append(f"{short}:{v}")
-        except Exception:
-            pass
-    stat_str = "  ".join(stats)
-    return f"{name}  [dim]{stat_str}[/dim]" if stat_str else name
+    if tsp:
+        stats.append(f"TSP:{tsp}")
+
+    lv_s   = f"[dim]Lv.{level}[/dim]" if level else ""
+    stat_s = f"[dim]  {'  '.join(stats)}[/dim]" if stats else ""
+    elem_m = f"  [yellow]{rich_escape(elem_s)}[/yellow]" if elem_s else ""
+
+    rarity_colors = {
+        "common": "", "uncommon": "cyan", "rare": "blue",
+        "superrare": "magenta", "notfound": "",
+    }
+    color  = rarity_colors.get(rarity_val.lower(), "")
+    name_m = f"[{color}]{name}[/{color}]" if color else name
+
+    return f"{name_m}  {lv_s}{stat_s}{elem_m}"
 
 
-def _diff_row(label: str, new_val: int | float, old_val: int | float, *, fmt: str = "d") -> str:
+# ── detail panels ─────────────────────────────────────────────────────────────
+
+def _build_item_info(item: Any | None) -> str:
+    """Left column: full in-game style item card."""
+    if item is None:
+        return "[dim]← Select an item[/dim]"
+
+    lines: list[str] = []
+
+    iname      = rich_escape(str(getattr(item, "name", "?")))
+    rarity_raw = getattr(item, "rarity", None)
+    rarity_val = rarity_raw.value if hasattr(rarity_raw, "value") else str(rarity_raw or "")
+    rarity_m   = _RARITY_MARKUP.get(rarity_val.lower(), rich_escape(rarity_val))
+    lines.append(f"[bold]{iname}[/bold]")
+    lines.append(rarity_m)
+
+    desc = str(getattr(item, "description", "") or getattr(item, "desc", "") or "")
+    if desc:
+        lines.append("")
+        lines.append(f"[dim]{rich_escape(desc)}[/dim]")
+
+    lines.append("")
+
+    try:
+        from game.objects.weapon import Weapon
+        from game.objects.armor import Armor, ArmorType
+        if isinstance(item, Weapon):
+            dmg_type = rich_escape(str(getattr(item, "damage_type", "physical") or "physical"))
+            dmg      = int(getattr(item, "damage", 0) or 0)
+            crit     = float(getattr(item, "critical_chance", 0.0) or 0)
+            ap_cost  = int(getattr(item, "ap_cost", 0) or 0)
+            rng      = int(getattr(item, "range", 1) or 1)
+            lines.append(f"[dim]── Weapon  ·  {dmg_type} ──[/dim]")
+            lines.append(f"Damage      : [bold]{dmg}[/bold]")
+            if crit:
+                lines.append(f"Crit Chance : [yellow]{crit:.1f}%[/yellow]")
+            lines.append(f"AP Cost     : {ap_cost}")
+            lines.append(f"Range       : {rng}")
+        elif isinstance(item, Armor):
+            slot       = getattr(item, "slot", None)
+            slot_label = slot.name.capitalize() if hasattr(slot, "name") else str(slot or "?")
+            defense    = int(getattr(item, "defense", 0) or 0)
+            lines.append(f"[dim]── Armor  ·  {slot_label} ──[/dim]")
+            lines.append(f"Defense     : [bold]{defense}[/bold]")
+    except Exception:
+        pass
+
+    level = int(getattr(item, "min_spawn_level", 0) or 0)
+    if level:
+        lines.append(f"Req. Level  : {level}")
+
+    # ── elements ──
+    elems  = getattr(item, "elements", None)
+    elem_s = _format_elements(elems)
+    if elem_s:
+        lines.append(f"Elements    : [yellow]{rich_escape(elem_s)}[/yellow]")
+
+    # ── stat bonuses + TSP ──
+    strength  = int(getattr(item, "strength",     0) or 0)
+    dexterity = int(getattr(item, "dexterity",    0) or 0)
+    intel     = int(getattr(item, "intelligence", 0) or 0)
+    con       = int(getattr(item, "constitution", 0) or 0)
+    tsp       = strength + dexterity + intel + con
+    bonus_pairs = [(v, l) for v, l in
+                   ((strength, "STR"), (dexterity, "DEX"), (intel, "INT"), (con, "CON")) if v]
+    if bonus_pairs or tsp:
+        lines.append("")
+        lines.append(f"[dim]── Stat Bonuses  ·  [bold]TSP: {tsp}[/bold] ──[/dim]")
+        for v, l in bonus_pairs:
+            lines.append(f"  +{v:<4} {l}")
+
+    # ── durability ──
+    dur     = int(getattr(item, "durability",     0) or 0)
+    max_dur = int(getattr(item, "max_durability", 0) or 0)
+    if max_dur:
+        dur_color = "green" if dur >= max_dur * 0.6 else ("yellow" if dur >= max_dur * 0.3 else "red")
+        lines.append("")
+        lines.append(f"Durability  : [{dur_color}]{dur}/{max_dur}[/{dur_color}]")
+
+    value = getattr(item, "value", None)
+    if value:
+        lines.append("")
+        lines.append(f"[dim]Value: {value}g  |  Sell: {int(int(value) * 0.5)}g[/dim]")
+
+    return "\n".join(lines)
+
+
+def _diff_row(label: str, new_val: int | float, old_val: int | float, *,
+              fmt: str = "d", higher_is_better: bool = True) -> str:
     if fmt == "f":
         val_str  = f"{float(new_val):.1f}"
         diff     = float(new_val) - float(old_val)
@@ -104,25 +263,24 @@ def _diff_row(label: str, new_val: int | float, old_val: int | float, *, fmt: st
         val_str  = str(int(new_val))
         diff     = int(new_val) - int(old_val)
         diff_str = f"{int(diff):+d}"
-    if diff > 0:
-        diff_markup = f"[green]{diff_str}[/green]"
-    elif diff < 0:
-        diff_markup = f"[red]{diff_str}[/red]"
-    else:
+    if diff == 0:
         diff_markup = f"[dim]{diff_str}[/dim]"
-    return f"{label}: {val_str}  {diff_markup}"
+    elif (diff > 0) == higher_is_better:
+        diff_markup = f"[green]{diff_str}[/green]"
+    else:
+        diff_markup = f"[red]{diff_str}[/red]"
+    return f"  {label}: {val_str}  {diff_markup}"
 
 
 def _format_status(status: dict) -> str:
-    """One-line display for a status descriptor, e.g. 'Attack Buff (F) (3t)'."""
     try:
         from game.constants_other import ELEMENTAL_CHAR_KEYS
     except ImportError:
         ELEMENTAL_CHAR_KEYS = {}
-    name  = rich_escape(str(status.get("name") or status.get("id") or "Status"))
-    elems = status.get("elements") or []
+    name     = rich_escape(str(status.get("name") or status.get("id") or "Status"))
+    elems    = status.get("elements") or []
     elem_str = "".join(ELEMENTAL_CHAR_KEYS.get(str(e), "") for e in elems)
-    turns = status.get("turns_remaining", status.get("duration", 1))
+    turns    = status.get("turns_remaining", status.get("duration", 1))
     try:
         turns = int(turns)
     except (TypeError, ValueError):
@@ -132,60 +290,8 @@ def _format_status(status: dict) -> str:
     return f"{name}{suffix} [dim]({dur_str})[/dim]"
 
 
-def _build_item_info(item: Any | None) -> str:
-    """Left column: item name, description, and all stats."""
-    if item is None:
-        return "[dim]← Select an item[/dim]"
-
-    lines: list[str] = []
-    iname = rich_escape(str(getattr(item, "name", "?")))
-    lines.append(f"[bold]{iname}[/bold]")
-
-    desc = getattr(item, "description", "") or getattr(item, "desc", "")
-    if desc:
-        lines.append(rich_escape(str(desc)))
-
-    lines.append("")
-
-    try:
-        from game.objects.weapon import Weapon
-        from game.objects.armor import Armor, ArmorType
-        if isinstance(item, Weapon):
-            lines.append("[dim]── Weapon ──[/dim]")
-            dmg  = int(getattr(item, "damage", 0) or 0)
-            crit = float(getattr(item, "critical_chance", 0.0) or 0)
-            lines.append(f"DMG:   {dmg}")
-            if crit:
-                lines.append(f"CRIT%: {crit:.1f}")
-        elif isinstance(item, Armor):
-            slot = getattr(item, "slot", None)
-            slot_label = slot.name if hasattr(slot, "name") else str(slot or "?")
-            lines.append(f"[dim]── Armor · {slot_label} ──[/dim]")
-            lines.append(f"DEF:   {int(getattr(item, 'defense', 0) or 0)}")
-    except Exception:
-        pass
-
-    for attr, lbl in (
-        ("strength",     "STR"),
-        ("dexterity",    "DEX"),
-        ("intelligence", "INT"),
-        ("constitution", "CON"),
-        ("durability",   "DUR"),
-    ):
-        v = int(getattr(item, attr, 0) or 0)
-        if v:
-            lines.append(f"{lbl}:   {v}")
-
-    value = getattr(item, "value", None)
-    if value:
-        lines.append("")
-        lines.append(f"[dim]Value: {value}g  |  Sell: {int(value * 0.5)}g[/dim]")
-
-    return "\n".join(lines)
-
-
 def _build_char_detail(player: Any, item: Any | None) -> str:
-    """Right column: character loadout + stat diff vs highlighted item."""
+    """Right column: character loadout + colour-coded stat diff vs item."""
     lines: list[str] = []
     pname = rich_escape(str(getattr(player, "name", "?")))
     lvl   = getattr(player, "level", 0)
@@ -205,20 +311,19 @@ def _build_char_detail(player: Any, item: Any | None) -> str:
     lines.append(f"ARMS: {rich_escape(arms.name if arms else 'None')}")
     lines.append(f"LEGS: {rich_escape(legs.name if legs else 'None')}")
 
+    # pending points
     up_abil = int(getattr(player, "unused_ability_slots", 0) or 0)
     up_stat = int(getattr(player, "unused_stat_points",   0) or 0)
     up_pow  = int(getattr(player, "unused_power_points",  0) or 0)
     awards: list[str] = []
-    if up_abil:
-        awards.append(f"S:{up_abil}")
-    if up_stat:
-        awards.append(f"SP:{up_stat}")
-    if up_pow:
-        awards.append(f"PP:{up_pow}")
+    if up_abil: awards.append(f"S:{up_abil}")
+    if up_stat: awards.append(f"SP:{up_stat}")
+    if up_pow:  awards.append(f"PP:{up_pow}")
     if awards:
         lines.append("")
         lines.append(f"[yellow]★ {'  '.join(awards)}[/yellow]")
 
+    # statuses
     statuses = list(getattr(player, "statuses", []) or [])
     if statuses:
         lines.append("")
@@ -236,12 +341,14 @@ def _build_char_detail(player: Any, item: Any | None) -> str:
     except ImportError:
         return "\n".join(lines)
 
+    # ── comparison block ──
     lines.append("")
     iname = rich_escape(str(getattr(item, "name", "?")))
     lines.append(f"[bold]── vs {iname} ──[/bold]")
 
     if isinstance(item, Weapon):
         current = w
+        # primary stats
         lines.append(_diff_row("DMG",
             int(getattr(item, "damage", 0) or 0),
             int(getattr(current, "damage", 0) or 0) if current else 0))
@@ -249,15 +356,26 @@ def _build_char_detail(player: Any, item: Any | None) -> str:
             float(getattr(item, "critical_chance", 0.0) or 0),
             float(getattr(current, "critical_chance", 0.0) or 0) if current else 0.0,
             fmt="f"))
-        for attr, short in (("strength","STR"),("dexterity","DEX"),
-                             ("intelligence","INT"),("constitution","CON")):
+        lines.append(_diff_row("AP Cost",
+            int(getattr(item, "ap_cost", 0) or 0),
+            int(getattr(current, "ap_cost", 0) or 0) if current else 0,
+            higher_is_better=False))
+        # bonus stats
+        for attr, short in (("strength","STR"), ("dexterity","DEX"),
+                             ("intelligence","INT"), ("constitution","CON")):
             nv = int(getattr(item,    attr, 0) or 0)
             ov = int(getattr(current, attr, 0) or 0) if current else 0
             if nv or ov:
                 lines.append(_diff_row(short, nv, ov))
+        # elements
+        new_e = _format_elements(getattr(item,    "elements", None))
+        old_e = _format_elements(getattr(current, "elements", None) if current else None)
+        if new_e or old_e:
+            lines.append(f"  Elem: [yellow]{rich_escape(new_e or '—')}[/yellow]"
+                         f"  (was [dim]{rich_escape(old_e or '—')}[/dim])")
 
     elif isinstance(item, Armor):
-        slot = getattr(item, "slot", None)
+        slot      = getattr(item, "slot", None)
         _slot_map: dict[Any, tuple[Any, str]] = {
             ArmorType.HEAD: (head, "HEAD"),
             ArmorType.BODY: (body, "BODY"),
@@ -265,23 +383,28 @@ def _build_char_detail(player: Any, item: Any | None) -> str:
             ArmorType.LEGS: (legs, "LEGS"),
         }
         current, slot_label = _slot_map.get(slot, (None, "?"))
-        lines.append(f"[dim]Slot: {slot_label}[/dim]")
+        lines.append(f"  [dim]Slot: {slot_label}[/dim]")
         lines.append(_diff_row("DEF",
             int(getattr(item, "defense", 0) or 0),
             int(getattr(current, "defense", 0) or 0) if current else 0))
-        for attr, short in (("strength","STR"),("dexterity","DEX"),
-                             ("intelligence","INT"),("constitution","CON")):
+        for attr, short in (("strength","STR"), ("dexterity","DEX"),
+                             ("intelligence","INT"), ("constitution","CON")):
             nv = int(getattr(item,    attr, 0) or 0)
             ov = int(getattr(current, attr, 0) or 0) if current else 0
             if nv or ov:
                 lines.append(_diff_row(short, nv, ov))
+        new_e = _format_elements(getattr(item,    "elements", None))
+        old_e = _format_elements(getattr(current, "elements", None) if current else None)
+        if new_e or old_e:
+            lines.append(f"  Elem: [yellow]{rich_escape(new_e or '—')}[/yellow]"
+                         f"  (was [dim]{rich_escape(old_e or '—')}[/dim])")
     else:
-        lines.append("[dim]Not equipable[/dim]")
+        lines.append("[dim]Not equippable[/dim]")
 
     return "\n".join(lines)
 
 
-# ── Widget ────────────────────────────────────────────────────────────────────
+# ── list row ──────────────────────────────────────────────────────────────────
 
 class _EquipRow(ListItem):
     def __init__(self, item: Any) -> None:
@@ -289,15 +412,15 @@ class _EquipRow(ListItem):
         self.item = item
 
 
+# ── overlay widget ────────────────────────────────────────────────────────────
+
 class EquipOverlay(Widget):
     """
     Floating equipment picker docked to the bottom of InventoryScreen.
 
-    Tab / Shift-Tab cycle equipment-slot filters (all/weapon/head/body/arms/legs).
-    Left / Right change the active party member while the overlay stays open.
-    Click highlights a row only. Enter or the Equip button opens the action modal.
-    Delete directly discards without a modal.
-    Escape closes the overlay.
+    Tab / Shift-Tab cycle slot filters. List sorted by level → stats → primary → crit.
+    Left / Right change party member. Click highlights; Enter/Equip opens modal.
+    Delete discards. Escape closes.
     """
 
     can_focus = True
@@ -423,10 +546,10 @@ class EquipOverlay(Widget):
                     yield Static("[dim]← Select an item[/dim]", id="eq-item-col")
                     yield Static("[dim]No character selected[/dim]", id="eq-char-col")
                 with Horizontal(id="eq-action-row"):
-                    yield Button("Equip", id="eq-btn-equip", variant="primary", disabled=True)
-                    yield Button("Discard", id="eq-btn-discard", variant="error", disabled=True)
+                    yield Button("Equip",   id="eq-btn-equip",   variant="primary", disabled=True)
+                    yield Button("Discard", id="eq-btn-discard", variant="error",   disabled=True)
         yield Static(
-            "[dim]Enter/Equip btn:equip  Del/Discard btn:discard  Tab/Shift-Tab:filter  ◄►:member  Esc:close[/dim]",
+            "[dim]Enter/Equip:equip  Del/Discard:discard  Tab/⇧Tab:filter  ◄►:member  Esc:close[/dim]",
             id="eq-hint",
         )
 
@@ -437,8 +560,7 @@ class EquipOverlay(Widget):
 
     # ── public API called by InventoryScreen ──────────────────────────────
 
-    def on_player_changed(self) -> None:
-        """Called by InventoryScreen after the selected character changes."""
+    def on_player_changed(self, player: Any) -> None:
         self._update_detail(self._highlighted_item())
 
     # ── filter helpers ────────────────────────────────────────────────────
@@ -451,10 +573,11 @@ class EquipOverlay(Widget):
         parts: list[str] = []
         for i, key in enumerate(_EQUIP_FILTERS):
             label = _EQUIP_FILTER_LABEL[key]
-            if i == self._filter_idx:
-                parts.append(f"[bold reverse] {label} [/bold reverse]")
-            else:
-                parts.append(f"[dim] {label} [/dim]")
+            parts.append(
+                f"[bold reverse] {label} [/bold reverse]"
+                if i == self._filter_idx
+                else f"[dim] {label} [/dim]"
+            )
         return "  ".join(parts)
 
     def _filtered_equipment(self) -> list:
@@ -462,16 +585,15 @@ class EquipOverlay(Widget):
         return _apply_equip_filter(inv, self._current_filter)
 
     def _rebuild_list(self) -> None:
-        lv = self.query_one("#eq-list", ListView)
+        lv    = self.query_one("#eq-list", ListView)
         lv.clear()
         items = self._filtered_equipment()
         for item in items:
             lv.append(_EquipRow(item))
         self.query_one("#eq-filter-bar", Static).update(self._filter_bar_text())
-        total = len(items)
         filt  = _EQUIP_FILTER_LABEL[self._current_filter]
         self.query_one("#eq-header", Static).update(
-            f"── Equip ({total}) · Tab to cycle filter · current: {filt} ──"
+            f"── Equip ({len(items)}) · sorted: level/stats/primary/crit · filter: {filt} ──"
         )
         self._update_detail(None)
 
@@ -482,12 +604,10 @@ class EquipOverlay(Widget):
 
     def _update_detail(self, item: Any | None) -> None:
         player = self._resolve_player()
-
         try:
             self.query_one("#eq-item-col", Static).update(_build_item_info(item))
         except Exception:
             pass
-
         try:
             char_text = (
                 _build_char_detail(player, item)
@@ -497,7 +617,6 @@ class EquipOverlay(Widget):
             self.query_one("#eq-char-col", Static).update(char_text)
         except Exception:
             pass
-
         has_item = item is not None
         try:
             self.query_one("#eq-btn-equip",   Button).disabled = not has_item
@@ -514,7 +633,7 @@ class EquipOverlay(Widget):
 
     @on(ListView.Selected, "#eq-list")
     def _on_selected(self, event: ListView.Selected) -> None:
-        """Click only highlights the row — use Enter or the Equip button to act."""
+        """Click highlights only — Enter/button equips."""
         event.stop()
 
     @on(Button.Pressed, "#eq-btn-equip")
@@ -588,11 +707,10 @@ class EquipOverlay(Widget):
         try:
             from game.objects.weapon import Weapon
             from game.objects.armor import Armor
-            if isinstance(item, Weapon):
-                ok = player.equip_weapon(self._pg, item)
-            elif isinstance(item, Armor):
-                ok = player.equip_armor(self._pg, item)
-            else:
+            ok = player.equip_weapon(self._pg, item) if isinstance(item, Weapon) \
+                 else player.equip_armor(self._pg, item) if isinstance(item, Armor) \
+                 else None
+            if ok is None:
                 self.app.notify(
                     f"Cannot equip {rich_escape(str(getattr(item, 'name', 'item')))}.",
                     title="Equip",
@@ -629,40 +747,35 @@ class EquipOverlay(Widget):
     # ── internal: party navigation ────────────────────────────────────────
 
     def _shift_member(self, delta: int) -> None:
-        """Move the selected character index by delta, then refresh the detail panel."""
         try:
             from tui.screens.inventory_screen import InventoryScreen
             screen = self.app.screen
             if not isinstance(screen, InventoryScreen):
                 return
-            pg     = self._pg
-            total  = len(list(getattr(pg, "characters", [])))
+            total   = len(list(getattr(self._pg, "characters", [])))
             if total == 0:
                 return
             new_sel = max(0, min(screen._selected + delta, total - 1))
             if new_sel == screen._selected:
                 return
             screen._selected = new_sel
-            # keep viewport in sync
             if screen._selected < screen._offset:
                 screen._offset = screen._selected
-            if screen._selected >= screen._offset + 5:   # _MAX_DISPLAY = 5
+            if screen._selected >= screen._offset + 5:
                 screen._offset = screen._selected - 4
             screen._refresh_cards()
         except Exception:
             return
         self._update_detail(self._highlighted_item())
 
-    # ── helpers ───────────────────────────────────────────────────────────
-
     def _resolve_player(self) -> Any | None:
         try:
             from tui.screens.inventory_screen import InventoryScreen
-            screen = self.app.screen
+            screen  = self.app.screen
             if not isinstance(screen, InventoryScreen):
                 return None
             players = list(getattr(self._pg, "characters", []))
-            idx = screen._selected
+            idx     = screen._selected
             return players[idx] if 0 <= idx < len(players) else None
         except Exception:
             return None

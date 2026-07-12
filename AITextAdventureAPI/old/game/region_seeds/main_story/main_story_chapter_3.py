@@ -678,29 +678,7 @@ TASKS = [
 				'params': {
 					'npc_id': 'seth'
 				}
-			}, # seth sidequest... create new dungeon.  have the players meet Seth there.  this is the nobles mansion to help the players get the item to unlock the players memory
-			# there is also a second item there that allows the player to deliver to Mira, for the 2 ingredients needed to cure the chracters amnesia
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'main_story_ch_3_deliver_scribe_mint'
-				}
-			},
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'main_story_ch_3_report_to_rook'
-				}
-			}
-		]
-	},
-	{
-		'task_id': 'main_story_ch_3_deliver_scribe_mint',
-		'type': 'deliver',
-		'item_id': 'scribe_mint_ch3',
-		'to_type': 'npc',
-		'to_id': 'kess_thornwrite',
-		'task_acquire_events': [
+			}, 
 			{
 				'event_type': 'create_dungeon',
 				'params': {
@@ -732,6 +710,14 @@ TASKS = [
 				}
 			},
 			{
+				'event_type': 'dungeon_add_npc',
+				'params': {
+					'dungeon_id': 'nobles_mansion_ch3',
+					'npc_id': 'seth',
+					'location': 'entrance'
+				}
+			},
+			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
 					'npc_id': 'seth',
@@ -745,7 +731,31 @@ TASKS = [
 				'params': {
 					'task_id': 'meet_relic_guardian'
 				}
+			},
+			# seth sidequest... create new dungeon.  have the players meet Seth there.  this is the nobles mansion to help the players get the item to unlock the players memory
+			# there is also a second item there that allows the player to deliver to Mira, for the 2 ingredients needed to cure the chracters amnesia
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'main_story_ch_3_deliver_scribe_mint'
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'main_story_ch_3_report_to_rook'
+				}
 			}
+		]
+	},
+	{
+		'task_id': 'main_story_ch_3_deliver_scribe_mint',
+		'type': 'deliver',
+		'item_id': 'scribe_mint_ch3',
+		'to_type': 'npc',
+		'to_id': 'kess_thornwrite',
+		'task_acquire_events': [
+
 		],
 		'task_complete_events': [
 			{

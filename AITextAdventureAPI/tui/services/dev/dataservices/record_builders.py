@@ -10,6 +10,145 @@ from tui.services.dev.dataservices.models import DevRecord
 
 _CITY_FIELDS: Tuple[str, ...] = ("CITY_NAME", "CITY_DESCRIPTION", "BUILDINGS")
 
+_RARITY_LABELS: dict[str, str] = {
+    "common":    "Common",
+    "uncommon":  "Uncommon",
+    "rare":      "Rare",
+    "superrare": "Super Rare",
+}
+
+_ELEMENTAL_CHARS: dict[str, str] = {
+    "dark": "(D)", "light": "(L)", "earth": "(Ë)", "fire": "(F)",
+    "water": "(W)", "air": "(A)", "ice": "(I)", "electric": "(É)",
+}
+
+
+def _fmt_elements(elems: Any) -> str:
+    if not elems:
+        return ""
+    if not isinstance(elems, (list, tuple)):
+        elems = [elems]
+    out = ""
+    for e in elems:
+        key = e.get("id") or e.get("name") if isinstance(e, dict) else str(e)
+        out += _ELEMENTAL_CHARS.get(str(key).lower(), f"({key})")
+    return out
+
+
+def _total_stat_power(seed: dict) -> int:
+    """Derived stat: sum of all bonus stat buffs on an equipment seed."""
+    return sum(
+        int(seed.get(s, 0) or 0)
+        for s in ("strength", "dexterity", "intelligence", "constitution")
+    )
+
+
+def _build_weapon_detail(seed: dict) -> str:
+    lines: list[str] = []
+    desc      = str(seed.get("description", "") or "")
+    rarity    = str(seed.get("rarity", "") or "")
+    level     = seed.get("min_spawn_level", seed.get("min_level", 0))
+    dmg       = seed.get("damage", 0)
+    dmg_type  = str(seed.get("damage_type", "physical") or "physical")
+    crit      = seed.get("critical_chance", 0.0)
+    ap_cost   = seed.get("ap_cost", 0)
+    rng       = seed.get("range", 1)
+    dur       = seed.get("durability", seed.get("max_durability", 0))
+    max_dur   = seed.get("max_durability", dur)
+    value     = seed.get("value", 0)
+    elements  = seed.get("elements")
+    strength  = int(seed.get("strength",     0) or 0)
+    dexterity = int(seed.get("dexterity",    0) or 0)
+    intel     = int(seed.get("intelligence", 0) or 0)
+    con       = int(seed.get("constitution", 0) or 0)
+    tsp       = strength + dexterity + intel + con
+
+    rarity_label = _RARITY_LABELS.get(rarity.lower(), rarity)
+    if desc:
+        lines.append(desc)
+        lines.append("")
+    lines.append(f"Rarity          : {rarity_label}")
+    lines.append(f"Req. Level      : {level}")
+    lines.append("")
+    lines.append(f"── Weapon  ·  {dmg_type} ──")
+    lines.append(f"Damage          : {dmg}")
+    if crit:
+        lines.append(f"Crit Chance     : {float(crit):.1f}%")
+    lines.append(f"AP Cost         : {ap_cost}")
+    lines.append(f"Range           : {rng}")
+    elem_s = _fmt_elements(elements)
+    if elem_s:
+        lines.append(f"Elements        : {elem_s}")
+    lines.append("")
+    lines.append(f"── Stat Bonuses  ·  TSP: {tsp} ──")
+    for v, l in ((strength, "STR"), (dexterity, "DEX"), (intel, "INT"), (con, "CON")):
+        if v:
+            lines.append(f"  +{v:<4} {l}")
+    if max_dur:
+        lines.append("")
+        lines.append(f"Durability      : {dur}/{max_dur}")
+    if value:
+        lines.append("")
+        lines.append(f"Value           : {value}g  |  Sell: {int(int(value) * 0.5)}g")
+    return "\n".join(lines)
+
+
+def _build_armor_detail(seed: dict, slot: str) -> str:
+    lines: list[str] = []
+    desc      = str(seed.get("description", "") or "")
+    rarity    = str(seed.get("rarity", "") or "")
+    level     = seed.get("min_spawn_level", seed.get("min_level", 0))
+    defense   = seed.get("defense", 0)
+    dur       = seed.get("durability", seed.get("max_durability", 0))
+    max_dur   = seed.get("max_durability", dur)
+    value     = seed.get("value", 0)
+    elements  = seed.get("elements")
+    strength  = int(seed.get("strength",     0) or 0)
+    dexterity = int(seed.get("dexterity",    0) or 0)
+    intel     = int(seed.get("intelligence", 0) or 0)
+    con       = int(seed.get("constitution", 0) or 0)
+    tsp       = strength + dexterity + intel + con
+
+    rarity_label = _RARITY_LABELS.get(rarity.lower(), rarity)
+    if desc:
+        lines.append(desc)
+        lines.append("")
+    lines.append(f"Rarity          : {rarity_label}")
+    lines.append(f"Req. Level      : {level}")
+    lines.append("")
+    lines.append(f"── Armor  ·  {slot.capitalize()} ──")
+    lines.append(f"Defense         : {defense}")
+    elem_s = _fmt_elements(elements)
+    if elem_s:
+        lines.append(f"Elements        : {elem_s}")
+    lines.append("")
+    lines.append(f"── Stat Bonuses  ·  TSP: {tsp} ──")
+    for v, l in ((strength, "STR"), (dexterity, "DEX"), (intel, "INT"), (con, "CON")):
+        if v:
+            lines.append(f"  +{v:<4} {l}")
+    if max_dur:
+        lines.append("")
+        lines.append(f"Durability      : {dur}/{max_dur}")
+    if value:
+        lines.append("")
+        lines.append(f"Value           : {value}g  |  Sell: {int(int(value) * 0.5)}g")
+    return "\n".join(lines)
+
+
+def _equip_subtitle(seed: dict, type_label: str) -> str:
+    level        = seed.get("min_spawn_level", seed.get("min_level", 0)) or 0
+    rarity       = str(seed.get("rarity", "") or "")
+    rarity_label = _RARITY_LABELS.get(rarity.lower(), rarity)
+    tsp          = _total_stat_power(seed)
+    parts        = [type_label]
+    if level:
+        parts.append(f"Lv.{level}")
+    if rarity_label:
+        parts.append(rarity_label)
+    if tsp:
+        parts.append(f"TSP:{tsp}")
+    return "  ·  ".join(parts)
+
 
 def _build_characters(const: Any) -> List[DevRecord]:
     records: List[DevRecord] = []
@@ -103,8 +242,8 @@ def _build_equipment(const: Any) -> List[DevRecord]:
             name = str(seed.get("name", iid))
             records.append(DevRecord(
                 category="equipment", id=iid, name=name,
-                subtitle="weapon",
-                detail=str(seed.get("description", "")),
+                subtitle=_equip_subtitle(seed, "weapon"),
+                detail=_build_weapon_detail(seed),
             ))
     elif isinstance(weapon_seeds, dict):
         for slot, seed_list in weapon_seeds.items():
@@ -113,8 +252,8 @@ def _build_equipment(const: Any) -> List[DevRecord]:
                 name = str(seed.get("name", iid))
                 records.append(DevRecord(
                     category="equipment", id=iid, name=name,
-                    subtitle=f"weapon · {slot}",
-                    detail=str(seed.get("description", "")),
+                    subtitle=_equip_subtitle(seed, f"weapon · {slot}"),
+                    detail=_build_weapon_detail(seed),
                 ))
 
     armor_seeds = getattr(const, "ARMOR_SEEDS", {}) or {}
@@ -125,17 +264,18 @@ def _build_equipment(const: Any) -> List[DevRecord]:
                 name = str(seed.get("name", iid))
                 records.append(DevRecord(
                     category="equipment", id=iid, name=name,
-                    subtitle=f"armor · {slot}",
-                    detail=str(seed.get("description", "")),
+                    subtitle=_equip_subtitle(seed, f"armor · {slot}"),
+                    detail=_build_armor_detail(seed, slot),
                 ))
     elif isinstance(armor_seeds, list):
         for seed in armor_seeds:
             iid  = str(seed.get("id", "?"))
             name = str(seed.get("name", iid))
+            slot = str(seed.get("slot", "armor"))
             records.append(DevRecord(
                 category="equipment", id=iid, name=name,
-                subtitle="armor",
-                detail=str(seed.get("description", "")),
+                subtitle=_equip_subtitle(seed, f"armor · {slot}"),
+                detail=_build_armor_detail(seed, slot),
             ))
 
     return records
