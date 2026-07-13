@@ -680,6 +680,13 @@ TASKS = [
 				}
 			}, 
 			{
+				'event_type': 'create_npc',
+				'params': {
+					'npc_id': 'relic_guardian',
+					'location': None
+			}
+			},
+			{
 				'event_type': 'create_dungeon',
 				'params': {
 					'dungeon_id': 'nobles_mansion_ch3',

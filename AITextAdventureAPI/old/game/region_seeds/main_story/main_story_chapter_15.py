@@ -1002,6 +1002,7 @@ TASKS = [
         'to_id': 'ravel',
         'task_acquire_events': [],
         'task_complete_events': [
+            {'event_type': 'create_npc', 'params': {'npc_id': 'warden_hale', 'location': None}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'ravel', 'dialog_id': 'ravel_ch15_warden_hale'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'faith', 'dialog_id': 'faith_ch15_who_else'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'ravel', 'dialog_id': 'ravel_ch15_hale_intro'}},

@@ -534,11 +534,7 @@ TASKS = [
 				}
 			},
 			{
-				'event_type': 'create_npc',
-				'params': {
-					'npc_id': 'seth',
-					'location': None
-				}
+				'event_type': 'create_npc', 'params': { 'npc_id': 'seth', 'location': None }
 			},			
 			{
 				'event_type': 'initiate_dialog',
@@ -562,18 +558,10 @@ TASKS = [
 				}
 			},
 			{
-				'event_type': 'create_npc',
-				'params': {
-					'npc_id': 'oren',
-					'location': 'region_city_inn'
-				}
+				'event_type': 'create_npc', 'params': { 'npc_id': 'oren', 'location': 'region_city_inn' }
 			},
 			{
-				'event_type': 'create_npc',
-				'params': {
-					'npc_id': 'rook',
-					'location': 'region_city_shopitems'
-				}
+				'event_type': 'create_npc', 'params': { 'npc_id': 'rook', 'location': 'region_city_shopitems' }
 			},
 			{
 				'event_type': 'set_npc_standing_text',
@@ -585,11 +573,7 @@ TASKS = [
 				}
 			},
 			{
-				'event_type': 'create_npc',
-				'params': {
-					'npc_id': 'diego',
-					'location': 'region_city_shopweapons'
-				}
+				'event_type': 'create_npc', 'params': { 'npc_id': 'diego', 'location': 'region_city_shopweapons' }
 			},
 			{
 				'event_type': 'set_npc_standing_text',
@@ -602,11 +586,7 @@ TASKS = [
 				}
 			},
 			{
-				'event_type': 'create_npc',
-				'params': {
-					'npc_id': 'brawn',
-					'location': 'region_city_shoparmor'
-				}
+				'event_type': 'create_npc', 'params': { 'npc_id': 'brawn', 'location': 'region_city_shoparmor' }
 			},
 			{
 				'event_type': 'set_npc_standing_text',
@@ -876,18 +856,10 @@ TASKS = [
 		'to_id': 'tess',
 		'task_acquire_events': [
 			{
-				'event_type': 'create_npc',
-				'params': {
-					'npc_id': 'tess',
-					'location': 'region_city_bar'
-				}
+				'event_type': 'create_npc', 'params': { 'npc_id': 'tess', 'location': 'region_city_bar' }
 			},
 			{
-				'event_type': 'create_npc',
-				'params': {
-					'npc_id': 'sam',
-					'location': 'region_city_bar'
-				}
+				'event_type': 'create_npc', 'params': { 'npc_id': 'sam', 'location': 'region_city_bar' }
 			},
 			{
 				'event_type': 'set_npc_standing_text',
