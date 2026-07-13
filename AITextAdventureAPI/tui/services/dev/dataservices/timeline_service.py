@@ -5,7 +5,7 @@ get_timeline_tree() lives in catalog.py to avoid circular imports.
 from __future__ import annotations
 
 import re
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 
 from tui.services.dev.dataservices.models import (
     TimelineBucketNode,
@@ -38,6 +38,48 @@ _CHAPTER_TITLES: Dict[int, str] = {
     19: "Cataclysm",           20: "Oracle & Reliquary",
     21: "Dominion's Gauntlet",
 }
+
+
+# ── City metadata lookup (chapter + continent per extended bucket) ─────────
+
+def _build_city_metadata() -> Dict[str, Tuple[int, int]]:
+    """Return a mapping of extended bucket_key → (chapter_number, continent_number).
+
+    Derives from CHAPTER_CITY_ORDER and CONTINENT_COMPOSITION in world_constants.
+    Extended bucket keys are city keys with the trailing ``_city`` stripped:
+    ``"desert_large_city"`` → ``"desert_large"``.
+    """
+    try:
+        from game.region_seeds.world_constants import (
+            CHAPTER_CITY_ORDER,
+            CONTINENT_COMPOSITION,
+        )
+    except ImportError:
+        return {}
+
+    meta: Dict[str, Tuple[int, int]] = {}
+    continent     = 1
+    comp_idx      = 0
+    cities_left   = CONTINENT_COMPOSITION[0] if CONTINENT_COMPOSITION else 0
+
+    for chapter_num, city_key in enumerate(CHAPTER_CITY_ORDER, start=1):
+        bucket_key = city_key[:-5] if city_key.endswith("_city") else city_key
+        meta[bucket_key] = (chapter_num, continent)
+
+        cities_left -= 1
+        if cities_left == 0:
+            comp_idx += 1
+            continent += 1
+            cities_left = (
+                CONTINENT_COMPOSITION[comp_idx]
+                if comp_idx < len(CONTINENT_COMPOSITION)
+                else 0
+            )
+
+    return meta
+
+
+_CITY_METADATA: Dict[str, Tuple[int, int]] = _build_city_metadata()
 
 
 # ── Public filter API ─────────────────────────────────────────────────────
@@ -91,12 +133,24 @@ def _humanize_task_id(task_id: str) -> str:
 
 
 def _humanize_bucket_label(bucket_id: str) -> str:
-    """``ch1`` → ``Chapter 1 - Awakening``, ``desert_large`` → ``Desert Large``."""
+    """Format a bucket_id as a human-readable label.
+
+    - ``ch1`` → ``Chapter 1 - Awakening``
+    - ``desert_large`` (extended city) → ``Desert Large City  Ch.1  Cont.1``
+    - anything else → title-cased words
+    """
     ch_match = re.match(r"^ch(\d+)$", bucket_id)
     if ch_match:
         ch_num = int(ch_match.group(1))
         title  = _CHAPTER_TITLES.get(ch_num, "")
         return f"Chapter {ch_num}{' - ' + title if title else ''}"
+
+    city_meta = _CITY_METADATA.get(bucket_id)
+    if city_meta:
+        ch_num, cont_num = city_meta
+        base = bucket_id.replace("_", " ").title() + " City"
+        return f"{base}  Ch.{ch_num}  Cont.{cont_num}"
+
     return bucket_id.replace("_", " ").title()
 
 

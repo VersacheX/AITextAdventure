@@ -99,7 +99,21 @@ From `task_completion_service.py`, valid event types:
 ```python
 { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'npc_name', 'dialog_id': 'dialog_id' }}
 { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'character_name', 'dialog_id': 'dialog_id' }}
+{ 'event_type': 'initiate_option_dialog', 'params': {
+    'message': 'What do you want to do?',
+    'options': [
+        ('Fight the guard', 'ch1_fight_seth'),
+        ('Sneak past',      'ch1_sneak'),
+        ('Talk your way out', 'ch1_negotiate'),
+    ]
+}}
 ```
+> **`initiate_option_dialog`** presents a blocking choice prompt to the player.
+> The player selects exactly one option; the corresponding `target_task_id` is
+> immediately awarded via the normal `award_task` flow.  Escape is disabled —
+> the player must choose.  Only one option dialog can be pending at a time.
+> Any `info_dialogs` in the queue are displayed in full before the option
+> prompt appears, so dialogue lines always precede the player's choice.
 
 #### Item Events
 ```python
@@ -339,6 +353,86 @@ From `task_completion_service.py`, valid event types:
 
 
 ---
+
+### Step 3b: Event Conditions
+
+Any event in `task_acquire_events` or `task_complete_events` can carry an optional `condition` key.  When present, `handle_task_event` evaluates the condition against the live game state **before** executing the event.  If the condition is not met the event is **silently skipped** and the rest of the chain continues normally.
+
+#### Syntax
+
+{
+    'event_type': 'award_item',
+    'params': { 'item_id': 'silver_key' },
+    'condition': {
+        'type': 'is_task_completed',
+        'params': { 'task_id': 'ch3_open_vault' }
+    }
+}
+
+
+#### Available Condition Types
+
+All types are defined in `TaskEventConditionType` (`task.py`).
+
+##### Task State
+
+# True if the named task exists and is marked completed
+{ 'type': 'is_task_completed', 'params': { 'task_id': 'ch1_meet_kirn' }}
+
+# True if the named task exists and is NOT yet completed
+{ 'type': 'is_task_active', 'params': { 'task_id': 'ch1_meet_kirn' }}
+
+# True if the named task is absent or already completed (not currently active)
+{ 'type': 'is_task_not_active', 'params': { 'task_id': 'ch1_meet_kirn' }}
+
+
+##### Inventory / Economy
+
+# True if player holds at least 1 unit of the item
+{ 'type': 'has_item', 'params': { 'item_id': 'bracelet_of_void' }}
+
+# True if player has at least the given amount of gold
+{ 'type': 'has_money', 'params': { 'amount': 500 }}
+
+##### NPC State
+
+# True if the NPC has been met (npc.met == True)
+{ 'type': 'is_npc_met',     'params': { 'npc_id': 'velka' }}
+
+# True if the NPC has NOT yet been met
+{ 'type': 'is_npc_not_met', 'params': { 'npc_id': 'velka' }}
+
+
+##### World / Progression
+# True if player_game.intro_complete is True
+{ 'type': 'is_intro_complete', 'params': {} }
+
+# True if current_chapter >= the given value
+{ 'type': 'is_chapter_gte', 'params': { 'chapter': 5 }}
+
+# True if current_chapter <= the given value
+{ 'type': 'is_chapter_lte', 'params': { 'chapter': 7 }}
+
+#### Rules
+
+1. Conditions are **per-event**, not per-task.  Different events within the same task can have different (or no) conditions.
+2. An unconditional event always fires.  Only add a `condition` key when branching is needed.
+3. If a condition type is unrecognised at runtime, the event is skipped and a debug prompt is raised — treat this as a bug.
+4. Conditions do **not** chain (no `AND` / `OR` at the seed level).  If multiple conditions are needed, split the logic across separate tasks or use the most restrictive single condition.
+
+#### Example: Conditional Dialog Branch
+
+# Show a different line if the player already completed a side quest
+{ 'event_type': 'initiate_dialog',
+  'params': { 'npc_id': 'kirn', 'dialog_id': 'kirn_ch5_post_sidequest' },
+  'condition': { 'type': 'is_task_completed', 'params': { 'task_id': 'desert_sidequest_final' }}},
+
+{ 'event_type': 'initiate_dialog',
+  'params': { 'npc_id': 'kirn', 'dialog_id': 'kirn_ch5_default' },
+  'condition': { 'type': 'is_task_not_active', 'params': { 'task_id': 'desert_sidequest_final' }}},
+
+---
+
 
 ### Step 4: Location Reference System
 
@@ -761,6 +855,7 @@ Before finalizing a chapter file, verify:
 - [ ] **Boss Fights**: Follow two-task pattern (meet ? defeat)
 - [ ] **Character Reactions**: Include appropriate player character dialog
 - [ ] **Item Handling**: Proper `award_item` and `remove_item` events
+- [ ] **Event Conditions**: Any `condition` key uses a valid type from `TaskEventConditionType`; `params` match the expected shape for that type
 
 ---
 

@@ -1,4 +1,4 @@
-from typing import Any, Dict
+﻿from typing import Any, Dict
 
 from game.objects.npc import NPC
 import game.constants as const
@@ -53,8 +53,18 @@ def handle_task_event(event, player_game, parent_task):
 	if hasattr(event, 'event_type'):
 		ev_type = event.event_type
 		params = getattr(event, 'params', {})
-	
-	ev_name = ev_type.value	
+
+	ev_name = ev_type.value
+
+	# ── conditional guard ─────────────────────────────────────────────────
+	# If the event carries a condition, evaluate it first.  A False result
+	# silently skips the event; the rest of the task chain continues normally.
+	condition = getattr(event, 'condition', None)
+	if condition is not None:
+		from services.event_condition_service import evaluate_condition  # noqa: PLC0415
+		if not evaluate_condition(condition, player_game):
+			return None
+	# ─────────────────────────────────────────────────────────────────────
 
 	# AWARD_TASK: find seed in const.TASKS and build a Task then give to player_game
 	if ev_name == TaskEventType.AWARD_TASK.value:
@@ -83,6 +93,9 @@ def handle_task_event(event, player_game, parent_task):
 
 	if ev_name == TaskEventType.INITIATE_CHARACTER_DIALOG.value:
 		return initiate_character_dialog_to_player_game(params, player_game)
+
+	if ev_name == TaskEventType.INITIATE_OPTION_DIALOG.value:
+		return initiate_option_dialog_to_player_game(params, player_game)
 
 	if ev_name == TaskEventType.SET_NPC_STANDING_TEXT.value:
 		return set_npc_standing_text(params, player_game)
@@ -513,7 +526,7 @@ def set_player_location(params, player_game, parent_task):
 		player_game.set_player_location(pos)
 
 def show_npc_in_player_game(params, player_game, parent_task):
-	""" unlike hide_npoc which simply sets the npc position to None, so it's effectively nowhere,
+	""" unlike hide_npoc which simply sets the npc position to None, so it's effectively nowhere.
 	show_npc must behave like create_npc and place the npc back into the world at a location.
 	using the npc in player_game.npcs ... if does not exist do nothing (throw error).
 	"""
@@ -585,6 +598,42 @@ def initiate_character_dialog_to_player_game(params, player_game):
 	# not found -> return None
 	input (f'Dialog not found for npc_id={npc_id}, dialog_id={dialog_id}')
 	return None
+
+def initiate_option_dialog_to_player_game(params, player_game):
+	"""Set player_game.option_dialog from an initiate_option_dialog event.
+
+	Expected params:
+	    {
+	        'message': 'What do you want to do?',
+	        'options': [
+	            ('Fight the guard', 'ch1_fight_seth'),
+	            ('Sneak past',      'ch1_sneak'),
+	        ]
+	    }
+
+	Any pending info_dialogs are displayed in full before the option prompt
+	surfaces in the TUI (handled by _check_dialogs_and_refresh ordering).
+	The TUI mounts an OptionDialogWidget, awards the chosen task_id via
+	award_task_to_player_game, then clears option_dialog back to None.
+	"""
+	message = params.get('message', '')
+	raw_options = params.get('options') or []
+
+	# Accept both list-of-tuples and list-of-dicts for author convenience
+	options = []
+	for opt in raw_options:
+		if isinstance(opt, (list, tuple)) and len(opt) == 2:
+			options.append((str(opt[0]), str(opt[1])))
+		elif isinstance(opt, dict):
+			options.append((str(opt.get('text', '')), str(opt.get('task_id', ''))))
+
+	if not message or not options:
+		input(f'initiate_option_dialog: missing message or options in params: {params}')
+		return None
+
+	player_game.option_dialog = {'message': message, 'options': options}
+	return player_game.option_dialog
+6
 
 def initiate_dialog_to_player_game(params, player_game):
 	#print (f'Initiating dialog with params: {params}')

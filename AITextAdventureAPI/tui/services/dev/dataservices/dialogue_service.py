@@ -14,6 +14,7 @@ from tui.services.dev.dataservices.models import (
     DialogueStageNode,
     DialogueTaskNode,
 )
+from tui.services.dev.dataservices.timeline_service import _CITY_METADATA
 
 # ── Module-level caches (mutated by catalog._load_all) ────────────────────
 _DIALOG_TREE: List[DialogueActNode] = []
@@ -138,7 +139,13 @@ def _label_for_story(story_id: str, group_key: str) -> str:
         city_match = re.match(r"(\w+)_(\w+)_city_story", story_id)
         if city_match:
             region, size = city_match.group(1), city_match.group(2)
-            return f"{region.title()} {size.title()} City"
+            base       = f"{region.title()} {size.title()} City"
+            bucket_key = f"{region}_{size}"
+            city_meta  = _CITY_METADATA.get(bucket_key)
+            if city_meta:
+                ch_num, cont_num = city_meta
+                return f"{base}  Ch.{ch_num}  Cont.{cont_num}"
+            return base
         return _humanize_task_id(story_id)
 
     return _humanize_task_id(story_id)
@@ -220,8 +227,6 @@ def _build_dialogue_tree(const: Any) -> List[DialogueActNode]:
     if STORY_GROUPS is not present so older constants still work.
     """
     # ── Build dialog index ────────────────────────────────────────────────
-    # Start from the top-level NPC_DIALOG (main story + regional + city dialog
-    # that constants.py aggregates at the top level).
     dialog_index: Dict[Tuple[Any, Any], List[str]] = {}
 
     def _index_npc_dialog(dialog_list: Any) -> None:

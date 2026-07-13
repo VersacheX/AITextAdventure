@@ -236,17 +236,55 @@ class OverworldScreen(BaseScreen):
             self._refresh_all()
             return
 
-        # Check for info_dialogs queue
+        # Info dialogs drain first — conversation lines before the choice appears
         if hasattr(pg, "info_dialogs") and pg.info_dialogs:
             messages = []
             while pg.info_dialogs:
                 messages.append(pg.pop_dialog())
             if messages:
                 self._show_dialog(messages, "Story")
-                # Refresh happens after dialog is dismissed
                 return
 
+        # Option dialog follows once all preceding lines have been acknowledged
+        if getattr(pg, "option_dialog", None):
+            self._show_option_dialog(pg.option_dialog)
+            return
+
         self._refresh_all()
+
+    def _show_option_dialog(self, option_dialog: dict) -> None:
+        """Mount an OptionDialogWidget for the pending choice prompt."""
+        from tui.screens.option_dialog import OptionDialogWidget  # noqa: PLC0415
+        self._remove_option_dialog()
+        try:
+            map_panel = self.query_one("#map-panel")
+            widget = OptionDialogWidget(option_dialog)
+            map_panel.mount(widget)
+        except Exception as e:
+            self.notify(f"Could not show option dialog: {e}", severity="error")
+            self._refresh_all()
+
+    def _remove_option_dialog(self) -> None:
+        from tui.screens.option_dialog import OptionDialogWidget  # noqa: PLC0415
+        try:
+            self.query_one("#map-panel").query_one(OptionDialogWidget).remove()
+        except Exception:
+            pass
+
+    def on_option_dialog_widget_option_chosen(
+        self, event: "OptionDialogWidget.OptionChosen"
+    ) -> None:
+        """Award the chosen task, clear the pending dialog, and continue."""
+        from tui.screens.option_dialog import OptionDialogWidget  # noqa: PLC0415
+        pg = self._player_game()
+        if pg is not None:
+            pg.option_dialog = None
+            # Award the chosen task via the normal service path
+            from old.services.task_completion_service import award_task_to_player_game  # noqa: PLC0415
+            award_task_to_player_game(event.target_task_id, pg, None)
+        self._remove_option_dialog()
+        self._check_dialogs_and_refresh()
+        event.stop()
 
     def _show_dialog(self, messages: list[str], title: str = "Message") -> None:
         """Display a centered message dialog with the given messages.
@@ -290,13 +328,23 @@ class OverworldScreen(BaseScreen):
         self.set_timer(0.1, _check_and_refresh)
 
     def _dialog_visible(self) -> bool:
-        """Check if a MessageDialog is currently mounted in the map panel."""
+        """Check if a MessageDialog or OptionDialogWidget is currently mounted."""
+        from tui.screens.option_dialog import OptionDialogWidget  # noqa: PLC0415
         try:
             map_panel = self.query_one("#map-panel")
-            map_panel.query_one(MessageDialog)
-            return True
+            try:
+                map_panel.query_one(MessageDialog)
+                return True
+            except Exception:
+                pass
+            try:
+                map_panel.query_one(OptionDialogWidget)
+                return True
+            except Exception:
+                pass
         except Exception:
-            return False
+            pass
+        return False
 
     def _remove_dialog(self) -> None:
         """Remove the message dialog if present in the map panel."""

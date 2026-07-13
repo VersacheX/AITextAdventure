@@ -1,4 +1,4 @@
-"""
+﻿"""
 Dialogue tree: widget population, filtering, and node traversal.
 Operates on #dm-dialog-tree using the DialogueActNode model.
 """

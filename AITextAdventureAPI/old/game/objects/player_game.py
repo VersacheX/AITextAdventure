@@ -57,6 +57,9 @@ class PlayerGame:
 		self.npcs: List[NPC] = []
 
 		self.info_dialogs: List[str] = [] # List of info dialogs shown to the player
+		# Option dialog: a single pending choice prompt. Set by initiate_option_dialog events;
+		# cleared by the TUI after the player picks an option (which awards the chosen task).
+		self.option_dialog: Optional["OptionDialog"] = None
 		self.pending_fight_mob_id: str = None # If set, indicates a pending fight with the given mob id
 		self.chapter_task_waiting: bool = False
 		self.pending_character: str = None # npc/character id of a pending character to be added to the party
@@ -1399,7 +1402,8 @@ class PlayerGame:
 			'can_aircraft_fly': True,
 			'npc_log_locked': True,
 			'intro_max_cities': 4,
-			'hyperway_unlocked': False
+			'hyperway_unlocked': False,
+			'option_dialog': None,
 		}
 
 		for k, v in defaults.items():

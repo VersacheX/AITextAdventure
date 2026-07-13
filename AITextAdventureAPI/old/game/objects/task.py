@@ -1,25 +1,93 @@
 from enum import Enum
-from typing import Optional, Union, Tuple, List, Dict, Any
+from typing import Optional, Union, Tuple, List, Dict, Any, TypedDict
 import random
 from services.task_completion_service import execute_acquire_event, execute_complete_event
 
 
-class TaskType(str, Enum):
-    Fetch = "fetch"
-    Deliver = "deliver"
-    Meet = "meet"
-    Goto = "goto"
-    Defeat = "defeat"
-    CompleteIntroStory = "complete_intro_story"
-    CompleteRegionalQuests = "complete_regional_quests"
+class OptionDialog(TypedDict):
+    """Typed structure for an in-game option/choice dialog.
+
+    Populated by ``initiate_option_dialog`` task events and consumed by the
+    TUI's ``OptionDialogWidget``, which presents the message and lets the
+    player pick one option.  Selecting an option awards the corresponding
+    ``target_task_id`` via the normal task-award flow.
+
+    Fields:
+        message:  The prompt text shown to the player.
+        options:  List of (display_text, target_task_id) pairs.
+    """
+
+    message: str
+    options: List[Tuple[str, str]]   # (option_text, target_task_id)
 
 
-class SpecialTaskToType(str, Enum):
-    NPC = "npc"
-    SPECIAL_SUBLOCATION = "special_sublocation"
-    COORDINATES = "coordinates"
-    MOB = "mob"
+# ====================== EVENT CONDITIONS ======================
 
+class TaskEventConditionType(str, Enum):
+    """All supported condition types for conditional task events.
+
+    A condition is attached to an event via the ``condition`` key in the
+    seed dict.  ``handle_task_event`` evaluates it before executing; if
+    the condition is not met the event is silently skipped.
+
+    Seed usage:
+        {
+            'event_type': 'award_item',
+            'params': { 'item_id': 'silver_key' },
+            'condition': {
+                'type': 'is_task_completed',
+                'params': { 'task_id': 'ch1_open_gate' }
+            }
+        }
+    """
+
+    # Story / task state
+    IS_TASK_COMPLETED   = "is_task_completed"    # params: task_id
+    IS_TASK_ACTIVE      = "is_task_active"        # params: task_id
+    IS_TASK_NOT_ACTIVE  = "is_task_not_active"    # params: task_id (not in active list)
+
+    # Inventory / economy
+    HAS_ITEM            = "has_item"              # params: item_id
+    HAS_MONEY           = "has_money"             # params: amount (int)
+
+    # NPC state
+    IS_NPC_MET          = "is_npc_met"            # params: npc_id
+    IS_NPC_NOT_MET      = "is_npc_not_met"        # params: npc_id
+
+    # World / progression
+    IS_INTRO_COMPLETE   = "is_intro_complete"     # no params
+    IS_CHAPTER_GTE      = "is_chapter_gte"        # params: chapter (int) — current_chapter >= chapter
+    IS_CHAPTER_LTE      = "is_chapter_lte"        # params: chapter (int)
+
+
+class TaskEventCondition:
+    """A parsed, typed condition attached to a task event.
+
+    Attributes:
+        condition_type: The kind of check to perform.
+        params:         Key/value parameters specific to the condition type.
+    """
+
+    def __init__(
+        self,
+        condition_type: TaskEventConditionType,
+        params: Dict[str, Any],
+    ) -> None:
+        self.condition_type: TaskEventConditionType = condition_type
+        self.params: Dict[str, Any] = params
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> "TaskEventCondition":
+        """Build a ``TaskEventCondition`` from a seed dict fragment.
+
+        Expected shape: ``{'type': 'is_task_completed', 'params': {...}}``
+        """
+        ctype = TaskEventConditionType(d.get("type") or d.get("condition_type"))
+        params = d.get("params") or {}
+        return TaskEventCondition(ctype, params)
+
+
+# ====================== EVENT CLASSES ======================
 
 class TaskEventType(str, Enum):
     CREATE_SUBLOCATION = "create_sublocation_with_loot"
@@ -35,6 +103,7 @@ class TaskEventType(str, Enum):
     AWARD_MONEY = "award_money"
     INITIATE_DIALOG = "initiate_dialog"
     INITIATE_CHARACTER_DIALOG = "initiate_character_dialog"
+    INITIATE_OPTION_DIALOG = "initiate_option_dialog"
     SET_NPC_STANDING_TEXT = "set_npc_standing_text"
     HIDE_NPC = "hide_npc"
     SHOW_NPC = "show_npc"
@@ -63,9 +132,15 @@ class TaskEventType(str, Enum):
 
 
 class TaskAcquireEvent:
-    def __init__(self, event_type: TaskEventType, params: Dict[str, Any]):
+    def __init__(
+        self,
+        event_type: TaskEventType,
+        params: Dict[str, Any],
+        condition: Optional[TaskEventCondition] = None,
+    ) -> None:
         self.event_type: TaskEventType = event_type
         self.params: Dict[str, Any] = params
+        self.condition: Optional[TaskEventCondition] = condition
 
     def execute(self, player_game, parent_task) -> None:
         execute_acquire_event(self, player_game, parent_task)
@@ -75,13 +150,24 @@ class TaskAcquireEvent:
         et = d.get("event_type")
         params = d.get("params") or {}
         evtype = TaskEventType(et)
-        return TaskAcquireEvent(evtype, params)
+        condition = (
+            TaskEventCondition.from_dict(d["condition"])
+            if d.get("condition")
+            else None
+        )
+        return TaskAcquireEvent(evtype, params, condition)
 
 
 class TaskCompleteEvent:
-    def __init__(self, event_type: TaskEventType, params: Dict[str, Any]):
+    def __init__(
+        self,
+        event_type: TaskEventType,
+        params: Dict[str, Any],
+        condition: Optional[TaskEventCondition] = None,
+    ) -> None:
         self.event_type: TaskEventType = event_type
         self.params: Dict[str, Any] = params
+        self.condition: Optional[TaskEventCondition] = condition
 
     def execute(self, player_game, parent_task) -> None:
         execute_complete_event(self, player_game, parent_task)
@@ -91,7 +177,12 @@ class TaskCompleteEvent:
         et = d.get("event_type")
         params = d.get("params") or {}
         evtype = TaskEventType(et)
-        return TaskCompleteEvent(evtype, params)
+        condition = (
+            TaskEventCondition.from_dict(d["condition"])
+            if d.get("condition")
+            else None
+        )
+        return TaskCompleteEvent(evtype, params, condition)
 
 
 # ====================== MAIN TASK CLASSES ======================
