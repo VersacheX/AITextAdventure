@@ -523,6 +523,11 @@ TEST_DIALOG = [
 			"You decide to take stock of your surroundings first.",
 			"A reckless charge into chaos never helped anyone."
 		]
+	},
+	{
+		'npc_id': None,
+		'dialog_id': 'condition_test_narrator',
+		'dialog': ["conditions work."]
 	}
 ]
 
@@ -755,12 +760,10 @@ TASKS = [
 		'to_id': 'rook',
 		'task_acquire_events': [
 			{
-				'event_type': 'set_npc_standing_text',
+				'event_type': 'initiate_dialog',
 				'params': {
-					'npc_id': 'rook',
-					'standing_text': [
-						"Bring him to me and I'll give you half the bounty. He's camped up in a hideout somewhere in the outskirts."
-					]
+					'npc_id': None,
+					'dialog_id': 'condition_test_narrator'
 				},
 				'condition': {
 					'type': 'is_task_completed',

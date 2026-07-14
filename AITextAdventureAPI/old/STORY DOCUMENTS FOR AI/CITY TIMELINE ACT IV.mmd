@@ -1,0 +1,142 @@
+﻿timeline
+    title The Fracture Saga - CITY TIMELINE ACT IV - Chapters 14 to 15
+
+    section Chapter 14 - Hailward Hold
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - runeforger_bjorn (region_city_other1):
+                EVENT - set_npc_standing_text - runeforger_bjorn ("Runes remember deeds—sit by the forge and tell me one of yours."):
+                EVENT - create_npc - speaker_yrsa (region_city_other2):
+                EVENT - set_npc_standing_text - speaker_yrsa ("Ancestral winds carry many tales—speak softly and the cliffs will answer."):
+                Narrator - Chapter 14 City - Hailward Hold is carved into the frozen cliffs, its forge flames burning blue with ancestral power. But the runes resist the flame and the chants echo wrong — something fractures the old songs.:
+            ► COMPLETED:
+                EVENT - award_task - snow_mid_city_meet_bjorn
+
+        TASK - Meet Bjorn Runeforger - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - runeforger_bjorn ("The runes resist the flame. Something twists their meaning beneath the ice."):
+            ► COMPLETED:
+                Bjorn - The runes resist the flame.:
+                Bjorn - Their meanings twist beneath the ice.:
+                Bjorn - Something breaks their song.:
+                EVENT - award_task - snow_mid_city_meet_yrsa
+
+        TASK - Meet Yrsa Icebound - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Yrsa - The chants echo wrong.:
+                Yrsa - Ancestral voices strain to reach us.:
+                Yrsa - A force blocks their path.:
+                EVENT - set_npc_standing_text - speaker_yrsa ("The chants echo wrong. Ancestral voices strain as though something blocks them."):
+                EVENT - award_task - snow_mid_city_find_haldrin
+
+        TASK - Find Haldrin the Chant-Seer - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - chant_seer_haldrin (region_open_area):
+                EVENT - set_npc_standing_text - chant_seer_haldrin ("The rune echoes fracture. A Shattered Rune stirs beneath the frost."):
+            ► COMPLETED:
+                Haldrin - The rune echoes fracture.:
+                Haldrin - A Shattered Rune rises — a spirit of broken chants.:
+                Haldrin - If it awakens fully, the ancestors will fall silent.:
+                EVENT - award_task - snow_mid_city_rimechant_hall
+
+        TASK - Explore the Rimechant Hall - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - rimechant_hall (region_open_area):
+                EVENT - create_npc - rimechant_echo (None):
+            ► COMPLETED:
+                Rimechant Echo - We are the chants that froze wrong.:
+                Rimechant Echo - The Shattered Rune twists our echoes.:
+                Rimechant Echo - It waits deeper in the Blueforge Depths.:
+                EVENT - award_task - snow_mid_city_blueforge_depths
+
+        TASK - Descend into the Blueforge Depths - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - blueforge_depths (region_open_area):
+                EVENT - create_npc - blueforge_spirit (None):
+            ► COMPLETED:
+                Blueforge Spirit - The Depths burn with unstable blue flame.:
+                Blueforge Spirit - The Shattered Rune gathers strength.:
+                Blueforge Spirit - Only its heart remains to be stilled.:
+                EVENT - award_task - snow_mid_city_shattered_rune
+
+        TASK - Defeat the Shattered Rune - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_shattered_rune (region_open_area):
+                EVENT - begin_combat - shattered_rune_1 (boss_battle):
+            ► COMPLETED:
+                Bjorn - The runes sing true again.:
+                Bjorn - The forge burns steady.:
+                Bjorn - You've restored the voice of the ancestors.:
+                EVENT - complete_region_quest - snow_mid_city
+
+    section Chapter 15 - Tidekin Cove
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - signalwatch_errol (region_city_other1):
+                EVENT - set_npc_standing_text - signalwatch_errol ("The sea speaks in flags—watch with me and tell me what you spy."):
+                EVENT - create_npc - runner_sylka (region_city_other2):
+                EVENT - set_npc_standing_text - runner_sylka ("Hidden coves have stories—whisper one to me between the waves."):
+                Narrator - Chapter 15 City - Tidekin Cove is a small settlement of lookouts and couriers who read the sea. The fog has thickened beyond reason, the signals blur, and the cove's hidden passages feel like they lead somewhere they shouldn't.:
+            ► COMPLETED:
+                EVENT - award_task - shallows_small_city_meet_errol
+
+        TASK - Meet Errol Signalwatch - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - signalwatch_errol ("The sea's signals blur. Flags read wrong even when the wind is steady."):
+            ► COMPLETED:
+                Errol - The sea's signals blur.:
+                Errol - Flags read wrong even when the wind is steady.:
+                Errol - Something hides warnings beneath the fog.:
+                EVENT - award_task - shallows_small_city_meet_sylka
+
+        TASK - Meet Sylka the Cove-Runner - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Sylka - Hidden routes feel wrong.:
+                Sylka - The fog watches back.:
+                Sylka - If we don't act, the coves will swallow travelers whole.:
+                EVENT - set_npc_standing_text - runner_sylka ("Hidden routes feel wrong. Something in the fog watches back."):
+                EVENT - award_task - shallows_small_city_find_loryth
+
+        TASK - Find Loryth the Mist-Seer - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - mist_seer_loryth (region_open_area):
+                EVENT - set_npc_standing_text - mist_seer_loryth ("The mist glyphs twist. A Silent Buoy rises beneath the fog."):
+            ► COMPLETED:
+                Loryth - The mist glyphs twist.:
+                Loryth - A Silent Buoy rises — a spirit of drowned warnings.:
+                Loryth - If it awakens, the coast will lose its voice.:
+                EVENT - award_task - shallows_small_city_fogwhisper_inlet
+
+        TASK - Explore the Fogwhisper Inlet - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - fogwhisper_inlet (region_open_area):
+                EVENT - create_npc - fogwhisper_echo (None):
+            ► COMPLETED:
+                Fogwhisper Echo - We are the warnings the fog devoured.:
+                Fogwhisper Echo - The Silent Buoy twists our signals.:
+                Fogwhisper Echo - It waits deeper in the Coveveil Passage.:
+                EVENT - award_task - shallows_small_city_coveveil_passage
+
+        TASK - Descend into the Coveveil Passage - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - coveveil_passage (region_open_area):
+                EVENT - create_npc - coveveil_voice (None):
+            ► COMPLETED:
+                Coveveil Voice - The Passage hums with stolen warnings.:
+                Coveveil Voice - The Silent Buoy gathers strength.:
+                Coveveil Voice - Only its heart remains to be dimmed.:
+                EVENT - award_task - shallows_small_city_silent_buoy
+
+        TASK - Defeat the Silent Buoy - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_silent_buoy (region_open_area):
+                EVENT - begin_combat - silent_buoy_1 (boss_battle):
+            ► COMPLETED:
+                Errol - The fog clears. The signals return.:
+                Errol - You've restored the coast's voice.:
+                Errol - The Shallows will remember your vigilance.:
+                EVENT - complete_region_quest - shallows_small_city

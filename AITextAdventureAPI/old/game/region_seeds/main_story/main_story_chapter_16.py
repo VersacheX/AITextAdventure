@@ -669,6 +669,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch16_on_records' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch16_on_records' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'jessa', 'dialog_id': 'jessa_ch16_directs' }},
+			{ 'event_type': 'remove_item', 'params': { 'item_id': 'fracture_logs' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch16_meet_marlo_finch' }}
 		]
 	},

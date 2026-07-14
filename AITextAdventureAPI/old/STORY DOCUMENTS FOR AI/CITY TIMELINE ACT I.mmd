@@ -1,0 +1,280 @@
+﻿timeline
+    title The Fracture Saga - CITY TIMELINE ACT I - Chapters 1 to 4
+
+    section Chapter 1 - The Desert Metropolis
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - kadeem (region_city_other1):
+                EVENT - set_npc_standing_text - kadeem ("Care to browse?"):
+                EVENT - create_npc - mara (region_city_other2):
+                EVENT - set_npc_standing_text - mara ("Looking for something particular, or just lost in the heat?"):
+                Narrator - Chapter 1 City - The Desert Metropolis hums with commerce and concealed danger. In the shadow markets, everything is for sale — including information.:
+            ► COMPLETED:
+                EVENT - award_task - desert_large_city_meet_kadeem
+
+        TASK - Meet Kadeem - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - kadeem ("Strange shipments have been coming in from the deep desert. Sand that hums. Stones that whisper. Something's stirring out there."):
+            ► COMPLETED:
+                Kadeem - You look like someone who appreciates a good find.:
+                Kadeem - I can get you curious trinkets, weapons with a story, or information—for a fee, of course.:
+                EVENT - award_task - desert_large_city_meet_mara
+
+        TASK - Meet Mara - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Mara - Business moves fast in The Desert Metropolis. Know the right people and doors open.:
+                Mara - If you need a contact or a hush-hush job handled, I can broker the arrangement—provided you can pay.:
+                EVENT - set_npc_standing_text - mara ("If you're looking for trouble, the desert has plenty. A new faction is moving out there—something old, something loud."):
+                EVENT - award_task - desert_large_city_find_rhyla
+
+        TASK - Find Rhyla the Echo-Binder - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - rhyla (region_open_area):
+                EVENT - set_npc_standing_text - rhyla ("The desert is singing again. And not the kind of song you want to hear."):
+            ► COMPLETED:
+                Rhyla - You feel it, don't you? The desert humming beneath your feet.:
+                Rhyla - Zaruun cracked something open. Now the Dune Choir stirs.:
+                Rhyla - If we don't silence them, the whole region will collapse into song and sand.:
+                EVENT - award_task - desert_large_city_choir_outpost
+
+        TASK - Investigate the Choir Outpost - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - choir_outpost (region_open_area):
+                EVENT - create_npc - choir_echo (None):
+            ► COMPLETED:
+                Choir Echo - We are the Choir. We are the memory of sand.:
+                Choir Echo - You walk on our bodies. You breathe our dust.:
+                Choir Echo - You cannot silence what was here before you.:
+                EVENT - award_task - desert_large_city_sunken_archive
+
+        TASK - Explore the Sunken Archive - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - sunken_archive (region_open_area):
+                EVENT - create_npc - archive_voice (None):
+            ► COMPLETED:
+                Archive Voice - The Archive remembers every collapse.:
+                Archive Voice - Zaruun was only the first crack. You are the second.:
+                Archive Voice - The Glass Maw waits below.:
+                EVENT - award_task - desert_large_city_glass_maw
+
+        TASK - Defeat the Glass Maw - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - glass_maw (region_open_area):
+                EVENT - begin_combat - glass_maw_1 (boss_battle):
+            ► COMPLETED:
+                Rhyla - It's done. The Choir falls quiet again.:
+                Rhyla - For now, the desert holds. But it never forgets.:
+                Rhyla - Travel well, wanderer. The sands will remember your steps.:
+                EVENT - complete_region_quest - desert_large_city
+
+    section Chapter 2 - Boiling Bubble
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - emberwitch_thera (region_city_other1):
+                EVENT - set_npc_standing_text - emberwitch_thera ("The lantern shows small futures; stay and see what tonight whispers to you."):
+                EVENT - create_npc - alchemist_mirlo (region_city_other2):
+                EVENT - set_npc_standing_text - alchemist_mirlo ("I tinker with moonlight; tell me a tale and I'll brew it into a memory."):
+                Narrator - Chapter 2 City - Boiling Bubble seethes with flame-born spirits and unstable lunar brews. Something stirs where the forest's night and its fire are beginning to bleed into one another.:
+            ► COMPLETED:
+                EVENT - award_task - forest_mid_city_meet_thera
+
+        TASK - Meet Thera of the Emberlight - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - emberwitch_thera ("The lantern flickers strangely tonight. Its sparks show futures that shouldn't exist."):
+            ► COMPLETED:
+                Thera - The lantern's sparks twist into warnings.:
+                Thera - Something is merging flame-spirits with moonlight.:
+                Thera - If it completes the ritual, night itself will change.:
+                EVENT - award_task - forest_mid_city_meet_mirlo
+
+        TASK - Meet Mirlo the Moonbrewer - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Mirlo - My moonbrews keep reacting to a strange pulse.:
+                Mirlo - It's like the forest is brewing something of its own.:
+                Mirlo - Whatever it is... it's unstable.:
+                EVENT - set_npc_standing_text - alchemist_mirlo ("My moonbrews are reacting to something in the forest. The glow is... wrong. Pulsing. Like it's alive."):
+                EVENT - award_task - forest_mid_city_find_vael
+
+        TASK - Find Vael the Glimmer-Hermit - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - glimmer_hermit_vael (region_open_area):
+                EVENT - set_npc_standing_text - glimmer_hermit_vael ("Moon-embers drift toward the Rift. Something stirs where flame and night entwine."):
+            ► COMPLETED:
+                Vael - Moon-embers drift toward the Rift.:
+                Vael - A Crucible forms — half flame, half night.:
+                Vael - If it awakens fully, the forest's cycle will break.:
+                EVENT - award_task - forest_mid_city_embergrove_rift
+
+        TASK - Explore the Embergrove Rift - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - embergrove_rift (region_open_area):
+                EVENT - create_npc - riftspark (None):
+            ► COMPLETED:
+                Riftspark - The Rift burns cold and glows hot.:
+                Riftspark - The Crucible feeds on contradictions.:
+                Riftspark - It waits deeper below.:
+                EVENT - award_task - forest_mid_city_lunarcask_depths
+
+        TASK - Descend into the Lunarcask Depths - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - lunarcask_depths (region_open_area):
+                EVENT - create_npc - lunarcask_shade (None):
+            ► COMPLETED:
+                Lunarcask Shade - The Depths churn with lunar residue.:
+                Lunarcask Shade - The Crucible stirs, shaping a new night.:
+                Lunarcask Shade - Only its core remains to be shattered.:
+                EVENT - award_task - forest_mid_city_twilit_crucible
+
+        TASK - Defeat the Twilit Crucible - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_twilit_crucible (region_open_area):
+                EVENT - begin_combat - twilit_crucible_1 (boss_battle):
+            ► COMPLETED:
+                Thera - The Crucible is extinguished.:
+                Thera - The lantern's sparks settle — the futures calm.:
+                Thera - You've kept the forest's night from fracturing.:
+                EVENT - complete_region_quest - forest_mid_city
+
+    section Chapter 3 - Highsteeple Crossing
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - scribe_althorin (region_city_other1):
+                EVENT - set_npc_standing_text - scribe_althorin ("Words weave history—share a memory and I'll add it to the ledger."):
+                EVENT - create_npc - oathwarden_seris (region_city_other2):
+                EVENT - set_npc_standing_text - oathwarden_seris ("Pacts are spoken softly here—if your heart is true, speak and I will hear."):
+                Narrator - Chapter 3 City - Highsteeple Crossing is a city of binding vows and living doctrine. But the sacred texts have begun to shift in the night, and promises break without cause.:
+            ► COMPLETED:
+                EVENT - award_task - grassland_mid_city_meet_althorin
+
+        TASK - Meet Althorin the Doctrine-Scribe - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - scribe_althorin ("The doctrines shift. Verses appear where none were written. Something rewrites the sacred texts."):
+            ► COMPLETED:
+                Althorin - The doctrines shift in the night.:
+                Althorin - Verses appear where none were written.:
+                Althorin - A False Verse spreads — subtle, poisonous.:
+                EVENT - award_task - grassland_mid_city_meet_seris
+
+        TASK - Meet Seris Oathwarden - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Seris - Vows break without cause.:
+                Seris - Oaths unravel mid-sentence.:
+                Seris - Something corrupts the very act of truth-binding.:
+                EVENT - set_npc_standing_text - oathwarden_seris ("Vows unravel. Promises break without cause. Something corrupts the very act of oath-making."):
+                EVENT - award_task - grassland_mid_city_find_halven
+
+        TASK - Find Halven the Verse-Seeker - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - verse_seeker_halven (region_open_area):
+                EVENT - set_npc_standing_text - verse_seeker_halven ("The wind carries fractured scripture. A False Verse spreads across the plains."):
+            ► COMPLETED:
+                Halven - The wind carries fractured scripture.:
+                Halven - A Verse that was never meant to be spoken.:
+                Halven - If it completes itself, all doctrine will bend.:
+                EVENT - award_task - grassland_mid_city_shattered_lexicon
+
+        TASK - Explore the Shattered Lexicon - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - shattered_lexicon (region_open_area):
+                EVENT - create_npc - lexicon_fragment (None):
+            ► COMPLETED:
+                Lexicon Fragment - We are the words that broke.:
+                Lexicon Fragment - The False Verse rewrites us.:
+                Lexicon Fragment - It waits deeper in the Sanctum.:
+                EVENT - award_task - grassland_mid_city_oathbreak_sanctum
+
+        TASK - Descend into the Oathbreak Sanctum - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - oathbreak_sanctum (region_open_area):
+                EVENT - create_npc - sanctum_voice (None):
+            ► COMPLETED:
+                Sanctum Voice - The Sanctum trembles with broken vows.:
+                Sanctum Voice - The False Verse grows stronger.:
+                Sanctum Voice - Only its heart remains to be silenced.:
+                EVENT - award_task - grassland_mid_city_false_verse
+
+        TASK - Defeat the False Verse - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_false_verse (region_open_area):
+                EVENT - begin_combat - false_verse_1 (boss_battle):
+            ► COMPLETED:
+                Seris - The doctrines settle. The vows hold true again.:
+                Seris - You have restored the plains' sacred order.:
+                Seris - The grasslands remember your honesty.:
+                EVENT - complete_region_quest - grassland_mid_city
+
+    section Chapter 4 - Ironveil Foundry
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - rustscribe_gorvak (region_city_other1):
+                EVENT - set_npc_standing_text - rustscribe_gorvak ("Old gears have songs—come, tell me what yours did before the rust."):
+                EVENT - create_npc - relaytech_sindra (region_city_other2):
+                EVENT - set_npc_standing_text - relaytech_sindra ("Sparks tell stories—share your curious misfires and I'll laugh with you."):
+                Narrator - Chapter 4 City - Ironveil Foundry groans under the weight of ancient machinery. The gears that once drove the mountain's heart have begun to turn again — and no one set them in motion.:
+            ► COMPLETED:
+                EVENT - award_task - mountains_large_city_meet_gorvak
+
+        TASK - Meet Gorvak Rustscribe - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - rustscribe_gorvak ("The relics hum louder than usual. Something deep below is waking the old gears."):
+            ► COMPLETED:
+                Gorvak - The relics hum louder than they should.:
+                Gorvak - Old gears turn without hands to guide them.:
+                Gorvak - Something deep below has awakened.:
+                EVENT - award_task - mountains_large_city_meet_sindra
+
+        TASK - Meet Sindra Coilrunner - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Sindra - The conduits spark in strange rhythms.:
+                Sindra - It's like the mountain is trying to speak.:
+                Sindra - Whatever's down there is messing with the relay grid.:
+                EVENT - set_npc_standing_text - relaytech_sindra ("The conduits spark in strange rhythms. Feels like the mountain is trying to speak."):
+                EVENT - award_task - mountains_large_city_find_brannoc
+
+        TASK - Find Brannoc the Forge-Seer - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - forge_seer_brannoc (region_open_area):
+                EVENT - set_npc_standing_text - forge_seer_brannoc ("The mountain groans. Its heart-gears turn again. A Resonance stirs in the deep forges."):
+            ► COMPLETED:
+                Brannoc - The mountain's heart-gears turn again.:
+                Brannoc - A Resonance stirs — metal remembering its purpose.:
+                Brannoc - If it grows stronger, the whole range will shake itself apart.:
+                EVENT - award_task - mountains_large_city_geargrave_pit
+
+        TASK - Explore the Geargrave Pit - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - geargrave_pit (region_open_area):
+                EVENT - create_npc - gearghost (None):
+            ► COMPLETED:
+                Gearghost - We are the gears that died turning.:
+                Gearghost - The Resonance calls us back to motion.:
+                Gearghost - It waits deeper in the Conduit Maw.:
+                EVENT - award_task - mountains_large_city_conduit_maw
+
+        TASK - Descend into the Conduit Maw - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - conduit_maw (region_open_area):
+                EVENT - create_npc - conduit_echo (None):
+            ► COMPLETED:
+                Conduit Echo - The Maw hums with unstable power.:
+                Conduit Echo - The Resonance grows louder.:
+                Conduit Echo - Only its core remains to be silenced.:
+                EVENT - award_task - mountains_large_city_iron_resonance
+
+        TASK - Defeat the Iron Resonance - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_iron_resonance (region_open_area):
+                EVENT - begin_combat - iron_resonance_1 (boss_battle):
+            ► COMPLETED:
+                Gorvak - The mountain quiets. The gears rest again.:
+                Gorvak - You've stilled a force older than any forge.:
+                Gorvak - The peaks owe you their peace.:
+                EVENT - complete_region_quest - mountains_large_city

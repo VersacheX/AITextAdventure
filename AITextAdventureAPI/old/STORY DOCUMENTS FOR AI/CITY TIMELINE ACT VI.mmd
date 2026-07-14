@@ -1,0 +1,72 @@
+﻿timeline
+    title The Fracture Saga - CITY TIMELINE ACT VI - Chapter 21
+
+    section Chapter 21 - Hollerforge Hollow
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - forgehand_belkan (region_city_other1):
+                EVENT - set_npc_standing_text - forgehand_belkan ("The anvil sings; rest your feet and tell me where the road has taken you."):
+                EVENT - create_npc - marshal_korla (region_city_other2):
+                EVENT - set_npc_standing_text - marshal_korla ("I've walked dark tunnels for years—sit and share a watch, and I'll share what I've learned."):
+                Narrator - Chapter 21 City - Hollerforge Hollow is a forge-settlement carved into the mountain's belly, where smiths hammer by firelight and the deep stone hums with ancient heat. But the forges cool too quickly, tunnels collapse in deliberate patterns, and something below hungers for fire and metal.:
+            ► COMPLETED:
+                EVENT - award_task - mountains_small_city_meet_belkan
+
+        TASK - Meet Belkan Forgehand - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - forgehand_belkan ("The metal cools too quickly these days. Something deep below steals the forge's heat."):
+            ► COMPLETED:
+                Belkan - The forge cools too quickly.:
+                Belkan - Heat drains into the stone like it's being stolen.:
+                Belkan - Something below hungers for fire and metal.:
+                EVENT - award_task - mountains_small_city_meet_korla
+
+        TASK - Meet Korla Deepdelve - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Korla - Tunnels collapse in deliberate patterns.:
+                Korla - Something shifts the stone with intent.:
+                Korla - If we don't act, the depths will swallow the village.:
+                EVENT - set_npc_standing_text - marshal_korla ("Tunnels collapse in patterns I've never seen. Something shifts the stone on purpose."):
+                EVENT - award_task - mountains_small_city_find_thalric
+
+        TASK - Find Thalric the Depth-Seer - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - depth_seer_thalric (region_open_area):
+                EVENT - set_npc_standing_text - depth_seer_thalric ("The fault-echoes tremble. A forge-spirit stirs beneath the Ashen halls."):
+            ► COMPLETED:
+                Thalric - The fault-echoes tremble.:
+                Thalric - A forge-spirit stirs — the Ashen Anvil.:
+                Thalric - If it rises, all metal will bend to its will.:
+                EVENT - award_task - mountains_small_city_forgefall_tunnels
+
+        TASK - Explore the Forgefall Tunnels - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - forgefall_tunnels (region_open_area):
+                EVENT - create_npc - forgefall_echo (None):
+            ► COMPLETED:
+                Forgefall Echo - We are the forges that fell silent.:
+                Forgefall Echo - The Anvil calls us back to flame.:
+                Forgefall Echo - It waits deeper in the Foundry.:
+                EVENT - award_task - mountains_small_city_deepcoil_foundry
+
+        TASK - Descend into the Deepcoil Foundry - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - deepcoil_foundry (region_open_area):
+                EVENT - create_npc - deepcoil_spirit (None):
+            ► COMPLETED:
+                Deepcoil Spirit - The Foundry coils with stolen heat.:
+                Deepcoil Spirit - The Anvil gathers strength.:
+                Deepcoil Spirit - Only its heart remains to be shattered.:
+                EVENT - award_task - mountains_small_city_ashen_anvil
+
+        TASK - Defeat the Ashen Anvil - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_ashen_anvil (region_open_area):
+                EVENT - begin_combat - ashen_anvil_1 (boss_battle):
+            ► COMPLETED:
+                Belkan - The forges breathe again.:
+                Belkan - The metal sings true once more.:
+                Belkan - You've saved our craft — and our future.:
+                EVENT - complete_region_quest - mountains_small_city

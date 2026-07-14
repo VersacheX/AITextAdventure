@@ -68,7 +68,7 @@ BOSS_HOSTILES = [
     },
     {
         'id': 'scalpel_boss', 'name': 'Scalpel', 'hostile_type': 'construct', 'min_spawn_level': 47, 'role': 'damage', 'rarity': 'notfound',
-        'base_xp': 6000, 'common_drop': 'tome_dex_superrare', 'rare_drop': 'rift_core', 'money_range': (800, 1500),
+        'base_xp': 6000, 'common_drop': 'tome_int', 'rare_drop': 'tome_dex_superrare', 'money_range': (800, 1500),
         'basic_attack': 'anatomical strike', 'strong_attack': 'vivisection', 'player_abilities': ['cold_execution', 'perfect_cut', 'detached_slaughter'],
         'base_str': 32, 'base_dex': 40, 'base_con': 28, 'base_int': 20, 'base_hp': 18000, 'base_ap': 280,
         'str_per_level': 4, 'dex_per_level': 6, 'con_per_level': 3, 'int_per_level': 2,

@@ -60,7 +60,7 @@ BOSS_MOB = {
 BOSS_HOSTILES = [
     {
         'id': 'scalpel_projection_1', 'name': 'Scalpel\'s Projection', 'hostile_type': 'construct', 'min_spawn_level': 42, 'role': 'damage', 'rarity': 'notfound',
-        'base_xp': 5000, 'common_drop': 'tome_dex_superrare', 'rare_drop': 'phase_crystal', 'money_range': (500, 1000),
+        'base_xp': 5000, 'common_drop': 'tome_int', 'rare_drop': 'tome_dex_superrare', 'money_range': (500, 1000),
         'basic_attack': 'surgical strike', 'strong_attack': 'perfect cut', 'player_abilities': ['cold_execution', 'perfect_cut', 'detached_slaughter'],
         'base_str': 28, 'base_dex': 35, 'base_con': 24, 'base_int': 25, 'base_hp': 12000, 'base_ap': 250,
         'str_per_level': 3, 'dex_per_level': 5, 'con_per_level': 3, 'int_per_level': 3,
