@@ -909,14 +909,15 @@ def validate_timeline_integrity(
                     ))
                 else:
                     for opt in options:
-                        # Accept both (text, task_id) tuples and {'text':..,'task_id':..} dicts
                         if isinstance(opt, (list, tuple)) and len(opt) == 2:
-                            opt_task_id = str(opt[1])
+                            opt_task_id = str(opt[1]).strip()
                         elif isinstance(opt, dict):
-                            opt_task_id = str(opt.get("task_id") or "")
+                            opt_task_id = str(opt.get("task_id") or "").strip()
                         else:
                             opt_task_id = ""
-                        if opt_task_id and opt_task_id not in known_task_ids:
+                        if not opt_task_id:
+                            continue
+                        if opt_task_id not in known_task_ids:
                             errors_map[task_id].append(_err(
                                 "OPTION_DIALOG_OPTION_TARGET_MISSING",
                                 f"initiate_option_dialog option references unknown "
@@ -924,6 +925,12 @@ def validate_timeline_integrity(
                                 event_type=raw_type,
                                 related_task_id=opt_task_id,
                             ))
+                        else:
+                            # Option tasks are awarded through player choice, not
+                            # award_task edges.  Register them as inbound so R4
+                            # (TASK_UNREACHABLE_NO_INBOUND_AWARD) does not flag them.
+                            inbound_awards[opt_task_id].append(task_id)
+                            award_edges[task_id].append(opt_task_id)
 
             # ── R12 extension: set_npc_met references known NPC ───────
             elif raw_type == "set_npc_met":

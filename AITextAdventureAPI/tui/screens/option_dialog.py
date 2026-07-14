@@ -1,10 +1,10 @@
-"""
+ï»¿"""
 OptionDialogWidget: centered choice-prompt popup.
 
 Mirrors MessageDialog but instead of advancing through a queue of lines,
 it presents a single prompt with a list of labelled options.  The player
 selects one with arrow keys / mouse click and confirms with Enter or by
-clicking the option button.  Escape is intentionally NOT bound — the player
+clicking the option button.  Escape is intentionally NOT bound â€” the player
 must make a choice.
 
 The widget is mounted inside the map panel (same layer strategy as
@@ -35,7 +35,7 @@ class OptionDialogWidget(Widget):
     can_focus = True
     can_focus_children = True
 
-    # No escape binding — player must choose
+    # No escape binding â€” player must choose
     BINDINGS = [
         Binding("up",   "focus_previous", "Up",   show=False),
         Binding("down", "focus_next",     "Down", show=False),

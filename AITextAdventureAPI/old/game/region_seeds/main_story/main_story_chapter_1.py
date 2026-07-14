@@ -702,8 +702,7 @@ TASKS = [
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'oren',
-		'task_acquire_events': [],
-		'task_complete_events': [
+		'task_acquire_events': [
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
@@ -711,7 +710,8 @@ TASKS = [
 					'dialog_id': 'ch1_choice_look_for_friends'
 				}
 			}
-		]
+		],
+		'task_complete_events': []
 	},
 	# Option stub: find somewhere safe
 	{
@@ -719,8 +719,7 @@ TASKS = [
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'oren',
-		'task_acquire_events': [],
-		'task_complete_events': [
+		'task_acquire_events': [
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
@@ -728,7 +727,8 @@ TASKS = [
 					'dialog_id': 'ch1_choice_find_somewhere_safe'
 				}
 			}
-		]
+		],
+		'task_complete_events': []
 	},
 	# Option stub: look around
 	{
@@ -736,8 +736,7 @@ TASKS = [
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'oren',
-		'task_acquire_events': [],
-		'task_complete_events': [
+		'task_acquire_events': [
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
@@ -745,7 +744,8 @@ TASKS = [
 					'dialog_id': 'ch1_choice_look_around'
 				}
 			}
-		]
+		],
+		'task_complete_events': []
 	},
 	#Task 2 find item shop
 	{
@@ -754,28 +754,19 @@ TASKS = [
 		'to_type': 'npc',
 		'to_id': 'rook',
 		'task_acquire_events': [
-				#Task 2 find item shop
-				{
-					'task_id': 'main_story_ch_1_find_item_shop',
-					'type': 'meet',
-					'to_type': 'npc',
-					'to_id': 'rook',
-					'task_acquire_events': [
-						{
-							'event_type': 'set_npc_standing_text',
-							'params': {
-								'npc_id': 'rook',
-								'standing_text': [
-									"Bring him to me and I'll give you half the bounty. He's camped up in a hideout somewhere in the outskirts."
-								]
-							},
-							'condition': {
-								'type': 'is_task_completed',
-								'params': { 'task_id': 'main_story_ch_1_find_the_inn' }
-							}
-						}
-					],
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'rook',
+					'standing_text': [
+						"Bring him to me and I'll give you half the bounty. He's camped up in a hideout somewhere in the outskirts."
+					]
+				},
+				'condition': {
+					'type': 'is_task_completed',
+					'params': { 'task_id': 'main_story_ch_1_find_the_inn' }
 				}
+			}
 		],
 		'task_complete_events': [ 
 			{

@@ -236,6 +236,11 @@ class OverworldScreen(BaseScreen):
             self._refresh_all()
             return
 
+        # Block re-entrancy — if a dialog or option dialog is already visible,
+        # do nothing; _schedule_dialog_check will re-enter when it clears.
+        if self._dialog_visible():
+            return
+
         # Info dialogs drain first — conversation lines before the choice appears
         if hasattr(pg, "info_dialogs") and pg.info_dialogs:
             messages = []
@@ -276,14 +281,15 @@ class OverworldScreen(BaseScreen):
     ) -> None:
         """Award the chosen task, clear the pending dialog, and continue."""
         from tui.screens.option_dialog import OptionDialogWidget  # noqa: PLC0415
+        from services.task_completion_service import award_task_to_player_game  # noqa: PLC0415
         pg = self._player_game()
         if pg is not None:
             pg.option_dialog = None
-            # Award the chosen task via the normal service path
-            from old.services.task_completion_service import award_task_to_player_game  # noqa: PLC0415
             award_task_to_player_game(event.target_task_id, pg, None)
         self._remove_option_dialog()
-        self._check_dialogs_and_refresh()
+        # Defer until after Textual has processed the widget removal so that
+        # _dialog_visible() returns False and the acquire info_dialogs surface.
+        self.call_after_refresh(self._check_dialogs_and_refresh)
         event.stop()
 
     def _show_dialog(self, messages: list[str], title: str = "Message") -> None:
@@ -319,12 +325,12 @@ class OverworldScreen(BaseScreen):
         """Schedule a check to see if the dialog has been dismissed."""
         def _check_and_refresh() -> None:
             if not self._dialog_visible():
-                self._refresh_all()
+                # Re-enter the full dialog/option check so any queued
+                # option_dialog surfaces immediately after info lines drain.
+                self._check_dialogs_and_refresh()
             else:
-                # Dialog still visible, check again soon
                 self.set_timer(0.2, _check_and_refresh)
-        
-        # Start checking after a brief delay
+
         self.set_timer(0.1, _check_and_refresh)
 
     def _dialog_visible(self) -> bool:
@@ -545,7 +551,10 @@ class OverworldScreen(BaseScreen):
         if pg is None:
             return
         self._ensure_tiles_worker(pg)
-        self._refresh_all()
+        # Use _check_dialogs_and_refresh so any info_dialogs or option_dialog
+        # set by task acquire events during world setup are shown immediately
+        # rather than being silently skipped on the first render.
+        self._check_dialogs_and_refresh()
         self._update_overlay()
 
     def _player_game(self) -> Any:
