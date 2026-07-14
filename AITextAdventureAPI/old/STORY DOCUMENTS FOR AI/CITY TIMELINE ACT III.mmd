@@ -1,0 +1,422 @@
+﻿timeline
+    title The Fracture Saga - CITY TIMELINE ACT III - Chapters 8 to 13
+
+    section Chapter 8 - Nightveil Spire
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - velra_the_indexer (region_city_other1):
+                EVENT - set_npc_standing_text - velra_the_indexer ("Hello. The Vaults whisper; what do you seek?"):
+                EVENT - create_npc - shade_broker_kavren (region_city_other2):
+                EVENT - set_npc_standing_text - shade_broker_kavren ("I know names and rumors. Tell me yours, and perhaps I can help."):
+                Narrator - Chapter 8 City - Nightveil Spire hides its secrets in deep archives and shadowed ledgers. But the records are vanishing, and something beneath the Vaults hungers to erase what remains.:
+            ► COMPLETED:
+                EVENT - award_task - desert_mid_city_meet_velra
+
+        TASK - Meet Velra the Indexer - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - velra_the_indexer ("The Vaults shift again. Something is rewriting the catalog. If you hear whispers, do not answer them."):
+            ► COMPLETED:
+                Velra - Records vanish. Entire entries gone.:
+                Velra - The Vaults whisper of an intruder — a script that devours meaning.:
+                Velra - If you descend, do not trust what remembers you.:
+                EVENT - award_task - desert_mid_city_meet_kavren
+
+        TASK - Meet Kavren the Shade-Broker - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Kavren - People come to me to hide their secrets.:
+                Kavren - But now secrets are hiding themselves.:
+                Kavren - Someone is erasing identities from the inside out.:
+                EVENT - set_npc_standing_text - shade_broker_kavren ("Names are disappearing from my ledgers. Someone — or something — is erasing people."):
+                EVENT - award_task - desert_mid_city_find_threx
+
+        TASK - Find Archivist-Warden Threx - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - archivist_warden_threx (region_open_area):
+                EVENT - set_npc_standing_text - archivist_warden_threx ("The Vaults breach. Protocols failing. Identity integrity compromised."):
+            ► COMPLETED:
+                Threx - Designation: Threx. Archivist-Warden.:
+                Threx - The Vaults breach. Containment failing.:
+                Threx - The Erasure feeds. You must descend.:
+                EVENT - award_task - desert_mid_city_lower_vaults
+
+        TASK - Explore the Lower Vaults - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - lower_vaults (region_open_area):
+                EVENT - create_npc - vault_whisper (None):
+            ► COMPLETED:
+                Vault Whisper - You hear us. Good.:
+                Vault Whisper - The script crawls. It eats names first.:
+                Vault Whisper - Yours tastes bright.:
+                EVENT - award_task - desert_mid_city_inkwell_depths
+
+        TASK - Descend into the Inkwell Depths - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - inkwell_depths (region_open_area):
+                EVENT - create_npc - ink_specter (None):
+            ► COMPLETED:
+                Ink Specter - Ink remembers what flesh forgets.:
+                Ink Specter - The Erasure waits below, hungry for your outline.:
+                Ink Specter - Turn back, or be rewritten.:
+                EVENT - award_task - desert_mid_city_erasure_chamber
+
+        TASK - Defeat The Erasure - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_erasure_chamber (region_open_area):
+                EVENT - begin_combat - erasure_1 (boss_battle):
+            ► COMPLETED:
+                Velra - The Vaults quiet. The script retreats.:
+                Velra - You have preserved what remains of us.:
+                Velra - I will index your name myself — so it cannot be erased.:
+                EVENT - complete_region_quest - desert_mid_city
+
+    section Chapter 9 - The Radpost
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - sparkwire_Jexa (region_city_other1):
+                EVENT - set_npc_standing_text - sparkwire_Jexa ("I mend what others discard — sit and tell me how it broke."):
+                EVENT - create_npc - morrowdeal_krayt (region_city_other2):
+                EVENT - set_npc_standing_text - morrowdeal_krayt ("The Bazaar has stories for every ear — pull up a crate and share one."):
+                Narrator - Chapter 9 City - The Radpost buzzes with salvaged circuitry and black-market relics. A strange relic passed through last week, and now the district's technology has begun to wake up on its own.:
+            ► COMPLETED:
+                EVENT - award_task - desert_small_city_meet_Jexa
+
+        TASK - Meet Jexa Sparkwire - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - sparkwire_Jexa ("Circuits are acting strange lately. Like they're dreaming. If your gear starts humming on its own, bring it to me."):
+            ► COMPLETED:
+                Jexa - Something's wrong with the tech around here.:
+                Jexa - Devices are waking up on their own — humming, twitching, overheating.:
+                Jexa - Feels like a sick machine crying for help.:
+                EVENT - award_task - desert_small_city_meet_krayt
+
+        TASK - Meet Krayt Morrowdeal - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Krayt - A relic passed through the Bazaar last week.:
+                Krayt - Looked harmless. Felt cursed.:
+                Krayt - Now the whole district buzzes like a dying generator.:
+                EVENT - set_npc_standing_text - morrowdeal_krayt ("Someone brought a relic through the Bazaar last week. Now half the tech in the district is glitching."):
+                EVENT - award_task - desert_small_city_find_venn
+
+        TASK - Find Scrap-Seer Venn - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - scrap_seer_venn (region_open_area):
+                EVENT - set_npc_standing_text - scrap_seer_venn ("Shhh. The broken ones are speaking. Their pain points toward the Hollows."):
+            ► COMPLETED:
+                Venn - You hear the static too. Good.:
+                Venn - The broken ones scream of a Heart beating too fast.:
+                Venn - Follow the noise. It will find you.:
+                EVENT - award_task - desert_small_city_scrap_hollows
+
+        TASK - Explore the Scrap Hollows - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - scrap_hollows (region_open_area):
+                EVENT - create_npc - hollow_echo (None):
+            ► COMPLETED:
+                Hollow Echo - The Hollows remember every discarded thing.:
+                Hollow Echo - The Heart feeds on what you throw away.:
+                Hollow Echo - It grows stronger with every spark.:
+                EVENT - award_task - desert_small_city_signal_wastes
+
+        TASK - Traverse the Signal Wastes - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - signal_wastes (region_open_area):
+                EVENT - create_npc - signal_wraith (None):
+            ► COMPLETED:
+                Signal Wraith - Your signal is clean. Rare.:
+                Signal Wraith - The Heart wants to rewrite you.:
+                Signal Wraith - Run, or burn bright.:
+                EVENT - award_task - desert_small_city_overclocked_heart
+
+        TASK - Defeat the Overclocked Heart - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_overclocked_heart (region_open_area):
+                EVENT - begin_combat - overclocked_heart_1 (boss_battle):
+            ► COMPLETED:
+                Jexa - You did it. The Heart's gone quiet.:
+                Jexa - Circuits are stable again — for now.:
+                Jexa - If anything starts humming at night, bring it straight to me.:
+                EVENT - complete_region_quest - desert_small_city
+
+    section Chapter 10 - Crosswind Bazaar
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - keeper_savran (region_city_other1):
+                EVENT - set_npc_standing_text - keeper_savran ("I've seen beasts you'd never believe—sit and I'll tell you their names."):
+                EVENT - create_npc - waymaster_delphi (region_city_other2):
+                EVENT - set_npc_standing_text - waymaster_delphi ("Travelers bring tales—share one and I'll show you a path worth taking."):
+                Narrator - Chapter 10 City - Crosswind Bazaar sits at the crossroads of every major trade route on the plains. The beasts have grown restless, the caravans vanish, and something old prowls the wind.:
+            ► COMPLETED:
+                EVENT - award_task - grassland_large_city_meet_savran
+
+        TASK - Meet Savran Spicekeeper - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - keeper_savran ("The beasts are restless. Even the gentle ones snarl at shadows. Something stirs across the plains."):
+            ► COMPLETED:
+                Savran - The plains are uneasy. Even the docile beasts bare their teeth.:
+                Savran - Something ancient prowls the wind — a force that drives creatures wild.:
+                Savran - If we don't stop it, the grasslands will tear themselves apart.:
+                EVENT - award_task - grassland_large_city_meet_delphi
+
+        TASK - Meet Delphi the Waymaster - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Delphi - Caravans vanish without a trace.:
+                Delphi - The wind carries roars that don't belong to any living creature.:
+                Delphi - Whatever's out there is disrupting every route I know.:
+                EVENT - set_npc_standing_text - waymaster_delphi ("Trade routes are collapsing. Caravans vanish without a trace. Whatever's causing this moves with the wind."):
+                EVENT - award_task - grassland_large_city_find_vexa
+
+        TASK - Find Vexa the Trail-Reader - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - trail_reader_vexa (region_open_area):
+                EVENT - set_npc_standing_text - trail_reader_vexa ("The wind carries claw-marks today. Something drives the herds into madness."):
+            ► COMPLETED:
+                Vexa - The wind scars tell a story of frenzy.:
+                Vexa - Herds stampede in patterns no beast would choose.:
+                Vexa - A Steppe-Spirit wakes — hungry for motion, hungry for chaos.:
+                EVENT - award_task - grassland_large_city_stampede_hollows
+
+        TASK - Explore the Stampede Hollows - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - stampede_hollows (region_open_area):
+                EVENT - create_npc - hollow_runner (None):
+            ► COMPLETED:
+                Hollow Runner - The Hollows echo with thunderous hooves.:
+                Hollow Runner - The Steppe's breath stirs the earth.:
+                Hollow Runner - It waits deeper within the wind-carved tunnels.:
+                EVENT - award_task - grassland_large_city_windcarve_den
+
+        TASK - Descend into the Windcarve Den - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - windcarve_den (region_open_area):
+                EVENT - create_npc - windcarve_spirit (None):
+            ► COMPLETED:
+                Windcarve Spirit - The Den howls with ancient fury.:
+                Windcarve Spirit - The Roaring Steppe gathers strength.:
+                Windcarve Spirit - Only its heart remains to be stilled.:
+                EVENT - award_task - grassland_large_city_roaring_steppe
+
+        TASK - Defeat the Roaring Steppe - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_roaring_steppe (region_open_area):
+                EVENT - begin_combat - roaring_steppe_1 (boss_battle):
+            ► COMPLETED:
+                Savran - The plains calm. The beasts breathe easy again.:
+                Savran - You've tamed a force older than any creature I've known.:
+                Savran - The grasslands owe you their peace.:
+                EVENT - complete_region_quest - grassland_large_city
+
+    section Chapter 11 - Blackwake Bay
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - tidejudge_merrik (region_city_other1):
+                EVENT - set_npc_standing_text - tidejudge_merrik ("Disputes find their calm here—if you have a grievance, speak plainly."):
+                EVENT - create_npc - lanternrunner_vexa (region_city_other2):
+                EVENT - set_npc_standing_text - lanternrunner_vexa ("Lanterns hide more than light—share a secret and I might share a route."):
+                Narrator - Chapter 11 City - Blackwake Bay thrives on coded lantern signals and hidden tunnel routes. But the signals have begun to lie, and ships are vanishing in perfectly calm water.:
+            ► COMPLETED:
+                EVENT - award_task - shallows_mid_city_meet_merrik
+
+        TASK - Meet Merrik Tidejudge - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - tidejudge_merrik ("Signals conflict. Lantern codes contradict themselves. Something disrupts the order of the coast."):
+            ► COMPLETED:
+                Merrik - Lantern codes contradict themselves.:
+                Merrik - Signals flicker in patterns no sailor would send.:
+                Merrik - Something disrupts the order of the coast.:
+                EVENT - award_task - shallows_mid_city_meet_vexa
+
+        TASK - Meet Vexa Lanternrunner - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Vexa - Routes flicker wrong.:
+                Vexa - Someone's sending signals that lead nowhere — or worse.:
+                Vexa - If we don't stop it, ships will vanish in calm waters.:
+                EVENT - set_npc_standing_text - lanternrunner_vexa ("Lantern routes flicker wrong. Someone — or something — is sending false signals."):
+                EVENT - award_task - shallows_mid_city_find_thalen
+
+        TASK - Find Thalen the Signal-Seer - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - signal_seer_thalen (region_open_area):
+                EVENT - set_npc_standing_text - signal_seer_thalen ("Lantern patterns fracture. A False Lantern rises beneath the waves."):
+            ► COMPLETED:
+                Thalen - The lantern patterns fracture.:
+                Thalen - A False Lantern rises — a spirit of misdirection.:
+                Thalen - If it awakens fully, the coast will lose its way.:
+                EVENT - award_task - shallows_mid_city_lanternfade_passage
+
+        TASK - Explore the Lanternfade Passage - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - lanternfade_passage (region_open_area):
+                EVENT - create_npc - lanternfade_echo (None):
+            ► COMPLETED:
+                Lanternfade Echo - We are the signals that faded.:
+                Lanternfade Echo - The False Lantern twists our light.:
+                Lanternfade Echo - It waits deeper in the Undertunnel.:
+                EVENT - award_task - shallows_mid_city_smugglers_undertunnel
+
+        TASK - Descend into the Smugglers' Undertunnel - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - smugglers_undertunnel (region_open_area):
+                EVENT - create_npc - undertunnel_voice (None):
+            ► COMPLETED:
+                Undertunnel Voice - The tunnels hum with stolen signals.:
+                Undertunnel Voice - The False Lantern gathers strength.:
+                Undertunnel Voice - Only its heart remains to be dimmed.:
+                EVENT - award_task - shallows_mid_city_false_lantern
+
+        TASK - Defeat the False Lantern - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_false_lantern (region_open_area):
+                EVENT - begin_combat - false_lantern_1 (boss_battle):
+            ► COMPLETED:
+                Merrik - The signals steady. The coast finds its bearings again.:
+                Merrik - You've restored truth to the lantern routes.:
+                Merrik - The Shallows will remember your clarity.:
+                EVENT - complete_region_quest - shallows_mid_city
+
+    section Chapter 12 - Quantford Hollow
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - curator_bramble (region_city_other1):
+                EVENT - set_npc_standing_text - curator_bramble ("Welcome! The fields have stories—sit and I'll tell you one."):
+                EVENT - create_npc - librarian_sylfa (region_city_other2):
+                EVENT - set_npc_standing_text - librarian_sylfa ("Books choose readers—perhaps one chose you. Care to listen?"):
+                Narrator - Chapter 12 City - Quantford Hollow is a quiet village of folk traditions and pastoral lore. But the old charms twist into unfamiliar shapes at night, and the meadow's gentlest stories have grown teeth.:
+            ► COMPLETED:
+                EVENT - award_task - grassland_small_city_meet_bramble
+
+        TASK - Meet Bramble the Curator - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - curator_bramble ("The fields whisper strange tales today. Old charms twist into shapes I don't recognize."):
+            ► COMPLETED:
+                Bramble - The fields hum with strange tales.:
+                Bramble - Folk charms twist into shapes I've never seen.:
+                Bramble - Something meddles with our simplest stories.:
+                EVENT - award_task - grassland_small_city_meet_sylfa
+
+        TASK - Meet Sylfa Meadowreader - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Sylfa - Books whisper warnings.:
+                Sylfa - Stories shift when the meadow is uneasy.:
+                Sylfa - A Hollow spirit rewrites our gentlest lore.:
+                EVENT - set_npc_standing_text - librarian_sylfa ("Stories shift when the meadow is uneasy. Something rewrites our gentlest tales."):
+                EVENT - award_task - grassland_small_city_find_marnel
+
+        TASK - Find Marnel the Hearth-Seer - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - hearth_seer_marnel (region_open_area):
+                EVENT - set_npc_standing_text - hearth_seer_marnel ("The meadow's tales wander off their paths. A Hollow stirs beneath the folklore."):
+            ► COMPLETED:
+                Marnel - The meadow's tales wander off their paths.:
+                Marnel - A Folklore Hollow stirs beneath the roots.:
+                Marnel - If it wakes fully, our traditions will turn against us.:
+                EVENT - award_task - grassland_small_city_meadowtale_thicket
+
+        TASK - Explore the Meadowtale Thicket - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - meadowtale_thicket (region_open_area):
+                EVENT - create_npc - thicket_story (None):
+            ► COMPLETED:
+                Thicket Story - We are the tales that grew wild.:
+                Thicket Story - The Hollow twists us into danger.:
+                Thicket Story - It waits deeper in the Charmroot Den.:
+                EVENT - award_task - grassland_small_city_charmroot_den
+
+        TASK - Descend into the Charmroot Den - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - charmroot_den (region_open_area):
+                EVENT - create_npc - charmroot_voice (None):
+            ► COMPLETED:
+                Charmroot Voice - The Den trembles with corrupted charms.:
+                Charmroot Voice - The Hollow feeds on forgotten stories.:
+                Charmroot Voice - Only its heart remains to be quieted.:
+                EVENT - award_task - grassland_small_city_folklore_hollow
+
+        TASK - Defeat the Folklore Hollow - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_folklore_hollow (region_open_area):
+                EVENT - begin_combat - folklore_hollow_1 (boss_battle):
+            ► COMPLETED:
+                Bramble - The fields breathe easy again.:
+                Bramble - Our stories return to their gentle shapes.:
+                Bramble - You've saved our traditions from being lost.:
+                EVENT - complete_region_quest - grassland_small_city
+
+    section Chapter 13 - The Necropolis
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - bonechanter_velis (region_city_other1):
+                EVENT - set_npc_standing_text - bonechanter_velis ("Bones hum with stories—stay and let me arrange them into one."):
+                EVENT - create_npc - reliquarist_morwen (region_city_other2):
+                EVENT - set_npc_standing_text - reliquarist_morwen ("Relics whisper at night—come, and I will tell you what they grant and warn."):
+                Narrator - Chapter 13 City - The Necropolis is a city of sacred remains and drowned relics. The bones shift in their patterns, and something older than the swamp itself stirs beneath the mire.:
+            ► COMPLETED:
+                EVENT - award_task - swamp_large_city_meet_velis
+
+        TASK - Meet Velis Bonechanter - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - bonechanter_velis ("The bones shift in their patterns. Something stirs beneath the mire."):
+            ► COMPLETED:
+                Velis - The bones shift in their patterns.:
+                Velis - Their memories stir with unease.:
+                Velis - Something rises from the drowned past.:
+                EVENT - award_task - swamp_large_city_meet_morwen
+
+        TASK - Meet Morwen the Veil-Whisper - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Morwen - The relics murmur warnings.:
+                Morwen - Their spirits tremble as though something calls to them.:
+                Morwen - If we ignore this, the swamp will choke on its own dead.:
+                EVENT - set_npc_standing_text - reliquarist_morwen ("The relics murmur louder. Their warnings drip with dread."):
+                EVENT - award_task - swamp_large_city_find_halveth
+
+        TASK - Find Halveth the Mire-Seer - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - mire_seer_halveth (region_open_area):
+                EVENT - set_npc_standing_text - mire_seer_halveth ("The bone tides rise. A Bone Drown wakes beneath the muck."):
+            ► COMPLETED:
+                Halveth - The bone tides rise.:
+                Halveth - A Bone Drown wakes — a spirit of drowned memory.:
+                Halveth - If it awakens fully, the swamp will forget the living.:
+                EVENT - award_task - swamp_large_city_ossuary_slick
+
+        TASK - Explore the Ossuary Slick - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - ossuary_slick (region_open_area):
+                EVENT - create_npc - ossuary_whisper (None):
+            ► COMPLETED:
+                Ossuary Whisper - We are the bones that sank too deep.:
+                Ossuary Whisper - The Bone Drown twists our rest.:
+                Ossuary Whisper - It waits deeper in the Relicmire Sump.:
+                EVENT - award_task - swamp_large_city_relicmire_sump
+
+        TASK - Descend into the Relicmire Sump - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - relicmire_sump (region_open_area):
+                EVENT - create_npc - relicmire_voice (None):
+            ► COMPLETED:
+                Relicmire Voice - The Sump churns with drowned relics.:
+                Relicmire Voice - The Bone Drown gathers strength.:
+                Relicmire Voice - Only its heart remains to be silenced.:
+                EVENT - award_task - swamp_large_city_bone_drown
+
+        TASK - Defeat the Bone Drown - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_bone_drown (region_open_area):
+                EVENT - begin_combat - bone_drown_1 (boss_battle):
+            ► COMPLETED:
+                Velis - The bones settle. Their memories quiet.:
+                Velis - You've stilled a hunger older than the swamp itself.:
+                Velis - The mire will remember your tread.:
+                EVENT - complete_region_quest - swamp_large_city

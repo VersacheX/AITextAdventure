@@ -62,7 +62,7 @@ BOSS_MOB = {
 BOSS_HOSTILES = [
     {
         'id': 'rapture_boss', 'name': 'Rapture', 'hostile_type': 'aberration', 'min_spawn_level': 57, 'role': 'damage', 'rarity': 'notfound',
-        'base_xp': 8000, 'common_drop': 'tome_str_superrare', 'rare_drop': 'rift_core', 'money_range': (1000, 2000),
+        'base_xp': 8000, 'common_drop': 'tome_int', 'rare_drop': 'tome_str_superrare', 'money_range': (1000, 2000),
         'basic_attack': 'painful truth', 'strong_attack': 'agony spike', 'player_abilities': ['blood_spectacle', 'thrill_of_ruin', 'seizing_the_moment'],
         'base_str': 40, 'base_dex': 35, 'base_con': 30, 'base_int': 25, 'base_hp': 25000, 'base_ap': 350,
         'str_per_level': 5, 'dex_per_level': 4, 'con_per_level': 3, 'int_per_level': 3,

@@ -59,17 +59,20 @@ def rebuild_timeline_tree(
 def _task_label(task_node: TimelineTaskNode) -> str:
     """Render the Rich-markup label for a task leaf.
 
-    If the node has validation errors the entire label is rendered in red
-    with an error count suffix; otherwise the existing styling is used.
+    Errors render in red, warnings in yellow.  If a node has both the
+    highest-severity colour wins (red takes priority).
     """
     if task_node.errors:
-        n     = len(task_node.errors)
-        label = rich_escape(task_node.label)
-        tid   = rich_escape(task_node.task_id)
+        has_error   = any(e.severity == "error"   for e in task_node.errors)
+        has_warning = any(e.severity == "warning" for e in task_node.errors)
+        colour = "red" if has_error else "yellow"
+        n      = len(task_node.errors)
+        label  = rich_escape(task_node.label)
+        tid    = rich_escape(task_node.task_id)
         return (
-            f"[red]{label}[/red]  "
-            f"[dim red]{tid}[/dim red]  "
-            f"[red](errors: {n})[/red]"
+            f"[{colour}]{label}[/{colour}]  "
+            f"[dim {colour}]{tid}[/dim {colour}]  "
+            f"[{colour}]({'errors' if has_error else 'warnings'}: {n})[/{colour}]"
         )
     return (
         f"{rich_escape(task_node.label)}  "

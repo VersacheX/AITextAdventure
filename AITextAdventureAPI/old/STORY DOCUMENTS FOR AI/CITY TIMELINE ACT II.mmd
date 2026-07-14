@@ -1,0 +1,213 @@
+﻿timeline
+    title The Fracture Saga - CITY TIMELINE ACT II - Chapters 5 to 7
+
+    section Chapter 5 - Brineward Harbor
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - saltcaller_renlo (region_city_other1):
+                EVENT - set_npc_standing_text - saltcaller_renlo ("Storms and stories—sit and taste the salt while I tell you of the last gale."):
+                EVENT - create_npc - vaultkeeper_syrin (region_city_other2):
+                EVENT - set_npc_standing_text - vaultkeeper_syrin ("Relics remember their voyages—if you listen, the sea will tell you its name."):
+                Narrator - Chapter 5 City - Brineward Harbor thrives on maritime trade and drowned secrets. Something stirs beneath the waves, and the relics in the vaults have begun to glow.:
+            ► COMPLETED:
+                EVENT - award_task - shallows_large_city_meet_renlo
+
+        TASK - Meet Renlo Saltcaller - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - saltcaller_renlo ("The air tastes wrong today. Storms gather where the sky is clear."):
+            ► COMPLETED:
+                Renlo - The air tastes wrong.:
+                Renlo - Storms gather where the sky is clear.:
+                Renlo - Something beneath the waves stirs the winds.:
+                EVENT - award_task - shallows_large_city_meet_syrin
+
+        TASK - Meet Syrin of the Harborlight - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Syrin - The relics glow brighter.:
+                Syrin - They whisper of a Beacon drowned long ago.:
+                Syrin - If it rises, the tides will follow.:
+                EVENT - set_npc_standing_text - vaultkeeper_syrin ("The relics glow brighter. Something beneath the waves calls to them."):
+                EVENT - award_task - shallows_large_city_find_marenna
+
+        TASK - Find Marenna the Tide-Seer - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - tide_seer_marenna (region_open_area):
+                EVENT - set_npc_standing_text - tide_seer_marenna ("The tide scars whisper. A Beacon stirs beneath the drowned paths."):
+            ► COMPLETED:
+                Marenna - The tide scars tremble.:
+                Marenna - A Beacon stirs — a storm-spirit born of shipwreck light.:
+                Marenna - If it awakens, the sea will reclaim the coast.:
+                EVENT - award_task - shallows_large_city_stormtide_market_ruins
+
+        TASK - Explore the Stormtide Market Ruins - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - stormtide_market_ruins (region_open_area):
+                EVENT - create_npc - stormtide_echo (None):
+            ► COMPLETED:
+                Stormtide Echo - We are the markets the storm devoured.:
+                Stormtide Echo - The Beacon calls the tides to rise again.:
+                Stormtide Echo - It waits deeper in the Undertow Vault.:
+                EVENT - award_task - shallows_large_city_undertow_vault
+
+        TASK - Descend into the Undertow Vault - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - undertow_vault (region_open_area):
+                EVENT - create_npc - undertow_voice (None):
+            ► COMPLETED:
+                Undertow Voice - The Vault churns with drowned memories.:
+                Undertow Voice - The Beacon gathers strength.:
+                Undertow Voice - Only its heart remains to be stilled.:
+                EVENT - award_task - shallows_large_city_drowned_beacon
+
+        TASK - Defeat the Drowned Beacon - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_drowned_beacon (region_open_area):
+                EVENT - begin_combat - drowned_beacon_1 (boss_battle):
+            ► COMPLETED:
+                Renlo - The winds calm. The tides settle.:
+                Renlo - You've stilled a storm older than the coast itself.:
+                Renlo - The Shallows owe you their peace.:
+                EVENT - complete_region_quest - shallows_large_city
+
+    section Chapter 6 - Bleakwatch Outpost
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - vigilant_karrek (region_city_other1):
+                EVENT - set_npc_standing_text - vigilant_karrek ("The wind speaks of travelers—stand with me and tell what you've seen."):
+                EVENT - create_npc - survivor_mira (region_city_other2):
+                EVENT - set_npc_standing_text - survivor_mira ("Snow keeps memories; share one and I'll warm you with a story."):
+                Narrator - Chapter 6 City - Bleakwatch Outpost clings to the snowfields, its watchers reading the wind for danger. But the storm signs have gone silent, and travelers walk blind into the white.:
+            ► COMPLETED:
+                EVENT - award_task - snow_small_city_meet_karrek
+
+        TASK - Meet Karrek Windbreak - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - vigilant_karrek ("The wind's warnings blur. Storm signs vanish before I can read them."):
+            ► COMPLETED:
+                Karrek - The wind's warnings blur.:
+                Karrek - Storm signs vanish before I can read them.:
+                Karrek - Something hides danger beneath the snow.:
+                EVENT - award_task - snow_small_city_meet_mira
+
+        TASK - Meet Mira Frostline - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Mira - The snow forgets too quickly.:
+                Mira - Stories storms should leave behind fade in moments.:
+                Mira - If we don't act, travelers will walk blind into danger.:
+                EVENT - set_npc_standing_text - survivor_mira ("The snow keeps memories, but some fade too fast. Something steals the stories storms should leave behind."):
+                EVENT - award_task - snow_small_city_find_orlena
+
+        TASK - Find Orlena the Gale-Seer - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - gale_seer_orlena (region_open_area):
+                EVENT - set_npc_standing_text - gale_seer_orlena ("The storm glyphs twist. A Frozen Warning rises beneath the drifts."):
+            ► COMPLETED:
+                Orlena - The storm glyphs twist.:
+                Orlena - A Frozen Warning rises — a spirit of stolen omens.:
+                Orlena - If it awakens fully, the wind will fall silent.:
+                EVENT - award_task - snow_small_city_windscar_outpost
+
+        TASK - Explore the Windscar Outpost - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - windscar_outpost (region_open_area):
+                EVENT - create_npc - windscar_echo (None):
+            ► COMPLETED:
+                Windscar Echo - We are the warnings the wind once carried.:
+                Windscar Echo - The Frozen Warning twists our echoes.:
+                Windscar Echo - It waits deeper in the Stormhollow Crevasse.:
+                EVENT - award_task - snow_small_city_stormhollow_crevasse
+
+        TASK - Descend into the Stormhollow Crevasse - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - stormhollow_crevasse (region_open_area):
+                EVENT - create_npc - stormhollow_voice (None):
+            ► COMPLETED:
+                Stormhollow Voice - The Crevasse hums with stolen wind.:
+                Stormhollow Voice - The Frozen Warning gathers strength.:
+                Stormhollow Voice - Only its heart remains to be stilled.:
+                EVENT - award_task - snow_small_city_frozen_warning
+
+        TASK - Defeat the Frozen Warning - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_frozen_warning (region_open_area):
+                EVENT - begin_combat - frozen_warning_1 (boss_battle):
+            ► COMPLETED:
+                Karrek - The wind speaks clearly again.:
+                Karrek - Storm signs return to the cliffs.:
+                Karrek - You've restored the voice of the Snowlands.:
+                EVENT - complete_region_quest - snow_small_city
+
+    section Chapter 7 - Gnashwater Hollow
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - bogrunner_tavik (region_city_other1):
+                EVENT - set_npc_standing_text - bogrunner_tavik ("The channels whisper secrets—ride with me and tell what the swamp showed you."):
+                EVENT - create_npc - rotwharf_madra (region_city_other2):
+                EVENT - set_npc_standing_text - rotwharf_madra ("Hollow's shadows remember faces—stay and tell me what brought you here."):
+                Narrator - Chapter 7 City - Gnashwater Hollow is a place of tangled channels and hidden routes. The swamp has begun swallowing the paths its own people rely on, and no one knows what devours them.:
+            ► COMPLETED:
+                EVENT - award_task - swamp_small_city_meet_tavik
+
+        TASK - Meet Tavik Bogrunner - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Tavik - The channels twist where they once ran straight.:
+                Tavik - The swamp hides its own paths.:
+                Tavik - Something swallows the routes we trust.:
+                EVENT - set_npc_standing_text - bogrunner_tavik ("The channels twist where they once ran straight. Something hides the safe paths."):
+                EVENT - award_task - swamp_small_city_meet_madra
+
+        TASK - Meet Madra Rotwharf - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Madra - Shadows move wrong in Hollow.:
+                Madra - Smugglers vanish on routes they've walked for years.:
+                Madra - If we don't act, the swamp will claim every traveler.:
+                EVENT - set_npc_standing_text - rotwharf_madra ("Shadows move wrong in Hollow. Someone — or something — is swallowing the routes smugglers rely on."):
+                EVENT - award_task - swamp_small_city_find_draveth
+
+        TASK - Find Draveth the Channel-Seer - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - channel_seer_draveth (region_open_area):
+                EVENT - set_npc_standing_text - channel_seer_draveth ("The current-signs vanish. A Swallowed Path rises beneath the murk."):
+            ► COMPLETED:
+                Draveth - The current-signs vanish.:
+                Draveth - A Swallowed Path rises — a spirit of devoured routes.:
+                Draveth - If it awakens fully, no one will find their way out.:
+                EVENT - award_task - swamp_small_city_murkchannel_run
+
+        TASK - Explore the Murkchannel Run - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - murkchannel_run (region_open_area):
+                EVENT - create_npc - murkchannel_echo (None):
+            ► COMPLETED:
+                Murkchannel Echo - We are the channels the swamp forgot.:
+                Murkchannel Echo - The Swallowed Path twists our flow.:
+                Murkchannel Echo - It waits deeper in the Rotfen Hideaway.:
+                EVENT - award_task - swamp_small_city_rotfen_hideaway
+
+        TASK - Descend into the Rotfen Hideaway - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - rotfen_hideaway (region_open_area):
+                EVENT - create_npc - rotfen_voice (None):
+            ► COMPLETED:
+                Rotfen Voice - The Hideaway churns with lost routes.:
+                Rotfen Voice - The Swallowed Path gathers strength.:
+                Rotfen Voice - Only its heart remains to be severed.:
+                EVENT - award_task - swamp_small_city_swallowed_path
+
+        TASK - Defeat the Swallowed Path - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_swallowed_path (region_open_area):
+                EVENT - begin_combat - swallowed_path_1 (boss_battle):
+            ► COMPLETED:
+                Tavik - The channels clear. The swamp breathes easier.:
+                Tavik - You've restored the paths the mire tried to swallow.:
+                Tavik - Travelers will owe you their lives.:
+                EVENT - complete_region_quest - swamp_small_city

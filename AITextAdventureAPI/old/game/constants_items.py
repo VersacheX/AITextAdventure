@@ -128,7 +128,7 @@ SPECIAL_ITEM_SEEDS = [
     ## CH 3 special items
     {"id": "scarred_thyme", "name": "Scarred Thyme", "description": "A peculiar herb with leaves that appear to have tiny scars.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
     {"id": "scribe_mint", "name": "Scribe Mint", "description": "A rare mint used in potions with a sharp refreshing taste.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
-    {"id": "memory_tonic_ch3", "name": "Lost but not forgotten Tonic", "description": "A tonic that is said to restore lost memories.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "memory_tonic_ch3", "name": "Memory Tonic", "description": "A tonic that is said to restore lost memories.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
     ## CH 4 special items
     {"id":"rift_dust", "name":"Rift Dust", "description":"A small vial of shimmering dust that seems to warp light around it.  This looks like it could be mixed into an illicit potion.", "effect_description":"", "value":0, "min_spawn_level":1, "rarity":"notfound"},
     {"id":"unstable_relic", "name":"Unstable Relic", "description":"An ancient relic that crackles with unpredictable energy.  It looks like it would fetch a high price on the black market.", "effect_description":"", "value":0, "min_spawn_level":1, "rarity":"notfound"},
@@ -151,7 +151,7 @@ SPECIAL_ITEM_SEEDS = [
     {"id": "echofoil_nullglass", "name": "Echofoil Nullglass", "description": "A shard of echofoil nullglass that absorbs sound and light, creating an eerie silence around it.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
     {"id": "puzzle_box", "name": "Puzzle Box", "description": "A mysterious box with intricate carvings and a complex locking mechanism. Solving the puzzle is said to reveal great secrets.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
     ## CH 20 special items
-    {"id": "memory_tonic_ch20", "name": "Memory Tonic", "description": "A rare tonic that is said to restore lost memories. It has a sweet, nostalgic scent.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "memory_tonic_ch20", "name": "Lost but not forgotten Tonic", "description": "A rare tonic that is said to restore lost memories. It has a sweet, nostalgic scent.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
 
     #7 region deliver items (region-specific heirlooms used by primary stories)
     {"id": "heirloom_ring", "name": "Heirloom Ring", "description": "A wind-etched ring of braided silver, its filigree whispers of open plains.", "effect_description": "", "value":0, "min_spawn_level":1, "rarity": "notfound"},

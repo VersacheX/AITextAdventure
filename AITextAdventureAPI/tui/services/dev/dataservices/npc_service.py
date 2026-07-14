@@ -320,6 +320,20 @@ def filter_npc_tree(
         group_matches = q in group.label.lower() or q in group.group_id.lower()
         if group_matches:
             result.append(group)
+            continue
+        matched_npcs = [
+            npc for npc in group.npcs
+            if q in npc.npc_id.lower()
+            or q in npc.label.lower()
+            or q in npc.record.detail.lower()
+        ]
+        if matched_npcs:
+            result.append(NpcGroupNode(
+                group_id=group.group_id,
+                label=group.label,
+                npcs=matched_npcs,
+            ))
+    return result
 
 def _build_npc_tree(const: Any) -> List[NpcGroupNode]:
     """Build the group → NPC tree from ``const.NPC_GROUPS``.

@@ -1,0 +1,352 @@
+﻿timeline
+    title The Fracture Saga - CITY TIMELINE ACT V - Chapters 16 to 20
+
+    section Chapter 16 - Thornshade Hamlet
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - archivist_fernhollow (region_city_other1):
+                EVENT - set_npc_standing_text - archivist_fernhollow ("Come read the old leaves with me; they hum of distant summers."):
+                EVENT - create_npc - scout_lyss (region_city_other2):
+                EVENT - set_npc_standing_text - scout_lyss ("Quiet roads are a blessing—if you've tales, I'll listen between steps."):
+                Narrator - Chapter 16 City - Thornshade Hamlet is a gentle settlement deep in the old forest, where memories cling to the trees like moss. But stories slip away at dawn, and something steals the forest's lore one whisper at a time.:
+            ► COMPLETED:
+                EVENT - award_task - forest_small_city_meet_fernhollow
+
+        TASK - Meet Fernhollow - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - archivist_fernhollow ("The leaves forget their stories too quickly. Something steals the forest's memories."):
+            ► COMPLETED:
+                Fernhollow - The forest forgets too much.:
+                Fernhollow - Memories slip away like dew at dawn.:
+                Fernhollow - Something steals our stories — gently, but relentlessly.:
+                EVENT - award_task - forest_small_city_meet_lyss
+
+        TASK - Meet Lyss the Quiet Step - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Lyss - The quiet is wrong.:
+                Lyss - Even the wind hesitates to speak.:
+                Lyss - Whatever silences the forest moves softly.:
+                EVENT - set_npc_standing_text - scout_lyss ("The forest is too quiet. Even the birds hesitate to speak."):
+                EVENT - award_task - forest_small_city_find_selen
+
+        TASK - Find Whisper-Moth Selen - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - whisper_moth_selen (region_open_area):
+                EVENT - set_npc_standing_text - whisper_moth_selen ("The moths drift toward the Passage. They carry memories the forest has lost."):
+            ► COMPLETED:
+                Selen - The moths carry what the forest forgets.:
+                Selen - They drift toward a place where memories fade.:
+                Selen - Follow them, and you'll find the thief of whispers.:
+                EVENT - award_task - forest_small_city_mothglade_passage
+
+        TASK - Explore the Mothglade Passage - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - mothglade_passage (region_open_area):
+                EVENT - create_npc - moth_echo (None):
+            ► COMPLETED:
+                Moth Echo - We flutter with forgotten tales.:
+                Moth Echo - The Silent Canopy drinks our voices.:
+                Moth Echo - It waits deeper below.:
+                EVENT - award_task - forest_small_city_echofern_burrows
+
+        TASK - Descend into the Echofern Burrows - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - echofern_burrows (region_open_area):
+                EVENT - create_npc - burrow_whisper (None):
+            ► COMPLETED:
+                Burrow Whisper - The Burrows tremble with stolen memories.:
+                Burrow Whisper - The Canopy grows stronger with each silence.:
+                Burrow Whisper - Only its heart remains to be severed.:
+                EVENT - award_task - forest_small_city_silent_canopy
+
+        TASK - Defeat the Silent Canopy - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_silent_canopy (region_open_area):
+                EVENT - begin_combat - silent_canopy_1 (boss_battle):
+            ► COMPLETED:
+                Fernhollow - The forest breathes again.:
+                Fernhollow - Its stories return like rain to thirsty soil.:
+                Fernhollow - You've restored what was nearly lost.:
+                EVENT - complete_region_quest - forest_small_city
+
+    section Chapter 17 - Gallows Rift
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - warden_harrock (region_city_other1):
+                EVENT - set_npc_standing_text - warden_harrock ("The cliffs hum with memory—if you've a story of survival, I'll listen."):
+                EVENT - create_npc - emberguide_ryla (region_city_other2):
+                EVENT - set_npc_standing_text - emberguide_ryla ("Share a flame and a tale—our fires remember the names of brave travelers."):
+                Narrator - Chapter 17 City - Gallows Rift clings to treacherous cliff paths above a deep mountain gorge. Rockfalls strike without warning, flames burn wrong colors, and something beneath the Shatterpeak stirs in its ancient sleep.:
+            ► COMPLETED:
+                EVENT - award_task - mountains_mid_city_meet_harrock
+
+        TASK - Meet Harrock the Cliff-Warden - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - warden_harrock ("The cliffs rumble more each day. Rockfalls strike without warning — something shifts beneath us."):
+            ► COMPLETED:
+                Harrock - The cliffs rumble without warning.:
+                Harrock - Rockfalls strike where the paths were once safe.:
+                Harrock - Something beneath the mountain shifts in its sleep.:
+                EVENT - award_task - mountains_mid_city_meet_ryla
+
+        TASK - Meet Ryla Emberguide - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Ryla - My flames burn in colors I've never seen.:
+                Ryla - The mountain's fury stirs in the embers.:
+                Ryla - If it wakes fully, the cliffs will tear themselves apart.:
+                EVENT - set_npc_standing_text - emberguide_ryla ("My flames burn in strange colors. The mountain's fury stirs — I can feel it in the embers."):
+                EVENT - award_task - mountains_mid_city_find_korrin
+
+        TASK - Find Korrin the Avalanche-Seer - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - avalanche_seer_korrin (region_open_area):
+                EVENT - set_npc_standing_text - avalanche_seer_korrin ("The fall-lines tremble. A Core awakens beneath the Shatterpeak."):
+            ► COMPLETED:
+                Korrin - The fall-lines tremble with warning.:
+                Korrin - A Core awakens — pressure, flame, and stone given will.:
+                Korrin - If it rises, the whole range will collapse.:
+                EVENT - award_task - mountains_mid_city_fallshadow_crevasse
+
+        TASK - Explore the Fallshadow Crevasse - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - fallshadow_crevasse (region_open_area):
+                EVENT - create_npc - fallshadow_echo (None):
+            ► COMPLETED:
+                Fallshadow Echo - We are the echoes of old collapses.:
+                Fallshadow Echo - The Core calls the cliffs to fall again.:
+                Fallshadow Echo - It waits deeper in the Emberwake Cavern.:
+                EVENT - award_task - mountains_mid_city_emberwake_cavern
+
+        TASK - Descend into the Emberwake Cavern - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - emberwake_cavern (region_open_area):
+                EVENT - create_npc - emberwake_spirit (None):
+            ► COMPLETED:
+                Emberwake Spirit - The Cavern burns with ancient fury.:
+                Emberwake Spirit - The Core gathers strength.:
+                Emberwake Spirit - Only its heart remains to be stilled.:
+                EVENT - award_task - mountains_mid_city_shatterpeak_core
+
+        TASK - Defeat the Shatterpeak Core - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_shatterpeak_core (region_open_area):
+                EVENT - begin_combat - shatterpeak_core_1 (boss_battle):
+            ► COMPLETED:
+                Harrock - The cliffs quiet. The paths are safe again.:
+                Harrock - You've stilled a force older than the mountain winds.:
+                Harrock - Travelers will owe you their lives for generations.:
+                EVENT - complete_region_quest - mountains_mid_city
+
+    section Chapter 18 - Aurelion Veil
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - elder_saphrin (region_city_other1):
+                EVENT - set_npc_standing_text - elder_saphrin ("Sit awhile — the trees remember more stories than any traveler."):
+                EVENT - create_npc - twigwhisper_loryn (region_city_other2):
+                EVENT - set_npc_standing_text - twigwhisper_loryn ("High branches hold gossip; lean close and I'll tell you what the leaves sang."):
+                Narrator - Chapter 18 City - Aurelion Veil is a grand forest city built among the canopy, its economy woven from living bargains and ancient pacts. Something beneath the roots hungers to claim every promise ever spoken.:
+            ► COMPLETED:
+                EVENT - award_task - forest_large_city_meet_saphrin
+
+        TASK - Meet Saphrin the Hollow-Keeper - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - elder_saphrin ("The Exchange trembles. Something roots beneath our bargains. Sit, traveler — the wood has warnings to whisper."):
+            ► COMPLETED:
+                Saphrin - The Exchange falters. Promises rot at the edges.:
+                Saphrin - Something ancient stirs beneath the roots — a mind that binds all bargains.:
+                Saphrin - If it wakes fully, no oath will remain free.:
+                EVENT - award_task - forest_large_city_meet_loryn
+
+        TASK - Meet Loryn Twigwhisper - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Loryn - The canopy rustles with warnings.:
+                Loryn - Deals unravel, threads snap, and the forest tightens its grip.:
+                Loryn - Whatever lies below wants every promise ever spoken.:
+                EVENT - set_npc_standing_text - twigwhisper_loryn ("Deals are unraveling. Promises fray like old bark. Something deep below is rewriting the rules."):
+                EVENT - award_task - forest_large_city_find_myrn
+
+        TASK - Find Myrn the Spore-Seer - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - spore_seer_myrn (region_open_area):
+                EVENT - set_npc_standing_text - spore_seer_myrn ("Hush... the spores drift strangely today. They fall toward the Hollows. Something wakes."):
+            ► COMPLETED:
+                Myrn - Spores drift toward the Hollows — drawn by a hungry root-mind.:
+                Myrn - The Heartwood Veil grows, weaving itself through every pact.:
+                Myrn - If you descend, tread softly. It listens.:
+                EVENT - award_task - forest_large_city_hollow_roots
+
+        TASK - Explore the Hollow Roots - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - hollow_roots (region_open_area):
+                EVENT - create_npc - root_echo (None):
+            ► COMPLETED:
+                Root Echo - We are the roots. We remember every oath.:
+                Root Echo - The Veil drinks promises like rain.:
+                Root Echo - Turn back, or be woven into its will.:
+                EVENT - award_task - forest_large_city_sporevault
+
+        TASK - Descend into the Sporevault - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - sporevault (region_open_area):
+                EVENT - create_npc - vault_spirit (None):
+            ► COMPLETED:
+                Vault Spirit - The Sporevault keeps the forest's oldest bargains.:
+                Vault Spirit - The Veil seeks to claim them all — past, present, future.:
+                Vault Spirit - Only its Heart remains to be severed.:
+                EVENT - award_task - forest_large_city_heartwood_veil
+
+        TASK - Defeat the Heartwood Veil - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_heartwood_veil (region_open_area):
+                EVENT - begin_combat - heartwood_veil_1 (boss_battle):
+            ► COMPLETED:
+                Saphrin - The Veil falls silent. The Exchange breathes again.:
+                Saphrin - You have freed our promises from its grasp.:
+                Saphrin - The forest will remember your name in its rings.:
+                EVENT - complete_region_quest - forest_large_city
+
+    section Chapter 19 - Frostgate Spire
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - concordant_ivar (region_city_other1):
+                EVENT - set_npc_standing_text - concordant_ivar ("Calmness grows here—share a quarrel and I will help stitch it closed."):
+                EVENT - create_npc - artificer_lyndra (region_city_other2):
+                EVENT - set_npc_standing_text - artificer_lyndra ("My designs are born of frost—tell me a curious problem and I will sketch a solution."):
+                Narrator - Chapter 19 City - Frostgate Spire is the crown of the Snowlands, its frost-engines and ice harmonics powering the city's calm order. But the harmonies fracture, the machines fall out of tune, and something ancient stirs in the deep cold.:
+            ► COMPLETED:
+                EVENT - award_task - snow_large_city_meet_ivar
+
+        TASK - Meet Ivar the Concordant - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - concordant_ivar ("The frost patterns shift unpredictably. Something disturbs the harmony beneath the ice."):
+            ► COMPLETED:
+                Ivar - The frost patterns shift without cause.:
+                Ivar - Harmony fractures beneath the ice.:
+                Ivar - Something awakens in the deep cold.:
+                EVENT - award_task - snow_large_city_meet_lyndra
+
+        TASK - Meet Lyndra Frostlight - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Lyndra - My machines hum out of tune.:
+                Lyndra - Cold magic splinters where it once flowed clean.:
+                Lyndra - If this continues, the city's frost-engines will fail.:
+                EVENT - set_npc_standing_text - artificer_lyndra ("My machines hum out of tune. Cold magic fractures where it once flowed cleanly."):
+                EVENT - award_task - snow_large_city_find_thryna
+
+        TASK - Find Thryna the Glacier-Seer - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - glacier_seer_thryna (region_open_area):
+                EVENT - set_npc_standing_text - glacier_seer_thryna ("The ice harmonics tremble. A Fractured Chime awakens beneath the frostline."):
+            ► COMPLETED:
+                Thryna - The ice harmonics tremble.:
+                Thryna - A Fractured Chime rises — a spirit of broken harmony.:
+                Thryna - If it awakens fully, the frost will turn against itself.:
+                EVENT - award_task - snow_large_city_frostline_conservatory
+
+        TASK - Explore the Frostline Conservatory - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - frostline_conservatory (region_open_area):
+                EVENT - create_npc - frostline_echo (None):
+            ► COMPLETED:
+                Frostline Echo - We are the harmonies that froze wrong.:
+                Frostline Echo - The Chime twists our resonance.:
+                Frostline Echo - It waits deeper in the Glacierpulse Chamber.:
+                EVENT - award_task - snow_large_city_glacierpulse_chamber
+
+        TASK - Descend into the Glacierpulse Chamber - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - glacierpulse_chamber (region_open_area):
+                EVENT - create_npc - glacierpulse_voice (None):
+            ► COMPLETED:
+                Glacierpulse Voice - The Chamber pulses with unstable frost.:
+                Glacierpulse Voice - The Chime gathers strength.:
+                Glacierpulse Voice - Only its heart remains to be stilled.:
+                EVENT - award_task - snow_large_city_fractured_chime
+
+        TASK - Defeat the Fractured Chime - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_fractured_chime (region_open_area):
+                EVENT - begin_combat - fractured_chime_1 (boss_battle):
+            ► COMPLETED:
+                Ivar - The frost settles. Harmony returns.:
+                Ivar - You've stilled a discord older than the glacier itself.:
+                Ivar - The Snowlands will remember your calm.:
+                EVENT - complete_region_quest - snow_large_city
+
+    section Chapter 20 - Bayou Nocturne
+        TASK - City Arrival - Initialize:
+            ► ACQUIRED:
+                EVENT - create_npc - bargaincaller_ress (region_city_other1):
+                EVENT - set_npc_standing_text - bargaincaller_ress ("Charms and curses have stories—tell me yours and I will listen."):
+                EVENT - create_npc - lanternsworn_janrel (region_city_other2):
+                EVENT - set_npc_standing_text - lanternsworn_janrel ("The lantern sees more than light—sit and speak, and I will share what it shows."):
+                Narrator - Chapter 20 City - Bayou Nocturne is a city of lantern-lit deals and fate-bound bargains, deep in the swamp's darkest reaches. The lantern-fire flares at every lie, and something beneath the murk rewrites the Court's fate-threads.:
+            ► COMPLETED:
+                EVENT - award_task - swamp_mid_city_meet_ress
+
+        TASK - Meet Ress the Mire-Caller - NPC:
+            ► ACQUIRED:
+                EVENT - set_npc_standing_text - bargaincaller_ress ("The lantern-fire flares at every lie. Something twists the bargains struck in this mire."):
+            ► COMPLETED:
+                Ress - The lantern-fire flares at every lie.:
+                Ress - Bargains twist in ways no mortal hand could shape.:
+                Ress - Something rewrites the Court's fate-threads.:
+                EVENT - award_task - swamp_mid_city_meet_janrel
+
+        TASK - Meet Janrel of the Lantern-Sworn - NPC:
+            ► ACQUIRED:
+                (no acquired events):
+            ► COMPLETED:
+                Janrel - The lantern's flame flickers in impossible patterns.:
+                Janrel - Omen-light bends toward something hidden.:
+                Janrel - If we ignore this, the swamp will lose its way.:
+                EVENT - set_npc_standing_text - lanternsworn_janrel ("The lantern's flame flickers in patterns I've never seen. Omen-light bends as though something rewrites fate."):
+                EVENT - award_task - swamp_mid_city_find_selka
+
+        TASK - Find Selka the Oath-Reed - NPC:
+            ► ACQUIRED:
+                EVENT - create_npc - oath_reed_selka (region_open_area):
+                EVENT - set_npc_standing_text - oath_reed_selka ("The reeds whisper of broken promises. A Broken Pact rises beneath the lanternbog."):
+            ► COMPLETED:
+                Selka - The reeds whisper of broken promises.:
+                Selka - A Broken Pact rises — a spirit of violated bargains.:
+                Selka - If it awakens fully, no oath will hold in this mire.:
+                EVENT - award_task - swamp_mid_city_lanternbog_crossing
+
+        TASK - Explore the Lanternbog Crossing - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - lanternbog_crossing (region_open_area):
+                EVENT - create_npc - lanternbog_echo (None):
+            ► COMPLETED:
+                Lanternbog Echo - We are the lanterns that drowned in lies.:
+                Lanternbog Echo - The Broken Pact twists our light.:
+                Lanternbog Echo - It waits deeper in the Oathrot Channel.:
+                EVENT - award_task - swamp_mid_city_oathrot_channel
+
+        TASK - Descend into the Oathrot Channel - Dungeon:
+            ► ACQUIRED:
+                EVENT - create_dungeon - oathrot_channel (region_open_area):
+                EVENT - create_npc - oathrot_voice (None):
+            ► COMPLETED:
+                Oathrot Voice - The Channel rots with broken vows.:
+                Oathrot Voice - The Broken Pact gathers strength.:
+                Oathrot Voice - Only its heart remains to be severed.:
+                EVENT - award_task - swamp_mid_city_broken_pact
+
+        TASK - Defeat the Broken Pact - MOB:
+            ► ACQUIRED:
+                EVENT - create_dungeon - the_broken_pact (region_open_area):
+                EVENT - begin_combat - broken_pact_1 (boss_battle):
+            ► COMPLETED:
+                Ress - The lantern-fire steadies.:
+                Ress - The Court's bargains hold true again.:
+                Ress - You've restored fate to the swamp.:
+                EVENT - complete_region_quest - swamp_mid_city

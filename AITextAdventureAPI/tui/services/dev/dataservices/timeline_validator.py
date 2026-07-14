@@ -116,6 +116,13 @@ R16 OPTION_DIALOG_OPTION_TARGET_MISSING
     OPTION_DIALOG_OPTION_TARGET_MISSING — an option task_id is not in the
     known task set.
 
+R17 DELIVER_ITEM_NOT_REMOVED  (warning)
+    A deliver task has an item_id but its complete events contain no
+    remove_item for that item.  Most deliver tasks consume the item on
+    hand-off; missing removal is flagged as a warning.  Suppress by
+    adding remove_item to task_complete_events, or ignore if the NPC
+    is designed to inspect and return the item.
+
 """
 from __future__ import annotations
 
@@ -432,10 +439,12 @@ def _err(
     event_type: str = "",
     related_task_id: str = "",
     related_entity_id: str = "",
+    severity: str = "error",
 ) -> TimelineValidationError:
     return TimelineValidationError(
         code=code,
         message=message,
+        severity=severity,
         event_type=event_type,
         related_task_id=related_task_id,
         related_entity_id=related_entity_id,
@@ -954,6 +963,31 @@ def validate_timeline_integrity(
                 "TASK_UNREACHABLE_NO_INBOUND_AWARD",
                 f"Task '{tn.task_id}' has no inbound award_task and is not a root task.",
                 related_task_id=tn.task_id,
+            ))
+
+    # ── R17: Deliver task missing remove_item (warning) ───────────────────
+    for tn in all_tasks:
+        task      = tn.task
+        task_type = str(task.get("type", "")).lower()
+        if task_type != "deliver":
+            continue
+        item_id = str(task.get("item_id") or "")
+        if not item_id:
+            continue
+        has_remove = any(
+            ev.get("event_type") == "remove_item"
+            and str((ev.get("params") or {}).get("item_id") or "") == item_id
+            for _, ev in _iter_events(task)
+        )
+        if not has_remove:
+            errors_map[tn.task_id].append(_err(
+                "DELIVER_ITEM_NOT_REMOVED",
+                f"Deliver task requires item '{item_id}' but no remove_item "
+                f"for that item exists in its complete events. "
+                f"If this is intentional (item returned to player) this warning can be ignored.",
+                event_type="deliver",
+                related_entity_id=item_id,
+                severity="warning",
             ))
 
     # ── R9: Cycle detection (DFS on award graph) ──────────────────────────
