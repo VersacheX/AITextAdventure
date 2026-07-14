@@ -3,7 +3,7 @@ All dataclasses shared across the dev data services.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Dict, List
 
 
@@ -71,6 +71,30 @@ class DialogueActNode:
     chapters: List[DialogueChapterNode]
 
 
+# ── Timeline validation model ─────────────────────────────────────────────
+
+@dataclass
+class TimelineValidationError:
+    """One integrity error attached to a TimelineTaskNode.
+
+    Severity is informational — warnings (e.g. dynamic NPC references) and
+    hard errors share the same type; callers may inspect ``code`` to
+    distinguish them.
+
+    Attributes:
+        code:              Machine-readable error code (e.g. ``ITEM_REMOVE_WITHOUT_SOURCE``).
+        message:           Human-readable description.
+        event_type:        The event_type string that triggered the error, if applicable.
+        related_task_id:   A secondary task id referenced by the error, if any.
+        related_entity_id: An NPC id, item id, or dungeon id involved, if any.
+    """
+    code: str
+    message: str
+    event_type: str = ""
+    related_task_id: str = ""
+    related_entity_id: str = ""
+
+
 # ── Timeline tree model ───────────────────────────────────────────────────
 
 @dataclass
@@ -80,6 +104,8 @@ class TimelineTaskNode:
     label: str
     source_path: str   # e.g. "regional:desert", "extended:desert_large", "main:ch1"
     task: Dict[str, Any]
+    # Validation errors — empty until validate_timeline_integrity() is called
+    errors: List[TimelineValidationError] = field(default_factory=list)
 
 
 @dataclass

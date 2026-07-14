@@ -28,7 +28,7 @@ def rebuild_timeline_tree(
     user_expanded: Set[str],
     user_collapsed: Set[str],
 ) -> tuple[int, list]:
-    """Rebuild the timeline tree widget, preserving explicit user expansion state.
+    """Rebuild the NPC tree widget, preserving explicit user expansion state.
 
     Group nodes default to expanded; bucket nodes default to collapsed.
 
@@ -49,14 +49,32 @@ def rebuild_timeline_tree(
             bucket_branch = group_branch.add(bucket_node.label, expand=False)
             for task_node in bucket_node.tasks:
                 total_tasks += 1
-                label = (
-                    f"{rich_escape(task_node.label)}  "
-                    f"[dim]{rich_escape(task_node.task_id)}[/dim]"
-                )
+                label = _task_label(task_node)
                 bucket_branch.add_leaf(label, data=task_node)
 
     restore_user_expansion_state(tree, user_expanded, user_collapsed, filter_active)
     return total_tasks, filtered
+
+
+def _task_label(task_node: TimelineTaskNode) -> str:
+    """Render the Rich-markup label for a task leaf.
+
+    If the node has validation errors the entire label is rendered in red
+    with an error count suffix; otherwise the existing styling is used.
+    """
+    if task_node.errors:
+        n     = len(task_node.errors)
+        label = rich_escape(task_node.label)
+        tid   = rich_escape(task_node.task_id)
+        return (
+            f"[red]{label}[/red]  "
+            f"[dim red]{tid}[/dim red]  "
+            f"[red](errors: {n})[/red]"
+        )
+    return (
+        f"{rich_escape(task_node.label)}  "
+        f"[dim]{rich_escape(task_node.task_id)}[/dim]"
+    )
 
 
 def collect_timeline_tasks_from_node(node: TreeNode) -> List[TimelineTaskNode]:

@@ -52,6 +52,7 @@ from tui.services.dev.dataservices import (
     get_timeline_tree,
     search_records,
 )
+from tui.services.dev.dataservices.timeline_validator import validate_timeline_integrity
 
 if TYPE_CHECKING:
     from tui.screens.dev.data_mgmt.data_mgmt_screen import DataMgmtScreen
@@ -91,6 +92,7 @@ def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
     screen.query_one("#dm-expand", Button).display                 = is_tree
     screen.query_one("#dm-collapse", Button).display               = is_tree
     screen.query_one("#dm-copy", Button).display                   = is_tree
+    screen.query_one("#dm-validate-timeline", Button).display      = is_timeline
     # NPC music player bar — only visible on the NPC tab
     screen.query_one(NpcMusicPlayerWidget).display                 = is_npc
 
@@ -195,8 +197,6 @@ def handle_tree_node_highlighted(screen: "DataMgmtScreen", event: Tree.NodeHighl
 
     elif category == _NPC_CATEGORY:
         if isinstance(data, NpcRecordNode):
-            # Store selection and drive detail + music through the screen's
-            # unified method so playlist index and player label stay in sync.
             screen.select_npc_record(data.record, start_music=True)
         else:
             npc_nodes = collect_npc_records_from_node(node)
@@ -213,6 +213,8 @@ def handle_button_pressed(screen: "DataMgmtScreen", event: Button.Pressed) -> No
         collapse_all_nodes(screen.query_one(tree_id, Tree))
     elif bid == "dm-copy":
         _handle_copy(screen)
+    elif bid == "dm-validate-timeline":
+        validate_timeline_for_screen(screen)
 
 
 def _handle_copy(screen: "DataMgmtScreen") -> None:
@@ -247,6 +249,34 @@ def _handle_copy(screen: "DataMgmtScreen") -> None:
     if text:
         copy_to_clipboard(text)
         screen.notify("Copied to clipboard", timeout=2.0)
+
+
+def validate_timeline_for_screen(screen: "DataMgmtScreen") -> None:
+    """Run the timeline integrity validator and repaint the tree.
+
+    Errors are annotated in-place on each ``TimelineTaskNode.errors`` list.
+    The tree is then rebuilt so labels for invalid tasks render in red.
+    A status notification reports the total error count.
+    """
+    import game.constants as const
+
+    groups = get_timeline_tree()
+    summary = validate_timeline_integrity(groups, const)
+
+    # Repaint — rebuild uses the now-annotated nodes from the same cache
+    rebuild_timeline_tree_for_screen(screen)
+
+    total_errors  = summary.get("total_errors", 0)
+    invalid_tasks = summary.get("invalid_tasks", 0)
+
+    if total_errors == 0:
+        screen.notify("✓ Timeline integrity OK — no errors found.", timeout=3.0)
+    else:
+        screen.notify(
+            f"✗ {total_errors} error(s) across {invalid_tasks} task(s) — invalid tasks shown in red.",
+            severity="warning",
+            timeout=5.0,
+        )
 
 
 def rebuild_dialog_tree_for_screen(screen: "DataMgmtScreen") -> None:
@@ -296,7 +326,6 @@ def rebuild_npc_tree_for_screen(screen: "DataMgmtScreen") -> None:
     )
     screen._last_npc_filtered = filtered
     screen.query_one("#dm-status", Static).update(f"{total_npcs} NPC(s)")
-    # Restore previous selection or auto-pick a random NPC with a song
     screen.restore_npc_selection()
 
 

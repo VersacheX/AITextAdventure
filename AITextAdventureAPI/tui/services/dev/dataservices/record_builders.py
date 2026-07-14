@@ -43,6 +43,61 @@ def _total_stat_power(seed: dict) -> int:
     )
 
 
+# ── Special-item source index ─────────────────────────────────────────────
+
+_SPECIAL_ITEM_SOURCE_EVENT_TYPES = frozenset({"dungeon_add_treasure", "award_item", "remove_item"})
+
+
+def _build_special_item_source_index(
+    const: Any,
+) -> Dict[str, List[str]]:
+    """Scan TASK_GROUPS for dungeon_add_treasure, award_item, and remove_item events.
+
+    Returns {item_id: [formatted_line, ...]} where each line describes one
+    source, e.g.:
+      Award   - main_story_ch_1_deliver_ornate_bracers
+      Dungeon - seth_hideout (final_chamber) - main_story_ch_1_find_item_shop
+      Remove  - main_story_ch_2_deliver_cursed_couplet_to_mira
+    """
+    index: Dict[str, List[str]] = {}
+    task_groups = getattr(const, "TASK_GROUPS", None) or {}
+
+    for family in task_groups.values():
+        if not isinstance(family, dict):
+            continue
+        for task_list in family.values():
+            for task in task_list or []:
+                if not isinstance(task, dict):
+                    continue
+                task_id = str(task.get("task_id", "?"))
+                for stage_key in ("task_acquire_events", "task_complete_events"):
+                    for ev in task.get(stage_key) or []:
+                        if not isinstance(ev, dict):
+                            continue
+                        event_type = ev.get("event_type", "")
+                        if event_type not in _SPECIAL_ITEM_SOURCE_EVENT_TYPES:
+                            continue
+                        params  = ev.get("params") or {}
+                        item_id = str(
+                            params.get("item_id") or params.get("id") or ""
+                        )
+                        if not item_id:
+                            continue
+
+                        if event_type == "award_item":
+                            line = f"  Award   - {task_id}"
+                        elif event_type == "remove_item":
+                            line = f"  Remove  - {task_id}"
+                        else:  # dungeon_add_treasure
+                            dungeon_id    = str(params.get("dungeon_id") or "?")
+                            location_type = str(params.get("location") or "?")
+                            line = f"  Dungeon - {dungeon_id} ({location_type}) - {task_id}"
+
+                        index.setdefault(item_id, []).append(line)
+
+    return index
+
+
 def _build_weapon_detail(seed: dict) -> str:
     lines: list[str] = []
     desc      = str(seed.get("description", "") or "")
@@ -219,15 +274,30 @@ def _build_items(const: Any) -> List[DevRecord]:
 
 
 def _build_special_items(const: Any) -> List[DevRecord]:
+    source_index = _build_special_item_source_index(const)
     records: List[DevRecord] = []
+
     for seed in getattr(const, "SPECIAL_ITEM_SEEDS", []) or []:
         iid  = str(seed.get("id", "?"))
         name = str(seed.get("name", iid))
+        desc = str(seed.get("description", ""))
+
+        sources = source_index.get(iid, [])
+        if sources:
+            source_block = "Sources:\n" + "\n".join(sources)
+        else:
+            source_block = "Sources:\n  [red]None[/red]"
+
+        detail = f"{desc}\n\n{source_block}" if desc else source_block
+
         records.append(DevRecord(
-            category="special_item", id=iid, name=name,
+            category="special_item",
+            id=iid,
+            name=name,
             subtitle="special",
-            detail=str(seed.get("description", "")),
+            detail=detail,
         ))
+
     return records
 
 

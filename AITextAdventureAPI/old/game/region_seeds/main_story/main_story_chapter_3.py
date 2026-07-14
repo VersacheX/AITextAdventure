@@ -711,12 +711,6 @@ TASKS = [
 				}
 			},
 			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'deliver_scribe_mint_to_kess_ch3'
-				}
-			},
-			{
 				'event_type': 'dungeon_add_npc',
 				'params': {
 					'dungeon_id': 'nobles_mansion_ch3',

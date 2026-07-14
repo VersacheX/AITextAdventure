@@ -141,7 +141,7 @@ class DataMgmtScreen(BaseScreen):
         color: $text;
     }
 
-    #dm-expand, #dm-collapse, #dm-copy {
+    #dm-expand, #dm-collapse, #dm-copy, #dm-validate-timeline {
         display: none;
         margin-left: 1;
         padding: 0 1;
@@ -274,6 +274,7 @@ class DataMgmtScreen(BaseScreen):
             yield Button("++", id="dm-expand", variant="default")
             yield Button("--", id="dm-collapse", variant="default")
             yield Button("Copy", id="dm-copy", variant="default")
+            yield Button("Validate Timeline", id="dm-validate-timeline", variant="default")
             yield Button("⤢", id="dm-detail-expand", variant="default")
             yield Static("Loading...", id="dm-status")
         with Horizontal(id="dm-main-row"):

@@ -115,9 +115,6 @@ UTILITY_ITEM_SEEDS = [
 # Special items (unique/quest) - these are rare and may be referenced by NPCs/quests
 SPECIAL_ITEM_SEEDS = [
     ### When Special Items eventuall have use effect specials they will relate to task events: create_dungeon, award_task, etc.
-    {"id": "ancient_amulet", "name": "Ancient Amulet", "description": "An amulet with unknown runes. It hums faintly.", "effect_description": "May unlock hidden lore or power.", "value":0, "min_spawn_level":1, "rarity": "notfound"},
-    {"id": "vault_key", "name": "Vault Key", "description": "A heavy iron key stamped with a crest.", "effect_description": "Opens a specific locked vault.", "value":0, "min_spawn_level":1, "rarity": "notfound"},
-
     ## CH 1 special items 
     {"id": "mnemonic_logger", "name": "Mnemonic Logger", "description": "A compact device that records and plays back memories. It has a worn leather strap and a small screen.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
     {"id": "cursed_couplet", "name": "Cursed Couplet", "description": "A matched set of ritual bracelets, their bands intertwined by corrosion and time. Runes along the inner edges glow faintly when the pair is disturbed.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},

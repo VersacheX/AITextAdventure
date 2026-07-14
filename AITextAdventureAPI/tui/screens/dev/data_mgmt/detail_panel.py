@@ -420,7 +420,6 @@ class TimelineDetailPanel(Widget):
         acquire  = task.get("task_acquire_events") or []
         complete = task.get("task_complete_events") or []
 
-        # Pull the shared indexes (already built; zero cost after first load)
         dialog_index = get_dialog_index()
         name_map     = get_npc_names()
 
@@ -444,6 +443,30 @@ class TimelineDetailPanel(Widget):
 
         with Vertical(classes="tl-section"):
             yield Static("\n".join(header_lines))
+
+        # ── Integrity section ─────────────────────────────────────────
+        with Vertical(classes="tl-section"):
+            if not node.errors:
+                yield Static("Integrity: [green]OK[/green]", classes="tl-section-header")
+            else:
+                yield Static(
+                    f"Integrity: [red]FAIL  ({len(node.errors)} error(s))[/red]",
+                    classes="tl-section-header",
+                )
+                for err in node.errors:
+                    code_str = rich_escape(err.code)
+                    msg_str  = rich_escape(err.message)
+                    extra    = ""
+                    if err.event_type:
+                        extra += f"  event={rich_escape(err.event_type)}"
+                    if err.related_task_id:
+                        extra += f"  task={rich_escape(err.related_task_id)}"
+                    if err.related_entity_id:
+                        extra += f"  entity={rich_escape(err.related_entity_id)}"
+                    yield Static(
+                        f"  [red]{code_str}[/red]  {msg_str}[dim]{extra}[/dim]",
+                        classes="tl-event-row",
+                    )
 
         # ── Acquired events ───────────────────────────────────────────
         with Vertical(classes="tl-section"):
@@ -530,12 +553,27 @@ def update_detail_for_timeline_subtree(
     if not task_nodes:
         detail_panel.mount(TimelineDetailPanel(None))
         return
+
+    invalid      = sum(1 for t in task_nodes if t.errors)
+    total_errors = sum(len(t.errors) for t in task_nodes)
+
+    if invalid:
+        integrity_line = (
+            f"\n[red]Integrity: {invalid} invalid task(s), "
+            f"{total_errors} error(s) in subtree[/red]"
+        )
+    else:
+        any_validated = any(t.errors is not None for t in task_nodes)
+        integrity_line = "\n[green]Integrity: OK[/green]" if any_validated else ""
+
     summary = "\n".join(
         f"[bold]{rich_escape(t.label)}[/bold]  "
         f"[dim]{rich_escape(t.task_id)}[/dim]  "
         f"[dim]({rich_escape(t.source_path)})[/dim]"
+        + (f"  [red](errors: {len(t.errors)})[/red]" if t.errors else "")
         for t in task_nodes
-    )
+    ) + integrity_line
+
     detail_panel.mount(TimelineDetailPanel(None, summary_text=summary))
 
 
