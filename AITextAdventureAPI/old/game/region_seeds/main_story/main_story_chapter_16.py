@@ -424,8 +424,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'lyren_vale',
-		'dialog_id': 'lyren_vale_ch16_to_marlo',
+		'npc_id': 'lyren',
+		'dialog_id': 'lyren_ch16_to_marlo',
 		'dialog': [
 			"(softly) Everything broken still holds its original shape somewhere inside... We just have to remember what that shape was."
 		]
@@ -688,7 +688,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch16_to_marlo' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch16_after_marlo_explains' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch16_after_marlo_explains' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren_vale', 'dialog_id': 'lyren_vale_ch16_to_marlo' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch16_to_marlo' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'marlo_finch', 'dialog_id': 'marlo_finch_ch16_sends_off' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch16_meet_crux_origin_form' }}
 		]

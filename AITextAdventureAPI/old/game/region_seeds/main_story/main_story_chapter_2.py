@@ -874,94 +874,12 @@ TASKS = [
 				'params': {
 					'task_id': 'main_story_ch_2_deliver_rare_ingredient'
 				}
-			}
-		]
-	},
-	# Task 6 - fetch ingredient dungeon
-	{
-		'task_id': 'main_story_ch_2_deliver_rare_ingredient',
-		'type': 'deliver',
-		'item_id': 'rare_ingredient_ch2',
-		'to_type': 'npc',
-		'to_id': 'kess_thornwrite',
-		'task_acquire_events': [
-			{
-				'event_type': 'create_dungeon',
-				'params': {
-					'dungeon_id': 'abandoned_ruin_ch2',
-					'location': 'region_open_area'
-				}
 			},
-			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'abandoned_ruin_ch2', 'item_id': 'grove_lattice', 'location': 'treasure_room'}},
-			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'abandoned_ruin_ch2', 'item_id': 'coreforge_shard', 'location': 'treasure_room'}},
 			{
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'the_demigorgon',
 					'location': None
-				}
-			},
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'main_story_ch_2_meet_demigorgon' 
-				}
-			}
-		],
-		'task_complete_events': [
-			{
-				'event_type': 'initiate_dialog',
-				'params': {
-					'npc_id': 'kess_thornwrite',
-					'dialog_id': 'kess_ch2_after_dungeon'
-				}
-			},
-			{
-				'event_type': 'remove_item',
-				'params': {
-					'item_id': 'rare_ingredient_ch2'
-				}
-			},
-			{
-				'event_type': 'initiate_character_dialog',
-				'params': {
-					'npc_id': 'technique',
-					'dialog_id': 'technique_ch2_after_dungeon'
-				}
-			},
-			{
-				'event_type': 'initiate_character_dialog',
-				'params': {
-					'npc_id': 'skill',
-					'dialog_id': 'skill_ch2_after_dungeon'
-				}
-			},
-			{
-				'event_type': 'initiate_character_dialog',
-				'params': {
-					'npc_id': 'tech',
-					'dialog_id': 'tech_ch2_after_dungeon'
-				}
-			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'kess_thornwrite',
-					'standing_text': [
-						"Take the concoction to Juno. She's expecting it."
-					]
-				}
-			},
-			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'volatile_concoction_ch2'
-				}
-			},
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'main_story_ch_2_return_to_juno_after_kess'
 				}
 			}
 		]
@@ -1090,6 +1008,87 @@ TASKS = [
 				'event_type': 'award_item',
 				'params': {
 					'item_id': 'rare_ingredient_ch2'
+				}
+			}
+		]
+	},
+	{
+		'task_id': 'main_story_ch_2_deliver_rare_ingredient',
+		'type': 'deliver',
+		'item_id': 'rare_ingredient_ch2',
+		'to_type': 'npc',
+		'to_id': 'kess_thornwrite',
+		'task_acquire_events': [
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'abandoned_ruin_ch2',
+					'location': 'region_open_area'
+				}
+			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'abandoned_ruin_ch2', 'item_id': 'grove_lattice', 'location': 'treasure_room'}},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'abandoned_ruin_ch2', 'item_id': 'coreforge_shard', 'location': 'treasure_room'}},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'main_story_ch_2_meet_demigorgon' 
+				}
+			}
+		],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'kess_thornwrite',
+					'dialog_id': 'kess_ch2_after_dungeon'
+				}
+			},
+			{
+				'event_type': 'remove_item',
+				'params': {
+					'item_id': 'rare_ingredient_ch2'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch2_after_dungeon'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch2_after_dungeon'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch2_after_dungeon'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'kess_thornwrite',
+					'standing_text': [
+						"Take the concoction to Juno. She's expecting it."
+					]
+				}
+			},
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'volatile_concoction_ch2'
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'main_story_ch_2_return_to_juno_after_kess'
 				}
 			}
 		]

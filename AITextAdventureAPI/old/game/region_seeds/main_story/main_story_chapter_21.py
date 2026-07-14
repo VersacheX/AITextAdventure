@@ -2,7 +2,7 @@
 # = CHAPTER 21 : DOMINION'S GAUNTLET
 # ============================================================
 #
-# [ FINAL CITY — THE VOID'S DOMAIN ]
+# [ FINAL CITY ï¿½ THE VOID'S DOMAIN ]
 # -----------------------------------
 # @ = player
 # E = Edict (System enforcer)
@@ -861,8 +861,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'lyren_vale',
-        'dialog_id': 'lyren_vale_ch21_choose_to_believe',
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_ch21_choose_to_believe',
         'dialog': [
             "No. I know what I choose to believe."
         ]
@@ -994,8 +994,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'lyren_vale',
-        'dialog_id': 'lyren_vale_ch21_chose_to_prove_wrong',
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_ch21_chose_to_prove_wrong',
         'dialog': [
             "It doesn't matter what we believe deep down. It matters what we choose to do. And we chose to prove you wrong."
         ]
@@ -1240,8 +1240,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'lyren_vale',
-        'dialog_id': 'lyren_vale_ch21_not_meaningless',
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_ch21_not_meaningless',
         'dialog': [
             "And even if it does end, that doesn't mean what happened before it was meaningless."
         ]
@@ -1352,8 +1352,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'lyren_vale',
-        'dialog_id': 'lyren_vale_ch21_or_matter',
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_ch21_or_matter',
         'dialog': [
             "Or made to matter."
         ]
@@ -1901,7 +1901,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'oracle', 'dialog_id': 'oracle_ch21_confirmation' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch21_creating_pressure' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'garbage', 'dialog_id': 'garbage_ch21_already_know' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren_vale', 'dialog_id': 'lyren_vale_ch21_choose_to_believe' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch21_choose_to_believe' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'garbage', 'dialog_id': 'garbage_ch21_not_same' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'oracle', 'dialog_id': 'oracle_ch21_failure_occurred' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'pageant', 'dialog_id': 'pageant_ch21_compensate' }},
@@ -1947,7 +1947,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'oracle', 'dialog_id': 'oracle_ch21_variables_accounted' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_bully_into_it' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'garbage', 'dialog_id': 'garbage_ch21_still_believe' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren_vale', 'dialog_id': 'lyren_vale_ch21_chose_to_prove_wrong' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch21_chose_to_prove_wrong' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'pageant' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'oracle' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'garbage' }},
@@ -2039,7 +2039,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_ch21_always_collapse' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'dominion', 'dialog_id': 'dominion_ch21_collapse_resolution' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_ch21_feels_like_breaking' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren_vale', 'dialog_id': 'lyren_vale_ch21_not_meaningless' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch21_not_meaningless' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_uncertainty_allows_alternatives' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch21_cant_handle_change' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch21_erase_itself' }},
@@ -2055,7 +2055,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_or_improved' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_ch21_or_experienced' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch21_or_chosen' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren_vale', 'dialog_id': 'lyren_vale_ch21_or_matter' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch21_or_matter' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'dominion', 'dialog_id': 'dominion_ch21_instability' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch21_its_choice' }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_defeat_dominion' }}

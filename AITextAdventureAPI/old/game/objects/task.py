@@ -3,6 +3,23 @@ from typing import Optional, Union, Tuple, List, Dict, Any, TypedDict
 import random
 from services.task_completion_service import execute_acquire_event, execute_complete_event
 
+# ====================== ENUMS ======================
+
+class TaskType(str, Enum):
+    Fetch = "fetch"
+    Deliver = "deliver"
+    Meet = "meet"
+    Goto = "goto"
+    Defeat = "defeat"
+    CompleteIntroStory = "complete_intro_story"
+    CompleteRegionalQuests = "complete_regional_quests"
+
+
+class SpecialTaskToType(str, Enum):
+    NPC = "npc"
+    SPECIAL_SUBLOCATION = "special_sublocation"
+    COORDINATES = "coordinates"
+    MOB = "mob"
 
 class OptionDialog(TypedDict):
     """Typed structure for an in-game option/choice dialog.
@@ -56,7 +73,7 @@ class TaskEventConditionType(str, Enum):
 
     # World / progression
     IS_INTRO_COMPLETE   = "is_intro_complete"     # no params
-    IS_CHAPTER_GTE      = "is_chapter_gte"        # params: chapter (int) — current_chapter >= chapter
+    IS_CHAPTER_GTE      = "is_chapter_gte"        # params: chapter (int) ï¿½ current_chapter >= chapter
     IS_CHAPTER_LTE      = "is_chapter_lte"        # params: chapter (int)
 
 

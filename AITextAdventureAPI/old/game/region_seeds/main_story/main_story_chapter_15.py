@@ -304,7 +304,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'lyren_vale',
+        'npc_id': 'lyren',
         'dialog_id': 'lyren_ch15_pageant_aftermath',
         'dialog': [
             "(gently, almost mourning) Everything she touched still carries the echo of what it was meant to be...",
@@ -414,7 +414,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'lyren_vale',
+        'npc_id': 'lyren',
         'dialog_id': 'lyren_ch15_simply_be',
         'dialog': [
             "(softly) Then we won’t perform. We’ll simply be."
@@ -755,7 +755,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'lyren_vale',
+        'npc_id': 'lyren',
         'dialog_id': 'lyren_ch15_breaking_them',
         'dialog': [
             "(soft but steady) You can’t force people to be whole by breaking them first."
@@ -946,7 +946,7 @@ TASKS = [
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch15_pageant_aftermath'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch15_pageant_aftermath'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch15_pageant_aftermath'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren_vale', 'dialog_id': 'lyren_ch15_pageant_aftermath'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren', 'dialog_id': 'lyren_ch15_pageant_aftermath'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'thorn', 'dialog_id': 'thorn_ch15_pageant_aftermath'}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'caius', 'standing_text': ["That mask was her prison. She was so afraid of being ordinary that she locked herself in a cage of admiration. You should take that thing to Elian"]}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'jett', 'standing_text': ["Pageant’s mask was a masterpiece of deception. It’s a shame it couldn’t protect her from the truth."]}},
@@ -986,7 +986,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'jett', 'dialog_id': 'jett_ch15_legitimate'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch15_hit_them'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'jett', 'dialog_id': 'jett_ch15_on_your_own'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren_vale', 'dialog_id': 'lyren_ch15_simply_be'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren', 'dialog_id': 'lyren_ch15_simply_be'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'faith', 'dialog_id': 'faith_ch15_no_cages'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'jett', 'dialog_id': 'jett_ch15_ballsy'}},
             {'event_type': 'unlock_dungeon', 'params': {'dungeon_id': 'the_citadel'}},
@@ -1113,7 +1113,7 @@ TASKS = [
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch15_poison'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch15_scared_masks'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch15_reject_control'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren_vale', 'dialog_id': 'lyren_ch15_breaking_them'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren', 'dialog_id': 'lyren_ch15_breaking_them'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'faith', 'dialog_id': 'faith_ch15_own_path'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'edict', 'dialog_id': 'edict_ch15_final_word'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'stigma', 'dialog_id': 'stigma_ch15_final_word'}},

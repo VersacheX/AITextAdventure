@@ -378,7 +378,7 @@ TASKS = [
 
     # Task 4: report back to Bragg
     {
-        'task_id': 'mountain_primary_report_to_bragg',
+        'task_id': 'mountains_primary_report_to_bragg',
         'type': 'meet',
         'to_type': 'npc',
         'to_id': 'bragg',

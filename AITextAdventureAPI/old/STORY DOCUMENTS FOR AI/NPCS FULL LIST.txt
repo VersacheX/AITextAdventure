@@ -1082,7 +1082,7 @@ NPCS = [
 #### Snow
 NPCS = [
     {
-        'npc_id': 'korin',
+        'npc_id': 'kor_in',
         'name': 'Kor-in',
         'description': (
             'An ice trapper whose wife was frozen alive by Lady Aeriola’s time-stopping spell.'
@@ -1193,7 +1193,7 @@ NPCS = [
 #################### ENDGAME CHARACTERS
 NPCS = [
     {
-        "npc_id": "lyren_vale",
+        "npc_id": "lyren",
         "name": "Lyren Vale",
         "description": (
                     "A gentle wayfarer attuned to the emotional undercurrents of the world. Lyren feels the Riftwaters long before she sees them."

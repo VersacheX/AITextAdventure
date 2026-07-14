@@ -1,67 +1,121 @@
-﻿"""
-Timeline integrity validator.
+﻿"""Timeline integrity validator.
 
 Call ``validate_timeline_integrity(tree, const)`` to run all rules against
 the current timeline tree and annotate each ``TimelineTaskNode.errors``.
 
+Traversal order
+---------------
+Checks that depend on prior-task state (item stock, NPC lifecycle, etc.) use
+story-chronological order:
+
+    main ch 1–7  →  regional stories  →  main ch 8–21  →  extended city stories
+
+This matches the in-game unlock sequence.  ``_flat_tasks_story_order()`` builds
+the ordered flat list; all stateful rules consume it instead of raw tree order.
+
 Rules
 -----
 R1  ITEM_REMOVE_WITHOUT_SOURCE
-    remove_item with no prior award_item / dungeon_add_treasure for the same item_id.
+    remove_item with no prior award_item / dungeon_add_treasure for the same
+    item_id in story-chronological order.
     ITEM_REMOVE_EXCESS_COUNT (warning)
-    remove_item count exceeds award/dungeon source count for the item.
+    remove_item count exceeds the running award/dungeon source total.
 
 R2  MEET_NPC_WITHOUT_CREATE / MEET_NPC_DYNAMIC_REFERENCE
-    meet task targeting a static NPC with no prior create_npc.
-    Dynamic ids (pending_character etc.) emit a warning instead.
+    meet task targeting a static NPC id with no prior create_npc in chronological
+    order.  Dynamic slot ids (``pending_character``, archetype placeholders) emit a
+    warning (MEET_NPC_DYNAMIC_REFERENCE) instead of an error.
+    Self-create exemption: if the meet task itself contains create_npc for the same
+    id in its own acquire events it is considered the authoritative creation point
+    and is not flagged.
+    Root-task exemption: the first task of each story bucket may freely reference
+    NPCs not yet seen (they are assumed pre-placed by world setup).
 
 R3  AWARD_TASK_TARGET_MISSING
-    award_task referencing a task_id that doesn't exist in the known set.
+    award_task referencing a task_id that does not exist anywhere in the known set.
 
 R4  TASK_UNREACHABLE_NO_INBOUND_AWARD
     Non-root task with zero inbound award_task edges.
+    Root-task exemption: the first task of each story bucket is never flagged here.
 
 R5  TASK_ID_DUPLICATE
-    Same task_id appears more than once.
+    Same task_id appears more than once across all stories.
 
 R6  DIALOG_REF_MISSING
     initiate_dialog / initiate_character_dialog references an (npc_id, dialog_id)
     pair not present in the dialog index.
 
 R7  DIALOG_NPC_UNKNOWN
-    npc_id used in a dialog event is not in the known NPC set (narrator / dynamic
-    ids are exempted).
+    npc_id used in a dialog event is not in the known static NPC set.
+    Narrator and dynamic slot ids (pending_character, archetype ids) are exempted.
+
+    create_character_npc coverage check (warning):
+    When a task uses create_character_npc or references pending_character, the
+    validator verifies that dialog coverage exists for every player-character
+    archetype id (technique / tech / magic / faith / skill).  Missing coverage is
+    reported as DIALOG_REF_MISSING warnings on the task.
 
 R8  TASK_SCHEMA_INVALID
-    meet  → must have to_type + to_id
+    meet    → must have to_type + to_id
     deliver → must have item_id + to_type + to_id
     defeat  → must have to_type == "mob" and to_id
 
 R9  AWARD_GRAPH_CYCLE
     Cycle detected in the award_task directed graph.
+    Shuttle-pair exemption: a pair of tasks that mutually award each other
+    (A awards B, B awards A) AND where exactly one of the pair also awards a third
+    task (the "escape edge") is treated as an intentional shuttle pattern and is
+    not flagged as a cycle.  This covers patterns like the Astra Wynn go-back /
+    go-forward tasks in Chapter 5.
 
 R10 CHAPTER_NO_ROOT
-    A chapter bucket has no root task (no task with an inbound award from
-    outside the chapter, or a recognized root pattern).
+    A story bucket has no root task — i.e. no task that is either the first task
+    of its bucket or has an inbound award_task from outside the bucket.
 
 R11 CHAPTER_NO_ADVANCE
     A main-story chapter bucket has no advance_chapter event anywhere in its tasks.
-    (Warning level — some chapters legitimately delay advance.)
+    Warning level only.
+    Final-chapter exemption: the last chapter in the main-story sequence is not
+    required to carry advance_chapter (there is no next chapter to advance to).
 
 R12 NPC_LIFECYCLE_INVALID
     show_npc / hide_npc / set_npc_standing_text / character_join reference an
-    NPC id that was never created (create_npc) and is not in the static NPC list.
+    NPC id that was never introduced by create_npc and is not in the static NPC
+    list at the point it is referenced (chronological order).
 
 R13 DUNGEON_EVENT_UNKNOWN_DUNGEON
     dungeon_add_treasure / dungeon_add_npc / set_player_in_dungeon /
     remove_player_from_dungeon / lock_dungeon / unlock_dungeon reference a
-    dungeon_id never created by a prior create_dungeon event.
+    dungeon_id that was never created by a prior create_dungeon event.
 
 R14 REMOVE_TASK_TARGET_MISSING
-    remove_task / cancel_task referencing a task_id that doesn't exist.
+    remove_task / cancel_task referencing a task_id that does not exist anywhere
+    in the known set.
 
 R15 CONDITION_PAYLOAD_INVALID
-    Condition block present but missing required fields for its type.
+    Condition block present but missing required fields for its condition type,
+    or a type-specific value is malformed (e.g. negative amount/chapter).
+    Unknown condition types are also flagged here.
+
+    CONDITION_REF_INVALID
+    Condition param references an entity that does not exist in the known set:
+    - is_task_completed / is_task_active / is_task_not_active → task_id must
+      exist in the known task set.
+    - is_npc_met / is_npc_not_met → npc_id must be a known static or dynamic
+      NPC id (pending_character / final_character / twisted_character are
+      always exempted as they resolve at runtime).
+    Note: has_item is intentionally not cross-referenced here because the item
+    set is not loaded into the validator's const context.
+
+R16 OPTION_DIALOG_OPTION_TARGET_MISSING
+    Each option in an initiate_option_dialog params.options list is a
+    (display_text, task_id) pair.  Every task_id must exist in the known
+    task set.  A missing message or empty options list is also flagged.
+    OPTION_DIALOG_NO_MESSAGE  — params.message is absent or empty.
+    OPTION_DIALOG_NO_OPTIONS  — params.options is absent or empty.
+    OPTION_DIALOG_OPTION_TARGET_MISSING — an option task_id is not in the
+    known task set.
+
 """
 from __future__ import annotations
 
@@ -88,9 +142,17 @@ _ROOT_TASK_TYPES: FrozenSet[str] = frozenset({
 # Explicit allowlist for edge-case roots that don't match patterns
 _ROOT_TASK_ALLOWLIST: FrozenSet[str] = frozenset()
 
-# NPC ids whose absence from create_npc is expected (global preloads)
+# Dynamic NPC slot ids — their existence depends on runtime character assignment
 _DYNAMIC_NPC_IDS: FrozenSet[str] = frozenset({
     "pending_character", "final_character", "twisted_character",
+})
+
+# The five player-character archetype ids used as npc_id proxies in dialog
+# seeds that target a dynamic character slot (pending_character etc.).
+# A dialog_id is considered "covered" for a dynamic slot when ALL five
+# archetypes carry that dialog_id.
+_PLAYER_CHARACTER_TYPES: FrozenSet[str] = frozenset({
+    "technique", "tech", "magic", "faith", "skill",
 })
 
 # Condition types → required param keys
@@ -167,6 +229,71 @@ def _check_award_task_refs(
             ))
     return errors
 
+def _chapter_number(bucket_id: str) -> int:
+    """Parse the chapter number from a main-story bucket id like 'ch7'.
+
+    Returns 0 for non-chapter bucket ids so they sort before everything else
+    if unexpectedly encountered.
+    """
+    stripped = bucket_id.lower().lstrip("ch")
+    try:
+        return int(stripped)
+    except ValueError:
+        return 0
+
+
+def _flat_tasks_story_order(tree: List[TimelineGroupNode]) -> List[TimelineTaskNode]:
+    """Return all task nodes in canonical story-chronological order:
+
+        main ch1–7  →  regional  →  main ch8–21  →  extended (city stories)
+
+    This ordering is used for all traversal-dependent validation rules so that
+    NPC creation, item economy, and dungeon tracking reflect actual play order.
+    """
+    # Index groups by id for easy lookup
+    groups_by_id: Dict[str, TimelineGroupNode] = {g.group_id: g for g in tree}
+
+    out: List[TimelineTaskNode] = []
+
+    # ── 1. Main story chapters 1–7 ────────────────────────────────────────
+    main_group = groups_by_id.get("main")
+    if main_group:
+        early_buckets = sorted(
+            (b for b in main_group.buckets if _chapter_number(b.bucket_id) <= 7),
+            key=lambda b: _chapter_number(b.bucket_id),
+        )
+        for bucket in early_buckets:
+            out.extend(bucket.tasks)
+
+    # ── 2. Regional stories ───────────────────────────────────────────────
+    regional_group = groups_by_id.get("regional")
+    if regional_group:
+        for bucket in regional_group.buckets:
+            out.extend(bucket.tasks)
+
+    # ── 3. Main story chapters 8–21 ───────────────────────────────────────
+    if main_group:
+        late_buckets = sorted(
+            (b for b in main_group.buckets if _chapter_number(b.bucket_id) >= 8),
+            key=lambda b: _chapter_number(b.bucket_id),
+        )
+        for bucket in late_buckets:
+            out.extend(bucket.tasks)
+
+    # ── 4. Extended city stories ──────────────────────────────────────────
+    extended_group = groups_by_id.get("extended")
+    if extended_group:
+        for bucket in extended_group.buckets:
+            out.extend(bucket.tasks)
+
+    # ── Fallback: any groups not covered above (future-proofing) ──────────
+    known_group_ids = {"main", "regional", "extended"}
+    for group in tree:
+        if group.group_id not in known_group_ids:
+            for bucket in group.buckets:
+                out.extend(bucket.tasks)
+
+    return out
 
 def _check_remove_task_refs(
     node: TimelineTaskNode,
@@ -315,7 +442,7 @@ def _err(
     )
 
 
-def _is_root(task: Dict[str, Any], task_id: str) -> bool:
+def _is_root(task: Dict[str, Any], task_id: str, story_root_ids: FrozenSet[str]) -> bool:
     """Return True if this task is exempt from the inbound-award requirement."""
     if task_id in _ROOT_TASK_ALLOWLIST:
         return True
@@ -323,7 +450,7 @@ def _is_root(task: Dict[str, Any], task_id: str) -> bool:
         if task_id.endswith(suffix):
             return True
     ttype = str(task.get("type", "")).lower()
-    return ttype in _ROOT_TASK_TYPES
+    return ttype in _ROOT_TASK_TYPES or task_id in story_root_ids
 
 
 def _iter_events(task: Dict[str, Any]):
@@ -378,7 +505,7 @@ def validate_timeline_integrity(
     All existing errors on nodes are cleared before re-validation.
     """
     # ── Reset ─────────────────────────────────────────────────────────────
-    all_tasks = _flat_tasks(tree)
+    all_tasks = _flat_tasks_story_order(tree)
     for tn in all_tasks:
         tn.errors.clear()
 
@@ -404,8 +531,19 @@ def validate_timeline_integrity(
             if did:
                 known_dungeon_ids.add(str(did))
 
+    # ── Identify story-root tasks ──────────────────────────────────────────
+    # The first task of every story bucket is awarded automatically when the
+    # story unlocks (primary region, city, or chapter).  It will never have
+    # an inbound award_task edge and must not be flagged as unreachable.
+    story_root_ids: FrozenSet[str] = frozenset(
+        bucket.tasks[0].task_id
+        for group in tree
+        for bucket in group.buckets
+        if bucket.tasks
+    )
+
     # ── R5: Duplicate task ids ────────────────────────────────────────────
-    seen_ids: Dict[str, str] = {}  # task_id → first task_id (same key, kept for dup detection)
+    seen_ids: Dict[str, str] = {}
     for tn in all_tasks:
         if tn.task_id in seen_ids:
             errors_map[tn.task_id].append(_err(
@@ -417,15 +555,17 @@ def validate_timeline_integrity(
             seen_ids[tn.task_id] = tn.task_id
 
     # ── Traversal-order state for rules that require "prior" context ───────
-    item_source_counts: Dict[str, int] = defaultdict(int)   # item_id → net sources
-    item_remove_counts: Dict[str, int] = defaultdict(int)   # item_id → net removes
-    created_npc_ids:    Set[str]       = set()
-    created_dungeon_ids: Set[str]      = set()
+    item_source_counts:  Dict[str, int] = defaultdict(int)
+    item_remove_counts:  Dict[str, int] = defaultdict(int)
+    created_npc_ids:     Set[str]       = set()
+    created_dungeon_ids: Set[str]       = set()
+    character_npc_slots: int            = 0   # incremented by create_character_npc events
 
-    # award_task graph: target_task_id → list of awarding task_ids
+    # Build the node map early — needed by shuttle-pair detection and error attachment
+    task_node_map: Dict[str, TimelineTaskNode] = {tn.task_id: tn for tn in all_tasks}
+
     inbound_awards: Dict[str, List[str]] = defaultdict(list)
-    # for cycle detection: awarding_task_id → [target_task_ids]
-    award_edges: Dict[str, List[str]] = defaultdict(list)
+    award_edges:    Dict[str, List[str]] = defaultdict(list)
 
     tasks_scanned  = 0
     events_scanned = 0
@@ -459,15 +599,31 @@ def validate_timeline_integrity(
                     f"got to_type={task.get('to_type')!r} to_id={task.get('to_id')!r}",
                 ))
 
-        # ── R2: meet-NPC check (pre-event pass) ───────────────────────
+        # ── R2: meet-NPC check ────────────────────────────────────────
+        # A meet task may create its own target NPC inside task_acquire_events
+        # (the NPC is placed just before the player interacts with it).
+        # If the NPC appears in the task's own acquire events it is considered
+        # pre-created and must not be flagged.
         if task_type == "meet" and str(task.get("to_type", "")).lower() == "npc":
             to_id = str(task.get("to_id", ""))
-            if to_id in _DYNAMIC_NPC_IDS:
-                errors_map[task_id].append(_err(
-                    "MEET_NPC_DYNAMIC_REFERENCE",
-                    f"NPC id '{to_id}' is dynamic and cannot be statically verified.",
-                    related_entity_id=to_id,
-                ))
+            own_creates: Set[str] = {
+                str(ev.get("params", {}).get("npc_id") or "")
+                for ev in _events(task, "task_acquire_events")
+                if ev.get("event_type") in ("create_npc", "create_character_npc")
+            }
+            if to_id in own_creates:
+                pass  # Valid — NPC spawned by this task's own acquire events
+            elif to_id in _DYNAMIC_NPC_IDS:
+                # A dynamic character slot is valid only if a create_character_npc
+                # event has already been seen earlier in the traversal.
+                if character_npc_slots == 0:
+                    errors_map[task_id].append(_err(
+                        "MEET_NPC_DYNAMIC_REFERENCE",
+                        f"meet targets dynamic NPC id '{to_id}' but no prior "
+                        f"create_character_npc event was found.",
+                        related_entity_id=to_id,
+                    ))
+                # else: slot is filled — no error
             elif to_id and to_id not in created_npc_ids:
                 errors_map[task_id].append(_err(
                     "MEET_NPC_WITHOUT_CREATE",
@@ -493,6 +649,7 @@ def validate_timeline_integrity(
                         event_type=raw_type,
                     ))
                 else:
+                    # R15a: required param keys present
                     for req_key in required:
                         if req_key not in cparams:
                             errors_map[task_id].append(_err(
@@ -500,6 +657,62 @@ def validate_timeline_integrity(
                                 f"Condition '{ctype}' missing required param '{req_key}'.",
                                 event_type=raw_type,
                             ))
+
+                    # R15b: cross-reference param values against known entity sets
+                    if ctype in ("is_task_completed", "is_task_active", "is_task_not_active"):
+                        ref_id = str(cparams.get("task_id") or "")
+                        if ref_id and ref_id not in known_task_ids:
+                            errors_map[task_id].append(_err(
+                                "CONDITION_REF_INVALID",
+                                f"Condition '{ctype}' references unknown task_id '{ref_id}'.",
+                                event_type=raw_type,
+                                related_task_id=ref_id,
+                            ))
+
+                    elif ctype in ("is_npc_met", "is_npc_not_met"):
+                        ref_id = str(cparams.get("npc_id") or "")
+                        if ref_id and ref_id not in _DYNAMIC_NPC_IDS:
+                            if ref_id not in created_npc_ids and ref_id not in known_npc_ids:
+                                errors_map[task_id].append(_err(
+                                    "CONDITION_REF_INVALID",
+                                    f"Condition '{ctype}' references unknown npc_id '{ref_id}'.",
+                                    event_type=raw_type,
+                                    related_entity_id=ref_id,
+                            ))
+
+                    elif ctype == "has_money":
+                        amount = cparams.get("amount")
+                        if amount is not None:
+                            try:
+                                if int(amount) < 0:
+                                    errors_map[task_id].append(_err(
+                                        "CONDITION_PAYLOAD_INVALID",
+                                        f"Condition 'has_money' has negative amount {amount!r}.",
+                                        event_type=raw_type,
+                                    ))
+                            except (TypeError, ValueError):
+                                errors_map[task_id].append(_err(
+                                    "CONDITION_PAYLOAD_INVALID",
+                                    f"Condition 'has_money' amount {amount!r} is not an integer.",
+                                    event_type=raw_type,
+                                ))
+
+                    elif ctype in ("is_chapter_gte", "is_chapter_lte"):
+                        chapter = cparams.get("chapter")
+                        if chapter is not None:
+                            try:
+                                if int(chapter) < 0:
+                                    errors_map[task_id].append(_err(
+                                        "CONDITION_PAYLOAD_INVALID",
+                                        f"Condition '{ctype}' has negative chapter {chapter!r}.",
+                                        event_type=raw_type,
+                                    ))
+                            except (TypeError, ValueError):
+                                errors_map[task_id].append(_err(
+                                    "CONDITION_PAYLOAD_INVALID",
+                                    f"Condition '{ctype}' chapter {chapter!r} is not an integer.",
+                                    event_type=raw_type,
+                                ))
 
             # ── R1: Item economy ──────────────────────────────────────
             if raw_type == "award_item":
@@ -578,10 +791,15 @@ def validate_timeline_integrity(
                     ))
 
             # ── NPC lifecycle tracking ────────────────────────────────
-            elif raw_type in ("create_npc", "create_character_npc"):
+            elif raw_type == "create_npc":
                 npc_id = str(params.get("npc_id") or params.get("id") or "")
                 if npc_id:
                     created_npc_ids.add(npc_id)
+
+            elif raw_type == "create_character_npc":
+                # Fills a dynamic character slot (pending/final/twisted).
+                # No npc_id param — the slot identity is resolved at runtime.
+                character_npc_slots += 1
 
             # ── R12: NPC lifecycle validity ───────────────────────────
             elif raw_type in _NPC_LIFECYCLE_EVENT_TYPES:
@@ -634,28 +852,95 @@ def validate_timeline_integrity(
             elif raw_type in ("initiate_dialog", "initiate_character_dialog"):
                 npc_id    = params.get("npc_id")
                 dialog_id = params.get("dialog_id")
-                pair      = (npc_id, dialog_id)
-                if pair not in known_dialog_pairs:
-                    errors_map[task_id].append(_err(
-                        "DIALOG_REF_MISSING",
-                        f"'{raw_type}' references (npc_id={npc_id!r}, "
-                        f"dialog_id={dialog_id!r}) which has no dialog lines.",
-                        event_type=raw_type,
-                        related_entity_id=str(npc_id or ""),
-                    ))
-                if npc_id and str(npc_id) not in _DYNAMIC_NPC_IDS | {None, ""}:
-                    if str(npc_id) not in known_npc_ids:
+
+                if npc_id is not None and str(npc_id) in _DYNAMIC_NPC_IDS:
+                    # Dynamic slot dialogs are stored once per player-character
+                    # archetype (technique / tech / magic / faith / skill).
+                    # The dialog is valid when ALL five archetypes carry it.
+                    missing_archetypes = [
+                        pc for pc in sorted(_PLAYER_CHARACTER_TYPES)
+                        if (pc, dialog_id) not in known_dialog_pairs
+                    ]
+                    if missing_archetypes:
                         errors_map[task_id].append(_err(
-                            "DIALOG_NPC_UNKNOWN",
-                            f"'{raw_type}' uses npc_id '{npc_id}' which is not in "
-                            f"the known NPC set.",
+                            "DIALOG_REF_MISSING",
+                            f"'{raw_type}' uses dynamic npc_id '{npc_id}' with "
+                            f"dialog_id={dialog_id!r} but the following player-character "
+                            f"archetypes are missing that dialog: "
+                            f"{', '.join(missing_archetypes)}.",
                             event_type=raw_type,
                             related_entity_id=str(npc_id),
+                        ))
+                else:
+                    pair = (npc_id, dialog_id)
+                    if pair not in known_dialog_pairs:
+                        errors_map[task_id].append(_err(
+                            "DIALOG_REF_MISSING",
+                            f"'{raw_type}' references (npc_id={npc_id!r}, "
+                            f"dialog_id={dialog_id!r}) which has no dialog lines.",
+                            event_type=raw_type,
+                            related_entity_id=str(npc_id or ""),
+                        ))
+                    if npc_id and str(npc_id) not in _DYNAMIC_NPC_IDS | {None, ""}:
+                        if str(npc_id) not in known_npc_ids:
+                            errors_map[task_id].append(_err(
+                                "DIALOG_NPC_UNKNOWN",
+                                f"'{raw_type}' uses npc_id '{npc_id}' which is not in "
+                                f"the known NPC set.",
+                                event_type=raw_type,
+                                related_entity_id=str(npc_id),
+                            ))
+
+            # ── R16: Option dialog validation ─────────────────────────
+            elif raw_type == "initiate_option_dialog":
+                message = params.get("message", "")
+                options = params.get("options") or []
+                if not message:
+                    errors_map[task_id].append(_err(
+                        "OPTION_DIALOG_NO_MESSAGE",
+                        "initiate_option_dialog event has no message.",
+                        event_type=raw_type,
+                    ))
+                if not options:
+                    errors_map[task_id].append(_err(
+                        "OPTION_DIALOG_NO_OPTIONS",
+                        "initiate_option_dialog event has an empty options list.",
+                        event_type=raw_type,
+                    ))
+                else:
+                    for opt in options:
+                        # Accept both (text, task_id) tuples and {'text':..,'task_id':..} dicts
+                        if isinstance(opt, (list, tuple)) and len(opt) == 2:
+                            opt_task_id = str(opt[1])
+                        elif isinstance(opt, dict):
+                            opt_task_id = str(opt.get("task_id") or "")
+                        else:
+                            opt_task_id = ""
+                        if opt_task_id and opt_task_id not in known_task_ids:
+                            errors_map[task_id].append(_err(
+                                "OPTION_DIALOG_OPTION_TARGET_MISSING",
+                                f"initiate_option_dialog option references unknown "
+                                f"task_id '{opt_task_id}'.",
+                                event_type=raw_type,
+                                related_task_id=opt_task_id,
+                            ))
+
+            # ── R12 extension: set_npc_met references known NPC ───────
+            elif raw_type == "set_npc_met":
+                npc_id = str(params.get("npc_id") or "")
+                if npc_id and npc_id not in _DYNAMIC_NPC_IDS:
+                    if npc_id not in created_npc_ids and npc_id not in known_npc_ids:
+                        errors_map[task_id].append(_err(
+                            "NPC_LIFECYCLE_INVALID",
+                            f"set_npc_met references NPC '{npc_id}' which was never "
+                            f"created or statically defined.",
+                            event_type=raw_type,
+                            related_entity_id=npc_id,
                         ))
 
     # ── R4: Unreachable tasks (no inbound award) ──────────────────────────
     for tn in all_tasks:
-        if _is_root(tn.task, tn.task_id):
+        if _is_root(tn.task, tn.task_id, story_root_ids):
             continue
         if not inbound_awards.get(tn.task_id):
             errors_map[tn.task_id].append(_err(
@@ -665,6 +950,44 @@ def validate_timeline_integrity(
             ))
 
     # ── R9: Cycle detection (DFS on award graph) ──────────────────────────
+    # Build a shuttle-pair exemption set first.
+    # A shuttle pair is two tasks that mutually award AND mutually remove_task
+    # each other — this is an intentional bidirectional toggle, not a bug.
+    shuttle_pairs: Set[FrozenSet[str]] = set()
+    for tn in all_tasks:
+        for _, ev in _iter_events(tn.task):
+            if ev.get("event_type") != "award_task":
+                continue
+            target = str((ev.get("params") or {}).get("task_id") or "")
+            if not target:
+                continue
+            # Check whether target also awards tn.task_id back
+            target_node = task_node_map.get(target)
+            if not target_node:
+                continue
+            target_awards_back = any(
+                str((e.get("params") or {}).get("task_id") or "") == tn.task_id
+                for _, e in _iter_events(target_node.task)
+                if e.get("event_type") == "award_task"
+            )
+            # Check mutual remove_task — each removes the other
+            own_removes = {
+                str((e.get("params") or {}).get("task_id") or "")
+                for _, e in _iter_events(tn.task)
+                if e.get("event_type") in ("remove_task", "cancel_task")
+            }
+            target_removes = {
+                str((e.get("params") or {}).get("task_id") or "")
+                for _, e in _iter_events(target_node.task)
+                if e.get("event_type") in ("remove_task", "cancel_task")
+            }
+            if (
+                target_awards_back
+                and tn.task_id in target_removes
+                and target in own_removes
+            ):
+                shuttle_pairs.add(frozenset({tn.task_id, target}))
+
     visited:   Set[str] = set()
     rec_stack: Set[str] = set()
 
@@ -672,6 +995,9 @@ def validate_timeline_integrity(
         visited.add(node)
         rec_stack.add(node)
         for neighbour in award_edges.get(node, []):
+            # Skip edges that are part of a known shuttle pair
+            if frozenset({node, neighbour}) in shuttle_pairs:
+                continue
             if neighbour not in visited:
                 if _dfs_cycle(neighbour):
                     return True
@@ -691,13 +1017,22 @@ def validate_timeline_integrity(
                 ))
 
     # ── R10/R11: Per-bucket chapter checks ───────────────────────────────
+    # Determine the highest chapter number in the main group so R11 can
+    # exempt it — the final chapter intentionally has no advance_chapter.
+    main_buckets_in_tree = [
+        b for g in tree if g.group_id == "main" for b in g.buckets
+    ]
+    final_chapter_num = max(
+        (_chapter_number(b.bucket_id) for b in main_buckets_in_tree),
+        default=0,
+    )
+
     for group_id, bucket_id, bucket_tasks in _flat_tasks_by_bucket(tree):
         if not bucket_tasks:
             continue
 
         bucket_task_ids = {tn.task_id for tn in bucket_tasks}
 
-        # R10: at least one root in every bucket
         has_bucket_root = any(
             not any(
                 awarding in bucket_task_ids
@@ -712,22 +1047,25 @@ def validate_timeline_integrity(
                 f"root task.",
             ))
 
-        # R11: main-story buckets should have an advance_chapter
+        # R11: main-story buckets should have an advance_chapter — except the
+        # final chapter, which ends the story and never advances further.
         if group_id == "main":
-            has_advance = any(
-                ev.get("event_type") == "advance_chapter"
-                for tn in bucket_tasks
-                for _, ev in _iter_events(tn.task)
-            )
-            if not has_advance:
-                errors_map[bucket_tasks[0].task_id].append(_err(
-                    "CHAPTER_NO_ADVANCE",
-                    f"Main-story bucket '{bucket_id}' has no advance_chapter event. "
-                    f"(Warning — may be intentional for final chapters.)",
-                ))
+            is_final_chapter = _chapter_number(bucket_id) == final_chapter_num
+            if not is_final_chapter:
+                has_advance = any(
+                    ev.get("event_type") == "advance_chapter"
+                    for tn in bucket_tasks
+                    for _, ev in _iter_events(tn.task)
+                )
+                if not has_advance:
+                    errors_map[bucket_tasks[0].task_id].append(_err(
+                        "CHAPTER_NO_ADVANCE",
+                        f"Main-story bucket '{bucket_id}' has no advance_chapter event. "
+                        f"(Warning — may be intentional for final chapters.)",
+                    ))
 
     # ── Attach errors to nodes ────────────────────────────────────────────
-    task_node_map: Dict[str, TimelineTaskNode] = {tn.task_id: tn for tn in all_tasks}
+    # task_node_map is built earlier — do not reassign here
     for task_id, errs in errors_map.items():
         if task_id in task_node_map:
             task_node_map[task_id].errors.extend(errs)

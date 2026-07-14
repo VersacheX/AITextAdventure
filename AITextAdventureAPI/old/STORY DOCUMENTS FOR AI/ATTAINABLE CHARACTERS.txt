@@ -165,7 +165,7 @@ ATTAINABLE_PLAYER_CHARACTERS = [
     { 
         ## total power points = 15 + 15* 29  = 465
         ## total stat points = 10 + 6*29 = 184
-        'id': 'korin', 
+        'id': 'kor_in', 
         'name': 'Kor-in',
         'arm_armor': 'glacial_vambraces_mk2',
         'head_armor': 'glacial_crown',

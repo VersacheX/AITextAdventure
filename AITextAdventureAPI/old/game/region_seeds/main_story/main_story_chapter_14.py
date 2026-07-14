@@ -271,7 +271,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'lyren_vale',
+        'npc_id': 'lyren',
         'dialog_id': 'lyren_ch14_broken_version',
         'dialog': [
             "(softly) Everything broken still carries pieces of what it was meant to be… You don’t have to choose their broken version of you."
@@ -355,7 +355,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'lyren_vale',
+        'npc_id': 'lyren',
         'dialog_id': 'lyren_ch14_fractures_deeper',
         'dialog': [
             "(soft but resolute) Broken things can still be beautiful. Forcing them to be \"perfect\" only makes the fractures deeper."
@@ -557,7 +557,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'lyren_vale',
+        'npc_id': 'lyren',
         'dialog_id': 'lyren_ch14_erase_parts',
         'dialog': [
             "You speak of family... but families don’t demand you erase parts of yourself to belong."
@@ -656,7 +656,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'lyren_vale',
+        'npc_id': 'lyren',
         'dialog_id': 'lyren_ch14_stigma_aftermath',
         'dialog': [
             "Everything she touched still carries the echo of what it was meant to be... but she tried to silence those echoes. That’s the real crime.",
@@ -744,7 +744,7 @@ TASKS = [
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch14_social_control'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'ravel', 'dialog_id': 'ravel_ch14_hate_me'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'faith', 'dialog_id': 'faith_ch14_stand_whole'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren_vale', 'dialog_id': 'lyren_ch14_broken_version'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren', 'dialog_id': 'lyren_ch14_broken_version'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'ravel', 'dialog_id': 'ravel_ch14_hask_stigma'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'tess', 'dialog_id': 'tess_ch14_beautiful_grift'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'thorn', 'dialog_id': 'thorn_ch14_predator_skin'}},
@@ -768,7 +768,7 @@ TASKS = [
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'skill', 'dialog_id': 'skill_ch14_dust'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch14_terrified_of_real'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch14_brittle'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren_vale', 'dialog_id': 'lyren_ch14_fractures_deeper'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren', 'dialog_id': 'lyren_ch14_fractures_deeper'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch14_earning_it'}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'hask', 'standing_text': ["Stigma will bring true unity. The division ends with her."]}},
             {'event_type': 'create_npc', 'params': {'npc_id': 'stigma', 'location': 'region_city_bar'}},
@@ -840,7 +840,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'stigma', 'dialog_id': 'stigma_ch14_belonging'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch14_choose_you'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'skill', 'dialog_id': 'skill_ch14_predation'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren_vale', 'dialog_id': 'lyren_ch14_erase_parts'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren', 'dialog_id': 'lyren_ch14_erase_parts'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'stigma', 'dialog_id': 'stigma_ch14_venom'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch14_done_with_tools'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch14_end_this'}},
@@ -864,7 +864,7 @@ TASKS = [
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch14_stigma_aftermath'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch14_stigma_aftermath'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'skill', 'dialog_id': 'skill_ch14_stigma_aftermath'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren_vale', 'dialog_id': 'lyren_ch14_stigma_aftermath'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren', 'dialog_id': 'lyren_ch14_stigma_aftermath'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'thorn', 'dialog_id': 'thorn_ch14_stigma_aftermath'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'nia', 'dialog_id': 'nia_ch14_stigma_aftermath'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch14_face_edict'}},
