@@ -208,6 +208,13 @@ NPC_DIALOG = [
         ]
     },
     {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_ch5_static_wraiths',
+        'dialog': [
+            "Stay focused. They’re fast, don’t let them flank you."
+        ]
+    },
+    {
         'npc_id': 'technique',
         'dialog_id': 'technique_ch5_defeated_static_wraiths',
         'dialog': [

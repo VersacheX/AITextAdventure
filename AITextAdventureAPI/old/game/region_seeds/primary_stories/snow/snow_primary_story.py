@@ -50,7 +50,7 @@ ATTAINABLE_PLAYER_CHARACTERS = [
     { 
         ## total power points = 15 + 15* 29  = 465
         ## total stat points = 10 + 6*29 = 184
-        'id': 'korin', 
+        'id': 'kor_in', 
         'name': 'Kor-in',
         'arm_armor': 'glacial_vambraces_mk2',
         'head_armor': 'glacial_crown',
@@ -140,7 +140,7 @@ Consider a quiet moment after the fight where Kor-in confronts what his vengeanc
 
 NPCS = [
     {
-        'npc_id': 'korin',
+        'npc_id': 'kor_in',
         'name': 'Kor-in',
         'description': (
             'An ice trapper whose wife was frozen alive by Lady Aeriola’s time-stopping spell.'
@@ -197,8 +197,8 @@ NPCS = [
 
 NPC_DIALOG = [
     {
-        'npc_id': 'korin',
-        'dialog_id': 'korin_intro',
+        'npc_id': 'kor_in',
+        'dialog_id': 'kor_in_intro',
         'dialog': [
             "You there. You smell like warmth. Good. I need someone alive.",
             "Lady Aeriola froze half the valley last night. She wants the world still — unmoving — like a corpse.",
@@ -222,8 +222,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'korin',
-        'dialog_id': 'korin_closing',
+        'npc_id': 'kor_in',
+        'dialog_id': 'kor_in_closing',
         'dialog': [
             "She's gone. Good. The snow feels honest again.",
             "You fight well. I'll travel with you — until the world stops breathing."
@@ -241,16 +241,16 @@ TASKS = [
 			{
 				'event_type': 'create_npc',
 				'params': {
-					'npc_id': 'korin',
+					'npc_id': 'kor_in',
 					'location': 'region_bar'
 				}
 			},
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
-					'npc_id': 'korin',
+					'npc_id': 'kor_in',
 					'standing_text': [ 
-                        "Ho there!  I'm Korin.  One of the best ice trappers around.  I lost my family to a psychotic sorceress a few years back",
+                        "Ho there!  I'm Kor-In.  One of the best ice trappers around.  I lost my family to a psychotic sorceress a few years back",
                         "Which is why I'm always holed up in here.  If you ever hear anything about her whereabouts come let me know."
 					]
 				}
@@ -260,23 +260,23 @@ TASKS = [
 			{
 				'event_type': 'award_task',
 				'params': {
-					'task_id': 'snow_primary_meet_korin'
+					'task_id': 'snow_primary_meet_kor_in'
 				}
 			}
 		]		
 	},
     # Task 1: meet Kor-in at region bar
     {
-        'task_id': 'snow_primary_meet_korin',
+        'task_id': 'snow_primary_meet_kor_in',
         'type': 'deliver',
         'to_type': 'npc',
-        'to_id': 'korin',
+        'to_id': 'kor_in',
         'item_id': 'boreal_clasp',
         'task_acquire_events': [
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
-                    'npc_id': 'korin',
+                    'npc_id': 'kor_in',
                     'standing_text': [# get the boreal_clasp
                         "Aeriola is on a rampage.  I need a Boreal Clasp to break her wards."
                     ]
@@ -287,14 +287,14 @@ TASKS = [
             {
                 'event_type': 'initiate_dialog',
                 'params': {
-                    'npc_id': 'korin',
-                    'dialog_id': 'korin_intro'
+                    'npc_id': 'kor_in',
+                    'dialog_id': 'kor_in_intro'
                 }
             },
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
-                    'npc_id': 'korin',
+                    'npc_id': 'kor_in',
                     'standing_text': [
                         "The world is frozen in her grasp. We must act swiftly.",
                         "Will you help me stop Lady Aeriola?"
@@ -382,7 +382,7 @@ TASKS = [
             {
                 'event_type': 'award_task',
                 'params': {
-                    'task_id': 'snow_primary_report_to_korin'
+                    'task_id': 'snow_primary_report_to_kor_in'
                 }
             }
         ]
@@ -390,29 +390,29 @@ TASKS = [
 
     # Task 4: report back to Kor-in
     {
-        'task_id': 'snow_primary_report_to_korin',
+        'task_id': 'snow_primary_report_to_kor_in',
         'type': 'meet',
         'to_type': 'npc',
-        'to_id': 'korin',
+        'to_id': 'kor_in',
         'task_acquire_events': [],
         'task_complete_events': [
             {
                 'event_type': 'initiate_dialog',
                 'params': {
-                    'npc_id': 'korin',
-                    'dialog_id': 'korin_closing'
+                    'npc_id': 'kor_in',
+                    'dialog_id': 'kor_in_closing'
                 }
             },
             {
                 'event_type': 'hide_npc',
                 'params': {
-                    'npc_id': 'korin'
+                    'npc_id': 'kor_in'
                 }
             },
             {
                 'event_type': 'character_join',
                 'params': {
-                    'character_id': 'korin'
+                    'character_id': 'kor_in'
                 }
             }
         ]

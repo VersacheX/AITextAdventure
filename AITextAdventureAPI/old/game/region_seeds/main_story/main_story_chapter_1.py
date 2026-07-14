@@ -499,6 +499,34 @@ NPC_DIALOG = [
 
 ]
 
+TEST_DIALOG = [
+	{
+		'npc_id': None,
+		'dialog_id': 'ch1_choice_look_for_friends',
+		'dialog': [
+			"You decide to look for your missing friends first.",
+			"Someone in this city must know something."
+		]
+	},
+	{
+		'npc_id': None,
+		'dialog_id': 'ch1_choice_find_somewhere_safe',
+		'dialog': [
+			"You decide to find somewhere safe to regroup.",
+			"The inn seems like the best bet for now."
+		]
+	},
+	{
+		'npc_id': None,
+		'dialog_id': 'ch1_choice_look_around',
+		'dialog': [
+			"You decide to take stock of your surroundings first.",
+			"A reckless charge into chaos never helped anyone."
+		]
+	}
+]
+
+NPC_DIALOG += TEST_DIALOG
 TASKS = [
 	# Task 1: main_story_ch_1_find_the_inn
 	{
@@ -604,7 +632,19 @@ TASKS = [
 					'npc_id': None,
 					'dialog_id': 'ch1_narrator_we_do_not_begin'
 				}
+			},
+			{
+				'event_type': 'initiate_option_dialog',
+				'params': {
+					'message': "The city is in chaos. What do you do first?",
+					'options': [
+						('Look for your missing friends', 'ch1_option_look_for_friends'),
+						('Find somewhere safe to regroup',  'ch1_option_find_somewhere_safe'),
+						('Look around and take stock',      'ch1_option_look_around'),
+					]
+				}
 			}
+			#INITIATE OPTION DIALOG WITH 3 OPTIONS. HAVE THE TASKS DO NOTHING EXCEPT CALL NARRATOR DIALOG [initiate_dialog npc_id=None] STATING THE CHOICE THEY MADE
 		],
 		'task_complete_events': [ 
 			{
@@ -656,6 +696,57 @@ TASKS = [
 			}
 		]
 	},
+	# Option stub: look for friends
+	{
+		'task_id': 'ch1_option_look_for_friends',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'oren',
+		'task_acquire_events': [],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': None,
+					'dialog_id': 'ch1_choice_look_for_friends'
+				}
+			}
+		]
+	},
+	# Option stub: find somewhere safe
+	{
+		'task_id': 'ch1_option_find_somewhere_safe',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'oren',
+		'task_acquire_events': [],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': None,
+					'dialog_id': 'ch1_choice_find_somewhere_safe'
+				}
+			}
+		]
+	},
+	# Option stub: look around
+	{
+		'task_id': 'ch1_option_look_around',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'oren',
+		'task_acquire_events': [],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': None,
+					'dialog_id': 'ch1_choice_look_around'
+				}
+			}
+		]
+	},
 	#Task 2 find item shop
 	{
 		'task_id': 'main_story_ch_1_find_item_shop',
@@ -663,6 +754,28 @@ TASKS = [
 		'to_type': 'npc',
 		'to_id': 'rook',
 		'task_acquire_events': [
+				#Task 2 find item shop
+				{
+					'task_id': 'main_story_ch_1_find_item_shop',
+					'type': 'meet',
+					'to_type': 'npc',
+					'to_id': 'rook',
+					'task_acquire_events': [
+						{
+							'event_type': 'set_npc_standing_text',
+							'params': {
+								'npc_id': 'rook',
+								'standing_text': [
+									"Bring him to me and I'll give you half the bounty. He's camped up in a hideout somewhere in the outskirts."
+								]
+							},
+							'condition': {
+								'type': 'is_task_completed',
+								'params': { 'task_id': 'main_story_ch_1_find_the_inn' }
+							}
+						}
+					],
+				}
 		],
 		'task_complete_events': [ 
 			{

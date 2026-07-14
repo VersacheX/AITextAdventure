@@ -350,8 +350,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'korin',
-        'dialog_id': 'korin_ch10_riot2_end',
+        'npc_id': 'kor_in',
+        'dialog_id': 'kor_in_ch10_riot2_end',
         'dialog': [
             "(quietly) Like frostbite... it numbs you before it destroys you."
         ]
@@ -549,7 +549,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch10_riot2_end' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch10_riot2_end' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch10_riot2_end' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'korin', 'dialog_id': 'korin_ch10_riot2_end' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_ch10_riot2_end' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'ember', 'dialog_id': 'ember_ch10_departs' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch10_to_ember_departs' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch10_to_ember_departs' }},

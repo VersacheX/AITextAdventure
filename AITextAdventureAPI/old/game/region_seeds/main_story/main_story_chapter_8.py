@@ -210,8 +210,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'korin',
-        'dialog_id': 'korin_ch8_airship_intro',
+        'npc_id': 'kor_in',
+        'dialog_id': 'kor_in_ch8_airship_intro',
         'dialog': [
             "(quietly) ...Like walking on thinning ice."
         ]
@@ -629,7 +629,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_ch8_airship_intro' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch8_airship_response' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch8_airship_intro' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'korin', 'dialog_id': 'korin_ch8_airship_intro' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_ch8_airship_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_ch8_airship_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch8_airship_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch8_airship_intro' }},

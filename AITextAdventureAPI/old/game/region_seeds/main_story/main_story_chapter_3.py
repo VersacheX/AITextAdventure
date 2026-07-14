@@ -749,69 +749,6 @@ TASKS = [
 			}
 		]
 	},
-	{
-		'task_id': 'main_story_ch_3_deliver_scribe_mint',
-		'type': 'deliver',
-		'item_id': 'scribe_mint_ch3',
-		'to_type': 'npc',
-		'to_id': 'kess_thornwrite',
-		'task_acquire_events': [
-
-		],
-		'task_complete_events': [
-			{
-				'event_type': 'initiate_dialog',
-				'params': {
-					'npc_id': 'kess_thornwrite',
-					'dialog_id': 'kess_ch3_after_receiving_scribe_mint'
-				}
-			},
-			{
-				'event_type': 'remove_item',
-				'params': {
-					'item_id': 'scribe_mint_ch3',
-					'quantity': 1
-				}
-			},
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'deliver_scarred_thyme_to_kess_ch3'
-				}
-			}
-		]
-	},
-	{
-		'task_id': 'deliver_scarred_thyme_to_kess_ch3',
-		'type': 'deliver',
-		'item_id': 'scarred_thyme_ch3',
-		'to_type': 'npc',
-		'to_id': 'kess_thornwrite',
-		'task_acquire_events': [],
-		'task_complete_events': [
-			{
-				'event_type': 'initiate_dialog',
-				'params': {
-					'npc_id': 'kess_thornwrite',
-					'dialog_id': 'kess_ch3_after_receiving_scarred_thyme'
-				}
-			}, # award memory_tonic
-			{
-				'event_type': 'remove_item',
-				'params': {
-					'item_id': 'scarred_thyme_ch3',
-					'quantity': 1
-				}
-			},
-			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'memory_tonic_ch3',
-					'quantity': 1
-				}
-			}
-		]
-	},
 	{ # decidedly the current end to chapter 3
 		'task_id': 'main_story_ch_3_report_to_rook',
 		'type': 'meet',
@@ -914,6 +851,69 @@ TASKS = [
 					'standing_text': [
 						"Thanks for dealing with that guardian."
 					]
+				}
+			}
+		]
+	},
+	{
+		'task_id': 'main_story_ch_3_deliver_scribe_mint',
+		'type': 'deliver',
+		'item_id': 'scribe_mint',
+		'to_type': 'npc',
+		'to_id': 'kess_thornwrite',
+		'task_acquire_events': [
+
+		],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'kess_thornwrite',
+					'dialog_id': 'kess_ch3_after_receiving_scribe_mint'
+				}
+			},
+			{
+				'event_type': 'remove_item',
+				'params': {
+					'item_id': 'scribe_mint',
+					'quantity': 1
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'deliver_scarred_thyme_to_kess_ch3'
+				}
+			}
+		]
+	},
+	{
+		'task_id': 'deliver_scarred_thyme_to_kess_ch3',
+		'type': 'deliver',
+		'item_id': 'scarred_thyme',
+		'to_type': 'npc',
+		'to_id': 'kess_thornwrite',
+		'task_acquire_events': [],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'kess_thornwrite',
+					'dialog_id': 'kess_ch3_after_receiving_scarred_thyme'
+				}
+			}, # award memory_tonic
+			{
+				'event_type': 'remove_item',
+				'params': {
+					'item_id': 'scarred_thyme',
+					'quantity': 1
+				}
+			},
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'memory_tonic_ch3',
+					'quantity': 1
 				}
 			}
 		]

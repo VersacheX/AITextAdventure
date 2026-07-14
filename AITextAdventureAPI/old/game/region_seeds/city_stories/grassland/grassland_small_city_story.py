@@ -149,6 +149,7 @@ TASKS = [
 
 		],
 		'task_complete_events': [
+            { 'event_type': 'award_task', 'params': { 'task_id': 'grassland_small_city_meet_bramble' } }
 		]		
 	},
 
