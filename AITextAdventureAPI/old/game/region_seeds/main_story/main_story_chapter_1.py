@@ -704,9 +704,10 @@ TASKS = [
 	# Option stub: look for friends
 	{
 		'task_id': 'ch1_option_look_for_friends',
-		'type': 'meet',
+		'type': 'deliver',
+		'item_id': 'rift_core',
 		'to_type': 'npc',
-		'to_id': 'oren',
+		'to_id': 'kadeem',
 		'task_acquire_events': [
 			{
 				'event_type': 'initiate_dialog',
@@ -721,9 +722,10 @@ TASKS = [
 	# Option stub: find somewhere safe
 	{
 		'task_id': 'ch1_option_find_somewhere_safe',
-		'type': 'meet',
+		'type': 'deliver',
+		'item_id': 'phase_crystal',
 		'to_type': 'npc',
-		'to_id': 'oren',
+		'to_id': 'alchemist_mirlo',
 		'task_acquire_events': [
 			{
 				'event_type': 'initiate_dialog',
@@ -738,9 +740,10 @@ TASKS = [
 	# Option stub: look around
 	{
 		'task_id': 'ch1_option_look_around',
-		'type': 'meet',
+		'type': 'deliver',
+		'item_id': 'demigorgon_tooth',
 		'to_type': 'npc',
-		'to_id': 'oren',
+		'to_id': 'emberwitch_thera',
 		'task_acquire_events': [
 			{
 				'event_type': 'initiate_dialog',
