@@ -111,13 +111,13 @@ From `game\region_seeds\regions\cities\README.md`:
 - **Hollerforge Hollow** (Small) - Ch 21 (Dominion's Gauntlet)
 
 #### Shallows Cities
-- **Tidekin Cove** (Large) - Ch 15 (Pageant & Edict)
+- **Tidekin Cove** (Small) - Ch 14 (Stigma)
 - **Brineward Harbor** (Medium) - Ch 5
-- **Blackwake Bay** (Small) - Ch 11 (Rapture & Revelry)
+- **Blackwake Bay** (Large) - Ch 11 (Rapture & Revelry)
 
 #### Snow Cities
 - **Frostgate Spire** (Large) - Ch 19 (Cataclysm)
-- **Hailward Hold** (Medium) - Ch 14 (Stigma)
+- **Hailward Hold** (Medium) - Ch 15 (Pageant & Edict)
 - **Glacier's Edge** (Small)
 
 #### Swamp Cities
@@ -590,8 +590,8 @@ EVENT - advance_chapter
 ```
 
 **Cities:**
-- Ch 14: Hailward Hold (Snow Medium)
-- Ch 15: Tidekin Cove (Shallows Large)
+- Ch 14: Tidekin Cove (Shallows Small)
+- Ch 15: Hailward Hold (Snow Medium)
 
 ### ACT V (Chapters 16-20) - Fall of the Mind
 

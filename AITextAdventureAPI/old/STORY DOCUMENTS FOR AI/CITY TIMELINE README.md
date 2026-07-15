@@ -23,7 +23,7 @@ Each number represents how many chapters belong to that act:
 | I   | 1–4      | desert_large_city, forest_mid_city, grassland_mid_city, mountains_large_city |
 | II  | 5–7      | shallows_large_city, snow_small_city, swamp_small_city |
 | III | 8–13     | desert_mid_city, desert_small_city, grassland_large_city, shallows_mid_city, grassland_small_city, swamp_large_city |
-| IV  | 14–15    | snow_mid_city, shallows_small_city |
+| IV  | 14–15    | shallows_small_city, snow_mid_city |
 | V   | 16–20    | forest_small_city, mountains_mid_city, forest_large_city, snow_large_city, swamp_mid_city |
 | VI  | 21       | mountains_small_city |
 

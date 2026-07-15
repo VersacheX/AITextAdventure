@@ -205,56 +205,127 @@ def _equip_subtitle(seed: dict, type_label: str) -> str:
     return "  ·  ".join(parts)
 
 
+def _build_npc_profile_lines(npc: dict) -> list[str]:
+    """Render the full character profile block from an NPC seed dict.
+
+    Produces: description → MBTI + cognitive functions → Enneagram (all
+    fields) → Shadow Psychology → Theme Song.  Returns a list of strings
+    ready to be joined with newlines.
+    """
+    lines: list[str] = []
+
+    desc = str(npc.get("description", "") or "")
+    if desc:
+        lines.append(desc)
+        lines.append("")
+
+    psych = npc.get("psychology") or {}
+    if psych:
+        lines.append(f"── Psychology ──────────────────────────────")
+        lines.append(f"MBTI: {psych.get('mbti', '?')}")
+        for key in ("dominant", "auxiliary", "tertiary", "inferior"):
+            val = psych.get(key)
+            if val:
+                lines.append(f"  {key.capitalize()}: {val}")
+        lines.append("")
+
+    enneagram = npc.get("enneagram") or {}
+    if enneagram:
+        lines.append(f"── Enneagram ────────────────────────────────")
+        lines.append(f"Enneagram: {enneagram.get('enneagram_type', '?')}")
+        for key, label in (
+            ("core_fear",           "Core Fear"),
+            ("core_desire",         "Core Desire"),
+            ("defense_mechanism",   "Defense"),
+            ("stress_line",         "Stress"),
+            ("growth_line",         "Growth"),
+            ("instinctual_variant", "Instinct"),
+        ):
+            val = enneagram.get(key)
+            if val:
+                lines.append(f"  {label}: {val}")
+        lines.append("")
+
+    shadow = npc.get("shadow_psychology") or {}
+    if shadow:
+        lines.append(f"── Shadow Psychology ────────────────────────")
+        lines.append(f"Shadow MBTI: {shadow.get('mbti', '?')}")
+        for key in ("dominant", "auxiliary", "tertiary", "inferior"):
+            val = shadow.get(key)
+            if val:
+                lines.append(f"  {key.capitalize()}: {val}")
+        lines.append("")
+
+    theme = str(npc.get("theme_song", "") or "")
+    if theme:
+        lines.append(f"Theme Song: {theme}")
+
+    return lines
+
+
 def _build_characters(const: Any) -> List[DevRecord]:
     records: List[DevRecord] = []
 
+    # Build a lookup from npc_id → npc seed for all NPCS so attainable
+    # player characters can resolve their profile data.
+    npc_lookup: dict[str, dict] = {}
+    for npc in getattr(const, "NPCS", []) or []:
+        nid = str(npc.get("npc_id", ""))
+        if nid:
+            npc_lookup[nid] = npc
+
     for npc in getattr(const, "PLAYER_NPCS", []) or []:
-        cid      = str(npc.get("npc_id", "?"))
-        name     = str(npc.get("name", cid))
-        desc     = str(npc.get("description", ""))
-        psych    = npc.get("psychology") or {}
-        enneagram = npc.get("enneagram") or {}
-        lines = [desc, ""]
-        if psych:
-            lines.append(f"MBTI: {psych.get('mbti', '?')}")
-        if enneagram:
-            lines.append(f"Enneagram: {enneagram.get('enneagram_type', '?')}")
-            lines.append(f"Core fear: {enneagram.get('core_fear', '?')}")
-            lines.append(f"Core desire: {enneagram.get('core_desire', '?')}")
+        cid   = str(npc.get("npc_id", "?"))
+        name  = str(npc.get("name", cid))
+        psych = npc.get("psychology") or {}
+        lines = _build_npc_profile_lines(npc)
         records.append(DevRecord(
             category="character", id=cid, name=name,
             subtitle=psych.get("mbti", ""),
             detail="\n".join(lines),
+            image=str(npc.get("image", "") or ""),
         ))
 
     for pc in getattr(const, "ATTAINABLE_PLAYER_CHARACTERS", []) or []:
-        cid       = str(pc.get("id", "?"))
-        name      = str(pc.get("name", cid))
-        level     = pc.get("level", "?")
+        cid      = str(pc.get("id", "?"))
+        name     = str(pc.get("name", cid))
+        level    = pc.get("level", "?")
         abilities = pc.get("abilities", []) or []
-        lines = [
+
+        # Profile block from the matching NPC seed (cross-referenced by id)
+        npc_seed = npc_lookup.get(cid, {})
+        psych    = npc_seed.get("psychology") or {}
+        profile_lines = _build_npc_profile_lines(npc_seed) if npc_seed else []
+
+        # Stat block
+        stat_lines = [
+            "── Stats ────────────────────────────────────",
             f"Level {level}",
-            f"HP {pc.get('current_hp', '?')}/{pc.get('max_hp', '?')}   "
-            f"AP {pc.get('current_ap', '?')}/{pc.get('max_ap', '?')}",
+            f"HP  {pc.get('current_hp', '?')}/{pc.get('max_hp', '?')}   "
+            f"AP  {pc.get('current_ap', '?')}/{pc.get('max_ap', '?')}",
             f"STR {pc.get('strength', 0)}  DEX {pc.get('dexterity', 0)}  "
             f"INT {pc.get('intelligence', 0)}  CON {pc.get('constitution', 0)}",
             "",
-            f"Weapon: {pc.get('equipped_weapon', 'None')}",
-            f"Head:   {pc.get('head_armor', 'None')}",
-            f"Body:   {pc.get('body_armor', 'None')}",
-            f"Arms:   {pc.get('arm_armor', 'None')}",
-            f"Legs:   {pc.get('leg_armor', 'None')}",
+            f"Weapon : {pc.get('equipped_weapon', 'None')}",
+            f"Head   : {pc.get('head_armor', 'None')}",
+            f"Body   : {pc.get('body_armor', 'None')}",
+            f"Arms   : {pc.get('arm_armor', 'None')}",
+            f"Legs   : {pc.get('leg_armor', 'None')}",
         ]
         if abilities:
-            lines.append("")
-            lines.append("Abilities:")
-            lines.extend(f"  {a}" for a in abilities)
+            stat_lines.append("")
+            stat_lines.append("Abilities:")
+            stat_lines.extend(f"  {a}" for a in abilities)
+
+        all_lines = profile_lines + ([""] if profile_lines else []) + stat_lines
+
         records.append(DevRecord(
             category="character",
             id=cid,
             name=name,
-            subtitle=f"Unlockable · Lv.{level}",
-            detail="\n".join(lines),
+            subtitle=f"Unlockable · Lv.{level}" + (f" · {psych.get('mbti', '')}" if psych.get("mbti") else ""),
+            detail="\n".join(all_lines),
+            image=str(npc_seed.get("image", "") or ""),
         ))
 
     return records

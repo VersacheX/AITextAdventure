@@ -414,7 +414,7 @@ NPC_DIALOG = [
         'dialog_id': 'stigma_ch14_tidekin_cove',
         'dialog': [
             "(leaning in slightly, voice warm and intimate) By showing people there are worse prisons than the ones they already know.",
-            "The city of Tidekin Cove, to the south, is a monument to false performance - ruled by a tyrant named Edict who demands perfect compliance.",
+            "The city of Hailward Hold, is a monument to false performance - ruled by a tyrant named Edict who demands perfect compliance.",
             "Go there. See it with your own eyes. Breathe their air. Then return to me, and you will be ready to understand what I’m truly offering."
         ]
     },
@@ -539,7 +539,7 @@ NPC_DIALOG = [
         'dialog': [
             "Control? I offer belonging. I offer healing.",
             "I offer a place where you don’t have to choose between painful memory and empty performance.",
-            "You felt it in Tidekin Cove, didn’t you? The suffocating weight of expectation. I can free you from all of that."
+            "You felt it in Hailward Hold, didn’t you? The suffocating weight of expectation. I can free you from all of that."
         ]
     },
     {
@@ -790,7 +790,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'stigma', 'dialog_id': 'stigma_ch14_tidekin_cove'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'faith', 'dialog_id': 'faith_ch14_prove_a_point'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'stigma', 'dialog_id': 'stigma_ch14_the_abyss'}},
-            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'stigma', 'standing_text': ["Tidekin Cove is a test. See the lies, and then we can talk about the truth."]}},
+            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'stigma', 'standing_text': ["Hailward Hold is a test. See the lies, and then we can talk about the truth."]}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'ravel', 'standing_text': ["Stigma... she's offering belonging. But at what cost?"]}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'hask', 'standing_text': ["Stigma will bring true unity. The division ends with her."]}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'tess', 'standing_text': ["She seems so sure... maybe picking a side isn't so bad if it's with her."]}},
@@ -817,12 +817,12 @@ TASKS = [
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'skill', 'dialog_id': 'skill_ch14_burn_both'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'caius', 'dialog_id': 'caius_ch14_get_out'}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'caius', 'standing_text': ["Go back to Stigma. Tell her you understand. Before Edict understands you're here."]}},
-            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'jett', 'standing_text': ["Word travels fast. You went to Tidekin Cove... came back looking like you saw something ugly. Stigma’s ‘family’ isn’t sounding so friendly anymore, is it?"]}},
-            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'elian', 'standing_text': ["You returned from Tidekin Cove quieter than when you left. Whatever you saw there has shaken your faith in Stigma’s promises."]}},
+            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'jett', 'standing_text': ["Word travels fast. You went to Hailward Hold... came back looking like you saw something ugly. Stigma’s ‘family’ isn’t sounding so friendly anymore, is it?"]}},
+            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'elian', 'standing_text': ["You returned from Hailward Hold quieter than when you left. Whatever you saw there has shaken your faith in Stigma’s promises."]}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'ravel', 'standing_text': ["Your faces say you didn’t like what you found. Maybe you’re starting to see through her."]}},
-            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'hask', 'standing_text': ["You've returned from Tidekin Cove. If You saw the rot there and still stand with Stigma, then You are truly ready for the cleansing."]}},
+            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'hask', 'standing_text': ["You've returned from Hailward Hold. If You saw the rot there and still stand with Stigma, then You are truly ready for the cleansing."]}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'sam', 'standing_text': ["Something in You eyes changed. I don’t trust Stigma’s smile anymore."]}},
-            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'tess', 'standing_text': ["You just got back from Tidekin Cove... You look like You saw behind the curtain. I still want to believe Stigma can fix things... but I’m starting to wonder."]}},
+            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'tess', 'standing_text': ["You just got back from Hailward Hold... You look like You saw behind the curtain. I still want to believe Stigma can fix things... but I’m starting to wonder."]}},
             {'event_type': 'award_task', 'params': {'task_id': 'main_story_ch14_return_to_stigma'}}
         ]
     },

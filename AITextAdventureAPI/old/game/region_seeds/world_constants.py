@@ -17,8 +17,8 @@ CHAPTER_CITY_ORDER = [
     "shallows_mid_city",      # Chapter 11: Blackwake Bay
     "grassland_small_city",     # Chapter 12: Quantford Hollow
     "swamp_large_city",           # Chapter 13: The Necropolis
-    "snow_mid_city",            # Chapter 14: Hailward Hold
-    "shallows_small_city",      # Chapter 15: Tidekin Cove
+    "shallows_small_city",      # Chapter 14: Tidekin Cove
+    "snow_mid_city",            # Chapter 15: Hailward Hold
     "forest_small_city",        # Chapter 16: Thornshade Hamlet
     "mountains_mid_city",     # Chapter 17: Gallows Rift
     "forest_large_city",        # Chapter 18: Aurelion Veil

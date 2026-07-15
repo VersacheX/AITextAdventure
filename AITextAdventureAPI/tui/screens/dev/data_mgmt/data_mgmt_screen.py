@@ -206,7 +206,6 @@ class DataMgmtScreen(BaseScreen):
     }
 
     #dm-detail-text {
-        height: 100%;
         padding: 0 1;
     }
     """

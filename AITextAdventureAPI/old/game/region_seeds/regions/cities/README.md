@@ -275,8 +275,8 @@ SUBLOCATION_DEFS = {
 | **Forest** | Thornwood Vale | Boiling Bubble (Ch 2) | Thornshade Hamlet (Ch 16) |
 | **Grassland** | Crosswind Bazaar (Ch 10) | Highsteeple Crossing (Ch 3) | Quantford Hollow (Ch 12) |
 | **Mountains** | Gallows Rift (Ch 17) | Ironveil Foundry (Ch 4) | Hollerforge Hollow (Ch 21) |
-| **Shallows** | Tidekin Cove (Ch 15) | Brineward Harbor (Ch 5) | Blackwake Bay (Ch 11) |
-| **Snow** | Frostgate Spire (Ch 19) | Hailward Hold (Ch 14) | Glacier's Edge |
+| **Shallows** | Tidekin Cove (Ch 14) | Brineward Harbor (Ch 5) | Blackwake Bay (Ch 11) |
+| **Snow** | Frostgate Spire (Ch 19) | Hailward Hold (Ch 15) | Glacier's Edge |
 | **Swamp** | Bayou Nocturne (Ch 20) | The Necropolis (Ch 13) | Mistvale |
 
 ### City Theme Examples
@@ -344,7 +344,7 @@ SUBLOCATION_DEFS = {
 - Special: ACT VI final encounter location
 
 #### Shallows Cities
-**Large (Tidekin Cove - Ch 15):**
+**Large (Tidekin Cove - Ch 14):**
 - Theme: Rave-state authoritarian island (Pageant & Edict)
 - Special: "Perform or Be Removed" enforcement
 - Buildings: Neon-lit synchronized crowds
@@ -364,7 +364,7 @@ SUBLOCATION_DEFS = {
 - Buildings: "Spiral of Futures" district
 - Special: Systemic collapse, controlled destruction
 
-**Medium (Hailward Hold - Ch 14):**
+**Medium (Hailward Hold - Ch 15):**
 - Theme: Split-Court District (Stigma)
 - Special: Court of Memory vs Court of Reputation
 - Buildings: "Hall of Mirrors"
@@ -825,8 +825,8 @@ Average = `(5×0.10 + 3×0.18 + 2×0.06) / 10 = 0.116` (11.6%)
 - **Ch 13**: The Necropolis (Swamp Mid) - `swamp/constants_buildings_mid_city.py`
 
 #### ACT IV (Chapters 14-15)
-- **Ch 14**: Hailward Hold (Snow Mid) - `snow/constants_buildings_mid_city.py`
-- **Ch 15**: Tidekin Cove (Shallows Large) - `shallows/constants_buildings_large_city.py`
+- **Ch 14**: Tidekin Cove (Shallows Large) - `shallows/constants_buildings_large_city.py`
+- **Ch 15**: Hailward Hold (Snow Mid) - `snow/constants_buildings_mid_city.py`
 
 #### ACT V (Chapters 16-20)
 - **Ch 16**: Thornshade Hamlet (Forest Small) - `forest/constants_buildings_small_city.py`
