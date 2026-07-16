@@ -624,6 +624,7 @@ TASKS = [
 			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'twisted_darkwood_1', 'combat_type': 'boss_battle' }}
 		],
 		'task_complete_events': [
+			{ 'event_type': 'hide_npc', 'params': { 'npc_id': 'twisted_darkwood' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch19_darkwood_shatter' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch19_reclaimed' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch19_no_more_mud' }},

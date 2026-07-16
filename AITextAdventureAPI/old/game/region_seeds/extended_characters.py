@@ -1,6 +1,8 @@
-﻿[
+﻿EXTENDED_CHARACTERS = []
+
+EXTENDED_CHARACTERS_NPCS = [
     {
-        'id': 'voss_caldera',
+        'npc_id': 'voss_caldera',
         'name': 'Voss Caldera',
         'description': (
             'A sharp, high-profile corporate executive who rose through cutthroat boardrooms. '
@@ -21,11 +23,14 @@
             "stress_line": "Moves to Type 9 — Becomes disengaged and apathetic when success feels hollow.",
             "growth_line": "Moves to Type 6 — Becomes more cooperative and loyal.",
             "instinctual_variant": "so/sp — Focused on social status and control through competence."
-        }
+        },
+        "theme_song": "",
+        "song_id": "",
+        "image": ""
     },
     {
-        'id': 'caretaker_rynn',
-        'name': 'Caretaker Rynn',
+        'npc_id': 'rynn',
+        'name': 'Rynn',
         'description': (
             'A quiet, steadfast field medic and community anchor. '
             'He remembers every wound, every promise, and every person he couldn’t save.'
@@ -45,10 +50,13 @@
             "stress_line": "Moves to Type 6 — Becomes anxious and overly dependent.",
             "growth_line": "Moves to Type 3 — Becomes more assertive and goal-oriented.",
             "instinctual_variant": "sp/so — Seeks personal security through service."
-        }
+        },
+        "theme_song": "",
+        "song_id": "",
+        "image": ""
     },
     {
-        'id': 'elyra_dawnseer',
+        'npc_id': 'elyra_dawnseer',
         'name': 'Elyra Dawnseer',
         'description': (
             'A serene but intense prophet who receives fragmented visions of possible futures.'
@@ -68,10 +76,13 @@
             "stress_line": "Moves to Type 2 — Becomes overly dependent on others.",
             "growth_line": "Moves to Type 1 — Becomes principled and disciplined.",
             "instinctual_variant": "sx/sp — Experiences intense personal visions."
-        }
+        },
+        "theme_song": "",
+        "song_id": "",
+        "image": ""
     },
     {
-        'id': 'regent_sylvara',
+        'npc_id': 'regent_sylvara',
         'name': 'Regent Sylvara',
         'description': (
             'A cold, visionary strategist who pulls strings from behind thrones and corporations.'
@@ -91,10 +102,13 @@
             "stress_line": "Moves to Type 7 — Becomes scattered and avoidant.",
             "growth_line": "Moves to Type 8 — Becomes confident and decisive.",
             "instinctual_variant": "sp/so — Hoards knowledge for security."
-        }
+        },
+        "theme_song": "",
+        "song_id": "",
+        "image": ""
     },
     {
-        'id': 'ghost',
+        'npc_id': 'ghost',
         'name': 'Ghost',
         'description': (
             'A silent, hyper-competent lone operative who moves like a shadow and strikes with surgical precision.'
@@ -114,10 +128,13 @@
             "stress_line": "Moves to Type 6 — Becomes hypervigilant, scanning for threats and trusting no one.",
             "growth_line": "Moves to Type 3 — Becomes a focused, unstoppable executor who channels precision into decisive action.",
             "instinctual_variant": "sp/sx — Withdrawn and self-contained, forming intense bonds only with a select few."
-        }
+        },
+        "theme_song": "",
+        "song_id": "",
+        "image": ""
     },
     {
-        'id': 'lira_emberforge',
+        'npc_id': 'lira_emberforge',
         'name': 'Lira Emberforge',
         'description': (
             'A gifted artisan and weaponsmith who pours her soul into every creation.'
@@ -137,10 +154,13 @@
             "stress_line": "Moves to Type 2 — Becomes overly people-pleasing.",
             "growth_line": "Moves to Type 1 — Develops discipline and structure.",
             "instinctual_variant": "sp/sx — Focuses on personal mastery and intense creation."
-        }
+        },
+        "theme_song": "",
+        "song_id": "",
+        "image": ""
     },
     {
-        'id': 'osten_dreamweaver',
+        'npc_id': 'osten_dreamweaver',
         'name': 'Osten Dreamweaver',
         'description': (
             'A wandering storyteller and dream interpreter who blurs the line between reality and fantasy.'
@@ -160,10 +180,13 @@
             "stress_line": "Moves to Type 2 — Becomes overly dependent on others.",
             "growth_line": "Moves to Type 1 — Becomes more disciplined and action-oriented.",
             "instinctual_variant": "sx/sp — Deeply romantic and introspective."
-        }
+        },
+        "theme_song": "",
+        "song_id": "",
+        "image": ""
     },
     {
-        'id': 'lyric',
+        'npc_id': 'lyric',
         'name': 'Lyric',
         'description': (
             'A brilliant but eccentric theorist who spends days lost in abstract systems and possibilities.'
@@ -183,10 +206,13 @@
             "stress_line": "Moves to Type 7 — Becomes scattered and avoidant.",
             "growth_line": "Moves to Type 8 — Becomes more assertive in the real world.",
             "instinctual_variant": "sp/sx — Hoards knowledge while seeking intense intellectual stimulation."
-        }
+        },
+        "theme_song": "",
+        "song_id": "",
+        "image": ""
     },
     {
-        'id': 'dare',
+        'npc_id': 'dare',
         'name': 'Dare',
         'description': (
             'A fearless thrill-seeker and elite scout who lives for danger and adrenaline.'
@@ -206,10 +232,13 @@
             "stress_line": "Moves to Type 1 — Becomes rigid and critical.",
             "growth_line": "Moves to Type 5 — Becomes more thoughtful and strategic.",
             "instinctual_variant": "sx/sp — Craves intense experiences."
-        }
+        },
+        "theme_song": "",
+        "song_id": "",
+        "image": ""
     },
     {
-        'id': 'andrea_starveil',
+        'npc_id': 'andrea_starveil',
         'name': 'Andrea Starveil',
         'description': (
             'A charismatic performer and morale officer who lifts spirits even in the darkest times.'
@@ -229,10 +258,13 @@
             "stress_line": "Moves to Type 1 — Becomes critical and perfectionistic.",
             "growth_line": "Moves to Type 5 — Becomes more introspective and focused.",
             "instinctual_variant": "so/sx — Seeks social connection through performance."
-        }
+        },
+        "theme_song": "",
+        "song_id": "",
+        "image": ""
     },
     {
-        'id': 'sera_flameweaver',
+        'npc_id': 'sera_flameweaver',
         'name': 'Sera Flameweaver',
         'description': (
             'A passionate and theatrical fire mage who believes emotion is the source of true power.'
@@ -252,10 +284,13 @@
             "stress_line": "Moves to Type 2 — Becomes overly dependent on validation.",
             "growth_line": "Moves to Type 1 — Becomes disciplined and principled.",
             "instinctual_variant": "sx/so — Seeks intense emotional experiences."
-        }
+        },
+        "theme_song": "",
+        "song_id": "",
+        "image": ""
     },
     {
-        'id': 'spark_maddox',
+        'npc_id': 'spark_maddox',
         'name': 'Maddox "Spark" Quill',
         'description': (
             'A wildly brilliant and unpredictable inventor who treats reality as his personal playground.'
@@ -275,11 +310,14 @@
             "stress_line": "Moves to Type 1 — Becomes rigid and judgmental.",
             "growth_line": "Moves to Type 5 — Becomes more focused and masterful.",
             "instinctual_variant": "sx/sp — Seeks intense experiences."
-        }
+        },
+        "theme_song": "",
+        "song_id": "",
+        "image": ""
     },
     {
-        'id': 'archivist_anita',
-        'name': 'Archivist Anita',
+        'npc_id': 'anita',
+        'name': 'Anita',
         'description': (
             'A meticulous archivist and information broker who collects secrets like currency.'
         ),
@@ -298,10 +336,13 @@
             "stress_line": "Moves to Type 3 — Becomes frantic and image-conscious.",
             "growth_line": "Moves to Type 9 — Becomes more trusting and peaceful.",
             "instinctual_variant": "sp/so — Focuses on personal security through knowledge."
-        }
+        },
+        "theme_song": "",
+        "song_id": "",
+        "image": ""
     },
     {
-        'id': 'talia_softheart',
+        'npc_id': 'talia_softheart',
         'name': 'Talia Softheart',
         'description': (
             'A deeply compassionate healer who feels the pain of others as her own.'
@@ -321,10 +362,13 @@
             "stress_line": "Moves to Type 8 — Becomes demanding when unappreciated.",
             "growth_line": "Moves to Type 4 — Becomes more self-aware.",
             "instinctual_variant": "so/sp — Focuses on being central to her community."
-        }
+        },
+        "theme_song": "",
+        "song_id": "",
+        "image": ""
     },
     {
-        'id': 'korina_brightvein',
+        'npc_id': 'korina_brightvein',
         'name': 'Korina Brightvein',
         'description': (
             'A charismatic leader and motivator who inspires others to reach their highest potential.'
@@ -344,10 +388,13 @@
             "stress_line": "Moves to Type 8 — Becomes controlling when unappreciated.",
             "growth_line": "Moves to Type 4 — Becomes more authentic and self-aware.",
             "instinctual_variant": "so/sx — Finds value in being a central, inspiring figure."
-        }
+        },
+        "theme_song": "",
+        "song_id": "",
+        "image": ""
     },
     {
-        'id': 'commander_drax',
+        'npc_id': 'commander_drax',
         'name': 'Commander Drax',
         'description': (
             'A battle-hardened commander who leads from the front and demands excellence.'
@@ -367,7 +414,10 @@
             "stress_line": "Moves to Type 5 — Becomes withdrawn and paranoid.",
             "growth_line": "Moves to Type 2 — Uses power to protect and empower others.",
             "instinctual_variant": "so/sp — Leads with dominance and strategic vision."
-        }
+        },
+        "theme_song": "",
+        "song_id": "",
+        "image": ""
     }
 ]
 
@@ -375,259 +425,133 @@
 
 
 
-####### EXTENDED CHARACTER PLACEMENT
-Proposed 16-character → city assignment
+# ####### EXTENDED CHARACTER PLACEMENT
+# Proposed 16-character → city assignment
 
-Character         City (Ch)            Why it fits
-
- 
-
-Voss Caldera (ESTJ 3w4, corporate shark) 
-
-Crosswind Bazaar (10)           
-
-Cutthroat commerce in a chaotic trade hub — she'd dominate the merchant riots by sheer competence.
+# Character         City (Ch)            Why it fits
 
  
 
-Caretaker Rynn (ISFJ 9w1, field medic)        
+# Voss Caldera (ESTJ 3w4, corporate shark) 
 
-Quantford Hollow (12)            
+# Crosswind Bazaar (10)           
 
-Post-mania grief-crash chapter — a quiet healer who "remembers every person he couldn't save" fits the tonal comedown perfectly.
-
- 
-
-Elyra Dawnseer (INFJ 4w5, fragmented prophet)   
-
-Nightveil Spire (8)       
-
-Twilight/arcane spectacle city already built around sensory intoxication — her Ni visions of Glamour/Scalpel's duality write themselves.
+# Cutthroat commerce in a chaotic trade hub — she'd dominate the merchant riots by sheer competence.
 
  
 
-Regent Sylvara (INTJ 5w6, throne-puppeteer)          
+# Caretaker Rynn (ISFJ 9w1, field medic)        
 
-Highsteeple Crossing (3)       
+# Quantford Hollow (12)            
 
-Pious, sanctimonious ruling city — she's the cold strategist actually pulling strings behind its religious facade.
-
- 
-
-Ghost (ISTP 9w8, silent operative)   
-
-Gnashwater Hollow (7)          
-
-City literally described as running on "mercenaries and bounty hunters" — direct mechanical fit.
+# Post-mania grief-crash chapter — a quiet healer who "remembers every person he couldn't save" fits the tonal comedown perfectly.
 
  
 
-Lira Emberforge (ISFP 4w5, soul-in-her-craft artisan)        
+# Elyra Dawnseer (INFJ 4w5, fragmented prophet)   
 
-Hollerforge Hollow (21)          
+# Nightveil Spire (8)       
 
-"Reality's foundry" finale hub — an artisan who pours herself into creation belongs at the last forge before the metaphysical melt.
-
- 
-
-Osten Dreamweaver (INFP 4w5, dream/reality blur)           
-
-Aurelion Veil (19)        
-
-Living-wood memory city built for "Reconstructing the Self" — a dream-interpreter is the natural guide here.
+# Twilight/arcane spectacle city already built around sensory intoxication — her Ni visions of Glamour/Scalpel's duality write themselves.
 
  
 
-Lyric (INTP 5w6, abstract systems theorist)              
+# Regent Sylvara (INTJ 5w6, throne-puppeteer)          
 
-Frostgate Spire (18)  
+# Highsteeple Crossing (3)       
 
-Cataclysm chapter — institutions systematically breaking themselves; a theorist watching his beloved systems collapse in real time.
-
- 
-
-Dare (ESTP 7w8, thrill-seeking scout)           
-
-Blackwake Bay (11)  
-
-Pirate taverns, danger, peak frenzy before burnout — exactly his adrenaline register.
+# Pious, sanctimonious ruling city — she's the cold strategist actually pulling strings behind its religious facade.
 
  
 
-Andrea Starveil (ESFP 7w6, morale officer)               
+# Ghost (ISTP 9w8, silent operative)   
 
-Tidekin Cove (15)       
+# Gnashwater Hollow (7)          
 
-Ironic fit: a genuine morale-lifter inside a mandated "party-as-control" state — could be a quiet act of resistance.
-
- 
-
-Sera Flameweaver (ENFP 4w3, theatrical fire mage)          
-
-Boiling Bubble (2)       
-
-Witch hamlet already built around potions/cauldrons/cursed artifacts — she slots into the existing Mira/Leera/Kess cast naturally.
+# City literally described as running on "mercenaries and bounty hunters" — direct mechanical fit.
 
  
 
-Spark Maddox (ENTP 7w8, reality-as-playground inventor)            
+# Lira Emberforge (ISFP 4w5, soul-in-her-craft artisan)        
 
-Ironveil Foundry (4)   
+# Hollerforge Hollow (21)          
 
-Fracture Point chapter, maps literally twisting — an inventor who treats reality as an experiment fits the rift-opening chaos.
-
- 
-
-Archivist Anita (ISTJ 6w5, secrets-as-currency)      
-
-The Necropolis (13)  
-
-City of crypts/relics/ancient rites — an archivist obsessed with preserving the past amid identity-rot themes.
+# "Reality's foundry" finale hub — an artisan who pours herself into creation belongs at the last forge before the metaphysical melt.
 
  
 
-Talia Softheart (ESFJ 2w1, empathic healer)             
+# Osten Dreamweaver (INFP 4w5, dream/reality blur)           
 
-Thornshade Hamlet (16)       
+# Aurelion Veil (19)        
 
-"Path Without Meaning" — emotional hollowness chapter; her raw compassion is the sharpest possible contrast/antidote.
-
- 
-
-Korina Brightvein (ENFJ 2w3, charismatic motivator)         
-
-Gallows Rift (17)         
-
-Explicitly "camaraderie... tales of daring exploits shared around campfires" — she's the one telling them.
+# Living-wood memory city built for "Reconstructing the Self" — a dream-interpreter is the natural guide here.
 
  
 
-Commander Drax (ENTJ 8w7, battle-hardened commander)       
+# Lyric (INTP 5w6, abstract systems theorist)              
 
-Bleakwatch Outpost (6)          "Resistance ops and breach sites" frontier — a commander leading from the front is a direct fit.
+# Frostgate Spire (18)  
 
- 
-
-
-
-
-
-
-
-############# REGIONAL STORY IDEAS
+# Cataclysm chapter — institutions systematically breaking themselves; a theorist watching his beloved systems collapse in real time.
 
  
 
-1. Desert — dune_sundial (Ch1) — Barter/Trade resolution
+# Dare (ESTP 7w8, thrill-seeking scout)           
 
-No fight. Rook wants something in exchange, not defense.
+# Blackwake Bay (11)  
 
- 
-
-Task A (meet Rook): He mentions Kadeem in the Black Market Guild has the sundial, but Kadeem won't just hand it over.
-
-Task B (meet Kadeem, ch1 city cast): Kadeem wants a trade — offer him the spare caffeine_shots Rook gave you at the start, or convince him narratively that you're trustworthy (dialog-only, no combat, no item cost — just a persuasion beat via dialog).
-
-Kadeem hands it over, mentions "some witch out past the dunes keeps asking about these."
+# Pirate taverns, danger, peak frenzy before burnout — exactly his adrenaline register.
 
  
 
- 
+# Andrea Starveil (ESFP 7w6, morale officer)               
+
+# Tidekin Cove (15)       
+
+# Ironic fit: a genuine morale-lifter inside a mandated "party-as-control" state — could be a quiet act of resistance.
 
  
 
-2. Forest — grove_lattice (Ch2) — Puzzle/lore-solve resolution
+# Sera Flameweaver (ENFP 4w3, theatrical fire mage)          
 
-No fight. Reuses the riddle mechanic already established with Leera in ch2 (the cursed couplet arc).
+# Boiling Bubble (2)       
 
- 
-
-Task A (meet Leera): She senses the lattice is sealed behind a ward that responds to a specific phrase tied to forest lore, not force.
-
-Task B: Player must initiate_dialog sequence where the correct dialog choice (already-known lore from her ch2 couplet riddle) unlocks it — a callback/payoff to content the player already engaged with, no new mob needed.
-
-Leera hands over the lattice, mentions "a guardian named Thorn" who'd want this back.
+# Witch hamlet already built around potions/cauldrons/cursed artifacts — she slots into the existing Mira/Leera/Kess cast naturally.
 
  
 
- 
+# Spark Maddox (ENTP 7w8, reality-as-playground inventor)            
+
+# Ironveil Foundry (4)   
+
+# Fracture Point chapter, maps literally twisting — an inventor who treats reality as an experiment fits the rift-opening chaos.
 
  
 
-3. Grassland — heirloom_ring (Ch3) — Skirmish resolution (keep one, for variety pacing)
+# Archivist Anita (ISTJ 6w5, secrets-as-currency)      
 
-This is the one that keeps a fight — reuses Talla Renn's enforcer role, thematically she's already street-justice muscle.
+# The Necropolis (13)  
 
- 
-
-Task A (meet Talla): A petty thief just swiped the ring from a noble in the square; Talla asks you to run him down.
-
-Task B: Quick begin_combat skirmish (no dungeon), recover ring, return it — noble gifts it to you instead ("more trouble than it's worth"), mentions "wind-witches on the steppe."
+# City of crypts/relics/ancient rites — an archivist obsessed with preserving the past amid identity-rot themes.
 
  
 
- 
+# Talia Softheart (ESFJ 2w1, empathic healer)             
+
+# Thornshade Hamlet (16)       
+
+# "Path Without Meaning" — emotional hollowness chapter; her raw compassion is the sharpest possible contrast/antidote.
 
  
 
-4. Mountain — coreforge_shard (Ch4) — Technical/investigation resolution
+# Korina Brightvein (ENFJ 2w3, charismatic motivator)         
 
-No fight. Marlo Finch is an auditor, not a fighter — fits his ISTJ Si/Te profile perfectly to solve this analytically.
+# Gallows Rift (17)         
 
- 
-
-Task A (meet Marlo): A foundry golem malfunctioned and locked itself down mid-diagnostic before Marlo could extract the shard.
-
-Task B: Player has to initiate_dialog with Velka (ch4 cartographer) to get the correct shutdown sequence/rune-pattern from her map data, then return to Marlo to safely power down the golem and extract the shard — a fetch-a-clue-from-NPC-B-to-solve-NPC-A's-problem structure, no combat.
-
-Marlo hands it over, mentions "Bragg down in the tunnels."
+# Explicitly "camaraderie... tales of daring exploits shared around campfires" — she's the one telling them.
 
  
 
- 
+# Commander Drax (ENTJ 8w7, battle-hardened commander)       
 
- 
-
-5. Shallows — moontide_orb (Ch5) — Ambush-defense resolution (the "NPC gets attacked" pattern you originally wanted — use it here)
-
-Task A (meet Dorian Pikefall): He's nervously guarding the orb, convinced someone's been following him.
-
-Task B: Mid-conversation, a begin_combat skirmish fires as tide-scavengers ambush Dorian directly — you defend him in the moment (no separate acquire-stage setup, it's a live interruption of the dialog scene itself). Dorian, grateful and rattled, gives you the orb as thanks.
-
-Dorian mentions "a tide oracle" — Ripple.
-
- 
-
- 
-
- 
-
-6. Snow — boreal_clasp (Ch6) — Moral-choice/persuasion resolution
-
-No fight. Rhett is cold and pragmatic (Ti/Se) — fits a negotiation/leverage beat rather than combat.
-
- 
-
-Task A (meet Rhett): He has the clasp but won't release resistance supplies to "outsiders" without proof of commitment.
-
-Task B: Player must complete a initiate_option_dialog choice proving loyalty (echoing the ch1 pattern) — pick the option that demonstrates understanding of the resistance's cause; wrong choice loops back to the same task node (soft retry, not punished long-term), correct choice unlocks the clasp handoff.
-
-Rhett mentions "an ice trapper" — Kor-in.
-
- 
-
- 
-
- 
-
-7. Swamp — mirethread_pendant (Ch7) — Trade/favor-chain resolution
-
-No fight. Seth is central to this chapter already — fits a "calling in a favor" beat instead of combat.
-
- 
-
-Task A (meet Seth): He knows where the pendant is — with a black-market fence in Gnashwater Hollow — but the fence wants payment, not a fight.
-
-Task B (meet a swamp city_story NPC, e.g. Madra Rotwharf from swamp_small_city_story.py if that's the assigned city, or an equivalent Gnashwater NPC): Player trades money/an existing inventory item (award_money-adjacent, e.g. spend gold or hand over cursed_couplet-tier throwaway item) for the pendant — a pure commerce resolution.
-
-Seth or the fence mentions "a gadgeteer who deals in cursed relics" — Grimnaw.
+# Bleakwatch Outpost (6)          "Resistance ops and breach sites" frontier — a commander leading from the front is a direct fit.

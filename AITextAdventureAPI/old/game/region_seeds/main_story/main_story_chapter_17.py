@@ -648,6 +648,7 @@ TASKS = [
 			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'displacer_gargantuan_1', 'combat_type': 'boss_battle' }}
 		],
 		'task_complete_events': [
+			{ 'event_type': 'hide_npc', 'params': { 'npc_id': 'displacer_gargantuan' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch17_gargantuan_defeat' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch17_died_twice' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch17_paradox_resolved' }},

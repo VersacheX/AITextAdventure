@@ -270,6 +270,9 @@ from game.region_seeds.main_story.main_story_chapter_18 import PRIMARY_STORY_SET
 from game.region_seeds.main_story.main_story_chapter_19 import PRIMARY_STORY_SETTINGS as CH19_SETTINGS, TASKS as CH19_TASKS, NPCS as CH19_NPCS, NPC_DIALOG as CH19_NPC_DIALOG, ATTAINABLE_PLAYER_CHARACTERS as CH19_ATTAINABLE_PLAYER_CHARACTERS
 from game.region_seeds.main_story.main_story_chapter_20 import PRIMARY_STORY_SETTINGS as CH20_SETTINGS, TASKS as CH20_TASKS, NPCS as CH20_NPCS, NPC_DIALOG as CH20_NPC_DIALOG, ATTAINABLE_PLAYER_CHARACTERS as CH20_ATTAINABLE_PLAYER_CHARACTERS
 from game.region_seeds.main_story.main_story_chapter_21 import PRIMARY_STORY_SETTINGS as CH21_SETTINGS, TASKS as CH21_TASKS, NPCS as CH21_NPCS, NPC_DIALOG as CH21_NPC_DIALOG, ATTAINABLE_PLAYER_CHARACTERS as CH21_ATTAINABLE_PLAYER_CHARACTERS
+
+from game.region_seeds import main_characters, extended_characters
+EXTENDED_CHARACTERS = extended_characters.EXTENDED_CHARACTERS
 ## MAIN STORY AGGREGATES
 MAIN_STORY_SETTINGS = [
 	CH1_SETTINGS, CH2_SETTINGS, CH3_SETTINGS, CH4_SETTINGS,
@@ -277,18 +280,7 @@ MAIN_STORY_SETTINGS = [
 	CH11_SETTINGS, CH12_SETTINGS, CH13_SETTINGS, CH14_SETTINGS, CH15_SETTINGS, CH16_SETTINGS,
 	CH17_SETTINGS, CH18_SETTINGS, CH19_SETTINGS, CH20_SETTINGS, CH21_SETTINGS
 ]
-# TASKS += (
-# 	CH1_TASKS + CH2_TASKS + CH3_TASKS + CH4_TASKS +
-# 	CH5_TASKS + CH6_TASKS + CH7_TASKS + CH8_TASKS + CH9_TASKS + CH10_TASKS +
-# 	CH11_TASKS + CH12_TASKS + CH13_TASKS + CH14_TASKS + CH15_TASKS + CH16_TASKS +
-# 	CH17_TASKS + CH18_TASKS + CH19_TASKS + CH20_TASKS + CH21_TASKS
-# )
-# NPCS += (
-# 	CH1_NPCS + CH2_NPCS + CH3_NPCS + CH4_NPCS +
-# 	CH5_NPCS + CH6_NPCS + CH7_NPCS + CH8_NPCS + CH9_NPCS + CH10_NPCS +
-# 	CH11_NPCS + CH12_NPCS + CH13_NPCS + CH14_NPCS + CH15_NPCS + CH16_NPCS +
-# 	CH17_NPCS + CH18_NPCS + CH19_NPCS + CH20_NPCS + CH21_NPCS
-# )
+
 NPC_DIALOG += (
 	CH1_NPC_DIALOG + CH2_NPC_DIALOG + CH3_NPC_DIALOG + CH4_NPC_DIALOG +
 	CH5_NPC_DIALOG + CH6_NPC_DIALOG + CH7_NPC_DIALOG + CH8_NPC_DIALOG + CH9_NPC_DIALOG + CH10_NPC_DIALOG +
@@ -299,7 +291,7 @@ ATTAINABLE_PLAYER_CHARACTERS += (
 	CH1_ATTAINABLE_PLAYER_CHARACTERS + CH2_ATTAINABLE_PLAYER_CHARACTERS + CH3_ATTAINABLE_PLAYER_CHARACTERS + CH4_ATTAINABLE_PLAYER_CHARACTERS +
 	CH5_ATTAINABLE_PLAYER_CHARACTERS + CH6_ATTAINABLE_PLAYER_CHARACTERS + CH7_ATTAINABLE_PLAYER_CHARACTERS + CH8_ATTAINABLE_PLAYER_CHARACTERS + CH9_ATTAINABLE_PLAYER_CHARACTERS + CH10_ATTAINABLE_PLAYER_CHARACTERS +
 	CH11_ATTAINABLE_PLAYER_CHARACTERS + CH12_ATTAINABLE_PLAYER_CHARACTERS + CH13_ATTAINABLE_PLAYER_CHARACTERS + CH14_ATTAINABLE_PLAYER_CHARACTERS + CH15_ATTAINABLE_PLAYER_CHARACTERS + CH16_ATTAINABLE_PLAYER_CHARACTERS +
-	CH17_ATTAINABLE_PLAYER_CHARACTERS + CH18_ATTAINABLE_PLAYER_CHARACTERS + CH19_ATTAINABLE_PLAYER_CHARACTERS + CH20_ATTAINABLE_PLAYER_CHARACTERS + CH21_ATTAINABLE_PLAYER_CHARACTERS
+	CH17_ATTAINABLE_PLAYER_CHARACTERS + CH18_ATTAINABLE_PLAYER_CHARACTERS + CH19_ATTAINABLE_PLAYER_CHARACTERS + CH20_ATTAINABLE_PLAYER_CHARACTERS + CH21_ATTAINABLE_PLAYER_CHARACTERS + EXTENDED_CHARACTERS
 )
 DUNGEON_ENTRANCE_CHAR = 'Ð'
 DIRECTIONAL_MAPPING = {'w': (0, -1, 'north'), 's': (0,1, 'south'), 'a': (-1,0, 'west'), 'd': (1,0, 'east')}
@@ -314,313 +306,15 @@ PATHS = [
 	{"name": ALLEY, "char": " ", "hostile_prob": 0.5}
 ]
 
-# PLAYER_NPCS SEEDS  
-#--- these are the basic characters from the players universe 
-# --- 2 of them join the player at the start of the game at random
-# --- the rest are unlocked randomly along the story... ch2, 3, and 4... (spoiler: this unlocks the first primary story region... when we get there)
-# as npcs they can be referenced in dialogs and quests
-# ... it might be interesting to have 3 different scenarios since 3 can be aqcuired...
-# scenario one... find in dungeon during story quest.. have character join precombat with boss... begin combat.
-# scenario 2: easter egg hunt to unlock info about character location
-# scenario 3: They've been corrupted... fight them, defeat them, have them join
-### GOTO CHAPTER 5... the first biome dungeon... 
-# ... this would be a good opportunity to return the player to Tess and give her the Grift Stone
-# j/k.... There is always something that can bring us back to
-CHARACTER_CLASS_MAP = {
-    'technique': 'Chock',
-    'faith': 'Kaera',
-    'magic': 'Moxie',
-    'tech': 'Kade',
-    'skill': 'Poise',
-}
+CHARACTER_CLASS_MAP = main_characters.CHARACTER_CLASS_MAP
 
-PLAYER_NPCS = [
-    {
-        "npc_id": "technique",
-        "name": "Chock",
-        "description": "A skilled warrior known for his brutal force and unwavering discipline. Chock is rugged, ornery, and sometimes rude, but his heart is in the right place. He seeks to master his enemies through sheer strength and tactical prowess. He is calm under pressure and values honor above all else.",
-		"theme_song": "Hero (instrumental), skillet | Orion, Metallica",
-        "psychology": {
-            "mbti": "ESTJ",
-            "dominant": "Te — Acts decisively and forcefully. He evaluates situations quickly and executes without hesitation, naturally taking command.",
-            "auxiliary": "Si — Relies on discipline, training, and proven methods. He respects structure, routines, and personal codes of honor.",
-            "tertiary": "Ne — Occasionally flashes creative tactical ideas in combat when standard approaches fail.",
-            "inferior": "Fi — Holds deep internal values, but rarely expresses them. Under heavy stress, he becomes uncharacteristically emotional or rigid."
-        },
-        "enneagram": {
-          "enneagram_type": "8w9",
-          "core_fear": "Being controlled or harmed by others.",
-          "core_desire": "To protect himself (and his inner circle) by controlling his own life and destiny.",
-          "defense_mechanism": "Denial — Pushes away vulnerability and weakness, insisting he is always in control and unaffected by threats.",
-          "stress_line": "Moves to Type 5 — Withdraws, becomes secretive, and fears the worst, hoarding resources.",
-          "growth_line": "Moves to Type 2 — Becomes more compassionate, using his strength to protect and empower others rather than just control.",
-          "instinctual_variant": "sp/sx — Focused on self-preservation, control over his environment, and intense one-on-one loyalties."
-        },
-        "shadow_psychology": {
-            "mbti": "ESTJ-shadow",
-            "dominant": "Te — Becomes tyrannical and domineering; 'My way or the highway' turns into 'Obey or be crushed'.",
-            "auxiliary": "Si — Obsessively clings to past failures and betrayals, becoming paranoid and vengeful.",
-            "tertiary": "Ne — Twisted creativity; sees threats and conspiracies in every possibility.",
-            "inferior": "Fi — Explosive, self-righteous rage; moral code becomes hypocritical and violently enforced."
-        },
-        'image': 'chock1.jpeg',
-		'song_id': 'hero_instrumental_skillet'
-    },
-    {
-        "npc_id": "faith",
-        "name": "Kaera",
-        "description": (
-			"A devout cleric with a deep connection to the divine. Kaera serves as the steadfast protector and emotional anchor of the group."
-			" Her compassion and healing abilities make her a quiet beacon of hope, and she possesses a calm, reliable presence."
-		),
-		"theme_song": "Lofticries, Purity Ring AND Never Ending Circles, CHVRCHES",
-        "psychology": {
-            "mbti": "ISFJ",
-            "dominant": "Si — Deeply attuned to past experiences, traditions, and the concrete needs of her companions. She remembers every promise and every wound.",
-            "auxiliary": "Fe — Provides emotional support and creates harmony. She instinctively senses when someone is struggling and offers quiet care.",
-            "tertiary": "Ti — Analyzes moral and spiritual matters with sharp internal precision.",
-            "inferior": "Ne — Under extreme stress, she becomes overwhelmed by too many possibilities and fears sudden chaotic change."
-        },
-        "enneagram": {
-          "enneagram_type": "2w1",
-          "core_fear": "Being unwanted or unworthy of love.",
-          "core_desire": "To be loved and needed.",
-          "defense_mechanism": "Repression — Denies her own needs and feelings to focus entirely on helping others, believing her worth comes from her service.",
-          "stress_line": "Moves to Type 8 — Becomes controlling and aggressive when her help is rejected or she feels unappreciated.",
-          "growth_line": "Moves to Type 4 — Becomes more self-aware and able to acknowledge her own needs and complex emotions.",
-          "instinctual_variant": "so/sp — Socially focused on the group's well-being, creating harmony and ensuring everyone is cared for."
-        },
-        "shadow_psychology": {
-            "mbti": "ISFJ-shadow",
-            "dominant": "Si — Becomes trapped in traumatic memories; endlessly replays past failures and losses.",
-            "auxiliary": "Fe — Weaponized guilt and obligation; manipulates others through emotional blackmail and martyrdom.",
-            "tertiary": "Ti — Cold, critical over-analysis; becomes harshly judgmental of everyone’s ‘flaws’ and ‘sins’.",
-            "inferior": "Ne — Paralyzing catastrophic thinking; sees every small change as the beginning of total collapse."
-        },
-        'image': 'kaera1.jpeg',
-		'song_id': 'never_ending_circles_chvrches'
-    },
-    {
-        "npc_id": "magic",
-        "name": "Moxie",
-        "description": "A brilliant sorcerer with an insatiable curiosity for the arcane and a mischievous streak. Moxie is constantly seeking new spells and magical knowledge to expand her power. Her quick wit, resourcefulness, and playful side make her both dangerous and entertaining.",
-		"theme_song": "Bubblegum Bitch, Marina",
-        "psychology": {
-            "mbti": "ENTP",
-            "dominant": "Ne — Constantly generating ideas, possibilities, and wild magical experiments. She thrives on novelty and unpredictability.",
-            "auxiliary": "Ti — Breaks down magical systems with sharp logical precision. Her mischief is usually calculated.",
-            "tertiary": "Fe — Uses charm and humor to influence others. She can be surprisingly warm when she chooses.",
-            "inferior": "Si — Struggles with routine and repetition. Under stress, she becomes fixated on past mistakes or overly rigid details."
-        },
-        "enneagram": {
-          "enneagram_type": "7w8",
-          "core_fear": "Being trapped in emotional pain, boredom, or limitation.",
-          "core_desire": "To maintain her freedom and happiness, to live a life full of excitement and stimulation.",
-          "defense_mechanism": "Rationalization — Reframes negative experiences as exciting adventures or funny stories to avoid feeling pain or fear.",
-          "stress_line": "Moves to Type 1 — Becomes critical, rigid, and judgmental when her freedom is threatened.",
-          "growth_line": "Moves to Type 5 — Becomes more focused, introspective, and able to sit with complex ideas without needing immediate stimulation.",
-          "instinctual_variant": "sx/so — Seeks intense experiences and connections, drawing energy from social engagement and playful provocation."
-        },
-        "shadow_psychology": {
-            "mbti": "ENTP-shadow",
-            "dominant": "Ne — Chaotic idea generation; creates endless destructive possibilities and cruel pranks.",
-            "auxiliary": "Ti — Sadistic logical detachment; enjoys intellectually dismantling people and their beliefs.",
-            "tertiary": "Fe — Cruel mockery and gaslighting; uses social awareness to humiliate and isolate targets.",
-            "inferior": "Si — Obsessive rumination; becomes fixated on every slight and past humiliation."
-        },
-        'image': 'moxie1.jpeg',
-		'song_id': 'bubblegum_bitch_marina'
-    },
-    {
-        "npc_id": "tech",
-        "name": "Kade",
-        "description": "A tech-savvy inventor and engineer who is sarcastic, rude, and incredibly intelligent. Kade uses his technological prowess to create powerful gadgets and elegant solutions. He is always looking for ways to improve and push boundaries, often lightening tense moments with dry humor.",
-		"theme_song": "Radioactive, Imagine Dragon (instrumental in deep thought)",
-        "psychology": {
-            "mbti": "INTJ",
-            "dominant": "Ni — Foresees long-term consequences and systemic patterns with cold clarity.",
-            "auxiliary": "Te — Executes plans with ruthless efficiency and demands high competence from everyone around him.",
-            "tertiary": "Fi — Holds strong internal principles, though he rarely shows them. Becomes surprisingly cutting when they are violated.",
-            "inferior": "Se — Under extreme stress, he either becomes paralyzed by details or lashes out with impulsive action."
-        },
-        "enneagram": {
-          "enneagram_type": "5w6",
-          "core_fear": "Being useless, helpless, or incapable.",
-          "core_desire": "To be capable and competent.",
-          "defense_mechanism": "Isolation — Detaches from his emotions to analyze problems with cold, objective logic. Sarcasm is a tool to maintain this distance.",
-          "stress_line": "Moves to Type 7 — Becomes scattered, restless, and avoids problems through manic activity or new projects.",
-          "growth_line": "Moves to Type 8 — Becomes more confident and decisive in action, using his knowledge to take charge in the real world.",
-          "instinctual_variant": "sp/sx — Hoards knowledge and resources to ensure his own competence and survival, engaging intensely with subjects that capture his interest."
-        },
-        "shadow_psychology": {
-            "mbti": "INTJ-shadow",
-            "dominant": "Ni — Nihilistic fatalism; sees only inevitable failure and betrayal in every future.",
-            "auxiliary": "Te — Becomes a cold tyrant; efficiency above all else, including human cost.",
-            "tertiary": "Fi — Self-righteous moral superiority; judges everyone as weak or morally inferior.",
-            "inferior": "Se — Reckless hedonism or violent outbursts; loses all impulse control."
-        },
-        'image': 'kade1.jpeg',
-		'song_id': 'radioactive_instrumental_imagine_dragon'
-    },
-    {
-        "npc_id": "skill",
-        "name": "Poise",
-        "description": "A master of incredible martial arts with unparalleled agility and stealth. Poise moves with deadly skill and precision. She is wise, calm, disciplined, and highly focused. Her charm and cunning make her both a formidable fighter and a valuable companion.",
-		"theme_song": "Sail (instrumental), AWOLNATION | Clint Eastwood, Gorillaz",
-        "psychology": {
-            "mbti": "ISTP",
-            "dominant": "Ti — Quietly analytical with internally precise understanding of movement, technique, and opponents.",
-            "auxiliary": "Se — Hyper-attuned to the physical world. Her reflexes, agility, and combat instincts are razor sharp.",
-            "tertiary": "Ni — Occasionally senses deeper patterns or future threats, giving him a mysterious, focused calm.",
-            "inferior": "Fe — Avoids emotional expression. Under stress, she may lash out or completely withdraw."
-        },
-        "enneagram": {
-          "enneagram_type": "9w8",
-          "core_fear": "Loss of connection; conflict and fragmentation.",
-          "core_desire": "To have inner stability and peace of mind.",
-          "defense_mechanism": "Narcotization — Disengages from conflict or emotional turmoil by focusing on physical discipline and maintaining a calm, detached exterior.",
-          "stress_line": "Moves to Type 6 — Becomes anxious, worried, and indecisive when her inner peace is threatened.",
-          "growth_line": "Moves to Type 3 — Becomes more assertive, goal-oriented, and engaged with the world.",
-          "instinctual_variant": "sp/sx — Seeks comfort and peace through physical routines and mastery, forming deep bonds with a select few."
-        },
-        "shadow_psychology": {
-            "mbti": "ISTP-shadow",
-            "dominant": "Ti — Detached nihilism; analyzes everything coldly, including why people deserve to die.",
-            "auxiliary": "Se — Becomes adrenaline-addicted and reckless; lives only for the thrill of violence.",
-            "tertiary": "Ni — Paranoid fatalism; convinced everyone will eventually betray her.",
-            "inferior": "Fe — Explosive, misdirected rage; suddenly lashes out with cruel emotional attacks."
-        },
-        'image': 'poise1.jpeg',
-		'song_id': 'sail_instrumental_awolnation'
-    }
-]
+PLAYER_NPCS = main_characters.PLAYER_NPCS
 
-PLAYER_NPC_JOIN_DIALOGS = [
-	### the first set are when the party first arrives in the new world . they appeared through portal don't know where they are each unit hasa dialog for the situation that is individual as only 2 arrive and that selection is random
-	{
-		'npc_id': 'technique', 
-		'dialog_id': 'begin_game_add_pc', 
-		'dialog': [
-			"Whoa... where are we? This place looks... ancient.",
-			"I don't know how we got here, but we need to stick together if we're going to figure this out.",
-			"Let's find some shelter and gather our thoughts."
-	]},
-	{
-		'npc_id': 'faith', 
-		'dialog_id': 'begin_game_add_pc', 
-		'dialog': [
-			"This land feels... different. Like it's alive in a way I've never felt before.",
-			"We must be cautious. There could be dangers lurking around every corner.",
-			"But I sense a purpose here. We were brought for a reason."
-	]},
-	{
-		'npc_id': 'magic', 
-		'dialog_id': 'begin_game_add_pc', 
-		'dialog': [
-			"Fascinating! The ambient magic here is unlike anything I've studied.",
-			"We should explore and see what secrets this place holds.",
-			"But first, let's ensure we're safe and have a plan."
-	]},
-	{
-		'npc_id': 'tech', 
-		'dialog_id': 'begin_game_add_pc', 
-		'dialog': [
-			"Hmm, the technology here seems primitive, yet there's something intriguing about it.",
-			"We need to assess our surroundings and figure out how to adapt.",
-			"Survival is our first priority; everything else can wait."
-	]},
-	{
-		'npc_id': 'skill', 
-		'dialog_id': 'begin_game_add_pc', 
-		'dialog': [
-			"This environment is unfamiliar, but I can feel its challenges ahead.",
-			"We must rely on our skills and instincts to navigate this place.",
-			"Let's stay alert and work together to overcome whatever lies ahead."
-	]},
-	### CHAPTER 2 JOINS ... "this world is crazy... Everywhere is chaos... took a job to get ingredients.  need help with gorgon ... basic concept
-	### WE are actually coming to see the newly added character in a fight, so they urgently need help
-	{
-		'npc_id': 'technique',
-		'dialog_id': 'ch2_add_pc',
-		'dialog': [
-			"This world is in chaos. I took a job to gather ingredients, but it was more dangerous than I expected.",
-			"Care to give me a hand here?"
-		]
-	},
-	{
-		'npc_id': 'faith',
-		'dialog_id': 'ch2_add_pc',
-		'dialog': [
-			"The turmoil in this world is overwhelming. I was gathering ingredients for a ritual when things went awry.",
-			"I don't think I can handle this monster."
-		]
-	},
-	{
-		   'npc_id': 'magic',
-		   'dialog_id': 'ch2_add_pc',
-		   'dialog': [
-			   "The magical disturbances here are unlike anything I've seen. I was collecting rare components when I was ambushed.",
-			   "I could use some assistance against this creature."
-		   ]
-	},
-	{
-		   'npc_id': 'tech',
-		   'dialog_id': 'ch2_add_pc',
-		   'dialog': [
-			   "This world's technology is wild. I was scavenging for parts when I ran into trouble.",
-			   "I need backup to deal with this threat."
-		   ]
-	},
-	{
-		   'npc_id': 'skill',
-		   'dialog_id': 'ch2_add_pc',
-		   'dialog': [
-			   "The chaos in this place is intense. I was on a job to acquire some items when I got caught off guard.",
-			   "I could use some help taking down this beast."
-		   ]
-	},
-	{
-		'npc_id': 'technique', ## character just restored their memory and is ready to go with th party
-		'dialog_id': 'add_pending_character',
-		'dialog': [
-			"That was fucking weird.  What are you pussies looking at?",
-			"Let's go make something bleed."
-		]
-	},
-	{
-		'npc_id': 'faith',
-		'dialog_id': 'add_pending_character',
-		'dialog': [
-			"It's all coming back to me...  Oh god, you heathens!",
-			"The god's have pitied you so far. I'll come along for the entartainment."
-		]
-	},
-	{
-		'npc_id': 'magic',
-		'dialog_id': 'add_pending_character',
-		'dialog': [
-			"Yessssssss! Now I remember everything... EVERYTHING!!! HAHAHA!",
-			"Ughhhhhh! Including all you ugly losers!"
-		]
-	},
-	{
-		'npc_id': 'tech',
-		'dialog_id': 'add_pending_character',
-		'dialog': [
-			"Now I remember you nerds.  I suppose you're gonna need my genius.  I'll tag along, until I rip this reality."
-		]
-	},
-	{
-		'npc_id': 'skill',
-		'dialog_id': 'add_pending_character',
-		'dialog': [
-			"Chaos unravels the mystery and I can see once again.",
-			"It's amazing you failures managed that."
-		]
-	}
-]
+PLAYER_NPC_JOIN_DIALOGS =  main_characters.PLAYER_NPC_JOIN_DIALOGS
 
 NPC_DIALOG += PLAYER_NPC_JOIN_DIALOGS
+
+EXTENDED_CHARACTER_NPCS = extended_characters.EXTENDED_CHARACTERS_NPCS
 # ── NPC source grouping ─────────────────────────────────────────────────────
 # NPC_GROUPS is the canonical grouped source of all NPC seeds, consumed by
 # the dev data service.  NPCS is rebuilt from it below so all existing code
@@ -631,11 +325,11 @@ NPC_GROUPS = {
 		SHALLOWS_NPCS + SNOW_NPCS + SWAMP_NPCS
 	),
 	"main_story": (
-		CH1_NPCS + CH2_NPCS + CH3_NPCS + CH4_NPCS +
+		PLAYER_NPCS + CH1_NPCS + CH2_NPCS + CH3_NPCS + CH4_NPCS +
 		CH5_NPCS + CH6_NPCS + CH7_NPCS + CH8_NPCS + CH9_NPCS + CH10_NPCS +
 		CH11_NPCS + CH12_NPCS + CH13_NPCS + CH14_NPCS + CH15_NPCS + CH16_NPCS +
 		CH17_NPCS + CH18_NPCS + CH19_NPCS + CH20_NPCS + CH21_NPCS +
-		WORLD_NPCS + PLAYER_NPCS
+		WORLD_NPCS
 	),
 	"extended": (
 		DESERT_LARGE_CITY_NPCS + DESERT_MID_CITY_NPCS + DESERT_SMALL_CITY_NPCS +
@@ -646,6 +340,7 @@ NPC_GROUPS = {
 		SNOW_LARGE_CITY_NPCS + SNOW_MID_CITY_NPCS + SNOW_SMALL_CITY_NPCS +
 		SWAMP_LARGE_CITY_NPCS + SWAMP_MID_CITY_NPCS + SWAMP_SMALL_CITY_NPCS
 	),
+	"extended_characters": EXTENDED_CHARACTER_NPCS
 }
 
 STORY_GROUPS = {
@@ -725,15 +420,6 @@ for _task_family in TASK_GROUPS.values():
 	for _task_list in _task_family.values():
 		TASKS += _task_list
 
-##### POSSIBLE GAME PIECES #####
-# Walls / cliffs → █ ▓ ▒ ░
-
-# Mountains → ▲ ▲ ▲
-
-# Water → ≈ (U+2248 almost equal sign, looks like waves) or 〰 (U+3030 wavy dash)
-
-# Trees / foliage → ♣ (U+2663 club suit), ▲ stacked
-
 
 SELL_RATIO =0.5
 
@@ -742,17 +428,17 @@ CITY_TYPES = ["large_city", "mid_city", "small_city"]
 
 
 # Per-subtype metadata (domain, hostility probability, default connection pools)
-SUBTYPE_META = {
- "street": {"domain": "passage", "hostile_prob":0.3, "connect_pool": ["street", "alley", "shop", "bar", "inn", "business", "residence"], "exclude_directions": [], "descend_to": None},
- "alley": {"domain": "passage", "hostile_prob":0.5, "connect_pool": ["alley", "street", "residence", "business"], "exclude_directions": [], "descend_to": None},
- "sewer": {"domain": "passage", "hostile_prob":0.5, "connect_pool": ["sewer", "sewer", "street"], "exclude_directions": ["descend"], "descend_to": None},
- "shop": {"domain": "building", "hostile_prob":0.1, "connect_pool": ["street", "alley"], "exclude_directions": [], "descend_to": "sewer"},
- "bar": {"domain": "building", "hostile_prob":0.1, "connect_pool": ["street", "alley"], "exclude_directions": [], "descend_to": "sewer"},
- "inn": {"domain": "building", "hostile_prob":0.1, "connect_pool": ["street", "alley"], "exclude_directions": [], "descend_to": "sewer"},
- "residence": {"domain": "building", "hostile_prob":0.1, "connect_pool": ["street", "alley"], "exclude_directions": [], "descend_to": "sewer"},
- "business": {"domain": "building", "hostile_prob":0.1, "connect_pool": ["street", "alley"], "exclude_directions": [], "descend_to": "sewer"},
- "open_area": {"domain": "passage", "hostile_prob":0.5, "connect_pool": ["alley", "street", "residence", "business"], "exclude_directions": [], "descend_to": None},
-}
+# SUBTYPE_META = {
+#  "street": {"domain": "passage", "hostile_prob":0.3, "connect_pool": ["street", "alley", "shop", "bar", "inn", "business", "residence"], "exclude_directions": [], "descend_to": None},
+#  "alley": {"domain": "passage", "hostile_prob":0.5, "connect_pool": ["alley", "street", "residence", "business"], "exclude_directions": [], "descend_to": None},
+#  "sewer": {"domain": "passage", "hostile_prob":0.5, "connect_pool": ["sewer", "sewer", "street"], "exclude_directions": ["descend"], "descend_to": None},
+#  "shop": {"domain": "building", "hostile_prob":0.1, "connect_pool": ["street", "alley"], "exclude_directions": [], "descend_to": "sewer"},
+#  "bar": {"domain": "building", "hostile_prob":0.1, "connect_pool": ["street", "alley"], "exclude_directions": [], "descend_to": "sewer"},
+#  "inn": {"domain": "building", "hostile_prob":0.1, "connect_pool": ["street", "alley"], "exclude_directions": [], "descend_to": "sewer"},
+#  "residence": {"domain": "building", "hostile_prob":0.1, "connect_pool": ["street", "alley"], "exclude_directions": [], "descend_to": "sewer"},
+#  "business": {"domain": "building", "hostile_prob":0.1, "connect_pool": ["street", "alley"], "exclude_directions": [], "descend_to": "sewer"},
+#  "open_area": {"domain": "passage", "hostile_prob":0.5, "connect_pool": ["alley", "street", "residence", "business"], "exclude_directions": [], "descend_to": None},
+# }
 
 
 # ── City data registry ────────────────────────────────────────────────────────
@@ -974,30 +660,30 @@ CITY_DATA: dict = {
 
 CITY_SUBTYPES = ["shop", "residence", "street", "alley", "bar", "inn", "business"]
 DIRECTIONS_EXTERNAL = ["north", "south", "east", "west", "enter", "descend", "climb"]
-
-COUNTS = {
- "street": (3,5),
- "alley": (2,4),
- "shop": (1,2),
- "bar": (1,3),
- "inn": (2,4),
- "residence": (1,2),
- "business": (1,3),
-}
-
 RESTRICTED_TYPES = ["shop", "bar", "inn"]
 BUILDING_TYPES = ["shop", "bar", "inn", "business", "residence"]
-PASSAGE_CONTINUATION = {"street":0.85, "alley":0.25}
-DEFAULT_CONNECT_POOL = ["street", "alley", "shop", "residence", "business", "bar", "inn"]
-BUILDING_EXCLUDED_DIRECTIONS = ("north", "south", "east", "west")
 
-REVERSE_DIRECTION_PAIRS = (
- ("north", "south"),
- ("east", "west"),
- ("climb", "descend"),
- ("enter", "back"),
- ("up", "down"),
-)
+# COUNTS = {
+#  "street": (3,5),
+#  "alley": (2,4),
+#  "shop": (1,2),
+#  "bar": (1,3),
+#  "inn": (2,4),
+#  "residence": (1,2),
+#  "business": (1,3),
+# }
+
+#PASSAGE_CONTINUATION = {"street":0.85, "alley":0.25}
+#DEFAULT_CONNECT_POOL = ["street", "alley", "shop", "residence", "business", "bar", "inn"]
+#BUILDING_EXCLUDED_DIRECTIONS = ("north", "south", "east", "west")
+
+# REVERSE_DIRECTION_PAIRS = (
+#  ("north", "south"),
+#  ("east", "west"),
+#  ("climb", "descend"),
+#  ("enter", "back"),
+#  ("up", "down"),
+# )
 # Build a simple lookup: hostile_id -> module path
 
 HOSTILE_SEED_PATHS = {}
@@ -1141,7 +827,7 @@ _gather_hostile_seed_sources(HOSTILE_SEED_PATHS)
 
 __all__ = [
 	"TASKS", "TASK_GROUPS", "NPCS", "NPC_GROUPS", "CITY_DATA", 
-	"MAIN_STORY_SETTINGS","PRIMARY_STORIES","CITY_STORIES", "STORY_GROUPS"
+	"MAIN_STORY_SETTINGS","PRIMARY_STORIES","CITY_STORIES", "STORY_GROUPS", "EXTENDED_CHARACTER_NPCS",
 	"NPC_DIALOG", "ATTAINABLE_PLAYER_CHARACTERS","DUNGEON_ENTRANCE_CHAR",
 
  # re-exports from other modules
@@ -1153,7 +839,7 @@ __all__ = [
  # local constants
  "DIRECTIONAL_MAPPING", "ROAD", "ALLEY", "BUILDING", "PATHS", "SELL_RATIO", "ABILITY_TYPE_REQUIREMENTS",
  # re-export region settings
- "BUILDING_EXCLUDED_DIRECTIONS",
+ #"BUILDING_EXCLUDED_DIRECTIONS",
  "AVAILABLE_REGIONS", "AVAILABLE_CITIES", "REGIONAL_NEIGHBORS", "PATH_TILE_MAPPINGS", "CHAPTER_CITY_ORDER", "CONTINENT_COMPOSITION", 
 
  "DESERT_OPEN_AREA_CHAR", "FOREST_OPEN_AREA_CHAR", "GRASSLAND_OPEN_AREA_CHAR",
