@@ -638,6 +638,7 @@ TASKS = [
 					'dialog_id': 'ch1_narrator_we_do_not_begin'
 				}
 			},
+			#INITIATE OPTION DIALOG WITH 3 OPTIONS. HAVE THE TASKS DO NOTHING EXCEPT CALL NARRATOR DIALOG [initiate_dialog npc_id=None] STATING THE CHOICE THEY MADE
 			{
 				'event_type': 'initiate_option_dialog',
 				'params': {
@@ -649,7 +650,6 @@ TASKS = [
 					]
 				}
 			}
-			#INITIATE OPTION DIALOG WITH 3 OPTIONS. HAVE THE TASKS DO NOTHING EXCEPT CALL NARRATOR DIALOG [initiate_dialog npc_id=None] STATING THE CHOICE THEY MADE
 		],
 		'task_complete_events': [ 
 			{
