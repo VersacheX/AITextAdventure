@@ -3,9 +3,13 @@
 from typing import Dict, Any
 
 # Tile constants for dungeon rendering and builder decisions
-OPEN_AREA_TILE = "░"
-IMPASSABLE_TILE = "¤"
-IMPASSABLE_CHANCE = 0.04   # rocky collapses, unstable tunnels
+OPEN_AREA_TILE   = "░"
+IMPASSABLE_TILE  = "¤"
+IMPASSABLE_CHANCE = 0.04
+OPEN_AREA_COLOR  = "#706860"
+IMPASSABLE_COLOR = "#282018"
+BORDER_TILE      = "·"
+BORDER_COLOR     = "#504840"
 
 FLOOR_HOSTILES = {
     1: [
@@ -278,6 +282,10 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     "display_name": "Rokhuld's Deep Core",
     "open_area_tile": OPEN_AREA_TILE,
     "impassable_tile": IMPASSABLE_TILE,
+    "open_area_color":  OPEN_AREA_COLOR,
+	"impassable_color": IMPASSABLE_COLOR,
+	"border_tile":      BORDER_TILE,
+	"border_color":     BORDER_COLOR,
     "impassable_chance": IMPASSABLE_CHANCE,
     "floor_hostiles": FLOOR_HOSTILES,
     "hostile_seeds": HOSTILE_SEEDS,

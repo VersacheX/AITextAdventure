@@ -5,9 +5,13 @@ The heart of Edict's control system, a sterile and oppressive fortress.
 from typing import Dict, Any
 
 # Tiles
-OPEN_AREA_TILE = " "
+OPEN_AREA_TILE = "░"
 IMPASSABLE_TILE = "█"
 IMPASSABLE_CHANCE = 0.05
+OPEN_AREA_COLOR  = "#909090"
+IMPASSABLE_COLOR = "#202020"
+BORDER_TILE      = "·"
+BORDER_COLOR     = "#606060"
 
 # Hostiles
 FLOOR_HOSTILES = {
@@ -99,6 +103,10 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'display_name': "The Citadel",
     'open_area_tile': OPEN_AREA_TILE,
     'impassable_tile': IMPASSABLE_TILE,
+    'open_area_color':  OPEN_AREA_COLOR,
+	'impassable_color': IMPASSABLE_COLOR,
+	'border_tile':      BORDER_TILE,
+	'border_color':     BORDER_COLOR,
     'impassable_chance': IMPASSABLE_CHANCE,
     'floor_hostiles': FLOOR_HOSTILES,
     'hostile_seeds': HOSTILE_SEEDS,

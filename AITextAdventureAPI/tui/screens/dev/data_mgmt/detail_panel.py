@@ -491,9 +491,125 @@ class TimelineDetailPanel(Widget):
                 yield Static("  (none)", classes="tl-empty")
 
 
+# ── Dungeon detail widget ─────────────────────────────────────────────────
+
+def _dungeon_tile_markup(ch: str, color: Optional[str]) -> str:
+    """Return a single tile character wrapped in Rich color markup if a
+    color is provided, escaped so square brackets in the glyph are safe."""
+    if not ch:
+        ch = "?"
+    safe = ch.replace("[", "\\[")
+    if color:
+        return f"[{color}]{safe}[/]"
+    return safe
+
+
+class DungeonDetailPanel(Widget):
+    """Detail panel for a dungeon DevRecord.
+
+    Displays:
+      • Name / id header
+      • Tile legend: each of the three tile types shown in its assigned color
+      • Layout stats (floors, rooms/floor, visible distance)
+      • Hostile list, boss list, NPCs, items  (same content as the old plain-text detail)
+    """
+
+    DEFAULT_CSS = """
+    DungeonDetailPanel {
+        width: 100%;
+        height: auto;
+        layout: vertical;
+    }
+    .dg-section {
+        width: 100%;
+        height: auto;
+        padding: 0 2 1 2;
+        border-bottom: solid $accent 20%;
+    }
+    .dg-section-header {
+        width: 100%;
+        height: auto;
+        color: $accent;
+        text-style: bold;
+    }
+    .dg-row {
+        width: 100%;
+        height: auto;
+        color: $text 85%;
+    }
+    """
+
+    def __init__(self, record: "DevRecord") -> None:
+        super().__init__()
+        self._record = record
+
+    def compose(self) -> ComposeResult:
+        r  = self._record
+        ex = r.extras or {}
+
+        open_tile   = str(ex.get("open_area_tile",  ".") or ".")
+        imp_tile    = str(ex.get("impassable_tile",  "#") or "#")
+        border_tile = str(ex.get("border_tile",      "*") or "*")
+        open_color  = ex.get("open_area_color")  or None
+        imp_color   = ex.get("impassable_color") or None
+        border_color= ex.get("border_color")     or None
+
+        open_mu   = _dungeon_tile_markup(open_tile,   open_color)
+        imp_mu    = _dungeon_tile_markup(imp_tile,    imp_color)
+        border_mu = _dungeon_tile_markup(border_tile, border_color)
+
+        # ── header ────────────────────────────────────────────────────
+        with Vertical(classes="dg-section"):
+            yield Static(
+                f"[bold]{rich_escape(r.name)}[/bold]\n"
+                f"[dim]{rich_escape(r.id)}[/dim]",
+            )
+
+        # ── tile legend ───────────────────────────────────────────────
+        with Vertical(classes="dg-section"):
+            yield Static("Tiles", classes="dg-section-header")
+            yield Static(
+                f" {open_mu}  Floor (open area)\n"
+                f" {imp_mu}  Wall  (impassable)\n"
+                f" {border_mu}  Perimeter (border)",
+                classes="dg-row",
+            )
+
+        # ── layout stats ──────────────────────────────────────────────
+        with Vertical(classes="dg-section"):
+            yield Static("Layout", classes="dg-section-header")
+            yield Static(
+                f" Floors:            {ex.get('floors', '?')}\n"
+                f" Rooms / floor:     {ex.get('rooms', '?')}\n"
+                f" Visible distance:  {ex.get('visible_distance', '?')}",
+                classes="dg-row",
+            )
+
+        # ── hostile / boss / npc / item lists ─────────────────────────
+        with Vertical(classes="dg-section"):
+            yield Static(rich_escape(r.detail), classes="dg-row")
+
+
 # ── public API ──────────────────────────────────────────────────────────────
 
-def update_detail_for_record(screen: "DataMgmtScreen", record: DevRecord | None) -> None:
+def _reset_to_static(container: Any, markup: str) -> None:
+    """Replace all children of *container* with a single Static showing *markup*."""
+    container.remove_children()
+    container.mount(Static(markup))
+
+
+def _ensure_static(container: Any) -> "Static":
+    """Return the first Static child of *container*, creating one if needed."""
+    from textual.widgets import Static as _Static  # noqa: PLC0415
+    try:
+        return container.query_one(_Static)
+    except Exception:
+        s = _Static("")
+        container.mount(s)
+        return s
+
+
+def update_detail_for_record(screen: "DataMgmtScreen", record: "DevRecord | None") -> None:
     """Update the detail panel for a DevRecord."""
     detail_panel = screen.query_one("#dm-detail-panel")
 
@@ -506,6 +622,11 @@ def update_detail_for_record(screen: "DataMgmtScreen", record: DevRecord | None)
         detail_panel.mount(NpcDetailPanel(record))
         return
 
+    if record.category == "dungeon":
+        detail_panel.remove_children()
+        detail_panel.mount(DungeonDetailPanel(record))
+        return
+
     static = _ensure_static(detail_panel)
     header = f"[bold]{rich_escape(record.name)}[/bold]"
     if record.subtitle:
@@ -513,7 +634,7 @@ def update_detail_for_record(screen: "DataMgmtScreen", record: DevRecord | None)
     static.update(f"{header}\n\n{rich_escape(record.detail)}")
 
 
-def update_detail_for_single_dialogue(screen: "DataMgmtScreen", line: DialogueLine | None) -> None:
+def update_detail_for_single_dialogue(screen: "DataMgmtScreen", line: "DialogueLine | None") -> None:
     """Update detail panel with a single DialogueLine."""
     detail_panel = screen.query_one("#dm-detail-panel")
     static = _ensure_static(detail_panel)
@@ -523,7 +644,7 @@ def update_detail_for_single_dialogue(screen: "DataMgmtScreen", line: DialogueLi
     static.update(f"[bold]{rich_escape(line.speaker)}[/bold]\n\n{rich_escape(line.text)}")
 
 
-def update_detail_for_multiple_dialogue(screen: "DataMgmtScreen", lines: List[DialogueLine]) -> None:
+def update_detail_for_multiple_dialogue(screen: "DataMgmtScreen", lines: "List[DialogueLine]") -> None:
     """Update detail panel with multiple DialogueLines (subtree selection)."""
     detail_panel = screen.query_one("#dm-detail-panel")
     static = _ensure_static(detail_panel)
@@ -536,7 +657,7 @@ def update_detail_for_multiple_dialogue(screen: "DataMgmtScreen", lines: List[Di
     static.update("\n\n".join(parts))
 
 
-def update_detail_for_timeline_task(screen: "DataMgmtScreen", task_node: TimelineTaskNode) -> None:
+def update_detail_for_timeline_task(screen: "DataMgmtScreen", task_node: "TimelineTaskNode") -> None:
     """Update the detail panel with a single TimelineTaskNode (sectioned)."""
     detail_panel = screen.query_one("#dm-detail-panel")
     detail_panel.remove_children()
@@ -545,7 +666,7 @@ def update_detail_for_timeline_task(screen: "DataMgmtScreen", task_node: Timelin
 
 def update_detail_for_timeline_subtree(
     screen: "DataMgmtScreen",
-    task_nodes: List[TimelineTaskNode],
+    task_nodes: "List[TimelineTaskNode]",
 ) -> None:
     """Update the detail panel with an aggregate summary of task nodes from a subtree."""
     detail_panel = screen.query_one("#dm-detail-panel")
@@ -579,7 +700,7 @@ def update_detail_for_timeline_subtree(
 
 def update_detail_for_npc_group(
     screen: "DataMgmtScreen",
-    npc_nodes: List[NpcRecordNode],
+    npc_nodes: "List[NpcRecordNode]",
 ) -> None:
     """Update the detail panel with an aggregate view of NPCs from a group selection."""
     detail_panel = screen.query_one("#dm-detail-panel")
@@ -594,20 +715,3 @@ def update_detail_for_npc_group(
         for n in npc_nodes
     ]
     static.update("\n".join(parts))
-
-
-# ── helpers ──────────────────────────────────────────────────────────────────
-
-def _reset_to_static(detail_panel: Widget, text: str) -> None:
-    _ensure_static(detail_panel).update(text)
-
-
-def _ensure_static(detail_panel: Widget) -> Static:
-    """Return ``#dm-detail-text``, rebuilding it if any other panel type is mounted."""
-    try:
-        return detail_panel.query_one("#dm-detail-text", Static)
-    except Exception:
-        detail_panel.remove_children()
-        s = Static("", id="dm-detail-text")
-        detail_panel.mount(s)
-        return s

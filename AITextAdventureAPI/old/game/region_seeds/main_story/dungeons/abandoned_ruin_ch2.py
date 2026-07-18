@@ -9,8 +9,11 @@ from typing import Dict, Any
 # Tiles
 OPEN_AREA_TILE = "░"
 IMPASSABLE_TILE = "¤"
-
-IMPASSABLE_CHANCE =0.16
+IMPASSABLE_CHANCE = 0.16
+OPEN_AREA_COLOR  = "#7a7060"
+IMPASSABLE_COLOR = "#3d3830"
+BORDER_TILE      = "·"
+BORDER_COLOR     = "#5a5248"
 
 # Hostiles that may appear per floor
 FLOOR_HOSTILES = {
@@ -241,24 +244,28 @@ BOSS_HOSTILES = [
 ]
 
 DUNGEON_SETTINGS: Dict[str, Any] = {
- 'dungeon_id': 'abandoned_ruin_ch2',
- 'seed': abs(hash('abandoned_ruin_ch2')),
- 'floor_count':1,
- 'room_size_min_max': (100,160),
- 'rooms_per_floor':7,
- 'max_neighbors_per_room':4,
- 'additional_connection_chance':0.02,
- 'min_max_distance_between_rooms': (2,5),
- 'min_max_corridor_width': (3,7),
- 'display_name': 'Abandoned Ruin',
- 'open_area_tile': OPEN_AREA_TILE,
- 'impassable_tile': IMPASSABLE_TILE,
- 'impassable_chance': IMPASSABLE_CHANCE,
- 'floor_hostiles': FLOOR_HOSTILES,
- 'hostile_seeds': HOSTILE_SEEDS,
- 'npcs': DUNGEON_NPCS,
- 'items': DUNGEON_ITEMS,
- 'boss_mob': BOSS_MOB,
- 'boss_hostiles': BOSS_HOSTILES,
- 'visible_distance':8,
+    'dungeon_id': 'abandoned_ruin_ch2',
+    'seed': abs(hash('abandoned_ruin_ch2')),
+    'floor_count':1,
+    'room_size_min_max': (100,160),
+    'rooms_per_floor':7,
+    'max_neighbors_per_room':4,
+    'additional_connection_chance':0.02,
+    'min_max_distance_between_rooms': (2,5),
+    'min_max_corridor_width': (3,7),
+    'display_name': 'Abandoned Ruin',
+    'open_area_tile': OPEN_AREA_TILE,
+    'impassable_tile': IMPASSABLE_TILE,
+    'open_area_color':  OPEN_AREA_COLOR,
+    'impassable_color': IMPASSABLE_COLOR,
+    'border_tile':      BORDER_TILE,
+    'border_color':     BORDER_COLOR,
+    'impassable_chance': IMPASSABLE_CHANCE,
+    'floor_hostiles': FLOOR_HOSTILES,
+    'hostile_seeds': HOSTILE_SEEDS,
+    'npcs': DUNGEON_NPCS,
+    'items': DUNGEON_ITEMS,
+    'boss_mob': BOSS_MOB,
+    'boss_hostiles': BOSS_HOSTILES,
+    'visible_distance':8,
 }

@@ -1,13 +1,17 @@
-"""
+﻿"""
 Nihilist Camp - Chapter 12 Dungeon Seed Configuration
 A small, bleak camp where despair is the only creed.
 """
 from typing import Dict, Any
 
 # Tiles
-OPEN_AREA_TILE = " "
-IMPASSABLE_TILE = "X"
+OPEN_AREA_TILE = "░"
+IMPASSABLE_TILE = "¤"
 IMPASSABLE_CHANCE = 0.05
+OPEN_AREA_COLOR  = "#4a4a4a"
+IMPASSABLE_COLOR = "#1e1e1e"
+BORDER_TILE      = "·"
+BORDER_COLOR     = "#383838"
 
 # Hostiles
 FLOOR_HOSTILES = {
@@ -67,6 +71,10 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'display_name': "Nihilist Camp",
     'open_area_tile': OPEN_AREA_TILE,
     'impassable_tile': IMPASSABLE_TILE,
+    'open_area_color':  OPEN_AREA_COLOR,
+	'impassable_color': IMPASSABLE_COLOR,
+	'border_tile':      BORDER_TILE,
+	'border_color':     BORDER_COLOR,
     'impassable_chance': IMPASSABLE_CHANCE,
     'floor_hostiles': FLOOR_HOSTILES,
     'hostile_seeds': HOSTILE_SEEDS,

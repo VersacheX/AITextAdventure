@@ -63,10 +63,14 @@ R8  TASK_SCHEMA_INVALID
 R9  AWARD_GRAPH_CYCLE
     Cycle detected in the award_task directed graph.
     Shuttle-pair exemption: a pair of tasks that mutually award each other
-    (A awards B, B awards A) AND where exactly one of the pair also awards a third
-    task (the "escape edge") is treated as an intentional shuttle pattern and is
-    not flagged as a cycle.  This covers patterns like the Astra Wynn go-back /
-    go-forward tasks in Chapter 5.
+    (A awards B, B awards A) AND where each task also contains remove_task
+    for the other is treated as an intentional bidirectional toggle and is
+    not flagged as a cycle.
+    Self-cleaning replay exemption: a back-edge X → Y is exempt when X
+    contains a remove_task targeting Y.  This covers intentional retry loops
+    where the wrong-answer task deletes the puzzle task before re-awarding it,
+    guaranteeing a fresh task instance on each attempt with no runaway cycle
+    at runtime (e.g. option-dialog puzzle wrong-answer → remove → re-award).
 
 R10 CHAPTER_NO_ROOT
     A story bucket has no root task — i.e. no task that is either the first task
@@ -528,6 +532,7 @@ def validate_timeline_integrity(
         if isinstance(npc, dict) and npc.get("npc_id"):
             known_npc_ids.add(str(npc["npc_id"]))
 
+
     known_dialog_pairs: Set[Tuple[Any, Any]] = set()
     for dlg in getattr(const, "NPC_DIALOG", []) or []:
         if isinstance(dlg, dict):
@@ -566,9 +571,24 @@ def validate_timeline_integrity(
     # ── Traversal-order state for rules that require "prior" context ───────
     item_source_counts:  Dict[str, int] = defaultdict(int)
     item_remove_counts:  Dict[str, int] = defaultdict(int)
-    created_npc_ids:     Set[str]       = set()
     created_dungeon_ids: Set[str]       = set()
     character_npc_slots: int            = 0   # incremented by create_character_npc events
+
+    # Pre-populate created_npc_ids from ALL complete_intro_story acquire events.
+    # These tasks are story-initialization roots that fire before any meet tasks
+    # can be reached, regardless of which group/bucket they live in.  This means
+    # an NPC created in one story's initialize task (e.g. mara in
+    # desert_large_city_initialize) is correctly visible to meet tasks in other
+    # stories (e.g. the regional desert primary story) even when traversal order
+    # would place the creating bucket after the referencing one.
+    created_npc_ids: Set[str] = set()
+    for _tn in all_tasks:
+        if str(_tn.task.get("type", "")).lower() == "complete_intro_story":
+            for _ev in _events(_tn.task, "task_acquire_events"):
+                if _ev.get("event_type") == "create_npc":
+                    _npc_id = str(_ev.get("params", {}).get("npc_id") or "")
+                    if _npc_id:
+                        created_npc_ids.add(_npc_id)
 
     # Build the node map early — needed by shuttle-pair detection and error attachment
     task_node_map: Dict[str, TimelineTaskNode] = {tn.task_id: tn for tn in all_tasks}
@@ -1043,6 +1063,21 @@ def validate_timeline_integrity(
                 if _dfs_cycle(neighbour):
                     return True
             elif neighbour in rec_stack:
+                # Self-cleaning replay loop exemption: if the source task
+                # removes the back-edge target before re-awarding it, the
+                # cycle is intentional — both tasks are destroyed at runtime
+                # before the target is freshly re-created, so no runaway loop
+                # exists.  This covers option-dialog puzzle retry patterns
+                # where the wrong-answer task cleans up then replays the round.
+                node_task = task_node_map.get(node)
+                if node_task:
+                    removes_target = any(
+                        str((e.get("params") or {}).get("task_id") or "") == neighbour
+                        for _, e in _iter_events(node_task.task)
+                        if e.get("event_type") in ("remove_task", "cancel_task")
+                    )
+                    if removes_target:
+                        continue
                 return True
         rec_stack.discard(node)
         return False

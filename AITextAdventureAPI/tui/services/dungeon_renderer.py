@@ -11,22 +11,42 @@ Tile legend (matches legacy):
   .  passable floor (open_area_tile)
   #  impassable wall (impassable_tile)
   ?  undiscovered
-  *  perimeter (empty cell adjacent to a known tile)
+  *  perimeter (border_tile — empty cell adjacent to a known tile)
   ß  NPC entity
   ◘  item entity
   ↕  stairs up + down
   ↓  stairs up (displayed inverted: going deeper)
   ↑  stairs down (origin / surface)
+
+All characters except '?' and ' ' are wrapped in Textual Rich color markup
+when the dungeon carries color fields (open_area_color, impassable_color,
+border_color).  The caller (DungeonScreen) passes the output directly to
+Static.update(), which renders markup by default.
 """
 from __future__ import annotations
 
 from typing import Any, List, Optional
 
 
+# ── color markup helper ────────────────────────────────────────────────────
+
+def _colorize(ch: str, color: Optional[str]) -> str:
+    """Wrap `ch` in Textual Rich color markup.
+
+    Escapes any square brackets in `ch` so they are never misread as markup
+    tags.  Returns `ch` unchanged when `color` is falsy.
+    """
+    if not color:
+        return ch
+    safe_ch = ch.replace("[", "\\[")
+    return f"[{color}]{safe_ch}[/{color}]"
+
+
 # ── per-tile character lookup ──────────────────────────────────────────────
 
 def _tile_char(dungeon: Any, wx: int, wy: int, z: int, reveal_all: bool) -> str:
-    """Return the display character for world coordinate (wx, wy, z).
+    """Return the display character (with optional Rich color markup) for
+    world coordinate (wx, wy, z).
     Mirrors the inner loop of `old/game_screens/dungeon_screen._render_minimap()`.
     """
     from game.objects.player import ItemType  # noqa: PLC0415
@@ -39,31 +59,36 @@ def _tile_char(dungeon: Any, wx: int, wy: int, z: int, reveal_all: bool) -> str:
     if not visible:
         return "?"
 
-    ch = dungeon.open_area_tile if tile.passable else dungeon.impassable_tile
+    if tile.passable:
+        ch = dungeon.open_area_tile
+        color = getattr(dungeon, "open_area_color", None)
+    else:
+        ch = dungeon.impassable_tile
+        color = getattr(dungeon, "impassable_color", None)
 
     if tile.entities:
         for ent in tile.entities:
             if isinstance(ent, dict) and ent.get("type") == "npc":
-                ch = "ß"
-                break
+                # NPC marker — inherit floor color so it pops on the right background
+                return _colorize("ß", color)
             if isinstance(ent, ItemType):
-                ch = "◘"
+                return _colorize("◘", color)
 
     # stairs markers override entity marks for visibility
     has_up = getattr(tile, "has_stairs_up", False)
     has_down = getattr(tile, "has_stairs_down", False)
     if has_up and has_down:
-        ch = "↕"
+        return _colorize("↕", color)
     elif has_up:
-        ch = "↓"  # going deeper → displayed as ↓
+        return _colorize("↓", color)  # going deeper → displayed as ↓
     elif has_down:
-        ch = "↑"  # back toward surface → displayed as ↑
+        return _colorize("↑", color)  # back toward surface → displayed as ↑
 
     # origin marker
     if wx == 0 and wy == 0 and z == 0:
-        ch = "↑"
+        return _colorize("↑", color)
 
-    return ch
+    return _colorize(ch, color)
 
 
 # ── full minimap viewport ──────────────────────────────────────────────────
@@ -74,8 +99,9 @@ def build_minimap_lines(
     view_h: int = 23,
     reveal_all: bool = False,
 ) -> List[str]:
-    """Return a list of `view_h` strings, each `view_w` characters wide,
-    representing the dungeon minimap centered on the player.  No borders —
+    """Return a list of `view_h` strings, each representing one row of the
+    dungeon minimap centered on the player.  Characters are wrapped in Textual
+    Rich color markup when the dungeon carries color fields.  No borders —
     the caller (DungeonScreen) handles Textual widget layout.
 
     Mirrors `old/game_screens/dungeon_screen._render_minimap()`.
@@ -87,11 +113,16 @@ def build_minimap_lines(
     px, py, pz = player_pos
     z = pz
 
+    border_tile  = getattr(dungeon, "border_tile",  "*")
+    border_color = getattr(dungeon, "border_color", None)
+
     # compute world offset so the player is centered
     ox = px - view_w // 2
     oy = py - view_h // 2
 
-    # build grid
+    # build grid — store raw (uncolored) sentinel strings first so perimeter
+    # detection can still compare against plain " " / "?"
+
     grid: List[List[str]] = [[" " for _ in range(view_w)] for _ in range(view_h)]
 
     for gy in range(view_h):
@@ -100,7 +131,9 @@ def build_minimap_lines(
             wy = oy + gy
             grid[gy][gx] = _tile_char(dungeon, wx, wy, z, reveal_all)
 
-    # mark perimeter: any ' ' adjacent to a known (non-space) tile becomes '*'
+    # mark perimeter: any ' ' adjacent to a known (non-space, non-?) tile
+    # becomes the border_tile (colored if border_color is set).
+    border_ch = _colorize(border_tile, border_color)
     for gy in range(view_h):
         for gx in range(view_w):
             if grid[gy][gx] != " ":
@@ -110,7 +143,7 @@ def build_minimap_lines(
                 if 0 <= nx2 < view_w and 0 <= ny2 < view_h:
                     t = dungeon.get_tile(nx2 + ox, ny2 + oy, z)
                     if t and (reveal_all or t.discovered):
-                        grid[gy][gx] = "*"
+                        grid[gy][gx] = border_ch
                         break
 
     # remaining spaces become '?'

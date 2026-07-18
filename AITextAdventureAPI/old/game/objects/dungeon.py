@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+﻿from dataclasses import dataclass, field
 from turtle import width
 from typing import List, Optional, Tuple, Dict, Any
 from enum import Enum
@@ -69,6 +69,13 @@ class Dungeon:
         self.visible_distance: int = 5
         self.position: Tuple[int, int] = (0, 0)  # x,y position in region/world map
 
+        # ── tile display colours (#rrggbb strings or None for terminal default) ──
+        self.open_area_color: Optional[str] = None
+        self.impassable_color: Optional[str] = None
+        # border_tile / border_color: the perimeter marker shown adjacent to known tiles
+        self.border_tile: str = "*"
+        self.border_color: Optional[str] = None
+
         # the player position within this dungeon (x,y,z) or None if not placed
         self.player_pos: Optional[Tuple[int, int, int]] = None
 
@@ -104,7 +111,7 @@ class Dungeon:
         if not start_tile or not start_tile.passable:
             return False
         if start_tile.entities and len(start_tile.entities) >0:
-            # origin occupied by entities � treat as blocked
+            # origin occupied by entities — treat as blocked
             return False
 
         goal_tile = self.get_tile(position[0], position[1], position[2])
@@ -189,7 +196,7 @@ class Dungeon:
             if not tile.passable:
                 #print(f' skipping tile ({tile.x},{tile.y},{tile.z}) because not passable')
                 continue
-            # Do not place NPCs/items directly on stairs � this prevents blocking vertical movement.
+            # Do not place NPCs/items directly on stairs — this prevents blocking vertical movement.
             if tile.has_stairs_up or tile.has_stairs_down:
                 continue
             # Ensure no entities
@@ -235,7 +242,7 @@ class Dungeon:
             if not tile.passable:
                 #print(f' skipping tile ({tile.x},{tile.y},{tile.z}) because not passable')
                 continue
-            # Do not place NPCs/items directly on stairs � this prevents blocking vertical movement.
+            # Do not place NPCs/items directly on stairs — this prevents blocking vertical movement.
             if tile.has_stairs_up or tile.has_stairs_down:
                 continue
             # Ensure no entities

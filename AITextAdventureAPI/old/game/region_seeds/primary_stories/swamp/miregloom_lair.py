@@ -3,9 +3,13 @@
 from typing import Dict, Any
 
 # Tile constants for dungeon rendering and builder decisions
-OPEN_AREA_TILE = "░"
-IMPASSABLE_TILE = "¤"
+OPEN_AREA_TILE   = "░"
+IMPASSABLE_TILE  = "¤"
 IMPASSABLE_CHANCE = 0.04
+OPEN_AREA_COLOR  = "#5a6838"
+IMPASSABLE_COLOR = "#1e2410"
+BORDER_TILE      = "·"
+BORDER_COLOR     = "#3a4820"
 
 FLOOR_HOSTILES = {
     1: [
@@ -272,6 +276,10 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     "display_name": "Miregloom's Rot-Catacomb",
     "open_area_tile": OPEN_AREA_TILE,
     "impassable_tile": IMPASSABLE_TILE,
+    "open_area_color":  OPEN_AREA_COLOR,
+	"impassable_color": IMPASSABLE_COLOR,
+	"border_tile":      BORDER_TILE,
+	"border_color":     BORDER_COLOR,
     "impassable_chance": IMPASSABLE_CHANCE,
     "floor_hostiles": FLOOR_HOSTILES,
     "hostile_seeds": HOSTILE_SEEDS,

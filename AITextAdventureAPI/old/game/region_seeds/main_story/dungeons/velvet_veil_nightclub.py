@@ -7,7 +7,11 @@ from typing import Dict, Any
 # Tiles
 OPEN_AREA_TILE = "▒"
 IMPASSABLE_TILE = "█"
-IMPASSABLE_CHANCE = 0.1
+IMPASSABLE_CHANCE = 0.10
+OPEN_AREA_COLOR  = "#7a3a7a"
+IMPASSABLE_COLOR = "#1a0a1a"
+BORDER_TILE      = "·"
+BORDER_COLOR     = "#4a1a4a"
 
 # Hostiles
 FLOOR_HOSTILES = {
@@ -84,6 +88,10 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'display_name': "The Velvet Veil",
     'open_area_tile': OPEN_AREA_TILE,
     'impassable_tile': IMPASSABLE_TILE,
+    'open_area_color':  OPEN_AREA_COLOR,
+	'impassable_color': IMPASSABLE_COLOR,
+	'border_tile':      BORDER_TILE,
+	'border_color':     BORDER_COLOR,
     'impassable_chance': IMPASSABLE_CHANCE,
     'floor_hostiles': FLOOR_HOSTILES,
     'hostile_seeds': HOSTILE_SEEDS,

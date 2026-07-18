@@ -534,7 +534,7 @@ def _build_equipment(const: Any) -> List[DevRecord]:
 def _build_dungeons(const: Any) -> List[DevRecord]:
     records: List[DevRecord] = []
     for ds in getattr(const, "DUNGEON_SETTINGS", []) or []:
-        did      = str(ds.get("id", "?"))
+        did      = str(ds.get("dungeon_id") or ds.get("id") or "?")
         name     = str(ds.get("display_name", did))
         hostiles = ds.get("hostile_seeds") or []
         boss     = ds.get("boss_hostiles") or []
@@ -558,6 +558,17 @@ def _build_dungeons(const: Any) -> List[DevRecord]:
             category="dungeon", id=did, name=name,
             subtitle=f"{len(hostiles)} hostiles · {len(boss)} boss",
             detail="\n".join(lines),
+            extras={
+                "open_area_tile":  ds.get("open_area_tile",  "."),
+                "impassable_tile": ds.get("impassable_tile", "#"),
+                "border_tile":     ds.get("border_tile",     "*"),
+                "open_area_color": ds.get("open_area_color"),
+                "impassable_color":ds.get("impassable_color"),
+                "border_color":    ds.get("border_color"),
+                "floors":          ds.get("floor_count", 1),
+                "rooms":           ds.get("rooms_per_floor", "?"),
+                "visible_distance":ds.get("visible_distance", 5),
+            },
         ))
     return records
 

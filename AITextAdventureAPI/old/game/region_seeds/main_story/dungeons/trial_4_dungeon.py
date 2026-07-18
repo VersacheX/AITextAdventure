@@ -8,6 +8,10 @@ from typing import Dict, Any
 OPEN_AREA_TILE = "▒"
 IMPASSABLE_TILE = "█"
 IMPASSABLE_CHANCE = 0.14
+OPEN_AREA_COLOR  = "#a09060"
+IMPASSABLE_COLOR = "#282010"
+BORDER_TILE      = "·"
+BORDER_COLOR     = "#706040"
 
 # Hostiles
 FLOOR_HOSTILES = {
@@ -100,6 +104,10 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'display_name': "The System of Perception",
     'open_area_tile': OPEN_AREA_TILE,
     'impassable_tile': IMPASSABLE_TILE,
+    'open_area_color':  OPEN_AREA_COLOR,
+    'impassable_color': IMPASSABLE_COLOR,
+    'border_tile':      BORDER_TILE,
+    'border_color':     BORDER_COLOR,
     'impassable_chance': IMPASSABLE_CHANCE,
     'floor_hostiles': FLOOR_HOSTILES,
     'hostile_seeds': HOSTILE_SEEDS,

@@ -376,7 +376,7 @@ class ShopOverlay(Widget):
 
     #shop-buy-row, #shop-sell-row {
         height: auto;
-        max-height: 22;
+        max-height: 26;
     }
 
     #buy-list-col, #sell-list-col {
@@ -393,9 +393,10 @@ class ShopOverlay(Widget):
     #buy-detail-col, #sell-detail-col {
         width: 30;
         height: auto;
-        max-height: 22;
+        max-height: 26;
         border-left: solid $accent 30%;
         padding: 1;
+        overflow-y: auto;
     }
 
     #buy-detail, #sell-detail {
@@ -437,6 +438,37 @@ class ShopOverlay(Widget):
         height: 1;
         border-top: solid $accent 50%;
     }
+
+    #buy-afford {
+        height: 1;
+        margin-top: 1;
+        color: $text 60%;
+    }
+
+    #buy-qty-row {
+        height: 3;
+        margin-top: 1;
+        align: left middle;
+    }
+
+    #buy-qty-dec, #buy-qty-inc {
+        min-width: 3;
+        width: 3;
+        height: 1;
+        border: none;
+    }
+
+    #buy-qty-display {
+        width: 4;
+        text-align: center;
+        content-align: center middle;
+    }
+
+    #buy-btn {
+        width: 100%;
+        height: 3;
+        margin-top: 1;
+    }
     """
 
     def __init__(
@@ -457,6 +489,8 @@ class ShopOverlay(Widget):
         self._acted        = False
         self._sell_item:   Any | None = None
         self._sell_qty:    int = 1
+        self._buy_item:    Any | None = None
+        self._buy_qty:     int = 1
 
     # ── compose ───────────────────────────────────────────────────────────────
 
@@ -476,6 +510,12 @@ class ShopOverlay(Widget):
                             yield ListView(id="buy-list")
                         with Vertical(id="buy-detail-col"):
                             yield Static("[dim]Select an item.[/dim]", id="buy-detail")
+                            yield Static("", id="buy-afford")
+                            with Horizontal(id="buy-qty-row"):
+                                yield Button("−", id="buy-qty-dec", variant="default")
+                                yield Static("1", id="buy-qty-display")
+                                yield Button("+", id="buy-qty-inc", variant="default")
+                            yield Button("Buy", id="buy-btn", variant="primary", disabled=True)
                 if has_sell:
                     with TabPane("Sell", id="tab-sell"):
                         with Horizontal(id="shop-sell-row"):
@@ -556,13 +596,71 @@ class ShopOverlay(Widget):
 
     @on(ListView.Highlighted, "#buy-list")
     def _on_buy_highlighted(self, event: ListView.Highlighted) -> None:
-        item = event.item.item if isinstance(event.item, _ShopItem) else None
+        self._buy_item = event.item.item if isinstance(event.item, _ShopItem) else None
+        self._buy_qty  = 1
+        self._refresh_buy_panel()
+
+    @on(ListView.Selected, "#buy-list")
+    def _on_buy_selected(self, event: ListView.Selected) -> None:
+        if isinstance(event.item, _ShopItem):
+            self._buy_item = event.item.item
+            self._buy_qty  = 1
+            self._refresh_buy_panel()
+
+    def _refresh_buy_panel(self) -> None:
+        item  = self._buy_item
+        money = getattr(self._pg, "money", 0)
         try:
             self.query_one("#buy-detail", Static).update(_item_detail(item))
         except Exception:
             pass
+        try:
+            if item is not None:
+                price   = item.get("value", 0) if isinstance(item, dict) else getattr(item, "value", 0)
+                max_qty = (money // price) if price > 0 else 99
+                max_qty = max(1, min(max_qty, 99))
+                can_buy = money >= price
+                self._buy_qty = max(1, min(self._buy_qty, max_qty))
+                self.query_one("#buy-afford",      Static).update(f"Can afford: {max_qty}×")
+                self.query_one("#buy-qty-display", Static).update(str(self._buy_qty))
+                self.query_one("#buy-qty-dec",  Button).disabled = (self._buy_qty <= 1)
+                self.query_one("#buy-qty-inc",  Button).disabled = (self._buy_qty >= max_qty)
+                self.query_one("#buy-btn",      Button).disabled = not can_buy
+            else:
+                self.query_one("#buy-afford",      Static).update("")
+                self.query_one("#buy-qty-display", Static).update("1")
+                self.query_one("#buy-qty-dec",  Button).disabled = True
+                self.query_one("#buy-qty-inc",  Button).disabled = True
+                self.query_one("#buy-btn",      Button).disabled = True
+        except Exception:
+            pass
 
-    # ── sell detail + qty stepper ─────────────────────────────────────────────
+    @on(Button.Pressed, "#buy-qty-dec")
+    def _on_buy_qty_dec(self) -> None:
+        if self._buy_item is None or self._buy_qty <= 1:
+            return
+        self._buy_qty -= 1
+        self._refresh_buy_panel()
+
+    @on(Button.Pressed, "#buy-qty-inc")
+    def _on_buy_qty_inc(self) -> None:
+        if self._buy_item is None:
+            return
+        money = getattr(self._pg, "money", 0)
+        price = self._buy_item.get("value", 0) if isinstance(self._buy_item, dict) else getattr(self._buy_item, "value", 0)
+        max_qty = (money // price) if price > 0 else 99
+        max_qty = max(1, min(max_qty, 99))
+        if self._buy_qty >= max_qty:
+            return
+        self._buy_qty += 1
+        self._refresh_buy_panel()
+
+    @on(Button.Pressed, "#buy-btn")
+    def _on_buy_btn(self) -> None:
+        if self._buy_item is not None:
+            self._do_buy(self._buy_item, self._buy_qty)
+
+    # ── sell flow ─────────────────────────────────────────────────────────────
 
     @on(ListView.Highlighted, "#sell-list")
     def _on_sell_highlighted(self, event: ListView.Highlighted) -> None:
@@ -570,22 +668,32 @@ class ShopOverlay(Widget):
         self._sell_qty  = 1
         self._refresh_sell_panel()
 
+    @on(ListView.Selected, "#sell-list")
+    def _on_sell_selected(self, event: ListView.Selected) -> None:
+        if isinstance(event.item, _ShopItem):
+            self._sell_item = event.item.item
+            self._sell_qty  = 1
+            self._refresh_sell_panel()
+
     def _refresh_sell_panel(self) -> None:
-        item = self._sell_item
+        item  = self._sell_item
         try:
             self.query_one("#sell-detail", Static).update(_item_detail(item))
         except Exception:
             pass
         try:
             if item is not None:
-                owned = int(getattr(item, "quantity", 1) or 1)
-                self.query_one("#sell-owned",       Static).update(f"Owned: {owned}")
+                owned    = int(getattr(item, "quantity", 1) or 1)
+                max_qty  = owned
+                can_sell = True
+                self._sell_qty = max(1, min(self._sell_qty, max_qty))
+                self.query_one("#sell-owned",      Static).update(f"Owned: {owned}")
                 self.query_one("#sell-qty-display", Static).update(str(self._sell_qty))
                 self.query_one("#sell-qty-dec",  Button).disabled = (self._sell_qty <= 1)
-                self.query_one("#sell-qty-inc",  Button).disabled = (self._sell_qty >= owned)
-                self.query_one("#sell-btn",      Button).disabled = False
+                self.query_one("#sell-qty-inc",  Button).disabled = (self._sell_qty >= max_qty)
+                self.query_one("#sell-btn",      Button).disabled = not can_sell
             else:
-                self.query_one("#sell-owned",       Static).update("")
+                self.query_one("#sell-owned",      Static).update("")
                 self.query_one("#sell-qty-display", Static).update("1")
                 self.query_one("#sell-qty-dec",  Button).disabled = True
                 self.query_one("#sell-qty-inc",  Button).disabled = True
@@ -617,80 +725,71 @@ class ShopOverlay(Widget):
 
     # ── buy flow ──────────────────────────────────────────────────────────────
 
+    @on(ListView.Highlighted, "#buy-list")
+    def _on_buy_highlighted(self, event: ListView.Highlighted) -> None:
+        self._buy_item = event.item.item if isinstance(event.item, _ShopItem) else None
+        self._buy_qty  = 1
+        self._refresh_buy_panel()
+
     @on(ListView.Selected, "#buy-list")
     def _on_buy_selected(self, event: ListView.Selected) -> None:
         if isinstance(event.item, _ShopItem):
-            self._do_buy(event.item.item)
+            self._buy_item = event.item.item
+            self._buy_qty  = 1
+            self._refresh_buy_panel()
 
-    def _do_buy(self, item: Any) -> None:
-        price = item.get("value", 0) if isinstance(item, dict) else getattr(item, "value", 0)
-        name  = item.get("name", "?") if isinstance(item, dict) else getattr(item, "name", "?")
+    def _refresh_buy_panel(self) -> None:
+        item  = self._buy_item
         money = getattr(self._pg, "money", 0)
-
-        if money < price:
-            self.app.notify(
-                f"You need {price}g. You have {money}g.",
-                title="Insufficient Funds",
-                severity="warning",
-            )
-            return
-
-        def _on_confirmed(confirmed: bool | None) -> None:
-            if not confirmed:
-                return
-            try:
-                result = self._execute_buy(item)
-            except Exception as exc:
-                self.app.notify(str(exc), title="Purchase Error", severity="error")
-                return
-            if result.get("success"):
-                self._acted = True
-                self.app.notify(f"Bought {rich_escape(str(name))}!", title="Purchased", timeout=2)
-                self._refresh_gold()
-                if _shop_has_sell(self._shop_type):
-                    self._sell_stock = _load_sell_stock(self._shop_type, self._pg)
-                    self._rebuild_sell_list()
-            else:
-                err = result.get("error", "unknown_error")
-                if err == "insufficient_funds":
-                    self.app.notify("Not enough gold.", title="Purchase Failed", severity="warning")
-                elif err == "inventory_full":
-                    self.app.notify("Your inventory is full.", title="Purchase Failed", severity="warning")
-                else:
-                    self.app.notify(f"Purchase failed: {err}", severity="error")
-
-        from tui.screens.confirm_screen import ConfirmScreen  # noqa: PLC0415
-        self.app.push_screen(
-            ConfirmScreen(
-                f"Buy {rich_escape(str(name))} for {price}g?",
-                yes_label="Buy",
-                no_label="Cancel",
-            ),
-            _on_confirmed,
-        )
-
-    def _execute_buy(self, item: Any) -> dict:
         try:
-            if self._shop_type == "shopweapons":
-                from services.weapon_shop_service import buy  # noqa: PLC0415
-                return buy(self._pg, item)
-            if self._shop_type == "shoparmor":
-                from services.armor_shop_service import buy  # noqa: PLC0415
-                return buy(self._pg, item)
-            if self._shop_type == "shopitems":
-                from services.utility_shop_service import buy  # noqa: PLC0415
-                return buy(self._pg, item)
-            if self._shop_type == "inn":
-                from services.inn_service import buy  # noqa: PLC0415
-                return buy(self._pg, item)
-            if self._shop_type == "bar":
-                from services.bar_service import buy  # noqa: PLC0415
-                return buy(self._pg, item)
-        except Exception as exc:
-            return {"success": False, "error": str(exc)}
-        return {"success": False, "error": "unsupported_shop_type"}
+            self.query_one("#buy-detail", Static).update(_item_detail(item))
+        except Exception:
+            pass
+        try:
+            if item is not None:
+                price   = item.get("value", 0) if isinstance(item, dict) else getattr(item, "value", 0)
+                max_qty = (money // price) if price > 0 else 99
+                max_qty = max(1, min(max_qty, 99))
+                can_buy = money >= price
+                self._buy_qty = max(1, min(self._buy_qty, max_qty))
+                self.query_one("#buy-afford",      Static).update(f"Can afford: {max_qty}×")
+                self.query_one("#buy-qty-display", Static).update(str(self._buy_qty))
+                self.query_one("#buy-qty-dec",  Button).disabled = (self._buy_qty <= 1)
+                self.query_one("#buy-qty-inc",  Button).disabled = (self._buy_qty >= max_qty)
+                self.query_one("#buy-btn",      Button).disabled = not can_buy
+            else:
+                self.query_one("#buy-afford",      Static).update("")
+                self.query_one("#buy-qty-display", Static).update("1")
+                self.query_one("#buy-qty-dec",  Button).disabled = True
+                self.query_one("#buy-qty-inc",  Button).disabled = True
+                self.query_one("#buy-btn",      Button).disabled = True
+        except Exception:
+            pass
 
-    # ── sell flow ─────────────────────────────────────────────────────────────
+    @on(Button.Pressed, "#buy-qty-dec")
+    def _on_buy_qty_dec(self) -> None:
+        if self._buy_item is None or self._buy_qty <= 1:
+            return
+        self._buy_qty -= 1
+        self._refresh_buy_panel()
+
+    @on(Button.Pressed, "#buy-qty-inc")
+    def _on_buy_qty_inc(self) -> None:
+        if self._buy_item is None:
+            return
+        money = getattr(self._pg, "money", 0)
+        price = self._buy_item.get("value", 0) if isinstance(self._buy_item, dict) else getattr(self._buy_item, "value", 0)
+        max_qty = (money // price) if price > 0 else 99
+        max_qty = max(1, min(max_qty, 99))
+        if self._buy_qty >= max_qty:
+            return
+        self._buy_qty += 1
+        self._refresh_buy_panel()
+
+    @on(Button.Pressed, "#buy-btn")
+    def _on_buy_btn(self) -> None:
+        if self._buy_item is not None:
+            self._do_buy(self._buy_item, self._buy_qty)
 
     def _do_sell(self, item: Any, qty: int = 1) -> None:
         name       = rich_escape(str(getattr(item, "name", "?")))
@@ -757,3 +856,86 @@ class ShopOverlay(Widget):
         self.remove_class("ow-overlay")
         self.remove()
         self._on_done(self._acted)
+
+    def _do_buy(self, item: Any, qty: int = 1) -> None:
+        price   = item.get("value", 0) if isinstance(item, dict) else getattr(item, "value", 0)
+        name    = item.get("name", "?") if isinstance(item, dict) else getattr(item, "name", "?")
+        money   = getattr(self._pg, "money", 0)
+        total   = price * qty
+        qty_str = f"{qty}× " if qty > 1 else ""
+
+        if money < total:
+            self.app.notify(
+                f"You need {total}g. You have {money}g.",
+                title="Insufficient Funds",
+                severity="warning",
+            )
+            return
+
+        def _on_confirmed(confirmed: bool | None) -> None:
+            if not confirmed:
+                return
+            success_count = 0
+            for _ in range(qty):
+                try:
+                    result = self._execute_buy(item)
+                except Exception as exc:
+                    self.app.notify(str(exc), title="Purchase Error", severity="error")
+                    break
+                if result.get("success"):
+                    success_count += 1
+                else:
+                    err = result.get("error", "unknown_error")
+                    if err == "insufficient_funds":
+                        self.app.notify("Ran out of gold mid-purchase.", severity="warning")
+                    elif err == "inventory_full":
+                        self.app.notify("Inventory full.", severity="warning")
+                    else:
+                        self.app.notify(f"Purchase failed: {err}", severity="error")
+                    break
+
+            if success_count > 0:
+                self._acted    = True
+                self._buy_item = None
+                self._buy_qty  = 1
+                self.app.notify(
+                    f"Bought {qty_str}{rich_escape(str(name))} for {price * success_count}g!",
+                    title="Purchased",
+                    timeout=2,
+                )
+                self._refresh_gold()
+                self._refresh_buy_panel()
+                if _shop_has_sell(self._shop_type):
+                    self._sell_stock = _load_sell_stock(self._shop_type, self._pg)
+                    self._rebuild_sell_list()
+
+        from tui.screens.confirm_screen import ConfirmScreen  # noqa: PLC0415
+        self.app.push_screen(
+            ConfirmScreen(
+                f"Buy {qty_str}{rich_escape(str(name))} for {total}g?",
+                yes_label="Buy",
+                no_label="Cancel",
+            ),
+            _on_confirmed,
+        )
+
+    def _execute_buy(self, item: Any) -> dict:
+        try:
+            if self._shop_type == "shopweapons":
+                from services.weapon_shop_service import buy  # noqa: PLC0415
+                return buy(self._pg, item)
+            if self._shop_type == "shoparmor":
+                from services.armor_shop_service import buy  # noqa: PLC0415
+                return buy(self._pg, item)
+            if self._shop_type == "shopitems":
+                from services.utility_shop_service import buy  # noqa: PLC0415
+                return buy(self._pg, item)
+            if self._shop_type == "inn":
+                from services.inn_service import buy  # noqa: PLC0415
+                return buy(self._pg, item)
+            if self._shop_type == "bar":
+                from services.bar_service import buy  # noqa: PLC0415
+                return buy(self._pg, item)
+        except Exception as exc:
+            return {"success": False, "error": str(exc)}
+        return {"success": False, "error": "unsupported_shop_type"}

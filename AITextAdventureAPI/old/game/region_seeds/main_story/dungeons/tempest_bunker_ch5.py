@@ -10,7 +10,11 @@ from typing import Dict, Any
 # Tiles
 OPEN_AREA_TILE = "░"
 IMPASSABLE_TILE = "¤"
-IMPASSABLE_CHANCE = 0.14   # cracked panels, exposed wiring, storm damage
+IMPASSABLE_CHANCE = 0.14
+OPEN_AREA_COLOR  = "#607080"
+IMPASSABLE_COLOR = "#2a3040"
+BORDER_TILE      = "·"
+BORDER_COLOR     = "#485868"
 
 # Hostiles per floor
 FLOOR_HOSTILES = {
@@ -251,6 +255,10 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'display_name': "Tempest Research Bunker",
     'open_area_tile': OPEN_AREA_TILE,
     'impassable_tile': IMPASSABLE_TILE,
+    'open_area_color':  OPEN_AREA_COLOR,
+    'impassable_color': IMPASSABLE_COLOR,
+    'border_tile':      BORDER_TILE,
+    'border_color':     BORDER_COLOR,
     'impassable_chance': IMPASSABLE_CHANCE,
     'floor_hostiles': FLOOR_HOSTILES,
     'hostile_seeds': HOSTILE_SEEDS,

@@ -8,7 +8,11 @@ from typing import Dict, Any
 # Tiles
 OPEN_AREA_TILE = "▒"
 IMPASSABLE_TILE = "█"
-IMPASSABLE_CHANCE = 0.05 
+IMPASSABLE_CHANCE = 0.05
+OPEN_AREA_COLOR  = "#6a4a8a"
+IMPASSABLE_COLOR = "#28183a"
+BORDER_TILE      = "·"
+BORDER_COLOR     = "#4a3060"
 
 # Hostiles for this area
 FLOOR_HOSTILES = {
@@ -92,6 +96,10 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'display_name': "Rift Dungeon Outskirts",
     'open_area_tile': OPEN_AREA_TILE,
     'impassable_tile': IMPASSABLE_TILE,
+    'open_area_color':  OPEN_AREA_COLOR,
+    'impassable_color': IMPASSABLE_COLOR,
+    'border_tile':      BORDER_TILE,
+    'border_color':     BORDER_COLOR,
     'impassable_chance': 0.25, # More chaotic than the main dungeon
     'floor_hostiles': FLOOR_HOSTILES,
     'hostile_seeds': HOSTILE_SEEDS,

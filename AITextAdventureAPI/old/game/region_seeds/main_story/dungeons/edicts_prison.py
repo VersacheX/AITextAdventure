@@ -5,9 +5,13 @@ A black site for correcting those who are 'too real' for Edict's stage.
 from typing import Dict, Any
 
 # Tiles
-OPEN_AREA_TILE = " "
+OPEN_AREA_TILE = "░"
 IMPASSABLE_TILE = "█"
-IMPASSABLE_CHANCE = 0.1
+IMPASSABLE_CHANCE = 0.10
+OPEN_AREA_COLOR  = "#787878"
+IMPASSABLE_COLOR = "#1c1c1c"
+BORDER_TILE      = "·"
+BORDER_COLOR     = "#484848"
 
 # Hostiles
 FLOOR_HOSTILES = {
@@ -83,6 +87,10 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'display_name': "Edict's Correctional Facility",
     'open_area_tile': OPEN_AREA_TILE,
     'impassable_tile': IMPASSABLE_TILE,
+    'open_area_color':  OPEN_AREA_COLOR,
+	'impassable_color': IMPASSABLE_COLOR,
+	'border_tile':      BORDER_TILE,
+	'border_color':     BORDER_COLOR,
     'impassable_chance': IMPASSABLE_CHANCE,
     'floor_hostiles': FLOOR_HOSTILES,
     'hostile_seeds': HOSTILE_SEEDS,

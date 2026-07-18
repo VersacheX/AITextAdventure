@@ -72,6 +72,10 @@ class DungeonBuilder:
         dungeon.impassable_tile = self.impassable_tile
         dungeon.impassable_chance = self.impassable_chance
         dungeon.visible_distance = self.visible_distance
+        dungeon.open_area_color = self.settings.get("open_area_color", None)
+        dungeon.impassable_color = self.settings.get("impassable_color", None)
+        dungeon.border_tile = self.settings.get("border_tile", "*")
+        dungeon.border_color = self.settings.get("border_color", None)
 
         # Build each floor independently. Align next floor under previous exit stair.
         prev_exit_xy: Optional[Tuple[int,int]] = None

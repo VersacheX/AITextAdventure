@@ -3,9 +3,13 @@
 from typing import Dict, Any
 
 # Tile constants for dungeon rendering and builder decisions
-OPEN_AREA_TILE = "░"
-IMPASSABLE_TILE = "¤"
+OPEN_AREA_TILE   = "░"
+IMPASSABLE_TILE  = "¤"
 IMPASSABLE_CHANCE = 0.03
+OPEN_AREA_COLOR  = "#90b8d8"
+IMPASSABLE_COLOR = "#1a3050"
+BORDER_TILE      = "·"
+BORDER_COLOR     = "#5a88a8"
 
 FLOOR_HOSTILES = {
     1: ['frostling', 'ice_wolf', 'shiver_shade', 'glacier_spirit', 'frozen_stalker', 'snow_bandit', 'frostbound_bear']
@@ -258,6 +262,10 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     "display_name": "Aeriola's Glacier Tomb",
     "open_area_tile": OPEN_AREA_TILE,
     "impassable_tile": IMPASSABLE_TILE,
+    "open_area_color":  OPEN_AREA_COLOR,
+	"impassable_color": IMPASSABLE_COLOR,
+	"border_tile":      BORDER_TILE,
+	"border_color":     BORDER_COLOR,
     "impassable_chance": IMPASSABLE_CHANCE,
     "floor_hostiles": FLOOR_HOSTILES,
     "hostile_seeds": HOSTILE_SEEDS,

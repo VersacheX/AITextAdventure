@@ -10,9 +10,11 @@ from typing import Dict, Any
 # Tiles
 OPEN_AREA_TILE = "░"
 IMPASSABLE_TILE = "¤"
-
-# Slightly higher due to spatial instability
 IMPASSABLE_CHANCE = 0.18
+OPEN_AREA_COLOR  = "#7a5a9e"
+IMPASSABLE_COLOR = "#2e1a4a"
+BORDER_TILE      = "░"
+BORDER_COLOR     = "#5a3a7a"
 
 ############################################################
 # HOSTILES PER FLOOR
@@ -407,6 +409,10 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'display_name': 'Rift Dungeon',
     'open_area_tile': OPEN_AREA_TILE,
     'impassable_tile': IMPASSABLE_TILE,
+    'open_area_color':  OPEN_AREA_COLOR,
+    'impassable_color': IMPASSABLE_COLOR,
+    'border_tile':      BORDER_TILE,
+    'border_color':     BORDER_COLOR,
     'impassable_chance': IMPASSABLE_CHANCE,
     'floor_hostiles': FLOOR_HOSTILES,
     'hostile_seeds': HOSTILE_SEEDS,

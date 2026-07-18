@@ -514,9 +514,9 @@ class Player:
 	# ── Level up / stat management ─────────────────────────────────────────
 
 	def get_required_experience_to_level(self) -> int:
-		max_experience_reqquired_to_level = 20000
+		max_experience_required_to_level = 20000
 		scaling_factor = min(self.level / 60, 1.0)
-		required_xp = int(self.xp_needed_to_level + (max_experience_reqURED_TO_LEVEL - self.xp_needed_to_level) * scaling_factor)
+		required_xp = int(self.xp_needed_to_level + (max_experience_required_to_level - self.xp_needed_to_level) * scaling_factor)
 		return required_xp
 
 	def gain_experience(self, amount: int) -> int:

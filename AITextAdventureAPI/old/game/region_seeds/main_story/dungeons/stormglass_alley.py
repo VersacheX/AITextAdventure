@@ -9,6 +9,10 @@ from typing import Dict, Any
 OPEN_AREA_TILE = "▒"
 IMPASSABLE_TILE = "█"
 IMPASSABLE_CHANCE = 0.05
+OPEN_AREA_COLOR  = "#5a8aaa"
+IMPASSABLE_COLOR = "#1a2a3a"
+BORDER_TILE      = "·"
+BORDER_COLOR     = "#3a6080"
 
 # Hostiles
 FLOOR_HOSTILES = {
@@ -99,6 +103,10 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'display_name': "Stormglass Alley",
     'open_area_tile': OPEN_AREA_TILE,
     'impassable_tile': IMPASSABLE_TILE,
+    'open_area_color':  OPEN_AREA_COLOR,
+    'impassable_color': IMPASSABLE_COLOR,
+    'border_tile':      BORDER_TILE,
+    'border_color':     BORDER_COLOR,
     'impassable_chance': IMPASSABLE_CHANCE,
     'floor_hostiles': FLOOR_HOSTILES,
     'hostile_seeds': HOSTILE_SEEDS,

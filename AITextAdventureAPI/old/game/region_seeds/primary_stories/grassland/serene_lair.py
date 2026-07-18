@@ -3,9 +3,13 @@
 from typing import Dict, Any
 
 # Tile constants for dungeon rendering and builder decisions
-OPEN_AREA_TILE = "░"       # tall grass paths
-IMPASSABLE_TILE = "♠"      # dense thicket walls
-IMPASSABLE_CHANCE = 0.03   # shifting grass walls
+OPEN_AREA_TILE   = "░"       # tall grass paths
+IMPASSABLE_TILE  = "♠"      # dense thicket walls
+IMPASSABLE_CHANCE = 0.03
+OPEN_AREA_COLOR  = "#a0b850"
+IMPASSABLE_COLOR = "#3a4818"
+BORDER_TILE      = "·"
+BORDER_COLOR     = "#708030"
 
 FLOOR_HOSTILES = {
     1: [
@@ -266,6 +270,10 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     "display_name": "Serene's Whispering Maze",
     "open_area_tile": OPEN_AREA_TILE,
     "impassable_tile": IMPASSABLE_TILE,
+    "open_area_color":  OPEN_AREA_COLOR,
+	"impassable_color": IMPASSABLE_COLOR,
+	"border_tile":      BORDER_TILE,
+	"border_color":     BORDER_COLOR,
     "impassable_chance": IMPASSABLE_CHANCE,
     "floor_hostiles": FLOOR_HOSTILES,
     "hostile_seeds": HOSTILE_SEEDS,

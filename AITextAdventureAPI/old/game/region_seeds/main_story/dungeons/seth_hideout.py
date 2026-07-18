@@ -9,6 +9,11 @@ IMPASSABLE_TILE = "¤"
 
 IMPASSABLE_CHANCE = 0.04   # roots shifting, blocking paths
 
+OPEN_AREA_COLOR  = "#6b5a3e"
+IMPASSABLE_COLOR = "#3a2e1f"
+BORDER_TILE      = "·"
+BORDER_COLOR     = "#4a3d2a"
+
 #### SAVE FOR LATER... COOL TILE SET
 # OPEN_AREA_TILE = "▞" # Disco
 # IMPASSABLE_TILE = "◘" # Link block ... possible chest
@@ -246,6 +251,10 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     "display_name": "Seth's Hideout",
     "open_area_tile": OPEN_AREA_TILE,
     "impassable_tile": IMPASSABLE_TILE,
+    'open_area_color':  OPEN_AREA_COLOR,
+    'impassable_color': IMPASSABLE_COLOR,
+    'border_tile':      BORDER_TILE,
+    'border_color':     BORDER_COLOR,
     "impassable_chance": IMPASSABLE_CHANCE,
     "floor_hostiles": FLOOR_HOSTILES,
     "hostile_seeds": HOSTILE_SEEDS,

@@ -191,7 +191,8 @@ NPC_DIALOG = [
 		'dialog': [
 			"You don't know how you got here.",
 			"In one moment you and your compadres were in a bar knocking back a few µ.",
-			"And the next, reality shifted around you.  You find yourself here with three of your friends missing.",
+			"And the next, blinding lights crashed through the dim establishment.",
+			"Reality shifted around you, and you found yourself here with three of your friends missing.",
 			"This place looks like chaos.  The streets are littered, buildings look looted, and people can be seen breaking out in fights."
 		]
 	},
@@ -199,7 +200,8 @@ NPC_DIALOG = [
 		'npc_id': None,
 		'dialog_id': 'ch1_narrator_we_do_not_begin',
 		'dialog': [
-			"Chapter 1 - We do not begin by knowing where we are.  We begin by finding ourselves already there."
+			"Chapter 1",
+			"We do not begin by knowing where we are.  We begin by finding ourselves already there."
 		]
 	},
 	{
@@ -214,17 +216,15 @@ NPC_DIALOG = [
 		'npc_id': 'seth',
 		'dialog_id': 'seth_preface',
 		'dialog': [
-			"Ey! You there! Yeah, you look lost.",
-			"These streets aren't safe, especially for scrums like you.",
-			"You'll be safe inside though... As long as its not the µ or the Ṣ.",
-			"You can get to the @inn if you need to put your head down... It's tuff out here!"
+			"Whoa! that was crazy! You appeared out of nowhere...",
+			"Hey Look, these streets aren't safe, be careful who you trust.",
+			"Gotta run... It's tuff out here!"
 		]
 	},
 	{
 		'npc_id': None,
 		'dialog_id': 'chapter_1_our_stuff_is_missing',
 		'dialog': [
-			"It looks like your cash is gone. That thug must have stolen some of it when you weren't looking",
 			"You should get somewhere safe to check your things.  Most buildings are safe, except for the bars.",
 			"Find a residence or business (î Î ï Ï), then press (i) to manage your party.",
 			"Make sure to spend any power points you have to upgrade your stats and ensure your characters learn any abilities",
@@ -235,7 +235,7 @@ NPC_DIALOG = [
 		'npc_id': 'technique',
 		'dialog_id': 'technique_got_jacked',
 		'dialog': [
-			"Ooooooooh! I'm gonna find that guy and take him to pound town!"
+			"If you ask me the first person to question trusting is the guy sayin be careful who to trust."
 		]
 	},
 	{
@@ -523,12 +523,13 @@ TEST_DIALOG = [
 			"You decide to take stock of your surroundings first.",
 			"A reckless charge into chaos never helped anyone."
 		]
-	},
-	{
-		'npc_id': None,
-		'dialog_id': 'condition_test_narrator',
-		'dialog': ["conditions work."]
 	}
+	# ,
+	# {
+	# 	'npc_id': None,
+	# 	'dialog_id': 'condition_test_narrator',
+	# 	'dialog': ["conditions work."]
+	# }
 ]
 
 NPC_DIALOG += TEST_DIALOG
@@ -835,17 +836,17 @@ TASKS = [
 		'to_type': 'npc',
 		'to_id': 'rook',
 		'task_acquire_events': [
-			{
-				'event_type': 'initiate_dialog',
-				'params': {
-					'npc_id': None,
-					'dialog_id': 'condition_test_narrator'
-				},
-				'condition': {
-					'type': 'is_task_completed',
-					'params': { 'task_id': 'main_story_ch_1_find_the_inn' }
-				}
-			}
+			# {
+			# 	'event_type': 'initiate_dialog',
+			# 	'params': {
+			# 		'npc_id': None,
+			# 		'dialog_id': 'condition_test_narrator'
+			# 	},
+			# 	'condition': {
+			# 		'type': 'is_task_completed',
+			# 		'params': { 'task_id': 'main_story_ch_1_find_the_inn' }
+			# 	}
+			# }
 		],
 		'task_complete_events': [ 
 			{
@@ -905,8 +906,8 @@ TASKS = [
 					'dungeon_id': 'seth_hideout',
 					'location': 'region_open_area'
 				}
-			},
-			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'seth_hideout', 'item_id': 'dune_sundial', 'location': 'treasure_room'}}
+			}
+			#,{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'seth_hideout', 'item_id': 'dune_sundial', 'location': 'treasure_room'}}
 		],
 		'task_complete_events': [
 			{

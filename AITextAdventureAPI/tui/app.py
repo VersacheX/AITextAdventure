@@ -16,6 +16,7 @@ don't exist yet during incremental development, without crashing.
 """
 from __future__ import annotations
 
+import sys as _sys
 from pathlib import Path
 
 from textual.app import App
@@ -33,7 +34,11 @@ from tui.screens.tasks_screen import TasksScreen
 from tui.screens.dungeon_screen import DungeonScreen
 from tui.screens.dev.data_mgmt import DataMgmtScreen
 
-_STYLES_PATH = Path(__file__).parent / "styles" / "app.tcss"
+_STYLES_PATH = (
+    Path(_sys._MEIPASS) / "tui" / "styles" / "app.tcss"
+    if getattr(_sys, "frozen", False)
+    else Path(__file__).parent / "styles" / "app.tcss"
+)
 
 
 class FractureApp(App):
