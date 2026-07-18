@@ -292,7 +292,6 @@ def equip_player_gear(player: Player, player_game, ability_type_focus: Optional[
         wobj = _instantiate_weapon(wseed)
         player_game.pick_up_item(wobj)
         player.equip_weapon(player_game, wobj)
-    
 
     # Armor pieces
     aseeds = select_armor(player, ability_type_focus) or {}
@@ -302,11 +301,9 @@ def equip_player_gear(player: Player, player_game, ability_type_focus: Optional[
         aobj = _instantiate_armor(seed, slot)
         player_game.pick_up_item(aobj)
         player.equip_armor(player_game, aobj)
-    
+
     # Utility items
-    
     useeds = select_utility_items(player)
     for us in (useeds or []):
         uobj = _instantiate_utility(us)
         player_game.pick_up_item(uobj)
-    

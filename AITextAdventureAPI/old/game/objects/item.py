@@ -134,80 +134,72 @@ class Item:
 # Helper to instantiate an Item (Weapon/Armor/Utility/Special) from a seed id or seed dict.
 # This centralizes logic so other modules can call it instead of duplicating
 # instantiation code and risking import cycles.
-def instantiate_item_from_id(drop_ref): # drop_ref is ALWAYS A STRING.... IF WE WANT SOMETHING TO BUILD THE ITEM FROM SEED WE WILL DO THAT SPECIFICALLY
-	"""Given a drop reference which may be:
-	- None -> returns None
-	- a string id referencing a seed in game.constants (WEAPON_SEEDS, ARMOR_SEEDS, UTILITY_ITEM_SEEDS, SPECIAL_ITEM_SEEDS)
-	- a seed dict (mapping)
+def instantiate_item_from_id(drop_ref):
+    """Given a drop reference which may be:
+    - None -> returns None
+    - a string id referencing a seed in game.constants (WEAPON_SEEDS, ARMOR_SEEDS,
+      UTILITY_ITEM_SEEDS, SPECIAL_ITEM_SEEDS) or ACCESSORY_SEEDS
+    - a seed dict (mapping)
 
-	Attempts to create and return a concrete Item (Weapon/Armor/UtilityItem/SpecialItem)
-	using the object's module-level _instantiate_* helpers. Exceptions from imports
-	or instantiation will propagate to the caller (no try/except here by request).
-	"""
-	if not drop_ref:
-		return None
+    Attempts to create and return a concrete Item (Weapon/Armor/UtilityItem/SpecialItem/Accessory)
+    using the object's module-level _instantiate_* helpers. Exceptions from imports
+    or instantiation will propagate to the caller (no try/except here by request).
+    """
+    if not drop_ref:
+        return None
 
-	# local imports to avoid import cycles at module import time
-	import game.constants as const
+    import game.constants as const
 
-	# import instantiation helpers (let ImportError propagate if missing)
-	from game.objects.weapon import _instantiate_weapon
-	from game.objects.armor import _instantiate_armor
-	from game.objects.utility_item import _instantiate_utility
-	from game.objects.special_item import _instantiate_special
+    from game.objects.weapon import _instantiate_weapon
+    from game.objects.armor import _instantiate_armor
+    from game.objects.utility_item import _instantiate_utility
+    from game.objects.special_item import _instantiate_special
 
-	# helper: search lists/maps in constants
-	def _find_in_const(list_or_map, ident):
-		if not list_or_map:
-			return None, None
+    def _find_in_const(list_or_map, ident):
+        if not list_or_map:
+            return None, None
+        is_map = isinstance(list_or_map, dict)
+        for entry in (list_or_map.items() if is_map else list_or_map):
+            if is_map:
+                slot, group = entry
+                for s in group or []:
+                    if isinstance(s, dict) and s.get('id') == ident:
+                        return s, slot
+            else:
+                s = entry
+                if isinstance(s, dict) and s.get('id') == ident:
+                    return s, None
+        return None, None
 
- 	    # determine if list_or_map is a map (dict) or list
-		is_map = isinstance(list_or_map, dict)
+    if isinstance(drop_ref, str):
+        ident = drop_ref
 
-		for entry in (list_or_map.items() if is_map else list_or_map):
-			if is_map: #armor case
-				slot, group = entry
-				for s in group or []:
-					if isinstance(s, dict) and s.get('id') == ident:
-						return s, slot
-			else: #weapon, utility, special case
-				s = entry
-				if isinstance(s, dict) and s.get('id') == ident:
-					return s, None
+        # try weapon
+        s, _ = _find_in_const(const.WEAPON_SEEDS, ident)
+        if s:
+            return _instantiate_weapon(s)
+        # try armor
+        s, slot = _find_in_const(const.ARMOR_SEEDS, ident)
+        if s:
+            return _instantiate_armor(s, slot)
+        # try utility
+        s, _ = _find_in_const(const.UTILITY_ITEM_SEEDS, ident)
+        if s:
+            return _instantiate_utility(s)
+        # try special
+        s, _ = _find_in_const(const.SPECIAL_ITEM_SEEDS, ident)
+        if s:
+            return _instantiate_special(s)
+        # try accessory
+        try:
+            from game.constants_accesories import ACCESSORY_SEEDS
+            from game.objects.accessory import instantiate_accessory
+            acc_seed = next((a for a in ACCESSORY_SEEDS if a.get('id') == ident), None)
+            if acc_seed:
+                return instantiate_accessory(acc_seed)
+        except ImportError:
+            pass
 
-		return None, None
+        return None
 
-	# If it's a string id, look up in constants
-	if isinstance(drop_ref, str):
-		ident = drop_ref
-		weapon_seeds = const.WEAPON_SEEDS
-		armor_seeds = const.ARMOR_SEEDS
-		utility_seeds = const.UTILITY_ITEM_SEEDS
-		special_seeds = const.SPECIAL_ITEM_SEEDS
-
-		# try weapon
-		if weapon_seeds:
-			s, _ = _find_in_const(weapon_seeds, ident)
-			if s:
-				return _instantiate_weapon(s)
-		# try armor
-		if armor_seeds:
-			s, slot = _find_in_const(armor_seeds, ident)
-			if s:
-				return _instantiate_armor(s, slot)
-		# try utility
-		if utility_seeds:
-			s, _ = _find_in_const(utility_seeds, ident)
-			if s:
-				return _instantiate_utility(s)
-		# try special
-		if special_seeds:
-			s, _ = _find_in_const(special_seeds, ident)
-			if s:
-				return _instantiate_special(s)
-
-		# not found: return original id
-		return None
-
-	# unknown type: return as-is
-	return None
+    return None

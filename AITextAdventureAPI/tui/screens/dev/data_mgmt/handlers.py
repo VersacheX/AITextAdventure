@@ -4,10 +4,15 @@ Each tree category has its own dedicated handler in treehandlers.
 """
 from __future__ import annotations
 
+from collections import defaultdict
+
+from rich.style import Style
+from rich.text import Text
+
 from typing import TYPE_CHECKING
 
 from textual.containers import Vertical
-from textual.widgets import Button, Input, ListView, RadioSet, Static, Tabs, Tree
+from textual.widgets import Button, DataTable, Input, ListView, RadioSet, Static, Tabs, Tree
 
 from tui.screens.dev.data_mgmt.components import _RecordRow
 from tui.screens.dev.data_mgmt.detail_panel import (
@@ -85,15 +90,16 @@ def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
     screen.query_one("#dm-filter", Input).display                  = not (is_dialog or is_equipment)
     screen.query_one("#dm-dialog-filter-row").display              = is_dialog
     screen.query_one("#dm-equipment-filter-row", Vertical).display = is_equipment
-    screen.query_one("#dm-list", ListView).display                 = not is_tree
+    screen.query_one("#dm-list", ListView).display                 = not is_tree and not is_equipment
+    screen.query_one("#dm-equipment-table", DataTable).display     = is_equipment
     screen.query_one("#dm-dialog-tree", Tree).display              = is_dialog
     screen.query_one("#dm-timeline-tree", Tree).display            = is_timeline
     screen.query_one("#dm-npc-tree", Tree).display                 = is_npc
     screen.query_one("#dm-expand", Button).display                 = is_tree
     screen.query_one("#dm-collapse", Button).display               = is_tree
-    screen.query_one("#dm-copy", Button).display                   = is_tree
+    screen.query_one("#dm-copy", Button).display                   = is_tree or is_equipment
     screen.query_one("#dm-validate-timeline", Button).display      = is_timeline
-    # NPC music player bar — only visible on the NPC tab
+    screen.query_one("#dm-equip-sort-dir", Button).display         = is_equipment
     screen.query_one(NpcMusicPlayerWidget).display                 = is_npc
 
 
@@ -136,8 +142,38 @@ def handle_input_changed(screen: "DataMgmtScreen", event: Input.Changed) -> None
 
 
 def handle_radio_set_changed(screen: "DataMgmtScreen", event: RadioSet.Changed) -> None:
-    if event.radio_set.id in ("dm-equipment-type-radio", "dm-equipment-slot-radio"):
+    if event.radio_set.id in (
+        "dm-equipment-type-radio",
+        "dm-equipment-slot-radio",
+        "dm-equipment-sort-radio",
+    ):
+        if event.radio_set.id == "dm-equipment-type-radio":
+            type_filter = get_equipment_type_filter(screen)
+            slot_radio  = screen.query_one("#dm-equipment-slot-radio", RadioSet)
+            slot_radio.disabled = type_filter in ("weapon", "accessory")
         rebuild_list_for_screen(screen)
+
+
+_SORT_COL_MAP: dict[str, str] = {
+    "equip-sort-lv":     "level",
+    "equip-sort-rarity": "rarity_rank",
+    "equip-sort-dmg":    "damage",
+    "equip-sort-def":    "defense",
+    "equip-sort-crit":   "crit",
+    "equip-sort-tsp":    "tsp",
+    "equip-sort-tep":    "tep",
+    "equip-sort-tap":    "tap",
+    "equip-sort-tp":     "tp",
+}
+
+
+def get_equipment_sort_col(screen: "DataMgmtScreen") -> str:
+    try:
+        sort_radio = screen.query_one("#dm-equipment-sort-radio", RadioSet)
+        pressed_id = sort_radio.pressed_button.id if sort_radio.pressed_button else "equip-sort-none"
+        return _SORT_COL_MAP.get(pressed_id, "")
+    except Exception:
+        return ""
 
 
 def get_equipment_type_filter(screen: "DataMgmtScreen") -> str:
@@ -148,6 +184,8 @@ def get_equipment_type_filter(screen: "DataMgmtScreen") -> str:
             return "weapon"
         elif pressed_id == "equip-type-armor":
             return "armor"
+        elif pressed_id == "equip-type-accessory":
+            return "accessory"
         return ""
     except Exception:
         return ""
@@ -215,6 +253,10 @@ def handle_button_pressed(screen: "DataMgmtScreen", event: Button.Pressed) -> No
         _handle_copy(screen)
     elif bid == "dm-validate-timeline":
         validate_timeline_for_screen(screen)
+    elif bid == "dm-equip-sort-dir":
+        screen._equipment_sort_asc = not screen._equipment_sort_asc
+        event.button.label = "↑" if screen._equipment_sort_asc else "↓"
+        rebuild_list_for_screen(screen)
 
 
 def _handle_copy(screen: "DataMgmtScreen") -> None:
@@ -242,6 +284,12 @@ def _handle_copy(screen: "DataMgmtScreen") -> None:
             tree = screen.query_one("#dm-npc-tree", Tree)
             text = "\n".join(serialize_node_visible(tree.root, depth=0))
 
+    elif category == _EQUIPMENT_CATEGORY:
+        records = screen._last_filtered or []
+        text = "\n".join(
+            f"{r.name}  {r.subtitle}" for r in records
+        )
+
     else:
         if screen._last_filtered is not None:
             text = serialize_filtered_tree(screen._last_filtered)
@@ -254,7 +302,7 @@ def _handle_copy(screen: "DataMgmtScreen") -> None:
 def validate_timeline_for_screen(screen: "DataMgmtScreen") -> None:
     """Run the timeline integrity validator and repaint the tree.
 
-    Errors are annotated in-place on each ``TimelineTaskNode.errors`` list.
+    Errors areannotated in-place on each ``TimelineTaskNode.errors`` list.
     The tree is then rebuilt so labels for invalid tasks render in red.
     A status notification reports the total error count.
     """
@@ -328,9 +376,180 @@ def rebuild_npc_tree_for_screen(screen: "DataMgmtScreen") -> None:
     screen.query_one("#dm-status", Static).update(f"{total_npcs} NPC(s)")
     screen.restore_npc_selection()
 
+# ── Symbol maps ───────────────────────────────────────────────────────────────
+
+_ELEMENT_SYMBOLS: dict[str, str] = {
+    "dark":     "(D)",
+    "light":    "(L)",
+    "earth":    "(Ë)",
+    "fire":     "(F)",
+    "water":    "(W)",
+    "air":      "(A)",
+    "ice":      "(I)",
+    "electric": "(É)",
+}
+
+# Unicode single-char glyphs for status effects — chosen for terminal readability
+_STATUS_SYMBOLS: dict[str, str] = {
+    "petrify":            "⬡",   # hollow hexagon → frozen/stone
+    "stun":               "✦",   # burst star → shocked/dazed
+    "sleep":              "☽",   # crescent → unconscious
+    "confuse":            "⁈",   # interrobang → disoriented
+    "paralyze":           "≋",   # triple tilde → locked in place
+    "silence":            "⊘",   # slashed circle → no voice
+    "fear":               "☠",   # skull → terror
+    "continuous_damage":  "♾",   # infinity → ongoing tick
+    "elemental_debuff":   "◆",   # filled diamond → elemental weakness
+    "attack_debuff":      "↓A",  # arrow + letter → attack lowered
+    "defense_debuff":     "↓D",
+    "strength_debuff":    "↓S",
+    "dexterity_debuff":   "↓X",
+    "intelligence_debuff":"↓I",
+    "constitution_debuff":"↓C",
+}
+
+
+def _fmt_elem_list(elems: list[str]) -> str:
+    """Format a list of element names as compact symbols."""
+    if not elems:
+        return "—"
+    return "".join(_ELEMENT_SYMBOLS.get(e, f"({e[:1].upper()})") for e in elems)
+
+
+def _fmt_status_list(statuses: list[str]) -> str:
+    """Format a list of status ids as compact unicode glyphs."""
+    if not statuses:
+        return "—"
+    return " ".join(_STATUS_SYMBOLS.get(s, f"[{s[:2]}]") for s in statuses)
+
+
+_RARITY_ABBR_MAP = {
+    "common": "Com", "uncommon": "Unc", "rare": "Rar", "superrare": "SR", "notfound": "Not",
+}
+
+_TYPE_ABBR_MAP = {
+    "weapon":       "WPN",
+    "armor · head": "A-HD",
+    "armor · body": "A-BD",
+    "armor · arms": "A-AR",
+    "armor · legs": "A-LG",
+    "accessory":    "ACC",
+}
+
+_EQUIP_COLUMNS = (
+    "Name", "Type", "Lv", "Rarity", "Elem",
+    "DMG", "DEF", "CRIT", "TSP", "TEP", "TAP", "TP",
+    "Imm", "Res", "Wk",
+)
+def _balance_ratings(records: list) -> list[str]:
+    """Return a 'weak' / 'strong' / '' rating for each record.
+
+    Strategy: group records by (broad_type, level), compute the mean TP
+    for each group, then flag items whose TP is < 65% (weak) or > 145%
+    (strong) of their group mean.  Groups with only one member are not
+    flagged so unique high-level uniques don't get false positives.
+    """
+    tp_by_group: dict = defaultdict(list)
+    for r in records:
+        x = r.extras
+        broad = "weapon" if x.get("damage") else "armor"
+        key   = (broad, x.get("level", 0))
+        tp_by_group[key].append(x.get("tp", 0))
+
+    tp_avg: dict = {
+        k: sum(v) / len(v) for k, v in tp_by_group.items() if len(v) > 1
+    }
+
+    ratings: list[str] = []
+    for r in records:
+        x     = r.extras
+        broad = "weapon" if x.get("damage") else "armor"
+        key   = (broad, x.get("level", 0))
+        avg   = tp_avg.get(key, 0)
+        tp    = x.get("tp", 0)
+        if avg and tp / avg < 0.65:
+            ratings.append("weak")
+        elif avg and tp / avg > 1.45:
+            ratings.append("strong")
+        else:
+            ratings.append("")
+    return ratings
+
+
+def _cell(value: str, rating: str) -> Text:
+    """Wrap a cell value in a Rich Text with the appropriate balance colour."""
+    if rating == "weak":
+        return Text(value, style=Style(color="red", dim=True))
+    if rating == "strong":
+        return Text(value, style=Style(color="yellow"))
+    return Text(value)
+
+
+def _populate_equipment_table(screen: "DataMgmtScreen", records: list) -> None:
+    table = screen.query_one("#dm-equipment-table", DataTable)
+    table.clear(columns=True)
+    for col in _EQUIP_COLUMNS:
+        table.add_column(col, key=col)
+
+    ratings = _balance_ratings(records)
+
+    for idx, (r, rating) in enumerate(zip(records, ratings)):
+        x         = r.extras
+        rarity    = x.get("rarity", "")
+        rar_disp  = _RARITY_ABBR_MAP.get(rarity, rarity[:3].title() if rarity else "—")
+        type_abbr = _TYPE_ABBR_MAP.get(x.get("type_label", ""), x.get("type_label", "")[:4].upper() or "—")
+        dmg  = str(x["damage"])     if x.get("damage")  else "—"
+        defn = str(x["defense"])    if x.get("defense") else "—"
+        crit = f"{x['crit']:.1f}"  if x.get("crit")    else "—"
+        tsp  = str(x.get("tsp", 0))
+        tep  = str(x.get("tep", 0))
+        tap_val = x.get("tap", 0)
+        tap  = str(tap_val) if tap_val != 0 else "—"
+        tp   = str(x.get("tp",  0))
+        elem = x.get("elements", "") or "—"
+
+        imm_raw = x.get("immunities") or []
+        res_raw = x.get("resistances") or []
+        wk_raw  = x.get("weaknesses") or []
+
+        def _fmt_mixed(items: list[str]) -> str:
+            if not items:
+                return "—"
+            parts = []
+            for item in items:
+                if item in _STATUS_SYMBOLS:
+                    parts.append(_STATUS_SYMBOLS[item])
+                elif item in _ELEMENT_SYMBOLS:
+                    parts.append(_ELEMENT_SYMBOLS[item])
+                else:
+                    parts.append(f"[{item[:3]}]")
+            return " ".join(parts)
+
+        imm_disp = _fmt_mixed(imm_raw)
+        res_disp = _fmt_mixed(res_raw)
+        wk_disp  = _fmt_mixed(wk_raw)
+
+        table.add_row(
+            _cell(r.name,                   rating),
+            _cell(type_abbr,                rating),
+            _cell(str(x.get("level", 0)),   rating),
+            _cell(rar_disp,                 rating),
+            _cell(elem,                     rating),
+            _cell(dmg,                      rating),
+            _cell(defn,                     rating),
+            _cell(crit,                     rating),
+            _cell(tsp,                      rating),
+            _cell(tep,                      rating),
+            _cell(tap,                      rating),
+            _cell(tp,                       rating),
+            _cell(imm_disp,                 rating),
+            _cell(res_disp,                 rating),
+            _cell(wk_disp,                  rating),
+            key=str(idx),
+        )
 
 def rebuild_list_for_screen(screen: "DataMgmtScreen") -> None:
-    """Rebuild the flat ListView for the active non-tree category."""
+    """Rebuild the flat ListView (or equipment DataTable) for the active non-tree category."""
     if not screen._loaded:
         return
     category = screen._category
@@ -340,21 +559,30 @@ def rebuild_list_for_screen(screen: "DataMgmtScreen") -> None:
     except Exception:
         pass
 
-    list_view = screen.query_one("#dm-list", ListView)
-    list_view.clear()
-
     if category == _EQUIPMENT_CATEGORY:
         records = filter_equipment_records(
             get_equipment_type_filter(screen),
             get_equipment_slot_filter(screen),
         )
-    else:
-        records = search_records(category, query)
+        sort_col = get_equipment_sort_col(screen)
+        if sort_col:
+            sort_asc = getattr(screen, "_equipment_sort_asc", True)
+            records = sorted(
+                records,
+                key=lambda r: r.extras.get(sort_col, 0),
+                reverse=not sort_asc,
+            )
+        screen._last_filtered = records
+        _populate_equipment_table(screen, records)
+        screen.query_one("#dm-status", Static).update(f"{len(records)} record(s)")
+        return
 
+    list_view = screen.query_one("#dm-list", ListView)
+    list_view.clear()
+    records = search_records(category, query)
     screen._last_filtered = records
     for record in records:
         list_view.append(_RecordRow(record))
-
     screen.query_one("#dm-status", Static).update(f"{len(records)} record(s)")
 
 
@@ -391,4 +619,11 @@ def handle_copy_action(screen: "DataMgmtScreen") -> None:
 
     copied = copy_to_clipboard(text)
     status = "Copied to clipboard" if copied else "Saved to temp file (fallback)"
+    def handle_radio_set_changed(screen: "DataMgmtScreen", event: RadioSet.Changed) -> None:
+        if event.radio_set.id in (
+            "dm-equipment-type-radio",
+            "dm-equipment-slot-radio",
+            "dm-equipment-sort-radio",
+        ):
+            rebuild_list_for_screen(screen)
     screen.query_one("#dm-status", Static).update(status)

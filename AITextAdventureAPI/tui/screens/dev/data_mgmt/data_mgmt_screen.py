@@ -7,14 +7,15 @@ Delegates all behavior to handlers, treehandlers, detail_panel, and utils.
 from __future__ import annotations
 
 import random as _random
+from collections import deque
 from pathlib import Path
-from typing import Any, List, Optional, Set
+from typing import Any, Deque, List, Optional, Set
 
 from textual import work
 from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal, ScrollableContainer, Vertical
-from textual.widgets import Button, Input, Label, ListView, RadioButton, RadioSet, Static, Tab, Tabs, Tree
+from textual.widgets import Button, DataTable, Input, Label, ListView, RadioButton, RadioSet, Static, Tab, Tabs, Tree
 
 from tui.audio import NPCMusicController
 from tui.screens.base_screen import BaseScreen
@@ -46,9 +47,9 @@ _DIALOG_CATEGORY   = "character_dialog"
 _TIMELINE_CATEGORY = "timeline"
 _NPC_CATEGORY      = "npc"
 
-_MUSIC_DIR          = Path(__file__).resolve().parents[3] / "assets" / "music"
+_MUSIC_DIR           = Path(__file__).resolve().parents[3] / "assets" / "music"
 _DETAIL_WIDTH_NORMAL = 80
-
+_HISTORY_SIZE        = 7
 
 class DataMgmtScreen(BaseScreen):
     """Dev-only browser for every seed-data catalog in the game."""
@@ -109,8 +110,14 @@ class DataMgmtScreen(BaseScreen):
         align: left middle;
     }
 
+    #dm-equipment-table {
+        height: 1fr;
+        display: none;
+    }
+
     #dm-equipment-type-radio,
-    #dm-equipment-slot-radio {
+    #dm-equipment-slot-radio,
+    #dm-equipment-sort-radio {
         width: 1fr;
         height: auto;
         layout: horizontal;
@@ -119,10 +126,22 @@ class DataMgmtScreen(BaseScreen):
     }
 
     #dm-equipment-type-radio RadioButton,
-    #dm-equipment-slot-radio RadioButton {
+    #dm-equipment-slot-radio RadioButton,
+    #dm-equipment-sort-radio RadioButton {
         width: auto;
         min-width: 8;
         margin-right: 1;
+    }
+
+    #dm-equip-sort-dir {
+        width: auto;
+        min-width: 3;
+        height: auto;
+        padding: 0 1;
+        margin-left: 1;
+        color: $text;
+        background: $surface;
+        border: solid $accent 30%;
     }
 
     RadioButton {
@@ -216,12 +235,10 @@ class DataMgmtScreen(BaseScreen):
         self._loaded: bool  = False
         self._detail_maximised: bool = False
 
-        # Per-tree filtered model caches (for copy-to-clipboard fallback)
         self._last_filtered: Any           = None
         self._last_timeline_filtered: Any  = None
         self._last_npc_filtered: Any       = None
 
-        # Independent expansion state per tree so switching tabs doesn't clobber state
         self._user_expanded: Set[str]          = set()
         self._user_collapsed: Set[str]         = set()
         self._timeline_user_expanded: Set[str] = set()
@@ -229,12 +246,16 @@ class DataMgmtScreen(BaseScreen):
         self._npc_user_expanded: Set[str]      = set()
         self._npc_user_collapsed: Set[str]     = set()
 
-        # NPC selection and playlist state
         self._last_selected_npc_record: Optional[DevRecord] = None
         self._npc_playlist: List[DevRecord] = []
         self._npc_playlist_index: int = 0
+        # Rolling history of the last _HISTORY_SIZE track IDs played — used to
+        # prevent recent-track replay in both random and sequential modes.
+        self._play_history: Deque[str] = deque(maxlen=_HISTORY_SIZE)
 
-        # NPC theme-music controller — active for the lifetime of this screen.
+        # Equipment sort state
+        self._equipment_sort_asc: bool = True
+
         self._npc_music = NPCMusicController(
             music_dir=_MUSIC_DIR,
             fadeout_ms=700,
@@ -259,9 +280,10 @@ class DataMgmtScreen(BaseScreen):
                 with Horizontal():
                     yield Label("Type:")
                     with RadioSet(id="dm-equipment-type-radio"):
-                        yield RadioButton("All", value=True, id="equip-type-all")
-                        yield RadioButton("Weapon", id="equip-type-weapon")
-                        yield RadioButton("Armor", id="equip-type-armor")
+                        yield RadioButton("All",       value=True, id="equip-type-all")
+                        yield RadioButton("Weapon",                id="equip-type-weapon")
+                        yield RadioButton("Armor",                 id="equip-type-armor")
+                        yield RadioButton("Accessory",             id="equip-type-accessory")
                 with Horizontal():
                     yield Label("Slot:")
                     with RadioSet(id="dm-equipment-slot-radio"):
@@ -270,17 +292,29 @@ class DataMgmtScreen(BaseScreen):
                         yield RadioButton("Body", id="equip-slot-body")
                         yield RadioButton("Arms", id="equip-slot-arms")
                         yield RadioButton("Legs", id="equip-slot-legs")
+                    yield Label("Sort:")
+                    with RadioSet(id="dm-equipment-sort-radio"):
+                        yield RadioButton("None", value=True, id="equip-sort-none")
+                        yield RadioButton("Lv",   id="equip-sort-lv")
+                        yield RadioButton("Rar",  id="equip-sort-rarity")
+                        yield RadioButton("DMG",  id="equip-sort-dmg")
+                        yield RadioButton("DEF",  id="equip-sort-def")
+                        yield RadioButton("CRIT", id="equip-sort-crit")
+                        yield RadioButton("TSP",  id="equip-sort-tsp")
+                        yield RadioButton("TEP",  id="equip-sort-tep")
+                        yield RadioButton("TP",   id="equip-sort-tp")
             yield Button("++", id="dm-expand", variant="default")
             yield Button("--", id="dm-collapse", variant="default")
             yield Button("Copy", id="dm-copy", variant="default")
             yield Button("Validate Timeline", id="dm-validate-timeline", variant="default")
+            yield Button("↑", id="dm-equip-sort-dir", variant="default")
             yield Button("⤢", id="dm-detail-expand", variant="default")
             yield Static("Loading...", id="dm-status")
         with Horizontal(id="dm-main-row"):
             with Vertical(id="dm-list-panel"):
-                # NPC player bar — hidden on non-NPC tabs via set_filter_mode
                 yield NpcMusicPlayerWidget(id="npc-player")
                 yield ListView(id="dm-list")
+                yield DataTable(id="dm-equipment-table", cursor_type="row", show_cursor=True)
                 dialog_tree: Tree[DialogueLine] = Tree("Dialogue", id="dm-dialog-tree")
                 dialog_tree.show_root = False
                 yield dialog_tree
@@ -397,6 +431,8 @@ class DataMgmtScreen(BaseScreen):
                 record.id, record.song_id, force=True
             )
             if started:
+                # Record to history so it is excluded from near-future picks
+                self._play_history.append(record.id)
                 self._update_player_label(record)
 
     def restore_npc_selection(self) -> None:
@@ -470,13 +506,26 @@ class DataMgmtScreen(BaseScreen):
             return
 
         if random_mode:
-            # Pick a random track that isn't the current one (if possible)
-            if len(self._npc_playlist) > 1:
-                current_id = self._last_selected_npc_record.id if self._last_selected_npc_record else ""
-                candidates = [r for r in self._npc_playlist if r.id != current_id]
-                record = _random.choice(candidates)
-            else:
-                record = self._npc_playlist[0]
+            # Exclude the last _HISTORY_SIZE played tracks to prevent
+            # near-future repeats.  Fall back to the full playlist when it is
+            # too small to satisfy the exclusion window.
+            excluded = set(self._play_history)
+            candidates = [r for r in self._npc_playlist if r.id not in excluded]
+            if not candidates:
+                # Playlist is smaller than the history window — relax by
+                # keeping only the single most-recent track excluded.
+                last_id = self._play_history[-1] if self._play_history else ""
+                candidates = [r for r in self._npc_playlist if r.id != last_id]
+            if not candidates:
+                candidates = self._npc_playlist
+            record = _random.choice(candidates)
+            # Sync sequential index so switching to sequential feels natural
+            try:
+                self._npc_playlist_index = next(
+                    i for i, r in enumerate(self._npc_playlist) if r.id == record.id
+                )
+            except StopIteration:
+                pass
         else:
             step   = 1 if forward else -1
             self._npc_playlist_index = (self._npc_playlist_index + step) % len(self._npc_playlist)
@@ -546,3 +595,12 @@ class DataMgmtScreen(BaseScreen):
             self._toggle_detail_panel()
             return
         handle_button_pressed(self, event)
+
+    def on_data_table_row_highlighted(self, event: DataTable.RowHighlighted) -> None:
+        from tui.screens.dev.data_mgmt.detail_panel import update_detail_for_record  # noqa: PLC0415
+        records = self._last_filtered or []
+        try:
+            idx = int(event.row_key.value)
+            update_detail_for_record(self, records[idx])
+        except Exception:
+            pass

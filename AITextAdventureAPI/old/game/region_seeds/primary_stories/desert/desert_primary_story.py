@@ -337,6 +337,7 @@ NPC_DIALOG = [
 			"Go knock some sense into him before he hollows the whole region."
 		]
 	},
+	# TDU: add dialog for meeting Mara for sundial task chain and oren
 	{
 		'npc_id': 'zaruun',
 		'dialog_id': 'zaruun_intro',
@@ -346,6 +347,7 @@ NPC_DIALOG = [
 			"Turn back, or be swallowed with the rest."
 		]
 	},
+	# TDU ADD MORE DIALOG BETWEEN the 5 main characters, sable and zaruun
 	{
 		'npc_id': 'zaruun',
 		'dialog_id': 'zaruun_defeat',
@@ -353,6 +355,7 @@ NPC_DIALOG = [
 			"You delay the desert’s truth… but the void waits beneath every grain."
 		]
 	},
+	# TDU ADD MORE DIALOG BETWEEN the 5 main characters, sable and zaruun
 	{
 		'npc_id': 'sable',
 		'dialog_id': 'sable_closing',
@@ -361,6 +364,7 @@ NPC_DIALOG = [
 			"You’ve got grit. I like that. I’ll tag along. Someone needs to keep you alive."
 		]
 	}
+	# TDU ADD MORE DIALOG BETWEEN the 5 main characters, sable and zaruun
 ]
 
 TASKS = [
@@ -394,8 +398,14 @@ TASKS = [
 					'task_id': 'desert_primary_meet_sable'
 				}
 			}
+			# TDU (TODO DESERT UPGRADE): add award task meet mara for sundial task chain
 		]		
 	},
+	# TDU: add task for meeting Mara for sundial task chain
+	# TDU: follow documentation in D:\dev\source\repos\AITextAdventure\AITextAdventureAPI\old\STORY DOCUMENTS FOR AI\Regional_Stories_Ideas.md
+	# TDU: add task for meeting oren, also task trees in order to complete the 3 option dialog puzzles
+	# TDU: on the correct 3rd choice award sundial
+	# TDU: DO NOT TOUCH ANY THING ELSE IN THE TASKS
 	# Task 1: meet Sable at region bar coordinates
 	{		
 		'task_id': 'desert_primary_meet_sable',

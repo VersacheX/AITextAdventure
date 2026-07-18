@@ -715,6 +715,30 @@ TASKS = [
 					'npc_id': None,
 					'dialog_id': 'ch1_choice_look_for_friends'
 				}
+			},
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'lucky_charm'
+				}
+			},
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'worn_ring'
+				}
+			},
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'worn_ring'
+				}
+			},
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'toughened_cord'
+				}
 			}
 		],
 		'task_complete_events': []
@@ -733,6 +757,31 @@ TASKS = [
 					'npc_id': None,
 					'dialog_id': 'ch1_choice_find_somewhere_safe'
 				}
+			},
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'toughened_cord'
+				}
+			},
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'worn_ring'
+				}
+			},
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'worn_ring'
+				}
+			},
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'lucky_charm',
+					'quantity': 1
+				}
 			}
 		],
 		'task_complete_events': []
@@ -750,6 +799,30 @@ TASKS = [
 				'params': {
 					'npc_id': None,
 					'dialog_id': 'ch1_choice_look_around'
+				}
+			},
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'worn_ring'
+				}
+			},
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'worn_ring'
+				}
+			},
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'worn_ring'
+				}
+			},
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'toughened_cord'
 				}
 			}
 		],

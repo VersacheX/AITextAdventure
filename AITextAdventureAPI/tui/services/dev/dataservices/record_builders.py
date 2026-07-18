@@ -17,6 +17,26 @@ _RARITY_LABELS: dict[str, str] = {
     "superrare": "Super Rare",
 }
 
+_RARITY_ABBR: dict[str, str] = {
+    "common":    "Com",
+    "uncommon":  "Unc",
+    "rare":      "Rar",
+    "superrare": "SR ",
+}
+
+_RARITY_RANK: dict[str, int] = {
+    "common": 0, "uncommon": 1, "rare": 2, "superrare": 3,
+}
+
+_TYPE_ABBR: dict[str, str] = {
+    "weapon":       "WPN ",
+    "armor · head": "A-HD",
+    "armor · body": "A-BD",
+    "armor · arms": "A-AR",
+    "armor · legs": "A-LG",
+    "accessory":    "ACC ",
+}
+
 _ELEMENTAL_CHARS: dict[str, str] = {
     "dark": "(D)", "light": "(L)", "earth": "(Ë)", "fire": "(F)",
     "water": "(W)", "air": "(A)", "ice": "(I)", "electric": "(É)",
@@ -43,7 +63,57 @@ def _total_stat_power(seed: dict) -> int:
     )
 
 
-# ── Special-item source index ─────────────────────────────────────────────
+def _equip_stats(seed: dict, type_label: str = "") -> dict:
+    """Compute all display and sort stats from an equipment seed."""
+    tsp      = _total_stat_power(seed)
+    damage   = int(seed.get("damage") or 0)
+    defense  = int(seed.get("defense") or 0)
+    crit     = float(seed.get("critical_chance", 0) or 0)
+    crit_pts = int(crit * 5)
+    tep      = (damage + crit_pts) if damage else defense
+    tp       = tsp + tep
+    level    = int(seed.get("min_spawn_level", seed.get("min_level", 0)) or 0)
+    rarity   = str(seed.get("rarity", "") or "").lower()
+    return {
+        "type_label":  type_label,
+        "level":       level,
+        "rarity":      rarity,
+        "rarity_rank": _RARITY_RANK.get(rarity, -1),
+        "damage":      damage,
+        "defense":     defense,
+        "crit":        crit,
+        "tsp":         tsp,
+        "tep":         tep,
+        "tp":          tp,
+        "elements":    _fmt_elements(seed.get("elements")),
+    }
+
+def _equip_subtitle(seed: dict, type_label: str) -> str:
+    """Fixed-width subtitle so all columns align across list rows."""
+    s     = _equip_stats(seed)
+    abbr  = _TYPE_ABBR.get(type_label, (type_label[:4].upper() if type_label else "????"))
+    rar   = _RARITY_ABBR.get(s["rarity"], s["rarity"][:3].title() if s["rarity"] else "---")
+    elem  = s["elements"] if s["elements"] else "   "
+
+    dmg_s = str(s["damage"])     if s["damage"]  else "---"
+    def_s = str(s["defense"])    if s["defense"] else "---"
+    crt_s = f"{s['crit']:.2f}"  if s["crit"]    else "-.--"
+    tsp_s = str(s["tsp"])        if s["tsp"]     else "---"
+    tep_s = str(s["tep"])        if s["tep"]     else "---"
+    tp_s  = str(s["tp"])         if s["tp"]      else "---"
+
+    return (
+        f"{abbr:<4} "
+        f"Lv:{s['level']:<3} "
+        f"{rar:<3} "
+        f"{elem:<9} "
+        f"DMG:{dmg_s:<5} "
+        f"DEF:{def_s:<5} "
+        f"CRT:{crt_s:<5} "
+        f"TSP:{tsp_s:<4} "
+        f"TEP:{tep_s:<4} "
+        f"TP:{tp_s:<4}"
+    )
 
 _SPECIAL_ITEM_SOURCE_EVENT_TYPES = frozenset({"dungeon_add_treasure", "award_item", "remove_item"})
 
@@ -195,13 +265,42 @@ def _equip_subtitle(seed: dict, type_label: str) -> str:
     rarity       = str(seed.get("rarity", "") or "")
     rarity_label = _RARITY_LABELS.get(rarity.lower(), rarity)
     tsp          = _total_stat_power(seed)
-    parts        = [type_label]
+
+    # Detect weapon vs armor by the presence of "damage" / "defense" keys
+    damage  = seed.get("damage") or 0
+    defense = seed.get("defense") or 0
+    crit    = float(seed.get("critical_chance", 0) or 0)
+    # TEP: damage/defense are direct; crit contributes decimal * 5
+    crit_pts = int(crit * 5)
+    if damage:
+        tep = int(damage) + crit_pts
+    elif defense:
+        tep = int(defense)
+    else:
+        tep = 0
+    tp = tsp + tep
+
+    elements = _fmt_elements(seed.get("elements"))
+
+    parts: list[str] = [type_label]
     if level:
         parts.append(f"Lv.{level}")
     if rarity_label:
         parts.append(rarity_label)
+    if elements:
+        parts.append(elements)
+    if damage:
+        parts.append(f"DMG:{damage}")
+    if defense:
+        parts.append(f"DEF:{defense}")
+    if crit:
+        parts.append(f"CRIT:{crit:.1f}")
     if tsp:
         parts.append(f"TSP:{tsp}")
+    if tep:
+        parts.append(f"TEP:{tep}")
+    if tp:
+        parts.append(f"TP:{tp}")
     return "  ·  ".join(parts)
 
 
@@ -375,26 +474,30 @@ def _build_special_items(const: Any) -> List[DevRecord]:
 def _build_equipment(const: Any) -> List[DevRecord]:
     records: List[DevRecord] = []
 
-    # WEAPON_SEEDS is a flat list; ARMOR_SEEDS is a dict keyed by slot.
     weapon_seeds = getattr(const, "WEAPON_SEEDS", []) or []
     if isinstance(weapon_seeds, list):
         for seed in weapon_seeds:
             iid  = str(seed.get("id", "?"))
             name = str(seed.get("name", iid))
+            stats = _equip_stats(seed, "weapon")
             records.append(DevRecord(
                 category="equipment", id=iid, name=name,
                 subtitle=_equip_subtitle(seed, "weapon"),
                 detail=_build_weapon_detail(seed),
+                extras=stats,
             ))
     elif isinstance(weapon_seeds, dict):
         for slot, seed_list in weapon_seeds.items():
             for seed in seed_list or []:
                 iid  = str(seed.get("id", "?"))
                 name = str(seed.get("name", iid))
+                label = f"weapon · {slot}"
+                stats = _equip_stats(seed, label)
                 records.append(DevRecord(
                     category="equipment", id=iid, name=name,
-                    subtitle=_equip_subtitle(seed, f"weapon · {slot}"),
+                    subtitle=_equip_subtitle(seed, label),
                     detail=_build_weapon_detail(seed),
+                    extras=stats,
                 ))
 
     armor_seeds = getattr(const, "ARMOR_SEEDS", {}) or {}
@@ -403,20 +506,26 @@ def _build_equipment(const: Any) -> List[DevRecord]:
             for seed in seed_list or []:
                 iid  = str(seed.get("id", "?"))
                 name = str(seed.get("name", iid))
+                label = f"armor · {slot}"
+                stats = _equip_stats(seed, label)
                 records.append(DevRecord(
                     category="equipment", id=iid, name=name,
-                    subtitle=_equip_subtitle(seed, f"armor · {slot}"),
+                    subtitle=_equip_subtitle(seed, label),
                     detail=_build_armor_detail(seed, slot),
+                    extras=stats,
                 ))
     elif isinstance(armor_seeds, list):
         for seed in armor_seeds:
             iid  = str(seed.get("id", "?"))
             name = str(seed.get("name", iid))
             slot = str(seed.get("slot", "armor"))
+            label = f"armor · {slot}"
+            stats = _equip_stats(seed, label)
             records.append(DevRecord(
                 category="equipment", id=iid, name=name,
-                subtitle=_equip_subtitle(seed, f"armor · {slot}"),
+                subtitle=_equip_subtitle(seed, label),
                 detail=_build_armor_detail(seed, slot),
+                extras=stats,
             ))
 
     return records
@@ -513,3 +622,112 @@ def _build_cities(const: Any) -> List[DevRecord]:
                 ))
 
     return records
+
+
+def _build_accessories(const: Any) -> List[DevRecord]:
+    """Build equipment DevRecords from ACCESSORY_SEEDS in constants_accesories."""
+    records: List[DevRecord] = []
+    try:
+        from game.constants_accesories import ACCESSORY_SEEDS  # noqa: PLC0415
+    except ImportError:
+        return records
+
+    for seed in ACCESSORY_SEEDS or []:
+        iid    = str(seed.get('id', '?'))
+        name   = str(seed.get('name', iid))
+        rarity = str(seed.get('rarity', '') or '').lower()
+        level  = int(seed.get('min_level', 0) or 0)
+        str_   = int(seed.get('strength', 0) or 0)
+        dex    = int(seed.get('dexterity', 0) or 0)
+        intel  = int(seed.get('intelligence', 0) or 0)
+        con    = int(seed.get('constitution', 0) or 0)
+        tsp    = str_ + dex + intel + con
+        crit   = float(seed.get('crit_bonus', 0.0) or 0.0)
+        dmg    = int(seed.get('damage_bonus', 0) or 0)
+        tep    = dmg + int(crit * 5)
+        imm    = list(seed.get('immunities') or [])
+        res    = list(seed.get('resistances') or [])
+        wk     = list(seed.get('weaknesses') or [])
+        tap    = len(imm) * 2 + len(res) * 1 + len(wk) * -1
+        tp     = tsp + tep + tap
+        special = str(seed.get('special_effect', '') or '')
+
+        detail_lines = [str(seed.get('description', ''))]
+        detail_lines.append("")
+        if imm:
+            detail_lines.append(f"Immunity:    {', '.join(imm)}")
+        if res:
+            detail_lines.append(f"Resistance:  {', '.join(res)}")
+        if wk:
+            detail_lines.append(f"Weakness:    {', '.join(wk)}")
+        detail_lines.append("")
+        detail_lines.append(f"── Stats  ·  TSP: {tsp} ──")
+        for v, l in ((str_, "STR"), (dex, "DEX"), (intel, "INT"), (con, "CON")):
+            if v:
+                detail_lines.append(f"  +{v:<4} {l}")
+        if dmg or crit:
+            detail_lines.append("")
+            detail_lines.append("── Combat Bonus ──")
+            if dmg:
+                detail_lines.append(f"  Damage Bonus : +{dmg}")
+            if crit:
+                detail_lines.append(f"  Crit Bonus   : +{crit:.1f}%")
+        if special:
+            detail_lines.append("")
+            detail_lines.append(f"Special: {special}")
+        if seed.get('value'):
+            detail_lines.append(f"\nValue: {seed['value']}g  |  Sell: {int(seed['value'] * 0.5)}g")
+
+        extras = {
+            "type_label":  "accessory",
+            "level":       level,
+            "rarity":      rarity,
+            "rarity_rank": _RARITY_RANK.get(rarity, -1),
+            "damage":      dmg,
+            "defense":     0,
+            "crit":        crit,
+            "tsp":         tsp,
+            "tep":         tep,
+            "tap":         tap,
+            "tp":          tp,
+            "elements":    "",
+            "immunities":  imm,
+            "resistances": res,
+            "weaknesses":  wk,
+        }
+
+        records.append(DevRecord(
+            category="equipment",
+            id=iid,
+            name=name,
+            subtitle=_equip_subtitle_from_extras(extras),
+            detail="\n".join(detail_lines),
+            extras=extras,
+        ))
+    return records
+
+
+def _equip_subtitle_from_extras(x: dict) -> str:
+    """Build a fixed-width subtitle from a pre-computed extras dict."""
+    rarity   = x.get("rarity", "")
+    rar      = _RARITY_ABBR.get(rarity, rarity[:3].title() if rarity else "---")
+    type_abbr = _TYPE_ABBR.get(x.get("type_label", ""), "ACC ")
+    elem     = x.get("elements", "") or "   "
+    dmg_s    = str(x["damage"])      if x.get("damage")  else "---"
+    def_s    = str(x["defense"])     if x.get("defense") else "---"
+    crt_s    = f"{x['crit']:.2f}"   if x.get("crit")    else "-.--"
+    tsp_s    = str(x.get("tsp", 0))
+    tep_s    = str(x.get("tep", 0))
+    tp_s     = str(x.get("tp",  0))
+    return (
+        f"{type_abbr:<4} "
+        f"Lv:{x.get('level', 0):<3} "
+        f"{rar:<3} "
+        f"{elem:<9} "
+        f"DMG:{dmg_s:<5} "
+        f"DEF:{def_s:<5} "
+        f"CRT:{crt_s:<5} "
+        f"TSP:{tsp_s:<4} "
+        f"TEP:{tep_s:<4} "
+        f"TP:{tp_s:<4}"
+    )

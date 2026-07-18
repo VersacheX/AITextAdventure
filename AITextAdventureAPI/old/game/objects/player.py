@@ -1,4 +1,4 @@
-import random
+﻿import random
 from typing import List, Optional, Union, Tuple, Dict, Any
 from dataclasses import dataclass, field
 import uuid
@@ -13,6 +13,9 @@ import game.status_utils as status_utils
 import game.constants as const
 
 ItemType = Union[Item, Armor, Weapon, UtilityItem, SpecialItem]
+
+_DEFAULT_MAX_ACCESSORY_SLOTS = 3
+
 
 @dataclass
 class Player:
@@ -29,9 +32,9 @@ class Player:
 	_uuid: str = field(default_factory=lambda: uuid.uuid4().hex, init=False)
 
 	name: str
-	x: int =0
-	y: int =0
-	z: int =0
+	x: int = 0
+	y: int = 0
+	z: int = 0
 	inside: bool = False
 
 	arm_armor: Optional[Armor] = None
@@ -40,111 +43,234 @@ class Player:
 	leg_armor: Optional[Armor] = None
 	equipped_weapon: Optional[Weapon] = None
 
-	power_points_per_level: int =15 # these are distributed between max_hp and max_ap on level up and at start
-	max_hp_per_lvl: int =20
-	max_ap_per_lvl: int =5
-	max_hp: int =20
-	current_hp: int =20
-	max_ap: int =5
-	current_ap: int =5
-	
-	unused_ability_slots: int =1
-	unused_stat_points: int =10 
-	unused_power_points: int =15
-	initial_stat_distribution_amount: int =10 # points to distribute at level1
-	per_level_stat_distribution_amount: int =6 # points to distribute at each level up
-	strength: int =8 # strength affects melee damage and melee weapon/unarmed damage
-	dexterity: int =8 # dexterity affects ranged weapon accuracy and evasion
-	constitution: int =8 # constitution buffs automatic max_hp gain per level before power point distribution
-	intelligence: int =8 # intelligence buffs automatic max_ap gain per level before power point distribution
+	# Accessory slot: array of equipped accessories, capped by max_accessory_slots.
+	# Each entry is an Accessory instance from constants_accessories.
+	accessories: List[Any] = field(default_factory=list)
+	max_accessory_slots: int = _DEFAULT_MAX_ACCESSORY_SLOTS
 
-	level: int =1
-	experience: int =0 # current player experience - resets to 0 + remainder on level up - player level to enemy level controls xp earned ratio
-	xp_needed_to_level: int =100 # experience needed to reach next level - scales with level
+	power_points_per_level: int = 15
+	max_hp_per_lvl: int = 20
+	max_ap_per_lvl: int = 5
+	max_hp: int = 20
+	current_hp: int = 20
+	max_ap: int = 5
+	current_ap: int = 5
+
+	unused_ability_slots: int = 1
+	unused_stat_points: int = 10
+	unused_power_points: int = 15
+	initial_stat_distribution_amount: int = 10
+	per_level_stat_distribution_amount: int = 6
+	strength: int = 8
+	dexterity: int = 8
+	constitution: int = 8
+	intelligence: int = 8
+
+	level: int = 1
+	experience: int = 0
+	xp_needed_to_level: int = 100
 
 	abilities: List[PlayerAbility] = field(default_factory=list)
-	ability_acquirement_level_amount: int =4 # every N levels, player gets a new ability
+	ability_acquirement_level_amount: int = 4
 
 	id: Optional[str] = None
-	npc_id: Optional[str] = None  # link to NPC definition if applicable
-	# transient tracking for combat messages
+	npc_id: Optional[str] = None
 	last_broken_armor: List[str] = field(default_factory=list)
-
 	last_broken_weapon_dropped: Optional[str] = None
-
-	# Status effects currently applied to this entity.
-	# Each status is a dict: {id, name, type, duration, magnitude, elements, turns_remaining, source}
 	statuses: List[dict] = field(default_factory=list)
 
+	# ── Pickle / save-file compatibility ──────────────────────────────────
 
-	##### POSITION METHODS #######
+	def __setstate__(self, state: dict) -> None:
+		"""Restore a Player from a pickled state dict.
 
-	# def move(self, dx: int, dy: int, dz: int =0) -> None:
-	# 	self.x += dx
-	# 	self.y += dy
-	# 	self.z += dz
-	
-	##### STATUS METHODS #######
+		Guarantees forward-compatibility: any field introduced after an older
+		save was made will be set to its default so the game never crashes on
+		load when new fields are added.
+		"""
+		# Provide defaults for every field that may be missing from old saves.
+		defaults = {
+			'_uuid':                            uuid.uuid4().hex,
+			'name':                             'Unknown',
+			'x': 0, 'y': 0, 'z': 0,
+			'inside':                           False,
+			'arm_armor':                        None,
+			'head_armor':                       None,
+			'body_armor':                       None,
+			'leg_armor':                        None,
+			'equipped_weapon':                  None,
+			'accessories':                      [],
+			'max_accessory_slots':              _DEFAULT_MAX_ACCESSORY_SLOTS,
+			'power_points_per_level':           15,
+			'max_hp_per_lvl':                   20,
+			'max_ap_per_lvl':                   5,
+			'max_hp':                           20,
+			'current_hp':                       20,
+			'max_ap':                           5,
+			'current_ap':                       5,
+			'unused_ability_slots':             1,
+			'unused_stat_points':               10,
+			'unused_power_points':              15,
+			'initial_stat_distribution_amount': 10,
+			'per_level_stat_distribution_amount': 6,
+			'strength':                         8,
+			'dexterity':                        8,
+			'constitution':                     8,
+			'intelligence':                     8,
+			'level':                            1,
+			'experience':                       0,
+			'xp_needed_to_level':              100,
+			'abilities':                        [],
+			'ability_acquirement_level_amount': 4,
+			'id':                               None,
+			'npc_id':                           None,
+			'last_broken_armor':                [],
+			'last_broken_weapon_dropped':       None,
+			'statuses':                         [],
+		}
+		for key, default in defaults.items():
+			self.__dict__[key] = state.get(key, default)
 
-	def get_modified_strength (self) -> int:
-		"""compute effective strength using status modifiers, armor and weapon"""
+	# ── Accessory management ───────────────────────────────────────────────
+
+	def equip_accessory(self, player_game, accessory: Any) -> bool:
+		"""Equip an accessory into the accessory array if a slot is free.
+
+		Creates an independent copy of the accessory for the equipped slot so
+		the inventory instance and the equipped instance never alias each other.
+		Returns True on success, False if no slots are available.
+		"""
+		if accessory is None:
+			return False
+		if len(self.accessories) >= self.max_accessory_slots:
+			return False
+		# Use an independent copy so stacked inventory objects and equipped
+		# slots never share the same reference.
+		from dataclasses import replace as _dc_replace  # noqa: PLC0415
+		equipped_copy = _dc_replace(accessory, quantity=1)
+		self.accessories.append(equipped_copy)
+		if player_game is not None:
+			player_game.remove_single_item_unit(accessory)
+		return True
+
+	def unequip_accessory(self, player_game, accessory: Any) -> bool:
+		"""Remove an equipped accessory and return it to inventory.
+
+		Returns True on success, False if not equipped.
+		"""
+		if accessory not in self.accessories:
+			return False
+		self.accessories.remove(accessory)
+		if player_game is not None:
+			player_game.pick_up_item(accessory)
+		return True
+
+	def get_accessory_immunities(self) -> set:
+		"""Return the union of all status immunities granted by equipped accessories."""
+		immunities: set = set()
+		for acc in self.accessories:
+			for sid in (getattr(acc, 'immunities', None) or []):
+				immunities.add(sid)
+		return immunities
+
+	def has_accessory_immunity(self, status_id: str) -> bool:
+		"""Return True if any equipped accessory grants immunity to status_id."""
+		return status_id in self.get_accessory_immunities()
+
+	def get_accessory_resistances(self) -> set:
+		"""Return the union of all elemental resistances granted by equipped accessories."""
+		resistances: set = set()
+		for acc in self.accessories:
+			for elem in (getattr(acc, 'resistances', None) or []):
+				resistances.add(elem)
+		return resistances
+
+	def get_accessory_weaknesses(self) -> set:
+		"""Return the union of all elemental weaknesses from equipped accessories."""
+		weaknesses: set = set()
+		for acc in self.accessories:
+			for elem in (getattr(acc, 'weaknesses', None) or []):
+				weaknesses.add(elem)
+		return weaknesses
+
+	# ── Status methods ─────────────────────────────────────────────────────
+
+	def get_modified_strength(self) -> int:
 		modified = self.strength
 		modified = status_utils.compute_modified_stat(self, 'strength', modified)
-
-		# add strength buff from all armor annd weapon pieces
 		pieces = [self.head_armor, self.body_armor, self.arm_armor, self.leg_armor, self.equipped_weapon]
 		for p in pieces:
 			if p is not None:
 				modified += p.strength
-
+		for acc in self.accessories:
+			modified += getattr(acc, 'strength', 0) or 0
 		return max(1, modified)
 
-	def get_modified_dexterity (self) -> int:
-		"""compute effective dexterity using status modifiers, armor and weapon"""
+	def get_modified_dexterity(self) -> int:
 		modified = self.dexterity
 		modified = status_utils.compute_modified_stat(self, 'dexterity', modified)
-
-		# add dexterity buff from all armor annd weapon pieces
 		pieces = [self.head_armor, self.body_armor, self.arm_armor, self.leg_armor, self.equipped_weapon]
 		for p in pieces:
 			if p is not None:
 				modified += p.dexterity
-
+		for acc in self.accessories:
+			modified += getattr(acc, 'dexterity', 0) or 0
 		return max(1, modified)
 
-	def get_modified_intelligence (self) -> int:
-		"""compute effective intelligence using status modifiers, armor and weapon"""
+	def get_modified_intelligence(self) -> int:
 		modified = self.intelligence
 		modified = status_utils.compute_modified_stat(self, 'intelligence', modified)
-
-		# add intelligence buff from all armor annd weapon pieces
 		pieces = [self.head_armor, self.body_armor, self.arm_armor, self.leg_armor, self.equipped_weapon]
 		for p in pieces:
 			if p is not None:
 				modified += p.intelligence
+		for acc in self.accessories:
+			modified += getattr(acc, 'intelligence', 0) or 0
 		return max(1, modified)
 
 	def get_modified_constitution(self) -> int:
-		"""compute effective constitution using status modifiers, armor and weapon"""
 		modified = self.constitution
 		modified = status_utils.compute_modified_stat(self, 'constitution', modified)
-
-		# add consitution buff from all armor annd weapon pieces
 		pieces = [self.head_armor, self.body_armor, self.arm_armor, self.leg_armor, self.equipped_weapon]
 		for p in pieces:
 			if p is not None:
 				modified += p.constitution
-
+		for acc in self.accessories:
+			modified += getattr(acc, 'constitution', 0) or 0
 		return max(1, modified)
 
 	def add_status(self, descriptor: dict, source: Optional[object] = None) -> None:
-		"""Apply a status descriptor to the player. Descriptor is copied and
-		initialised with `turns_remaining` from `duration`.
+		"""Apply a status descriptor.
+
+		Accessory immunities block the status entirely.
+		Accessory resistances halve the duration (min 1).
+		Accessory weaknesses extend the duration by 50%.
+		Mirrors the logic in RandomHostile.add_status.
 		"""
 		if not descriptor or not isinstance(descriptor, dict):
 			return
+		sid = descriptor.get('id', '')
+		if not sid:
+			return
+
+		# 1. Immunity — accessory blocks the status entirely
+		if self.has_accessory_immunity(sid):
+			return
+
 		s = dict(descriptor)
-		s['turns_remaining'] = int(s.get('duration',1))
+		duration = int(s.get('duration', 1))
+
+		# 2. Resistance — halve duration (min 1)
+		if sid in self.get_accessory_resistances():
+			if duration > 1:
+				duration = max(1, duration // 2)
+
+		# 3. Weakness — extend duration by 50% (permanent statuses are never extended)
+		if sid in self.get_accessory_weaknesses():
+			if duration != -1:
+				duration = int(duration * 1.5)
+
+		s['turns_remaining'] = duration
 		if source is not None:
 			s['source'] = getattr(source, 'id', None) or getattr(source, 'name', None)
 		self.statuses.append(s)
@@ -199,77 +325,88 @@ class Player:
 	def is_alive(self) -> bool:
 		return self.current_hp >0
 
-	def take_damage(self, amount: int, attacker: Optional[object] = None, elements: Optional[List[str]] = None, physical: bool =False) -> int:
-		"""Reduce HP by amount and return actual damage taken."""
-		# reset transient
-		#self.last_broken_armor = []
-		# self.last_broken_armor_stored = []
-		# self.last_broken_armor_dropped = []
-		#self.last_broken_weapon_stored = None
+	def take_damage(self, amount: int, attacker: Optional[object] = None, elements: Optional[List[str]] = None, physical: bool = False) -> int:
+		"""Reduce HP by amount and return actual damage taken.
+
+		Elemental interactions (immunity, weakness, resistance) from equipped
+		accessories are applied before status-based modifiers, mirroring
+		RandomHostile.take_damage.
+		"""
 		last_broken_weapon_dropped: Optional[str] = None
-		if amount <=0:
+		if amount <= 0:
 			return 0
 		# simple armor reduction: sum defense of worn armor
-		armor_block =0
+		armor_block = 0
 		pieces = [self.head_armor, self.body_armor, self.arm_armor, self.leg_armor]
 		for a in pieces:
 			if a is not None and not a.is_broken:
 				armor_block += a.defense
 		net = max(0, amount - armor_block)
-		# apply incoming status modifiers (defense buffs/debuffs)
-		net = status_utils.compute_incoming_damage(self, net, elements, is_physical = physical)
-		
-		if physical == True and 'sleep' in [s.get('id') for s in self.statuses]:
-			# waking up on damage
+
+		if elements:
+			# Accessory immunities: any matching element nullifies the hit
+			acc_imm = self.get_accessory_immunities()
+			if any(e in acc_imm for e in elements):
+				net = 0
+			else:
+				# Accessory weaknesses: +25% per matching element (capped at 2×)
+				acc_weak = self.get_accessory_weaknesses()
+				weak_matches = sum(1 for e in elements if e in acc_weak)
+				if weak_matches > 0:
+					amp = min(2.0, 1.0 + 0.25 * weak_matches)
+					net = int(net * amp)
+				# Accessory resistances: -20% per matching element (capped at -60%)
+				acc_res = self.get_accessory_resistances()
+				res_matches = sum(1 for e in elements if e in acc_res)
+				if res_matches > 0:
+					reduction = min(0.6, 0.2 * res_matches)
+					net = int(net * (1.0 - reduction))
+
+		net = status_utils.compute_incoming_damage(self, net, elements, is_physical=physical)
+		if physical and 'sleep' in [s.get('id') for s in self.statuses]:
 			self.remove_status_by_id('sleep')
-		# apply damage to HP (no durability changes for player-worn gear)
 		self.current_hp = max(0, self.current_hp - net)
 		return net
 
 	def attack(self, target: Optional[object] = None) -> dict:
-		"""Perform a player attack against a target. Uses weapon/strength for damage
-		and dexterity for accuracy. Returns result dict similar to RandomHostile.attack.
-		"""
 		if not self.equipped_weapon:
-			base_damage = max(1, int(self.get_modified_strength()))  + self.level
+			base_damage = max(1, int(self.get_modified_strength())) + self.level
 			weapon_name = 'Unarmed'
-			crit_chance =0.0
+			crit_chance = 0.0
 		else:
 			weapon_name = self.equipped_weapon.name
-			# include player's strength as a flat bonus to weapon damage
-			base_damage = int(self.equipped_weapon.expected_damage()) + (self.get_modified_strength())
+			base_damage = int(self.equipped_weapon.expected_damage()) + self.get_modified_strength()
 			crit_chance = self.equipped_weapon.critical_chance
 
-		attacker_acc =50 + (self.level *2) + (self.get_modified_dexterity() *2)
-		target_evasion =10
+		# Accessories may add flat damage and crit bonuses
+		for acc in self.accessories:
+			base_damage += getattr(acc, 'damage_bonus', 0) or 0
+			crit_chance += getattr(acc, 'crit_bonus', 0) or 0
+
+		attacker_acc = 50 + (self.level * 2) + (self.get_modified_dexterity() * 2)
+		target_evasion = 10
 		if target is not None:
-			target_evasion =10 + (target.get_modified_dexterity() *2)
-		hit_chance = max(5, min(95,50 + (attacker_acc - target_evasion)))
-		hit_roll = random.random() *100
+			target_evasion = 10 + (target.get_modified_dexterity() * 2)
+		hit_chance = max(5, min(95, 50 + (attacker_acc - target_evasion)))
+		hit_roll = random.random() * 100
 
 		result = {
 			'attacker_id': self.id,
 			'attacker_name': self.name,
 			'weapon': weapon_name,
-			'damage':0,
+			'damage': 0,
 			'hit': False,
 		}
 
 		if hit_roll > hit_chance:
-			# miss
 			return result
 
-		# hit -> compute damage with variance
-		damage = max(0, int(random.normalvariate(base_damage, max(1, base_damage *0.2))))
-		
-		# apply attacker-side status modifiers		
-		# collect elements from weapon/ability and attacker statuses
+		damage = max(0, int(random.normalvariate(base_damage, max(1, base_damage * 0.2))))
 		elems = status_utils.collect_attack_elements(self)
 		damage = status_utils.compute_outgoing_damage(self, damage, elems)
 
-		# crit
-		if crit_chance and (random.random() *100) < crit_chance:
-			damage *=2
+		if crit_chance and (random.random() * 100) < crit_chance:
+			damage *= 2
 			result['crit'] = True
 		else:
 			result['crit'] = False
@@ -278,307 +415,206 @@ class Player:
 		result['hit'] = True
 
 		if target is not None:
-			# pass elemental list to target so incoming-side modifiers (resistances/debuffs) apply
-
 			applied = target.take_damage(damage, attacker=self, elements=elems if elems else None, physical=True)
 			result['applied'] = applied
-
-			# if target reported broken armor (transient), include in result
 			if target.last_broken_armor:
 				result['armor_broken'] = list(target.last_broken_armor)
 
-		return result	
+		return result
 
-	##### ABILITY AND ITEM USE MANAGEMENT / combat and noncombat #######
+	# ── Ability / item use ─────────────────────────────────────────────────
 
 	def heal(self, amount: int) -> int:
-		if amount <=0:
+		if amount <= 0:
 			return 0
 		old = self.current_hp
 		self.current_hp = min(self.max_hp, self.current_hp + amount)
 		return self.current_hp - old
 
-	#note to later add mutitarget/aoe support
 	def use_ability(self, ability: PlayerAbility, target: Optional[object] = None, targets: List[Optional[object]] = None) -> Dict[str, Any]:
 		from .player_ability import PlayerAbility
-		#target can be RandomHostile or Player
-		#targets can be a list of RandomHostile or Player
-		"""Use a PlayerAbility (or ability id) against a target. Returns the ability's apply() result or an error dict."""
 		if not ability:
 			return {'used': False, 'error': 'no_ability'}
-		# resolve ability instance
-
 		if not isinstance(ability, PlayerAbility):
 			return {'used': False, 'error': 'invalid_ability_type'}
-
 		cost = ability.ap_cost
-
 		if cost and not self.spend_ap(cost):
 			return {'used': False, 'error': 'insufficient_ap'}
-		# apply ability to single target or multiple targets
 		results: List[Dict[str, Any]] = []
-		# support multi-target list
 		for t in (targets or []):
-			# percent_reduction scales with number of targets (simple balancing)
-			pr = ((len(targets) - 1) *0.1) if targets else 0.0
+			pr = ((len(targets) - 1) * 0.1) if targets else 0.0
 			r = ability.apply(target=t, owner=self, percent_reduction=pr)
 			if isinstance(r, dict):
 				r['ability_id'] = ability.id
 				r['ability_name'] = ability.name
 			results.append(r)
-
 		return {'used': True, 'ability_id': ability.id, 'results': results}
 
-	def use_item(self, inv_idx: int, player_game, target = None) -> dict:
-		"""Use a utility item from inventory at index `inv_idx`.
-
-		Removes item if uses are depleted. Returns result dict from the item's `apply` method.
-		If index invalid or item not usable, returns {'used': False, 'error': '...'}.
-		"""
-		if inv_idx <0 or inv_idx >= len(player_game.inventory):
+	def use_item(self, inv_idx: int, player_game, target=None) -> dict:
+		if inv_idx < 0 or inv_idx >= len(player_game.inventory):
 			return {'used': False, 'note': f'{inv_idx} of {len(player_game.inventory)}', 'error': 'invalid_index'}
 		item = player_game.inventory[inv_idx]
 		if not isinstance(item, UtilityItem):
 			return {'used': False, 'note': f'item type: {item.__class__.__name__}', 'error': 'not_utility'}
 		target = self if target is None else target
-
 		res = item.apply(target)
 		player_game.remove_single_item_unit(item)
-
 		return res
 
-	######## ACTION POINT MANAGEMENT #######
+	# ── AP management ──────────────────────────────────────────────────────
 
 	def restore_ap(self, amount: int) -> int:
-		if amount <=0:
+		if amount <= 0:
 			return 0
 		old = self.current_ap
 		self.current_ap = min(self.max_ap, self.current_ap + amount)
 		return self.current_ap - old
 
 	def spend_ap(self, amount: int) -> bool:
-		"""Attempt to spend `amount` AP. Returns True if spent, False if insufficient AP.
-
-		This is the safe API callers (UI/game systems) should use instead of
-		directly manipulating `current_ap`.
-		"""
 		amt = int(amount)
-		if amt <=0:
+		if amt <= 0:
 			return True
 		if self.current_ap < amt:
 			return False
 		self.current_ap = max(0, self.current_ap - amt)
 		return True
 
-	####### EQUIPMENT MANAGEMENT ####
+	# ── Equipment management ───────────────────────────────────────────────
 
 	def equip_weapon(self, player_game, weapon: Optional[Weapon]) -> bool:
-		"""Equip the given weapon. Returns True if successful, False otherwise.
-
-		This implementation requires the caller to pass a proper `Weapon` instance.
-		If another type is passed, the call fails fast.
-		"""
-		# require a Weapon instance
 		if not isinstance(weapon, Weapon):
 			return False
-
-		# if currently equipped, move it to inventory (allow +1 slot to unequip)
 		if self.equipped_weapon is not None:
 			player_game.pick_up_item(self.equipped_weapon)
-
-		# equip new weapon and remove from inventory if present
 		self.equipped_weapon = weapon
 		if weapon in player_game.inventory:
 			player_game.remove_single_item_unit(weapon)
 		return True
 
 	def equip_armor(self, player_game, armor: Optional[Armor]) -> bool:
-		"""Equip the given armor piece. Returns True if successful, False otherwise."""
 		if armor is None or not isinstance(armor, Armor):
 			return False
-		# normalize slot: accept ArmorType enum or string-like values
 		raw_slot = armor.slot
 		slot_key = None
-
 		from enum import Enum
-		# if it's an enum (ArmorType), map to name
 		if raw_slot.name:
 			slot_name = raw_slot.value
 			slot_key = const.ARMOR_TYPES[slot_name]
-
 		if slot_key is None:
 			return False
-
 		attr_name = f"{slot_key}_armor"
-		#input (f"Equipping {armor.name} to slot {slot_key} (attribute: {attr_name})")
-		# if currently equipped move equipped item to inventory (respect capacity)
 		current_armor = getattr(self, attr_name, None)
 		if current_armor is not None:
 			player_game.pick_up_item(current_armor)
-			
-		# equip
 		setattr(self, attr_name, armor)
-		# after equipping, remove from inventory if present
 		if armor in player_game.inventory:
 			player_game.remove_single_item_unit(armor)
 		return True
 
-	#### LEVEL UP AND STAT MANAGEMENT ####
+	# ── Level up / stat management ─────────────────────────────────────────
 
 	def get_required_experience_to_level(self) -> int:
-		"""
-			NEED TO HAVE REQUIRED EXPERIENCE SCALE BASED ON LEVEL
-			SCALING SHOULD BE PROGRESSIVE UNTIL LEVEL 60 WHERE IT FLATTENS OUT
-			USE self.xp_needed_to_level AS BASELINE
-		"""
 		max_experience_reqquired_to_level = 20000
 		scaling_factor = min(self.level / 60, 1.0)
-		required_xp = int(self.xp_needed_to_level + (max_experience_reqquired_to_level - self.xp_needed_to_level) * scaling_factor)
-		# exmple result for level 15  = 3333 
-		# example result for level 55  = 18333
+		required_xp = int(self.xp_needed_to_level + (max_experience_reqURED_TO_LEVEL - self.xp_needed_to_level) * scaling_factor)
 		return required_xp
 
-
 	def gain_experience(self, amount: int) -> int:
-		"""Add experience to the player and handle level up increments.
-
-		Returns the number of levels gained (0 if none).
-		"""
-		if amount is None:
-			return 0
-		if amount <=0:
+		if amount is None or amount <= 0:
 			return 0
 		self.experience += int(amount)
-		levels_gained =0
-		# simple fixed threshold leveling; unspent experience carries over
+		levels_gained = 0
 		while self.experience >= self.get_required_experience_to_level():
 			self.experience -= self.get_required_experience_to_level()
-			self.level +=1
-			levels_gained +=1
-
+			self.level += 1
+			levels_gained += 1
 		return levels_gained
 
 	def check_level_up_awards(self) -> Tuple[bool, int, int]:
-		"""Check if the player has new abilities to learn and how many stat points they can distribute.
-
-		Returns a tuple (has_new_ability: bool, stat_points: int).
-		"""
 		has_new_ability = False
 		stat_points = 0
 		if self.level % self.ability_acquirement_level_amount == 0:
 			self.unused_ability_slots += 1
 			has_new_ability = True
-		elif self.unused_ability_slots >0:
+		elif self.unused_ability_slots > 0:
 			has_new_ability = True
-
 		self.unused_stat_points += 4
 		self.allocate_stats(1, 1, 1, 1)
 		self.max_ap += self.max_ap_per_lvl
 		self.max_hp += self.max_hp_per_lvl
 		self.unused_stat_points += self.per_level_stat_distribution_amount
-
 		self.unused_power_points += self.power_points_per_level
 		self.heal(self.max_hp)
 		self.restore_ap(self.max_ap)
-
 		return has_new_ability, self.per_level_stat_distribution_amount, self.power_points_per_level
 
-
-
-	def upgrade_stats(self, str_inc: int =0, dex_inc: int =0, con_inc: int =0, int_inc: int =0, hp_points: int = 0, ap_points: int = 0) -> None:
-		"""Apply stat and power point increases outside of level up context."""
+	def upgrade_stats(self, str_inc: int = 0, dex_inc: int = 0, con_inc: int = 0, int_inc: int = 0, hp_points: int = 0, ap_points: int = 0) -> None:
 		self.allocate_stats(str_inc, dex_inc, con_inc, int_inc)
 		self.apply_power_point_allocation(hp_points, ap_points)
 
-	def allocate_stats(self, str_inc: int =0, dex_inc: int =0, con_inc: int =0, int_inc: int =0, use_stat_points: bool = True) -> None:
-		"""Apply stat increases to the player."""
+	def allocate_stats(self, str_inc: int = 0, dex_inc: int = 0, con_inc: int = 0, int_inc: int = 0, use_stat_points: bool = True) -> None:
 		if str_inc:
 			self.strength += int(str_inc)
 		if dex_inc:
 			self.dexterity += int(dex_inc)
 		if con_inc:
 			self.constitution += int(con_inc)
-			hp_inc =  int(con_inc) * 2
-			self.max_hp += hp_inc  # each constitution point adds 2 max HP
-			self.current_hp  += hp_inc
+			hp_inc = int(con_inc) * 2
+			self.max_hp += hp_inc
+			self.current_hp += hp_inc
 		if int_inc:
 			self.intelligence += int(int_inc)
-
 		if use_stat_points:
 			self.unused_stat_points -= max(0, (str_inc + dex_inc + con_inc + int_inc))
 
-	def apply_power_point_allocation(self, hp_points: int =0, ap_points: int =0) -> None:
-		"""Apply allocated power points to max HP and AP and set current to max."""
+	def apply_power_point_allocation(self, hp_points: int = 0, ap_points: int = 0) -> None:
 		if hp_points:
 			self.max_hp += int(hp_points)
 		if ap_points:
 			self.max_ap += int(ap_points)
-		# set current to new maxima
 		self.current_hp += int(hp_points)
 		self.current_ap += int(ap_points)
 		self.unused_power_points -= max(0, (hp_points + ap_points))
 
 	def learn_ability(self, ability: PlayerAbility) -> bool:
-		"""Add a new ability to the player's known abilities by id. Returns True if learned, False if already known."""
 		if not ability:
 			return False
-
 		if ability in self.abilities:
 			return False
-		self.unused_ability_slots = max(0, self.unused_ability_slots -1)
+		self.unused_ability_slots = max(0, self.unused_ability_slots - 1)
 		self.abilities.append(ability)
 		return
 
 	def populate_from_json(self, data: dict) -> None:
-		"""Populate player fields from a JSON-like dict."""
 		if not data or not isinstance(data, dict):
 			return
-		ignored_fields = ['arm_armor', 'head_armor', 'body_armor', 'leg_armor', 'equipped_weapon', 'abilities']
+		ignored_fields = ['arm_armor', 'head_armor', 'body_armor', 'leg_armor', 'equipped_weapon', 'abilities', 'accessories']
 		for key, value in data.items():
 			if key not in ignored_fields:
 				if hasattr(self, key):
 					setattr(self, key, value)
 
+	# ── Deprecated ────────────────────────────────────────────────────────
 
-
-	######## TO BE DEPRECATED
-	def level_up(self, str_inc: int =0, dex_inc: int =0, con_inc: int =0, int_inc: int =0, hp_points: int =0, ap_points: int =0, selected_ability: Optional[str] = None) -> None:
-		"""Apply level up increases to stats and power points.
-		Parameters correspond to increases to apply.
-		"""
+	def level_up(self, str_inc: int = 0, dex_inc: int = 0, con_inc: int = 0, int_inc: int = 0, hp_points: int = 0, ap_points: int = 0, selected_ability: Optional[str] = None) -> None:
 		self.max_ap += int_inc * 2
 		self.max_hp += con_inc * 2
 		self.allocate_stats(str_inc, dex_inc, con_inc, int_inc)
 		self.apply_power_point_allocation(hp_points, ap_points)
 		self.heal(self.max_hp)
 		self.restore_ap(self.max_ap)
-		
-		# add selected ability if provided and not already known
 		if selected_ability:
 			if selected_ability not in self.abilities:
 				self.abilities.append(selected_ability)
 
-def generate_player_from_attainable_character_seed(seed) -> Player:
-	"""
-	Create a Player instance from an attainable-character seed dict.
 
-	This will populate simple attributes from the seed and instantiate
-	armor/weapon/abilities using existing factory helpers.
-	"""
+def generate_player_from_attainable_character_seed(seed) -> Player:
 	if not isinstance(seed, dict):
 		return None
-
-	# create player with provided name (Player requires a name)
 	name = seed.get('name') or seed.get('id') or 'Unnamed'
 	p = Player(name)
-
-	# populate simple fields that match Player attributes
-	# use populate_from_json to apply numeric and string fields where possible	
 	p.populate_from_json(seed)
-	
-	# instantiate equipment items (armor/weapon) from ids in seed
 	from game.objects.item import instantiate_item_from_id
-	# armor slots expected keys in seed
 	armor_keys = ['arm_armor', 'head_armor', 'body_armor', 'leg_armor']
 	for key in armor_keys:
 		val = seed.get(key)
@@ -586,20 +622,14 @@ def generate_player_from_attainable_character_seed(seed) -> Player:
 			itm = instantiate_item_from_id(val)
 			if itm is not None:
 				setattr(p, key, itm)
-
-	# equipped weapon
 	weap_ref = seed.get('equipped_weapon') or seed.get('weapon')
 	if weap_ref:
 		w = instantiate_item_from_id(weap_ref)
 		if w is not None:
 			p.equipped_weapon = w
-
-	# instantiate abilities from ids
 	abilities = seed.get('abilities') or []
-
 	if abilities and isinstance(abilities, (list, str)):
 		from game.objects.player_ability import _instantiate_from_seed
-		# build a lookup of ability seeds by id from constants
 		ability_seeds = const.PLAYER_ABILITY_SEEDS
 		seed_map = {s.get('id'): s for s in ability_seeds}
 		for aid in abilities:
@@ -609,8 +639,6 @@ def generate_player_from_attainable_character_seed(seed) -> Player:
 			if aseed:
 				ability_obj = _instantiate_from_seed(aseed)
 				p.abilities.append(ability_obj)
-
-	# return instantiated player
 	return p
 
 

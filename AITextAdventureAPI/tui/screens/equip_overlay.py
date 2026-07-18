@@ -32,14 +32,15 @@ from textual.widgets import Button, Label, ListItem, ListView, Static
 
 from tui.screens.item_action_screen import ItemActionScreen
 
-_EQUIP_FILTERS: tuple[str, ...] = ("all", "weapon", "head", "body", "arms", "legs")
+_EQUIP_FILTERS: tuple[str, ...] = ("all", "weapon", "head", "body", "arms", "legs", "accessory")
 _EQUIP_FILTER_LABEL: dict[str, str] = {
-    "all":    "All",
-    "weapon": "Weapon",
-    "head":   "Head",
-    "body":   "Body",
-    "arms":   "Arms",
-    "legs":   "Legs",
+    "all":       "All",
+    "weapon":    "Weapon",
+    "head":      "Head",
+    "body":      "Body",
+    "arms":      "Arms",
+    "legs":      "Legs",
+    "accessory": "Accessory",
 }
 
 _RARITY_MARKUP: dict[str, str] = {
@@ -104,12 +105,15 @@ def _apply_equip_filter(inventory: list, filter_key: str) -> list:
     try:
         from game.objects.weapon import Weapon
         from game.objects.armor import Armor, ArmorType
+        from game.objects.accessory import Accessory
     except ImportError:
         return list(inventory)
     if filter_key == "all":
-        items = [it for it in inventory if isinstance(it, (Weapon, Armor))]
+        items = [it for it in inventory if isinstance(it, (Weapon, Armor, Accessory))]
     elif filter_key == "weapon":
         items = [it for it in inventory if isinstance(it, Weapon)]
+    elif filter_key == "accessory":
+        items = [it for it in inventory if isinstance(it, Accessory)]
     else:
         slot_map: dict[str, Any] = {
             "head": ArmorType.HEAD,
@@ -119,7 +123,7 @@ def _apply_equip_filter(inventory: list, filter_key: str) -> list:
         }
         slot  = slot_map.get(filter_key)
         items = [it for it in inventory if isinstance(it, Armor) and it.slot == slot] \
-                if slot else [it for it in inventory if isinstance(it, (Weapon, Armor))]
+                if slot else [it for it in inventory if isinstance(it, (Weapon, Armor, Accessory))]
     items.sort(key=_item_sort_key)
     return items
 
@@ -127,18 +131,19 @@ def _apply_equip_filter(inventory: list, filter_key: str) -> list:
 # ── list-row label ────────────────────────────────────────────────────────────
 
 def _equip_item_label(item: Any) -> str:
-    name      = rich_escape(str(getattr(item, "name", "?")))
-    level     = int(getattr(item, "min_spawn_level", 0) or 0)
-    rarity    = str(getattr(item, "rarity", "") or "")
+    name       = rich_escape(str(getattr(item, "name", "?")))
+    level      = int(getattr(item, "min_spawn_level", getattr(item, "min_level", 0)) or 0)
+    rarity     = str(getattr(item, "rarity", "") or "")
     rarity_val = rarity.value if hasattr(rarity, "value") else str(rarity)
-    elems     = getattr(item, "elements", None)
-    elem_s    = _format_elements(elems)
-    tsp       = _total_stat_power(item)
+    elems      = getattr(item, "elements", None)
+    elem_s     = _format_elements(elems)
+    tsp        = _total_stat_power(item)
 
     stats: list[str] = []
     try:
         from game.objects.weapon import Weapon
         from game.objects.armor import Armor
+        from game.objects.accessory import Accessory
         if isinstance(item, Weapon):
             dmg  = int(getattr(item, "damage", 0) or 0)
             crit = float(getattr(item, "critical_chance", 0.0) or 0)
@@ -147,6 +152,22 @@ def _equip_item_label(item: Any) -> str:
                 stats.append(f"Crt:{crit:.0f}%")
         elif isinstance(item, Armor):
             stats.append(f"DEF:{int(getattr(item, 'defense', 0) or 0)}")
+        elif isinstance(item, Accessory):
+            imm = list(getattr(item, "immunities",  []) or [])
+            res = list(getattr(item, "resistances", []) or [])
+            wk  = list(getattr(item, "weaknesses",  []) or [])
+            if imm:
+                stats.append(f"Imm:{len(imm)}")
+            if res:
+                stats.append(f"Res:{len(res)}")
+            if wk:
+                stats.append(f"Wk:{len(wk)}")
+            dmg_b = int(getattr(item, "damage_bonus", 0) or 0)
+            crit_b = float(getattr(item, "crit_bonus", 0.0) or 0)
+            if dmg_b:
+                stats.append(f"+DMG:{dmg_b}")
+            if crit_b:
+                stats.append(f"+Crt:{crit_b:.0f}%")
     except Exception:
         pass
     if tsp:
@@ -192,6 +213,7 @@ def _build_item_info(item: Any | None) -> str:
     try:
         from game.objects.weapon import Weapon
         from game.objects.armor import Armor, ArmorType
+        from game.objects.accessory import Accessory
         if isinstance(item, Weapon):
             dmg_type = rich_escape(str(getattr(item, "damage_type", "physical") or "physical"))
             dmg      = int(getattr(item, "damage", 0) or 0)
@@ -210,10 +232,28 @@ def _build_item_info(item: Any | None) -> str:
             defense    = int(getattr(item, "defense", 0) or 0)
             lines.append(f"[dim]── Armor  ·  {slot_label} ──[/dim]")
             lines.append(f"Defense     : [bold]{defense}[/bold]")
+        elif isinstance(item, Accessory):
+            dmg_b  = int(getattr(item, "damage_bonus", 0) or 0)
+            crit_b = float(getattr(item, "crit_bonus", 0.0) or 0)
+            lines.append("[dim]── Accessory ──[/dim]")
+            if dmg_b:
+                lines.append(f"Damage Bonus: [bold]+{dmg_b}[/bold]")
+            if crit_b:
+                lines.append(f"Crit Bonus  : [yellow]+{crit_b:.1f}%[/yellow]")
+            # immunities / resistances / weaknesses
+            imm = list(getattr(item, "immunities",  []) or [])
+            res = list(getattr(item, "resistances", []) or [])
+            wk  = list(getattr(item, "weaknesses",  []) or [])
+            if imm:
+                lines.append(f"Immune      : [bold green]{', '.join(rich_escape(s) for s in imm)}[/bold green]")
+            if res:
+                lines.append(f"Resist      : [cyan]{', '.join(rich_escape(s) for s in res)}[/cyan]")
+            if wk:
+                lines.append(f"Weakness    : [red]{', '.join(rich_escape(s) for s in wk)}[/red]")
     except Exception:
         pass
 
-    level = int(getattr(item, "min_spawn_level", 0) or 0)
+    level = int(getattr(item, "min_spawn_level", getattr(item, "min_level", 0)) or 0)
     if level:
         lines.append(f"Req. Level  : {level}")
 
@@ -237,7 +277,7 @@ def _build_item_info(item: Any | None) -> str:
         for v, l in bonus_pairs:
             lines.append(f"  +{v:<4} {l}")
 
-    # ── durability ──
+    # ── durability (weapons/armor only) ──
     dur     = int(getattr(item, "durability",     0) or 0)
     max_dur = int(getattr(item, "max_durability", 0) or 0)
     if max_dur:
@@ -303,6 +343,8 @@ def _build_char_detail(player: Any, item: Any | None) -> str:
     body = getattr(player, "body_armor",      None)
     arms = getattr(player, "arm_armor",       None)
     legs = getattr(player, "leg_armor",       None)
+    accessories    = list(getattr(player, "accessories",        []) or [])
+    max_acc_slots  = int(getattr(player, "max_accessory_slots", 3) or 3)
 
     lines.append("[dim]── Equipped ──[/dim]")
     lines.append(f"WPN:  {rich_escape(w.name    if w    else 'None')}")
@@ -310,6 +352,22 @@ def _build_char_detail(player: Any, item: Any | None) -> str:
     lines.append(f"BODY: {rich_escape(body.name if body else 'None')}")
     lines.append(f"ARMS: {rich_escape(arms.name if arms else 'None')}")
     lines.append(f"LEGS: {rich_escape(legs.name if legs else 'None')}")
+    # accessories
+    lines.append(f"[dim]── Accessories ({len(accessories)}/{max_acc_slots}) ──[/dim]")
+    if accessories:
+        for acc in accessories:
+            acc_name = rich_escape(str(getattr(acc, "name", "?")))
+            imm_c    = len(getattr(acc, "immunities",  []) or [])
+            res_c    = len(getattr(acc, "resistances", []) or [])
+            wk_c     = len(getattr(acc, "weaknesses",  []) or [])
+            tags: list[str] = []
+            if imm_c: tags.append(f"[green]Imm:{imm_c}[/green]")
+            if res_c: tags.append(f"[cyan]Res:{res_c}[/cyan]")
+            if wk_c:  tags.append(f"[red]Wk:{wk_c}[/red]")
+            tag_s = "  " + "  ".join(tags) if tags else ""
+            lines.append(f"  ◈ {acc_name}{tag_s}  [dim](Equip→Unequip)[/dim]")
+    else:
+        lines.append("  [dim]None[/dim]")
 
     # pending points
     up_abil = int(getattr(player, "unused_ability_slots", 0) or 0)
@@ -338,6 +396,7 @@ def _build_char_detail(player: Any, item: Any | None) -> str:
     try:
         from game.objects.weapon import Weapon
         from game.objects.armor import Armor, ArmorType
+        from game.objects.accessory import Accessory
     except ImportError:
         return "\n".join(lines)
 
@@ -348,7 +407,6 @@ def _build_char_detail(player: Any, item: Any | None) -> str:
 
     if isinstance(item, Weapon):
         current = w
-        # primary stats
         lines.append(_diff_row("DMG",
             int(getattr(item, "damage", 0) or 0),
             int(getattr(current, "damage", 0) or 0) if current else 0))
@@ -360,14 +418,12 @@ def _build_char_detail(player: Any, item: Any | None) -> str:
             int(getattr(item, "ap_cost", 0) or 0),
             int(getattr(current, "ap_cost", 0) or 0) if current else 0,
             higher_is_better=False))
-        # bonus stats
         for attr, short in (("strength","STR"), ("dexterity","DEX"),
                              ("intelligence","INT"), ("constitution","CON")):
             nv = int(getattr(item,    attr, 0) or 0)
             ov = int(getattr(current, attr, 0) or 0) if current else 0
             if nv or ov:
                 lines.append(_diff_row(short, nv, ov))
-        # elements
         new_e = _format_elements(getattr(item,    "elements", None))
         old_e = _format_elements(getattr(current, "elements", None) if current else None)
         if new_e or old_e:
@@ -398,6 +454,17 @@ def _build_char_detail(player: Any, item: Any | None) -> str:
         if new_e or old_e:
             lines.append(f"  Elem: [yellow]{rich_escape(new_e or '—')}[/yellow]"
                          f"  (was [dim]{rich_escape(old_e or '—')}[/dim])")
+
+    elif isinstance(item, Accessory):
+        slots_used = len(accessories)
+        slots_free = max_acc_slots - slots_used
+        already_eq = item in accessories
+        if already_eq:
+            lines.append("  [yellow]Equipped — press Equip to unequip[/yellow]")
+        elif slots_free <= 0:
+            lines.append(f"  [red]No free slots ({slots_used}/{max_acc_slots})[/red]")
+        else:
+            lines.append(f"  [green]Slot available ({slots_used}/{max_acc_slots}) — press Equip[/green]")
     else:
         lines.append("[dim]Not equippable[/dim]")
 
@@ -633,7 +700,9 @@ class EquipOverlay(Widget):
 
     @on(ListView.Selected, "#eq-list")
     def _on_selected(self, event: ListView.Selected) -> None:
-        """Click highlights only — Enter/button equips."""
+        """Mouse click — highlight only, do not open modal.
+        Keyboard Enter is handled by action_open_action (bound via BINDINGS).
+        """
         event.stop()
 
     @on(Button.Pressed, "#eq-btn-equip")
@@ -696,6 +765,8 @@ class EquipOverlay(Widget):
         def _handle(result: str | None) -> None:
             if result == "equip":
                 self._do_equip(item, player)
+            elif result == "unequip":
+                self._do_unequip_accessory(item, player)
             elif result == "discard":
                 self._do_discard(item)
 
@@ -707,9 +778,34 @@ class EquipOverlay(Widget):
         try:
             from game.objects.weapon import Weapon
             from game.objects.armor import Armor
-            ok = player.equip_weapon(self._pg, item) if isinstance(item, Weapon) \
-                 else player.equip_armor(self._pg, item) if isinstance(item, Armor) \
-                 else None
+            from game.objects.accessory import Accessory
+            if isinstance(item, Weapon):
+                ok = player.equip_weapon(self._pg, item)
+            elif isinstance(item, Armor):
+                ok = player.equip_armor(self._pg, item)
+            elif isinstance(item, Accessory):
+                # Push slot-picker — it handles replace confirmation internally
+                from tui.screens.accessory_slot_screen import AccessorySlotScreen  # noqa: PLC0415
+
+                def _on_slot_chosen(slot_index: int | None) -> None:
+                    if slot_index is None:
+                        return
+                    ok = player.equip_accessory(self._pg, item)
+                    if ok:
+                        iname = rich_escape(str(getattr(item,   "name", "item")))
+                        pname = rich_escape(str(getattr(player, "name", "?")))
+                        self.app.notify(f"{pname} equipped {iname}.", title="Equip")
+                    else:
+                        self.app.notify("Could not equip accessory.", title="Equip")
+                    self._rebuild_list()
+
+                self.app.push_screen(
+                    AccessorySlotScreen(item, player, self._pg),
+                    _on_slot_chosen,
+                )
+                return
+            else:
+                ok = None
             if ok is None:
                 self.app.notify(
                     f"Cannot equip {rich_escape(str(getattr(item, 'name', 'item')))}.",
@@ -723,6 +819,21 @@ class EquipOverlay(Widget):
         pname = rich_escape(str(getattr(player, "name", "?")))
         self.app.notify(
             f"{pname} equipped {iname}." if ok else f"Could not equip {iname}.",
+            title="Equip",
+        )
+        self._rebuild_list()
+
+    def _do_unequip_accessory(self, item: Any, player: Any) -> None:
+        """Remove an equipped accessory back to the shared inventory."""
+        try:
+            ok = player.unequip_accessory(self._pg, item)
+        except Exception as exc:
+            self.app.notify(f"Error unequipping: {rich_escape(str(exc))}", title="Equip")
+            return
+        iname = rich_escape(str(getattr(item,   "name", "item")))
+        pname = rich_escape(str(getattr(player, "name", "?")))
+        self.app.notify(
+            f"{pname} unequipped {iname}." if ok else f"Could not unequip {iname}.",
             title="Equip",
         )
         self._rebuild_list()

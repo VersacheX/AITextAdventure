@@ -32,6 +32,7 @@ from tui.services.dev.dataservices.record_builders import (
     _build_cities,
     _build_dungeons,
     _build_equipment,
+    _build_accessories,
     _build_items,
     _build_special_items,
 )
@@ -83,7 +84,7 @@ def search_records(category: str, query: str) -> List[DevRecord]:
 
 
 def filter_equipment_records(type_query: str = "", slot_query: str = "") -> List[DevRecord]:
-    """Filter equipment records by type (Weapon/Armor) and armor slot."""
+    """Filter equipment records by type (weapon/armor/accessory) and armor slot."""
     preload()
     all_equipment = _CACHE.get("equipment", [])
     if not type_query and not slot_query:
@@ -92,15 +93,20 @@ def filter_equipment_records(type_query: str = "", slot_query: str = "") -> List
     slot_lower = slot_query.lower()
     filtered = []
     for record in all_equipment:
-        type_match = not type_query or type_lower in record.subtitle.lower()
-        slot_match = True
-        if slot_query:
-            if "armor" in record.subtitle.lower():
-                slot_match = slot_lower in record.detail.lower() or slot_lower in record.subtitle.lower()
-            else:
-                slot_match = False
-        if type_match and slot_match:
-            filtered.append(record)
+        tl = record.extras.get("type_label", "").lower()
+        if type_lower:
+            if type_lower == "weapon" and not tl.startswith("weapon"):
+                continue
+            if type_lower == "armor" and not tl.startswith("armor"):
+                continue
+            if type_lower == "accessory" and tl != "accessory":
+                continue
+        if slot_lower:
+            if not tl.startswith("armor"):
+                continue
+            if slot_lower not in tl:
+                continue
+        filtered.append(record)
     return filtered
 
 
@@ -147,7 +153,7 @@ def _load_all() -> None:
     _CACHE["timeline"]         = []  # tree category; use get_timeline_tree()
     _CACHE["item"]             = _build_items(const)
     _CACHE["special_item"]     = _build_special_items(const)
-    _CACHE["equipment"]        = _build_equipment(const)
+    _CACHE["equipment"]        = _build_equipment(const) + _build_accessories(const)
     _CACHE["dungeon"]          = _build_dungeons(const)
     _CACHE["city"]             = _build_cities(const)
     _CACHE["npc"]              = []  # tree category; use get_npc_tree()

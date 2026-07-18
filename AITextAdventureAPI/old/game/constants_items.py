@@ -60,15 +60,15 @@ for slot in SLOTS:
 UTILITY_ITEM_SEEDS = [
     # HP healing tiers (fractions of max HP: small=25%, mid=50%, large=75%, full=100%)
     {"id": "herb_minor", "name": "Pocket Salve", "description": "Restores a small fraction of your max HP.", "effect": "heal_small", "uses":1, "value":8, "min_spawn_level":1, "rarity": "common", "heal_fraction":0.25},
-    {"id": "herb_med", "name": "Patch Kit", "description": "Restores a moderate fraction of your max HP.", "effect": "heal_mid", "uses":1, "value":18, "min_spawn_level":4, "rarity": "uncommon", "heal_fraction":0.5},
-    {"id": "herb_major", "name": "Curative Salve", "description": "Restores a large fraction of your max HP.", "effect": "heal_large", "uses":1, "value":40, "min_spawn_level":10, "rarity": "rare", "heal_fraction":0.75},
-    {"id": "elixir_full_heal", "name": "Stimpak", "description": "Fully restores your HP.", "effect": "heal_full", "uses":1, "value":200, "min_spawn_level":15, "rarity": "superrare", "heal_fraction":1.0},
+    {"id": "herb_med", "name": "Patch Kit", "description": "Restores a moderate fraction of your max HP.", "effect": "heal_mid", "uses":1, "value":500, "min_spawn_level":4, "rarity": "uncommon", "heal_fraction":0.5},
+    {"id": "herb_major", "name": "Curative Salve", "description": "Restores a large fraction of your max HP.", "effect": "heal_large", "uses":1, "value":1000, "min_spawn_level":10, "rarity": "rare", "heal_fraction":0.75},
+    {"id": "elixir_full_heal", "name": "Stimpak", "description": "Fully restores your HP.", "effect": "heal_full", "uses":1, "value":2000, "min_spawn_level":15, "rarity": "superrare", "heal_fraction":1.0},
 
     # AP (action points) restoration tiers (fractions of max AP)
     {"id": "stimulant_small", "name": "Caffeine Shot", "description": "Restores a small fraction of your max AP.", "effect": "restore_ap_small", "uses":1, "value":10, "min_spawn_level":1, "rarity": "common", "ap_fraction":0.25},
-    {"id": "stimulant_med", "name": "Energy Drink", "description": "Restores a moderate fraction of your max AP.", "effect": "restore_ap_mid", "uses":1, "value":28, "min_spawn_level":4, "rarity": "uncommon", "ap_fraction":0.5},
-    {"id": "stimulant_large", "name": "Adrenaline Shot", "description": "Restores a large fraction of your max AP.", "effect": "restore_ap_large", "uses":1, "value":60, "min_spawn_level":10, "rarity": "rare", "ap_fraction":0.75},
-    {"id": "stimulant_full", "name": "Neuro Stim", "description": "Fully restores your AP.", "effect": "restore_ap_full", "uses":1, "value":180, "min_spawn_level":15, "rarity": "superrare", "ap_fraction":1.0},
+    {"id": "stimulant_med", "name": "Energy Drink", "description": "Restores a moderate fraction of your max AP.", "effect": "restore_ap_mid", "uses":1, "value":500, "min_spawn_level":4, "rarity": "uncommon", "ap_fraction":0.5},
+    {"id": "stimulant_large", "name": "Adrenaline Shot", "description": "Restores a large fraction of your max AP.", "effect": "restore_ap_large", "uses":1, "value":1000, "min_spawn_level":10, "rarity": "rare", "ap_fraction":0.75},
+    {"id": "stimulant_full", "name": "Neuro Stim", "description": "Fully restores your AP.", "effect": "restore_ap_full", "uses":1, "value":2000, "min_spawn_level":15, "rarity": "superrare", "ap_fraction":1.0},
 
 
 
@@ -76,8 +76,8 @@ UTILITY_ITEM_SEEDS = [
     #{"id": "lockpick", "name": "Slim Jim", "description": "Useful for opening simple locks.", "effect": "open_lock", "uses":5, "value":20, "min_spawn_level":1, "rarity": "uncommon"},
 
     # Revive Items
-    {"id": "revive_kit", "name": "Revival Kit", "description": "A compact kit that can revive a fallen ally with partial HP.", "effect": "revive", "uses":1, "value":150, "min_spawn_level":5, "rarity": "rare", "revive_fraction":0.5},
-    {"id": "defibrillator", "name": "Defibrillator", "description": "A portable defibrillator that can revive a fallen ally with full HP.", "effect": "revive", "uses":1, "value":400, "min_spawn_level":12, "rarity": "superrare", "revive_fraction":1.0},
+    {"id": "revive_kit", "name": "Revival Kit", "description": "A compact kit that can revive a fallen ally with partial HP.", "effect": "revive", "uses":1, "value":500, "min_spawn_level":5, "rarity": "rare", "revive_fraction":0.5},
+    {"id": "defibrillator", "name": "Defibrillator", "description": "A portable defibrillator that can revive a fallen ally with full HP.", "effect": "revive", "uses":1, "value":5000, "min_spawn_level":12, "rarity": "superrare", "revive_fraction":1.0},
 
 
     # Status-curing commons
@@ -93,19 +93,19 @@ UTILITY_ITEM_SEEDS = [
 
 
     # Permanent stat-increase tomes (superrare)
-    {"id": "tome_hp", "name": "Dummy's Guide to Health", "description": "Permanently increases your max HP by1.", "effect": "stat_increase", "uses":1, "value":500, "min_spawn_level":10, "rarity": "notfound", "stat": "max_hp", "amount":1},
-    {"id": "tome_ap", "name": "Dummy's Guide to Focus", "description": "Permanently increases your max AP by1.", "effect": "stat_increase", "uses":1, "value":500, "min_spawn_level":10, "rarity": "notfound", "stat": "max_ap", "amount":1},
-    {"id": "tome_str", "name": "Dummy's Guide to Lifting", "description": "Permanently increases your Strength by1.", "effect": "stat_increase", "uses":1, "value":500, "min_spawn_level":10, "rarity": "notfound", "stat": "strength", "amount":1},
-    {"id": "tome_dex", "name": "Dummy's Guide to Crossfit", "description": "Permanently increases your Dexterity by1.", "effect": "stat_increase", "uses":1, "value":500, "min_spawn_level":10, "rarity": "notfound", "stat": "dexterity", "amount":1},
-    {"id": "tome_int", "name": "Dummy's Encyclopedia of Everything", "description": "Permanently increases your Intelligence by1.", "effect": "stat_increase", "uses":1, "value":500, "min_spawn_level":10, "rarity": "notfound", "stat": "intelligence", "amount":1},
-    {"id": "tome_con", "name": "Dummy's Way to Resistance", "description": "Permanently increases your Constitution by1.", "effect": "stat_increase", "uses":1, "value":500, "min_spawn_level":10, "rarity": "notfound", "stat": "constitution", "amount":1},
+    {"id": "tome_hp", "name": "Dummy's Guide to Health", "description": "Permanently increases your max HP by1.", "effect": "stat_increase", "uses":1, "value":5000, "min_spawn_level":10, "rarity": "notfound", "stat": "max_hp", "amount":1},
+    {"id": "tome_ap", "name": "Dummy's Guide to Focus", "description": "Permanently increases your max AP by1.", "effect": "stat_increase", "uses":1, "value":5000, "min_spawn_level":10, "rarity": "notfound", "stat": "max_ap", "amount":1},
+    {"id": "tome_str", "name": "Dummy's Guide to Lifting", "description": "Permanently increases your Strength by1.", "effect": "stat_increase", "uses":1, "value":5000, "min_spawn_level":10, "rarity": "notfound", "stat": "strength", "amount":1},
+    {"id": "tome_dex", "name": "Dummy's Guide to Crossfit", "description": "Permanently increases your Dexterity by1.", "effect": "stat_increase", "uses":1, "value":5000, "min_spawn_level":10, "rarity": "notfound", "stat": "dexterity", "amount":1},
+    {"id": "tome_int", "name": "Dummy's Encyclopedia of Everything", "description": "Permanently increases your Intelligence by1.", "effect": "stat_increase", "uses":1, "value":5000, "min_spawn_level":10, "rarity": "notfound", "stat": "intelligence", "amount":1},
+    {"id": "tome_con", "name": "Dummy's Way to Resistance", "description": "Permanently increases your Constitution by1.", "effect": "stat_increase", "uses":1, "value":5000, "min_spawn_level":10, "rarity": "notfound", "stat": "constitution", "amount":1},
     # Stronger/superrare versions of the tomes (grant +2 to stat)
-    {"id": "tome_hp_superrare", "name": "Masterwork Guide to Health", "description": "Permanently increases your max HP by2.", "effect": "stat_increase", "uses":1, "value":1500, "min_spawn_level":15, "rarity": "notfound", "stat": "max_hp", "amount":2},
-    {"id": "tome_ap_superrare", "name": "Masterwork Guide to Focus", "description": "Permanently increases your max AP by2.", "effect": "stat_increase", "uses":1, "value":1500, "min_spawn_level":15, "rarity": "notfound", "stat": "max_ap", "amount":2},
-    {"id": "tome_str_superrare", "name": "Masterwork Guide to Strength", "description": "Permanently increases your Strength by2.", "effect": "stat_increase", "uses":1, "value":1500, "min_spawn_level":15, "rarity": "notfound", "stat": "strength", "amount":2},
-    {"id": "tome_dex_superrare", "name": "Masterwork Guide to Agility", "description": "Permanently increases your Dexterity by2.", "effect": "stat_increase", "uses":1, "value":1500, "min_spawn_level":15, "rarity": "notfound", "stat": "dexterity", "amount":2},
-    {"id": "tome_int_superrare", "name": "Masterwork Encyclopedia of Lore", "description": "Permanently increases your Intelligence by2.", "effect": "stat_increase", "uses":1, "value":1500, "min_spawn_level":15, "rarity": "notfound", "stat": "intelligence", "amount":2},
-    {"id": "tome_con_superrare", "name": "Masterwork Way to Resistance", "description": "Permanently increases your Constitution by2.", "effect": "stat_increase", "uses":1, "value":1500, "min_spawn_level":15, "rarity": "notfound", "stat": "constitution", "amount":2},
+    {"id": "tome_hp_superrare", "name": "Masterwork Guide to Health", "description": "Permanently increases your max HP by2.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":15, "rarity": "notfound", "stat": "max_hp", "amount":2},
+    {"id": "tome_ap_superrare", "name": "Masterwork Guide to Focus", "description": "Permanently increases your max AP by2.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":15, "rarity": "notfound", "stat": "max_ap", "amount":2},
+    {"id": "tome_str_superrare", "name": "Masterwork Guide to Strength", "description": "Permanently increases your Strength by2.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":15, "rarity": "notfound", "stat": "strength", "amount":2},
+    {"id": "tome_dex_superrare", "name": "Masterwork Guide to Agility", "description": "Permanently increases your Dexterity by2.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":15, "rarity": "notfound", "stat": "dexterity", "amount":2},
+    {"id": "tome_int_superrare", "name": "Masterwork Encyclopedia of Lore", "description": "Permanently increases your Intelligence by2.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":15, "rarity": "notfound", "stat": "intelligence", "amount":2},
+    {"id": "tome_con_superrare", "name": "Masterwork Way to Resistance", "description": "Permanently increases your Constitution by2.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":15, "rarity": "notfound", "stat": "constitution", "amount":2},
 ]
 
 

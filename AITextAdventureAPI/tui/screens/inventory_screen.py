@@ -97,6 +97,16 @@ def _build_card_text(player: Any, player_game: Any) -> str:
     lines.append(f"BODY  {rich_escape(body.name   if body   else 'None')}")
     lines.append(f"ARMS  {rich_escape(arms.name   if arms   else 'None')}")
     lines.append(f"LEGS  {rich_escape(legs.name   if legs   else 'None')}")
+
+    # Accessories — shown directly under Legs
+    accessories   = list(getattr(player, "accessories",        []) or [])
+    max_acc_slots = int(getattr(player, "max_accessory_slots", 3) or 3)
+    for i in range(max_acc_slots):
+        if i < len(accessories):
+            acc_name = rich_escape(str(getattr(accessories[i], "name", "?")))
+            lines.append(f"ACC{i + 1}  {acc_name}")
+        else:
+            lines.append(f"[dim]ACC{i + 1}  —[/dim]")
     lines.append("")
 
     up_abil = int(getattr(player, "unused_ability_slots", 0) or 0)
