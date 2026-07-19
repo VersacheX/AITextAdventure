@@ -79,192 +79,29 @@ ATTAINABLE_PLAYER_CHARACTERS = [
     }
 ]
 """
-⭐ Sable Character Review
-Overall Verdict: 9.4 / 10 — One of the strongest thematic characters in the cast.
-
-Sable is a desert witch who sells miracles she no longer believes in.
-That alone is a devastating character hook.
-
-But the real brilliance is how her personality, magic, trauma, and worldview all orbit the same core truth:
-
-She is a healer who cannot heal herself.
-
-She guides others with charisma, insight, and emotional precision — yet she carries a grief so deep she has buried it under sand, silence, and service.
-
-Her lines across Acts III–VI show:
-
-quiet sorrow
-
-sharp intuition
-
-charismatic leadership
-
-flashes of bitterness
-
-deep empathy
-
-a refusal to let the world collapse without fighting
-
-She is the emotional backbone of the party.
-
-🧠 MBTI Fit: ENFJ (Extremely Strong)
-Dominant Fe — Emotional leadership
-Sable reads people instantly and responds with emotional clarity:
-
-"Someone who still has their head on straight? I'll take it."
-"Another city, another storm. This is never going to end, is it?"
-
-She guides the group's emotional tone, especially in collapse-heavy chapters.
-
-Auxiliary Ni — Pattern intuition
-She senses deeper metaphysical patterns:
-
-"This… this is what the desert warned me about."
-"Everything screaming for your eyes."
-
-Her Ni is symbolic, prophetic, and tied to the desert's shifting nature.
-
-Tertiary Se — Decisive action
-She acts with confidence and flair:
-
-"One more step closer to understanding what's tearing the world apart."
-
-She's grounded in the moment, especially in combat or crisis.
-
-Inferior Ti — Sharp, cutting logic under stress
-When overwhelmed, she becomes biting, critical, and surgical:
-
-"This place is devouring people whole. We can't let it keep winning."
-
-Her Ti emerges as cold precision — a contrast to her usual warmth.
-
-💔 Enneagram Fit: 2w3 (Perfect)
-Core Fear:
-Being unwanted, unworthy, or failing those who depend on her.
-
-Core Desire:
-To be needed, valued, and emotionally indispensable.
-
-Defense Mechanism: Repression
-She hides her grief — the caravan she failed to save — beneath charisma and service.
-
-She helps others to avoid confronting her own pain.
-
-Stress Line → Type 8
-When triggered, she becomes:
-
-controlling
-
-aggressive
-
-confrontational
-
-fiercely protective
-
-We see flashes of this in collapse-heavy chapters.
-
-Growth Line → Type 4
-When she grows, she becomes:
-
-introspective
-
-emotionally honest
-
-willing to confront her grief
-
-able to find identity beyond service
-
-This is her true arc.
-
-🏜️ Narrative Function: The Desert Oracle of Grief
-Sable's role is enormous — even if subtle.
-
-1. She is the party's emotional stabilizer.
-When others spiral, she grounds them.
-
-2. She is the thematic mirror of the world's collapse.
-She failed to save a caravan.
-The world is failing to save itself.
-Her grief is the world's grief.
-
-3. She is the "miracle seller" who no longer believes in miracles.
-This is one of the strongest character contradictions in your entire cast.
-
-4. She is the desert's voice.
-Her intuition ties directly into the Void's influence beneath the dunes.
-
-5. She is the emotional counterpoint to characters like Moxie and Kade.
-Where they are chaotic or analytical, she is empathetic and symbolic.
-
-🎤 Current Lines (from your document)
-"I don't like this… feels like the air itself is lying to us."
-"This… this is what the desert warned me about."
-"Another city, another storm. This is never going to end, is it?"
-"One more step closer to understanding what's tearing the world apart."
-"Ember would be proud."
-
-These lines are excellent — but they can be sharpened to reveal:
-
-her grief
-
-her guilt
-
-her intuition
-
-her symbolic connection to collapse
-
-her emotional leadership
-
-her buried trauma
-
-✨ Suggested Enhanced Lines (In-Character)
-Act III – Glamour's City
-Sable: (quiet, uneasy) The air's lying. The desert taught me that feeling — when reality starts to slip sideways.
-Sable: This place screams for your eyes. It's the same hunger the dunes had before the sink swallowed them.
-
-Act IV – Stigma's City
-Sable: Masks and miracles… both are lies people cling to when the truth hurts too much.
-Sable: I used to sell hope. Now I just try to keep people from drowning in it.
-
-Act V – Fall of the Mind
-Sable: (softly) The world feels like the dunes before the collapse. Too quiet. Too heavy.
-Sable: I hear echoes under the sand again. I thought they were gone.
-
-Act VI – Fall of Existence
-Sable: I couldn't save the caravan. I couldn't save the dunes.
-Sable: But I can save this. I have to.
-
-🧩 Where Sable Can Shine Later
-1. When the party faces Lament
-Sable should feel the grief loops more deeply than others.
-
-2. When corruption spreads across cities
-She should compare it to the desert's collapse.
-
-3. When the party fractures emotionally
-She should be the one who tries to hold them together — even if it hurts her.
-
-4. When the final choice arrives
-She should confront her past failure directly.
-
-🏜️ Psychological Depth Summary
-Sable is a charismatic ENFJ 2w3 desert witch whose grief, intuition, and emotional leadership form one of the strongest arcs in your entire narrative. She is:
-
-empathetic
-
-symbolic
-
-wounded
-
-charismatic
-
-intuitive
-
-quietly grieving
-
-emotionally essential
-
-She is the heart of the party — even when she doesn't believe she deserves to be.
+Sable Voice Guide
+Character: Sable
+Role: Desert Witch / Attainable Companion (Desert Region)
+Core Archetype: World-weary, grounded survivor with quiet intensity and dry humor.
+
+Core Tone Rules
+
+Voice Style: Low, dry, slightly raspy. Speaks like someone who’s spent years in the desert — direct, no-nonsense, with a hint of exhaustion.
+Personality: Cynical but not bitter. Pragmatic. Carries quiet grief but doesn’t dwell on it. Has a dry, understated sense of humor.
+Speech Patterns:
+Short to medium-length sentences.
+Frequent use of desert/sand imagery, but never overly poetic.
+Occasional pauses (…) for weight.
+Rarely raises her voice — even when serious, she stays controlled.
+Uses “the desert” as a living entity metaphor.
+
+
+Key Traits to Maintain:
+
+Observant and perceptive
+Slightly jaded but still capable of hope
+Loyal once earned
+Distrustful of pretty words or grand promises
 """
 
 #DUNGEONS = ['zaruun_lair']
@@ -326,15 +163,65 @@ NPCS = [
 	}
 ]
 
+"""
+	Dialog Sable
+    "Well, well… you don’t look like the usual lost travelers I get around here."
+    "You actually brought the Dune Sundial. I’m impressed."
+    "Zaruun’s been cracking the desert open like it owes him something. Sinkholes, screaming dunes… the whole region is suffering."
+    "He thinks the desert wants to be nothing again. I say he’s just a fool with too much power and not enough sense."
+
+  Dialog Kaera
+    "It’s good to meet you, Sable. Truly."
+    "Anyone who’s carried grief as long as you have and still chooses to stand and fight… that says a lot about who you are."
+
+  Dialog Kade
+    "A desert witch who reads sand like code. Interesting."
+    "Just don’t start talking in riddles. I’ve had enough metaphors for one lifetime."
+
+  Dialog Sable
+    "The desert feels a little lighter now. Like it can breathe again."
+    "I’ve been standing still for too long… selling hope to people when I stopped believing in it myself."
+    "But you? You actually did something."
+    "…I’m done waiting here. If you’ll have me, I’m coming with you."
+    "The desert lies in ways most people never notice. You’ll need someone who knows those lies."
+"""
 NPC_DIALOG = [
 	{
 		'npc_id': 'sable',
 		'dialog_id': 'sable_intro',
 		'dialog': [
-			"Well now… you look like someone who can handle a little sandstorm of trouble.",
-			"Zaruun's been cracking the desert open again — sinkholes, screaming dunes, the whole mess.",
-			"He thinks the desert wants to return to emptiness. I think he's an idiot with an ego.",
-			"Go knock some sense into him before he hollows the whole region."
+			"Well, well… you don’t look like the usual lost travelers I get around here.",
+			"You actually brought the Dune Sundial. I’m impressed.",
+			"Zaruun’s been cracking the desert open like it owes him something. Sinkholes, screaming dunes… the whole region is suffering.",
+			"He thinks the desert wants to be nothing again. I say he’s just a fool with too much power and not enough sense."
+		]
+	},	
+	# Sable joins — scene with Kaera and Kade responding
+	{
+		'npc_id': 'faith',
+		'dialog_id': 'kaera_sable_join_reaction',
+		'dialog': [
+			"It’s good to meet you, Sable. Truly.",
+			"Anyone who’s carried grief as long as you have and still chooses to stand and fight… that says a lot about who you are."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'kade_sable_join_reaction',
+		'dialog': [
+			"A desert witch who reads sand like code. Interesting.",
+			"Just don’t start talking in riddles. I’ve had enough metaphors for one lifetime."
+		]
+	},
+	{
+		'npc_id': 'sable',
+		'dialog_id': 'sable_join',
+		'dialog': [
+			"The desert feels a little lighter now. Like it can breathe again.",
+			"I’ve been standing still for too long… selling hope to people when I stopped believing in it myself.",
+			"But you? You actually did something.",
+			"…I’m done waiting here. If you’ll have me, I’m coming with you.",
+			"The desert lies in ways most people never notice. You’ll need someone who knows those lies."
 		]
 	},
 	# Mara dialog — directs player to Oren and plants subtle puzzle hints
@@ -348,6 +235,23 @@ NPC_DIALOG = [
 			"He also muttered something once about memories casting no shadow. Said it like it was the most obvious thing in the world.",
 			"And the last time I saw him, he was staring at a sundial in the dark, whispering about 'the silence between breaths.'",
 			"I'm sure it means something to him. Find him in Highsteeple Crossing. Good luck getting a straight answer."
+		]
+	},
+	# Kaera and Poise react to Mara's directions
+	{
+		'npc_id': 'faith',
+		'dialog_id': 'kaera_mara_reaction',
+		'dialog': [
+			"Wind… memory… silence. She's not just giving directions, is she.",
+			"These feel like things worth holding onto."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'poise_mara_reaction',
+		'dialog': [
+			"She's describing the desert's rhythm. Wind leaves a shape. Memory leaves nothing. Silence is what remains when both are gone.",
+			"This Oren sounds like someone who pays attention. Respect."
 		]
 	},
 	# Oren dialog — initial meeting before puzzles begin
@@ -409,25 +313,77 @@ NPC_DIALOG = [
 			"Turn back, or be swallowed with the rest."
 		]
 	},
-	# TDU ADD MORE DIALOG BETWEEN the 5 main characters, sable and zaruun
+	# Scene: confrontation with Zaruun — Sable, Moxie, and Chock speak before the fight
+	{
+		'npc_id': 'sable',
+		'dialog_id': 'sable_zaruun_confrontation',
+		'dialog': [
+			"Zaruun. I knew we'd end up here.",
+			"You're not purifying anything. You're just afraid of what the desert still holds."
+		]
+	},
+	{
+		'npc_id': 'zaruun',
+		'dialog_id': 'zaruun_confrontation_reply',
+		'dialog': [
+			"Sable. Still selling miracles to fools who can't face the truth.",
+			"The desert doesn't hold anything. It releases. That is its nature. That is its mercy."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'moxie_zaruun_taunt',
+		'dialog': [
+			"Mercy? You've been swallowing people whole and calling it liberation.",
+			"That's not philosophy, that's a god complex with better lighting."
+		]
+	},
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'chock_zaruun_challenge',
+		'dialog': [
+			"Enough talking. He's made his choice.",
+			"Let's make ours."
+		]
+	},
+	# Scene: after defeating Zaruun — Sable's closing, Void hint, character join
 	{
 		'npc_id': 'zaruun',
 		'dialog_id': 'zaruun_defeat',
 		'dialog': [
-			"You delay the desert's truth… but the void waits beneath every grain."
+			"You delay the desert's truth… but the void waits beneath every grain.",
+			"I can hear it. The thinning. It isn't me you should fear.",
+			"Something else is already beneath the sand. Something older.",
+			"You haven't stopped anything. You've just made yourself its next obstacle."
 		]
 	},
-	# TDU ADD MORE DIALOG BETWEEN the 5 main characters, sable and zaruun
 	{
 		'npc_id': 'sable',
-		'dialog_id': 'sable_closing',
+		'dialog_id': 'sable_post_defeat',
 		'dialog': [
-			"Well done, traveler. Zaruun's gone, and the desert can breathe again — for now.",
-			"You've got grit. I like that. I'll tag along. Someone needs to keep you alive."
+			"(quiet, to herself) Something older…",
+			"I've heard that before. The dunes used to make that sound — right before the first sinkholes opened.",
+			"He wasn't wrong about everything. I hate that."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'moxie_post_defeat',
+		'dialog': [
+			"Okay, the dying villain monologue was a little on the nose.",
+			"But… the part about something older. That felt real."
+		]
+	},
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'chock_post_defeat',
+		'dialog': [
+			"Then we deal with it when it shows its face.",
+			"Right now — we breathe. Then we move."
 		]
 	}
-	# TDU ADD MORE DIALOG BETWEEN the 5 main characters, sable and zaruun
 ]
+
 
 TASKS = [
 	{
@@ -446,9 +402,9 @@ TASKS = [
 				'params': {
 					'npc_id': 'sable',
 					'standing_text': [ 
-						"How's it going?  I'm Sable, the friendliest sand witch around.  I'm out here selling miracles to need.",
-						"Maybe one day you'll need one of my miracles too.",
-						"Maybe I'll need one from you."
+						"The dunes are louder than usual tonight. Something's cracking open out there.",
+						"I've been trying to track the source for weeks. Every time I get close, the sand shifts.",
+						"If you're passing through — keep your ears open. This desert remembers things."
 					]
 				}
 			}
@@ -471,19 +427,33 @@ TASKS = [
 
 	# Task: Meet Mara at Broker's Hideout in the desert city.
 	# She points the player to Oren in Highsteeple Crossing and plants hints for his 3 riddles.
+	# Kaera and Poise add their read on Mara's clues.
 	{
 		'task_id': 'desert_primary_meet_mara',
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'mara',
-		'task_acquire_events': [
-		],
+		'task_acquire_events': [],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
 					'npc_id': 'mara',
 					'dialog_id': 'mara_sundial_direction'
+				}
+			},
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'faith',
+					'dialog_id': 'kaera_mara_reaction'
+				}
+			},
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'poise_mara_reaction'
 				}
 			},
 			{
@@ -747,7 +717,8 @@ TASKS = [
 		]
 	},
 
-	# Task 1: Deliver the Dune Sundial to Sable at the region bar
+	# Task 1: Deliver the Dune Sundial to Sable at the region bar.
+	# Sable, Kaera, and Kade have a scene — Sable joins the party here.
 	{		
 		'task_id': 'desert_primary_meet_sable',
 		'type': 'deliver',
@@ -766,7 +737,7 @@ TASKS = [
 				}
 			}
 		],
-		'task_complete_events': [ #< = after meeting
+		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
@@ -774,16 +745,39 @@ TASKS = [
 					'dialog_id': 'sable_intro'
 				}
 			},
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'sable',
-                    'standing_text': [
-						"Zaruun is still out there, cracking open the desert. Go stop him.",
-						"I've heard he's holed up somewhere in the desert nearby. Be careful."
-                    ]
-                }
-            },
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'faith',
+					'dialog_id': 'kaera_sable_join_reaction'
+				}
+			},
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'kade_sable_join_reaction'
+				}
+			},
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'sable',
+					'dialog_id': 'sable_join'
+				}
+			},
+			{
+				'event_type': 'hide_npc',
+				'params': {
+					'npc_id': 'sable'
+				}
+			},
+			{
+				'event_type': 'character_join',
+				'params': {
+					'character_id': 'sable'
+				}
+			},
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -792,7 +786,9 @@ TASKS = [
 			}
 		]
 	},
-	# Task 2: meet Zaruun the Sand-Sunderer in a dungeon
+
+	# Task 2: Meet Zaruun the Sand-Sunderer in his dungeon.
+	# Scene includes Sable, Moxie, and Chock confronting him before combat.
 	{
 		'task_id': 'desert_primary_defeat_zaruun',
 		'type': 'meet',
@@ -800,17 +796,17 @@ TASKS = [
 		'to_id': 'zaruun',
 		'task_acquire_events': [
 			{
-				'event_type': 'create_dungeon', # <-  creating dungeon with zaruun as boss - speak to him to complete task
-				'params': {
-					'dungeon_id': 'zaruun_lair',
-					'location': 'region_open_area'
-				}
-			},
-			{
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'zaruun',
 					'location': None
+				}
+			},
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'zaruun_lair',
+					'location': 'region_open_area'
 				}
 			}
 		],
@@ -823,6 +819,34 @@ TASKS = [
 				}
 			},
 			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'sable',
+					'dialog_id': 'sable_zaruun_confrontation'
+				}
+			},
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'zaruun',
+					'dialog_id': 'zaruun_confrontation_reply'
+				}
+			},
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'moxie_zaruun_taunt'
+				}
+			},
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'chock_zaruun_challenge'
+				}
+			},
+			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'defeat_zaruun'
@@ -830,7 +854,10 @@ TASKS = [
 			}
 		],
 	},
-	# Task 3: defeat Zaruun the Sand-Sunderer
+
+	# Task 3: Defeat Zaruun the Sand-Sunderer.
+	# After victory: Zaruun's Void hint, Sable/Moxie/Chock closing scene, Sable's arc resolves.
+	# desert_primary_report_to_sable is removed — character join already happened in meet_sable.
 	{
 		'task_id': 'defeat_zaruun',
         'type': 'defeat',
@@ -838,7 +865,7 @@ TASKS = [
 		'to_id': 'zaruun_1',
 		'task_acquire_events': [
 			{
-				'event_type': 'begin_combat', # <- begin combat with zaruun as boss defeating him completes event
+				'event_type': 'begin_combat',
 				'params': {
 					'boss_mob_id': 'zaruun_1',
 					'combat_type': 'boss_battle'
@@ -855,53 +882,35 @@ TASKS = [
 			},
 			{ 'event_type': 'hide_npc', 'params': { 'npc_id': 'zaruun' }},
 			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'sable',
+					'dialog_id': 'sable_post_defeat'
+				}
+			},
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'moxie_post_defeat'
+				}
+			},
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'chock_post_defeat'
+				}
+			},
+			{
 				'event_type': 'complete_region_quest',
 				'params': {
 					'region_id': 'desert',
 				}
-			},
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'desert_primary_report_to_sable'
-				}
-			}
-		]
-	},
-	# Task 4: report back to Sable at region bar
-	{
-		'task_id': 'desert_primary_report_to_sable',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'sable',
-		'task_acquire_events': [],
-		'task_complete_events': [
-			{
-				'event_type': 'initiate_dialog',
-				'params': {
-					'npc_id': 'sable',
-					'dialog_id': 'sable_closing'
-				}
-			},
-			#remove npc sable location (so she's not on the map)
-			{
-				'event_type': 'hide_npc',
-				'params': {
-					'npc_id': 'sable'
-				}
-			},
-			{
-				'event_type': 'character_join',
-				'params': {
-					'character_id': 'sable'
-				}
 			}
 		]
 	}
-
-    
 ]
-
 
 
 PRIMARY_STORY_SETTINGS = {
@@ -910,4 +919,4 @@ PRIMARY_STORY_SETTINGS = {
     'npcs': NPCS,
     'npc_dialog': NPC_DIALOG,
     'attainable_player_characters': ATTAINABLE_PLAYER_CHARACTERS,
-    }
+}

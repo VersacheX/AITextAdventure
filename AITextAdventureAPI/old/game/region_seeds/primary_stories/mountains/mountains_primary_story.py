@@ -136,7 +136,7 @@ NPCS = [
             'an event that killed his entire crew. He masks his fear of losing control beneath swagger and bravado.'
             ' Bragg now seeks to understand the fracture that destroyed his forge.'
         ),
-        "theme_song": "One-Eyed Bastard, Green Day",
+        "theme_song": "I Stand Alone, Godsmack",
         "psychology": {
             "mbti": "ESTP",
             "dominant": "Se — Lives through action and physical force, reacting instantly to threats.",
@@ -153,8 +153,8 @@ NPCS = [
           "growth_line": "Moves to Type 2 — Uses his strength to protect others, turning his trauma into a protective instinct.",
           "instinctual_variant": "sx/sp — Seeks intense challenges and confrontations to prove his strength and control."
         },
-        'image': 'bragg1.jpeg',
-        'song_id': 'one_eyed_bastard_green_day'
+        'image': 'bragg1',
+        'song_id': 'i_stand_alone_godsmack'
     },
     {
         'npc_id': 'rokhuld',
