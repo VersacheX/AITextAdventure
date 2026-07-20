@@ -15,18 +15,50 @@ NPCS = [
 		'npc_id': 'alchemist_mirlo',
 		'name': 'Mirlo the Moonbrewer',
 		'description': (
-			'A wide‑eyed alchemist obsessed with lunar infusions and bubbling concoctions.'
-			' Mirlo’s potions glow with soft moonlight, even underground.'
-			' He often forgets whether he’s brewing medicine or mild chaos.'
-		)
+			'A wide-eyed alchemist obsessed with lunar infusions and bubbling concoctions.'
+			' Mirlo\'s potions glow with soft moonlight, even underground.'
+			' He often forgets whether he\'s brewing medicine or mild chaos.'
+		),
+		"psychology": {
+			"mbti": "ENTP",
+			"dominant": "Ne — Endlessly curious. Combines ingredients, theories, and side-effects with reckless, joyful creativity.",
+			"auxiliary": "Ti — Reverse-engineers his own accidents with sharp internal logic. He understands why the chaos happened, even when he can't stop it.",
+			"tertiary": "Fe — Genuinely delighted by other people's reactions to his brews. Social warmth drives his sharing instinct.",
+			"inferior": "Si — Loses track of what he's already tried, repeating experiments and occasionally rediscovering the same disaster."
+		},
+		"enneagram": {
+			"enneagram_type": "7w6",
+			"core_fear": "Being deprived, bored, or trapped in limitation.",
+			"core_desire": "To have a life full of stimulating discovery.",
+			"defense_mechanism": "Rationalization — Frames dangerous experiments as necessary research, avoiding the weight of their potential consequences.",
+			"stress_line": "Moves to Type 1 — Becomes rigid and perfectionistic when experiments spiral out of control.",
+			"growth_line": "Moves to Type 5 — Develops genuine expertise and depth when he commits to studying a single phenomenon.",
+			"instinctual_variant": "so/sp — Engages socially through his brews, securing his place in the community by being indispensable and entertaining."
+		}
 	},
     {
         'npc_id': 'glimmer_hermit_vael',
-        'name': 'Vael the Glimmer‑Hermit',
+        'name': 'Vael the Glimmer-Hermit',
         'description': (
-            'A wandering mystic who reads moon‑embers drifting through the forest. '
+            'A wandering mystic who reads moon-embers drifting through the forest. '
             'Vael senses disturbances where flame and night intertwine.'
-        )
+        ),
+		"psychology": {
+			"mbti": "INTJ",
+			"dominant": "Ni — Reads the world through invisible patterns. Moon-embers tell him what others cannot perceive.",
+			"auxiliary": "Te — Communicates observations with blunt, efficient precision. He doesn't waste words.",
+			"tertiary": "Fi — Has strong private convictions about the forest's nature and his role within it.",
+			"inferior": "Se — Rarely engages with the physical world directly. When forced to, he becomes briefly overwhelmed."
+		},
+		"enneagram": {
+			"enneagram_type": "5w4",
+			"core_fear": "Being useless or overwhelmed.",
+			"core_desire": "To understand the world through observation.",
+			"defense_mechanism": "Isolation — Withdraws into solitary study to maintain clarity and avoid emotional entanglement.",
+			"stress_line": "Moves to Type 7 — Becomes restless and scattered when his patterns refuse to resolve.",
+			"growth_line": "Moves to Type 8 — Applies his knowledge with decisive, protective action.",
+			"instinctual_variant": "sp/sx — Hermitic and self-sufficient, engaging deeply only with phenomena he deems worthy of attention."
+		}
     },
     {
         'npc_id': 'riftspark',

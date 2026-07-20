@@ -549,3 +549,30 @@ PRIMARY_STORY_SETTINGS = {
     'npc_dialog': NPC_DIALOG,
     'attainable_player_characters': ATTAINABLE_PLAYER_CHARACTERS,
     }
+
+def update_detail_for_record(screen: "DataMgmtScreen", record: "DevRecord | None") -> None:
+    """Update the detail panel for a DevRecord."""
+    detail_panel = screen.query_one("#dm-detail-panel")
+
+    if record is None:
+        _reset_to_static(detail_panel, "[dim]No matching records.[/dim]")
+        return
+
+    if record.category == "npc":
+        detail_panel.remove_children()
+        detail_panel.mount(NpcDetailPanel(record))
+        return
+
+    if record.category == "dungeon":
+        detail_panel.remove_children()
+        detail_panel.mount(DungeonDetailPanel(record))
+        return
+
+    # Remove any mounted sub-panel (e.g. a stale TimelineDetailPanel) before
+    # writing plain text, otherwise _ensure_static finds a Static buried inside
+    # the old panel widget and the timeline underlay bleeds through.
+    detail_panel.remove_children()
+    header = f"[bold]{rich_escape(record.name)}[/bold]"
+    if record.subtitle:
+        header += f"\n[dim]{rich_escape(record.subtitle)}[/dim]"
+    detail_panel.mount(Static(f"{header}\n\n{rich_escape(record.detail)}"))

@@ -13,6 +13,7 @@ class TaskType(str, Enum):
     Defeat = "defeat"
     CompleteIntroStory = "complete_intro_story"
     CompleteRegionalQuests = "complete_regional_quests"
+    Gated = "gated"
 
 
 class SpecialTaskToType(str, Enum):
@@ -82,6 +83,8 @@ class TaskEventCondition:
 
     Attributes:
         condition_type: The kind of check to perform.
+        operator:       ``"is"`` (default) fires when the condition is True.
+                        ``"is_not"`` inverts the result, firing when False.
         params:         Key/value parameters specific to the condition type.
     """
 
@@ -89,19 +92,28 @@ class TaskEventCondition:
         self,
         condition_type: TaskEventConditionType,
         params: Dict[str, Any],
+        operator: str = "is",
     ) -> None:
         self.condition_type: TaskEventConditionType = condition_type
         self.params: Dict[str, Any] = params
+        self.operator: str = operator if operator in ("is", "is_not") else "is"
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "TaskEventCondition":
         """Build a ``TaskEventCondition`` from a seed dict fragment.
 
-        Expected shape: ``{'type': 'is_task_completed', 'params': {...}}``
+        Expected shape::
+
+            {
+                'type': 'is_task_completed',
+                'params': {'task_id': 'ch1_open_gate'},
+                'operator': 'is_not'          # optional, defaults to 'is'
+            }
         """
-        ctype = TaskEventConditionType(d.get("type") or d.get("condition_type"))
-        params = d.get("params") or {}
-        return TaskEventCondition(ctype, params)
+        ctype    = TaskEventConditionType(d.get("type") or d.get("condition_type"))
+        params   = d.get("params") or {}
+        operator = d.get("operator", "is")
+        return TaskEventCondition(ctype, params, operator)
 
 
 # ====================== EVENT CLASSES ======================
@@ -146,6 +158,8 @@ class TaskEventType(str, Enum):
     LOCK_HYPERWAY = 'lock_hyperway'
     CANCEL_TASK = 'cancel_task'
     REMOVE_TASK = 'remove_task'
+    REMOVE_MONEY = 'remove_money'
+    COMPLETE_TASK = 'complete_task'
 
 
 class TaskAcquireEvent:
@@ -314,6 +328,20 @@ class CompleteRegionalQuestsTask(Task):
         super().__init__(task_id)
         self.type = TaskType.CompleteRegionalQuests
 
+class GatedTask(Task):
+    """A task that completes only when explicitly triggered via a complete_task event.
+
+    Its acquire events run immediately on award (used to self-complete via
+    ``complete_task`` so the completion events fire right away), or acquire
+    events can be left empty and completion triggered externally.
+    """
+    def __init__(self, task_id: str) -> None:
+        super().__init__(task_id)
+        self.type = TaskType.Gated
+
+    def check_completion_terms(self, player_game=None) -> bool:
+        return False  # Never auto-completes; only via complete_task event
+
 
 # ------------------ Seed Builder ------------------
 def build_task_from_seed(seed: Dict[str, Any], acquired_region: Any) -> Task:
@@ -334,6 +362,8 @@ def build_task_from_seed(seed: Dict[str, Any], acquired_region: Any) -> Task:
         task = CompleteIntroStoryTask(tid)
     elif ttype == 'complete_regional_quests':
         task = CompleteRegionalQuestsTask(tid)
+    elif ttype == 'gated':
+        task = GatedTask(tid)
     else:
         task = Task(tid)
 

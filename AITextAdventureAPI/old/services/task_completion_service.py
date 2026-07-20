@@ -87,6 +87,10 @@ def handle_task_event(event, player_game, parent_task):
 		amount = int(amount) if amount is not None else 0
 		return award_money_to_player_game(amount, player_game)
 
+	if ev_name == TaskEventType.REMOVE_MONEY.value:
+		amount = int(params.get('amount', 0))
+		return remove_money_from_player_game(amount, player_game)
+
 	# INITIATE_DIALOG: locate dialog in const.NPC_DIALOG and push to player_game.info_dialogs
 	if ev_name == TaskEventType.INITIATE_DIALOG.value:
 		return initiate_dialog_to_player_game(params, player_game)
@@ -210,6 +214,10 @@ def handle_task_event(event, player_game, parent_task):
 
 	if ev_name == TaskEventType.REMOVE_TASK.value:
 		return player_game.remove_task(params.get('task_id'))
+
+	if ev_name == TaskEventType.COMPLETE_TASK.value:
+		task_id = params.get('task_id')
+		return complete_task_in_player_game(task_id, player_game)
 
 	input( f'Unhandled task event type: {ev_name} with params: {params}' )
 
@@ -667,6 +675,14 @@ def initiate_dialog_to_player_game(params, player_game):
 	# not found -> return None
 	input (f'Dialog not found for npc_id={npc_id}, dialog_id={dialog_id}')
 	return None
+
+def remove_money_from_player_game(amount: int, player_game):
+    """Deduct money from player_game by amount. Floors at 0."""
+    if player_game is not None and amount and amount > 0:
+        current = getattr(player_game, 'money', 0)
+        player_game.money = max(0, current - amount)
+        player_game.add_info_dialog_line(None, f'Lost money: {amount}')
+    return amount
 
 def award_money_to_player_game(amount: int, player_game):
 	"""Award money to player_game by amount."""

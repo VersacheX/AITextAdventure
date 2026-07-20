@@ -7,8 +7,13 @@ events without polluting the main dispatch table.
 
 Adding a new condition type:
   1. Add an entry to TaskEventConditionType in task.py.
-  2. Add a matching branch in evaluate_condition() below.
+  2. Add a matching branch in _check_condition() below.
   3. Document the params shape in the TaskEventConditionType docstring.
+
+operator support:
+  Each condition dict may include an ``operator`` key:
+    ``"is"``     (default) — event fires when the condition evaluates True.
+    ``"is_not"``            — event fires when the condition evaluates False.
 """
 from __future__ import annotations
 
@@ -19,7 +24,14 @@ if TYPE_CHECKING:
 
 
 def evaluate_condition(condition: "TaskEventCondition", player_game) -> bool:
-    """Return True if *condition* is satisfied by the current *player_game* state.
+    """Return True if *condition* (with its operator) is satisfied by *player_game*."""
+    result   = _check_condition(condition, player_game)
+    operator = getattr(condition, "operator", "is")
+    return (not result) if operator == "is_not" else result
+
+
+def _check_condition(condition: "TaskEventCondition", player_game) -> bool:
+    """Evaluate the raw condition value, ignoring operator.
 
     If the condition type is unrecognised, a debug prompt is raised and the
     event is **skipped** (returns False) to avoid silent data corruption.
@@ -93,3 +105,40 @@ def evaluate_condition(condition: "TaskEventCondition", player_game) -> bool:
     # ── unhandled ─────────────────────────────────────────────────────────
     input(f"evaluate_condition: unhandled condition type '{ct}' with params {p}")
     return False
+
+class TaskEventCondition:
+    """A parsed, typed condition attached to a task event.
+
+    Attributes:
+        condition_type: The kind of check to perform.
+        operator:       ``"is"`` (default) fires when the condition is True.
+                        ``"is_not"`` inverts the result, firing when False.
+        params:         Key/value parameters specific to the condition type.
+    """
+
+    def __init__(
+        self,
+        condition_type: TaskEventConditionType,
+        params: Dict[str, Any],
+        operator: str = "is",
+    ) -> None:
+        self.condition_type: TaskEventConditionType = condition_type
+        self.params: Dict[str, Any] = params
+        self.operator: str = operator if operator in ("is", "is_not") else "is"
+
+    @staticmethod
+    def from_dict(d: Dict[str, Any]) -> "TaskEventCondition":
+        """Build a ``TaskEventCondition`` from a seed dict fragment.
+
+        Expected shape::
+
+            {
+                'type': 'is_task_completed',
+                'params': {'task_id': 'ch1_open_gate'},
+                'operator': 'is_not'          # optional, defaults to 'is'
+            }
+        """
+        ctype    = TaskEventConditionType(d.get("type") or d.get("condition_type"))
+        params   = d.get("params") or {}
+        operator = d.get("operator", "is")
+        return TaskEventCondition(ctype, params, operator)

@@ -424,7 +424,11 @@ class DataMgmtScreen(BaseScreen):
                 self._npc_playlist_index = i
                 break
 
-        update_detail_for_record(self, record)
+        # Only update the detail panel when the NPC tab is the active view.
+        # The music poll fires every 500ms regardless of tab; without this guard
+        # advancing the playlist overwrites the timeline/item/etc. detail panel.
+        if self._category == "npc":
+            update_detail_for_record(self, record)
 
         if start_music:
             started = self._npc_music.play_record(
