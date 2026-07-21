@@ -4,128 +4,65 @@
 #
 # local bad-guys:
 #  ROKHULD THE CORE-BREAKER
-#   A massive, hammer‑wielding brute who believes the mountain’s heart contains the world’s “true ending.”
+#   A massive, hammer-wielding brute who believes the mountain's heart contains the world's "true ending."
 #   He is tunneling downward to reach it.
 #
-#   Why he opposes Bragg:  
+#   Why he opposes Bragg:
 #    Bragg builds; Rokhuld destroys.
-#    He mocks Bragg’s golems as “delaying the inevitable collapse.”
+#    He mocks Bragg's golems as "delaying the inevitable collapse."
 #
-#   Void Hint:  
-#    He claims the mountain is hollow because “something below is hungry.”
+#   Void Hint:
+#    He claims the mountain is hollow because "something below is hungry."
 #
-# dialog and story:
+# Pregame to unlock coreforge_shard:
+#   Sindra Coilrunner (relaytech_sindra, mountains large city) has been
+#   having nightmares. The relay conduits in her workshop are bleeding
+#   corrupted energy into her sleep — constructs from the corruption are
+#   beginning to manifest physically. Three escalating waves of nightmare
+#   entities erupt from the conduits. After the third wave is cleared
+#   Sindra can finally sleep; she gives the party the coreforge_shard
+#   she pulled from the final construct as proof the corruption was real.
 #
-# Bragg & Rokhuld
-# Protagonist Intro (Bragg → Player)
-# “Ah! A traveler with working limbs. Perfect.”
+#   Wave 1: two relay_phantoms.
+#   Wave 2: one relay_phantom + two surge_wraiths.
+#   Wave 3: one surge_wraith + one conduit_colossus (rare drop: coreforge_shard).
 #
-# “Rokhuld’s smashing his way toward the mountain’s heart.
-# Says the world’s ending is buried down there.”
-#
-# “He’s breaking my golems, my tunnels, my patience.
-# Go stop him before he cracks the whole peak.”
-#
-# CREATE: DUNGEON
-#
-# Antagonist Intro (Rokhuld → Player)
-# “You stand between me and truth.”
-#
-# “The mountain hides the world’s final breath.
-# I will break it open.”
-#
-# Antagonist Defeat (Rokhuld → Player)
-# “Stone… holds…
-# for now…”
-#
-# Protagonist Closing (Bragg → Player)
-# “Ha! You flattened him like a loose cobblestone.”
-#
-# “You’ve got talent.
-# I’ll come along — someone needs to build things while you break them.”
-#
-# Reward: Bragg joins the cause.
+# Deliver coreforge_shard to Bragg → he joins here (report_to_bragg removed).
 
 ATTAINABLE_PLAYER_CHARACTERS = [
-    #{'id': 'bragg', 'name': 'Bragg'}
-    { 
-        ## total power points = 15 + 15* 29  = 465
-        ## total stat points = 10 + 6*29 = 184
-        'id': 'bragg', 
+    {
+        ## total power points = 15 + 15 * 29 = 465
+        ## total stat points = 10 + 6 * 29 = 184
+        'id': 'bragg',
         'name': 'Bragg',
         'head_armor': 'coresight_visor',
         'body_armor': 'forgeplate_harness',
         'arm_armor': 'shockforge_gauntlets',
         'leg_armor': 'stonebinder_greaves',
         'equipped_weapon': 'corebreaker_hammer',
-        'max_hp': 941, # 20 + 20 * 29 = 600            + 365
+        'max_hp': 941,
         'current_hp': 941,
-        'max_ap': 350, # 5 + 5 * 29 = 150              + 100
+        'max_ap': 350,
         'current_ap': 350,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 38,                                # +120
-        'dexterity': 102,        
-        'intelligence':158,
-        'constitution': 38,                            # + 64
+        'strength': 38,
+        'dexterity': 102,
+        'intelligence': 158,
+        'constitution': 38,
         'level': 30,
-        'abilities': ['dark_earth_electric_tech_lv3_petrifying_shock', 'earth_electric_water_tech_lv3_tectonic_current', 
-                      'fire_earth_tech_lv2_forge_pulse', 'earth_earth_tech_lv2_seismic_rupture', 'electric_earth_tech_lv2_grounded_spike',
-                      'fire_tech_lv1_flux_dampener', 'earth_tech_lv1_fault_inhibitor'
-
+        'abilities': [
+            'dark_earth_electric_tech_lv3_petrifying_shock',
+            'earth_electric_water_tech_lv3_tectonic_current',
+            'fire_earth_tech_lv2_forge_pulse',
+            'earth_earth_tech_lv2_seismic_rupture',
+            'electric_earth_tech_lv2_grounded_spike',
+            'fire_tech_lv1_flux_dampener',
+            'earth_tech_lv1_fault_inhibitor',
         ]
-
     }
 ]
-"""
-Bragg Character Review
-Overall Verdict: 8.6 / 10 – Strong, fun, and fitting.
-Bragg is a solid, likable “big personality” tank character. He brings grounded, practical energy that balances the more mystical or philosophical party members.
-How Well He Matches His Base (ESTP 8w7)
-Strong Matches:
-
-Se-dominant: Action-oriented, physical, immediate reactions. Loves smashing things and fixing (or breaking) stuff.
-Bravado masking trauma: The explosion that killed his crew is a perfect wound for an 8w7. He covers fear of losing control with swagger and humor.
-Forge-breaker / Builder vibe: Mechanical expertise mixed with destructive force feels very ESTP.
-
-Current Lines (Mountain Arc + Group Scenes):
-
-“Ah! A traveler with working limbs. Perfect.”
-“Rokhuld’s smashing his way toward the mountain’s heart. Says the world’s ending is buried down there.”
-“He’s breaking my golems, my tunnels, my patience. Go stop him before he cracks the whole peak.”
-“Ha! You flattened him like a loose cobblestone.”
-“You’ve got talent. I’ll come along — someone needs to build things while you break them.”
-
-These are good — they show his practical, gruff charm and builder/destroyer duality.
-Strengths
-
-Distinct voice: Blunt, confident, a bit cocky but helpful.
-Good contrast with more introspective characters (Kor-in, Ripple, Grimnaw).
-Natural party integration — he respects strength and wants to contribute practically.
-
-Areas for Improvement
-1. Deepen the Trauma
-We know about the explosion, but we don’t feel it much yet. A few lines hinting at his fear of sudden collapse or losing people would make him richer.
-2. Vary the Swagger
-He’s a bit one-note “tough builder” right now. Lean into ESTP charm, impulsiveness, or momentary vulnerability under stress.
-Suggested Line Tweaks / Additions:
-Mountain Arc (Meet Bragg):
-
-Bragg: (wiping soot from his hands, grinning) Ah! Fresh limbs with working brains. Perfect. Rokhuld’s smashing my golems to dust. Says the world’s end is buried in the mountain’s heart… I lost enough people to one explosion already. Go crack his skull before he cracks my whole damn peak.
-
-After Defeating Rokhuld:
-
-Bragg: Ha! You flattened him like a loose cobblestone. Good work. …Reminds me of the old crew. They would’ve liked you. (quiet for a beat) Anyway — I’ll tag along. Someone’s gotta build things while you lot break the world.
-
-In Group Scenes (e.g. Chapter 8 ship crash):
-
-Bragg: (laughing nervously as the ship shakes) Just like the old forge right before she blew! Hold on to something solid!
-
-
-Final Thoughts
-Bragg has strong “party tank with heart” energy. He’s fun, useful, and believable. With a little more vulnerability tied to his trauma, he’ll feel even more alive.
-"""
 
 NPCS = [
     {
@@ -145,13 +82,13 @@ NPCS = [
             "inferior": "Ni — Under stress, becomes paranoid about unseen dangers or future collapse."
         },
         "enneagram": {
-          "enneagram_type": "8w7",
-          "core_fear": "Being controlled or harmed by forces beyond his understanding (like the fracture).",
-          "core_desire": "To be in control of his own life and environment.",
-          "defense_mechanism": "Denial — Uses bravado and swagger to deny his underlying fear and trauma from the explosion, projecting an image of strength.",
-          "stress_line": "Moves to Type 5 — Becomes withdrawn and paranoid when his control is seriously threatened.",
-          "growth_line": "Moves to Type 2 — Uses his strength to protect others, turning his trauma into a protective instinct.",
-          "instinctual_variant": "sx/sp — Seeks intense challenges and confrontations to prove his strength and control."
+            "enneagram_type": "8w7",
+            "core_fear": "Being controlled or harmed by forces beyond his understanding (like the fracture).",
+            "core_desire": "To be in control of his own life and environment.",
+            "defense_mechanism": "Denial — Uses bravado and swagger to deny his underlying fear and trauma from the explosion, projecting an image of strength.",
+            "stress_line": "Moves to Type 5 — Becomes withdrawn and paranoid when his control is seriously threatened.",
+            "growth_line": "Moves to Type 2 — Uses his strength to protect others, turning his trauma into a protective instinct.",
+            "instinctual_variant": "sx/sp — Seeks intense challenges and confrontations to prove his strength and control."
         },
         'image': 'bragg1',
         'song_id': 'i_stand_alone_godsmack'
@@ -160,63 +97,336 @@ NPCS = [
         'npc_id': 'rokhuld',
         'name': 'Rokhuld the Core-Breaker',
         'description': (
-            'A massive, hammer‑wielding brute who believes the mountain’s heart contains the world’s “true ending.” '
+            'A massive, hammer-wielding brute who believes the mountain\'s heart contains the world\'s "true ending." '
             'He is tunneling downward to reach it.'
         ),
         "psychology": {
             "mbti": "ISTJ",
-            "dominant": "Si — Fixated on the mountain’s ancient patterns and the ‘truth’ he believes lies beneath. He follows a rigid internal sense of duty.",
-            "auxiliary": "Te — Executes his mission with relentless efficiency. He destroys anything in his way, including Bragg’s golems.",
+            "dominant": "Si — Fixated on the mountain's ancient patterns and the 'truth' he believes lies beneath. He follows a rigid internal sense of duty.",
+            "auxiliary": "Te — Executes his mission with relentless efficiency. He destroys anything in his way, including Bragg's golems.",
             "tertiary": "Fi — Holds a private, warped conviction that breaking the mountain is righteous. His morality is internal and unshakeable.",
-            "inferior": "Ni — The void exploits his weakest function, filling him with catastrophic visions and the belief that the mountain hides the world’s ‘final breath.’"
+            "inferior": "Ni — The void exploits his weakest function, filling him with catastrophic visions and the belief that the mountain hides the world's 'final breath.'"
         },
         "enneagram": {
-          "enneagram_type": "1w2",
-          "core_fear": "Being corrupt or failing in his sacred duty.",
-          "core_desire": "To be good and have integrity by fulfilling his perceived purpose.",
-          "defense_mechanism": "Reaction Formation — Channels his fear of the world's end into a rigid, destructive quest that he believes is righteous and necessary.",
-          "stress_line": "Moves to Type 4 — Becomes melancholic and withdrawn when his progress is halted.",
-          "growth_line": "Moves to Type 7 — Learns to find a more flexible and less destructive purpose.",
-          "instinctual_variant": "sp/so — A self-contained crusader, focused on his personal mission which he believes will save the world."
+            "enneagram_type": "1w2",
+            "core_fear": "Being corrupt or failing in his sacred duty.",
+            "core_desire": "To be good and have integrity by fulfilling his perceived purpose.",
+            "defense_mechanism": "Reaction Formation — Channels his fear of the world's end into a rigid, destructive quest that he believes is righteous and necessary.",
+            "stress_line": "Moves to Type 4 — Becomes melancholic and withdrawn when his progress is halted.",
+            "growth_line": "Moves to Type 7 — Learns to find a more flexible and less destructive purpose.",
+            "instinctual_variant": "sp/so — A self-contained crusader, focused on his personal mission which he believes will save the world."
         },
         'image': 'bosses:rokhuld1.jpeg'
     }
 ]
 
 NPC_DIALOG = [
+    # ── Sindra nightmare chain ────────────────────────────────────────────────
+    {
+        'npc_id': 'relaytech_sindra',
+        'dialog_id': 'sindra_nightmare_intro',
+        'dialog': [
+            "Oh — you came at the right time. Or the wrong time. I can't tell anymore.",
+            "Three nights running. Machines that aren't there. Sparks that make shapes.",
+            "The conduits are fine — I checked. Everything checks out.",
+            "(quietly) But they're still coming through.",
+            "It's like the relay grid is dreaming and the dreams are getting out.",
+            "I don't know what to do. I stopped sleeping.",
+            "(the workshop hums — then a conduit flares) ...",
+            "There. You see that? That's not a normal arc.",
+            "Stay close."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'kade_sindra_nightmare_intro',
+        'dialog': [
+            "Relay feedback doesn't spontaneously generate constructs.",
+            "Something is using the conduit grid as a door.",
+            "Sindra, get behind us."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'moxie_sindra_nightmare_intro',
+        'dialog': [
+            "The sparks have shapes and the shapes have intent.",
+            "That's not machinery. That's something wearing machinery.",
+            "Hit it."
+        ]
+    },
+    # ── After wave 1 ──────────────────────────────────────────────────────────
+    {
+        'npc_id': 'relaytech_sindra',
+        'dialog_id': 'sindra_after_wave_1',
+        'dialog': [
+            "That — that was them. Exactly what I've been seeing.",
+            "They just — walked right out of the conduit housing.",
+            "I'm not losing my mind."
+        ]
+    },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'chock_after_wave_1',
+        'dialog': [
+            "No. You're not.",
+            "There are more coming. I can feel the grid building pressure again."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'poise_after_wave_1',
+        'dialog': [
+            "They're getting faster between waves.",
+            "Whatever is feeding them is close."
+        ]
+    },
+    # ── After wave 2 ──────────────────────────────────────────────────────────
+    {
+        'npc_id': 'relaytech_sindra',
+        'dialog_id': 'sindra_after_wave_2',
+        'dialog': [
+            "The surge wraiths — those are the ones that drain you.",
+            "In the dreams they just stand there and pull the warmth out of everything.",
+            "(steadying herself) There's something bigger behind all of this. I can feel it in the hum."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'kade_after_wave_2',
+        'dialog': [
+            "The resonance frequency is climbing. Something large is about to come through.",
+            "Sindra — if this breaks your conduit housing it won't be fixable tonight.",
+            "Be ready."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'moxie_after_wave_2',
+        'dialog': [
+            "I've fought things that came out of voids, cracks, tears, and one very aggressive painting.",
+            "A relay conduit is new. Points for creativity.",
+            "Let's finish this."
+        ]
+    },
+    # ── After wave 3 (colossus defeated, shard awarded) ───────────────────────
+    {
+        'npc_id': 'relaytech_sindra',
+        'dialog_id': 'sindra_after_wave_3',
+        'dialog': [
+            "(long exhale) ...",
+            "It's quiet. The hum stopped.",
+            "Three nights I couldn't sleep and it took you — what — twenty minutes.",
+            "(crouching, examining the collapsed colossus) Look at this.",
+            "There's a shard embedded in the core housing. Pure forged resonite.",
+            "That shouldn't exist in a construct like this. It's not relay material.",
+            "It's deeper — mountain deep. The kind of thing Bragg would recognize.",
+            "(hands it over) Take it. I don't want it near my conduits.",
+            "And tell Bragg... whatever that thing was, it came from below his territory.",
+            "He should know."
+        ]
+    },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'chock_after_wave_3',
+        'dialog': [
+            "Rokhuld's been cracking the mountain open below.",
+            "Whatever he's disturbing, it's finding other ways out.",
+            "Sindra's conduits were just the nearest crack."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'poise_after_wave_3',
+        'dialog': [
+            "Sindra. Go sleep.",
+            "Actually sleep. It's done."
+        ]
+    },
+    {
+        'npc_id': 'relaytech_sindra',
+        'dialog_id': 'sindra_farewell',
+        'dialog': [
+            "(almost laughing) Yeah.",
+            "Yeah, I think I will.",
+            "Thank you. Seriously."
+        ]
+    },
+    # ── Bragg intro (receives coreforge_shard, joins) ─────────────────────────
     {
         'npc_id': 'bragg',
         'dialog_id': 'bragg_intro',
         'dialog': [
-            "Ah! A traveler with working limbs. Perfect.",
-            "Rokhuld’s smashing his way toward the mountain’s heart. Says the world’s ending is buried down there.",
-            "He’s breaking my golems, my tunnels, my patience. Go stop him before he cracks the whole peak."
+            "(wiping soot from his hands, grinning) Ah! Fresh limbs with working brains. Perfect.",
+            "Rokhuld's smashing my golems to dust. Says the world's end is buried in the mountain's heart.",
+            "I lost enough people to one explosion already. Go crack his skull before he cracks the whole peak."
         ]
     },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'moxie_bragg_intro',
+        'dialog': [
+            "He said 'I lost people' like it was a footnote.",
+            "It wasn't a footnote."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'kade_bragg_intro',
+        'dialog': [
+            "He builds golems to replace what he lost.",
+            "That's either brilliant engineering or avoidance.",
+            "Probably both."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'poise_bragg_intro',
+        'dialog': [
+            "The shard came from deep in Rokhuld's territory.",
+            "Bragg recognized it in under a second.",
+            "He knows this mountain."
+        ]
+    },
+    # ── Bragg receives shard and joins ────────────────────────────────────────
+    {
+        'npc_id': 'bragg',
+        'dialog_id': 'bragg_shard_received',
+        'dialog': [
+            "(turning the shard over in his hand, expression shifting)",
+            "...This is coreforge resonite. Deep seam. Pre-fracture grade.",
+            "Sindra pulled this out of a construct that walked out of her conduits.",
+            "That means Rokhuld cracked something loose down there that's already bleeding upward.",
+            "(sets the shard down carefully)",
+            "I built this whole operation to understand what happened to my crew.",
+            "A micro-fracture. One crack I didn't see coming.",
+            "If Rokhuld opens the core... that won't be a micro-fracture.",
+            "(picks up his hammer) I'm coming with you.",
+            "Someone needs to build things while you lot break the world.",
+            "...And someone who actually knows what's down there probably shouldn't stay up here."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'moxie_bragg_join_reaction',
+        'dialog': [
+            "He went from grinning to quiet to absolutely decided in about four seconds.",
+            "I respect the pace.",
+            "Welcome aboard, Bragg."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'kade_bragg_join_reaction',
+        'dialog': [
+            "Structural analysis. Mechanical expertise. First-hand knowledge of fracture events.",
+            "He's useful.",
+            "Also the hammer is large. That helps."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'poise_bragg_join_reaction',
+        'dialog': [
+            "He moves like someone who's already decided how he's going to die and made peace with it.",
+            "That's either wisdom or a very bad sign.",
+            "Either way — glad he's on our side."
+        ]
+    },
+    # ── Rokhuld confrontation ─────────────────────────────────────────────────
     {
         'npc_id': 'rokhuld',
         'dialog_id': 'rokhuld_intro',
         'dialog': [
             "You stand between me and truth.",
-            "The mountain hides the world’s final breath.",
+            "The mountain hides the world's final breath.",
             "I will break it open."
         ]
     },
     {
-        'npc_id': 'rokhuld',
-        'dialog_id': 'rokhuld_defeat',
+        'npc_id': 'bragg',
+        'dialog_id': 'bragg_rokhuld_confrontation',
         'dialog': [
-            "Stone… holds… for now…"
+            "Rokhuld.",
+            "I've seen what a fracture does. One small crack. One.",
+            "You're not finding truth down there. You're finding the same thing that took my crew.",
+            "Step back."
         ]
     },
     {
-        'npc_id': 'bragg',
-        'dialog_id': 'bragg_closing',
+        'npc_id': 'rokhuld',
+        'dialog_id': 'rokhuld_confrontation_reply',
         'dialog': [
-            "Ha! You flattened him like a loose cobblestone.",
-            "You’ve got talent. I’ll come along — someone needs to build things while you break them."
+            "Your crew died because they feared the depth.",
+            "The mountain's heart does not punish courage.",
+            "It punishes hesitation.",
+            "I will not hesitate."
         ]
-    }
+    },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'chock_rokhuld_challenge',
+        'dialog': [
+            "He's not going to listen.",
+            "He never was."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'moxie_rokhuld_challenge',
+        'dialog': [
+            "He turned Bragg's grief into an argument for cracking open the mountain.",
+            "I've heard enough."
+        ]
+    },
+    # ── Rokhuld defeat ────────────────────────────────────────────────────────
+    {
+        'npc_id': 'rokhuld',
+        'dialog_id': 'rokhuld_defeat',
+        'dialog': [
+            "Stone… holds…",
+            "for now…",
+            "Something below is still hungry.",
+            "You… have only sealed the surface."
+        ]
+    },
+    # ── Post-defeat scene ─────────────────────────────────────────────────────
+    {
+        'npc_id': 'bragg',
+        'dialog_id': 'bragg_post_defeat',
+        'dialog': [
+            "(quiet for a beat) 'Something below is still hungry.'",
+            "Yeah.",
+            "I know.",
+            "That's why I'm here.",
+            "(to the party) Come on. Let's not give it time to find another crack."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'moxie_post_defeat',
+        'dialog': [
+            "He said 'sealed the surface.'",
+            "Not 'stopped it.'",
+            "I noticed that too."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'kade_post_defeat',
+        'dialog': [
+            "The mountain is stable for now.",
+            "For now is doing a lot of work in that sentence."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'poise_post_defeat',
+        'dialog': [
+            "Bragg held.",
+            "That's what matters right now."
+        ]
+    },
 ]
 
 DUNGEONS = []
@@ -706,4 +916,4 @@ PRIMARY_STORY_SETTINGS = {
     'npcs': NPCS,
     'npc_dialog': NPC_DIALOG,
     'attainable_player_characters': ATTAINABLE_PLAYER_CHARACTERS,
-    }
+}
