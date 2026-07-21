@@ -31,6 +31,14 @@
 #
 # Deliver moontide_orb to Ripple → she joins here.
 # report_to_ripple end step removed.
+#
+# STANDING TEXT CONVENTION:
+#   set_npc_standing_text in a meet task's task_acquire_events is redundant
+#   because the meet event fires its own dialog on completion. The standing
+#   text would only be seen if the player walks away before triggering the
+#   meet, which is brief and uncommon.
+#   set_npc_standing_text IS necessary in deliver task_acquire_events — the
+#   player needs a visible hint to bring the item back before the dialog fires.
 
 ATTAINABLE_PLAYER_CHARACTERS = [
     {
@@ -517,6 +525,8 @@ DUNGEONS = []
 
 TASKS = [
     # ── Initialize — Ripple appears at region bar ─────────────────────────────
+    # Standing text here is neutral: no story hints, no forward references.
+    # The player hasn't been told anything yet — Ripple is just present.
     {
         'task_id': 'shallows_primary_initialize',
         'type': 'complete_intro_story',
@@ -533,9 +543,9 @@ TASKS = [
                 'params': {
                     'npc_id': 'ripple',
                     'standing_text': [
-                        "The tides are unsettled today.",
-                        "Something stirs beneath the shallows.",
-                        "Talk to Renlo at the market — he notices things the water touches."
+                        "The tides speak to those who listen.",
+                        "I am Ripple. Tide Oracle of the Shallows.",
+                        "If you seek guidance, I am here."
                     ]
                 }
             }
@@ -551,6 +561,12 @@ TASKS = [
     },
 
     # ── Step 1: Renlo notices Syrin is withdrawn ──────────────────────────────
+    # task_acquire_events updates Ripple's standing text now that the player
+    # has been pointed toward Renlo. This is the correct place for a
+    # directional hint — it fires before the player reaches Renlo, giving
+    # them a nudge if they return to Ripple first.
+    # Note: set_npc_standing_text on the meet target (Renlo) is redundant here
+    # since the meet dialog fires immediately on arrival. It is omitted.
     {
         'task_id': 'shallows_primary_meet_renlo',
         'type': 'meet',
@@ -560,10 +576,11 @@ TASKS = [
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
-                    'npc_id': 'saltcaller_renlo',
+                    'npc_id': 'ripple',
                     'standing_text': [
-                        "Something's got Syrin stuck.",
-                        "She won't say what. Come find me."
+                        "Talk to Renlo at the market.",
+                        "He notices things the water touches.",
+                        "He may know something useful."
                     ]
                 }
             }
@@ -828,6 +845,9 @@ TASKS = [
     },
 
     # ── Deliver moontide_orb to Ripple — she joins here ───────────────────────
+    # set_npc_standing_text in task_acquire_events is necessary here: this is
+    # a deliver task. The player must go find the item then return. The
+    # standing text is the only hint visible while they are away.
     {
         'task_id': 'shallows_primary_meet_ripple',
         'type': 'deliver',

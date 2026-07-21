@@ -663,7 +663,7 @@ TASKS = [
 					'location': 'region_open_area'
 				}
 			},
-			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'seth_hideout_ch3', 'item_id': 'moontide_orb', 'location': 'treasure_room'}}
+			#{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'seth_hideout_ch3', 'item_id': 'moontide_orb', 'location': 'treasure_room'}}
 		],
 		'task_complete_events': [
 			{

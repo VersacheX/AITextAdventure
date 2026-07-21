@@ -433,6 +433,7 @@ DUNGEONS = []
 
 TASKS = [
     # ── Initialize — Bragg appears at region bar ──────────────────────────────
+    # Standing text is neutral — no forward references to Sindra or the tunnels.
     {
         'task_id': 'mountains_primary_initialize',
         'type': 'complete_intro_story',
@@ -449,8 +450,9 @@ TASKS = [
                 'params': {
                     'npc_id': 'bragg',
                     'standing_text': [
-                        "Heyo! I'm Bragg — I build golems and keep the mining networks from collapsing.",
-                        "Something's been disturbing the deep tunnels lately. Ask around the city.",
+                        "Heyo! I'm Bragg.",
+                        "I build golems, patch mining networks, and keep the mountain from eating itself.",
+                        "If you need something broken or something built — I'm your man."
                     ]
                 }
             }
@@ -466,23 +468,15 @@ TASKS = [
     },
 
     # ── Meet Sindra — she describes the nightmares, wave 1 erupts ────────────
+    # task_acquire_events updates Bragg's standing text with the directional hint.
+    # set_npc_standing_text on Sindra (meet target) is omitted — redundant,
+    # her dialog fires immediately on arrival.
     {
         'task_id': 'mountains_primary_meet_sindra',
         'type': 'meet',
         'to_type': 'npc',
         'to_id': 'relaytech_sindra',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'relaytech_sindra',
-                    'standing_text': [
-                        "Three nights without sleep. The conduits are fine on paper.",
-                        "They're not fine.",
-                        "Come find me if you want to see for yourself."
-                    ]
-                }
-            },
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {

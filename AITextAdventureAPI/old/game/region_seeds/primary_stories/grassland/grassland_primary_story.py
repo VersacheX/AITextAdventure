@@ -489,7 +489,7 @@ TASKS = [
                     'standing_text': [
                         "Hey! Have you heard anything interesting lately?",
                         "The wind's been carrying all kinds of whispers. I love it.",
-                        "Come talk to me when you have a moment."
+                        "Come talk to me whenever you have time."
                     ]
                 }
             }
