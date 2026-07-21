@@ -152,11 +152,25 @@ TASKS = [
             {
                 'event_type': 'award_task',
                 'params': {
-                    'task_id': 'shallows_large_city_meet_renlo'
+                    'task_id': 'shallows_large_city_regional_complete_gate'
                 }
             }
 		]		
 	},
+    {
+        'task_id': 'shallows_large_city_regional_complete_gate',
+        'type': 'complete_regional_quests',
+        'task_acquire_events': [],
+        'task_complete_events': [            
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'shallows_large_city_meet_renlo'
+                }
+            }
+        ]
+
+    },
 
     # Task 1 — Meet Renlo after initialization
     {

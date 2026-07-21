@@ -153,12 +153,25 @@ TASKS = [
             {
                 'event_type': 'award_task',
                 'params': {
-                    'task_id': 'desert_large_city_meet_kadeem'
+                    'task_id': 'desert_large_city_regional_complete_gate'
                 }
             }
 		]		
 	},
+    {
+        'task_id': 'desert_large_city_regional_complete_gate',
+        'type': 'complete_regional_quests',
+        'task_acquire_events': [],
+        'task_complete_events': [            
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'desert_large_city_meet_kadeem'
+                }
+            }
+        ]
 
+    },
     # Task 1 — Speak to Kadeem after city initialization
     {
         'task_id': 'desert_large_city_meet_kadeem',

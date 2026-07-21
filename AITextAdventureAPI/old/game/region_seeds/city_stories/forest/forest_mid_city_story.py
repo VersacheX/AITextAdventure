@@ -185,11 +185,25 @@ TASKS = [
             {
                 'event_type': 'award_task',
                 'params': {
-                    'task_id': 'forest_mid_city_meet_thera'
+                    'task_id': 'forest_mid_city_regional_complete_gate'
                 }
             }
 		]		
 	},
+    {
+        'task_id': 'forest_mid_city_regional_complete_gate',
+        'type': 'complete_regional_quests',
+        'task_acquire_events': [],
+        'task_complete_events': [            
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'forest_mid_city_meet_thera'
+                }
+            }
+        ]
+
+    },
 
     # Task 1 — Meet Thera after initialization
     {

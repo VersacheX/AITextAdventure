@@ -2,7 +2,7 @@
 # = CHAPTER 7 : SETH'S AIRSHIP & THE REQUIREMENT
 # ============================================================
 #
-# [ LOCATION - BLEAKWATCH OUTPOST ]
+# [ LOCATION - Gnashwater Hollow ]
 # -----------------------------------
 # @ = player
 # S = Seth 

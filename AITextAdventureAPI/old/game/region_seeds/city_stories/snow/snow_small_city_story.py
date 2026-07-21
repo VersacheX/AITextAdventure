@@ -152,11 +152,25 @@ TASKS = [
             {
                 'event_type': 'award_task',
                 'params': {
-                    'task_id': 'snow_small_city_meet_karrek'
+                    'task_id': 'snow_small_city_regional_complete_gate'
                 }
             }
 		]		
 	},
+    {
+        'task_id': 'snow_small_city_regional_complete_gate',
+        'type': 'complete_regional_quests',
+        'task_acquire_events': [],
+        'task_complete_events': [            
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'snow_small_city_meet_karrek'
+                }
+            }
+        ]
+
+    },
 
     # Task 1 — Meet Karrek after initialization
     {
