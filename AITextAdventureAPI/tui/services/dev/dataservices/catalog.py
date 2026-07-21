@@ -1,15 +1,15 @@
 ﻿"""
 Central catalog: CATEGORIES, caches, preload, get_records, and tree getters.
-_load_all orchestrates all builders. Tree getters live here (not in individual
-service files) to keep the import graph acyclic.
 """
 from __future__ import annotations
 
 from typing import Any, Dict, List, Tuple
 
 from tui.services.dev.dataservices.models import (
+    AbilityTypeNode,
     DevRecord,
     DialogueActNode,
+    HostileRarityNode,
     NpcGroupNode,
     TimelineGroupNode,
 )
@@ -26,6 +26,14 @@ from tui.services.dev.dataservices.timeline_service import (
 from tui.services.dev.dataservices.npc_service import (
     _NPC_TREE,
     _build_npc_tree,
+)
+from tui.services.dev.dataservices.ability_service import (
+    _ABILITY_TREE,
+    _build_ability_tree,
+)
+from tui.services.dev.dataservices.hostile_service import (
+    _HOSTILE_TREE,
+    _build_hostile_tree,
 )
 from tui.services.dev.dataservices.record_builders import (
     _build_characters,
@@ -47,6 +55,9 @@ CATEGORIES: Tuple[str, ...] = (
     "city",
     "npc",
     "character_dialog",
+    "ability",
+    "hostile",
+    "simulation",
 )
 
 CATEGORY_LABELS: Dict[str, str] = {
@@ -59,6 +70,9 @@ CATEGORY_LABELS: Dict[str, str] = {
     "city":             "Cities",
     "npc":              "NPCs",
     "character_dialog": "Dialogue",
+    "ability":          "Abilities",
+    "hostile":          "Hostiles",
+    "simulation":       "Simulation",
 }
 
 _CACHE: Dict[str, List[DevRecord]] = {}
@@ -131,8 +145,20 @@ def get_npc_tree() -> List[NpcGroupNode]:
     return _NPC_TREE
 
 
+def get_ability_tree() -> List[AbilityTypeNode]:
+    if not _CACHE:
+        _load_all()
+    return _ABILITY_TREE
+
+
+def get_hostile_tree() -> List[HostileRarityNode]:
+    """Return the cached Rarity → Level bucket → Hostile tree."""
+    if not _CACHE:
+        _load_all()
+    return _HOSTILE_TREE
+
+
 def get_dialog_index() -> Dict[Tuple[Any, Any], List[str]]:
-    """Return the (npc_id, dialog_id) → lines index built from NPC_DIALOG."""
     if not _CACHE:
         _load_all()
     return _DIALOG_INDEX
@@ -156,8 +182,11 @@ def _load_all() -> None:
     _CACHE["equipment"]        = _build_equipment(const) + _build_accessories(const)
     _CACHE["dungeon"]          = _build_dungeons(const)
     _CACHE["city"]             = _build_cities(const)
-    _CACHE["npc"]              = []  # tree category; use get_npc_tree()
-    _CACHE["character_dialog"] = []  # tree category; use get_dialogue_tree()
+    _CACHE["npc"]              = []
+    _CACHE["character_dialog"] = []
+    _CACHE["ability"]          = []   # tree category; use get_ability_tree()
+    _CACHE["hostile"]          = []   # tree category; use get_hostile_tree()
+    _CACHE["simulation"]       = []
 
     _DIALOG_TREE.clear()
     _DIALOG_TREE.extend(_build_dialogue_tree(const))
@@ -167,3 +196,6 @@ def _load_all() -> None:
 
     _NPC_TREE.clear()
     _NPC_TREE.extend(_build_npc_tree(const))
+
+    _build_ability_tree(const)
+    _build_hostile_tree(const)

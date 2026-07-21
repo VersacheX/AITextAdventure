@@ -160,7 +160,8 @@ class DataMgmtScreen(BaseScreen):
         color: $text;
     }
 
-    #dm-expand, #dm-collapse, #dm-copy, #dm-validate-timeline {
+    #dm-expand, #dm-collapse, #dm-copy, #dm-validate-timeline,
+    #dm-validate-abilities, #dm-validate-hostiles {
         display: none;
         margin-left: 1;
         padding: 0 1;
@@ -203,17 +204,27 @@ class DataMgmtScreen(BaseScreen):
     }
 
     #dm-dialog-tree {
-        height: 1fr;
+        height: 100%;
         display: none;
     }
 
     #dm-timeline-tree {
-        height: 1fr;
+        height: 100%;
         display: none;
     }
 
     #dm-npc-tree {
-        height: 1fr;
+        height: 100%;
+        display: none;
+    }
+
+    #dm-ability-tree {
+        height: 100%;
+        display: none;
+    }
+
+    #dm-hostile-tree {
+        height: 100%;
         display: none;
     }
 
@@ -238,13 +249,19 @@ class DataMgmtScreen(BaseScreen):
         self._last_filtered: Any           = None
         self._last_timeline_filtered: Any  = None
         self._last_npc_filtered: Any       = None
+        self._last_ability_filtered: Any   = None
+        self._last_hostile_filtered: Any   = None
 
-        self._user_expanded: Set[str]          = set()
-        self._user_collapsed: Set[str]         = set()
-        self._timeline_user_expanded: Set[str] = set()
+        self._user_expanded: Set[str]           = set()
+        self._user_collapsed: Set[str]          = set()
+        self._timeline_user_expanded: Set[str]  = set()
         self._timeline_user_collapsed: Set[str] = set()
-        self._npc_user_expanded: Set[str]      = set()
-        self._npc_user_collapsed: Set[str]     = set()
+        self._npc_user_expanded: Set[str]       = set()
+        self._npc_user_collapsed: Set[str]      = set()
+        self._ability_user_expanded: Set[str]   = set()
+        self._ability_user_collapsed: Set[str]  = set()
+        self._hostile_user_expanded: Set[str]   = set()
+        self._hostile_user_collapsed: Set[str]  = set()
 
         self._last_selected_npc_record: Optional[DevRecord] = None
         self._npc_playlist: List[DevRecord] = []
@@ -307,6 +324,8 @@ class DataMgmtScreen(BaseScreen):
             yield Button("--", id="dm-collapse", variant="default")
             yield Button("Copy", id="dm-copy", variant="default")
             yield Button("Validate Timeline", id="dm-validate-timeline", variant="default")
+            yield Button("Validate Abilities", id="dm-validate-abilities", variant="default")
+            yield Button("Validate Hostiles", id="dm-validate-hostiles", variant="default")
             yield Button("↑", id="dm-equip-sort-dir", variant="default")
             yield Button("⤢", id="dm-detail-expand", variant="default")
             yield Static("Loading...", id="dm-status")
@@ -324,6 +343,12 @@ class DataMgmtScreen(BaseScreen):
                 npc_tree: Tree = Tree("NPCs", id="dm-npc-tree")
                 npc_tree.show_root = False
                 yield npc_tree
+                ability_tree: Tree = Tree("Abilities", id="dm-ability-tree")
+                ability_tree.show_root = False
+                yield ability_tree
+                hostile_tree: Tree = Tree("Hostiles", id="dm-hostile-tree")
+                hostile_tree.show_root = False
+                yield hostile_tree
             with ScrollableContainer(id="dm-detail-panel"):
                 yield Static("", id="dm-detail-text")
 
@@ -427,7 +452,7 @@ class DataMgmtScreen(BaseScreen):
         # Only update the detail panel when the NPC tab is the active view.
         # The music poll fires every 500ms regardless of tab; without this guard
         # advancing the playlist overwrites the timeline/item/etc. detail panel.
-        if self._category == "npc":
+        if self._category == _NPC_CATEGORY:
             update_detail_for_record(self, record)
 
         if start_music:

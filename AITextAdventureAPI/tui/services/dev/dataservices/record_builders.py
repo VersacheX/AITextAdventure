@@ -742,3 +742,180 @@ def _equip_subtitle_from_extras(x: dict) -> str:
         f"TEP:{tep_s:<4} "
         f"TP:{tp_s:<4}"
     )
+
+_EFFECT_LABELS: dict[str, str] = {
+    "damage": "Damage",
+    "heal":   "Heal",
+    "status": "Status",
+    "revive": "Revive",
+    "cure":   "Cure",
+}
+
+_ABILITY_TYPE_LABELS: dict[str, str] = {
+    "technique": "Technique",
+    "faith":     "Faith",
+    "magic":     "Magic",
+    "tech":      "Tech",
+    "skill":     "Skill",
+}
+
+
+def _build_ability_detail(seed: dict) -> str:
+    lines: list[str] = []
+    desc      = str(seed.get("description", "") or "")
+    atype     = str(seed.get("ability_type", "") or "")
+    level     = seed.get("level", 1)
+    elements  = seed.get("elements") or []
+    base_power = seed.get("base_power", 0)
+    ap_cost   = seed.get("ap_cost", 0)
+    effect    = str(seed.get("effect", "") or "")
+    status_keys = seed.get("status_keys") or []
+    can_aoe   = seed.get("can_aoe", False)
+
+    if desc:
+        lines.append(desc)
+        lines.append("")
+
+    lines.append(f"Type     : {_ABILITY_TYPE_LABELS.get(atype, atype.title())}")
+    lines.append(f"Level    : {level}")
+    lines.append(f"Effect   : {_EFFECT_LABELS.get(effect, effect.title())}")
+    lines.append(f"AP Cost  : {ap_cost}")
+    if base_power:
+        lines.append(f"Power    : {base_power}")
+    if elements:
+        elem_str = "  ".join(_ELEMENTAL_CHARS.get(str(e).lower(), f"({e})") for e in elements)
+        lines.append(f"Elements : {elem_str}")
+    if status_keys:
+        lines.append(f"Statuses : {', '.join(status_keys)}")
+    lines.append(f"AOE      : {'Yes' if can_aoe else 'No'}")
+    return "\n".join(lines)
+
+
+def _build_abilities(const: Any) -> List[DevRecord]:
+    records: List[DevRecord] = []
+    for seed in getattr(const, "PLAYER_ABILITY_SEEDS", []) or []:
+        aid    = str(seed.get("id", "?"))
+        name   = str(seed.get("name", aid))
+        atype  = str(seed.get("ability_type", "") or "")
+        level  = seed.get("level", 1)
+        effect = str(seed.get("effect", "") or "")
+        elements = seed.get("elements") or []
+        elem_str = "".join(_ELEMENTAL_CHARS.get(str(e).lower(), "") for e in elements)
+        subtitle = (
+            f"Lv.{level}  "
+            f"{_ABILITY_TYPE_LABELS.get(atype, atype.title()):<10}  "
+            f"{_EFFECT_LABELS.get(effect, effect.title()):<8}  "
+            f"{elem_str}"
+        )
+        records.append(DevRecord(
+            category="ability",
+            id=aid,
+            name=name,
+            subtitle=subtitle,
+            detail=_build_ability_detail(seed),
+            extras={
+                "level":        int(level),
+                "ability_type": atype,
+                "effect":       effect,
+                "ap_cost":      int(seed.get("ap_cost", 0) or 0),
+                "base_power":   int(seed.get("base_power", 0) or 0),
+            },
+        ))
+    return records
+
+
+def _build_hostile_detail(seed: dict) -> str:
+    lines: list[str] = []
+    desc      = str(seed.get("description", "") or "")
+    htype     = str(seed.get("hostile_type", "creature") or "creature")
+    role      = str(seed.get("role", "") or "")
+    level     = seed.get("min_spawn_level", 1)
+    rarity    = str(seed.get("rarity", "common") or "common")
+    base_xp   = seed.get("base_xp", 0)
+    money     = seed.get("money_range")
+    basic_atk = str(seed.get("basic_attack", "") or "")
+    strong_atk = str(seed.get("strong_attack", "") or "")
+    weaknesses  = seed.get("weaknesses") or []
+    resistances = seed.get("resistances") or []
+    immunities  = seed.get("immunities") or []
+    common_drop = seed.get("common_drop") or ""
+    rare_drop   = seed.get("rare_drop") or ""
+
+    if desc:
+        lines.append(desc)
+        lines.append("")
+
+    lines.append(f"Type     : {htype.title()}  ·  {role.title() if role else '—'}")
+    lines.append(f"Min Lv.  : {level}")
+    lines.append(f"Rarity   : {_RARITY_LABELS.get(rarity.lower(), rarity.title())}")
+    lines.append(f"XP       : {base_xp}")
+    if money:
+        lines.append(f"Money    : {money[0]}–{money[1]}")
+    lines.append("")
+    if basic_atk:
+        lines.append(f"Basic    : {basic_atk}")
+    if strong_atk:
+        lines.append(f"Strong   : {strong_atk}")
+    if weaknesses or resistances or immunities:
+        lines.append("")
+        def _fmt_aff(lst: list) -> str:
+            return "  ".join(_ELEMENTAL_CHARS.get(str(e).lower(), f"({e})") for e in lst) or "—"
+        lines.append(f"Weak     : {_fmt_aff(weaknesses)}")
+        lines.append(f"Resist   : {_fmt_aff(resistances)}")
+        lines.append(f"Immune   : {_fmt_aff(immunities)}")
+    if common_drop or rare_drop:
+        lines.append("")
+        lines.append(f"Drop (C) : {common_drop or '—'}")
+        lines.append(f"Drop (R) : {rare_drop or '—'}")
+
+    return "\n".join(lines)
+
+
+def _build_hostiles(const: Any) -> List[DevRecord]:
+    records: List[DevRecord] = []
+    seen: set[str] = set()
+
+    # Collect from every regional and dungeon hostile seed list
+    all_seed_lists: list[Any] = []
+    for attr in dir(const):
+        if "HOSTILE_SEEDS" in attr or "BOSS_HOSTILES" in attr or "RANDOM_HOSTILE" in attr:
+            val = getattr(const, attr, None)
+            if isinstance(val, list):
+                all_seed_lists.append(val)
+    # Also pull WORLD_HOSTILES / WORLD_BOSS_MOBS if present
+    for attr in ("WORLD_HOSTILES", "WORLD_BOSS_MOBS"):
+        val = getattr(const, attr, None)
+        if isinstance(val, list):
+            all_seed_lists.append(val)
+
+    for seed_list in all_seed_lists:
+        for seed in seed_list:
+            if not isinstance(seed, dict):
+                continue
+            hid = str(seed.get("id", ""))
+            if not hid or hid in seen:
+                continue
+            seen.add(hid)
+            name    = str(seed.get("name", hid))
+            level   = int(seed.get("min_spawn_level", 1) or 1)
+            rarity  = str(seed.get("rarity", "common") or "common")
+            htype   = str(seed.get("hostile_type", "creature") or "creature")
+            role    = str(seed.get("role", "") or "")
+            rar_abbr = _RARITY_ABBR.get(rarity.lower(), rarity[:3].title())
+            subtitle = f"Lv.{level:<3}  {rar_abbr}  {htype.title():<10}  {role.title() if role else ''}"
+            records.append(DevRecord(
+                category="hostile",
+                id=hid,
+                name=name,
+                subtitle=subtitle,
+                detail=_build_hostile_detail(seed),
+                extras={
+                    "level":  level,
+                    "rarity": rarity,
+                    "rarity_rank": _RARITY_RANK.get(rarity.lower(), -1),
+                    "hostile_type": htype,
+                },
+            ))
+
+    records.sort(key=lambda r: (r.extras.get("level", 0), r.name))
+    return records

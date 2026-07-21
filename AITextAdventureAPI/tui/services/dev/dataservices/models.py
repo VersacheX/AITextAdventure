@@ -137,7 +137,82 @@ class NpcRecordNode:
 
 @dataclass
 class NpcGroupNode:
-    """Top-level NPC group: 'regional_story', 'extended', or 'main_story'."""
     group_id: str
     label: str
     npcs: List[NpcRecordNode]
+
+
+# ── Ability tree model ────────────────────────────────────────────────────
+
+@dataclass
+class AbilityValidationError:
+    """One validation error attached to an AbilityNode."""
+    code: str
+    message: str
+    severity: str = "error"   # "error" | "warning"
+
+
+@dataclass
+class AbilityNode:
+    """One ability leaf in the ability tree."""
+    ability_id: str
+    label: str
+    ability_type: str   # "technique" | "faith" | "magic" | "tech" | "skill"
+    level: int
+    record: DevRecord
+    errors: List[AbilityValidationError] = field(default_factory=list)
+
+
+@dataclass
+class AbilityLevelNode:
+    """A level bucket under an ability-type group."""
+    level: int
+    label: str          # e.g. "Level 1"
+    abilities: List[AbilityNode]
+
+
+@dataclass
+class AbilityTypeNode:
+    type_id: str
+    label: str
+    level_buckets: List[AbilityLevelNode]
+
+
+# ── Hostile tree model ────────────────────────────────────────────────────
+
+@dataclass
+class HostileValidationError:
+    code: str
+    message: str
+    severity: str = "error"   # "error" | "warning"
+
+
+@dataclass
+class HostileNode:
+    """One hostile leaf in the hostile tree."""
+    hostile_id: str
+    label: str
+    rarity: str     # "common" | "uncommon" | "rare" | "superrare" | "notfound"
+    level: int
+    source_list: str    # attribute name the seed came from, e.g. "FOREST_RANDOM_HOSTILE_SEEDS"
+    record: DevRecord
+    seed: Dict[str, Any] = field(default_factory=dict)
+    errors: List[HostileValidationError] = field(default_factory=list)
+
+
+@dataclass
+class HostileLevelBucketNode:
+    """A level-range bucket under a rarity group, e.g. 'Lv 1–5'."""
+    bucket_id: str      # e.g. "lv_01_05"
+    label: str          # e.g. "Lv 1–5"
+    level_min: int
+    level_max: int
+    hostiles: List[HostileNode]
+
+
+@dataclass
+class HostileRarityNode:
+    """Top-level rarity group: Common, Uncommon, Rare, Super Rare."""
+    rarity_id: str      # "common" | "uncommon" | "rare" | "superrare" | "notfound"
+    label: str
+    level_buckets: List[HostileLevelBucketNode]

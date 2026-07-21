@@ -715,3 +715,139 @@ def update_detail_for_npc_group(
         for n in npc_nodes
     ]
     static.update("\n".join(parts))
+
+
+def update_detail_for_ability(
+    screen: "DataMgmtScreen",
+    ability_node: "AbilityNode",
+) -> None:
+    """Update the detail panel for a single AbilityNode."""
+    from tui.services.dev.dataservices.models import AbilityNode as _AbilityNode  # noqa: PLC0415
+
+    detail_panel = screen.query_one("#dm-detail-panel")
+    detail_panel.remove_children()
+
+    record  = ability_node.record
+    errors  = ability_node.errors
+    lines: list[str] = []
+
+    # Header
+    lines.append(f"[bold]{rich_escape(record.name)}[/bold]")
+    lines.append(f"[dim]{rich_escape(record.id)}[/dim]")
+    lines.append("")
+
+    # Validation block
+    if errors:
+        has_error = any(e.severity == "error"   for e in errors)
+        colour    = "red" if has_error else "yellow"
+        kind      = "FAIL" if has_error else "WARN"
+        lines.append(f"[{colour}]Integrity: {kind}  ({len(errors)} issue(s))[/{colour}]")
+        for e in errors:
+            c = "red" if e.severity == "error" else "yellow"
+            lines.append(f"  [{c}]{rich_escape(e.code)}[/{c}]  [dim]{rich_escape(e.message)}[/dim]")
+    else:
+        lines.append("[green]Integrity: OK[/green]")
+
+    lines.append("")
+    lines.append(rich_escape(record.detail))
+
+    detail_panel.mount(Static("\n".join(lines)))
+
+
+def update_detail_for_ability_group(
+    screen: "DataMgmtScreen",
+    ability_nodes: "List[AbilityNode]",
+) -> None:
+    """Update the detail panel with an aggregate view of a selected ability subtree."""
+    detail_panel = screen.query_one("#dm-detail-panel")
+    detail_panel.remove_children()
+
+    if not ability_nodes:
+        detail_panel.mount(Static("[dim]← select an ability from the tree[/dim]"))
+        return
+
+    invalid      = sum(1 for n in ability_nodes if n.errors)
+    total_errors = sum(len(n.errors) for n in ability_nodes)
+
+    if invalid:
+        integrity_line = (
+            f"\n[red]Integrity: {invalid} invalid, "
+            f"{total_errors} issue(s) in subtree[/red]"
+        )
+    else:
+        any_validated = any(n.errors is not None for n in ability_nodes)
+        integrity_line = "\n[green]Integrity: OK[/green]" if any_validated else ""
+
+    parts = [
+        f"[bold]{rich_escape(n.label)}[/bold]  "
+        f"[dim]{rich_escape(n.ability_id)}[/dim]"
+        + (f"  [red](issues: {len(n.errors)})[/red]" if n.errors else "")
+        for n in ability_nodes
+    ]
+    detail_panel.mount(Static("\n".join(parts) + integrity_line))
+
+
+def update_detail_for_hostile(
+    screen: "DataMgmtScreen",
+    hostile_node: "HostileNode",
+) -> None:
+    """Update the detail panel for a single HostileNode."""
+    detail_panel = screen.query_one("#dm-detail-panel")
+    detail_panel.remove_children()
+
+    record = hostile_node.record
+    errors = hostile_node.errors
+    lines: list[str] = []
+
+    lines.append(f"[bold]{rich_escape(record.name)}[/bold]")
+    lines.append(f"[dim]{rich_escape(record.id)}[/dim]")
+    lines.append("")
+
+    if errors:
+        has_error = any(e.severity == "error" for e in errors)
+        colour    = "red" if has_error else "yellow"
+        kind      = "FAIL" if has_error else "WARN"
+        lines.append(f"[{colour}]Integrity: {kind}  ({len(errors)} issue(s))[/{colour}]")
+        for e in errors:
+            c = "red" if e.severity == "error" else "yellow"
+            lines.append(f"  [{c}]{rich_escape(e.code)}[/{c}]  [dim]{rich_escape(e.message)}[/dim]")
+    else:
+        lines.append("[green]Integrity: OK[/green]")
+
+    lines.append("")
+    lines.append(rich_escape(record.detail))
+
+    detail_panel.mount(Static("\n".join(lines)))
+
+
+def update_detail_for_hostile_group(
+    screen: "DataMgmtScreen",
+    hostile_nodes: "List[HostileNode]",
+) -> None:
+    """Update the detail panel with an aggregate view of a hostile subtree."""
+    detail_panel = screen.query_one("#dm-detail-panel")
+    detail_panel.remove_children()
+
+    if not hostile_nodes:
+        detail_panel.mount(Static("[dim]← select a hostile from the tree[/dim]"))
+        return
+
+    invalid      = sum(1 for n in hostile_nodes if n.errors)
+    total_errors = sum(len(n.errors) for n in hostile_nodes)
+
+    if invalid:
+        integrity_line = (
+            f"\n[red]Integrity: {invalid} invalid, "
+            f"{total_errors} issue(s) in subtree[/red]"
+        )
+    else:
+        any_validated = any(n.errors is not None for n in hostile_nodes)
+        integrity_line = "\n[green]Integrity: OK[/green]" if any_validated else ""
+
+    parts = [
+        f"[bold]{rich_escape(n.label)}[/bold]  "
+        f"[dim]{rich_escape(n.hostile_id)}[/dim]"
+        + (f"  [red](issues: {len(n.errors)})[/red]" if n.errors else "")
+        for n in hostile_nodes
+    ]
+    detail_panel.mount(Static("\n".join(parts) + integrity_line))
