@@ -222,37 +222,261 @@ NPC_DIALOG = [
 DUNGEONS = []
 
 TASKS = [
-	{
-		'task_id': 'mountains_primary_initialize',
-		'type': 'complete_intro_story',
-		'task_acquire_events': [
-			{
-				'event_type': 'create_npc',
-				'params': {
-					'npc_id': 'bragg',
-					'location': 'region_bar'
-				}
-			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'bragg',
-					'standing_text': [ 
-                        "Heyo! I'm Bragg, I build golems around these parts and help to stabilize the mining networks.",
-					]
-				}
-			}
-		],
-		'task_complete_events': [
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'mountains_primary_meet_bragg'
-				}
-			}
-		]		
-	},
-    # Task 1: meet Bragg at region bar
+    # ── Initialize — Bragg appears at region bar ──────────────────────────────
+    {
+        'task_id': 'mountains_primary_initialize',
+        'type': 'complete_intro_story',
+        'task_acquire_events': [
+            {
+                'event_type': 'create_npc',
+                'params': {
+                    'npc_id': 'bragg',
+                    'location': 'region_bar'
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'bragg',
+                    'standing_text': [
+                        "Heyo! I'm Bragg — I build golems and keep the mining networks from collapsing.",
+                        "Something's been disturbing the deep tunnels lately. Ask around the city.",
+                    ]
+                }
+            }
+        ],
+        'task_complete_events': [
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'mountains_primary_meet_sindra'
+                }
+            }
+        ]
+    },
+
+    # ── Meet Sindra — she describes the nightmares, wave 1 erupts ────────────
+    {
+        'task_id': 'mountains_primary_meet_sindra',
+        'type': 'meet',
+        'to_type': 'npc',
+        'to_id': 'relaytech_sindra',
+        'task_acquire_events': [
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'relaytech_sindra',
+                    'standing_text': [
+                        "Three nights without sleep. The conduits are fine on paper.",
+                        "They're not fine.",
+                        "Come find me if you want to see for yourself."
+                    ]
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'bragg',
+                    'standing_text': [
+                        "Sindra's been jumpy. She says the relay conduits are doing something they shouldn't.",
+                        "She's not the type to imagine things. Go see what she's dealing with."
+                    ]
+                }
+            }
+        ],
+        'task_complete_events': [
+            {
+                'event_type': 'initiate_dialog',
+                'params': {
+                    'npc_id': 'relaytech_sindra',
+                    'dialog_id': 'sindra_nightmare_intro'
+                }
+            },
+            {
+                'event_type': 'initiate_character_dialog',
+                'params': {
+                    'npc_id': 'tech',
+                    'dialog_id': 'kade_sindra_nightmare_intro'
+                }
+            },
+            {
+                'event_type': 'initiate_character_dialog',
+                'params': {
+                    'npc_id': 'magic',
+                    'dialog_id': 'moxie_sindra_nightmare_intro'
+                }
+            },
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'mountains_primary_nightmare_wave_1'
+                }
+            }
+        ]
+    },
+
+    # ── Wave 1: two relay_phantoms ────────────────────────────────────────────
+    {
+        'task_id': 'mountains_primary_nightmare_wave_1',
+        'type': 'defeat',
+        'to_type': 'mob',
+        'to_id': 'sindra_nightmare_1',
+        'task_acquire_events': [
+            {
+                'event_type': 'begin_combat',
+                'params': {
+                    'boss_mob_id': 'sindra_nightmare_1',
+                    'combat_type': 'combat'
+                }
+            }
+        ],
+        'task_complete_events': [
+            {
+                'event_type': 'initiate_dialog',
+                'params': {
+                    'npc_id': 'relaytech_sindra',
+                    'dialog_id': 'sindra_after_wave_1'
+                }
+            },
+            {
+                'event_type': 'initiate_character_dialog',
+                'params': {
+                    'npc_id': 'technique',
+                    'dialog_id': 'chock_after_wave_1'
+                }
+            },
+            {
+                'event_type': 'initiate_character_dialog',
+                'params': {
+                    'npc_id': 'skill',
+                    'dialog_id': 'poise_after_wave_1'
+                }
+            },
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'mountains_primary_nightmare_wave_2'
+                }
+            }
+        ]
+    },
+
+    # ── Wave 2: relay_phantom + two surge_wraiths ─────────────────────────────
+    {
+        'task_id': 'mountains_primary_nightmare_wave_2',
+        'type': 'defeat',
+        'to_type': 'mob',
+        'to_id': 'sindra_nightmare_2',
+        'task_acquire_events': [
+            {
+                'event_type': 'begin_combat',
+                'params': {
+                    'boss_mob_id': 'sindra_nightmare_2',
+                    'combat_type': 'combat'
+                }
+            }
+        ],
+        'task_complete_events': [
+            {
+                'event_type': 'initiate_dialog',
+                'params': {
+                    'npc_id': 'relaytech_sindra',
+                    'dialog_id': 'sindra_after_wave_2'
+                }
+            },
+            {
+                'event_type': 'initiate_character_dialog',
+                'params': {
+                    'npc_id': 'tech',
+                    'dialog_id': 'kade_after_wave_2'
+                }
+            },
+            {
+                'event_type': 'initiate_character_dialog',
+                'params': {
+                    'npc_id': 'magic',
+                    'dialog_id': 'moxie_after_wave_2'
+                }
+            },
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'mountains_primary_nightmare_wave_3'
+                }
+            }
+        ]
+    },
+
+    # ── Wave 3: surge_wraith + conduit_colossus ───────────────────────────────
+    {
+        'task_id': 'mountains_primary_nightmare_wave_3',
+        'type': 'defeat',
+        'to_type': 'mob',
+        'to_id': 'sindra_nightmare_3',
+        'task_acquire_events': [
+            {
+                'event_type': 'begin_combat',
+                'params': {
+                    'boss_mob_id': 'sindra_nightmare_3',
+                    'combat_type': 'combat'
+                }
+            }
+        ],
+        'task_complete_events': [
+            {
+                'event_type': 'initiate_dialog',
+                'params': {
+                    'npc_id': 'relaytech_sindra',
+                    'dialog_id': 'sindra_after_wave_3'
+                }
+            },
+            {
+                'event_type': 'initiate_character_dialog',
+                'params': {
+                    'npc_id': 'technique',
+                    'dialog_id': 'chock_after_wave_3'
+                }
+            },
+            {
+                'event_type': 'initiate_character_dialog',
+                'params': {
+                    'npc_id': 'skill',
+                    'dialog_id': 'poise_after_wave_3'
+                }
+            },
+            {
+                'event_type': 'initiate_dialog',
+                'params': {
+                    'npc_id': 'relaytech_sindra',
+                    'dialog_id': 'sindra_farewell'
+                }
+            },
+            {
+                'event_type': 'award_item',
+                'params': {
+                    'item_id': 'coreforge_shard'
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'relaytech_sindra',
+                    'standing_text': [
+                        "The conduits are quiet now. First time in days.",
+                        "Go find Bragg. Tell him what came out of that thing."
+                    ]
+                }
+            },
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'mountains_primary_meet_bragg'
+                }
+            }
+        ]
+    },
+
+    # ── Deliver coreforge_shard to Bragg — he joins here ─────────────────────
     {
         'task_id': 'mountains_primary_meet_bragg',
         'type': 'deliver',
@@ -261,12 +485,12 @@ TASKS = [
         'item_id': 'coreforge_shard',
         'task_acquire_events': [
             {
-                'event_type': 'set_npc_standing_text',# tell the players to find the coreforge shard
+                'event_type': 'set_npc_standing_text',
                 'params': {
                     'npc_id': 'bragg',
                     'standing_text': [
-                        "If you find a Coreforge Shard, bring it to me.",
-                        "Rokhuld's on a rampage below. I him before he breaks the whole mountain!"
+                        "You found something? Bring it here.",
+                        "If Sindra pulled it out of a construct, I need to see it."
                     ]
                 }
             }
@@ -280,14 +504,61 @@ TASKS = [
                 }
             },
             {
-                'event_type': 'set_npc_standing_text',
+                'event_type': 'initiate_character_dialog',
+                'params': {
+                    'npc_id': 'magic',
+                    'dialog_id': 'moxie_bragg_intro'
+                }
+            },
+            {
+                'event_type': 'initiate_character_dialog',
+                'params': {
+                    'npc_id': 'tech',
+                    'dialog_id': 'kade_bragg_intro'
+                }
+            },
+            {
+                'event_type': 'initiate_character_dialog',
+                'params': {
+                    'npc_id': 'skill',
+                    'dialog_id': 'poise_bragg_intro'
+                }
+            },
+            {
+                'event_type': 'initiate_dialog',
                 'params': {
                     'npc_id': 'bragg',
-                    'standing_text': [
-                        "Rokhuld's on a rampage below. Stop him before he breaks the whole mountain!",
-                        "What a dick head. Why are you still standing around?",
-                    ]
+                    'dialog_id': 'bragg_shard_received'
                 }
+            },
+            {
+                'event_type': 'initiate_character_dialog',
+                'params': {
+                    'npc_id': 'magic',
+                    'dialog_id': 'moxie_bragg_join_reaction'
+                }
+            },
+            {
+                'event_type': 'initiate_character_dialog',
+                'params': {
+                    'npc_id': 'tech',
+                    'dialog_id': 'kade_bragg_join_reaction'
+                }
+            },
+            {
+                'event_type': 'initiate_character_dialog',
+                'params': {
+                    'npc_id': 'skill',
+                    'dialog_id': 'poise_bragg_join_reaction'
+                }
+            },
+            {
+                'event_type': 'hide_npc',
+                'params': {'npc_id': 'bragg'}
+            },
+            {
+                'event_type': 'character_join',
+                'params': {'character_id': 'bragg'}
             },
             {
                 'event_type': 'award_task',
@@ -298,7 +569,7 @@ TASKS = [
         ]
     },
 
-    # Task 2: meet Rokhuld in dungeon
+    # ── Meet Rokhuld in dungeon — confrontation scene before combat ───────────
     {
         'task_id': 'mountains_primary_defeat_rokhuld',
         'type': 'meet',
@@ -312,13 +583,13 @@ TASKS = [
                     'location': 'region_open_area'
                 }
             },
-			{
-				'event_type': 'create_npc',
-				'params': {
-					'npc_id': 'rokhuld',
-					'location': None
-				}
-			}
+            {
+                'event_type': 'create_npc',
+                'params': {
+                    'npc_id': 'rokhuld',
+                    'location': None
+                }
+            }
         ],
         'task_complete_events': [
             {
@@ -326,6 +597,34 @@ TASKS = [
                 'params': {
                     'npc_id': 'rokhuld',
                     'dialog_id': 'rokhuld_intro'
+                }
+            },
+            {
+                'event_type': 'initiate_dialog',
+                'params': {
+                    'npc_id': 'bragg',
+                    'dialog_id': 'bragg_rokhuld_confrontation'
+                }
+            },
+            {
+                'event_type': 'initiate_dialog',
+                'params': {
+                    'npc_id': 'rokhuld',
+                    'dialog_id': 'rokhuld_confrontation_reply'
+                }
+            },
+            {
+                'event_type': 'initiate_character_dialog',
+                'params': {
+                    'npc_id': 'technique',
+                    'dialog_id': 'chock_rokhuld_challenge'
+                }
+            },
+            {
+                'event_type': 'initiate_character_dialog',
+                'params': {
+                    'npc_id': 'magic',
+                    'dialog_id': 'moxie_rokhuld_challenge'
                 }
             },
             {
@@ -337,7 +636,7 @@ TASKS = [
         ]
     },
 
-    # Task 3: defeat Rokhuld
+    # ── Defeat Rokhuld — void hint + Bragg arc resolution ────────────────────
     {
         'task_id': 'defeat_rokhuld',
         'type': 'defeat',
@@ -360,53 +659,45 @@ TASKS = [
                     'dialog_id': 'rokhuld_defeat'
                 }
             },
-            { 'event_type': 'hide_npc', 'params': { 'npc_id': 'rokhuld' }},
-			{
-				'event_type': 'complete_region_quest',
-				'params': {
-					'region_id': 'mountains',
-				}
-			},
             {
-                'event_type': 'award_task',
-                'params': {
-                    'task_id': 'mountains_primary_report_to_bragg'
-                }
-            }
-        ]
-    },
-
-    # Task 4: report back to Bragg
-    {
-        'task_id': 'mountains_primary_report_to_bragg',
-        'type': 'meet',
-        'to_type': 'npc',
-        'to_id': 'bragg',
-        'task_acquire_events': [],
-        'task_complete_events': [
+                'event_type': 'hide_npc',
+                'params': {'npc_id': 'rokhuld'}
+            },
             {
                 'event_type': 'initiate_dialog',
                 'params': {
                     'npc_id': 'bragg',
-                    'dialog_id': 'bragg_closing'
+                    'dialog_id': 'bragg_post_defeat'
                 }
             },
             {
-                'event_type': 'hide_npc',
+                'event_type': 'initiate_character_dialog',
                 'params': {
-                    'npc_id': 'bragg'
+                    'npc_id': 'magic',
+                    'dialog_id': 'moxie_post_defeat'
                 }
             },
             {
-                'event_type': 'character_join',
+                'event_type': 'initiate_character_dialog',
                 'params': {
-                    'character_id': 'bragg'
+                    'npc_id': 'tech',
+                    'dialog_id': 'kade_post_defeat'
                 }
+            },
+            {
+                'event_type': 'initiate_character_dialog',
+                'params': {
+                    'npc_id': 'skill',
+                    'dialog_id': 'poise_post_defeat'
+                }
+            },
+            {
+                'event_type': 'complete_region_quest',
+                'params': {'region_id': 'mountains'}
             }
         ]
     }
 ]
-
 
 
 PRIMARY_STORY_SETTINGS = {

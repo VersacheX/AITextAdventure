@@ -22,33 +22,45 @@ Known overworld boss encounters (by chapter and mob id):
     Hostiles : manic_rioter, frenzied_rioter, festival_berserker
     Note     : Three escalating waves of manic citizens corrupted by
                Revelry and Rapture's influence. combat_type is 'combat'
-      (not boss_battle). No create_npc or create_dungeon wraps
-  these fights -- they break out directly in the city streets.
-    Wave 1: three manic_rioters.
- Wave 2: one manic_rioter + two frenzied_rioters.
-        Wave 3: one frenzied_rioter + one festival_berserker.
+               (not boss_battle). No create_npc or create_dungeon wraps
+               these fights -- they break out directly in the city streets.
+               Wave 1: three manic_rioters.
+               Wave 2: one manic_rioter + two frenzied_rioters.
+               Wave 3: one frenzied_rioter + one festival_berserker.
 
   Chapter 14 - stigma_boss_battle_1
     Location : region_city_bar (overworld)
     Trigger  : main_story_ch14_defeat_stigma task (begin_combat)
     Hostiles : stigma
     Note     : Stigma is placed with create_npc in the city bar. The fight
-        is scripted, not dungeon-gated. The mob id used in the chapter
+               is scripted, not dungeon-gated. The mob id used in the chapter
                is 'stigma_boss_battle_1' -- this is distinct from the generic
-   'stigma_1' entry which is reserved for secondary encounters.
+               'stigma_1' entry which is reserved for secondary encounters.
 
   Chapter 20 - oracle_reliquary_2
     Location : memory_museum dungeon (second battle, triggered mid-dungeon)
     Trigger  : main_story_ch20_defeat_oracle_and_reliquary_again task (begin_combat)
     Hostiles : oracle_boss_2, reliquary_boss_2
     Note     : The memory_museum dungeon only supports a single boss_mob entry.
-         The second Oracle/Reliquary encounter is a story-triggered reset
-      battle that occurs after the player delivers the memory tonic to
-       Curator Lysa. Because it cannot live in the dungeon seed as a
+               The second Oracle/Reliquary encounter is a story-triggered reset
+               battle that occurs after the player delivers the memory tonic to
+               Curator Lysa. Because it cannot live in the dungeon seed as a
                second boss_mob, it is defined here as a world mob instead.
-       oracle_boss_2 and reliquary_boss_2 are the escalated Reset
+               oracle_boss_2 and reliquary_boss_2 are the escalated Reset
                variants -- higher stats and an additional immunity each vs
-        the round-1 versions in the dungeon file.
+               the round-1 versions in the dungeon file.
+
+  Mountains primary story - sindra_nightmare_1 / sindra_nightmare_2 / sindra_nightmare_3
+    Location : mountains large city (overworld, Sindra's workshop)
+    Trigger  : mountains_primary_meet_sindra_nightmare_1/2/3 tasks (begin_combat)
+    Hostiles : relay_phantom, surge_wraith, conduit_colossus
+    Note     : Three escalating waves of nightmare constructs erupting from
+               Sindra's corrupted relay conduits. combat_type is 'combat'
+               (not boss_battle). Spawned in Sindra's workshop without a
+               dungeon wrapper. Lv 30.
+               Wave 1: two relay_phantoms.
+               Wave 2: one relay_phantom + two surge_wraiths.
+               Wave 3: one surge_wraith + one conduit_colossus.
 ---------------------------------------------------------------------------"""
 
 WORLD_NPCS = [
@@ -103,55 +115,79 @@ WORLD_NPCS = [
 ]
 
 WORLD_BOSS_MOBS = [
-    { 
+    {
         'id': 'the_void_1',
         'name': 'The Void',
         'hostiles': [
             'the_void'
         ]
     },
-	# Ch14 - overworld fight in region_city_bar. Stigma is placed via create_npc,
-	# not inside a dungeon. The chapter references this specific mob id.
+    # Ch14 - overworld fight in region_city_bar. Stigma is placed via create_npc,
+    # not inside a dungeon. The chapter references this specific mob id.
     {
         'id': 'stigma_boss_battle_1',
         'name': 'Stigma',
         'hostiles': [
             'stigma'
         ]
-	},
-	# Ch10 - three escalating overworld rioter waves, triggered in city streets.
-	# combat_type is 'combat', not 'boss_battle'.
-	{
-		'id': 'festival_rioters_1',
-		'name': 'Festival Rioters',
-		'hostiles': [
-			'manic_rioter', 'manic_rioter', 'manic_rioter'
-]
-	},
-	{
-		'id': 'festival_rioters_2',
-		'name': 'Festival Rioters - Wave 2',
-		'hostiles': [
-			'manic_rioter', 'frenzied_rioter', 'frenzied_rioter'
-		]
-	},
-	{
-		'id': 'festival_rioters_3',
-		'name': 'Festival Rioters - Final Wave',
-		'hostiles': [
-			'frenzied_rioter', 'festival_berserker'
-		]
-	},
-    {
-	    'id': 'oracle_reliquary_2',
-	    'name': 'Oracle and Reliquary - Reset',
-	    'hostiles': ['oracle_boss_2', 'reliquary_boss_2']
     },
-    { 
+    # Ch10 - three escalating overworld rioter waves, triggered in city streets.
+    # combat_type is 'combat', not 'boss_battle'.
+    {
+        'id': 'festival_rioters_1',
+        'name': 'Festival Rioters',
+        'hostiles': [
+            'manic_rioter', 'manic_rioter', 'manic_rioter'
+        ]
+    },
+    {
+        'id': 'festival_rioters_2',
+        'name': 'Festival Rioters - Wave 2',
+        'hostiles': [
+            'manic_rioter', 'frenzied_rioter', 'frenzied_rioter'
+        ]
+    },
+    {
+        'id': 'festival_rioters_3',
+        'name': 'Festival Rioters - Final Wave',
+        'hostiles': [
+            'frenzied_rioter', 'festival_berserker'
+        ]
+    },
+    {
+        'id': 'oracle_reliquary_2',
+        'name': 'Oracle and Reliquary - Reset',
+        'hostiles': ['oracle_boss_2', 'reliquary_boss_2']
+    },
+    {
         'id': 'dominion_1',
         'name': 'Dominion - System Incarnate',
         'hostiles': ['dominion']
-    }
+    },
+    # Mountains primary story - Sindra's nightmare constructs.
+    # Three escalating overworld waves in her workshop.
+    # combat_type is 'combat', not 'boss_battle'.
+    {
+        'id': 'sindra_nightmare_1',
+        'name': "Sindra's Nightmare - Wave 1",
+        'hostiles': [
+            'relay_phantom', 'relay_phantom'
+        ]
+    },
+    {
+        'id': 'sindra_nightmare_2',
+        'name': "Sindra's Nightmare - Wave 2",
+        'hostiles': [
+            'relay_phantom', 'surge_wraith', 'surge_wraith'
+        ]
+    },
+    {
+        'id': 'sindra_nightmare_3',
+        'name': "Sindra's Nightmare - Final Wave",
+        'hostiles': [
+            'surge_wraith', 'conduit_colossus'
+        ]
+    },
 ]
 
 WORLD_HOSTILES = [
@@ -239,108 +275,197 @@ WORLD_HOSTILES = [
         'immunities': ['confuse', 'stun', 'petrify', 'silence', 'sleep'],
         'weaknesses': ['light']
     },
-	# -------------------------------------------------------------------
-	# Chapter 10 overworld rioters — manic citizens corrupted by Revelry
-	# and Rapture. Appear in three escalating waves on the city streets.
-	# -------------------------------------------------------------------
-	{
-		'id': 'manic_rioter',
-		'name': 'Manic Rioter',
-		'hostile_type': 'humanoid',
-		'min_spawn_level': 50,
-		'role': 'damage',
-		'rarity': 'notfound',
-		'base_xp': 800,
-		'common_drop': None,
-		'rare_drop': None,
-		'money_range': (50, 150),
-		'basic_attack': 'frenzied strike',
-		'strong_attack': 'mob surge',
-		'player_abilities': [],
-		'base_str': 28,
-		'base_dex': 22,
-		'base_con': 25,
-		'base_int': 10,
-		'base_hp': 8000,
-		'base_ap': 80,
-		'str_per_level': 3,
-		'dex_per_level': 2,
-		'con_per_level': 2,
-		'int_per_level': 1,
-		'resistances': [],
-		'immunities': ['fear', 'confuse'],
-		'weaknesses': ['ice']
-	},
-	{
-		'id': 'frenzied_rioter',
-		'name': 'Frenzied Rioter',
-		'hostile_type': 'humanoid',
-		'min_spawn_level': 52,
-		'role': 'damage',
-		'rarity': 'notfound',
-		'base_xp': 1200,
-		'common_drop': None,
-		'rare_drop': None,
-		'money_range': (80, 200),
-		'basic_attack': 'wild assault',
-		'strong_attack': 'euphoric rampage',
-		'player_abilities': [],
-		'base_str': 35,
-		'base_dex': 30,
-		'base_con': 30,
-		'base_int': 8,
-		'base_hp': 12000,
-		'base_ap': 90,
-		'str_per_level': 4,
-		'dex_per_level': 3,
-		'con_per_level': 3,
-		'int_per_level': 1,
-		'resistances': ['fire'],
-		'immunities': ['fear', 'confuse', 'sleep'],
-		'weaknesses': ['ice']
-	},
-	{
-		'id': 'festival_berserker',
-		'name': 'Festival Berserker',
-		'hostile_type': 'humanoid',
-		'min_spawn_level': 54,
-		'role': 'damage',
-		'rarity': 'notfound',
-		'base_xp': 2000,
-		'common_drop': None,
-		'rare_drop': None,
-		'money_range': (120, 300),
-		'basic_attack': 'adrenaline slam',
-		'strong_attack': 'crash wave',
-		'player_abilities': [],
-		'base_str': 48,
-		'base_dex': 35,
-		'base_con': 40,
-		'base_int': 6,
-		'base_hp': 20000,
-		'base_ap': 100,
-		'str_per_level': 5,
-		'dex_per_level': 4,
-		'con_per_level': 4,
-		'int_per_level': 1,
-		'resistances': ['fire', 'physical'],
-		'immunities': ['fear', 'confuse', 'sleep', 'stun'],
-		'weaknesses': ['ice', 'dark']
-	},
-	{
-		'id': 'oracle_boss_2', 'name': 'Oracle - Reset', 'hostile_type': 'aberration', 'min_spawn_level': 103, 'role': 'hazard', 'rarity': 'notfound',
-		'base_xp': 50000, 'common_drop': 'tome_int_superrare', 'rare_drop': 'shattered_prophecy', 'money_range': (12000, 24000),
-		'basic_attack': 'immutable future', 'strong_attack': 'the only ending', 'player_abilities': ['inescapable_prophecy', 'vision_of_ruin', 'fate_lock'],
-		'base_str': 60, 'base_dex': 70, 'base_con': 62, 'base_int': 110, 'base_hp': 180000, 'base_ap': 1800,
-		'str_per_level': 7, 'dex_per_level': 9, 'con_per_level': 8, 'int_per_level': 14,
-		'resistances': ['dark', 'ice', 'electric', 'air'], 'immunities': ['fear', 'confuse', 'sleep', 'stun'], 'weaknesses': ['light']
-	},
-	{
-		'id': 'reliquary_boss_2', 'name': 'Reliquary - Reset', 'hostile_type': 'aberration', 'min_spawn_level': 103, 'role': 'damage', 'rarity': 'notfound',
-		'base_xp': 50000, 'common_drop': 'tome_con_superrare', 'rare_drop': 'final_archive', 'money_range': (12000, 24000),
-		'basic_attack': 'the past always returns', 'strong_attack': 'inescapable record', 'player_abilities': ['eternal_wound', 'memory_of_suffering', 'burden_of_the_lost'],
-		'base_str': 65, 'base_dex': 60, 'base_con': 80, 'base_int': 92, 'base_hp': 200000, 'base_ap': 1600,
-		'str_per_level': 8, 'dex_per_level': 7, 'con_per_level': 10, 'int_per_level': 11,
-		'resistances': ['dark', 'physical', 'ice', 'earth'], 'immunities': ['stun', 'petrify', 'confuse', 'fear'], 'weaknesses': ['light', 'fire']
-	}
+    # -------------------------------------------------------------------
+    # Chapter 10 overworld rioters — manic citizens corrupted by Revelry
+    # and Rapture. Appear in three escalating waves on the city streets.
+    # -------------------------------------------------------------------
+    {
+        'id': 'manic_rioter',
+        'name': 'Manic Rioter',
+        'hostile_type': 'humanoid',
+        'min_spawn_level': 50,
+        'role': 'damage',
+        'rarity': 'notfound',
+        'base_xp': 800,
+        'common_drop': None,
+        'rare_drop': None,
+        'money_range': (50, 150),
+        'basic_attack': 'frenzied strike',
+        'strong_attack': 'mob surge',
+        'player_abilities': [],
+        'base_str': 28,
+        'base_dex': 22,
+        'base_con': 25,
+        'base_int': 10,
+        'base_hp': 8000,
+        'base_ap': 80,
+        'str_per_level': 3,
+        'dex_per_level': 2,
+        'con_per_level': 2,
+        'int_per_level': 1,
+        'resistances': [],
+        'immunities': ['fear', 'confuse'],
+        'weaknesses': ['ice']
+    },
+    {
+        'id': 'frenzied_rioter',
+        'name': 'Frenzied Rioter',
+        'hostile_type': 'humanoid',
+        'min_spawn_level': 52,
+        'role': 'damage',
+        'rarity': 'notfound',
+        'base_xp': 1200,
+        'common_drop': None,
+        'rare_drop': None,
+        'money_range': (80, 200),
+        'basic_attack': 'wild assault',
+        'strong_attack': 'euphoric rampage',
+        'player_abilities': [],
+        'base_str': 35,
+        'base_dex': 30,
+        'base_con': 30,
+        'base_int': 8,
+        'base_hp': 12000,
+        'base_ap': 90,
+        'str_per_level': 4,
+        'dex_per_level': 3,
+        'con_per_level': 3,
+        'int_per_level': 1,
+        'resistances': ['fire'],
+        'immunities': ['fear', 'confuse', 'sleep'],
+        'weaknesses': ['ice']
+    },
+    {
+        'id': 'festival_berserker',
+        'name': 'Festival Berserker',
+        'hostile_type': 'humanoid',
+        'min_spawn_level': 54,
+        'role': 'damage',
+        'rarity': 'notfound',
+        'base_xp': 2000,
+        'common_drop': None,
+        'rare_drop': None,
+        'money_range': (120, 300),
+        'basic_attack': 'adrenaline slam',
+        'strong_attack': 'crash wave',
+        'player_abilities': [],
+        'base_str': 48,
+        'base_dex': 35,
+        'base_con': 40,
+        'base_int': 6,
+        'base_hp': 20000,
+        'base_ap': 100,
+        'str_per_level': 5,
+        'dex_per_level': 4,
+        'con_per_level': 4,
+        'int_per_level': 1,
+        'resistances': ['fire', 'physical'],
+        'immunities': ['fear', 'confuse', 'sleep', 'stun'],
+        'weaknesses': ['ice', 'dark']
+    },
+    {
+        'id': 'oracle_boss_2', 'name': 'Oracle - Reset', 'hostile_type': 'aberration', 'min_spawn_level': 103, 'role': 'hazard', 'rarity': 'notfound',
+        'base_xp': 50000, 'common_drop': 'tome_int_superrare', 'rare_drop': 'shattered_prophecy', 'money_range': (12000, 24000),
+        'basic_attack': 'immutable future', 'strong_attack': 'the only ending', 'player_abilities': ['inescapable_prophecy', 'vision_of_ruin', 'fate_lock'],
+        'base_str': 60, 'base_dex': 70, 'base_con': 62, 'base_int': 110, 'base_hp': 180000, 'base_ap': 1800,
+        'str_per_level': 7, 'dex_per_level': 9, 'con_per_level': 8, 'int_per_level': 14,
+        'resistances': ['dark', 'ice', 'electric', 'air'], 'immunities': ['fear', 'confuse', 'sleep', 'stun'], 'weaknesses': ['light']
+    },
+    {
+        'id': 'reliquary_boss_2', 'name': 'Reliquary - Reset', 'hostile_type': 'aberration', 'min_spawn_level': 103, 'role': 'damage', 'rarity': 'notfound',
+        'base_xp': 50000, 'common_drop': 'tome_con_superrare', 'rare_drop': 'final_archive', 'money_range': (12000, 24000),
+        'basic_attack': 'the past always returns', 'strong_attack': 'inescapable record', 'player_abilities': ['eternal_wound', 'memory_of_suffering', 'burden_of_the_lost'],
+        'base_str': 65, 'base_dex': 60, 'base_con': 80, 'base_int': 92, 'base_hp': 200000, 'base_ap': 1600,
+        'str_per_level': 8, 'dex_per_level': 7, 'con_per_level': 10, 'int_per_level': 11,
+        'resistances': ['dark', 'physical', 'ice', 'earth'], 'immunities': ['stun', 'petrify', 'confuse', 'fear'], 'weaknesses': ['light', 'fire']
+    },
+    # -------------------------------------------------------------------
+    # Mountains primary story — Sindra's nightmare constructs.
+    # Relay-energy entities erupting from corrupted conduits in her
+    # workshop. Three escalating waves. All at Lv 30.
+    # -------------------------------------------------------------------
+    {
+        'id': 'relay_phantom',
+        'name': 'Relay Phantom',
+        'hostile_type': 'construct',
+        'min_spawn_level': 30,
+        'role': 'damage',
+        'rarity': 'notfound',
+        'base_xp': 900,
+        'common_drop': None,
+        'rare_drop': None,
+        'money_range': (60, 180),
+        'basic_attack': 'arc lash',
+        'strong_attack': 'feedback burst',
+        'player_abilities': [],
+        'base_str': 22,
+        'base_dex': 30,
+        'base_con': 20,
+        'base_int': 28,
+        'base_hp': 9000,
+        'base_ap': 120,
+        'str_per_level': 2,
+        'dex_per_level': 3,
+        'con_per_level': 2,
+        'int_per_level': 3,
+        'resistances': ['electric'],
+        'immunities': ['sleep', 'confuse'],
+        'weaknesses': ['earth', 'ice']
+    },
+    {
+        'id': 'surge_wraith',
+        'name': 'Surge Wraith',
+        'hostile_type': 'construct',
+        'min_spawn_level': 30,
+        'role': 'hazard',
+        'rarity': 'notfound',
+        'base_xp': 1400,
+        'common_drop': None,
+        'rare_drop': None,
+        'money_range': (100, 250),
+        'basic_attack': 'voltage drain',
+        'strong_attack': 'overload pulse',
+        'player_abilities': [],
+        'base_str': 18,
+        'base_dex': 28,
+        'base_con': 25,
+        'base_int': 38,
+        'base_hp': 13000,
+        'base_ap': 150,
+        'str_per_level': 2,
+        'dex_per_level': 3,
+        'con_per_level': 2,
+        'int_per_level': 4,
+        'resistances': ['electric', 'fire'],
+        'immunities': ['sleep', 'confuse', 'stun'],
+        'weaknesses': ['earth', 'ice']
+    },
+    {
+        'id': 'conduit_colossus',
+        'name': 'Conduit Colossus',
+        'hostile_type': 'construct',
+        'min_spawn_level': 30,
+        'role': 'tank',
+        'rarity': 'notfound',
+        'base_xp': 2800,
+        'common_drop': None,
+        'rare_drop': 'coreforge_shard',
+        'money_range': (200, 500),
+        'basic_attack': 'coil slam',
+        'strong_attack': 'grid collapse',
+        'player_abilities': [],
+        'base_str': 40,
+        'base_dex': 18,
+        'base_con': 50,
+        'base_int': 30,
+        'base_hp': 28000,
+        'base_ap': 130,
+        'str_per_level': 4,
+        'dex_per_level': 2,
+        'con_per_level': 5,
+        'int_per_level': 3,
+        'resistances': ['electric', 'physical'],
+        'immunities': ['sleep', 'confuse', 'stun', 'petrify'],
+        'weaknesses': ['earth', 'water']
+    },
 ]
