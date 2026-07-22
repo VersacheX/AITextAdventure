@@ -499,40 +499,40 @@ NPC_DIALOG = [
 
 ]
 
-TEST_DIALOG = [
-	{
-		'npc_id': None,
-		'dialog_id': 'ch1_choice_look_for_friends',
-		'dialog': [
-			"You decide to look for your missing friends first.",
-			"Someone in this city must know something."
-		]
-	},
-	{
-		'npc_id': None,
-		'dialog_id': 'ch1_choice_find_somewhere_safe',
-		'dialog': [
-			"You decide to find somewhere safe to regroup.",
-			"The inn seems like the best bet for now."
-		]
-	},
-	{
-		'npc_id': None,
-		'dialog_id': 'ch1_choice_look_around',
-		'dialog': [
-			"You decide to take stock of your surroundings first.",
-			"A reckless charge into chaos never helped anyone."
-		]
-	}
-	# ,
-	# {
-	# 	'npc_id': None,
-	# 	'dialog_id': 'condition_test_narrator',
-	# 	'dialog': ["conditions work."]
-	# }
-]
+# TEST_DIALOG = [
+# 	{
+# 		'npc_id': None,
+# 		'dialog_id': 'ch1_choice_look_for_friends',
+# 		'dialog': [
+# 			"You decide to look for your missing friends first.",
+# 			"Someone in this city must know something."
+# 		]
+# 	},
+# 	{
+# 		'npc_id': None,
+# 		'dialog_id': 'ch1_choice_find_somewhere_safe',
+# 		'dialog': [
+# 			"You decide to find somewhere safe to regroup.",
+# 			"The inn seems like the best bet for now."
+# 		]
+# 	},
+# 	{
+# 		'npc_id': None,
+# 		'dialog_id': 'ch1_choice_look_around',
+# 		'dialog': [
+# 			"You decide to take stock of your surroundings first.",
+# 			"A reckless charge into chaos never helped anyone."
+# 		]
+# 	}
+# 	# ,
+# 	# {
+# 	# 	'npc_id': None,
+# 	# 	'dialog_id': 'condition_test_narrator',
+# 	# 	'dialog': ["conditions work."]
+# 	# }
+# ]
 
-NPC_DIALOG += TEST_DIALOG
+# NPC_DIALOG += TEST_DIALOG
 TASKS = [
 	# Task 1: main_story_ch_1_find_the_inn
 	{
@@ -638,19 +638,20 @@ TASKS = [
 					'npc_id': None,
 					'dialog_id': 'ch1_narrator_we_do_not_begin'
 				}
-			},
-			#INITIATE OPTION DIALOG WITH 3 OPTIONS. HAVE THE TASKS DO NOTHING EXCEPT CALL NARRATOR DIALOG [initiate_dialog npc_id=None] STATING THE CHOICE THEY MADE
-			{
-				'event_type': 'initiate_option_dialog',
-				'params': {
-					'message': "The city is in chaos. What do you do first?",
-					'options': [
-						('Look for your missing friends', 'ch1_option_look_for_friends'),
-						('Find somewhere safe to regroup',  'ch1_option_find_somewhere_safe'),
-						('Look around and take stock',      'ch1_option_look_around'),
-					]
-				}
 			}
+			# ,
+			# #INITIATE OPTION DIALOG WITH 3 OPTIONS. HAVE THE TASKS DO NOTHING EXCEPT CALL NARRATOR DIALOG [initiate_dialog npc_id=None] STATING THE CHOICE THEY MADE
+			# {
+			# 	'event_type': 'initiate_option_dialog',
+			# 	'params': {
+			# 		'message': "The city is in chaos. What do you do first?",
+			# 		'options': [
+			# 			('Look for your missing friends', 'ch1_option_look_for_friends'),
+			# 			('Find somewhere safe to regroup',  'ch1_option_find_somewhere_safe'),
+			# 			('Look around and take stock',      'ch1_option_look_around'),
+			# 		]
+			# 	}
+			# }
 		],
 		'task_complete_events': [ 
 			{
@@ -702,133 +703,133 @@ TASKS = [
 			}
 		]
 	},
-	# Option stub: look for friends
-	{
-		'task_id': 'ch1_option_look_for_friends',
-		'type': 'deliver',
-		'item_id': 'rift_core',
-		'to_type': 'npc',
-		'to_id': 'kadeem',
-		'task_acquire_events': [
-			{
-				'event_type': 'initiate_dialog',
-				'params': {
-					'npc_id': None,
-					'dialog_id': 'ch1_choice_look_for_friends'
-				}
-			},
-			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'lucky_charm'
-				}
-			},
-			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'worn_ring'
-				}
-			},
-			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'worn_ring'
-				}
-			},
-			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'toughened_cord'
-				}
-			}
-		],
-		'task_complete_events': []
-	},
-	# Option stub: find somewhere safe
-	{
-		'task_id': 'ch1_option_find_somewhere_safe',
-		'type': 'deliver',
-		'item_id': 'phase_crystal',
-		'to_type': 'npc',
-		'to_id': 'alchemist_mirlo',
-		'task_acquire_events': [
-			{
-				'event_type': 'initiate_dialog',
-				'params': {
-					'npc_id': None,
-					'dialog_id': 'ch1_choice_find_somewhere_safe'
-				}
-			},
-			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'toughened_cord'
-				}
-			},
-			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'worn_ring'
-				}
-			},
-			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'worn_ring'
-				}
-			},
-			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'lucky_charm',
-					'quantity': 1
-				}
-			}
-		],
-		'task_complete_events': []
-	},
-	# Option stub: look around
-	{
-		'task_id': 'ch1_option_look_around',
-		'type': 'deliver',
-		'item_id': 'demigorgon_tooth',
-		'to_type': 'npc',
-		'to_id': 'emberwitch_thera',
-		'task_acquire_events': [
-			{
-				'event_type': 'initiate_dialog',
-				'params': {
-					'npc_id': None,
-					'dialog_id': 'ch1_choice_look_around'
-				}
-			},
-			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'worn_ring'
-				}
-			},
-			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'worn_ring'
-				}
-			},
-			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'worn_ring'
-				}
-			},
-			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'toughened_cord'
-				}
-			}
-		],
-		'task_complete_events': []
-	},
+	# # Option stub: look for friends
+	# {
+	# 	'task_id': 'ch1_option_look_for_friends',
+	# 	'type': 'deliver',
+	# 	'item_id': 'rift_core',
+	# 	'to_type': 'npc',
+	# 	'to_id': 'kadeem',
+	# 	'task_acquire_events': [
+	# 		{
+	# 			'event_type': 'initiate_dialog',
+	# 			'params': {
+	# 				'npc_id': None,
+	# 				'dialog_id': 'ch1_choice_look_for_friends'
+	# 			}
+	# 		},
+	# 		{
+	# 			'event_type': 'award_item',
+	# 			'params': {
+	# 				'item_id': 'lucky_charm'
+	# 			}
+	# 		},
+	# 		{
+	# 			'event_type': 'award_item',
+	# 			'params': {
+	# 				'item_id': 'worn_ring'
+	# 			}
+	# 		},
+	# 		{
+	# 			'event_type': 'award_item',
+	# 			'params': {
+	# 				'item_id': 'worn_ring'
+	# 			}
+	# 		},
+	# 		{
+	# 			'event_type': 'award_item',
+	# 			'params': {
+	# 				'item_id': 'toughened_cord'
+	# 			}
+	# 		}
+	# 	],
+	# 	'task_complete_events': []
+	# },
+	# # Option stub: find somewhere safe
+	# {
+	# 	'task_id': 'ch1_option_find_somewhere_safe',
+	# 	'type': 'deliver',
+	# 	'item_id': 'phase_crystal',
+	# 	'to_type': 'npc',
+	# 	'to_id': 'alchemist_mirlo',
+	# 	'task_acquire_events': [
+	# 		{
+	# 			'event_type': 'initiate_dialog',
+	# 			'params': {
+	# 				'npc_id': None,
+	# 				'dialog_id': 'ch1_choice_find_somewhere_safe'
+	# 			}
+	# 		},
+	# 		{
+	# 			'event_type': 'award_item',
+	# 			'params': {
+	# 				'item_id': 'toughened_cord'
+	# 			}
+	# 		},
+	# 		{
+	# 			'event_type': 'award_item',
+	# 			'params': {
+	# 				'item_id': 'worn_ring'
+	# 			}
+	# 		},
+	# 		{
+	# 			'event_type': 'award_item',
+	# 			'params': {
+	# 				'item_id': 'worn_ring'
+	# 			}
+	# 		},
+	# 		{
+	# 			'event_type': 'award_item',
+	# 			'params': {
+	# 				'item_id': 'lucky_charm',
+	# 				'quantity': 1
+	# 			}
+	# 		}
+	# 	],
+	# 	'task_complete_events': []
+	# },
+	# # Option stub: look around
+	# {
+	# 	'task_id': 'ch1_option_look_around',
+	# 	'type': 'deliver',
+	# 	'item_id': 'demigorgon_tooth',
+	# 	'to_type': 'npc',
+	# 	'to_id': 'emberwitch_thera',
+	# 	'task_acquire_events': [
+	# 		{
+	# 			'event_type': 'initiate_dialog',
+	# 			'params': {
+	# 				'npc_id': None,
+	# 				'dialog_id': 'ch1_choice_look_around'
+	# 			}
+	# 		},
+	# 		{
+	# 			'event_type': 'award_item',
+	# 			'params': {
+	# 				'item_id': 'worn_ring'
+	# 			}
+	# 		},
+	# 		{
+	# 			'event_type': 'award_item',
+	# 			'params': {
+	# 				'item_id': 'worn_ring'
+	# 			}
+	# 		},
+	# 		{
+	# 			'event_type': 'award_item',
+	# 			'params': {
+	# 				'item_id': 'worn_ring'
+	# 			}
+	# 		},
+	# 		{
+	# 			'event_type': 'award_item',
+	# 			'params': {
+	# 				'item_id': 'toughened_cord'
+	# 			}
+	# 		}
+	# 	],
+	# 	'task_complete_events': []
+	# },
 	#Task 2 find item shop
 	{
 		'task_id': 'main_story_ch_1_find_item_shop',
