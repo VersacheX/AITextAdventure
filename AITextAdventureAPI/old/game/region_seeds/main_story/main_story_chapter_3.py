@@ -693,6 +693,7 @@ TASKS = [
 					'location': 'region_open_area'
 				}
 			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'nobles_mansion_ch3', 'item_id': 'grassland_large_city_accessory_key', 'location': 'final_chamber' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'nobles_mansion_ch3', 'item_id': 'scarred_thyme', 'location': 'treasure_room'}},
 			#{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'nobles_mansion_ch3', 'item_id': 'heirloom_ring', 'location': 'treasure_room'}},
 			{

@@ -33,7 +33,7 @@ EXTENDED_CHARACTERS_NPCS = [
         'name': 'Rynn',
         'description': (
             'A quiet, steadfast field medic and community anchor. '
-            'He remembers every wound, every promise, and every person he couldn’t save.'
+            'He remembers every wound, every promise, and every person he couldn\'t save.'
         ),
         "psychology": {
             "mbti": "ISFJ",
@@ -422,136 +422,519 @@ EXTENDED_CHARACTERS_NPCS = [
 ]
 
 
-
-
-
 # ####### EXTENDED CHARACTER PLACEMENT
 # Proposed 16-character → city assignment
-
-# Character         City (Ch)            Why it fits
-
- 
-
-# Voss Caldera (ESTJ 3w4, corporate shark) 
-
-# Crosswind Bazaar (10)           
-
-# Cutthroat commerce in a chaotic trade hub — she'd dominate the merchant riots by sheer competence.
-
- 
-
-# Caretaker Rynn (ISFJ 9w1, field medic)        
-
-# Quantford Hollow (12)            
-
-# Post-mania grief-crash chapter — a quiet healer who "remembers every person he couldn't save" fits the tonal comedown perfectly.
-
- 
-
-# Elyra Dawnseer (INFJ 4w5, fragmented prophet)   
-
-# Nightveil Spire (8)       
-
-# Twilight/arcane spectacle city already built around sensory intoxication — her Ni visions of Glamour/Scalpel's duality write themselves.
-
- 
-
-# Regent Sylvara (INTJ 5w6, throne-puppeteer)          
-
-# Highsteeple Crossing (3)       
-
-# Pious, sanctimonious ruling city — she's the cold strategist actually pulling strings behind its religious facade.
-
- 
-
-# Ghost (ISTP 9w8, silent operative)   
-
-# Gnashwater Hollow (7)          
-
-# City literally described as running on "mercenaries and bounty hunters" — direct mechanical fit.
-
- 
-
-# Lira Emberforge (ISFP 4w5, soul-in-her-craft artisan)        
-
-# Hollerforge Hollow (21)          
-
-# "Reality's foundry" finale hub — an artisan who pours herself into creation belongs at the last forge before the metaphysical melt.
-
- 
-
-# Osten Dreamweaver (INFP 4w5, dream/reality blur)           
-
-# Aurelion Veil (19)        
-
-# Living-wood memory city built for "Reconstructing the Self" — a dream-interpreter is the natural guide here.
-
- 
-
-# Lyric (INTP 5w6, abstract systems theorist)              
-
-# Frostgate Spire (18)  
-
-# Cataclysm chapter — institutions systematically breaking themselves; a theorist watching his beloved systems collapse in real time.
-
- 
-
-# Dare (ESTP 7w8, thrill-seeking scout)           
-
-# Blackwake Bay (11)  
-
-# Pirate taverns, danger, peak frenzy before burnout — exactly his adrenaline register.
-
- 
-
-# Andrea Starveil (ESFP 7w6, morale officer)               
-
-# Tidekin Cove (15)       
-
-# Ironic fit: a genuine morale-lifter inside a mandated "party-as-control" state — could be a quiet act of resistance.
-
- 
-
-# Sera Flameweaver (ENFP 4w3, theatrical fire mage)          
-
-# Boiling Bubble (2)       
-
-# Witch hamlet already built around potions/cauldrons/cursed artifacts — she slots into the existing Mira/Leera/Kess cast naturally.
-
- 
-
-# Spark Maddox (ENTP 7w8, reality-as-playground inventor)            
-
-# Ironveil Foundry (4)   
-
-# Fracture Point chapter, maps literally twisting — an inventor who treats reality as an experiment fits the rift-opening chaos.
-
- 
-
-# Archivist Anita (ISTJ 6w5, secrets-as-currency)      
-
-# The Necropolis (13)  
-
-# City of crypts/relics/ancient rites — an archivist obsessed with preserving the past amid identity-rot themes.
-
- 
-
-# Talia Softheart (ESFJ 2w1, empathic healer)             
-
-# Thornshade Hamlet (16)       
-
-# "Path Without Meaning" — emotional hollowness chapter; her raw compassion is the sharpest possible contrast/antidote.
-
- 
-
-# Korina Brightvein (ENFJ 2w3, charismatic motivator)         
-
-# Gallows Rift (17)         
-
-# Explicitly "camaraderie... tales of daring exploits shared around campfires" — she's the one telling them.
-
- 
-
-# Commander Drax (ENTJ 8w7, battle-hardened commander)       
-
-# Bleakwatch Outpost (6)          "Resistance ops and breach sites" frontier — a commander leading from the front is a direct fit.
+# (unchanged — see comments above)
+
+# ── Extended Character ATTAINABLE_PLAYER_CHARACTERS Seeds ───────────────────
+# Level formula: chapter × 5, minimum 40
+# Stat points per level: 10 (base) + 6 × (level − 1)
+# Power points per level: 15 (base) + 15 × (level − 1)
+# Base stats: STR 8, DEX 8, CON 8, INT 8
+# Base HP: 20  Base AP: 5
+# HP gain from CON: (CON − 8) × 2
+# Archetypes:
+#   brawler  → STR primary, CON secondary, all power to HP
+#   caster   → INT primary, CON secondary, power split 50/50 HP/AP
+#   agile    → DEX primary, STR secondary, power split 75/25 HP/AP
+#   balanced → STR/INT equal, CON secondary, power split 60/40 HP/AP
+
+EXTENDED_CHARACTERS = [
+
+    # ── Sera Flameweaver  (Ch.2 · Boiling Bubble · level 40) ──────────────
+    # ENFP · 4w3 · fire mage — INT primary, CON secondary, caster
+    {
+        'id': 'sera_flameweaver',
+        'name': 'Sera Flameweaver',
+        'arm_armor': 'emberweave_bracers',
+        'head_armor': 'flamecrest_circlet',
+        'body_armor': 'scorchthread_robe',
+        'leg_armor': 'ashstep_sandals',
+        'equipped_weapon': 'blazeheart_staff',
+        'max_hp': 440,
+        'current_hp': 440,
+        'max_ap': 305,
+        'current_ap': 305,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 22,
+        'dexterity': 24,
+        'constitution': 68,
+        'intelligence': 138,
+        'level': 40,
+        'abilities': [
+            'fire_magic_lv1_fireball',
+            'fire_technique_lv1_scorch_slash',
+            'fire_faith_lv1_warmth_blessing',
+            'electric_faith_lv1_shock_blessing',
+            'dark_faith_lv1_shade_whisper',
+        ]
+    },
+
+    # ── Regent Sylvara  (Ch.3 · Highsteeple Crossing · level 40) ──────────
+    # INTJ · 5w6 · cold strategist — INT primary, CON secondary, caster
+    {
+        'id': 'regent_sylvara',
+        'name': 'Regent Sylvara',
+        'arm_armor': 'ironveil_vambraces',
+        'head_armor': 'sovereignty_circlet',
+        'body_armor': 'edictweave_mantle',
+        'leg_armor': 'coldmarch_greaves',
+        'equipped_weapon': 'scepter_of_dominion',
+        'max_hp': 432,
+        'current_hp': 432,
+        'max_ap': 305,
+        'current_ap': 305,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 20,
+        'dexterity': 20,
+        'constitution': 64,
+        'intelligence': 142,
+        'level': 40,
+        'abilities': [
+            'dark_magic_lv1_shadow_bolt',
+            'electric_magic_lv1_shock_pulse',
+            'dark_faith_lv1_shade_whisper',
+            'light_faith_lv1_convert',
+            'air_technique_lv1_sonic_strike',
+        ]
+    },
+
+    # ── Spark Maddox  (Ch.4 · Ironveil Foundry · level 40) ───────────────
+    # ENTP · 7w8 · inventor — DEX primary, INT secondary, agile
+    {
+        'id': 'spark_maddox',
+        'name': 'Maddox "Spark" Quill',
+        'arm_armor': 'overclock_gauntlets',
+        'head_armor': 'juryrig_goggles',
+        'body_armor': 'patchwork_conduit_vest',
+        'leg_armor': 'springcoil_boots',
+        'equipped_weapon': 'shockdart_launcher',
+        'max_hp': 502,
+        'current_hp': 502,
+        'max_ap': 155,
+        'current_ap': 155,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 30,
+        'dexterity': 130,
+        'constitution': 24,
+        'intelligence': 68,
+        'level': 40,
+        'abilities': [
+            'electric_tech_lv1_circuit_burst',
+            'electric_technique_lv1_stun_strike',
+            'air_technique_lv1_sonic_strike',
+            'air_skill_lv1_phantom_step',
+            'electric_skill_lv1_overcharge',
+        ]
+    },
+
+    # ── Commander Drax  (Ch.6 · Bleakwatch Outpost · level 40) ───────────
+    # ENTJ · 8w7 · brawler commander — STR primary, CON secondary, brawler
+    {
+        'id': 'commander_drax',
+        'name': 'Commander Drax',
+        'arm_armor': 'vanguard_gauntlets',
+        'head_armor': 'ironwill_helm',
+        'body_armor': 'bulwark_plate',
+        'leg_armor': 'marchsteel_greaves',
+        'equipped_weapon': 'wardens_claymore',
+        'max_hp': 748,
+        'current_hp': 748,
+        'max_ap': 5,
+        'current_ap': 5,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 148,
+        'dexterity': 14,
+        'constitution': 72,
+        'intelligence': 18,
+        'level': 40,
+        'abilities': [
+            'ice_technique_lv1_frozen_slash',
+            'earth_technique_lv1_armor_up',
+            'light_technique_lv1_radiant_slash',
+            'electric_technique_lv1_stun_strike',
+            'air_technique_lv1_sonic_strike',
+        ]
+    },
+
+    # ── Ghost  (Ch.7 · Gnashwater Hollow · level 40) ─────────────────────
+    # ISTP · 9w8 · silent operative — STR primary, DEX secondary, balanced
+    {
+        'id': 'ghost',
+        'name': 'Ghost',
+        'arm_armor': 'shadowweave_wraps',
+        'head_armor': 'nullface_hood',
+        'body_armor': 'voidstep_leathers',
+        'leg_armor': 'silent_stride_boots',
+        'equipped_weapon': 'phantom_edge',
+        'max_hp': 424,
+        'current_hp': 424,
+        'max_ap': 245,
+        'current_ap': 245,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 110,
+        'dexterity': 80,
+        'constitution': 30,
+        'intelligence': 32,
+        'level': 40,
+        'abilities': [
+            'dark_technique_lv1_night_claw',
+            'water_technique_lv1_slick_manuever',
+            'air_skill_lv1_phantom_step',
+            'dark_skill_lv1_shadow_step',
+            'electric_technique_lv1_stun_strike',
+        ]
+    },
+
+    # ── Elyra Dawnseer  (Ch.8 · Nightveil Spire · level 40) ──────────────
+    # INFJ · 4w5 · prophet — INT primary, CON secondary, caster
+    {
+        'id': 'elyra_dawnseer',
+        'name': 'Elyra Dawnseer',
+        'arm_armor': 'dawnthread_bracers',
+        'head_armor': 'oracle_veil',
+        'body_armor': 'visionweave_robe',
+        'leg_armor': 'starfall_sandals',
+        'equipped_weapon': 'seer_focus_wand',
+        'max_hp': 436,
+        'current_hp': 436,
+        'max_ap': 305,
+        'current_ap': 305,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 20,
+        'dexterity': 26,
+        'constitution': 66,
+        'intelligence': 140,
+        'level': 40,
+        'abilities': [
+            'light_faith_lv1_minor_heal',
+            'light_faith_lv1_glimmer',
+            'earth_faith_lv1_earthen_blessing',
+            'light_faith_lv1_convert',
+            'dark_faith_lv1_shade_whisper',
+        ]
+    },
+
+    # ── Voss Caldera  (Ch.10 · Crosswind Bazaar · level 50) ──────────────
+    # ESTJ · 3w4 · corporate brawler — STR primary, CON secondary, brawler
+    {
+        'id': 'voss_caldera',
+        'name': 'Voss Caldera',
+        'arm_armor': 'executive_vambraces',
+        'head_armor': 'authority_visor',
+        'body_armor': 'boardroom_plate',
+        'leg_armor': 'powerstride_greaves',
+        'equipped_weapon': 'leverage_maul',
+        'max_hp': 934,
+        'current_hp': 934,
+        'max_ap': 5,
+        'current_ap': 5,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 186,
+        'dexterity': 14,
+        'constitution': 90,
+        'intelligence': 22,
+        'level': 50,
+        'abilities': [
+            'light_technique_lv1_radiant_slash',
+            'earth_technique_lv1_armor_up',
+            'fire_technique_lv1_scorch_slash',
+            'electric_technique_lv1_stun_strike',
+            'air_technique_lv1_sonic_strike',
+        ]
+    },
+
+    # ── Dare  (Ch.11 · Blackwake Bay · level 55) ─────────────────────────
+    # ESTP · 7w8 · agile thrill-seeker — DEX primary, STR secondary, agile
+    {
+        'id': 'dare',
+        'name': 'Dare',
+        'arm_armor': 'corsair_bracers',
+        'head_armor': 'reckless_bandana',
+        'body_armor': 'saltwind_leathers',
+        'leg_armor': 'wavechaser_boots',
+        'equipped_weapon': 'tiderunner_blades',
+        'max_hp': 675,
+        'current_hp': 675,
+        'max_ap': 211,
+        'current_ap': 211,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 100,
+        'dexterity': 188,
+        'constitution': 26,
+        'intelligence': 28,
+        'level': 55,
+        'abilities': [
+            'water_technique_lv1_slick_manuever',
+            'air_skill_lv1_phantom_step',
+            'fire_technique_lv1_scorch_slash',
+            'electric_technique_lv1_stun_strike',
+            'dark_technique_lv1_night_claw',
+        ]
+    },
+
+    # ── Rynn  (Ch.12 · Quantford Hollow · level 60) ───────────────────────
+    # ISFJ · 9w1 · field medic — INT primary, CON secondary, caster
+    {
+        'id': 'rynn',
+        'name': 'Rynn',
+        'arm_armor': 'steadfast_wraps',
+        'head_armor': 'field_medic_cap',
+        'body_armor': 'compassweave_robe',
+        'leg_armor': 'hearthstep_boots',
+        'equipped_weapon': 'mending_scepter',
+        'max_hp': 674,
+        'current_hp': 674,
+        'max_ap': 455,
+        'current_ap': 455,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 28,
+        'dexterity': 34,
+        'constitution': 110,
+        'intelligence': 200,
+        'level': 60,
+        'abilities': [
+            'light_faith_lv1_minor_heal',
+            'water_faith_lv1_mending_streams',
+            'light_faith_lv1_glimmer',
+            'earth_faith_lv1_earthen_blessing',
+            'air_faith_lv1_zephyr_bless',
+        ]
+    },
+
+    # ── Anita  (Ch.13 · The Necropolis · level 65) ────────────────────────
+    # ISTJ · 6w5 · archivist broker — balanced STR/INT, CON secondary
+    {
+        'id': 'anita',
+        'name': 'Anita',
+        'arm_armor': 'ledger_vambraces',
+        'head_armor': 'archivists_hood',
+        'body_armor': 'crypt_recorded_coat',
+        'leg_armor': 'vaultwalker_boots',
+        'equipped_weapon': 'codex_blade',
+        'max_hp': 789,
+        'current_hp': 789,
+        'max_ap': 395,
+        'current_ap': 395,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 120,
+        'dexterity': 62,
+        'constitution': 100,
+        'intelligence': 120,
+        'level': 65,
+        'abilities': [
+            'dark_magic_lv1_shadow_bolt',
+            'dark_faith_lv1_shade_whisper',
+            'light_faith_lv1_convert',
+            'earth_technique_lv1_armor_up',
+            'electric_technique_lv1_stun_strike',
+        ]
+    },
+
+    # ── Andrea Starveil  (Ch.14 · Tidekin Cove · level 70) ───────────────
+    # ESFP · 7w6 · performer/morale — DEX primary, STR secondary, agile
+    {
+        'id': 'andrea_starveil',
+        'name': 'Andrea Starveil',
+        'arm_armor': 'stageside_bracers',
+        'head_armor': 'spotlight_wreath',
+        'body_armor': 'ovation_leathers',
+        'leg_armor': 'starchasers_boots',
+        'equipped_weapon': 'encore_blades',
+        'max_hp': 860,
+        'current_hp': 860,
+        'max_ap': 267,
+        'current_ap': 267,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 120,
+        'dexterity': 240,
+        'constitution': 34,
+        'intelligence': 38,
+        'level': 70,
+        'abilities': [
+            'air_skill_lv1_phantom_step',
+            'water_technique_lv1_slick_manuever',
+            'light_faith_lv1_minor_heal',
+            'air_faith_lv1_zephyr_bless',
+            'fire_technique_lv1_scorch_slash',
+        ]
+    },
+
+    # ── Talia Softheart  (Ch.16 · Thornshade Hamlet · level 80) ──────────
+    # ESFJ · 2w1 · healer — INT primary, CON secondary, caster
+    {
+        'id': 'talia_softheart',
+        'name': 'Talia Softheart',
+        'arm_armor': 'gentleweave_bracers',
+        'head_armor': 'warmth_cowl',
+        'body_armor': 'hearthroot_robe',
+        'leg_armor': 'softpath_sandals',
+        'equipped_weapon': 'kindness_staff',
+        'max_hp': 900,
+        'current_hp': 900,
+        'max_ap': 605,
+        'current_ap': 605,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 30,
+        'dexterity': 44,
+        'constitution': 148,
+        'intelligence': 270,
+        'level': 80,
+        'abilities': [
+            'light_faith_lv1_minor_heal',
+            'water_faith_lv1_mending_streams',
+            'light_faith_lv1_glimmer',
+            'earth_faith_lv1_earthen_blessing',
+            'air_faith_lv1_zephyr_bless',
+        ]
+    },
+
+    # ── Korina Brightvein  (Ch.17 · Gallows Rift · level 85) ─────────────
+    # ENFJ · 2w3 · leader — INT primary, CON secondary, caster/support
+    {
+        'id': 'korina_brightvein',
+        'name': 'Korina Brightvein',
+        'arm_armor': 'goldvein_bracers',
+        'head_armor': 'rallying_crown',
+        'body_armor': 'brightweave_mantle',
+        'leg_armor': 'inspirer_greaves',
+        'equipped_weapon': 'voice_of_valor_staff',
+        'max_hp': 958,
+        'current_hp': 958,
+        'max_ap': 642,
+        'current_ap': 642,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 32,
+        'dexterity': 46,
+        'constitution': 158,
+        'intelligence': 286,
+        'level': 85,
+        'abilities': [
+            'light_faith_lv1_minor_heal',
+            'electric_faith_lv1_shock_blessing',
+            'fire_faith_lv1_warmth_blessing',
+            'earth_faith_lv1_earthen_blessing',
+            'air_faith_lv1_zephyr_bless',
+        ]
+    },
+
+    # ── Lyric  (Ch.19 · Frostgate Spire · level 95) ───────────────────────
+    # INTP · 5w6 · theorist — INT primary, DEX secondary, caster
+    {
+        'id': 'lyric',
+        'name': 'Lyric',
+        'arm_armor': 'theorem_bracers',
+        'head_armor': 'abstract_lens_headset',
+        'body_armor': 'logic_lattice_robe',
+        'leg_armor': 'analysis_greaves',
+        'equipped_weapon': 'axiom_focus_rod',
+        'max_hp': 997,
+        'current_hp': 997,
+        'max_ap': 717,
+        'current_ap': 717,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 42,
+        'dexterity': 60,
+        'constitution': 140,
+        'intelligence': 340,
+        'level': 95,
+        'abilities': [
+            'electric_magic_lv1_shock_pulse',
+            'electric_tech_lv1_circuit_burst',
+            'dark_magic_lv1_shadow_bolt',
+            'air_tech_lv1_system_scan',
+            'electric_technique_lv1_stun_strike',
+        ]
+    },
+
+    # ── Osten Dreamweaver  (Ch.20 · Bayou Nocturne · level 100) ──────────
+    # INFP · 4w5 · storyteller — INT primary, CON secondary, caster
+    {
+        'id': 'osten_dreamweaver',
+        'name': 'Osten Dreamweaver',
+        'arm_armor': 'dreamthread_bracers',
+        'head_armor': 'reverie_hood',
+        'body_armor': 'folklore_robe',
+        'leg_armor': 'wanderer_wraps',
+        'equipped_weapon': 'storyteller_staff',
+        'max_hp': 1074,
+        'current_hp': 1074,
+        'max_ap': 755,
+        'current_ap': 755,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 46,
+        'dexterity': 46,
+        'constitution': 160,
+        'intelligence': 360,
+        'level': 100,
+        'abilities': [
+            'dark_magic_lv1_shadow_bolt',
+            'dark_faith_lv1_shade_whisper',
+            'light_faith_lv1_minor_heal',
+            'water_faith_lv1_mending_streams',
+            'light_faith_lv1_convert',
+        ]
+    },
+
+    # ── Lira Emberforge  (Ch.21 · Hollerforge Hollow · level 105) ────────
+    # ISFP · 4w5 · artisan smith — DEX primary, STR secondary, agile
+    {
+        'id': 'lira_emberforge',
+        'name': 'Lira Emberforge',
+        'arm_armor': 'soulforge_gauntlets',
+        'head_armor': 'artisan_helm',
+        'body_armor': 'masterwork_apron',
+        'leg_armor': 'forgestride_boots',
+        'equipped_weapon': 'prima_blade',
+        'max_hp': 1289,
+        'current_hp': 1289,
+        'max_ap': 399,
+        'current_ap': 399,
+        'unused_ability_slots': 0,
+        'unused_stat_points': 0,
+        'unused_power_points': 0,
+        'strength': 180,
+        'dexterity': 360,
+        'constitution': 52,
+        'intelligence': 50,
+        'level': 105,
+        'abilities': [
+            'fire_technique_lv1_scorch_slash',
+            'earth_technique_lv1_armor_up',
+            'fire_faith_lv1_warmth_blessing',
+            'air_skill_lv1_phantom_step',
+            'electric_technique_lv1_stun_strike',
+        ]
+    },
+
+]

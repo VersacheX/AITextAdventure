@@ -5,11 +5,15 @@ from game.region_seeds.weapons.lv11_20 import WEAPONS_LV11_20
 from game.region_seeds.weapons.lv21_35 import WEAPONS_LV21_35
 from game.region_seeds.weapons.lv36_50 import WEAPONS_LV36_50
 from game.region_seeds.weapons.lv51_65 import WEAPONS_LV51_65
+from game.region_seeds.weapons.lv66_80 import WEAPONS_LV66_80
+from game.region_seeds.weapons.lv81_105 import WEAPONS_LV81_105
 from game.region_seeds.armor.lv1_10 import ARMOR_LV1_10
 from game.region_seeds.armor.lv11_20 import ARMOR_LV11_20
 from game.region_seeds.armor.lv21_35 import ARMOR_LV21_35
 from game.region_seeds.armor.lv36_50 import ARMOR_LV36_50
 from game.region_seeds.armor.lv51_65 import ARMOR_LV51_65
+from game.region_seeds.armor.lv66_80 import ARMOR_LV66_80
+from game.region_seeds.armor.lv81_105 import ARMOR_LV81_105
 
 # Combine weapons from seed files and sort by:
 #1) min_spawn_level (ascending)
@@ -17,13 +21,15 @@ from game.region_seeds.armor.lv51_65 import ARMOR_LV51_65
 #3) intelligence (descending)
 #4) dexterity (descending)
 WEAPON_SEEDS = sorted(
-     (WEAPONS_LV1_10 or []) + (WEAPONS_LV11_20 or []) + (WEAPONS_LV21_35 or []) + (WEAPONS_LV36_50 or []) + (WEAPONS_LV51_65 or []),
-     key=lambda w: (
-         int(w.get('min_spawn_level',0)),
-         -int(w.get('strength',0)),
-         -int(w.get('intelligence',0)),
-         -int(w.get('dexterity',0)),
-     ),
+    (WEAPONS_LV1_10 or []) + (WEAPONS_LV11_20 or []) + (WEAPONS_LV21_35 or [])
+    + (WEAPONS_LV36_50 or []) + (WEAPONS_LV51_65 or [])
+    + (WEAPONS_LV66_80 or []) + (WEAPONS_LV81_105 or []),
+    key=lambda w: (
+        int(w.get('min_spawn_level', 0)),
+        -int(w.get('strength', 0)),
+        -int(w.get('intelligence', 0)),
+        -int(w.get('dexterity', 0)),
+    ),
 )
 
 ARMOR_TYPES = {
@@ -42,16 +48,18 @@ for slot in SLOTS:
     list3 = ARMOR_LV21_35.get(slot, []) if isinstance(ARMOR_LV21_35, dict) else []
     list4 = ARMOR_LV36_50.get(slot, []) if isinstance(ARMOR_LV36_50, dict) else []
     list5 = ARMOR_LV51_65.get(slot, []) if isinstance(ARMOR_LV51_65, dict) else []
-    combined = (list1 or []) + (list2 or []) + (list3 or []) + (list4 or []) + (list5 or [])
+    list6 = ARMOR_LV66_80.get(slot, []) if isinstance(ARMOR_LV66_80, dict) else []
+    list7 = ARMOR_LV81_105.get(slot, []) if isinstance(ARMOR_LV81_105, dict) else []
+    combined = (list1 or []) + (list2 or []) + (list3 or []) + (list4 or []) + (list5 or []) + (list6 or []) + (list7 or [])
     # sort by min_spawn_level ascending, then strength/intelligence/dexterity descending
     combined_sorted = sorted(
         combined,
         key=lambda a: (
-            int(a.get('min_spawn_level',0)),
-            -int(a.get('strength',0)),
-            -int(a.get('intelligence',0)),
-            -int(a.get('dexterity',0)),
-            ),
+            int(a.get('min_spawn_level', 0)),
+            -int(a.get('strength', 0)),
+            -int(a.get('intelligence', 0)),
+            -int(a.get('dexterity', 0)),
+        ),
     )
     ARMOR_SEEDS[slot] = combined_sorted
 
@@ -69,11 +77,6 @@ UTILITY_ITEM_SEEDS = [
     {"id": "stimulant_med", "name": "Energy Drink", "description": "Restores a moderate fraction of your max AP.", "effect": "restore_ap_mid", "uses":1, "value":500, "min_spawn_level":4, "rarity": "uncommon", "ap_fraction":0.5},
     {"id": "stimulant_large", "name": "Adrenaline Shot", "description": "Restores a large fraction of your max AP.", "effect": "restore_ap_large", "uses":1, "value":1000, "min_spawn_level":10, "rarity": "rare", "ap_fraction":0.75},
     {"id": "stimulant_full", "name": "Neuro Stim", "description": "Fully restores your AP.", "effect": "restore_ap_full", "uses":1, "value":2000, "min_spawn_level":15, "rarity": "superrare", "ap_fraction":1.0},
-
-
-
-    # Utility / tools   <- remove lockpicks... this tech will never be built
-    #{"id": "lockpick", "name": "Slim Jim", "description": "Useful for opening simple locks.", "effect": "open_lock", "uses":5, "value":20, "min_spawn_level":1, "rarity": "uncommon"},
 
     # Revive Items
     {"id": "revive_kit", "name": "Revival Kit", "description": "A compact kit that can revive a fallen ally with partial HP.", "effect": "revive", "uses":1, "value":500, "min_spawn_level":5, "rarity": "rare", "revive_fraction":0.5},
@@ -107,9 +110,6 @@ UTILITY_ITEM_SEEDS = [
     {"id": "tome_int_superrare", "name": "Masterwork Encyclopedia of Lore", "description": "Permanently increases your Intelligence by2.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":15, "rarity": "notfound", "stat": "intelligence", "amount":2},
     {"id": "tome_con_superrare", "name": "Masterwork Way to Resistance", "description": "Permanently increases your Constitution by2.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":15, "rarity": "notfound", "stat": "constitution", "amount":2},
 ]
-
-
-
 
 
 # Special items (unique/quest) - these are rare and may be referenced by NPCs/quests
@@ -163,10 +163,41 @@ SPECIAL_ITEM_SEEDS = [
     {"id": "mirethread_pendant", "name": "Mirethread Pendant", "description": "A pendant braided from preserved reeds and small vertebrae, smelling faintly of peat and iron.", "effect_description": "", "value":0, "min_spawn_level":1, "rarity": "notfound"},
 
     # SPECIAL RIFT ITEMS FOUND IN THE FIRST FRACTURE
-
     {"id":"bracelet_of_void", "name":"Bracelet of the Void", "description":"A dark bracelet that seems to absorb light, with an unsettling aura.", "effect_description":"", "value":0, "min_spawn_level":1, "rarity":"notfound"},
     {"id":"bracelet_of_existence", "name":"Bracelet of Existence", "description":"A radiant bracelet that emits a soft glow, it eminates the power of life and creation.", "effect_description":"", "value":0, "min_spawn_level":1, "rarity":"notfound"},
+
+    # ── A-chain chapter tie-in items ──────────────────────────────────────
+    {"id": "embers_pressed_flower", "name": "Ember's Pressed Flower", "description": "A wildflower pressed between wax paper — small, ordinary, and carried with the kind of care reserved for things that matter more than they should.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "vale_pendant", "name": "Vale Pendant", "description": "A pendant carved from swamp-oak heartwood — old, smoothed by handling, and engraved with initials that have never been explained.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+
+    # ── E-chain artifacts (gate items for Type D chains) ──────────────────
+    {"id": "desert_large_city_e_dune_cipher_stone", "name": "Dune Cipher Stone", "description": "A flat stone inscribed with resonance frequencies used by desert traders as a routing cipher. The merchant who last owned it is not coming back for it.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "desert_small_city_e_eroded_ledger_plate", "name": "Eroded Ledger Plate", "description": "A brass plate whose engraved trade-ledger has been half-worn away by sand and time. What remains is enough.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "shallows_large_city_e_brine_compass", "name": "Brine Compass", "description": "A compass whose needle was magnetized by deep-sea current iron. It points toward tidal pull rather than north. Navigators who know what they're reading find it invaluable.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "swamp_mid_city_e_bayou_memory_vessel", "name": "Bayou Memory Vessel", "description": "A sealed clay vessel recovered from the bayou floor. The contents are unknown — something inside shifts when the vessel is tilted. It has never been opened.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "mountains_large_city_e_forge_echo_core", "name": "Forge Echo Core", "description": "A dense cylinder of resonant forge-iron that vibrates at the frequency of the mountain's oldest smelting chamber. Artificers call it a memory of fire.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "grassland_mid_city_e_sanctum_seal_fragment", "name": "Sanctum Seal Fragment", "description": "A fragment of a larger ceremonial seal, its edges clean-broken rather than worn — it was separated deliberately. The full seal would authorize passage to a restricted sanctum.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "snow_mid_city_e_pageant_decree_shard", "name": "Pageant Decree Shard", "description": "A shard of carved bone bearing a fragment of an ancestral clan decree. The chant-runes etched into it carry a resonance frequency specific to Hailward Hold's old forge-mark.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "pageant_decree_shard", "name": "Pageant Decree Shard", "description": "A shard of carved bone bearing a fragment of an ancestral clan decree. The chant-runes etched into it carry a resonance frequency specific to Hailward Hold's old forge-mark.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "shallows_mid_city_e_tidekin_seal", "name": "Tidekin Seal", "description": "A ceremonial disc bearing Old Tidekin founding-pact script around the rim. It was separated from its cove during a storm and has not been back since.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "tidekin_seal", "name": "Tidekin Seal", "description": "A ceremonial disc bearing Old Tidekin founding-pact script around the rim. It was separated from its cove during a storm and has not been back since.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+
+    # ── F-chain faction items (passed between cities via recurring NPCs) ───
+    {"id": "desert_large_city_f_salvage_manifest", "name": "Salvage Manifest", "description": "A folded document listing salvage claims across three desert trade routes. Someone has underlined certain entries in red. The underlined names are no longer active traders.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "desert_small_city_f_contraband_registry", "name": "Contraband Registry", "description": "A ledger of contraband movements maintained by someone with access to both sides of every checkpoint it documents. The handwriting is deliberately inconsistent.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "shallows_large_city_f_rift_observation_log", "name": "Rift Observation Log", "description": "A field log of rift anomaly sightings along the shallows coastline. The observations are precise, the conclusions are missing, and the final entry is unfinished mid-sentence.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "snow_mid_city_f_audit_testimony_seal", "name": "Audit Testimony Seal", "description": "A certified wax seal containing a compressed record of council testimony regarding forge allocation fraud. It is legally binding in three city-state jurisdictions.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+
+    # ── D-chain gate keys (delivered to unlock mythic reward chains) ───────
+    {"id": "grassland_large_city_accessory_key", "name": "Windcarver's Token", "description": "A worn bronze token marked with wind-spiral script. Trail readers in the grassland region use tokens like this to identify those who have completed the windcarve rite.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "snow_large_city_armor_key", "name": "Frostgate Vault Key", "description": "A key of pale bone-iron etched with vault-sealing runes. It was issued to the last known guardian of Frostgate's lower vault. The guardian is gone.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "hollow_grief_token", "name": "Hollow Grief Token", "description": "A small clay token formed in the shape of a cupped hand — used in grassland mourning rites to carry grief to the fold. This one has been carried a long time.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "necropolis_marrow_shard", "name": "Necropolis Marrow Shard", "description": "A fragment of marrow-crystal harvested from the Necropolis's oldest chamber. It pulses faintly with residual undeath energy and smells of old stone.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "bayou_memory_vessel", "name": "Bayou Memory Vessel", "description": "A sealed clay vessel recovered from the bayou floor. The contents are unknown — something inside shifts when the vessel is tilted. It has never been opened.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "mountains_small_city_weapon_key", "name": "Dominion Forge Key", "description": "A heavy iron key marked with the dominion forge-seal. It was held by the forge-warden who oversaw the mountain's last great weapon commission. The commission was never collected.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "forge_dominion_shard", "name": "Forge Dominion Shard", "description": "A fragment of dominion-ore extracted from the mountain's primary vein during a controlled collapse. It carries the compressed heat of a sealed forge chamber.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
 ]
+
 
 # Export convenience lists for simple random selection
 SEED_WEAPON_IDS = [w["id"] for w in WEAPON_SEEDS]

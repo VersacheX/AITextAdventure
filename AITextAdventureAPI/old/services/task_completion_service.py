@@ -181,6 +181,9 @@ def handle_task_event(event, player_game, parent_task):
 	if ev_name == TaskEventType.COMPLETE_REGION_QUEST.value:
 		return player_game.complete_region_quest(params.get('region_id'))
 	
+	if ev_name == TaskEventType.COMPLETE_REGION_QUEST_2.value:
+		return player_game.complete_region_quest_2(params.get('region_id'))
+	
 	# DUNGEON ADD TREASAURE
 	if ev_name == TaskEventType.DUNGEON_ADD_TREASURE.value:
 		#print('Adding treasure to dungeon...')

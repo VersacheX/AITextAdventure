@@ -180,11 +180,17 @@ NPC_DIALOG = [
             "If we forget that... then the Fracture has already won."
         ]
     },
+    # ── Replace relic dialog with Vale Pendant dialog ──────────────
     {
         'npc_id': 'lyren',
-        'dialog_id': 'lyren_ch7_receives_relic',
+        'dialog_id': 'lyren_ch7_receives_vale_pendant',
         'dialog': [
-            "(holding the relic with both hands, voice barely above a whisper) This one remembers... before the fractures. Before fear became the only constant."
+            "(her breath catches — she takes the pendant in both hands and holds it for a long moment without speaking)",
+            "This is my mother's.",
+            "I left it in Gnashwater Hollow when I fled. I thought it was gone.",
+            "(quietly) She wore it every day until the Fracture took her.",
+            "I didn't think I'd ever... (steadies herself)",
+            "Thank you. I don't know how you found it, but... thank you."
         ]
     },
     {
@@ -312,7 +318,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch7_to_lyren_1' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lyren', 'standing_text': ["The land is breaking down faster than we can fix it. Help stabilize the region before Seth can prepare the airship for departure."]}},
             { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'seth_hideout_ch3', 'item_id': 'fragrant_hibiscus', 'location': 'final_chamber' }},
-            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'abandoned_ruin_ch2', 'item_id': 'ancient_relic', 'location': 'final_chamber' }},
+            # ── Type A: vale_pendant placed in swamp small city chain ──
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch7_deliver_hibiscus_to_lyren' }}
         ]
     },
@@ -330,18 +336,18 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch7_after_hibiscus' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_response_to_magic' }},
             { 'event_type': 'remove_item', 'params': { 'item_id': 'fragrant_hibiscus' }},
-            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch7_deliver_relic_to_lyren' }}
+            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch7_deliver_vale_pendant_to_lyren' }}
         ]
     },
     {
-        'task_id': 'main_story_ch7_deliver_relic_to_lyren',
+        'task_id': 'main_story_ch7_deliver_vale_pendant_to_lyren',
         'type': 'deliver',
-        'item_id': 'ancient_relic',
+        'item_id': 'vale_pendant',
         'to_type': 'npc',
         'to_id': 'lyren',
         'task_acquire_events': [],
         'task_complete_events': [
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_receives_relic' }},
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_receives_vale_pendant' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch7_after_relic' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_joins_1' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch7_after_relic' }},
@@ -349,7 +355,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch7_after_relic' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch7_after_relic' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_joins_2' }},
-            { 'event_type': 'remove_item', 'params': { 'item_id': 'ancient_relic' }},
+            { 'event_type': 'remove_item', 'params': { 'item_id': 'vale_pendant' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'lyren' }},
             { 'event_type': 'character_join', 'params': { 'character_id': 'lyren' }}
         ]

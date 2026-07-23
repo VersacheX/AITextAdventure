@@ -188,6 +188,20 @@ Slots ordered 1 → 3 by ascending gate difficulty within each city.
 >
 > **Ch.18 note:** Aurelion Veil is the only city with no Type D — its three slots are fully occupied by the Chapter Tie-In (A), the Forest Regional Quest (B), and the Extended Character Unlock (C), making it the most story-dense city in the game.
 
+A tasks 
+- ch 6
+- + change seth first dialog a little and instead of directly giving the players to the contact seth wants to get the players to do something for him in the local area.
+  + i.e. they interact with the npc from city story line ... add a simple meet task after the initial talk with seth and the offering of contact and awarding meet contact conditionally... the meet task should have seth say ... did you do whatever? then an event with condition on the give contact speech and award next task... and a not complete condition on an event to destroy that delete_task for that task then re-award it so it has a replay loop.
+- ch 7
+- + replace item from relic to a piece of jewelry that is a family heirloom for lyren. have to remove the relic from being added to dungeon
+  + this makes the a task an easy get the item task however that's done is up to the city storyline.
+- ch 12
+- + ch 12 is easy, the second meet rell event should be changed to a deliver task... his set npc standing text saying how grief torn he is over ember and what he left the players searching for at the beginning of the chapter.
+  + the delivery of the item found in the a task chain of the city story will reflect what the players found as an addition at the beggining of the current events dialog
+- ch 18
+- + Velkas map is far too easily accurate... this is how this a chain will resolve.
+  + her meet will become similar to the ch6 conditional task complete structure reawarding itself until the players complete the task, thin that case the conditional award task and dialog
+
 ---
 
 ## NPC Rules (All Chain Types)
@@ -330,7 +344,7 @@ When a city is assigned Type A, the corresponding chapter file **must** be updat
 
 ### Finding NPC Dialog Voice Reference
 
-Before writing any NPC dialog, read the existing `NPC_DIALOG` entries for that NPC in their city story file and in any chapter file where they appear. Matchvocabulary, sentence rhythm, and thematic concerns exactly.
+Before writing any NPC dialog, read the existing `NPC_DIALOG` entries for that NPC in their city story file and in any chapter file where they appear. Match vocabulary, sentence rhythm, and thematic concerns exactly.
 
 For extended characters (Type C), their personality profiles are in:
 AITextAdventureAPI/old/game/region_seeds/extended_characters.py  →  EXTENDED_CHARACTERS_NPCS
@@ -347,6 +361,7 @@ AITextAdventureAPI/old/STORY DOCUMENTS FOR AI/ATTAINABLE CHARACTERS.txt
 ### City Story File Structure Reference
 
 A complete city story file follows this shape (use `desert_mid_city_story.py` as the canonical example):
+
 ATTAINABLE_PLAYER_CHARACTERS = []   # populated only if a character joins in base story
 NPCS = [...]                        # all NPCs that exist in this city
 NPC_DIALOG = [...]                  # all dialog entries for those NPCs
@@ -359,7 +374,11 @@ PRIMARY_STORY_SETTINGS = {
     'attainable_player_characters': ATTAINABLE_PLAYER_CHARACTERS,
 }
 
-Secondary chains (B–F) are added as additional `TASKS` entries and their dialogs as additional `NPC_DIALOG` entries in the **same file**. They are not separate files.
+Secondary chains (B–F) are added as additional `TASKS +=` blocks and their dialogs as additional `NPC_DIALOG +=` blocks in the **same file**. Each independent chain must be clearly comment-separated.
+
+> ⚠️ **AUTHORING RULE — No old linear chains:** The original city story files contain a base linear quest chain. **These must be completely removed during the rewrite.** Keep only `initialize` and `regional_complete_gate` (or equivalent). Everything after them is replaced by the 3 typed chain slots. Do not append typed chains on top of old linear chains.
+
+> ⚠️ **AUTHORING RULE — No `create_dungeon` in E or F chains:** Type E and Type F chains are fully NPC-driven. NPCs are placed at `region_open_area` or existing city locations via `create_npc`. No `create_dungeon` events belong in E or F chains. Dungeon events are reserved for Type B and Type D chains only.
 
 **Each independent chain must be clearly comment-separated:**
 ---

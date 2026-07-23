@@ -678,7 +678,8 @@ TASKS = [
 		'task_acquire_events': [
 			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'seraphine_glade', 'location': 'region_city_open_area' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'seraphine_glade', 'item_id': 'harmony_echo', 'location': 'final_chamber' }},
-			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'seraphine_glade', 'item_id': 'harmony_echo', 'location': 'final_chamber' }}
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'seraphine_glade', 'item_id': 'harmony_echo', 'location': 'final_chamber' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'seraphine_glade', 'item_id': 'snow_large_city_armor_key', 'location': 'final_chamber' }}
 		],
 		'task_complete_events': [
 			{ 'event_type': 'remove_item', 'params': { 'item_id': 'harmony_echo' }},

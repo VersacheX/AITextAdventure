@@ -318,4 +318,34 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
         'strength': 20, 'dexterity': 20, 'intelligence': 20, 'constitution': 20,
         'crit_bonus': 8.0, 'damage_bonus': 20, 'special_effect': 'amplify_ability',
     },
+
+    # ── MYTHIC D-CHAIN ACCESSORY REWARDS (notfound) ────────────────────────
+
+    {
+        'id': 'mythic_grassland_large_windcarvers_mantle',
+        'name': "Windcarver's Mantle",
+        'description': 'A mantle woven from windcarve-thread harvested at the peak of a grassland gale rite. Its edges never settle — they move with a wind that is not in the room.',
+        'min_level': 1, 'rarity': 'notfound', 'value': 30000,
+        'immunities': [], 'resistances': ['air'], 'weaknesses': [],
+        'strength': 8, 'dexterity': 24, 'intelligence': 20, 'constitution': 12,
+        'crit_bonus': 2.0, 'damage_bonus': 6, 'special_effect': '',
+    },
+    {
+        'id': 'mythic_grassland_small_folklore_hollow_talisman',
+        'name': 'Folklore Hollow Talisman',
+        'description': 'A talisman carved from hollow-wood found only in the grief-fold — the place where grassland mourning rites end. It carries the weight of names no longer spoken.',
+        'min_level': 1, 'rarity': 'notfound', 'value': 22000,
+        'immunities': [], 'resistances': ['earth', 'dark'], 'weaknesses': [],
+        'strength': 10, 'dexterity': 16, 'intelligence': 18, 'constitution': 14,
+        'crit_bonus': 1.5, 'damage_bonus': 4, 'special_effect': '',
+    },
+    {
+        'id': 'mythic_grassland_mid_oathbreakers_sigil',
+        'name': "Oathbreaker's Sigil",
+        'description': 'A sigil stamp recovered from a sanctum that sealed its own doors — the entity that broke the founding oath left this behind as either warning or trophy.',
+        'min_level': 1, 'rarity': 'notfound', 'value': 26000,
+        'immunities': ['silence'], 'resistances': ['dark', 'light'], 'weaknesses': [],
+        'strength': 14, 'dexterity': 18, 'intelligence': 22, 'constitution': 16,
+        'crit_bonus': 2.0, 'damage_bonus': 8, 'special_effect': '',
+    },
 ]

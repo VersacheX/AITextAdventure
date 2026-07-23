@@ -7,8 +7,8 @@ NPCS = [
 		'name': 'Errol Signalwatch',
 		'description': (
 			'A vigilant lookout who monitors the coastline for danger.'
-			' Errol’s signal flags move with flawless precision, even in storms.'
-			' He claims he can read the sea’s intentions like a book.'
+			' Errol\'s signal flags move with flawless precision, even in storms.'
+			' He claims he can read the sea\'s intentions like a book.'
 		)
 	},
 	{
@@ -104,8 +104,54 @@ NPC_DIALOG = [
             "You’ve restored the coast’s voice.",
             "The Shallows will remember your vigilance."
         ]
-    }
+    },
 
+	# ── Type C dialogs — Andrea Starveil ───────────────────────────
+	{
+		'npc_id': 'signalwatch_errol',
+		'dialog_id': 'errol_c_andrea_sighting',
+		'dialog': [
+			"There's a performer who came in on the last tide.",
+			"She's been doing something strange — lifting spirits in a city that has mandated celebration.",
+			"Everyone here is supposed to be happy.",
+			"She's the only one who actually seems to mean it.",
+			"Sylka knows her. She ran the route she arrived on."
+		]
+	},
+	{
+		'npc_id': 'runner_sylka',
+		'dialog_id': 'sylka_c_andrea_vouch',
+		'dialog': [
+			"Andrea Starveil.",
+			"She paid me in a story instead of coin.",
+			"Normally I'd refuse. But the story was worth it.",
+			"She's the real thing — joy as an act of defiance in a place that weaponises it.",
+			"Tell her Sylka says the hidden routes are clear.",
+			"She'll know what that means."
+		]
+	},
+	{
+		'npc_id': 'andrea_starveil',
+		'dialog_id': 'andrea_c_first_meet',
+		'dialog': [
+			"Sylka's phrase.",
+			"She doesn't share that with people who aren't worth the route.",
+			"I've been watching your crew move through this place.",
+			"You're not performing survival — you're actually doing it.",
+			"That's the most interesting thing I've seen in months.",
+			"What's next?"
+		]
+	},
+	{
+		'npc_id': 'andrea_starveil',
+		'dialog_id': 'andrea_c_joins',
+		'dialog': [
+			"Morale isn't a luxury.",
+			"It's the difference between a party that breaks and one that doesn't.",
+			"I keep people standing.",
+			"Let me come."
+		]
+	},
 ]
 
 
@@ -125,7 +171,7 @@ TASKS = [
 				'event_type': 'set_npc_standing_text',
 				'params': {
 					'npc_id': 'signalwatch_errol',
-					'standing_text': [ 
+					'standing_text': [
 						"The sea speaks in flags—watch with me and tell me what you spy."
 					]
 				}
@@ -141,21 +187,30 @@ TASKS = [
 				'event_type': 'set_npc_standing_text',
 				'params': {
 					'npc_id': 'runner_sylka',
-					'standing_text': [ 
+					'standing_text': [
 						"Hidden coves have stories—whisper one to me between the waves."
 					]
 				}
-			}
-
+			},
 		],
 		'task_complete_events': [
-            {
-                'event_type': 'award_task',
-                'params': {
-                    'task_id': 'shallows_small_city_meet_errol'
-                }
-            }
-		]		
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'shallows_small_city_meet_errol'
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'shallows_small_city_type_c_find_andrea'
+				},
+				'condition': {
+					'type': 'is_chapter_gte',
+					'params': { 'chapter': 15 }
+				}
+			},
+		]
 	},
 
     # Task 1 — Meet Errol after initialization
@@ -384,11 +439,428 @@ TASKS = [
                 }
             }
         ]
-    }
+    },
+
+	# =========================================================
+	# TYPE C — Andrea Starveil (extended character, slot 2)
+	# Gated by is_chapter_gte: 15
+	# Awarded by: shallows_small_city_initialize (conditional)
+	# =========================================================
+
+	{
+		'task_id': 'shallows_small_city_type_c_find_andrea',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'signalwatch_errol',
+		'task_acquire_events': [
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'signalwatch_errol',
+					'standing_text': [
+						"Strange performer came in on the last tide.",
+						"Joy that actually means something — in this city.",
+						"Sylka knows her."
+					]
+				}
+			},
+		],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'signalwatch_errol',
+					'dialog_id': 'errol_c_andrea_sighting'
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'shallows_small_city_type_c_consult_sylka'
+				}
+			},
+		]
+	},
+	{
+		'task_id': 'shallows_small_city_type_c_consult_sylka',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'runner_sylka',
+		'task_acquire_events': [
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'runner_sylka',
+					'standing_text': [
+						"Errol sent you about the performer.",
+						"I ran her route in. I can tell you everything."
+					]
+				}
+			},
+		],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'runner_sylka',
+					'dialog_id': 'sylka_c_andrea_vouch'
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'shallows_small_city_type_c_earn_andrea'
+				}
+			},
+		]
+	},
+	{
+		'task_id': 'shallows_small_city_type_c_earn_andrea',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'andrea_starveil',
+		'task_acquire_events': [
+			{
+				'event_type': 'create_npc',
+				'params': {
+					'npc_id': 'andrea_starveil',
+					'location': 'region_open_area'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'andrea_starveil',
+					'standing_text': [
+						"The cove has its own rhythm if you listen past the mandate.",
+						"Come find me when you're ready to hear it."
+					]
+				}
+			},
+		],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'andrea_starveil',
+					'dialog_id': 'andrea_c_first_meet'
+				}
+			},
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'andrea_starveil',
+					'dialog_id': 'andrea_c_joins'
+				}
+			},
+			{
+				'event_type': 'hide_npc',
+				'params': { 'npc_id': 'andrea_starveil' }
+			},
+			{
+				'event_type': 'character_join',
+				'params': { 'character_id': 'andrea_starveil' }
+			},
+		]
+	},
 
 ]
 
+# ── Type B ── Ripple / Uul'thar the Tide-Wakened (regional character quest) ───
+# Gated by Ch.20 Void Gauntlet. Ripple feels Uul'thar's geometry re-forming
+# in the Tidekin Cove shallows — the collapse of Oracle and Reliquary has
+# released void-pressure that Uul'thar is absorbing. Creates dungeon in open area.
+# No new NPCs — uses initiate_character_dialog on Ripple exclusively.
 
+NPC_DIALOG += [
+
+	{
+		'npc_id': 'ripple',
+		'dialog_id': 'ripple_b_tide_wrong',
+		'dialog': [
+			"The tide is wrong.",
+			"Not the surface — deeper. The geometry of it.",
+			"Uul'thar mapped every tide in these coves before we stopped him.",
+			"The void's collapse released something. Pressure. A signal.",
+			"He's been absorbing it.",
+			"(very quietly) He doesn't surface on his own. Something called him.",
+			"We have to go back down. Before he finishes reconstructing."
+		]
+	},
+	{
+		'npc_id': 'ripple',
+		'dialog_id': 'ripple_b_entering_maw',
+		'dialog': [
+			"The water remembers him.",
+			"Let it. Let it show us where he is.",
+			"(steadying herself) I am not afraid of this water.",
+			"I just need to keep reminding myself of that."
+		]
+	},
+	{
+		'npc_id': 'uulthar',
+		'dialog_id': 'uulthar_b_risen',
+		'dialog': [
+			"The void gave me clarity.",
+			"I understand the configuration now. Every tide. Every collapse. Every point of failure.",
+			"You are a point of failure.",
+			"I will reconfigure you."
+		]
+	},
+	{
+		'npc_id': 'ripple',
+		'dialog_id': 'ripple_b_victory',
+		'dialog': [
+			"(long exhale) The tide is right again.",
+			"Not the same as before — you can never step in the same tide twice.",
+			"But right.",
+			"He saw the world as a system to be corrected.",
+			"(quietly) Some of us used to think that too.",
+			"The difference is we learned to let the tide be what it is."
+		]
+	},
+
+]
+
+TASKS += [
+
+	# B-0 — Void Gauntlet entry (self-completing gated task)
+	{
+		'task_id': 'shallows_small_city_b_void_gauntlet',
+		'type': 'gated',
+		'task_acquire_events': [
+			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'uulthars_tidal_maw', 'location': 'region_open_area' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_b_tide_wrong' }},
+			{ 'event_type': 'complete_task', 'params': { 'task_id': 'shallows_small_city_b_void_gauntlet' }},
+		],
+		'task_complete_events': [
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'shallows_small_city_b_meet_uulthar' }},
+		]
+	},
+
+	# B-1 — Meet Uul'thar (boss intro)
+	{
+		'task_id': 'shallows_small_city_b_meet_uulthar',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'uulthar',
+		'task_acquire_events': [
+			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'uulthar', 'location': None }},
+			{ 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'uulthars_tidal_maw', 'location': 'final_chamber' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_b_entering_maw' }},
+		],
+		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'uulthar', 'dialog_id': 'uulthar_b_risen' }},
+			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'uulthar_b1', 'combat_type': 'boss_battle' }},
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'shallows_small_city_b_defeat_uulthar' }},
+		]
+	},
+
+	# B-2 — Defeat Uul'thar
+	{
+		'task_id': 'shallows_small_city_b_defeat_uulthar',
+		'type': 'defeat',
+		'to_type': 'mob',
+		'to_id': 'uulthar_b1',
+		'task_acquire_events': [],
+		'task_complete_events': [
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_b_victory' }},
+			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'shallows' }},
+		]
+	},
+
+]
+
+# ── Type D ── Tidecaller's Edge (mythic weapon) ───────────────────────────────
+# Gate: tidekin_seal from shallows_mid_city (Blackwake Bay, Ch.11) — retroactive.
+# Deliver to Diego → Loryth reads the seal → defeat Coveveil Voice → mythic weapon.
+# No new NPCs — uses mist_seer_loryth, coveveil_voice, and diego (Ch.1 party anchor).
+
+NPC_DIALOG += [
+
+	{
+		'npc_id': 'mist_seer_loryth',
+		'dialog_id': 'loryth_d_seal_read',
+		'dialog': [
+			"A Tidekin Seal. I have not seen one surface in this generation.",
+			"The Tidekin were the Cove's first wardens — before signal flags, before runners.",
+			"They sealed their authority into objects like this when they passed on.",
+			"The Coveveil Passage holds the resonance of their final ward.",
+			"The seal is calling it forward.",
+			"The Voice will not release the Tidekin metal willingly.",
+			"But Diego can forge Tidekin iron into something the sea itself cannot blunt."
+		]
+	},
+
+	{
+		'npc_id': 'coveveil_voice',
+		'dialog_id': 'coveveil_voice_d_awakens',
+		'dialog': [
+			"The Tidekin Seal opens what was sealed at their passing.",
+			"Every hidden route, every drowned warning, every smuggled secret — I hold them all.",
+			"The metal at the Passage's heart was theirs.",
+			"You are not Tidekin.",
+			"You will not take what they left here."
+		]
+	},
+
+]
+
+TASKS += [
+
+	# D-0 — Deliver tidekin_seal to Diego (standalone deliver; unlocks D chain)
+	{
+		'task_id': 'shallows_small_city_type_d_deliver_tidekin_seal',
+		'type': 'deliver',
+		'item_id': 'tidekin_seal',
+		'to_type': 'npc',
+		'to_id': 'diego',
+		'gate': {
+			'has_item': 'tidekin_seal'
+		},
+		'task_acquire_events': [
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'diego',
+					'standing_text': [
+						"That seal — the metal it radiates is unlike anything I've handled.",
+						"Old. Dense. Like the sea hardened it deliberately.",
+						"Find Loryth. She reads the mist glyphs here.",
+						"If anything in this cove knows what that seal unlocks, she does."
+					]
+				}
+			},
+		],
+		'task_complete_events': [
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'shallows_small_city_type_d_consult_loryth'
+				}
+			},
+		]
+	},
+
+	# D-1 — Consult Loryth for the seal reading
+	{
+		'task_id': 'shallows_small_city_type_d_consult_loryth',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'mist_seer_loryth',
+		'task_acquire_events': [
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'mist_seer_loryth',
+					'standing_text': [
+						"The mist glyphs changed the moment you arrived.",
+						"They are spelling a name I have not read in years.",
+						"Tidekin. Come — before the Passage notices what you carry."
+					]
+				}
+			},
+		],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'mist_seer_loryth',
+					'dialog_id': 'loryth_d_seal_read'
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'shallows_small_city_type_d_meet_coveveil_voice'
+				}
+			},
+		]
+	},
+
+	# D-2 — Meet the Coveveil Voice (boss intro)
+	{
+		'task_id': 'shallows_small_city_type_d_meet_coveveil_voice',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'coveveil_voice',
+		'task_acquire_events': [
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'coveveil_voice',
+					'standing_text': [
+						"The Coveveil Passage hums with a resonance deeper than fog.",
+						"Sylka says the hidden routes have all gone cold — even the ones she runs blindfolded.",
+						"The Tidekin Seal has drawn the Voice to the surface."
+					]
+				}
+			},
+		],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'coveveil_voice',
+					'dialog_id': 'coveveil_voice_d_awakens'
+				}
+			},
+			{
+				'event_type': 'begin_combat',
+				'params': {
+					'boss_mob_id': 'coveveil_voice_1',
+					'combat_type': 'boss_encounter'
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'shallows_small_city_type_d_defeat_coveveil_voice'
+				}
+			},
+		]
+	},
+
+	# D-3 — Defeat the Coveveil Voice; Diego forges the mythic weapon
+	{
+		'task_id': 'shallows_small_city_type_d_defeat_coveveil_voice',
+		'type': 'defeat',
+		'to_type': 'mob',
+		'to_id': 'coveveil_voice_1',
+		'task_acquire_events': [],
+		'task_complete_events': [
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'mythic_shallows_small_tidecaller_edge'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'diego',
+					'standing_text': [
+						"Tidekin iron — it doesn't rust, doesn't dull, and it knows where the current is before you do.",
+						"I've worked it into the blade.",
+						"The sea forged this metal once. I just finished the job."
+					]
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'mist_seer_loryth',
+					'standing_text': [
+						"The mist glyphs read clearly again.",
+						"Every hidden route the Voice sealed has opened.",
+						"Sylka says the cove-runners can move freely."
+					]
+				}
+			},
+		]
+	},
+
+]
 
 PRIMARY_STORY_SETTINGS = {
     'story_id': 'shallows_small_city_story',

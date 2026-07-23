@@ -104,7 +104,87 @@ NPC_DIALOG = [
             "You’ve restored the paths the mire tried to swallow.",
             "Travelers will owe you their lives."
         ]
-    }
+    },
+
+	# ── Type C dialogs — Ghost ──────────────────────────────────────
+	{
+		'npc_id': 'bogrunner_tavik',
+		'dialog_id': 'tavik_c_ghost_sighting',
+		'dialog': [
+			"Someone moves through the night channels.",
+			"No boat. No wake until they're already gone.",
+			"Madra's clocked them twice near the Hideaway entrance.",
+			"Whoever it is — they're not hiding from the swamp.",
+			"They're hiding from us."
+		]
+	},
+	{
+		'npc_id': 'rotwharf_madra',
+		'dialog_id': 'madra_c_ghost_vouch',
+		'dialog': [
+			"I've seen every kind of shadow pass through Hollow.",
+			"Bounty hunters, deserters, couriers running black-market routes.",
+			"This one's different.",
+			"They move like the dark owes them a favour.",
+			"I caught a name once. Ghost.",
+			"They don't move for coin or cause.",
+			"Find out what they're watching — that might earn you a word."
+		]
+	},
+	{
+		'npc_id': 'ghost',
+		'dialog_id': 'ghost_c_first_meet',
+		'dialog': [
+			"You weren't followed.",
+			"Good.",
+			"I've been watching your party since the Riftlands.",
+			"You operate quietly.",
+			"That's worth something in Hollow.",
+			"Say what you want."
+		]
+	},
+	{
+		'npc_id': 'ghost',
+		'dialog_id': 'ghost_c_joins',
+		'dialog': [
+			"The swamp runs on favours and silence.",
+			"You've earned both.",
+			"I move when I decide. You point the direction.",
+			"That's the arrangement."
+		]
+	},
+
+	# ── Type A dialogs — Ch.7 Airship Tie-In ───────────────────────
+	{
+		'npc_id': 'bogrunner_tavik',
+		'dialog_id': 'tavik_a_channel_check',
+		'dialog': [
+			"Something big is moving through the upper channels — airship-scale displacement.",
+			"If Seth tries to lift off before the mire settles, the suction will collapse three routes.",
+			"Get Draveth to read the current-signs.",
+			"If he clears it, the swamp can handle the departure."
+		]
+	},
+	{
+		'npc_id': 'channel_seer_draveth',
+		'dialog_id': 'draveth_a_clearance',
+		'dialog': [
+			"The channels are restless — they feel the engine pressure from the outpost.",
+			"But the flow holds.",
+			"Mire absorption rate is high enough to handle the displacement.",
+			"Tell Madra the current-signs confirm it. She'll relay to Seth."
+		]
+	},
+	{
+		'npc_id': 'rotwharf_madra',
+		'dialog_id': 'madra_a_network_clear',
+		'dialog': [
+			"Draveth's read is in.",
+			"My network's gone quiet — no bounties filed, no interference flagged.",
+			"Hollow's clear.",
+			"Tell Seth he can lift off."
+		]
+	},
 
 ]
 
@@ -125,7 +205,7 @@ TASKS = [
 				'event_type': 'set_npc_standing_text',
 				'params': {
 					'npc_id': 'bogrunner_tavik',
-					'standing_text': [ 
+					'standing_text': [
 						"The channels whisper secrets—ride with me and tell what the swamp showed you."
 					]
 				}
@@ -141,21 +221,21 @@ TASKS = [
 				'event_type': 'set_npc_standing_text',
 				'params': {
 					'npc_id': 'rotwharf_madra',
-					'standing_text': [ 
+					'standing_text': [
 						"Hollow's shadows remember faces—stay and tell me what brought you here."
 					]
 				}
-			}
-
+			},
 		],
 		'task_complete_events': [
-            {
-                'event_type': 'award_task',
-                'params': {
-                    'task_id': 'swamp_small_city_regional_complete_gate'
-                }
-            }
-		]		
+            { 'event_type': 'award_task', 'params': { 'task_id': 'swamp_small_city_type_a_ch7_find_pendant' }},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'swamp_small_city_regional_complete_gate'
+				}
+			}
+		]
 	},
     {
         'task_id': 'swamp_small_city_regional_complete_gate',
@@ -167,7 +247,13 @@ TASKS = [
                 'params': {
                     'task_id': 'swamp_small_city_meet_tavik'
                 }
-            }
+            },
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'swamp_small_city_type_c_find_ghost'
+				}
+			}
         ]
 
     },
@@ -398,7 +484,205 @@ TASKS = [
                 }
             }
         ]
-    }
+    },
+
+    # ── Type D ── Rotfen Dredge Blade (mythic weapon) ─────────────────────────────
+    # Gate: player holds bayou_memory_vessel from the Ch.20 Type E chain (retroactive).
+    # Deliver to Diego → Draveth reads the vessel → defeat Rotfen Voice → mythic weapon.
+    # No new NPCs — uses channel_seer_draveth, rotfen_voice, and diego (Ch.1 party anchor).
+
+    {
+        'task_id': 'swamp_small_city_type_d_deliver_memory_vessel',
+        'type': 'deliver',
+        'item_id': 'bayou_memory_vessel',
+        'to_type': 'npc',
+        'to_id': 'diego',
+        'gate': {
+            'has_item': 'bayou_memory_vessel'
+        },
+        'task_acquire_events': [
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'diego',
+                    'standing_text': [
+                        "That vessel — the clay holds a forge-resonance I've never felt from a swamp relic.",
+                        "There's metal inside the Hollow that only this thing can unlock.",
+                        "Find Draveth. He reads the channels — he'll know where the resonance leads."
+                    ]
+                }
+            },
+		],
+        'task_complete_events': [
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'swamp_small_city_type_d_consult_draveth'
+                }
+            },
+		]
+    },
+
+	# D-1 — Consult Draveth for the channel reading
+	{
+		'task_id': 'swamp_small_city_type_d_consult_draveth',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'channel_seer_draveth',
+		'task_acquire_events': [
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'channel_seer_draveth',
+					'standing_text': [
+						"The current-signs surged the moment that vessel crossed the Hollow's edge.",
+						"The Bayou's memory doesn't belong here — and the Rotfen Voice knows it.",
+						"Come quickly. The Hideaway won't stay open long."
+					]
+				}
+			},
+		],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'channel_seer_draveth',
+					'dialog_id': 'draveth_d_vessel_read'
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'swamp_small_city_type_d_meet_rotfen_voice'
+				}
+			},
+		]
+	},
+
+	# D-2 — Meet the Rotfen Voice (boss intro)
+	{
+		'task_id': 'swamp_small_city_type_d_meet_rotfen_voice',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'rotfen_voice',
+		'task_acquire_events': [
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'rotfen_voice',
+					'standing_text': [
+						"The mire thickens near the Hideaway entrance.",
+						"Tavik says no one who entered last season ever surfaced.",
+						"The vessel has agitated whatever lives in the deep rot."
+					]
+				}
+			},
+		],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'rotfen_voice',
+					'dialog_id': 'rotfen_voice_d_awakens'
+				}
+			},
+			{
+				'event_type': 'begin_combat',
+				'params': {
+					'boss_mob_id': 'rotfen_voice_1',
+					'combat_type': 'boss_encounter'
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'swamp_small_city_type_d_defeat_rotfen_voice'
+				}
+			},
+		]
+	},
+
+	# D-3 — Defeat the Rotfen Voice; Diego forges the mythic weapon
+	{
+		'task_id': 'swamp_small_city_type_d_defeat_rotfen_voice',
+		'type': 'defeat',
+		'to_type': 'mob',
+		'to_id': 'rotfen_voice_1',
+		'task_acquire_events': [],
+		'task_complete_events': [
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'mythic_swamp_small_rotfen_dredge_blade'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'diego',
+					'standing_text': [
+						"The swamp-iron the Voice guarded — it's unlike any metal I've handled.",
+						"I've worked it into the blade. It knows every route the swamp has ever swallowed.",
+						"You won't get lost carrying this."
+					]
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'channel_seer_draveth',
+					'standing_text': [
+						"The current-signs flow clean again.",
+						"Every route the Voice devoured has returned.",
+						"Tavik can run the channels safely now."
+					]
+				}
+			},
+		]
+	},
+
+]
+
+# ── Type A ── Ch.7 Chapter Tie-In (Lyren's Vale Pendant) ─────────────────────
+# Awarded when Lyren is met in Ch.7. Tavik recovered the pendant from a
+# sunken skiff in the channels — he's been waiting to hand it to someone
+# who might know its owner. No new NPCs — Tavik is in the city seed.
+
+NPC_DIALOG += [
+
+    {
+        'npc_id': 'bogrunner_tavik',
+        'dialog_id': 'tavik_a_ch7_pendant',
+        'dialog': [
+            "Pulled this out of a sunken skiff three weeks ago.",
+            "Silver pendant. Delicate work — not from around here.",
+            "The skiff had a name burned into the hull: Vale.",
+            "I've been asking around but nobody claimed it.",
+            "(holds it out) You look like people who travel. Maybe you know someone."
+        ]
+    },
+
+]
+
+TASKS += [
+
+    # A-1 — Meet Tavik to recover the Vale Pendant
+    {
+        'task_id': 'swamp_small_city_type_a_ch7_find_pendant',
+        'type': 'meet',
+        'to_type': 'npc',
+        'to_id': 'bogrunner_tavik',
+        'task_acquire_events': [
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'bogrunner_tavik', 'standing_text': [
+                "Found something in the channels that doesn't belong to anyone around here.",
+                "Silver pendant. Someone out there's missing it."
+            ]}},
+        ],
+        'task_complete_events': [
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'bogrunner_tavik', 'dialog_id': 'tavik_a_ch7_pendant' }},
+            { 'event_type': 'award_item', 'params': { 'item_id': 'vale_pendant' }},
+        ]
+    },
 
 ]
 

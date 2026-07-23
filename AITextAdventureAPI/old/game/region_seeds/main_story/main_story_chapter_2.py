@@ -28,7 +28,7 @@ NPCS = [
           "growth_line": "Moves to Type 2 — Uses her power and resources to protect and empower those she deems worthy, showing a hidden capacity for loyalty.",
           "instinctual_variant": "sx/sp — Forms intense, controlling one-on-one alliances, using seduction and power to ensure her security."
         },
-        'image': 'npcs:mira1'
+		'image': 'npcs:mira1'
 	},
 	{
 		'npc_id': 'leera',
@@ -54,7 +54,7 @@ NPCS = [
           "growth_line": "Moves to Type 1 — Becomes more objective and principled, acting on her wisdom rather than just feeling it.",
           "instinctual_variant": "sp/sx — Protects her unique identity by withdrawing into her world of lore, sharing it only in intense, meaningful interactions."
         },
-        'image': 'npcs:leera1'
+		'image': 'npcs:leera1'
 	},
 	{
 		'npc_id': 'juno',
@@ -80,7 +80,7 @@ NPCS = [
           "growth_line": "Moves to Type 6 — Becomes more cooperative and committed to others, finding value beyond her own success.",
           "instinctual_variant": "so/sx — Craves admiration and status within her social circle, using her charm to win high-stakes games and relationships."
         },
-        'image': 'npcs:juno1'
+		'image': 'npcs:juno1'
 	},
 	{
 		'npc_id': 'kess_thornwrite',
@@ -1027,6 +1027,7 @@ TASKS = [
 				}
 			},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'abandoned_ruin_ch2', 'item_id': 'grove_lattice', 'location': 'treasure_room'}},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'abandoned_ruin_ch2', 'item_id': 'veil_memory_leaf', 'location': 'treasure_room'}},
 			#{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'abandoned_ruin_ch2', 'item_id': 'coreforge_shard', 'location': 'treasure_room'}},
 			{
 				'event_type': 'award_task',

@@ -712,7 +712,8 @@ TASKS = [
         'task_acquire_events': [
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'glamour', 'location': None }},
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'scalpel', 'location': None }},
-            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'theatre_of_echoed_faces', 'location': 'region_city_open_area' }}
+            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'theatre_of_echoed_faces', 'location': 'region_city_open_area' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'theatre_of_echoed_faces', 'item_id': 'ink_resonance_vial', 'location': 'final_chamber' }},
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch8_glamour_intro' }},

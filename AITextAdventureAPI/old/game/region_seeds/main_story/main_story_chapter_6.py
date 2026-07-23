@@ -467,7 +467,37 @@ NPC_DIALOG = [
         'dialog': [
             "Seven? Easy. I'll do eight just to show off."
         ]
-    }
+    },
+    # ── Type A hook dialogs ────────────────────────────────────────
+    {
+        'npc_id': 'seth',
+        'dialog_id': 'seth_ch6_local_errand',
+        'dialog': [
+            "Before I hand you off to my contact — I need something from you first.",
+            "Karrek Windbreak. Watchman stationed at the outpost's storm post.",
+            "He's been tracking something in those hollow wind-channels near the breach site.",
+            "I can't brief my contact properly without knowing what Karrek saw.",
+            "Talk to him. Come back to me with what he found."
+        ]
+    },
+    {
+        'npc_id': 'seth',
+        'dialog_id': 'seth_ch6_still_waiting',
+        'dialog': [
+            "You talk to Karrek yet?",
+            "I need that storm report before I can send you to my contact.",
+            "He's at the storm post. Won't take long."
+        ]
+    },
+    {
+        'npc_id': 'seth',
+        'dialog_id': 'seth_ch6_karrek_done',
+        'dialog': [
+            "Good. That's what I needed.",
+            "Now I can brief him properly.",
+            "My contact's at the city outskirts bar. His name's Rhett. Tell him Seth sent you."
+        ]
+    },
 ]
 
 TASKS = [
@@ -490,9 +520,30 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch6_after_seth_reveal' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_kaera_gets_it' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch6_to_seth' }},
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_contact_intro' }},
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'seth', 'standing_text': ["I have a contact who can help you investigate the breach. Meet him at the city outskirts bar."]}},
-            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch6_meet_seth_local_contact' }}
+            # ── Type A hook: Seth sends them to Karrek before handing off contact ──
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_local_errand' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'seth', 'standing_text': ["Talk to Karrek at the storm post first. Then I'll send you to my contact."]}},
+            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch6_check_back_with_seth' }},
+        ]
+    },
+    # ── New task: check back with Seth after Karrek ─────────────────
+    {
+        'task_id': 'main_story_ch6_check_back_with_seth',
+        'type': 'meet',
+        'to_type': 'npc',
+        'to_id': 'seth',
+        'task_acquire_events': [],
+        'task_complete_events': [
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_still_waiting' },
+              'condition': { 'type': 'is_task_not_active', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
+            { 'event_type': 'remove_task', 'params': { 'task_id': 'main_story_ch6_check_back_with_seth' },
+              'condition': { 'type': 'is_task_not_active', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
+            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch6_check_back_with_seth' },
+              'condition': { 'type': 'is_task_not_active', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_karrek_done' },
+              'condition': { 'type': 'is_task_completed', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
+            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch6_meet_seth_local_contact' },
+              'condition': { 'type': 'is_task_completed', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
         ]
     },
     {

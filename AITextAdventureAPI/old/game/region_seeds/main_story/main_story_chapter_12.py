@@ -434,7 +434,34 @@ NPC_DIALOG = [
         'dialog': [
             "(nodding slowly) Then go. I'll be here... trying to remember how to play without her echo in my head."
         ]
-    }
+    },
+    # ── Type A hook dialogs ────────────────────────────────────────
+    {
+        'npc_id': 'rell',
+        'dialog_id': 'rell_ch12_ember_keepsake_request',
+        'dialog': [
+            "(voice low, not quite looking at you)",
+            "Before you go... there's something I've been trying to find.",
+            "Ember kept a small keepsake — a pressed flower she carried everywhere.",
+            "She said it was from the first meadow she ever performed in.",
+            "After she... I couldn't find it.",
+            "If it's anywhere, it's somewhere in the hollow. The fields around Quantford.",
+            "I know it's a small thing. But right now small things are all I have left of her."
+        ]
+    },
+    {
+        'npc_id': 'rell',
+        'dialog_id': 'rell_ch12_receives_keepsake',
+        'dialog': [
+            "(stares at the flower for a long moment)",
+            "This is it.",
+            "(his hands shake slightly as he takes it)",
+            "She pressed it herself. Told me the petals kept their colour because the meadow wanted to be remembered.",
+            "(quietly) She was right about a lot of things.",
+            "Thank you for finding it.",
+            "(steadies himself) Now. You have to go. Don't let her sacrifice mean nothing."
+        ]
+    },
 ]
 
 TASKS = [
@@ -535,7 +562,13 @@ TASKS = [
         'type': 'meet',
         'to_type': 'npc',
         'to_id': 'rell',
-        'task_acquire_events': [],
+        'task_acquire_events': [
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rell', 'standing_text': [
+                "Ember kept a pressed flower from the first meadow she ever performed in.",
+                "I haven't been able to find it. If it's anywhere, it's out in the hollow fields.",
+                "...Please. If you find it, bring it to me before you leave."
+            ]}}
+        ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_final_request' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch12_to_rell_final' }},
@@ -543,10 +576,26 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch12_to_rell_final' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch12_to_rell_final' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch12_to_rell_final' }},
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_ember_keepsake_request' }},
+            # ── Type A: award city chain + the deliver task back here ──
+            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch12_deliver_ember_keepsake_to_rell' }},
+        ]
+    },
+    # ── New task: deliver Ember's keepsake ─────────────────────────
+    {
+        'task_id': 'main_story_ch12_deliver_ember_keepsake_to_rell',
+        'type': 'deliver',
+        'item_id': 'embers_pressed_flower',
+        'to_type': 'npc',
+        'to_id': 'rell',
+        'task_acquire_events': [],
+        'task_complete_events': [
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_receives_keepsake' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_farewell' }},
+            { 'event_type': 'remove_item', 'params': { 'item_id': 'embers_pressed_flower' }},
             { 'event_type': 'advance_chapter' }
         ]
-    }
+    },
 ]
 
 PRIMARY_STORY_SETTINGS = {

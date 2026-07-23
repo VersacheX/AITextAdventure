@@ -260,7 +260,41 @@ NPC_DIALOG = [
 		'dialog': [
 			"Living memory architecture... I have so many questions."
 		]
-	}
+	},
+	# ── Type A hook dialogs ────────────────────────────────────────
+    {
+        'npc_id': 'velka',
+        'dialog_id': 'velka_ch18_map_unstable',
+        'dialog': [
+            "I can't give you a location. Not yet.",
+            "The map is rewriting itself faster than I can read it.",
+            "(tracing her finger across shifting lines)",
+            "There's one anchor point that isn't moving — a fixed memory somewhere in the forest exchange.",
+            "The living wood holds it. Something that doesn't collapse the way everything else does.",
+            "Find me that anchor and I can lock the map long enough to give you a real entry point.",
+            "Without it... you'd be walking into the mind of a city that's already erased itself."
+        ]
+    },
+    {
+        'npc_id': 'velka',
+        'dialog_id': 'velka_ch18_still_shifting',
+        'dialog': [
+            "Still shifting.",
+            "The anchor — did you find it yet?",
+            "I can't hold the map open much longer."
+        ]
+    },
+    {
+        'npc_id': 'velka',
+        'dialog_id': 'velka_ch18_anchor_received',
+        'dialog': [
+            "(pressing the anchor against the map — the lines stop moving for the first time)",
+            "There.",
+            "Look. The lines are locked. That point — (points on the map) — that's where it is.",
+            "If you go in there, you are walking into the mind of a world that has decided it should not exist.",
+            "That's your entry."
+        ]
+    },
 ]
 
 TASKS = [
@@ -298,18 +332,26 @@ TASKS = [
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch18_meet_velka' }}
 		]
 	},
-	{
-		'task_id': 'main_story_ch18_meet_velka',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'velka',
-		'task_acquire_events': [],
-		'task_complete_events': [
-			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'velka', 'dialog_id': 'velka_ch18_map_reading' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch18_reason_to_reconsider' }},
-			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch18_meet_cataclysm' }}
-		]
-	},
+    {
+        'task_id': 'main_story_ch18_meet_velka',
+        'type': 'meet',
+        'to_type': 'npc',
+        'to_id': 'velka',
+        'task_acquire_events': [],
+        'task_complete_events': [
+            # ── Map unstable: send to city chain, loop until anchor found ──
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'velka', 'dialog_id': 'velka_ch18_map_unstable' }},
+            { 'event_type': 'remove_task', 'params': { 'task_id': 'main_story_ch18_meet_velka' }},
+            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch18_meet_velka' }},
+            # ── Anchor in hand: lock the map, proceed ──
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'velka', 'dialog_id': 'velka_ch18_anchor_received' },
+              'condition': { 'type': 'is_task_completed', 'params': { 'task_id': 'forest_large_city_type_a_ch18_find_anchor' }}},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch18_reason_to_reconsider' },
+              'condition': { 'type': 'is_task_completed', 'params': { 'task_id': 'forest_large_city_type_a_ch18_find_anchor' }}},
+            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch18_meet_cataclysm' },
+              'condition': { 'type': 'is_task_completed', 'params': { 'task_id': 'forest_large_city_type_a_ch18_find_anchor' }}},
+        ]
+    },
 	{
 		'task_id': 'main_story_ch18_meet_cataclysm',
 		'type': 'meet',
@@ -374,3 +416,38 @@ PRIMARY_STORY_SETTINGS = {
 	'npc_dialog': NPC_DIALOG,
 	'attainable_player_characters': ATTAINABLE_PLAYER_CHARACTERS,
 }
+
+# ── Type A hook dialogs ────────────────────────────────────────
+{
+    'npc_id': 'velka',
+    'dialog_id': 'velka_ch18_map_unstable',
+    'dialog': [
+        "I can't give you a location. Not yet.",
+        "The map is rewriting itself faster than I can read it.",
+        "(tracing her finger across shifting lines)",
+        "There's one anchor point that isn't moving — a fixed memory somewhere in the forest exchange.",
+        "The living wood holds it. Something that doesn't collapse the way everything else does.",
+        "Find me that anchor and I can lock the map long enough to give you a real entry point.",
+        "Without it... you'd be walking into the mind of a city that's already erased itself."
+    ]
+},
+{
+    'npc_id': 'velka',
+    'dialog_id': 'velka_ch18_still_shifting',
+    'dialog': [
+        "Still shifting.",
+        "The anchor — did you find it yet?",
+        "I can't hold the map open much longer."
+    ]
+},
+{
+    'npc_id': 'velka',
+    'dialog_id': 'velka_ch18_anchor_received',
+    'dialog': [
+        "(pressing the anchor against the map — the lines stop moving for the first time)",
+        "There.",
+        "Look. The lines are locked. That point — (points on the map) — that's where it is.",
+        "If you go in there, you are walking into the mind of a world that has decided it should not exist.",
+        "That's your entry."
+    ]
+},

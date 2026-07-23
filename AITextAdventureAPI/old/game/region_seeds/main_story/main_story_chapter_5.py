@@ -562,7 +562,8 @@ TASKS = [
         'to_id': 'static_wraith',
         'task_acquire_events': [
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'static_wraith', 'location': None }},
-            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'stormglass_alley', 'location': 'region_city_open_area' }}
+            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'stormglass_alley', 'location': 'region_city_open_area' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'stormglass_alley', 'item_id': 'corsair_tide_fragment', 'location': 'final_chamber' }}
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch5_static_wraiths' }},

@@ -13,6 +13,7 @@ class TaskType(str, Enum):
     Defeat = "defeat"
     CompleteIntroStory = "complete_intro_story"
     CompleteRegionalQuests = "complete_regional_quests"
+    CompleteRegionalQuests2 = "complete_regional_quests_2"
     Gated = "gated"
 
 
@@ -147,6 +148,7 @@ class TaskEventType(str, Enum):
     SET_PLAYER_IN_DUNGEON = "set_player_in_dungeon"
     REMOVE_PLAYER_FROM_DUNGEON = "remove_player_from_dungeon"
     COMPLETE_REGION_QUEST = "complete_region_quest"
+    COMPLETE_REGION_QUEST_2 = "complete_region_quest_2"
     SET_NPC_MET = "set_npc_met"
     SET_AIRCRAFT = "set_aircraft"
     ALLOW_OCEAN_FLIGHT = 'allow_ocean_flight'
@@ -328,6 +330,16 @@ class CompleteRegionalQuestsTask(Task):
         super().__init__(task_id)
         self.type = TaskType.CompleteRegionalQuests
 
+class CompleteRegionalQuests2Task(Task):
+    def __init__(self, task_id: str):
+        super().__init__(task_id)
+        self.type = TaskType.CompleteRegionalQuests2
+
+    def check_completion_terms(self, player_game=None) -> bool:
+        if player_game is None:
+            return False
+        return player_game.check_regional_quests_2_complete()
+
 class GatedTask(Task):
     """A task that completes only when explicitly triggered via a complete_task event.
 
@@ -362,6 +374,8 @@ def build_task_from_seed(seed: Dict[str, Any], acquired_region: Any) -> Task:
         task = CompleteIntroStoryTask(tid)
     elif ttype == 'complete_regional_quests':
         task = CompleteRegionalQuestsTask(tid)
+    elif ttype == 'complete_regional_quests_2':
+        task = CompleteRegionalQuests2Task(tid)
     elif ttype == 'gated':
         task = GatedTask(tid)
     else:

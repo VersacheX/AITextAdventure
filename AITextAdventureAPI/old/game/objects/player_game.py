@@ -67,6 +67,7 @@ class PlayerGame:
 		self.final_character: str = None # npc/character id of the final character in the story
 		self.intro_complete: bool = False
 		self.completed_regional_quests: List[str] = [] # list of region ids where regional quests have been completed
+		self.completed_regional_quests_2: List[str] = [] # list of region ids where Type B regional quests have been completed
 		self.random_encounter_timer: int = random.randint(5,15) # timer for random encounters, counts down with player movement
 		self.inside_aircraft: bool = False # whether the player is currently inside the aircraft
 		self.phased: bool = False # whether the player is currently phased (e.g. introduced later in the game allowing the player overworld movement without encounters)
@@ -197,8 +198,20 @@ class PlayerGame:
 				if task.type == TaskType.CompleteRegionalQuests and not task.completed:
 					self.complete_task(task)
 
+	def complete_region_quest_2(self, region_id: str):
+		if region_id not in self.completed_regional_quests_2:
+			self.completed_regional_quests_2.append(region_id)
+
+		if self.check_regional_quests_2_complete():
+			for task in self.tasks:
+				if task.type == TaskType.CompleteRegionalQuests2 and not task.completed:
+					self.complete_task(task)
+
 	def check_regional_quests_complete(self):
 		return len(self.completed_regional_quests) >= len(const.REGIONAL_QUEST_REGIONS)
+
+	def check_regional_quests_2_complete(self):
+		return len(self.completed_regional_quests_2) >= len(const.REGIONAL_QUEST_REGIONS)
 
 	def complete_intro_story(self):
 		# check all tasks for task type CompleteIntroStory
@@ -278,6 +291,9 @@ class PlayerGame:
 			if task.check_completion_terms(self):
 				self.complete_task(task)
 		if task.type == TaskType.CompleteRegionalQuests:
+			if task.check_completion_terms(self):
+				self.complete_task(task)
+		if task.type == TaskType.CompleteRegionalQuests2:
 			if task.check_completion_terms(self):
 				self.complete_task(task)
 
@@ -1404,6 +1420,8 @@ class PlayerGame:
 			'intro_max_cities': 4,
 			'hyperway_unlocked': False,
 			'option_dialog': None,
+			'completed_regional_quests': [],
+			'completed_regional_quests_2': [],
 		}
 
 		for k, v in defaults.items():

@@ -1,4 +1,4 @@
-# ============================================================
+﻿# ============================================================
 # = CHAPTER 20 : FALL OF TIME
 # ============================================================
 #
@@ -652,7 +652,15 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'marlo_finch', 'dialog_id': 'marlo_finch_ch20_bracelet_first' }},
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'bracelet_of_void' }},
 			{ 'event_type': 'unlock_hyperway' },
-			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_meet_curator_lysa' }}
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_meet_curator_lysa' }},
+			# ── Type B chains come online here ────────────────────────────
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'desert_mid_city_b_void_gauntlet' }},
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'grassland_large_city_b_void_gauntlet' }},
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'swamp_large_city_b_void_gauntlet' }},
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'shallows_small_city_b_void_gauntlet' }},
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'mountains_mid_city_b_void_gauntlet' }},
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'forest_large_city_b_void_gauntlet' }},
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'snow_large_city_b_void_gauntlet' }},
 		]
 	},
 	{
@@ -667,7 +675,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch20_memory_tonic_good' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch20_degradation_loop' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_kess_thornwrite' }},
-			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_deliver_memory_tonic_to_curator_lysa' }},
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_complete_regional_quest_2_lock' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_meet_kess_for_memory_tonic' }}
 		]
 	},
@@ -713,7 +721,16 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'kess_thornwrite', 'dialog_id': 'kess_ch20_forgotten_promises' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_exactly_needs' }},
 			{ 'event_type': 'remove_item', 'params': { 'item_id': 'forgotten_promises' }},
-			{ 'event_type': 'award_item', 'params': { 'item_id': 'memory_tonic_ch20' }},
+			{ 'event_type': 'award_item', 'params': { 'item_id': 'memory_tonic_ch20' }}
+		]
+	},
+	{ #AND THIS EVENT HERE IS THE CLOSER ENSURING THE PLAYERS DO THE REGIONALS DURING THIS CHAPTER
+		'task_id': 'main_story_ch20_complete_regional_quest_2_lock',
+		'type': 'complete_regional_quests_2',
+		'task_acquire_events': [
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'curator_lysa', 'standing_text': ["Something feels unresolved... like echoes of the world still crying out. I can feel it."] }}
+		],
+		'task_complete_events': [
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_deliver_memory_tonic_to_curator_lysa' }}
 		]
 	},
