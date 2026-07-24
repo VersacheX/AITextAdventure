@@ -448,6 +448,8 @@ class TimelineDetailPanel(Widget):
             yield Static("\n".join(header_lines))
 
         # ── Integrity section ─────────────────────────────────────────
+        info_item_ids: set = set()
+
         with Vertical(classes="tl-section"):
             if not node.errors:
                 yield Static("Integrity: [green]OK[/green]", classes="tl-section-header")

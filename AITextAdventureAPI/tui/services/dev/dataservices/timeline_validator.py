@@ -134,6 +134,11 @@ R17 DELIVER_ITEM_NOT_REMOVED  (warning)
     adding remove_item to task_complete_events, or ignore if the NPC
     is designed to inspect and return the item.
 
+R18 NPC_OPEN_AREA_PLACEMENT  (warning)
+    create_npc or show_npc places an NPC at ``region_open_area`` or
+    ``region_city_open_area``.  These are valid locations but broad — flag as a
+    reminder to confirm the placement is intentional and not a placeholder.
+
 """
 from __future__ import annotations
 
@@ -859,6 +864,16 @@ def validate_timeline_integrity(
                 npc_id = str(params.get("npc_id") or params.get("id") or "")
                 if npc_id:
                     created_npc_ids.add(npc_id)
+                location = str(params.get("location") or "")
+                if location in ("region_open_area", "region_city_open_area"):
+                    errors_map[task_id].append(_err(
+                        "NPC_OPEN_AREA_PLACEMENT",
+                        f"create_npc for '{npc_id or '?'}' uses broad location "
+                        f"'{location}' — confirm this is intentional and not a placeholder.",
+                        event_type=raw_type,
+                        related_entity_id=npc_id,
+                        severity="warning",
+                    ))
 
             elif raw_type == "create_character_npc":
                 # Fills a dynamic character slot (pending/final/twisted).
@@ -877,7 +892,18 @@ def validate_timeline_integrity(
                             event_type=raw_type,
                             related_entity_id=npc_id,
                         ))
-
+                # R18: broad open-area placement on show_npc
+                if raw_type == "show_npc":
+                    location = str(params.get("location") or "")
+                    if location in ("region_open_area", "region_city_open_area"):
+                        errors_map[task_id].append(_err(
+                            "NPC_OPEN_AREA_PLACEMENT",
+                            f"show_npc for '{npc_id or '?'}' uses broad location "
+                            f"'{location}' — confirm this is intentional and not a placeholder.",
+                            event_type=raw_type,
+                            related_entity_id=npc_id,
+                            severity="warning",
+                        ))
             elif raw_type == "character_join":
                 char_id = str(params.get("character_id") or "")
                 if char_id and char_id not in known_npc_ids:
