@@ -690,7 +690,226 @@ TASKS += [
 
 ]
 
+TASKS += [
 
+	# =========================================================
+	# TYPE C — Ghost (extended character, slot 2)
+	# Gated by is_chapter_gte: 7
+	# Awarded by: swamp_small_city_regional_complete_gate (conditional)
+	# Chain: tavik reports sighting → madra vouches → meet Ghost → Ghost joins
+	# Ghost is the reward — not a guide. No new NPCs beyond Ghost.
+	# =========================================================
+
+	# C-1 — Tavik reports the mysterious figure in the night channels
+	{
+		'task_id': 'swamp_small_city_type_c_find_ghost',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'bogrunner_tavik',
+		'task_acquire_events': [
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'bogrunner_tavik',
+					'standing_text': [
+						"Someone moves through the night channels without a boat.",
+						"No wake. No sound until they're already gone.",
+						"You should hear this from me directly."
+					]
+				}
+			},
+		],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'bogrunner_tavik',
+					'dialog_id': 'tavik_c_ghost_sighting'
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'swamp_small_city_type_c_madra_vouch'
+				}
+			},
+		]
+	},
+
+	# C-2 — Madra gives the name and the lead
+	{
+		'task_id': 'swamp_small_city_type_c_madra_vouch',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'rotwharf_madra',
+		'task_acquire_events': [
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'rotwharf_madra',
+					'standing_text': [
+						"Tavik sent you. Good — I've clocked this shadow twice near the Hideaway entrance.",
+						"I've got a name. Come ask."
+					]
+				}
+			},
+		],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'rotwharf_madra',
+					'dialog_id': 'madra_c_ghost_vouch'
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'swamp_small_city_type_c_meet_ghost'
+				}
+			},
+		]
+	},
+
+	# C-3 — Meet Ghost; Ghost joins the party
+	{
+		'task_id': 'swamp_small_city_type_c_meet_ghost',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'ghost',
+		'task_acquire_events': [
+			{
+				'event_type': 'create_npc',
+				'params': {
+					'npc_id': 'ghost',
+					'location': 'region_open_area'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'ghost',
+					'standing_text': [
+						"A figure stands perfectly still in the shadow of the Hideaway entrance.",
+						"They watched you arrive without moving."
+					]
+				}
+			},
+		],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'ghost',
+					'dialog_id': 'ghost_c_first_meet'
+				}
+			},
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'ghost',
+					'dialog_id': 'ghost_c_joins'
+				}
+			},
+			{
+				'event_type': 'character_join',
+				'params': {
+					'character_id': 'ghost'
+				}
+			},
+		]
+	},
+
+]
+
+TASKS += [
+
+	# =========================================================
+	# TYPE A — Ch.7 Airship Channel Clearance
+	# Seth cannot lift off safely until the swamp channels are read.
+	# Awarded by: swamp_small_city_regional_complete_gate
+	# Chain: read current-signs with Draveth → relay clearance to Madra
+	# No new NPCs — Draveth and Madra are both in the city seed.
+	# advance_chapter is handled by the pendant chain (swamp_small_city_type_a_ch7_find_pendant)
+	# =========================================================
+
+	# A-1 — Find Draveth for the channel reading
+	{
+		'task_id': 'swamp_small_city_type_a_channel_check',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'channel_seer_draveth',
+		'task_acquire_events': [
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'channel_seer_draveth',
+					'standing_text': [
+						"Engine pressure from the outpost disturbs the current-signs.",
+						"I need to read the flow before anything large lifts off.",
+						"Come quickly."
+					]
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'bogrunner_tavik',
+					'standing_text': [
+						"Something big is moving through the upper channels — airship-scale displacement.",
+						"Get Draveth to read the current-signs before Seth tries to lift off."
+					]
+				}
+			},
+		],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'channel_seer_draveth',
+					'dialog_id': 'draveth_a_clearance'
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'swamp_small_city_type_a_relay_to_madra'
+				}
+			},
+		]
+	},
+
+	# A-2 — Relay Draveth's clearance to Madra; she signals Seth
+	{
+		'task_id': 'swamp_small_city_type_a_relay_to_madra',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'rotwharf_madra',
+		'task_acquire_events': [
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'rotwharf_madra',
+					'standing_text': [
+						"Draveth's read is the last thing I need.",
+						"My network's already gone quiet.",
+						"Bring me his word and I'll clear Seth for departure."
+					]
+				}
+			},
+		],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'rotwharf_madra',
+					'dialog_id': 'madra_a_network_clear'
+				}
+			},
+		]
+	},
+
+]
 
 PRIMARY_STORY_SETTINGS = {
 	'story_id': 'swamp_small_city_story',

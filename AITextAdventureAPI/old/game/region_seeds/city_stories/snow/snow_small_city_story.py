@@ -219,10 +219,12 @@ TASKS = [
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'snow_small_city_type_c_find_drax'
-				},
-				'condition': {
-					'type': 'is_chapter_gte',
-					'params': { 'chapter': 6 }
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'snow_small_city_type_d_deliver_contraband_registry'
 				}
 			}
 		]
