@@ -364,8 +364,9 @@ def validate_timeline_for_screen(screen: "DataMgmtScreen") -> None:
     """Run the timeline integrity validator and repaint the tree.
 
     Errors are annotated in-place on each ``TimelineTaskNode.errors`` list.
-    The tree is then rebuilt so labels for invalid tasks render in red.
+    The tree is then rebuilt so labels for invalid tasks render in red/yellow/cyan.
     A status notification reports error, warning, and total affected task counts.
+    Info-severity annotations are excluded from the toast counts.
     """
     import game.constants as const
 
@@ -375,7 +376,7 @@ def validate_timeline_for_screen(screen: "DataMgmtScreen") -> None:
     # Repaint — rebuild uses the now-annotated nodes from the same cache
     rebuild_timeline_tree_for_screen(screen)
 
-    # Tally by severity across all annotated nodes
+    # Tally by severity across all annotated nodes — info excluded from counts
     error_tasks   = 0
     warning_tasks = 0
     for group in groups:

@@ -294,6 +294,7 @@ def _format_event_lines(
     ev: Dict[str, Any],
     dialog_index: Dict[Tuple[Any, Any], List[str]],
     name_map: Dict[str, str],
+    info_item_ids: set | None = None,
 ) -> List[str]:
     """
     Format a single task event dict into one or more readable display lines.
@@ -341,6 +342,8 @@ def _format_event_lines(
     if raw_type in ("award_item", "remove_item"):
         label   = raw_type.replace("_", " ").title()
         item_id = str(params.get("item_id", "?"))
+        if item_id in info_item_ids:
+            return [f"  [cyan]{label}  {rich_escape(item_id)}[/cyan]"]
         return [f"  {label}  {rich_escape(item_id)}"]
 
     if raw_type == "award_money":
@@ -449,10 +452,39 @@ class TimelineDetailPanel(Widget):
             if not node.errors:
                 yield Static("Integrity: [green]OK[/green]", classes="tl-section-header")
             else:
-                yield Static(
-                    f"Integrity: [red]FAIL  ({len(node.errors)} error(s))[/red]",
-                    classes="tl-section-header",
-                )
+                has_error   = any(e.severity == "error"   for e in node.errors)
+                has_warning = any(e.severity == "warning" for e in node.errors)
+                has_info    = any(e.severity == "info"    for e in node.errors)
+
+                error_count   = sum(1 for e in node.errors if e.severity == "error")
+                warning_count = sum(1 for e in node.errors if e.severity == "warning")
+                info_count    = sum(1 for e in node.errors if e.severity == "info")
+
+                if has_error or has_warning:
+                    parts = []
+                    if error_count:
+                        parts.append(f"[red]{error_count} error(s)[/red]")
+                    if warning_count:
+                        parts.append(f"[yellow]{warning_count} warning(s)[/yellow]")
+                    if info_count:
+                        parts.append(f"[cyan]{info_count} info[/cyan]")
+                    yield Static(
+                        f"Integrity: [red]FAIL[/red]  ({', '.join(parts)})",
+                        classes="tl-section-header",
+                    )
+                else:
+                    yield Static(
+                        f"Integrity: [cyan]INFO  ({info_count} note(s))[/cyan]",
+                        classes="tl-section-header",
+                    )
+
+                # Collect item_ids flagged at info level for cyan event highlighting
+                info_item_ids = {
+                    e.related_entity_id
+                    for e in node.errors
+                    if e.severity == "info" and e.related_entity_id
+                }
+
                 for err in node.errors:
                     code_str = rich_escape(err.code)
                     msg_str  = rich_escape(err.message)
@@ -463,8 +495,14 @@ class TimelineDetailPanel(Widget):
                         extra += f"  task={rich_escape(err.related_task_id)}"
                     if err.related_entity_id:
                         extra += f"  entity={rich_escape(err.related_entity_id)}"
+                    if err.severity == "info":
+                        colour = "cyan"
+                    elif err.severity == "warning":
+                        colour = "yellow"
+                    else:
+                        colour = "red"
                     yield Static(
-                        f"  [red]{code_str}[/red]  {msg_str}[dim]{extra}[/dim]",
+                        f"  [{colour}]{code_str}[/{colour}]  {msg_str}[dim]{extra}[/dim]",
                         classes="tl-event-row",
                     )
 
@@ -474,7 +512,7 @@ class TimelineDetailPanel(Widget):
             if acquire:
                 for ev in acquire:
                     if isinstance(ev, dict):
-                        for line in _format_event_lines(ev, dialog_index, name_map):
+                        for line in _format_event_lines(ev, dialog_index, name_map, info_item_ids):
                             yield Static(line, classes="tl-event-row")
             else:
                 yield Static("  (none)", classes="tl-empty")
@@ -485,7 +523,7 @@ class TimelineDetailPanel(Widget):
             if complete:
                 for ev in complete:
                     if isinstance(ev, dict):
-                        for line in _format_event_lines(ev, dialog_index, name_map):
+                        for line in _format_event_lines(ev, dialog_index, name_map, info_item_ids):
                             yield Static(line, classes="tl-event-row")
             else:
                 yield Static("  (none)", classes="tl-empty")
@@ -852,11 +890,11 @@ def _parse_chapter_data(task_nodes: "List[TimelineTaskNode]") -> "dict | None":
         chapter_num  = chapter_num,
         city_key     = city_key,
         city_name    = city_name,
-        region       = region,
+        region        = region,
         size_label   = size_label,
-        created_npcs = created_npcs,
-        joined_chars = joined_chars,
-        created_dung = created_dung,
+        created_npcs  = created_npcs,
+        joined_chars  = joined_chars,
+        created_dung  = created_dung,
     )
 
 

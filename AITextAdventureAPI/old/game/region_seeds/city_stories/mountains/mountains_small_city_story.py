@@ -98,7 +98,8 @@ NPC_DIALOG += [
 		'dialog': [
 			"The resonance has quieted.",
 			"Whatever hold that shard had on the tunnels — it's broken.",
-			"The hollow can breathe again."
+			"The hollow can breathe again.",
+			"Hold onto it. Something that strong doesn't stop being useful."
 		]
 	},
 
@@ -106,33 +107,51 @@ NPC_DIALOG += [
 
 NPC_DIALOG += [
 
-	# ── Type C dialogs — Vorn Ashpike ───────────────────────────────
+	# ── Type C dialogs — Lira Emberforge ───────────────────────────
 
 	{
 		'npc_id': 'vorn_ashpike',
-		'dialog_id': 'vorn_c_first_meet',
+		'dialog_id': 'vorn_c_lira_sighting',
 		'dialog': [
-			"I've seen too many outsiders come through looking for glory in the tunnels.",
-			"I stay because the hollow needs someone who knows its moods.",
-			"Give me one good reason to walk out of it with you."
+			"Someone lit the secondary forge three nights ago.",
+			"I didn't hire them. Belkan didn't either.",
+			"The lock didn't stop them — and the work they left behind is nothing I've seen.",
+			"Not hollow technique. Not foundry style.",
+			"Go ask Belkan. He looked closer than I did."
 		]
 	},
 	{
 		'npc_id': 'forgehand_belkan',
-		'dialog_id': 'belkan_c_vouch',
+		'dialog_id': 'belkan_c_lira_vouch',
 		'dialog': [
-			"Vorn is stubborn as cold iron — but his instincts have kept this hollow standing.",
-			"Tell him I sent you and that the resonance work is real.",
-			"That's the only currency he'll accept."
+			"She appeared without introduction and asked to use the secondary forge.",
+			"I said no. She worked it anyway.",
+			"Her welds are flawless — not trained, innate.",
+			"The ore remembers her touch differently than anyone I've ever watched.",
+			"I've asked around. No one in the hollow knows her name.",
+			"She's still there. Go find out who she is."
 		]
 	},
 	{
-		'npc_id': 'vorn_ashpike',
-		'dialog_id': 'vorn_c_joins',
+		'npc_id': 'lira_emberforge',
+		'dialog_id': 'lira_c_first_meet',
 		'dialog': [
-			"Belkan doesn't vouch for fools.",
-			"If the shard work is as serious as he says, you'll need someone who knows what lives in the deep.",
-			"I'm in — but we do this right."
+			"The ore remembers everything that's been done to it.",
+			"I read what others leave behind.",
+			"Your party carries forge-heat that doesn't match any range I've worked.",
+			"(sets down her hammer)",
+			"That's interesting.",
+			"Say what you came to say."
+		]
+	},
+	{
+		'npc_id': 'lira_emberforge',
+		'dialog_id': 'lira_c_joins',
+		'dialog': [
+			"I've stayed here long enough to read everything this hollow holds.",
+			"Whatever your party carries — I haven't read that yet.",
+			"I'll come.",
+			"Don't explain it. I'll understand it when I understand it."
 		]
 	},
 
@@ -140,25 +159,26 @@ NPC_DIALOG += [
 
 NPC_DIALOG += [
 
-	# ── Type D dialogs — Dominion Edge ─────────────────────────────
+	# ── Type D dialogs — Dominion Edge (mythic weapon) ─────────────
 
 	{
 		'npc_id': 'forgehand_belkan',
-		'dialog_id': 'belkan_d_weapon_key',
+		'dialog_id': 'belkan_d_shard_receipt',
 		'dialog': [
-			"A Hollow Dominion Key… this was forged before the Fellowship existed.",
-			"It doesn't open a lock. It opens a claim.",
-			"There is a blade sleeping in the deep stone — the Dominion Edge.",
-			"Speak to Korla. She knows the descent path."
+			"The Dominion Hollow was guarding this for a reason.",
+			"This shard — I've read its resonance pattern before.",
+			"There is a blade in the deep fault-line that was forged when this was placed.",
+			"They're linked. The shard is its key.",
+			"Korla knows the descent path. Move — the resonance won't hold long."
 		]
 	},
 	{
 		'npc_id': 'marshal_korla',
 		'dialog_id': 'korla_d_descent',
 		'dialog': [
-			"The key resonates with the deepest fault-line.",
-			"The Dominion Edge has been down there since before any map I carry.",
-			"Thalric must perform the rite to wake it — but the guardian will answer first."
+			"The shard resonates against every map I carry.",
+			"The Dominion Edge has been below since before any tunnel I've charted.",
+			"Thalric must perform the rite to wake it — but its guardian will answer first."
 		]
 	},
 	{
@@ -174,7 +194,7 @@ NPC_DIALOG += [
 		'npc_id': 'forgehand_belkan',
 		'dialog_id': 'belkan_d_reward',
 		'dialog': [
-			"The forge-heat steadied when you returned.",
+			"The forge-heat steadied the moment you returned.",
 			"The Dominion Edge chose you — I felt it from the anvil.",
 			"Carry it with the weight it deserves."
 		]
@@ -216,12 +236,51 @@ TASKS = [
 				'params': {
 					'npc_id': 'marshal_korla',
 					'standing_text': [
-						"I've walked dark tunnels for years—sit and share a watch, and I'll share what I've learned."
+						"I've walked dark tunnels for years — sit and share a watch, and I'll share what I've learned."
+					]
+				}
+			},
+			{
+				'event_type': 'create_npc',
+				'params': {
+					'npc_id': 'vorn_ashpike',
+					'location': 'region_city_other1'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'vorn_ashpike',
+					'standing_text': [
+						"The hollow keeps its own counsel.",
+						"Most visitors don't stay long enough to hear it."
 					]
 				}
 			},
 		],
 		'task_complete_events': [
+			# Prompt Belkan toward the E chain immediately on city arrival
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'forgehand_belkan',
+					'standing_text': [
+						"Something embedded in the deep ore is pulling at the forge heat.",
+						"I've seen nothing like it. Come — look at what we pulled from the wall."
+					]
+				}
+			},
+			# Prompt Vorn toward the C chain (Lira sighting)
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'vorn_ashpike',
+					'standing_text': [
+						"Someone lit the secondary forge last night.",
+						"I didn't hire them. Neither did Belkan."
+					]
+				}
+			},
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -238,16 +297,6 @@ TASKS = [
 					'params': { 'chapter': 21 }
 				}
 			},
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'mountains_small_city_type_c_find_lira'
-				},
-				'condition': {
-					'type': 'is_chapter_gte',
-					'params': { 'chapter': 21 }
-				}
-			}
 		]
 	},
 ]
@@ -257,27 +306,19 @@ TASKS += [
 	# =========================================================
 	# TYPE E — Forge Dominion Shard
 	# Artifact ID: forge_dominion_shard
-	# Gates: mountains_small_city Type D (slot 3, this file)
+	# Gates: mountains_small_city Type D (slot 3, this file — same city pair)
 	# Awarded by: mountains_small_city_initialize
+	# Chain: investigate with Belkan → consult Thalric → defeat Dominion Hollow
+	# No create_dungeon — NPC-driven chain per Type E rules.
 	# =========================================================
 
+	# E-1 — Belkan shows the party the shard in the ore wall
 	{
 		'task_id': 'mountains_small_city_type_e_investigate_resonance',
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'forgehand_belkan',
-		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'forgehand_belkan',
-					'standing_text': [
-						"Something embedded in the deep ore is pulling at the forge heat.",
-						"I've seen nothing like it. Come — look at what we pulled from the wall."
-					]
-				}
-			},
-		],
+		'task_acquire_events': [],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
@@ -286,20 +327,7 @@ TASKS += [
 					'dialog_id': 'belkan_e_resonance'
 				}
 			},
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'mountains_small_city_type_e_consult_thalric'
-				}
-			},
-		]
-	},
-	{
-		'task_id': 'mountains_small_city_type_e_consult_thalric',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'depth_seer_thalric',
-		'task_acquire_events': [
+			# Spawn Thalric here so his standing text is ready before the meet task
 			{
 				'event_type': 'create_npc',
 				'params': {
@@ -317,7 +345,22 @@ TASKS += [
 					]
 				}
 			},
-		],
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'mountains_small_city_type_e_consult_thalric'
+				}
+			},
+		]
+	},
+
+	# E-2 — Thalric identifies the shard as a dominion anchor
+	{
+		'task_id': 'mountains_small_city_type_e_consult_thalric',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'depth_seer_thalric',
+		'task_acquire_events': [],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
@@ -334,6 +377,8 @@ TASKS += [
 			},
 		]
 	},
+
+	# E-3 — Defeat the Dominion Hollow; claim the artifact
 	{
 		'task_id': 'mountains_small_city_type_e_defeat_dominion_hollow',
 		'type': 'defeat',
@@ -362,6 +407,24 @@ TASKS += [
 					'dialog_id': 'korla_e_closing'
 				}
 			},
+			# Gate D chain — E artifact is the trigger for the same-city D slot
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'forgehand_belkan',
+					'standing_text': [
+						"That shard you're carrying — the forge-resonance has shifted.",
+						"Something below recognises it.",
+						"We should talk."
+					]
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'mountains_small_city_type_d_deliver_shard'
+				}
+			},
 		]
 	},
 
@@ -370,41 +433,37 @@ TASKS += [
 TASKS += [
 
 	# =========================================================
-	# TYPE C — Vorn Ashpike (extended character)
+	# TYPE C — Lira Emberforge (extended character, slot 2)
 	# Gated by is_chapter_gte: 21
 	# Awarded by: mountains_small_city_initialize (conditional)
+	# Chain: Vorn spots Lira → Belkan vouches → meet Lira → Lira joins
+	# Only new NPC beyond city seed: lira_emberforge (extended character).
+	# Vorn Ashpike is used as the discovery lead — city NPC, no character_join.
 	# =========================================================
 
+	# C-1 — Vorn tips off the party about the mystery smith
 	{
 		'task_id': 'mountains_small_city_type_c_find_vorn',
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'vorn_ashpike',
-		'task_acquire_events': [
-			{
-				'event_type': 'create_npc',
-				'params': {
-					'npc_id': 'vorn_ashpike',
-					'location': 'region_city_other1'
-				}
-			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'vorn_ashpike',
-					'standing_text': [
-						"I keep to myself. The hollow gives me everything I need.",
-						"Unless you've got a real reason to talk, move along."
-					]
-				}
-			},
-		],
+		'task_acquire_events': [],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
 					'npc_id': 'vorn_ashpike',
-					'dialog_id': 'vorn_c_first_meet'
+					'dialog_id': 'vorn_c_lira_sighting'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'forgehand_belkan',
+					'standing_text': [
+						"Vorn sent you about the smith at the secondary forge.",
+						"I've been watching her work. Come — I'll tell you what I know."
+					]
 				}
 			},
 			{
@@ -415,6 +474,8 @@ TASKS += [
 			},
 		]
 	},
+
+	# C-2 — Belkan vouches and points the party toward Lira; Lira is placed
 	{
 		'task_id': 'mountains_small_city_type_c_consult_belkan',
 		'type': 'meet',
@@ -426,276 +487,14 @@ TASKS += [
 				'event_type': 'initiate_dialog',
 				'params': {
 					'npc_id': 'forgehand_belkan',
-					'dialog_id': 'belkan_c_vouch'
+					'dialog_id': 'belkan_c_lira_vouch'
 				}
 			},
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'mountains_small_city_type_c_earn_vorn'
-				}
-			},
-		]
-	},
-	{
-		'task_id': 'mountains_small_city_type_c_earn_vorn',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'vorn_ashpike',
-		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'vorn_ashpike',
-					'standing_text': [
-						"Belkan sent you back.",
-						"That means something. Let's talk."
-					]
-				}
-			},
-		],
-		'task_complete_events': [
-			{
-				'event_type': 'initiate_dialog',
-				'params': {
-					'npc_id': 'vorn_ashpike',
-					'dialog_id': 'vorn_c_joins'
-				}
-			},
-			{
-				'event_type': 'character_join',
-				'params': {
-					'character_id': 'vorn_ashpike'
-				}
-			},
-		]
-	},
-
-]
-
-TASKS += [
-
-	# =========================================================
-	# TYPE D — Mythic Equipment Quest (slot 3)
-	# Gate: mountains_small_city_weapon_key (from trial_1_dungeon, Ch.21)
-	# Mythic reward: mythic_mountains_small_dominion_edge (weapon → Diego)
-	# =========================================================
-
-	{
-		'task_id': 'mountains_small_city_type_d_deliver_weapon_key',
-		'type': 'deliver',
-		'item_id': 'mountains_small_city_weapon_key',
-		'to_type': 'npc',
-		'to_id': 'forgehand_belkan',
-		'task_acquire_events': [],
-		'task_complete_events': [
-			{
-				'event_type': 'initiate_dialog',
-				'params': {
-					'npc_id': 'forgehand_belkan',
-					'dialog_id': 'belkan_d_weapon_key'
-				}
-			},
-			{
-				'event_type': 'remove_item',
-				'params': {
-					'item_id': 'mountains_small_city_weapon_key'
-				}
-			},
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'mountains_small_city_type_d_consult_korla'
-				}
-			}
-		]
-	},
-	{
-		'task_id': 'mountains_small_city_type_d_consult_korla',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'marshal_korla',
-		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'marshal_korla',
-					'standing_text': [
-						"That key hums against my maps.",
-						"I know what it wants. Come — I'll show you the descent path."
-					]
-				}
-			}
-		],
-		'task_complete_events': [
-			{
-				'event_type': 'initiate_dialog',
-				'params': {
-					'npc_id': 'marshal_korla',
-					'dialog_id': 'korla_d_descent'
-				}
-			},
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'mountains_small_city_type_d_meet_dominion_guardian'
-				}
-			}
-		]
-	},
-	{
-		'task_id': 'mountains_small_city_type_d_meet_dominion_guardian',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'depth_seer_thalric',
-		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'depth_seer_thalric',
-					'standing_text': [
-						"The fault-echoes confirm the blade's location.",
-						"The guardian stirs already. I'll perform the rite — you face what answers."
-					]
-				}
-			}
-		],
-		'task_complete_events': [
-			{
-				'event_type': 'initiate_dialog',
-				'params': {
-					'npc_id': 'depth_seer_thalric',
-					'dialog_id': 'thalric_d_rite'
-				}
-			},
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'mountains_small_city_type_d_defeat_dominion_guardian'
-				}
-			}
-		]
-	},
-	{
-		'task_id': 'mountains_small_city_type_d_defeat_dominion_guardian',
-		'type': 'defeat',
-		'to_type': 'mob',
-		'to_id': 'deep_dominion_guardian_1',
-		'task_acquire_events': [
-			{
-				'event_type': 'begin_combat',
-				'params': {
-					'boss_mob_id': 'deep_dominion_guardian_1',
-					'combat_type': 'boss_battle'
-				}
-			}
-		],
-		'task_complete_events': [
-			{
-				'event_type': 'initiate_dialog',
-				'params': {
-					'npc_id': 'forgehand_belkan',
-					'dialog_id': 'belkan_d_reward'
-				}
-			},
-			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'mythic_mountains_small_dominion_edge'
-				}
-			}
-		]
-	},
-
-]
-
-
-TASKS += [
-
-	# =========================================================
-	# TYPE C — Lira Emberforge (extended character, slot 2)
-	# Gated by is_chapter_gte: 21
-	# Awarded by: mountains_small_city_initialize (conditional)
-	# =========================================================
-
-	{
-		'task_id': 'mountains_small_city_type_c_find_lira',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'forgehand_belkan',
-		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'forgehand_belkan',
-					'standing_text': [
-						"There's a smith at the secondary forge I didn't hire.",
-						"Her work is unlike anything I've seen.",
-						"Korla checked her out. Come — I'll explain."
-					]
-				}
-			},
-		],
-		'task_complete_events': [
-			{
-				'event_type': 'initiate_dialog',
-				'params': {
-					'npc_id': 'forgehand_belkan',
-					'dialog_id': 'belkan_c_lira_sighting'
-				}
-			},
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'mountains_small_city_type_c_consult_korla'
-				}
-			},
-		]
-	},
-	{
-		'task_id': 'mountains_small_city_type_c_consult_korla',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'marshal_korla',
-		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'marshal_korla',
-					'standing_text': [
-						"Belkan sent you about the smith.",
-						"I've watched her work. I'll tell you what I know."
-					]
-				}
-			},
-		],
-		'task_complete_events': [
-			{
-				'event_type': 'initiate_dialog',
-				'params': {
-					'npc_id': 'marshal_korla',
-					'dialog_id': 'korla_c_lira_vouch'
-				}
-			},
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'mountains_small_city_type_c_earn_lira'
-				}
-			},
-		]
-	},
-	{
-		'task_id': 'mountains_small_city_type_c_earn_lira',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'lira_emberforge',
-		'task_acquire_events': [
 			{
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'lira_emberforge',
-					'location': 'region_city_other1'
+					'location': 'region_city_other2'
 				}
 			},
 			{
@@ -708,7 +507,22 @@ TASKS += [
 					]
 				}
 			},
-		],
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'mountains_small_city_type_c_earn_lira'
+				}
+			},
+		]
+	},
+
+	# C-3 — Meet Lira; she joins the party
+	{
+		'task_id': 'mountains_small_city_type_c_earn_lira',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'lira_emberforge',
+		'task_acquire_events': [],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
@@ -731,6 +545,162 @@ TASKS += [
 			{
 				'event_type': 'character_join',
 				'params': { 'character_id': 'lira_emberforge' }
+			},
+		]
+	},
+
+]
+
+TASKS += [
+
+	# =========================================================
+	# TYPE D — Dominion Edge (mythic weapon, slot 3)
+	# Gate: forge_dominion_shard — awarded by E chain's defeat task (same city)
+	# Mythic reward: mythic_mountains_small_dominion_edge
+	# Chain: deliver shard to Belkan → consult Korla → meet Thalric → defeat guardian
+	# No new NPCs — Belkan, Korla, and Thalric are all city seed NPCs.
+	# Thalric is already placed by the E chain when D becomes available.
+	# =========================================================
+
+	# D-1 — Deliver the Forge Dominion Shard to Belkan; he recognises the deeper resonance
+	{
+		'task_id': 'mountains_small_city_type_d_deliver_shard',
+		'type': 'deliver',
+		'item_id': 'forge_dominion_shard',
+		'to_type': 'npc',
+		'to_id': 'forgehand_belkan',
+		'task_acquire_events': [
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'forgehand_belkan',
+					'standing_text': [
+						"That shard you're carrying — the forge-resonance has shifted.",
+						"Something below recognises it.",
+						"We should talk."
+					]
+				}
+			},
+		],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'forgehand_belkan',
+					'dialog_id': 'belkan_d_shard_receipt'
+				}
+			},
+			{
+				'event_type': 'remove_item',
+				'params': {
+					'item_id': 'forge_dominion_shard'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'marshal_korla',
+					'standing_text': [
+						"That shard hums against my maps.",
+						"I know what it wants. Come — I'll show you the descent path."
+					]
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'mountains_small_city_type_d_consult_korla'
+				}
+			},
+		]
+	},
+
+	# D-2 — Korla maps the descent to the Dominion Edge
+	{
+		'task_id': 'mountains_small_city_type_d_consult_korla',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'marshal_korla',
+		'task_acquire_events': [],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'marshal_korla',
+					'dialog_id': 'korla_d_descent'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'depth_seer_thalric',
+					'standing_text': [
+						"The fault-echoes confirm the blade's location.",
+						"The guardian stirs already. I'll perform the rite — you face what answers."
+					]
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'mountains_small_city_type_d_meet_thalric'
+				}
+			},
+		]
+	},
+
+	# D-3 — Thalric performs the rite; the guardian responds
+	{
+		'task_id': 'mountains_small_city_type_d_meet_thalric',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'depth_seer_thalric',
+		'task_acquire_events': [],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'depth_seer_thalric',
+					'dialog_id': 'thalric_d_rite'
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'mountains_small_city_type_d_defeat_dominion_guardian'
+				}
+			},
+		]
+	},
+
+	# D-4 — Defeat the Dominion Guardian; claim the Dominion Edge
+	{
+		'task_id': 'mountains_small_city_type_d_defeat_dominion_guardian',
+		'type': 'defeat',
+		'to_type': 'mob',
+		'to_id': 'deep_dominion_guardian_1',
+		'task_acquire_events': [
+			{
+				'event_type': 'begin_combat',
+				'params': {
+					'boss_mob_id': 'deep_dominion_guardian_1',
+					'combat_type': 'boss_battle'
+				}
+			},
+		],
+		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'forgehand_belkan',
+					'dialog_id': 'belkan_d_reward'
+				}
+			},
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'mythic_mountains_small_dominion_edge'
+				}
 			},
 		]
 	},

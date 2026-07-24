@@ -1,4 +1,4 @@
-"""
+﻿"""
 Timeline tree: widget population, filtering, and node traversal.
 Operates on #dm-timeline-tree using the TimelineGroupNode model.
 """
@@ -59,21 +59,38 @@ def rebuild_timeline_tree(
 def _task_label(task_node: TimelineTaskNode) -> str:
     """Render the Rich-markup label for a task leaf.
 
-    Errors render in red, warnings in yellow.  If a node has both the
-    highest-severity colour wins (red takes priority).
+    Errors render in red, warnings in yellow.  Info-only nodes render
+    in cyan without an error count — they are not considered invalid.
+    Hard errors take priority over warnings; warnings take priority over info.
     """
     if task_node.errors:
         has_error   = any(e.severity == "error"   for e in task_node.errors)
         has_warning = any(e.severity == "warning" for e in task_node.errors)
-        colour = "red" if has_error else "yellow"
-        n      = len(task_node.errors)
-        label  = rich_escape(task_node.label)
-        tid    = rich_escape(task_node.task_id)
-        return (
-            f"[{colour}]{label}[/{colour}]  "
-            f"[dim {colour}]{tid}[/dim {colour}]  "
-            f"[{colour}]({'errors' if has_error else 'warnings'}: {n})[/{colour}]"
-        )
+        has_info    = any(e.severity == "info"    for e in task_node.errors)
+
+        label = rich_escape(task_node.label)
+        tid   = rich_escape(task_node.task_id)
+
+        if has_error:
+            n = sum(1 for e in task_node.errors if e.severity == "error")
+            return (
+                f"[red]{label}[/red]  "
+                f"[dim red]{tid}[/dim red]  "
+                f"[red](errors: {n})[/red]"
+            )
+        if has_warning:
+            n = sum(1 for e in task_node.errors if e.severity == "warning")
+            return (
+                f"[yellow]{label}[/yellow]  "
+                f"[dim yellow]{tid}[/dim yellow]  "
+                f"[yellow](warnings: {n})[/yellow]"
+            )
+        if has_info:
+            return (
+                f"[cyan]{label}[/cyan]  "
+                f"[dim cyan]{tid}[/dim cyan]"
+            )
+
     return (
         f"{rich_escape(task_node.label)}  "
         f"[dim]{rich_escape(task_node.task_id)}[/dim]"

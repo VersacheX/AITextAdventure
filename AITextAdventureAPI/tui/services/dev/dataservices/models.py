@@ -81,14 +81,15 @@ class TimelineValidationError:
     Attributes:
         code:              Machine-readable error code.
         message:           Human-readable description.
-        severity:          ``"error"`` (red) or ``"warning"`` (yellow).
+        severity:          ``"error"`` (red), ``"warning"`` (yellow),
+                           or ``"info"`` (cyan — informational, not a fault).
         event_type:        The event_type string that triggered the error, if applicable.
         related_task_id:   A secondary task id referenced by the error, if any.
         related_entity_id: An NPC id, item id, or dungeon id involved, if any.
     """
     code: str
     message: str
-    severity: str = "error"   # "error" | "warning"
+    severity: str = "error"   # "error" | "warning" | "info"
     event_type: str = ""
     related_task_id: str = ""
     related_entity_id: str = ""

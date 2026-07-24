@@ -799,9 +799,11 @@ def validate_timeline_integrity(
                         errors_map[task_id].append(_err(
                             "ITEM_REMOVE_WITHOUT_SOURCE",
                             f"remove_item for '{item_id}' with no prior award_item or "
-                            f"dungeon_add_treasure.",
+                            f"dungeon_add_treasure in traversal order — "
+                            f"item may be awarded in a regional or city story.",
                             event_type=raw_type,
                             related_entity_id=item_id,
+                            severity="info",
                         ))
                     item_remove_counts[item_id] += 1
                     if item_remove_counts[item_id] > item_source_counts[item_id]:
@@ -809,11 +811,12 @@ def validate_timeline_integrity(
                             "ITEM_REMOVE_EXCESS_COUNT",
                             f"remove_item for '{item_id}' exceeds known source count "
                             f"({item_remove_counts[item_id]} removes vs "
-                            f"{item_source_counts[item_id]} sources).",
+                            f"{item_source_counts[item_id]} sources) — "
+                            f"item may be awarded in a regional or city story.",
                             event_type=raw_type,
                             related_entity_id=item_id,
+                            severity="info",
                         ))
-
             # ── R3: award_task target exists ──────────────────────────
             elif raw_type == "award_task":
                 target = str(params.get("task_id") or "")

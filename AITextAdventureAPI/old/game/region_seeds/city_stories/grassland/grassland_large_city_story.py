@@ -108,7 +108,7 @@ NPC_DIALOG = [
 TASKS = [
 	{
 		'task_id': 'grassland_large_city_initialize',
-		'type': 'complete_intro_story',
+		'type': 'complete_intro_story',	
 		'task_acquire_events': [
 			{
 				'event_type': 'create_npc',
@@ -122,7 +122,7 @@ TASKS = [
 				'params': {
 					'npc_id': 'keeper_savran',
 					'standing_text': [
-						"I've seen beasts you'd never believe—sit and I'll tell you their names."
+						"I've seen beasts you'd never believe — sit and I'll tell you their names."
 					]
 				}
 			},
@@ -138,13 +138,13 @@ TASKS = [
 				'params': {
 					'npc_id': 'waymaster_delphi',
 					'standing_text': [
-						"Travelers bring tales—share one and I'll show you a path worth taking."
+						"Travelers bring tales — share one and I'll show you a path worth taking."
 					]
 				}
 			},
 		],
 		'task_complete_events': [
-			{ 'event_type': 'award_task', 'params': { 'task_id': 'grassland_large_city_regional_complete_gate' }}
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'grassland_large_city_regional_complete_gate' }},
 		]
 	},
 	{
@@ -152,16 +152,61 @@ TASKS = [
 		'type': 'complete_regional_quests',
 		'task_acquire_events': [],
 		'task_complete_events': [
-			{ 'event_type': 'award_task', 'params': { 'task_id': 'grassland_large_city_type_c_find_voss' }},
-			{ 'event_type': 'award_task', 'params': { 'task_id': 'grassland_large_city_type_d_deliver_accessory_key' }},
+			# C chain — gated by chapter 10 being reached
+			# Place Voss and set her standing text so she is ready for the meet task
+			{
+				'event_type': 'create_npc',
+				'params': {
+					'npc_id': 'voss_caldera',
+					'location': 'region_city_other3'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'voss_caldera',
+					'standing_text': [
+						"I don't have time for pleasantries.",
+						"If you have something useful to offer, say it."
+					]
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'grassland_large_city_type_c_find_voss'
+				}
+			},
+			# D chain — trigger item (grassland_large_city_accessory_key) placed in
+			# nobles_mansion_ch3 dungeon via dungeon_add_treasure in main_story_chapter_3.py.
+			# Deliver task awarded here; it waits until the player recovers the key.
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'mira',
+					'standing_text': [
+						"That key — the wind impressions on it are extraordinary.",
+						"Someone mapped every grassland migration into this metal.",
+						"Find Vexa. She reads wind scars better than anyone.",
+						"She'll know what it opens."
+					]
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'grassland_large_city_type_d_deliver_accessory_key'
+				}
+			},
 		]
 	},
 ]
 
 
-# ── Type C ── Voss Caldera (extended character) ───────────────────────────────
-# Gated by is_chapter_gte: 10. Voss arrives at the Bazaar on business but
+# ── Type C ── Voss Caldera (extended character, slot 1) ───────────────────────
+# Voss arrives at the Bazaar on business but
 # recognises the party's capability. Delphi's endorsement earns her trust.
+# Voss is placed and given initial standing text in regional_complete_gate.
 
 NPC_DIALOG += [
 
@@ -176,7 +221,6 @@ NPC_DIALOG += [
 			"But I don't travel with strangers. Impress someone I trust first."
 		]
 	},
-
 	{
 		'npc_id': 'waymaster_delphi',
 		'dialog_id': 'delphi_c_vouch',
@@ -187,7 +231,6 @@ NPC_DIALOG += [
 			"That's the only currency she respects."
 		]
 	},
-
 	{
 		'npc_id': 'voss_caldera',
 		'dialog_id': 'voss_c_joins',
@@ -203,37 +246,37 @@ NPC_DIALOG += [
 
 TASKS += [
 
-	# C-1 — Find Voss Caldera
+	# =========================================================
+	# TYPE C — Voss Caldera (extended character, slot 1)
+	# Awarded by: grassland_large_city_regional_complete_gate (conditional)
+	# Chain: find Voss → Delphi vouches → return to Voss → Voss joins
+	# Voss placed in regional_complete_gate complete events.
+	# =========================================================
+
+	# C-1 — Voss introduces herself and directs the party to Delphi
 	{
 		'task_id': 'grassland_large_city_type_c_find_voss',
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'voss_caldera',
-		'task_acquire_events': [
-			{
-				'event_type': 'create_npc',
-				'params': {
-					'npc_id': 'voss_caldera',
-					'location': 'region_city_other1'
-				}
-			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'voss_caldera',
-					'standing_text': [
-						"I don't have time for pleasantries.",
-						"If you have something useful to offer, say it."
-					]
-				}
-			},
-		],
+		'task_acquire_events': [],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
 					'npc_id': 'voss_caldera',
 					'dialog_id': 'voss_c_first_meet'
+				}
+			},
+			# Prime Delphi's standing text before the party goes to her
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'waymaster_delphi',
+					'standing_text': [
+						"Voss sent you? Then she's already decided — she just wants confirmation.",
+						"I'll give it."
+					]
 				}
 			},
 			{
@@ -245,7 +288,7 @@ TASKS += [
 		]
 	},
 
-	# C-2 — Get Delphi's endorsement
+	# C-2 — Delphi vouches and points the party back to Voss
 	{
 		'task_id': 'grassland_large_city_type_c_consult_delphi',
 		'type': 'meet',
@@ -260,22 +303,7 @@ TASKS += [
 					'dialog_id': 'delphi_c_vouch'
 				}
 			},
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'grassland_large_city_type_c_earn_voss'
-				}
-			},
-		]
-	},
-
-	# C-3 — Return to Voss; she joins
-	{
-		'task_id': 'grassland_large_city_type_c_earn_voss',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'voss_caldera',
-		'task_acquire_events': [
+			# Update Voss's standing text so she signals she is ready
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -287,7 +315,22 @@ TASKS += [
 					]
 				}
 			},
-		],
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'grassland_large_city_type_c_earn_voss'
+				}
+			},
+		]
+	},
+
+	# C-3 — Return to Voss; she joins the party
+	{
+		'task_id': 'grassland_large_city_type_c_earn_voss',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'voss_caldera',
+		'task_acquire_events': [],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
@@ -295,6 +338,10 @@ TASKS += [
 					'npc_id': 'voss_caldera',
 					'dialog_id': 'voss_c_joins'
 				}
+			},
+			{
+				'event_type': 'hide_npc',
+				'params': { 'npc_id': 'voss_caldera' }
 			},
 			{
 				'event_type': 'character_join',
@@ -308,10 +355,12 @@ TASKS += [
 ]
 
 
-# ── Type D ── Windcarver's Mantle (mythic accessory) ──────────────────────────
-# Gate: player holds grassland_large_city_accessory_key from nobles_mansion (Ch.3 dungeon).
-# Standalone deliver to Mira → Vexa reads the key → defeat Windcarve Spirit → mythic accessory.
-# No new NPCs — uses trail_reader_vexa, windcarve_spirit, and mira (Ch.2 party anchor).
+# ── Type D ── Windcarver's Mantle (mythic accessory, slot 2) ──────────────────
+# Gate: grassland_large_city_accessory_key placed in nobles_mansion_ch3 (Ch.3 dungeon).
+# Deliver to Mira → Vexa reads the key → defeat Windcarve Spirit → mythic accessory.
+# No new NPCs — trail_reader_vexa and windcarve_spirit are both in the city NPCS list.
+# Mira's standing text and the deliver award_task fire from regional_complete_gate.
+# Vexa placed in deliver complete events; windcarve_spirit placed in consult_vexa complete events.
 
 NPC_DIALOG += [
 
@@ -327,7 +376,6 @@ NPC_DIALOG += [
 			"You'll feel ambushes before they form."
 		]
 	},
-
 	{
 		'npc_id': 'windcarve_spirit',
 		'dialog_id': 'windcarve_spirit_d_awakens',
@@ -342,44 +390,30 @@ NPC_DIALOG += [
 
 TASKS += [
 
-	# D-0 — Deliver grassland_large_city_accessory_key to Mira (standalone deliver; unlocks D chain)
+	# =========================================================
+	# TYPE D — Windcarver's Mantle (mythic accessory, slot 2)
+	# Gate: grassland_large_city_accessory_key (nobles_mansion_ch3, Ch.3)
+	# Mythic reward: mythic_grassland_large_windcarvers_mantle
+	# Awarded by: grassland_large_city_regional_complete_gate (deliver task waits for item)
+	# =========================================================
+
+	# D-0 — Deliver key to Mira; she directs the party to Vexa
 	{
 		'task_id': 'grassland_large_city_type_d_deliver_accessory_key',
 		'type': 'deliver',
 		'item_id': 'grassland_large_city_accessory_key',
 		'to_type': 'npc',
 		'to_id': 'mira',
-		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'mira',
-					'standing_text': [
-						"That key — the wind impressions on it are extraordinary.",
-						"Someone mapped every grassland migration into this metal.",
-						"Find Vexa. She reads wind scars better than anyone.",
-						"She'll know what it opens."
-					]
-				}
-			},
-		],
+		'task_acquire_events': [],
 		'task_complete_events': [
+			# Place Vexa and set her standing text for the consult step
 			{
-				'event_type': 'award_task',
+				'event_type': 'create_npc',
 				'params': {
-					'task_id': 'grassland_large_city_type_d_consult_vexa'
+					'npc_id': 'trail_reader_vexa',
+					'location': 'region_open_area'
 				}
 			},
-		]
-	},
-
-	# D-1 — Consult Vexa for the wind-route reading
-	{
-		'task_id': 'grassland_large_city_type_d_consult_vexa',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'trail_reader_vexa',
-		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -391,7 +425,22 @@ TASKS += [
 					]
 				}
 			},
-		],
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'grassland_large_city_type_d_consult_vexa'
+				}
+			},
+		]
+	},
+
+	# D-1 — Vexa reads the wind-route impressions on the key
+	{
+		'task_id': 'grassland_large_city_type_d_consult_vexa',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'trail_reader_vexa',
+		'task_acquire_events': [],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
@@ -400,22 +449,14 @@ TASKS += [
 					'dialog_id': 'vexa_d_key_read'
 				}
 			},
+			# Place the Windcarve Spirit and set standing text for the meet step
 			{
-				'event_type': 'award_task',
+				'event_type': 'create_npc',
 				'params': {
-					'task_id': 'grassland_large_city_type_d_meet_windcarve_spirit'
+					'npc_id': 'windcarve_spirit',
+					'location': 'region_open_area'
 				}
 			},
-		]
-	},
-
-	# D-2 — Meet the Windcarve Spirit (boss intro)
-	{
-		'task_id': 'grassland_large_city_type_d_meet_windcarve_spirit',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'windcarve_spirit',
-		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -427,7 +468,22 @@ TASKS += [
 					]
 				}
 			},
-		],
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'grassland_large_city_type_d_meet_windcarve_spirit'
+				}
+			},
+		]
+	},
+
+	# D-2 — Meet the Windcarve Spirit; it reveals what it guards
+	{
+		'task_id': 'grassland_large_city_type_d_meet_windcarve_spirit',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'windcarve_spirit',
+		'task_acquire_events': [],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
@@ -458,7 +514,7 @@ TASKS += [
 					'boss_mob_id': 'windcarve_spirit_1',
 					'combat_type': 'boss_battle'
 				}
-			}
+			},
 		],
 		'task_complete_events': [
 			{
@@ -497,10 +553,9 @@ TASKS += [
 
 
 # ── Type B ── Nia / Serene the Whisper-Thief (regional character quest) ───────
-# Gated by Ch.20 Void Gauntlet. Nia hears Serene's signal threading through
-# the Crosswind Bazaar's updrafts — the Whisper-Thief is collecting echoes
-# from the party's own past. Creates dungeon in open area.
-# No new NPCs — uses initiate_character_dialog on Nia exclusively.
+# Gated by Ch.20 Void Gauntlet. Awarded externally from main_story_chapter_20.py
+# when the Void Gauntlet event fires — not from this file's regional gate.
+# grassland_large_city_b_void_gauntlet will show TASK_UNREACHABLE until Ch.20 is updated.
 
 NPC_DIALOG += [
 
@@ -554,7 +609,14 @@ NPC_DIALOG += [
 
 TASKS += [
 
-	# B-0 — Void Gauntlet entry (self-completing gated task)
+	# =========================================================
+	# TYPE B — Nia / Serene the Whisper-Thief (regional character quest, slot 3)
+	# Gated by Ch.20 Void Gauntlet — awarded from main_story_chapter_20.py externally.
+	# grassland_large_city_b_void_gauntlet is the entry task; TASK_UNREACHABLE is expected
+	# until Ch.20 is updated to award it.
+	# =========================================================
+
+	# B-0 — Void Gauntlet entry (awarded by Ch.20 externally)
 	{
 		'task_id': 'grassland_large_city_b_void_gauntlet',
 		'type': 'gated',
@@ -580,7 +642,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_b_entering_vault' }},
 		],
 		'task_complete_events': [
-			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'serene', 'dialog_id': 'serene_b_risen' }},			
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'serene', 'dialog_id': 'serene_b_risen' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'grassland_large_city_b_defeat_serene' }},
 		]
 	},
@@ -592,7 +654,7 @@ TASKS += [
 		'to_type': 'mob',
 		'to_id': 'serene_b1',
 		'task_acquire_events': [
-			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'serene_b1', 'combat_type': 'boss_battle' }}
+			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'serene_b1', 'combat_type': 'boss_battle' }},
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_b_victory' }},
