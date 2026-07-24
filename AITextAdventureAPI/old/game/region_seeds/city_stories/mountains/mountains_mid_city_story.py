@@ -444,13 +444,6 @@ TASKS += [
 				}
 			},
 			{
-				'event_type': 'begin_combat',
-				'params': {
-					'boss_mob_id': 'emberwake_spirit_1',
-					'combat_type': 'boss_encounter'
-				}
-			},
-			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'mountains_mid_city_type_d_defeat_emberwake_spirit'
@@ -465,7 +458,15 @@ TASKS += [
 		'type': 'defeat',
 		'to_type': 'mob',
 		'to_id': 'emberwake_spirit_1',
-		'task_acquire_events': [],
+		'task_acquire_events': [
+			{
+				'event_type': 'begin_combat',
+				'params': {
+					'boss_mob_id': 'emberwake_spirit_1',
+					'combat_type': 'boss_battle'
+				}
+			}
+		],
 		'task_complete_events': [
 			{
 				'event_type': 'award_item',
@@ -586,7 +587,6 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rokhuld', 'dialog_id': 'rokhuld_b_risen' }},
-			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'rokhuld_b1', 'combat_type': 'boss_battle' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'mountains_mid_city_b_defeat_rokhuld' }},
 		]
 	},
@@ -597,7 +597,9 @@ TASKS += [
 		'type': 'defeat',
 		'to_type': 'mob',
 		'to_id': 'rokhuld_b1',
-		'task_acquire_events': [],
+		'task_acquire_events': [
+			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'rokhuld_b1', 'combat_type': 'boss_battle' }}
+		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_b_victory' }},
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'mountains' }},

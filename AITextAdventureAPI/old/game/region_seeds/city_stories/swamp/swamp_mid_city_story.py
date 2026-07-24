@@ -385,7 +385,15 @@ TASKS += [
 		'type': 'defeat',
 		'to_type': 'npc',
 		'to_id': 'oathrot_voice',
-		'task_acquire_events': [],
+		'task_acquire_events': [
+			{
+				'event_type': 'begin_combat',
+				'params': {
+					'boss_mob_id': 'oathrot_voice',
+					'combat_type': 'boss_battle'
+				}
+			}
+		],
 		'task_complete_events': [
 			{
 				'event_type': 'award_item',

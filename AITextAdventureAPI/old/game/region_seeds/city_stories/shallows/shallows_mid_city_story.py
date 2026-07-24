@@ -381,7 +381,15 @@ TASKS += [
         'type': 'defeat',
         'to_type': 'npc',
         'to_id': 'lanternfade_echo',
-        'task_acquire_events': [],
+        'task_acquire_events': [
+            {
+                'event_type': 'begin_combat',
+                'params': {
+                    'boss_mob_id': 'lanternfade_echo',
+                    'combat_type': 'boss_battle'
+                }
+            }
+        ],
         'task_complete_events': [
             {
                 'event_type': 'award_item',
@@ -679,13 +687,6 @@ TASKS += [
 				}
 			},
 			{
-				'event_type': 'begin_combat',
-				'params': {
-					'boss_mob_id': 'undertunnel_voice_1',
-					'combat_type': 'boss_encounter'
-				}
-			},
-			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'shallows_mid_city_type_d_defeat_undertunnel_voice'
@@ -700,7 +701,15 @@ TASKS += [
 		'type': 'defeat',
 		'to_type': 'mob',
 		'to_id': 'undertunnel_voice_1',
-		'task_acquire_events': [],
+		'task_acquire_events': [
+			{
+				'event_type': 'begin_combat',
+				'params': {
+					'boss_mob_id': 'undertunnel_voice_1',
+					'combat_type': 'boss_battle'
+				}
+			}
+        ],
 		'task_complete_events': [
 			{
 				'event_type': 'award_item',

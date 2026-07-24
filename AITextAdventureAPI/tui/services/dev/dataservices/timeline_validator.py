@@ -30,6 +30,10 @@ R2  MEET_NPC_WITHOUT_CREATE / MEET_NPC_DYNAMIC_REFERENCE
     and is not flagged.
     Root-task exemption: the first task of each story bucket may freely reference
     NPCs not yet seen (they are assumed pre-placed by world setup).
+    MEET_NPC_STANDING_TEXT_ON_ACQUIRE (warning)
+    A set_npc_standing_text event targeting the meet's to_id appears in
+    task_acquire_events. It fires before the meet interaction and the change
+    is almost certainly overwritten — it should be in task_complete_events.
 
 R3  AWARD_TASK_TARGET_MISSING
     award_task referencing a task_id that does not exist anywhere in the known set.
@@ -59,6 +63,9 @@ R8  TASK_SCHEMA_INVALID
     meet    → must have to_type + to_id
     deliver → must have item_id + to_type + to_id
     defeat  → must have to_type == "mob" and to_id
+
+    DEFEAT_NO_BEGIN_COMBAT
+    defeat  → task_acquire_events must contain at least one begin_combat event.
 
 R9  AWARD_GRAPH_CYCLE
     Cycle detected in the award_task directed graph.
@@ -627,6 +634,16 @@ def validate_timeline_integrity(
                     f"'defeat' task must have to_type='mob' and to_id, "
                     f"got to_type={task.get('to_type')!r} to_id={task.get('to_id')!r}",
                 ))
+            has_begin_combat = any(
+                ev.get("event_type") == "begin_combat"
+                for ev in _events(task, "task_acquire_events")
+            )
+            if not has_begin_combat:
+                errors_map[task_id].append(_err(
+                    "DEFEAT_NO_BEGIN_COMBAT",
+                    f"'defeat' task '{task_id}' has no begin_combat event in "
+                    f"task_acquire_events.",
+                ))
 
         # ── R2: meet-NPC check ────────────────────────────────────────
         # A meet task may create its own target NPC inside task_acquire_events
@@ -643,8 +660,6 @@ def validate_timeline_integrity(
             if to_id in own_creates:
                 pass  # Valid — NPC spawned by this task's own acquire events
             elif to_id in _DYNAMIC_NPC_IDS:
-                # A dynamic character slot is valid only if a create_character_npc
-                # event has already been seen earlier in the traversal.
                 if character_npc_slots == 0:
                     errors_map[task_id].append(_err(
                         "MEET_NPC_DYNAMIC_REFERENCE",
@@ -652,7 +667,6 @@ def validate_timeline_integrity(
                         f"create_character_npc event was found.",
                         related_entity_id=to_id,
                     ))
-                # else: slot is filled — no error
             elif to_id and to_id not in created_npc_ids:
                 errors_map[task_id].append(_err(
                     "MEET_NPC_WITHOUT_CREATE",
@@ -660,6 +674,24 @@ def validate_timeline_integrity(
                     related_entity_id=to_id,
                 ))
 
+            # Warn when acquire events mutate the NPC's standing text — this
+            # runs before the player has interacted with them and the text
+            # change will almost certainly be overwritten by the meet sequence.
+            standing_text_on_acquire = any(
+                ev.get("event_type") == "set_npc_standing_text"
+                and str((ev.get("params") or {}).get("npc_id") or "") == to_id
+                for ev in _events(task, "task_acquire_events")
+            )
+            if standing_text_on_acquire:
+                errors_map[task_id].append(_err(
+                    "MEET_NPC_STANDING_TEXT_ON_ACQUIRE",
+                    f"'meet' task '{task_id}' sets standing text for NPC '{to_id}' "
+                    f"in task_acquire_events. This fires before the meet interaction "
+                    f"and is likely unintentional — move it to task_complete_events.",
+                    event_type="set_npc_standing_text",
+                    related_entity_id=to_id,
+                    severity="warning",
+                ))
         for stage, ev in _iter_events(task):
             events_scanned += 1
             raw_type = str(ev.get("event_type", ""))

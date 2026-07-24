@@ -630,7 +630,6 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'aeriola', 'dialog_id': 'aeriola_b_risen' }},
-			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'aeriola_b1', 'combat_type': 'boss_battle' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'snow_large_city_b_defeat_aeriola' }},
 		]
 	},
@@ -641,7 +640,9 @@ TASKS += [
 		'type': 'defeat',
 		'to_type': 'mob',
 		'to_id': 'aeriola_b1',
-		'task_acquire_events': [],
+		'task_acquire_events': [
+			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'aeriola_b1', 'combat_type': 'boss_battle' }}
+		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_b_victory' }},
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'snow' }},

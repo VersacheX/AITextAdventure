@@ -590,13 +590,6 @@ TASKS = [
 				}
 			},
 			{
-				'event_type': 'begin_combat',
-				'params': {
-					'boss_mob_id': 'rotfen_voice_1',
-					'combat_type': 'boss_encounter'
-				}
-			},
-			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'swamp_small_city_type_d_defeat_rotfen_voice'
@@ -611,7 +604,15 @@ TASKS = [
 		'type': 'defeat',
 		'to_type': 'mob',
 		'to_id': 'rotfen_voice_1',
-		'task_acquire_events': [],
+		'task_acquire_events': [
+			{
+				'event_type': 'begin_combat',
+				'params': {
+					'boss_mob_id': 'rotfen_voice_1',
+					'combat_type': 'boss_battle'
+				}
+			}
+        ],
 		'task_complete_events': [
 			{
 				'event_type': 'award_item',

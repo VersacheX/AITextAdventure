@@ -653,7 +653,6 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'uulthar', 'dialog_id': 'uulthar_b_risen' }},
-			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'uulthar_b1', 'combat_type': 'boss_battle' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'shallows_small_city_b_defeat_uulthar' }},
 		]
 	},
@@ -664,7 +663,9 @@ TASKS += [
 		'type': 'defeat',
 		'to_type': 'mob',
 		'to_id': 'uulthar_b1',
-		'task_acquire_events': [],
+		'task_acquire_events': [
+			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'uulthar_b1', 'combat_type': 'boss_battle' }}
+		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_b_victory' }},
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'shallows' }},
@@ -714,7 +715,7 @@ TASKS += [
 	{
 		'task_id': 'shallows_small_city_type_d_deliver_tidekin_seal',
 		'type': 'deliver',
-		'item_id': 'tidekin_seal',
+		'item_id': 'shallows_mid_city_e_tidekin_seal',
 		'to_type': 'npc',
 		'to_id': 'diego',
 		'task_acquire_events': [
@@ -805,13 +806,6 @@ TASKS += [
 				}
 			},
 			{
-				'event_type': 'begin_combat',
-				'params': {
-					'boss_mob_id': 'coveveil_voice_1',
-					'combat_type': 'boss_encounter'
-				}
-			},
-			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'shallows_small_city_type_d_defeat_coveveil_voice'
@@ -826,7 +820,15 @@ TASKS += [
 		'type': 'defeat',
 		'to_type': 'mob',
 		'to_id': 'coveveil_voice_1',
-		'task_acquire_events': [],
+		'task_acquire_events':[
+			{
+				'event_type': 'begin_combat',
+				'params': {
+					'boss_mob_id': 'coveveil_voice_1',
+					'combat_type': 'boss_battle'
+				}
+			}
+		],
 		'task_complete_events': [
 			{
 				'event_type': 'award_item',

@@ -437,13 +437,6 @@ TASKS += [
 				}
 			},
 			{
-				'event_type': 'begin_combat',
-				'params': {
-					'boss_mob_id': 'windcarve_spirit_1',
-					'combat_type': 'boss_encounter'
-				}
-			},
-			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'grassland_large_city_type_d_defeat_windcarve_spirit'
@@ -458,7 +451,15 @@ TASKS += [
 		'type': 'defeat',
 		'to_type': 'mob',
 		'to_id': 'windcarve_spirit_1',
-		'task_acquire_events': [],
+		'task_acquire_events': [
+			{
+				'event_type': 'begin_combat',
+				'params': {
+					'boss_mob_id': 'windcarve_spirit_1',
+					'combat_type': 'boss_battle'
+				}
+			}
+		],
 		'task_complete_events': [
 			{
 				'event_type': 'award_item',
@@ -579,8 +580,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_b_entering_vault' }},
 		],
 		'task_complete_events': [
-			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'serene', 'dialog_id': 'serene_b_risen' }},
-			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'serene_b1', 'combat_type': 'boss_battle' }},
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'serene', 'dialog_id': 'serene_b_risen' }},			
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'grassland_large_city_b_defeat_serene' }},
 		]
 	},
@@ -591,7 +591,9 @@ TASKS += [
 		'type': 'defeat',
 		'to_type': 'mob',
 		'to_id': 'serene_b1',
-		'task_acquire_events': [],
+		'task_acquire_events': [
+			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'serene_b1', 'combat_type': 'boss_battle' }}
+		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_b_victory' }},
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'grassland' }},

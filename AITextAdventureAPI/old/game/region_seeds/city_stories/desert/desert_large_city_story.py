@@ -234,13 +234,6 @@ TASKS = [
         'task_complete_events': [
             # Type D — not gated by anything, player must find the cipher stone and deliver it. standing task
             { 'event_type': 'award_task', 'params': { 'task_id': 'desert_large_city_type_d_deliver_cipher_stone' } },
-            # Type C — standing task
-            {
-                'event_type': 'award_task',
-                'params': {
-                    'task_id': 'desert_large_city_type_c_find_elyra'
-                }
-            },
             # Type E — no gate condition, artifact waits in inventory
             {
                 'event_type': 'award_task',
@@ -386,9 +379,11 @@ TASKS += [
     {
         'task_id': 'desert_large_city_type_e_defeat_choir_echo',
         'type': 'defeat',
-        'to_type': 'npc',
-        'to_id': 'choir_echo',
-        'task_acquire_events': [],
+        'to_type': 'mob',
+        'to_id': 'choir_echo_1',
+        'task_acquire_events': [
+            { 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'choir_echo_1', 'combat_type': 'boss_battle' }}
+        ],
         'task_complete_events': [
             {
                 'event_type': 'award_item',
@@ -411,16 +406,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'rhyla',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'rhyla',
-                    'standing_text': [
-                        "You made it back.",
-                        "And you're still holding it. Good."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -428,6 +413,15 @@ TASKS += [
                 'params': {
                     'npc_id': 'rhyla',
                     'dialog_id': 'rhyla_cipher_received'
+                }
+            },            
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'rhyla',
+                    'standing_text': [
+                        "And you're still holding it. Good."
+                    ]
                 }
             }
         ]
@@ -643,6 +637,7 @@ TASKS += [
 					'dialog_id': 'rhyla_d_cipher_read'
 				}
 			},
+            { 'event_type': 'create_npc', 'params': { 'npc_id': 'archive_voice', 'location': 'region_open_area' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -680,13 +675,6 @@ TASKS += [
 				}
 			},
 			{
-				'event_type': 'begin_combat',
-				'params': {
-					'boss_mob_id': 'archive_voice_1',
-					'combat_type': 'boss_encounter'
-				}
-			},
-			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'desert_large_city_type_d_defeat_archive_voice'
@@ -701,7 +689,15 @@ TASKS += [
 		'type': 'defeat',
 		'to_type': 'mob',
 		'to_id': 'archive_voice_1',
-		'task_acquire_events': [],
+		'task_acquire_events': [
+			{
+				'event_type': 'begin_combat',
+				'params': {
+					'boss_mob_id': 'archive_voice_1',
+					'combat_type': 'boss_battle'
+				}
+			}
+        ],
 		'task_complete_events': [
 			{
 				'event_type': 'award_item',
@@ -724,224 +720,6 @@ TASKS += [
 	},
 
 ]
-
-
-# =========================================================
-# TYPE C — Elyra Dawnseer (extended character, slot 2)
-# Gated by is_chapter_gte: 8
-# Awarded by: desert_large_city_regional_complete_gate (conditional)
-# =========================================================
-NPC_DIALOG += [
-
-    # ── Type C dialogs — Elyra Dawnseer ────────────────────────────
-    {
-        'npc_id': 'kadeem',
-        'dialog_id': 'kadeem_c_elyra_rumour',
-        'dialog': [
-            "There's a woman who passes through the Spire every few weeks.",
-            "Doesn't buy. Doesn't sell.",
-            "She just watches — like she already knows how every deal in this market ends.",
-            "Mara knows her name. She knows everyone's name."
-        ]
-    },
-    {
-        'npc_id': 'mara',
-        'dialog_id': 'mara_c_elyra_vouch',
-        'dialog': [
-            "Elyra Dawnseer.",
-            "She's been circling the Spire for weeks.",
-            "The visions she describes — they're not prophecy. They're pattern recognition pushed past the edge of language.",
-            "She watches your party because she's already seen what happens if you fail.",
-            "Tell her Mara said the cards are in your favour.",
-            "That's the only phrase that opens her door."
-        ]
-    },
-    {
-        'npc_id': 'elyra_dawnseer',
-        'dialog_id': 'elyra_c_first_meet',
-        'dialog': [
-            "Mara's phrase.",
-            "I've been waiting to hear it from someone who means it.",
-            "The Glamour and the Scalpel — you've felt both by now.",
-            "The city shows you what it wants you to see.",
-            "I see what it hides.",
-            "You need that. And I need somewhere to stand when the next vision breaks."
-        ]
-    },
-    {
-        'npc_id': 'elyra_dawnseer',
-        'dialog_id': 'elyra_c_joins',
-        'dialog': [
-            "Every future I've seen with you in it is uncertain.",
-            "That's the first honest thing I've encountered in years.",
-            "I'll come."
-        ]
-    },
-
-]
-
-TASKS += [
-    {
-        'task_id': 'desert_large_city_type_c_find_elyra',
-        'type': 'meet',
-        'to_type': 'npc',
-        'to_id': 'kadeem',
-        'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'kadeem',
-                    'standing_text': [
-                        "Strange woman's been watching the market again.",
-                        "Mara knows her. She knows everyone."
-                    ]
-                }
-            },
-        ],
-        'task_complete_events': [
-            {
-                'event_type': 'initiate_dialog',
-                'params': {
-                    'npc_id': 'kadeem',
-                    'dialog_id': 'kadeem_c_elyra_rumour'
-                }
-            },
-            {
-                'event_type': 'award_task',
-                'params': {
-                    'task_id': 'desert_large_city_type_c_consult_mara'
-                }
-            },
-        ]
-    },
-    {
-        'task_id': 'desert_large_city_type_c_consult_mara',
-        'type': 'meet',
-        'to_type': 'npc',
-        'to_id': 'mara',
-        'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'mara',
-                    'standing_text': [
-                        "Kadeem sent you about the woman in the Spire.",
-                        "I know exactly who you mean."
-                    ]
-                }
-            },
-        ],
-        'task_complete_events': [
-            {
-                'event_type': 'initiate_dialog',
-                'params': {
-                    'npc_id': 'mara',
-                    'dialog_id': 'mara_c_elyra_vouch'
-                }
-            },
-            {
-                'event_type': 'award_task',
-                'params': {
-                    'task_id': 'desert_large_city_type_c_earn_elyra'
-                }
-            },
-        ]
-    },
-    {
-        'task_id': 'desert_large_city_type_c_earn_elyra',
-        'type': 'meet',
-        'to_type': 'npc',
-        'to_id': 'elyra_dawnseer',
-        'task_acquire_events': [
-            {
-                'event_type': 'create_npc',
-                'params': {
-                    'npc_id': 'elyra_dawnseer',
-                    'location': 'region_open_area'
-                }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'elyra_dawnseer',
-                    'standing_text': [
-                        "The Spire changes what people see.",
-                        "Come when you're ready to hear what it hides."
-                    ]
-                }
-            },
-        ],
-        'task_complete_events': [
-            {
-                'event_type': 'initiate_dialog',
-                'params': {
-                    'npc_id': 'elyra_dawnseer',
-                    'dialog_id': 'elyra_c_first_meet'
-                }
-            },
-            {
-                'event_type': 'initiate_dialog',
-                'params': {
-                    'npc_id': 'elyra_dawnseer',
-                    'dialog_id': 'elyra_c_joins'
-                }
-            },
-            {
-                'event_type': 'hide_npc',
-                'params': { 'npc_id': 'elyra_dawnseer' }
-            },
-            {
-                'event_type': 'character_join',
-                'params': { 'character_id': 'elyra_dawnseer' }
-            },
-        ]
-    },
-
-]
-
-# ── Type E ── Dune Cipher Stone → gates Desert Large Type D ───────────────────
-# Rhyla the Echo-Binder holds a stone carved with resonance patterns she
-# recovered from the Dune Choir's dispersal site. No new NPCs. No dungeon.
-
-NPC_DIALOG += [
-
-	{
-		'npc_id': 'rhyla',
-		'dialog_id': 'rhyla_e_cipher_stone',
-		'dialog': [
-			"After the Choir fell silent, I swept the dispersal site.",
-			"The sand had pressed this into the surface — a stone carved with resonance patterns.",
-			"It stores the frequency of the Choir's final note.",
-			"I don't know what it unlocks. But it hums when held near old desert architecture.",
-			"Take it. Something out there will know what to do with it."
-		]
-	},
-
-]
-
-TASKS += [
-
-	# E-1 — Meet Rhyla to receive the Dune Cipher Stone
-	{
-		'task_id': 'desert_large_city_type_e_meet_rhyla',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'rhyla',
-		'task_acquire_events': [
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rhyla', 'standing_text': [
-				"The dispersal site left something behind.",
-				"A carved stone that hums with old resonance.",
-				"Come find me when you're ready for it."
-			]}}
-		],
-		'task_complete_events': [
-			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rhyla', 'dialog_id': 'rhyla_e_cipher_stone' }},
-			{ 'event_type': 'award_item', 'params': { 'item_id': 'desert_large_city_e_dune_cipher_stone' }},
-		]
-	},
-
-]
-
 
 PRIMARY_STORY_SETTINGS = {
 	'story_id': 'desert_large_city_story',

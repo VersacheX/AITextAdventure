@@ -392,7 +392,15 @@ TASKS += [
         'type': 'defeat',
         'to_type': 'npc',
         'to_id': 'rimechant_echo',
-        'task_acquire_events': [],
+        'task_acquire_events': [
+            {
+                'event_type': 'begin_combat',
+                'params': {
+                    'boss_mob_id': 'rimechant_echo',
+                    'combat_type': 'boss_battle'
+                }
+            }
+        ],
         'task_complete_events': [
             {
                 'event_type': 'award_item',
@@ -631,11 +639,11 @@ NPC_DIALOG += [
 
 TASKS += [
 
-	# D-0 — Deliver pageant_decree_shard to Brawn (standalone deliver; unlocks D chain)
+	# D-0 — Deliver snow_mid_city_e_pageant_decree_shard to Brawn (standalone deliver; unlocks D chain)
 	{
 		'task_id': 'snow_mid_city_type_d_deliver_decree_shard',
 		'type': 'deliver',
-		'item_id': 'pageant_decree_shard',
+		'item_id': 'snow_mid_city_e_pageant_decree_shard',
 		'to_type': 'npc',
 		'to_id': 'brawn',
 		'task_acquire_events': [
@@ -725,13 +733,6 @@ TASKS += [
 				}
 			},
 			{
-				'event_type': 'begin_combat',
-				'params': {
-					'boss_mob_id': 'blueforge_spirit_1',
-					'combat_type': 'boss_encounter'
-				}
-			},
-			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'snow_mid_city_type_d_defeat_blueforge_spirit'
@@ -746,7 +747,15 @@ TASKS += [
 		'type': 'defeat',
 		'to_type': 'mob',
 		'to_id': 'blueforge_spirit_1',
-		'task_acquire_events': [],
+		'task_acquire_events': [
+			{
+				'event_type': 'begin_combat',
+				'params': {
+					'boss_mob_id': 'blueforge_spirit_1',
+					'combat_type': 'boss_battle'
+				}
+			}
+        ],
 		'task_complete_events': [
 			{
 				'event_type': 'award_item',

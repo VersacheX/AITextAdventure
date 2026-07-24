@@ -469,7 +469,15 @@ TASKS += [
         'type': 'defeat',
         'to_type': 'npc',
         'to_id': 'sanctum_voice',
-        'task_acquire_events': [],
+        'task_acquire_events': [
+            {
+                'event_type': 'begin_combat',
+                'params': {
+                    'boss_mob_id': 'sanctum_voice_1',
+                    'combat_type': 'boss_battle'
+                }
+            }
+        ],
         'task_complete_events': [
             {
                 'event_type': 'award_item',
@@ -648,7 +656,7 @@ TASKS += [
 				'event_type': 'begin_combat',
 				'params': {
 					'boss_mob_id': 'sanctum_voice_1',
-					'combat_type': 'boss_encounter'
+					'combat_type': 'boss_battle'
 				}
 			},
 			{

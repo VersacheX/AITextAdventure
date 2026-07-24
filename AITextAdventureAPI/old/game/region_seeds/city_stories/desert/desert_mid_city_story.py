@@ -364,6 +364,13 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{
+				'event_type': 'create_npc',
+				'params': {
+					'npc_id': 'archivist_warden_threx',
+					'location': 'region_city_other1'
+				}
+			},
+			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'desert_mid_city_type_d_consult_threx'
@@ -379,18 +386,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'archivist_warden_threx',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'archivist_warden_threx',
-					'standing_text': [
-						"Ink Resonance Vial detected.",
-						"Provenance: Theatre of Echoed Faces.",
-						"Protocol: decode before compound destabilizes.",
-						"Bring it to me immediately."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -398,6 +393,13 @@ TASKS += [
 				'params': {
 					'npc_id': 'archivist_warden_threx',
 					'dialog_id': 'threx_d_vial_decode'
+				}
+			},
+			{
+				'event_type': 'create_npc',
+				'params': {
+					'npc_id': 'ink_specter',
+					'location': 'region_open_area'
 				}
 			},
 			{
@@ -416,17 +418,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'ink_specter',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'ink_specter',
-					'standing_text': [
-						"The Inkwell Depths stir.",
-						"Kavren says a shifting presence has been seen near the lower archive entrance.",
-						"The vial has drawn the Specter forward."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -434,13 +425,6 @@ TASKS += [
 				'params': {
 					'npc_id': 'ink_specter',
 					'dialog_id': 'ink_specter_d_awakens'
-				}
-			},
-			{
-				'event_type': 'begin_combat',
-				'params': {
-					'boss_mob_id': 'ink_specter_1',
-					'combat_type': 'boss_encounter'
 				}
 			},
 			{
@@ -458,7 +442,15 @@ TASKS += [
 		'type': 'defeat',
 		'to_type': 'mob',
 		'to_id': 'ink_specter_1',
-		'task_acquire_events': [],
+		'task_acquire_events': [
+			{
+				'event_type': 'begin_combat',
+				'params': {
+					'boss_mob_id': 'ink_specter_1',
+					'combat_type': 'boss_battle'
+				}
+			}
+		],
 		'task_complete_events': [
 			{
 				'event_type': 'award_item',
@@ -574,7 +566,6 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'zaruun', 'dialog_id': 'zaruun_b_risen' }},
-			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'zaruun_b1', 'combat_type': 'boss_battle' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'desert_mid_city_b_defeat_zaruun' }},
 		]
 	},
@@ -585,7 +576,9 @@ TASKS += [
 		'type': 'defeat',
 		'to_type': 'mob',
 		'to_id': 'zaruun_b1',
-		'task_acquire_events': [],
+		'task_acquire_events': [
+			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'zaruun_b1', 'combat_type': 'boss_battle' }},
+		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_b_victory' }},
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'desert' }},

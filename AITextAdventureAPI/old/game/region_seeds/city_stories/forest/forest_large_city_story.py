@@ -159,7 +159,8 @@ TASKS = [
 				'params': {
 					'task_id': 'forest_large_city_type_a_meet_saphrin'
 				}
-			}
+			},
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'forest_large_city_type_d_deliver_veil_leaf' }}
 		]
 	},
 	{
@@ -477,7 +478,6 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'marrowroot', 'dialog_id': 'marrowroot_b_risen' }},
-			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'marrowroot_b1', 'combat_type': 'boss_battle' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'forest_large_city_b_defeat_marrowroot' }},
 		]
 	},
@@ -488,7 +488,9 @@ TASKS += [
 		'type': 'defeat',
 		'to_type': 'mob',
 		'to_id': 'marrowroot_b1',
-		'task_acquire_events': [],
+		'task_acquire_events': [			
+			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'marrowroot_b1', 'combat_type': 'boss_battle' }}
+		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_b_victory' }},
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'forest' }},

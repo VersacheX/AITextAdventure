@@ -43,6 +43,14 @@ NPCS = [
             'A shimmering figure made of distorted radio waves and static. '
             'It flickers between frequencies as it speaks.'
         )
+    },
+    {
+        'npc_id': 'signal_wraith_2',
+        'name': 'Signal Wraith',
+        'description': (
+            'A shimmering figure made of distorted radio waves and static. '
+            'It flickers between frequencies as it speaks.'
+        )
     }
 ]
 
@@ -390,9 +398,17 @@ TASKS += [
     {
         'task_id': 'desert_small_city_type_e_defeat_signal_wraith',
         'type': 'defeat',
-        'to_type': 'npc',
+        'to_type': 'mob',
         'to_id': 'signal_wraith',
-        'task_acquire_events': [],
+        'task_acquire_events': [
+            {
+                'event_type': 'begin_combat',
+                'params': {
+                    'boss_mob_id': 'signal_wraith',
+                    'combat_type': 'boss_battle'
+                }
+            }
+        ],
         'task_complete_events': [
             {
                 'event_type': 'award_item',
@@ -616,7 +632,7 @@ NPC_DIALOG += [
 	},
 
 	{
-		'npc_id': 'signal_wraith',
+		'npc_id': 'signal_wraith_2',
 		'dialog_id': 'signal_wraith_d_awakens',
 		'dialog': [
 			"The ledger plate opens my frequency.",
@@ -688,6 +704,13 @@ TASKS += [
 					'dialog_id': 'venn_d_plate_read'
 				}
 			},
+            {
+                'event_type': 'create_npc',
+                'params': {
+                    'npc_id': 'signal_wraith_2',
+                    'location': 'region_open_area'
+                }
+            },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -702,12 +725,12 @@ TASKS += [
 		'task_id': 'desert_small_city_type_d_meet_signal_wraith',
 		'type': 'meet',
 		'to_type': 'npc',
-		'to_id': 'signal_wraith',
+		'to_id': 'signal_wraith_2',
 		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
-					'npc_id': 'signal_wraith',
+					'npc_id': 'signal_wraith_2',
 					'standing_text': [
 						"Static bleeds across every device in the Bazaar.",
 						"Jexa says her circuits are screaming — something is broadcasting on all channels.",
@@ -720,15 +743,8 @@ TASKS += [
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
-					'npc_id': 'signal_wraith',
+					'npc_id': 'signal_wraith_2',
 					'dialog_id': 'signal_wraith_d_awakens'
-				}
-			},
-			{
-				'event_type': 'begin_combat',
-				'params': {
-					'boss_mob_id': 'signal_wraith_1',
-					'combat_type': 'boss_encounter'
 				}
 			},
 			{
@@ -745,8 +761,16 @@ TASKS += [
 		'task_id': 'desert_small_city_type_d_defeat_signal_wraith',
 		'type': 'defeat',
 		'to_type': 'mob',
-		'to_id': 'signal_wraith_1',
-		'task_acquire_events': [],
+		'to_id': 'signal_wraith_2',
+		'task_acquire_events': [            
+			{
+				'event_type': 'begin_combat',
+				'params': {
+					'boss_mob_id': 'signal_wraith_2',
+					'combat_type': 'boss_battle'
+				}
+			}
+        ],
 		'task_complete_events': [
 			{
 				'event_type': 'award_item',
@@ -777,76 +801,6 @@ TASKS += [
 					]
 				}
 			},
-		]
-	},
-
-]
-# ── Type E ── Eroded Ledger Plate → gates Desert Small Type D ─────────────────
-# Krayt Morrowdeal found an engraved metal plate among scrap — it lists
-# transactions in a cipher no one in the Bazaar recognises. No new NPCs. No dungeon.
-
-NPC_DIALOG += [
-
-	{
-		'npc_id': 'morrowdeal_krayt',
-		'dialog_id': 'krayt_e_ledger_plate',
-		'dialog': [
-			"Came in with a salvage haul last season.",
-			"Metal plate. Engraved both sides with figures and marks I can't read.",
-			"Jexa ran it through every cipher she knows. Nothing.",
-			"The Scrap-Seer says it's a transaction record from before the desert had cities.",
-			"I can't sell what I can't explain. And I can't explain this.",
-			"Take it off my hands. Maybe it means something to someone further out."
-		]
-	},
-	{
-		'npc_id': 'scrap_seer_venn',
-		'dialog_id': 'venn_e_plate_reading',
-		'dialog': [
-			"The machine-emotion on that plate is old.",
-			"Not broken — retired. Deliberately.",
-			"Someone closed a ledger and buried the record.",
-			"What's recorded in that plate never expired. It's still owed."
-		]
-	},
-
-]
-
-TASKS += [
-
-	# E-1 — Consult Venn about the plate
-	{
-		'task_id': 'desert_small_city_type_e_consult_venn',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'scrap_seer_venn',
-		'task_acquire_events': [
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'scrap_seer_venn', 'standing_text': [
-				"Krayt's mystery plate — I've been listening to it.",
-				"Come. It has a lot to say."
-			]}}
-		],
-		'task_complete_events': [
-			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'scrap_seer_venn', 'dialog_id': 'venn_e_plate_reading' }},
-			{ 'event_type': 'award_task', 'params': { 'task_id': 'desert_small_city_type_e_collect_plate' }},
-		]
-	},
-
-	# E-2 — Collect from Krayt
-	{
-		'task_id': 'desert_small_city_type_e_collect_plate',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'morrowdeal_krayt',
-		'task_acquire_events': [
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'morrowdeal_krayt', 'standing_text': [
-				"Venn read the plate then? Good.",
-				"Come take it. My shelf space is expensive."
-			]}}
-		],
-		'task_complete_events': [
-			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'morrowdeal_krayt', 'dialog_id': 'krayt_e_ledger_plate' }},
-			{ 'event_type': 'award_item', 'params': { 'item_id': 'desert_small_city_e_eroded_ledger_plate' }},
 		]
 	},
 

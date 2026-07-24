@@ -514,7 +514,15 @@ TASKS += [
         'type': 'defeat',
         'to_type': 'npc',
         'to_id': 'gearghost',
-        'task_acquire_events': [],
+        'task_acquire_events': [
+            {
+                'event_type': 'begin_combat',
+                'params': {
+                    'boss_mob_id': 'gearghost',
+                    'combat_type': 'boss_battle'
+                }
+            }
+        ],
         'task_complete_events': [
             {
                 'event_type': 'award_item',
@@ -683,13 +691,6 @@ TASKS += [
 				}
 			},
 			{
-				'event_type': 'begin_combat',
-				'params': {
-					'boss_mob_id': 'conduit_echo_1',
-					'combat_type': 'boss_encounter'
-				}
-			},
-			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'mountains_large_city_type_d_defeat_conduit_echo'
@@ -704,7 +705,15 @@ TASKS += [
 		'type': 'defeat',
 		'to_type': 'mob',
 		'to_id': 'conduit_echo_1',
-		'task_acquire_events': [],
+		'task_acquire_events': [
+			{
+				'event_type': 'begin_combat',
+				'params': {
+					'boss_mob_id': 'conduit_echo_1',
+					'combat_type': 'boss_battle'
+				}
+			}
+        ],
 		'task_complete_events': [
 			{
 				'event_type': 'award_item',

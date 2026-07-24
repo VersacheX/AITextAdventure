@@ -559,7 +559,8 @@ TASKS = [
     },
     {
         'task_id': 'main_story_ch12_meet_rell_again',
-        'type': 'meet',
+        'type': 'deliver',
+        'item_id': 'embers_pressed_flower',
         'to_type': 'npc',
         'to_id': 'rell',
         'task_acquire_events': [
@@ -570,6 +571,9 @@ TASKS = [
             ]}}
         ],
         'task_complete_events': [
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_receives_keepsake' }},
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_farewell' }},
+            { 'event_type': 'remove_item', 'params': { 'item_id': 'embers_pressed_flower' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_final_request' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch12_to_rell_final' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_final_response' }},
@@ -577,25 +581,9 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch12_to_rell_final' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch12_to_rell_final' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_ember_keepsake_request' }},
-            # ── Type A: award city chain + the deliver task back here ──
-            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch12_deliver_ember_keepsake_to_rell' }},
-        ]
-    },
-    # ── New task: deliver Ember's keepsake ─────────────────────────
-    {
-        'task_id': 'main_story_ch12_deliver_ember_keepsake_to_rell',
-        'type': 'deliver',
-        'item_id': 'embers_pressed_flower',
-        'to_type': 'npc',
-        'to_id': 'rell',
-        'task_acquire_events': [],
-        'task_complete_events': [
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_receives_keepsake' }},
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_farewell' }},
-            { 'event_type': 'remove_item', 'params': { 'item_id': 'embers_pressed_flower' }},
             { 'event_type': 'advance_chapter' }
         ]
-    },
+    }
 ]
 
 PRIMARY_STORY_SETTINGS = {
