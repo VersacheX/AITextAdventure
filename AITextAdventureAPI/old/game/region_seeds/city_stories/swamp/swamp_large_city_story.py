@@ -165,6 +165,12 @@ TASKS = [
 			{
 				'event_type': 'award_task',
 				'params': {
+					'task_id': 'swamp_large_city_type_d_deliver_marrow_shard'
+				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
 					'task_id': 'swamp_large_city_b_void_gauntlet'
 				}
 			}
@@ -383,6 +389,13 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{
+				'event_type': 'create_npc',
+				'params': {
+					'npc_id': 'mire_seer_halveth',
+					'location': 'region_city_other1'
+				}
+			},
+			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'swamp_large_city_type_d_consult_halveth'
@@ -416,6 +429,13 @@ TASKS += [
 				'params': {
 					'npc_id': 'mire_seer_halveth',
 					'dialog_id': 'halveth_d_shard_read'
+				}
+			},
+			{
+				'event_type': 'create_npc',
+				'params': {
+					'npc_id': 'relicmire_voice',
+					'location': 'region_open_area'
 				}
 			},
 			{

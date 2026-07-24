@@ -112,16 +112,22 @@ NPC_DIALOG += [
 			"You would take our sustenance."
 		]
 	},
-	{
-		'npc_id': 'lanternsworn_janrel',
-		'dialog_id': 'janrel_vessel_received',
-		'dialog': [
-			"The omen-light steadied the moment you returned.",
-			"The vessel still has something inside — I can feel it through the glass.",
-			"Whatever memory it holds has survived.",
-			"This doesn't belong in the bayou. It belongs with whoever needs to remember."
-		]
-	},
+    {
+        'npc_id': 'lanternsworn_janrel',
+        'dialog_id': 'janrel_vessel_received',
+        'dialog': [
+            "The lantern steadied the moment you returned.",
+            "You have it — and the Oathrot Voice no longer does.",
+            "When the Broken Pact dissolved, it pressed this into my hands.",
+            "A sealed vessel — clay, swamp-fired.",
+            "The omen-light reads it as a memory container. Something the Bayou compressed over centuries.",
+            "(holding her lantern near it — the flame shifts green)",
+            "The Court can't hold it. It belongs further down the swamp.",
+            "Gnashwater Hollow was shaped by bargains older than ours.",
+            "Whatever is in this vessel — it was made there.",
+            "Carry it sealed. If it opens before it arrives, the memory dissipates."
+        ]
+    }
 
 ]
 
@@ -704,6 +710,7 @@ TASKS += [
 	},
 
 ]
+
 # ── Type E ── Bayou Memory Vessel → gates Swamp Small Type D (Gnashwater) ─────
 # Janrel of the Lantern-Sworn received a sealed clay vessel from a spirit
 # during the Broken Pact resolution — it holds compressed swamp memory.
@@ -733,48 +740,6 @@ NPC_DIALOG += [
 			"The memory inside it belongs to the hollow — not the Court.",
 			"Carry it sealed. If it opens before it arrives, the memory dissipates.",
 			"Don't drop it in water."
-		]
-	},
-
-]
-
-TASKS += [
-
-	# E-1 — Consult Selka about the vessel
-	{
-		'task_id': 'swamp_mid_city_type_e_consult_selka',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'oath_reed_selka',
-		'task_acquire_events': [
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'oath_reed_selka', 'standing_text': [
-				"Janrel received something from the Pact's dissolution.",
-				"The reeds have been reading it all morning.",
-				"Come."
-			]}}
-		],
-		'task_complete_events': [
-			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'oath_reed_selka', 'dialog_id': 'selka_e_vessel_reading' }},
-			{ 'event_type': 'award_task', 'params': { 'task_id': 'swamp_mid_city_type_e_collect_vessel' }},
-		]
-	},
-
-	# E-2 — Collect from Janrel
-	{
-		'task_id': 'swamp_mid_city_type_e_collect_vessel',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'lanternsworn_janrel',
-		'task_acquire_events': [
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lanternsworn_janrel', 'standing_text': [
-				"The lantern hasn't steadied since the Pact dissolved.",
-				"The vessel is the reason.",
-				"Take it to Gnashwater."
-			]}}
-		],
-		'task_complete_events': [
-			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lanternsworn_janrel', 'dialog_id': 'janrel_e_memory_vessel' }},
-			{ 'event_type': 'award_item', 'params': { 'item_id': 'swamp_mid_city_e_bayou_memory_vessel' }},
 		]
 	},
 
