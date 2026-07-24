@@ -187,7 +187,34 @@ NPC_DIALOG = [
 	},
 
 ]
+# ── Type D dialogs — Rotfen Dredge Blade ───────────────────────
 
+NPC_DIALOG += [
+
+    {
+        'npc_id': 'channel_seer_draveth',
+        'dialog_id': 'draveth_d_vessel_read',
+        'dialog': [
+            "This vessel — the memory inside it is not from the Hollow.",
+            "It carries an imprint of the Bayou's oldest channels.",
+            "The Rotfen Voice will sense it the moment you cross the Hideaway threshold.",
+            "It will interpret the vessel as a claim on its territory.",
+            "That anger is what we need. It will surface — and you will be ready."
+        ]
+    },
+
+    {
+        'npc_id': 'rotfen_voice',
+        'dialog_id': 'rotfen_voice_d_awakens',
+        'dialog': [
+            "That vessel does not belong in the Hollow.",
+            "The Bayou's memory is a poison here.",
+            "You carry it as a weapon against me.",
+            "Then I will take it — and every route you ever knew."
+        ]
+    },
+
+]
 
 TASKS = [
 	{
@@ -234,7 +261,8 @@ TASKS = [
 				'params': {
 					'task_id': 'swamp_small_city_regional_complete_gate'
 				}
-			}
+			},
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'swamp_small_city_type_d_deliver_memory_vessel' }},
 		]
 	},
     {
