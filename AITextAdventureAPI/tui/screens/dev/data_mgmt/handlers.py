@@ -363,26 +363,43 @@ def _handle_copy(screen: "DataMgmtScreen") -> None:
 def validate_timeline_for_screen(screen: "DataMgmtScreen") -> None:
     """Run the timeline integrity validator and repaint the tree.
 
-    Errors areannotated in-place on each ``TimelineTaskNode.errors`` list.
+    Errors are annotated in-place on each ``TimelineTaskNode.errors`` list.
     The tree is then rebuilt so labels for invalid tasks render in red.
-    A status notification reports the total error count.
+    A status notification reports error, warning, and total affected task counts.
     """
     import game.constants as const
 
     groups = get_timeline_tree()
-    summary = validate_timeline_integrity(groups, const)
+    validate_timeline_integrity(groups, const)
 
     # Repaint — rebuild uses the now-annotated nodes from the same cache
     rebuild_timeline_tree_for_screen(screen)
 
-    total_errors  = summary.get("total_errors", 0)
-    invalid_tasks = summary.get("invalid_tasks", 0)
+    # Tally by severity across all annotated nodes
+    error_tasks   = 0
+    warning_tasks = 0
+    for group in groups:
+        for bucket in group.buckets:
+            for tn in bucket.tasks:
+                has_error   = any(e.severity == "error"   for e in tn.errors)
+                has_warning = any(e.severity == "warning" for e in tn.errors)
+                if has_error:
+                    error_tasks += 1
+                if has_warning:
+                    warning_tasks += 1
 
-    if total_errors == 0:
+    total_tasks = error_tasks + warning_tasks
+
+    if total_tasks == 0:
         screen.notify("✓ Timeline integrity OK — no errors found.", timeout=3.0)
     else:
+        parts = []
+        if error_tasks:
+            parts.append(f"{error_tasks} error task(s)")
+        if warning_tasks:
+            parts.append(f"{warning_tasks} warning task(s)")
         screen.notify(
-            f"✗ {total_errors} error(s) across {invalid_tasks} task(s) — invalid tasks shown in red.",
+            f"✗ {total_tasks} total affected task(s): {', '.join(parts)}.",
             severity="warning",
             timeout=5.0,
         )

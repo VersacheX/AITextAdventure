@@ -390,7 +390,7 @@ TASKS += [
     {
         'task_id': 'snow_mid_city_type_e_defeat_rimechant_echo',
         'type': 'defeat',
-        'to_type': 'npc',
+        'to_type': 'mob',
         'to_id': 'rimechant_echo',
         'task_acquire_events': [
             {

@@ -288,6 +288,12 @@ TASKS = [
                 'params': {
                     'task_id': 'forest_mid_city_type_d_deliver_root_graft'
                 }
+            },
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'forest_mid_city_type_e_meet_vael'
+                }
             }
         ]
     },
@@ -422,7 +428,7 @@ TASKS += [
     {
         'task_id': 'forest_mid_city_type_e_defeat_riftspark',
         'type': 'defeat',
-        'to_type': 'npc',
+        'to_type': 'mob',
         'to_id': 'riftspark',
         'task_acquire_events': [
             {

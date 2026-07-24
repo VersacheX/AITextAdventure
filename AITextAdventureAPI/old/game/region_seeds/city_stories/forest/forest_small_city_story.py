@@ -372,7 +372,7 @@ TASKS += [
     {
         'task_id': 'forest_small_city_type_e_defeat_burrow_whisper',
         'type': 'defeat',
-        'to_type': 'npc',
+        'to_type': 'mob',
         'to_id': 'burrow_whisper',
         'task_acquire_events': [
             {

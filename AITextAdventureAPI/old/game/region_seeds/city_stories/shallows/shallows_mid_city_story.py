@@ -245,6 +245,12 @@ TASKS = [
                 'params': {
                     'task_id': 'shallows_mid_city_type_d_deliver_corsair_fragment'
                 }
+            },
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'shallows_mid_city_type_e_consult_vexa'
+                }
             }
 		]
 	},
@@ -379,7 +385,7 @@ TASKS += [
     {
         'task_id': 'shallows_mid_city_type_e_defeat_lanternfade_echo',
         'type': 'defeat',
-        'to_type': 'npc',
+        'to_type': 'mob',
         'to_id': 'lanternfade_echo',
         'task_acquire_events': [
             {
@@ -650,6 +656,13 @@ TASKS += [
 					'dialog_id': 'thalen_d_fragment_read'
 				}
 			},
+            {
+                'event_type': 'create_npc',
+                'params': {
+                    'npc_id': 'undertunnel_voice',
+                    'location': 'region_open_area'
+                }
+            },
 			{
 				'event_type': 'award_task',
 				'params': {

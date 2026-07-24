@@ -247,6 +247,17 @@ TASKS = [
                 'params': {
                     'task_id': 'desert_large_city_type_f_find_seth_trail'
                 }
+            },
+            #Update standing text after regional completion - this needs to be done for the first 7 region cities            
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'kadeem',
+                    'standing_text': [
+                        "Something came in from the deep desert.",
+                        "Buyers won't touch it. Figured you might want a look."
+                    ]
+                }
             }
         ]
     },
@@ -266,16 +277,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'kadeem',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'kadeem',
-                    'standing_text': [
-                        "Something came in from the deep desert.",
-                        "Buyers won't touch it. Figured you might want a look."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -306,16 +307,6 @@ TASKS += [
                     'npc_id': 'rhyla',
                     'location': 'region_open_area'
                 }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'rhyla',
-                    'standing_text': [
-                        "A Cipher Vault. I haven't heard that name in years.",
-                        "Tell me what Kadeem described."
-                    ]
-                }
             }
         ],
         'task_complete_events': [
@@ -324,6 +315,17 @@ TASKS += [
                 'params': {
                     'npc_id': 'rhyla',
                     'dialog_id': 'rhyla_cipher_context'
+                }
+            },
+            
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'rhyla',
+                    'standing_text': [
+                        "The vault is sealed. The Choir will not let you pass.",
+                        "You will have to confront the Choir Echo to gain access."
+                    ]
                 }
             },
             {
@@ -346,16 +348,6 @@ TASKS += [
                 'params': {
                     'npc_id': 'choir_echo',
                     'location': 'region_open_area'
-                }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'choir_echo',
-                    'standing_text': [
-                        "This place is sealed.",
-                        "Leave."
-                    ]
                 }
             }
         ],
@@ -444,16 +436,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'kadeem',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'kadeem',
-                    'standing_text': [
-                        "Seth blew through here and left in a hurry.",
-                        "Left something with Mara. Ask her about it."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -461,6 +443,17 @@ TASKS += [
                 'params': {
                     'npc_id': 'kadeem',
                     'dialog_id': 'kadeem_seth_tip'
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'kadeem',
+                    'standing_text': [
+                        "Seth's been through here. Left in a hurry — said something came off one of his drops wrong.",
+                        "He usually moves salvage through Mara. Whatever it was, it rattled him.",
+                        "She might know where he went."
+                    ]
                 }
             },
             {
@@ -478,16 +471,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'mara',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'mara',
-                    'standing_text': [
-                        "Seth? Yes, he was here.",
-                        "Left something in my back room. Not sure what to make of it."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -495,6 +478,17 @@ TASKS += [
                 'params': {
                     'npc_id': 'mara',
                     'dialog_id': 'mara_seth_info'
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'mara',
+                    'standing_text': [
+                        "Seth? Yeah. Dropped off a crate, wouldn't say from where.",
+                        "The manifest was still in it. Itemized list — mostly junk, but one entry was circled and crossed out.",
+                        "He took it with him. But he left the crate. It's still in my back room."
+                    ]
                 }
             },
             {
@@ -512,16 +506,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'mara',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'mara',
-                    'standing_text': [
-                        "The crate is in the back. The manifest is still inside.",
-                        "Take it — I want no part of whatever Seth was moving."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -535,6 +519,18 @@ TASKS += [
                 'event_type': 'award_item',
                 'params': {
                     'item_id': 'desert_large_city_f_salvage_manifest'
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'mara',
+                    'standing_text': [
+                        "The manifest. So he left it after all.",
+                        "Circled entry reads: 'recovered — Desert Metropolis vault. Rerouted. Do not log.' ",
+                        "That's Seth's handwriting. Whatever he pulled out of that vault, it wasn't for a client.",
+                        "Keep it. Might matter to someone later."
+                    ]
                 }
             }
         ]

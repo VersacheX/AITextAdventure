@@ -360,6 +360,14 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{
+				'event_type': 'create_npc',
+				'params': {
+					'npc_id': 'hearth_seer_marnel',
+					'location': 'region_city_other2'
+				}
+
+			},
+			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'grassland_small_city_type_d_consult_marnel'
@@ -393,6 +401,13 @@ TASKS += [
 				'params': {
 					'npc_id': 'hearth_seer_marnel',
 					'dialog_id': 'marnel_d_token_read'
+				}
+			},
+			{
+				'event_type': 'create_npc',
+				'params': {
+					'npc_id': 'charmroot_voice',
+					'location': 'region_open_area'
 				}
 			},
 			{

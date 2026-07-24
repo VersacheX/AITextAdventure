@@ -257,6 +257,12 @@ TASKS = [
                 'params': {
                     'task_id': 'mountains_large_city_type_d_deliver_armor_key'
                 }
+            },
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'mountains_large_city_type_e_consult_sindra'
+                }
             }
         ]
     },
@@ -512,7 +518,7 @@ TASKS += [
     {
         'task_id': 'mountains_large_city_type_e_defeat_gearghost',
         'type': 'defeat',
-        'to_type': 'npc',
+        'to_type': 'mob',
         'to_id': 'gearghost',
         'task_acquire_events': [
             {
@@ -654,6 +660,13 @@ TASKS += [
 					'dialog_id': 'gorvak_d_key_assay'
 				}
 			},
+            {
+                'event_type': 'create_npc',
+                'params': {
+                    'npc_id': 'conduit_echo',
+                    'location': 'region_open_area'
+                }
+            },
 			{
 				'event_type': 'award_task',
 				'params': {

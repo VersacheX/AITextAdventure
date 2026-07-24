@@ -245,13 +245,6 @@ TASKS = [
         'type': 'complete_regional_quests',
         'task_acquire_events': [],
         'task_complete_events': [
-            # Type C — gated by chapter 11 being reached
-            {
-                'event_type': 'award_task',
-                'params': {
-                    'task_id': 'shallows_large_city_type_c_find_dare'
-                }
-            },
             # Type E — no gate condition, artifact waits in inventory
             {
                 'event_type': 'award_task',
@@ -270,6 +263,12 @@ TASKS = [
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'shallows_large_city_type_d_deliver_brine_compass'
+                }
+            },
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'shallows_large_city_type_e_meet_syrin'
                 }
             }
         ]
@@ -405,7 +404,7 @@ TASKS += [
     {
         'task_id': 'shallows_large_city_type_e_defeat_stormtide_echo',
         'type': 'defeat',
-        'to_type': 'npc',
+        'to_type': 'mob',
         'to_id': 'stormtide_echo',
         'task_acquire_events': [
             {
@@ -707,6 +706,13 @@ TASKS += [
 					'dialog_id': 'marenna_d_compass_read'
 				}
 			},
+            {
+                'event_type': 'create_npc',
+                'params': {
+                    'npc_id': 'undertow_voice',
+                    'location': 'region_open_area'
+                }
+            },
 			{
 				'event_type': 'award_task',
 				'params': {

@@ -383,7 +383,7 @@ TASKS += [
 	{
 		'task_id': 'swamp_mid_city_type_e_defeat_oathrot_voice',
 		'type': 'defeat',
-		'to_type': 'npc',
+		'to_type': 'mob',
 		'to_id': 'oathrot_voice',
 		'task_acquire_events': [
 			{

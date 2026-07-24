@@ -372,6 +372,13 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{
+				'event_type': 'create_npc',
+				'params': {
+					'npc_id': 'avalanche_seer_korrin',
+					'location': 'region_city_bar'
+				}
+			},
+			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'mountains_mid_city_type_d_consult_korrin'

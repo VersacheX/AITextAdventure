@@ -467,7 +467,7 @@ TASKS += [
     {
         'task_id': 'grassland_mid_city_type_e_defeat_sanctum_voice',
         'type': 'defeat',
-        'to_type': 'npc',
+        'to_type': 'mob',
         'to_id': 'sanctum_voice',
         'task_acquire_events': [
             {

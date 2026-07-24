@@ -425,16 +425,6 @@ TASKS = [
         'to_type': 'npc',
         'to_id': 'alchemist_mirlo',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'thorn',
-                    'standing_text': [
-                        "Marrowroot's wards are thick. Need a grove lattice to break through.",
-                        "Mirlo in Boiling Bubble had one last I heard. Go find it."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -484,16 +474,6 @@ TASKS = [
         'to_type': 'npc',
         'to_id': 'juno',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'juno',
-                    'standing_text': [
-                        "Three cards. One moon. You know what you're here for.",
-                        "First game is a thousand gold."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -518,6 +498,16 @@ TASKS = [
                 }
             },
             {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'juno',
+                    'standing_text': [
+                        "Three cards. One moon. Pick one. Cost: 1,000 gold.",
+                        "Win at any point, the catalyst is yours."
+                    ]
+                }
+            },
+            {
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'forest_primary_meet_juno_r1'
@@ -532,9 +522,6 @@ TASKS = [
         'to_type': 'npc',
         'to_id': 'juno',
         'task_acquire_events': [
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'juno', 'standing_text': [
-                "1,000 gold. Ready when you are."
-            ]}}
         ],
         'task_complete_events': [
             # Has funds — show the card game
@@ -603,9 +590,6 @@ TASKS = [
         'to_type': 'npc',
         'to_id': 'juno',
         'task_acquire_events': [
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'juno', 'standing_text': [
-                "Double or nothing. 2,000 gold. Ready when you are."
-            ]}}
         ],
         'task_complete_events': [
             {
@@ -672,9 +656,6 @@ TASKS = [
         'to_type': 'npc',
         'to_id': 'juno',
         'task_acquire_events': [
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'juno', 'standing_text': [
-                "Last round. 4,000 gold. One card. Make it count."
-            ]}}
         ],
         'task_complete_events': [
             {
@@ -741,16 +722,6 @@ TASKS = [
         'to_id': 'alchemist_mirlo',
         'item_id': 'lunar_resonance_catalyst',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'alchemist_mirlo',
-                    'standing_text': [
-                        "You got the catalyst? Bring it here!",
-                        "The grove lattice is yours the moment you hand it over."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
