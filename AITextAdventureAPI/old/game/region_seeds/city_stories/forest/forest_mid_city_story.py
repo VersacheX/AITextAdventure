@@ -693,6 +693,13 @@ TASKS += [
 					'dialog_id': 'thera_d_graft_read'
 				}
 			},
+            {
+                'event_type': 'create_npc',
+                'params': {
+                    'npc_id': 'lunarcask_shade',
+                    'location': 'region_open_area'
+                }
+            },
 			{
 				'event_type': 'award_task',
 				'params': {

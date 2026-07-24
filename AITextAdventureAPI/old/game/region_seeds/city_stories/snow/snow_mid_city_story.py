@@ -256,6 +256,12 @@ TASKS = [
                 'params': {
                     'task_id': 'snow_mid_city_type_d_deliver_decree_shard'
                 }
+            },
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'snow_mid_city_type_e_consult_bjorn'
+                }
             }
 		]
 	},
@@ -696,6 +702,13 @@ TASKS += [
 					'dialog_id': 'bjorn_d_shard_read'
 				}
 			},
+            {
+                'event_type': 'create_npc',
+                'params': {
+                    'npc_id': 'blueforge_spirit',
+                    'location': 'region_open_area'
+                }
+            },
 			{
 				'event_type': 'award_task',
 				'params': {

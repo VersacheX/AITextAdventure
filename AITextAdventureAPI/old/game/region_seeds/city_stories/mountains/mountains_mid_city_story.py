@@ -415,6 +415,13 @@ TASKS += [
 				}
 			},
 			{
+				'event_type': 'create_npc',
+				'params': {
+					'npc_id': 'emberwake_spirit',
+					'location': 'region_open_area'
+				}
+			},
+			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'mountains_mid_city_type_d_meet_emberwake_spirit'

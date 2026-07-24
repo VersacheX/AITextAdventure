@@ -188,12 +188,14 @@ TASKS = [
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'snow_large_city_type_c_find_lyric'
-				},
-				'condition': {
-					'type': 'is_chapter_gte',
-					'params': { 'chapter': 19 }
 				}
 			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'snow_large_city_type_d_deliver_armor_key'
+				}
+			}
 		]
 	},
 	{
