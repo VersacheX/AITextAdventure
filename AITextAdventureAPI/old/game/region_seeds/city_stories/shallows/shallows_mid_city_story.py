@@ -238,10 +238,12 @@ TASKS = [
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'shallows_mid_city_type_c_find_dare'
-                },
-                'condition': {
-                    'type': 'is_chapter_gte',
-                    'params': { 'chapter': 11 }
+                }
+            },
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'shallows_mid_city_type_d_deliver_corsair_fragment'
                 }
             }
 		]
@@ -382,7 +384,7 @@ TASKS += [
         'task_acquire_events': [],
         'task_complete_events': [
             {
-                'event_type': 'give_item',
+                'event_type': 'award_item',
                 'params': {
                     'item_id': 'shallows_mid_city_e_tidekin_seal'
                 }
@@ -539,7 +541,7 @@ TASKS += [
             {
                 'event_type': 'character_join',
                 'params': {
-                    'npc_id': 'dare'
+                    'character_id': 'dare'
                 }
             }
         ]
@@ -590,9 +592,6 @@ TASKS += [
 		'item_id': 'corsair_tide_fragment',
 		'to_type': 'npc',
 		'to_id': 'diego',
-		'gate': {
-			'has_item': 'corsair_tide_fragment'
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',

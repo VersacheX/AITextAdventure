@@ -250,10 +250,6 @@ TASKS = [
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'shallows_large_city_type_c_find_dare'
-                },
-                'condition': {
-                    'type': 'is_chapter_gte',
-                    'params': { 'chapter': 11 }
                 }
             },
             # Type E — no gate condition, artifact waits in inventory
@@ -268,10 +264,12 @@ TASKS = [
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'shallows_large_city_type_f_find_astra'
-                },
-                'condition': {
-                    'type': 'is_chapter_gte',
-                    'params': { 'chapter': 5 }
+                }
+            },
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'shallows_large_city_type_d_deliver_brine_compass'
                 }
             }
         ]
@@ -412,7 +410,7 @@ TASKS += [
         'task_acquire_events': [],
         'task_complete_events': [
             {
-                'event_type': 'give_item',
+                'event_type': 'award_item',
                 'params': {
                     'item_id': 'shallows_large_city_e_brine_compass'
                 }
@@ -600,7 +598,7 @@ TASKS += [
                 }
             },
             {
-                'event_type': 'give_item',
+                'event_type': 'award_item',
                 'params': {
                     'item_id': 'shallows_large_city_f_rift_observation_log'
                 }
@@ -651,9 +649,6 @@ TASKS += [
 		'item_id': 'brine_compass',
 		'to_type': 'npc',
 		'to_id': 'diego',
-		'gate': {
-			'has_item': 'brine_compass'
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',

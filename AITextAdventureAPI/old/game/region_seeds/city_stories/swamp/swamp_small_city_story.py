@@ -253,7 +253,13 @@ TASKS = [
 				'params': {
 					'task_id': 'swamp_small_city_type_c_find_ghost'
 				}
-			}
+			},
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'swamp_small_city_type_a_channel_check'
+                }
+            }
         ]
 
     },
@@ -497,9 +503,6 @@ TASKS = [
         'item_id': 'bayou_memory_vessel',
         'to_type': 'npc',
         'to_id': 'diego',
-        'gate': {
-            'has_item': 'bayou_memory_vessel'
-        },
         'task_acquire_events': [
             {
                 'event_type': 'set_npc_standing_text',

@@ -281,10 +281,12 @@ TASKS = [
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'forest_mid_city_type_c_find_sera'
-                },
-                'condition': {
-                    'type': 'is_chapter_gte',
-                    'params': { 'chapter': 2 }
+                }
+            },
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'forest_mid_city_type_d_deliver_root_graft'
                 }
             }
         ]
@@ -425,7 +427,7 @@ TASKS += [
         'task_acquire_events': [],
         'task_complete_events': [
             {
-                'event_type': 'give_item',
+                'event_type': 'award_item',
                 'params': {
                     'item_id': 'forest_mid_city_e_mycelia_memory_spore'
                 }
@@ -580,7 +582,7 @@ TASKS += [
             {
                 'event_type': 'character_join',
                 'params': {
-                    'npc_id': 'sera_flameweaver'
+                    'character_id': 'sera_flameweaver'
                 }
             }
         ]
@@ -627,9 +629,6 @@ TASKS += [
 		'item_id': 'thornshade_root_graft',
 		'to_type': 'npc',
 		'to_id': 'mira',
-		'gate': {
-			'has_item': 'thornshade_root_graft'
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',

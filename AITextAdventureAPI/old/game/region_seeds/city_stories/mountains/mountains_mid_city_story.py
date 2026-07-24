@@ -143,13 +143,19 @@ TASKS = [
 				}
 			},
 		],
-		'task_complete_events': []
+		'task_complete_events': [
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'mountains_mid_city_regional_complete_gate' } }
+		]
 	},
 	{
 		'task_id': 'mountains_mid_city_regional_complete_gate',
 		'type': 'complete_regional_quests',
 		'task_acquire_events': [],
-		'task_complete_events': []
+		'task_complete_events': [
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'mountains_mid_city_type_c_find_korina' } },
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'mountains_mid_city_type_d_deliver_forge_core' } },
+		]
+
 	},
 ]
 
@@ -208,9 +214,6 @@ TASKS += [
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'korina_brightvein',
-		'gate': {
-			'is_chapter_gte': 17
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'create_npc',
@@ -299,7 +302,7 @@ TASKS += [
 				}
 			},
 			{
-				'event_type': 'add_extended_character',
+				'event_type': 'character_join',
 				'params': {
 					'character_id': 'korina_brightvein'
 				}
@@ -353,9 +356,6 @@ TASKS += [
 		'item_id': 'forge_echo_core',
 		'to_type': 'npc',
 		'to_id': 'brawn',
-		'gate': {
-			'has_item': 'forge_echo_core'
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',

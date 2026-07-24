@@ -143,13 +143,18 @@ TASKS = [
 				}
 			},
 		],
-		'task_complete_events': []
+		'task_complete_events': [
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'grassland_large_city_regional_complete_gate' }}
+		]
 	},
 	{
 		'task_id': 'grassland_large_city_regional_complete_gate',
 		'type': 'complete_regional_quests',
 		'task_acquire_events': [],
-		'task_complete_events': []
+		'task_complete_events': [
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'grassland_large_city_type_c_find_voss' }},
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'grassland_large_city_type_d_deliver_accessory_key' }},
+		]
 	},
 ]
 
@@ -204,9 +209,6 @@ TASKS += [
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'voss_caldera',
-		'gate': {
-			'is_chapter_gte': 10
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'create_npc',
@@ -295,7 +297,7 @@ TASKS += [
 				}
 			},
 			{
-				'event_type': 'add_extended_character',
+				'event_type': 'character_join',
 				'params': {
 					'character_id': 'voss_caldera'
 				}
@@ -347,9 +349,6 @@ TASKS += [
 		'item_id': 'grassland_large_city_accessory_key',
 		'to_type': 'npc',
 		'to_id': 'mira',
-		'gate': {
-			'has_item': 'grassland_large_city_accessory_key'
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',

@@ -144,6 +144,9 @@ TASKS = [
 		],
 		'task_complete_events': [			
             { 'event_type': 'award_task', 'params': { 'task_id': 'grassland_small_city_type_a_ch12_find_keepsake' }},
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'grassland_small_city_type_c_find_rynn' }},
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'grassland_small_city_type_d_deliver_grief_token' }},
+
 		]
 	},
 ]
@@ -201,9 +204,6 @@ TASKS += [
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'rynn',
-		'gate': {
-			'is_chapter_gte': 12
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'create_npc',
@@ -292,7 +292,7 @@ TASKS += [
 				}
 			},
 			{
-				'event_type': 'add_extended_character',
+				'event_type': 'character_join',
 				'params': {
 					'character_id': 'rynn'
 				}
@@ -344,9 +344,6 @@ TASKS += [
 		'item_id': 'hollow_grief_token',
 		'to_type': 'npc',
 		'to_id': 'mira',
-		'gate': {
-			'has_item': 'hollow_grief_token'
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',

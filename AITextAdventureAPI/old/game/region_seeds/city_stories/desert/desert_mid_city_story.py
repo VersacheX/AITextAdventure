@@ -142,13 +142,20 @@ TASKS = [
 				}
 			},
 		],
-		'task_complete_events': []
+		'task_complete_events': [
+			{
+				'event_type': 'award_task', 'params': { 'task_id': 'desert_mid_city_regional_complete_gate' }
+			}
+		]
 	},
 	{
 		'task_id': 'desert_mid_city_regional_complete_gate',
 		'type': 'complete_regional_quests',
 		'task_acquire_events': [],
-		'task_complete_events': []
+		'task_complete_events': [
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'desert_mid_city_type_c_find_elyra' } },
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'desert_mid_city_type_d_deliver_ink_vial' } },
+		]
 	},
 ]
 
@@ -203,9 +210,6 @@ TASKS += [
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'elyra_dawnseer',
-		'gate': {
-			'is_chapter_gte': 8
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'create_npc',
@@ -294,7 +298,7 @@ TASKS += [
 				}
 			},
 			{
-				'event_type': 'add_extended_character',
+				'event_type': 'character_join',
 				'params': {
 					'character_id': 'elyra_dawnseer'
 				}
@@ -345,9 +349,6 @@ TASKS += [
 		'item_id': 'ink_resonance_vial',
 		'to_type': 'npc',
 		'to_id': 'mira',
-		'gate': {
-			'has_item': 'ink_resonance_vial'
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',

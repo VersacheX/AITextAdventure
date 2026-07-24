@@ -238,10 +238,12 @@ TASKS = [
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'forest_small_city_type_c_find_talia'
-                },
-                'condition': {
-                    'type': 'is_chapter_gte',
-                    'params': { 'chapter': 16 }
+                }
+            },
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'forest_small_city_type_d_deliver_memory_spore'
                 }
             }
 		]
@@ -375,7 +377,7 @@ TASKS += [
         'task_acquire_events': [],
         'task_complete_events': [
             {
-                'event_type': 'give_item',
+                'event_type': 'award_item',
                 'params': {
                     'item_id': 'forest_small_city_e_thornshade_root_graft'
                 }
@@ -579,9 +581,6 @@ TASKS += [
 		'item_id': 'mycelia_memory_spore',
 		'to_type': 'npc',
 		'to_id': 'diego',
-		'gate': {
-			'has_item': 'mycelia_memory_spore'
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',

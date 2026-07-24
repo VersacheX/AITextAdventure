@@ -44,10 +44,8 @@ NPCS = [
 ]
 
 
+# --- Base city standing dialog ---
 NPC_DIALOG = [
-
-    # --- Base city standing dialog ---
-
 	{
 		'npc_id': 'kadeem',
 		'dialog_id': 'kadeem_intro',
@@ -103,9 +101,9 @@ NPC_DIALOG = [
 
 ]
 
+# --- Type E: Dune Cipher Stone ---
 NPC_DIALOG += [
 
-    # --- Type E: Dune Cipher Stone ---
 
     {
         'npc_id': 'kadeem',
@@ -146,9 +144,9 @@ NPC_DIALOG += [
 
 ]
 
+# --- Type F: Seth's Salvage Manifest ---
 NPC_DIALOG += [
 
-    # --- Type F: Seth's Salvage Manifest ---
 
     {
         'npc_id': 'kadeem',
@@ -181,6 +179,7 @@ NPC_DIALOG += [
 
 ]
 
+# --- Base city standing tasks ---
 TASKS = [
 	{
 		'task_id': 'desert_large_city_initialize',
@@ -233,15 +232,13 @@ TASKS = [
         'type': 'complete_regional_quests',
         'task_acquire_events': [],
         'task_complete_events': [
-            # Type C — gated by chapter 8 being reached
+            # Type D — not gated by anything, player must find the cipher stone and deliver it. standing task
+            { 'event_type': 'award_task', 'params': { 'task_id': 'desert_large_city_type_d_deliver_cipher_stone' } },
+            # Type C — standing task
             {
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'desert_large_city_type_c_find_elyra'
-                },
-                'condition': {
-                    'type': 'is_chapter_gte',
-                    'params': { 'chapter': 8 }
                 }
             },
             # Type E — no gate condition, artifact waits in inventory
@@ -263,15 +260,13 @@ TASKS = [
 
 ]
 
+# =========================================================
+# TYPE E — Dune Cipher Stone
+# Artifact ID: desert_large_city_e_dune_cipher_stone
+# Gates: desert_large_city Type D (Slot 2)
+# Awarded by: desert_large_city_regional_complete_gate
+# =========================================================
 TASKS += [
-
-    # =========================================================
-    # TYPE E — Dune Cipher Stone
-    # Artifact ID: desert_large_city_e_dune_cipher_stone
-    # Gates: desert_large_city Type D (Slot 2)
-    # Awarded by: desert_large_city_regional_complete_gate
-    # =========================================================
-
     {
         'task_id': 'desert_large_city_type_e_investigate_resonance',
         'type': 'meet',
@@ -396,7 +391,7 @@ TASKS += [
         'task_acquire_events': [],
         'task_complete_events': [
             {
-                'event_type': 'give_item',
+                'event_type': 'award_item',
                 'params': {
                     'item_id': 'desert_large_city_e_dune_cipher_stone'
                 }
@@ -440,16 +435,15 @@ TASKS += [
 
 ]
 
+# =========================================================
+# TYPE F — Seth's Salvage Manifest
+# Faction Item ID: desert_large_city_f_salvage_manifest
+# Recurring NPC: seth (Ch.1–Ch.13)
+# Gates: grassland_mid_city (Highsteeple Crossing, Ch.3) Type D (Slot 2)
+# Awarded by: desert_large_city_regional_complete_gate
+# =========================================================
+
 TASKS += [
-
-    # =========================================================
-    # TYPE F — Seth's Salvage Manifest
-    # Faction Item ID: desert_large_city_f_salvage_manifest
-    # Recurring NPC: seth (Ch.1–Ch.13)
-    # Gates: grassland_mid_city (Highsteeple Crossing, Ch.3) Type D (Slot 2)
-    # Awarded by: desert_large_city_regional_complete_gate
-    # =========================================================
-
     {
         'task_id': 'desert_large_city_type_f_find_seth_trail',
         'type': 'meet',
@@ -544,7 +538,7 @@ TASKS += [
                 }
             },
             {
-                'event_type': 'give_item',
+                'event_type': 'award_item',
                 'params': {
                     'item_id': 'desert_large_city_f_salvage_manifest'
                 }
@@ -593,9 +587,6 @@ TASKS += [
 		'item_id': 'dune_cipher_stone',
 		'to_type': 'npc',
 		'to_id': 'diego',
-		'gate': {
-			'has_item': 'dune_cipher_stone'
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',
@@ -734,6 +725,12 @@ TASKS += [
 
 ]
 
+
+# =========================================================
+# TYPE C — Elyra Dawnseer (extended character, slot 2)
+# Gated by is_chapter_gte: 8
+# Awarded by: desert_large_city_regional_complete_gate (conditional)
+# =========================================================
 NPC_DIALOG += [
 
     # ── Type C dialogs — Elyra Dawnseer ────────────────────────────
@@ -784,13 +781,6 @@ NPC_DIALOG += [
 ]
 
 TASKS += [
-
-    # =========================================================
-    # TYPE C — Elyra Dawnseer (extended character, slot 2)
-    # Gated by is_chapter_gte: 8
-    # Awarded by: desert_large_city_regional_complete_gate (conditional)
-    # =========================================================
-
     {
         'task_id': 'desert_large_city_type_c_find_elyra',
         'type': 'meet',

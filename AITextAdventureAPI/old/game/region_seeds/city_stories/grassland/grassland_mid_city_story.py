@@ -233,10 +233,6 @@ TASKS = [
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'grassland_mid_city_type_c_find_sylvara'
-                },
-                'condition': {
-                    'type': 'is_chapter_gte',
-                    'params': { 'chapter': 3 }
                 }
             },
             # Type E — no gate condition, artifact waits in inventory
@@ -244,6 +240,12 @@ TASKS = [
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'grassland_mid_city_type_e_investigate_seal'
+                }
+            },
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'grassland_mid_city_type_d_deliver_seal_fragment'
                 }
             }
         ]
@@ -329,7 +331,7 @@ TASKS += [
             {
                 'event_type': 'character_join',
                 'params': {
-                    'npc_id': 'regent_sylvara'
+                    'character_id': 'regent_sylvara'
                 }
             }
         ]
@@ -470,7 +472,7 @@ TASKS += [
         'task_acquire_events': [],
         'task_complete_events': [
             {
-                'event_type': 'give_item',
+                'event_type': 'award_item',
                 'params': {
                     'item_id': 'grassland_mid_city_e_sanctum_seal_fragment'
                 }
@@ -555,9 +557,6 @@ TASKS += [
 		'item_id': 'sanctum_seal_fragment',
 		'to_type': 'npc',
 		'to_id': 'mira',
-		'gate': {
-			'has_item': 'sanctum_seal_fragment'
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',

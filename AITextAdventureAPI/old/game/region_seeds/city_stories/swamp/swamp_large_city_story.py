@@ -160,12 +160,14 @@ TASKS = [
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'swamp_large_city_type_c_find_anita'
-				},
-				'condition': {
-					'type': 'is_chapter_gte',
-					'params': { 'chapter': 13 }
 				}
 			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'swamp_large_city_b_void_gauntlet'
+				}
+			}
 		]
 	},
 ]
@@ -366,9 +368,6 @@ TASKS += [
 		'item_id': 'necropolis_marrow_shard',
 		'to_type': 'npc',
 		'to_id': 'diego',
-		'gate': {
-			'has_item': 'necropolis_marrow_shard'
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',

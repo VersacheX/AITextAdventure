@@ -249,17 +249,19 @@ TASKS = [
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'desert_small_city_type_f_find_tess_trail'
-                },
-                'condition': {
-                    'type': 'is_chapter_gte',
-                    'params': { 'chapter': 2 }
+                }
+            },
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'desert_small_city_type_d_deliver_ledger_plate'
                 }
             }
 		]
 	},
 
 ]
-
+# E
 TASKS += [
 
     # =========================================================
@@ -393,7 +395,7 @@ TASKS += [
         'task_acquire_events': [],
         'task_complete_events': [
             {
-                'event_type': 'give_item',
+                'event_type': 'award_item',
                 'params': {
                     'item_id': 'desert_small_city_e_eroded_ledger_plate'
                 }
@@ -436,7 +438,7 @@ TASKS += [
     },
 
 ]
-
+# F
 TASKS += [
 
     # =========================================================
@@ -582,7 +584,7 @@ TASKS += [
                 }
             },
             {
-                'event_type': 'give_item',
+                'event_type': 'award_item',
                 'params': {
                     'item_id': 'desert_small_city_f_contraband_registry'
                 }
@@ -635,9 +637,6 @@ TASKS += [
 		'item_id': 'eroded_ledger_plate',
 		'to_type': 'npc',
 		'to_id': 'diego',
-		'gate': {
-			'has_item': 'eroded_ledger_plate'
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',

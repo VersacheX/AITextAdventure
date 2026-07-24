@@ -388,7 +388,7 @@ TASKS += [
 		'task_acquire_events': [],
 		'task_complete_events': [
 			{
-				'event_type': 'give_item',
+				'event_type': 'award_item',
 				'params': {
 					'item_id': 'swamp_mid_city_e_bayou_memory_vessel'
 				}

@@ -445,7 +445,7 @@ TASKS += [
 				}
 			},
 			{
-				'event_type': 'add_extended_character',
+				'event_type': 'character_join',
 				'params': {
 					'character_id': 'commander_drax'
 				}

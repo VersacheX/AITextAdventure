@@ -249,10 +249,12 @@ TASKS = [
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'snow_mid_city_type_f_find_marlo_trail'
-                },
-                'condition': {
-                    'type': 'is_chapter_gte',
-                    'params': { 'chapter': 4 }
+                }
+            },
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'snow_mid_city_type_d_deliver_decree_shard'
                 }
             }
 		]
@@ -393,7 +395,7 @@ TASKS += [
         'task_acquire_events': [],
         'task_complete_events': [
             {
-                'event_type': 'give_item',
+                'event_type': 'award_item',
                 'params': {
                     'item_id': 'snow_mid_city_e_pageant_decree_shard'
                 }
@@ -582,7 +584,7 @@ TASKS += [
                 }
             },
             {
-                'event_type': 'give_item',
+                'event_type': 'award_item',
                 'params': {
                     'item_id': 'snow_mid_city_f_audit_testimony_seal'
                 }
@@ -636,9 +638,6 @@ TASKS += [
 		'item_id': 'pageant_decree_shard',
 		'to_type': 'npc',
 		'to_id': 'brawn',
-		'gate': {
-			'has_item': 'pageant_decree_shard'
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',

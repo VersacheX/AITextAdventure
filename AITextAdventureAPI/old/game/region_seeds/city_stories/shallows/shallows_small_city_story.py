@@ -204,12 +204,14 @@ TASKS = [
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'shallows_small_city_type_c_find_andrea'
-				},
-				'condition': {
-					'type': 'is_chapter_gte',
-					'params': { 'chapter': 15 }
 				}
 			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'shallows_small_city_type_d_deliver_tidekin_seal'
+				}
+			}
 		]
 	},
 
@@ -715,9 +717,6 @@ TASKS += [
 		'item_id': 'tidekin_seal',
 		'to_type': 'npc',
 		'to_id': 'diego',
-		'gate': {
-			'has_item': 'tidekin_seal'
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',

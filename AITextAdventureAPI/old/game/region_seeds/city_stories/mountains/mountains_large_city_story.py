@@ -243,10 +243,6 @@ TASKS = [
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'mountains_large_city_type_c_find_spark'
-                },
-                'condition': {
-                    'type': 'is_chapter_gte',
-                    'params': { 'chapter': 4 }
                 }
             },
             # Type E — no gate condition, artifact waits in inventory
@@ -254,6 +250,12 @@ TASKS = [
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'mountains_large_city_type_e_investigate_echo'
+                }
+            },
+            {
+                'event_type': 'award_task',
+                'params': {
+                    'task_id': 'mountains_large_city_type_d_deliver_armor_key'
                 }
             }
         ]
@@ -374,7 +376,7 @@ TASKS += [
             {
                 'event_type': 'character_join',
                 'params': {
-                    'npc_id': 'spark_maddox'
+                    'character_id': 'spark_maddox'
                 }
             }
         ]
@@ -515,7 +517,7 @@ TASKS += [
         'task_acquire_events': [],
         'task_complete_events': [
             {
-                'event_type': 'give_item',
+                'event_type': 'award_item',
                 'params': {
                     'item_id': 'mountains_large_city_e_forge_echo_core'
                 }
@@ -594,9 +596,6 @@ TASKS += [
 		'item_id': 'mountains_large_city_armor_key',
 		'to_type': 'npc',
 		'to_id': 'brawn',
-		'gate': {
-			'has_item': 'mountains_large_city_armor_key'
-		},
 		'task_acquire_events': [
 			{
 				'event_type': 'set_npc_standing_text',
