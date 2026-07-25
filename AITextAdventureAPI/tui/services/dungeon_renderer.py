@@ -30,16 +30,22 @@ from typing import Any, List, Optional
 
 # ── color markup helper ────────────────────────────────────────────────────
 
-def _colorize(ch: str, color: Optional[str]) -> str:
+def _colorize(ch: str, color: Optional[str], bg_color: Optional[str] = None) -> str:
     """Wrap `ch` in Textual Rich color markup.
 
     Escapes any square brackets in `ch` so they are never misread as markup
-    tags.  Returns `ch` unchanged when `color` is falsy.
+    tags.  Returns `ch` unchanged when both `color` and `bg_color` are falsy.
+    When `bg_color` is provided it is applied as the cell background so that
+    entities and impassable tiles sit on the same background as the open floor.
     """
-    if not color:
+    if not color and not bg_color:
         return ch
     safe_ch = ch.replace("[", "\\[")
-    return f"[{color}]{safe_ch}[/{color}]"
+    if color and bg_color:
+        return f"[{color} on {bg_color}]{safe_ch}[/]"
+    if color:
+        return f"[{color}]{safe_ch}[/]"
+    return f"[on {bg_color}]{safe_ch}[/]"
 
 
 # ── per-tile character lookup ──────────────────────────────────────────────
@@ -59,36 +65,35 @@ def _tile_char(dungeon: Any, wx: int, wy: int, z: int, reveal_all: bool) -> str:
     if not visible:
         return "?"
 
-    if tile.passable:
-        ch = dungeon.open_area_tile
-        color = getattr(dungeon, "open_area_color", None)
-    else:
-        ch = dungeon.impassable_tile
-        color = getattr(dungeon, "impassable_color", None)
+    open_color      = getattr(dungeon, "open_area_color",  None)
+    impassable_color = getattr(dungeon, "impassable_color", None)
 
+    if not tile.passable:
+        return _colorize(dungeon.impassable_tile, impassable_color, open_color)
+
+    # passable tile — check entities first
     if tile.entities:
         for ent in tile.entities:
             if isinstance(ent, dict) and ent.get("type") == "npc":
-                # NPC marker — inherit floor color so it pops on the right background
-                return _colorize("ß", color)
+                return _colorize("ß", "#ffffff", open_color)
             if isinstance(ent, ItemType):
-                return _colorize("◘", color)
+                return _colorize("◘", "#d97706", open_color)
 
-    # stairs markers override entity marks for visibility
-    has_up = getattr(tile, "has_stairs_up", False)
-    has_down = getattr(tile, "has_stairs_down", False)
+    # stairs markers
+    has_up   = getattr(tile, "has_stairs_up",   False)
+    has_down = getattr(tile, "has_stairs_down",  False)
     if has_up and has_down:
-        return _colorize("↕", color)
-    elif has_up:
-        return _colorize("↓", color)  # going deeper → displayed as ↓
-    elif has_down:
-        return _colorize("↑", color)  # back toward surface → displayed as ↑
+        return _colorize("↕", "#ffffff", open_color)
+    if has_up:
+        return _colorize("↓", "#ffffff", open_color)
+    if has_down:
+        return _colorize("↑", "#ffffff", open_color)
 
     # origin marker
     if wx == 0 and wy == 0 and z == 0:
-        return _colorize("↑", color)
+        return _colorize("↑", "#ffffff", open_color)
 
-    return _colorize(ch, color)
+    return _colorize(dungeon.open_area_tile, open_color)
 
 
 # ── full minimap viewport ──────────────────────────────────────────────────

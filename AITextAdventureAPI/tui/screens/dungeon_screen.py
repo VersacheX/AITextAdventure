@@ -134,10 +134,12 @@ class DungeonScreen(BaseScreen):
 
     def on_mount(self) -> None:
         self._dungeon.reveal_tiles_to_player()
+        self.app._active_dungeon = self._dungeon
         self.call_after_refresh(self._refresh_all)
 
     def on_screen_resume(self) -> None:
         """Called when returning from inventory screen."""
+        self.app._active_dungeon = self._dungeon
         self._check_dialogs_and_refresh()
 
     # ── movement bindings ─────────────────────────────────────────────────
@@ -170,6 +172,11 @@ class DungeonScreen(BaseScreen):
         if self._dialog_visible():
             return
         self._interact()
+
+    def on_dismiss(self, result: bool | None = None) -> None:
+        """Clear the active dungeon reference whenever this screen is removed,
+        regardless of which code path triggered the dismiss."""
+        self.app._active_dungeon = None
 
     def action_go_back(self) -> None:
         """Escape: leave the dungeon and return to the overworld."""

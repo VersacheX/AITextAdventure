@@ -110,15 +110,20 @@ def build_header(player_game: Any) -> str:
 
 # ── color markup helper ─────────────────────────────────────────────────────
 
-def _colorize(ch: str, color: Optional[str]) -> str:
-    """Wrap `ch` in Textual markup for `color` (a `#rrggbb` string), escaping
-    any square brackets in the character itself so it can't be misread as a
-    markup tag. If `color` is falsy, the character is returned unescaped.
+def _colorize(ch: str, color: Optional[str], bg_color: Optional[str] = None) -> str:
+    """Wrap `ch` in Textual Rich color markup, escaping any square brackets
+    in the character so it can't be misread as a markup tag.  When `bg_color`
+    is provided it is applied as the cell background so that impassable tiles
+    share the same background as the open area floor around them.
     """
-    if not color:
+    if not color and not bg_color:
         return ch
     safe_ch = ch.replace("[", "\\[")
-    return f"[{color}]{safe_ch}[/]"
+    if color and bg_color:
+        return f"[{color} on {bg_color}]{safe_ch}[/]"
+    if color:
+        return f"[{color}]{safe_ch}[/]"
+    return f"[on {bg_color}]{safe_ch}[/]"
 
 
 # ── per-tile character ──────────────────────────────────────────────────────
@@ -180,7 +185,8 @@ def _tile_char(x: int, y: int, player_game: Any) -> str:
         try:
             dungeon = player_game.get_dungeon_at_position((x, y))
             if dungeon is not None:
-                return getattr(const, "DUNGEON_ENTRANCE_CHAR", "D") if const else "D"
+                ch = getattr(const, "DUNGEON_ENTRANCE_CHAR", "D") if const else "D"
+                return _colorize(ch, "#af1111")
             _, active = player_game.get_region_and_active_area_for_position((x, y))
             if active and const:
                 type_name = getattr(active, "city_name", None) or getattr(active, "region_name", "")
@@ -197,8 +203,9 @@ def _tile_char(x: int, y: int, player_game: Any) -> str:
             if active and const:
                 type_name = getattr(active, "city_name", None) or getattr(active, "region_name", "")
                 ch = getattr(const, f"{type_name.upper()}_IMPASSABLE_CHAR", None) or "#"
-                color = getattr(const, f"{type_name.upper()}_IMPASSABLE_COLOR", None)
-                return _colorize(ch, color)
+                impassable_color = getattr(const, f"{type_name.upper()}_IMPASSABLE_COLOR", None)
+                open_color       = getattr(const, f"{type_name.upper()}_OPEN_AREA_COLOR",  None)
+                return _colorize(ch, impassable_color, open_color)
         except Exception:
             pass
         return "#"

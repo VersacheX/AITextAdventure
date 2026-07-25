@@ -357,7 +357,7 @@ class Dungeon:
         return [tile for (x, y, level), tile in self.tiles.items() if level == z]
 
     def remove_player_from_dungeon(self) -> None:
-        self.player_pos = (0,0,0)
+        self.player_pos = None
 
     # Player position management (stored on dungeon instance)
     def set_player_pos(self, x: int, y: int, z: int) -> bool:
@@ -459,3 +459,15 @@ class Dungeon:
 
         input ("Boss mob ID not found: {}".format(boss_mob_id))
         return None
+
+    def can_save(self) -> bool:
+        """Return True only when the player is standing on a rest-point tile.
+
+        Saving inside a dungeon is restricted to designated rest points.
+        Returns False when the player has no position or the current tile
+        does not have ``has_rest_point`` set.
+        """
+        if self.player_pos is None:
+            return False
+        tile = self.get_tile(*self.player_pos)
+        return tile is not None and getattr(tile, "has_rest_point", False)

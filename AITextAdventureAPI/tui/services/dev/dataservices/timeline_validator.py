@@ -156,6 +156,11 @@ R21 DUNGEON_UNDEFINED
     empty — no rooms, no hostiles, no treasure.  This catches stub dungeons
     that were wired into the task graph before their seed file was authored.
 
+R22 MEET_DELIVER_NO_DIALOG  (notice)
+    A meet or deliver task has no initiate_dialog or initiate_character_dialog
+    event in its task_complete_events.  These tasks are the primary narrative
+    delivery point — a missing dialog call is almost always an authoring gap.
+    Rendered as magenta in the timeline tree; counted separately in the toast.
 """
 from __future__ import annotations
 
@@ -1083,6 +1088,26 @@ def validate_timeline_integrity(
                     event_type="create_npc",
                     related_entity_id=npc_id,
                 ))
+
+    # ── R22: Meet / deliver tasks with no dialog in complete events ────────
+    _DIALOG_EVENT_TYPES: FrozenSet[str] = frozenset({
+        "initiate_dialog", "initiate_character_dialog",
+    })
+    for tn in all_tasks:
+        task_type = str(tn.task.get("type", "")).lower()
+        if task_type not in ("meet", "deliver"):
+            continue
+        has_dialog = any(
+            ev.get("event_type") in _DIALOG_EVENT_TYPES
+            for ev in _events(tn.task, "task_complete_events")
+        )
+        if not has_dialog:
+            errors_map[tn.task_id].append(_err(
+                "MEET_DELIVER_NO_DIALOG",
+                f"'{task_type}' task '{tn.task_id}' has no initiate_dialog or "
+                f"initiate_character_dialog in task_complete_events.",
+                severity="notice",
+            ))
 
     # ── R4: Unreachable tasks (no inbound award) ──────────────────────────
     for tn in all_tasks:

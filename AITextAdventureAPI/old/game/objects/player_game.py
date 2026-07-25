@@ -1,4 +1,4 @@
-from typing import Any, Dict, List, Tuple, Optional
+﻿from typing import Any, Dict, List, Tuple, Optional
 import random
 import importlib
 
@@ -1427,3 +1427,14 @@ class PlayerGame:
 		for k, v in defaults.items():
 			if not hasattr(self, k):
 				setattr(self, k, v)
+
+	def get_active_dungeon(self) -> Optional["Dungeon"]:
+		"""Return the dungeon the player is currently inside, or None.
+        Uses dungeon.player_pos as the authoritative presence flag.
+        Guards against stale (0,0,0) values written by older saves.
+        """
+		for dungeon in self.dungeons:
+			pos = getattr(dungeon, "player_pos", None)
+			if pos is not None and pos != (0, 0, 0):
+				return dungeon
+		return None

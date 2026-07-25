@@ -411,6 +411,17 @@ class InventoryScreen(BaseScreen):
         if pg is None:
             self.notify("No active game to save.", title="Save")
             return
+
+        # Block saving inside a dungeon unless the player is on a rest point.
+        active_dungeon = pg.get_active_dungeon()
+        if active_dungeon is not None and not active_dungeon.can_save():
+            self.notify(
+                "You can only save at a rest point inside a dungeon.",
+                title="Save",
+                severity="warning",
+            )
+            return
+
         if self._overlay_active():
             self._close_overlay()
             return

@@ -380,20 +380,24 @@ def validate_timeline_for_screen(screen: "DataMgmtScreen") -> None:
     error_tasks     = 0
     warning_tasks   = 0
     duplicate_tasks = 0
+    notice_tasks    = 0
     for group in groups:
         for bucket in group.buckets:
             for tn in bucket.tasks:
                 has_error     = any(e.severity == "error"     for e in tn.errors)
                 has_warning   = any(e.severity == "warning"   for e in tn.errors)
                 has_duplicate = any(e.severity == "duplicate" for e in tn.errors)
+                has_notice    = any(e.severity == "notice"    for e in tn.errors)
                 if has_error:
                     error_tasks += 1
                 if has_warning:
                     warning_tasks += 1
                 if has_duplicate:
                     duplicate_tasks += 1
+                if has_notice:
+                    notice_tasks += 1
 
-    total_tasks = error_tasks + warning_tasks + duplicate_tasks
+    total_tasks = error_tasks + warning_tasks + duplicate_tasks + notice_tasks
 
     if total_tasks == 0:
         screen.notify("✓ Timeline integrity OK — no errors found.", timeout=3.0)
@@ -405,6 +409,8 @@ def validate_timeline_for_screen(screen: "DataMgmtScreen") -> None:
             parts.append(f"{warning_tasks} warning task(s)")
         if duplicate_tasks:
             parts.append(f"{duplicate_tasks} duplicate task(s)")
+        if notice_tasks:
+            parts.append(f"{notice_tasks} notice task(s)")
         screen.notify(
             f"✗ {total_tasks} total affected task(s): {', '.join(parts)}.",
             severity="warning",
@@ -680,8 +686,8 @@ def _populate_equipment_table(screen: "DataMgmtScreen", records: list) -> None:
         dmg  = str(x["damage"])     if x.get("damage")  else "—"
         defn = str(x["defense"])    if x.get("defense") else "—"
         crit = f"{x['crit']:.1f}"  if x.get("crit")    else "—"
-        tsp  = str(x.get("tsp", 0))
-        tep  = str(x.get("tep", 0))
+        tsp  = str(x.get("tsp, 0"))
+        tep  = str(x.get("tep, 0"))
         tap_val = x.get("tap", 0)
         tap  = str(tap_val) if tap_val != 0 else "—"
         tp   = str(x.get("tp",  0))
