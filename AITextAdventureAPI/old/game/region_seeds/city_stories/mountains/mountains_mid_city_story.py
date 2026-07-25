@@ -595,7 +595,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'rokhuld',
 		'task_acquire_events': [
-			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'rokhuld', 'location': None }},
 			{ 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'rokhulls_fracture_core', 'location': 'final_chamber' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_b_entering_core' }},
 		],

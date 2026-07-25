@@ -1,0 +1,225 @@
+﻿flowchart LR
+    classDef eChain    fill:#a78bfa,color:#000,stroke:#7c3aed
+    classDef fChain    fill:#f59e0b,color:#000,stroke:#d97706
+    classDef trigger   fill:#38bdf8,color:#000,stroke:#0284c7
+    classDef artifact  fill:#d946ef,color:#fff,stroke:#a21caf
+    classDef deliver   fill:#64748b,color:#fff,stroke:#334155
+    classDef dChain    fill:#22c55e,color:#000,stroke:#15803d
+    classDef mythic    fill:#f97316,color:#fff,stroke:#c2410c
+    classDef issue     fill:#ef4444,color:#fff,stroke:#b91c1c
+
+    %% ── E ARTIFACT CHAINS ───────────────────────────────────────────
+
+    subgraph E_CHAINS["Type E — Artifact Chains"]
+        direction TB
+        EC1["E Chain\ndesert_large Ch.35#59;1"]:::eChain
+        EC2["E Chain\nforest_mid Ch.35#59;2"]:::eChain
+        EC3["E Chain\ngrassland_mid Ch.35#59;3"]:::eChain
+        EC4["E Chain\nmountains_large Ch.35#59;4"]:::eChain
+        EC5["E Chain\nshallows_large Ch.35#59;5"]:::eChain
+        EC6["E Chain\ndesert_small Ch.35#59;9"]:::eChain
+        EC7["E Chain\nshallows_mid Ch.35#59;11"]:::eChain
+        EC8["E Chain\nsnow_mid Ch.35#59;15"]:::eChain
+        EC9["E Chain\nforest_small Ch.35#59;16"]:::eChain
+        EC10["E Chain\nswamp_mid Ch.35#59;20"]:::eChain
+        EC11["E Chain\nmountains_small Ch.35#59;21"]:::eChain
+    end
+
+    subgraph E_ARTIFACTS["E Artifacts"]
+        direction TB
+        EA1["Dune Cipher Stone"]:::artifact
+        EA2["Mycelia Memory Spore"]:::artifact
+        EA3["Sanctum Seal Fragment"]:::artifact
+        EA4["Forge Echo Core\n&nbsp;&nbsp;⚠ fix: remove dup award&nbsp;&nbsp;"]:::artifact
+        EA5["Brine Compass\n&nbsp;&nbsp;⚠ fix: remove dup award&nbsp;&nbsp;"]:::artifact
+        EA6["Eroded Ledger Plate"]:::artifact
+        EA7["Tidekin Seal\n&nbsp;&nbsp;⚠ fix: remove dup award&nbsp;&nbsp;"]:::artifact
+        EA8["Pageant Decree Shard\n&nbsp;&nbsp;⚠ fix: remove dup award&nbsp;&nbsp;"]:::artifact
+        EA9["Thornshade Root Graft"]:::artifact
+        EA10["Bayou Memory Vessel\n&nbsp;&nbsp;⚠ ID mismatch in code&nbsp;&nbsp;"]:::artifact
+        EA11["Dominion Fragment\n&nbsp;&nbsp;⚠ ID mismatch: forge_dominion_shard&nbsp;&nbsp;"]:::artifact
+    end
+
+    EC1 --> EA1
+    EC2 --> EA2
+    EC3 --> EA3
+    EC4 --> EA4
+    EC5 --> EA5
+    EC6 --> EA6
+    EC7 --> EA7
+    EC8 --> EA8
+    EC9 --> EA9
+    EC10 --> EA10
+    EC11 --> EA11
+
+    %% ── F FACTION CHAINS ─────────────────────────────────────────────
+
+    subgraph F_CHAINS["Type F — Faction Chains"]
+        direction TB
+        FC1["F Chain Seth\ndesert_large Ch.35#59;1"]:::fChain
+        FC2["F Chain Astra Wynn\nshallows_large Ch.35#59;5"]:::fChain
+        FC3["F Chain Tess\ndesert_small Ch.35#59;9"]:::fChain
+        FC4["F Chain Marlo Finch\nsnow_mid Ch.35#59;15"]:::fChain
+    end
+
+    subgraph F_ITEMS["F Faction Items"]
+        direction TB
+        FI1["Salvage Manifest"]:::artifact
+        FI2["Rift Observation Log"]:::artifact
+        FI3["Contraband Registry"]:::artifact
+        FI4["Audit Testimony Seal"]:::artifact
+    end
+
+    FC1 --> FI1
+    FC2 --> FI2
+    FC3 --> FI3
+    FC4 --> FI4
+
+    %% ── STANDARD TRIGGER ITEMS ───────────────────────────────────────
+
+    subgraph DUNGEONS["Chapter Dungeons"]
+        direction TB
+        DG1["Ch.35#59;4 Dungeon\nrift_dungeon_ch4"]:::trigger
+        DG2["Ch.35#59;8 Dungeon"]:::trigger
+        DG3["Ch.35#59;5 Dungeon"]:::trigger
+        DG4["Ch.35#59;3 Dungeon\nnobles_mansion_ch3\n&nbsp;&nbsp;⚠ dungeon_add_treasure missing&nbsp;&nbsp;"]:::issue
+        DG5["Ch.35#59;4 Dungeon\nrift_dungeon_ch4"]:::trigger
+        DG6["Ch.35#59;2 Dungeon"]:::trigger
+    end
+
+    subgraph TRIGGERS["Standard Trigger Items"]
+        direction TB
+        TR1["Foundry Resonance Key"]:::artifact
+        TR2["Ink Resonance Vial"]:::artifact
+        TR3["Corsair Tide Fragment"]:::artifact
+        TR4["Hollow Grief Token\n&nbsp;&nbsp;⚠ no source — add dungeon_add_treasure&nbsp;&nbsp;"]:::issue
+        TR5["Necropolis Marrow Shard"]:::artifact
+        TR6["Veil Memory Leaf"]:::artifact
+    end
+
+    DG1 --> TR1
+    DG2 --> TR2
+    DG3 --> TR3
+    DG4 --> TR4
+    DG5 --> TR5
+    DG6 --> TR6
+
+    subgraph DELIVER["Deliver To"]
+        direction TB
+        BRAWN["Brawn\nArmor"]:::deliver
+        MIRA1["Mira\nAccessory"]:::deliver
+        DIEGO1["Diego\nWeapon"]:::deliver
+        MIRA2["Mira\nAccessory"]:::deliver
+        DIEGO2["Diego\nWeapon"]:::deliver
+        MIRA3["Mira\nAccessory"]:::deliver
+    end
+
+    TR1 --> BRAWN
+    TR2 --> MIRA1
+    TR3 --> DIEGO1
+    TR4 --> MIRA2
+    TR5 --> DIEGO2
+    TR6 --> MIRA3
+
+    %% ── D CHAINS & MYTHIC REWARDS ────────────────────────────────────
+
+    subgraph D_CHAINS["Type D — Mythic Equipment Chains"]
+        direction TB
+        DC1["D Chain\ndesert_large Ch.35#59;1"]:::dChain
+        DC2["D Chain\nforest_mid Ch.35#59;2 retroactive"]:::dChain
+        DC3["D Chain\ngrassland_mid Ch.35#59;3"]:::dChain
+        DC4["D Chain\nmountains_large Ch.35#59;4"]:::dChain
+        DC5["D Chain\nshallows_large Ch.35#59;5"]:::dChain
+        DC6["D Chain\nsnow_small Ch.35#59;6"]:::dChain
+        DC7["D Chain\nswamp_small Ch.35#59;7 retroactive"]:::dChain
+        DC8["D Chain\ndesert_mid Ch.35#59;8"]:::dChain
+        DC9["D Chain\ndesert_small Ch.35#59;9"]:::dChain
+        DC10["D Chain\ngrassland_large Ch.35#59;10"]:::dChain
+        DC11["D Chain\nshallows_mid Ch.35#59;11"]:::dChain
+        DC12["D Chain\ngrassland_small Ch.35#59;12"]:::dChain
+        DC13["D Chain\nswamp_large Ch.35#59;13"]:::dChain
+        DC14["D Chain\nshallows_small Ch.35#59;14"]:::dChain
+        DC15["D Chain\nsnow_mid Ch.35#59;15"]:::dChain
+        DC16["D Chain\nforest_small Ch.35#59;16"]:::dChain
+        DC17["D Chain\nmountains_mid Ch.35#59;17"]:::dChain
+        DC19["D Chain\nsnow_large Ch.35#59;19"]:::dChain
+        DC20["D Chain\nswamp_mid Ch.35#59;20"]:::dChain
+        DC21["D Chain\nmountains_small Ch.35#59;21"]:::dChain
+    end
+
+    subgraph MYTHIC["Mythic Items"]
+        direction TB
+        M1["mythic accessory\ndesert_large"]:::mythic
+        M2["mythic ?\nforest_mid"]:::mythic
+        M3["mythic weapon\ngrassland_mid"]:::mythic
+        M4["mythic armor\nmountains_large"]:::mythic
+        M5["mythic accessory\nshallows_large"]:::mythic
+        M6["mythic ?\nsnow_small"]:::mythic
+        M7["mythic weapon\nswamp_small"]:::mythic
+        M8["mythic accessory\ndesert_mid"]:::mythic
+        M9["mythic ?\ndesert_small"]:::mythic
+        M10["mythic accessory\ngrassland_large"]:::mythic
+        M11["mythic weapon\nshallows_mid"]:::mythic
+        M12["mythic accessory\ngrassland_small"]:::mythic
+        M13["mythic weapon\nswamp_large"]:::mythic
+        M14["mythic ?\nshallows_small"]:::mythic
+        M15["mythic armor\nsnow_mid"]:::mythic
+        M16["mythic ?\nforest_small"]:::mythic
+        M17["mythic weapon\nmountains_mid"]:::mythic
+        M19["mythic accessory\nsnow_large"]:::mythic
+        M20["mythic weapon\nswamp_mid"]:::mythic
+        M21["mythic ?\nmountains_small"]:::mythic
+    end
+
+    %% E → D (same-city and cross-city)
+    EA1 -->|"gates"| DC1
+    EA2 -->|"gates Ch.16→Ch.2 retroactive"| DC16
+    EA3 -->|"gates Ch.3→Ch.10"| DC10
+    EA4 -->|"gates Ch.4→Ch.17"| DC17
+    EA5 -->|"gates same-city"| DC5
+    EA6 -->|"gates same-city"| DC9
+    EA7 -->|"gates Ch.11→Ch.14"| DC14
+    EA8 -->|"gates same-city"| DC15
+    EA9 -->|"gates Ch.16→Ch.2 retroactive"| DC2
+    EA10 -->|"gates Ch.20→Ch.7 retroactive"| DC7
+    EA11 -->|"gates same-city"| DC21
+
+    %% F → D
+    FI1 -->|"gates Ch.1→Ch.3"| DC3
+    FI2 -->|"gates Ch.5→Ch.19"| DC19
+    FI3 -->|"gates Ch.9→Ch.6"| DC6
+    FI4 -->|"gates Ch.15→Ch.20"| DC20
+
+    %% Trigger → Deliver → D
+    BRAWN  -->|"unlocks"| DC4
+    MIRA1  -->|"unlocks"| DC8
+    DIEGO1 -->|"unlocks"| DC11
+    MIRA2  -->|"unlocks"| DC12
+    DIEGO2 -->|"unlocks"| DC13
+    MIRA3  -->|"unlocks"| DC18
+
+    %% D → Mythic
+    DC1  --> M1
+    DC2  --> M2
+    DC3  --> M3
+    DC4  --> M4
+    DC5  --> M5
+    DC6  --> M6
+    DC7  --> M7
+    DC8  --> M8
+    DC9  --> M9
+    DC10 --> M10
+    DC11 --> M11
+    DC12 --> M12
+    DC13 --> M13
+    DC14 --> M14
+    DC15 --> M15
+    DC16 --> M16
+    DC17 --> M17
+    DC19 --> M19
+    DC20 --> M20
+    DC21 --> M21
+
+    %% Orphaned item note
+    ORPHAN["dominion_forge_key\n&nbsp;&nbsp;⚠ no source, no consumer&nbsp;&nbsp;\nresolve or delete"]:::issue
+    WIND["Windcarver's Token\n&nbsp;&nbsp;⚠ source exists, no consumer&nbsp;&nbsp;\nwire to D chain or remove from loot"]:::issue

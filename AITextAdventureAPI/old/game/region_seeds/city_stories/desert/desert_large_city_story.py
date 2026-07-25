@@ -305,7 +305,7 @@ TASKS += [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'rhyla',
-                    'location': 'region_open_area'
+                    'location': 'region_city_other2'
                 }
             }
         ],
@@ -317,7 +317,6 @@ TASKS += [
                     'dialog_id': 'rhyla_cipher_context'
                 }
             },
-            
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
@@ -326,6 +325,20 @@ TASKS += [
                         "The vault is sealed. The Choir will not let you pass.",
                         "You will have to confront the Choir Echo to gain access."
                     ]
+                }
+            },            
+            {
+                'event_type': 'create_npc',
+                'params': {
+                    'npc_id': 'choir_echo',
+                    'location': None
+                }
+            },
+            {
+                'event_type': 'create_dungeon',
+                'params': {
+                    'dungeon_id': 'desert_large_city_choir_vault',
+                    'location': 'region_open_area'
                 }
             },
             {
@@ -343,13 +356,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'choir_echo',
         'task_acquire_events': [
-            {
-                'event_type': 'create_npc',
-                'params': {
-                    'npc_id': 'choir_echo',
-                    'location': 'region_open_area'
-                }
-            }
         ],
         'task_complete_events': [
             {

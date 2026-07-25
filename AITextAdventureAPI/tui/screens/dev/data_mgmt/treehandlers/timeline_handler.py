@@ -59,14 +59,15 @@ def rebuild_timeline_tree(
 def _task_label(task_node: TimelineTaskNode) -> str:
     """Render the Rich-markup label for a task leaf.
 
-    Errors render in red, warnings in yellow.  Info-only nodes render
-    in cyan without an error count — they are not considered invalid.
-    Hard errors take priority over warnings; warnings take priority over info.
+    Errors render in red, warnings in yellow, duplicates in light violet,
+    info-only nodes in cyan.  Hard errors take priority; warnings next;
+    duplicates next; info last.
     """
     if task_node.errors:
-        has_error   = any(e.severity == "error"   for e in task_node.errors)
-        has_warning = any(e.severity == "warning" for e in task_node.errors)
-        has_info    = any(e.severity == "info"    for e in task_node.errors)
+        has_error     = any(e.severity == "error"     for e in task_node.errors)
+        has_warning   = any(e.severity == "warning"   for e in task_node.errors)
+        has_duplicate = any(e.severity == "duplicate" for e in task_node.errors)
+        has_info      = any(e.severity == "info"      for e in task_node.errors)
 
         label = rich_escape(task_node.label)
         tid   = rich_escape(task_node.task_id)
@@ -84,6 +85,13 @@ def _task_label(task_node: TimelineTaskNode) -> str:
                 f"[yellow]{label}[/yellow]  "
                 f"[dim yellow]{tid}[/dim yellow]  "
                 f"[yellow](warnings: {n})[/yellow]"
+            )
+        if has_duplicate:
+            n = sum(1 for e in task_node.errors if e.severity == "duplicate")
+            return (
+                f"[#c084fc]{label}[/#c084fc]  "
+                f"[dim #c084fc]{tid}[/dim #c084fc]  "
+                f"[#c084fc](duplicates: {n})[/#c084fc]"
             )
         if has_info:
             return (

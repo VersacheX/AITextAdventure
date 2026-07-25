@@ -637,7 +637,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'serene',
 		'task_acquire_events': [
-			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'serene', 'location': None }},
 			{ 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'serenes_wind_vault', 'location': 'final_chamber' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_b_entering_vault' }},
 		],

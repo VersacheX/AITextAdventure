@@ -364,6 +364,13 @@ TASKS += [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'signal_wraith',
+                    'location': None
+                }
+            },
+            {
+                'event_type': 'create_dungeon',
+                'params': {
+                    'dungeon_id': 'desert_small_city_signal_relay',
                     'location': 'region_open_area'
                 }
             },
@@ -539,23 +546,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'tess',
         'task_acquire_events': [
-            {
-                'event_type': 'create_npc',
-                'params': {
-                    'npc_id': 'tess',
-                    'location': 'region_open_area'
-                }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'tess',
-                    'standing_text': [
-                        "Oh, Jexa sent you? She really can't keep a secret.",
-                        "Come look at what I found."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {

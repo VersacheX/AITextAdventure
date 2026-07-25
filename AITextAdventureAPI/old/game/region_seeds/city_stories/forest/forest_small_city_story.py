@@ -386,12 +386,18 @@ TASKS += [
 					'dialog_id': 'lyss_root_graft_context'
 				}
 			},
-			# Place the Burrow Whisper and set standing text before the confront task
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'forest_small_city_burrow_alcove',
+					'location': 'region_open_area'
+				}
+			},
 			{
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'burrow_whisper',
-					'location': 'region_open_area'
+					'location': None
 				}
 			},
 			{

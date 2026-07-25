@@ -472,7 +472,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'marrowroot',
 		'task_acquire_events': [
-			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'marrowroot', 'location': None }},
 			{ 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'marrowroots_deep_grove', 'location': 'final_chamber' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_b_entering_grove' }},
 		],

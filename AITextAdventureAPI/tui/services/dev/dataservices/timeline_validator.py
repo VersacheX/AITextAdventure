@@ -139,6 +139,23 @@ R18 NPC_OPEN_AREA_PLACEMENT  (warning)
     ``region_city_open_area``.  These are valid locations but broad — flag as a
     reminder to confirm the placement is intentional and not a placeholder.
 
+R19 NPC_DUPLICATE_CREATE
+    The same npc_id has create_npc events in more than one task anywhere
+    across all stories.  An NPC may only be created once — duplicate
+    create_npc calls will overwrite each other at runtime.
+
+R20 ITEM_AWARD_DUPLICATE
+    The same item_id is awarded by more than one task anywhere across all stories.
+    Each contributing task is flagged so the author can identify and remove the
+    redundant award_item, keeping only the canonical terminal task's grant.
+    Rendered as light violet in the timeline tree; counted separately in the toast.
+
+R21 DUNGEON_UNDEFINED
+    create_dungeon references a dungeon_id that has no corresponding entry in
+    DUNGEON_SETTINGS.  The dungeon will be created at runtime but will be
+    empty — no rooms, no hostiles, no treasure.  This catches stub dungeons
+    that were wired into the task graph before their seed file was authored.
+
 """
 from __future__ import annotations
 
@@ -557,6 +574,12 @@ def validate_timeline_integrity(
             if did:
                 known_dungeon_ids.add(str(did))
 
+    # Snapshot of dungeons that have an actual seed definition in const.
+    # create_dungeon events add to known_dungeon_ids at runtime, but a dungeon
+    # that is wired via create_dungeon with no matching DUNGEON_SETTINGS entry
+    # is a stub — it exists in the task graph but has no dungeon built for it.
+    static_dungeon_ids: Set[str] = set(known_dungeon_ids)
+
     # ── Identify story-root tasks ──────────────────────────────────────────
     # The first task of every story bucket is awarded automatically when the
     # story unlocks (primary region, city, or chapter).  It will never have
@@ -583,8 +606,10 @@ def validate_timeline_integrity(
     # ── Traversal-order state for rules that require "prior" context ───────
     item_source_counts:  Dict[str, int] = defaultdict(int)
     item_remove_counts:  Dict[str, int] = defaultdict(int)
+    award_origins:       Dict[str, List[str]] = defaultdict(list)  # item_id → [task_ids]
     created_dungeon_ids: Set[str]       = set()
     character_npc_slots: int            = 0   # incremented by create_character_npc events
+    npc_create_origins: Dict[str, List[str]] = defaultdict(list)  # npc_id → [task_id, ...]
 
     # Pre-populate created_npc_ids from ALL complete_intro_story acquire events.
     # These tasks are story-initialization roots that fire before any meet tasks
@@ -785,6 +810,7 @@ def validate_timeline_integrity(
                 item_id = str(params.get("item_id") or params.get("id") or "")
                 if item_id:
                     item_source_counts[item_id] += 1
+                    award_origins[item_id].append(task_id)
 
             elif raw_type == "dungeon_add_treasure":
                 item_id = str(params.get("item_id") or params.get("id") or "")
@@ -864,8 +890,9 @@ def validate_timeline_integrity(
                 npc_id = str(params.get("npc_id") or params.get("id") or "")
                 if npc_id:
                     created_npc_ids.add(npc_id)
+                    npc_create_origins[npc_id].append(task_id)
                 location = str(params.get("location") or "")
-                if location in ("region_open_area", "region_city_open_area"):
+                if location in ("region_open_area", "city_open_area"):
                     errors_map[task_id].append(_err(
                         "NPC_OPEN_AREA_PLACEMENT",
                         f"create_npc for '{npc_id or '?'}' uses broad location "
@@ -920,6 +947,15 @@ def validate_timeline_integrity(
                 if did:
                     created_dungeon_ids.add(did)
                     known_dungeon_ids.add(did)
+                    # ── R21: Dungeon has no seed definition ───────────
+                    if did not in static_dungeon_ids:
+                        errors_map[task_id].append(_err(
+                            "DUNGEON_UNDEFINED",
+                            f"create_dungeon references '{did}' which has no entry in "
+                            f"DUNGEON_SETTINGS — dungeon is a stub with no seed built.",
+                            event_type=raw_type,
+                            related_entity_id=did,
+                        ))
 
             # ── R13: Dungeon event references known dungeon ───────────
             elif raw_type in _DUNGEON_REF_EVENT_TYPES:
@@ -1034,6 +1070,19 @@ def validate_timeline_integrity(
                             event_type=raw_type,
                             related_entity_id=npc_id,
                         ))
+
+    # ── R19: Duplicate create_npc across all tasks ────────────────────────
+    for npc_id, origin_task_ids in npc_create_origins.items():
+        if len(origin_task_ids) > 1:
+            for origin_task_id in origin_task_ids:
+                errors_map[origin_task_id].append(_err(
+                    "NPC_DUPLICATE_CREATE",
+                    f"NPC '{npc_id}' is created by create_npc in {len(origin_task_ids)} "
+                    f"tasks: {', '.join(origin_task_ids)}. "
+                    f"An NPC may only be created once — duplicate calls overwrite each other.",
+                    event_type="create_npc",
+                    related_entity_id=npc_id,
+                ))
 
     # ── R4: Unreachable tasks (no inbound award) ──────────────────────────
     for tn in all_tasks:

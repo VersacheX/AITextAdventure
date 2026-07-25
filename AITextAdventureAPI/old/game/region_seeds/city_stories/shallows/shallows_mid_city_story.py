@@ -398,12 +398,6 @@ TASKS += [
         ],
         'task_complete_events': [
             {
-                'event_type': 'award_item',
-                'params': {
-                    'item_id': 'shallows_mid_city_e_tidekin_seal'
-                }
-            },
-            {
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'shallows_mid_city_type_e_return_to_vexa'

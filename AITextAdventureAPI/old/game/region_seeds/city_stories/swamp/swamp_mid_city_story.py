@@ -355,6 +355,13 @@ TASKS += [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'oathrot_voice',
+					'location': None
+				}
+			},
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'swamp_mid_city_oathrot_channel',
 					'location': 'region_open_area'
 				}
 			},
@@ -438,6 +445,12 @@ TASKS += [
 				'params': {
 					'npc_id': 'lanternsworn_janrel',
 					'dialog_id': 'janrel_vessel_received'
+				}
+			},
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'swamp_mid_city_e_bayou_memory_vessel'
 				}
 			},
 			{

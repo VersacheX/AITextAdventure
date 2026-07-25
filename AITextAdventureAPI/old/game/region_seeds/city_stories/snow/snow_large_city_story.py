@@ -626,7 +626,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'aeriola',
 		'task_acquire_events': [
-			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'aeriola', 'location': None }},
 			{ 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'aeriolass_frozen_sanctum', 'location': 'final_chamber' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_b_entering_sanctum' }},
 		],

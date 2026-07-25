@@ -531,12 +531,6 @@ TASKS += [
         ],
         'task_complete_events': [
             {
-                'event_type': 'award_item',
-                'params': {
-                    'item_id': 'mountains_large_city_e_forge_echo_core'
-                }
-            },
-            {
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'mountains_large_city_type_e_return_to_gorvak'
@@ -660,13 +654,20 @@ TASKS += [
 					'dialog_id': 'gorvak_d_key_assay'
 				}
 			},
-            {
-                'event_type': 'create_npc',
-                'params': {
-                    'npc_id': 'conduit_echo',
-                    'location': 'region_open_area'
-                }
-            },
+			{
+				'event_type': 'create_npc',
+				'params': {
+					'npc_id': 'conduit_echo',
+					'location': None
+				}
+			},
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'mountains_large_city_conduit_maw',
+					'location': 'region_open_area'
+				}
+			},
 			{
 				'event_type': 'award_task',
 				'params': {

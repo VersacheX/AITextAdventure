@@ -506,11 +506,17 @@ TASKS += [
 					'dialog_id': 'halven_seal_context'
 				}
 			},
-			# Place the Sanctum Voice and set its standing text before the confront task
 			{
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'sanctum_voice',
+					'location': None
+				}
+			},
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'grassland_mid_city_sanctum_vault',
 					'location': 'region_open_area'
 				}
 			},

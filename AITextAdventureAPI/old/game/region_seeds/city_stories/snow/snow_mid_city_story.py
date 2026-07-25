@@ -321,7 +321,7 @@ TASKS += [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'chant_seer_haldrin',
-                    'location': 'region_open_area'
+                    'location': 'region_city_other1'
                 }
             },
             {
@@ -344,6 +344,20 @@ TASKS += [
                 }
             },
             {
+                'event_type': 'create_npc',
+                'params': {
+                    'npc_id': 'rimechant_echo',
+                    'location': None
+                }
+            },
+            {
+                'event_type': 'create_dungeon',
+                'params': {
+                    'dungeon_id': 'snow_mid_city_rimechant_hall',
+                    'location': 'region_open_area'
+                }
+            },
+            {
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'snow_mid_city_type_e_confront_rimechant_echo'
@@ -358,13 +372,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'rimechant_echo',
         'task_acquire_events': [
-            {
-                'event_type': 'create_npc',
-                'params': {
-                    'npc_id': 'rimechant_echo',
-                    'location': 'region_open_area'
-                }
-            },
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
@@ -408,12 +415,6 @@ TASKS += [
             }
         ],
         'task_complete_events': [
-            {
-                'event_type': 'award_item',
-                'params': {
-                    'item_id': 'snow_mid_city_e_pageant_decree_shard'
-                }
-            },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -503,23 +504,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'marlo_finch',
         'task_acquire_events': [
-            {
-                'event_type': 'create_npc',
-                'params': {
-                    'npc_id': 'marlo_finch',
-                    'location': 'region_open_area'
-                }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'marlo_finch',
-                    'standing_text': [
-                        "I've been stranded here since the last storm.",
-                        "Fortunate, actually. Gave me time to cross-reference three separate ledgers."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -544,6 +528,15 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'speaker_yrsa',
         'task_acquire_events': [
+        ],
+        'task_complete_events': [
+            {
+                'event_type': 'initiate_dialog',
+                'params': {
+                    'npc_id': 'speaker_yrsa',
+                    'dialog_id': 'yrsa_marlo_testimony'
+                }
+            },
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
@@ -552,15 +545,6 @@ TASKS += [
                         "An auditor needs testimony about the old council allocations?",
                         "It's long past time someone investigated those records."
                     ]
-                }
-            }
-        ],
-        'task_complete_events': [
-            {
-                'event_type': 'initiate_dialog',
-                'params': {
-                    'npc_id': 'speaker_yrsa',
-                    'dialog_id': 'yrsa_marlo_testimony'
                 }
             },
             {
@@ -578,16 +562,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'marlo_finch',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'marlo_finch',
-                    'standing_text': [
-                        "Yrsa agreed to testify?",
-                        "That closes the Hailward section of the audit."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {

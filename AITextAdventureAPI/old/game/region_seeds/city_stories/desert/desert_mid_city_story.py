@@ -560,7 +560,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'zaruun',
 		'task_acquire_events': [
-			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'zaruun', 'location': None }},
 			{ 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'zaruuns_sanctum', 'location': 'final_chamber' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_b_entering_sanctum' }},
 		],

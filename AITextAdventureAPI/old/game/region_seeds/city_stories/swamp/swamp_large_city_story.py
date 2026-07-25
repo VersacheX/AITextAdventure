@@ -612,7 +612,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'miregloom',
 		'task_acquire_events': [
-			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'miregloom', 'location': None }},
 			{ 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'miregloom_resurrection_pit', 'location': 'final_chamber' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_b_entering_pit' }},
 		],

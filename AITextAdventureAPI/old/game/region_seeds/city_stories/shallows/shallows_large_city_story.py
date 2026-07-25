@@ -370,6 +370,13 @@ TASKS += [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'stormtide_echo',
+                    'location': None
+                }
+            },
+            {
+                'event_type': 'create_dungeon',
+                'params': {
+                    'dungeon_id': 'shallows_large_city_stormtide_vault',
                     'location': 'region_open_area'
                 }
             },
@@ -416,12 +423,6 @@ TASKS += [
             }
         ],
         'task_complete_events': [
-            {
-                'event_type': 'award_item',
-                'params': {
-                    'item_id': 'shallows_large_city_e_brine_compass'
-                }
-            },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -477,23 +478,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'astra_wynn',
         'task_acquire_events': [
-            {
-                'event_type': 'create_npc',
-                'params': {
-                    'npc_id': 'astra_wynn',
-                    'location': 'region_open_area'
-                }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'astra_wynn',
-                    'standing_text': [
-                        "The rift here is unusually clean.",
-                        "I've been watching it for two days. Something about it doesn't add up."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -706,13 +690,20 @@ TASKS += [
 					'dialog_id': 'marenna_d_compass_read'
 				}
 			},
-            {
-                'event_type': 'create_npc',
-                'params': {
-                    'npc_id': 'undertow_voice',
-                    'location': 'region_open_area'
-                }
-            },
+			{
+				'event_type': 'create_npc',
+				'params': {
+					'npc_id': 'undertow_voice',
+					'location': None
+				}
+			},
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'shallows_large_city_undertow_vault',
+					'location': 'region_open_area'
+				}
+			},
 			{
 				'event_type': 'award_task',
 				'params': {

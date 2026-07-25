@@ -647,7 +647,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'uulthar',
 		'task_acquire_events': [
-			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'uulthar', 'location': None }},
 			{ 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'uulthars_tidal_maw', 'location': 'final_chamber' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_b_entering_maw' }},
 		],
