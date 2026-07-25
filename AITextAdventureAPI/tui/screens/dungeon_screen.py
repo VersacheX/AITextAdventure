@@ -50,19 +50,15 @@ class DungeonScreen(BaseScreen):
     show_footer = True
 
     BINDINGS = [
-        Binding("w", "move_north", "North", show=False),
-        Binding("up", "move_north", "North", show=False),
-        Binding("s", "move_south", "South", show=False),
-        Binding("down", "move_south", "South", show=False),
-        Binding("a", "move_west", "West", show=False),
-        Binding("left", "move_west", "West", show=False),
-        Binding("d", "move_east", "East", show=False),
-        Binding("right", "move_east", "East", show=False),
-        Binding("u", "floor_up", "Up", show=True),
-        Binding("shift+d", "floor_down", "Down", show=True),
-        Binding("space", "interact", "Interact", show=True),
-        Binding("i", "open_inventory", "Inventory", show=True),
-        Binding("escape", "go_back", "Exit", show=True),
+        Binding("up",     "move_north", "North", show=False),
+        Binding("down",   "move_south", "South", show=False),
+        Binding("left",   "move_west",  "West",  show=False),
+        Binding("right",  "move_east",  "East",  show=False),
+        Binding("u",      "floor_up",   "Up",    show=True),
+        Binding("j",      "floor_down", "Down",  show=True),
+        Binding("space",  "interact",   "Interact", show=True),
+        Binding("i",      "open_inventory", "Inventory", show=True),
+        Binding("escape", "go_back",    "Exit",  show=True),
     ]
 
     DEFAULT_CSS = """

@@ -177,19 +177,31 @@ def _tile_char(x: int, y: int, player_game: Any) -> str:
 
     if tile_type == BUILDING:
         bld = getattr(t, "building", None)
-        ch = bld.get("char") if isinstance(bld, dict) else None
+        ch    = bld.get("char")  if isinstance(bld, dict) else None
         color = bld.get("color") if isinstance(bld, dict) else None
-        return _colorize(ch if ch else "B", color)
+        try:
+            _, active = player_game.get_region_and_active_area_for_position((x, y))
+            if active and const:
+                type_name = getattr(active, "city_name", None) or getattr(active, "region_name", "")
+                open_color = getattr(const, f"{type_name.upper()}_OPEN_AREA_COLOR", None)
+            else:
+                open_color = None
+        except Exception:
+            open_color = None
+        return _colorize(ch if ch else "B", color, open_color)
 
     if tile_type == "open_area":
         try:
             dungeon = player_game.get_dungeon_at_position((x, y))
-            if dungeon is not None:
-                ch = getattr(const, "DUNGEON_ENTRANCE_CHAR", "D") if const else "D"
-                return _colorize(ch, "#af1111")
             _, active = player_game.get_region_and_active_area_for_position((x, y))
+            open_color = None
             if active and const:
                 type_name = getattr(active, "city_name", None) or getattr(active, "region_name", "")
+                open_color = getattr(const, f"{type_name.upper()}_OPEN_AREA_COLOR", None)
+            if dungeon is not None:
+                ch = getattr(const, "DUNGEON_ENTRANCE_CHAR", "D") if const else "D"
+                return _colorize(ch, "#af1111", open_color)
+            if active and const:
                 ch = getattr(const, f"{type_name.upper()}_OPEN_AREA_CHAR", None) or "."
                 color = getattr(const, f"{type_name.upper()}_OPEN_AREA_COLOR", None)
                 return _colorize(ch, color)
@@ -271,3 +283,35 @@ def build_stats_lines(player_game: Any) -> List[str]:
         lines.append(" ?")
 
     return lines
+
+
+def _get_open_color(x: int, y: int, player_game: Any, const: Any) -> Optional[str]:
+    """Return the OPEN_AREA_COLOR for the tile at (x, y).
+    Tries the city-level constant first; if the active area is a city,
+    walks up to its parent region via get_city_parent_region and tries that.
+    Returns None if neither yields a constant.
+    """
+    try:
+        from services.city_service import get_city_parent_region
+
+        _, active = player_game.get_region_and_active_area_for_position((x, y))
+
+        # 1. try city-level constant
+        if active and const:
+            type_name = getattr(active, "city_name", None) or getattr(active, "region_name", "")
+            color = getattr(const, f"{type_name.upper()}_OPEN_AREA_COLOR", None)
+            if color:
+                return color
+
+        # 2. active area is a city — walk up to its parent region
+        if active and const:
+            parent = get_city_parent_region(active, player_game)
+            if parent:
+                region_name = getattr(parent, "region_name", None)
+                if region_name:
+                    color = getattr(const, f"{region_name.upper()}_OPEN_AREA_COLOR", None)
+                    if color:
+                        return color
+    except Exception:
+        pass
+    return None

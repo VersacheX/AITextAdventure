@@ -403,9 +403,10 @@ def add_npc_to_dungeon(params: Dict[str, Any], player_game, parent_task):
 	if npc_id == 'final_character':
 		npc_id = player_game.final_character
 	location = params.get('location')
-	entity = {'type':'npc', 'npc_id': npc_id}
-	from game.objects. dungeon import DungeonTileType
-	dungeon.place_entity_at_location(entity, DungeonTileType(location))
+	depth = params.get('depth')           # optional 0-100 depth percentage
+	entity = {'type': 'npc', 'npc_id': npc_id}
+	from game.objects.dungeon import DungeonTileType
+	dungeon.place_entity_at_location(entity, DungeonTileType(location), depth=depth)
 
 
 
@@ -455,11 +456,12 @@ def add_treasure_to_dungeon(params: Dict[str, Any], player_game, parent_task):
 		return None
 
 	location_type = params.get('location')  # e.g. 'final_chamber'
+	depth = params.get('depth')
 	if not location_type:
-		input (f'Location type not provided in params')
+		input(f'Location type not provided in params')
 		return None
-	from game.objects. dungeon import DungeonTileType
-	dungeon.place_entity_at_location(item, DungeonTileType(location_type))
+	from game.objects.dungeon import DungeonTileType
+	dungeon.place_entity_at_location(item, DungeonTileType(location_type), depth=depth)
 	return item
 
 def create_combat_scenario(params: Dict[str, Any], player_game, parent_task):

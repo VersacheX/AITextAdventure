@@ -181,20 +181,68 @@ class Dungeon:
 
         #input (f'NPC {npc_id} not found in dungeon {self.id} to hide')
 
-    def place_entity_at_location(self, entity: Any, location_type: DungeonTileType):
+    def _candidates_at_depth(
+        self,
+        candidates: list,
+        depth_pct: int,
+    ) -> list:
+        """Filter *candidates* to tiles whose depth matches *depth_pct* (0–100).
+
+        Depth is measured as normalised Manhattan distance from the nearest
+        ENTRANCE tile.  Tiles are sorted by that distance and the subset whose
+        normalised position is closest to depth_pct/100 is returned.
+
+        If no ENTRANCE tile exists the raw tile index order is used as a proxy
+        (entrance-less dungeons treat tile 0 as the origin).
+
+        A ±10 % tolerance band is tried first; if that yields nothing the single
+        nearest candidate is returned so placement never hard-fails due to depth.
+        """
+        if not candidates:
+            return candidates
+
+        # --- origin: centroid of all ENTRANCE tiles, or first candidate ---
+        entrance_tiles = [t for t in self.tiles.values() if t.tile_type == DungeonTileType.ENTRANCE]
+        if entrance_tiles:
+            ox = sum(t.x for t in entrance_tiles) / len(entrance_tiles)
+            oy = sum(t.y for t in entrance_tiles) / len(entrance_tiles)
+        else:
+            ox, oy = float(candidates[0].x), float(candidates[0].y)
+
+        dist = lambda t: abs(t.x - ox) + abs(t.y - oy)  # noqa: E731
+
+        distances = [dist(t) for t in candidates]
+        max_dist = max(distances) or 1  # avoid divide-by-zero
+
+        target = depth_pct / 100.0
+        tolerance = 0.10  # ±10 %
+
+        # try band first, then widen to nearest single match
+        in_band = [
+            t for t, d in zip(candidates, distances)
+            if abs(d / max_dist - target) <= tolerance
+        ]
+        if in_band:
+            return in_band
+
+        # fallback: return the single candidate closest to the target depth
+        return [min(candidates, key=lambda t: abs(dist(t) / max_dist - target))]
+
+    def place_entity_at_location(
+        self,
+        entity: Any,
+        location_type: DungeonTileType,
+        depth: Optional[int] = None,
+    ):
         lt = location_type
 
         # debug: list all tiles with matching tile_type
         all_tiles = [t for t in self.tiles.values() if t.tile_type == lt]
-        #print(f'place_entity_at_location called for entity={entity} location_type={location_type} -> tiles with type={len(all_tiles)}')
-        # for t in all_tiles:
-        #     print(f' tile ({t.x},{t.y},{t.z}) passable={t.passable} entities={len(t.entities)} tile_type={t.tile_type}')
 
         # only consider tiles of the requested type that are reachable from origin
         candidates = []
         for tile in all_tiles:
             if not tile.passable:
-                #print(f' skipping tile ({tile.x},{tile.y},{tile.z}) because not passable')
                 continue
             # Do not place NPCs/items directly on stairs — this prevents blocking vertical movement.
             if tile.has_stairs_up or tile.has_stairs_down:
@@ -203,28 +251,29 @@ class Dungeon:
             if tile.entities:
                 continue
             path_ok = self.path_exists((tile.x, tile.y, tile.z))
-            #print(f' path check for ({tile.x},{tile.y},{tile.z}): {path_ok}')
             if path_ok:
                 candidates.append(tile)
 
         if not candidates:
-            print (f'No candidates found to place entity {entity} at location type {location_type}, ltvalue = {lt}')
-            # extra diagnostics: show nearby tiles and why blocked
+            print(f'No candidates found to place entity {entity} at location type {location_type}, ltvalue = {lt}')
             for t in all_tiles:
                 px = (t.x, t.y, t.z)
                 print(f' diag tile {px}: passable={t.passable} entities={t.entities} -- path_exists={self.path_exists(px)}')
-            # pause for debugging so you can inspect logs when running interactively
             try:
                 input('DEBUG: no placement candidates found - press Enter to continue')
             except Exception:
                 pass
             return False
 
+        # narrow candidates to the requested depth band (0–100 %)
+        if depth is not None:
+            candidates = self._candidates_at_depth(candidates, int(depth))
+
         # choose candidate deterministically from dungeon and entity to keep placement stable
         import random
         key_hash = abs(hash(self.id))
         ent_hash = abs(hash(entity.name if isinstance(entity, Item) else entity.get('npc_id')))
-        rng = random.Random((key_hash * ent_hash * max(1, len(self.get_all_entity_locations()))) % (10 **8))
+        rng = random.Random((key_hash * ent_hash * max(1, len(self.get_all_entity_locations()))) % (10 ** 8))
         chosen_tile = rng.choice(candidates)
         chosen_tile.entities.append(entity)
         print(f'Placed entity {entity} at tile ({chosen_tile.x}, {chosen_tile.y}, {chosen_tile.z}) of type {lt}')
