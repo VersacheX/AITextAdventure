@@ -31,13 +31,12 @@ def get_location_actions(pg: Any, active_area: Any) -> List[LocationAction]:
 
     # ── NPC interaction ───────────────────────────────────────────────────
     try:
-        can_interact, npc_name, npc_id = pg._can_npc_interact_at_player_location()
-        if can_interact and npc_name:
+        for npc in pg.get_npcs_at_player_location():
             actions.append(LocationAction(
-                id=f"npc_{npc_id}",
-                label=f"Talk to {npc_name}",
+                id=f"npc_{npc.id}",
+                label=f"Talk to {npc.name}",
                 kind="npc",
-                data={"npc_id": npc_id, "npc_name": npc_name},
+                data={"npc_id": npc.id, "npc_name": npc.name},
             ))
     except Exception:
         pass

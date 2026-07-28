@@ -228,6 +228,11 @@ class DataMgmtScreen(BaseScreen):
         display: none;
     }
 
+    #dm-dungeon-tree {
+        height: 100%;
+        display: none;
+    }
+
     #dm-detail-panel {
         width: 80;
         height: 100%;
@@ -262,8 +267,12 @@ class DataMgmtScreen(BaseScreen):
         self._ability_user_collapsed: Set[str]  = set()
         self._hostile_user_expanded: Set[str]   = set()
         self._hostile_user_collapsed: Set[str]  = set()
+        self._dungeon_user_expanded: Set[str]   = set()
+        self._dungeon_user_collapsed: Set[str]  = set()
+        self._last_dungeon_filtered: Any        = None
 
         self._last_selected_npc_record: Optional[DevRecord] = None
+        self._last_selected_timeline_node: Optional[Any] = None
         self._npc_playlist: List[DevRecord] = []
         self._npc_playlist_index: int = 0
         # Rolling history of the last _HISTORY_SIZE track IDs played — used to
@@ -326,6 +335,7 @@ class DataMgmtScreen(BaseScreen):
             yield Button("Validate Timeline", id="dm-validate-timeline", variant="default")
             yield Button("Validate Abilities", id="dm-validate-abilities", variant="default")
             yield Button("Validate Hostiles", id="dm-validate-hostiles", variant="default")
+            yield Button("Validate Dungeons", id="dm-validate-dungeons", variant="default")
             yield Button("↑", id="dm-equip-sort-dir", variant="default")
             yield Button("⤢", id="dm-detail-expand", variant="default")
             yield Static("Loading...", id="dm-status")
@@ -349,6 +359,9 @@ class DataMgmtScreen(BaseScreen):
                 hostile_tree: Tree = Tree("Hostiles", id="dm-hostile-tree")
                 hostile_tree.show_root = False
                 yield hostile_tree
+                dungeon_tree: Tree = Tree("Dungeons", id="dm-dungeon-tree")
+                dungeon_tree.show_root = False
+                yield dungeon_tree
             with ScrollableContainer(id="dm-detail-panel"):
                 yield Static("", id="dm-detail-text")
 
@@ -633,3 +646,19 @@ class DataMgmtScreen(BaseScreen):
             update_detail_for_record(self, records[idx])
         except Exception:
             pass
+
+    def on_tree_node_expanded(self, event: Tree.NodeExpanded) -> None:
+        """Track user-expanded nodes for accurate copy serialization."""
+        from tui.screens.dev.data_mgmt.utils import node_label_text  # noqa: PLC0415
+        label = node_label_text(event.node)
+        if label:
+            self._timeline_user_expanded.add(label)
+            self._timeline_user_collapsed.discard(label)
+
+    def on_tree_node_collapsed(self, event: Tree.NodeCollapsed) -> None:
+        """Track user-collapsed nodes for accurate copy serialization."""
+        from tui.screens.dev.data_mgmt.utils import node_label_text  # noqa: PLC0415
+        label = node_label_text(event.node)
+        if label:
+            self._timeline_user_collapsed.add(label)
+            self._timeline_user_expanded.discard(label)

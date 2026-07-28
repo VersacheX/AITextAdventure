@@ -9,6 +9,7 @@ from tui.services.dev.dataservices.models import (
     AbilityTypeNode,
     DevRecord,
     DialogueActNode,
+    DungeonGroupNode,
     HostileRarityNode,
     NpcGroupNode,
     TimelineGroupNode,
@@ -34,6 +35,10 @@ from tui.services.dev.dataservices.ability_service import (
 from tui.services.dev.dataservices.hostile_service import (
     _HOSTILE_TREE,
     _build_hostile_tree,
+)
+from tui.services.dev.dataservices.dungeon_service import (
+    _DUNGEON_TREE,
+    _build_dungeon_tree,
 )
 from tui.services.dev.dataservices.record_builders import (
     _build_characters,
@@ -158,6 +163,13 @@ def get_hostile_tree() -> List[HostileRarityNode]:
     return _HOSTILE_TREE
 
 
+def get_dungeon_tree() -> List[DungeonGroupNode]:
+    """Return the cached Group → Dungeon tree."""
+    if not _CACHE:
+        _load_all()
+    return _DUNGEON_TREE
+
+
 def get_dialog_index() -> Dict[Tuple[Any, Any], List[str]]:
     if not _CACHE:
         _load_all()
@@ -198,4 +210,7 @@ def _load_all() -> None:
     _NPC_TREE.extend(_build_npc_tree(const))
 
     _build_ability_tree(const)
+
     _build_hostile_tree(const)
+
+    _build_dungeon_tree(const)

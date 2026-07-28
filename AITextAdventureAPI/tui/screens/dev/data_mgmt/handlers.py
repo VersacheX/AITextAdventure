@@ -18,6 +18,8 @@ from tui.screens.dev.data_mgmt.components import _RecordRow
 from tui.screens.dev.data_mgmt.detail_panel import (
     update_detail_for_ability,
     update_detail_for_ability_group,
+    update_detail_for_dungeon,
+    update_detail_for_dungeon_group,
     update_detail_for_hostile,
     update_detail_for_hostile_group,
     update_detail_for_multiple_dialogue,
@@ -45,19 +47,23 @@ from tui.screens.dev.data_mgmt.utils import (
     copy_to_clipboard,
     expand_all_nodes,
     get_node_children,
+    serialize_dialog_tree_visible,
     serialize_filtered_tree,
     serialize_node_visible,
-    serialize_npc_tree,
     serialize_timeline_tree,
+    serialize_timeline_task_detail,
+    serialize_npc_tree,
 )
 from tui.services.dev.dataservices import (
     CATEGORIES,
     DialogueLine,
+    DungeonNode,
+    HostileNode,
     NpcRecordNode,
     TimelineTaskNode,
-    HostileNode,
     filter_equipment_records,
     get_dialogue_tree,
+    get_dungeon_tree,
     get_npc_tree,
     get_timeline_tree,
     search_records,
@@ -73,6 +79,7 @@ _TIMELINE_CATEGORY    = "timeline"
 _NPC_CATEGORY         = "npc"
 _ABILITY_CATEGORY     = "ability"
 _HOSTILE_CATEGORY     = "hostile"
+_DUNGEON_CATEGORY     = "dungeon"
 _SIMULATION_CATEGORY  = "simulation"
 
 
@@ -87,6 +94,8 @@ def _active_tree_id(screen: "DataMgmtScreen") -> str:
         return "#dm-ability-tree"
     if screen._category == _HOSTILE_CATEGORY:
         return "#dm-hostile-tree"
+    if screen._category == _DUNGEON_CATEGORY:
+        return "#dm-dungeon-tree"
     return "#dm-dialog-tree"  # fallback
 
 
@@ -99,8 +108,9 @@ def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
     is_npc        = category == _NPC_CATEGORY
     is_ability    = category == _ABILITY_CATEGORY
     is_hostile    = category == _HOSTILE_CATEGORY
+    is_dungeon    = category == _DUNGEON_CATEGORY
     is_simulation = category == _SIMULATION_CATEGORY
-    is_tree       = is_dialog or is_timeline or is_npc or is_ability or is_hostile
+    is_tree       = is_dialog or is_timeline or is_npc or is_ability or is_hostile or is_dungeon
 
     screen.query_one("#dm-filter", Input).display                  = not (is_dialog or is_equipment or is_simulation)
     screen.query_one("#dm-dialog-filter-row").display              = is_dialog
@@ -112,12 +122,14 @@ def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
     screen.query_one("#dm-npc-tree", Tree).display                 = is_npc
     screen.query_one("#dm-ability-tree", Tree).display             = is_ability
     screen.query_one("#dm-hostile-tree", Tree).display             = is_hostile
+    screen.query_one("#dm-dungeon-tree", Tree).display             = is_dungeon
     screen.query_one("#dm-expand", Button).display                 = is_tree
     screen.query_one("#dm-collapse", Button).display               = is_tree
     screen.query_one("#dm-copy", Button).display                   = is_tree or is_equipment
     screen.query_one("#dm-validate-timeline", Button).display      = is_timeline
     screen.query_one("#dm-validate-abilities", Button).display     = is_ability
     screen.query_one("#dm-validate-hostiles", Button).display      = is_hostile
+    screen.query_one("#dm-validate-dungeons", Button).display      = is_dungeon
     screen.query_one("#dm-equip-sort-dir", Button).display         = is_equipment
     screen.query_one(NpcMusicPlayerWidget).display                 = is_npc
 
@@ -155,6 +167,8 @@ def handle_tab_activated(screen: "DataMgmtScreen", event: Tabs.TabActivated) -> 
                 rebuild_ability_tree_for_screen(screen)
             elif category == _HOSTILE_CATEGORY:
                 rebuild_hostile_tree_for_screen(screen)
+            elif category == _DUNGEON_CATEGORY:
+                rebuild_dungeon_tree_for_screen(screen)
             elif category == _SIMULATION_CATEGORY:
                 pass  # SimulationPanel is self-contained
             else:
@@ -172,6 +186,8 @@ def handle_input_changed(screen: "DataMgmtScreen", event: Input.Changed) -> None
             rebuild_ability_tree_for_screen(screen)
         elif screen._category == _HOSTILE_CATEGORY:
             rebuild_hostile_tree_for_screen(screen)
+        elif screen._category == _DUNGEON_CATEGORY:
+            rebuild_dungeon_tree_for_screen(screen)
         else:
             rebuild_list_for_screen(screen)
     elif input_id in ("dm-filter-act", "dm-filter-chapter", "dm-filter-task", "dm-filter-character"):
@@ -257,6 +273,9 @@ def handle_tree_node_highlighted(screen: "DataMgmtScreen", event: Tree.NodeHighl
     from tui.screens.dev.data_mgmt.treehandlers.hostile_handler import (  # noqa: PLC0415
         collect_hostile_nodes_from_node,
     )
+    from tui.screens.dev.data_mgmt.treehandlers.dungeon_handler import (  # noqa: PLC0415
+        collect_dungeon_nodes_from_node,
+    )
 
     category = screen._category
     node     = event.node
@@ -271,8 +290,10 @@ def handle_tree_node_highlighted(screen: "DataMgmtScreen", event: Tree.NodeHighl
 
     elif category == _TIMELINE_CATEGORY:
         if isinstance(data, TimelineTaskNode):
+            screen._last_selected_timeline_node = data
             update_detail_for_timeline_task(screen, data)
         else:
+            screen._last_selected_timeline_node = None
             tasks = collect_timeline_tasks_from_node(node)
             update_detail_for_timeline_subtree(screen, tasks)
 
@@ -297,6 +318,13 @@ def handle_tree_node_highlighted(screen: "DataMgmtScreen", event: Tree.NodeHighl
             hostile_nodes = collect_hostile_nodes_from_node(node)
             update_detail_for_hostile_group(screen, hostile_nodes)
 
+    elif category == _DUNGEON_CATEGORY:
+        if isinstance(data, DungeonNode):
+            update_detail_for_dungeon(screen, data)
+        else:
+            dungeon_nodes = collect_dungeon_nodes_from_node(node)
+            update_detail_for_dungeon_group(screen, dungeon_nodes)
+
 
 def handle_button_pressed(screen: "DataMgmtScreen", event: Button.Pressed) -> None:
     bid = event.button.id or ""
@@ -312,31 +340,29 @@ def handle_button_pressed(screen: "DataMgmtScreen", event: Button.Pressed) -> No
         validate_timeline_for_screen(screen)
     elif bid == "dm-validate-abilities":
         validate_abilities_for_screen(screen)
+    elif bid == "dm-validate-hostiles":
+        validate_hostiles_for_screen(screen)
+    elif bid == "dm-validate-dungeons":
+        validate_dungeons_for_screen(screen)
     elif bid == "dm-equip-sort-dir":
         screen._equipment_sort_asc = not screen._equipment_sort_asc
         event.button.label = "↑" if screen._equipment_sort_asc else "↓"
         rebuild_list_for_screen(screen)
-    elif bid == "dm-validate-hostiles":
-        validate_hostiles_for_screen(screen)
 
 
 def _handle_copy(screen: "DataMgmtScreen") -> None:
     category = screen._category
-    text = ""
 
     if category == _DIALOG_CATEGORY:
-        if screen._last_filtered is not None:
-            text = serialize_filtered_tree(screen._last_filtered)
-        else:
-            tree = screen.query_one("#dm-dialog-tree", Tree)
-            text = "\n".join(serialize_node_visible(tree.root, depth=0))
+        from tui.screens.dev.data_mgmt.utils import serialize_dialog_tree_from_widget  # noqa: PLC0415
+        tree_widget = screen.query_one("#dm-dialog-tree", Tree)
+        text = serialize_dialog_tree_from_widget(tree_widget)
 
     elif category == _TIMELINE_CATEGORY:
-        if screen._last_timeline_filtered is not None:
-            text = serialize_timeline_tree(screen._last_timeline_filtered)
-        else:
-            tree = screen.query_one("#dm-timeline-tree", Tree)
-            text = "\n".join(serialize_node_visible(tree.root, depth=0))
+        from tui.services.dev.dataservices import get_timeline_tree  # noqa: PLC0415
+        from tui.screens.dev.data_mgmt.utils import serialize_timeline_tree_visible  # noqa: PLC0415
+        tree_widget = screen.query_one("#dm-timeline-tree", Tree)
+        text = serialize_timeline_tree_visible(tree_widget, get_timeline_tree(), screen)
 
     elif category == _NPC_CATEGORY:
         if screen._last_npc_filtered is not None:
@@ -347,13 +373,13 @@ def _handle_copy(screen: "DataMgmtScreen") -> None:
 
     elif category == _EQUIPMENT_CATEGORY:
         records = screen._last_filtered or []
-        text = "\n".join(
-            f"{r.name}  {r.subtitle}" for r in records
-        )
+        text = "\n".join(f"{r.name}  {r.subtitle}" for r in records)
 
     else:
         if screen._last_filtered is not None:
             text = serialize_filtered_tree(screen._last_filtered)
+        else:
+            text = ""
 
     if text:
         copy_to_clipboard(text)
@@ -515,6 +541,76 @@ def rebuild_hostile_tree_for_screen(screen: "DataMgmtScreen") -> None:
     update_detail_for_hostile_group(screen, [])
 
 
+def rebuild_dungeon_tree_for_screen(screen: "DataMgmtScreen") -> None:
+    from tui.screens.dev.data_mgmt.treehandlers.dungeon_handler import rebuild_dungeon_tree  # noqa: PLC0415
+    from tui.screens.dev.data_mgmt.detail_panel import update_detail_for_dungeon_group       # noqa: PLC0415
+
+    if not screen._loaded:
+        return
+    query = ""
+    try:
+        query = screen.query_one("#dm-filter", Input).value.strip()
+    except Exception:
+        pass
+    tree = screen.query_one("#dm-dungeon-tree", Tree)
+    total, filtered = rebuild_dungeon_tree(
+        tree,
+        query=query,
+        user_expanded=screen._dungeon_user_expanded,
+        user_collapsed=screen._dungeon_user_collapsed,
+    )
+    screen._last_dungeon_filtered = filtered
+    screen.query_one("#dm-status", Static).update(f"{total} dungeon(s)")
+    update_detail_for_dungeon_group(screen, [])
+
+
+def validate_timeline_for_screen(screen: "DataMgmtScreen") -> None:
+    """Run the timeline integrity validator and repaint the tree."""
+    import game.constants as const
+
+    groups = get_timeline_tree()
+    validate_timeline_integrity(groups, const)
+
+    rebuild_timeline_tree_for_screen(screen)
+
+    error_tasks = warning_tasks = duplicate_tasks = notice_tasks = 0
+    for group in groups:
+        for bucket in group.buckets:
+            for tn in bucket.tasks:
+                has_error     = any(e.severity == "error"     for e in tn.errors)
+                has_warning   = any(e.severity == "warning"   for e in tn.errors)
+                has_duplicate = any(e.severity == "duplicate" for e in tn.errors)
+                has_notice    = any(e.severity == "notice"    for e in tn.errors)
+                if has_error:
+                    error_tasks += 1
+                if has_warning:
+                    warning_tasks += 1
+                if has_duplicate:
+                    duplicate_tasks += 1
+                if has_notice:
+                    notice_tasks += 1
+
+    total_tasks = error_tasks + warning_tasks + duplicate_tasks + notice_tasks
+
+    if total_tasks == 0:
+        screen.notify("✓ Timeline integrity OK — no errors found.", timeout=3.0)
+    else:
+        parts = []
+        if error_tasks:
+            parts.append(f"{error_tasks} error task(s)")
+        if warning_tasks:
+            parts.append(f"{warning_tasks} warning task(s)")
+        if duplicate_tasks:
+            parts.append(f"{duplicate_tasks} duplicate task(s)")
+        if notice_tasks:
+            parts.append(f"{notice_tasks} notice task(s)")
+        screen.notify(
+            f"✗ {total_tasks} total affected task(s): {', '.join(parts)}.",
+            severity="warning",
+            timeout=5.0,
+        )
+
+
 def validate_abilities_for_screen(screen: "DataMgmtScreen") -> None:
     from tui.services.dev.dataservices.ability_validator import validate_ability_tree  # noqa: PLC0415
     from tui.services.dev.dataservices.catalog import get_ability_tree               # noqa: PLC0415
@@ -556,6 +652,29 @@ def validate_hostiles_for_screen(screen: "DataMgmtScreen") -> None:
     else:
         screen.notify(
             f"✗ {total_errors} issue(s) across {invalid} hostile(s) — flagged in tree.",
+            severity="warning",
+            timeout=5.0,
+        )
+
+
+def validate_dungeons_for_screen(screen: "DataMgmtScreen") -> None:
+    from tui.services.dev.dataservices.dungeon_validator import validate_dungeon_tree  # noqa: PLC0415
+    from tui.services.dev.dataservices.catalog import get_dungeon_tree                # noqa: PLC0415
+    import game.constants as const                                                     # noqa: PLC0415
+
+    tree    = get_dungeon_tree()
+    summary = validate_dungeon_tree(tree, const)
+
+    rebuild_dungeon_tree_for_screen(screen)
+
+    invalid      = summary.get("invalid", 0)
+    total_errors = summary.get("total_errors", 0)
+
+    if total_errors == 0:
+        screen.notify("✓ Dungeon integrity OK — no issues found.", timeout=3.0)
+    else:
+        screen.notify(
+            f"✗ {total_errors} issue(s) across {invalid} dungeon(s) — flagged in tree.",
             severity="warning",
             timeout=5.0,
         )
@@ -795,7 +914,10 @@ def handle_copy_action(screen: "DataMgmtScreen") -> None:
         text = "\n".join(lines)
     else:
         if category == _TIMELINE_CATEGORY:
-            text = serialize_timeline_tree(screen._last_timeline_filtered or get_timeline_tree())
+            from tui.services.dev.dataservices import get_timeline_tree  # noqa: PLC0415
+            from tui.screens.dev.data_mgmt.utils import serialize_timeline_tree_visible  # noqa: PLC0415
+            tree_widget = screen.query_one("#dm-timeline-tree", Tree)
+            text = serialize_timeline_tree_visible(tree_widget, get_timeline_tree(), screen)
         elif category == _NPC_CATEGORY:
             text = serialize_npc_tree(screen._last_npc_filtered or get_npc_tree())
         else:

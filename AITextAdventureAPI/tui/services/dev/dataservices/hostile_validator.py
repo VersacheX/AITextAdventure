@@ -9,6 +9,9 @@ H3  HOSTILE_MISSING_BASE_STATS     base_hp or base_ap is 0 / absent
 H4  HOSTILE_ABILITY_MISMATCH       ability count below expected minimum for rarity
                                    (common=0, uncommon≥1, rare≥2, superrare≥3)
 H5  HOSTILE_MISSING_TYPE           hostile_type is empty or absent
+H6  HOSTILE_DROP_UNKNOWN_ITEM      common_drop or rare_drop references an item
+                                   id that is not registered in the game's
+                                   known item constants
 
 Balance rules  (warning, rarity-aware)
 --------------------------------------
@@ -42,7 +45,7 @@ Stat pools (from hostile_seed_engine.py RARITY_STAT_POOLS)
 from __future__ import annotations
 
 from collections import defaultdict
-from typing import Dict, List, Any
+from typing import Any, Dict, List, Set
 
 from tui.services.dev.dataservices.models import (
     HostileNode,
@@ -81,6 +84,21 @@ _W_AB  = 1.5
 
 def _err(code: str, message: str, severity: str = "error") -> HostileValidationError:
     return HostileValidationError(code=code, message=message, severity=severity)
+
+
+def _build_known_item_ids(const: Any) -> Set[str]:
+    """Collect every valid item id from the game constants."""
+    ids: Set[str] = set()
+    for attr in ("SEED_UTILITY_IDS", "SEED_SPECIAL_IDS", "SEED_WEAPON_IDS"):
+        val = getattr(const, attr, None)
+        if isinstance(val, list):
+            ids.update(str(i) for i in val if i)
+    armor_ids = getattr(const, "SEED_ARMOR_IDS", None)
+    if isinstance(armor_ids, dict):
+        for slot_list in armor_ids.values():
+            if isinstance(slot_list, list):
+                ids.update(str(i) for i in slot_list if i)
+    return ids
 
 
 def _estimate_combat_score(seed: dict, ability_index: Dict[str, dict]) -> float:
@@ -173,6 +191,9 @@ def validate_hostile_tree(
         if isinstance(a, dict) and a.get("id"):
             ability_index[str(a["id"])] = a
 
+    # Build known item id set for H6
+    known_item_ids = _build_known_item_ids(const)
+
     # ── Pre-compute combat scores ─────────────────────────────────────────
     scores: Dict[str, float] = {}
     for node in all_nodes:
@@ -260,6 +281,22 @@ def validate_hostile_tree(
             ))
             by_code["HOSTILE_MISSING_TYPE"] += 1
 
+        # H6 — drop item cross-reference
+        for drop_field in ("common_drop", "rare_drop"):
+            drop_val = seed.get(drop_field)
+            if not drop_val:
+                continue
+            drop_id = str(drop_val)
+            if drop_id not in known_item_ids:
+                node.errors.append(_err(
+                    "HOSTILE_DROP_UNKNOWN_ITEM",
+                    f"{drop_field} '{drop_id}' is not registered in any item "
+                    "constant (SEED_UTILITY_IDS, SEED_SPECIAL_IDS, "
+                    "SEED_WEAPON_IDS, SEED_ARMOR_IDS).",
+                    severity="warning",
+                ))
+                by_code["HOSTILE_DROP_UNKNOWN_ITEM"] += 1
+
         # ── Balance checks ────────────────────────────────────────────────
         score = scores[node.hostile_id]
         gkey  = node_group.get(node.hostile_id)
@@ -318,14 +355,15 @@ def validate_hostile_tree(
 
 
 def _rarity_label(rarity_id: str) -> str:
-    return {"common": "Common", "uncommon": "Uncommon",
-            "rare": "Rare", "superrare": "Super Rare"}.get(rarity_id, rarity_id.title())
+    return {
+        "common": "Common", "uncommon": "Uncommon",
+        "rare": "Rare", "superrare": "Super Rare",
+    }.get(rarity_id, rarity_id.title())
 
 
 def _bucket_label(bucket_id: str) -> str:
-    # "lv_01_05" → "Lv 1–5"
-    try:
-        parts = bucket_id.split("_")
-        return f"Lv {int(parts[1])}–{int(parts[2])}"
-    except Exception:
-        return bucket_id
+    # bucket_id e.g. "lv_01_05" → "Lv 1–5"
+    parts = bucket_id.replace("lv_", "").split("_")
+    if len(parts) == 2:
+        return f"Lv {int(parts[0])}–{int(parts[1])}"
+    return bucket_id

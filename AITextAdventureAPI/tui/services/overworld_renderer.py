@@ -145,7 +145,6 @@ def _tile_char(x: int, y: int, player_game: Any) -> str:
     # resolve tile from world_tiles (same priority order as legacy)
     t = player_game.world_tiles.get((x, y))
     if t is None:
-        # try active child city tiles
         try:
             _, active = player_game.get_region_and_active_area_for_position((x, y))
             if active and hasattr(active, "tiles"):
@@ -179,32 +178,21 @@ def _tile_char(x: int, y: int, player_game: Any) -> str:
         bld = getattr(t, "building", None)
         ch    = bld.get("char")  if isinstance(bld, dict) else None
         color = bld.get("color") if isinstance(bld, dict) else None
-        try:
-            _, active = player_game.get_region_and_active_area_for_position((x, y))
-            if active and const:
-                type_name = getattr(active, "city_name", None) or getattr(active, "region_name", "")
-                open_color = getattr(const, f"{type_name.upper()}_OPEN_AREA_COLOR", None)
-            else:
-                open_color = None
-        except Exception:
-            open_color = None
+        open_color = _get_open_color(x, y, player_game, const)
         return _colorize(ch if ch else "B", color, open_color)
 
     if tile_type == "open_area":
         try:
             dungeon = player_game.get_dungeon_at_position((x, y))
             _, active = player_game.get_region_and_active_area_for_position((x, y))
-            open_color = None
-            if active and const:
-                type_name = getattr(active, "city_name", None) or getattr(active, "region_name", "")
-                open_color = getattr(const, f"{type_name.upper()}_OPEN_AREA_COLOR", None)
+            open_color = _get_open_color(x, y, player_game, const)
             if dungeon is not None:
                 ch = getattr(const, "DUNGEON_ENTRANCE_CHAR", "D") if const else "D"
                 return _colorize(ch, "#af1111", open_color)
             if active and const:
+                type_name = getattr(active, "city_name", None) or getattr(active, "region_name", "")
                 ch = getattr(const, f"{type_name.upper()}_OPEN_AREA_CHAR", None) or "."
-                color = getattr(const, f"{type_name.upper()}_OPEN_AREA_COLOR", None)
-                return _colorize(ch, color)
+                return _colorize(ch, open_color)
         except Exception:
             pass
         return "."
@@ -212,18 +200,17 @@ def _tile_char(x: int, y: int, player_game: Any) -> str:
     if tile_type == "impassable":
         try:
             _, active = player_game.get_region_and_active_area_for_position((x, y))
+            open_color = _get_open_color(x, y, player_game, const)
             if active and const:
                 type_name = getattr(active, "city_name", None) or getattr(active, "region_name", "")
                 ch = getattr(const, f"{type_name.upper()}_IMPASSABLE_CHAR", None) or "#"
                 impassable_color = getattr(const, f"{type_name.upper()}_IMPASSABLE_COLOR", None)
-                open_color       = getattr(const, f"{type_name.upper()}_OPEN_AREA_COLOR",  None)
                 return _colorize(ch, impassable_color, open_color)
         except Exception:
             pass
         return "#"
 
     return "."
-
 
 # ── full viewport ───────────────────────────────────────────────────────────
 

@@ -161,6 +161,21 @@ R22 MEET_DELIVER_NO_DIALOG  (notice)
     event in its task_complete_events.  These tasks are the primary narrative
     delivery point — a missing dialog call is almost always an authoring gap.
     Rendered as magenta in the timeline tree; counted separately in the toast.
+
+    MEET_DELIVER_NO_CHARACTER_DIALOG  (notice)
+    A meet or deliver task has no initiate_character_dialog event in its
+    task_complete_events.  This dialog is the primary narrative delivery point
+    for character-specific interactions — a missing dialog call is almost
+    always an authoring gap.  Rendered as orange in the timeline tree; counted
+    separately in the toast.
+
+R23 CREATE_NPC_NO_STANDING_TEXT  (warning)
+    A task that contains a create_npc event does not also contain a
+    set_npc_standing_text event for the same npc_id anywhere in that task's
+    acquire or complete events.  NPCs should always have standing text set at
+    the point of creation so they have interaction text from the moment they
+    exist.  Use author discretion to suppress — e.g. a meet-defeat boss that
+    is never interactable before the defeat may not need standing text.
 """
 from __future__ import annotations
 
@@ -717,7 +732,7 @@ def validate_timeline_integrity(
                 and str((ev.get("params") or {}).get("npc_id") or "") == to_id
                 for ev in _events(task, "task_acquire_events")
             )
-            if standing_text_on_acquire:
+            if standing_text_on_acquire and task_id not in story_root_ids:
                 errors_map[task_id].append(_err(
                     "MEET_NPC_STANDING_TEXT_ON_ACQUIRE",
                     f"'meet' task '{task_id}' sets standing text for NPC '{to_id}' "
@@ -1089,13 +1104,41 @@ def validate_timeline_integrity(
                     related_entity_id=npc_id,
                 ))
 
+    # ── R23: create_npc without set_npc_standing_text in same task ───────────
+    for tn in all_tasks:
+        created_in_task = [
+            str(ev.get("params", {}).get("npc_id") or ev.get("params", {}).get("id") or "")
+            for ev in _all_events(tn.task)
+            if ev.get("event_type") == "create_npc"
+        ]
+        if not created_in_task:
+            continue
+        standing_ids = {
+            str(ev.get("params", {}).get("npc_id") or "")
+            for ev in _all_events(tn.task)
+            if ev.get("event_type") == "set_npc_standing_text"
+        }
+        for npc_id in created_in_task:
+            if npc_id and npc_id not in standing_ids:
+                errors_map[tn.task_id].append(_err(
+                    "CREATE_NPC_NO_STANDING_TEXT",
+                    f"create_npc for '{npc_id}' has no set_npc_standing_text in the same "
+                    f"task — NPC will have no interaction text until standing text is set.",
+                    event_type="create_npc",
+                    related_entity_id=npc_id,
+                    severity="warning",
+                ))
+
     # ── R22: Meet / deliver tasks with no dialog in complete events ────────
     _DIALOG_EVENT_TYPES: FrozenSet[str] = frozenset({
-        "initiate_dialog", "initiate_character_dialog",
+        "initiate_dialog",
+        #"initiate_character_dialog", <perform seperate check
+        "initiate_option_dialog",   # presents a choice prompt — counts as dialog
+        "player_character_join",    # fires a join dialog implicitly via dialog_id param
     })
     for tn in all_tasks:
         task_type = str(tn.task.get("type", "")).lower()
-        if task_type not in ("meet", "deliver"):
+        if task_type not in ("meet", "deliver", "defeat"):
             continue
         has_dialog = any(
             ev.get("event_type") in _DIALOG_EVENT_TYPES
@@ -1104,8 +1147,21 @@ def validate_timeline_integrity(
         if not has_dialog:
             errors_map[tn.task_id].append(_err(
                 "MEET_DELIVER_NO_DIALOG",
-                f"'{task_type}' task '{tn.task_id}' has no initiate_dialog or "
-                f"initiate_character_dialog in task_complete_events.",
+                f"'{task_type}' task '{tn.task_id}' has no initiate_dialog, initiate_option_dialog, or player_character_join"
+                f" in task_complete_events.",
+                severity="notice",
+            ))
+
+        has_character_dialog = any(
+            ev.get("event_type") == "initiate_character_dialog"
+            for ev in _events(tn.task, "task_complete_events")
+        )
+        if not has_character_dialog:
+            errors_map[tn.task_id].append(_err(
+                "MEET_DELIVER_NO_CHARACTER_DIALOG",
+                f"'{task_type}' task '{tn.task_id}' has no initiate_character_dialog in "
+                f"task_complete_events.  If this is intentional (no character dialog needed) "
+                f"this warning can be ignored.",
                 severity="notice",
             ))
 
@@ -1304,3 +1360,23 @@ def validate_timeline_integrity(
         "total_errors":   total_errors,
         "by_code":        dict(by_code),
     }
+
+def _validate_task_nodes(groups: List[TimelineGroupNode]) -> int:
+    """Basic per-node structural checks (task id, award refs, etc.).
+    Called internally by validate_timeline_integrity — not a public API.
+    """
+    all_nodes  = _all_task_nodes(groups)
+    known_ids  = {n.task_id for n in all_nodes}
+    total      = 0
+
+    for node in all_nodes:
+        node.errors.extend(_check_missing_task_id(node))
+        node.errors.extend(_check_award_task_refs(node, known_ids))
+        node.errors.extend(_check_remove_task_refs(node, known_ids))
+        node.errors.extend(_check_advance_chapter(node))
+        node.errors.extend(_check_dungeon_treasure(node))
+        node.errors.extend(_check_initiate_option_dialog(node))
+        node.errors.extend(_check_duplicate_events(node))
+        total += len(node.errors)
+
+    return total

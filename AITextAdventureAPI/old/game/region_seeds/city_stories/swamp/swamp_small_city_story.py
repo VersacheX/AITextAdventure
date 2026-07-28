@@ -6,8 +6,8 @@ NPCS = [
 		'npc_id': 'bogrunner_tavik',
 		'name': 'Tavik Bogrunner',
 		'description': (
-			'A wiry trader who ferries goods through the swamp’s most treacherous channels.'
-			' Tavik’s skiff is patched with mismatched planks and swamp‑etched runes.'
+			'A wiry trader who ferries goods through the swamp\'s most treacherous channels.'
+			' Tavik\'s skiff is patched with mismatched planks and swamp‑etched runes.'
 			' He claims the bog itself shows him safe paths when danger rises.'
 		)
 	},
@@ -15,9 +15,9 @@ NPCS = [
 		'npc_id': 'rotwharf_madra',
 		'name': 'Madra Rotwharf',
 		'description': (
-			'A hardened broker who deals in illicit wares dredged from the swamp’s depths.'
-			' Madra’s voice is rough, as though she’s swallowed too much swamp fog.'
-			' She knows every outlaw, fugitive, and mercenary who passes through Hollow’s shadows.'
+			'A hardened broker who deals in illicit wares dredged from the swamp\'s depths.'
+			' Madra\'s voice is rough, as though she\'s swallowed too much swamp fog.'
+			' She knows every outlaw, fugitive, and mercenary who passes through Hollow\'s shadows.'
 		)
 	},
     {
@@ -61,8 +61,8 @@ NPC_DIALOG = [
         'dialog_id': 'madra_intro',
         'dialog': [
             "Shadows move wrong in Hollow.",
-            "Smugglers vanish on routes they’ve walked for years.",
-            "If we don’t act, the swamp will claim every traveler."
+            "Smugglers vanish on routes they've walked for years.",
+            "If we don't act, the swamp will claim every traveler."
         ]
     },
 
@@ -101,7 +101,7 @@ NPC_DIALOG = [
         'dialog_id': 'tavik_closing',
         'dialog': [
             "The channels clear. The swamp breathes easier.",
-            "You’ve restored the paths the mire tried to swallow.",
+            "You've restored the paths the mire tried to swallow.",
             "Travelers will owe you their lives."
         ]
     },
@@ -187,6 +187,7 @@ NPC_DIALOG = [
 	},
 
 ]
+
 # ── Type D dialogs — Rotfen Dredge Blade ───────────────────────
 
 NPC_DIALOG += [
@@ -211,6 +212,16 @@ NPC_DIALOG += [
             "The Bayou's memory is a poison here.",
             "You carry it as a weapon against me.",
             "Then I will take it — and every route you ever knew."
+        ]
+    },
+
+    {
+        'npc_id': 'diego',
+        'dialog_id': 'diego_d_swamp_vessel_received',
+        'dialog': [
+            "That vessel — the clay holds a forge-resonance I've never felt from a swamp relic.",
+            "There's metal inside the Hollow that only this thing can unlock.",
+            "Find Draveth. He reads the channels — he'll know where the resonance leads."
         ]
     },
 
@@ -298,8 +309,7 @@ TASKS = [
         'type': 'meet',
         'to_type': 'npc',
         'to_id': 'bogrunner_tavik',
-        'task_acquire_events': [
-        ],
+        'task_acquire_events': [],
         'task_complete_events': [
             {
                 'event_type': 'initiate_dialog',
@@ -353,6 +363,16 @@ TASKS = [
                 }
             },
             {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'channel_seer_draveth',
+                    'standing_text': [
+                        "The current‑signs vanish.",
+                        "A Swallowed Path rises beneath the murk."
+                    ]
+                }
+            },
+            {
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'swamp_small_city_find_draveth'
@@ -375,16 +395,6 @@ TASKS = [
                     'location': 'region_open_area'
                 }
             },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'channel_seer_draveth',
-                    'standing_text': [
-                        "The current‑signs vanish.",
-                        "A Swallowed Path rises beneath the murk."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -392,6 +402,16 @@ TASKS = [
                 'params': {
                     'npc_id': 'channel_seer_draveth',
                     'dialog_id': 'draveth_intro'
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'murkchannel_echo',
+                    'standing_text': [
+                        "A presence stirs in the Murkchannel.",
+                        "It remembers routes the swamp has tried to erase."
+                    ]
                 }
             },
             {
@@ -431,6 +451,17 @@ TASKS = [
                 'params': {
                     'npc_id': 'murkchannel_echo',
                     'dialog_id': 'murkchannel_echo_intro'
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'rotfen_voice',
+                    'standing_text': [
+                        "The Hideaway churns with lost routes.",
+                        "The Swallowed Path gathers strength.",
+                        "Only its heart remains to be severed."
+                    ]
                 }
             },
             {
@@ -521,14 +552,13 @@ TASKS = [
     },
 
     # ── Type D ── Rotfen Dredge Blade (mythic weapon) ─────────────────────────────
-    # Gate: player holds bayou_memory_vessel from the Ch.20 Type E chain (retroactive).
+    # Gate: player holds swamp_mid_city_e_bayou_memory_vessel from the Ch.20 Type E chain.
     # Deliver to Diego → Draveth reads the vessel → defeat Rotfen Voice → mythic weapon.
-    # No new NPCs — uses channel_seer_draveth, rotfen_voice, and diego (Ch.1 party anchor).
 
     {
         'task_id': 'swamp_small_city_type_d_deliver_memory_vessel',
         'type': 'deliver',
-        'item_id': 'bayou_memory_vessel',
+        'item_id': 'swamp_mid_city_e_bayou_memory_vessel',
         'to_type': 'npc',
         'to_id': 'diego',
         'task_acquire_events': [
@@ -543,15 +573,39 @@ TASKS = [
                     ]
                 }
             },
-		],
+        ],
         'task_complete_events': [
+            {
+                'event_type': 'initiate_dialog',
+                'params': {
+                    'npc_id': 'diego',
+                    'dialog_id': 'diego_d_swamp_vessel_received'
+                }
+            },
+            {
+                'event_type': 'remove_item',
+                'params': {
+                    'item_id': 'swamp_mid_city_e_bayou_memory_vessel'
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'channel_seer_draveth',
+                    'standing_text': [
+                        "The current-signs surged the moment that vessel crossed the Hollow's edge.",
+                        "The Bayou's memory doesn't belong here — and the Rotfen Voice knows it.",
+                        "Come quickly. The Hideaway won't stay open long."
+                    ]
+                }
+            },
             {
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'swamp_small_city_type_d_consult_draveth'
                 }
             },
-		]
+        ]
     },
 
 	# D-1 — Consult Draveth for the channel reading
@@ -560,25 +614,24 @@ TASKS = [
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'channel_seer_draveth',
-		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'channel_seer_draveth',
-					'standing_text': [
-						"The current-signs surged the moment that vessel crossed the Hollow's edge.",
-						"The Bayou's memory doesn't belong here — and the Rotfen Voice knows it.",
-						"Come quickly. The Hideaway won't stay open long."
-					]
-				}
-			},
-		],
+		'task_acquire_events': [],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
 					'npc_id': 'channel_seer_draveth',
 					'dialog_id': 'draveth_d_vessel_read'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'rotfen_voice',
+					'standing_text': [
+						"The mire thickens near the Hideaway entrance.",
+						"Tavik says no one who entered last season ever surfaced.",
+						"The vessel has agitated whatever lives in the deep rot."
+					]
 				}
 			},
 			{
@@ -596,19 +649,7 @@ TASKS = [
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'rotfen_voice',
-		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'rotfen_voice',
-					'standing_text': [
-						"The mire thickens near the Hideaway entrance.",
-						"Tavik says no one who entered last season ever surfaced.",
-						"The vessel has agitated whatever lives in the deep rot."
-					]
-				}
-			},
-		],
+		'task_acquire_events': [],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
@@ -676,9 +717,6 @@ TASKS = [
 ]
 
 # ── Type A ── Ch.7 Chapter Tie-In (Lyren's Vale Pendant) ─────────────────────
-# Awarded when Lyren is met in Ch.7. Tavik recovered the pendant from a
-# sunken skiff in the channels — he's been waiting to hand it to someone
-# who might know its owner. No new NPCs — Tavik is in the city seed.
 
 NPC_DIALOG += [
 
@@ -722,10 +760,6 @@ TASKS += [
 
 	# =========================================================
 	# TYPE C — Ghost (extended character, slot 2)
-	# Gated by is_chapter_gte: 7
-	# Awarded by: swamp_small_city_regional_complete_gate (conditional)
-	# Chain: tavik reports sighting → madra vouches → meet Ghost → Ghost joins
-	# Ghost is the reward — not a guide. No new NPCs beyond Ghost.
 	# =========================================================
 
 	# C-1 — Tavik reports the mysterious figure in the night channels
@@ -756,6 +790,16 @@ TASKS += [
 				}
 			},
 			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'rotwharf_madra',
+					'standing_text': [
+						"Tavik sent you. Good — I've clocked this shadow twice near the Hideaway entrance.",
+						"I've got a name. Come ask."
+					]
+				}
+			},
+			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'swamp_small_city_type_c_madra_vouch'
@@ -770,18 +814,7 @@ TASKS += [
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'rotwharf_madra',
-		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'rotwharf_madra',
-					'standing_text': [
-						"Tavik sent you. Good — I've clocked this shadow twice near the Hideaway entrance.",
-						"I've got a name. Come ask."
-					]
-				}
-			},
-		],
+		'task_acquire_events': [],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
@@ -854,11 +887,6 @@ TASKS += [
 
 	# =========================================================
 	# TYPE A — Ch.7 Airship Channel Clearance
-	# Seth cannot lift off safely until the swamp channels are read.
-	# Awarded by: swamp_small_city_regional_complete_gate
-	# Chain: read current-signs with Draveth → relay clearance to Madra
-	# No new NPCs — Draveth and Madra are both in the city seed.
-	# advance_chapter is handled by the pendant chain (swamp_small_city_type_a_ch7_find_pendant)
 	# =========================================================
 
 	# A-1 — Find Draveth for the channel reading
@@ -879,16 +907,6 @@ TASKS += [
 					]
 				}
 			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'bogrunner_tavik',
-					'standing_text': [
-						"Something big is moving through the upper channels — airship-scale displacement.",
-						"Get Draveth to read the current-signs before Seth tries to lift off."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -896,6 +914,17 @@ TASKS += [
 				'params': {
 					'npc_id': 'channel_seer_draveth',
 					'dialog_id': 'draveth_a_clearance'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'rotwharf_madra',
+					'standing_text': [
+						"Draveth's read is the last thing I need.",
+						"My network's already gone quiet.",
+						"Bring me his word and I'll clear Seth for departure."
+					]
 				}
 			},
 			{
@@ -913,19 +942,7 @@ TASKS += [
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'rotwharf_madra',
-		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'rotwharf_madra',
-					'standing_text': [
-						"Draveth's read is the last thing I need.",
-						"My network's already gone quiet.",
-						"Bring me his word and I'll clear Seth for departure."
-					]
-				}
-			},
-		],
+		'task_acquire_events': [],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',

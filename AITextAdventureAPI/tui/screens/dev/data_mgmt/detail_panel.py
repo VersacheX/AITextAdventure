@@ -454,13 +454,17 @@ class TimelineDetailPanel(Widget):
             if not node.errors:
                 yield Static("Integrity: [green]OK[/green]", classes="tl-section-header")
             else:
-                has_error   = any(e.severity == "error"   for e in node.errors)
-                has_warning = any(e.severity == "warning" for e in node.errors)
-                has_info    = any(e.severity == "info"    for e in node.errors)
+                has_error     = any(e.severity == "error"     for e in node.errors)
+                has_warning   = any(e.severity == "warning"   for e in node.errors)
+                has_info      = any(e.severity == "info"      for e in node.errors)
+                has_notice    = any(e.severity == "notice"    for e in node.errors)
+                has_duplicate = any(e.severity == "duplicate" for e in node.errors)
 
-                error_count   = sum(1 for e in node.errors if e.severity == "error")
-                warning_count = sum(1 for e in node.errors if e.severity == "warning")
-                info_count    = sum(1 for e in node.errors if e.severity == "info")
+                error_count     = sum(1 for e in node.errors if e.severity == "error")
+                warning_count   = sum(1 for e in node.errors if e.severity == "warning")
+                info_count      = sum(1 for e in node.errors if e.severity == "info")
+                notice_count    = sum(1 for e in node.errors if e.severity == "notice")
+                duplicate_count = sum(1 for e in node.errors if e.severity == "duplicate")
 
                 if has_error or has_warning:
                     parts = []
@@ -470,8 +474,24 @@ class TimelineDetailPanel(Widget):
                         parts.append(f"[yellow]{warning_count} warning(s)[/yellow]")
                     if info_count:
                         parts.append(f"[cyan]{info_count} info[/cyan]")
+                    if notice_count:
+                        parts.append(f"[magenta]{notice_count} notice(s)[/magenta]")
+                    if duplicate_count:
+                        parts.append(f"[bright_magenta]{duplicate_count} duplicate(s)[/bright_magenta]")
                     yield Static(
                         f"Integrity: [red]FAIL[/red]  ({', '.join(parts)})",
+                        classes="tl-section-header",
+                    )
+                elif has_notice or has_duplicate:
+                    parts = []
+                    if notice_count:
+                        parts.append(f"[magenta]{notice_count} notice(s)[/magenta]")
+                    if duplicate_count:
+                        parts.append(f"[bright_magenta]{duplicate_count} duplicate(s)[/bright_magenta]")
+                    if info_count:
+                        parts.append(f"[cyan]{info_count} info[/cyan]")
+                    yield Static(
+                        f"Integrity: [#e040fb]NOTICE[/#e040fb]  ({', '.join(parts)})",
                         classes="tl-section-header",
                     )
                 else:
@@ -501,6 +521,10 @@ class TimelineDetailPanel(Widget):
                         colour = "cyan"
                     elif err.severity == "warning":
                         colour = "yellow"
+                    elif err.severity == "notice":
+                        colour = "#e040fb"
+                    elif err.severity == "duplicate":
+                        colour = "bright_magenta"
                     else:
                         colour = "red"
                     yield Static(
@@ -1224,6 +1248,49 @@ def update_detail_for_hostile_group(
         for n in hostile_nodes
     ]
     detail_panel.mount(Static("\n".join(parts) + integrity_line))
+
+
+def update_detail_for_dungeon(
+    screen: "DataMgmtScreen",
+    dungeon_node: "DungeonNode",
+) -> None:
+    """Update the detail panel for a single DungeonNode."""
+    detail_panel = screen.query_one("#dm-detail-panel")
+    detail_panel.remove_children()
+
+    record   = dungeon_node.record
+    errors   = dungeon_node.errors
+    settings = dungeon_node.settings
+    lines: list[str] = []
+
+    lines.append(f"[bold]{rich_escape(record.name)}[/bold]")
+    lines.append(f"[dim]{rich_escape(dungeon_node.dungeon_id)}[/dim]")
+    lines.append(f"[dim]Group: {rich_escape(dungeon_node.group_id)}[/dim]")
+    lines.append("")
+
+    if errors:
+        has_error = any(e.severity == "error" for e in errors)
+        colour    = "red" if has_error else "yellow"
+        kind      = "FAIL" if has_error else "WARN"
+        lines.append(f"[{colour}]Integrity: {kind}  ({len(errors)} issue(s))[/{colour}]")
+        for e in errors:
+            c = "red" if e.severity == "error" else "yellow"
+            lines.append(f"  [{c}]{rich_escape(e.code)}[/{c}]  [dim]{rich_escape(e.message)}[/dim]")
+    else:
+        lines.append("[green]Integrity: OK[/green]")
+
+    lines.append("")
+
+    if settings:
+        for key, val in settings.items():
+            lines.append(f"[dim]{rich_escape(str(key))}:[/dim] {rich_escape(str(val))}")
+        lines.append("")
+
+    if record.detail:
+        lines.append(rich_escape(record.detail))
+
+    detail_panel.mount(Static("\n".join(lines)))
+
     
 
 # ── Subtree header data extraction ───────────────────────────────────────
@@ -1705,20 +1772,20 @@ def update_detail_for_hostile(
     detail_panel.mount(Static("\n".join(lines)))
 
 
-def update_detail_for_hostile_group(
+def update_detail_for_dungeon_group(
     screen: "DataMgmtScreen",
-    hostile_nodes: "List[HostileNode]",
+    dungeon_nodes: "List[DungeonNode]",
 ) -> None:
-    """Update the detail panel with an aggregate view of a hostile subtree."""
+    """Update the detail panel with an aggregate view of a dungeon subtree."""
     detail_panel = screen.query_one("#dm-detail-panel")
     detail_panel.remove_children()
 
-    if not hostile_nodes:
-        detail_panel.mount(Static("[dim]← select a hostile from the tree[/dim]"))
+    if not dungeon_nodes:
+        detail_panel.mount(Static("[dim]← select a dungeon from the tree[/dim]"))
         return
 
-    invalid      = sum(1 for n in hostile_nodes if n.errors)
-    total_errors = sum(len(n.errors) for n in hostile_nodes)
+    invalid      = sum(1 for n in dungeon_nodes if n.errors)
+    total_errors = sum(len(n.errors) for n in dungeon_nodes)
 
     if invalid:
         integrity_line = (
@@ -1726,13 +1793,13 @@ def update_detail_for_hostile_group(
             f"{total_errors} issue(s) in subtree[/red]"
         )
     else:
-        any_validated = any(n.errors is not None for n in hostile_nodes)
+        any_validated = any(n.errors is not None for n in dungeon_nodes)
         integrity_line = "\n[green]Integrity: OK[/green]" if any_validated else ""
 
     parts = [
         f"[bold]{rich_escape(n.label)}[/bold]  "
-        f"[dim]{rich_escape(n.hostile_id)}[/dim]"
+        f"[dim]{rich_escape(n.dungeon_id)}[/dim]"
         + (f"  [red](issues: {len(n.errors)})[/red]" if n.errors else "")
-        for n in hostile_nodes
+        for n in dungeon_nodes
     ]
     detail_panel.mount(Static("\n".join(parts) + integrity_line))

@@ -15,6 +15,9 @@ from tui.services.dev.dataservices.models import (
     DialogueLine,
     DialogueStageNode,
     DialogueTaskNode,
+    DungeonGroupNode,
+    DungeonNode,
+    DungeonValidationError,
     HostileLevelBucketNode,
     HostileNode,
     HostileRarityNode,
@@ -41,6 +44,9 @@ from tui.services.dev.dataservices.ability_service import filter_ability_tree
 # HOSTILE
 from tui.services.dev.dataservices.hostile_service import filter_hostile_tree
 
+# DUNGEON
+from tui.services.dev.dataservices.dungeon_service import filter_dungeon_tree
+
 # Catalog (CATEGORIES, preload, get_records, tree getters)
 from tui.services.dev.dataservices.catalog import (
     CATEGORIES,
@@ -49,6 +55,7 @@ from tui.services.dev.dataservices.catalog import (
     get_ability_tree,
     get_dialog_index,
     get_dialogue_tree,
+    get_dungeon_tree,
     get_hostile_tree,
     get_npc_names,
     get_npc_tree,
@@ -67,6 +74,7 @@ __all__ = [
     "NpcRecordNode", "NpcGroupNode",
     "AbilityNode", "AbilityLevelNode", "AbilityTypeNode", "AbilityValidationError",
     "HostileNode", "HostileLevelBucketNode", "HostileRarityNode", "HostileValidationError",
+    "DungeonNode", "DungeonGroupNode", "DungeonValidationError",
     # catalogue
     "CATEGORIES", "CATEGORY_LABELS",
     "preload", "get_records", "search_records", "filter_equipment_records",
@@ -76,4 +84,5 @@ __all__ = [
     "get_npc_tree", "filter_npc_tree",
     "get_ability_tree", "filter_ability_tree",
     "get_hostile_tree", "filter_hostile_tree",
+    "get_dungeon_tree", "filter_dungeon_tree",
 ]

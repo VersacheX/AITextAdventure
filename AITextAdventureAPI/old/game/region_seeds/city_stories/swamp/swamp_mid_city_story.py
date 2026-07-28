@@ -409,12 +409,6 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'swamp_mid_city_e_bayou_memory_vessel'
-				}
-			},
-			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'swamp_mid_city_type_e_return_to_janrel'

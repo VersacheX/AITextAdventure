@@ -82,14 +82,16 @@ class TimelineValidationError:
         code:              Machine-readable error code.
         message:           Human-readable description.
         severity:          ``"error"`` (red), ``"warning"`` (yellow),
-                           or ``"info"`` (cyan — informational, not a fault).
+                           ``"info"`` (cyan — informational, not a fault),
+                           ``"notice"`` (magenta — deterministic authoring hint),
+                           or ``"duplicate"`` (light violet — duplicate award).
         event_type:        The event_type string that triggered the error, if applicable.
         related_task_id:   A secondary task id referenced by the error, if any.
         related_entity_id: An NPC id, item id, or dungeon id involved, if any.
     """
     code: str
     message: str
-    severity: str = "error"   # "error" | "warning" | "info"
+    severity: str = "error"   # "error" | "warning" | "info" | "notice" | "duplicate"
     event_type: str = ""
     related_task_id: str = ""
     related_entity_id: str = ""
@@ -217,3 +219,32 @@ class HostileRarityNode:
     rarity_id: str      # "common" | "uncommon" | "rare" | "superrare" | "notfound"
     label: str
     level_buckets: List[HostileLevelBucketNode]
+
+
+# ── Dungeon tree model ────────────────────────────────────────────────────
+
+@dataclass
+class DungeonValidationError:
+    """One validation error attached to a DungeonNode."""
+    code: str
+    message: str
+    severity: str = "error"   # "error" | "warning" | "notice"
+
+
+@dataclass
+class DungeonNode:
+    """One dungeon leaf in the dungeon tree."""
+    dungeon_id: str
+    label: str          # display_name
+    group_id: str       # "main_story" | "primary_story" | "city_regional"
+    record: DevRecord
+    settings: Dict[str, Any] = field(default_factory=dict)
+    errors: List[DungeonValidationError] = field(default_factory=list)
+
+
+@dataclass
+class DungeonGroupNode:
+    """Top-level dungeon source group."""
+    group_id: str       # "main_story" | "primary_story" | "city_regional"
+    label: str
+    dungeons: List[DungeonNode]
