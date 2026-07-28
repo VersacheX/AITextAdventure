@@ -206,7 +206,34 @@ NPC_DIALOG = [
             "I don’t know what it is, but it’s warping reality around her. She’s hanging out at the ₨, you should check it out."
         ]
     },
-
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_ch4_after_drin',
+        'dialog': [
+            "Illusions turning real? That’s a new kind of headache."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_ch4_after_drin',
+        'dialog': [
+            "Reality instability centered on a bracelet. Classic containment failure."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_ch4_after_drin',
+        'dialog': [
+            "A bracelet that makes illusions real? I need to see this thing."
+        ]
+    },
+    # add character dialog after drin intro
+    # Character Dialog Chock
+    #   "Illusions turning real? That’s a new kind of headache."
+    # Character Dialog Kade
+    #   "Reality instability centered on a bracelet. Classic containment failure."
+    # Character Dialog Moxie
+    #   "A bracelet that makes illusions real? I need to see this thing."
     ###############################################
     # KIRN — The Bracelet of Void (Shop Items)
     ###############################################
@@ -222,7 +249,34 @@ NPC_DIALOG = [
             "Here, take it. I'm not couriering this thing anymore."
         ]
     },
-
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_ch4_after_kirn',
+        'dialog': [
+            "You’re just handing us a reality-breaking bracelet? Bold."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_ch4_after_kirn',
+        'dialog': [
+            "This thing is actively warping space around it. We need to contain it fast."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_ch4_after_kirn',
+        'dialog': [
+            "Ooooh, it hums. I like when things hum."
+        ]
+    },
+    # add character dialog after kirn intro
+    # Character Dialog Chock
+    #   "You’re just handing us a reality-breaking bracelet? Bold."
+    # Character Dialog Kade
+    #   "This thing is actively warping space around it. We need to contain it fast."
+    # Character Dialog Moxie
+    #   "Ooooh, it hums. I like when things hum."
     ###############################################
     # FINAL CHARACTER — Inside the Rift - each character needs a dialog here as any of them could be the final_character
     ###############################################
@@ -306,6 +360,25 @@ NPC_DIALOG = [
             "Systems online. Let’s crack this rift open and shut it down properly."
         ]
     },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_final_character_ch4_join',
+        'dialog': [
+            "Another one of us? About damn time."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_final_character_ch4_join',
+        'dialog': [
+            "Stay close. The rift isn’t finished with us yet."
+        ]
+    },
+    # add character dialog after final_character intro
+    # Character Dialog Chock
+    #   "Another one of us? About damn time."
+    # Character Dialog Poise
+    #   "Stay close. The rift isn’t finished with us yet."
     ###############################################
     # CATALYST — Rift Boss Intro
     ###############################################
@@ -319,6 +392,34 @@ NPC_DIALOG = [
             "You cannot stop the collapse, but you can beg for a swift end."
         ]
     },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_ch4_after_catalyst',
+        'dialog': [
+            "Yeah, yeah, collapse, eternity, whatever. Let’s just kill it."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_ch4_after_catalyst',
+        'dialog': [
+            "It thinks the fracture is inevitable. I intend to prove otherwise."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_ch4_after_catalyst',
+        'dialog': [
+            "Herald of the end of the world? Cute. I’ve heard better threats."
+        ]
+    },
+    # add character dialog after catalyst intro
+    # Character Dialog Chock
+    #   "Yeah, yeah, collapse, eternity, whatever. Let’s just kill it."
+    # Character Dialog Kade
+    #   "It thinks the fracture is inevitable. I intend to prove otherwise."
+    # Character Dialog Moxie
+    #   "Herald of the end of the world? Cute. I’ve heard better threats."
     ##################### RIFT EVENT SECTION #####################
     ## Narrative of the world shaking and trembling.
     ## characters engage in conversation about the very earth shaking based on personalities
@@ -381,6 +482,34 @@ NPC_DIALOG = [
             "Go back to Mira and find out where the other bracelet went.  These things need to be put back together."
         ]
     },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_ch4_after_marlo_finch',
+        'dialog': [
+            "Great. Now the government wants the other half too."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_ch4_after_marlo_finch',
+        'dialog': [
+            "A ledger of collapse… that tracks with everything we’ve seen."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_ch4_after_marlo_finch',
+        'dialog': [
+            "If these relics are tearing the world apart, they must be reunited… carefully."
+        ]
+    },
+    # add character dialog after marlo finch post-rift
+    # Character Dialog Chock
+    #   "Great. Now the government wants the other half too."
+    # Character Dialog Kade
+    #   "A ledger of collapse… that tracks with everything we’ve seen."
+    # Character Dialog Kaera
+    #   "If these relics are tearing the world apart, they must be reunited… carefully."
 
     ###############################################
     # Mira — Outro
@@ -394,7 +523,34 @@ NPC_DIALOG = [
             "I haven't had it for days.  You should visit Kirn again, he might be able to dig up information on the courier that carried it."
         ]
     },
-
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_ch4_after_mira_outro',
+        'dialog': [
+            "Of course she won’t give up her buyer. Smugglers and their codes."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_ch4_after_mira_outro',
+        'dialog': [
+            "Kirn might still have courier records. That’s our next angle."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_ch4_after_mira_outro',
+        'dialog': [
+            "Back to Kirn. Move."
+        ]
+    },
+    # add character dialog after mira outro
+    # Character Dialog Chock
+    #   "Of course she won’t give up her buyer. Smugglers and their codes."
+    # Character Dialog Kade
+    #   "Kirn might still have courier records. That’s our next angle."
+    # Character Dialog Poise
+    #   "Back to Kirn. Move."
     ############################################################
     # Kess — After receiving Rift Dust
     ############################################################
@@ -409,7 +565,34 @@ NPC_DIALOG = [
             "Here! A Boreal Clasp. Stabilizes the body when reality gets wobbly."
         ]
     },
-
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_ch4_after_kess_rift_dust',
+        'dialog': [
+            "A clasp that keeps reality from wobbling. Useful."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_ch4_after_kess_rift_dust',
+        'dialog': [
+            "Stabilization gear. Finally something practical."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_ch4_after_kess_rift_dust',
+        'dialog': [
+            "It still smells like the rift. I kind of like it."
+        ]
+    },
+    # add character dialog after kess after rift dust
+    # Character Dialog Chock
+    #   "A clasp that keeps reality from wobbling. Useful."
+    # Character Dialog Kade
+    #   "Stabilization gear. Finally something practical."
+    # Character Dialog Moxie
+    #   "It still smells like the rift. I kind of like it."
     ############################################################
     # Mira — After receiving Unstable Relic
     ############################################################
@@ -423,7 +606,35 @@ NPC_DIALOG = [
             "Here — take this Mirethread Pendant.",
             "It’s woven from the same kind of energy. Should keep you from unraveling."
         ]
+    },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_ch4_after_mira_unstable_relic',
+        'dialog': [
+            "Another shiny trinket. At least this one is supposed to keep us from unraveling."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_ch4_after_mira_unstable_relic',
+        'dialog': [
+            "Unstable, illegal, and pretty. My favorite combination."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_ch4_after_mira_unstable_relic',
+        'dialog': [
+            "Pendant secured. We keep moving."
+        ]
     }
+    # add character dialog after mira after unstable relic
+    # Character Dialog Chock
+    #   "Another shiny trinket. At least this one is supposed to keep us from unraveling."
+    # Character Dialog Moxie
+    #   "Unstable, illegal, and pretty. My favorite combination."
+    # Character Dialog Poise
+    #   "Pendant secured. We keep moving."
 ]
 
 TASKS = [
@@ -490,6 +701,9 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'drin', 'dialog_id': 'drin_ch4_intro' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch4_after_drin' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch4_after_drin' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch4_after_drin' } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'drin', 'standing_text': [
                 "Kirn’s carrying something dangerous.",
                 "Find her in the shop."
@@ -511,6 +725,9 @@ TASKS = [
 
             # Kirn dialog
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'kirn', 'dialog_id': 'kirn_ch4_intro' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch4_after_kirn' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch4_after_kirn' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch4_after_kirn' } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'kirn', 'standing_text': [
                         "I don’t know where this bracelet came from, but it’s been messing with the places I go.",
                         "Here, take it. I'm not couriering this thing anymore."
@@ -528,7 +745,12 @@ TASKS = [
                     'location': None
                 }
             },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'catalyst', 'standing_text': [
+                "I am the Catalyst. The fracture’s herald and harbinger.",
+                "You cannot stop the collapse, but you can beg for a swift end."
+            ] } },
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'final_character', 'location': None } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'final_character', 'standing_text': ['???'] } },
             { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'rift_dungeon_ch4', 'location': 'region_city_open_area' } },
             { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rift_dungeon_ch4', 'item_id': 'rift_dust', 'location': 'treasure_room'}},
             { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rift_dungeon_ch4', 'item_id': 'unstable_relic', 'location': 'treasure_room'}},
@@ -562,6 +784,8 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'final_character', 'dialog_id': 'final_character_ch4_intro' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_final_character_ch4_join' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_final_character_ch4_join' } },
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'final_character'} },
             { 'event_type': 'player_character_join', 'params': { 'dialog_id': 'final_character_ch4_join', 'is_final_character': True } }
         ]
@@ -580,6 +804,9 @@ TASKS = [
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'catalyst', 'dialog_id': 'catalyst_ch4_intro' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch4_after_catalyst' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch4_after_catalyst' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch4_after_catalyst' } },
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch4_defeat_catalyst' } }
         ]
     },
@@ -621,6 +848,9 @@ TASKS = [
             { 'event_type': 'remove_item', 'params': { 'item_id': 'bracelet_of_void' } },
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'marlo_finch', 'dialog_id': 'marlo_finch_ch4_after_rift_2' } },
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch4_return_to_mira' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch4_after_marlo_finch' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch4_after_marlo_finch' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch4_after_marlo_finch' } }
 
         ]
     },
@@ -636,6 +866,9 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'mira', 'dialog_id': 'mira_ch4_outro' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch4_after_mira_outro' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch4_after_mira_outro' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch4_after_mira_outro' } },
             { 'event_type': 'award_task', 'params': { 'task_id': 'ch4_deliver_rift_dust_to_kess' } },
             { 'event_type': 'award_task', 'params': { 'task_id': 'ch4_deliver_unstable_relic_to_mira' } },
             { 'event_type': 'advance_chapter' }
@@ -659,6 +892,9 @@ TASKS = [
                     'dialog_id': 'kess_ch4_after_rift_dust'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch4_after_kess_rift_dust' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch4_after_kess_rift_dust' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch4_after_kess_rift_dust' } },
             {
                 'event_type': 'remove_item',
                 'params': {
@@ -703,6 +939,9 @@ TASKS = [
                     'dialog_id': 'mira_ch4_after_unstable_relic'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch4_after_mira_unstable_relic' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch4_after_mira_unstable_relic' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch4_after_mira_unstable_relic' } },
             {
                 'event_type': 'remove_item',
                 'params': {
