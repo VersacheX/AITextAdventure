@@ -296,6 +296,41 @@ NPC_DIALOG = [
 		]
 	},
 	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch3_sidequest_intro',
+		'dialog': [
+			"You want us to lie to Rook? Fine. But if you try anything funny in that mansion, I’m finishing what we started."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch3_sidequest_intro',
+		'dialog': [
+			"A noble’s mansion full of rare herbs… and a bandit offering us the keys. This feels like a trap with extra steps."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_ch3_sidequest_intro',
+		'dialog': [
+			"Ooooh, secret deal with the guy we were supposed to arrest? I love this already."
+		]
+	},
+	{
+		'npc_id': 'faith',
+		'dialog_id': 'faith_ch3_sidequest_intro',
+		'dialog': [
+			"If this truly helps the one who has lost their memories… then we should take the risk."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch3_sidequest_intro',
+		'dialog': [
+			"We report. We enter. We take what we need. Keep it clean."
+		]
+	},
+	{
 		'npc_id': 'kess_thornwrite',
 		'dialog_id': 'kess_ch3_after_receiving_scribe_mint',
 		'dialog': [
@@ -303,6 +338,41 @@ NPC_DIALOG = [
 			"This herb is known for its ability to help with memory retention and recall.",
 			"I'll prepare a special concoction for you using this.",
 			"Now, I also need scarred thyme for a more potent brew. It's a bit harder to come by."
+		]
+	},
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch3_after_receiving_scribe_mint',
+		'dialog': [
+			"One herb down. What’s the next one she needs?"
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch3_after_receiving_scribe_mint',
+		'dialog': [
+			"Scribe mint for memory… logical. Scarred thyme must be the catalyst."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_ch3_after_receiving_scribe_mint',
+		'dialog': [
+			"I love a good potion recipe. Especially the dangerous ones."
+		]
+	},
+	{
+		'npc_id': 'faith',
+		'dialog_id': 'faith_ch3_after_receiving_scribe_mint',
+		'dialog': [
+			"If this helps restore what was lost, it is worth any effort."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch3_after_receiving_scribe_mint',
+		'dialog': [
+			"We have the thyme. Finish the brew."
 		]
 	},
 	{
@@ -316,6 +386,41 @@ NPC_DIALOG = [
 		]
 	},
 	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch3_after_receiving_scarred_thyme',
+		'dialog': [
+			"Finally. Let’s get this thing to the amnesiac before I lose my patience."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch3_after_receiving_scarred_thyme',
+		'dialog': [
+			"A tonic that forces total recall… that’s either salvation or psychological warfare."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_ch3_after_receiving_scarred_thyme',
+		'dialog': [
+			"Drink this and remember every last embarrassing detail? Delicious."
+		]
+	},
+	{
+		'npc_id': 'faith',
+		'dialog_id': 'faith_ch3_after_receiving_scarred_thyme',
+		'dialog': [
+			"Please… let this bring them home to us."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch3_after_receiving_scarred_thyme',
+		'dialog': [
+			"The mind will open. Be ready for whatever comes out."
+		]
+	},
+	{
 		'npc_id': 'rook',
 		'dialog_id': 'rook_ch3_after_seth',
 		'dialog': [
@@ -326,14 +431,118 @@ NPC_DIALOG = [
 		]
 	},
 	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch3_after_seth',
+		'dialog': [
+			"Yeah, yeah, we ‘scarred him off’. Whatever gets us the information."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch3_after_seth',
+		'dialog': [
+			"He’s not wrong. Relying on one source of intel was always a bad plan."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_ch3_after_seth',
+		'dialog': [
+			"Sylvi Emberlane, huh? Sounds like the kind of person who knows where all the bodies are buried… and who’s still using them."
+		]
+	},
+	{
+		'npc_id': 'faith',
+		'dialog_id': 'faith_ch3_after_seth',
+		'dialog': [
+			"We should speak with her. Gossip can be as useful as prayer sometimes."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch3_after_seth',
+		'dialog': [
+			"New lead. We move."
+		]
+	},
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch3_meet_relic_guardian',
+		'dialog': [
+			"Whoa! That thing is huge! I’ve never seen anything like it."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch3_meet_relic_guardian',
+		'dialog': [
+			"Guardian construct. Old. Angry. Predictable."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_ch3_meet_relic_guardian',
+		'dialog': [
+			"It’s pretty… in a ‘wants to turn us into paste’ kind of way."
+		]
+	},
+	{
+		'npc_id': 'faith',
+		'dialog_id': 'faith_ch3_meet_relic_guardian',
+		'dialog': [
+			"This place is under sacred protection. We must be careful."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch3_meet_relic_guardian',
+		'dialog': [
+			"Focus. It will strike the moment we take a step too far."
+		]
+	},
+	{
 		'npc_id': 'seth',
 		'dialog_id': 'seth_ch3_sidequest_complete',
 		'dialog': [
-			"Wooooo, with that thing gone, you should loot up this place has a lot of nice stuff."
+			"Wooooo, with that thing gone, you should loot up. This place has a lot of nice stuff."
 		]
 	},
-
-		{
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch3_sidequest_complete',
+		'dialog': [
+			"That thing hit harder than it looked. Good fight."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch3_sidequest_complete',
+		'dialog': [
+			"Guardian down. Loot everything before the wards reset."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_ch3_sidequest_complete',
+		'dialog': [
+			"Aww, it was just starting to get interesting."
+		]
+	},
+	{
+		'npc_id': 'faith',
+		'dialog_id': 'faith_ch3_sidequest_complete',
+		'dialog': [
+			"May whatever spirit bound it find rest."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch3_sidequest_complete',
+		'dialog': [
+			"Clean kill. Take the mint and move."
+		]
+	},
+	{
 		'npc_id': 'technique',
 		'dialog_id': 'character_ch3_we_found_the_tonic',
 		'dialog': [
@@ -663,7 +872,6 @@ TASKS = [
 					'location': 'region_open_area'
 				}
 			},
-			#{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'seth_hideout_ch3', 'item_id': 'moontide_orb', 'location': 'treasure_room'}}
 		],
 		'task_complete_events': [
 			{
@@ -671,6 +879,41 @@ TASKS = [
 				'params': {
 					'npc_id': 'seth',
 					'dialog_id': 'seth_ch3_sidequest_intro'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch3_sidequest_intro'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch3_sidequest_intro'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch3_sidequest_intro'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'faith',
+					'dialog_id': 'faith_ch3_sidequest_intro'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch3_sidequest_intro'
 				}
 			},
 			{
@@ -684,7 +927,16 @@ TASKS = [
 				'params': {
 					'npc_id': 'relic_guardian',
 					'location': None
-			}
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'relic_guardian',
+					'standing_text': [
+						"This relic is under my protection. You shall not pass."
+					]
+				}
 			},
 			{
 				'event_type': 'create_dungeon',
@@ -764,7 +1016,42 @@ TASKS = [
 					'dialog_id': 'rook_ch3_after_seth'
 				}
 			},
-			{#EVENT - set_npc_standing_text - sylvi ("I've never seen that person at the bar before, They're about as mysterious as you."):
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch3_after_seth'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch3_after_seth'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch3_after_seth'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'faith',
+					'dialog_id': 'faith_ch3_after_seth'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch3_after_seth'
+				}
+			},
+			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
 					'npc_id': 'sylvi', # sylvi is a street performer who has heard of the players exploits in ch1
@@ -789,6 +1076,41 @@ TASKS = [
 		'to_id': 'relic_guardian',
 		'task_acquire_events': [],
 		'task_complete_events': [
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch3_meet_relic_guardian'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch3_meet_relic_guardian'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch3_meet_relic_guardian'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'faith',
+					'dialog_id': 'faith_ch3_meet_relic_guardian'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch3_meet_relic_guardian'
+				}
+			},
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -846,6 +1168,41 @@ TASKS = [
 				}
 			},
 			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch3_sidequest_complete'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch3_sidequest_complete'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch3_sidequest_complete'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'faith',
+					'dialog_id': 'faith_ch3_sidequest_complete'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch3_sidequest_complete'
+				}
+			},
+			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
 					'npc_id': 'seth',
@@ -871,6 +1228,41 @@ TASKS = [
 				'params': {
 					'npc_id': 'kess_thornwrite',
 					'dialog_id': 'kess_ch3_after_receiving_scribe_mint'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch3_after_receiving_scribe_mint'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch3_after_receiving_scribe_mint'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'faith',
+					'dialog_id': 'faith_ch3_after_receiving_scribe_mint'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch3_after_receiving_scribe_mint'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch3_after_receiving_scribe_mint'
 				}
 			},
 			{
@@ -902,7 +1294,42 @@ TASKS = [
 					'npc_id': 'kess_thornwrite',
 					'dialog_id': 'kess_ch3_after_receiving_scarred_thyme'
 				}
-			}, # award memory_tonic
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch3_after_receiving_scarred_thyme'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch3_after_receiving_scarred_thyme'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'faith',
+					'dialog_id': 'faith_ch3_after_receiving_scarred_thyme'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch3_after_receiving_scarred_thyme'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch3_after_receiving_scarred_thyme'
+				}
+			},
 			{
 				'event_type': 'remove_item',
 				'params': {

@@ -1135,6 +1135,7 @@ def validate_timeline_integrity(
         #"initiate_character_dialog", <perform seperate check
         "initiate_option_dialog",   # presents a choice prompt — counts as dialog
         "player_character_join",    # fires a join dialog implicitly via dialog_id param
+        "add_pending_character",    # delivers the pending character with implicit dialog
     })
     for tn in all_tasks:
         task_type = str(tn.task.get("type", "")).lower()

@@ -472,6 +472,20 @@ NPC_DIALOG = [
 		]
 	},
 	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_brawn_intro',
+		'dialog': [
+			"Seth again? Good. I wasn't done with him the first time."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_brawn_intro',
+		'dialog': [
+			"Stolen gear. Simple job. We move."
+		]
+	},
+	{
 		'npc_id': 'technique', 
 		'dialog_id': 'technique_brawn_ornate_bracers',
 		'dialog': [
@@ -575,6 +589,15 @@ TASKS = [
 				'params': {
 					'npc_id': 'seth',
 					'dialog_id': 'seth_preface'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'seth',
+					'standing_text': [
+						"You look good for a few."
+					]
 				}
 			},
 			{
@@ -1270,6 +1293,20 @@ TASKS = [
 				'params': {
 					'npc_id': 'brawn',
 					'dialog_id': 'brawn_intro'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_brawn_intro'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_brawn_intro'
 				}
 			},
 			{

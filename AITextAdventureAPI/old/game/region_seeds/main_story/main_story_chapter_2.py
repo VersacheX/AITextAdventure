@@ -239,7 +239,41 @@ NPC_DIALOG = [
 			"Word is she recently acquired something interesting... Which I now share an interest in, the Resonance Shard"
 		]
 	},
-
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch2_after_leera',
+		'dialog': [
+			"Resonance Shard? Sounds like a job for us. Let's go find Juno."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch2_after_leera',
+		'dialog': [
+			"Resonance Shard. We need to find Juno and get it."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch2_after_leera',
+		'dialog': [
+			"Resonance Shard? Sounds like a job for us. Let's go find Juno."
+		]
+	},
+	{
+		'npc_id': 'faith',
+		'dialog_id': 'faith_ch2_after_leera',
+		'dialog': [
+			"Resonance Shard. We must find Juno and retrieve it."
+		]
+	},
+	{
+		'npc_id': 'moxie',
+		'dialog_id': 'moxie_ch2_after_leera',
+		'dialog': [
+			"Resonance Shard? Sounds like a job for us. Let's go find Juno."
+		]
+	},
 	{
 		'npc_id': 'juno',
 		'dialog_id': 'juno_ch2_intro',
@@ -273,6 +307,48 @@ NPC_DIALOG = [
 			"I sent someone to fetch it from a nearby ruin… but they never came back.",
 			"If you bring me the item, I’ll finish the brew.",
 			"Try not to die on me.  I don't want that on my head."
+		]
+	},
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch2_after_kess',
+		'dialog': [
+			"Someone went into a ruin and never came back. Sounds like our kind of job."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_ch2_after_kess',
+		'dialog': [
+			"A volatile, contraband concoction? I already like her."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch2_after_kess',
+		'dialog': [
+			"Classic. Send the amateurs, then hire professionals when they disappear."
+		]
+	},
+	{
+		'npc_id': 'faith',
+		'dialog_id': 'faith_ch2_after_kess',
+		'dialog': [
+			"We will recover what was lost. And pray the previous seekers found peace."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch2_after_kess',
+		'dialog': [
+			"Ruin. Missing ingredient. We go."
+		]
+	},
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch2_meet_demigorgon',
+		'dialog': [
+			"Oooooh! Looks like we bit off more than we can chew."
 		]
 	},
     {
@@ -398,7 +474,41 @@ NPC_DIALOG = [
 			"Take it back to Mira. She’ll know how to use it."
 		]
 	},
-
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_juno_ch2_after_kess',
+		'dialog': [
+			"Finally. One less favor hanging over our heads."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_juno_ch2_after_kess',
+		'dialog': [
+			"Resonance Shard acquired. Let’s get it to Mira before it starts doing something unfortunate."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_juno_ch2_after_kess',
+		'dialog': [
+			"Shiny, dangerous, and slightly illegal. Perfect."
+		]
+	},
+	{
+		'npc_id': 'faith',
+		'dialog_id': 'faith_juno_ch2_after_kess',
+		'dialog': [
+			"May this shard bring the balance that was promised."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_juno_ch2_after_kess',
+		'dialog': [
+			"Shard in hand. Back to Mira."
+		]
+	},
 	{
 		'npc_id': 'mira',
 		'dialog_id': 'mira_ch2_decoupling',
@@ -764,6 +874,41 @@ TASKS = [
 				}
 			},
 			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch2_after_leera'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch2_after_leera'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch2_after_leera'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch2_after_leera'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'faith',
+					'dialog_id': 'faith_ch2_after_leera'
+				}
+			},
+			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
 					'npc_id': 'mira',
@@ -861,6 +1006,41 @@ TASKS = [
 				}
 			},
 			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch2_after_kess'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch2_after_kess'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch2_after_kess'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'faith',
+					'dialog_id': 'faith_ch2_after_kess'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch2_after_kess'
+				}
+			},
+			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
 					'npc_id': 'kess_thornwrite',
@@ -881,6 +1061,15 @@ TASKS = [
 					'npc_id': 'the_demigorgon',
 					'location': None
 				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'the_demigorgon',
+					'standing_text': [
+						"Grrrr. Arghhh!"
+					]
+				}
 			}
 		]
 	},
@@ -896,6 +1085,13 @@ TASKS = [
 				'event_type': 'player_character_join',
 				'params': {
 					'dialog_id': 'ch2_add_pc'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch2_meet_demigorgon'
 				}
 			},
 			{
@@ -1108,6 +1304,41 @@ TASKS = [
 				'params': {
 					'npc_id': 'juno',
 					'dialog_id': 'juno_ch2_after_kess'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_juno_ch2_after_kess'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_juno_ch2_after_kess'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_juno_ch2_after_kess'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'faith',
+					'dialog_id': 'faith_juno_ch2_after_kess'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_juno_ch2_after_kess'
 				}
 			},
 			{
