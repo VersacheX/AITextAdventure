@@ -498,6 +498,27 @@ NPC_DIALOG = [
             "My contact's at the city outskirts bar. His name's Rhett. Tell him Seth sent you."
         ]
     },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_ch6_after_seth_contact_intro',
+        'dialog': [
+            "Finally. Let’s go meet this contact of yours."
+        ]
+    },
+    {
+        'npc_id': 'kade',
+        'dialog_id': 'kade_ch6_after_seth_contact_intro',
+        'dialog': [
+            "Rhett at the outskirts bar. At least the chain of command is getting clearer."
+        ]
+    },
+    {
+        'npc_id': 'moxie',
+        'dialog_id': 'moxie_ch6_after_seth_contact_intro',
+        'dialog': [
+            "A resistance contact? This just keeps getting better."
+        ]
+    },
 ]
 
 TASKS = [
@@ -540,6 +561,7 @@ TASKS = [
               'condition': { 'type': 'is_task_not_active', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch6_check_back_with_seth' },
               'condition': { 'type': 'is_task_not_active', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
+
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_karrek_done' },
               'condition': { 'type': 'is_task_completed', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch6_meet_seth_local_contact' },
@@ -572,6 +594,7 @@ TASKS = [
         'to_id': 'riftspawn_aberrant',
         'task_acquire_events': [
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'riftspawn_aberrant', 'location': None }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'riftspawn_aberrant', 'standing_text': [" *static void crackles*"]}},
             { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'riftland_breach_site', 'location': 'region_open_area' }}
         ],
         'task_complete_events': [

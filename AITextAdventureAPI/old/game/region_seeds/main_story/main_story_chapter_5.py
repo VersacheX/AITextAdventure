@@ -562,6 +562,7 @@ TASKS = [
         'to_id': 'static_wraith',
         'task_acquire_events': [
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'static_wraith', 'location': None }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'static_wraith', 'standing_text': ["*static screeching*"]}},
             { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'stormglass_alley', 'location': 'region_city_open_area' }},
             { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'stormglass_alley', 'item_id': 'corsair_tide_fragment', 'location': 'final_chamber' }}
         ],
@@ -616,7 +617,8 @@ TASKS = [
         'to_type': 'npc',
         'to_id': 'astra_wynn',
         'task_acquire_events': [
-            { 'event_type': 'create_npc', 'params': { 'npc_id': 'astra_wynn', 'location': 'city_number_3_region_city_shopitems' }}
+            { 'event_type': 'create_npc', 'params': { 'npc_id': 'astra_wynn', 'location': 'city_number_3_region_city_shopitems' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'astra_wynn', 'standing_text': ["The reflections are restless tonight."]} }
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'astra_wynn', 'dialog_id': 'astra_ch5_intro' }},
