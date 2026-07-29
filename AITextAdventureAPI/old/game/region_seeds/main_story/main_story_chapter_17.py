@@ -636,6 +636,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch17_gargantuan_choose' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch17_confusing' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch17_between_states' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'displacer_gargantuan', 'standing_text': ["I kill you yesterday. I kill you tomorrow. I kill you today."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch17_defeat_displacer_gargantuan' }}
 		]
 	},
@@ -720,6 +721,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch17_exist_anyway' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'paradox', 'dialog_id': 'paradox_ch17_already_written' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_ch17_equations_breaking' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'paradox', 'standing_text': ["To proceed, you must stop. To win, you must lose. Welcome to the end of logic."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch17_defeat_paradox_and_crux' }}
 		]
 	},

@@ -650,6 +650,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lumen', 'dialog_id': 'lumen_ch16_response' }},
 			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'temporal_echoes', 'location': 'region_open_area' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'temporal_echoes', 'item_id': 'fracture_logs', 'location': 'final_chamber' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lumen', 'standing_text': ["The logs are in the temporal echoes"]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch16_deliver_fracture_logs_to_jessa' }}
 		]
 	},
@@ -714,6 +715,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch16_taunts_tech' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch16_to_crux' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch16_taunts_skill' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'crux', 'standing_text': ["You cannot defeat me. I am the first wound. I am the contradiction. I am the void."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch16_defeat_crux_origin_form' }}
 		]
 	},

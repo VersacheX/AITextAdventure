@@ -521,6 +521,8 @@ class TimelineDetailPanel(Widget):
                         colour = "cyan"
                     elif err.severity == "warning":
                         colour = "yellow"
+                    elif err.severity == "notice" and err.code == "MEET_DELIVER_NO_CHARACTER_DIALOG":
+                        colour = "blue"
                     elif err.severity == "notice":
                         colour = "#e040fb"
                     elif err.severity == "duplicate":
@@ -1292,7 +1294,6 @@ def update_detail_for_dungeon(
     detail_panel.mount(Static("\n".join(lines)))
 
     
-
 # ── Subtree header data extraction ───────────────────────────────────────
 
 def _parse_subtree_header_data(task_nodes: "List[TimelineTaskNode]") -> "dict | None":

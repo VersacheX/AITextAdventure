@@ -614,6 +614,8 @@ TASKS = [
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'marlo_finch', 'standing_text': ["I've audited their books. The Oracle's prophecies and the Reliquary's archives. It's a closed loop. A perfect, inescapable trap. We have to burn the whole library down."]}},
 			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'oracle', 'location': None }},
 			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'reliquary', 'location': None }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'oracle', 'standing_text': ["Your story ends here. It was always going to end here. I have seen it."]}},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'reliquary', 'standing_text': ["And your pain will be preserved forever in our collection. A perfect, unchanging memory."]}},
 			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'memory_museum', 'location': 'region_open_area' }},
 			{ 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'memory_museum', 'location': 'final_chamber' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch20_intro' }},

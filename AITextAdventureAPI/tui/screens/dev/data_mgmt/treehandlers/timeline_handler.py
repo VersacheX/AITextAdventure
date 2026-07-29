@@ -58,11 +58,12 @@ def rebuild_timeline_tree(
 
 def _task_label(task_node: TimelineTaskNode) -> str:
     if task_node.errors:
-        has_error     = any(e.severity == "error"     for e in task_node.errors)
-        has_warning   = any(e.severity == "warning"   for e in task_node.errors)
-        has_duplicate = any(e.severity == "duplicate" for e in task_node.errors)
-        has_notice    = any(e.severity == "notice"    for e in task_node.errors)
-        has_info      = any(e.severity == "info"      for e in task_node.errors)
+        has_error       = any(e.severity == "error"     for e in task_node.errors)
+        has_warning     = any(e.severity == "warning"   for e in task_node.errors)
+        has_duplicate   = any(e.severity == "duplicate" for e in task_node.errors)
+        has_notice      = any(e.severity == "notice" and e.code != "MEET_DELIVER_NO_CHARACTER_DIALOG" for e in task_node.errors)
+        has_blue_notice = any(e.severity == "notice" and e.code == "MEET_DELIVER_NO_CHARACTER_DIALOG" for e in task_node.errors)
+        has_info        = any(e.severity == "info"      for e in task_node.errors)
 
         import logging
         logging.getLogger(__name__).debug(
@@ -96,11 +97,18 @@ def _task_label(task_node: TimelineTaskNode) -> str:
                 f"[#c084fc](duplicates: {n})[/#c084fc]"
             )
         if has_notice:
-            n = sum(1 for e in task_node.errors if e.severity == "notice")
+            n = sum(1 for e in task_node.errors if e.severity == "notice" and e.code != "MEET_DELIVER_NO_CHARACTER_DIALOG")
             return (
                 f"[#e040fb]{label}[/#e040fb]  "
                 f"[dim #e040fb]{tid}[/dim #e040fb]  "
                 f"[#e040fb](notice: {n})[/#e040fb]"
+            )
+        if has_blue_notice:
+            n = sum(1 for e in task_node.errors if e.severity == "notice" and e.code == "MEET_DELIVER_NO_CHARACTER_DIALOG")
+            return (
+                f"[#2323ff]{label}[/#2323ff]  "
+                f"[dim #2323ff]{tid}[/dim #2323ff]  "
+                f"[#2323ff](notice: {n})[/#2323ff]"
             )
         if has_info:
             return (

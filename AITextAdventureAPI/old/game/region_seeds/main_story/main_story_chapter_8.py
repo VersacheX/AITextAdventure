@@ -712,6 +712,7 @@ TASKS = [
         'task_acquire_events': [
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'glamour', 'location': None }},
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'scalpel', 'location': None }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'scalpel', 'standing_text': ["Glamour was soft. I only need one clean cut."]}},
             { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'theatre_of_echoed_faces', 'location': 'region_city_open_area' }},
             { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'theatre_of_echoed_faces', 'item_id': 'ink_resonance_vial', 'location': 'final_chamber' }},
         ],
@@ -731,6 +732,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'scalpel', 'dialog_id': 'scalpel_ch8_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch8_scalpel_arrival' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch8_scalpel_arrival' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'glamour', 'standing_text': ["Later bitches."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch8_defeat_scalpel_projection' }}
         ]
     },

@@ -191,13 +191,6 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'riftspawn_aberrant',
-        'dialog_id': 'aberrant_ch6_intro',
-        'dialog': [
-            "*distorted screeching*"
-        ]
-    },
-    {
         'npc_id': 'tech',
         'dialog_id': 'tech_ch6_aberrant_intro',
         'dialog': [
@@ -506,15 +499,15 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'kade',
-        'dialog_id': 'kade_ch6_after_seth_contact_intro',
+        'npc_id': 'tech',
+        'dialog_id': 'tech_ch6_after_seth_contact_intro',
         'dialog': [
             "Rhett at the outskirts bar. At least the chain of command is getting clearer."
         ]
     },
     {
-        'npc_id': 'moxie',
-        'dialog_id': 'moxie_ch6_after_seth_contact_intro',
+        'npc_id': 'magic',
+        'dialog_id': 'magic_ch6_after_seth_contact_intro',
         'dialog': [
             "A resistance contact? This just keeps getting better."
         ]
@@ -566,6 +559,12 @@ TASKS = [
               'condition': { 'type': 'is_task_completed', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch6_meet_seth_local_contact' },
               'condition': { 'type': 'is_task_completed', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch6_after_contact' },
+              'condition': { 'type': 'is_task_completed', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch6_after_seth_contact_intro' },
+              'condition': { 'type': 'is_task_completed', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch6_after_seth_contact_intro' },
+              'condition': { 'type': 'is_task_completed', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}}
         ]
     },
     {
@@ -594,17 +593,16 @@ TASKS = [
         'to_id': 'riftspawn_aberrant',
         'task_acquire_events': [
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'riftspawn_aberrant', 'location': None }},
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'riftspawn_aberrant', 'standing_text': [" *static void crackles*"]}},
             { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'riftland_breach_site', 'location': 'region_open_area' }}
         ],
         'task_complete_events': [
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'riftspawn_aberrant', 'dialog_id': 'aberrant_ch6_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch6_aberrant_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch6_aberrant_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch6_aberrant_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch6_aberrant_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch6_aberrant_intro' }},
-            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch6_defeat_riftspawn_aberrant' }}
+            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch6_defeat_riftspawn_aberrant' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'riftspawn_aberrant', 'standing_text': [" *static void crackles*"]}}
         ]
     },
     {

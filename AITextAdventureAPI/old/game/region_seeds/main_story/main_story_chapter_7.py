@@ -294,6 +294,7 @@ TASKS = [
         'to_id': 'seth',
         'task_acquire_events': [
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'lyren', 'location': 'region_city_inn' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lyren', 'standing_text': ["The land is breaking down faster than we can fix it. Help stabilize the region before Seth can prepare the airship for departure."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch7_meet_lyren' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch7_narrator_intro' }}
         ],

@@ -772,6 +772,7 @@ TASKS = [
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch14_earning_it'}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'hask', 'standing_text': ["Stigma will bring true unity. The division ends with her."]}},
             {'event_type': 'create_npc', 'params': {'npc_id': 'stigma', 'location': 'region_city_bar'}},
+            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'stigma', 'standing_text': ["Hailward Hold is a test. See the lies, and then we can talk about the truth."]}},
             {'event_type': 'award_task', 'params': {'task_id': 'main_story_ch14_meet_stigma'}}
         ]
     },

@@ -750,6 +750,7 @@ TASKS = [
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'echo_merchant', 'location': 'region_city_shopitems' }},
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'veiled_widow', 'location': 'region_city_bar' }},
             { 'event_type': 'show_npc', 'params': { 'npc_id': 'seth', 'location': 'region_city_bar' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'garbage', 'standing_text': ["I am the rot that festers in your soul."]}},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'seth', 'standing_text': ["The Necropolis is a graveyard of forgotten things. It's where the city buries its secrets and its failures."]}},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'crypt_warden', 'standing_text': ["I used to be someone. Now I'm just... a shadow in the Necropolis."]}},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'echo_merchant', 'standing_text': ["I sell mirrors that show you your true self. Most people can't handle the truth."]}},

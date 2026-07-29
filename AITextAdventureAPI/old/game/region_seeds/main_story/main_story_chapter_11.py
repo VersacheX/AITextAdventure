@@ -851,6 +851,7 @@ TASKS = [
         'task_acquire_events': [
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'rapture', 'location': None }},
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'revelry', 'location': None }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rapture', 'standing_text': ["They don't want it to stop. They want the thrill. The edge. The moment the bone snaps and the world feels real."]}},
             { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'festival_of_delight', 'location': 'region_open_area' }}
         ],
         'task_complete_events': [
@@ -862,6 +863,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch11_boss_response' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'revelry', 'dialog_id': 'revelry_ch11_response' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rapture', 'dialog_id': 'rapture_ch11_response' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'revelry', 'standing_text': ["We give them what they crave! A world without consequence! A party that never ends!"]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch11_defeat_rapture_and_revelry' }}
         ]
     },
@@ -958,6 +960,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch11_to_nihilist' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch11_to_nihilist' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'nihilist_leader', 'dialog_id': 'nihilist_leader_ch11_taunt' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'nihilist_leader', 'standing_text': ["Nothing matters. Nothing lasts. Nothing is real."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch11_defeat_nihilist_leader' }}
         ]
     },

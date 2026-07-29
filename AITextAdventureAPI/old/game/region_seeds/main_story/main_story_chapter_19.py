@@ -612,6 +612,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch19_focus' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'twisted_darkwood', 'dialog_id': 'twisted_darkwoo_ch19_intro' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch19_more_than_past' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'twisted_darkwood', 'standing_text': ["You are nothing but your mistakes. You will repeat them forever."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch19_destroy_twisted_darkwoo' }}
 		]
 	},

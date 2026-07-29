@@ -923,6 +923,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'pageant', 'dialog_id': 'pageant_ch15_intro'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch15_mask'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'pageant', 'dialog_id': 'pageant_ch15_seams'}},
+            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'pageant', 'standing_text': ["Edict demands perfection. Stigma demands devotion. Me? I simply ask that you *perform* beautifully."]}},
             {'event_type': 'award_task', 'params': {'task_id': 'main_story_ch15_defeat_pageant'}}
         ]
     },
@@ -1008,6 +1009,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'ravel', 'dialog_id': 'ravel_ch15_hale_intro'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'skill', 'dialog_id': 'skill_ch15_where_is_he'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'ravel', 'dialog_id': 'ravel_ch15_jett_knows'}},
+            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'warden_hale', 'standing_text': ["I am Warden Hale. I enforce Edict’s vision of perfection."]}},
             {'event_type': 'award_task', 'params': {'task_id': 'main_story_ch15_meet_jett_for_warden_hale'}}
         ]
     },
@@ -1071,6 +1073,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'prison_warden', 'dialog_id': 'warden_ch15_protocol'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch15_step_aside'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'prison_warden', 'dialog_id': 'warden_ch15_denied'}},
+            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'prison_warden', 'standing_text': ["I am the Warden of the Correctional Facility. I enforce Edict’s vision of perfection."]}},
             {'event_type': 'award_task', 'params': {'task_id': 'main_story_ch15_defeat_prison_warden'}}
         ]
     },
@@ -1118,6 +1121,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'edict', 'dialog_id': 'edict_ch15_final_word'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'stigma', 'dialog_id': 'stigma_ch15_final_word'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'pageant', 'dialog_id': 'pageant_ch15_final_act'}},
+            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'edict', 'standing_text': ["Edict is the architect of the Citadel. He believes perfection is the only path to peace."]}},
             {'event_type': 'award_task', 'params': {'task_id': 'main_story_ch15_defeat_pageant_edict_stigma'}}
         ]
     },

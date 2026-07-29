@@ -369,6 +369,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch18_loves_monologue' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch18_perfect_order' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'cataclysm', 'dialog_id': 'cataclysm_ch18_failure' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'cataclysm', 'standing_text': ["ANOMALIES. EXISTENCE WITHOUT PURPOSE IS WASTE. I WILL BALANCE THE EQUATION."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch18_defeat_cataclysm' }}
 		]
 	},

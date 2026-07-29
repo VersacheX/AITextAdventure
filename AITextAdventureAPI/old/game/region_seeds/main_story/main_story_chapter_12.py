@@ -472,6 +472,7 @@ TASKS = [
         'to_id': 'rell',
         'task_acquire_events': [
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'lament', 'location': None }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lament', 'standing_text': ["I can feel the grief of this place."]}},
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'rell', 'location': 'region_city_inn' }},
             { 'event_type': 'show_npc', 'params': { 'npc_id': 'veyla', 'location': 'region_city_bar' }},
             { 'event_type': 'show_npc', 'params': { 'npc_id': 'serin', 'location': 'region_city_bar' }},
@@ -496,6 +497,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_resolve' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rell', 'standing_text': ["Ember's gone... but her fight isn't over. What do you need from me?"]}},
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'archivist_fragment', 'location': 'region_city_inn' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'archivist_fragment', 'standing_text': ["I remember you dying. Twice. Time loops here. Lament's influence breaks causality. The village mourns someone called Ember. The grief never ends. It loops."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch12_meet_archivist_fragment' }}
         ]
     },
