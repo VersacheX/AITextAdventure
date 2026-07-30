@@ -257,13 +257,34 @@ NPC_DIALOG = [
 	# Oren dialog — initial meeting before puzzles begin
 	{
 		'npc_id': 'oren',
-		'dialog_id': 'oren_meeting',
+		'dialog_id': 'oren_intro_desert_primary',
 		'dialog': [
 			"Oh. Hello. Are you real? I'm never quite sure anymore.",
 			"Mara sent you? Hm. She has a talent for sending things in the right direction at the wrong time.",
 			"You want the Sundial. Of course you do. It's been waiting, I think.",
 			"But first — you'll have to prove you're paying attention. The desert speaks, you know. Most people just don't listen.",
 			"Three questions. Answer well, and the Sundial is yours."
+		]
+	},
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'chock_oren_intro_desert_primary',
+		'dialog': [
+			"Three questions just to get a sundial? Fine. Let’s get this over with."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'moxie_oren_intro_desert_primary',
+		'dialog': [
+			"A riddle-obsessed dreamer in the desert. I already like him."
+		]
+	},
+	{
+		'npc_id': 'faith',
+		'dialog_id': 'kaera_oren_intro_desert_primary',
+		'dialog': [
+			"He’s testing whether we’re listening. We should answer carefully."
 		]
 	},
 	# Oren puzzle pass/fail feedback dialogs
@@ -443,14 +464,14 @@ TASKS = [
 				}
 			},
 			{
-				'event_type': 'initiate_dialog',
+				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'faith',
 					'dialog_id': 'kaera_mara_reaction'
 				}
 			},
 			{
-				'event_type': 'initiate_dialog',
+				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'skill',
 					'dialog_id': 'poise_mara_reaction'
@@ -499,7 +520,28 @@ TASKS = [
 				'event_type': 'initiate_dialog',
 				'params': {
 					'npc_id': 'oren',
-					'dialog_id': 'oren_meeting'
+					'dialog_id': 'oren_intro_desert_primary'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'chock_oren_intro_desert_primary'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'moxie_oren_intro_desert_primary'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'faith',
+					'dialog_id': 'kaera_oren_intro_desert_primary'
 				}
 			},
 			{
@@ -516,9 +558,12 @@ TASKS = [
 	# Hint planted by Mara: "He likes to talk about the wind — how it leaves a shape in the sand long after it's gone."
 	{
 		'task_id': 'desert_oren_puzzle_1',
-		'type': 'complete_intro_story',
-		'task_acquire_events': [
-			{
+		'type': 'gated',
+        'task_acquire_events': [
+            { 'event_type': 'complete_task', 'params': { 'task_id': 'desert_oren_puzzle_1' } }
+		],
+		'task_complete_events': [
+						{
 				'event_type': 'initiate_option_dialog',
 				'params': {
 					'message': (
@@ -532,13 +577,14 @@ TASKS = [
 					]
 				}
 			}
-		],
-		'task_complete_events': []
+		]
 	},
 	{
 		'task_id': 'desert_oren_p1_correct',
-		'type': 'complete_intro_story',
-		'task_acquire_events': [],
+		'type': 'gated',
+        'task_acquire_events': [
+            { 'event_type': 'complete_task', 'params': { 'task_id': 'desert_oren_p1_correct' } }
+		],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
@@ -557,8 +603,10 @@ TASKS = [
 	},
 	{
 		'task_id': 'desert_oren_p1_wrong',
-		'type': 'complete_intro_story',
-		'task_acquire_events': [],
+		'type': 'gated',
+        'task_acquire_events': [
+            { 'event_type': 'complete_task', 'params': { 'task_id': 'desert_oren_p1_wrong' } }
+		],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
@@ -584,8 +632,11 @@ TASKS = [
 	# Hint planted by Mara: "He muttered something about memories casting no shadow."
 	{
 		'task_id': 'desert_oren_puzzle_2',
-		'type': 'complete_intro_story',
-		'task_acquire_events': [
+		'type': 'gated',
+        'task_acquire_events': [
+            { 'event_type': 'complete_task', 'params': { 'task_id': 'desert_oren_puzzle_2' } }
+		],
+		'task_complete_events': [
 			{
 				'event_type': 'initiate_option_dialog',
 				'params': {
@@ -600,13 +651,14 @@ TASKS = [
 					]
 				}
 			}
-		],
-		'task_complete_events': []
+		]
 	},
 	{
 		'task_id': 'desert_oren_p2_correct',
-		'type': 'complete_intro_story',
-		'task_acquire_events': [],
+		'type': 'gated',
+        'task_acquire_events': [
+            { 'event_type': 'complete_task', 'params': { 'task_id': 'desert_oren_p2_correct' } }
+		],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
@@ -625,8 +677,10 @@ TASKS = [
 	},
 	{
 		'task_id': 'desert_oren_p2_wrong',
-		'type': 'complete_intro_story',
-		'task_acquire_events': [],
+		'type': 'gated',
+        'task_acquire_events': [
+            { 'event_type': 'complete_task', 'params': { 'task_id': 'desert_oren_p2_wrong' } }
+		],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
@@ -653,8 +707,11 @@ TASKS = [
 	# Correct answer awards the dune_sundial item.
 	{
 		'task_id': 'desert_oren_puzzle_3',
-		'type': 'complete_intro_story',
-		'task_acquire_events': [
+		'type': 'gated',
+        'task_acquire_events': [
+            { 'event_type': 'complete_task', 'params': { 'task_id': 'desert_oren_puzzle_3' } }
+		],
+		'task_complete_events': [
 			{
 				'event_type': 'initiate_option_dialog',
 				'params': {
@@ -669,13 +726,14 @@ TASKS = [
 					]
 				}
 			}
-		],
-		'task_complete_events': []
+		]
 	},
 	{
 		'task_id': 'desert_oren_p3_correct',
-		'type': 'complete_intro_story',
-		'task_acquire_events': [],
+		'type': 'gated',
+        'task_acquire_events': [
+            { 'event_type': 'complete_task', 'params': { 'task_id': 'desert_oren_p3_correct' } }
+		],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
@@ -695,8 +753,10 @@ TASKS = [
 	},
 	{
 		'task_id': 'desert_oren_p3_wrong',
-		'type': 'complete_intro_story',
-		'task_acquire_events': [],
+		'type': 'gated',
+        'task_acquire_events': [
+            { 'event_type': 'complete_task', 'params': { 'task_id': 'desert_oren_p3_wrong' } }
+		],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
@@ -746,14 +806,14 @@ TASKS = [
 				}
 			},
 			{
-				'event_type': 'initiate_dialog',
+				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'faith',
 					'dialog_id': 'kaera_sable_join_reaction'
 				}
 			},
 			{
-				'event_type': 'initiate_dialog',
+				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'tech',
 					'dialog_id': 'kade_sable_join_reaction'
@@ -819,7 +879,7 @@ TASKS = [
 				}
 			},
 			{
-				'event_type': 'initiate_dialog',
+				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'sable',
 					'dialog_id': 'sable_zaruun_confrontation'
@@ -833,17 +893,27 @@ TASKS = [
 				}
 			},
 			{
-				'event_type': 'initiate_dialog',
+				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'magic',
 					'dialog_id': 'moxie_zaruun_taunt'
 				}
 			},
 			{
-				'event_type': 'initiate_dialog',
+				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'technique',
 					'dialog_id': 'chock_zaruun_challenge'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'zaruun',
+					'standing_text': [
+						"The desert is thinning. I can feel it. Zaruun is out there, cracking open the dunes.",
+						"He's been causing sinkholes all over the desert. We need to stop him."
+					]
 				}
 			},
 			{
@@ -882,21 +952,21 @@ TASKS = [
 			},
 			{ 'event_type': 'hide_npc', 'params': { 'npc_id': 'zaruun' }},
 			{
-				'event_type': 'initiate_dialog',
+				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'sable',
 					'dialog_id': 'sable_post_defeat'
 				}
 			},
 			{
-				'event_type': 'initiate_dialog',
+				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'magic',
 					'dialog_id': 'moxie_post_defeat'
 				}
 			},
 			{
-				'event_type': 'initiate_dialog',
+				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'technique',
 					'dialog_id': 'chock_post_defeat'

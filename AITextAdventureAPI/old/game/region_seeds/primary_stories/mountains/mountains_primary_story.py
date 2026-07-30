@@ -804,7 +804,7 @@ TASKS = [
                 }
             },
             {
-                'event_type': 'initiate_dialog',
+                'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'bragg',
                     'dialog_id': 'bragg_rokhuld_confrontation'
@@ -829,6 +829,17 @@ TASKS = [
                 'params': {
                     'npc_id': 'magic',
                     'dialog_id': 'moxie_rokhuld_challenge'
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'rokhuld',
+                    'standing_text': [
+                        "You stand between me and truth.",
+                        "The mountain hides the world's final breath.",
+                        "I will break it open."
+                    ]
                 }
             },
             {
@@ -868,7 +879,7 @@ TASKS = [
                 'params': {'npc_id': 'rokhuld'}
             },
             {
-                'event_type': 'initiate_dialog',
+                'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'bragg',
                     'dialog_id': 'bragg_post_defeat'

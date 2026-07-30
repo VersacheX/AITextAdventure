@@ -537,7 +537,9 @@ TASKS = [
                     'npc_id': 'ripple',
                     'location': 'region_bar'
                 }
-            },
+            }
+        ],
+        'task_complete_events': [            
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
@@ -548,9 +550,7 @@ TASKS = [
                         "If you seek guidance, I am here."
                     ]
                 }
-            }
-        ],
-        'task_complete_events': [
+            },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -633,17 +633,6 @@ TASKS = [
         'to_type': 'npc',
         'to_id': 'vaultkeeper_syrin',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'vaultkeeper_syrin',
-                    'standing_text': [
-                        "The vault is open.",
-                        "...",
-                        "Sorry. I'm not very good company today."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -935,17 +924,17 @@ TASKS = [
         'to_id': 'uulthar',
         'task_acquire_events': [
             {
-                'event_type': 'create_dungeon',
-                'params': {
-                    'dungeon_id': 'uulthar_lair',
-                    'location': 'region_open_area'
-                }
-            },
-            {
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'uulthar',
                     'location': None
+                }
+            },
+            {
+                'event_type': 'create_dungeon',
+                'params': {
+                    'dungeon_id': 'uulthar_lair',
+                    'location': 'region_open_area'
                 }
             }
         ],
@@ -958,7 +947,7 @@ TASKS = [
                 }
             },
             {
-                'event_type': 'initiate_dialog',
+                'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'ripple',
                     'dialog_id': 'ripple_uulthar_confrontation'
@@ -983,6 +972,16 @@ TASKS = [
                 'params': {
                     'npc_id': 'faith',
                     'dialog_id': 'kaera_uulthar_challenge'
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'uulthar',
+                    'standing_text': [
+                        "The after begins.",
+                        "The tides are mine to rewrite."
+                    ]
                 }
             },
             {
@@ -1022,7 +1021,7 @@ TASKS = [
                 'params': {'npc_id': 'uulthar'}
             },
             {
-                'event_type': 'initiate_dialog',
+                'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'ripple',
                     'dialog_id': 'ripple_post_defeat'

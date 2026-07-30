@@ -97,6 +97,7 @@ NPC_DIALOG = [
             "Consistency simulated. Outcome maintained."
         ]
     },
+
     {
         'npc_id': 'grimnaw',
         'dialog_id': 'grimnaw_ch21_clever',
@@ -305,6 +306,34 @@ NPC_DIALOG = [
         'dialog_id': 'glamour_ch21_follow_path',
         'dialog': [
             "Follow the path laid out for you. The rest doesn't concern you."
+        ]
+    },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_ch21_follow_path',
+        'dialog': [
+            "So this is the test. Walk the path they built and see if we break."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_ch21_follow_path',
+        'dialog': [
+            "They’re not even pretending the rules are consistent anymore. Just that the outcome stays the same."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_ch21_follow_path',
+        'dialog': [
+            "A system that no longer cares whether it is true… only that it continues."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_ch21_follow_path',
+        'dialog': [
+            "Then we break the continuation."
         ]
     },
     {
@@ -749,6 +778,41 @@ NPC_DIALOG = [
         ]
     },
     {
+        'npc_id': 'paradox',
+        'dialog_id': 'paradox_ch21_meet_paradox',
+        'dialog': [
+            "Joy requires ending. Ending sustains joy. Continue."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_ch21_meet_paradox',
+        'dialog': [
+            "You’re not celebrating. You’re just refusing to sit with the quiet."
+        ]
+    },
+    {
+        'npc_id': 'nia',
+        'dialog_id': 'nia_ch21_meet_paradox',
+        'dialog': [
+            "This isn’t joy. It’s noise loud enough to drown out the ending."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_ch21_meet_paradox',
+        'dialog': [
+            "An unsustainable loop dressed up as a party. It was always going to collapse."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_ch21_meet_paradox',
+        'dialog': [
+            "Real joy doesn’t need an ending to justify itself."
+        ]
+    },
+    {
         'npc_id': 'revelry',
         'dialog_id': 'revelry_ch21_defeat',
         'dialog': [
@@ -945,6 +1009,41 @@ NPC_DIALOG = [
         ]
     },
     {
+        'npc_id': 'garbage',
+        'dialog_id': 'garbage_ch21_meet_garbage',
+        'dialog': [
+            "You think you can outsmart me? You think you can outmaneuver me? You think you can outlast me? You think you can outplay me? You think you can outwit me? You think you can outthink me? You think you can outguess me? You think you can outmaneuver me? You think you can outlast me? You think you can outplay me? You think you can outwit me? You think you can outthink me? You think you can outguess me?"
+        ]
+    },
+    {
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_ch21_meet_garbage',
+        'dialog': [
+            "No. I know what I choose to believe."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_ch21_meet_garbage',
+        'dialog': [
+            "That’s the difference. Maybe the first thought isn’t ours… but the next one is."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_ch21_meet_garbage',
+        'dialog': [
+            "Prediction only works if we keep performing the expected role. We refuse."
+        ]
+    },
+    {
+        'npc_id': 'sable',
+        'dialog_id': 'sable_ch21_meet_garbage',
+        'dialog': [
+            "You’re not revealing truth. You’re trying to make us accept a script."
+        ]
+    },
+    {
         'npc_id': 'pageant',
         'dialog_id': 'pageant_ch21_defeat',
         'dialog': [
@@ -1124,6 +1223,34 @@ NPC_DIALOG = [
         'dialog_id': 'cataclysm_ch21_enter_trial',
         'dialog': [
             "You have seen the record. You understand how it works. Now you will experience it."
+        ]
+    },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_ch21_enter_trial',
+        'dialog': [
+            "Another trial. Let's finish this."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_ch21_enter_trial',
+        'dialog': [
+            "They're going to try to turn every past failure into a weapon. Don't let them."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_ch21_enter_trial',
+        'dialog': [
+            "Memory is not a cage. We will not be trapped by what has already been recorded."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_ch21_enter_trial',
+        'dialog': [
+            "Then we rewrite the record."
         ]
     },
     {
@@ -1621,6 +1748,8 @@ TASKS = [
             { 'event_type': 'show_npc', 'params': { 'npc_id': 'reliquary', 'location': 'region_city_shoparmor' }},
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'dominion', 'location': None }},
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'the_void', 'location': None }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'dominion', 'standing_text': ["You are instability. You are chaos."] }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'the_void', 'standing_text': ["Quiet is the prelude to nothing."] }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'dominion', 'dialog_id': 'dominion_ch21_opening' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'edict', 'standing_text': ["Follow what's in front of you. The rest doesn't concern you."] }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'stigma', 'standing_text': ["People don't suffer from being defined. They suffer from not knowing how they'll be judged."] }},
@@ -1690,6 +1819,10 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'edict', 'dialog_id': 'edict_ch21_enter_trial' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'glamour', 'dialog_id': 'glamour_ch21_follow_path' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch21_simulated' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch21_follow_path' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_follow_path' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch21_follow_path' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch21_follow_path' }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_defeat_edict_glamour_crux' }}
         ]
     },
@@ -1854,6 +1987,11 @@ TASKS = [
             { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'trial_3_dungeon', 'location': 'region_open_area' }}
         ],
         'task_complete_events': [
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'paradox', 'dialog_id': 'paradox_ch21_meet_paradox' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_meet_paradox' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_ch21_meet_paradox' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_meet_paradox' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch21_meet_paradox' }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_defeat_revelry_lament_paradox' }}
         ]
     },
@@ -1928,6 +2066,11 @@ TASKS = [
             { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'trial_4_dungeon', 'location': 'region_open_area' }}
         ],
         'task_complete_events': [
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'garbage', 'dialog_id': 'garbage_ch21_meet_garbage' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch21_meet_garbage' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_meet_garbage' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_meet_garbage' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch21_meet_garbage' }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_defeat_pageant_oracle_garbage' }}
         ]
     },
@@ -1996,6 +2139,20 @@ TASKS = [
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'cataclysm', 'dialog_id': 'cataclysm_ch21_enter_trial' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch21_enter_trial' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_enter_trial' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_enter_trial' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch21_enter_trial' }},
+
+            # add chacter_ch21_enter_trial dialog for each character
+            # Character Dialog Chock
+            #   "Another trial. Let’s finish this."
+            # Character Dialog Kade
+            #   "They’re going to try to turn every past failure into a weapon. Don’t let them."
+            # Character Dialog Kaera
+            #   "Memory is not a cage. We will not be trapped by what has already been recorded."
+            # Character Dialog Poise
+            #   "Then we rewrite the record."
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_defeat_cataclysm_reliquary' }}
         ]
     },

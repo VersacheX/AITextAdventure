@@ -501,17 +501,17 @@ TASKS = [
         'to_id': 'miregloom',
         'task_acquire_events': [
             {
-                'event_type': 'create_dungeon',
-                'params': {
-                    'dungeon_id': 'miregloom_lair',
-                    'location': 'region_open_area'
-                }
-            },
-            {
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'miregloom',
                     'location': None
+                }
+            },
+            {
+                'event_type': 'create_dungeon',
+                'params': {
+                    'dungeon_id': 'miregloom_lair',
+                    'location': 'region_open_area'
                 }
             }
         ],
@@ -524,7 +524,7 @@ TASKS = [
                 }
             },
             {
-                'event_type': 'initiate_dialog',
+                'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'grimnaw',
                     'dialog_id': 'grimnaw_miregloom_confrontation'
@@ -538,7 +538,7 @@ TASKS = [
                 }
             },
             {
-                'event_type': 'initiate_dialog',
+                'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'grimnaw',
                     'dialog_id': 'grimnaw_miregloom_reply'
@@ -557,6 +557,15 @@ TASKS = [
                     'npc_id': 'tech',
                     'dialog_id': 'kade_miregloom_challenge'
                 }
+            },
+            { 'event_type': 'set_npc_standing_text',
+              'params': {
+                  'npc_id': 'miregloom',
+                  'standing_text': [
+                      "The swamp stirs.",
+                      "Its secrets are mine to command."
+                  ]
+              }
             },
             {
                 'event_type': 'award_task',
@@ -595,7 +604,7 @@ TASKS = [
                 'params': {'npc_id': 'miregloom'}
             },
             {
-                'event_type': 'initiate_dialog',
+                'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'grimnaw',
                     'dialog_id': 'grimnaw_post_defeat'

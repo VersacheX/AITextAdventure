@@ -222,6 +222,20 @@ NPC_DIALOG = [
             "The lunar resonance in it is still active. Should be perfect for what you need."
         ]
     },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'moxie_mirlo_reaction',
+        'dialog': [
+            "We actually got it out of her. I’m almost disappointed it didn’t take longer."
+        ]
+    },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'chock_mirlo_reaction',
+        'dialog': [
+            "One less gambler to deal with."
+        ]
+    },
     # ── Thorn receives the lattice and joins ──────────────────────────────────
     {
         'npc_id': 'thorn',
@@ -731,6 +745,8 @@ TASKS = [
                     'dialog_id': 'mirlo_catalyst_received'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_mirlo_reaction' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_mirlo_reaction' } },
             { 'event_type': 'remove_item', 'params': { 'item_id': 'lunar_resonance_catalyst' } },
             { 'event_type': 'award_item',  'params': { 'item_id': 'grove_lattice' } },
             {
@@ -810,17 +826,17 @@ TASKS = [
         'to_id': 'marrowroot',
         'task_acquire_events': [
             {
-                'event_type': 'create_dungeon',
-                'params': {
-                    'dungeon_id': 'marrowroot_lair',
-                    'location': 'region_open_area'
-                }
-            },
-            {
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'marrowroot',
                     'location': None
+                }
+            },
+            {
+                'event_type': 'create_dungeon',
+                'params': {
+                    'dungeon_id': 'marrowroot_lair',
+                    'location': 'region_open_area'
                 }
             }
         ],
@@ -830,7 +846,7 @@ TASKS = [
                 'params': { 'npc_id': 'marrowroot', 'dialog_id': 'marrowroot_intro' }
             },
             {
-                'event_type': 'initiate_dialog',
+                'event_type': 'initiate_character_dialog',
                 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_marrowroot_confrontation' }
             },
             {
@@ -845,6 +861,9 @@ TASKS = [
                 'event_type': 'initiate_character_dialog',
                 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_marrowroot_observation' }
             },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'marrowroot', 'standing_text': [
+                "The void touches the world. I will pull the forest back before it is devoured."
+            ]}},
             {
                 'event_type': 'award_task',
                 'params': { 'task_id': 'defeat_marrowroot' }
@@ -875,7 +894,7 @@ TASKS = [
             },
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'marrowroot' } },
             {
-                'event_type': 'initiate_dialog',
+                'event_type': 'initiate_character_dialog',
                 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_post_defeat' }
             },
             {

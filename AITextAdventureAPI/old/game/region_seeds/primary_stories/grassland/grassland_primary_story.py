@@ -481,20 +481,19 @@ TASKS = [
                     'npc_id': 'nia',
                     'location': 'region_bar'
                 }
-            },
+            }
+        ],
+        'task_complete_events': [
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
                     'npc_id': 'nia',
                     'standing_text': [
-                        "Hey! Have you heard anything interesting lately?",
-                        "The wind's been carrying all kinds of whispers. I love it.",
-                        "Come talk to me whenever you have time."
+                        "I heard something worth knowing. Come find me.",
+                        "The wind always finds the right ear — let's see if yours are good."
                     ]
                 }
-            }
-        ],
-        'task_complete_events': [
+            },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -511,16 +510,6 @@ TASKS = [
         'to_type': 'npc',
         'to_id': 'nia',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'nia',
-                    'standing_text': [
-                        "I heard something worth knowing. Come find me.",
-                        "The wind always finds the right ear — let's see if yours are good."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -808,17 +797,17 @@ TASKS = [
         'to_id': 'serene',
         'task_acquire_events': [
             {
-                'event_type': 'create_dungeon',
-                'params': {
-                    'dungeon_id': 'serene_lair',
-                    'location': 'region_open_area'
-                }
-            },
-            {
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'serene',
                     'location': None
+                }
+            },
+            {
+                'event_type': 'create_dungeon',
+                'params': {
+                    'dungeon_id': 'serene_lair',
+                    'location': 'region_open_area'
                 }
             }
         ],
@@ -831,7 +820,7 @@ TASKS = [
                 }
             },
             {
-                'event_type': 'initiate_dialog',
+                'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'nia',
                     'dialog_id': 'nia_serene_confrontation'
@@ -856,6 +845,16 @@ TASKS = [
                 'params': {
                     'npc_id': 'technique',
                     'dialog_id': 'chock_serene_challenge'
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'serene',
+                    'standing_text': [
+                        "The wind has no future left — only what I choose.",
+                        "You carry echoes of tomorrow with you. Interesting. I wonder what they're worth."
+                    ]
                 }
             },
             {
@@ -895,7 +894,7 @@ TASKS = [
                 'params': {'npc_id': 'serene'}
             },
             {
-                'event_type': 'initiate_dialog',
+                'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'nia',
                     'dialog_id': 'nia_post_defeat'

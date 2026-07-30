@@ -485,17 +485,17 @@ TASKS = [
         'to_id': 'aeriola',
         'task_acquire_events': [
             {
-                'event_type': 'create_dungeon',
-                'params': {
-                    'dungeon_id': 'aeriola_lair',
-                    'location': 'region_open_area'
-                }
-            },
-            {
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'aeriola',
                     'location': None
+                }
+            },
+            {
+                'event_type': 'create_dungeon',
+                'params': {
+                    'dungeon_id': 'aeriola_lair',
+                    'location': 'region_open_area'
                 }
             }
         ],
@@ -508,7 +508,7 @@ TASKS = [
                 }
             },
             {
-                'event_type': 'initiate_dialog',
+                'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'kor_in',
                     'dialog_id': 'kor_in_aeriola_confrontation'
@@ -534,6 +534,15 @@ TASKS = [
                     'npc_id': 'magic',
                     'dialog_id': 'moxie_aeriola_challenge'
                 }
+            },
+            { 'event_type': 'set_npc_standing_text',
+              'params': {
+                  'npc_id': 'aeriola',
+                  'standing_text': [
+                      "The after begins.",
+                      "The tides are mine to rewrite."
+                  ]
+              }
             },
             {
                 'event_type': 'award_task',
@@ -572,7 +581,7 @@ TASKS = [
                 'params': {'npc_id': 'aeriola'}
             },
             {
-                'event_type': 'initiate_dialog',
+                'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'kor_in',
                     'dialog_id': 'kor_in_post_defeat'
