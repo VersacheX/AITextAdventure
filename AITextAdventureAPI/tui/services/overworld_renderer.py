@@ -178,7 +178,12 @@ def _tile_char(x: int, y: int, player_game: Any) -> str:
         bld = getattr(t, "building", None)
         ch    = bld.get("char")  if isinstance(bld, dict) else None
         color = bld.get("color") if isinstance(bld, dict) else None
-        open_color = _get_open_color(x, y, player_game, const)
+        try:
+            _, active = player_game.get_region_and_active_area_for_position((x, y))
+            is_city = bool(getattr(active, "city_name", None))
+        except Exception:
+            is_city = False
+        open_color = None if is_city else _get_open_color(x, y, player_game, const)
         return _colorize(ch if ch else "B", color, open_color)
 
     if tile_type == "open_area":
@@ -200,7 +205,8 @@ def _tile_char(x: int, y: int, player_game: Any) -> str:
     if tile_type == "impassable":
         try:
             _, active = player_game.get_region_and_active_area_for_position((x, y))
-            open_color = _get_open_color(x, y, player_game, const)
+            is_city = bool(getattr(active, "city_name", None))
+            open_color = None if is_city else _get_open_color(x, y, player_game, const)
             if active and const:
                 type_name = getattr(active, "city_name", None) or getattr(active, "region_name", "")
                 ch = getattr(const, f"{type_name.upper()}_IMPASSABLE_CHAR", None) or "#"
