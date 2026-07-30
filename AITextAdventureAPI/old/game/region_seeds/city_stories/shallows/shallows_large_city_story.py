@@ -193,6 +193,92 @@ NPC_DIALOG += [
 ]
 
 
+# --- Character dialogs: Type E (Brine Compass chain) ---
+NPC_DIALOG += [
+
+    # Type E – Investigate Compass
+    { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_large_e_investigate_compass',    'dialog': [ "A compass that doesn't point north. It's been tracking something under the harbor floor since the tides started behaving strangely." ] },
+    { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_large_e_investigate_compass', 'dialog': [ "Pulled from a wreck three seasons ago and never properly catalogued. The needle never stopped." ] },
+    { 'npc_id': 'ripple',  'dialog_id': 'ripple_shallows_large_e_investigate_compass',  'dialog': [ "Some relics only start moving when the water itself is already in motion." ] },
+
+    # Type E – Consult Marenna
+    { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_large_e_consult_marenna',    'dialog': [ "Old navigators made these to chart routes through submerged fracture lines. The nearest open fracture is very close." ] },
+    { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_large_e_consult_marenna', 'dialog': [ "The Stormtide Echo guards the approaches. It will not let anyone pass unchallenged." ] },
+    { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_large_e_consult_marenna',   'dialog': [ "Then we challenge it." ] },
+
+    # Type E – Confront Stormtide Echo
+    { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_large_e_confront_stormtide_echo', 'dialog': [ "It already decided the Compass does not leave these waters." ] },
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_large_e_confront_stormtide_echo', 'dialog': [ "'You are not a navigator. You are a thief.' At least it's clear about its position." ] },
+    { 'npc_id': 'lyren', 'dialog_id': 'lyren_shallows_large_e_confront_stormtide_echo', 'dialog': [ "Some things were made to stay where they were born. This one disagrees." ] },
+
+    # Type E – Defeat Stormtide Echo / Return to Syrin
+    { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_large_e_return_to_syrin', 'dialog': [ "It's done. The needle settled the moment we stepped back in." ] },
+    { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_e_return_to_syrin',  'dialog': [ "It's pointing at us now. It decided it belongs with whoever carries it next." ] },
+    { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_large_e_return_to_syrin', 'dialog': [ "Syrin stopped arguing with relics years ago. Smart policy." ] },
+
+]
+
+# --- Character dialogs: Type F (Rift Observation Log chain) ---
+NPC_DIALOG += [
+
+    # Type F – Find Astra
+    { 'npc_id': 'tech',   'dialog_id': 'kade_shallows_large_f_find_astra',   'dialog': [ "The cleanest rift she's seen since the Riftwaters crossing. No distortion, no echo interference." ] },
+    { 'npc_id': 'magic',  'dialog_id': 'moxie_shallows_large_f_find_astra',  'dialog': [ "Someone prepared it. There's a pattern she can't quite close yet." ] },
+    { 'npc_id': 'ripple', 'dialog_id': 'ripple_shallows_large_f_find_astra', 'dialog': [ "Observation posts like this one leave a trail if you know how to read the gaps." ] },
+
+    # Type F – Get Syrin Data
+    { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_f_get_syrin_data',  'dialog': [ "She needs the tide anomaly records. The fracture timings line up with two other sites she's already marked." ] },
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_large_f_get_syrin_data', 'dialog': [ "Syrin trusts vault-keepers more than riftcallers. Obvious reasons." ] },
+    { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_large_f_get_syrin_data', 'dialog': [ "Ask her. She'll respond better coming from us." ] },
+
+    # Type F – Speak to Syrin
+    { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_large_f_speak_to_syrin',    'dialog': [ "The third anomaly was not a natural fracture event. Something moved through that rift deliberately." ] },
+    { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_large_f_speak_to_syrin', 'dialog': [ "She logged the direction. That's the piece Astra has been missing." ] },
+    { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_large_f_speak_to_syrin',   'dialog': [ "Deliver it." ] },
+
+    # Type F – Deliver to Astra
+    { 'npc_id': 'tech',   'dialog_id': 'kade_shallows_large_f_deliver_to_astra',   'dialog': [ "Deliberate movement. Matches what she saw at the northern post." ] },
+    { 'npc_id': 'magic',  'dialog_id': 'moxie_shallows_large_f_deliver_to_astra',  'dialog': [ "Two confirmed, one suspected. The third site is further north." ] },
+    { 'npc_id': 'ripple', 'dialog_id': 'ripple_shallows_large_f_deliver_to_astra', 'dialog': [ "If we reach it first, we'll know what to look for." ] },
+
+]
+
+# --- Character dialogs: Type D (Tidecleaver chain) ---
+NPC_DIALOG += [
+
+    # Type D – Deliver Brine Compass
+    { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_d_deliver_brine_compass',  'dialog': [ "The needle points somewhere that shouldn't exist. Brine-forged metal holding a direction like that is rare." ] },
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_large_d_deliver_brine_compass', 'dialog': [ "Marenna will know what the tide carved into it." ] },
+    { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_large_d_deliver_brine_compass', 'dialog': [ "Find her." ] },
+
+    # Type D – Consult Marenna
+    { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_large_d_consult_marenna',    'dialog': [ "It reads the Undertow Vault — the drowned chamber beneath the harbor. A Voice made from every navigator who never surfaced." ] },
+    { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_large_d_consult_marenna', 'dialog': [ "The compass is the key that unlocks its attention. Silence it and the brine crystallizes." ] },
+    { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_large_d_consult_marenna',   'dialog': [ "Then we unlock it." ] },
+
+    # Type D – Meet Undertow Voice
+    { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_large_d_meet_undertow_voice', 'dialog': [ "It's carrying every drowned sailor's last bearing." ] },
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_large_d_meet_undertow_voice', 'dialog': [ "'Take it from me if you can.' We can." ] },
+    { 'npc_id': 'lyren', 'dialog_id': 'lyren_shallows_large_d_meet_undertow_voice', 'dialog': [ "Some voices only know how to hold what the tide refused to return." ] },
+
+    # Type D – Defeat Undertow Voice
+    { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_large_d_defeat_undertow_voice', 'dialog': [ "Quiet. Take the crystallized brine." ] },
+    { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_d_defeat_undertow_voice',  'dialog': [ "A blade that cuts clean through anything the tide would carry. It knows where it's going before you do." ] },
+    { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_large_d_defeat_undertow_voice', 'dialog': [ "The bearings those sailors carried can finally rest." ] },
+
+]
+
+# --- Character dialogs: Type E post-Vault (Meet Syrin) ---
+NPC_DIALOG += [
+
+    # Type E – Meet Syrin (post-Vault)
+    { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_e_meet_syrin',  'dialog': [ "A compass that doesn't point north. It tracks storm-spirit traces — things that have moved through salt water and void both." ] },
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_large_e_meet_syrin', 'dialog': [ "Too specific to be decorative. The sea will tell us where it belongs." ] },
+    { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_large_e_meet_syrin', 'dialog': [ "Take it." ] },
+
+]
+
+
 TASKS = [
 	{
 		'task_id': 'shallows_large_city_initialize',
@@ -310,6 +396,9 @@ TASKS += [
                     'dialog_id': 'syrin_brine_compass_discovery'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_large_e_investigate_compass'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_large_e_investigate_compass' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple',  'dialog_id': 'ripple_shallows_large_e_investigate_compass'  } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -351,6 +440,9 @@ TASKS += [
                     'dialog_id': 'marenna_brine_compass_context'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_large_e_consult_marenna'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_large_e_consult_marenna' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_large_e_consult_marenna'   } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -399,6 +491,9 @@ TASKS += [
                     'dialog_id': 'stormtide_echo_compass_guardian'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_large_e_confront_stormtide_echo' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_large_e_confront_stormtide_echo' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_shallows_large_e_confront_stormtide_echo' } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -456,7 +551,10 @@ TASKS += [
                     'npc_id': 'vaultkeeper_syrin',
                     'dialog_id': 'syrin_brine_compass_received'
                 }
-            }
+            },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_large_e_return_to_syrin' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_e_return_to_syrin'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_large_e_return_to_syrin' } },
         ]
     },
 
@@ -487,6 +585,9 @@ TASKS += [
                     'dialog_id': 'astra_wynn_brineward_arrival'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'kade_shallows_large_f_find_astra'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'moxie_shallows_large_f_find_astra'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_shallows_large_f_find_astra' } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -521,6 +622,9 @@ TASKS += [
                     'dialog_id': 'astra_wynn_log_request'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_f_get_syrin_data'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_large_f_get_syrin_data' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_large_f_get_syrin_data' } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -555,6 +659,9 @@ TASKS += [
                     'dialog_id': 'syrin_astra_data'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_large_f_speak_to_syrin'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_large_f_speak_to_syrin' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_large_f_speak_to_syrin'   } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -588,6 +695,9 @@ TASKS += [
                     'dialog_id': 'astra_wynn_log_complete'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'kade_shallows_large_f_deliver_to_astra'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'moxie_shallows_large_f_deliver_to_astra'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_shallows_large_f_deliver_to_astra' } },
             {
                 'event_type': 'award_item',
                 'params': {
@@ -654,6 +764,15 @@ TASKS += [
 			},
 		],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_d_deliver_brine_compass'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_large_d_deliver_brine_compass' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_large_d_deliver_brine_compass' } },
+			{
+				'event_type': 'remove_item',
+				'params': {
+					'item_id': 'brine_compass'
+				}
+			},
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -690,6 +809,9 @@ TASKS += [
 					'dialog_id': 'marenna_d_compass_read'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_large_d_consult_marenna'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_large_d_consult_marenna' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_large_d_consult_marenna'   } },
 			{
 				'event_type': 'create_npc',
 				'params': {
@@ -740,6 +862,9 @@ TASKS += [
 					'dialog_id': 'undertow_voice_d_awakens'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_large_d_meet_undertow_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_large_d_meet_undertow_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_shallows_large_d_meet_undertow_voice' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -771,6 +896,9 @@ TASKS += [
 					'item_id': 'mythic_shallows_large_tidecleaver'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_large_d_defeat_undertow_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_d_defeat_undertow_voice'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_large_d_defeat_undertow_voice' } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -837,6 +965,9 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'vaultkeeper_syrin', 'dialog_id': 'syrin_e_brine_compass' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_e_meet_syrin'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_large_e_meet_syrin' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_large_e_meet_syrin' } },
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'shallows_large_city_e_brine_compass' }},
 		]
 	},

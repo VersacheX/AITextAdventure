@@ -206,6 +206,228 @@ NPC_DIALOG += [
 
 ]
 
+# --- Character dialogs: Type C ---
+NPC_DIALOG += [
+
+    # Type C – Find Korina
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_mountains_mid_c_find_korina',
+        'dialog': [
+            "She's been pulling survivor camps back together with belief instead of authority. Rare skill up here."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_mountains_mid_c_find_korina',
+        'dialog': [
+            "Trust is the only currency that holds value on the Rift passes. She wants a local warden to vouch first."
+        ]
+    },
+    {
+        'npc_id': 'bragg',
+        'dialog_id': 'bragg_mountains_mid_c_find_korina',
+        'dialog': [
+            "Fair. Harrock's word carries weight on these cliffs."
+        ]
+    },
+
+    # Type C – Consult Harrock
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_mountains_mid_c_consult_harrock',
+        'dialog': [
+            "She kept three separate camps from falling apart last season. She didn't use rank — she used belief."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_mountains_mid_c_consult_harrock',
+        'dialog': [
+            "Tell her the Rift paths are safer when we walk them. She'll know what that means."
+        ]
+    },
+    {
+        'npc_id': 'bragg',
+        'dialog_id': 'bragg_mountains_mid_c_consult_harrock',
+        'dialog': [
+            "Harrock doesn't say that about just anyone. That's the endorsement she needs."
+        ]
+    },
+
+    # Type C – Earn Korina
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_mountains_mid_c_earn_korina',
+        'dialog': [
+            "He's never said that about anyone. She's in."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_mountains_mid_c_earn_korina',
+        'dialog': [
+            "Fair warning — she will push everyone on this team to be better. Including us."
+        ]
+    },
+    {
+        'npc_id': 'bragg',
+        'dialog_id': 'bragg_mountains_mid_c_earn_korina',
+        'dialog': [
+            "Especially us. Good. We could use the pressure."
+        ]
+    },
+
+]
+
+# --- Character dialogs: Type D ---
+NPC_DIALOG += [
+
+    # Type D – Deliver Forge Core
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_mountains_mid_d_deliver_forge_core',
+        'dialog': [
+            "The forge-pressure inside it is still active. Something in the Gallows Rift resonates with this exact frequency."
+        ]
+    },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_mountains_mid_d_deliver_forge_core',
+        'dialog': [
+            "Korrin reads fall-lines and mountain pressure. He'll know what the core is calling to."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_mountains_mid_d_deliver_forge_core',
+        'dialog': [
+            "I already want to see what surfaces when we present it."
+        ]
+    },
+
+    # Type D – Consult Korrin
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_mountains_mid_d_consult_korrin',
+        'dialog': [
+            "The pressure signature matches the Emberwake Cavern almost exactly. The Spirit has been drawing heat from Ryla's fires for years."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grmnaw_mountains_mid_d_consult_korrin',
+        'dialog': [
+            "Present the Core and it will surface for the frequency it's been feeding on. Clean."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_mountains_mid_d_consult_korrin',
+        'dialog': [
+            "Silence it and the forge-pressure crystallizes. Brawn can work with that."
+        ]
+    },
+
+    # Type D – Meet Emberwake Spirit
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_mountains_mid_d_meet_emberwake_spirit',
+        'dialog': [
+            "It already decided the pressure is its and we will not leave with it."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_mountains_mid_d_meet_emberwake_spirit',
+        'dialog': [
+            "Ironveil's foundry frequency walking into its domain. It's been waiting a long time for this."
+        ]
+    },
+    {
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_mountains_mid_d_meet_emberwake_spirit',
+        'dialog': [
+            "Some spirits only know how to hold what the mountain once burned. We take it back."
+        ]
+    },
+
+    # Type D – Defeat Emberwake Spirit
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_mountains_mid_d_defeat_emberwake_spirit',
+        'dialog': [
+            "It's down. Take the forge-pressure crystal."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_mountains_mid_d_defeat_emberwake_spirit',
+        'dialog': [
+            "Armor that compresses under impact and rebounds harder. The harder you're hit, the stronger it holds."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_mountains_mid_d_defeat_emberwake_spirit',
+        'dialog': [
+            "The fall-lines are clear. Ryla's fires burn in the right colors again."
+        ]
+    },
+
+]
+
+# --- Character dialogs: Type B ---
+NPC_DIALOG += [
+
+    # B – Meet Rokhuld
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_mountains_mid_b_meet_rokhuld',
+        'dialog': [
+            "He's deeper than before. The void fed something in him."
+        ]
+    },
+    {
+        'npc_id': 'bragg',
+        'dialog_id': 'bragg_mountains_mid_b_meet_rokhuld',
+        'dialog': [
+            "Don't let him monologue. He gets worse the longer he talks."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_mountains_mid_b_meet_rokhuld',
+        'dialog': [
+            "He still thinks breaking the core is righteous. We end the argument today."
+        ]
+    },
+
+    # B – Defeat Rokhuld
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_mountains_mid_b_defeat_rokhuld',
+        'dialog': [
+            "Stay down. The mountain doesn't need another crusade."
+        ]
+    },
+    {
+        'npc_id': 'bragg',
+        'dialog_id': 'bragg_mountains_mid_b_defeat_rokhuld',
+        'dialog': [
+            "We were both just afraid. The mountain's still standing. That's what matters."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_mountains_mid_b_defeat_rokhuld',
+        'dialog': [
+            "Some callings are just fear wearing a better name. This one is finished."
+        ]
+    },
+
+]
+
 TASKS += [
 
 	# C-1 — Find Korina Brightvein
@@ -241,6 +463,9 @@ TASKS += [
 					'dialog_id': 'korina_c_first_meet'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_mid_c_find_korina' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_mountains_mid_c_find_korina'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg',     'dialog_id': 'bragg_mountains_mid_c_find_korina'     } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -265,6 +490,9 @@ TASKS += [
 					'dialog_id': 'harrock_c_vouch'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_mountains_mid_c_consult_harrock' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_mountains_mid_c_consult_harrock'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_mountains_mid_c_consult_harrock' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -301,6 +529,9 @@ TASKS += [
 					'dialog_id': 'korina_c_joins'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_mid_c_earn_korina' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_mountains_mid_c_earn_korina'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg',     'dialog_id': 'bragg_mountains_mid_c_earn_korina'     } },
 			{
 				'event_type': 'character_join',
 				'params': {
@@ -372,6 +603,15 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{
+				'event_type': 'remove_item',
+				'params': {
+					'item_id': 'forge_echo_core'
+				}
+			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_mountains_mid_d_deliver_forge_core'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_mid_d_deliver_forge_core' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',     'dialog_id': 'magic_mountains_mid_d_deliver_forge_core'     } },
+			{
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'avalanche_seer_korrin',
@@ -414,6 +654,9 @@ TASKS += [
 					'dialog_id': 'korrin_d_core_read'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_mountains_mid_d_consult_korrin'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grmnaw_mountains_mid_d_consult_korrin' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_mountains_mid_d_consult_korrin'   } },
 			{
 				'event_type': 'create_npc',
 				'params': {
@@ -457,6 +700,9 @@ TASKS += [
 					'dialog_id': 'emberwake_spirit_d_awakens'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_mountains_mid_d_meet_emberwake_spirit'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_mountains_mid_d_meet_emberwake_spirit'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',  'dialog_id': 'lyren_mountains_mid_d_meet_emberwake_spirit'  } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -488,6 +734,9 @@ TASKS += [
 					'item_id': 'mythic_mountains_mid_shatterpeak_warplate'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_mid_d_defeat_emberwake_spirit' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_mountains_mid_d_defeat_emberwake_spirit'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_mountains_mid_d_defeat_emberwake_spirit'     } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -600,6 +849,9 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rokhuld', 'dialog_id': 'rokhuld_b_risen' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_mid_b_meet_rokhuld' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg',     'dialog_id': 'bragg_mountains_mid_b_meet_rokhuld'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_mountains_mid_b_meet_rokhuld'      } },
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'mountains_mid_city_b_defeat_rokhuld' }},
 		]
 	},
@@ -615,6 +867,9 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_b_victory' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_mid_b_defeat_rokhuld' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg',     'dialog_id': 'bragg_mountains_mid_b_defeat_rokhuld'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_mountains_mid_b_defeat_rokhuld'     } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'mountains' }},
 		]
 	},

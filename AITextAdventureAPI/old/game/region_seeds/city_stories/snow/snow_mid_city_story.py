@@ -197,6 +197,96 @@ NPC_DIALOG += [
 
 ]
 
+# --- Character dialogs: Type E (Pageant Decree Shard chain) ---
+NPC_DIALOG += [
+
+    # Type E – Investigate Decree
+    { 'npc_id': 'tech',    'dialog_id': 'kade_snow_mid_e_investigate_decree',    'dialog': [ "An ancestral voice carrying the memory of a formal decree — not a battle, not a death. A pact made between clans at the height of the old Pageant courts." ] },
+    { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_mid_e_investigate_decree', 'dialog': [ "Part of the physical record is still preserved in the ice beneath the Rimechant Hall." ] },
+    { 'npc_id': 'skill',   'dialog_id': 'poise_snow_mid_e_investigate_decree',   'dialog': [ "Haldrin will know how the Echo has been holding it." ] },
+
+    # Type E – Consult Haldrin
+    { 'npc_id': 'tech',    'dialog_id': 'kade_snow_mid_e_consult_haldrin',    'dialog': [ "The Pageant Decree Shards were binding documents — clan agreements forged into stone. The Rimechant Echo absorbed one long ago." ] },
+    { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_mid_e_consult_haldrin', 'dialog': [ "It doesn't guard out of malice. The echo simply doesn't know how to let go. The bond has to be broken by force." ] },
+    { 'npc_id': 'skill',   'dialog_id': 'poise_snow_mid_e_consult_haldrin',   'dialog': [ "Then we break it." ] },
+
+    # Type E – Confront Rimechant Echo
+    { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_e_confront_rimechant_echo', 'dialog': [ "It already decided the Shard is part of its chant." ] },
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_e_confront_rimechant_echo', 'dialog': [ "'To take it is to silence a voice that has spoken for centuries.' Dramatic. Accurate, maybe." ] },
+    { 'npc_id': 'lyren', 'dialog_id': 'lyren_snow_mid_e_confront_rimechant_echo', 'dialog': [ "Some voices only know how to keep speaking. They never learned how to finish." ] },
+
+    # Type E – Defeat Rimechant Echo / Return to Yrsa
+    { 'npc_id': 'technique', 'dialog_id': 'chock_snow_mid_e_return_to_yrsa', 'dialog': [ "The bond is broken. The ancestral voice quieted the moment we returned." ] },
+    { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_e_return_to_yrsa', 'dialog': [ "It said what it needed to say. This shard is not meant for an archive — it's meant for someone who will act on it." ] },
+    { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_e_return_to_yrsa',  'dialog': [ "The pact it records will matter again someday. Carry it." ] },
+
+]
+
+# --- Character dialogs: Type F (Audit Testimony Seal chain) ---
+NPC_DIALOG += [
+
+    # Type F – Find Marlo Trail
+    { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_f_find_marlo_trail',  'dialog': [ "An auditor with Council credentials asking about forge requisitions and shipment records. Left in a hurry when the storms rolled in." ] },
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_f_find_marlo_trail', 'dialog': [ "Said he'd return. He hasn't. Classic." ] },
+    { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_f_find_marlo_trail', 'dialog': [ "Find him." ] },
+
+    # Type F – Find Marlo
+    { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_f_find_marlo',  'dialog': [ "Requisition fraud across three snow-region cities. Hailward Hold is the linchpin — whoever authorized the forge allocations signed off on the entire chain." ] },
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_f_find_marlo', 'dialog': [ "He needs a witness who saw the original transaction. Yrsa was there." ] },
+    { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_f_find_marlo', 'dialog': [ "Get her testimony." ] },
+
+    # Type F – Get Yrsa Testimony
+    { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_f_get_yrsa_testimony', 'dialog': [ "She was there when those allocations were approved. She did not agree with the decision then. She will not protect it now." ] },
+    { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_f_get_yrsa_testimony',  'dialog': [ "She'll sign whatever document he needs. Long past time someone investigated those records." ] },
+    { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_f_get_yrsa_testimony', 'dialog': [ "Return to Marlo." ] },
+
+    # Type F – Return to Marlo
+    { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_f_return_to_marlo',  'dialog': [ "With this, the audit trail leads directly to the distribution end — Bayou Nocturne. The final transaction was routed south." ] },
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_f_return_to_marlo', 'dialog': [ "A certified copy of everything compiled here. If we reach the Bayou first, we show it to whoever's holding the other end of the chain." ] },
+    { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_f_return_to_marlo', 'dialog': [ "Take the seal." ] },
+
+]
+
+# --- Character dialogs: Type D (Blueforge Warplate chain) ---
+NPC_DIALOG += [
+
+    # Type D – Deliver Decree Shard
+    { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_d_deliver_decree_shard',  'dialog': [ "The rune-frequency vibrating off it is unlike anything Brawn has felt. Something in Hailward Hold resonates with it." ] },
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_d_deliver_decree_shard', 'dialog': [ "Bjorn carves runes for a living. He'll know exactly what this is calling to." ] },
+    { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_d_deliver_decree_shard', 'dialog': [ "Find him before the Depths notice it too." ] },
+
+    # Type D – Consult Bjorn
+    { 'npc_id': 'tech',    'dialog_id': 'kade_snow_mid_d_consult_bjorn',    'dialog': [ "The rune-frequency matches the Blueforge Depths' resonance signature almost exactly. The Spirit has been drawing heat from his forge for years." ] },
+    { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_mid_d_consult_bjorn', 'dialog': [ "Present the shard and it will surface. Silence it correctly and the blue-forge metal crystallizes." ] },
+    { 'npc_id': 'skill',   'dialog_id': 'poise_snow_mid_d_consult_bjorn',   'dialog': [ "Then we present it." ] },
+
+    # Type D – Meet Blueforge Spirit
+    { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_d_meet_blueforge_spirit', 'dialog': [ "It already decided the blue-forge metal is its and we must survive its flame to claim it." ] },
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_d_meet_blueforge_spirit', 'dialog': [ "The frequency it's fed on since the first forge burned here. It's been waiting a long time." ] },
+    { 'npc_id': 'lyren', 'dialog_id': 'lyren_snow_mid_d_meet_blueforge_spirit', 'dialog': [ "Some spirits only know how to hold what the runes once declared. We take it back." ] },
+
+    # Type D – Defeat Blueforge Spirit
+    { 'npc_id': 'technique', 'dialog_id': 'chock_snow_mid_d_defeat_blueforge_spirit', 'dialog': [ "It's down. Take the blue-forge crystal." ] },
+    { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_d_defeat_blueforge_spirit',  'dialog': [ "Nothing has ever sung like this. Brawn will hammer it into warplate that holds against ice or rift." ] },
+    { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_d_defeat_blueforge_spirit', 'dialog': [ "The blue flame burns clean again. The runes sing the way they're supposed to." ] },
+
+]
+
+# --- Character dialogs: Type E post-chain (Shard path) ---
+NPC_DIALOG += [
+
+    # Type E – Consult Bjorn (Shard path)
+    { 'npc_id': 'tech',    'dialog_id': 'kade_snow_mid_e_consult_bjorn',    'dialog': [ "The pattern is from the old Hold ceremonies. Hailward's founders used it to open their greatest works." ] },
+    { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_mid_e_consult_bjorn', 'dialog': [ "A decree shard means something was declared and never answered. The Hold will know what to do with it." ] },
+    { 'npc_id': 'skill',   'dialog_id': 'poise_snow_mid_e_consult_bjorn',   'dialog': [ "Collect it from Yrsa." ] },
+
+    # Type E – Collect Shard
+    { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_e_collect_shard', 'dialog': [ "The ancestors sent this up from the Depths when the Shattered Rune fell. A formal declaration of something." ] },
+    { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_e_collect_shard',  'dialog': [ "Bjorn says the rune patterns match a forge-mark used only in Hailward Hold ceremonial work. It must go back there." ] },
+    { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_e_collect_shard', 'dialog': [ "The decree wants to be completed." ] },
+
+]
+
 
 TASKS = [
 	{
@@ -302,6 +392,9 @@ TASKS += [
                     'dialog_id': 'yrsa_decree_shard_discovery'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_mid_e_investigate_decree'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_mid_e_investigate_decree' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_snow_mid_e_investigate_decree'   } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -343,6 +436,9 @@ TASKS += [
                     'dialog_id': 'haldrin_decree_shard_context'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_mid_e_consult_haldrin'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_mid_e_consult_haldrin' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_snow_mid_e_consult_haldrin'   } },
             {
                 'event_type': 'create_npc',
                 'params': {
@@ -391,6 +487,9 @@ TASKS += [
                     'dialog_id': 'rimechant_echo_decree_guardian'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_e_confront_rimechant_echo' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_e_confront_rimechant_echo' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_snow_mid_e_confront_rimechant_echo' } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -448,7 +547,10 @@ TASKS += [
                     'npc_id': 'speaker_yrsa',
                     'dialog_id': 'yrsa_decree_shard_received'
                 }
-            }
+            },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_snow_mid_e_return_to_yrsa' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_e_return_to_yrsa' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_e_return_to_yrsa'  } },
         ]
     },
 
@@ -489,6 +591,9 @@ TASKS += [
                     'dialog_id': 'bjorn_marlo_tip'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_f_find_marlo_trail'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_f_find_marlo_trail' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_f_find_marlo_trail' } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -513,6 +618,9 @@ TASKS += [
                     'dialog_id': 'marlo_finch_hailward_intro'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_f_find_marlo'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_f_find_marlo' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_f_find_marlo' } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -537,6 +645,9 @@ TASKS += [
                     'dialog_id': 'yrsa_marlo_testimony'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_f_get_yrsa_testimony' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_f_get_yrsa_testimony'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_f_get_yrsa_testimony' } },
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
@@ -571,6 +682,9 @@ TASKS += [
                     'dialog_id': 'marlo_finch_hailward_seal'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_f_return_to_marlo'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_f_return_to_marlo' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_f_return_to_marlo' } },
             {
                 'event_type': 'award_item',
                 'params': {
@@ -640,6 +754,15 @@ TASKS += [
 			},
 		],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_d_deliver_decree_shard'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_d_deliver_decree_shard' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_d_deliver_decree_shard' } },
+			{
+				'event_type': 'remove_item',
+				'params': {
+					'item_id': 'snow_mid_city_e_pageant_decree_shard'
+				}
+			},
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -676,6 +799,9 @@ TASKS += [
 					'dialog_id': 'bjorn_d_shard_read'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_mid_d_consult_bjorn'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_mid_d_consult_bjorn' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_snow_mid_d_consult_bjorn'   } },
             {
                 'event_type': 'create_npc',
                 'params': {
@@ -719,6 +845,9 @@ TASKS += [
 					'dialog_id': 'blueforge_spirit_d_awakens'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_d_meet_blueforge_spirit' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_d_meet_blueforge_spirit' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_snow_mid_d_meet_blueforge_spirit' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -750,6 +879,9 @@ TASKS += [
 					'item_id': 'mythic_snow_mid_blueforge_warplate'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_snow_mid_d_defeat_blueforge_spirit' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_d_defeat_blueforge_spirit'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_d_defeat_blueforge_spirit' } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -825,6 +957,9 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'runeforger_bjorn', 'dialog_id': 'bjorn_e_decree_context' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_mid_e_consult_bjorn'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_mid_e_consult_bjorn' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_snow_mid_e_consult_bjorn'   } },
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'snow_mid_city_type_e_collect_shard' }},
 		]
 	},
@@ -844,6 +979,9 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'speaker_yrsa', 'dialog_id': 'yrsa_e_decree_shard' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_e_collect_shard' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_e_collect_shard'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_e_collect_shard' } },
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'snow_mid_city_e_pageant_decree_shard' }},
 		]
 	},

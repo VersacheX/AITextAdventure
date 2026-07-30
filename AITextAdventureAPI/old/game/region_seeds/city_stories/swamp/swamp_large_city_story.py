@@ -103,6 +103,50 @@ NPC_DIALOG = [
 
 ]
 
+# --- Character dialogs: Type C (Anita chain) ---
+NPC_DIALOG += [
+
+	# Type C – Find Anita
+	{ 'npc_id': 'tech',    'dialog_id': 'kade_swamp_large_c_find_anita',    'dialog': [ "Forty-seven relic-spirit manifestations this season. The Necropolis is the most information-dense location she's ever worked." ] },
+	{ 'npc_id': 'magic',   'dialog_id': 'moxie_swamp_large_c_find_anita',   'dialog': [ "Everything here remembers — the bones, the relics, the mire itself. She doesn't leave a place like this until she understands it completely." ] },
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_large_c_find_anita', 'dialog': [ "Cataloguing is the correct first response to a place that refuses to forget." ] },
+
+	# Type C – Consult Morwen
+	{ 'npc_id': 'tech',    'dialog_id': 'kade_swamp_large_c_consult_morwen',    'dialog': [ "She catalogued the reliquary's entire spirit-manifest index in a single sitting. Noticed patterns Morwen spent twenty years missing." ] },
+	{ 'npc_id': 'magic',   'dialog_id': 'moxie_swamp_large_c_consult_morwen',   'dialog': [ "Tell her the relics recognize her methodology. She'll understand the weight of that." ] },
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_large_c_consult_morwen', 'dialog': [ "Recognition from the relics themselves is not a small endorsement." ] },
+
+	# Type C – Earn Anita
+	{ 'npc_id': 'tech',    'dialog_id': 'kade_swamp_large_c_earn_anita',    'dialog': [ "Morwen doesn't say things like that without precision. Her archive travels with her." ] },
+	{ 'npc_id': 'magic',   'dialog_id': 'moxie_swamp_large_c_earn_anita',   'dialog': [ "If we encounter things that need cataloguing — and we will — she can be useful." ] },
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_large_c_earn_anita', 'dialog': [ "She's coming. Good. The dead keep better records when someone is willing to read them." ] },
+
+]
+
+# --- Character dialogs: Type D (Bonedrown Reliquary chain) ---
+NPC_DIALOG += [
+
+	# Type D – Deliver Marrow Shard
+	{ 'npc_id': 'tech',    'dialog_id': 'kade_swamp_large_d_deliver_marrow_shard',    'dialog': [ "The marrow hasn't decayed despite the rift exposure. Something in the Necropolis is preserving it." ] },
+	{ 'npc_id': 'magic',   'dialog_id': 'moxie_swamp_large_d_deliver_marrow_shard',   'dialog': [ "Halveth reads bone tides. He'll know what this is connected to." ] },
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_large_d_deliver_marrow_shard', 'dialog': [ "Find him before the Sump finishes noticing." ] },
+
+	# Type D – Consult Halveth
+	{ 'npc_id': 'tech',    'dialog_id': 'kade_swamp_large_d_consult_halveth',    'dialog': [ "The bone-tide resonance is unlike anything native to this swamp. But the Relicmire Voice recognizes it." ] },
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_large_d_consult_halveth', 'dialog': [ "It has been waiting for this exact frequency since the Sump formed. Draw it out and the drowned metal surfaces." ] },
+	{ 'npc_id': 'skill',   'dialog_id': 'poise_swamp_large_d_consult_halveth',   'dialog': [ "Diego can forge it into a weapon that remembers every kill." ] },
+
+	# Type D – Meet Relicmire Voice
+	{ 'npc_id': 'skill', 'dialog_id': 'poise_swamp_large_d_meet_relicmire_voice', 'dialog': [ "It already decided the metal has been its for centuries." ] },
+	{ 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_large_d_meet_relicmire_voice', 'dialog': [ "Rift-bone walking into the domain of the drowned. Bold." ] },
+	{ 'npc_id': 'lyren', 'dialog_id': 'lyren_swamp_large_d_meet_relicmire_voice', 'dialog': [ "Some voices only know how to keep what the mire refused to return." ] },
+
+	# Type D – Defeat Relicmire Voice
+	{ 'npc_id': 'technique', 'dialog_id': 'chock_swamp_large_d_defeat_relicmire_voice', 'dialog': [ "Quiet. Take the drowned Necropolis metal." ] },
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_swamp_large_d_defeat_relicmire_voice',  'dialog': [ "Dense, cold, impossibly sharp. It remembers every wound it's ever dealt." ] },
+	{ 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_large_d_defeat_relicmire_voice', 'dialog': [ "The bone tides have settled. The relics stopped murmuring warnings." ] },
+
+]
 
 TASKS = [
 	{
@@ -262,6 +306,9 @@ TASKS += [
 					'dialog_id': 'anita_c_first_meet'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_swamp_large_c_find_anita'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',   'dialog_id': 'moxie_swamp_large_c_find_anita'   } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_large_c_find_anita' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -284,6 +331,9 @@ TASKS += [
 					'dialog_id': 'morwen_c_vouch'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_swamp_large_c_consult_morwen'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',   'dialog_id': 'moxie_swamp_large_c_consult_morwen'   } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_large_c_consult_morwen' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -318,6 +368,9 @@ TASKS += [
 					'dialog_id': 'anita_c_joins'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_swamp_large_c_earn_anita'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',   'dialog_id': 'moxie_swamp_large_c_earn_anita'   } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_large_c_earn_anita' } },
 			{
 				'event_type': 'hide_npc',
 				'params': { 'npc_id': 'anita' }
@@ -388,6 +441,15 @@ TASKS += [
 			},
 		],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_swamp_large_d_deliver_marrow_shard'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',   'dialog_id': 'moxie_swamp_large_d_deliver_marrow_shard'   } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_large_d_deliver_marrow_shard' } },
+			{
+				'event_type': 'remove_item',
+				'params': {
+					'item_id': 'necropolis_marrow_shard'
+				}
+			},
 			{
 				'event_type': 'create_npc',
 				'params': {
@@ -431,6 +493,9 @@ TASKS += [
 					'dialog_id': 'halveth_d_shard_read'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_swamp_large_d_consult_halveth'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_large_d_consult_halveth' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_swamp_large_d_consult_halveth'   } },
 			{
 				'event_type': 'create_npc',
 				'params': {
@@ -474,6 +539,9 @@ TASKS += [
 					'dialog_id': 'relicmire_voice_d_awakens'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_swamp_large_d_meet_relicmire_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_large_d_meet_relicmire_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_swamp_large_d_meet_relicmire_voice' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -505,6 +573,9 @@ TASKS += [
 					'item_id': 'mythic_swamp_large_bonedrown_reliquary'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_swamp_large_d_defeat_relicmire_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_swamp_large_d_defeat_relicmire_voice'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_large_d_defeat_relicmire_voice' } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -589,6 +660,20 @@ NPC_DIALOG += [
 
 ]
 
+# --- Character dialogs: Type B (Miregloom chain) ---
+NPC_DIALOG += [
+
+	# B – Meet Miregloom
+	{ 'npc_id': 'technique', 'dialog_id': 'chock_swamp_large_b_meet_miregloom',   'dialog': [ "The rot down here is structured. Intentional." ] },
+	{ 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_swamp_large_b_meet_miregloom', 'dialog': [ "He's been growing a new architecture out of the dead. He really did love decay. Shame it was pointed in the wrong direction." ] },
+	{ 'npc_id': 'tech',      'dialog_id': 'kade_swamp_large_b_meet_miregloom',    'dialog': [ "He thinks we have delayed long enough. We disagree." ] },
+
+	# B – Defeat Miregloom
+	{ 'npc_id': 'technique', 'dialog_id': 'chock_swamp_large_b_defeat_miregloom', 'dialog': [ "Stay down. Decay is not a destination." ] },
+	{ 'npc_id': 'faith',     'dialog_id': 'kaera_swamp_large_b_defeat_miregloom', 'dialog': [ "The frequency is gone. The Necropolis can stop humming in that particular key." ] },
+
+]
+
 TASKS += [
 
 	# B-0 — Void Gauntlet entry (self-completing gated task)
@@ -617,6 +702,9 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'miregloom', 'dialog_id': 'miregloom_b_risen' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_swamp_large_b_meet_miregloom'   } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_swamp_large_b_meet_miregloom' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'kade_swamp_large_b_meet_miregloom'    } },
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'swamp_large_city_b_defeat_miregloom' }},
 		]
 	},
@@ -631,7 +719,9 @@ TASKS += [
 			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'miregloom_b1', 'combat_type': 'boss_battle' }}
 		],
 		'task_complete_events': [
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_b_victory' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_swamp_large_b_defeat_miregloom'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_b_victory'                     } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'kaera_swamp_large_b_defeat_miregloom'  } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'swamp' }},
 		]
 	},

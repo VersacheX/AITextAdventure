@@ -202,6 +202,76 @@ NPC_DIALOG += [
 
 ]
 
+# --- Character dialogs: Type E (Bayou Memory Vessel chain) ---
+NPC_DIALOG += [
+
+	# Type E – Investigate Vessel
+	{ 'npc_id': 'tech',    'dialog_id': 'kade_swamp_mid_e_investigate_vessel',    'dialog': [ "A vessel for memory, not water or oil. The swamp has been holding onto something it was never meant to keep." ] },
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_mid_e_investigate_vessel', 'dialog': [ "The omen-light points into the Channel. The vessel is there." ] },
+	{ 'npc_id': 'skill',   'dialog_id': 'poise_swamp_mid_e_investigate_vessel',   'dialog': [ "Selka will know how long the reeds have been whispering about it." ] },
+
+	# Type E – Consult Selka
+	{ 'npc_id': 'tech',    'dialog_id': 'kade_swamp_mid_e_consult_selka',    'dialog': [ "Memory Vessels preserved the last thoughts of the dying. This one was lost in a flood. The Oathrot Voice has been absorbing its contents slowly." ] },
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_mid_e_consult_selka', 'dialog': [ "Pull it out before there's nothing left inside." ] },
+	{ 'npc_id': 'skill',   'dialog_id': 'poise_swamp_mid_e_consult_selka',   'dialog': [ "Then we pull it out." ] },
+
+	# Type E – Confront Oathrot Voice
+	{ 'npc_id': 'skill', 'dialog_id': 'poise_swamp_mid_e_confront_oathrot_voice', 'dialog': [ "It already decided the Vessel feeds them." ] },
+	{ 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_e_confront_oathrot_voice', 'dialog': [ "Every memory it holds becomes part of their rot. They're not going to hand it over." ] },
+	{ 'npc_id': 'lyren', 'dialog_id': 'lyren_swamp_mid_e_confront_oathrot_voice', 'dialog': [ "Some voices only know how to keep what the dying left behind." ] },
+
+	# Type E – Defeat Oathrot Voice / Return to Janrel
+	{ 'npc_id': 'technique', 'dialog_id': 'chock_swamp_mid_e_return_to_janrel', 'dialog': [ "The lantern steadied the moment we returned. The Voice no longer has it." ] },
+	{ 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_e_return_to_janrel', 'dialog': [ "A sealed vessel — clay, swamp-fired. The omen-light reads it as a memory container compressed over centuries." ] },
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_e_return_to_janrel',  'dialog': [ "It belongs further down the swamp. Carry it sealed. If it opens early, the memory dissipates." ] },
+
+]
+
+# --- Character dialogs: Type D (Mirebound Sovereign chain) ---
+NPC_DIALOG += [
+
+	# Type D – Deliver Memory Vessel
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_d_deliver_memory_vessel',  'dialog': [ "The lantern-fire bows when it passes. Memory older than this city. There's a blade bound inside a bargain made long before Ress was born." ] },
+	{ 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_d_deliver_memory_vessel', 'dialog': [ "Deliver it to Selka. The reeds know the rite to release it." ] },
+	{ 'npc_id': 'skill', 'dialog_id': 'poise_swamp_mid_d_deliver_memory_vessel', 'dialog': [ "Move." ] },
+
+	# Type D – Consult Selka
+	{ 'npc_id': 'tech',    'dialog_id': 'kade_swamp_mid_d_consult_selka',    'dialog': [ "The Mirebound Sovereign — a blade forged from the first broken oath in the bayou. The vessel is the key." ] },
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_mid_d_consult_selka', 'dialog': [ "The Court-Guardian will not yield it without a fight. Prove the oath is ours to carry." ] },
+	{ 'npc_id': 'skill',   'dialog_id': 'poise_swamp_mid_d_consult_selka',   'dialog': [ "Then we prove it." ] },
+
+	# Type D – Meet Court Guardian
+	{ 'npc_id': 'skill', 'dialog_id': 'poise_swamp_mid_d_meet_court_guardian', 'dialog': [ "It already decided we must prove we can carry what was never meant to be held." ] },
+	{ 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_d_meet_court_guardian', 'dialog': [ "The first broken oath. Bold claim for a guardian." ] },
+	{ 'npc_id': 'lyren', 'dialog_id': 'lyren_swamp_mid_d_meet_court_guardian', 'dialog': [ "Some bargains only open for the ones willing to finish them." ] },
+
+	# Type D – Defeat Court Guardian
+	{ 'npc_id': 'technique', 'dialog_id': 'chock_swamp_mid_d_defeat_court_guardian', 'dialog': [ "The lantern blazed the moment we returned. Not in warning — in recognition." ] },
+	{ 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_d_defeat_court_guardian', 'dialog': [ "The Mirebound Sovereign has chosen its bearer. That bargain is sealed." ] },
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_d_defeat_court_guardian',  'dialog': [ "Carry it with the weight it deserves." ] },
+
+]
+
+# --- Character dialogs: Type C (Osten Dreamweaver chain) ---
+NPC_DIALOG += [
+
+	# Type C – Find Osten
+	{ 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_c_find_osten', 'dialog': [ "The bayou holds stories the way skin holds warmth — for a little while after the fire goes out. They've been trying to write them all down." ] },
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_c_find_osten',  'dialog': [ "There are more than they can carry alone. We look like people who have collected a few of our own." ] },
+	{ 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_c_find_osten', 'dialog': [ "Ress will know whether the lantern trusts them." ] },
+
+	# Type C – Consult Ress
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_c_consult_ress',  'dialog': [ "The lantern hasn't flared once around them in three days. That means something." ] },
+	{ 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_c_consult_ress', 'dialog': [ "He reads people the way the lantern reads lies. If it didn't flare, we mean what we say." ] },
+	{ 'npc_id': 'skill', 'dialog_id': 'poise_swamp_mid_c_consult_ress', 'dialog': [ "That's enough for them." ] },
+
+	# Type C – Earn Osten
+	{ 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_c_earn_osten', 'dialog': [ "The stories they need are moving — they don't stay in one place. Neither should they." ] },
+	{ 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_c_earn_osten', 'dialog': [ "They're coming. The bayou's stories travel better with company." ] },
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_c_earn_osten',  'dialog': [ "Good. We could use someone who listens to water." ] },
+
+]
+
 
 TASKS = [
 	{
@@ -297,6 +367,9 @@ TASKS += [
 					'dialog_id': 'janrel_vessel_discovery'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_swamp_mid_e_investigate_vessel'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_mid_e_investigate_vessel' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_swamp_mid_e_investigate_vessel'   } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -337,6 +410,9 @@ TASKS += [
 					'dialog_id': 'selka_vessel_context'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_swamp_mid_e_consult_selka'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_mid_e_consult_selka' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_swamp_mid_e_consult_selka'   } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -385,6 +461,9 @@ TASKS += [
 					'dialog_id': 'oathrot_voice_vessel_guardian'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_swamp_mid_e_confront_oathrot_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_e_confront_oathrot_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_swamp_mid_e_confront_oathrot_voice' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -441,6 +520,9 @@ TASKS += [
 					'dialog_id': 'janrel_vessel_received'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_swamp_mid_e_return_to_janrel' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_e_return_to_janrel' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_e_return_to_janrel'  } },
 			{
 				'event_type': 'award_item',
 				'params': {
@@ -492,6 +574,9 @@ TASKS += [
 					'dialog_id': 'ress_vessel_trade'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_d_deliver_memory_vessel'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_d_deliver_memory_vessel' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_swamp_mid_d_deliver_memory_vessel' } },
 			{
 				'event_type': 'remove_item',
 				'params': {
@@ -531,6 +616,9 @@ TASKS += [
 					'dialog_id': 'selka_vessel_rite'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_swamp_mid_d_consult_selka'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_mid_d_consult_selka' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_swamp_mid_d_consult_selka'   } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -557,6 +645,9 @@ TASKS += [
 			}
 		],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_swamp_mid_d_meet_court_guardian' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_d_meet_court_guardian' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_swamp_mid_d_meet_court_guardian' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -592,7 +683,10 @@ TASKS += [
 				'params': {
 					'item_id': 'mythic_swamp_mid_mirebound_sovereign'
 				}
-			}
+			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_swamp_mid_d_defeat_court_guardian' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_d_defeat_court_guardian' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_d_defeat_court_guardian'  } },
 		]
 	},
 
@@ -639,6 +733,9 @@ TASKS += [
 					'dialog_id': 'osten_type_c_intro'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_c_find_osten' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_c_find_osten'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_c_find_osten' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -672,6 +769,9 @@ TASKS += [
 					'dialog_id': 'osten_type_c_ress_check'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_c_consult_ress'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_c_consult_ress' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_swamp_mid_c_consult_ress' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -705,6 +805,9 @@ TASKS += [
 					'dialog_id': 'osten_type_c_join'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_c_earn_osten' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_c_earn_osten' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_c_earn_osten'  } },
 			{
 				'event_type': 'hide_npc',
 				'params': { 'npc_id': 'osten_dreamweaver' }

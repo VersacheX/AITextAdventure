@@ -216,6 +216,298 @@ NPC_DIALOG += [
 ]
 
 
+# --- Character dialogs: Type C ---
+NPC_DIALOG += [
+
+    # Type C – Find Sylvara
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_grassland_mid_c_find_sylvara',
+        'dialog': [
+            "A city built on doctrines it no longer believes in. She's been watching it unravel."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_grassland_mid_c_find_sylvara',
+        'dialog': [
+            "She wants to stop it, but she trusts Seris's assessment more than her own instinct. That's rare discipline."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_grassland_mid_c_find_sylvara',
+        'dialog': [
+            "Speak to the Oathwarden first. Clean process."
+        ]
+    },
+
+    # Type C – Earn Sylvara (via Seris)
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_grassland_mid_c_earn_sylvara',
+        'dialog': [
+            "Seris has been watching since we arrived. What we did at the Sanctum was enough."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_grassland_mid_c_earn_sylvara',
+        'dialog': [
+            "She doesn't use the word 'trust' lightly. She used it today."
+        ]
+    },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_grassland_mid_c_earn_sylvara',
+        'dialog': [
+            "Go back to Sylvara. She's ready."
+        ]
+    },
+
+    # Type C – Join Sylvara
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_grassland_mid_c_join_sylvara',
+        'dialog': [
+            "The False Verse is a failure of governance. She was designed for exactly that kind of problem."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_grassland_mid_c_join_sylvara',
+        'dialog': [
+            "She's in. Good. We need someone who understands how systems rot from the inside."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_grassland_mid_c_join_sylvara',
+        'dialog': [
+            "Some people join because of duty. She's joining because the doctrines stopped meaning what they claimed."
+        ]
+    },
+
+]
+
+# --- Character dialogs: Type E ---
+NPC_DIALOG += [
+
+    # Type E – Investigate Seal
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_grassland_mid_e_investigate_seal',
+        'dialog': [
+            "Every founding document references a foundation seal, but the stone itself is missing. Deliberate."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grmnaw_grassland_mid_e_investigate_seal',
+        'dialog': [
+            "It predates the False Verse by centuries. If it still exists, it's in the deepest chamber."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_grassland_mid_e_investigate_seal',
+        'dialog': [
+            "Something that old doesn't vanish by accident. It was buried for a reason."
+        ]
+    },
+
+    # Type E – Consult Halven
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_grassland_mid_e_consult_halven',
+        'dialog': [
+            "A compressed record of every oath ever sworn here, bound into stone. The False Verse cannot corrupt it."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grmnaw_grassland_mid_e_consult_halven',
+        'dialog': [
+            "That's precisely why it buried the chamber. It feared the one thing it couldn't rewrite."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_grassland_mid_e_consult_halven',
+        'dialog': [
+            "Then we open the chamber."
+        ]
+    },
+
+    # Type E – Confront Sanctum Voice
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_grassland_mid_e_confront_sanctum_voice',
+        'dialog': [
+            "It already decided retrieval is theft."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_grassland_mid_e_confront_sanctum_voice',
+        'dialog': [
+            "'We will remind you what broken vows feel like.' Dramatic. I like it."
+        ]
+    },
+    {
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_grassland_mid_e_confront_sanctum_voice',
+        'dialog': [
+            "It's not protecting the seal. It's protecting the right to decide which oaths still count."
+        ]
+    },
+
+    # Type E – Defeat Sanctum Voice
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_grassland_mid_e_defeat_sanctum_voice',
+        'dialog': [
+            "It's done. Take the fragment carefully."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_grassland_mid_e_defeat_sanctum_voice',
+        'dialog': [
+            "I can feel the oaths radiating from it. Althorin will want to read every one."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_grassland_mid_e_defeat_sanctum_voice',
+        'dialog': [
+            "The original mark. It doesn't belong locked away down there."
+        ]
+    },
+
+    # Type E – Return to Althorin
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_grassland_mid_e_return_to_althorin',
+        'dialog': [
+            "He can read every oath in the grain of the stone."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_grassland_mid_e_return_to_althorin',
+        'dialog': [
+            "It doesn't belong in his archive either. Oaths have a way of finding their purpose."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grmnaw_grassland_mid_e_return_to_althorin',
+        'dialog': [
+            "Carry it. Something will call for it eventually."
+        ]
+    },
+
+]
+
+# --- Character dialogs: Type D ---
+NPC_DIALOG += [
+
+    # Type D – Deliver Seal Fragment
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_grassland_mid_d_deliver_seal_fragment',
+        'dialog': [
+            "Mira's never held one of these. Althorin first — he needs to read the imprint."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_grassland_mid_d_deliver_seal_fragment',
+        'dialog': [
+            "An Oathbreak seal fragment. Do anything irreversible too early and we lose what it still holds."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_grassland_mid_d_deliver_seal_fragment',
+        'dialog': [
+            "The doctrine-scripts have been trembling since dawn. He already feels it."
+        ]
+    },
+
+    # Type D – Consult Althorin
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_grassland_mid_d_consult_althorin',
+        'dialog': [
+            "The Sanctum Voice was bound inside this seal. Releasing it correctly crystallizes the residue."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grmnaw_grassland_mid_d_consult_althorin',
+        'dialog': [
+            "Crystallized oath-residue is exactly what Mira has been searching for. But the Voice must be drawn out first."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_grassland_mid_d_consult_althorin',
+        'dialog': [
+            "Then we draw it out and silence it properly."
+        ]
+    },
+
+    # Type D – Meet Sanctum Voice (again)
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_grassland_mid_d_meet_sanctum_voice',
+        'dialog': [
+            "Every broken vow is flowing back to it."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_grassland_mid_d_meet_sanctum_voice',
+        'dialog': [
+            "It wants to finish what the doctrine started. We don't let it."
+        ]
+    },
+    {
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_grassland_mid_d_meet_sanctum_voice',
+        'dialog': [
+            "Some echoes only know how to punish. This one has been waiting a long time to do it again."
+        ]
+    },
+
+    # Type D – Defeat Sanctum Voice (again)
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_grassland_mid_d_defeat_sanctum_voice',
+        'dialog': [
+            "Quiet. Take the crystallized residue."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_grassland_mid_d_defeat_sanctum_voice',
+        'dialog': [
+            "A sigil that holds any vow you make absolutely — even the ones you make with yourself."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_grassland_mid_d_defeat_sanctum_voice',
+        'dialog': [
+            "The doctrine-scripts have gone still. For the first time in months, the verses read correctly."
+        ]
+    },
+
+]
+
+
 TASKS = [
 	{
 		'task_id': 'grassland_mid_city_initialize',
@@ -352,6 +644,9 @@ TASKS += [
 					'dialog_id': 'sylvara_type_c_intro'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_grassland_mid_c_find_sylvara'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_grassland_mid_c_find_sylvara' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_grassland_mid_c_find_sylvara' } },
 			# Prime Seris's standing text before the party goes to her
 			{
 				'event_type': 'set_npc_standing_text',
@@ -387,6 +682,9 @@ TASKS += [
 					'dialog_id': 'seris_c_sylvara_vouch'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_grassland_mid_c_earn_sylvara'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_grassland_mid_c_earn_sylvara'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_grassland_mid_c_earn_sylvara' } },
 			# Update Sylvara's standing text so she signals she is ready
 			{
 				'event_type': 'set_npc_standing_text',
@@ -422,6 +720,9 @@ TASKS += [
 					'dialog_id': 'sylvara_type_c_join'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_grassland_mid_c_join_sylvara' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_grassland_mid_c_join_sylvara'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_grassland_mid_c_join_sylvara'     } },
 			{
 				'event_type': 'hide_npc',
 				'params': { 'npc_id': 'regent_sylvara' }
@@ -464,6 +765,9 @@ TASKS += [
 					'dialog_id': 'althorin_seal_discovery'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_grassland_mid_e_investigate_seal'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grmnaw_grassland_mid_e_investigate_seal' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',   'dialog_id': 'faith_grassland_mid_e_investigate_seal'   } },
 			# Place Halven and set his standing text before the next meet task
 			{
 				'event_type': 'create_npc',
@@ -506,6 +810,9 @@ TASKS += [
 					'dialog_id': 'halven_seal_context'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_grassland_mid_e_consult_halven'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grmnaw_grassland_mid_e_consult_halven' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_grassland_mid_e_consult_halven'   } },
 			{
 				'event_type': 'create_npc',
 				'params': {
@@ -554,6 +861,9 @@ TASKS += [
 					'dialog_id': 'sanctum_voice_seal_guardian'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_grassland_mid_e_confront_sanctum_voice'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_grassland_mid_e_confront_sanctum_voice'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',  'dialog_id': 'lyren_grassland_mid_e_confront_sanctum_voice'  } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -585,6 +895,9 @@ TASKS += [
 					'item_id': 'grassland_mid_city_e_sanctum_seal_fragment'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_grassland_mid_e_defeat_sanctum_voice' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_grassland_mid_e_defeat_sanctum_voice'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_grassland_mid_e_defeat_sanctum_voice'      } },
 			# Set Althorin's standing text for the return step
 			{
 				'event_type': 'set_npc_standing_text',
@@ -639,6 +952,9 @@ TASKS += [
 					'dialog_id': 'althorin_seal_received'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',   'dialog_id': 'faith_grassland_mid_e_return_to_althorin'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_grassland_mid_e_return_to_althorin'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grmnaw_grassland_mid_e_return_to_althorin' } },
 		]
 	},
 
@@ -664,6 +980,15 @@ TASKS += [
 		'to_id': 'mira',
 		'task_acquire_events': [],
 		'task_complete_events': [
+			{
+				'event_type': 'remove_item',
+				'params': {
+					'item_id': 'grassland_mid_city_e_sanctum_seal_fragment'
+				}
+			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_grassland_mid_d_deliver_seal_fragment' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_grassland_mid_d_deliver_seal_fragment'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_grassland_mid_d_deliver_seal_fragment'     } },
 			# Set Althorin's standing text for the consult step
 			{
 				'event_type': 'set_npc_standing_text',
@@ -700,6 +1025,9 @@ TASKS += [
 					'dialog_id': 'althorin_d_seal_read'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_grassland_mid_d_consult_althorin'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grmnaw_grassland_mid_d_consult_althorin' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_grassland_mid_d_consult_althorin'   } },
 			# Set sanctum_voice standing text before the meet task
 			{
 				'event_type': 'set_npc_standing_text',
@@ -736,6 +1064,9 @@ TASKS += [
 					'dialog_id': 'sanctum_voice_d_awakens'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_grassland_mid_d_meet_sanctum_voice'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_grassland_mid_d_meet_sanctum_voice'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',  'dialog_id': 'lyren_grassland_mid_d_meet_sanctum_voice'  } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -767,6 +1098,9 @@ TASKS += [
 					'item_id': 'mythic_grassland_mid_oathbreakers_sigil'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_grassland_mid_d_defeat_sanctum_voice' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_grassland_mid_d_defeat_sanctum_voice'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_grassland_mid_d_defeat_sanctum_voice'      } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {

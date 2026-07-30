@@ -244,6 +244,228 @@ NPC_DIALOG += [
 
 ]
 
+# --- Character dialogs: Type C ---
+NPC_DIALOG += [
+
+    # Type C – Find Voss
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_grassland_large_c_find_voss',
+        'dialog': [
+            "She's watching the route network collapse and nobody in charge seems to care. Fair."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_grassland_large_c_find_voss',
+        'dialog': [
+            "She doesn't travel with strangers. Impress someone she trusts first. Efficient filter."
+        ]
+    },
+    {
+        'npc_id': 'bragg',
+        'dialog_id': 'bragg_grassland_large_c_find_voss',
+        'dialog': [
+            "Business, not sentiment. I can work with that."
+        ]
+    },
+
+    # Type C – Consult Delphi
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_grassland_large_c_consult_delphi',
+        'dialog': [
+            "Delphi doesn't waste words. If she says the routes are safer, that's the only currency Voss respects."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_grassland_large_c_consult_delphi',
+        'dialog': [
+            "Confirmation from someone she already trusts. Clean."
+        ]
+    },
+    {
+        'npc_id': 'nia',
+        'dialog_id': 'nia_grassland_large_c_consult_delphi',
+        'dialog': [
+            "Some people only move when the right person speaks for you."
+        ]
+    },
+
+    # Type C – Earn Voss
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_grassland_large_c_earn_voss',
+        'dialog': [
+            "She's in. And she sets the terms when we negotiate. Understood."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_grassland_large_c_earn_voss',
+        'dialog': [
+            "Delphi called the routes safer. She doesn't exaggerate. That was enough."
+        ]
+    },
+    {
+        'npc_id': 'bragg',
+        'dialog_id': 'bragg_grassland_large_c_earn_voss',
+        'dialog': [
+            "Good. Let's get to work."
+        ]
+    },
+
+]
+
+# --- Character dialogs: Type D ---
+NPC_DIALOG += [
+
+    # Type D – Deliver Accessory Key
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_grassland_large_d_deliver_accessory_key',
+        'dialog': [
+            "Wind impressions mapped into metal. Someone catalogued every grassland migration into this key."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_grassland_large_d_deliver_accessory_key',
+        'dialog': [
+            "Vexa reads wind scars better than anyone. She'll know what it opens."
+        ]
+    },
+    {
+        'npc_id': 'nia',
+        'dialog_id': 'nia_grassland_large_d_deliver_accessory_key',
+        'dialog': [
+            "The wind already shifted when we crossed the plains. Something is listening."
+        ]
+    },
+
+    # Type D – Consult Vexa
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_grassland_large_d_consult_vexa',
+        'dialog': [
+            "The noble's lineage mapped every migration across the grasslands. The Windcarve Spirit hoards the oldest of those routes."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grmnaw_grassland_large_d_consult_vexa',
+        'dialog': [
+            "Unlock the chamber and the routes crystallize. Mira can set wind-crystal into something that reads the air."
+        ]
+    },
+    {
+        'npc_id': 'nia',
+        'dialog_id': 'nia_grassland_large_d_consult_vexa',
+        'dialog': [
+            "You'll feel ambushes before they form. That's worth the risk."
+        ]
+    },
+
+    # Type D – Meet Windcarve Spirit
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_grassland_large_d_meet_windcarve_spirit',
+        'dialog': [
+            "It already decided we won't leave with the routes."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_grassland_large_d_meet_windcarve_spirit',
+        'dialog': [
+            "Guarded since the first caravan crossed these plains. Ambitious tenure."
+        ]
+    },
+    {
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_grassland_large_d_meet_windcarve_spirit',
+        'dialog': [
+            "It's not protecting paths. It's protecting the right to decide who gets to walk them."
+        ]
+    },
+
+    # Type D – Defeat Windcarve Spirit
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_grassland_large_d_defeat_windcarve_spirit',
+        'dialog': [
+            "It's down. Take the wind-crystal."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_grassland_large_d_defeat_windcarve_spirit',
+        'dialog': [
+            "A mantle that reads the air around you. You'll sense what's coming before it arrives."
+        ]
+    },
+    {
+        'npc_id': 'nia',
+        'dialog_id': 'nia_grassland_large_d_defeat_windcarve_spirit',
+        'dialog': [
+            "Every migration route the Spirit hoarded has returned to the plains. The caravans can move freely again."
+        ]
+    },
+
+]
+
+# --- Character dialogs: Type B ---
+NPC_DIALOG += [
+
+    # B – Meet Serene
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_grassland_large_b_meet_serene',
+        'dialog': [
+            "She predicted we'd come. Of course she did."
+        ]
+    },
+    {
+        'npc_id': 'nia',
+        'dialog_id': 'nia_grassland_large_b_meet_serene',
+        'dialog': [
+            "Don't let her voice get inside your head — she'll use your own words against you."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_grassland_large_b_meet_serene',
+        'dialog': [
+            "She's catalogued every pattern we carry. She thinks that means she owns the next move."
+        ]
+    },
+
+    # B – Defeat Serene
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_grassland_large_b_defeat_serene',
+        'dialog': [
+            "Stay down. The future doesn't belong to you."
+        ]
+    },
+    {
+        'npc_id': 'nia',
+        'dialog_id': 'nia_grassland_large_b_defeat_serene',
+        'dialog': [
+            "The wind sounds like itself again. Not recorded. Not archived. Just the wind."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_grassland_large_b_defeat_serene',
+        'dialog': [
+            "You can't steal something that won't hold still. She never understood that."
+        ]
+    },
+
+]
+
 TASKS += [
 
 	# =========================================================
@@ -268,6 +490,9 @@ TASKS += [
 					'dialog_id': 'voss_c_first_meet'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_grassland_large_c_find_voss' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_grassland_large_c_find_voss'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg',     'dialog_id': 'bragg_grassland_large_c_find_voss'     } },
 			# Prime Delphi's standing text before the party goes to her
 			{
 				'event_type': 'set_npc_standing_text',
@@ -303,6 +528,9 @@ TASKS += [
 					'dialog_id': 'delphi_c_vouch'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_grassland_large_c_consult_delphi'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_grassland_large_c_consult_delphi' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_grassland_large_c_consult_delphi'   } },
 			# Update Voss's standing text so she signals she is ready
 			{
 				'event_type': 'set_npc_standing_text',
@@ -339,6 +567,9 @@ TASKS += [
 					'dialog_id': 'voss_c_joins'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_grassland_large_c_earn_voss' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_grassland_large_c_earn_voss'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg',     'dialog_id': 'bragg_grassland_large_c_earn_voss'     } },
 			{
 				'event_type': 'hide_npc',
 				'params': { 'npc_id': 'voss_caldera' }
@@ -406,6 +637,15 @@ TASKS += [
 		'to_id': 'mira',
 		'task_acquire_events': [],
 		'task_complete_events': [
+			{
+				'event_type': 'remove_item',
+				'params': {
+					'item_id': 'grassland_large_city_accessory_key'
+				}
+			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_grassland_large_d_deliver_accessory_key'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_grassland_large_d_deliver_accessory_key' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_grassland_large_d_deliver_accessory_key'   } },
 			# Place Vexa and set her standing text for the consult step
 			{
 				'event_type': 'create_npc',
@@ -449,6 +689,9 @@ TASKS += [
 					'dialog_id': 'vexa_d_key_read'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_grassland_large_d_consult_vexa'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grmnaw_grassland_large_d_consult_vexa' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',     'dialog_id': 'nia_grassland_large_d_consult_vexa'     } },
 			# Place the Windcarve Spirit and set standing text for the meet step
 			{
 				'event_type': 'create_npc',
@@ -492,6 +735,9 @@ TASKS += [
 					'dialog_id': 'windcarve_spirit_d_awakens'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_grassland_large_d_meet_windcarve_spirit'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_grassland_large_d_meet_windcarve_spirit'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',  'dialog_id': 'lyren_grassland_large_d_meet_windcarve_spirit'  } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -523,6 +769,9 @@ TASKS += [
 					'item_id': 'mythic_grassland_large_windcarvers_mantle'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_grassland_large_d_defeat_windcarve_spirit' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_grassland_large_d_defeat_windcarve_spirit'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',       'dialog_id': 'nia_grassland_large_d_defeat_windcarve_spirit'       } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -642,6 +891,9 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'serene', 'dialog_id': 'serene_b_risen' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_grassland_large_b_meet_serene' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',       'dialog_id': 'nia_grassland_large_b_meet_serene'       } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_grassland_large_b_meet_serene'      } },
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'grassland_large_city_b_defeat_serene' }},
 		]
 	},
@@ -657,6 +909,9 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_b_victory' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_grassland_large_b_defeat_serene' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',       'dialog_id': 'nia_grassland_large_b_defeat_serene'       } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_grassland_large_b_defeat_serene'     } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'grassland' }},
 		]
 	},

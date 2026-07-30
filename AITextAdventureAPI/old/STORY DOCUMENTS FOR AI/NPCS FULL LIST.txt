@@ -2295,7 +2295,7 @@ Thorn | 8
 Sable | 8
 Ripple | 8
 Kor-In | 8
-Grinmaw | 8
+Grimnaw | 8
 Nia | 8
 Bragg | 8
 

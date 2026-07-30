@@ -186,6 +186,91 @@ NPC_DIALOG += [
 
 ]
 
+# --- Character dialogs: Type E (Tidekin Seal chain) ---
+NPC_DIALOG += [
+
+    # Type E – Investigate Seal
+    { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_mid_e_investigate_seal',    'dialog': [ "Ceremonial, old Tidekin script around the rim. Merrik won't touch it — says it should go back where it came from." ] },
+    { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_mid_e_investigate_seal', 'dialog': [ "The problem is nobody knows where that is. The undertunnel doesn't keep clear records." ] },
+    { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_mid_e_investigate_seal',   'dialog': [ "Thalen will know the resonance." ] },
+
+    # Type E – Consult Thalen
+    { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_mid_e_consult_thalen',    'dialog': [ "Coastal clans used these to mark founding pacts. This one was separated from its cove during the storm that buried the undertunnel." ] },
+    { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_mid_e_consult_thalen', 'dialog': [ "The Lanternfade Echo has been drawn to its resonance. It will try to claim it before we do." ] },
+    { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_mid_e_consult_thalen',   'dialog': [ "Take it before the echo bonds completely." ] },
+
+    # Type E – Confront Lanternfade Echo
+    { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_mid_e_confront_lanternfade_echo', 'dialog': [ "It already decided the Seal is theirs." ] },
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_e_confront_lanternfade_echo', 'dialog': [ "'We answered. It is ours now.' Bold claim for something that just showed up." ] },
+    { 'npc_id': 'lyren', 'dialog_id': 'lyren_shallows_mid_e_confront_lanternfade_echo', 'dialog': [ "Some echoes only know how to answer a call. They never ask who the call was meant for." ] },
+
+    # Type E – Defeat Lanternfade Echo / Return to Vexa
+    { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_mid_e_return_to_vexa', 'dialog': [ "It's dispersed. The Seal knows us now." ] },
+    { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_e_return_to_vexa',  'dialog': [ "Merrik will say it should go to the courts. Don't. Something that old belongs somewhere specific." ] },
+    { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_mid_e_return_to_vexa', 'dialog': [ "We'll figure out where." ] },
+
+]
+
+# --- Character dialogs: Type C (Dare chain) ---
+NPC_DIALOG += [
+
+    # Type C – Find Dare
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_c_find_dare', 'dialog': [ "A signal network nobody's touched in twenty years and routes that don't exist on any chart. She's already in." ] },
+    { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_c_find_dare',  'dialog': [ "Vexa showed her the undertunnel maps. She's been waiting for someone who looks curious enough to follow." ] },
+    { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_mid_c_find_dare', 'dialog': [ "We look curious enough." ] },
+
+    # Type C – Consult Vexa
+    { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_c_consult_vexa',  'dialog': [ "Reliable when it counts. Reckless the rest of the time. Vexa says we'd make a good pair." ] },
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_c_consult_vexa', 'dialog': [ "High praise from her. She doesn't say that about anyone." ] },
+    { 'npc_id': 'bragg', 'dialog_id': 'bragg_shallows_mid_c_consult_vexa', 'dialog': [ "She's been scouting the coastline for a month. The undertunnel is the most interesting thing she's found." ] },
+
+    # Type C – Earn Dare
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_c_earn_dare', 'dialog': [ "She moves fast and asks questions after. Fair warning." ] },
+    { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_c_earn_dare',  'dialog': [ "If that's a problem, say so now. Otherwise we go find whatever's at the end of those routes." ] },
+    { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_mid_c_earn_dare', 'dialog': [ "Not a problem. Let's move." ] },
+
+]
+
+# --- Character dialogs: Type D (Corsair's Depth Blade chain) ---
+NPC_DIALOG += [
+
+    # Type D – Deliver Corsair Fragment
+    { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_d_deliver_corsair_fragment',  'dialog': [ "The metal has a tide-pull Diego's never felt in steel. Something in Blackwake Bay resonates with it." ] },
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_d_deliver_corsair_fragment', 'dialog': [ "Thalen reads the coastal signals. He'll know where this belongs." ] },
+    { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_mid_d_deliver_corsair_fragment', 'dialog': [ "Find him." ] },
+
+    # Type D – Consult Thalen
+    { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_mid_d_consult_thalen',    'dialog': [ "The fragment carries the tide-frequency of Stormglass Alley. The Undertunnel Voice holds the matching resonance." ] },
+    { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_mid_d_consult_thalen', 'dialog': [ "The corsair lineage sealed it there deliberately. Draw the Voice out with the fragment and the tide-steel solidifies." ] },
+    { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_mid_d_consult_thalen',   'dialog': [ "Then we draw it out." ] },
+
+    # Type D – Meet Undertunnel Voice
+    { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_mid_d_meet_undertunnel_voice', 'dialog': [ "It's carrying every misdirected signal and every lost smuggler route." ] },
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_d_meet_undertunnel_voice', 'dialog': [ "'Take it from me if you can navigate the dark.' We can." ] },
+    { 'npc_id': 'lyren', 'dialog_id': 'lyren_shallows_mid_d_meet_undertunnel_voice', 'dialog': [ "Some voices only know how to hold what the tunnels refused to return." ] },
+
+    # Type D – Defeat Undertunnel Voice
+    { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_mid_d_defeat_undertunnel_voice', 'dialog': [ "Quiet. Take the corsair-tide steel." ] },
+    { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_d_defeat_undertunnel_voice',  'dialog': [ "A blade that knows every current and tunnel beneath the bay. Nothing will hold a line against this." ] },
+    { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_mid_d_defeat_undertunnel_voice', 'dialog': [ "Every misdirected signal the Voice held has resolved. The tunnels are finally quiet." ] },
+
+]
+
+# --- Character dialogs: Type E post-chain (Seal path) ---
+NPC_DIALOG += [
+
+    # Type E – Consult Vexa (Seal path)
+    { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_mid_e_consult_vexa',    'dialog': [ "Tidekin mark. A family in Tidekin Cove used it on sealed cargo that never arrived." ] },
+    { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_mid_e_consult_vexa', 'dialog': [ "That wax has been waiting to close something ever since." ] },
+    { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_mid_e_consult_vexa',   'dialog': [ "Collect it." ] },
+
+    # Type E – Collect Seal
+    { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_e_collect_seal',  'dialog': [ "Pressed into the wall near the entrance. Wax that hasn't aged. Cove marker Merrik doesn't recognise." ] },
+    { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_e_collect_seal', 'dialog': [ "Vexa confirmed the crest. If it belongs to Tidekin Cove, it should go there." ] },
+    { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_mid_e_collect_seal', 'dialog': [ "Take it through proper channels — whatever those are for us." ] },
+
+]
+
 
 TASKS = [
 	{
@@ -291,6 +376,9 @@ TASKS += [
                     'dialog_id': 'vexa_tidekin_seal_discovery'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_mid_e_investigate_seal'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_mid_e_investigate_seal' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_mid_e_investigate_seal'   } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -332,6 +420,9 @@ TASKS += [
                     'dialog_id': 'thalen_tidekin_seal_context'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_mid_e_consult_thalen'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_mid_e_consult_thalen' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_mid_e_consult_thalen'   } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -373,6 +464,9 @@ TASKS += [
                     'dialog_id': 'lanternfade_echo_seal_guardian'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_mid_e_confront_lanternfade_echo' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_e_confront_lanternfade_echo' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_shallows_mid_e_confront_lanternfade_echo' } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -430,7 +524,10 @@ TASKS += [
                     'npc_id': 'lanternrunner_vexa',
                     'dialog_id': 'vexa_tidekin_seal_received'
                 }
-            }
+            },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_mid_e_return_to_vexa' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_e_return_to_vexa'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_mid_e_return_to_vexa' } },
         ]
     },
 
@@ -477,6 +574,9 @@ TASKS += [
                     'dialog_id': 'dare_type_c_intro'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_c_find_dare' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_c_find_dare'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_mid_c_find_dare' } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -512,6 +612,9 @@ TASKS += [
                     'dialog_id': 'dare_type_c_vexa_check'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_c_consult_vexa'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_c_consult_vexa' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_shallows_mid_c_consult_vexa' } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -546,6 +649,9 @@ TASKS += [
                     'dialog_id': 'dare_type_c_join'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_c_earn_dare' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_c_earn_dare'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_mid_c_earn_dare' } },
             {
                 'event_type': 'character_join',
                 'params': {
@@ -614,6 +720,15 @@ TASKS += [
 			},
 		],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_d_deliver_corsair_fragment'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_d_deliver_corsair_fragment' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_mid_d_deliver_corsair_fragment' } },
+			{
+				'event_type': 'remove_item',
+				'params': {
+					'item_id': 'corsair_tide_fragment'
+				}
+			},
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -650,6 +765,9 @@ TASKS += [
 					'dialog_id': 'thalen_d_fragment_read'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_mid_d_consult_thalen'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_mid_d_consult_thalen' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_mid_d_consult_thalen'   } },
             {
                 'event_type': 'create_npc',
                 'params': {
@@ -693,6 +811,9 @@ TASKS += [
 					'dialog_id': 'undertunnel_voice_d_awakens'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_mid_d_meet_undertunnel_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_d_meet_undertunnel_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_shallows_mid_d_meet_undertunnel_voice' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -724,6 +845,9 @@ TASKS += [
 					'item_id': 'mythic_shallows_mid_corsairs_depth_blade'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_mid_d_defeat_undertunnel_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_d_defeat_undertunnel_voice'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_mid_d_defeat_undertunnel_voice' } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -797,6 +921,9 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lanternrunner_vexa', 'dialog_id': 'vexa_e_seal_context' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_mid_e_consult_vexa'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_mid_e_consult_vexa' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_mid_e_consult_vexa'   } },
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'shallows_mid_city_type_e_collect_seal' }},
 		]
 	},
@@ -816,6 +943,9 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'tidejudge_merrik', 'dialog_id': 'merrik_e_tidekin_seal' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_e_collect_seal'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_e_collect_seal' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_mid_e_collect_seal' } },
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'shallows_mid_city_e_tidekin_seal' }},
 		]
 	},

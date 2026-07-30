@@ -205,6 +205,320 @@ NPC_DIALOG += [
 
 ]
 
+# --- Character dialogs: Type E ---
+NPC_DIALOG += [
+
+    # Type E – Investigate Ledger
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_small_e_investigate_ledger',
+        'dialog': [
+            "A plate every buyer refuses to keep. That's not bad merchandise — that's a warning."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_small_e_investigate_ledger',
+        'dialog': [
+            "Old desert script on both sides and no one will hold it. It's waiting for a specific frequency."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_desert_small_e_investigate_ledger',
+        'dialog': [
+            "I already want to know what it's cataloguing."
+        ]
+    },
+
+    # Type E – Consult Venn
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_small_e_consult_venn',
+        'dialog': [
+            "A ledger of sealed underground routes, not commerce. That changes the value completely."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_small_e_consult_venn',
+        'dialog': [
+            "The Signal Wraith has been using it as an anchor. Of course it has."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_desert_small_e_consult_venn',
+        'dialog': [
+            "Then we take the anchor away from it."
+        ]
+    },
+
+    # Type E – Confront Signal Wraith
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_desert_small_e_confront_signal_wraith',
+        'dialog': [
+            "It's treating the plate like the only thing keeping it coherent."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_desert_small_e_confront_signal_wraith',
+        'dialog': [
+            "Without the plate it scatters across the frequencies. That's either tragic or extremely useful."
+        ]
+    },
+    {
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_desert_small_e_confront_signal_wraith',
+        'dialog': [
+            "It's not guarding a ledger. It's guarding the last shape it can still hold."
+        ]
+    },
+
+    # Type E – Defeat Signal Wraith
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_desert_small_e_defeat_signal_wraith',
+        'dialog': [
+            "It's done. Take the plate."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_small_e_defeat_signal_wraith',
+        'dialog': [
+            "Routes that lead out of the region entirely. This wasn't local bookkeeping."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_small_e_defeat_signal_wraith',
+        'dialog': [
+            "The signal is quiet. The ledger is free to be read by someone who actually wants the information."
+        ]
+    },
+
+    # Type E – Return to Krayt
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_desert_small_e_return_to_krayt',
+        'dialog': [
+            "It came back to us. Funny how that works."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_small_e_return_to_krayt',
+        'dialog': [
+            "Half these routes leave the region. Whatever it was tracking, it wasn't just trade."
+        ]
+    },
+    {
+        'npc_id': 'nia',
+        'dialog_id': 'nia_desert_small_e_return_to_krayt',
+        'dialog': [
+            "Keep it. Doors open for people who know the old paths."
+        ]
+    },
+
+]
+
+# --- Character dialogs: Type F ---
+NPC_DIALOG += [
+
+    # Type F – Find Tess Trail
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_desert_small_f_find_tess_trail',
+        'dialog': [
+            "Tess blew through here and left too fast. Classic."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_desert_small_f_find_tess_trail',
+        'dialog': [
+            "She only moves that quickly when the information is better than the company."
+        ]
+    },
+    {
+        'npc_id': 'thorn',
+        'dialog_id': 'thorn_desert_small_f_find_tess_trail',
+        'dialog': [
+            "Jexa's the next stop. Tess always needs something traced."
+        ]
+    },
+
+    # Type F – Ask Jexa
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_small_f_ask_jexa',
+        'dialog': [
+            "A frequency marker pointed at a buried cache. She's still out there."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_desert_small_f_ask_jexa',
+        'dialog': [
+            "Tess and a buried cache of black-market records. I already like this errand."
+        ]
+    },
+    {
+        'npc_id': 'bragg',
+        'dialog_id': 'bragg_desert_small_f_ask_jexa',
+        'dialog': [
+            "Let's go find her before someone else does."
+        ]
+    },
+
+    # Type F – Find Tess
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_desert_small_f_find_tess',
+        'dialog': [
+            "Three weeks pulling records out of a buried cache. She's committed, I'll give her that."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_small_f_find_tess',
+        'dialog': [
+            "Fifteen years of black-market drops. Names, dates, locations. That's not a hobby — that's leverage."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_desert_small_f_find_tess',
+        'dialog': [
+            "Someone logged every quiet transaction in the region. Tess found the only copy that matters."
+        ]
+    },
+
+    # Type F – Receive Registry
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_small_f_receive_registry',
+        'dialog': [
+            "Bleakwatch entries. Of course that's the section that matters."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_desert_small_f_receive_registry',
+        'dialog': [
+            "She's keeping the originals. Smart. The copy is still dangerous enough."
+        ]
+    },
+    {
+        'npc_id': 'nia',
+        'dialog_id': 'nia_desert_small_f_receive_registry',
+        'dialog': [
+            "If we ever end up in Bleakwatch, we'll know exactly who to ask."
+        ]
+    },
+
+]
+
+# --- Character dialogs: Type D ---
+NPC_DIALOG += [
+
+    # Type D – Deliver Ledger Plate
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_desert_small_d_deliver_ledger_plate',
+        'dialog': [
+            "Diego again. At least he can hear the frequency on this one."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_small_d_deliver_ledger_plate',
+        'dialog': [
+            "The plate is still humming. Venn will know what it's trying to say."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_small_d_deliver_ledger_plate',
+        'dialog': [
+            "Resonance left behind by whatever was recorded. That's never just data."
+        ]
+    },
+
+    # Type D – Consult Venn
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_small_d_consult_venn',
+        'dialog': [
+            "Every entry is a frequency signature. The Wraith has been feeding on them since the Radpost was built."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_small_d_consult_venn',
+        'dialog': [
+            "Draw it out with the plate's own resonance and the static crystallizes. Elegant, in a violent way."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_desert_small_d_consult_venn',
+        'dialog': [
+            "Then we call it and finish it."
+        ]
+    },
+
+    # Type D – Meet Signal Wraith (2)
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_desert_small_d_meet_signal_wraith',
+        'dialog': [
+            "It's been listening to every transaction since the post was built."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_desert_small_d_meet_signal_wraith',
+        'dialog': [
+            "'I will drown you in static first.' At least it's honest about its methods."
+        ]
+    },
+    {
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_desert_small_d_meet_signal_wraith',
+        'dialog': [
+            "It's not defending territory. It's defending the only conversation it still understands."
+        ]
+    },
+
+    # Type D – Defeat Signal Wraith (2)
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_desert_small_d_defeat_signal_wraith',
+        'dialog': [
+            "Quiet. Take the crystallized static."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_small_d_defeat_signal_wraith',
+        'dialog': [
+            "A blade that reads every ward and shield before the swing. That's a dangerous edge."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_small_d_defeat_signal_wraith',
+        'dialog': [
+            "The machines stopped screaming. The broadcast is finally over."
+        ]
+    },
+
+]
+
 
 TASKS = [
 	{
@@ -304,6 +618,9 @@ TASKS += [
                     'dialog_id': 'krayt_ledger_discovery'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_desert_small_e_investigate_ledger'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_small_e_investigate_ledger' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',   'dialog_id': 'magic_desert_small_e_investigate_ledger'   } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -345,6 +662,9 @@ TASKS += [
                     'dialog_id': 'venn_ledger_context'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_desert_small_e_consult_venn'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_small_e_consult_venn' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_desert_small_e_consult_venn'   } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -393,6 +713,9 @@ TASKS += [
                     'dialog_id': 'signal_wraith_ledger_guardian'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_desert_small_e_confront_signal_wraith'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_desert_small_e_confront_signal_wraith'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',  'dialog_id': 'lyren_desert_small_e_confront_signal_wraith'  } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -423,6 +746,9 @@ TASKS += [
                     'item_id': 'desert_small_city_e_eroded_ledger_plate'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_small_e_defeat_signal_wraith' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_desert_small_e_defeat_signal_wraith'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_desert_small_e_defeat_signal_wraith'   } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -456,7 +782,10 @@ TASKS += [
                     'npc_id': 'morrowdeal_krayt',
                     'dialog_id': 'krayt_ledger_received'
                 }
-            }
+            },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_small_e_return_to_krayt' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_desert_small_e_return_to_krayt'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',       'dialog_id': 'nia_desert_small_e_return_to_krayt'       } },
         ]
     },
 
@@ -497,6 +826,9 @@ TASKS += [
                     'dialog_id': 'krayt_tess_tip'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_small_f_find_tess_trail' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',     'dialog_id': 'magic_desert_small_f_find_tess_trail'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn',     'dialog_id': 'thorn_desert_small_f_find_tess_trail'     } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -531,6 +863,9 @@ TASKS += [
                     'dialog_id': 'Jexa_tess_location'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_desert_small_f_ask_jexa'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_desert_small_f_ask_jexa' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_desert_small_f_ask_jexa' } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -555,6 +890,9 @@ TASKS += [
                     'dialog_id': 'tess_radpost_intro'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_small_f_find_tess' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_desert_small_f_find_tess'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',     'dialog_id': 'magic_desert_small_f_find_tess'     } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -589,6 +927,9 @@ TASKS += [
                     'dialog_id': 'tess_radpost_registry_handoff'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_desert_small_f_receive_registry'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_desert_small_f_receive_registry' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_desert_small_f_receive_registry'   } },
             {
                 'event_type': 'award_item',
                 'params': {
@@ -658,6 +999,15 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{
+				'event_type': 'remove_item',
+				'params': {
+					'item_id': 'eroded_ledger_plate'
+				}
+			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_small_d_deliver_ledger_plate' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_desert_small_d_deliver_ledger_plate'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_desert_small_d_deliver_ledger_plate'   } },
+			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'desert_small_city_type_d_consult_venn'
@@ -694,6 +1044,9 @@ TASKS += [
 					'dialog_id': 'venn_d_plate_read'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_desert_small_d_consult_venn'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_small_d_consult_venn' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_desert_small_d_consult_venn'   } },
             {
                 'event_type': 'create_npc',
                 'params': {
@@ -737,6 +1090,9 @@ TASKS += [
 					'dialog_id': 'signal_wraith_d_awakens'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_desert_small_d_meet_signal_wraith'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_desert_small_d_meet_signal_wraith'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',  'dialog_id': 'lyren_desert_small_d_meet_signal_wraith'  } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -768,6 +1124,9 @@ TASKS += [
 					'item_id': 'mythic_desert_small_scrapwrights_edge'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_small_d_defeat_signal_wraith' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_desert_small_d_defeat_signal_wraith'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_desert_small_d_defeat_signal_wraith'   } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {

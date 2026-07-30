@@ -227,6 +227,112 @@ NPC_DIALOG += [
 
 ]
 
+# --- Character dialogs: main story chain ---
+NPC_DIALOG += [
+
+	# Meet Tavik
+	{ 'npc_id': 'thorn',  'dialog_id': 'thorn_swamp_small_meet_tavik',  'dialog': [ "Channels twisting where they used to run straight. The swamp's hiding its own paths again." ] },
+	{ 'npc_id': 'sable',  'dialog_id': 'sable_swamp_small_meet_tavik',  'dialog': [ "Something's swallowing the routes we trust. I've felt that kind of silence before." ] },
+	{ 'npc_id': 'ripple', 'dialog_id': 'ripple_swamp_small_meet_tavik', 'dialog': [ "The current doesn't forget. When it starts erasing itself, someone's making it." ] },
+
+	# Meet Madra
+	{ 'npc_id': 'nia',    'dialog_id': 'nia_swamp_small_meet_madra',    'dialog': [ "Smugglers vanishing on routes they've walked for years. Shadows moving wrong in Hollow." ] },
+	{ 'npc_id': 'bragg',  'dialog_id': 'bragg_swamp_small_meet_madra',  'dialog': [ "If we don't act, the swamp claims every traveler. She's not exaggerating." ] },
+	{ 'npc_id': 'kor_in', 'dialog_id': 'kor_in_swamp_small_meet_madra', 'dialog': [ "Some places only stay open if someone keeps walking them. Hollow is losing that." ] },
+
+	# Find Draveth
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_small_find_draveth', 'dialog': [ "A Swallowed Path — spirit of devoured routes. If it wakes fully, no one finds their way out." ] },
+	{ 'npc_id': 'ripple',  'dialog_id': 'ripple_swamp_small_find_draveth',  'dialog': [ "The current-signs are already vanishing. It's rising under the murk." ] },
+	{ 'npc_id': 'sable',   'dialog_id': 'sable_swamp_small_find_draveth',   'dialog': [ "Listen carefully. The swamp is trying to forget its own roads." ] },
+
+	# Murkchannel Run
+	{ 'npc_id': 'ripple', 'dialog_id': 'ripple_swamp_small_murkchannel_run', 'dialog': [ "We are the channels the swamp forgot. The Swallowed Path is twisting their flow." ] },
+	{ 'npc_id': 'kor_in', 'dialog_id': 'kor_in_swamp_small_murkchannel_run', 'dialog': [ "It waits deeper in the Rotfen Hideaway. Of course it does." ] },
+	{ 'npc_id': 'lyren',  'dialog_id': 'lyren_swamp_small_murkchannel_run',  'dialog': [ "Some paths only remember how to be erased. We force them open again." ] },
+
+	# Rotfen Hideaway
+	{ 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_rotfen_hideaway', 'dialog': [ "The Hideaway is churning with lost routes. The Path is gathering strength." ] },
+	{ 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_rotfen_hideaway', 'dialog': [ "Only its heart remains. Sever it before the channels close for good." ] },
+	{ 'npc_id': 'bragg', 'dialog_id': 'bragg_swamp_small_rotfen_hideaway', 'dialog': [ "Then we go cut the heart out." ] },
+
+	# Swallowed Path
+	{ 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_swallowed_path', 'dialog': [ "The channels clear. The swamp breathes easier." ] },
+	{ 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_swallowed_path', 'dialog': [ "You've restored the paths the mire tried to swallow. Travelers will owe you their lives." ] },
+	{ 'npc_id': 'nia',   'dialog_id': 'nia_swamp_small_swallowed_path',   'dialog': [ "Tavik can run them safely again. That's enough." ] },
+
+]
+
+# --- Character dialogs: Type D (Rotfen Dredge Blade chain) ---
+NPC_DIALOG += [
+
+	# Type D – Deliver Memory Vessel
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_small_d_deliver_memory_vessel', 'dialog': [ "The clay holds a forge-resonance Diego's never felt from a swamp relic. There's metal inside the Hollow only this can unlock." ] },
+	{ 'npc_id': 'ripple',  'dialog_id': 'ripple_swamp_small_d_deliver_memory_vessel',  'dialog': [ "Draveth reads the channels. He'll know where the resonance leads." ] },
+	{ 'npc_id': 'kor_in',  'dialog_id': 'kor_in_swamp_small_d_deliver_memory_vessel',  'dialog': [ "The Bayou's memory doesn't belong here — and the Rotfen Voice already knows it." ] },
+
+	# Type D – Consult Draveth
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_small_d_consult_draveth', 'dialog': [ "The memory inside is not from the Hollow. It carries the Bayou's oldest channels. The Voice will read it as a claim on its territory." ] },
+	{ 'npc_id': 'sable',   'dialog_id': 'sable_swamp_small_d_consult_draveth',   'dialog': [ "That anger is what we need. It will surface. We will be ready." ] },
+	{ 'npc_id': 'ripple',  'dialog_id': 'ripple_swamp_small_d_consult_draveth',  'dialog': [ "The Hideaway won't stay open long. Move." ] },
+
+	# Type D – Meet Rotfen Voice
+	{ 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_d_meet_rotfen_voice', 'dialog': [ "It already decided the vessel is poison here." ] },
+	{ 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_d_meet_rotfen_voice', 'dialog': [ "It will take the vessel — and every route we ever knew. We don't let it." ] },
+	{ 'npc_id': 'lyren', 'dialog_id': 'lyren_swamp_small_d_meet_rotfen_voice', 'dialog': [ "Some voices only know how to keep what the swamp tried to forget." ] },
+
+	# Type D – Defeat Rotfen Voice
+	{ 'npc_id': 'thorn',   'dialog_id': 'thorn_swamp_small_d_defeat_rotfen_voice',   'dialog': [ "Quiet. Take the swamp-iron." ] },
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_small_d_defeat_rotfen_voice', 'dialog': [ "It knows every route the swamp has ever swallowed. You won't get lost carrying this." ] },
+	{ 'npc_id': 'sable',   'dialog_id': 'sable_swamp_small_d_defeat_rotfen_voice',   'dialog': [ "Every route the Voice devoured has returned. The channels flow clean again." ] },
+
+]
+
+# --- Character dialogs: Type A Ch.7 ---
+NPC_DIALOG += [
+
+	# Type A – Ch7 Find Pendant
+	{ 'npc_id': 'nia',    'dialog_id': 'nia_swamp_small_a_ch7_find_pendant',    'dialog': [ "Silver pendant from a sunken skiff named Vale. Delicate work — not from around here." ] },
+	{ 'npc_id': 'kor_in', 'dialog_id': 'kor_in_swamp_small_a_ch7_find_pendant', 'dialog': [ "Nobody claimed it. Someone out there is missing it." ] },
+	{ 'npc_id': 'ripple', 'dialog_id': 'ripple_swamp_small_a_ch7_find_pendant', 'dialog': [ "You look like people who travel. Maybe you know the name." ] },
+
+]
+
+# --- Character dialogs: Type C (Ghost chain) ---
+NPC_DIALOG += [
+
+	# Type C – Find Ghost
+	{ 'npc_id': 'bragg', 'dialog_id': 'bragg_swamp_small_c_find_ghost', 'dialog': [ "Someone moves through the night channels with no boat, no wake, until they're already gone." ] },
+	{ 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_c_find_ghost', 'dialog': [ "Madra's clocked them twice near the Hideaway. They're not hiding from the swamp — they're hiding from us." ] },
+	{ 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_c_find_ghost', 'dialog': [ "Find out what they're watching. That might earn a word." ] },
+
+	# Type C – Madra Vouch
+	{ 'npc_id': 'bragg', 'dialog_id': 'bragg_swamp_small_c_madra_vouch', 'dialog': [ "I've seen every kind of shadow. This one moves like the dark owes them a favour." ] },
+	{ 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_c_madra_vouch', 'dialog': [ "Name's Ghost. They don't move for coin or cause. Find out what they're watching." ] },
+	{ 'npc_id': 'nia',   'dialog_id': 'nia_swamp_small_c_madra_vouch',   'dialog': [ "That might earn you a word. Worth the risk." ] },
+
+	# Type C – Meet Ghost
+	{ 'npc_id': 'bragg', 'dialog_id': 'bragg_swamp_small_c_meet_ghost', 'dialog': [ "We've been watched since the Riftlands. Operating quietly is worth something in Hollow." ] },
+	{ 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_c_meet_ghost', 'dialog': [ "The swamp runs on favours and silence. We've earned both." ] },
+	{ 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_c_meet_ghost', 'dialog': [ "They move when they decide. We point the direction. That's the arrangement." ] },
+
+]
+
+# --- Character dialogs: Type A Channel Check ---
+NPC_DIALOG += [
+
+	# Type A – Channel Check
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_small_a_channel_check', 'dialog': [ "Engine pressure from the outpost is disturbing the current-signs, but the flow holds. Mire absorption is high enough." ] },
+	{ 'npc_id': 'ripple',  'dialog_id': 'ripple_swamp_small_a_channel_check',  'dialog': [ "Tell Madra the current-signs confirm it. She'll relay to Seth." ] },
+	{ 'npc_id': 'sable',   'dialog_id': 'sable_swamp_small_a_channel_check',   'dialog': [ "Her network's already gone quiet. His word is the last thing she needs." ] },
+
+	# Type A – Relay to Madra
+	{ 'npc_id': 'bragg', 'dialog_id': 'bragg_swamp_small_a_relay_to_madra', 'dialog': [ "Draveth's read is in. Network's quiet — no bounties, no interference." ] },
+	{ 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_a_relay_to_madra', 'dialog': [ "Hollow's clear. Tell Seth he can lift off." ] },
+	{ 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_a_relay_to_madra', 'dialog': [ "Finally." ] },
+
+]
+
+
 TASKS = [
 	{
 		'task_id': 'swamp_small_city_initialize',
@@ -318,6 +424,9 @@ TASKS = [
                     'dialog_id': 'tavik_intro'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn',  'dialog_id': 'thorn_swamp_small_meet_tavik'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable',  'dialog_id': 'sable_swamp_small_meet_tavik'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_swamp_small_meet_tavik' } },
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
@@ -352,6 +461,9 @@ TASKS = [
                     'dialog_id': 'madra_intro'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',    'dialog_id': 'nia_swamp_small_meet_madra'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg',  'dialog_id': 'bragg_swamp_small_meet_madra'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_swamp_small_meet_madra' } },
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
@@ -404,6 +516,9 @@ TASKS = [
                     'dialog_id': 'draveth_intro'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_small_find_draveth' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple',  'dialog_id': 'ripple_swamp_small_find_draveth'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable',   'dialog_id': 'sable_swamp_small_find_draveth'   } },
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
@@ -453,6 +568,9 @@ TASKS = [
                     'dialog_id': 'murkchannel_echo_intro'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_swamp_small_murkchannel_run' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_swamp_small_murkchannel_run' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',  'dialog_id': 'lyren_swamp_small_murkchannel_run'  } },
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
@@ -503,6 +621,9 @@ TASKS = [
                     'dialog_id': 'rotfen_voice_intro'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_rotfen_hideaway' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_rotfen_hideaway' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_swamp_small_rotfen_hideaway' } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -542,6 +663,9 @@ TASKS = [
                     'dialog_id': 'tavik_closing'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_swallowed_path' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_swallowed_path' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_swamp_small_swallowed_path'   } },
             {
                 'event_type': 'complete_region_quest',
                 'params': {
@@ -582,6 +706,9 @@ TASKS = [
                     'dialog_id': 'diego_d_swamp_vessel_received'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_small_d_deliver_memory_vessel' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple',  'dialog_id': 'ripple_swamp_small_d_deliver_memory_vessel'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in',  'dialog_id': 'kor_in_swamp_small_d_deliver_memory_vessel'  } },
             {
                 'event_type': 'remove_item',
                 'params': {
@@ -623,6 +750,9 @@ TASKS = [
 					'dialog_id': 'draveth_d_vessel_read'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_small_d_consult_draveth' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable',   'dialog_id': 'sable_swamp_small_d_consult_draveth'   } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple',  'dialog_id': 'ripple_swamp_small_d_consult_draveth'  } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -658,6 +788,9 @@ TASKS = [
 					'dialog_id': 'rotfen_voice_d_awakens'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_d_meet_rotfen_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_d_meet_rotfen_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_swamp_small_d_meet_rotfen_voice' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -689,6 +822,9 @@ TASKS = [
 					'item_id': 'mythic_swamp_small_rotfen_dredge_blade'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn',   'dialog_id': 'thorn_swamp_small_d_defeat_rotfen_voice'   } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_small_d_defeat_rotfen_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable',   'dialog_id': 'sable_swamp_small_d_defeat_rotfen_voice'   } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -750,6 +886,9 @@ TASKS += [
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'bogrunner_tavik', 'dialog_id': 'tavik_a_ch7_pendant' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',    'dialog_id': 'nia_swamp_small_a_ch7_find_pendant'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_swamp_small_a_ch7_find_pendant' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_swamp_small_a_ch7_find_pendant' } },
             { 'event_type': 'award_item', 'params': { 'item_id': 'vale_pendant' }},
         ]
     },
@@ -789,6 +928,9 @@ TASKS += [
 					'dialog_id': 'tavik_c_ghost_sighting'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_swamp_small_c_find_ghost' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_c_find_ghost' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_c_find_ghost' } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -823,6 +965,9 @@ TASKS += [
 					'dialog_id': 'madra_c_ghost_vouch'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_swamp_small_c_madra_vouch' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_c_madra_vouch' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_swamp_small_c_madra_vouch'   } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -872,6 +1017,9 @@ TASKS += [
 					'dialog_id': 'ghost_c_joins'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_swamp_small_c_meet_ghost' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_c_meet_ghost' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_c_meet_ghost' } },
 			{
 				'event_type': 'character_join',
 				'params': {
@@ -916,6 +1064,9 @@ TASKS += [
 					'dialog_id': 'draveth_a_clearance'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_small_a_channel_check' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple',  'dialog_id': 'ripple_swamp_small_a_channel_check'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable',   'dialog_id': 'sable_swamp_small_a_channel_check'   } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -951,6 +1102,9 @@ TASKS += [
 					'dialog_id': 'madra_a_network_clear'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_swamp_small_a_relay_to_madra' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_a_relay_to_madra' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_a_relay_to_madra' } },
 		]
 	},
 

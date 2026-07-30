@@ -202,6 +202,228 @@ NPC_DIALOG += [
 
 ]
 
+# --- Character dialogs: Type C ---
+NPC_DIALOG += [
+
+    # Type C – Find Elyra
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_desert_mid_c_find_elyra',
+        'dialog': [
+            "She's seen this city erased a hundred times and still chooses to stay. That takes a particular kind of strength."
+        ]
+    },
+    {
+        'npc_id': 'ripple',
+        'dialog_id': 'ripple_desert_mid_c_find_elyra',
+        'dialog': [
+            "Visions of ink dissolving and names going dark… she's not just watching the future. She's trying to understand why it keeps failing."
+        ]
+    },
+    {
+        'npc_id': 'kor_in',
+        'dialog_id': 'kor_in_desert_mid_c_find_elyra',
+        'dialog': [
+            "Some people stay in a place because they hope it will finally choose a better ending."
+        ]
+    },
+
+    # Type C – Consult Velra
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_mid_c_consult_velra',
+        'dialog': [
+            "Velra doesn't believe in coincidence. She believes in pattern. That's useful."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_mid_c_consult_velra',
+        'dialog': [
+            "She reads the archive the same way Elyra reads possible futures. Two different indexes of the same threat."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_desert_mid_c_consult_velra',
+        'dialog': [
+            "If she trusts the entry she just made, we should take it seriously."
+        ]
+    },
+
+    # Type C – Earn Elyra
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_desert_mid_c_earn_elyra',
+        'dialog': [
+            "She saw us in every future that ends well. That's not a small thing to carry."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_desert_mid_c_earn_elyra',
+        'dialog': [
+            "Indexed by the Vaults themselves. I like the sound of being un-erasable."
+        ]
+    },
+    {
+        'npc_id': 'ripple',
+        'dialog_id': 'ripple_desert_mid_c_earn_elyra',
+        'dialog': [
+            "Some people join because of duty. She's joining because the pattern finally included us."
+        ]
+    },
+
+]
+
+# --- Character dialogs: Type D ---
+NPC_DIALOG += [
+
+    # Type D – Deliver Ink Vial
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_mid_d_deliver_ink_vial',
+        'dialog': [
+            "Ink that moves on its own is looking for a host. We should not let it find one."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_desert_mid_d_deliver_ink_vial',
+        'dialog': [
+            "Identity anchor in liquid form. Dangerous, elegant, and exactly the kind of thing Mira would notice."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_mid_d_deliver_ink_vial',
+        'dialog': [
+            "Take it to Threx before the vial decides what it wants to write."
+        ]
+    },
+
+    # Type D – Consult Threx
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_mid_d_consult_threx',
+        'dialog': [
+            "Binding a living identity into script. That's not archival work — that's containment."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_mid_d_consult_threx',
+        'dialog': [
+            "The Ink Specter carries the matching frequency. Of course the solution is to dissolve it correctly."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_desert_mid_d_consult_threx',
+        'dialog': [
+            "Then we find the Specter and finish the process."
+        ]
+    },
+
+    # Type D – Meet Ink Specter
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_desert_mid_d_meet_ink_specter',
+        'dialog': [
+            "It already decided we're the ones who took something from it."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_desert_mid_d_meet_ink_specter',
+        'dialog': [
+            "'I will rewrite you before I let it go.' Bold claim for something made of ink."
+        ]
+    },
+    {
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_desert_mid_d_meet_ink_specter',
+        'dialog': [
+            "It's not protecting the vial. It's protecting the last piece of itself that still has a name."
+        ]
+    },
+
+    # Type D – Defeat Ink Specter
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_desert_mid_d_defeat_ink_specter',
+        'dialog': [
+            "It's done. Take whatever crystallized."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_desert_mid_d_defeat_ink_specter',
+        'dialog': [
+            "An identity that cannot be erased… that's a heavy gift."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_mid_d_defeat_ink_specter',
+        'dialog': [
+            "The archive is whole again. The Specter's corruption is indexed and closed."
+        ]
+    },
+
+]
+
+# --- Character dialogs: Type B ---
+NPC_DIALOG += [
+
+    # B – Meet Zaruun
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_desert_mid_b_meet_zaruun',
+        'dialog': [
+            "He's not the same shape. The void remade him."
+        ]
+    },
+    {
+        'npc_id': 'sable',
+        'dialog_id': 'sable_desert_mid_b_meet_zaruun',
+        'dialog': [
+            "The dunes here are his memory — and they remember us."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_mid_b_meet_zaruun',
+        'dialog': [
+            "What's left of him is using the desert as a body. We end it here."
+        ]
+    },
+
+    # B – Defeat Zaruun
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_desert_mid_b_defeat_zaruun',
+        'dialog': [
+            "Stay down this time."
+        ]
+    },
+    {
+        'npc_id': 'sable',
+        'dialog_id': 'sable_desert_mid_b_defeat_zaruun',
+        'dialog': [
+            "The sand is quiet again. The real kind of quiet."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_desert_mid_b_defeat_zaruun',
+        'dialog': [
+            "Some silences are earned. This one feels final."
+        ]
+    },
+
+]
+
 TASKS += [
 
 	# C-1 — Find Elyra Dawnseer
@@ -237,6 +459,9 @@ TASKS += [
 					'dialog_id': 'elyra_c_first_meet'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_desert_mid_c_find_elyra'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_desert_mid_c_find_elyra' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_desert_mid_c_find_elyra' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -261,6 +486,9 @@ TASKS += [
 					'dialog_id': 'velra_c_vouch'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_desert_mid_c_consult_velra'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_mid_c_consult_velra' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_desert_mid_c_consult_velra'   } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -297,6 +525,9 @@ TASKS += [
 					'dialog_id': 'elyra_c_joins'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_desert_mid_c_earn_elyra'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_desert_mid_c_earn_elyra'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_desert_mid_c_earn_elyra' } },
 			{
 				'event_type': 'character_join',
 				'params': {
@@ -364,6 +595,15 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{
+				'event_type': 'remove_item',
+				'params': {
+					'item_id': 'ink_resonance_vial'
+				}
+			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_desert_mid_d_deliver_ink_vial'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',   'dialog_id': 'magic_desert_mid_d_deliver_ink_vial'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_mid_d_deliver_ink_vial' } },
+			{
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'archivist_warden_threx',
@@ -395,6 +635,9 @@ TASKS += [
 					'dialog_id': 'threx_d_vial_decode'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_desert_mid_d_consult_threx'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_mid_d_consult_threx' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_desert_mid_d_consult_threx'   } },
 			{
 				'event_type': 'create_npc',
 				'params': {
@@ -427,6 +670,9 @@ TASKS += [
 					'dialog_id': 'ink_specter_d_awakens'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_desert_mid_d_meet_ink_specter'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_desert_mid_d_meet_ink_specter'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',  'dialog_id': 'lyren_desert_mid_d_meet_ink_specter'  } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -458,6 +704,9 @@ TASKS += [
 					'item_id': 'mythic_desert_mid_veilscript_sigil'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_mid_d_defeat_ink_specter' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_desert_mid_d_defeat_ink_specter'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_desert_mid_d_defeat_ink_specter'   } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -565,6 +814,9 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'zaruun', 'dialog_id': 'zaruun_b_risen' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_mid_b_meet_zaruun' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable',     'dialog_id': 'sable_desert_mid_b_meet_zaruun'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_desert_mid_b_meet_zaruun'      } },
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'desert_mid_city_b_defeat_zaruun' }},
 		]
 	},
@@ -580,6 +832,9 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_b_victory' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_mid_b_defeat_zaruun' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable',     'dialog_id': 'sable_desert_mid_b_defeat_zaruun'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_desert_mid_b_defeat_zaruun'     } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'desert' }},
 		]
 	},

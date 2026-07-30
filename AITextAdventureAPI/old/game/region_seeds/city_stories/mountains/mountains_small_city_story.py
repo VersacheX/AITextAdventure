@@ -202,6 +202,71 @@ NPC_DIALOG += [
 
 ]
 
+# --- Character dialogs: Type E ---
+NPC_DIALOG += [
+
+	# Type E – Investigate Resonance
+	{ 'npc_id': 'tech',    'dialog_id': 'kade_mountains_small_e_investigate_resonance',    'dialog': [ "A shard humming with resonance that doesn't belong in raw ore. Someone drove it into the stone deliberately." ] },
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_mountains_small_e_investigate_resonance', 'dialog': [ "The pattern matches marks on collapsed tunnel walls. This was a claim, not an accident." ] },
+	{ 'npc_id': 'skill',   'dialog_id': 'poise_mountains_small_e_investigate_resonance',   'dialog': [ "Thalric can read what was placed here. We find him on the ridge." ] },
+
+	# Type E – Consult Thalric
+	{ 'npc_id': 'tech',    'dialog_id': 'kade_mountains_small_e_consult_thalric',    'dialog': [ "A dominion anchor. Whoever placed it claimed authority over the forge-heat in this entire range." ] },
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_mountains_small_e_consult_thalric', 'dialog': [ "That claim has to be dissolved before it spreads deeper into the fault-lines." ] },
+	{ 'npc_id': 'technique',   'dialog_id': 'chock_mountains_small_e_consult_thalric',   'dialog': [ "Then we dissolve it." ] },
+
+	# Type E – Defeat Dominion Hollow
+	{ 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_e_defeat_dominion_hollow', 'dialog': [ "It's broken. The resonance is quiet." ] },
+	{ 'npc_id': 'faith', 'dialog_id': 'kaera_mountains_small_e_defeat_dominion_hollow', 'dialog': [ "Whatever hold that shard had on the tunnels is gone. The hollow can breathe again." ] },
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_e_defeat_dominion_hollow',  'dialog': [ "Hold onto it. Something that strong doesn't stop being useful just because the lock is broken." ] },
+
+]
+
+# --- Character dialogs: Type C ---
+NPC_DIALOG += [
+
+	# Type C – Find Vorn
+	{ 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_c_find_vorn', 'dialog': [ "Someone lit the secondary forge without permission and left work neither of them recognise." ] },
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_c_find_vorn',  'dialog': [ "Not hollow technique. Not foundry style. Belkan looked closer — we talk to him next." ] },
+	{ 'npc_id': 'magic', 'dialog_id': 'moxie_mountains_small_c_find_vorn', 'dialog': [ "An unknown smith who ignores locks. I already want to meet her." ] },
+
+	# Type C – Consult Belkan
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_c_consult_belkan',  'dialog': [ "Flawless welds, innate rather than trained. The ore remembers her touch differently than anyone he's ever watched." ] },
+	{ 'npc_id': 'magic', 'dialog_id': 'moxie_mountains_small_c_consult_belkan', 'dialog': [ "No one in the hollow knows her name and she's still at the forge. Perfect." ] },
+	{ 'npc_id': 'skill', 'dialog_id': 'poise_mountains_small_c_consult_belkan', 'dialog': [ "Go find out who she is." ] },
+
+	# Type C – Earn Lira
+	{ 'npc_id': 'magic', 'dialog_id': 'moxie_mountains_small_c_earn_lira', 'dialog': [ "She reads what others leave behind in the ore. Our forge-heat doesn't match any range she's worked. That's interesting to her." ] },
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_c_earn_lira',  'dialog': [ "She doesn't want an explanation. She'll understand it when she understands it." ] },
+	{ 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_c_earn_lira', 'dialog': [ "She's coming. Good. We could use someone who listens to the metal." ] },
+
+]
+
+# --- Character dialogs: Type D ---
+NPC_DIALOG += [
+
+	# Type D – Deliver Shard
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_d_deliver_shard',  'dialog': [ "The Dominion Hollow was guarding this for a reason. There's a blade in the deep fault-line that was forged when this shard was placed." ] },
+	{ 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_d_deliver_shard', 'dialog': [ "They're linked. The shard is its key. Korla knows the descent path." ] },
+	{ 'npc_id': 'skill', 'dialog_id': 'poise_mountains_small_d_deliver_shard', 'dialog': [ "Move before the resonance fades." ] },
+
+	# Type D – Consult Korla
+	{ 'npc_id': 'tech',    'dialog_id': 'kade_mountains_small_d_consult_korla',    'dialog': [ "The Dominion Edge has been below since before any tunnel she's charted. Thalric has to wake it — but its guardian will answer first." ] },
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_mountains_small_d_consult_korla', 'dialog': [ "The fault-echoes already confirm the blade's location. The guardian is stirring." ] },
+	{ 'npc_id': 'skill',   'dialog_id': 'poise_mountains_small_d_consult_korla',   'dialog': [ "We face what answers." ] },
+
+	# Type D – Meet Thalric
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_d_meet_thalric',  'dialog': [ "The blade is real. The Hollow was its keeper — we've already broken it once." ] },
+	{ 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_d_meet_thalric', 'dialog': [ "This time it guards the blade itself. It won't hold back." ] },
+	{ 'npc_id': 'skill', 'dialog_id': 'poise_mountains_small_d_meet_thalric', 'dialog': [ "Then neither do we." ] },
+
+	# Type D – Defeat Dominion Guardian
+	{ 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_d_defeat_dominion_guardian', 'dialog': [ "It's done. The Dominion Edge chose us." ] },
+	{ 'npc_id': 'faith', 'dialog_id': 'kaera_mountains_small_d_defeat_dominion_guardian', 'dialog': [ "The forge-heat steadied the moment we returned. Carry it with the weight it deserves." ] },
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_d_defeat_dominion_guardian',  'dialog': [ "Belkan felt it from the anvil. The claim is finally dissolved." ] },
+
+]
+
 
 TASKS = [
 	{
@@ -327,6 +392,9 @@ TASKS += [
 					'dialog_id': 'belkan_e_resonance'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_mountains_small_e_investigate_resonance'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_mountains_small_e_investigate_resonance' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_mountains_small_e_investigate_resonance'   } },
 			# Spawn Thalric here so his standing text is ready before the meet task
 			{
 				'event_type': 'create_npc',
@@ -369,6 +437,9 @@ TASKS += [
 					'dialog_id': 'thalric_e_reading'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_mountains_small_e_consult_thalric'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_mountains_small_e_consult_thalric' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique',   'dialog_id': 'chock_mountains_small_e_consult_thalric'   } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -407,6 +478,9 @@ TASKS += [
 					'dialog_id': 'korla_e_closing'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_e_defeat_dominion_hollow' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_mountains_small_e_defeat_dominion_hollow' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_e_defeat_dominion_hollow'  } },
 			# Gate D chain — E artifact is the trigger for the same-city D slot
 			{
 				'event_type': 'set_npc_standing_text',
@@ -456,6 +530,9 @@ TASKS += [
 					'dialog_id': 'vorn_c_lira_sighting'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_c_find_vorn' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_c_find_vorn'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_mountains_small_c_find_vorn' } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -490,6 +567,9 @@ TASKS += [
 					'dialog_id': 'belkan_c_lira_vouch'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_c_consult_belkan'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_mountains_small_c_consult_belkan' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_mountains_small_c_consult_belkan' } },
 			{
 				'event_type': 'create_npc',
 				'params': {
@@ -538,6 +618,9 @@ TASKS += [
 					'dialog_id': 'lira_c_joins'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_mountains_small_c_earn_lira' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_c_earn_lira'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_c_earn_lira' } },
 			{
 				'event_type': 'hide_npc',
 				'params': { 'npc_id': 'lira_emberforge' }
@@ -590,6 +673,9 @@ TASKS += [
 					'dialog_id': 'belkan_d_shard_receipt'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_d_deliver_shard'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_d_deliver_shard' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_mountains_small_d_deliver_shard' } },
 			{
 				'event_type': 'remove_item',
 				'params': {
@@ -630,6 +716,9 @@ TASKS += [
 					'dialog_id': 'korla_d_descent'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_mountains_small_d_consult_korla'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_mountains_small_d_consult_korla' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_mountains_small_d_consult_korla'   } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -664,6 +753,9 @@ TASKS += [
 					'dialog_id': 'thalric_d_rite'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_d_meet_thalric'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_d_meet_thalric' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_mountains_small_d_meet_thalric' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -702,6 +794,9 @@ TASKS += [
 					'item_id': 'mythic_mountains_small_dominion_edge'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_d_defeat_dominion_guardian' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_mountains_small_d_defeat_dominion_guardian' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_d_defeat_dominion_guardian'  } },
 		]
 	},
 

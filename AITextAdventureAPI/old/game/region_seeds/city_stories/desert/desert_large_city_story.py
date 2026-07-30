@@ -179,6 +179,297 @@ NPC_DIALOG += [
 
 ]
 
+# --- Character dialogs: Type E ---
+NPC_DIALOG += [
+
+    # Type E – Investigate Resonance
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_large_e_investigate_resonance',
+        'dialog': [
+            "A stone that makes people's teeth ache isn't just resonant. It's actively rejecting contact."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_large_e_investigate_resonance',
+        'dialog': [
+            "They reburied it like it was still dangerous. That kind of caution is rarely wasted."
+        ]
+    },
+    {
+        'npc_id': 'ripple',
+        'dialog_id': 'ripple_desert_large_e_investigate_resonance',
+        'dialog': [
+            "Something that old doesn't stay quiet by accident."
+        ]
+    },
+
+    # Type E – Consult Rhyla
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_desert_large_e_consult_rhyla',
+        'dialog': [
+            "A record sealed in frequency instead of language… they didn't want it read. They wanted it heard correctly."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_large_e_consult_rhyla',
+        'dialog': [
+            "The Choir locked knowledge away so thoroughly that even the land around it stayed silent."
+        ]
+    },
+    {
+        'npc_id': 'sable',
+        'dialog_id': 'sable_desert_large_e_consult_rhyla',
+        'dialog': [
+            "If the vault is still guarded after this long, whatever's inside was never meant to leave."
+        ]
+    },
+
+    # Type E – Confront Choir Echo
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_desert_large_e_confront_choir_echo',
+        'dialog': [
+            "It already decided we don't belong here."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_large_e_confront_choir_echo',
+        'dialog': [
+            "'Wrong hands' is an easy judgment when you're the one who set the lock."
+        ]
+    },
+    {
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_desert_large_e_confront_choir_echo',
+        'dialog': [
+            "It's not protecting knowledge. It's protecting the decision to keep it buried."
+        ]
+    },
+
+    # Type E – Defeat Choir Echo
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_desert_large_e_defeat_choir_echo',
+        'dialog': [
+            "It's done. Take the stone and let's move."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_large_e_defeat_choir_echo',
+        'dialog': [
+            "The lock is broken. The record is free whether it wanted to be or not."
+        ]
+    },
+    {
+        'npc_id': 'ripple',
+        'dialog_id': 'ripple_desert_large_e_defeat_choir_echo',
+        'dialog': [
+            "Even sealed things eventually want to be known."
+        ]
+    },
+
+    # Type E – Return to Rhyla
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_desert_large_e_return_to_rhyla',
+        'dialog': [
+            "Older than the Choir. Older than the cities. This thing has been waiting a very long time."
+        ]
+    },
+    {
+        'npc_id': 'kor_in',
+        'dialog_id': 'kor_in_desert_large_e_return_to_rhyla',
+        'dialog': [
+            "Some things wait so long they forget why they were waiting."
+        ]
+    },
+    {
+        'npc_id': 'sable',
+        'dialog_id': 'sable_desert_large_e_return_to_rhyla',
+        'dialog': [
+            "Keep it close. The desert has a habit of taking back what it thinks still belongs to it."
+        ]
+    },
+
+]
+
+# --- Character dialogs: Type F ---
+NPC_DIALOG += [
+
+    # Type F – Find Seth Trail
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_desert_large_f_find_seth_trail',
+        'dialog': [
+            "Seth left in a hurry. That's never a good sign with him."
+        ]
+    },
+    {
+        'npc_id': 'thorn',
+        'dialog_id': 'thorn_desert_large_f_find_seth_trail',
+        'dialog': [
+            "If something rattled him badly enough to run, I want to know what it was."
+        ]
+    },
+    {
+        'npc_id': 'nia',
+        'dialog_id': 'nia_desert_large_f_find_seth_trail',
+        'dialog': [
+            "He always moves salvage through Mara when he's nervous. She's the next stop."
+        ]
+    },
+
+    # Type F – Speak to Mara
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_large_f_speak_to_mara',
+        'dialog': [
+            "He left the crate but took the only entry that mattered. Classic misdirection."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_large_f_speak_to_mara',
+        'dialog': [
+            "Circled and crossed out. He didn't want a paper trail of whatever he pulled."
+        ]
+    },
+    {
+        'npc_id': 'thorn',
+        'dialog_id': 'thorn_desert_large_f_speak_to_mara',
+        'dialog': [
+            "Let's see the manifest."
+        ]
+    },
+
+    # Type F – Retrieve Manifest
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_large_f_retrieve_manifest',
+        'dialog': [
+            "'Recovered — Desert Metropolis vault. Rerouted. Do not log.' That wasn't client work."
+        ]
+    },
+    {
+        'npc_id': 'nia',
+        'dialog_id': 'nia_desert_large_f_retrieve_manifest',
+        'dialog': [
+            "Seth was freelancing something he knew he shouldn't touch."
+        ]
+    },
+    {
+        'npc_id': 'ripple',
+        'dialog_id': 'ripple_desert_large_f_retrieve_manifest',
+        'dialog': [
+            "Whatever came out of that vault, he didn't want anyone else to know it existed."
+        ]
+    },
+
+]
+
+# --- Character dialogs: Type D ---
+NPC_DIALOG += [
+
+    # Type D – Deliver Cipher Stone
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_desert_large_d_deliver_cipher_stone',
+        'dialog': [
+            "Diego again. At least he usually knows something useful."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_large_d_deliver_cipher_stone',
+        'dialog': [
+            "That frequency is older than anything his usual network deals in."
+        ]
+    },
+    {
+        'npc_id': 'sable',
+        'dialog_id': 'sable_desert_large_d_deliver_cipher_stone',
+        'dialog': [
+            "Be careful what you hand him. Some things change the people who hold them."
+        ]
+    },
+
+    # Type D – Consult Rhyla
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_desert_large_d_consult_rhyla',
+        'dialog': [
+            "A resonance blueprint… the dunes have been singing a weapon into existence for centuries."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_large_d_consult_rhyla',
+        'dialog': [
+            "The Archive Voice holds the final frequency. Of course the last piece is still underground."
+        ]
+    },
+    {
+        'npc_id': 'kor_in',
+        'dialog_id': 'kor_in_desert_large_d_consult_rhyla',
+        'dialog': [
+            "Some songs weren't meant to be finished. We're about to finish one anyway."
+        ]
+    },
+
+    # Type D – Meet Archive Voice
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_desert_large_d_meet_archive_voice',
+        'dialog': [
+            "It wants us to silence it before it will give up the frequency."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_large_d_meet_archive_voice',
+        'dialog': [
+            "Typical guardian logic. Knowledge only after the threat is removed."
+        ]
+    },
+    {
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_desert_large_d_meet_archive_voice',
+        'dialog': [
+            "Even a voice that old can still be afraid of being fully heard."
+        ]
+    },
+
+    # Type D – Defeat Archive Voice
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_desert_large_d_defeat_archive_voice',
+        'dialog': [
+            "It's quiet. Take the resonance."
+        ]
+    },
+    {
+        'npc_id': 'ripple',
+        'dialog_id': 'ripple_desert_large_d_defeat_archive_voice',
+        'dialog': [
+            "The dunes finally went still. I don't think they'll sing again for a long time."
+        ]
+    },
+    {
+        'npc_id': 'sable',
+        'dialog_id': 'sable_desert_large_d_defeat_archive_voice',
+        'dialog': [
+            "Some silences are earned. This one feels like it was."
+        ]
+    },
+
+]
+
 # --- Base city standing tasks ---
 TASKS = [
 	{
@@ -286,6 +577,9 @@ TASKS += [
                     'dialog_id': 'kadeem_cipher_tip'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_desert_large_e_investigate_resonance'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_large_e_investigate_resonance' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple',  'dialog_id': 'ripple_desert_large_e_investigate_resonance'  } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -317,6 +611,9 @@ TASKS += [
                     'dialog_id': 'rhyla_cipher_context'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',   'dialog_id': 'faith_desert_large_e_consult_rhyla'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_large_e_consult_rhyla' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable',   'dialog_id': 'sable_desert_large_e_consult_rhyla'   } },
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
@@ -365,6 +662,9 @@ TASKS += [
                     'dialog_id': 'choir_echo_vault_guardian'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_desert_large_e_confront_choir_echo'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_large_e_confront_choir_echo' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',   'dialog_id': 'lyren_desert_large_e_confront_choir_echo'   } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -389,6 +689,9 @@ TASKS += [
                     'item_id': 'desert_large_city_e_dune_cipher_stone'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_large_e_defeat_choir_echo' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_desert_large_e_defeat_choir_echo'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple',    'dialog_id': 'ripple_desert_large_e_defeat_choir_echo'    } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -412,7 +715,10 @@ TASKS += [
                     'npc_id': 'rhyla',
                     'dialog_id': 'rhyla_cipher_received'
                 }
-            },            
+            },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_desert_large_e_return_to_rhyla'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_desert_large_e_return_to_rhyla' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable',  'dialog_id': 'sable_desert_large_e_return_to_rhyla'  } },
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
@@ -451,6 +757,9 @@ TASKS += [
                     'dialog_id': 'kadeem_seth_tip'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_large_f_find_seth_trail' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn',     'dialog_id': 'thorn_desert_large_f_find_seth_trail'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',       'dialog_id': 'nia_desert_large_f_find_seth_trail'       } },
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
@@ -486,6 +795,9 @@ TASKS += [
                     'dialog_id': 'mara_seth_info'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_desert_large_f_speak_to_mara'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_large_f_speak_to_mara' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn',   'dialog_id': 'thorn_desert_large_f_speak_to_mara'   } },
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
@@ -521,6 +833,9 @@ TASKS += [
                     'dialog_id': 'mara_seth_manifest_delivered'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'tech_desert_large_f_retrieve_manifest'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',    'dialog_id': 'nia_desert_large_f_retrieve_manifest'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_desert_large_f_retrieve_manifest' } },
             {
                 'event_type': 'award_item',
                 'params': {
@@ -603,6 +918,9 @@ TASKS += [
 					'dialog_id': 'diego_intro'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_large_d_deliver_cipher_stone' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_desert_large_d_deliver_cipher_stone'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable',     'dialog_id': 'sable_desert_large_d_deliver_cipher_stone'     } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -639,6 +957,9 @@ TASKS += [
 					'dialog_id': 'rhyla_d_cipher_read'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',   'dialog_id': 'faith_desert_large_d_consult_rhyla'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_large_d_consult_rhyla' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in',  'dialog_id': 'kor_in_desert_large_d_consult_rhyla'  } },
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'archive_voice', 'location': 'region_open_area' } },
 			{
 				'event_type': 'award_task',
@@ -676,6 +997,9 @@ TASKS += [
 					'dialog_id': 'archive_voice_d_awakens'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_desert_large_d_meet_archive_voice'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_large_d_meet_archive_voice' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',   'dialog_id': 'lyren_desert_large_d_meet_archive_voice'   } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -707,6 +1031,9 @@ TASKS += [
 					'item_id': 'mythic_desert_large_dune_resonance_blade'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_large_d_defeat_archive_voice' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple',    'dialog_id': 'ripple_desert_large_d_defeat_archive_voice'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable',     'dialog_id': 'sable_desert_large_d_defeat_archive_voice'     } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {

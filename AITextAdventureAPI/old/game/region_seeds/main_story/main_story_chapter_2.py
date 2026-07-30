@@ -268,7 +268,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'moxie',
+		'npc_id': 'magic',
 		'dialog_id': 'moxie_ch2_after_leera',
 		'dialog': [
 			"Resonance Shard? Sounds like a job for us. Let's go find Juno."

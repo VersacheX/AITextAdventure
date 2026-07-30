@@ -166,6 +166,81 @@ NPC_DIALOG += [
 
 ]
 
+# --- Character dialogs: main story chain ---
+NPC_DIALOG += [
+
+	# Meet Karrek
+	{ 'npc_id': 'tech',    'dialog_id': 'kade_snow_small_meet_karrek',    'dialog': [ "Wind patterns he's never recorded. Something moves through the storm that shouldn't be there." ] },
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_small_meet_karrek', 'dialog': [ "Bleakwatch has survived worse — but not without knowing what's coming." ] },
+	{ 'npc_id': 'skill',   'dialog_id': 'poise_snow_small_meet_karrek',   'dialog': [ "Mira will know what the quiet supply routes mean." ] },
+
+	# Meet Survivor Mira
+	{ 'npc_id': 'faith', 'dialog_id': 'kaera_snow_small_meet_survivor_mira', 'dialog': [ "Supply routes gone quiet. The cold coming from the wrong direction." ] },
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_meet_survivor_mira',  'dialog': [ "If the outpost loses its watch, the whole frontier falls dark." ] },
+	{ 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_meet_survivor_mira', 'dialog': [ "Find Orlena. The storm-patterns near the hollow are fracturing." ] },
+
+	# Find Orlena
+	{ 'npc_id': 'tech',    'dialog_id': 'kade_snow_small_find_orlena',    'dialog': [ "A Stormhollow Voice — spirit of trapped battle-wind. If it breaks free, no signal will carry across the snow line." ] },
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_small_find_orlena', 'dialog': [ "The storm-patterns are already fracturing toward it. We still it before the frontier goes dark." ] },
+	{ 'npc_id': 'technique',   'dialog_id': 'chock_snow_small_find_orlena',   'dialog': [ "The wind reads clean again. Bleakwatch stands. That's all that matters." ] },
+
+]
+
+# --- Character dialogs: Type C (Commander Drax chain) ---
+NPC_DIALOG += [
+
+	# Type C – Find Drax
+	{ 'npc_id': 'technique', 'dialog_id': 'chock_snow_small_c_find_drax', 'dialog': [ "He's been watching since we crossed the frost-line. Bleakwatch has a wall. What it doesn't have is people worth standing behind it." ] },
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_c_find_drax',  'dialog': [ "Prove we're worth his time and he'll consider the offer. Fair terms for a commander who's lost units before." ] },
+	{ 'npc_id': 'bragg', 'dialog_id': 'bragg_snow_small_c_find_drax', 'dialog': [ "Karrek's the one who opens his door." ] },
+
+	# Type C – Consult Karrek
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_c_consult_karrek',  'dialog': [ "Drax doesn't move for anyone. That's policy, not stubbornness. He's lost units to commanders who moved too fast." ] },
+	{ 'npc_id': 'technique', 'dialog_id': 'chock_snow_small_c_consult_karrek', 'dialog': [ "Tell him we didn't flinch on the storm-approach. Coming from Karrek, that's the only credential that works." ] },
+	{ 'npc_id': 'bragg', 'dialog_id': 'bragg_snow_small_c_consult_karrek', 'dialog': [ "He's already half-decided. This just confirms it." ] },
+
+	# Type C – Earn Drax
+	{ 'npc_id': 'technique', 'dialog_id': 'chock_snow_small_c_earn_drax', 'dialog': [ "Karrek doesn't say that about anyone. He's watched soldiers break on that approach for twenty years." ] },
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_c_earn_drax',  'dialog': [ "He leads from the front. Position him at the rear and he walks. Understood." ] },
+	{ 'npc_id': 'bragg', 'dialog_id': 'bragg_snow_small_c_earn_drax', 'dialog': [ "Fine. He's in." ] },
+
+]
+
+# --- Character dialogs: Type D (Bleakwatch Warden Plate chain) ---
+NPC_DIALOG += [
+
+	# Type D – Deliver Contraband Registry
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_d_deliver_contraband_registry',  'dialog': [ "A contraband registry from Tess's network — black-market warden equipment. The outpost's original plate disappeared during the second siege." ] },
+	{ 'npc_id': 'magic', 'dialog_id': 'moxie_snow_small_d_deliver_contraband_registry', 'dialog': [ "This entry traces the last known location to the Stormhollow. Brawn will know the design." ] },
+	{ 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_d_deliver_contraband_registry', 'dialog': [ "Orlena next. The gale is already reading something armoured down there." ] },
+
+	# Type D – Consult Orlena
+	{ 'npc_id': 'tech',    'dialog_id': 'kade_snow_small_d_consult_orlena',    'dialog': [ "The storm-patterns around the hollow carry the warden frequency. The plate has been down there since the siege." ] },
+	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_small_d_consult_orlena', 'dialog': [ "The Stormhollow Voice absorbed the battle-wind that buried it. Force it out and the plate surfaces with the storm it was trapped in." ] },
+	{ 'npc_id': 'skill',   'dialog_id': 'poise_snow_small_d_consult_orlena',   'dialog': [ "It won't surrender the armour quietly." ] },
+
+	# Type D – Meet Stormhollow Voice
+	{ 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_d_meet_stormhollow_voice', 'dialog': [ "It already decided the warden's plate is its." ] },
+	{ 'npc_id': 'magic', 'dialog_id': 'moxie_snow_small_d_meet_stormhollow_voice', 'dialog': [ "Every storm that buried this outpost feeds it. The battle-wind that never stopped." ] },
+	{ 'npc_id': 'lyren', 'dialog_id': 'lyren_snow_small_d_meet_stormhollow_voice', 'dialog': [ "Some voices only know how to keep the armour of the ones who fell. We take it back." ] },
+
+	# Type D – Defeat Stormhollow Voice
+	{ 'npc_id': 'technique', 'dialog_id': 'chock_snow_small_d_defeat_stormhollow_voice', 'dialog': [ "The storm broke clean when we came back." ] },
+	{ 'npc_id': 'faith', 'dialog_id': 'kaera_snow_small_d_defeat_stormhollow_voice', 'dialog': [ "That plate hasn't breathed open air since the second siege. The outpost's warden returns to the wall." ] },
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_d_defeat_stormhollow_voice',  'dialog': [ "Brawn says it's the finest warden-grade steel he's handled. Fitting." ] },
+
+]
+
+# --- Character dialogs: Type A Ch.6 ---
+NPC_DIALOG += [
+
+	# Type A – Ch6 Meet Karrek
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_a_ch6_meet_karrek',  'dialog': [ "Storm-pattern fractures near the hollow for three days. Something moved through that breach site that wasn't weather." ] },
+	{ 'npc_id': 'magic', 'dialog_id': 'moxie_snow_small_a_ch6_meet_karrek', 'dialog': [ "The hollow is listening. Whatever crawled out — it knows we're watching too." ] },
+	{ 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_a_ch6_meet_karrek', 'dialog': [ "Take the reading to Seth. He'll know what it means." ] },
+
+]
+
 
 TASKS = [
 
@@ -207,7 +282,7 @@ TASKS = [
 				}
 			},
 		],
-		'task_complete_events': [			
+		'task_complete_events': [
             { 'event_type': 'award_task', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }},
 			{
 				'event_type': 'award_task',
@@ -254,6 +329,9 @@ TASKS = [
 					'dialog_id': 'karrek_intro'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_small_meet_karrek'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_small_meet_karrek' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_snow_small_meet_karrek'   } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -276,6 +354,9 @@ TASKS = [
 					'dialog_id': 'mira_intro'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_small_meet_survivor_mira' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_meet_survivor_mira'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_meet_survivor_mira' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -316,6 +397,9 @@ TASKS = [
 					'dialog_id': 'orlena_intro'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_small_find_orlena'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_small_find_orlena' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique',   'dialog_id': 'chock_snow_small_find_orlena'   } },
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
@@ -374,6 +458,9 @@ TASKS += [
 					'dialog_id': 'drax_c_first_meet'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_snow_small_c_find_drax' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_c_find_drax'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_snow_small_c_find_drax' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -407,6 +494,9 @@ TASKS += [
 					'dialog_id': 'karrek_c_vouch'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_c_consult_karrek'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_snow_small_c_consult_karrek' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_snow_small_c_consult_karrek' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -440,6 +530,9 @@ TASKS += [
 					'dialog_id': 'drax_c_joins'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_snow_small_c_earn_drax' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_c_earn_drax'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_snow_small_c_earn_drax' } },
 			{
 				'event_type': 'hide_npc',
 				'params': {
@@ -474,6 +567,9 @@ TASKS += [
 		'to_id': 'brawn',
 		'task_acquire_events': [],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_d_deliver_contraband_registry'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_small_d_deliver_contraband_registry' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_d_deliver_contraband_registry' } },
 			{
 				'event_type': 'remove_item',
 				'params': {
@@ -521,6 +617,9 @@ TASKS += [
 					'dialog_id': 'orlena_d_storm_read'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_small_d_consult_orlena'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_small_d_consult_orlena' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_snow_small_d_consult_orlena'   } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -561,6 +660,9 @@ TASKS += [
 					'dialog_id': 'stormhollow_voice_awakens'
 				}
 			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_d_meet_stormhollow_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_small_d_meet_stormhollow_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_snow_small_d_meet_stormhollow_voice' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -596,7 +698,10 @@ TASKS += [
 				'params': {
 					'item_id': 'mythic_snow_small_bleakwatch_warden_plate'
 				}
-			}
+			},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_snow_small_d_defeat_stormhollow_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_small_d_defeat_stormhollow_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_d_defeat_stormhollow_voice'  } },
 		]
 	},
 
@@ -639,6 +744,9 @@ TASKS += [
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'vigilant_karrek', 'dialog_id': 'karrek_a_ch6_storm_report' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_a_ch6_meet_karrek'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_small_a_ch6_meet_karrek' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_a_ch6_meet_karrek' } },
         ]
     },
 

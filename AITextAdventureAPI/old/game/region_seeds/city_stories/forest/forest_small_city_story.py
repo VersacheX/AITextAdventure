@@ -218,6 +218,297 @@ NPC_DIALOG += [
 
 ]
 
+# --- Character dialogs: Type E ---
+NPC_DIALOG += [
+
+    # Type E – Investigate Graft
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_forest_small_e_investigate_graft',
+        'dialog': [
+            "A living cutting sealed for preservation and never retrieved. The original tree has been gone for two generations."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_forest_small_e_investigate_graft',
+        'dialog': [
+            "Root grafts don't just preserve — they transmit. This one has been trying to reach something for longer than the records can date."
+        ]
+    },
+    {
+        'npc_id': 'ripple',
+        'dialog_id': 'ripple_forest_small_e_investigate_graft',
+        'dialog': [
+            "The tree it came from is gone, but the cutting is still alive. That's not accident. That's intention."
+        ]
+    },
+
+    # Type E – Consult Lyss
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_forest_small_e_consult_lyss',
+        'dialog': [
+            "The Burrow Whisper guards that stretch more fiercely than any other. It's protecting something inside."
+        ]
+    },
+    {
+        'npc_id': 'thorn',
+        'dialog_id': 'thorn_forest_small_e_consult_lyss',
+        'dialog': [
+            "Sealed alcove, old growth roots around the entrance. The forest asked something to keep watch."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_forest_small_e_consult_lyss',
+        'dialog': [
+            "It's not protecting the space. It's protecting the graft."
+        ]
+    },
+
+    # Type E – Confront Burrow Whisper
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_forest_small_e_confront_burrow_whisper',
+        'dialog': [
+            "It already decided we are not the forest."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_forest_small_e_confront_burrow_whisper',
+        'dialog': [
+            "'The forest asked us to keep it.' Convenient when you're the one who decided what the forest wanted."
+        ]
+    },
+    {
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_forest_small_e_confront_burrow_whisper',
+        'dialog': [
+            "Some keepers forget that the thing they're guarding might still want to leave."
+        ]
+    },
+
+    # Type E – Defeat Burrow Whisper
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_forest_small_e_defeat_burrow_whisper',
+        'dialog': [
+            "It's done. Take the graft carefully — it's still alive."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_forest_small_e_defeat_burrow_whisper',
+        'dialog': [
+            "A cutting that carries the memory of a tree that no longer exists anywhere in Thornshade."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_forest_small_e_defeat_burrow_whisper',
+        'dialog': [
+            "Fernhollow will want to see it before it decides where it needs to go."
+        ]
+    },
+
+    # Type E – Return to Fernhollow
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_forest_small_e_return_to_fernhollow',
+        'dialog': [
+            "Still alive after all this time. The moths have been holding its memory."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_forest_small_e_return_to_fernhollow',
+        'dialog': [
+            "Root grafts transmit. This one has been trying to reach Boiling Bubble's mycelium for longer than we can measure."
+        ]
+    },
+    {
+        'npc_id': 'ripple',
+        'dialog_id': 'ripple_forest_small_e_return_to_fernhollow',
+        'dialog': [
+            "When the time comes, the network will know you're there. Carry it until then."
+        ]
+    },
+
+]
+
+# --- Character dialogs: Type C ---
+NPC_DIALOG += [
+
+    # Type C – Find Talia
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_forest_small_c_find_talia',
+        'dialog': [
+            "She's been tending more wounded than there should be. The forest's distress is reaching people."
+        ]
+    },
+    {
+        'npc_id': 'nia',
+        'dialog_id': 'nia_forest_small_c_find_talia',
+        'dialog': [
+            "She could use someone who actually listens when the wounds start talking."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_forest_small_c_find_talia',
+        'dialog': [
+            "The hamlet is carrying more than it can hold. She's right to look outward."
+        ]
+    },
+
+    # Type C – Consult Lyss (Talia path)
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_forest_small_c_consult_lyss',
+        'dialog': [
+            "Lyss doesn't say kind things about people unless she means them. That matters."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_forest_small_c_consult_lyss',
+        'dialog': [
+            "She's been hoping for someone who actually listens. Rare request."
+        ]
+    },
+    {
+        'npc_id': 'nia',
+        'dialog_id': 'nia_forest_small_c_consult_lyss',
+        'dialog': [
+            "Some people wait a long time for the right traveling company."
+        ]
+    },
+
+    # Type C – Earn Talia
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_forest_small_c_earn_talia',
+        'dialog': [
+            "She can't heal the forest from here. She needs to go where the wounds are."
+        ]
+    },
+    {
+        'npc_id': 'nia',
+        'dialog_id': 'nia_forest_small_c_earn_talia',
+        'dialog': [
+            "Just tell her when people are hurting. She's not always good at waiting to be asked."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_forest_small_c_earn_talia',
+        'dialog': [
+            "Useful. Welcome."
+        ]
+    },
+
+]
+
+# --- Character dialogs: Type D ---
+NPC_DIALOG += [
+
+    # Type D – Deliver Memory Spore
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_forest_small_d_deliver_memory_spore',
+        'dialog': [
+            "The memory-network residue is still active. Something in this hamlet resonates with it."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_forest_small_d_deliver_memory_spore',
+        'dialog': [
+            "Selen follows moth-spirits that carry forest memories. She'll know where this frequency leads."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_forest_small_d_deliver_memory_spore',
+        'dialog': [
+            "The spore is already speaking to every memory the forest has ever lost."
+        ]
+    },
+
+    # Type D – Consult Selen
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_forest_small_d_consult_selen',
+        'dialog': [
+            "The Burrow Whisper has been draining Thornshade's recollections through the root network for years."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grmnaw_forest_small_d_consult_selen',
+        'dialog': [
+            "Present the spore and it will surface for the frequency it's been hungry for. Clean trap."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_forest_small_d_consult_selen',
+        'dialog': [
+            "Silence it and the memory-metal crystallizes. A blade that never forgets a path it has walked."
+        ]
+    },
+
+    # Type D – Meet Burrow Whisper (Spore path)
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_forest_small_d_meet_burrow_whisper',
+        'dialog': [
+            "It's been hungry for this frequency for a very long time."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_forest_small_d_meet_burrow_whisper',
+        'dialog': [
+            "'You will not leave with it.' We'll see."
+        ]
+    },
+    {
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_forest_small_d_meet_burrow_whisper',
+        'dialog': [
+            "It's not defending territory. It's defending the last meal it still understands."
+        ]
+    },
+
+    # Type D – Defeat Burrow Whisper (Spore path)
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_forest_small_d_defeat_burrow_whisper',
+        'dialog': [
+            "Quiet. Take the memory-crystal."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_forest_small_d_defeat_burrow_whisper',
+        'dialog': [
+            "A blade that remembers every path it has ever walked. You'll never lose your way carrying this."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_forest_small_d_defeat_burrow_whisper',
+        'dialog': [
+            "Every memory the Whisper drained has returned to the root network. The archive filled itself back in."
+        ]
+    },
+
+]
+
 
 TASKS = [
 	{
@@ -351,6 +642,9 @@ TASKS += [
 					'dialog_id': 'fernhollow_root_graft_discovery'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'tech_forest_small_e_investigate_graft'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_small_e_investigate_graft'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_forest_small_e_investigate_graft' } },
 			# Prime Lyss's standing text before the party goes to her
 			{
 				'event_type': 'set_npc_standing_text',
@@ -386,6 +680,9 @@ TASKS += [
 					'dialog_id': 'lyss_root_graft_context'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_forest_small_e_consult_lyss' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_forest_small_e_consult_lyss' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_forest_small_e_consult_lyss'  } },
 			{
 				'event_type': 'create_dungeon',
 				'params': {
@@ -434,6 +731,9 @@ TASKS += [
 					'dialog_id': 'burrow_whisper_graft_guardian'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_forest_small_e_confront_burrow_whisper'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_forest_small_e_confront_burrow_whisper'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',  'dialog_id': 'lyren_forest_small_e_confront_burrow_whisper'  } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -465,6 +765,9 @@ TASKS += [
 					'item_id': 'forest_small_city_e_thornshade_root_graft'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_forest_small_e_defeat_burrow_whisper' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_forest_small_e_defeat_burrow_whisper'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_forest_small_e_defeat_burrow_whisper'      } },
 			# Set Fernhollow's standing text for the return step
 			{
 				'event_type': 'set_npc_standing_text',
@@ -500,6 +803,9 @@ TASKS += [
 					'dialog_id': 'fernhollow_root_graft_received'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_small_e_return_to_fernhollow'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'tech_forest_small_e_return_to_fernhollow'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_forest_small_e_return_to_fernhollow' } },
 		]
 	},
 
@@ -529,6 +835,9 @@ TASKS += [
 					'dialog_id': 'talia_type_c_intro'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_forest_small_c_find_talia' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_forest_small_c_find_talia'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_forest_small_c_find_talia' } },
 			# Prime Lyss's standing text for the C vouch step
 			{
 				'event_type': 'set_npc_standing_text',
@@ -564,6 +873,9 @@ TASKS += [
 					'dialog_id': 'talia_type_c_lyss_check'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_small_c_consult_lyss'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_forest_small_c_consult_lyss'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',    'dialog_id': 'nia_forest_small_c_consult_lyss'    } },
 			# Update Talia's standing text so she signals she is ready
 			{
 				'event_type': 'set_npc_standing_text',
@@ -599,6 +911,9 @@ TASKS += [
 					'dialog_id': 'talia_type_c_join'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_small_c_earn_talia'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',    'dialog_id': 'nia_forest_small_c_earn_talia'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_forest_small_c_earn_talia'  } },
 			{
 				'event_type': 'hide_npc',
 				'params': { 'npc_id': 'talia_softheart' }
@@ -633,6 +948,15 @@ TASKS += [
 		'to_id': 'diego',
 		'task_acquire_events': [],
 		'task_complete_events': [
+			{
+				'event_type': 'remove_item',
+				'params': {
+					'item_id': 'forest_mid_city_e_mycelia_memory_spore'
+				}
+			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'tech_forest_small_d_deliver_memory_spore'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_forest_small_d_deliver_memory_spore'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_small_d_deliver_memory_spore'  } },
 			# Place Selen and set her standing text for the consult step
 			{
 				'event_type': 'create_npc',
@@ -676,6 +1000,9 @@ TASKS += [
 					'dialog_id': 'selen_d_spore_read'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_forest_small_d_consult_selen'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grmnaw_forest_small_d_consult_selen' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',   'dialog_id': 'faith_forest_small_d_consult_selen'   } },
 			# Set Burrow Whisper's standing text for the D meet step
 			{
 				'event_type': 'set_npc_standing_text',
@@ -713,6 +1040,9 @@ TASKS += [
 					'dialog_id': 'burrow_whisper_d_awakens'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_forest_small_d_meet_burrow_whisper'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_forest_small_d_meet_burrow_whisper'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',  'dialog_id': 'lyren_forest_small_d_meet_burrow_whisper'  } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -744,6 +1074,9 @@ TASKS += [
 					'item_id': 'mythic_forest_small_echofern_blade'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_forest_small_d_defeat_burrow_whisper' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_forest_small_d_defeat_burrow_whisper'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_forest_small_d_defeat_burrow_whisper'     } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {

@@ -185,6 +185,325 @@ NPC_DIALOG += [
 
 ]
 
+# --- Character dialogs: Type C ---
+NPC_DIALOG += [
+
+    # Type C – Find Spark
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_mountains_large_c_find_spark',
+        'dialog': [
+            "A resonance frequency that shouldn't be possible. He thinks it's an invitation. I like him already."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_mountains_large_c_find_spark',
+        'dialog': [
+            "Sindra thinks malfunction. Gorvak thinks history. Spark thinks invitation. The interesting answer is usually the third one."
+        ]
+    },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_mountains_large_c_find_spark',
+        'dialog': [
+            "He wants in. Fine. Let's see if he can keep up."
+        ]
+    },
+
+    # Type C – Consult Sindra
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_mountains_large_c_consult_sindra',
+        'dialog': [
+            "She called him a liability yesterday and still vouched for him. That's either trust or resignation."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_mountains_large_c_consult_sindra',
+        'dialog': [
+            "The best discoveries always look like liabilities at first. He's not wrong."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_mountains_large_c_consult_sindra',
+        'dialog': [
+            "Just make sure he doesn't blow anything critical."
+        ]
+    },
+
+    # Type C – Earn Spark
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_mountains_large_c_earn_spark',
+        'dialog': [
+            "He invents. We make sure it doesn't explode at the wrong moment. Fair terms."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_mountains_large_c_earn_spark',
+        'dialog': [
+            "This forge has secrets older than any catalog. He intends to find every single one."
+        ]
+    },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_mountains_large_c_earn_spark',
+        'dialog': [
+            "Partnership accepted. Let's go."
+        ]
+    },
+
+]
+
+# --- Character dialogs: Type E (Echo Core chain) ---
+NPC_DIALOG += [
+
+    # Type E – Investigate Echo
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_mountains_large_e_investigate_echo',
+        'dialog': [
+            "A resonance core built into the mountain's deepest chamber before the city even existed."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grinmaw_mountains_large_e_investigate_echo',
+        'dialog': [
+            "The forge's memory made solid. Never meant to be extracted."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_mountains_large_e_investigate_echo',
+        'dialog': [
+            "Something that old doesn't stay buried by accident. The mountain has been keeping it."
+        ]
+    },
+
+    # Type E – Consult Brannoc
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_mountains_large_e_consult_brannoc',
+        'dialog': [
+            "Centuries of metalwork compressed into one object. The Gearghost will be drawn to it."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grinmaw_mountains_large_e_consult_brannoc',
+        'dialog': [
+            "They always guard what the mountain values most."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_mountains_large_e_consult_brannoc',
+        'dialog': [
+            "Then we go get it."
+        ]
+    },
+
+    # Type E – Confront Gearghost
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_mountains_large_e_confront_gearghost',
+        'dialog': [
+            "It already decided we will not have the Core."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_mountains_large_e_confront_gearghost',
+        'dialog': [
+            "The mountain's oldest memory. Ambitious claim."
+        ]
+    },
+    {
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_mountains_large_e_confront_gearghost',
+        'dialog': [
+            "Some guardians forget that memory can also mean the right to move."
+        ]
+    },
+
+    # Type E – Defeat Gearghost / Return to Gorvak
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_mountains_large_e_defeat_gearghost',
+        'dialog': [
+            "It's done. Take the Core carefully."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_mountains_large_e_return_to_gorvak',
+        'dialog': [
+            "Every alloy, every strike, every forge-fire since the mountain was first worked. It's all in there."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_mountains_large_e_return_to_gorvak',
+        'dialog': [
+            "It doesn't belong in an archive. It belongs with someone who will use it."
+        ]
+    },
+
+]
+
+# --- Character dialogs: Type D ---
+NPC_DIALOG += [
+
+    # Type D – Deliver Armor Key
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_mountains_large_d_deliver_armor_key',
+        'dialog': [
+            "Brawn can feel the forge-frequency from here. Gorvak first — he'll know which chamber it opens."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_mountains_large_d_deliver_armor_key',
+        'dialog': [
+            "Something in this city is waiting to be unlocked. The key is still vibrating."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_mountains_large_d_deliver_armor_key',
+        'dialog': [
+            "I already want to see what forged itself down there."
+        ]
+    },
+
+    # Type D – Consult Gorvak
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_mountains_large_d_consult_gorvak',
+        'dialog': [
+            "The frequency matches the Conduit Maw's deepest chamber. Something inside forged itself into armor long before the city existed."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grinmaw_mountains_large_d_consult_gorvak',
+        'dialog': [
+            "The Conduit Echo guards the armoring-frequency like a living lock."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_mountains_large_d_consult_gorvak',
+        'dialog': [
+            "Then we break the lock."
+        ]
+    },
+
+    # Type D – Meet Conduit Echo
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_mountains_large_d_meet_conduit_echo',
+        'dialog': [
+            "It wants us to prove we can survive the frequency first."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_mountains_large_d_meet_conduit_echo',
+        'dialog': [
+            "Centuries of held armor. It's not going to hand it over politely."
+        ]
+    },
+    {
+        'npc_id': 'lyren',
+        'dialog_id': 'lyren_mountains_large_d_meet_conduit_echo',
+        'dialog': [
+            "Some locks only open for the ones willing to pay the frequency's price."
+        ]
+    },
+
+    # Type D – Defeat Conduit Echo
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_mountains_large_d_defeat_conduit_echo',
+        'dialog': [
+            "It's down. Take the armoring-frequency."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_mountains_large_d_defeat_conduit_echo',
+        'dialog': [
+            "Warplate that will hold against anything the rift throws at us. Brawn's best work."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_mountains_large_d_defeat_conduit_echo',
+        'dialog': [
+            "The Maw is quiet now. The catalog finally has something new worth logging."
+        ]
+    },
+
+]
+
+# --- Character dialogs: Type E (Sindra/Core path) ---
+NPC_DIALOG += [
+
+    # Type E – Consult Sindra (Core path)
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_mountains_large_e_consult_sindra',
+        'dialog': [
+            "The conduit grid reads that core as something the mountain expelled. Not waste — a concentrated signal."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grinmaw_mountains_large_e_consult_sindra',
+        'dialog': [
+            "Somewhere in the range a receiver has been dormant, waiting for this frequency. Gallows Rift fits the harmonic profile."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_mountains_large_e_consult_sindra',
+        'dialog': [
+            "Then we take it there."
+        ]
+    },
+
+    # Type E – Collect Core
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_mountains_large_e_collect_core',
+        'dialog': [
+            "A crystallised echo of every forge-heat this range ever produced. The mountain's done with it."
+        ]
+    },
+    {
+        'npc_id': 'faith',
+        'dialog_id': 'faith_mountains_large_e_collect_core',
+        'dialog': [
+            "Gallows Rift has a cavity in its deep stone that's been waiting for something like this."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_mountains_large_e_collect_core',
+        'dialog': [
+            "Don't drop it — it vibrates. I already like it."
+        ]
+    },
+
+]
+
 
 TASKS = [
 	{
@@ -310,6 +629,9 @@ TASKS += [
                     'dialog_id': 'spark_type_c_intro'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',     'dialog_id': 'magic_mountains_large_c_find_spark'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_mountains_large_c_find_spark'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_large_c_find_spark' } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -345,6 +667,9 @@ TASKS += [
                     'dialog_id': 'spark_type_c_sindra_check'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_mountains_large_c_consult_sindra'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_mountains_large_c_consult_sindra' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_mountains_large_c_consult_sindra' } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -379,6 +704,9 @@ TASKS += [
                     'dialog_id': 'spark_type_c_join'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',     'dialog_id': 'magic_mountains_large_c_earn_spark'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_mountains_large_c_earn_spark'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_large_c_earn_spark' } },
             {
                 'event_type': 'character_join',
                 'params': {
@@ -424,6 +752,9 @@ TASKS += [
                     'dialog_id': 'gorvak_echo_core_discovery'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_mountains_large_e_investigate_echo'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grinmaw_mountains_large_e_investigate_echo' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',   'dialog_id': 'faith_mountains_large_e_investigate_echo'   } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -465,6 +796,9 @@ TASKS += [
                     'dialog_id': 'brannoc_echo_core_context'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_mountains_large_e_consult_brannoc'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grinmaw_mountains_large_e_consult_brannoc' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_mountains_large_e_consult_brannoc'   } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -506,6 +840,9 @@ TASKS += [
                     'dialog_id': 'gearghost_echo_guardian'
                 }
             },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_mountains_large_e_confront_gearghost'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_mountains_large_e_confront_gearghost'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',  'dialog_id': 'lyren_mountains_large_e_confront_gearghost'  } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -530,6 +867,23 @@ TASKS += [
             }
         ],
         'task_complete_events': [
+            {
+                'event_type': 'award_item',
+                'params': {
+                    'item_id': 'mountains_large_city_e_forge_echo_core'
+                }
+            },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_large_e_defeat_gearghost' } },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'rustscribe_gorvak',
+                    'standing_text': [
+                        "You found it. I can hear it from here.",
+                        "Come — I need to see it with my own eyes."
+                    ]
+                }
+            },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -563,7 +917,9 @@ TASKS += [
                     'npc_id': 'rustscribe_gorvak',
                     'dialog_id': 'gorvak_echo_core_received'
                 }
-            }
+            },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_mountains_large_e_return_to_gorvak'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_mountains_large_e_return_to_gorvak' } },
         ]
     },
 
@@ -619,6 +975,15 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{
+				'event_type': 'remove_item',
+				'params': {
+					'item_id': 'mountains_large_city_armor_key'
+				}
+			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_large_d_deliver_armor_key' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_mountains_large_d_deliver_armor_key'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',     'dialog_id': 'magic_mountains_large_d_deliver_armor_key'     } },
+			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'mountains_large_city_type_d_consult_gorvak'
@@ -654,6 +1019,9 @@ TASKS += [
 					'dialog_id': 'gorvak_d_key_assay'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_mountains_large_d_consult_gorvak'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grinmaw_mountains_large_d_consult_gorvak' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_mountains_large_d_consult_gorvak'   } },
 			{
 				'event_type': 'create_npc',
 				'params': {
@@ -704,6 +1072,9 @@ TASKS += [
 					'dialog_id': 'conduit_echo_d_awakens'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_mountains_large_d_meet_conduit_echo'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_mountains_large_d_meet_conduit_echo'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',  'dialog_id': 'lyren_mountains_large_d_meet_conduit_echo'  } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -735,6 +1106,9 @@ TASKS += [
 					'item_id': 'mythic_mountains_large_ironveil_warplate'
 				}
 			},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_large_d_defeat_conduit_echo' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_mountains_large_d_defeat_conduit_echo'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_mountains_large_d_defeat_conduit_echo'     } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -810,6 +1184,9 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'relaytech_sindra', 'dialog_id': 'sindra_e_core_confirms' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_mountains_large_e_consult_sindra'    } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grinmaw_mountains_large_e_consult_sindra' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_mountains_large_e_consult_sindra'   } },
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'mountains_large_city_type_e_collect_core' }},
 		]
 	},
@@ -829,6 +1206,9 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'forge_seer_brannoc', 'dialog_id': 'brannoc_e_echo_core' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'tech_mountains_large_e_collect_core'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_mountains_large_e_collect_core'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_mountains_large_e_collect_core'  } },
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'mountains_large_city_e_forge_echo_core' }},
 		]
 	},
