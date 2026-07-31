@@ -40,6 +40,13 @@ NPCS = [
 		'description': (
 			'A murmuring presence deep within the Echofern Burrows, shaped from lost recollections.'
 		)
+	},
+	{
+		'npc_id': 'burrow_whisper_2',
+		'name': 'Burrow Whisper',
+		'description': (
+			'A murmuring presence deep within the Echofern Burrows, shaped from lost recollections.'
+		)
 	}
 ]
 
@@ -206,7 +213,7 @@ NPC_DIALOG += [
 		]
 	},
 	{
-		'npc_id': 'burrow_whisper',
+		'npc_id': 'burrow_whisper_2',
 		'dialog_id': 'burrow_whisper_d_awakens',
 		'dialog': [
 			"The mycelia spore reaches the Burrows.",
@@ -416,6 +423,19 @@ NPC_DIALOG += [
 NPC_DIALOG += [
 
     # Type D – Deliver Memory Spore
+	{
+		'npc_id':'diego',
+		'dialog_id':'diego_forest_small_d_deliver_memory_spore',
+		'dialog': [
+			"That spore…",
+			"(holds it carefully, watching the faint glow)",
+			"Memory-network residue still active. I’ve handled a lot of strange cargo. This one is still talking.",
+			"Something in Thornshade is already answering it — every moth-spirit in the hamlet just turned toward you.",
+			"Selen follows those moths. She’ll know exactly where this frequency wants to go.",
+			"Take it to her before the Burrow finishes noticing you’re carrying it.",
+			"And if the archive parchments start going blank… that’s not a coincidence."
+		]
+	},
     {
         'npc_id': 'tech',
         'dialog_id': 'tech_forest_small_d_deliver_memory_spore',
@@ -760,6 +780,12 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{
+				'event_type': 'hide_npc',
+				'params': {
+					'npc_id': 'burrow_whisper'
+				}
+			},
+			{
 				'event_type': 'award_item',
 				'params': {
 					'item_id': 'forest_small_city_e_thornshade_root_graft'
@@ -936,7 +962,7 @@ TASKS += [
 	# Deliver to Diego → Selen reads the spore → defeat Burrow Whisper → mythic weapon
 	# No new NPCs — uses whisper_moth_selen and burrow_whisper (both city seed NPCs).
 	# Diego's standing text set in initialize complete events alongside D award_task.
-	# Selen placed in D deliver complete events; burrow_whisper already placed by E chain.
+	# Selen placed in D deliver complete events; burrow_whisper_2 already placed by E chain.
 	# =========================================================
 
 	# D-0 — Deliver spore to Diego; he directs the party to Selen
@@ -948,6 +974,7 @@ TASKS += [
 		'to_id': 'diego',
 		'task_acquire_events': [],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'diego', 'dialog_id': 'diego_forest_small_d_deliver_memory_spore' } },
 			{
 				'event_type': 'remove_item',
 				'params': {
@@ -962,7 +989,7 @@ TASKS += [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'whisper_moth_selen',
-					'location': 'region_open_area'
+					'location': 'region_bar'
 				}
 			},
 			{
@@ -1004,16 +1031,29 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grmnaw_forest_small_d_consult_selen' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',   'dialog_id': 'faith_forest_small_d_consult_selen'   } },
 			# Set Burrow Whisper's standing text for the D meet step
+			{ 'event_type': 'create_npc',
+				'params': {
+					'npc_id': 'burrow_whisper_2',
+					'location': None
+				}
+			},
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
-					'npc_id': 'burrow_whisper',
+					'npc_id': 'burrow_whisper_2',
 					'standing_text': [
 						"A low resonance bleeds from the Echofern Burrow entrance.",
 						"Fernhollow says the archive parchments have gone blank since dawn.",
 						"Lyss says the forest has gone completely silent.",
 						"The spore has drawn the Whisper forward."
 					]
+				}
+			},
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'forest_small_city_burrow_alcove_2',
+					'location': 'region_open_area'
 				}
 			},
 			{
@@ -1030,13 +1070,13 @@ TASKS += [
 		'task_id': 'forest_small_city_type_d_meet_burrow_whisper',
 		'type': 'meet',
 		'to_type': 'npc',
-		'to_id': 'burrow_whisper',
+		'to_id': 'burrow_whisper_2',
 		'task_acquire_events': [],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
-					'npc_id': 'burrow_whisper',
+					'npc_id': 'burrow_whisper_2',
 					'dialog_id': 'burrow_whisper_d_awakens'
 				}
 			},
@@ -1057,17 +1097,21 @@ TASKS += [
 		'task_id': 'forest_small_city_type_d_defeat_burrow_whisper',
 		'type': 'defeat',
 		'to_type': 'mob',
-		'to_id': 'burrow_whisper_1',
+		'to_id': 'burrow_whisper_2',
 		'task_acquire_events': [
 			{
 				'event_type': 'begin_combat',
 				'params': {
-					'boss_mob_id': 'burrow_whisper_1',
+					'boss_mob_id': 'burrow_whisper_2',
 					'combat_type': 'boss_battle'
 				}
 			},
 		],
 		'task_complete_events': [
+			{
+				'event_type': 'hide_npc',
+				'params': { 'npc_id': 'burrow_whisper_2' }
+			},
 			{
 				'event_type': 'award_item',
 				'params': {
@@ -1099,7 +1143,7 @@ TASKS += [
 						"Fernhollow says the archive parchments filled back in on their own."
 					]
 				}
-			},
+			}
 		]
 	},
 

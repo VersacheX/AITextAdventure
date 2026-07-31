@@ -599,16 +599,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'morrowdeal_krayt',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'morrowdeal_krayt',
-                    'standing_text': [
-                        "There's a plate in my stock I can't sell.",
-                        "Every buyer picks it up and puts it right back down."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -621,6 +611,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_desert_small_e_investigate_ledger'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_small_e_investigate_ledger' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',   'dialog_id': 'magic_desert_small_e_investigate_ledger'   } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'morrowdeal_krayt', 'standing_text': ["There's a plate in my inventory I can't move.", "Every buyer who handles it puts it back down without a word.", "Feels like it's waiting for someone specific. Old desert script etched into both sides."] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -640,17 +631,7 @@ TASKS += [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'scrap_seer_venn',
-                    'location': 'region_open_area'
-                }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'scrap_seer_venn',
-                    'standing_text': [
-                        "Krayt's plate. I remember when it surfaced.",
-                        "The Signal Wraith latched onto it immediately."
-                    ]
+                    'location': 'region_city_other2'
                 }
             }
         ],
@@ -665,6 +646,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_desert_small_e_consult_venn'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_small_e_consult_venn' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_desert_small_e_consult_venn'   } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'scrap_seer_venn', 'standing_text': ["I know that plate. Found it in the deep scrap field three seasons ago.", "It's not a ledger of commerce. It's a ledger of routes — underground paths, sealed since the last big quake.", "The Signal Wraith guards it. It's been using the plate's signal as an anchor."] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -693,16 +675,6 @@ TASKS += [
                     'dungeon_id': 'desert_small_city_signal_relay',
                     'location': 'region_open_area'
                 }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'signal_wraith',
-                    'standing_text': [
-                        "You want the Plate.",
-                        "I cannot let you have it."
-                    ]
-                }
             }
         ],
         'task_complete_events': [
@@ -716,6 +688,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_desert_small_e_confront_signal_wraith'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_desert_small_e_confront_signal_wraith'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',  'dialog_id': 'lyren_desert_small_e_confront_signal_wraith'  } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'signal_wraith', 'standing_text': ["The Plate is my anchor.", "Without it I scatter across the frequencies.", "You would take the only thing keeping me coherent."] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -764,16 +737,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'morrowdeal_krayt',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'morrowdeal_krayt',
-                    'standing_text': [
-                        "The static in the district dropped the moment you came back.",
-                        "Whatever you did out there — it worked."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -786,6 +749,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_small_e_return_to_krayt' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_desert_small_e_return_to_krayt'      } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',       'dialog_id': 'nia_desert_small_e_return_to_krayt'       } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'morrowdeal_krayt', 'standing_text': ["Ha. It actually came back to you.", "The routes on that plate — half of them lead out of this region entirely.", "Whatever it was cataloguing, it wasn't just local trade.", "Keep it. Might open doors elsewhere."] } }
         ]
     },
 
@@ -807,16 +771,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'morrowdeal_krayt',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'morrowdeal_krayt',
-                    'standing_text': [
-                        "Tess blew through here two days ago.",
-                        "Dropped something off and left before I could ask questions."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -829,6 +783,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_small_f_find_tess_trail' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',     'dialog_id': 'magic_desert_small_f_find_tess_trail'     } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn',     'dialog_id': 'thorn_desert_small_f_find_tess_trail'     } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'morrowdeal_krayt', 'standing_text': ["Tess came through the Bazaar two days ago.", "Dropped off a crate, asked no questions, left too fast.", "She's fun right up until she's not. Jexa might know where she went."] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -844,16 +799,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'sparkwire_Jexa',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'sparkwire_Jexa',
-                    'standing_text': [
-                        "Tess? Oh she was here.",
-                        "Needed a tracer. Pointed it at something buried outside the city limits."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -866,6 +811,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_desert_small_f_ask_jexa'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_desert_small_f_ask_jexa' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_desert_small_f_ask_jexa' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'sparkwire_Jexa', 'standing_text': ["Something's wrong with the tech around here.", "Devices are waking up on their own — humming, twitching, overheating.", "Feels like a sick machine crying for help."] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -908,16 +854,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'tess',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'tess',
-                    'standing_text': [
-                        "Still here? Good.",
-                        "I made you a copy. The Bleakwatch section is the one you'll want."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -943,12 +879,24 @@ TASKS += [
 
 
 # ── Type D ── Scrapwright's Edge (mythic weapon) ──────────────────────────────
-# Gate: player holds eroded_ledger_plate from the Type E chain (same city, Slot 1 → Slot 2).
+# Gate: player holds desert_small_city_e_eroded_ledger_plate from the Type E chain (same city, Slot 1 → Slot 2).
 # Deliver to Diego → Venn reads the plate → defeat Signal Wraith → mythic weapon.
 # No new NPCs — uses scrap_seer_venn, signal_wraith, and diego (Ch.1 party anchor).
 
 NPC_DIALOG += [
 
+	{
+		'npc_id': 'diego',
+		'dialog_id': 'diego_d_ledger_plate_reaction',
+		'dialog': [
+			"That plate…",
+			"(holds it near his ear for a second)",
+			"Yeah. Frequency's still live. Whatever was recorded on this left a resonance that didn't die with the entries.",
+			"I've heard scrap talk before. This isn't scrap talk. This is a machine still trying to finish a sentence.",
+			"Venn speaks that language better than anyone in BioHazard. Take it to him before the static decides to answer itself.",
+			"And if every device in the district starts humming at once… that's not a coincidence."
+		]
+	},
 	{
 		'npc_id': 'scrap_seer_venn',
 		'dialog_id': 'venn_d_plate_read',
@@ -977,11 +925,11 @@ NPC_DIALOG += [
 
 TASKS += [
 
-	# D-0 — Deliver eroded_ledger_plate to Diego (standalone deliver; unlocks D chain)
+	# D-0 — Deliver desert_small_city_e_eroded_ledger_plate to Diego (standalone deliver; unlocks D chain)
 	{
 		'task_id': 'desert_small_city_type_d_deliver_ledger_plate',
 		'type': 'deliver',
-		'item_id': 'eroded_ledger_plate',
+		'item_id': 'desert_small_city_e_eroded_ledger_plate',
 		'to_type': 'npc',
 		'to_id': 'diego',
 		'task_acquire_events': [
@@ -998,15 +946,16 @@ TASKS += [
 			},
 		],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'diego', 'dialog_id': 'diego_d_ledger_plate_reaction' }},
 			{
 				'event_type': 'remove_item',
 				'params': {
-					'item_id': 'eroded_ledger_plate'
+					'item_id': 'desert_small_city_e_eroded_ledger_plate'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_small_d_deliver_ledger_plate' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_desert_small_d_deliver_ledger_plate'      } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_desert_small_d_deliver_ledger_plate'   } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_small_d_deliver_ledger_plate' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_desert_small_d_deliver_ledger_plate'      } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_desert_small_d_deliver_ledger_plate'   } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -1023,18 +972,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'scrap_seer_venn',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'scrap_seer_venn',
-					'standing_text': [
-						"The scrap field went quiet when you walked in.",
-						"Every broken machine is listening.",
-						"That plate you carry — it's speaking to all of them.",
-						"Come here. Quickly."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -1047,13 +984,16 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_desert_small_d_consult_venn'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_small_d_consult_venn' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_desert_small_d_consult_venn'   } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'scrap_seer_venn', 'standing_text': ["The Wraith has been feeding on those frequencies since BioHazard was built.", "Draw it out with the plate's resonance and its static will crystallize.", "Diego can forge crystallized signal-static into an edge that cuts through interference."] } },
             {
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'signal_wraith_2',
-                    'location': 'region_open_area'
+                    'location': None
                 }
             },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'signal_wraith_2', 'standing_text': ["The ledger plate opens my frequency.", "Every transaction ever recorded here — I have been listening.", "You want to silence me.", "I will drown you in static first."] } },
+            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'desert_small_city_signal_relay', 'location': 'region_open_area' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -1070,17 +1010,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'signal_wraith_2',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'signal_wraith_2',
-					'standing_text': [
-						"Static bleeds across every device in the Bazaar.",
-						"Jexa says her circuits are screaming — something is broadcasting on all channels.",
-						"The ledger plate has called the Wraith forward."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
