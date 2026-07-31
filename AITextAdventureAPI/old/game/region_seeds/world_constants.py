@@ -12,7 +12,7 @@ CHAPTER_CITY_ORDER = [
     "snow_small_city",          # Chapter 6: Bleakwatch Outpost 
     "swamp_small_city",         # Chapter 7: Gnashwater Hollow 
     "desert_mid_city",        # Chapter 8: Nightveil Spire
-    "desert_small_city",        # Chapter 9: The Radpost
+    "desert_small_city",        # Chapter 9: BioHazard
     "grassland_large_city",     # Chapter 10: Crosswind Bazaar
     "shallows_mid_city",      # Chapter 11: Blackwake Bay
     "grassland_small_city",     # Chapter 12: Quantford Hollow

@@ -89,7 +89,7 @@ From `game\region_seeds\regions\cities\README.md`:
 
 #### Desert Cities
 - **Nightveil Spire** (Large) - Ch 8 (Glamour)
-- **The Radpost** (Outpost) - Ch 9 (Scalpel)
+- **BioHazard** (Outpost) - Ch 9 (Scalpel)
 - **Sunhaven Crossing** (Medium)
 - **Dustshore** (Small)
 
@@ -563,7 +563,7 @@ EVENT - advance_chapter
 
 **Important:** Use city names from reference:
 - Ch 8: Nightveil Spire (Desert Large)
-- Ch 9: The Radpost (Desert Outpost)
+- Ch 9: BioHazard (Desert Outpost)
 - Ch 10: Crosswind Bazaar (Grassland Large)
 - Ch 11: Blackwake Bay (Shallows Small)
 - Ch 12: Quantford Hollow (Grassland Village)

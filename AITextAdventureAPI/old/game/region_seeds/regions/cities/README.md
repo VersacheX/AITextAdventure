@@ -271,7 +271,7 @@ SUBLOCATION_DEFS = {
 
 | Region | Large City | Medium City | Small City |
 |--------|------------|-------------|------------|
-| **Desert** | Nightveil Spire (Ch 8) | Sunhaven Crossing | The Radpost (Ch 9) |
+| **Desert** | Nightveil Spire (Ch 8) | Sunhaven Crossing | BioHazard (Ch 9) |
 | **Forest** | Thornwood Vale | Boiling Bubble (Ch 2) | Thornshade Hamlet (Ch 16) |
 | **Grassland** | Crosswind Bazaar (Ch 10) | Highsteeple Crossing (Ch 3) | Quantford Hollow (Ch 12) |
 | **Mountains** | Gallows Rift (Ch 17) | Ironveil Foundry (Ch 4) | Hollerforge Hollow (Ch 21) |
@@ -293,7 +293,7 @@ SUBLOCATION_DEFS = {
 - Buildings: Merchant-focused, bazaar-style
 - Drinks: Desert-themed spirits and tonics
 
-**Small (The Radpost):**
+**Small (BioHazard):**
 - Theme: Brutal outpost arena (Scalpel's Domain - Ch 9)
 - Buildings: Bloodspark Arena, fighter lodges
 - Special: Violence-as-entertainment theme
@@ -818,7 +818,7 @@ Average = `(5×0.10 + 3×0.18 + 2×0.06) / 10 = 0.116` (11.6%)
 
 #### ACT III (Chapters 8-13)
 - **Ch 8**: Nightveil Spire (Desert Large) - `desert/constants_buildings_large_city.py`
-- **Ch 9**: The Radpost (Desert Small) - `desert/constants_buildings_small_city.py`
+- **Ch 9**: BioHazard (Desert Small) - `desert/constants_buildings_small_city.py`
 - **Ch 10**: Crosswind Bazaar (Grassland Large) - `grassland/constants_buildings_large_city.py`
 - **Ch 11**: Blackwake Bay (Shallows Small) - `shallows/constants_buildings_small_city.py`
 - **Ch 12**: Quantford Hollow (Grassland Small) - `grassland/constants_buildings_small_city.py`

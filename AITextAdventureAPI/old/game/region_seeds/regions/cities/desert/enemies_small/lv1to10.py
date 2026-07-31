@@ -1,4 +1,4 @@
-# Level1-10 hostile seeds for the Radpost (small city)
+# Level1-10 hostile seeds for BioHazard (small city)
 # Split out from constants_enemies_small_city for maintainability
 
 RANDOM_HOSTILE_SEEDS = [

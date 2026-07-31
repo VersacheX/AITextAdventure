@@ -169,6 +169,7 @@ SPECIAL_ITEM_SEEDS = [
     # ── A-chain chapter tie-in items ──────────────────────────────────────
     {"id": "embers_pressed_flower", "name": "Ember's Pressed Flower", "description": "A wildflower pressed between wax paper — small, ordinary, and carried with the kind of care reserved for things that matter more than they should.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
     {"id": "vale_pendant", "name": "Vale Pendant", "description": "A pendant carved from swamp-oak heartwood — old, smoothed by handling, and engraved with initials that have never been explained.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "living_memory_anchor", "name": "Living Memory Anchor", "description": "A small, smooth stone that seems to hum faintly when held. It is said to anchor memories and emotions.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
 
     # ── E-chain artifacts (gate items for Type D chains) ──────────────────
     {"id": "desert_large_city_e_dune_cipher_stone", "name": "Dune Cipher Stone", "description": "A flat stone inscribed with resonance frequencies used by desert traders as a routing cipher. The merchant who last owned it is not coming back for it.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},

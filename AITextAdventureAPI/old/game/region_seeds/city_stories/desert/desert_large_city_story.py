@@ -377,25 +377,53 @@ NPC_DIALOG += [
 NPC_DIALOG += [
 
     # Type D – Deliver Cipher Stone
+    # Completed
+    #   Dialog Diego
+    #     "That frequency… I’ve only ever heard it described in old salvage ledgers."
+    #     "Hand it over. Carefully."
+    #     "(examines the stone)"
+    #     "This isn’t just resonant. It’s a blueprint. The dunes have been singing this thing into existence for longer than any city on the map."
+    #     "I know someone who can finish what it started. Rhyla. She’s the only one who still listens to the old frequencies."
+    #     "Take it to her. And don’t drop it on the way — some things don’t forgive being mishandled."
+    #   Character Dialog Kade
+    #     "A resonance blueprint older than the network. Diego’s right to look nervous."
+    #   Character Dialog Grimnaw
+    #     "He’s already calculating who will pay for the finished frequency. Typical."
+    #   Character Dialog Sable
+    #     "Some things change the people who hold them. Watch him after he lets it go."
+    #   Remove Item dune_cipher_stone
+    #   Award Task desert_large_city_type_d_consult_rhyla
     {
-        'npc_id': 'technique',
-        'dialog_id': 'technique_desert_large_d_deliver_cipher_stone',
+        'npc_id': 'diego',
+        'dialog_id': 'diego_desert_large_d_deliver_cipher_stone',
         'dialog': [
-            "Diego again. At least he usually knows something useful."
+            "That frequency… I’ve only ever heard it described in old salvage ledgers.",
+            "Hand it over. Carefully.",
+            "(examines the stone)",
+            "This isn’t just resonant. It’s a blueprint. The dunes have been singing this thing into existence for longer than any city on the map.",
+            "I know someone who can finish what it started. Rhyla. She’s the only one who still listens to the old frequencies.",
+            "Take it to her. And don’t drop it on the way — some things don’t forgive being mishandled."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_large_d_deliver_cipher_stone',
+        'dialog': [
+            "A resonance blueprint older than the network. Diego’s right to look nervous."
         ]
     },
     {
         'npc_id': 'grimnaw',
         'dialog_id': 'grimnaw_desert_large_d_deliver_cipher_stone',
         'dialog': [
-            "That frequency is older than anything his usual network deals in."
+            "He’s already calculating who will pay for the finished frequency. Typical."
         ]
     },
     {
         'npc_id': 'sable',
         'dialog_id': 'sable_desert_large_d_deliver_cipher_stone',
         'dialog': [
-            "Be careful what you hand him. Some things change the people who hold them."
+            "Some things change the people who hold them. Watch him after he lets it go."
         ]
     },
 
@@ -632,6 +660,17 @@ TASKS += [
                 }
             },
             {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'choir_echo',
+                    'standing_text': [
+                        "We are the Choir. We are the memory of sand.",
+                        "You walk on our bodies. You breathe our dust.",
+                        "You cannot silence what was here before you."
+                    ]
+                }
+            },
+            {
                 'event_type': 'create_dungeon',
                 'params': {
                     'dungeon_id': 'desert_large_city_choir_vault',
@@ -683,6 +722,12 @@ TASKS += [
             { 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'choir_echo_1', 'combat_type': 'boss_battle' }}
         ],
         'task_complete_events': [
+            {
+                'event_type': 'hide_npc',
+                'params': {
+                    'npc_id': 'choir_echo'
+                }
+            },
             {
                 'event_type': 'award_item',
                 'params': {
@@ -895,7 +940,7 @@ TASKS += [
 	{
 		'task_id': 'desert_large_city_type_d_deliver_cipher_stone',
 		'type': 'deliver',
-		'item_id': 'dune_cipher_stone',
+		'item_id': 'desert_large_city_e_dune_cipher_stone',
 		'to_type': 'npc',
 		'to_id': 'diego',
 		'task_acquire_events': [
@@ -915,12 +960,13 @@ TASKS += [
 				'event_type': 'initiate_dialog',
 				'params': {
 					'npc_id': 'diego',
-					'dialog_id': 'diego_intro'
+					'dialog_id': 'diego_desert_large_d_deliver_cipher_stone'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_large_d_deliver_cipher_stone' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_desert_large_d_deliver_cipher_stone' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_desert_large_d_deliver_cipher_stone'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable',     'dialog_id': 'sable_desert_large_d_deliver_cipher_stone'     } },
+            { 'event_type': 'remove_item', 'params': { 'item_id': 'desert_large_city_e_dune_cipher_stone' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -937,17 +983,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'rhyla',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'rhyla',
-					'standing_text': [
-						"Diego sent you with the cipher stone.",
-						"I can hear what it wants to become.",
-						"Come close — the dunes are already answering."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -960,13 +995,16 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',   'dialog_id': 'faith_desert_large_d_consult_rhyla'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_large_d_consult_rhyla' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in',  'dialog_id': 'kor_in_desert_large_d_consult_rhyla'  } },
-            { 'event_type': 'create_npc', 'params': { 'npc_id': 'archive_voice', 'location': 'region_open_area' } },
+            { 'event_type': 'create_npc', 'params': { 'npc_id': 'archive_voice', 'location': None } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'archive_voice', 'standing_text': [ "The frequency stirs in the deep archive.", "Something ancient recognizes the cipher stone.", "Approach — it will not wait." ] } },
+            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'desert_large_city_archive_voice', 'location': 'region_open_area' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rhyla', 'standing_text': [ "The resonance blueprint is complete.", "The Archive Voice will not give it freely.", "You must silence it before the frequency can be made steel." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'desert_large_city_type_d_meet_archive_voice'
 				}
-			},
+			}
 		]
 	},
 
@@ -977,19 +1015,14 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'archive_voice',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'archive_voice',
-					'standing_text': [
-						"The frequency stirs in the deep archive.",
-						"Something ancient recognizes the cipher stone.",
-						"Approach — it will not wait."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
+            {
+                'event_type': 'hide_npc',
+                'params': {
+                    'npc_id': 'archive_voice'
+                }
+            },
 			{
 				'event_type': 'initiate_dialog',
 				'params': {

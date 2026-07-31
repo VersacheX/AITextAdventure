@@ -555,7 +555,7 @@ NPC_DIALOG = [
         'npc_id': 'scalpel',
         'dialog_id': 'scalpel_ch8_outro',
         'dialog': [
-            "Glamour was soft. I am not. This pathetic spire of distractions doesn't matter. The real entertainment awaits at The Radpost.",
+            "Glamour was soft. I am not. This pathetic spire of distractions doesn't matter. The real entertainment awaits at BioHazard.",
             "Come find me there... if you still have the stomach for it."
         ]
     },
@@ -563,7 +563,7 @@ NPC_DIALOG = [
         'npc_id': 'sable',
         'dialog_id': 'sable_ch8_after_scalpel',
         'dialog': [
-            "The Radpost? That sounds deep in the desert... This just keeps getting worse."
+            "BioHazard? That sounds deep in the desert... This just keeps getting worse."
         ]
     },
     {

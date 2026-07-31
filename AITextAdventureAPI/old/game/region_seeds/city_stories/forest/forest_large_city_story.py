@@ -315,27 +315,20 @@ NPC_DIALOG += [
     },
 
     # B – Defeat Marrowroot
-    {
-        'npc_id': 'technique',
-        'dialog_id': 'technique_forest_large_b_defeat_marrowroot',
-        'dialog': [
-            "Stay down. The forest doesn't need another savior."
-        ]
-    },
-    {
-        'npc_id': 'thorn',
-        'dialog_id': 'thorn_forest_large_b_defeat_marrowroot',
-        'dialog': [
-            "He believed what he was doing was good. That's the part that makes it hard."
-        ]
-    },
-    {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_forest_large_b_defeat_marrowroot',
-        'dialog': [
-            "The forest isn't his to save. It just needs to be left alone. We did that."
-        ]
-    },
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_forest_large_b_defeat_marrowroot',
+		'dialog': [
+			"Stay down. The forest doesn't need another savior."
+		]
+	},
+	{
+		'npc_id': 'faith',
+		'dialog_id': 'faith_forest_large_b_defeat_marrowroot',
+		'dialog': [
+			"The forest isn't his to save. It just needs to be left alone. We did that."
+		]
+	},
 
 ]
 
@@ -396,16 +389,6 @@ TASKS = [
 		'to_type': 'npc',
 		'to_id': 'elder_saphrin',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'elder_saphrin',
-					'standing_text': [
-						"The Exchange trembles. Something roots beneath our bargains.",
-						"Sit, traveler — the wood has warnings to whisper."
-					]
-				}
-			}
 		],
 		'task_complete_events': [
 			{
@@ -418,6 +401,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_large_a_meet_saphrin'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_forest_large_a_meet_saphrin' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn',  'dialog_id': 'thorn_forest_large_a_meet_saphrin'  } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'elder_saphrin', 'standing_text': [ "The Exchange trembles. Something roots beneath our bargains.", "Sit, traveler — the wood has warnings to whisper." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -471,17 +455,7 @@ TASKS = [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'spore_seer_myrn',
-					'location': 'region_open_area'
-				}
-			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'spore_seer_myrn',
-					'standing_text': [
-						"Hush… the spores drift strangely today.",
-						"They fall toward the Hollows. Something wakes."
-					]
+					'location': 'region_city_other1'
 				}
 			}
 		],
@@ -504,9 +478,13 @@ TASKS = [
 				}
 			},
 			{
-				'event_type': 'complete_regional_quests',
+				'event_type': 'set_npc_standing_text',
 				'params': {
-					'region_id': 'forest_large_city'
+					'npc_id': 'spore_seer_myrn',
+					'standing_text': [
+						"The forest is quiet again. The root-mind sleeps, and the Exchange breathes.",
+						"Thank you for keeping its promises free."
+					]
 				}
 			}
 		]
@@ -553,16 +531,6 @@ TASKS = [
 		'to_type': 'npc',
 		'to_id': 'twigwhisper_loryn',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'twigwhisper_loryn',
-					'standing_text': [
-						"There is something in the air today… old bark, old promises.",
-						"Come closer — I think I know what that leaf wants from you."
-					]
-				}
-			}
 		],
 		'task_complete_events': [
 			{
@@ -575,6 +543,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_large_d_consult_loryn'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'tech_forest_large_d_consult_loryn'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn',  'dialog_id': 'thorn_forest_large_d_consult_loryn'  } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'twigwhisper_loryn', 'standing_text': [ "The Cradle waits. If it accepts the leaf, the Canopy Sovereign is yours." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -624,17 +593,13 @@ TASKS = [
 		'to_type': 'npc',
 		'to_id': 'elder_saphrin',
 		'task_acquire_events': [
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'elder_saphrin', 'standing_text': [
-				"Something in the city feels unmoored.",
-				"The Exchange holds a fixed memory that may help.",
-				"Come speak with me."
-			]}},
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'elder_saphrin', 'dialog_id': 'saphrin_a_ch18_memory_anchor' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'tech_forest_large_a_ch18_find_anchor'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_large_a_ch18_find_anchor'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_forest_large_a_ch18_find_anchor' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'elder_saphrin', 'standing_text': [ "The forest trusts you with this. Do not waste it." ] } },
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'living_memory_anchor' }},
 		]
 	},
@@ -680,6 +645,22 @@ NPC_DIALOG += [
 			"The void showed me the edge approaching. The forest must transform or be consumed.",
 			"I am the transformation.",
 			"You are the resistance. And resistance is what I was made to overcome."
+		]
+	},
+	{
+		'npc_id': 'marrowroot',
+		'dialog_id': 'marrowroot_b_defeated',
+		'dialog': [
+			"(roots cracking, voice already half-wood)",
+			"You cut me from the tree once…",
+			"The intention did not die with the body. It only waited.",
+			"Seven places where the world already tried to empty itself.",
+			"Seven remnants the void found useful.",
+			"You close them… and still the reaching continues.",
+			"(almost gentle)",
+			"When the last root is burned… you will see.",
+			"I was never trying to save the forest from the edge.",
+			"I was trying to make it ready for what comes after the edge arrives."
 		]
 	},
 	{
@@ -742,10 +723,10 @@ TASKS += [
 			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'marrowroot_b1', 'combat_type': 'boss_battle' }}
 		],
 		'task_complete_events': [
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_b_victory' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_forest_large_b_defeat_marrowroot' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn',     'dialog_id': 'thorn_forest_large_b_defeat_marrowroot'     } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_forest_large_b_defeat_marrowroot'     } },
+			{ 'event_type': 'initiate_dialog',          'params': { 'npc_id': 'marrowroot', 'dialog_id': 'marrowroot_b_defeated'                         }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn',      'dialog_id': 'thorn_b_victory'                               }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_forest_large_b_defeat_marrowroot' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_forest_large_b_defeat_marrowroot'     } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'forest' }},
 		]
 	},

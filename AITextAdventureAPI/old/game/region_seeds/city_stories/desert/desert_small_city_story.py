@@ -184,7 +184,7 @@ NPC_DIALOG += [
     },
     {
         'npc_id': 'tess',
-        'dialog_id': 'tess_radpost_intro',
+        'dialog_id': 'tess_bio_hazard_intro',
         'dialog': [
             "Oh good, someone who doesn't look like they work for a government.",
             "I've been pulling records out of a buried cache for three weeks.",
@@ -194,7 +194,7 @@ NPC_DIALOG += [
     },
     {
         'npc_id': 'tess',
-        'dialog_id': 'tess_radpost_registry_handoff',
+        'dialog_id': 'tess_bio_hazard_registry_handoff',
         'dialog': [
             "I'm keeping the originals. Obviously.",
             "But you can have a copy. The Bleakwatch entries are the interesting ones.",
@@ -453,7 +453,7 @@ NPC_DIALOG += [
         'npc_id': 'tech',
         'dialog_id': 'tech_desert_small_d_consult_venn',
         'dialog': [
-            "Every entry is a frequency signature. The Wraith has been feeding on them since the Radpost was built."
+            "Every entry is a frequency signature. The Wraith has been feeding on them since BioHazard was built."
         ]
     },
     {
@@ -887,7 +887,7 @@ TASKS += [
                 'event_type': 'initiate_dialog',
                 'params': {
                     'npc_id': 'tess',
-                    'dialog_id': 'tess_radpost_intro'
+                    'dialog_id': 'tess_bio_hazard_intro'
                 }
             },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_small_f_find_tess' } },
@@ -924,7 +924,7 @@ TASKS += [
                 'event_type': 'initiate_dialog',
                 'params': {
                     'npc_id': 'tess',
-                    'dialog_id': 'tess_radpost_registry_handoff'
+                    'dialog_id': 'tess_bio_hazard_registry_handoff'
                 }
             },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_desert_small_f_receive_registry'  } },
@@ -955,7 +955,7 @@ NPC_DIALOG += [
 		'dialog': [
 			"This ledger plate — it doesn't just record transactions.",
 			"Every entry is a frequency signature.",
-			"The Signal Wraith has been feeding on those exact frequencies since the Radpost was built.",
+			"The Signal Wraith has been feeding on those exact frequencies since BioHazard was built.",
 			"Draw it out with the plate's resonance and its static will crystallize.",
 			"Diego can forge crystallized signal-static into an edge that cuts through interference.",
 			"Any shield, any armor, any ward — this blade reads the frequency and bypasses it."

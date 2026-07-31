@@ -48,7 +48,7 @@ BUILDINGS = [
 	{ "name": "other2", "display_name": "Broker’s Network", "type": "other2", "char": "0", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082"},
 ]
 
-CITY_NAME = "The radpost"
+CITY_NAME = "BioHazard"
 CITY_DESCRIPTION = (
 	"A battered outpost in the wasteland, serving as a hub for scavengers and survivors. "
 	"Amidst the ruins, makeshift buildings constructed from salvaged materials provide shelter and trade opportunities. "
@@ -518,7 +518,7 @@ Chapter	Act / Theme	Assigned City	Biome	Why it fits (tight summary)
 
 
 8	ACT III - Glamour → Scalpel emerges	Nightveil Spire	Desert	Perpetual twilight, bioluminescent streets, arcane spectacle—Glamour’s sensory intoxication turning to Scalpel’s cruelty.
-9	Scalpel’s Domain	The radpost	Desert	Battered outpost, survivalist cruelty, surgical brutality in a wasteland—Scalpel’s cold, precise worldview.
+9	Scalpel’s Domain	The bio_hazard	Desert	Battered outpost, survivalist cruelty, surgical brutality in a wasteland—Scalpel’s cold, precise worldview.
 10	Human Chaos (no boss)	Crosswind Bazaar	Grassland	Overcrowded trade hub; riots, thrill‑violence, manic contagion in a dense marketplace.
 11	Rapture + Revelry	Blackwake Bay	Shallows	Pirate taverns, crowded alleys, dangerous revelry—peak frenzy and spectacle before burnout.
 12	Lament	Quantford Hollow	Grassland	Quiet, picturesque village; perfect for the grief‑after‑mania tone, a soft place to feel the crash.

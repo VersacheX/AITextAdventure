@@ -11,7 +11,7 @@
 # T, S = Tess & Sam (impressionable travelers)
 # G, S = Glamour & Scalpel (Voidwalkers)
 #
-# High level: The party arrives at The Radpost, a city dominated by
+# High level: The party arrives at BioHazard, a city dominated by
 # the Bloodspark Arena, where the Voidwalker Scalpel cultivates a
 # culture of violence. The party must navigate this brutal environment,
 # confront the dual threat of Glamour and Scalpel, and retrieve the

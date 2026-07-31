@@ -321,28 +321,28 @@ NPC_DIALOG += [
 # --- Character dialogs: Type D ---
 NPC_DIALOG += [
 
-    # Type D – Deliver Accessory Key
-    {
+	# Type D – Deliver Accessory Key
+	{
         'npc_id': 'tech',
-        'dialog_id': 'tech_grassland_large_d_deliver_accessory_key',
-        'dialog': [
-            "Wind impressions mapped into metal. Someone catalogued every grassland migration into this key."
-        ]
-    },
-    {
+		'dialog_id': 'tech_grassland_large_d_deliver_accessory_key',
+		'dialog': [
+			"Wind impressions mapped into metal. Someone catalogued every grassland migration into this key."
+		]
+	},
+	{
         'npc_id': 'magic',
-        'dialog_id': 'magic_grassland_large_d_deliver_accessory_key',
-        'dialog': [
-            "Vexa reads wind scars better than anyone. She'll know what it opens."
-        ]
-    },
-    {
-        'npc_id': 'nia',
-        'dialog_id': 'nia_grassland_large_d_deliver_accessory_key',
-        'dialog': [
-            "The wind already shifted when we crossed the plains. Something is listening."
-        ]
-    },
+		'dialog_id': 'magic_grassland_large_d_deliver_accessory_key',
+		'dialog': [
+			"Vexa reads wind scars better than anyone. She'll know what it opens."
+		]
+	},
+	{
+		'npc_id': 'nia',
+		'dialog_id': 'nia_grassland_large_d_deliver_accessory_key',
+		'dialog': [
+			"The wind already shifted when we crossed the plains. Something is listening."
+		]
+	},
 
     # Type D – Consult Vexa
     {
@@ -441,28 +441,28 @@ NPC_DIALOG += [
         ]
     },
 
-    # B – Defeat Serene
-    {
-        'npc_id': 'technique',
-        'dialog_id': 'technique_grassland_large_b_defeat_serene',
-        'dialog': [
-            "Stay down. The future doesn't belong to you."
-        ]
-    },
-    {
-        'npc_id': 'nia',
-        'dialog_id': 'nia_grassland_large_b_defeat_serene',
-        'dialog': [
-            "The wind sounds like itself again. Not recorded. Not archived. Just the wind."
-        ]
-    },
-    {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_grassland_large_b_defeat_serene',
-        'dialog': [
-            "You can't steal something that won't hold still. She never understood that."
-        ]
-    },
+	# B – Defeat Serene
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_grassland_large_b_defeat_serene',
+		'dialog': [
+			"Stay down. The future doesn't belong to you."
+		]
+	},
+	{
+		'npc_id': 'nia',
+		'dialog_id': 'nia_grassland_large_b_defeat_serene',
+		'dialog': [
+			"The wind sounds like itself again. Not recorded. Not archived. Just the wind."
+		]
+	},
+	{
+		'npc_id': 'faith',
+		'dialog_id': 'faith_grassland_large_b_defeat_serene',
+		'dialog': [
+			"You can't steal something that won't hold still. She never understood that."
+		]
+	},
 
 ]
 
@@ -596,6 +596,18 @@ TASKS += [
 NPC_DIALOG += [
 
 	{
+		'npc_id': 'mira',
+		'dialog_id': 'mira_d_key_reaction',
+		'dialog': [
+			"Wind impressions mapped into metal…",
+			"(turns the key slowly, listening)",
+			"Someone spent a lifetime cataloguing every migration route across these plains and then locked the whole map into a single piece of steel.",
+			"That's not a key. That's a claim.",
+			"Vexa reads wind scars better than anyone alive. She'll know which door this opens — and what's still sleeping behind it.",
+			"Don't lose it on the way. Things like this tend to find their way back to the wrong hands."
+		]
+	},
+	{
 		'npc_id': 'trail_reader_vexa',
 		'dialog_id': 'vexa_d_key_read',
 		'dialog': [
@@ -637,6 +649,7 @@ TASKS += [
 		'to_id': 'mira',
 		'task_acquire_events': [],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'mira', 'dialog_id': 'mira_d_key_reaction' }},
 			{
 				'event_type': 'remove_item',
 				'params': {
@@ -651,7 +664,7 @@ TASKS += [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'trail_reader_vexa',
-					'location': 'region_open_area'
+					'location': 'region_bar'
 				}
 			},
 			{
@@ -697,6 +710,13 @@ TASKS += [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'windcarve_spirit',
+					'location': None
+				}
+			},
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'windcarve_den',
 					'location': 'region_open_area'
 				}
 			},
@@ -842,6 +862,22 @@ NPC_DIALOG += [
 		]
 	},
 	{
+		'npc_id': 'serene',
+		'dialog_id': 'serene_b_defeated',
+		'dialog': [
+			"(voice scattering into ordinary wind)",
+			"You broke the archive…",
+			"I had every pattern. Every word you ever spoke into open air.",
+			"Seven places where the world already tried to empty itself.",
+			"Seven echoes the void found useful.",
+			"You silence them… and still the quiet grows louder.",
+			"(almost amused)",
+			"When the last vault falls… you will hear it.",
+			"I never owned the future.",
+			"I only borrowed the parts of you that already belonged to the end."
+		]
+	},
+	{
 		'npc_id': 'nia',
 		'dialog_id': 'nia_b_victory',
 		'dialog': [
@@ -908,10 +944,10 @@ TASKS += [
 			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'serene_b1', 'combat_type': 'boss_battle' }},
 		],
 		'task_complete_events': [
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_b_victory' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_grassland_large_b_defeat_serene' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',       'dialog_id': 'nia_grassland_large_b_defeat_serene'       } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_grassland_large_b_defeat_serene'     } },
+			{ 'event_type': 'initiate_dialog',           'params': { 'npc_id': 'serene',    'dialog_id': 'serene_b_defeated'                              }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',       'dialog_id': 'nia_b_victory'                                  }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_grassland_large_b_defeat_serene' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_grassland_large_b_defeat_serene'     } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'grassland' }},
 		]
 	},

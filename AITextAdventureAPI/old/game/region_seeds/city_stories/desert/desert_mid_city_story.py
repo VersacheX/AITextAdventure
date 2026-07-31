@@ -411,7 +411,11 @@ NPC_DIALOG += [
         'npc_id': 'sable',
         'dialog_id': 'sable_desert_mid_b_defeat_zaruun',
         'dialog': [
-            "The sand is quiet again. The real kind of quiet."
+            "The sand is quiet again. Really quiet.",
+            "Not the silence before something breaks — the other kind.",
+            "The kind that means it's over.",
+            "(long pause) I spent years thinking the desert had no mercy in it.",
+            "Turns out it was just waiting for us to earn some."
         ]
     },
     {
@@ -437,19 +441,9 @@ TASKS += [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'elyra_dawnseer',
-					'location': 'region_open_area'
+					'location': 'region_city_other1'
 				}
-			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'elyra_dawnseer',
-					'standing_text': [
-						"The visions led me here.",
-						"I am still waiting to understand what they want me to do."
-					]
-				}
-			},
+			}
 		],
 		'task_complete_events': [
 			{
@@ -462,12 +456,13 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_desert_mid_c_find_elyra'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_desert_mid_c_find_elyra' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_desert_mid_c_find_elyra' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'elyra_dawnseer', 'standing_text': ["The visions brought me here.", "Fragments — ink dissolving, names going dark one by one.", "I have seen this city erased a hundred times in possible futures.", "I stay to understand why it keeps surviving."] } },
 			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'desert_mid_city_type_c_consult_velra'
 				}
-			},
+			}
 		]
 	},
 
@@ -489,12 +484,13 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_desert_mid_c_consult_velra'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_mid_c_consult_velra' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_desert_mid_c_consult_velra'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'velra_the_indexer', 'standing_text': ["Velra indexed you.", "That means you exist in a way the Erasure cannot touch.", "The futures I have seen that end well — you are in all of them."] } },
 			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'desert_mid_city_type_c_earn_elyra'
 				}
-			},
+			}
 		]
 	},
 
@@ -505,17 +501,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'elyra_dawnseer',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'elyra_dawnseer',
-					'standing_text': [
-						"Velra sent you back.",
-						"The index has a new entry.",
-						"I know what that means."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -534,8 +519,9 @@ TASKS += [
 					'character_id': 'elyra_dawnseer'
 				}
 			},
+			{ 'event_type': 'hide_npc', 'params': { 'npc_id': 'elyra_dawnseer' } }
 		]
-	},
+	}
 
 ]
 
@@ -546,6 +532,19 @@ TASKS += [
 # No new NPCs — uses archivist_warden_threx, ink_specter, and mira (Ch.2 anchor).
 
 NPC_DIALOG += [
+
+	{
+		'npc_id': 'mira',
+		'dialog_id': 'mira_d_deliver_ink_vial',
+		'dialog': [
+			"Ink that moves on its own…",
+			"(tilts the vial, watching the liquid crawl against the glass)",
+			"Identity anchors are rare. Most of them were locked away after the first Vault collapse.",
+			"You didn't open it. Smart. Things like this rewrite whatever they touch.",
+			"Threx will know how to finish what this started. Take it to him before it decides it wants a new host.",
+			"And if it starts writing… don't read what it writes."
+		]
+	},
 
 	{
 		'npc_id': 'archivist_warden_threx',
@@ -581,19 +580,15 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'mira',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'mira',
-					'standing_text': [
-						"That vial — the ink inside moves on its own.",
-						"It's looking for something to write itself into.",
-						"Take it to Threx before it finds a host."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'mira',
+					'dialog_id': 'mira_d_deliver_ink_vial'
+				}
+			},
 			{
 				'event_type': 'remove_item',
 				'params': {
@@ -610,12 +605,13 @@ TASKS += [
 					'location': 'region_city_other1'
 				}
 			},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'archivist_warden_threx', 'standing_text': ["Ink Resonance Vial — designation: identity anchor.", "This compound was used to bind a living identity into script.", "The Ink Specter in the Inkwell Depths carries the matching frequency.", "Dissolve the Specter correctly and the vial's compound crystallizes.", "Mira can set crystallized identity-ink into an accessory unlike any other."] } },
 			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'desert_mid_city_type_d_consult_threx'
 				}
-			},
+			}
 		]
 	},
 
@@ -642,15 +638,28 @@ TASKS += [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'ink_specter',
-					'location': 'region_open_area'
+					'location': None
 				}
 			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'ink_specter',
+					'standing_text': [
+						"The vial calls to me.",
+						"You carry what was taken from me.",
+						"I will rewrite you before I let it go."
+					]
+				}
+			},
+			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'desert_mid_ink_sanctum', 'location': 'region_open_area' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'archivist_warden_threx', 'standing_text': ["The Ink Specter in the Inkwell Depths carries the matching frequency.", "Dissolve the Specter correctly and the vial's compound crystallizes.", "Mira can set crystallized identity-ink into an accessory unlike any other."] } },
 			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'desert_mid_city_type_d_meet_ink_specter'
 				}
-			},
+			}
 		]
 	},
 
@@ -678,7 +687,7 @@ TASKS += [
 				'params': {
 					'task_id': 'desert_mid_city_type_d_defeat_ink_specter'
 				}
-			},
+			}
 		]
 	},
 
@@ -698,6 +707,12 @@ TASKS += [
 			}
 		],
 		'task_complete_events': [
+			{
+				'event_type': 'hide_npc',
+				'params': {
+					'npc_id': 'ink_specter'
+				}
+			},
 			{
 				'event_type': 'award_item',
 				'params': {
@@ -728,9 +743,9 @@ TASKS += [
 						"The archive is whole again."
 					]
 				}
-			},
+			}
 		]
-	},
+	}
 
 ]
 
@@ -773,6 +788,20 @@ NPC_DIALOG += [
 		]
 	},
 	{
+		'npc_id': 'zaruun',
+		'dialog_id': 'zaruun_b_defeated',
+		'dialog': [
+			"(sand collapsing inward, voice already half-dust)",
+			"You think this ends with me…",
+			"The void does not need a prophet. It only needs the silence that follows one.",
+			"Seven gates. Seven remnants. Each one a place where the world already tried to empty itself.",
+			"You close them… and still the quiet grows.",
+			"(almost a laugh, almost nothing)",
+			"When the last gate falls… you will understand. Emptiness was never the desert's will.",
+			"It was the world's."
+		]
+	},
+	{
 		'npc_id': 'sable',
 		'dialog_id': 'sable_b_victory',
 		'dialog': [
@@ -809,8 +838,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'zaruun',
 		'task_acquire_events': [
-			{ 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'zaruuns_sanctum', 'location': 'final_chamber' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_b_entering_sanctum' }},
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'zaruun', 'dialog_id': 'zaruun_b_risen' }},
@@ -831,13 +858,13 @@ TASKS += [
 			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'zaruun_b1', 'combat_type': 'boss_battle' }},
 		],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'zaruun', 'dialog_id': 'zaruun_b_defeated' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_b_victory' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_mid_b_defeat_zaruun' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable',     'dialog_id': 'sable_desert_mid_b_defeat_zaruun'     } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_desert_mid_b_defeat_zaruun'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_desert_mid_b_defeat_zaruun' } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'desert' }},
 		]
-	},
+	}
 
 ]
 

@@ -1,4 +1,4 @@
-﻿CITY_NAME = "The radpost"
+﻿CITY_NAME = "BioHazard"
 CITY_DESCRIPTION = (
 	"A battered outpost in the wasteland, serving as a hub for scavengers and survivors. "
 	"Amidst the ruins, makeshift buildings constructed from salvaged materials provide shelter and trade opportunities. "

@@ -168,7 +168,7 @@ Slots ordered 1 → 3 by ascending gate difficulty within each city.
 | 6  | Bleakwatch Outpost      | Snow      | Small | ~7    | No      |*A*| C | D | 6d 4c
 | 7  | Gnashwater Hollow       | Swamp     | Small | 5     | No      |*A*| C | D | 7d 5c
 | 8  | Nightveil Spire         | Desert    | Mid   | ~9    | Yes     | C | D | B | 8d 6c *desert regional*
-| 9  | The Radpost             | Desert    | Small | ~8    | Yes     | E | D |#F#| 9d
+| 9  | BioHazard             | Desert    | Small | ~8    | Yes     | E | D |#F#| 9d
 | 10 | Crosswind Bazaar        | Grassland | Large | ~6    | No      | C | D | B | 10d 7c *grass regional*
 | 11 | Blackwake Bay           | Shallows  | Mid   | ~10   | No      | E | C | D | 11d 8c
 | 12 | Quantford Hollow        | Grassland | Small | ~5    | No      |*A*| C | D | 12d 9c
@@ -184,7 +184,7 @@ Slots ordered 1 → 3 by ascending gate difficulty within each city.
 
 **Totals — A: 4 · B: 7 · C: 16 · D: 21 · E: 11 · F: 4 = 63**
 
-> **Ch.9 note:** The Radpost carries one Type E (Slot 1), one Type D (Slot 2), and one Type F (Slot 3) — a pure artifact/equipment/faction hub with no character unlock and no regional B.
+> **Ch.9 note:** BioHazard carries one Type E (Slot 1), one Type D (Slot 2), and one Type F (Slot 3) — a pure artifact/equipment/faction hub with no character unlock and no regional B.
 >
 > **Ch.18 note:** Aurelion Veil is the only city with no Type D — its three slots are fully occupied by the Chapter Tie-In (A), the Forest Regional Quest (B), and the Extended Character Unlock (C), making it the most story-dense city in the game.
 
@@ -413,7 +413,7 @@ Each E artifact is a named collectible that gates a specific D chain in another 
 | Highsteeple Crossing (3) | Sanctum Seal Fragment | → | Crosswind Bazaar (10) | Grassland region cross — sanctum relic → trade hub |
 | Ironveil Foundry (4) | Forge Echo Core | → | Gallows Rift (17) | Mountains region cross — foundry → mid-mountain dungeon |
 | Brineward Harbor (5) | Brine Compass | → | Brineward Harbor (5) | Same city — Slot 1 unlocks Slot 2 |
-| The Radpost (9) | Eroded Ledger Plate | → | The Radpost (9) | Same city — Slot 1 unlocks Slot 2 |
+| BioHazard (9) | Eroded Ledger Plate | → | BioHazard (9) | Same city — Slot 1 unlocks Slot 2 |
 | Blackwake Bay (11) | Tidekin Seal | → | Tidekin Cove (14) | Shallows region cross — mid harbor → small cove |
 | Hailward Hold (15) | Pageant Decree Shard | → | Hailward Hold (15) | Same city — Slot 1 unlocks Slot 2 |
 | Thornshade Hamlet (16) | Thornshade Root Graft | → | Boiling Bubble (2) | Forest region retroactive — player returns to Ch.2 city |
@@ -432,7 +432,7 @@ Each F faction item is the reward of a recurring NPC quest chain. It gates a D c
 |---|---|---|---|---|---|
 | The Desert Metropolis (1) | Seth | Seth's Salvage Manifest | → | Highsteeple Crossing (3) | Seth is active in Ch.3; his contraband trail leads there |
 | Brineward Harbor (5) | Astra Wynn | Rift Observation Log | → | Frostgate Spire (19) | Astra reappears in Ch.19; log connects both rift sites |
-| The Radpost (9) | Tess | Contraband Registry | → | Bleakwatch Outpost (6) | Tess's black market network; Bleakwatch is a frontier hub |
+| BioHazard (9) | Tess | Contraband Registry | → | Bleakwatch Outpost (6) | Tess's black market network; Bleakwatch is a frontier hub |
 | Hailward Hold (15) | Marlo Finch | Audit Testimony Seal | → | Bayou Nocturne (20) | Marlo reappears in Ch.20; audit trail concludes there |
 
 ---
@@ -466,7 +466,7 @@ These 6 D chains are gated only by a trigger item found in a chapter dungeon and
 | Bleakwatch Outpost | 6 | 3 | F item | Ch.9 F — Contraband Registry |
 | Gnashwater Hollow | 7 | 3 | E artifact | Ch.20 E — Bayou Memory Vessel *(retroactive)* |
 | Nightveil Spire | 8 | 2 | Trigger item | Ch.8 dungeon → Mira |
-| The Radpost | 9 | 2 | E artifact | Ch.9 E — Eroded Ledger Plate |
+| BioHazard | 9 | 2 | E artifact | Ch.9 E — Eroded Ledger Plate |
 | Crosswind Bazaar | 10 | 2 | E artifact | Ch.3 E — Sanctum Seal Fragment |
 | Blackwake Bay | 11 | 3 | Trigger item | Ch.5 dungeon → Diego |
 | Quantford Hollow | 12 | 3 | Trigger item | Ch.3 dungeon → Mira |

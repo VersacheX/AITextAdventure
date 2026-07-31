@@ -1,4 +1,4 @@
-# Random hostile seed data for "The radpost" (small post-apocalyptic city).
+# Random hostile seed data for "BioHazard" (small post-apocalyptic city).
 # Each entry is a simple dict used by encounter/spawn systems.
 
 from .enemies_small.lv1to10 import RANDOM_HOSTILE_SEEDS as LV1TO10
