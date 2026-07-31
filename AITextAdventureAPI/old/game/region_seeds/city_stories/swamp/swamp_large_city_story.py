@@ -285,18 +285,7 @@ TASKS += [
 					'npc_id': 'anita',
 					'location': 'region_city_other2'
 				}
-			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'anita',
-					'standing_text': [
-						"Every bone here carries data.",
-						"I intend to record all of it before I leave.",
-						"Which may be never."
-					]
-				}
-			},
+			}
 		],
 		'task_complete_events': [
 			{
@@ -309,6 +298,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_swamp_large_c_find_anita'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',   'dialog_id': 'moxie_swamp_large_c_find_anita'   } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_large_c_find_anita' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'anita', 'standing_text': [ "I've catalogued forty-seven relic-spirit manifestations this season alone.", "The Necropolis is the most information-dense location I've ever worked.", "Everything here remembers — the bones, the relics, the mire itself.", "I don't leave a place like this until I understand it completely." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -348,17 +338,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'anita',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'anita',
-					'standing_text': [
-						"Morwen sent you back.",
-						"The relics recognize my methodology.",
-						"Very well."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -392,6 +371,18 @@ TASKS += [
 
 NPC_DIALOG += [
 
+	{
+		'npc_id': 'diego',
+		'dialog_id': 'diego_d_marrow_shard_reaction',
+		'dialog': [
+			"Marrow that won't decay…",
+			"(holds the shard up to the light)",
+			"Rift exposure should have eaten this thing weeks ago. Something in the Necropolis is keeping it whole on purpose.",
+			"Halveth reads bone tides better than anyone in this mire. He'll know what frequency this is calling.",
+			"Take it to him before the Sump finishes noticing you're carrying it.",
+			"And if the bones start humming louder… don't stop walking."
+		]
+	},
 	{
 		'npc_id': 'mire_seer_halveth',
 		'dialog_id': 'halveth_d_shard_read',
@@ -428,19 +419,9 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'diego',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'diego',
-					'standing_text': [
-						"That shard — the marrow inside it hasn't decayed despite the rift exposure.",
-						"Something in the Necropolis is preserving it.",
-						"Find Halveth. He reads bone tides — he'll know what this is connected to."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'diego', 'dialog_id': 'diego_d_marrow_shard_reaction' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_swamp_large_d_deliver_marrow_shard'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',   'dialog_id': 'moxie_swamp_large_d_deliver_marrow_shard'   } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_large_d_deliver_marrow_shard' } },
@@ -455,6 +436,17 @@ TASKS += [
 				'params': {
 					'npc_id': 'mire_seer_halveth',
 					'location': 'region_city_other1'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'mire_seer_halveth',
+					'standing_text': [
+						"The bone tides surged the moment that shard crossed the mire's edge.",
+						"The Sump has been waiting for it.",
+						"Come quickly — the Relicmire Voice is already stirring."
+					]
 				}
 			},
 			{
@@ -473,17 +465,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'mire_seer_halveth',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'mire_seer_halveth',
-					'standing_text': [
-						"The bone tides surged the moment that shard crossed the mire's edge.",
-						"The Sump has been waiting for it.",
-						"Come quickly — the Relicmire Voice is already stirring."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -500,7 +481,37 @@ TASKS += [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'relicmire_voice',
+					'location': None
+				}
+			},
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'relicmire_sump',
+					'dungeon_type': 'swamp_large_city_type_d_relicmire_sump',
 					'location': 'region_open_area'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'mire_seer_halveth',
+					'standing_text': [
+						"The Sump churns violently near the deep entrance.",
+						"Velis says the bone patterns have all pointed inward since dawn.",
+						"The marrow shard has called the Voice to the surface."
+					]
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'relicmire_voice',
+					'standing_text': [
+						"The Sump churns with drowned relics.",
+						"The Bone Drown gathers strength.",
+						"Only its heart remains to be silenced."
+					]
 				}
 			},
 			{
@@ -519,17 +530,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'relicmire_voice',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'relicmire_voice',
-					'standing_text': [
-						"The Sump churns violently near the deep entrance.",
-						"Velis says the bone patterns have all pointed inward since dawn.",
-						"The marrow shard has called the Voice to the surface."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -647,6 +647,22 @@ NPC_DIALOG += [
 		]
 	},
 	{
+		'npc_id': 'miregloom',
+		'dialog_id': 'miregloom_b_defeated',
+		'dialog': [
+			"(roots collapsing, voice already half-rot)",
+			"You interrupt the process…",
+			"Decay does not interrupt with me.",
+			"Seven places where the world already tried to empty itself.",
+			"Seven graves the void found useful.",
+			"You close them… and still the quiet deepens.",
+			"(almost fond)",
+			"When the last root stops humming… you will understand.",
+			"I was never trying to become the swamp.",
+			"I was trying to finish the burial the world began the day it first refused to stay dead."
+		]
+	},
+	{
 		'npc_id': 'grimnaw',
 		'dialog_id': 'grimnaw_b_victory',
 		'dialog': [
@@ -719,9 +735,10 @@ TASKS += [
 			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'miregloom_b1', 'combat_type': 'boss_battle' }}
 		],
 		'task_complete_events': [
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_swamp_large_b_defeat_miregloom'  } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_b_victory'                     } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'kaera_swamp_large_b_defeat_miregloom'  } },
+			{ 'event_type': 'initiate_dialog',           'params': { 'npc_id': 'miregloom',  'dialog_id': 'miregloom_b_defeated' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique',  'dialog_id': 'chock_swamp_large_b_defeat_miregloom'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',    'dialog_id': 'grimnaw_b_victory'                     } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',      'dialog_id': 'kaera_swamp_large_b_defeat_miregloom'  } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'swamp' }},
 		]
 	},

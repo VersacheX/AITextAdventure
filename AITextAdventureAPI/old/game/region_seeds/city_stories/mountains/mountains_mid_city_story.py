@@ -283,28 +283,28 @@ NPC_DIALOG += [
 # --- Character dialogs: Type D ---
 NPC_DIALOG += [
 
-    # Type D – Deliver Forge Core
-    {
-        'npc_id': 'tech',
-        'dialog_id': 'tech_mountains_mid_d_deliver_forge_core',
-        'dialog': [
-            "The forge-pressure inside it is still active. Something in the Gallows Rift resonates with this exact frequency."
-        ]
-    },
-    {
-        'npc_id': 'technique',
-        'dialog_id': 'technique_mountains_mid_d_deliver_forge_core',
-        'dialog': [
-            "Korrin reads fall-lines and mountain pressure. He'll know what the core is calling to."
-        ]
-    },
-    {
-        'npc_id': 'magic',
-        'dialog_id': 'magic_mountains_mid_d_deliver_forge_core',
-        'dialog': [
-            "I already want to see what surfaces when we present it."
-        ]
-    },
+	# Type D – Deliver Forge Core
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_mountains_mid_d_deliver_forge_core',
+		'dialog': [
+			"The forge-pressure inside it is still active. Something in the Gallows Rift resonates with this exact frequency."
+		]
+	},
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_mountains_mid_d_deliver_forge_core',
+		'dialog': [
+			"Korrin reads fall-lines and mountain pressure. He'll know what the core is calling to."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_mountains_mid_d_deliver_forge_core',
+		'dialog': [
+			"I already want to see what surfaces when we present it."
+		]
+	},
 
     # Type D – Consult Korrin
     {
@@ -403,28 +403,28 @@ NPC_DIALOG += [
         ]
     },
 
-    # B – Defeat Rokhuld
-    {
-        'npc_id': 'technique',
-        'dialog_id': 'technique_mountains_mid_b_defeat_rokhuld',
-        'dialog': [
-            "Stay down. The mountain doesn't need another crusade."
-        ]
-    },
-    {
-        'npc_id': 'bragg',
-        'dialog_id': 'bragg_mountains_mid_b_defeat_rokhuld',
-        'dialog': [
-            "We were both just afraid. The mountain's still standing. That's what matters."
-        ]
-    },
-    {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_mountains_mid_b_defeat_rokhuld',
-        'dialog': [
-            "Some callings are just fear wearing a better name. This one is finished."
-        ]
-    },
+	# B – Defeat Rokhuld
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_mountains_mid_b_defeat_rokhuld',
+		'dialog': [
+			"Stay down. The mountain doesn't need another crusade."
+		]
+	},
+	{
+		'npc_id': 'bragg',
+		'dialog_id': 'bragg_mountains_mid_b_defeat_rokhuld',
+		'dialog': [
+			"We were both just afraid. The mountain's still standing. That's what matters."
+		]
+	},
+	{
+		'npc_id': 'faith',
+		'dialog_id': 'faith_mountains_mid_b_defeat_rokhuld',
+		'dialog': [
+			"Some callings are just fear wearing a better name. This one is finished."
+		]
+	},
 
 ]
 
@@ -441,19 +441,9 @@ TASKS += [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'korina_brightvein',
-					'location': 'region_open_area'
+					'location': 'region_city_other2'
 				}
-			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'korina_brightvein',
-					'standing_text': [
-						"Another party on the Rift passes.",
-						"I'm watching to see if you move like survivors or like tourists."
-					]
-				}
-			},
+			}
 		],
 		'task_complete_events': [
 			{
@@ -466,6 +456,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_mid_c_find_korina' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_mountains_mid_c_find_korina'     } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg',     'dialog_id': 'bragg_mountains_mid_c_find_korina'     } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'korina_brightvein', 'standing_text': [ "Harrock sent you back.", "The Rift paths are safer when you walk them.", "That's all I needed to hear." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -509,17 +500,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'korina_brightvein',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'korina_brightvein',
-					'standing_text': [
-						"Harrock sent you back.",
-						"The Rift paths are safer when you walk them.",
-						"That's all I needed to hear."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -538,6 +518,12 @@ TASKS += [
 					'character_id': 'korina_brightvein'
 				}
 			},
+			{
+				'event_type': 'hide_npc',
+				'params': {
+					'npc_id': 'korina_brightvein'
+				}
+			}
 		]
 	},
 
@@ -545,12 +531,24 @@ TASKS += [
 
 
 # ── Type D ── Shatterpeak Warplate (mythic armor) ─────────────────────────────
-# Gate: player holds forge_echo_core from the Ch.4 Type E chain (mountains cross).
+# Gate: player holds mountains_large_city_e_forge_echo_core from the Ch.4 Type E chain (mountains cross).
 # Deliver to Brawn → Korrin reads the core → defeat Emberwake Spirit → mythic armor.
 # No new NPCs — uses avalanche_seer_korrin, emberwake_spirit, and brawn (Ch.1 party anchor).
 
 NPC_DIALOG += [
 
+	{
+		'npc_id': 'brawn',
+		'dialog_id': 'brawn_d_forge_core_reaction',
+		'dialog': [
+			"Forge-pressure still active inside this thing…",
+			"(turns the core carefully in both hands)",
+			"I can feel the foundry frequency humming against the plate. Whatever made this was never meant to leave the mountain.",
+			"Korrin reads fall-lines and pressure better than anyone on these cliffs. He'll know exactly what this core is calling to.",
+			"Take it to him before the resonance starts pulling something up on its own.",
+			"And if the ground starts answering… step carefully."
+		]
+	},
 	{
 		'npc_id': 'avalanche_seer_korrin',
 		'dialog_id': 'korrin_d_core_read',
@@ -580,37 +578,26 @@ NPC_DIALOG += [
 
 TASKS += [
 
-	# D-0 — Deliver forge_echo_core to Brawn (standalone deliver; unlocks D chain)
+	# D-0 — Deliver mountains_large_city_e_forge_echo_core to Brawn (standalone deliver; unlocks D chain)
 	{
 		'task_id': 'mountains_mid_city_type_d_deliver_forge_core',
 		'type': 'deliver',
-		'item_id': 'forge_echo_core',
+		'item_id': 'mountains_large_city_e_forge_echo_core',
 		'to_type': 'npc',
 		'to_id': 'brawn',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'brawn',
-					'standing_text': [
-						"That core — the forge-pressure inside it is still active after all this time.",
-						"Something in the Gallows Rift resonates with it.",
-						"Find Korrin. He reads fall-lines and mountain pressure.",
-						"He'll know exactly what this core is calling to."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'brawn', 'dialog_id': 'brawn_d_forge_core_reaction' }},
 			{
 				'event_type': 'remove_item',
 				'params': {
-					'item_id': 'forge_echo_core'
+					'item_id': 'mountains_large_city_e_forge_echo_core'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_mountains_mid_d_deliver_forge_core'      } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_mid_d_deliver_forge_core' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',     'dialog_id': 'magic_mountains_mid_d_deliver_forge_core'     } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_mountains_mid_d_deliver_forge_core'      } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_mid_d_deliver_forge_core' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',     'dialog_id': 'magic_mountains_mid_d_deliver_forge_core'     } },
 			{
 				'event_type': 'create_npc',
 				'params': {
@@ -618,6 +605,7 @@ TASKS += [
 					'location': 'region_city_bar'
 				}
 			},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'avalanche_seer_korrin', 'standing_text': [ "The Forge Echo Core carries a resonance that matches the Emberwake Cavern almost exactly.", "Present it at the Cavern entrance and the Emberwake Spirit will surface.", "Silence it and the forge-pressure crystallizes. Brawn can work with that." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -634,17 +622,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'avalanche_seer_korrin',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'avalanche_seer_korrin',
-					'standing_text': [
-						"The fall-lines shifted the moment that core crossed the Rift.",
-						"The Cavern has been waiting for that foundry frequency.",
-						"Come quickly — the Emberwake Spirit is already stirring."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -661,6 +638,15 @@ TASKS += [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'emberwake_spirit',
+					'location': None
+				}
+			},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'avalanche_seer_korrin', 'standing_text': [ "The Emberwake Spirit has been drawing heat from Ryla's fires for years.", "Present the Forge Echo Core at the Cavern entrance and it will surface.", "Silence it and the forge-pressure crystallizes. Brawn can work with that." ] } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'emberwake_spirit', 'standing_text': [ "The Cavern burns with ancient fury.", "The Core gathers strength.", "Only its heart remains to be stilled." ] } },
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'mountains_mid_emberwake_cavern',
 					'location': 'region_open_area'
 				}
 			},
@@ -680,19 +666,14 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'emberwake_spirit',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'emberwake_spirit',
-					'standing_text': [
-						"Ryla's campfires have all burned down to cold ash.",
-						"The Cavern entrance glows with a deep orange heat-pulse.",
-						"The Forge Echo Core has called the Spirit forward."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
+			{
+				'event_type': 'hide_npc',
+				'params': {
+					'npc_id': 'emberwake_spirit'
+				}
+			},
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
@@ -708,7 +689,7 @@ TASKS += [
 				'params': {
 					'task_id': 'mountains_mid_city_type_d_defeat_emberwake_spirit'
 				}
-			},
+			}
 		]
 	},
 
@@ -807,6 +788,22 @@ NPC_DIALOG += [
 		]
 	},
 	{
+		'npc_id': 'rokhuld',
+		'dialog_id': 'rokhuld_b_defeated',
+		'dialog': [
+			"(hammer cracking, voice already half-stone)",
+			"You stop the drill…",
+			"The mission does not stop with me.",
+			"Seven places where the world already tried to empty itself.",
+			"Seven fractures the void found useful.",
+			"You seal them… and still the pressure builds.",
+			"(almost calm)",
+			"When the last core is broken… you will understand.",
+			"I was never trying to end the mountain.",
+			"I was trying to let the world finish the breath it started holding the day the first fracture opened."
+		]
+	},
+	{
 		'npc_id': 'bragg',
 		'dialog_id': 'bragg_b_victory',
 		'dialog': [
@@ -844,8 +841,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'rokhuld',
 		'task_acquire_events': [
-			{ 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'rokhulls_fracture_core', 'location': 'final_chamber' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_b_entering_core' }},
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rokhuld', 'dialog_id': 'rokhuld_b_risen' }},
@@ -866,10 +861,10 @@ TASKS += [
 			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'rokhuld_b1', 'combat_type': 'boss_battle' }}
 		],
 		'task_complete_events': [
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_b_victory' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_mid_b_defeat_rokhuld' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg',     'dialog_id': 'bragg_mountains_mid_b_defeat_rokhuld'     } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_mountains_mid_b_defeat_rokhuld'     } },
+			{ 'event_type': 'initiate_dialog',           'params': { 'npc_id': 'rokhuld',    'dialog_id': 'rokhuld_b_defeated'                            }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg',      'dialog_id': 'bragg_b_victory'                               }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_mid_b_defeat_rokhuld' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_mountains_mid_b_defeat_rokhuld'     } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'mountains' }},
 		]
 	},

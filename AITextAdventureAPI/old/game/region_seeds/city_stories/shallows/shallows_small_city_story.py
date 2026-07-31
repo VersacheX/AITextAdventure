@@ -316,16 +316,6 @@ TASKS = [
         'to_type': 'npc',
         'to_id': 'signalwatch_errol',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'signalwatch_errol',
-                    'standing_text': [
-                        "The sea's signals blur.",
-                        "Flags read wrong even when the wind is steady."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -338,6 +328,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_small_meet_errol'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_small_meet_errol' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_small_meet_errol'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'signalwatch_errol', 'standing_text': [ "The sea's signals blur.", "Flags read wrong even when the wind is steady.", "Something hides warnings beneath the fog." ] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -395,17 +386,7 @@ TASKS = [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'mist_seer_loryth',
-                    'location': 'region_open_area'
-                }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'mist_seer_loryth',
-                    'standing_text': [
-                        "The mist glyphs twist.",
-                        "A Silent Buoy rises beneath the fog."
-                    ]
+                    'location': 'region_city_other1'
                 }
             }
         ],
@@ -420,6 +401,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_small_find_loryth'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_small_find_loryth' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_small_find_loryth'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'mist_seer_loryth', 'standing_text': [ "The mist glyphs twist.", "A Silent Buoy rises — a spirit of drowned warnings.", "If it awakens, the coast will lose its voice." ] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -435,19 +417,19 @@ TASKS = [
         'type': 'meet',
         'to_type': 'npc',
         'to_id': 'fogwhisper_echo',
-        'task_acquire_events': [
-            {
-                'event_type': 'create_dungeon',
-                'params': {
-                    'dungeon_id': 'fogwhisper_inlet',
-                    'location': 'region_open_area'
-                }
-            },
+        'task_acquire_events': [			
             {
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'fogwhisper_echo',
                     'location': None
+                }
+            },
+            {
+                'event_type': 'create_dungeon',
+                'params': {
+                    'dungeon_id': 'fogwhisper_inlet',
+                    'location': 'region_open_area'
                 }
             }
         ],
@@ -462,6 +444,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_small_fogwhisper_inlet' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_small_fogwhisper_inlet' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_shallows_small_fogwhisper_inlet' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'fogwhisper_echo', 'standing_text': [ "We are the warnings the fog devoured.", "The Silent Buoy twists our signals.", "It waits deeper in the Coveveil Passage." ] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -477,19 +460,19 @@ TASKS = [
         'type': 'meet',
         'to_type': 'npc',
         'to_id': 'coveveil_voice',
-        'task_acquire_events': [
-            {
-                'event_type': 'create_dungeon',
-                'params': {
-                    'dungeon_id': 'coveveil_passage',
-                    'location': 'region_open_area'
-                }
-            },
+        'task_acquire_events': [			
             {
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'coveveil_voice',
                     'location': None
+                }
+            },
+            {
+                'event_type': 'create_dungeon',
+                'params': {
+                    'dungeon_id': 'coveveil_passage',
+                    'location': 'region_open_area'
                 }
             }
         ],
@@ -504,54 +487,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_small_coveveil_passage' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_small_coveveil_passage'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_small_coveveil_passage' } },
-            {
-                'event_type': 'award_task',
-                'params': {
-                    'task_id': 'shallows_small_city_silent_buoy'
-                }
-            }
-        ]
-    },
-
-    # Task 6 — Defeat the Silent Buoy (boss dungeon)
-    {
-        'task_id': 'shallows_small_city_silent_buoy',
-        'type': 'defeat',
-        'to_type': 'mob',
-        'to_id': 'silent_buoy_1',
-        'task_acquire_events': [
-            {
-                'event_type': 'create_dungeon',
-                'params': {
-                    'dungeon_id': 'the_silent_buoy',
-                    'location': 'region_open_area'
-                }
-            },
-            {
-                'event_type': 'begin_combat',
-                'params': {
-                    'boss_mob_id': 'silent_buoy_1',
-                    'combat_type': 'boss_battle'
-                }
-            }
-        ],
-        'task_complete_events': [
-            {
-                'event_type': 'initiate_dialog',
-                'params': {
-                    'npc_id': 'signalwatch_errol',
-                    'dialog_id': 'errol_closing'
-                }
-            },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_small_silent_buoy' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_small_silent_buoy' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_small_silent_buoy'  } },
-            {
-                'event_type': 'complete_region_quest',
-                'params': {
-                    'region_id': 'shallows_small_city'
-                }
-            }
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'coveveil_voice', 'standing_text': [ "The Passage hums with stolen warnings.", "The Silent Buoy gathers strength.", "Only its heart remains to be dimmed." ] } }
         ]
     },
 
@@ -567,17 +503,6 @@ TASKS = [
 		'to_type': 'npc',
 		'to_id': 'signalwatch_errol',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'signalwatch_errol',
-					'standing_text': [
-						"Strange performer came in on the last tide.",
-						"Joy that actually means something — in this city.",
-						"Sylka knows her."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -590,6 +515,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_small_c_find_andrea' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_small_c_find_andrea'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_shallows_small_c_find_andrea'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'signalwatch_errol','standing_text': [ "Strange performer came in on the last tide.", "Joy that actually means something — in this city.", "Sylka knows her." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -604,16 +530,6 @@ TASKS = [
 		'to_type': 'npc',
 		'to_id': 'runner_sylka',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'runner_sylka',
-					'standing_text': [
-						"Errol sent you about the performer.",
-						"I ran her route in. I can tell you everything."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -626,6 +542,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_small_c_consult_sylka' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_small_c_consult_sylka'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_shallows_small_c_consult_sylka'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'runner_sylka','standing_text': [ "Sylka says the hidden routes are clear.", "She'll know what that means." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -644,19 +561,9 @@ TASKS = [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'andrea_starveil',
-					'location': 'region_open_area'
+					'location': 'region_city_bar'
 				}
-			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'andrea_starveil',
-					'standing_text': [
-						"The cove has its own rhythm if you listen past the mandate.",
-						"Come find me when you're ready to hear it."
-					]
-				}
-			},
+			}
 		],
 		'task_complete_events': [
 			{
@@ -676,6 +583,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_small_c_earn_andrea' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_small_c_earn_andrea' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_shallows_small_c_earn_andrea'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'andrea_starveil','standing_text': [ "Morale isn't a luxury.", "It's the difference between a party that breaks and one that doesn't.", "I keep people standing. Let me come." ] } },
 			{
 				'event_type': 'hide_npc',
 				'params': { 'npc_id': 'andrea_starveil' }
@@ -728,6 +636,22 @@ NPC_DIALOG += [
 			"I understand the configuration now. Every tide. Every collapse. Every point of failure.",
 			"You are a point of failure.",
 			"I will reconfigure you."
+		]
+	},
+	{
+		'npc_id': 'uulthar',
+		'dialog_id': 'uulthar_b_defeated',
+		'dialog': [
+			"(geometry collapsing, voice already half-pressure)",
+			"You stop the configuration…",
+			"The pattern does not stop with me.",
+			"Seven places where the world already tried to empty itself.",
+			"Seven geometries the void found useful.",
+			"You correct them… and still the silence deepens.",
+			"(almost clinical)",
+			"When the last tide is rewritten… you will understand.",
+			"I was never trying to own the sea.",
+			"I was trying to finish the calculation the Fracture began the day the first wave forgot how to break."
 		]
 	},
 	{
@@ -790,9 +714,10 @@ TASKS += [
 			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'uulthar_b1', 'combat_type': 'boss_battle' }}
 		],
 		'task_complete_events': [
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique',  'dialog_id': 'chock_shallows_small_b_defeat_uulthar'  } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_b_victory'                        } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'kaera_shallows_small_b_defeat_uulthar'  } },
+			{ 'event_type': 'initiate_dialog',           'params': { 'npc_id': 'uulthar',   'dialog_id': 'uulthar_b_defeated'                         }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_small_b_defeat_uulthar'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple',    'dialog_id': 'ripple_b_victory'                       } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'kaera_shallows_small_b_defeat_uulthar'  } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'shallows' }},
 		]
 	},
@@ -806,6 +731,19 @@ TASKS += [
 
 NPC_DIALOG += [
 
+	{
+		'npc_id': 'diego',
+		'dialog_id': 'diego_d_tidekin_seal_reaction',
+		'dialog': [
+			"That seal…",
+			"(turns it once, feels the weight)",
+			"Metal the sea hardened on purpose. I've handled a lot of old iron. This one is different.",
+			"It doesn't just resist rust — it remembers the current.",
+			"Loryth reads the mist glyphs in this cove. If anything still knows what the Tidekin sealed, she does.",
+			"Take it to her before the Passage notices you're carrying it.",
+			"And if the fog starts thickening around you… don't stop walking."
+		]
+	},
 	{
 		'npc_id': 'mist_seer_loryth',
 		'dialog_id': 'loryth_d_seal_read',
@@ -858,6 +796,7 @@ TASKS += [
 			},
 		],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'diego', 'dialog_id': 'diego_d_tidekin_seal_reaction' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_small_d_deliver_tidekin_seal'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_small_d_deliver_tidekin_seal' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_small_d_deliver_tidekin_seal' } },
@@ -883,17 +822,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'mist_seer_loryth',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'mist_seer_loryth',
-					'standing_text': [
-						"The mist glyphs changed the moment you arrived.",
-						"They are spelling a name I have not read in years.",
-						"Tidekin. Come — before the Passage notices what you carry."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -906,6 +834,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_small_d_consult_loryth'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_small_d_consult_loryth' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_small_d_consult_loryth'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'mist_seer_loryth','standing_text': [ "The mist glyphs read clearly again.", "Every hidden route the Voice sealed has opened.", "Sylka says the cove-runners can move freely." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -922,17 +851,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'coveveil_voice',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'coveveil_voice',
-					'standing_text': [
-						"The Coveveil Passage hums with a resonance deeper than fog.",
-						"Sylka says the hidden routes have all gone cold — even the ones she runs blindfolded.",
-						"The Tidekin Seal has drawn the Voice to the surface."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -945,6 +863,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_small_d_meet_coveveil_voice' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_small_d_meet_coveveil_voice' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_shallows_small_d_meet_coveveil_voice' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'coveveil_voice','standing_text': [ "The Coveveil Passage hums with a resonance deeper than fog.", "Sylka says the hidden routes have all gone cold — even the ones she runs blindfolded.", "The Tidekin Seal has drawn the Voice to the surface." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {

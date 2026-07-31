@@ -400,7 +400,7 @@ TASKS += [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'depth_seer_thalric',
-					'location': 'region_open_area'
+					'location': 'region_city_other2'
 				}
 			},
 			{

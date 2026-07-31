@@ -284,16 +284,6 @@ TASKS = [
 		'to_type': 'npc',
 		'to_id': 'concordant_ivar',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'concordant_ivar',
-					'standing_text': [
-						"The frost patterns shift unpredictably.",
-						"Something disturbs the harmony beneath the ice."
-					]
-				}
-			}
 		],
 		'task_complete_events': [
 			{
@@ -306,6 +296,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_large_meet_ivar'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_large_meet_ivar' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_snow_large_meet_ivar'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'concordant_ivar', 'standing_text': [ "The frost settles. Harmony returns." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -359,17 +350,7 @@ TASKS = [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'glacier_seer_thryna',
-					'location': 'region_open_area'
-				}
-			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'glacier_seer_thryna',
-					'standing_text': [
-						"The ice harmonics tremble.",
-						"A Fractured Chime awakens beneath the frostline."
-					]
+					'location': 'region_city_other1'
 				}
 			}
 		],
@@ -392,9 +373,13 @@ TASKS = [
 				}
 			},
 			{
-				'event_type': 'complete_regional_quests',
+				'event_type': 'set_npc_standing_text',
 				'params': {
-					'region_id': 'snow_large_city'
+					'npc_id': 'glacier_seer_thryna',
+					'standing_text': [
+						"The ice harmonics tremble.",
+						"A Fractured Chime rises — a spirit of broken harmony."
+					]
 				}
 			}
 		]
@@ -413,17 +398,7 @@ TASKS = [
 					'npc_id': 'lyric',
 					'location': 'region_city_other1'
 				}
-			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'lyric',
-					'standing_text': [
-						"The interference pattern has seventeen variables.",
-						"I've collapsed it to three. Come back when you've verified the fourth."
-					]
-				}
-			},
+			}
 		],
 		'task_complete_events': [
 			{
@@ -436,6 +411,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_large_c_find_lyric'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',   'dialog_id': 'moxie_snow_large_c_find_lyric'   } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_large_c_find_lyric' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lyric', 'standing_text': [ "I've been mapping the frost-harmonic interference patterns." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -475,16 +451,6 @@ TASKS = [
 		'to_type': 'npc',
 		'to_id': 'lyric',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'lyric',
-					'standing_text': [
-						"You've spoken to Lyndra? Good.",
-						"Then you understand what I need. Come and tell me what you found."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -549,16 +515,6 @@ TASKS = [
 		'to_type': 'npc',
 		'to_id': 'artificer_lyndra',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'artificer_lyndra',
-					'standing_text': [
-						"That seal — it hums with deep vault resonance.",
-						"I know what it opens. Come, I\'ll explain the rites."
-					]
-				}
-			}
 		],
 		'task_complete_events': [
 			{
@@ -571,6 +527,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_large_d_consult_lyndra'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_large_d_consult_lyndra' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_snow_large_d_consult_lyndra'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'artificer_lyndra', 'standing_text': [ "The Seal awakens the vault guardian." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -585,16 +542,6 @@ TASKS = [
 		'to_type': 'npc',
 		'to_id': 'glacier_seer_thryna',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'glacier_seer_thryna',
-					'standing_text': [
-						"The vault stirs. The rite must be spoken before the guardian emerges.",
-						"Are you ready?"
-					]
-				}
-			}
 		],
 		'task_complete_events': [
 			{
@@ -607,6 +554,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_large_d_meet_vault_guardian' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_large_d_meet_vault_guardian' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_snow_large_d_meet_vault_guardian' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'glacier_seer_thryna', 'standing_text': [ "The Seal awakens the vault guardian." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -694,6 +642,22 @@ NPC_DIALOG += [
 			"The void returned what your violence took from me.",
 			"Every frozen moment I ever made — I carry them all now.",
 			"Stand still. I will add yours to the collection."
+		]
+	},
+	{
+		'npc_id': 'aeriola',
+		'dialog_id': 'aeriola_b_defeated',
+		'dialog': [
+			"(ice cracking, voice already half-thaw)",
+			"You break the moments…",
+			"The stillness does not break with me.",
+			"Seven places where the world already tried to empty itself.",
+			"Seven freezes the void found useful.",
+			"You thaw them… and still the quiet deepens.",
+			"(almost gentle)",
+			"When the last moment moves again… you will understand.",
+			"I was never trying to stop the world.",
+			"I was trying to keep it from having to feel what comes after the stopping ends."
 		]
 	},
 	{
@@ -874,9 +838,10 @@ TASKS += [
 			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'aeriola_b1', 'combat_type': 'boss_battle' }}
 		],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog',           'params': { 'npc_id': 'aeriola',    'dialog_id': 'aeriola_b_defeated' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique',  'dialog_id': 'chock_snow_large_b_defeat_aeriola'  } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_b_victory'                   } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'kaera_snow_large_b_defeat_aeriola'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in',     'dialog_id': 'kor_in_b_victory'                  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',      'dialog_id': 'kaera_snow_large_b_defeat_aeriola'  } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'snow' }},
 		]
 	},
