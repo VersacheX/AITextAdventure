@@ -160,6 +160,18 @@ def _build_hostile_tree(const: Any) -> None:
                 if isinstance(s, dict):
                     all_seeds.append((attr, s))
 
+    # Pull hostile_seeds and boss_hostiles from every DUNGEON_SETTINGS entry
+    dungeon_settings_list = getattr(const, "DUNGEON_SETTINGS", None)
+    if isinstance(dungeon_settings_list, list):
+        for ds in dungeon_settings_list:
+            if not isinstance(ds, dict):
+                continue
+            dungeon_id = ds.get("dungeon_id") or ds.get("display_name") or "unknown_dungeon"    
+            for key in ("hostile_seeds", "boss_hostiles"):
+                for s in (ds.get(key) or []):
+                    if isinstance(s, dict):
+                        all_seeds.append((f"{dungeon_id}.{key}", s))
+
     # Group by (rarity, level_bucket)
     # rarity → bucket_id → [HostileNode]
     by_rarity_bucket: Dict[str, Dict[str, List[HostileNode]]] = {
