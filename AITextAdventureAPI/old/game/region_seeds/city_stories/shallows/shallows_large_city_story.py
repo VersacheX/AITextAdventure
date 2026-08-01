@@ -466,16 +466,6 @@ TASKS += [
                     'dungeon_id': 'shallows_large_city_stormtide_vault',
                     'location': 'region_open_area'
                 }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'stormtide_echo',
-                    'standing_text': [
-                        "The Compass does not leave these waters.",
-                        "Turn back."
-                    ]
-                }
             }
         ],
         'task_complete_events': [
@@ -489,6 +479,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_large_e_confront_stormtide_echo' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_large_e_confront_stormtide_echo' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_shallows_large_e_confront_stormtide_echo' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'stormtide_echo', 'standing_text': [ "The Compass does not leave these waters." ] } },
             {
                 'event_type': 'award_task',
                 'params': {

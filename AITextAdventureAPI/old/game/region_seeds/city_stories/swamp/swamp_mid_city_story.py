@@ -418,17 +418,6 @@ TASKS += [
 					'dungeon_id': 'swamp_mid_city_oathrot_channel',
 					'location': 'region_open_area'
 				}
-			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'oathrot_voice',
-					'standing_text': [
-						"The Vessel is ours.",
-						"Its memories feed us.",
-						"You will not take them."
-					]
-				}
 			}
 		],
 		'task_complete_events': [
@@ -442,6 +431,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_swamp_mid_e_confront_oathrot_voice' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_e_confront_oathrot_voice' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_swamp_mid_e_confront_oathrot_voice' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'oathrot_voice', 'standing_text': [ "The Vessel feeds us.", "Every memory it holds becomes part of our rot.", "You would take our sustenance." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {

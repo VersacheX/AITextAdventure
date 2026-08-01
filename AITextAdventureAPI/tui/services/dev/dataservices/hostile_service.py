@@ -152,8 +152,10 @@ def _build_hostile_tree(const: Any) -> None:
                     if isinstance(s, dict):
                         all_seeds.append((attr, s))
 
-    # Also pull WORLD_HOSTILES / WORLD_BOSS_MOBS
-    for attr in ("WORLD_HOSTILES", "WORLD_BOSS_MOBS"):
+    # Also pull WORLD_HOSTILES only — WORLD_BOSS_MOBS are mob group
+    # definitions (id + hostiles list), not hostile seed dicts, and must
+    # not be loaded into the hostile tree.
+    for attr in ("WORLD_HOSTILES",):
         val = getattr(const, attr, None)
         if isinstance(val, list):
             for s in val:

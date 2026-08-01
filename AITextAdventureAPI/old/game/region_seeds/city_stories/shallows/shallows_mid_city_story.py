@@ -428,16 +428,6 @@ TASKS += [
                 }
             },
             {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'lanternfade_echo',
-                    'standing_text': [
-                        "The Seal is ours.",
-                        "Leave."
-                    ]
-                }
-            },
-            {
                 'event_type': 'create_dungeon',
                 'params': {
                     'dungeon_id': 'shallows_mid_city_type_e_defeat_lanternfade_echo',
@@ -456,6 +446,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_mid_e_confront_lanternfade_echo' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_e_confront_lanternfade_echo' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_shallows_mid_e_confront_lanternfade_echo' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lanternfade_echo', 'standing_text': [ "We are the signals that faded.", "The False Lantern twists our light.", "It waits deeper in the Undertunnel." ] } },
             {
                 'event_type': 'award_task',
                 'params': {
