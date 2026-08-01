@@ -414,6 +414,18 @@ NPC_DIALOG += [
 NPC_DIALOG += [
 
     # Type D – Deliver Seal Fragment
+	{
+		'npc_id': 'mira',
+        'dialog_id': 'grassland_mid_city_type_d_deliver_seal_fragment',
+        'dialog': [
+			"An Oathbreak seal fragment…",
+			"(turns it carefully, watching the grain of the stone)",
+			"I’ve seen shards like this in theory texts. Never held one. Do you understand what that means?",
+			"This isn’t cargo. It’s a compressed record of every vow this city ever broke — and every one it still pretends to keep.",
+			"Take it to Althorin first. He’ll know how to read the imprint before we do anything irreversible.",
+			"And if the doctrine-scripts start trembling while you’re walking… that’s not the wind."
+		]
+	},
     {
         'npc_id': 'technique',
         'dialog_id': 'technique_grassland_mid_d_deliver_seal_fragment',
@@ -773,7 +785,7 @@ TASKS += [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'verse_seeker_halven',
-					'location': 'region_open_area'
+					'location': 'region_city_other1'
 				}
 			},
 			{
@@ -980,6 +992,7 @@ TASKS += [
 		'to_id': 'mira',
 		'task_acquire_events': [],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'mira', 'dialog_id': 'grassland_mid_city_type_d_deliver_seal_fragment' } },
 			{
 				'event_type': 'remove_item',
 				'params': {

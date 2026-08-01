@@ -273,6 +273,18 @@ NPC_DIALOG += [
 NPC_DIALOG += [
 
     # Type D – Deliver Grief Token
+	{
+		'npc_id': 'mira',
+		'dialog_id': 'mira_grassland_small_d_token_deliver',
+		'dialog': [
+			"A grief token…",
+			"(holds it a moment longer than she usually holds anything)",
+			"Charm residue still live after all these years. Most of these fade within a season. This one refused.",
+			"An unfinished story that still carries weight. Those are rarer than the people who make them.",
+			"Marnel reads the hollow’s folk tales better than anyone still breathing. She’ll know which story this belongs to — and what still wants an ending.",
+			"Take it to her. And if the charms near the Den start going dark while you’re walking… keep moving."
+		]
+	},
     {
         'npc_id': 'tech',
         'dialog_id': 'tech_grassland_small_d_deliver_grief_token',
@@ -411,16 +423,6 @@ TASKS += [
 					'location': 'region_city_other1'
 				}
 			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'rynn',
-					'standing_text': [
-						"The folk-charm wounds are unlike anything I've treated before.",
-						"Something is very wrong with the hollow's traditions."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -433,6 +435,11 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_grassland_small_c_find_rynn' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_grassland_small_c_find_rynn'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_grassland_small_c_find_rynn' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rynn', 'standing_text': [
+				"Sylfa sent you back.",
+				"The books trust you.",
+				"That settles it."
+			]}},
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -476,17 +483,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'rynn',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'rynn',
-					'standing_text': [
-						"Sylfa sent you back.",
-						"The books trust you.",
-						"That settles it."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -505,6 +501,12 @@ TASKS += [
 					'character_id': 'rynn'
 				}
 			},
+			{
+				'event_type': 'hide_npc',
+				'params': {
+					'npc_id': 'rynn'
+				}
+			}
 		]
 	},
 
@@ -553,20 +555,15 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'mira',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'mira',
-					'standing_text': [
-						"A grief token from a noble's estate — these are extraordinarily rare.",
-						"The charm residue on it hasn't faded after all these years.",
-						"Find Marnel. She reads folk tales better than anyone.",
-						"She'll know what story this belongs to."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'mira',
+					'dialog_id': 'mira_grassland_small_d_token_deliver'
+				}
+			},
 			{
 				'event_type': 'remove_item',
 				'params': {
@@ -581,6 +578,16 @@ TASKS += [
 				'params': {
 					'npc_id': 'hearth_seer_marnel',
 					'location': 'region_city_other2'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'hearth_seer_marnel',
+					'standing_text': [
+						"That token you carry — it's the end of a story the hollow never finished.",
+						"Come. The Charmroot Den is already listening."
+					]
 				}
 			},
 			{
@@ -599,17 +606,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'hearth_seer_marnel',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'hearth_seer_marnel',
-					'standing_text': [
-						"The meadow's tales shifted the moment you arrived.",
-						"That token you carry — it's the end of a story the hollow never finished.",
-						"Come. The Charmroot Den is already listening."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -626,6 +622,24 @@ TASKS += [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'charmroot_voice',
+					'location': None
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'charmroot_voice',
+					'standing_text': [
+						"The Charmroot Den hums with a low, mournful resonance.",
+						"Bramble says the folk charms near the entrance have gone completely dark.",
+						"The grief token has drawn the Voice forward."
+					]
+				}
+			},
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'charmroot_den',
 					'location': 'region_open_area'
 				}
 			},
@@ -645,17 +659,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'charmroot_voice',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'charmroot_voice',
-					'standing_text': [
-						"The Charmroot Den hums with a low, mournful resonance.",
-						"Bramble says the folk charms near the entrance have gone completely dark.",
-						"The grief token has drawn the Voice forward."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -693,6 +696,12 @@ TASKS += [
 			}
 		],
 		'task_complete_events': [
+			{
+				'event_type': 'hide_npc',
+				'params': {
+					'npc_id': 'charmroot_voice'
+				}
+			},
 			{
 				'event_type': 'award_item',
 				'params': {
@@ -764,16 +773,13 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'curator_bramble',
         'task_acquire_events': [
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'curator_bramble', 'standing_text': [
-                "I found something in the performance fields that belongs to someone.",
-                "A pressed flower. Beautiful work. Waiting for the right person to claim it."
-            ]}}
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'curator_bramble', 'dialog_id': 'bramble_a_ch12_pressed_flower' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_grassland_small_a_ch12_find_keepsake'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',    'dialog_id': 'nia_grassland_small_a_ch12_find_keepsake'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_grassland_small_a_ch12_find_keepsake'  } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'curator_bramble', 'standing_text': [ "That pressed flower — it clearly matters to someone. I can see it in how it was pressed — with real care." ]} },
             { 'event_type': 'award_item', 'params': { 'item_id': 'embers_pressed_flower' }},
         ]
     },

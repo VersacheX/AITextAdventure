@@ -415,6 +415,19 @@ NPC_DIALOG += [
 
     # Type D – Deliver Root Graft
     {
+        
+        'npc_id': 'mira',
+        'dialog_id': 'forest_mid_mira_d_deliver_root_graft',
+        'dialog': [
+            "That graft…",
+            "(turns it once, watching the residue shift)",
+            "Grove residue unlike any recent harvest. I’ve been looking for something with this exact signature for years.",
+            "Thornshade’s oldest memories don’t travel easily. Whatever kept this cutting alive did it on purpose.",
+            "Show Thera first. She reads moonfire better than anyone in this city — she’ll know exactly what frequency it’s carrying.",
+            "And if the lanterns start answering it before she does… don’t wait around."
+        ]
+    },
+    {
         'npc_id': 'tech',
         'dialog_id': 'tech_forest_mid_d_deliver_root_graft',
         'dialog': [
@@ -657,16 +670,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'alchemist_mirlo',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'alchemist_mirlo',
-                    'standing_text': [
-                        "Something underground is interfering with all my brews.",
-                        "It's not the Rift — it's older. Deeper."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -679,6 +682,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_forest_mid_e_investigate_pulse'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_forest_mid_e_investigate_pulse' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_forest_mid_e_investigate_pulse' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'alchemist_mirlo', 'standing_text': ["The pulse is gone. The moonbrews are still."] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -698,17 +702,7 @@ TASKS += [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'glimmer_hermit_vael',
-                    'location': 'region_open_area'
-                }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'glimmer_hermit_vael',
-                    'standing_text': [
-                        "I felt it too. Something below the roots has been awake for a long time.",
-                        "Not hostile. But it does not give up what it holds easily."
-                    ]
+                    'location': 'region_city_other1'
                 }
             }
         ],
@@ -723,6 +717,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',   'dialog_id': 'faith_forest_mid_e_consult_vael'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple',  'dialog_id': 'ripple_forest_mid_e_consult_vael'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grmnaw_forest_mid_e_consult_vael' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'glimmer_hermit_vael', 'standing_text': ["The Hollow breathes. It will not let go of what it has."] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -742,17 +737,14 @@ TASKS += [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'riftspark',
-                    'location': 'region_open_area'
+                    'location': None
                 }
             },
             {
-                'event_type': 'set_npc_standing_text',
+                'event_type': 'create_dungeon',
                 'params': {
-                    'npc_id': 'riftspark',
-                    'standing_text': [
-                        "The Hollow breathes.",
-                        "You should not be here."
-                    ]
+                    'dungeon_id': 'forest_mid_city_type_e_riftspark_dungeon',
+                    'location': 'region_open_area'
                 }
             }
         ],
@@ -767,6 +759,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_forest_mid_e_confront_riftspark'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_forest_mid_e_confront_riftspark'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',  'dialog_id': 'lyren_forest_mid_e_confront_riftspark'  } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'riftspark', 'standing_text': ["The Hollow breathes. It will not let go of what it has."] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -792,6 +785,12 @@ TASKS += [
         ],
         'task_complete_events': [
             {
+                'event_type': 'hide_npc',
+                'params': {
+                    'npc_id': 'riftspark'
+                }
+            },
+            {
                 'event_type': 'award_item',
                 'params': {
                     'item_id': 'forest_mid_city_e_mycelia_memory_spore'
@@ -815,15 +814,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'alchemist_mirlo',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'alchemist_mirlo',
-                    'standing_text': [
-                        "You're back! And the pulse stopped — did you find something?"
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -836,6 +826,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_forest_mid_e_return_to_mirlo' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_forest_mid_e_return_to_mirlo'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_forest_mid_e_return_to_mirlo' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'alchemist_mirlo', 'standing_text': ["The moonbrews are still. The pulse is gone."] } }
         ]
     },
 
@@ -860,17 +851,7 @@ TASKS += [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'sera_flameweaver',
-                    'location': 'region_open_area'
-                }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'sera_flameweaver',
-                    'standing_text': [
-                        "The Rift pulses like a heartbeat.",
-                        "I've been trying to figure out whose."
-                    ]
+                    'location': 'region_city_other2'
                 }
             }
         ],
@@ -885,6 +866,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_forest_mid_c_find_sera' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_forest_mid_c_find_sera' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_forest_mid_c_find_sera'   } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'sera_flameweaver','standing_text': ["The Rift pulses like a heartbeat.","I've been trying to figure out whose."] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -900,16 +882,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'emberwitch_thera',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'emberwitch_thera',
-                    'standing_text': [
-                        "A fire mage watching the Rift? That's either very wise or very reckless.",
-                        "Bring her to me. I want to read her lantern."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -922,6 +894,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_mid_c_consult_thera'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_forest_mid_c_consult_thera'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_forest_mid_c_consult_thera'  } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'emberwitch_thera','standing_text': ["Thera sees warnings. I see invitations.","You're the only one who seems curious about both."] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -937,16 +910,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'sera_flameweaver',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'sera_flameweaver',
-                    'standing_text': [
-                        "I've made my decision.",
-                        "Thera sees warnings. I see invitations. You're the only one who seems curious about both."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -964,6 +927,12 @@ TASKS += [
                 'params': {
                     'character_id': 'sera_flameweaver'
                 }
+            },
+            {
+                'event_type': 'hide_npc',
+                'params': {
+                    'npc_id': 'sera_flameweaver'
+                }
             }
         ]
     },
@@ -971,7 +940,7 @@ TASKS += [
 ]
 
 # ── Type D ── Moonbriar Lantern (mythic accessory) ───────────────────────────
-# Gate: player holds thornshade_root_graft from the Ch.16 Type E chain.
+# Gate: player holds forest_small_city_e_thornshade_root_graft from the Ch.16 Type E chain.
 # Deliver to Mira → Thera reads the graft → defeat Lunarcask Shade → mythic accessory.
 # No new NPCs — uses emberwitch_thera, lunarcask_shade, and mira (Ch.2 party anchor).
 
@@ -1002,11 +971,11 @@ NPC_DIALOG += [
 
 TASKS += [
 
-	# D-0 — Deliver thornshade_root_graft to Mira (standalone deliver; unlocks D chain)
+	# D-0 — Deliver forest_small_city_e_thornshade_root_graft to Mira (standalone deliver; unlocks D chain)
 	{
 		'task_id': 'forest_mid_city_type_d_deliver_root_graft',
 		'type': 'deliver',
-		'item_id': 'thornshade_root_graft',
+		'item_id': 'forest_small_city_e_thornshade_root_graft',
 		'to_type': 'npc',
 		'to_id': 'mira',
 		'task_acquire_events': [
@@ -1023,10 +992,17 @@ TASKS += [
 			},
 		],
 		'task_complete_events': [
+            {
+                'event_type': 'initiate_dialog',
+                'params': {
+                    'npc_id': 'mira',
+                    'dialog_id': 'forest_mid_mira_d_deliver_root_graft'
+                }
+            },
 			{
 				'event_type': 'remove_item',
 				'params': {
-					'item_id': 'thornshade_root_graft'
+					'item_id': 'forest_small_city_e_thornshade_root_graft'
 				}
 			},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_forest_mid_d_deliver_root_graft'  } },
@@ -1048,17 +1024,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'emberwitch_thera',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'emberwitch_thera',
-					'standing_text': [
-						"I felt the moonfire shift the moment you entered the grove.",
-						"That root you carry — it called to the Lunarcask Shade.",
-						"Come. We need to speak before it finds you first."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -1071,10 +1036,29 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_mid_d_consult_thera'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'tech_forest_mid_d_consult_thera'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_forest_mid_d_consult_thera'  } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'emberwitch_thera','standing_text': ["The Lunarcask Shade has been feeding on this frequency.","Draw it out with the graft's resonance and the moonlight solidifies."] } },
             {
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'lunarcask_shade',
+                    'location': None
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'lunarcask_shade',
+                    'standing_text': [
+                        "The root-song reaches me.",
+                        "You bring the grove's memory here.",
+                        "I will take it — and everything else."
+                    ]
+                }
+            },
+            {
+                'event_type': 'create_dungeon',
+                'params': {
+                    'dungeon_id': 'forest_mid_city_type_d_lunarcask_shade_dungeon',
                     'location': 'region_open_area'
                 }
             },
@@ -1094,17 +1078,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'lunarcask_shade',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'lunarcask_shade',
-					'standing_text': [
-						"A cold shimmer drifts at the grove's edge.",
-						"The moonlight here feels wrong — too heavy, too hungry.",
-						"Something has been waiting here for the root graft's return."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -1142,6 +1115,12 @@ TASKS += [
 			}
         ],
 		'task_complete_events': [
+            {
+                'event_type': 'hide_npc',
+                'params': {
+                    'npc_id': 'lunarcask_shade'
+                }
+            },
 			{
 				'event_type': 'award_item',
 				'params': {
@@ -1206,10 +1185,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'glimmer_hermit_vael',
 		'task_acquire_events': [
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'glimmer_hermit_vael', 'standing_text': [
-				"Mirlo's latest accident has produced something worth examining.",
-				"Come. I'll tell you what the moon-embers say about it."
-			]}}
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'glimmer_hermit_vael', 'dialog_id': 'vael_e_spore_context' }},
@@ -1217,6 +1192,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_forest_mid_e_meet_vael' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_forest_mid_e_meet_vael' } },
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'forest_mid_city_type_e_collect_spore' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'glimmer_hermit_vael', 'standing_text': ["The roots have been reaching for something like this for years.","Better carried than drifting."] }  }
 		]
 	},
 
@@ -1227,10 +1203,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'alchemist_mirlo',
 		'task_acquire_events': [
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'alchemist_mirlo', 'standing_text': [
-				"It's been glowing brighter since this morning.",
-				"I really think it wants to leave."
-			]}}
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'alchemist_mirlo', 'dialog_id': 'mirlo_e_memory_spore' }},
@@ -1238,6 +1210,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_forest_mid_e_collect_spore'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_forest_mid_e_collect_spore' } },
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'forest_mid_city_e_mycelia_memory_spore' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'alchemist_mirlo', 'standing_text': ["The pulse is gone. The moonbrews are still."] }   }
 		]
 	},
 
