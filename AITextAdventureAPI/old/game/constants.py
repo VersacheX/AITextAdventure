@@ -120,6 +120,7 @@ from game.region_seeds.main_story.dungeons.trial_2_dungeon import DUNGEON_SETTIN
 from game.region_seeds.main_story.dungeons.trial_3_dungeon import DUNGEON_SETTINGS as TRIAL_3_DUNGEON_SETTINGS
 from game.region_seeds.main_story.dungeons.trial_4_dungeon import DUNGEON_SETTINGS as TRIAL_4_DUNGEON_SETTINGS
 from game.region_seeds.main_story.dungeons.trial_5_dungeon import DUNGEON_SETTINGS as TRIAL_5_DUNGEON_SETTINGS
+from game.region_seeds.city_stories.dungeons.murkchannel_run import DUNGEON_SETTINGS as MURKCHANNEL_RUN_DUNGEON_SETTINGS
 DUNGEON_SETTINGS = [
 	# Ch1-4
 	SETH_HIDEOUT_DUNGEON_SETTINGS, ABANDONED_RUIN_CH2_DUNGEON_SETTINGS,
@@ -142,7 +143,9 @@ DUNGEON_SETTINGS = [
 	# CH 21
 	TRIAL_1_DUNGEON_SETTINGS, TRIAL_2_DUNGEON_SETTINGS,
 	TRIAL_3_DUNGEON_SETTINGS, TRIAL_4_DUNGEON_SETTINGS,
-	TRIAL_5_DUNGEON_SETTINGS
+	TRIAL_5_DUNGEON_SETTINGS,
+	# CITY STORY DUNGEONS
+	MURKCHANNEL_RUN_DUNGEON_SETTINGS,
 ]
 
 #WORLD BOSS AND WORLD ENEMIES
@@ -811,6 +814,10 @@ def _gather_hostile_seed_sources(seed_paths):
 			(TRIAL_4_DUNGEON_SETTINGS.get("hostile_seeds", []), "TRIAL_4_HOSTILE_SEEDS"),
 			(TRIAL_4_DUNGEON_SETTINGS.get("boss_hostiles", []), "TRIAL_4_BOSS_HOSTILES"),
 			(TRIAL_5_DUNGEON_SETTINGS.get("hostile_seeds", []), "TRIAL_5_HOSTILE_SEEDS"),
+			(TRIAL_5_DUNGEON_SETTINGS.get("boss_hostiles", []), "TRIAL_5_BOSS_HOSTILES"),
+			#CITY STORY DUNGEON HOSTILES
+			(MURKCHANNEL_RUN_DUNGEON_SETTINGS.get("hostile_seeds", []), "MURKCHANNEL_RUN_HOSTILE_SEEDS"),
+			(MURKCHANNEL_RUN_DUNGEON_SETTINGS.get("boss_hostiles", []), "MURKCHANNEL_RUN_BOSS_HOSTILES"),
 			#WORLD BOSS HOSTILES
 			(WORLD_HOSTILES, "WORLD_HOSTILES")
 
@@ -819,7 +826,7 @@ def _gather_hostile_seed_sources(seed_paths):
 	for source, source_name in sources:
 		for entry in source:
 			if seed_paths.get(entry.get("id")) is not None:
-				input (f"Duplicate hostile seed ID detected: {entry.get('id')} in source {source_name}. Overwriting previous entry.")
+				print(f"WARNING: Duplicate hostile seed ID detected: {entry.get('id')} in source {source_name}. Overwriting previous entry.")
 			seed_paths[entry.get("id")] = source_name
 
 _gather_hostile_seed_sources(HOSTILE_SEED_PATHS)

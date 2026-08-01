@@ -371,6 +371,12 @@ def _handle_copy(screen: "DataMgmtScreen") -> None:
             tree = screen.query_one("#dm-npc-tree", Tree)
             text = "\n".join(serialize_node_visible(tree.root, depth=0))
 
+    elif category == _HOSTILE_CATEGORY:
+        from tui.services.dev.dataservices.catalog import get_hostile_tree          # noqa: PLC0415
+        from tui.screens.dev.data_mgmt.utils import serialize_hostile_tree          # noqa: PLC0415
+        filtered = screen._last_hostile_filtered or get_hostile_tree()
+        text = serialize_hostile_tree(filtered)
+
     elif category == _EQUIPMENT_CATEGORY:
         records = screen._last_filtered or []
         text = "\n".join(f"{r.name}  {r.subtitle}" for r in records)

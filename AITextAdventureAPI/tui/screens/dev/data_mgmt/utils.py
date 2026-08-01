@@ -180,6 +180,33 @@ def serialize_filtered_tree(filtered) -> str:
     return "\n".join(out)
 
 
+def serialize_hostile_tree(filtered) -> str:
+    """Serialize rarity/bucket/hostile into plain text with key stats per line."""
+    out: List[str] = []
+    for rarity_node in filtered:
+        out.append(rarity_node.label)
+        for bucket in rarity_node.level_buckets:
+            out.append(f"  {bucket.label}")
+            for h in bucket.hostiles:
+                seed    = h.seed or {}
+                htype   = seed.get("hostile_type", "?")
+                role    = seed.get("role", "?")
+                res     = ", ".join(seed.get("resistances") or []) or "—"
+                weak    = ", ".join(seed.get("weaknesses") or []) or "—"
+                imm     = ", ".join(seed.get("immunities") or []) or "—"
+                hp      = seed.get("base_hp", "?")
+                src     = h.source_list
+                err_tag = f"  [!{len(h.errors)}]" if h.errors else ""
+                out.append(
+                    f"    {h.label}  [{h.hostile_id}]  "
+                    f"type={htype}  role={role}  "
+                    f"hp={hp}  "
+                    f"res={res}  weak={weak}  imm={imm}  "
+                    f"src={src}{err_tag}"
+                )
+    return "\n".join(out)
+
+
 def serialize_timeline_tree(filtered) -> str:
     """Serialize timeline group/bucket/task into plain text (non-widget fallback)."""
     out: List[str] = []

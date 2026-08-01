@@ -361,6 +361,20 @@ NPC_DIALOG += [
 
     # Type D – Deliver Armor Key
     {
+        'npc_id': 'brawn',
+        'dialog_id': 'brawn_mountains_large_d_key_delivered',
+        'dialog': [
+            "That key…",
+            "(holds it against the side of his anvil for a second)",
+            "Forge-frequency’s still live in the metal. I can feel it from here.",
+            "Something in this city has been waiting to be unlocked for a very long time.",
+            "Gorvak knows the old catalogs better than anyone still breathing. He’ll know which chamber this opens — and what’s still forging itself inside.",
+            "Take it to him before the conduits start answering on their own.",
+            "And if the grid starts spiking while you’re walking… keep moving."
+        ]
+
+    },
+    {
         'npc_id': 'technique',
         'dialog_id': 'technique_mountains_large_d_deliver_armor_key',
         'dialog': [
@@ -609,16 +623,6 @@ TASKS += [
                     'npc_id': 'spark_maddox',
                     'location': 'region_city_other3'
                 }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'spark_maddox',
-                    'standing_text': [
-                        "The conduits are doing something they have absolutely no business doing.",
-                        "It's incredible. Also potentially catastrophic. Mostly incredible."
-                    ]
-                }
             }
         ],
         'task_complete_events': [
@@ -632,6 +636,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',     'dialog_id': 'magic_mountains_large_c_find_spark'     } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_mountains_large_c_find_spark'      } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_large_c_find_spark' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'spark_maddox', 'standing_text': ["Sindra vouched for me? Ha! She told me yesterday I was a liability.", "She's right, technically. Doesn't mean she's wrong to let me try.", "The best discoveries always look like liabilities at first."] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -647,17 +652,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'relaytech_sindra',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'relaytech_sindra',
-                    'standing_text': [
-                        "Spark? He's been poking at the deep conduits all week.",
-                        "Honestly if anyone can figure out what's happening down there, it's him.",
-                        "Just make sure he doesn't blow anything critical."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -670,6 +664,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_mountains_large_c_consult_sindra'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_mountains_large_c_consult_sindra' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_mountains_large_c_consult_sindra' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'relaytech_sindra', 'standing_text': ["Spark? He's been poking at the deep conduits all week.", "Honestly if anyone can figure out what's happening down there, it's him.", "Just make sure he doesn't blow anything critical."] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -685,16 +680,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'spark_maddox',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'spark_maddox',
-                    'standing_text': [
-                        "Sindra gave the nod? That's more than I expected.",
-                        "Alright. Let's talk terms."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -711,6 +696,12 @@ TASKS += [
                 'event_type': 'character_join',
                 'params': {
                     'character_id': 'spark_maddox'
+                }
+            },
+            {
+                'event_type': 'hide_npc',
+                'params': {
+                    'npc_id': 'spark_maddox'
                 }
             }
         ]
@@ -733,16 +724,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'rustscribe_gorvak',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'rustscribe_gorvak',
-                    'standing_text': [
-                        "I've been cross-referencing the oldest catalogs.",
-                        "There's something in the founding records that none of the newer archivists have documented."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -755,6 +736,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_mountains_large_e_investigate_echo'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grinmaw_mountains_large_e_investigate_echo' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',   'dialog_id': 'faith_mountains_large_e_investigate_echo'   } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rustscribe_gorvak', 'standing_text': ["I found a reference in the oldest catalog — predates the city's founding.", "The original forge architects built a resonance core into the mountain's deepest chamber.", "It was never meant to be extracted. They called it the Echo Core — the forge's memory made solid."] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -774,17 +756,7 @@ TASKS += [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'forge_seer_brannoc',
-                    'location': 'region_open_area'
-                }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'forge_seer_brannoc',
-                    'standing_text': [
-                        "The mountain's memory stirs.",
-                        "I have felt the Echo Core pulse twice this season."
-                    ]
+                    'location': 'region_city_other1'
                 }
             }
         ],
@@ -799,6 +771,17 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_mountains_large_e_consult_brannoc'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grinmaw_mountains_large_e_consult_brannoc' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_mountains_large_e_consult_brannoc'   } },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'forge_seer_brannoc',
+                    'standing_text': [
+                        "The Echo Core is not dangerous on its own.",
+                        "It absorbs the resonance of everything forged above it — centuries of metalwork compressed into one object.",
+                        "The Gearghost will be drawn to it. They always guard what the mountain values most."
+                    ]
+                }
+            },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -818,17 +801,14 @@ TASKS += [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'gearghost',
-                    'location': 'region_open_area'
+                    'location': None
                 }
             },
             {
-                'event_type': 'set_npc_standing_text',
+                'event_type': 'create_dungeon',
                 'params': {
-                    'npc_id': 'gearghost',
-                    'standing_text': [
-                        "You come for the Core.",
-                        "You will not have it."
-                    ]
+                    'dungeon_id': 'mountains_large_city_type_e_gearghost_dungeon',
+                    'location': None
                 }
             }
         ],
@@ -843,6 +823,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_mountains_large_e_confront_gearghost'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_mountains_large_e_confront_gearghost'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',  'dialog_id': 'lyren_mountains_large_e_confront_gearghost'  } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'gearghost', 'standing_text': ["The Core is the mountain's oldest memory.", "You would carry it away from here.", "We do not permit that."] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -867,6 +848,12 @@ TASKS += [
             }
         ],
         'task_complete_events': [
+            {
+                'event_type': 'hide_npc',
+                'params': {
+                    'npc_id': 'gearghost'
+                }
+            },
             {
                 'event_type': 'award_item',
                 'params': {
@@ -899,16 +886,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'rustscribe_gorvak',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'rustscribe_gorvak',
-                    'standing_text': [
-                        "You found it. I can hear it from here.",
-                        "Come — I need to see it with my own eyes."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -920,6 +897,7 @@ TASKS += [
             },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_mountains_large_e_return_to_gorvak'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_mountains_large_e_return_to_gorvak' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rustscribe_gorvak', 'standing_text': ["You found it. I can hear it from here.", "Come — I need to see it with my own eyes."] } }
         ]
     },
 
@@ -961,19 +939,15 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'brawn',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'brawn',
-					'standing_text': [
-						"That key — I can feel the forge-frequency vibrating off it from here.",
-						"Something in this city is waiting to be unlocked.",
-						"Show Gorvak first. He'll know which chamber it belongs to."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
+            {
+                'event_type': 'initiate_dialog',
+                'params': {
+                    'npc_id': 'brawn',
+                    'dialog_id': 'brawn_mountains_large_d_key_delivered'
+                }
+            },
 			{
 				'event_type': 'remove_item',
 				'params': {
@@ -983,6 +957,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_large_d_deliver_armor_key' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_mountains_large_d_deliver_armor_key'      } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',     'dialog_id': 'magic_mountains_large_d_deliver_armor_key'     } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'brawn', 'standing_text': ["Brawn can feel the forge-frequency from here.", "Gorvak first — he'll know which chamber it opens."] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -999,17 +974,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'rustscribe_gorvak',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'rustscribe_gorvak',
-					'standing_text': [
-						"The relics catalog trembled when you walked in.",
-						"Whatever you're carrying has a resonance signature I've logged before — in theory only.",
-						"Let me see it."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -1029,6 +993,17 @@ TASKS += [
 					'location': None
 				}
 			},
+            { 
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'conduit_echo',
+                    'standing_text': [
+                        "The relay conduits deep in the Maw crackle with sudden violence.",
+                        "The resonance key has called the Echo forward.",
+                        "Sindra says the grid is spiking — whatever is down there is aware."
+                    ]
+                }
+            },
 			{
 				'event_type': 'create_dungeon',
 				'params': {
@@ -1052,17 +1027,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'conduit_echo',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'conduit_echo',
-					'standing_text': [
-						"The relay conduits deep in the Maw crackle with sudden violence.",
-						"The resonance key has called the Echo forward.",
-						"Sindra says the grid is spiking — whatever is down there is aware."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -1176,11 +1140,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'relaytech_sindra',
 		'task_acquire_events': [
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'relaytech_sindra', 'standing_text': [
-				"The Resonance left something behind in the Maw.",
-				"Brannoc pulled it out. I've been trying to read its frequency.",
-				"Come look at it with me."
-			]}}
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'relaytech_sindra', 'dialog_id': 'sindra_e_core_confirms' }},
@@ -1188,6 +1147,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grinmaw_mountains_large_e_consult_sindra' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_mountains_large_e_consult_sindra'   } },
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'mountains_large_city_type_e_collect_core' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'relaytech_sindra', 'standing_text': [ "Brannoc's right — the conduit grid reads that core as something the mountain expelled" ] }}
 		]
 	},
 
@@ -1198,17 +1158,13 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'forge_seer_brannoc',
 		'task_acquire_events': [
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'forge_seer_brannoc', 'standing_text': [
-				"The core is ready.",
-				"The mountain's told me all it can.",
-				"Gallows Rift is waiting."
-			]}}
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'forge_seer_brannoc', 'dialog_id': 'brannoc_e_echo_core' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'tech_mountains_large_e_collect_core'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_mountains_large_e_collect_core'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_mountains_large_e_collect_core'  } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'forge_seer_brannoc', 'standing_text': [ "The Echo Core is not dangerous on its own.", "It absorbs the resonance of everything forged above it — centuries of metalwork compressed into one object.", "The Gearghost will be drawn to it. They always guard what the mountain values most." ] }},
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'mountains_large_city_e_forge_echo_core' }},
 		]
 	},

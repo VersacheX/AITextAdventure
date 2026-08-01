@@ -247,6 +247,19 @@ NPC_DIALOG += [
 NPC_DIALOG += [
 
     # Type D – Deliver Brine Compass
+    { 
+        'npc_id': 'diego',
+        'dialog_id': 'diego_shallows_large_d_brine_compass', 
+        'dialog': [ 
+            "That compass…",
+            "(watches the needle for a long second)",
+            "Doesn’t point north. Doesn’t point to any shore I’ve ever heard of. Brine-forged metal holding a direction like that is rare.",
+            "Whatever it’s tracking moved through salt water and void both. The tide carved the path into the needle and never let it go.",
+            "Marenna reads the undertow better than anyone still breathing. She’ll know which drowned chamber this is calling.",
+            "Take it to her before the Voice finishes noticing you’re carrying it.",
+            "And if the harbor water starts darkening around your feet… keep walking."
+        ]
+    },
     { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_d_deliver_brine_compass',  'dialog': [ "The needle points somewhere that shouldn't exist. Brine-forged metal holding a direction like that is rare." ] },
     { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_large_d_deliver_brine_compass', 'dialog': [ "Marenna will know what the tide carved into it." ] },
     { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_large_d_deliver_brine_compass', 'dialog': [ "Find her." ] },
@@ -377,16 +390,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'vaultkeeper_syrin',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'vaultkeeper_syrin',
-                    'standing_text': [
-                        "There's a relic in the vault I can't explain.",
-                        "The needle moves on its own. It's been pointing toward the harbor floor for weeks."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -399,6 +402,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_large_e_investigate_compass'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_large_e_investigate_compass' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple',  'dialog_id': 'ripple_shallows_large_e_investigate_compass'  } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'vaultkeeper_syrin', 'standing_text': [ "The needle hasn't stopped moving since the tides began behaving strangely." ] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -418,17 +422,7 @@ TASKS += [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'tide_seer_marenna',
-                    'location': 'region_open_area'
-                }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'tide_seer_marenna',
-                    'standing_text': [
-                        "A Brine Compass. I haven't heard of one surfacing in years.",
-                        "The fracture it's pointing to — I know that place."
-                    ]
+                    'location': 'region_city_other2'
                 }
             }
         ],
@@ -443,6 +437,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_large_e_consult_marenna'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_large_e_consult_marenna' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_large_e_consult_marenna'   } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'tide_seer_marenna', 'standing_text': [ "The Stormtide Echo will not let you pass unchallenged." ] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -519,6 +514,12 @@ TASKS += [
         ],
         'task_complete_events': [
             {
+                'event_type': 'hide_npc',
+                'params': {
+                    'npc_id': 'stormtide_echo'
+                }
+            },
+            {
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'shallows_large_city_type_e_return_to_syrin'
@@ -533,16 +534,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'vaultkeeper_syrin',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'vaultkeeper_syrin',
-                    'standing_text': [
-                        "The needle stopped moving the moment you stepped back in.",
-                        "I think it knows you have it."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -555,6 +546,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_large_e_return_to_syrin' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_e_return_to_syrin'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_large_e_return_to_syrin' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'vaultkeeper_syrin', 'standing_text': [ "The needle's settled. It's pointing at you now." ] } },
         ]
     },
 
@@ -603,16 +595,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'astra_wynn',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'astra_wynn',
-                    'standing_text': [
-                        "Syrin keeps the tide anomaly records.",
-                        "I need them. Go ask her — she'll respond better coming from you."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -625,6 +607,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_f_get_syrin_data'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_large_f_get_syrin_data' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_large_f_get_syrin_data' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'astra_wynn', 'standing_text': [ "Ask Syrin. She trusts vault-keepers more than riftcallers, for obvious reasons." ] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -640,16 +623,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'vaultkeeper_syrin',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'vaultkeeper_syrin',
-                    'standing_text': [
-                        "Astra Wynn sent you? I've been expecting this.",
-                        "I have what she needs."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -662,6 +635,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_large_f_speak_to_syrin'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_large_f_speak_to_syrin' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_large_f_speak_to_syrin'   } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'vaultkeeper_syrin', 'standing_text': [ "The third anomaly was not a natural fracture event. Something moved through that rift deliberately." ] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -677,15 +651,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'astra_wynn',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'astra_wynn',
-                    'standing_text': [
-                        "You got it. What did she say?"
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -698,6 +663,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'kade_shallows_large_f_deliver_to_astra'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'moxie_shallows_large_f_deliver_to_astra'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_shallows_large_f_deliver_to_astra' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'astra_wynn', 'standing_text': [ "If you reach that third site before I do, you'll know what to look for." ] } },
             {
                 'event_type': 'award_item',
                 'params': {
@@ -710,7 +676,7 @@ TASKS += [
 ]
 
 # ── Type D ── Tidecleaver (mythic weapon) ─────────────────────────────────────
-# Gate: player holds brine_compass from the Type E chain (same city, Slot 1 → Slot 2).
+# Gate: player holds shallows_large_city_e_brine_compass from the Type E chain (same city, Slot 1 → Slot 2).
 # Deliver to Diego → Marenna reads the compass → defeat Undertow Voice → mythic weapon.
 # No new NPCs — uses tide_seer_marenna, undertow_voice, and diego (Ch.1 party anchor).
 
@@ -743,36 +709,27 @@ NPC_DIALOG += [
 
 TASKS += [
 
-	# D-0 — Deliver brine_compass to Diego (standalone deliver; unlocks D chain)
+	# D-0 — Deliver shallows_large_city_e_brine_compass to Diego (standalone deliver; unlocks D chain)
 	{
 		'task_id': 'shallows_large_city_type_d_deliver_brine_compass',
 		'type': 'deliver',
-		'item_id': 'brine_compass',
+		'item_id': 'shallows_large_city_e_brine_compass',
 		'to_type': 'npc',
 		'to_id': 'diego',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'diego',
-					'standing_text': [
-						"That compass — the needle points somewhere that shouldn't exist.",
-						"I've never seen brine-forged metal hold a direction like that.",
-						"Find Marenna. She'll know what the tide carved into it."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'diego', 'dialog_id': 'diego_shallows_large_d_brine_compass' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_d_deliver_brine_compass'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_large_d_deliver_brine_compass' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_large_d_deliver_brine_compass' } },
 			{
 				'event_type': 'remove_item',
 				'params': {
-					'item_id': 'brine_compass'
+					'item_id': 'shallows_large_city_e_brine_compass'
 				}
 			},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'diego', 'standing_text': [ "The compass is the key that unlocks the Undertow Voice's attention. Silence it and the brine crystallizes." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -789,17 +746,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'tide_seer_marenna',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'tide_seer_marenna',
-					'standing_text': [
-						"The tide scars shifted when you arrived.",
-						"That compass is pulling at every drowned memory in this harbor.",
-						"Come quickly — I can read it before the Vault notices."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -826,6 +772,8 @@ TASKS += [
 					'location': 'region_open_area'
 				}
 			},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'undertow_voice', 'standing_text': [ "The harbor water darkens around the vault entrance. A low murmur rises — dozens of voices overlapping into one. The compass has drawn it to the surface." ] } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'tide_seer_marenna', 'standing_text': [ "The tide scars have gone quiet. The Vault is empty now. Whatever bearings those sailors carried — they can rest." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -842,17 +790,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'undertow_voice',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'undertow_voice',
-					'standing_text': [
-						"The harbor water darkens around the vault entrance.",
-						"A low murmur rises — dozens of voices overlapping into one.",
-						"The compass has drawn it to the surface."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -865,6 +802,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_large_d_meet_undertow_voice' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_large_d_meet_undertow_voice' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_shallows_large_d_meet_undertow_voice' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'undertow_voice', 'standing_text': [ "The harbor water darkens around the vault entrance. A low murmur rises — dozens of voices overlapping into one. The compass has drawn it to the surface." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -890,6 +828,12 @@ TASKS += [
 			}
         ],
 		'task_complete_events': [
+            {
+                'event_type': 'hide_npc',
+                'params': {
+                    'npc_id': 'undertow_voice'
+                }
+            },
 			{
 				'event_type': 'award_item',
 				'params': {
@@ -957,11 +901,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'vaultkeeper_syrin',
 		'task_acquire_events': [
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'vaultkeeper_syrin', 'standing_text': [
-				"Something came up from the vault floor after the Beacon fell.",
-				"A compass. Not for navigation — for something else.",
-				"Come see it."
-			]}}
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'vaultkeeper_syrin', 'dialog_id': 'syrin_e_brine_compass' }},
@@ -969,11 +908,12 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_large_e_meet_syrin' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_large_e_meet_syrin' } },
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'shallows_large_city_e_brine_compass' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'vaultkeeper_syrin', 'standing_text': [ "The needle hasn't stopped moving since the tides began behaving strangely." ] } },
 		]
 	},
 
 ]
-
+ 
 PRIMARY_STORY_SETTINGS = {
 	'story_id': 'shallows_large_city_story',
 	'tasks': TASKS,
