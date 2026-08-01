@@ -322,10 +322,6 @@ TASKS = [
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'swamp_mid_city_type_c_find_osten'
-				},
-				'condition': {
-					'type': 'is_chapter_gte',
-					'params': { 'chapter': 20 }
 				}
 			}
 		]
@@ -348,16 +344,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'lanternsworn_janrel',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'lanternsworn_janrel',
-					'standing_text': [
-						"The lantern showed me something last night.",
-						"A vessel. Deep in the Channel. The swamp has been holding it for too long."
-					]
-				}
-			}
 		],
 		'task_complete_events': [
 			{
@@ -370,6 +356,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_swamp_mid_e_investigate_vessel'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_mid_e_investigate_vessel' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_swamp_mid_e_investigate_vessel'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lanternsworn_janrel', 'standing_text': [ "The lantern showed me something last night.", "A vessel. Deep in the Channel. The swamp has been holding it for too long." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -388,17 +375,7 @@ TASKS += [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'oath_reed_selka',
-					'location': 'region_open_area'
-				}
-			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'oath_reed_selka',
-					'standing_text': [
-						"The reeds have whispered about that vessel for years.",
-						"The Oathrot Voice has been feeding on it slowly."
-					]
+					'location': 'region_city_other2'
 				}
 			}
 		],
@@ -413,6 +390,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_swamp_mid_e_consult_selka'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_mid_e_consult_selka' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_swamp_mid_e_consult_selka'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'oath_reed_selka', 'standing_text': [ "Memory Vessels were used by the old bayou clans to preserve the last thoughts of the dying.", "This one was lost during a flood — the reeds have been whispering about it for decades.", "The Oathrot Voice has been absorbing its contents slowly. You need to pull it out before there's nothing left inside." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -488,6 +466,12 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{
+				'event_type': 'hide_npc',
+				'params': {
+					'npc_id': 'oathrot_voice'
+				}
+			},
+			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'swamp_mid_city_type_e_return_to_janrel'
@@ -501,16 +485,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'lanternsworn_janrel',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'lanternsworn_janrel',
-					'standing_text': [
-						"The lantern steadied the moment you came back.",
-						"You have it. Good."
-					]
-				}
-			}
 		],
 		'task_complete_events': [
 			{
@@ -523,6 +497,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_swamp_mid_e_return_to_janrel' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_e_return_to_janrel' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_e_return_to_janrel'  } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lanternsworn_janrel', 'standing_text': [ "The lantern steadied the moment you returned.", "You have it — and the Oathrot Voice no longer does.", "When the Broken Pact dissolved, it pressed this into my hands." ] } },
 			{
 				'event_type': 'award_item',
 				'params': {
@@ -555,16 +530,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'bargaincaller_ress',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'bargaincaller_ress',
-					'standing_text': [
-						"The lantern-fire bows when you walk past.",
-						"Something you're carrying has weight the Court recognises."
-					]
-				}
-			}
 		],
 		'task_complete_events': [
 			{
@@ -577,6 +542,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_d_deliver_memory_vessel'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_d_deliver_memory_vessel' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_swamp_mid_d_deliver_memory_vessel' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'bargaincaller_ress', 'standing_text': [ "That vessel carries memory older than this city.", "The lantern-fire doesn't flare when I hold it — it bows.", "There's a blade bound inside a bargain made long before I was born.", "Deliver the vessel to Selka. The reeds know the rite to release it." ] } },
 			{
 				'event_type': 'remove_item',
 				'params': {
@@ -597,16 +563,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'oath_reed_selka',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'oath_reed_selka',
-					'standing_text': [
-						"The reeds have gone quiet.",
-						"They only do that when something important is about to happen."
-					]
-				}
-			}
 		],
 		'task_complete_events': [
 			{
@@ -619,6 +575,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_swamp_mid_d_consult_selka'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_mid_d_consult_selka' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_swamp_mid_d_consult_selka'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'oath_reed_selka', 'standing_text': [ "The reeds have waited for this.", "The Mirebound Sovereign — a blade forged from the first broken oath in the bayou.", "The vessel is the key. But the Court-Guardian will not yield it without a fight.", "Face it. Prove the oath is yours to carry." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -633,16 +590,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'oathrot_voice',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'oathrot_voice',
-					'standing_text': [
-						"The first broken oath. You dare to claim it?",
-						"Prove you can carry what was never meant to be held."
-					]
-				}
-			}
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_swamp_mid_d_meet_court_guardian' } },
@@ -711,17 +658,7 @@ TASKS += [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'osten_dreamweaver',
-					'location': 'region_open_area'
-				}
-			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'osten_dreamweaver',
-					'standing_text': [
-						"The bayou holds stories differently than anywhere else I've been.",
-						"I've been trying to write them all down. There are too many."
-					]
+					'location': 'region_city_other2'
 				}
 			}
 		],
@@ -736,6 +673,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_c_find_osten' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_c_find_osten'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_c_find_osten' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'osten_dreamweaver', 'standing_text': [ "The bayou holds stories the way skin holds warmth — for a little while after the fire goes out.", "I've been trying to write them all down, but there are more than I can carry alone.", "You look like people who have collected a few of your own." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -750,16 +688,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'bargaincaller_ress',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'bargaincaller_ress',
-					'standing_text': [
-						"The dreamer's been here three days.",
-						"Lantern hasn't flared once around them. That means something."
-					]
-				}
-			}
 		],
 		'task_complete_events': [
 			{
@@ -772,6 +700,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_c_consult_ress'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_c_consult_ress' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_swamp_mid_c_consult_ress' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'bargaincaller_ress', 'standing_text': [ "The lantern hasn't flared once around them in three days.", "That means something. It means they mean what they say." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -786,16 +715,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'osten_dreamweaver',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'osten_dreamweaver',
-					'standing_text': [
-						"Ress's lantern doesn't lie.",
-						"Neither do you, apparently."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -816,40 +735,6 @@ TASKS += [
 				'event_type': 'character_join',
 				'params': { 'character_id': 'osten_dreamweaver' }
 			},
-		]
-	},
-
-]
-
-# ── Type E ── Bayou Memory Vessel → gates Swamp Small Type D (Gnashwater) ─────
-# Janrel of the Lantern-Sworn received a sealed clay vessel from a spirit
-# during the Broken Pact resolution — it holds compressed swamp memory.
-# No new NPCs. No dungeon.
-
-NPC_DIALOG += [
-
-	{
-		'npc_id': 'lanternsworn_janrel',
-		'dialog_id': 'janrel_e_memory_vessel',
-		'dialog': [
-			"When the Broken Pact spirit dissolved, it pressed this into my hands.",
-			"A sealed vessel — clay, swamp-fired.",
-			"The omen-light reads it as a memory container. Something the Bayou compressed over centuries.",
-			"(holding her lantern near it — the flame shifts green)",
-			"The Court can't hold it. It belongs further down the swamp.",
-			"Gnashwater Hollow was shaped by bargains older than ours.",
-			"Whatever is in this vessel — it was made there."
-		]
-	},
-	{
-		'npc_id': 'oath_reed_selka',
-		'dialog_id': 'selka_e_vessel_reading',
-		'dialog': [
-			"The reeds confirm it.",
-			"This vessel was sealed during a pact that was never honoured.",
-			"The memory inside it belongs to the hollow — not the Court.",
-			"Carry it sealed. If it opens before it arrives, the memory dissipates.",
-			"Don't drop it in water."
 		]
 	},
 

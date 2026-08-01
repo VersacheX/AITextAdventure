@@ -357,16 +357,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'lanternrunner_vexa',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'lanternrunner_vexa',
-                    'standing_text': [
-                        "I pulled something out of the undertunnel that I can't place.",
-                        "Old script, ceremonial looking. Merrik won't go near it."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -379,6 +369,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_mid_e_investigate_seal'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_mid_e_investigate_seal' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_mid_e_investigate_seal'   } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lanternrunner_vexa', 'standing_text': [ "Found something in the undertunnel last week — wedged behind a collapsed wall.", "Looks ceremonial. Old Tidekin script around the rim.", "Merrik won't touch it. Says it should go back to where it came from.", "The problem is nobody knows where that is." ] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -398,17 +389,7 @@ TASKS += [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'signal_seer_thalen',
-                    'location': 'region_open_area'
-                }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'signal_seer_thalen',
-                    'standing_text': [
-                        "The Seal's resonance has been drifting for weeks.",
-                        "The Lanternfade Echo is circling it. We need to act before it bonds."
-                    ]
+                    'location': 'region_city_other2'
                 }
             }
         ],
@@ -423,6 +404,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_mid_e_consult_thalen'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_mid_e_consult_thalen' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_mid_e_consult_thalen'   } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'signal_seer_thalen', 'standing_text': [ "The Tidekin Seal. The coastal clans used it to mark founding pacts.", "This one was separated from its cove — probably during the storm that buried the undertunnel.", "The Lanternfade Echo has been drawn to its resonance. It will try to claim it.", "Take it before the echo bonds to it completely." ] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -442,7 +424,7 @@ TASKS += [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'lanternfade_echo',
-                    'location': 'region_open_area'
+                    'location': None
                 }
             },
             {
@@ -453,6 +435,13 @@ TASKS += [
                         "The Seal is ours.",
                         "Leave."
                     ]
+                }
+            },
+            {
+                'event_type': 'create_dungeon',
+                'params': {
+                    'dungeon_id': 'shallows_mid_city_type_e_defeat_lanternfade_echo',
+                    'location': 'region_open_area'
                 }
             }
         ],
@@ -492,6 +481,12 @@ TASKS += [
         ],
         'task_complete_events': [
             {
+                'event_type': 'hide_npc',
+                'params': {
+                    'npc_id': 'lanternfade_echo'
+                }
+            },
+            {
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'shallows_mid_city_type_e_return_to_vexa'
@@ -506,16 +501,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'lanternrunner_vexa',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'lanternrunner_vexa',
-                    'standing_text': [
-                        "The echo dispersed the moment you stepped back in.",
-                        "Whatever you're holding — it knows you now."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -528,6 +513,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_mid_e_return_to_vexa' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_e_return_to_vexa'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_mid_e_return_to_vexa' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lanternrunner_vexa', 'standing_text': [ "You got it out clean. Merrik's going to say you should hand it over to the courts.", "Don't. Something that old belongs somewhere specific. You'll figure out where." ] } }
         ]
     },
 
@@ -552,17 +538,7 @@ TASKS += [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'dare',
-                    'location': 'region_open_area'
-                }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'dare',
-                    'standing_text': [
-                        "You hear that frequency coming from the undertunnel?",
-                        "Twenty years dormant and now it's singing. I want to know why."
-                    ]
+                    'location': 'region_bar'
                 }
             }
         ],
@@ -577,6 +553,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_c_find_dare' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_c_find_dare'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_mid_c_find_dare' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'dare', 'standing_text': [ "You hear that? That's the sound of a signal network nobody's touched in twenty years.", "Vexa showed me the undertunnel maps. There are routes in there that don't exist on any chart.", "I want in. I'm guessing you do too, or you wouldn't be standing here looking curious." ] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -592,17 +569,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'lanternrunner_vexa',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'lanternrunner_vexa',
-                    'standing_text': [
-                        "Dare? Yeah I know her.",
-                        "Reliable when it counts. Reckless the rest of the time.",
-                        "You'd make a good pair, honestly."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -615,7 +581,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_c_consult_vexa'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_c_consult_vexa' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_shallows_mid_c_consult_vexa' } },
-            {
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lanternrunner_vexa', 'standing_text': [ "Vexa says you're reliable. High praise from her — she doesn't say that about anyone.", "I've been scouting this coastline for a month. The undertunnel is the most interesting thing I've found.", "You look like you know how to move through interesting places without dying." ] },
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'shallows_mid_city_type_c_earn_dare'
@@ -630,16 +596,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'dare',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'dare',
-                    'standing_text': [
-                        "Vexa vouched for you.",
-                        "That's enough for me."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -656,6 +612,12 @@ TASKS += [
                 'event_type': 'character_join',
                 'params': {
                     'character_id': 'dare'
+                }
+            },
+            {
+                'event_type': 'hide_npc',
+                'params': {
+                    'npc_id': 'dare'
                 }
             }
         ]
@@ -695,8 +657,21 @@ NPC_DIALOG += [
 		]
 	},
 
-]
+	{
+		'npc_id': 'diego',
+		'dialog_id': 'diego_d_fragment_received',
+		'dialog': [
+			"That fragment\u2026",
+			"(turns the metal once, feeling the pull)",
+			"Tide-pull I've never felt in steel. Not forge-heat. Not residual charge. Actual current, locked inside the grain.",
+			"Something in Blackwake Bay is still answering it \u2014 every lantern on the waterfront just flickered the same direction.",
+			"Thalen reads the coastal signals better than anyone still breathing. He'll know which drowned tunnel this belongs to.",
+			"Take it to him before the Voice finishes noticing you're carrying it.",
+			"And if the undertunnel starts humming while you're walking\u2026 keep moving."
+		]
+	},
 
+]
 TASKS += [
 
 	# D-0 — Deliver corsair_tide_fragment to Diego (standalone deliver; unlocks D chain)
@@ -707,19 +682,15 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'diego',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'diego',
-					'standing_text': [
-						"That fragment — the metal has a tide-pull I've never felt in steel.",
-						"Something in Blackwake Bay resonates with it.",
-						"Find Thalen. He reads the coastal signals — he'll know where this belongs."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'diego',
+					'dialog_id': 'diego_d_fragment_received'
+				}
+			},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_d_deliver_corsair_fragment'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_d_deliver_corsair_fragment' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_mid_d_deliver_corsair_fragment' } },
@@ -729,6 +700,17 @@ TASKS += [
 					'item_id': 'corsair_tide_fragment'
 				}
 			},
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'diego',
+                    'standing_text': [
+                        "That fragment — the metal has a tide-pull I've never felt in steel.",
+                        "Something in Blackwake Bay resonates with it.",
+                        "Find Thalen. He reads the coastal signals — he'll know where this belongs."
+                    ]
+                }
+            },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -745,17 +727,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'signal_seer_thalen',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'signal_seer_thalen',
-					'standing_text': [
-						"The lantern patterns shifted when you arrived.",
-						"Something in what you carry is broadcasting on the corsair frequency.",
-						"Come quickly — the tunnels are already answering."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -772,7 +743,37 @@ TASKS += [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'undertunnel_voice',
+                    'location': None
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'undertunnel_voice',
+                    'standing_text': [
+                        "The corsair fragment opens the deep tunnel.",
+                        "Every misdirected signal, every lost smuggler route — I carry them all.",
+                        "You want the tide-steel the corsairs buried here.",
+                        "Take it from me if you can navigate the dark."
+                    ]
+                }
+            },
+            {
+                'event_type': 'create_dungeon',
+                'params': {
+                    'dungeon_id': 'shallows_mid_city_type_d_defeat_undertunnel_voice',
                     'location': 'region_open_area'
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'signal_seer_thalen',
+                    'standing_text': [
+                        "The lantern patterns are clear again.",
+                        "Every misdirected signal the Voice held has resolved.",
+                        "Vexa says the tunnels are finally quiet."
+                    ]
                 }
             },
 			{
@@ -791,17 +792,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'undertunnel_voice',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'undertunnel_voice',
-					'standing_text': [
-						"Vexa says the smuggler tunnels are humming on their own.",
-						"Merrik closed the lower entrance — too many signals bleeding up from below.",
-						"The corsair fragment has woken whatever the old lineage sealed down there."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -814,6 +804,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_mid_d_meet_undertunnel_voice' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_d_meet_undertunnel_voice' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_shallows_mid_d_meet_undertunnel_voice' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'undertunnel_voice', 'standing_text': [ "The corsair fragment opens the deep tunnel.", "Every misdirected signal, every lost smuggler route — I carry them all.", "You want the tide-steel the corsairs buried here.", "Take it from me if you can navigate the dark." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -839,6 +830,12 @@ TASKS += [
 			}
         ],
 		'task_complete_events': [
+            {
+                'event_type': 'hide_npc',
+                'params': {
+                    'npc_id': 'undertunnel_voice'
+                }
+            },
 			{
 				'event_type': 'award_item',
 				'params': {
@@ -914,16 +911,16 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'lanternrunner_vexa',
 		'task_acquire_events': [
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lanternrunner_vexa', 'standing_text': [
-				"Merrik pulled something out of the tunnel evidence.",
-				"A seal I recognise. Come — I'll tell you where it needs to go."
-			]}}
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lanternrunner_vexa', 'dialog_id': 'vexa_e_seal_context' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_mid_e_consult_vexa'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_shallows_mid_e_consult_vexa' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_shallows_mid_e_consult_vexa'   } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lanternrunner_vexa', 'standing_text': [
+				"Merrik pulled something out of the tunnel evidence.",
+				"A seal I recognise. Come — I'll tell you where it needs to go."
+			]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'shallows_mid_city_type_e_collect_seal' }},
 		]
 	},
@@ -935,17 +932,17 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'tidejudge_merrik',
 		'task_acquire_events': [
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'tidejudge_merrik', 'standing_text': [
-				"Evidence logged. Case closed.",
-				"The seal has no jurisdiction here.",
-				"Come collect it."
-			]}}
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'tidejudge_merrik', 'dialog_id': 'merrik_e_tidekin_seal' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_e_collect_seal'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_e_collect_seal' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_mid_e_collect_seal' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'tidejudge_merrik', 'standing_text': [
+				"Evidence logged. Case closed.",
+				"The seal has no jurisdiction here.",
+				"Come collect it."
+			]}},
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'shallows_mid_city_e_tidekin_seal' }},
 		]
 	},

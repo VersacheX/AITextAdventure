@@ -194,6 +194,7 @@ SPECIAL_ITEM_SEEDS = [
     {"id": "necropolis_marrow_shard", "name": "Necropolis Marrow Shard", "description": "A fragment of marrow-crystal harvested from the Necropolis's oldest chamber. It pulses faintly with residual undeath energy and smells of old stone.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
     {"id": "swamp_mid_city_e_bayou_memory_vessel", "name": "Bayou Memory Vessel", "description": "A sealed clay vessel recovered from the bayou floor. The contents are unknown — something inside shifts when the vessel is tilted. It has never been opened.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
     {"id": "forge_dominion_shard", "name": "Forge Dominion Shard", "description": "A fragment of dominion-ore extracted from the mountain's primary vein during a controlled collapse. It carries the compressed heat of a sealed forge chamber.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "swamp_small_city_e_gnashwater_memory_vessel", "name": "Gnashwater Memory Vessel", "description": "A sealed clay vessel recovered from the swamp floor. The contents are unknown — something inside shifts when the vessel is tilted. It has never been opened.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"}
 ]
 
 

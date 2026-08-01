@@ -310,16 +310,6 @@ TASKS = [
 		'to_type': 'npc',
 		'to_id': 'vigilant_karrek',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'vigilant_karrek',
-					'standing_text': [
-						"The wind patterns are wrong.",
-						"Something moves through the storm that doesn't belong."
-					]
-				}
-			}
 		],
 		'task_complete_events': [
 			{
@@ -332,6 +322,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_small_meet_karrek'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_small_meet_karrek' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_snow_small_meet_karrek'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'vigilant_karrek', 'standing_text': [ "The wind shifts in patterns I've never recorded.", "Something moves through the storm that shouldn't be there.", "Bleakwatch has survived worse — but not without knowing what's coming." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -375,17 +366,7 @@ TASKS = [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'gale_seer_orlena',
-					'location': 'region_open_area'
-				}
-			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'gale_seer_orlena',
-					'standing_text': [
-						"The storm-patterns fracture near the hollow.",
-						"A Stormhollow Voice stirs — listen and you'll hear it."
-					]
+					'location': 'region_bar'
 				}
 			}
 		],
@@ -407,12 +388,7 @@ TASKS = [
 					'dialog_id': 'karrek_closing'
 				}
 			},
-			{
-				'event_type': 'complete_regional_quests',
-				'params': {
-					'region_id': 'snow_small_city'
-				}
-			}
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'gale_seer_orlena', 'standing_text': [ "The storm-patterns fracture near the hollow. A Stormhollow Voice stirs — a spirit of trapped battle-wind. If it breaks free, no signal will carry across the snow line." ] } }
 		]
 	},
 
@@ -438,17 +414,7 @@ TASKS += [
 					'npc_id': 'commander_drax',
 					'location': 'region_city_other1'
 				}
-			},
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'commander_drax',
-					'standing_text': [
-						"You're not garrison.",
-						"State your purpose or get off my wall."
-					]
-				}
-			},
+			}
 		],
 		'task_complete_events': [
 			{
@@ -461,6 +427,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_snow_small_c_find_drax' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_c_find_drax'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_snow_small_c_find_drax' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'commander_drax', 'standing_text': [ "You're not garrison. You move like field-trained. I've been watching your party since you crossed the frost-line. Bleakwatch has a wall. What it doesn't have is people worth standing behind it. Prove you're worth my time and I'll consider the offer." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -475,16 +442,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'vigilant_karrek',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'vigilant_karrek',
-					'standing_text': [
-						"Drax sent you to me, didn't he.",
-						"He does that. Means he's already half-decided."
-					]
-				}
-			}
 		],
 		'task_complete_events': [
 			{
@@ -497,6 +454,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_c_consult_karrek'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_snow_small_c_consult_karrek' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_snow_small_c_consult_karrek' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'vigilant_karrek', 'standing_text': [ "Drax doesn't move for anyone. That's not stubbornness — it's policy. He's lost units before to commanders who moved too fast. Tell him I watched you on the storm-approach and you didn't flinch. Coming from me, that's the only credential that opens his door." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -511,16 +469,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'commander_drax',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'commander_drax',
-					'standing_text': [
-						"Karrek spoke for you.",
-						"I don't ignore that. Come back and we'll talk terms."
-					]
-				}
-			}
 		],
 		'task_complete_events': [
 			{
@@ -584,6 +532,16 @@ TASKS += [
 				}
 			},
 			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'brawn',
+					'standing_text': [
+						"That registry traces the last known location of the outpost's original warden plate to the Stormhollow.",
+						"Orlena will know what the gale is reading."
+					]
+				}
+			},
+			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'snow_small_city_type_d_consult_orlena'
@@ -597,17 +555,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'gale_seer_orlena',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'gale_seer_orlena',
-					'standing_text': [
-						"The storm-patterns near the hollow shifted again.",
-						"Something old and armoured is down there.",
-						"Come — I need to show you what the gale is reading."
-					]
-				}
-			}
 		],
 		'task_complete_events': [
 			{
@@ -620,6 +567,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_small_d_consult_orlena'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_small_d_consult_orlena' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_snow_small_d_consult_orlena'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'gale_seer_orlena', 'standing_text': [ "The storm-patterns around the hollow carry the warden frequency. The plate has been down there since the siege. The Stormhollow Voice absorbed the battle-wind that buried it. Force it out and the plate surfaces with the storm it was trapped in. Be ready — it won't surrender the warden's armour quietly." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -638,19 +586,17 @@ TASKS += [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'stormhollow_voice',
-					'location': 'region_open_area'
+					'location': None
 				}
 			},
 			{
-				'event_type': 'set_npc_standing_text',
+				'event_type': 'create_dungeon',
 				'params': {
-					'npc_id': 'stormhollow_voice',
-					'standing_text': [
-						"The hollow howls with a voice that isn't the wind.",
-						"Orlena says this is it — the storm that never broke."
-					]
+					'dungeon_id': 'stormhollow_voice_1',
+					'location': 'region_open_area'
 				}
 			}
+
 		],
 		'task_complete_events': [
 			{
@@ -663,6 +609,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_d_meet_stormhollow_voice' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_small_d_meet_stormhollow_voice' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_snow_small_d_meet_stormhollow_voice' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'stormhollow_voice', 'standing_text': [ "The warden's plate is mine. Every storm that buried this outpost feeds me. I am the battle-wind that never stopped. You will not strip the hollow of its armour." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -686,6 +633,12 @@ TASKS += [
 			}
 		],
 		'task_complete_events': [
+			{
+				'event_type': 'hide_npc',
+				'params': {
+					'npc_id': 'stormhollow_voice'
+				}
+			},
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
@@ -737,16 +690,13 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'vigilant_karrek',
         'task_acquire_events': [
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'vigilant_karrek', 'standing_text': [
-                "The wind carries bad omens from the hollow.",
-                "Seth's people should know what I've recorded."
-            ]}}
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'vigilant_karrek', 'dialog_id': 'karrek_a_ch6_storm_report' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_a_ch6_meet_karrek'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_small_a_ch6_meet_karrek' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_a_ch6_meet_karrek' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'vigilant_karrek', 'standing_text': [ "Storm-pattern fractures near the hollow for three days. Something moved through that breach site that wasn't weather. The hollow is listening. Whatever crawled out — it knows we're watching too." ] } }
         ]
     },
 

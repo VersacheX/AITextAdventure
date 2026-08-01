@@ -475,16 +475,6 @@ TASKS = [
                 }
             },
             {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'channel_seer_draveth',
-                    'standing_text': [
-                        "The current‑signs vanish.",
-                        "A Swallowed Path rises beneath the murk."
-                    ]
-                }
-            },
-            {
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'swamp_small_city_find_draveth'
@@ -504,7 +494,7 @@ TASKS = [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'channel_seer_draveth',
-                    'location': 'region_open_area'
+                    'location': 'region_city_bar'
                 }
             },
         ],
@@ -522,13 +512,14 @@ TASKS = [
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
-                    'npc_id': 'murkchannel_echo',
-                    'standing_text': [
-                        "A presence stirs in the Murkchannel.",
-                        "It remembers routes the swamp has tried to erase."
-                    ]
-                }
-            },
+                    'npc_id': 'channel_seer_draveth',
+					'standing_text': [
+						"The current-signs vanish.",
+						"A Swallowed Path rises — a spirit of devoured routes.",
+						"If it awakens fully, no one will find their way out."
+					]
+				}
+			},
             {
                 'event_type': 'award_task',
                 'params': {
@@ -544,19 +535,19 @@ TASKS = [
         'type': 'meet',
         'to_type': 'npc',
         'to_id': 'murkchannel_echo',
-        'task_acquire_events': [
-            {
-                'event_type': 'create_dungeon',
-                'params': {
-                    'dungeon_id': 'murkchannel_run',
-                    'location': 'region_open_area'
-                }
-            },
+        'task_acquire_events': [			
             {
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'murkchannel_echo',
                     'location': None
+                }
+            },
+            {
+                'event_type': 'create_dungeon',
+                'params': {
+                    'dungeon_id': 'murkchannel_run',
+                    'location': 'region_open_area'
                 }
             }
         ],
@@ -571,17 +562,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_swamp_small_murkchannel_run' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_swamp_small_murkchannel_run' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',  'dialog_id': 'lyren_swamp_small_murkchannel_run'  } },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'rotfen_voice',
-                    'standing_text': [
-                        "The Hideaway churns with lost routes.",
-                        "The Swallowed Path gathers strength.",
-                        "Only its heart remains to be severed."
-                    ]
-                }
-            },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'murkchannel_echo', 'standing_text': [ "We are the channels the swamp forgot.", "The Swallowed Path twists our flow.", "It waits deeper in the Rotfen Hideaway." ] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -597,19 +578,19 @@ TASKS = [
         'type': 'meet',
         'to_type': 'npc',
         'to_id': 'rotfen_voice',
-        'task_acquire_events': [
-            {
-                'event_type': 'create_dungeon',
-                'params': {
-                    'dungeon_id': 'rotfen_hideaway',
-                    'location': 'region_open_area'
-                }
-            },
+        'task_acquire_events': [			
             {
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'rotfen_voice',
                     'location': None
+                }
+            },
+            {
+                'event_type': 'create_dungeon',
+                'params': {
+                    'dungeon_id': 'rotfen_hideaway',
+                    'location': 'region_open_area'
                 }
             }
         ],
@@ -624,6 +605,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_rotfen_hideaway' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_rotfen_hideaway' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_swamp_small_rotfen_hideaway' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rotfen_voice', 'standing_text': [ "The Hideaway churns with lost routes.", "The Swallowed Path gathers strength.", "Only its heart remains to be severed." ] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -640,13 +622,6 @@ TASKS = [
         'to_type': 'mob',
         'to_id': 'swallowed_path_1',
         'task_acquire_events': [
-            {
-                'event_type': 'create_dungeon',
-                'params': {
-                    'dungeon_id': 'the_swallowed_path',
-                    'location': 'region_open_area'
-                }
-            },
             {
                 'event_type': 'begin_combat',
                 'params': {
@@ -666,37 +641,21 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_swallowed_path' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_swallowed_path' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_swamp_small_swallowed_path'   } },
-            {
-                'event_type': 'complete_region_quest',
-                'params': {
-                    'region_id': 'swamp_small_city'
-                }
-            }
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rotfen_voice', 'standing_text': [ "The channels clear. The swamp breathes easier.", "You've restored the paths the mire tried to swallow.", "Travelers will owe you their lives." ] } }
         ]
     },
 
     # ── Type D ── Rotfen Dredge Blade (mythic weapon) ─────────────────────────────
-    # Gate: player holds swamp_mid_city_e_bayou_memory_vessel from the Ch.20 Type E chain.
+    # Gate: player holds swamp_small_city_e_gnashwater_memory_vessel from the Ch.20 Type E chain.
     # Deliver to Diego → Draveth reads the vessel → defeat Rotfen Voice → mythic weapon.
 
     {
         'task_id': 'swamp_small_city_type_d_deliver_memory_vessel',
         'type': 'deliver',
-        'item_id': 'swamp_mid_city_e_bayou_memory_vessel',
+        'item_id': 'swamp_small_city_e_gnashwater_memory_vessel',
         'to_type': 'npc',
         'to_id': 'diego',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'diego',
-                    'standing_text': [
-                        "That vessel — the clay holds a forge-resonance I've never felt from a swamp relic.",
-                        "There's metal inside the Hollow that only this thing can unlock.",
-                        "Find Draveth. He reads the channels — he'll know where the resonance leads."
-                    ]
-                }
-            },
         ],
         'task_complete_events': [
             {
@@ -709,10 +668,11 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_small_d_deliver_memory_vessel' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple',  'dialog_id': 'ripple_swamp_small_d_deliver_memory_vessel'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in',  'dialog_id': 'kor_in_swamp_small_d_deliver_memory_vessel'  } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'diego', 'standing_text': [ "The clay holds a forge-resonance I've never felt from a swamp relic.", "There's metal inside the Hollow that only this thing can unlock.", "Find Draveth. He reads the channels — he'll know where the resonance leads." ] } },
             {
                 'event_type': 'remove_item',
                 'params': {
-                    'item_id': 'swamp_mid_city_e_bayou_memory_vessel'
+                    'item_id': 'swamp_small_city_e_gnashwater_memory_vessel'
                 }
             },
             {
@@ -753,17 +713,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_small_d_consult_draveth' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable',   'dialog_id': 'sable_swamp_small_d_consult_draveth'   } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple',  'dialog_id': 'ripple_swamp_small_d_consult_draveth'  } },
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'rotfen_voice',
-					'standing_text': [
-						"The mire thickens near the Hideaway entrance.",
-						"Tavik says no one who entered last season ever surfaced.",
-						"The vessel has agitated whatever lives in the deep rot."
-					]
-				}
-			},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'channel_seer_draveth', 'standing_text': [ "The memory inside is not from the Hollow.", "It carries the Bayou's oldest channels.", "The Voice will read it as a claim on its territory." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -791,6 +741,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_d_meet_rotfen_voice' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_d_meet_rotfen_voice' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_swamp_small_d_meet_rotfen_voice' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rotfen_voice', 'standing_text': [ "It already decided the vessel is poison here.", "It will take the vessel — and every route we ever knew.", "We don't let it." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -816,6 +767,12 @@ TASKS = [
 			}
         ],
 		'task_complete_events': [
+			{
+				'event_type': 'hide_npc',
+				'params': {
+					'npc_id': 'rotfen_voice',
+				}
+			},
 			{
 				'event_type': 'award_item',
 				'params': {
@@ -879,16 +836,13 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'bogrunner_tavik',
         'task_acquire_events': [
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'bogrunner_tavik', 'standing_text': [
-                "Found something in the channels that doesn't belong to anyone around here.",
-                "Silver pendant. Someone out there's missing it."
-            ]}},
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'bogrunner_tavik', 'dialog_id': 'tavik_a_ch7_pendant' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',    'dialog_id': 'nia_swamp_small_a_ch7_find_pendant'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_swamp_small_a_ch7_find_pendant' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_swamp_small_a_ch7_find_pendant' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'bogrunner_tavik', 'standing_text': [ "The skiff had a name burned into the hull: Vale.", "I've been asking around but nobody claimed it.", "You look like people who travel. Maybe you know someone." ] } },
             { 'event_type': 'award_item', 'params': { 'item_id': 'vale_pendant' }},
         ]
     },
@@ -908,17 +862,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'bogrunner_tavik',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'bogrunner_tavik',
-					'standing_text': [
-						"Someone moves through the night channels without a boat.",
-						"No wake. No sound until they're already gone.",
-						"You should hear this from me directly."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -934,10 +877,11 @@ TASKS += [
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
-					'npc_id': 'rotwharf_madra',
+					'npc_id': 'bogrunner_tavik',
 					'standing_text': [
-						"Tavik sent you. Good — I've clocked this shadow twice near the Hideaway entrance.",
-						"I've got a name. Come ask."
+						"Madra's clocked them twice near the Hideaway.",
+						"They're not hiding from the swamp — they're hiding from us.",
+						"Find out what they're watching. That might earn a word."
 					]
 				}
 			},
@@ -968,6 +912,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_swamp_small_c_madra_vouch' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_c_madra_vouch' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_swamp_small_c_madra_vouch'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rotwharf_madra', 'standing_text': [ "The Hideaway's channels are a maze. The Ghost knows the way.", "They move when they decide. We point the direction. That's the arrangement." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -988,19 +933,16 @@ TASKS += [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'ghost',
-					'location': 'region_open_area'
+					'location': None
 				}
 			},
 			{
-				'event_type': 'set_npc_standing_text',
+				'event_type': 'create_dungeon',
 				'params': {
-					'npc_id': 'ghost',
-					'standing_text': [
-						"A figure stands perfectly still in the shadow of the Hideaway entrance.",
-						"They watched you arrive without moving."
-					]
+					'dungeon_id': 'ghost_hideaway',
+					'location': 'region_open_area'
 				}
-			},
+			}
 		],
 		'task_complete_events': [
 			{
@@ -1020,6 +962,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_swamp_small_c_meet_ghost' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_c_meet_ghost' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_c_meet_ghost' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'ghost', 'standing_text': [ "The channels are clear. The Swallowed Path is gone.", "I can move freely now. I can help you move freely too." ] } },
 			{
 				'event_type': 'character_join',
 				'params': {
@@ -1044,17 +987,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'channel_seer_draveth',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'channel_seer_draveth',
-					'standing_text': [
-						"Engine pressure from the outpost disturbs the current-signs.",
-						"I need to read the flow before anything large lifts off.",
-						"Come quickly."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -1070,11 +1002,10 @@ TASKS += [
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
-					'npc_id': 'rotwharf_madra',
+					'npc_id': 'channel_seer_draveth',
 					'standing_text': [
-						"Draveth's read is the last thing I need.",
-						"My network's already gone quiet.",
-						"Bring me his word and I'll clear Seth for departure."
+						"The current-signs are clear. The channels are safe.",
+						"Madra will relay the clearance to Seth. He can lift off."
 					]
 				}
 			},
@@ -1105,6 +1036,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_swamp_small_a_relay_to_madra' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_a_relay_to_madra' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_a_relay_to_madra' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rotwharf_madra', 'standing_text': [ "The channels are clear. Seth can lift off safely." ] } }
 		]
 	},
 

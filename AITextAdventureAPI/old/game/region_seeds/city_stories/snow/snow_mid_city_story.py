@@ -251,6 +251,17 @@ NPC_DIALOG += [
 NPC_DIALOG += [
 
     # Type D – Deliver Decree Shard
+    { 'npc_id': 'brawn', 'dialog_id': 'brawn_snow_mid_d_decree_shard', 'dialog': 
+        [ 
+            "That shard…",
+            "(holds it against the anvil for a second, listening)",
+            "Rune-frequency I’ve never felt in any metal. It’s not forge-heat. It’s declaration — something that was spoken into the stone and never finished.",
+            "Something in Hailward Hold is still answering it. Every tool on my rack just hummed the same note.",
+            "Bjorn carves these marks for a living. He’ll know exactly which Depths this is calling to.",
+            "Take it to him before the blue flame finishes noticing you’re carrying it.",
+            "And if the ancestral chants start getting drowned out while you’re walking… keep moving."
+        ]
+    },
     { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_d_deliver_decree_shard',  'dialog': [ "The rune-frequency vibrating off it is unlike anything Brawn has felt. Something in Hailward Hold resonates with it." ] },
     { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_d_deliver_decree_shard', 'dialog': [ "Bjorn carves runes for a living. He'll know exactly what this is calling to." ] },
     { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_d_deliver_decree_shard', 'dialog': [ "Find him before the Depths notice it too." ] },
@@ -373,16 +384,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'speaker_yrsa',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'speaker_yrsa',
-                    'standing_text': [
-                        "During my last deep chant I touched something unexpected.",
-                        "An ancestral memory carrying the weight of a formal decree."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -395,6 +396,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_mid_e_investigate_decree'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_mid_e_investigate_decree' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_snow_mid_e_investigate_decree'   } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'speaker_yrsa', 'standing_text': [ "The ancestral voice is calling for the shard to be returned to the Hold." ] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -416,16 +418,6 @@ TASKS += [
                     'npc_id': 'chant_seer_haldrin',
                     'location': 'region_city_other1'
                 }
-            },
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'chant_seer_haldrin',
-                    'standing_text': [
-                        "The Rimechant Echo has been holding that shard for longer than I've been alive.",
-                        "It doesn't know how to release what it carries."
-                    ]
-                }
             }
         ],
         'task_complete_events': [
@@ -439,6 +431,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_mid_e_consult_haldrin'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_mid_e_consult_haldrin' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_snow_mid_e_consult_haldrin'   } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'chant_seer_haldrin', 'standing_text': [ "The Shard is part of the chant now. The echo doesn't know how to let go." ] } },
             {
                 'event_type': 'create_npc',
                 'params': {
@@ -451,6 +444,16 @@ TASKS += [
                 'params': {
                     'dungeon_id': 'snow_mid_city_rimechant_hall',
                     'location': 'region_open_area'
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'rimechant_echo',
+                    'standing_text': [
+                        "The Shard is part of our chant.",
+                        "You cannot have it."
+                    ]
                 }
             },
             {
@@ -468,16 +471,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'rimechant_echo',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'rimechant_echo',
-                    'standing_text': [
-                        "The Shard is part of our chant.",
-                        "You cannot have it."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -515,6 +508,12 @@ TASKS += [
         ],
         'task_complete_events': [
             {
+                'event_type': 'hide_npc',
+                'params': {
+                    'npc_id': 'rimechant_echo'
+                }
+            },
+            {
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'snow_mid_city_type_e_return_to_yrsa'
@@ -529,16 +528,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'speaker_yrsa',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'speaker_yrsa',
-                    'standing_text': [
-                        "The ancestral voice quieted when you returned.",
-                        "It said what it needed to say."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -551,6 +540,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_snow_mid_e_return_to_yrsa' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_e_return_to_yrsa' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_e_return_to_yrsa'  } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'speaker_yrsa', 'standing_text': [ "The ancestral voice is quiet now. The shard is not meant for an archive — it's meant for someone who will act on it." ] } },
         ]
     },
 
@@ -572,16 +562,6 @@ TASKS += [
         'to_type': 'npc',
         'to_id': 'runeforger_bjorn',
         'task_acquire_events': [
-            {
-                'event_type': 'set_npc_standing_text',
-                'params': {
-                    'npc_id': 'runeforger_bjorn',
-                    'standing_text': [
-                        "An auditor was here last month. Marlo Finch.",
-                        "Asked a lot of questions about forge requisitions and left before the storms."
-                    ]
-                }
-            }
         ],
         'task_complete_events': [
             {
@@ -594,6 +574,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_f_find_marlo_trail'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_f_find_marlo_trail' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_f_find_marlo_trail' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'runeforger_bjorn', 'standing_text': [ "An auditor came through last month. Marlo Finch — Council credentials, very official. He was asking about resource allocations. Forge requisitions, shipment records, that sort of thing." ] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -696,6 +677,78 @@ TASKS += [
 
 ]
 
+# ── Type E ── Pageant Decree Shard → gates Snow Mid Type D ────────────────────
+# Yrsa Icebound recovered a shard of carved bone from the Blueforge Depths —
+# it carries a fragment of an ancestral decree. No new NPCs. No dungeon.
+
+NPC_DIALOG += [
+
+	{
+		'npc_id': 'speaker_yrsa',
+		'dialog_id': 'yrsa_e_decree_shard',
+		'dialog': [
+			"The ancestors sent this up from the Depths when the Shattered Rune fell.",
+			"A shard of carved bone — a decree fragment.",
+			"The chant etched into it is a pageant rite. A formal declaration of something.",
+			"(quiet) I can read the cadence but not the full sentence.",
+			"Bjorn says the rune patterns match a forge-mark used only in Hailward Hold ceremonial work.",
+			"It must go back there. The decree wants to be completed."
+		]
+	},
+	{
+		'npc_id': 'runeforger_bjorn',
+		'dialog_id': 'bjorn_e_decree_context',
+		'dialog': [
+			"This pattern — I know this mark.",
+			"It's from the old Hold ceremonies. Hailward's founders used it to open their greatest works.",
+			"A decree shard means something was declared and never answered.",
+			"The Hold will know what to do with it. They always do."
+		]
+	},
+
+]
+
+TASKS += [
+
+	# E-1 — Consult Bjorn about the shard
+	{
+		'task_id': 'snow_mid_city_type_e_consult_bjorn',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'runeforger_bjorn',
+		'task_acquire_events': [
+		],
+		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'runeforger_bjorn', 'dialog_id': 'bjorn_e_decree_context' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_mid_e_consult_bjorn'    } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_mid_e_consult_bjorn' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_snow_mid_e_consult_bjorn'   } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'runeforger_bjorn', 'standing_text': [ "The rune patterns match a forge-mark used only in Hailward Hold ceremonial work. It must go back there." ] } },
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'snow_mid_city_type_e_collect_shard' }},
+		]
+	},
+
+	# E-2 — Collect from Yrsa
+	{
+		'task_id': 'snow_mid_city_type_e_collect_shard',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'speaker_yrsa',
+		'task_acquire_events': [
+		],
+		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'speaker_yrsa', 'dialog_id': 'yrsa_e_decree_shard' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_e_collect_shard' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_e_collect_shard'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_e_collect_shard' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'speaker_yrsa', 'standing_text': [ "The ancestors sent this up from the Depths when the Shattered Rune fell. A formal declaration of something." ] } },
+			{ 'event_type': 'award_item', 'params': { 'item_id': 'snow_mid_city_e_pageant_decree_shard' }},
+		]
+	},
+
+]
+
+
 
 # ── Type D ── Blueforge Warplate (mythic armor) ───────────────────────────────
 # Gate: player holds pageant_decree_shard from the Type E chain (same city, Slot 1 → Slot 2).
@@ -741,19 +794,9 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'brawn',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'brawn',
-					'standing_text': [
-						"That shard — the rune-frequency vibrating off it is unlike anything I've felt.",
-						"Something in Hailward Hold resonates with it.",
-						"Find Bjorn. He carves runes for a living — he'll know exactly what this is calling to."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'brawn', 'dialog_id': 'brawn_snow_mid_d_decree_shard' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_d_deliver_decree_shard'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_d_deliver_decree_shard' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_d_deliver_decree_shard' } },
@@ -769,6 +812,16 @@ TASKS += [
 					'task_id': 'snow_mid_city_type_d_consult_bjorn'
 				}
 			},
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'brawn',
+                    'standing_text': [
+                        "The rune-frequency vibrating off that shard is unlike anything I've felt.",
+                        "Something in Hailward Hold resonates with it."
+                    ]
+                }
+            }
 		]
 	},
 
@@ -779,17 +832,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'runeforger_bjorn',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'runeforger_bjorn',
-					'standing_text': [
-						"My blue flame spiked the moment that shard entered the Hold.",
-						"The forge recognizes that frequency.",
-						"Come here before the Depths notice it too."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -802,10 +844,29 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_mid_d_consult_bjorn'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_mid_d_consult_bjorn' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_snow_mid_d_consult_bjorn'   } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'runeforger_bjorn', 'standing_text': [ "The rune-frequency matches the Blueforge Depths' resonance signature almost exactly. The Spirit has been drawing heat from my forge for years." ] } },
             {
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'blueforge_spirit',
+                    'location': None
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'blueforge_spirit',
+                    'standing_text': [
+                        "A molten-blue glow bleeds from the Depths entrance.",
+                        "Yrsa says her ancestral chants are being drowned out by a deep forge-hum.",
+                        "The decree shard has drawn the Spirit to the surface."
+                    ]
+                }
+            },
+            {
+                'event_type': 'create_dungeon',
+                'params': {
+                    'dungeon_id': 'snow_mid_city_blueforge_depths',
                     'location': 'region_open_area'
                 }
             },
@@ -814,7 +875,7 @@ TASKS += [
 				'params': {
 					'task_id': 'snow_mid_city_type_d_meet_blueforge_spirit'
 				}
-			},
+			}
 		]
 	},
 
@@ -825,17 +886,6 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'blueforge_spirit',
 		'task_acquire_events': [
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'blueforge_spirit',
-					'standing_text': [
-						"A molten-blue glow bleeds from the Depths entrance.",
-						"Yrsa says her ancestral chants are being drowned out by a deep forge-hum.",
-						"The decree shard has drawn the Spirit to the surface."
-					]
-				}
-			},
 		],
 		'task_complete_events': [
 			{
@@ -848,6 +898,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_d_meet_blueforge_spirit' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_d_meet_blueforge_spirit' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_snow_mid_d_meet_blueforge_spirit' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'blueforge_spirit', 'standing_text': [ "The decree shard reaches the Depths. You carry the rune-frequency I have fed on since the first forge burned here. You want the blue-forge metal. Survive my flame and it is yours." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -873,6 +924,12 @@ TASKS += [
 			}
         ],
 		'task_complete_events': [
+            {
+                'event_type': 'hide_npc',
+                'params': {
+                    'npc_id': 'blueforge_spirit'
+                }
+            },
 			{
 				'event_type': 'award_item',
 				'params': {
@@ -905,84 +962,6 @@ TASKS += [
 					]
 				}
 			},
-		]
-	},
-
-]
-# ── Type E ── Pageant Decree Shard → gates Snow Mid Type D ────────────────────
-# Yrsa Icebound recovered a shard of carved bone from the Blueforge Depths —
-# it carries a fragment of an ancestral decree. No new NPCs. No dungeon.
-
-NPC_DIALOG += [
-
-	{
-		'npc_id': 'speaker_yrsa',
-		'dialog_id': 'yrsa_e_decree_shard',
-		'dialog': [
-			"The ancestors sent this up from the Depths when the Shattered Rune fell.",
-			"A shard of carved bone — a decree fragment.",
-			"The chant etched into it is a pageant rite. A formal declaration of something.",
-			"(quiet) I can read the cadence but not the full sentence.",
-			"Bjorn says the rune patterns match a forge-mark used only in Hailward Hold ceremonial work.",
-			"It must go back there. The decree wants to be completed."
-		]
-	},
-	{
-		'npc_id': 'runeforger_bjorn',
-		'dialog_id': 'bjorn_e_decree_context',
-		'dialog': [
-			"This pattern — I know this mark.",
-			"It's from the old Hold ceremonies. Hailward's founders used it to open their greatest works.",
-			"A decree shard means something was declared and never answered.",
-			"The Hold will know what to do with it. They always do."
-		]
-	},
-
-]
-
-TASKS += [
-
-	# E-1 — Consult Bjorn about the shard
-	{
-		'task_id': 'snow_mid_city_type_e_consult_bjorn',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'runeforger_bjorn',
-		'task_acquire_events': [
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'runeforger_bjorn', 'standing_text': [
-				"Yrsa brought up a bone shard from the Depths.",
-				"The rune pattern on it — I've seen that mark before.",
-				"Come look."
-			]}}
-		],
-		'task_complete_events': [
-			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'runeforger_bjorn', 'dialog_id': 'bjorn_e_decree_context' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_mid_e_consult_bjorn'    } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_mid_e_consult_bjorn' } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_snow_mid_e_consult_bjorn'   } },
-			{ 'event_type': 'award_task', 'params': { 'task_id': 'snow_mid_city_type_e_collect_shard' }},
-		]
-	},
-
-	# E-2 — Collect from Yrsa
-	{
-		'task_id': 'snow_mid_city_type_e_collect_shard',
-		'type': 'meet',
-		'to_type': 'npc',
-		'to_id': 'speaker_yrsa',
-		'task_acquire_events': [
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'speaker_yrsa', 'standing_text': [
-				"The shard came from the ancestors.",
-				"Bjorn confirmed where it belongs.",
-				"Take it to Hailward Hold."
-			]}}
-		],
-		'task_complete_events': [
-			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'speaker_yrsa', 'dialog_id': 'yrsa_e_decree_shard' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_e_collect_shard' } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_e_collect_shard'  } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_e_collect_shard' } },
-			{ 'event_type': 'award_item', 'params': { 'item_id': 'snow_mid_city_e_pageant_decree_shard' }},
 		]
 	},
 
