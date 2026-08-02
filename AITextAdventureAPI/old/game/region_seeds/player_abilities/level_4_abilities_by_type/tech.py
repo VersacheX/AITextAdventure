@@ -136,6 +136,11 @@
         "effect": "status",
         "status_keys": ["stun"], # add silence when status_key is updated to status_keys
         "can_aoe": True
-    }
+    },
+
+    # crux — hazard/damage: scans and debuffs the philosophically corrupt
+    {"id": "debuff_the_wicked", "name": "Debuff the Wicked", "description": "Crux runs a cold diagnostic on the target and finds them logically inconsistent — it catalogues every contradiction in their form and systematically dismantles their ability to act.", "ability_type": "tech", "level": 4, "elements": ["dark", "electric", "ice", "air"], "base_power": 0, "ap_cost": 108, "effect": "status", "status_keys": ["intelligence_debuff"], "can_aoe": False, "non_player_ability": True},
+    # crux boss — upgraded debuff as AoE logic collapse
+    {"id": "logic_collapse", "name": "Logic Collapse", "description": "Crux broadcasts a terminal contradiction across the entire field — every mind within range short-circuits as it attempts to process something that cannot be true.", "ability_type": "tech", "level": 4, "elements": ["dark", "dark", "electric", "ice"], "base_power": 0, "ap_cost": 112, "effect": "status", "status_keys": ["intelligence_debuff"], "can_aoe": True, "non_player_ability": True},
 
 ]

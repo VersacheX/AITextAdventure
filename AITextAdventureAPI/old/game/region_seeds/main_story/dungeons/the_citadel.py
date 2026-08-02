@@ -66,24 +66,24 @@ BOSS_MOB = {
 BOSS_HOSTILES = [
     {
         'id': 'edict_boss', 'name': 'Edict', 'hostile_type': 'humanoid', 'min_spawn_level': 78, 'role': 'damage', 'rarity': 'notfound',
-        'base_xp': 30000, 'common_drop': 'tome_con_superrare', 'rare_drop': 'edict_core', 'money_range': (5000, 10000),
-        'basic_attack': 'system shock', 'strong_attack': 'defragment reality', 'player_abilities': ['ancient_rule', 'inescapable_edict', 'ritual_punishment'],
+        'base_xp': 30000, 'common_drop': 'tome_con_superrare', 'rare_drop': 'undying_oath_ring', 'money_range': (5000, 10000),
+        'basic_attack': 'system shock', 'strong_attack': 'defragment reality', 'player_abilities': ['ancient_rule', 'inescapable_edict', 'ritual_punishment', 'the_letter_of_the_law'],
         'base_str': 60, 'base_dex': 60, 'base_con': 70, 'base_int': 80, 'base_hp': 100000, 'base_ap': 1000,
         'str_per_level': 8, 'dex_per_level': 8, 'con_per_level': 9, 'int_per_level': 10,
         'resistances': ['physical', 'electric'], 'immunities': ['stun', 'confuse', 'petrify'], 'weaknesses': ['fire']
     },
     {
         'id': 'stigma_boss', 'name': 'Stigma', 'hostile_type': 'aberration', 'min_spawn_level': 78, 'role': 'hazard', 'rarity': 'notfound',
-        'base_xp': 30000, 'common_drop': 'tome_int_superrare', 'rare_drop': 'stigma_remnant', 'money_range': (5000, 10000),
-        'basic_attack': 'love bomb', 'strong_attack': 'unconditional acceptance', 'player_abilities': ['void_refraction', 'the_darkness_consuming', 'you_can_be_me'],
+        'base_xp': 30000, 'common_drop': 'tome_int_superrare', 'rare_drop': 'undying_oath_ring', 'money_range': (5000, 10000),
+        'basic_attack': 'love bomb', 'strong_attack': 'unconditional acceptance', 'player_abilities': ['void_refraction', 'the_darkness_consuming', 'identity_collapse', 'you_can_be_me'],
         'base_str': 50, 'base_dex': 70, 'base_con': 60, 'base_int': 75, 'base_hp': 80000, 'base_ap': 1200,
         'str_per_level': 6, 'dex_per_level': 9, 'con_per_level': 7, 'int_per_level': 9,
         'resistances': ['light', 'air'], 'immunities': ['fear', 'sleep'], 'weaknesses': ['dark']
     },
     {
         'id': 'pageant_boss_final', 'name': 'Pageant', 'hostile_type': 'spirit', 'min_spawn_level': 78, 'role': 'hazard', 'rarity': 'notfound',
-        'base_xp': 30000, 'common_drop': 'tome_dex_superrare', 'rare_drop': 'shattered_mask', 'money_range': (5000, 10000),
-        'basic_attack': 'encore', 'strong_attack': 'curtain call', 'player_abilities': ['mask_of_expectation', 'crushing_reputation', 'obligation_chain'],
+        'base_xp': 30000, 'common_drop': 'tome_dex_superrare', 'rare_drop': 'undying_oath_ring', 'money_range': (5000, 10000),
+        'basic_attack': 'encore', 'strong_attack': 'curtain call', 'player_abilities': ['mask_of_expectation', 'crushing_reputation', 'curtain_call_offensive', 'obligation_chain'],
         'base_str': 45, 'base_dex': 80, 'base_con': 55, 'base_int': 65, 'base_hp': 75000, 'base_ap': 1100,
         'str_per_level': 5, 'dex_per_level': 10, 'con_per_level': 6, 'int_per_level': 8,
         'resistances': ['air'], 'immunities': ['confuse'], 'weaknesses': ['earth']

@@ -21,7 +21,7 @@ FLOOR_HOSTILES = {
 HOSTILE_SEEDS = [
     {
         'id': 'compliance_drone', 'name': 'Compliance Drone', 'hostile_type': 'construct', 'min_spawn_level': 95, 'role': 'tank', 'rarity': 'common',
-        'base_xp': 8500, 'common_drop': 'potion_hp_mega', 'rare_drop': None, 'money_range': (800, 1200),
+        'base_xp': 8500, 'common_drop': 'defibrillator', 'rare_drop': None, 'money_range': (800, 1200),
         'basic_attack': 'protocol enforcement', 'strong_attack': 'mandatory compliance', 'player_abilities': [],
         'base_str': 45, 'base_dex': 30, 'base_con': 55, 'base_int': 35, 'base_hp': 45000, 'base_ap': 300,
         'str_per_level': 5, 'dex_per_level': 3, 'con_per_level': 6, 'int_per_level': 4,
@@ -29,7 +29,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'certainty_wraith', 'name': 'Certainty Wraith', 'hostile_type': 'undead', 'min_spawn_level': 96, 'role': 'damage', 'rarity': 'uncommon',
-        'base_xp': 9000, 'common_drop': 'potion_ap_mega', 'rare_drop': 'tome_int_rare', 'money_range': (850, 1300),
+        'base_xp': 9000, 'common_drop': 'stimulant_full', 'rare_drop': 'panacea', 'money_range': (850, 1300),
         'basic_attack': 'false clarity', 'strong_attack': 'absolute conviction', 'player_abilities': [],
         'base_str': 38, 'base_dex': 42, 'base_con': 40, 'base_int': 50, 'base_hp': 38000, 'base_ap': 350,
         'str_per_level': 4, 'dex_per_level': 5, 'con_per_level': 4, 'int_per_level': 6,

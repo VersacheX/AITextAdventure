@@ -35,10 +35,8 @@ LEVEL_3_TECHNIQUE_SEEDS = [
   {"id":"light_water_ice_technique_lv3_luminous_lull","name":"Luminous Lull","description":"A soothing beam of light and water that can put a single foe to sleep.","ability_type":"technique","level":3,"elements":["light","water","ice"],"base_power":12,"ap_cost":60,"effect":"status","status_keys":["sleep"],"can_aoe":False},
 
   ## NON PLAYER ABILITIES
-  #scalpel
   {"id": "detached_slaughter", "name": "Detached Slaughter", "description": "A sweeping series of strikes conducted without hesitation or mercy, cutting through all nearby targets with cold indifference.", "ability_type": "technique", "level": 3, "elements": ["ice", "dark", "air"], "base_power": 80, "ap_cost": 85, "effect": "damage", "can_aoe": True, "non_player_ability": True},
   {"id": "seizing_the_moment", "name": "Seizing the Moment", "description": "Rapture exploits a single instant of vulnerability — a devastating single strike timed to land the moment the target's guard wavers.", "ability_type": "technique", "level": 3, "elements": ["dark", "fire", "air"], "base_power": 90, "ap_cost": 72, "effect": "damage", "can_aoe": False, "non_player_ability": True},
   {"id": "predator_rush", "name": "Predator Rush", "description": "A thunderous charge across the arena that slams through any enemy in the path — raw physical domination disguised as momentum.", "ability_type": "technique", "level": 3, "elements": ["dark", "fire", "fire"], "base_power": 82, "ap_cost": 78, "effect": "damage", "can_aoe": True, "non_player_ability": True},
-
-
+  {"id": "rot_of_potential", "name": "Rot of Potential", "description": "Garbage drives itself into the target with the full force of every squandered chance and broken dream — a savage, disgusted strike that leaves ruin where meaning used to be.", "ability_type": "technique", "level": 3, "elements": ["dark", "earth", "fire"], "base_power": 98, "ap_cost": 82, "effect": "damage", "can_aoe": False, "non_player_ability": True},
 ]

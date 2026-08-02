@@ -21,7 +21,7 @@ FLOOR_HOSTILES = {
 HOSTILE_SEEDS = [
     {
         'id': 'failure_archive', 'name': 'Failure Archive', 'hostile_type': 'undead', 'min_spawn_level': 99, 'role': 'hazard', 'rarity': 'common',
-        'base_xp': 10000, 'common_drop': 'potion_hp_mega', 'rare_drop': None, 'money_range': (1000, 1400),
+        'base_xp': 10000, 'common_drop': 'defibrillator', 'rare_drop': None, 'money_range': (1000, 1400),
         'basic_attack': 'past mistake', 'strong_attack': 'recorded collapse', 'player_abilities': [],
         'base_str': 48, 'base_dex': 50, 'base_con': 52, 'base_int': 58, 'base_hp': 46000, 'base_ap': 360,
         'str_per_level': 6, 'dex_per_level': 6, 'con_per_level': 6, 'int_per_level': 7,
@@ -29,7 +29,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'memory_construct', 'name': 'Memory Construct', 'hostile_type': 'construct', 'min_spawn_level': 100, 'role': 'tank', 'rarity': 'uncommon',
-        'base_xp': 10500, 'common_drop': 'potion_ap_mega', 'rare_drop': 'tome_con_rare', 'money_range': (1050, 1500),
+        'base_xp': 10500, 'common_drop': 'stimulant_full', 'rare_drop': 'tome_con_rare', 'money_range': (1050, 1500),
         'basic_attack': 'preserved pain', 'strong_attack': 'eternal wound', 'player_abilities': [],
         'base_str': 55, 'base_dex': 48, 'base_con': 70, 'base_int': 55, 'base_hp': 56000, 'base_ap': 350,
         'str_per_level': 7, 'dex_per_level': 5, 'con_per_level': 9, 'int_per_level': 6,

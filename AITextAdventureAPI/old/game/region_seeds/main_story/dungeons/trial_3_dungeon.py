@@ -21,7 +21,7 @@ FLOOR_HOSTILES = {
 HOSTILE_SEEDS = [
     {
         'id': 'euphoria_addict', 'name': 'Euphoria Addict', 'hostile_type': 'humanoid', 'min_spawn_level': 97, 'role': 'damage', 'rarity': 'common',
-        'base_xp': 9000, 'common_drop': 'potion_hp_mega', 'rare_drop': None, 'money_range': (900, 1300),
+        'base_xp': 9000, 'common_drop': 'defibrillator', 'rare_drop': None, 'money_range': (900, 1300),
         'basic_attack': 'frenzied assault', 'strong_attack': 'manic rush', 'player_abilities': [],
         'base_str': 52, 'base_dex': 48, 'base_con': 42, 'base_int': 35, 'base_hp': 43000, 'base_ap': 330,
         'str_per_level': 6, 'dex_per_level': 6, 'con_per_level': 5, 'int_per_level': 4,
@@ -29,7 +29,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'silence_wraith', 'name': 'Silence Wraith', 'hostile_type': 'undead', 'min_spawn_level': 98, 'role': 'hazard', 'rarity': 'uncommon',
-        'base_xp': 9500, 'common_drop': 'potion_ap_mega', 'rare_drop': 'tome_int_rare', 'money_range': (950, 1400),
+        'base_xp': 9500, 'common_drop': 'stimulant_full', 'rare_drop': 'panacea', 'money_range': (950, 1400),
         'basic_attack': 'hollow touch', 'strong_attack': 'aftermath despair', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
         'base_str': 38, 'base_dex': 42, 'base_con': 40, 'base_int': 58, 'base_hp': 40000, 'base_ap': 380,
         'str_per_level': 4, 'dex_per_level': 5, 'con_per_level': 4, 'int_per_level': 7,

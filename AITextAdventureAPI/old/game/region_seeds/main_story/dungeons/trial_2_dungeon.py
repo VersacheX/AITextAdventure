@@ -21,7 +21,7 @@ FLOOR_HOSTILES = {
 HOSTILE_SEEDS = [
     {
         'id': 'identity_judge', 'name': 'Identity Judge', 'hostile_type': 'humanoid', 'min_spawn_level': 96, 'role': 'hazard', 'rarity': 'common',
-        'base_xp': 8800, 'common_drop': 'potion_hp_mega', 'rare_drop': None, 'money_range': (850, 1250),
+        'base_xp': 8800, 'common_drop': 'defibrillator', 'rare_drop': None, 'money_range': (850, 1250),
         'basic_attack': 'defining label', 'strong_attack': 'identity erasure', 'player_abilities': [],
         'base_str': 42, 'base_dex': 38, 'base_con': 40, 'base_int': 52, 'base_hp': 42000, 'base_ap': 320,
         'str_per_level': 5, 'dex_per_level': 4, 'con_per_level': 4, 'int_per_level': 6,
@@ -29,7 +29,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'pressure_wraith', 'name': 'Pressure Wraith', 'hostile_type': 'spirit', 'min_spawn_level': 97, 'role': 'damage', 'rarity': 'uncommon',
-        'base_xp': 9200, 'common_drop': 'potion_ap_mega', 'rare_drop': 'tome_dex_rare', 'money_range': (900, 1350),
+        'base_xp': 9200, 'common_drop': 'stimulant_full', 'rare_drop': 'apex_hunter_band', 'money_range': (900, 1350),
         'basic_attack': 'stress fracture', 'strong_attack': 'crushing expectation', 'player_abilities': [],
         'base_str': 48, 'base_dex': 50, 'base_con': 38, 'base_int': 42, 'base_hp': 40000, 'base_ap': 340,
         'str_per_level': 6, 'dex_per_level': 6, 'con_per_level': 4, 'int_per_level': 5,

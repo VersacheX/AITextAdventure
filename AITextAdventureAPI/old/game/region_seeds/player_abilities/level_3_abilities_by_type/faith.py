@@ -100,8 +100,14 @@ LEVEL_3_FAITH_SEEDS = [
    ##DEBUFF 1*aoe constitution debuff
  {"id": "light_dark_dark_faith_lv3_twilight_woe", "name": "Twilight Woe", "description": "A shadowy lament that weakens foes' constitution.", "ability_type": "faith", "level":3, "elements": ["light","dark","dark"], "base_power":0, "ap_cost":60, "effect": "status", "status_keys": ["constitution_debuff"], "can_aoe": True},
 
- ## NON PLAYER ABILITIES
- #glamour
- {"id": "suffocating_allure", "name": "Suffocating Allure", "description": "An aura of oppressive beauty radiates outward, closing the throats of all who behold it and stealing their voice.", "ability_type": "faith", "level": 3, "elements": ["light", "dark", "air"], "base_power": 0, "ap_cost": 85, "effect": "status", "status_keys": ["silence"], "can_aoe": True, "non_player_ability": True},
-
-]
+    ## NON PLAYER ABILITIES
+  #glamour
+  {"id": "suffocating_allure", "name": "Suffocating Allure", "description": "An aura of oppressive beauty radiates outward, closing the throats of all who behold it and stealing their voice.", "ability_type": "faith", "level": 3, "elements": ["light", "dark", "air"], "base_power": 0, "ap_cost": 85, "effect": "status", "status_keys": ["silence"], "can_aoe": True, "non_player_ability": True},
+  {"id": "the_epic_you_never_were", "name": "The Epic You Never Were", "description": "Garbage drowns all in the suffocating truth of their own inadequacy — the grand story they told themselves collapses, sapping their will to strike.", "ability_type": "faith", "level": 3, "elements": ["dark", "dark", "earth"], "base_power": 22, "ap_cost": 96, "effect": "status", "status_keys": ["attack_debuff"], "can_aoe": True, "non_player_ability": True},
+  # stigma - support role: identity replacement as hazard status
+  {"id": "you_can_be_me", "name": "You Can Be Me", "description": "Stigma offers the most dangerous gift — her identity to replace your own. The target's mind fractures as it tries to hold two selves simultaneously.", "ability_type": "faith", "level": 3, "elements": ["dark", "light", "air"], "base_power": 0, "ap_cost": 90, "effect": "status", "status_keys": ["confuse"], "can_aoe": False, "non_player_ability": True},
+  # pageant - hazard role: social obligation as silence
+  {"id": "obligation_chain", "name": "Obligation Chain", "description": "Pageant wraps a single target in the invisible chains of every social debt they've ever owed — the weight of obligation silences them completely.", "ability_type": "faith", "level": 3, "elements": ["light", "dark", "air"], "base_power": 0, "ap_cost": 88, "effect": "status", "status_keys": ["silence"], "can_aoe": False, "non_player_ability": True},
+  # edict - damage role: law as silence
+  {"id": "the_letter_of_the_law", "name": "The Letter of the Law", "description": "Edict invokes the precise, unanswerable text of the oldest rule — all speech, all protest, all defiance is legally prohibited and physically impossible.", "ability_type": "faith", "level": 3, "elements": ["dark", "earth", "light"], "base_power": 0, "ap_cost": 92, "effect": "status", "status_keys": ["silence"], "can_aoe": True, "non_player_ability": True},
+ ]

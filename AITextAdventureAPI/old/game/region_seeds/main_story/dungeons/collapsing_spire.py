@@ -66,8 +66,9 @@ BOSS_MOB = {
 BOSS_HOSTILES = [
 	{
 		'id': 'cataclysm_1', 'name': 'Cataclysm', 'hostile_type': 'construct', 'min_spawn_level': 92, 'role': 'damage', 'rarity': 'notfound',
-		'base_xp': 50000, 'common_drop': 'tome_con_superrare', 'rare_drop': 'ordered_void_core', 'money_range': (8000, 16000),
-		'basic_attack': 'scheduled annihilation', 'strong_attack': 'the final balance', 'player_abilities': ['absolute_destruction', 'calamity', 'eternal_nerve'],
+		'base_xp': 50000, 'common_drop': 'tome_con_superrare', 'rare_drop': 'defibrillator', 'money_range': (8000, 16000),
+		'basic_attack': 'inevitable strike', 'strong_attack': 'scheduled annihilation',
+		'player_abilities': ['absolute_destruction', 'calamity', 'eternal_nerve', 'scheduled_obliteration'],
 		'base_str': 85, 'base_dex': 40, 'base_con': 90, 'base_int': 60, 'base_hp': 180000, 'base_ap': 1000,
 		'str_per_level': 11, 'dex_per_level': 5, 'con_per_level': 11, 'int_per_level': 7,
 		'resistances': ['physical', 'fire', 'electric', 'earth', 'ice'], 'immunities': ['stun', 'petrify', 'confuse', 'fear', 'sleep'], 'weaknesses': ['dark']

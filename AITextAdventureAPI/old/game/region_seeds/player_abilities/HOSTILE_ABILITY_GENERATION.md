@@ -218,11 +218,24 @@ For named hostiles (bosses / story NPCs) referenced in the error table:
 3. If an `npc_id` exists, look up the corresponding NPC record in the city/story seed files
    for personality, archetype, speech style, and backstory.
 4. Use this data to write a thematic `description` and choose fitting `elements` and `effect`.
-5. Map the hostile's combat `role` to ability type:
-   - `damage` → `technique` (physical) or `magic`/`tech` (ranged/elemental)
-   - `support` / `healer` → `faith`
-   - `debuffer` / `assassin` → `skill` or `tech`
-   - `tank` / `guardian` → `technique` with constitution emphasis
+5. Map the hostile's combat `role` to ability type — this mirrors the priority order in
+   `hostile_seed_engine.py → get_role_based_abilities()`:
+
+   | Hostile `role` | Engine priority order | Recommended ability types |
+   |---|---|---|
+   | `support` | support buffs → hazard status → damage | `faith` (heals, buffs, revives), then `tech`/`skill` |
+   | `hazard` | hazard status first, then damage | `faith` or `magic` for harmful status effects (`continuous_damage`, `confuse`, `sleep`, `silence`, `*_debuff`); NOT `technique` or `skill` |
+   | `damage` | damage first, then filler | `technique` (physical), `magic` (elemental), `tech` (precision), `skill` (burst/AoE) |
+   | `tank` / `guardian` | hazard → damage | `technique` with constitution emphasis; `faith` for defense buffs |
+   | `debuffer` / `assassin` | hazard → damage | `skill` or `tech` for debuffs and status |
+
+   > **Key rule**: `hazard`-role hostiles use **harmful status effects** as their primary
+   > combat tool. The engine selects `effect == "status"` abilities with a `status_key` in
+   > `HARMFUL_STATUS_EFFECTS` before damage abilities. Author their abilities accordingly —
+   > `faith` and `magic` (which map to `intelligence`) are the correct types for a
+   > psychologically-themed hazard boss (e.g. Lament, Garbage). Using `technique` or `skill`
+   > for a `hazard` hostile means the engine will deprioritise those abilities in favour of
+   > any available status ability — give them what the engine will actually reach for first.
 
 ---
 

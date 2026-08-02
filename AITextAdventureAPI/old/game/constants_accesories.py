@@ -318,6 +318,22 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
         'strength': 20, 'dexterity': 20, 'intelligence': 20, 'constitution': 20,
         'crit_bonus': 8.0, 'damage_bonus': 20, 'special_effect': 'amplify_ability',
     },
+    {
+        'id': 'rotwood_heartstone',
+        'name': 'Rotwood Heartstone',
+        'description': 'A heartstone from the Rotwood, a forest that has been dead for centuries. Immunity to all harmful statuses. Resists all elements except light.',
+        'min_level': 70, 'rarity': 'notfound', 'value': 60000,
+        'immunities': [
+            'petrify', 'stun', 'sleep', 'confuse', 'stun', 'silence',
+            'fear', 'continuous_damage', 'elemental_debuff',
+            'attack_debuff', 'defense_debuff', 'strength_debuff',
+            'dexterity_debuff', 'intelligence_debuff', 'constitution_debuff',
+        ],
+        'resistances': ['dark', 'light', 'fire', 'water', 'earth', 'air', 'ice', 'electric'],
+        'weaknesses': [],
+        'strength': 25, 'dexterity': 25, 'intelligence': 25, 'constitution': 25,
+        'crit_bonus': 10.0, 'damage_bonus': 25, 'special_effect': 'auto_revive_1',
+    },
 
     # ── MYTHIC D-CHAIN ACCESSORY REWARDS (notfound) ────────────────────────
 

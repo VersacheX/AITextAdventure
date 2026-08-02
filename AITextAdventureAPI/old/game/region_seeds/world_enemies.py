@@ -260,7 +260,7 @@ WORLD_HOSTILES = [
         'money_range': (1500, 7500),
         'basic_attack': 'supportive touch',
         'strong_attack': 'void embrace',
-        'player_abilities': ['void_refraction', 'the_darkness_consuming', 'you_can_be_me'],
+        'player_abilities': ['void_refraction', 'the_darkness_consuming', 'you_can_be_me', 'seductive_void'],
         'base_str': 40,
         'base_dex': 30,
         'base_con': 40,

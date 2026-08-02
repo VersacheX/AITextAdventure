@@ -1,4 +1,4 @@
-"""
+﻿"""
 
  # --- tech ---
  ----------------------- level 3 seeding layout -----------------------
@@ -60,4 +60,7 @@ LEVEL_3_TECH_SEEDS = [
     {"id": "dark_earth_electric_tech_lv3_petrifying_shock", "name": "Petrifying Shock", "description": "A petrifying shock that turns enemies to stone.", "ability_type": "tech", "level":3, "elements": ["dark", "earth", "electric"], "base_power": 0, "ap_cost":50, "effect": "status", "status_keys": ["petrify"], "can_aoe": False},
     {"id": "dark_electric_water_tech_lv3_abyssal_current", "name": "Abyssal Current", "description": "An abyssal current that confuses enemies.", "ability_type": "tech", "level":3, "elements": ["dark", "electric", "water"], "base_power": 0, "ap_cost":50, "effect": "status", "status_keys": ["confuse"], "can_aoe": False},
 
+    ## NON PLAYER ABILITIES
+    # crux origin — lv3 filler: a cold diagnostic that silences
+    {"id": "static_erasure", "name": "Static Erasure", "description": "Crux runs an immediate purge of the target's communication channels — all signals are replaced with white noise and the target is cut off from every ability to call out or respond.", "ability_type": "tech", "level": 3, "elements": ["dark", "electric", "ice"], "base_power": 0, "ap_cost": 82, "effect": "status", "status_keys": ["silence"], "can_aoe": False, "non_player_ability": True},
 ]

@@ -21,7 +21,7 @@ FLOOR_HOSTILES = {
 HOSTILE_SEEDS = [
     {
         'id': 'performance_phantom', 'name': 'Performance Phantom', 'hostile_type': 'spirit', 'min_spawn_level': 98, 'role': 'hazard', 'rarity': 'common',
-        'base_xp': 9500, 'common_drop': 'potion_hp_mega', 'rare_drop': None, 'money_range': (950, 1350),
+        'base_xp': 9500, 'common_drop': 'defibrillator', 'rare_drop': None, 'money_range': (950, 1350),
         'basic_attack': 'forced smile', 'strong_attack': 'crushing expectation', 'player_abilities': [],
         'base_str': 45, 'base_dex': 55, 'base_con': 48, 'base_int': 50, 'base_hp': 44000, 'base_ap': 350,
         'str_per_level': 5, 'dex_per_level': 7, 'con_per_level': 5, 'int_per_level': 6,
@@ -29,7 +29,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'prophecy_sentinel', 'name': 'Prophecy Sentinel', 'hostile_type': 'construct', 'min_spawn_level': 99, 'role': 'tank', 'rarity': 'uncommon',
-        'base_xp': 10000, 'common_drop': 'potion_ap_mega', 'rare_drop': 'tome_con_rare', 'money_range': (1000, 1450),
+        'base_xp': 10000, 'common_drop': 'stimulant_full', 'rare_drop': 'tome_con_rare', 'money_range': (1000, 1450),
         'basic_attack': 'inevitable strike', 'strong_attack': 'fate lock', 'player_abilities': [],
         'base_str': 58, 'base_dex': 48, 'base_con': 65, 'base_int': 52, 'base_hp': 52000, 'base_ap': 340,
         'str_per_level': 7, 'dex_per_level': 5, 'con_per_level': 8, 'int_per_level': 6,

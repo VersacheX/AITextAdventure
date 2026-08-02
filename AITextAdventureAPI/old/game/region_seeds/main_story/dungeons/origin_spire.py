@@ -67,7 +67,8 @@ BOSS_HOSTILES = [
 	{
 		'id': 'crux_origin_1', 'name': 'Crux - Origin Form', 'hostile_type': 'aberration', 'min_spawn_level': 82, 'role': 'hazard', 'rarity': 'notfound',
 		'base_xp': 40000, 'common_drop': 'tome_int_superrare', 'rare_drop': 'fracture_core', 'money_range': (6000, 12000),
-		'basic_attack': 'static scream', 'strong_attack': 'first wound', 'player_abilities': ['impossibility_storm', 'debuff_the_wicked'],
+		'basic_attack': 'paradox strike', 'strong_attack': 'void collapse',
+		'player_abilities': ['impossibility_storm', 'debuff_the_wicked', 'glitch_cascade', 'static_erasure'],
 		'base_str': 55, 'base_dex': 55, 'base_con': 60, 'base_int': 80, 'base_hp': 120000, 'base_ap': 1200,
 		'str_per_level': 7, 'dex_per_level': 7, 'con_per_level': 8, 'int_per_level': 10,
 		'resistances': ['dark', 'ice', 'electric'], 'immunities': ['fear', 'confuse', 'sleep', 'stun'], 'weaknesses': ['light']
