@@ -37,7 +37,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'doubt_implanter', 'name': 'Doubt Implanter', 'hostile_type': 'aberration', 'min_spawn_level': 100, 'role': 'hazard', 'rarity': 'rare',
-        'base_xp': 11500, 'common_drop': 'elixir_full', 'rare_drop': 'tome_int_superrare', 'money_range': (1050, 1650),
+        'base_xp': 11500, 'common_drop': 'elixir_full_heal', 'rare_drop': 'tome_int_superrare', 'money_range': (1050, 1650),
         'basic_attack': 'intrusive thought', 'strong_attack': 'belief erosion', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
         'base_str': 40, 'base_dex': 50, 'base_con': 45, 'base_int': 70, 'base_hp': 42000, 'base_ap': 450,
         'str_per_level': 4, 'dex_per_level': 6, 'con_per_level': 5, 'int_per_level': 9,
@@ -45,7 +45,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'determinism_construct', 'name': 'Determinism Construct', 'hostile_type': 'construct', 'min_spawn_level': 101, 'role': 'damage', 'rarity': 'superrare',
-        'base_xp': 12500, 'common_drop': 'phoenix_down', 'rare_drop': 'tome_str_superrare', 'money_range': (1150, 1750),
+        'base_xp': 12500, 'common_drop': 'revive_kit', 'rare_drop': 'tome_str_superrare', 'money_range': (1150, 1750),
         'basic_attack': 'predicted assault', 'strong_attack': 'scripted outcome', 'player_abilities': [],
         'base_str': 60, 'base_dex': 62, 'base_con': 55, 'base_int': 58, 'base_hp': 54000, 'base_ap': 380,
         'str_per_level': 7, 'dex_per_level': 8, 'con_per_level': 6, 'int_per_level': 7,
@@ -113,7 +113,7 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'hostile_seeds': HOSTILE_SEEDS,
     'npcs': DUNGEON_NPCS,
     'items': [
-        {'id': 'elixir_full', 'location': 'treasure_room'},
+        {'id': 'elixir_full_heal', 'location': 'treasure_room'},
         {'id': 'defibrillator', 'location': 'treasure_room'},
         {'id': 'tome_ap_superrare', 'location': 'treasure_room'},
     ],

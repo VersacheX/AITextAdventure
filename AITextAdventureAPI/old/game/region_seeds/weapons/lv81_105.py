@@ -165,4 +165,68 @@ WEAPONS_LV81_105 = [
         "constitution": 18,
         "elements": ["fire", "earth", "electric", "air"]
     },
+    # ── World-drop weapons ────────────────────────────────────────────────────
+    # common / technique — lv83
+    {
+        "id": "standard_warblade",
+        "name": "Standard Warblade",
+        "description": "A production-forged warblade commissioned in bulk during a conflict that ended before they were all distributed. They were. Eventually.",
+        "damage": 110,
+        "damage_type": "slashing",
+        "ap_cost": 2,
+        "range": 1,
+        "critical_chance": 14.0,
+        "value": 22400,
+        "min_spawn_level": 83,
+        "rarity": "common",
+        "durability": 258,
+        "max_durability": 258,
+        "strength": 70,
+        "dexterity": 40,
+        "intelligence": 8,
+        "constitution": 18,
+        "elements": ["fire"]
+    },
+    # rare / faith — lv92
+    {
+        "id": "sanctified_staff",
+        "name": "Sanctified Staff",
+        "description": "A staff passed through seven consecutive rites of sanctification — the seventh performed by someone who no longer believed in the first six. It remains sanctified.",
+        "damage": 126,
+        "damage_type": "energy",
+        "ap_cost": 3,
+        "range": 4,
+        "critical_chance": 13.0,
+        "value": 52400,
+        "min_spawn_level": 92,
+        "rarity": "rare",
+        "durability": 278,
+        "max_durability": 278,
+        "strength": 4,
+        "dexterity": 10,
+        "intelligence": 154,
+        "constitution": 88,
+        "elements": ["light", "water", "earth"]
+    },
+    # superrare / tech — lv103
+    {
+        "id": "quantum_projector",
+        "name": "Quantum Projector",
+        "description": "A projector built to specifications that its creator described as 'theoretically impossible to manufacture.' It was manufactured. The creator has not commented.",
+        "damage": 142,
+        "damage_type": "energy",
+        "ap_cost": 2,
+        "range": 4,
+        "critical_chance": 18.0,
+        "value": 90400,
+        "min_spawn_level": 103,
+        "rarity": "superrare",
+        "durability": 306,
+        "max_durability": 306,
+        "strength": 12,
+        "dexterity": 162,
+        "intelligence": 112,
+        "constitution": 20,
+        "elements": ["electric", "dark", "air"]
+    },
 ]

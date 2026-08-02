@@ -7,15 +7,15 @@ SEEDS_LV11TO20 = [
  "base_str":3, "base_dex":6, "base_con":3, "base_int":2, "base_hp":120, "base_ap":4,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":0},
 
- {"id": "spire_broker", "name": "Spire Broker (too polite)", "hostile_type": "humanoid", "role": "support", "min_spawn_level":11, "rarity": "uncommon", "base_xp":120,
- "common_drop": "stimulant_small", "rare_drop": "lockpick", "money_range": (12,60),
- "basic_attack": "slides contract", "strong_attack": "commanding slap", "player_abilities": ["inspire"],
+ {"id": "spire_broker", "name": "Spire Broker", "hostile_type": "humanoid", "role": "support", "min_spawn_level":11, "rarity": "uncommon", "base_xp":120,
+ "common_drop": "stimulant_small", "rare_drop": "stimulant_small", "money_range": (12,60),
+ "basic_attack": "slides contract", "strong_attack": "commanding slap", "player_abilities": ["level_1_hostile_ability_inspire"],
  "base_str":3, "base_dex":3, "base_con":3, "base_int":6, "base_hp":140, "base_ap":5,
  "str_per_level":1, "dex_per_level":0, "con_per_level":1, "int_per_level":2},
 
- {"id": "frost_eel_shock", "name": "Frost Eel (charged)", "hostile_type": "creature", "role": "damage", "min_spawn_level":11, "rarity": "uncommon", "base_xp":110,
+ {"id": "frost_eel_shock", "name": "Frost Eel", "hostile_type": "creature", "role": "damage", "min_spawn_level":11, "rarity": "uncommon", "base_xp":110,
  "common_drop": "herb_med", "rare_drop": "ointment", "money_range": (10,60),
- "basic_attack": "charged snap", "strong_attack": "ionic coil", "player_abilities": ["venom_trace"],
+ "basic_attack": "charged snap", "strong_attack": "ionic coil", "player_abilities": ["level_1_hostile_ability_dark_skill_corrosive_spit"],
  "base_str":4, "base_dex":7, "base_con":5, "base_int":4, "base_hp":140, "base_ap":5,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
 
@@ -32,8 +32,8 @@ SEEDS_LV11TO20 = [
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":1},
 
  {"id": "ice_swindler", "name": "Ice Swindler", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":12, "rarity": "uncommon", "base_xp":130,
- "common_drop": "lockpick", "rare_drop": "stimulant_large", "money_range": (16,80),
- "basic_attack": "slick palm", "strong_attack": "purse pinch", "player_abilities": ["shadow_flicker"],
+ "common_drop": "stimulant_small", "rare_drop": "stimulant_large", "money_range": (16,80),
+ "basic_attack": "slick palm", "strong_attack": "purse pinch", "player_abilities": ["level_1_hostile_ability_shadow_flicker"],
  "base_str":2, "base_dex":8, "base_con":3, "base_int":5, "base_hp":120, "base_ap":6,
  "str_per_level":0, "dex_per_level":3, "con_per_level":1, "int_per_level":1},
 
@@ -44,14 +44,14 @@ SEEDS_LV11TO20 = [
  "str_per_level":2, "dex_per_level":0, "con_per_level":2, "int_per_level":0},
 
  {"id": "night_shank", "name": "Night Shank", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":13, "rarity": "rare", "base_xp":220,
- "common_drop": "lockpick", "rare_drop": "stimulant_large", "money_range": (30,140),
- "basic_attack": "grease strike", "strong_attack": "silent garrote", "player_abilities": ["void_veil"],
+ "common_drop": "stimulant_small", "rare_drop": "stimulant_large", "money_range": (30,140),
+ "basic_attack": "grease strike", "strong_attack": "silent garrote", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
  "base_str":3, "base_dex":8, "base_con":4, "base_int":5, "base_hp":192, "base_ap":8,
  "str_per_level":1, "dex_per_level":3, "con_per_level":1, "int_per_level":2},
 
  {"id": "spire_watch_sergeant", "name": "Spire Watch Sergeant", "hostile_type": "humanoid", "role": "support", "min_spawn_level":13, "rarity": "uncommon", "base_xp":180,
  "common_drop": "stimulant_med", "rare_drop": "kevlar_vest", "money_range": (26,140),
- "basic_attack": "sergeant's jab", "strong_attack": "crushing pike", "player_abilities": ["reinforce_frame"],
+ "basic_attack": "sergeant's jab", "strong_attack": "crushing pike", "player_abilities": ["level_1_hostile_ability_reinforce_frame"],
  "base_str":7, "base_dex":3, "base_con":7, "base_int":4, "base_hp":200, "base_ap":6,
  "str_per_level":2, "dex_per_level":0, "con_per_level":2, "int_per_level":1},
 
@@ -69,19 +69,19 @@ SEEDS_LV11TO20 = [
 
  {"id": "glacier_cuttle", "name": "Glacier Cuttle", "hostile_type": "eldritch", "role": "hazard", "min_spawn_level":15, "rarity": "rare", "base_xp":300,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (40,180),
- "basic_attack": "ink lash of cold", "strong_attack": "mind-numbing pulse", "player_abilities": ["abyssal_storm"],
+ "basic_attack": "ink lash of cold", "strong_attack": "mind-numbing pulse", "player_abilities": ["lv2_hostile_ability_dark_electric_magic_abyssal_storm"],
  "base_str":6, "base_dex":6, "base_con":8, "base_int":8, "base_hp":260, "base_ap":8,
  "str_per_level":2, "dex_per_level":2, "con_per_level":2, "int_per_level":3},
 
  {"id": "kraken_ice_whelp", "name": "Kraken Ice Whelp", "hostile_type": "creature", "role": "hazard", "min_spawn_level":15, "rarity": "rare", "base_xp":340,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (40,180),
- "basic_attack": "tentacle lash", "strong_attack": "frozen ink burst", "player_abilities": ["void_veil"],
+ "basic_attack": "tentacle lash", "strong_attack": "frozen ink burst", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
  "base_str":8, "base_dex":5, "base_con":9, "base_int":4, "base_hp":260, "base_ap":8,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":1},
 
  {"id": "rusted_colossus", "name": "Rusted Colossus", "hostile_type": "construct", "role": "support", "min_spawn_level":16, "rarity": "uncommon", "base_xp":300,
  "common_drop": "stimulant_large", "rare_drop": "kevlar_vest", "money_range": (60,260),
- "basic_attack": "piston slam", "strong_attack": "hydraulic crush", "player_abilities": ["reinforce_frame"],
+ "basic_attack": "piston slam", "strong_attack": "hydraulic crush", "player_abilities": ["level_1_hostile_ability_reinforce_frame"],
  "base_str":14, "base_dex":1, "base_con":18, "base_int":1, "base_hp":300, "base_ap":6,
  "str_per_level":4, "dex_per_level":0, "con_per_level":3, "int_per_level":0},
 
@@ -93,13 +93,13 @@ SEEDS_LV11TO20 = [
 
  {"id": "lorekeeper_frost", "name": "Lorekeeper Frost", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":17, "rarity": "superrare", "base_xp":520,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,340),
- "basic_attack": "lantern swing", "strong_attack": "blinding flare", "player_abilities": ["prism_burst", "void_veil"],
+ "basic_attack": "lantern swing", "strong_attack": "blinding flare", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst", "lv2_hostile_ability_dark_dark_faith_void_veil"],
  "base_str":8, "base_dex":5, "base_con":10, "base_int":10, "base_hp":320, "base_ap":10,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":3},
 
- {"id": "kraken_ice_whelp_giant", "name": "Kraken Ice Whelp (giant)", "hostile_type": "creature", "role": "hazard", "min_spawn_level":17, "rarity": "uncommon", "base_xp":380,
+ {"id": "kraken_ice_whelp_giant", "name": "Kraken Ice Whelp", "hostile_type": "creature", "role": "hazard", "min_spawn_level":17, "rarity": "uncommon", "base_xp":380,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (60,300),
- "basic_attack": "mighty tentacle lash", "strong_attack": "frozen ink maelstrom", "player_abilities": ["void_veil"],
+ "basic_attack": "mighty tentacle lash", "strong_attack": "frozen ink maelstrom", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
  "base_str":12, "base_dex":6, "base_con":12, "base_int":6, "base_hp":360, "base_ap":10,
  "str_per_level":4, "dex_per_level":1, "con_per_level":3, "int_per_level":1},
 
@@ -109,9 +109,9 @@ SEEDS_LV11TO20 = [
  "base_str":8, "base_dex":6, "base_con":8, "base_int":4, "base_hp":380, "base_ap":8,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":1},
 
- {"id": "iron_spire_colossus_guard", "name": "Iron Spire Colossus (guard)", "hostile_type": "construct", "role": "support", "min_spawn_level":18, "rarity": "rare", "base_xp":420,
+ {"id": "iron_spire_colossus_guard", "name": "Iron Spire Colossus", "hostile_type": "construct", "role": "support", "min_spawn_level":18, "rarity": "rare", "base_xp":420,
  "common_drop": "stimulant_large", "rare_drop": "kevlar_vest", "money_range": (80,320),
- "basic_attack": "guard slam", "strong_attack": "colossal crush", "player_abilities": ["reinforce_frame"],
+ "basic_attack": "guard slam", "strong_attack": "colossal crush", "player_abilities": ["level_1_hostile_ability_reinforce_frame"],
  "base_str":16, "base_dex":1, "base_con":20, "base_int":1, "base_hp":420, "base_ap":8,
  "str_per_level":4, "dex_per_level":0, "con_per_level":3, "int_per_level":0},
 ]

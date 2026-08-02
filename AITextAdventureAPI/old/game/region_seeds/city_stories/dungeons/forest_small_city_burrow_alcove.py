@@ -23,9 +23,9 @@ DUNGEON_NPCS: List[Dict] = [
 ]
 
 DUNGEON_ITEMS: List[Dict] = [
-    {'id': 'herb_large',      'location': 'treasure_room'},
+    {'id': 'herb_med',      'location': 'treasure_room'},
     {'id': 'stimulant_large', 'location': 'treasure_room'},
-    {'id': 'remedy_large',    'location': 'final_chamber'},
+    {'id': 'stimulant_med',    'location': 'final_chamber'},
 ]
 
 FLOOR_HOSTILES: Dict[int, List[str]] = {
@@ -41,7 +41,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'common',
         'base_xp': 572,
-        'common_drop': 'herb_large',
+        'common_drop': 'herb_med',
         'rare_drop': None,
         'money_range': (154, 492),
         'basic_attack': 'lunges from a burrow entrance with hardened root-claws',
@@ -62,8 +62,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'hazard',
         'rarity': 'uncommon',
         'base_xp': 698,
-        'common_drop': 'remedy_large',
-        'rare_drop': 'herb_large',
+        'common_drop': 'stimulant_med',
+        'rare_drop': 'herb_med',
         'money_range': (186, 594),
         'basic_attack': 'lashes with a tendril of memory-laden root',
         'strong_attack': 'memory drain',
@@ -84,7 +84,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'rarity': 'rare',
         'base_xp': 888,
         'common_drop': 'stimulant_large',
-        'rare_drop': 'remedy_large',
+        'rare_drop': 'stimulant_med',
         'money_range': (232, 742),
         'basic_attack': 'stands firm and drives root-reinforced fists into the target',
         'strong_attack': 'alcove press',
@@ -104,8 +104,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'superrare',
         'base_xp': 1196,
-        'common_drop': 'herb_large',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'herb_med',
+        'rare_drop': 'stimulant_med',
         'money_range': (278, 888),
         'basic_attack': 'opens a void-infused burrow beneath the target and strikes upward',
         'strong_attack': 'void burrow collapse',
@@ -134,8 +134,8 @@ BOSS_HOSTILES: List[Dict] = [
         'role': 'damage',
         'rarity': 'notfound',
         'base_xp': 38000,
-        'common_drop': 'remedy_large',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'stimulant_med',
+        'rare_drop': 'stimulant_med',
         'money_range': (920, 2760),
         'basic_attack': 'fills every burrow in the alcove with the forest\'s demand to keep what it holds',
         'strong_attack': 'burrow whisper collapse',

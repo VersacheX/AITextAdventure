@@ -1137,12 +1137,25 @@ def update_detail_for_ability(
 
     # Validation block
     if errors:
-        has_error = any(e.severity == "error"   for e in errors)
-        colour    = "red" if has_error else "yellow"
-        kind      = "FAIL" if has_error else "WARN"
-        lines.append(f"[{colour}]Integrity: {kind}  ({len(errors)} issue(s))[/{colour}]")
+        has_error  = any(e.severity == "error"   for e in errors)
+        has_warn   = any(e.severity == "warning" for e in errors)
+        has_notice = any(e.severity == "notice"  for e in errors)
+        if has_error:
+            header_colour, kind = "red",    "FAIL"
+        elif has_warn:
+            header_colour, kind = "yellow", "WARN"
+        elif has_notice:
+            header_colour, kind = "cyan",   "INFO"
+        else:
+            header_colour, kind = "cyan",   "INFO"
+        lines.append(f"[{header_colour}]Integrity: {kind}  ({len(errors)} issue(s))[/{header_colour}]")
         for e in errors:
-            c = "red" if e.severity == "error" else "yellow"
+            if e.severity == "error":
+                c = "red"
+            elif e.severity == "warning":
+                c = "yellow"
+            else:
+                c = "cyan"
             lines.append(f"  [{c}]{rich_escape(e.code)}[/{c}]  [dim]{rich_escape(e.message)}[/dim]")
     else:
         lines.append("[green]Integrity: OK[/green]")
@@ -1203,12 +1216,25 @@ def update_detail_for_hostile(
     lines.append("")
 
     if errors:
-        has_error = any(e.severity == "error" for e in errors)
-        colour    = "red" if has_error else "yellow"
-        kind      = "FAIL" if has_error else "WARN"
-        lines.append(f"[{colour}]Integrity: {kind}  ({len(errors)} issue(s))[/{colour}]")
+        has_error  = any(e.severity == "error"   for e in errors)
+        has_warn   = any(e.severity == "warning" for e in errors)
+        has_notice = any(e.severity == "notice"  for e in errors)
+        if has_error:
+            header_colour, kind = "red",    "FAIL"
+        elif has_warn:
+            header_colour, kind = "yellow", "WARN"
+        elif has_notice:
+            header_colour, kind = "cyan",   "INFO"
+        else:
+            header_colour, kind = "cyan",   "INFO"
+        lines.append(f"[{header_colour}]Integrity: {kind}  ({len(errors)} issue(s))[/{header_colour}]")
         for e in errors:
-            c = "red" if e.severity == "error" else "yellow"
+            if e.severity == "error":
+                c = "red"
+            elif e.severity == "warning":
+                c = "yellow"
+            else:
+                c = "cyan"
             lines.append(f"  [{c}]{rich_escape(e.code)}[/{c}]  [dim]{rich_escape(e.message)}[/dim]")
     else:
         lines.append("[green]Integrity: OK[/green]")
@@ -1271,12 +1297,25 @@ def update_detail_for_dungeon(
     lines.append("")
 
     if errors:
-        has_error = any(e.severity == "error" for e in errors)
-        colour    = "red" if has_error else "yellow"
-        kind      = "FAIL" if has_error else "WARN"
-        lines.append(f"[{colour}]Integrity: {kind}  ({len(errors)} issue(s))[/{colour}]")
+        has_error  = any(e.severity == "error"   for e in errors)
+        has_warn   = any(e.severity == "warning" for e in errors)
+        has_notice = any(e.severity == "notice"  for e in errors)
+        if has_error:
+            header_colour, kind = "red",    "FAIL"
+        elif has_warn:
+            header_colour, kind = "yellow", "WARN"
+        elif has_notice:
+            header_colour, kind = "cyan",   "INFO"
+        else:
+            header_colour, kind = "cyan",   "INFO"
+        lines.append(f"[{header_colour}]Integrity: {kind}  ({len(errors)} issue(s))[/{header_colour}]")
         for e in errors:
-            c = "red" if e.severity == "error" else "yellow"
+            if e.severity == "error":
+                c = "red"
+            elif e.severity == "warning":
+                c = "yellow"
+            else:
+                c = "cyan"
             lines.append(f"  [{c}]{rich_escape(e.code)}[/{c}]  [dim]{rich_escape(e.message)}[/dim]")
     else:
         lines.append("[green]Integrity: OK[/green]")

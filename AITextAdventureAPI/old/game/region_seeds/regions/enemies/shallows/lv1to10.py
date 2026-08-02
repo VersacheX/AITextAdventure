@@ -38,19 +38,19 @@ SEEDS_LV1TO10 = [
  "basic_attack": "reef club", "strong_attack": "coral slam", "player_abilities": ["earth_technique_lv1_armor_up"], "base_str":4, "base_dex":2, "base_con":6, "base_int":2, "base_hp":44, "base_ap":5, "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":0},
 
  {"id": "spray_witch", "name": "Spray Witch", "hostile_type": "magic", "role": "support", "min_spawn_level":5, "rarity": "rare", "base_xp":92, "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (20,100),
- "basic_attack": "spritz", "strong_attack": "torrent burst", "player_abilities": ["water_faith_lv1_mending_streams", "water_faith_lv2_healing_splash"], "base_str":3, "base_dex":3, "base_con":5, "base_int":10, "base_hp":92, "base_ap":6, "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":2},
+ "basic_attack": "spritz", "strong_attack": "torrent burst", "player_abilities": ["water_faith_lv1_mending_streams", "light_faith_lv1_minor_heal"], "base_str":3, "base_dex":3, "base_con":5, "base_int":10, "base_hp":92, "base_ap":6, "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":2},
 
  {"id": "kelp_stalker", "name": "Kelp Stalker", "hostile_type": "creature", "role": "damage", "min_spawn_level":5, "rarity": "uncommon", "base_xp":62, "common_drop": "herb_med", "money_range": (12,56),
  "basic_attack": "constrict", "strong_attack": "drag under", "player_abilities": [], "base_str":6, "base_dex":4, "base_con":6, "base_int":2, "base_hp":64, "base_ap":6, "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":0},
 
  {"id": "marsh_apothecary", "name": "Marsh Apothecary", "hostile_type": "humanoid", "role": "support", "min_spawn_level":6, "rarity": "rare", "base_xp":120, "common_drop": "herb_major", "rare_drop": "tome_con", "money_range": (20,100),
- "basic_attack": "throw vial", "strong_attack": "toxic cloud", "player_abilities": ["water_faith_lv2_healing_splash", "earth_skill_lv5_corrosive_spit"], "base_str":3, "base_dex":3, "base_con":6, "base_int":10, "base_hp":96, "base_ap":8, "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":2},
+ "basic_attack": "throw vial", "strong_attack": "toxic cloud", "player_abilities": ["light_faith_lv1_minor_heal", "level_1_hostile_ability_dark_skill_corrosive_spit"], "base_str":3, "base_dex":3, "base_con":6, "base_int":10, "base_hp":96, "base_ap":8, "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":2},
 
  {"id": "brack_water_reaver", "name": "Brack Water Reaver", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":6, "rarity": "rare", "base_xp":140, "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (18,80),
  "basic_attack": "chrome slash", "strong_attack": "gutting rip", "player_abilities": ["air_electric_fire_technique_lv3_tempest_charge"], "base_str":8, "base_dex":6, "base_con":6, "base_int":4, "base_hp":120, "base_ap":8, "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":1},
 
  {"id": "marsh_wraith", "name": "Marsh Wraith", "hostile_type": "spirit", "role": "hazard", "min_spawn_level":7, "rarity": "rare", "base_xp":160, "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (25,120),
- "basic_attack": "soul pull", "strong_attack": "wailing undercurrent", "player_abilities": ["dark_magic_lv2_night_whisper"], "base_str":2, "base_dex":4, "base_con":5, "base_int":10, "base_hp":120, "base_ap":8, "str_per_level":1, "dex_per_level":1, "con_per_level":2, "int_per_level":3},
+ "basic_attack": "soul pull", "strong_attack": "wailing undercurrent", "player_abilities": ["level_1_hostile_ability_night_whisper"], "base_str":2, "base_dex":4, "base_con":5, "base_int":10, "base_hp":120, "base_ap":8, "str_per_level":1, "dex_per_level":1, "con_per_level":2, "int_per_level":3},
 
  {"id": "bog_guardian", "name": "Bog Guardian", "hostile_type": "creature", "role": "damage", "min_spawn_level":8, "rarity": "uncommon", "base_xp":200, "common_drop": "herb_major", "rare_drop": "kevlar_vest", "money_range": (30,140),
  "basic_attack": "root club", "strong_attack": "entangling slam", "player_abilities": [], "base_str":10, "base_dex":4, "base_con":10, "base_int":3, "base_hp":220, "base_ap":8, "str_per_level":3, "dex_per_level":0, "con_per_level":3, "int_per_level":0},

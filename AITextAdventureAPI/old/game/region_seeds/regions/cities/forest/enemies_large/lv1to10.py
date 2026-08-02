@@ -23,7 +23,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  # min_spawn_level ==2
  {"id": "mosspiper", "name": "Mosspiper", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":2, "rarity": "common", "base_xp":10,
- "common_drop": "herb_minor", "rare_drop": "lockpick", "money_range": (1,8),
+ "common_drop": "herb_minor", "rare_drop": "stimulant_small", "money_range": (1,8),
  "basic_attack": "flute jab", "strong_attack": "harmonized stomp", "player_abilities": None,
  "base_str":2, "base_dex":4, "base_con":1, "base_int":3, "base_hp":12, "base_ap":2,
  "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":1},
@@ -49,7 +49,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  # min_spawn_level ==4
  {"id": "bramble_bandit", "name": "Bramble Bandit", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":4, "rarity": "uncommon", "base_xp":36,
- "common_drop": "lockpick", "rare_drop": "dagger", "money_range": (6,30),
+ "common_drop": "stimulant_small", "rare_drop": "dagger", "money_range": (6,30),
  "basic_attack": "prickly slash", "strong_attack": "ambush lunge", "player_abilities": ["dark_magic_lv1_shadow_tendril"],
  "base_str":4, "base_dex":8, "base_con":3, "base_int":2, "base_hp":28, "base_ap":5,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":0},
@@ -89,7 +89,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==7
  {"id": "sigil_harvester", "name": "Sigil Harvester", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":7, "rarity": "rare", "base_xp":140,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (30,120),
- "basic_attack": "rune lunge", "strong_attack": "sigil burst", "player_abilities": ["light_faith_lv2_prism_burst", "fire_magic_lv1_fireball"],
+ "basic_attack": "rune lunge", "strong_attack": "sigil burst", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst", "fire_magic_lv1_fireball"],
  "base_str":2, "base_dex":4, "base_con":4, "base_int":12, "base_hp":60, "base_ap":10,
  "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":4},
 

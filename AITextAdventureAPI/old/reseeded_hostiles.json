@@ -14,7 +14,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 9,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -278,7 +278,7 @@
         "min_spawn_level": 8,
         "rarity": "uncommon",
         "base_xp": 56,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           10,
@@ -334,7 +334,7 @@
         "min_spawn_level": 7,
         "rarity": "uncommon",
         "base_xp": 54,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           12,
@@ -555,7 +555,7 @@
         "min_spawn_level": 16,
         "rarity": "rare",
         "base_xp": 240,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_int",
         "money_range": [
           50,
@@ -716,7 +716,7 @@
         "min_spawn_level": 4,
         "rarity": "uncommon",
         "base_xp": 34,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           3,
@@ -978,7 +978,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 48,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           10,
@@ -1623,7 +1623,7 @@
         "min_spawn_level": 8,
         "rarity": "rare",
         "base_xp": 112,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           18,
@@ -1837,7 +1837,7 @@
         "min_spawn_level": 10,
         "rarity": "rare",
         "base_xp": 132,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           30,
@@ -1893,7 +1893,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 44,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           6,
@@ -2325,7 +2325,7 @@
         "min_spawn_level": 15,
         "rarity": "rare",
         "base_xp": 240,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           60,
@@ -3137,7 +3137,7 @@
         "rarity": "uncommon",
         "base_xp": 180,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           48
@@ -3410,7 +3410,7 @@
         "rarity": "common",
         "base_xp": 12,
         "common_drop": "herb_minor",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           1,
           10
@@ -3515,7 +3515,7 @@
         "min_spawn_level": 3,
         "rarity": "uncommon",
         "base_xp": 30,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "dagger",
         "money_range": [
           3,
@@ -3567,7 +3567,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 10,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           0,
@@ -3893,7 +3893,7 @@
         "min_spawn_level": 4,
         "rarity": "uncommon",
         "base_xp": 40,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           8,
@@ -3902,7 +3902,7 @@
         "basic_attack": "spanner jab",
         "strong_attack": "glitched spark",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade"
         ],
         "base_str": 2,
         "base_dex": 4,
@@ -4105,7 +4105,7 @@
         "min_spawn_level": 10,
         "rarity": "rare",
         "base_xp": 160,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_int",
         "money_range": [
           40,
@@ -5898,7 +5898,7 @@
         "strong_attack": "grave bloom",
         "player_abilities": [
           "dark_earth_magic_lv5_shadow_erode",
-          "light_fire_faith_lv4_hearthsong",
+          "level_1_hostile_ability_fire_faith_hearthsong",
           "fire_earth_dark_technique_lv3_strike"
         ],
         "base_str": 24,
@@ -5997,7 +5997,7 @@
         "rarity": "common",
         "base_xp": 10,
         "common_drop": "herb_minor",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           1,
           6
@@ -6156,7 +6156,7 @@
         "min_spawn_level": 4,
         "rarity": "uncommon",
         "base_xp": 44,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_small",
         "money_range": [
           6,
@@ -6165,7 +6165,7 @@
         "basic_attack": "wrench jab",
         "strong_attack": "electro-spark",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade"
         ],
         "base_str": 2,
         "base_dex": 4,
@@ -6530,7 +6530,7 @@
         "min_spawn_level": 8,
         "rarity": "rare",
         "base_xp": 160,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           40,
@@ -6756,7 +6756,7 @@
         "basic_attack": "wrench flurry",
         "strong_attack": "overclocked blast",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade",
+          "lv2_hostile_ability_fire_water_tech_steam_grenade",
           "air_magic_lv1_wind_lance"
         ],
         "base_str": 4,
@@ -7024,7 +7024,7 @@
         "rarity": "common",
         "base_xp": 10,
         "common_drop": "herb_minor",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           1,
           8
@@ -7181,7 +7181,7 @@
         "min_spawn_level": 4,
         "rarity": "uncommon",
         "base_xp": 36,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "dagger",
         "money_range": [
           6,
@@ -7998,7 +7998,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 10,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           0,
@@ -8165,7 +8165,7 @@
         "basic_attack": "precise hoot-shot",
         "strong_attack": "sundering aim",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 2,
         "base_dex": 8,
@@ -8210,7 +8210,7 @@
         "min_spawn_level": 8,
         "rarity": "uncommon",
         "base_xp": 48,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           10,
@@ -8264,7 +8264,7 @@
         "min_spawn_level": 7,
         "rarity": "uncommon",
         "base_xp": 52,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           12,
@@ -8582,7 +8582,7 @@
         "min_spawn_level": 4,
         "rarity": "uncommon",
         "base_xp": 40,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           8,
@@ -8800,7 +8800,7 @@
         "min_spawn_level": 10,
         "rarity": "rare",
         "base_xp": 160,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_int",
         "money_range": [
           40,
@@ -8809,7 +8809,7 @@
         "basic_attack": "silent strike",
         "strong_attack": "nightmare release",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 6,
         "base_dex": 12,
@@ -9194,7 +9194,7 @@
         "basic_attack": "maw lash",
         "strong_attack": "glacial constrict",
         "player_abilities": [
-          "water_air_dark_fire_magic_lv4_maelstrom_burst",
+          "lv2_hostile_ability_water_electric_magic_maelstrom_burst",
           "water_technique_lv1_ripple_bash"
         ],
         "base_str": 6,
@@ -9251,7 +9251,7 @@
         "basic_attack": "thorn lash",
         "strong_attack": "bramble eruption",
         "player_abilities": [
-          "dark_earth_air_magic_lv4_void_spike",
+          "lv2_hostile_ability_dark_ice_skill_void_spike",
           "water_magic_lv1_frostbolt"
         ],
         "base_str": 3,
@@ -9473,7 +9473,7 @@
         "strong_attack": "nightmarish maul",
         "player_abilities": [
           "dark_magic_lv5_abyssal_shadow",
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 8,
         "base_dex": 10,
@@ -9527,7 +9527,7 @@
         "basic_attack": "rending bite",
         "strong_attack": "volcanic maw",
         "player_abilities": [
-          "water_air_dark_fire_magic_lv4_maelstrom_burst",
+          "lv2_hostile_ability_water_electric_magic_maelstrom_burst",
           "earth_dark_technique_lv2_grave_thrust",
           "water_dark_technique_lv2_abyssal_rip"
         ],
@@ -9585,7 +9585,7 @@
         "basic_attack": "luminous touch",
         "strong_attack": "dazzling flare",
         "player_abilities": [
-          "light_fire_faith_lv4_hearthsong"
+          "level_1_hostile_ability_fire_faith_hearthsong"
         ],
         "base_str": 2,
         "base_dex": 6,
@@ -9801,7 +9801,7 @@
         "basic_attack": "hexed jab",
         "strong_attack": "mire hex",
         "player_abilities": [
-          "light_fire_faith_lv4_hearthsong"
+          "level_1_hostile_ability_fire_faith_hearthsong"
         ],
         "base_str": 3,
         "base_dex": 5,
@@ -9855,7 +9855,7 @@
         "basic_attack": "needle growth",
         "strong_attack": "spore burst",
         "player_abilities": [
-          "water_earth_skill_lv5_sap_bloom"
+          "level_1_hostile_ability_earth_magic_sap_bloom"
         ],
         "base_str": 2,
         "base_dex": 4,
@@ -10017,7 +10017,7 @@
         "basic_attack": "sorrow touch",
         "strong_attack": "weeping gale",
         "player_abilities": [
-          "water_dark_magic_lv5_gloom_tide"
+          "lv2_hostile_ability_water_dark_magic_gloom_tide"
         ],
         "base_str": 4,
         "base_dex": 6,
@@ -10071,8 +10071,8 @@
         "basic_attack": "wet lash",
         "strong_attack": "gale downpour",
         "player_abilities": [
-          "water_air_dark_fire_magic_lv4_maelstrom_burst",
-          "water_faith_lv2_healing_splash"
+          "lv2_hostile_ability_water_electric_magic_maelstrom_burst",
+          "light_faith_lv1_minor_heal"
         ],
         "base_str": 3,
         "base_dex": 7,
@@ -10613,7 +10613,7 @@
         "basic_attack": "moonbeam touch",
         "strong_attack": "lunar swell",
         "player_abilities": [
-          "light_fire_faith_lv4_hearthsong"
+          "level_1_hostile_ability_fire_faith_hearthsong"
         ],
         "base_str": 4,
         "base_dex": 8,
@@ -10723,7 +10723,7 @@
         "basic_attack": "icy gore",
         "strong_attack": "blizzard stomp",
         "player_abilities": [
-          "water_air_light_magic_lv4_frost_nova",
+          "lv2_hostile_ability_ice_light_magic_frost_nova",
           "water_air_magic_lv5_frost_lash"
         ],
         "base_str": 7,
@@ -11104,8 +11104,8 @@
         "basic_attack": "splash bolt",
         "strong_attack": "bog cascade",
         "player_abilities": [
-          "water_air_dark_fire_magic_lv4_maelstrom_burst",
-          "water_earth_skill_lv5_sap_bloom"
+          "lv2_hostile_ability_water_electric_magic_maelstrom_burst",
+          "level_1_hostile_ability_earth_magic_sap_bloom"
         ],
         "base_str": 4,
         "base_dex": 6,
@@ -11159,7 +11159,7 @@
         "basic_attack": "reef lash",
         "strong_attack": "spore burst",
         "player_abilities": [
-          "water_faith_lv2_healing_splash"
+          "light_faith_lv1_minor_heal"
         ],
         "base_str": 6,
         "base_dex": 6,
@@ -11267,7 +11267,7 @@
         "basic_attack": "hollow strike",
         "strong_attack": "void rend",
         "player_abilities": [
-          "dark_earth_air_magic_lv4_void_spike",
+          "lv2_hostile_ability_dark_ice_skill_void_spike",
           "earth_dark_technique_lv2_grave_thrust",
           "water_dark_technique_lv2_abyssal_rip"
         ],
@@ -11367,7 +11367,7 @@
         "rarity": "common",
         "base_xp": 10,
         "common_drop": "herb_minor",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           1,
           6
@@ -11630,7 +11630,7 @@
         "min_spawn_level": 4,
         "rarity": "uncommon",
         "base_xp": 36,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "dagger",
         "money_range": [
           6,
@@ -12006,7 +12006,7 @@
         "min_spawn_level": 9,
         "rarity": "rare",
         "base_xp": 120,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           30,
@@ -12337,7 +12337,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 8,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -12603,7 +12603,7 @@
         "min_spawn_level": 7,
         "rarity": "uncommon",
         "base_xp": 50,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_int",
         "money_range": [
           8,
@@ -12919,7 +12919,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 9,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -13084,7 +13084,7 @@
         "basic_attack": "juggling knives",
         "strong_attack": "banana peel ambush",
         "player_abilities": [
-          "air_skill_lv4_gale_dash"
+          "level_1_hostile_ability_air_skill_gale_dash"
         ],
         "base_str": 3,
         "base_dex": 8,
@@ -13185,7 +13185,7 @@
         "min_spawn_level": 7,
         "rarity": "uncommon",
         "base_xp": 48,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_med",
         "money_range": [
           10,
@@ -13239,7 +13239,7 @@
         "min_spawn_level": 4,
         "rarity": "uncommon",
         "base_xp": 28,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           3,
@@ -13499,7 +13499,7 @@
         "min_spawn_level": 8,
         "rarity": "uncommon",
         "base_xp": 46,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           10,
@@ -14150,7 +14150,7 @@
         "min_spawn_level": 9,
         "rarity": "rare",
         "base_xp": 110,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           18,
@@ -14215,7 +14215,7 @@
         "basic_attack": "quick shot",
         "strong_attack": "headshot",
         "player_abilities": [
-          "air_skill_lv4_gale_dash"
+          "level_1_hostile_ability_air_skill_gale_dash"
         ],
         "base_str": 3,
         "base_dex": 7,
@@ -14422,7 +14422,7 @@
         "min_spawn_level": 16,
         "rarity": "rare",
         "base_xp": 220,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           60,
@@ -15148,7 +15148,7 @@
         "basic_attack": "ice shard",
         "strong_attack": "freezing blast",
         "player_abilities": [
-          "water_air_light_magic_lv4_frost_nova",
+          "lv2_hostile_ability_ice_light_magic_frost_nova",
           "air_magic_lv1_wind_lance",
           "ice_skill_lv1_ice_shuriken"
         ],
@@ -15254,7 +15254,7 @@
         "rarity": "uncommon",
         "base_xp": 180,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           48
@@ -15475,7 +15475,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 8,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -15642,7 +15642,7 @@
         "basic_attack": "slides a coin across the palm",
         "strong_attack": "overcharged benediction",
         "player_abilities": [
-          "air_skill_lv4_gale_dash"
+          "level_1_hostile_ability_air_skill_gale_dash"
         ],
         "base_str": 4,
         "base_dex": 5,
@@ -15741,7 +15741,7 @@
         "min_spawn_level": 7,
         "rarity": "uncommon",
         "base_xp": 48,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           8,
@@ -16060,7 +16060,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 9,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -16227,7 +16227,7 @@
         "basic_attack": "juggling knives",
         "strong_attack": "banana peel ambush",
         "player_abilities": [
-          "air_skill_lv4_gale_dash"
+          "level_1_hostile_ability_air_skill_gale_dash"
         ],
         "base_str": 3,
         "base_dex": 8,
@@ -16326,7 +16326,7 @@
         "min_spawn_level": 7,
         "rarity": "uncommon",
         "base_xp": 50,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_med",
         "money_range": [
           12,
@@ -16378,7 +16378,7 @@
         "min_spawn_level": 4,
         "rarity": "uncommon",
         "base_xp": 30,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           3,
@@ -16638,7 +16638,7 @@
         "min_spawn_level": 9,
         "rarity": "uncommon",
         "base_xp": 48,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           12,
@@ -17287,7 +17287,7 @@
         "min_spawn_level": 9,
         "rarity": "rare",
         "base_xp": 110,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           18,
@@ -17352,7 +17352,7 @@
         "basic_attack": "quick shot",
         "strong_attack": "headshot",
         "player_abilities": [
-          "air_skill_lv4_gale_dash"
+          "level_1_hostile_ability_air_skill_gale_dash"
         ],
         "base_str": 3,
         "base_dex": 7,
@@ -17453,7 +17453,7 @@
         "min_spawn_level": 16,
         "rarity": "rare",
         "base_xp": 220,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           60,
@@ -18172,7 +18172,7 @@
         "basic_attack": "ice shard",
         "strong_attack": "freezing blast",
         "player_abilities": [
-          "water_air_light_magic_lv4_frost_nova",
+          "lv2_hostile_ability_ice_light_magic_frost_nova",
           "air_magic_lv1_wind_lance",
           "ice_skill_lv1_ice_shuriken"
         ],
@@ -18274,7 +18274,7 @@
         "rarity": "uncommon",
         "base_xp": 180,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           48
@@ -18964,7 +18964,7 @@
         "basic_attack": "gust strike",
         "strong_attack": "aerial clap",
         "player_abilities": [
-          "air_skill_lv2_swift_tap"
+          "air_light_skill_lv2_dawn_cut"
         ],
         "base_str": 3,
         "base_dex": 5,
@@ -19723,7 +19723,7 @@
         "basic_attack": "vine probe",
         "strong_attack": "mind rot",
         "player_abilities": [
-          "water_dark_magic_lv5_gloom_tide"
+          "lv2_hostile_ability_water_dark_magic_gloom_tide"
         ],
         "base_str": 6,
         "base_dex": 6,
@@ -20114,8 +20114,8 @@
         "strong_attack": "nether rupture",
         "player_abilities": [
           "dark_magic_lv5_abyssal_shadow",
-          "water_air_dark_fire_magic_lv4_maelstrom_burst",
-          "light_fire_faith_lv4_hearthsong"
+          "lv2_hostile_ability_water_electric_magic_maelstrom_burst",
+          "level_1_hostile_ability_fire_faith_hearthsong"
         ],
         "base_str": 22,
         "base_dex": 12,
@@ -20172,7 +20172,7 @@
         "strong_attack": "grave bloom",
         "player_abilities": [
           "dark_earth_magic_lv5_shadow_erode",
-          "light_fire_faith_lv4_hearthsong",
+          "level_1_hostile_ability_fire_faith_hearthsong",
           "fire_earth_dark_technique_lv3_strike"
         ],
         "base_str": 24,
@@ -20220,7 +20220,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 10,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -20272,7 +20272,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 8,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -20532,7 +20532,7 @@
         "min_spawn_level": 6,
         "rarity": "uncommon",
         "base_xp": 48,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           8,
@@ -20694,7 +20694,7 @@
         "min_spawn_level": 8,
         "rarity": "uncommon",
         "base_xp": 48,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           10,
@@ -20703,7 +20703,7 @@
         "basic_attack": "hacking charge",
         "strong_attack": "system overload",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade"
         ],
         "base_str": 2,
         "base_dex": 3,
@@ -20804,7 +20804,7 @@
         "min_spawn_level": 7,
         "rarity": "uncommon",
         "base_xp": 52,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           12,
@@ -20858,7 +20858,7 @@
         "min_spawn_level": 2,
         "rarity": "common",
         "base_xp": 14,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "cloth_pants",
         "money_range": [
           2,
@@ -20962,7 +20962,7 @@
         "min_spawn_level": 4,
         "rarity": "uncommon",
         "base_xp": 28,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           3,
@@ -21120,7 +21120,7 @@
         "min_spawn_level": 7,
         "rarity": "rare",
         "base_xp": 100,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "dagger",
         "money_range": [
           15,
@@ -21129,7 +21129,7 @@
         "basic_attack": "swift stab",
         "strong_attack": "lethal twirl",
         "player_abilities": [
-          "air_skill_lv4_gale_dash"
+          "level_1_hostile_ability_air_skill_gale_dash"
         ],
         "base_str": 3,
         "base_dex": 8,
@@ -21388,7 +21388,7 @@
         "min_spawn_level": 6,
         "rarity": "uncommon",
         "base_xp": 46,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           8,
@@ -21715,7 +21715,7 @@
         "min_spawn_level": 16,
         "rarity": "rare",
         "base_xp": 220,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_int",
         "money_range": [
           50,
@@ -21770,7 +21770,7 @@
         "min_spawn_level": 3,
         "rarity": "rare",
         "base_xp": 50,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           10,
@@ -22403,7 +22403,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 45,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           10,
@@ -22518,7 +22518,7 @@
         "basic_attack": "cybernetic punch",
         "strong_attack": "powerful jolt",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade"
         ],
         "base_str": 2,
         "base_dex": 4,
@@ -22899,7 +22899,7 @@
         "basic_attack": "siren song",
         "strong_attack": "mesmerize",
         "player_abilities": [
-          "light_fire_faith_lv4_hearthsong"
+          "level_1_hostile_ability_fire_faith_hearthsong"
         ],
         "base_str": 2,
         "base_dex": 6,
@@ -22946,7 +22946,7 @@
         "min_spawn_level": 8,
         "rarity": "rare",
         "base_xp": 110,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           20,
@@ -23108,7 +23108,7 @@
         "min_spawn_level": 10,
         "rarity": "rare",
         "base_xp": 130,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           30,
@@ -23117,7 +23117,7 @@
         "basic_attack": "precision strikes",
         "strong_attack": "wrenching attack",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade"
         ],
         "base_str": 3,
         "base_dex": 4,
@@ -23162,7 +23162,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 40,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           6,
@@ -23595,7 +23595,7 @@
         "min_spawn_level": 15,
         "rarity": "rare",
         "base_xp": 220,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           60,
@@ -24372,7 +24372,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 10,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -24686,7 +24686,7 @@
         "min_spawn_level": 2,
         "rarity": "uncommon",
         "base_xp": 30,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "cloth_pants",
         "money_range": [
           3,
@@ -24738,7 +24738,7 @@
         "min_spawn_level": 2,
         "rarity": "common",
         "base_xp": 12,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -24790,7 +24790,7 @@
         "min_spawn_level": 2,
         "rarity": "common",
         "base_xp": 12,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -25056,7 +25056,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 46,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           6,
@@ -25713,7 +25713,7 @@
         "min_spawn_level": 3,
         "rarity": "rare",
         "base_xp": 50,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           10,
@@ -25765,7 +25765,7 @@
         "min_spawn_level": 8,
         "rarity": "uncommon",
         "base_xp": 48,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           10,
@@ -26090,7 +26090,7 @@
         "rarity": "uncommon",
         "base_xp": 180,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           48
@@ -26098,7 +26098,7 @@
         "basic_attack": "dark slash",
         "strong_attack": "vanishing strike",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 5,
         "base_dex": 10,
@@ -26144,7 +26144,7 @@
         "rarity": "uncommon",
         "base_xp": 160,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           48
@@ -26152,7 +26152,7 @@
         "basic_attack": "dark slash",
         "strong_attack": "vanishing strike",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 5,
         "base_dex": 9,
@@ -26417,7 +26417,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 50,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_int",
         "money_range": [
           10,
@@ -26586,7 +26586,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 10,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -26742,7 +26742,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 12,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -26950,7 +26950,7 @@
         "min_spawn_level": 2,
         "rarity": "common",
         "base_xp": 14,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "cloth_pants",
         "money_range": [
           2,
@@ -27002,7 +27002,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 9,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           0,
@@ -27109,7 +27109,7 @@
         "rarity": "uncommon",
         "base_xp": 60,
         "common_drop": "stimulant_small",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           8,
           34
@@ -27225,7 +27225,7 @@
         "basic_attack": "precise shot",
         "strong_attack": "aimed salvo",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 2,
         "base_dex": 7,
@@ -27270,7 +27270,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 48,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           6,
@@ -27322,7 +27322,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 50,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_int",
         "money_range": [
           10,
@@ -27374,7 +27374,7 @@
         "min_spawn_level": 10,
         "rarity": "rare",
         "base_xp": 130,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           30,
@@ -27794,7 +27794,7 @@
         "min_spawn_level": 2,
         "rarity": "uncommon",
         "base_xp": 30,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "cloth_pants",
         "money_range": [
           3,
@@ -27846,7 +27846,7 @@
         "min_spawn_level": 3,
         "rarity": "rare",
         "base_xp": 50,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           10,
@@ -27898,7 +27898,7 @@
         "min_spawn_level": 8,
         "rarity": "rare",
         "base_xp": 110,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           20,
@@ -28228,7 +28228,7 @@
         "rarity": "uncommon",
         "base_xp": 180,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           48
@@ -28236,7 +28236,7 @@
         "basic_attack": "dark slash",
         "strong_attack": "vanishing strike",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 5,
         "base_dex": 10,
@@ -28282,7 +28282,7 @@
         "rarity": "uncommon",
         "base_xp": 120,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           36
@@ -28612,7 +28612,7 @@
         "basic_attack": "psychic tendrils",
         "strong_attack": "psychic pulse",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 2,
         "base_dex": 3,
@@ -29100,7 +29100,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 45,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           10,
@@ -29206,7 +29206,7 @@
         "min_spawn_level": 8,
         "rarity": "uncommon",
         "base_xp": 48,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           10,
@@ -31105,7 +31105,7 @@
         "strong_attack": "pyroclasm burst",
         "player_abilities": [
           "fire_earth_dark_magic_lv3_pyroclasm",
-          "light_fire_faith_lv4_hearthsong",
+          "level_1_hostile_ability_fire_faith_hearthsong",
           "fire_fire_dark_technique_lv3_strike"
         ],
         "base_str": 24,
@@ -31307,7 +31307,7 @@
         "min_spawn_level": 2,
         "rarity": "common",
         "base_xp": 12,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -31572,7 +31572,7 @@
         "rarity": "uncommon",
         "base_xp": 60,
         "common_drop": "stimulant_small",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           40
@@ -31679,7 +31679,7 @@
         "min_spawn_level": 2,
         "rarity": "common",
         "base_xp": 12,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -31731,7 +31731,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 48,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           6,
@@ -31891,7 +31891,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 50,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_int",
         "money_range": [
           8,
@@ -32433,7 +32433,7 @@
         "rarity": "uncommon",
         "base_xp": 120,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           40
@@ -32648,7 +32648,7 @@
         "min_spawn_level": 6,
         "rarity": "uncommon",
         "base_xp": 52,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "cloth_pants",
         "money_range": [
           6,
@@ -33308,7 +33308,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 10,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -33466,7 +33466,7 @@
         "min_spawn_level": 2,
         "rarity": "common",
         "base_xp": 16,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "cloth_pants",
         "money_range": [
           1,
@@ -33518,7 +33518,7 @@
         "min_spawn_level": 4,
         "rarity": "uncommon",
         "base_xp": 34,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_small",
         "money_range": [
           6,
@@ -33735,7 +33735,7 @@
         "rarity": "uncommon",
         "base_xp": 70,
         "common_drop": "stimulant_small",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           8,
           42
@@ -33840,7 +33840,7 @@
         "min_spawn_level": 8,
         "rarity": "rare",
         "base_xp": 140,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           20,
@@ -33894,7 +33894,7 @@
         "min_spawn_level": 7,
         "rarity": "uncommon",
         "base_xp": 54,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           12,
@@ -34384,7 +34384,7 @@
         "rarity": "uncommon",
         "base_xp": 120,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           36
@@ -34439,7 +34439,7 @@
         "min_spawn_level": 12,
         "rarity": "rare",
         "base_xp": 220,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           30,
@@ -34448,7 +34448,7 @@
         "basic_attack": "grease swipe",
         "strong_attack": "silent choke",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 3,
         "base_dex": 7,
@@ -34778,7 +34778,7 @@
         "player_abilities": [
           "water_light_magic_lv2_luminous_tide",
           "water_dark_technique_lv2_abyssal_rip",
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 10,
         "base_dex": 6,
@@ -35246,7 +35246,7 @@
         "min_spawn_level": 2,
         "rarity": "common",
         "base_xp": 14,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -35300,7 +35300,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 50,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           8,
@@ -35407,7 +35407,7 @@
         "rarity": "uncommon",
         "base_xp": 66,
         "common_drop": "stimulant_small",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           8,
           44
@@ -35460,7 +35460,7 @@
         "min_spawn_level": 9,
         "rarity": "rare",
         "base_xp": 140,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           20,
@@ -35514,7 +35514,7 @@
         "min_spawn_level": 6,
         "rarity": "uncommon",
         "base_xp": 54,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           10,
@@ -35948,7 +35948,7 @@
         "rarity": "uncommon",
         "base_xp": 140,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           36
@@ -35956,7 +35956,7 @@
         "basic_attack": "ink-swipe",
         "strong_attack": "vanish maul",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 4,
         "base_dex": 8,
@@ -36003,7 +36003,7 @@
         "min_spawn_level": 13,
         "rarity": "rare",
         "base_xp": 220,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           30,
@@ -36012,7 +36012,7 @@
         "basic_attack": "grease strike",
         "strong_attack": "silent garrote",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 3,
         "base_dex": 8,
@@ -36285,7 +36285,7 @@
         "strong_attack": "necrotic tide",
         "player_abilities": [
           "water_light_magic_lv2_luminous_tide",
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 6,
         "base_dex": 4,
@@ -36340,7 +36340,7 @@
         "strong_attack": "abyssal command",
         "player_abilities": [
           "water_dark_technique_lv2_abyssal_rip",
-          "fire_water_tech_lv2_steam_grenade_mk2",
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2",
           "water_light_technique_lv2_purewave_clout"
         ],
         "base_str": 9,
@@ -37181,7 +37181,7 @@
         "strong_attack": "torrent burst",
         "player_abilities": [
           "water_faith_lv1_mending_streams",
-          "water_faith_lv2_healing_splash"
+          "light_faith_lv1_minor_heal"
         ],
         "base_str": 3,
         "base_dex": 3,
@@ -37286,7 +37286,7 @@
         "basic_attack": "throw vial",
         "strong_attack": "toxic cloud",
         "player_abilities": [
-          "water_faith_lv2_healing_splash"
+          "light_faith_lv1_minor_heal"
         ],
         "base_str": 3,
         "base_dex": 3,
@@ -37502,7 +37502,7 @@
         "basic_attack": "silent plunge",
         "strong_attack": "toxic plunge",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 7,
         "base_dex": 11,
@@ -37720,7 +37720,7 @@
         "basic_attack": "multi-bite",
         "strong_attack": "spine barrage",
         "player_abilities": [
-          "water_air_dark_fire_magic_lv4_maelstrom_burst",
+          "lv2_hostile_ability_water_electric_magic_maelstrom_burst",
           "water_dark_technique_lv2_abyssal_rip"
         ],
         "base_str": 14,
@@ -37777,7 +37777,7 @@
         "basic_attack": "current probe",
         "strong_attack": "mind rot",
         "player_abilities": [
-          "water_faith_lv2_healing_splash",
+          "light_faith_lv1_minor_heal",
           "water_light_magic_lv2_luminous_tide"
         ],
         "base_str": 6,
@@ -37942,7 +37942,7 @@
         "basic_attack": "ocean slam",
         "strong_attack": "maelstrom crush",
         "player_abilities": [
-          "water_air_dark_fire_magic_lv4_maelstrom_burst",
+          "lv2_hostile_ability_water_electric_magic_maelstrom_burst",
           "fire_water_earth_technique_lv3_strike"
         ],
         "base_str": 20,
@@ -38163,8 +38163,8 @@
         "strong_attack": "nether rupture",
         "player_abilities": [
           "dark_magic_lv5_abyssal_shadow",
-          "water_air_dark_fire_magic_lv4_maelstrom_burst",
-          "light_fire_faith_lv4_hearthsong"
+          "lv2_hostile_ability_water_electric_magic_maelstrom_burst",
+          "level_1_hostile_ability_fire_faith_hearthsong"
         ],
         "base_str": 22,
         "base_dex": 12,
@@ -38218,7 +38218,7 @@
         "basic_attack": "rot lash",
         "strong_attack": "grave bloom",
         "player_abilities": [
-          "light_fire_faith_lv4_hearthsong",
+          "level_1_hostile_ability_fire_faith_hearthsong",
           "fire_water_earth_technique_lv3_strike",
           "fire_water_light_technique_lv3_strike"
         ],
@@ -38317,7 +38317,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 8,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -38527,7 +38527,7 @@
         "min_spawn_level": 2,
         "rarity": "common",
         "base_xp": 12,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -38579,7 +38579,7 @@
         "min_spawn_level": 4,
         "rarity": "uncommon",
         "base_xp": 36,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           6,
@@ -38792,7 +38792,7 @@
         "rarity": "uncommon",
         "base_xp": 54,
         "common_drop": "stimulant_small",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           36
@@ -38845,7 +38845,7 @@
         "min_spawn_level": 8,
         "rarity": "rare",
         "base_xp": 120,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           16,
@@ -38899,7 +38899,7 @@
         "min_spawn_level": 6,
         "rarity": "uncommon",
         "base_xp": 44,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           8,
@@ -39334,7 +39334,7 @@
         "rarity": "uncommon",
         "base_xp": 100,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           40
@@ -39389,7 +39389,7 @@
         "min_spawn_level": 12,
         "rarity": "rare",
         "base_xp": 180,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           24,
@@ -39398,7 +39398,7 @@
         "basic_attack": "greasy swipe",
         "strong_attack": "silent choke",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2",
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2",
           "water_dark_tech_lv2_shadow_cannon"
         ],
         "base_str": 3,
@@ -39621,7 +39621,7 @@
         "player_abilities": [
           "water_light_magic_lv2_luminous_tide",
           "water_dark_technique_lv2_abyssal_rip",
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 10,
         "base_dex": 6,
@@ -40038,7 +40038,7 @@
         "min_spawn_level": 2,
         "rarity": "common",
         "base_xp": 14,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -40090,7 +40090,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 52,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           8,
@@ -40197,7 +40197,7 @@
         "rarity": "uncommon",
         "base_xp": 72,
         "common_drop": "stimulant_small",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           8,
           44
@@ -40250,7 +40250,7 @@
         "min_spawn_level": 10,
         "rarity": "rare",
         "base_xp": 140,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           20,
@@ -40304,7 +40304,7 @@
         "min_spawn_level": 7,
         "rarity": "uncommon",
         "base_xp": 56,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           12,
@@ -40740,7 +40740,7 @@
         "rarity": "uncommon",
         "base_xp": 120,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           36
@@ -40748,7 +40748,7 @@
         "basic_attack": "sinuous swipe",
         "strong_attack": "vanishing strike",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 4,
         "base_dex": 8,
@@ -40795,7 +40795,7 @@
         "min_spawn_level": 13,
         "rarity": "rare",
         "base_xp": 220,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           30,
@@ -40804,7 +40804,7 @@
         "basic_attack": "grease strike",
         "strong_attack": "silent garrote",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 3,
         "base_dex": 8,
@@ -40910,7 +40910,7 @@
         "basic_attack": "ink lash of cold",
         "strong_attack": "mind-numbing pulse",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2",
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2",
           "earth_earth_tech_lv2_plate_breach"
         ],
         "base_str": 6,
@@ -41601,7 +41601,7 @@
         "min_spawn_level": 3,
         "rarity": "uncommon",
         "base_xp": 30,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           4,
@@ -41653,7 +41653,7 @@
         "min_spawn_level": 6,
         "rarity": "rare",
         "base_xp": 80,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           10,
@@ -41758,7 +41758,7 @@
         "rarity": "rare",
         "base_xp": 94,
         "common_drop": "stimulant_small",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           10,
           60
@@ -41813,7 +41813,7 @@
         "min_spawn_level": 12,
         "rarity": "rare",
         "base_xp": 180,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           28,
@@ -41867,7 +41867,7 @@
         "min_spawn_level": 9,
         "rarity": "uncommon",
         "base_xp": 78,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           14,
@@ -42308,7 +42308,7 @@
         "rarity": "rare",
         "base_xp": 160,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           12,
           72
@@ -42316,7 +42316,7 @@
         "basic_attack": "shadow paw",
         "strong_attack": "vanish rip",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 5,
         "base_dex": 9,
@@ -42361,7 +42361,7 @@
         "min_spawn_level": 15,
         "rarity": "rare",
         "base_xp": 300,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           40,
@@ -42370,7 +42370,7 @@
         "basic_attack": "silent slice",
         "strong_attack": "garrote snap",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 4,
         "base_dex": 10,
@@ -42966,7 +42966,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 10,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -43178,7 +43178,7 @@
         "min_spawn_level": 2,
         "rarity": "common",
         "base_xp": 12,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -43232,7 +43232,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 56,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           8,
@@ -43337,7 +43337,7 @@
         "rarity": "uncommon",
         "base_xp": 68,
         "common_drop": "stimulant_small",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           8,
           44
@@ -43390,7 +43390,7 @@
         "min_spawn_level": 9,
         "rarity": "rare",
         "base_xp": 120,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           18,
@@ -43444,7 +43444,7 @@
         "min_spawn_level": 6,
         "rarity": "uncommon",
         "base_xp": 44,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           10,
@@ -43876,7 +43876,7 @@
         "rarity": "uncommon",
         "base_xp": 120,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           36
@@ -43929,7 +43929,7 @@
         "min_spawn_level": 12,
         "rarity": "rare",
         "base_xp": 200,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           30,
@@ -43938,7 +43938,7 @@
         "basic_attack": "greasy slice",
         "strong_attack": "silent garrote",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 3,
         "base_dex": 8,
@@ -44531,7 +44531,7 @@
         "min_spawn_level": 3,
         "rarity": "common",
         "base_xp": 18,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           2,
@@ -44947,7 +44947,7 @@
         "min_spawn_level": 2,
         "rarity": "common",
         "base_xp": 12,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -45110,7 +45110,7 @@
         "rarity": "rare",
         "base_xp": 92,
         "common_drop": "stimulant_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           10,
           64
@@ -45165,7 +45165,7 @@
         "min_spawn_level": 9,
         "rarity": "rare",
         "base_xp": 140,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           18,
@@ -45381,7 +45381,7 @@
         "min_spawn_level": 4,
         "rarity": "uncommon",
         "base_xp": 34,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           3,
@@ -45545,7 +45545,7 @@
         "rarity": "uncommon",
         "base_xp": 140,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           8,
           48
@@ -45553,7 +45553,7 @@
         "basic_attack": "shadow pounce",
         "strong_attack": "vanishing rip",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 4,
         "base_dex": 9,
@@ -46570,7 +46570,7 @@
         "basic_attack": "servo jab",
         "strong_attack": "cold discharge",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade"
         ],
         "base_str": 4,
         "base_dex": 3,
@@ -46722,7 +46722,7 @@
         "rarity": "rare",
         "base_xp": 120,
         "common_drop": "stimulant_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           20,
           100
@@ -47213,7 +47213,7 @@
         "basic_attack": "chill touch",
         "strong_attack": "glacial wave",
         "player_abilities": [
-          "water_air_light_magic_lv4_frost_nova",
+          "lv2_hostile_ability_ice_light_magic_frost_nova",
           "water_magic_lv1_frostbolt"
         ],
         "base_str": 4,
@@ -47433,7 +47433,7 @@
         "basic_attack": "icy touch",
         "strong_attack": "wailing gale",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 4,
         "base_dex": 5,
@@ -47874,7 +47874,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 10,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           1,
@@ -48086,7 +48086,7 @@
         "min_spawn_level": 2,
         "rarity": "common",
         "base_xp": 12,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -48138,7 +48138,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 60,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           8,
@@ -48247,7 +48247,7 @@
         "rarity": "uncommon",
         "base_xp": 56,
         "common_drop": "stimulant_small",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           8,
           40
@@ -48300,7 +48300,7 @@
         "min_spawn_level": 8,
         "rarity": "rare",
         "base_xp": 120,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           18,
@@ -48356,7 +48356,7 @@
         "min_spawn_level": 6,
         "rarity": "uncommon",
         "base_xp": 42,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           10,
@@ -48791,7 +48791,7 @@
         "rarity": "uncommon",
         "base_xp": 100,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           36
@@ -48844,7 +48844,7 @@
         "min_spawn_level": 12,
         "rarity": "rare",
         "base_xp": 200,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           30,
@@ -48853,7 +48853,7 @@
         "basic_attack": "grease strike",
         "strong_attack": "silent garrote",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2"
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2"
         ],
         "base_str": 3,
         "base_dex": 8,
@@ -49383,7 +49383,7 @@
         "min_spawn_level": 3,
         "rarity": "common",
         "base_xp": 18,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           2,
@@ -50360,7 +50360,7 @@
         "basic_attack": "flicker bolt",
         "strong_attack": "mirage storm",
         "player_abilities": [
-          "fire_water_tech_lv2_steam_grenade_mk2",
+          "lv2_hostile_ability_fire_water_tech_steam_grenade_mk2",
           "earth_earth_tech_lv2_plate_breach"
         ],
         "base_str": 3,
@@ -50681,7 +50681,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 12,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           1,
@@ -50895,7 +50895,7 @@
         "min_spawn_level": 2,
         "rarity": "common",
         "base_xp": 14,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           1,
@@ -51052,7 +51052,7 @@
         "rarity": "uncommon",
         "base_xp": 50,
         "common_drop": "stimulant_small",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           8,
           36
@@ -51107,7 +51107,7 @@
         "min_spawn_level": 8,
         "rarity": "rare",
         "base_xp": 120,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           18,
@@ -53698,7 +53698,7 @@
         "min_spawn_level": 7,
         "rarity": "uncommon",
         "base_xp": 78,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           8,
@@ -53753,7 +53753,7 @@
         "rarity": "rare",
         "base_xp": 200,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           20,
           100
@@ -53866,7 +53866,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 8,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           0,
@@ -54138,7 +54138,7 @@
         "min_spawn_level": 8,
         "rarity": "uncommon",
         "base_xp": 50,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           8,
@@ -54192,7 +54192,7 @@
         "min_spawn_level": 7,
         "rarity": "uncommon",
         "base_xp": 50,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           10,
@@ -54412,7 +54412,7 @@
         "min_spawn_level": 16,
         "rarity": "rare",
         "base_xp": 220,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_int",
         "money_range": [
           48,
@@ -54627,7 +54627,7 @@
         "min_spawn_level": 2,
         "rarity": "uncommon",
         "base_xp": 28,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "cloth_pants",
         "money_range": [
           3,
@@ -54679,7 +54679,7 @@
         "min_spawn_level": 3,
         "rarity": "rare",
         "base_xp": 48,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           10,
@@ -55043,7 +55043,7 @@
         "min_spawn_level": 4,
         "rarity": "uncommon",
         "base_xp": 28,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           3,
@@ -55302,7 +55302,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 44,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           10,
@@ -55946,7 +55946,7 @@
         "min_spawn_level": 8,
         "rarity": "rare",
         "base_xp": 108,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           18,
@@ -56160,7 +56160,7 @@
         "min_spawn_level": 10,
         "rarity": "rare",
         "base_xp": 128,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           30,
@@ -56216,7 +56216,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 36,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "money_range": [
           6,
           28
@@ -56650,7 +56650,7 @@
         "min_spawn_level": 15,
         "rarity": "rare",
         "base_xp": 220,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           60,
@@ -57472,7 +57472,7 @@
         "rarity": "uncommon",
         "base_xp": 180,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           48
@@ -58480,7 +58480,7 @@
         "basic_attack": "soul chill",
         "strong_attack": "wailing gust",
         "player_abilities": [
-          "dark_magic_lv2_night_whisper"
+          "level_1_hostile_ability_night_whisper"
         ],
         "base_str": 2,
         "base_dex": 4,
@@ -59083,7 +59083,7 @@
         "min_spawn_level": 1,
         "rarity": "common",
         "base_xp": 8,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           0,
@@ -59349,7 +59349,7 @@
         "min_spawn_level": 7,
         "rarity": "uncommon",
         "base_xp": 48,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           8,
@@ -59401,7 +59401,7 @@
         "min_spawn_level": 4,
         "rarity": "uncommon",
         "base_xp": 50,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           10,
@@ -59616,7 +59616,7 @@
         "min_spawn_level": 16,
         "rarity": "rare",
         "base_xp": 220,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_int",
         "money_range": [
           48,
@@ -59779,7 +59779,7 @@
         "min_spawn_level": 4,
         "rarity": "uncommon",
         "base_xp": 30,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           2,
@@ -60043,7 +60043,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 44,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           10,
@@ -60684,7 +60684,7 @@
         "min_spawn_level": 8,
         "rarity": "rare",
         "base_xp": 110,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "pipe_wrench",
         "money_range": [
           18,
@@ -60900,7 +60900,7 @@
         "min_spawn_level": 10,
         "rarity": "rare",
         "base_xp": 128,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "tome_dex",
         "money_range": [
           30,
@@ -60954,7 +60954,7 @@
         "min_spawn_level": 5,
         "rarity": "uncommon",
         "base_xp": 40,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": null,
         "money_range": [
           6,
@@ -61386,7 +61386,7 @@
         "min_spawn_level": 15,
         "rarity": "rare",
         "base_xp": 220,
-        "common_drop": "lockpick",
+        "common_drop": "stimulant_small",
         "rare_drop": "stimulant_large",
         "money_range": [
           60,
@@ -62198,7 +62198,7 @@
         "rarity": "uncommon",
         "base_xp": 180,
         "common_drop": "herb_med",
-        "rare_drop": "lockpick",
+        "rare_drop": "stimulant_small",
         "money_range": [
           6,
           48

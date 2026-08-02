@@ -29,7 +29,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'edict_enforcer', 'name': 'Edict Enforcer', 'hostile_type': 'humanoid', 'min_spawn_level': 75, 'role': 'damage', 'rarity': 'uncommon',
-        'base_xp': 1800, 'common_drop': 'herb_large', 'rare_drop': None, 'money_range': (400, 800),
+        'base_xp': 1800, 'common_drop': 'herb_med', 'rare_drop': None, 'money_range': (400, 800),
         'basic_attack': 'compliance strike', 'strong_attack': 'judgment blow', 'player_abilities': [],
         'base_str': 55, 'base_dex': 45, 'base_con': 55, 'base_int': 25, 'base_hp': 6000, 'base_ap': 110,
         'str_per_level': 8, 'dex_per_level': 6, 'con_per_level': 8, 'int_per_level': 3,

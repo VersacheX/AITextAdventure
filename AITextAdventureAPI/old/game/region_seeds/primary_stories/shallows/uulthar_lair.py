@@ -202,7 +202,7 @@ HOSTILE_SEEDS = [  # all level 8–10, ~10 hostiles total
         'rarity': 'superrare',
         'base_xp': 300,
         'common_drop': 'herb_major',
-        'rare_drop': 'tome_faith_superrare',
+        'rare_drop': 'tome_con',
         'money_range': (50, 200),
         'basic_attack': 'void beam',
         'strong_attack': 'abyssal wave',
@@ -238,7 +238,7 @@ BOSS_HOSTILES = [
     {
         "id": "tide_fragment", "name": "Tide Fragment", "hostile_type": "magic", "role": "hazard",
         "min_spawn_level": 25, "rarity": "superrare", "base_xp": 480,
-        "common_drop": "herb_major", "rare_drop": "tome_faith", "money_range": (45,180),
+        "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (45,180),
         "basic_attack": "tidal lash", "strong_attack": "gravity swell",
         "player_abilities": ["water_tech_lv1_tide_entangler", "dark_magic_lv1_shadow_tendril"],
         "base_str": 6, "base_dex": 8, "base_con": 10, "base_int": 14,
@@ -248,7 +248,7 @@ BOSS_HOSTILES = [
     {
         "id": "uulthar_1", "name": "Uul’thar the Tide‑Wakened", "hostile_type": "magic", "role": "boss",
         "min_spawn_level": 30, "rarity": "notfound", "base_xp": 1200,
-        "common_drop": "herb_major", "rare_drop": "tome_faith", "money_range": (100,300),
+        "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (100,300),
         "basic_attack": "abyssal pull", "strong_attack": "void tide",
         "player_abilities": ["dark_dark_magic_lv2_umbra_storm", "water_dark_magic_lv2_abyssal_tide", "dark_faith_lv1_shade_whisper"],
         "base_str": 10, "base_dex": 10, "base_con": 14, "base_int": 18,

@@ -37,7 +37,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'role_enforcer', 'name': 'Role Enforcer', 'hostile_type': 'construct', 'min_spawn_level': 98, 'role': 'tank', 'rarity': 'rare',
-        'base_xp': 10500, 'common_drop': 'elixir_full', 'rare_drop': 'tome_str_superrare', 'money_range': (950, 1550),
+        'base_xp': 10500, 'common_drop': 'elixir_full_heal', 'rare_drop': 'tome_str_superrare', 'money_range': (950, 1550),
         'basic_attack': 'assigned purpose', 'strong_attack': 'role lock', 'player_abilities': [],
         'base_str': 55, 'base_dex': 40, 'base_con': 60, 'base_int': 38, 'base_hp': 48000, 'base_ap': 310,
         'str_per_level': 7, 'dex_per_level': 4, 'con_per_level': 7, 'int_per_level': 4,
@@ -45,7 +45,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'classification_construct', 'name': 'Classification Construct', 'hostile_type': 'aberration', 'min_spawn_level': 99, 'role': 'hazard', 'rarity': 'superrare',
-        'base_xp': 11500, 'common_drop': 'phoenix_down', 'rare_drop': 'tome_int_superrare', 'money_range': (1050, 1650),
+        'base_xp': 11500, 'common_drop': 'revive_kit', 'rare_drop': 'tome_int_superrare', 'money_range': (1050, 1650),
         'basic_attack': 'categorical strike', 'strong_attack': 'total filtration', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
         'base_str': 45, 'base_dex': 52, 'base_con': 48, 'base_int': 58, 'base_hp': 46000, 'base_ap': 420,
         'str_per_level': 5, 'dex_per_level': 6, 'con_per_level': 5, 'int_per_level': 7,
@@ -113,7 +113,7 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'hostile_seeds': HOSTILE_SEEDS,
     'npcs': DUNGEON_NPCS,
     'items': [
-        {'id': 'elixir_full', 'location': 'treasure_room'},
+        {'id': 'elixir_full_heal', 'location': 'treasure_room'},
         {'id': 'defibrillator', 'location': 'treasure_room'},
         {'id': 'tome_ap_superrare', 'location': 'treasure_room'},
     ],

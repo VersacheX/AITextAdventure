@@ -13,7 +13,7 @@ SEEDS_LV11TO20 = [
  {"id": "reed_harrier", "name": "Reed Harrier", "hostile_type": "creature", "role": "damage", "min_spawn_level":12, "rarity": "common", "base_xp":76, "common_drop": "herb_med", "rare_drop": None, "money_range": (8,44),
  "basic_attack": "swoop peck", "strong_attack": "mire talon", "player_abilities": [], "base_str":4, "base_dex":7, "base_con":4, "base_int":2, "base_hp":78, "base_ap":4, "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":0},
 
- {"id": "bog_scout", "name": "Bog Scout", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":12, "rarity": "uncommon", "base_xp":120, "common_drop": "lockpick", "rare_drop": None, "money_range": (12,64),
+ {"id": "bog_scout", "name": "Bog Scout", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":12, "rarity": "uncommon", "base_xp":120, "common_drop": "stimulant_small", "rare_drop": None, "money_range": (12,64),
  "basic_attack": "stabbing cut", "strong_attack": "dirty toss", "player_abilities": [], "base_str":5, "base_dex":6, "base_con":5, "base_int":4, "base_hp":96, "base_ap":5, "str_per_level":2, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
 
  {"id": "mire_usher", "name": "Mire Usher", "hostile_type": "spirit", "role": "hazard", "min_spawn_level":13, "rarity": "common", "base_xp":92, "common_drop": "herb_med", "rare_drop": None, "money_range": (10,56),
@@ -22,7 +22,7 @@ SEEDS_LV11TO20 = [
  {"id": "marsh_tad", "name": "Marsh Tad", "hostile_type": "creature", "role": "damage", "min_spawn_level":13, "rarity": "common", "base_xp":88, "common_drop": "herb_med", "rare_drop": None, "money_range": (9,48),
  "basic_attack": "moss nip", "strong_attack": "slip thrash", "player_abilities": [], "base_str":4, "base_dex":5, "base_con":4, "base_int":1, "base_hp":86, "base_ap":3, "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
 
- {"id": "marsh_trader", "name": "Marsh Trader", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":13, "rarity": "uncommon", "base_xp":115, "common_drop": "lockpick", "rare_drop": None, "money_range": (10,60),
+ {"id": "marsh_trader", "name": "Marsh Trader", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":13, "rarity": "uncommon", "base_xp":115, "common_drop": "stimulant_small", "rare_drop": None, "money_range": (10,60),
  "basic_attack": "barter swipe", "strong_attack": "hidden blade", "player_abilities": [], "base_str":4, "base_dex":6, "base_con":4, "base_int":4, "base_hp":90, "base_ap":4, "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
 
  {"id": "fen_ardent", "name": "Fen Ardent", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":14, "rarity": "uncommon", "base_xp":140, "common_drop": "herb_med", "rare_drop": "stimulant_med", "money_range": (14,72),
@@ -47,7 +47,7 @@ SEEDS_LV11TO20 = [
  "basic_attack": "alpha bite", "strong_attack": "thorn roar", "player_abilities": ["earth_dark_skill_lv5_venom_trace"], "base_str":10, "base_dex":5, "base_con":10, "base_int":2, "base_hp":280, "base_ap":6, "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":0},
 
  {"id": "wandering_lich", "name": "Wandering Lich", "hostile_type": "undead", "role": "hazard", "min_spawn_level":17, "rarity": "rare", "base_xp":420, "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (40,220),
- "basic_attack": "root bolt", "strong_attack": "necrotic rot", "player_abilities": ["dark_dark_magic_lv2_umbra_storm", "dark_magic_lv2_night_whisper"], "base_str":8, "base_dex":4, "base_con":10, "base_int":14, "base_hp":320, "base_ap":10, "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":3},
+ "basic_attack": "root bolt", "strong_attack": "necrotic rot", "player_abilities": ["dark_dark_magic_lv2_umbra_storm", "level_1_hostile_ability_night_whisper"], "base_str":8, "base_dex":4, "base_con":10, "base_int":14, "base_hp":320, "base_ap":10, "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":3},
 
  {"id": "praerie_colossus", "name": "Praerie Colossus", "hostile_type": "creature", "role": "damage", "min_spawn_level":17, "rarity": "common", "base_xp":240, "common_drop": "herb_major", "rare_drop": None, "money_range": (40,180),
  "basic_attack": "moss slam", "strong_attack": "spore quake", "player_abilities": [], "base_str":12, "base_dex":3, "base_con":12, "base_int":2, "base_hp":380, "base_ap":8, "str_per_level":4, "dex_per_level":0, "con_per_level":3, "int_per_level":0},
@@ -59,5 +59,5 @@ SEEDS_LV11TO20 = [
  "basic_attack": "soul grasp", "strong_attack": "void bind", "player_abilities": ["dark_dark_magic_lv2_umbra_storm"], "base_str":6, "base_dex":6, "base_con":8, "base_int":12, "base_hp":420, "base_ap":10, "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":3},
 
  {"id": "high_plains_archdruid", "name": "High Plains Archdruid", "hostile_type": "magic", "role": "support", "min_spawn_level":20, "rarity": "superrare", "base_xp":480, "common_drop": "stimulant_large", "rare_drop": "tome_int", "money_range": (60,280),
- "basic_attack": "thorn blast", "strong_attack": "ancient wrath", "player_abilities": ["water_dark_magic_lv5_gloom_tide", "air_electric_fire_technique_lv3_tempest_charge"], "base_str":8, "base_dex":6, "base_con":8, "base_int":14, "base_hp":480, "base_ap":10, "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":3},
+ "basic_attack": "thorn blast", "strong_attack": "ancient wrath", "player_abilities": ["lv2_hostile_ability_water_dark_magic_gloom_tide", "air_electric_fire_technique_lv3_tempest_charge"], "base_str":8, "base_dex":6, "base_con":8, "base_int":14, "base_hp":480, "base_ap":10, "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":3},
 ]

@@ -20,7 +20,7 @@ rendered:
 Flow per turn (mirrors the legacy inner loop in `CombatScreen.run()`):
   1. `_advance_turn()` checks for combat-over, then asks the simulation for
      the next ready unit.
-  2. A blocked (petrify/stun/sleep/paralyze) or confused unit auto-resolves
+  2. A blocked (petrify/stun/sleep) or confused unit auto-resolves
      its turn and immediately chains into `_advance_turn()` again.
   3. A hostile unit acts automatically and chains onward the same way.
   4. A player unit sets `_awaiting_player_input = True` and waits for an

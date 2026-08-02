@@ -61,7 +61,7 @@ RANDOM_HOSTILE_SEEDS = [
  "base_str":12, "base_dex":3, "base_con":12, "base_int":2, "base_hp":240, "base_ap":8,
  "str_per_level":3, "dex_per_level":0, "con_per_level":3, "int_per_level":0},
 
- {"id": "clockwork_colossus_small", "name": "Clockwork Colossus (small)", "hostile_type": "construct", "role": "support", "min_spawn_level":15, "rarity": "rare", "base_xp":320,
+ {"id": "clockwork_colossus_small", "name": "Clockwork Colossus", "hostile_type": "construct", "role": "support", "min_spawn_level":15, "rarity": "rare", "base_xp":320,
  "common_drop": "stimulant_large", "rare_drop": "kevlar_vest", "money_range": (60,220),
  "basic_attack": "mini piston swing", "strong_attack": "hydraulic crush", "player_abilities": ["air_earth_tech_lv5_reinforce_frame"],
  "base_str":14, "base_dex":2, "base_con":14, "base_int":1, "base_hp":300, "base_ap":4,
@@ -70,7 +70,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==16
  {"id": "elder_revenant_small", "name": "Elder Revenant", "hostile_type": "undead", "role": "hazard", "min_spawn_level":16, "rarity": "superrare", "base_xp":420,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (120,480),
- "basic_attack": "regal claw", "strong_attack": "necrotic wave", "player_abilities": ["dark_air_earth_light_magic_lv4_void_veil"],
+ "basic_attack": "regal claw", "strong_attack": "necrotic wave", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
  "base_str":9, "base_dex":6, "base_con":10, "base_int":8, "base_hp":320, "base_ap":10,
  "str_per_level":4, "dex_per_level":2, "con_per_level":3, "int_per_level":3},
 
@@ -88,8 +88,8 @@ RANDOM_HOSTILE_SEEDS = [
  "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":1},
 
  {"id": "thorn_shade_small", "name": "Thorn Shade", "hostile_type": "shadow", "role": "hazard", "min_spawn_level":17, "rarity": "uncommon", "base_xp":240,
- "common_drop": "herb_med", "rare_drop": "lockpick", "money_range": (90,360),
- "basic_attack": "dark tendril", "strong_attack": "vanishing thorn", "player_abilities": ["shadow_flicker"],
+ "common_drop": "herb_med", "rare_drop": "stimulant_small", "money_range": (90,360),
+ "basic_attack": "dark tendril", "strong_attack": "vanishing thorn", "player_abilities": ["level_1_hostile_ability_shadow_flicker"],
  "base_str":8, "base_dex":10, "base_con":7, "base_int":6, "base_hp":240, "base_ap":9,
  "str_per_level":2, "dex_per_level":3, "con_per_level":2, "int_per_level":1},
 
@@ -102,7 +102,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "lumen_guard_small", "name": "Lumen Guard", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":18, "rarity": "uncommon", "base_xp":320,
  "common_drop": "stimulant_med", "rare_drop": None, "money_range": (110,420),
- "basic_attack": "gleam strike", "strong_attack": "luminary volley", "player_abilities": ["light_faith_lv2_prism_burst"],
+ "basic_attack": "gleam strike", "strong_attack": "luminary volley", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst"],
  "base_str":9, "base_dex":8, "base_con":9, "base_int":6, "base_hp":320, "base_ap":10,
  "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":2},
 
@@ -115,7 +115,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "nocturne_revenant_small", "name": "Nocturne Revenant", "hostile_type": "shadow", "role": "hazard", "min_spawn_level":19, "rarity": "rare", "base_xp":360,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (120,480),
- "basic_attack": "ethereal stomp", "strong_attack": "void collapse", "player_abilities": ["night_whisper"],
+ "basic_attack": "ethereal stomp", "strong_attack": "void collapse", "player_abilities": ["level_1_hostile_ability_night_whisper"],
  "base_str":10, "base_dex":10, "base_con":10, "base_int":8, "base_hp":380, "base_ap":12,
  "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":2},
 
@@ -128,7 +128,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "dusk_warden_small", "name": "Dusk Warden", "hostile_type": "construct", "role": "support", "min_spawn_level":20, "rarity": "uncommon", "base_xp":420,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (150,700),
- "basic_attack": "twilight crush", "strong_attack": "dusken cataclysm", "player_abilities": ["air_earth_tech_lv5_reinforce_frame", "fire_technique_lv4_berserker_tech"],
+ "basic_attack": "twilight crush", "strong_attack": "dusken cataclysm", "player_abilities": ["air_earth_tech_lv5_reinforce_frame", "earth_fire_technique_lv2_berserker_tech"],
  "base_str":14, "base_dex":6, "base_con":14, "base_int":6, "base_hp":420, "base_ap":12,
  "str_per_level":4, "dex_per_level":2, "con_per_level":3, "int_per_level":2},
 ]

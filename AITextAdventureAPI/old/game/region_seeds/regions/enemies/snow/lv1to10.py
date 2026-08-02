@@ -34,7 +34,7 @@ SEEDS_LV1TO10 = [
  "basic_attack": "riveting jab", "strong_attack": "steel uppercut", "player_abilities": [], "base_str":5, "base_dex":3, "base_con":5, "base_int":2, "base_hp":40, "base_ap":5, "str_per_level":1, "dex_per_level":0, "con_per_level":1, "int_per_level":0},
 
  {"id": "frozen_vendor_drone", "name": "Frozen Vendor Drone", "hostile_type": "construct", "role": "damage", "min_spawn_level":3, "rarity": "uncommon", "base_xp":46, "common_drop": "stimulant_med", "money_range": (10,44),
- "basic_attack": "servo jab", "strong_attack": "cold discharge", "player_abilities": ["fire_water_tech_lv2_steam_grenade"], "base_str":4, "base_dex":3, "base_con":4, "base_int":3, "base_hp":44, "base_ap":5, "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":1},
+ "basic_attack": "servo jab", "strong_attack": "cold discharge", "player_abilities": ["lv2_hostile_ability_fire_water_tech_steam_grenade"], "base_str":4, "base_dex":3, "base_con":4, "base_int":3, "base_hp":44, "base_ap":5, "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":1},
 
  {"id": "glow_moth", "name": "Glow Moth", "hostile_type": "creature", "role": "damage", "min_spawn_level":3, "rarity": "common", "base_xp":22, "common_drop": "herb_minor", "money_range": (2,12),
  "basic_attack": "flit hit", "strong_attack": "luminous gust", "player_abilities": [], "base_str":1, "base_dex":6, "base_con":1, "base_int":3, "base_hp":18, "base_ap":3, "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":1},
@@ -50,11 +50,11 @@ SEEDS_LV1TO10 = [
  "basic_attack": "chain jab", "strong_attack": "pipe smash", "player_abilities": [], "base_str":4, "base_dex":4, "base_con":3, "base_int":2, "base_hp":36, "base_ap":4, "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
 
  # Level5
- {"id": "cold_case_investigator", "name": "Cold-case Investigator", "hostile_type": "humanoid", "role": "support", "min_spawn_level":5, "rarity": "rare", "base_xp":120, "common_drop": "stimulant_med", "rare_drop": "lockpick", "money_range": (20,100),
+ {"id": "cold_case_investigator", "name": "Cold-case Investigator", "hostile_type": "humanoid", "role": "support", "min_spawn_level":5, "rarity": "rare", "base_xp":120, "common_drop": "stimulant_med", "rare_drop": "stimulant_small", "money_range": (20,100),
  "basic_attack": "interrogation jab", "strong_attack": "evidence slam", "player_abilities": ["light_faith_lv5_ardent_inspire"], "base_str":6, "base_dex":5, "base_con":6, "base_int":6, "base_hp":92, "base_ap":6, "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
 
  {"id": "spectral_trapper", "name": "Spectral Trapper", "hostile_type": "spirit", "role": "hazard", "min_spawn_level":5, "rarity": "uncommon", "base_xp":100, "common_drop": "herb_med", "money_range": (8,48),
- "basic_attack": "ethereal snare", "strong_attack": "phantom crush", "player_abilities": ["dark_magic_lv2_night_whisper"], "base_str":2, "base_dex":4, "base_con":3, "base_int":6, "base_hp":60, "base_ap":6, "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":2},
+ "basic_attack": "ethereal snare", "strong_attack": "phantom crush", "player_abilities": ["level_1_hostile_ability_night_whisper"], "base_str":2, "base_dex":4, "base_con":3, "base_int":6, "base_hp":60, "base_ap":6, "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":2},
 
  # Level6
  {"id": "iceberg_stalker", "name": "Iceberg Stalker", "hostile_type": "creature", "role": "damage", "min_spawn_level":6, "rarity": "uncommon", "base_xp":150, "common_drop": "herb_major", "money_range": (20,90),
@@ -76,5 +76,5 @@ SEEDS_LV1TO10 = [
 
  # Level10
  {"id": "ice_shaman", "name": "Ice Shaman", "hostile_type": "elemental", "role": "hazard", "min_spawn_level":10, "rarity": "superrare", "base_xp":640, "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (45,180),
- "basic_attack": "chill touch", "strong_attack": "glacial wave", "player_abilities": ["water_air_light_magic_lv4_frost_nova"], "base_str":8, "base_dex":6, "base_con":10, "base_int":14, "base_hp":720, "base_ap":12, "str_per_level":3, "dex_per_level":1, "con_per_level":3, "int_per_level":3},
+ "basic_attack": "chill touch", "strong_attack": "glacial wave", "player_abilities": ["lv2_hostile_ability_ice_light_magic_frost_nova"], "base_str":8, "base_dex":6, "base_con":10, "base_int":14, "base_hp":720, "base_ap":12, "str_per_level":3, "dex_per_level":1, "con_per_level":3, "int_per_level":3},
 ]

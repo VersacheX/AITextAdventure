@@ -3,14 +3,14 @@ from typing import Optional, List, Dict, Any
 # Utility helpers to compute damage modifiers from statuses.
 # These are intentionally simple and can be adjusted later.
 
-BLOCKING_STATUS_IDS = {"petrify", "stun", "sleep", "paralyze"}
+BLOCKING_STATUS_IDS = {"petrify", "stun", "sleep"}
 
 
 def get_blocking_status(entity: Optional[object]) -> Optional[Dict[str, Any]]:
 	"""Return the first blocking status dict applied to `entity`, or None.
 
 	Blocking statuses are those that prevent the entity from taking actions during
-	their turn (e.g. petrify, stun, sleep, paralyze).
+	their turn (e.g. petrify, stun, sleep).
 	"""
 	if entity is None:
 		return None

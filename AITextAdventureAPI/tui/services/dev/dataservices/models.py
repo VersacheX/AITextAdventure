@@ -201,6 +201,8 @@ class HostileNode:
     record: DevRecord
     seed: Dict[str, Any] = field(default_factory=dict)
     errors: List[HostileValidationError] = field(default_factory=list)
+    location_dungeon: str = ""   # Dungeon display name, or "Overworld"
+    location_region: str = ""    # Region name or city name
 
 
 @dataclass

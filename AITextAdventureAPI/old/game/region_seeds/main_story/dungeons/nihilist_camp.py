@@ -29,7 +29,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'hollow_zealot', 'name': 'Hollow Zealot', 'hostile_type': 'humanoid', 'min_spawn_level': 60, 'role': 'damage', 'rarity': 'uncommon',
-        'base_xp': 750, 'common_drop': 'herb_large', 'rare_drop': None, 'money_range': (140, 280),
+        'base_xp': 750, 'common_drop': 'herb_med', 'rare_drop': None, 'money_range': (140, 280),
         'basic_attack': 'void strike', 'strong_attack': 'nothingness wave', 'player_abilities': ['dark_magic_lv1_shadow_tendril'],
         'base_str': 35, 'base_dex': 25, 'base_con': 32, 'base_int': 20, 'base_hp': 2200, 'base_ap': 70,
         'str_per_level': 4, 'dex_per_level': 3, 'con_per_level': 4, 'int_per_level': 2,
@@ -44,7 +44,7 @@ DUNGEON_NPCS = [
 BOSS_MOB = {
     'id': 'nihilist_leader_1',
     'name': 'Nihilist Leader',
-    'hostiles': ['nihilist_leader_1', 'despair_cultist', 'despair_cultist']
+    'hostiles': ['nihilist_leader_1', 'anarchist', 'anarchist']
 }
 
 BOSS_HOSTILES = [
@@ -55,6 +55,14 @@ BOSS_HOSTILES = [
         'base_str': 38, 'base_dex': 38, 'base_con': 35, 'base_int': 40, 'base_hp': 30000, 'base_ap': 500,
         'str_per_level': 4, 'dex_per_level': 4, 'con_per_level': 4, 'int_per_level': 5,
         'resistances': ['dark', 'ice'], 'immunities': ['fear', 'sleep', 'confuse'], 'weaknesses': ['light']
+    },
+    {
+        'id': 'anarchist', 'name': 'Anarchist', 'hostile_type': 'humanoid', 'min_spawn_level': 55, 'role': 'damage', 'rarity': 'uncommon',
+        'base_xp': 8000, 'common_drop': 'herb_med', 'rare_drop': None, 'money_range': (1400, 2800),
+        'basic_attack': 'chaotic strike', 'strong_attack': 'anarchy wave', 'player_abilities': ['dark_magic_lv1_shadow_tendril'],
+        'base_str': 35, 'base_dex': 25, 'base_con': 32, 'base_int': 20, 'base_hp': 2200, 'base_ap': 70,
+        'str_per_level': 4, 'dex_per_level': 3, 'con_per_level': 4, 'int_per_level': 2,
+        'resistances': ['dark'], 'immunities': ['confuse'], 'weaknesses': ['light']
     }
 ]
 

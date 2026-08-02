@@ -23,9 +23,9 @@ DUNGEON_NPCS: List[Dict] = [
 ]
 
 DUNGEON_ITEMS: List[Dict] = [
-    {'id': 'herb_large',      'location': 'treasure_room'},
+    {'id': 'herb_med',      'location': 'treasure_room'},
     {'id': 'stimulant_large', 'location': 'treasure_room'},
-    {'id': 'remedy_large',    'location': 'final_chamber'},
+    {'id': 'stimulant_med',    'location': 'final_chamber'},
 ]
 
 FLOOR_HOSTILES: Dict[int, List[str]] = {
@@ -41,7 +41,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'common',
         'base_xp': 610,
-        'common_drop': 'herb_large',
+        'common_drop': 'herb_med',
         'rare_drop': None,
         'money_range': (165, 528),
         'basic_attack': 'drives an ember-heated fist through plating',
@@ -62,8 +62,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'hazard',
         'rarity': 'uncommon',
         'base_xp': 744,
-        'common_drop': 'remedy_large',
-        'rare_drop': 'herb_large',
+        'common_drop': 'stimulant_med',
+        'rare_drop': 'herb_med',
         'money_range': (198, 634),
         'basic_attack': 'channels the heat of the cavern into a draining pulse',
         'strong_attack': 'cavern drain',
@@ -84,7 +84,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'rarity': 'rare',
         'base_xp': 944,
         'common_drop': 'stimulant_large',
-        'rare_drop': 'remedy_large',
+        'rare_drop': 'stimulant_med',
         'money_range': (248, 792),
         'basic_attack': 'holds the cavern passage and strikes with forge-pressure force',
         'strong_attack': 'pressure crash',
@@ -104,8 +104,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'superrare',
         'base_xp': 1272,
-        'common_drop': 'herb_large',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'herb_med',
+        'rare_drop': 'stimulant_med',
         'money_range': (298, 952),
         'basic_attack': 'channels void-corruption through emberwake heat into a strike',
         'strong_attack': 'void ember surge',
@@ -134,8 +134,8 @@ BOSS_HOSTILES: List[Dict] = [
         'role': 'damage',
         'rarity': 'notfound',
         'base_xp': 43000,
-        'common_drop': 'remedy_large',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'stimulant_med',
+        'rare_drop': 'stimulant_med',
         'money_range': (1040, 3120),
         'basic_attack': 'floods the cavern with the forge-pressure it has held since the first furnace burned here',
         'strong_attack': 'emberwake dominion',

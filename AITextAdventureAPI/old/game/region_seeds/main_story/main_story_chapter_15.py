@@ -37,7 +37,7 @@ ATTAINABLE_PLAYER_CHARACTERS = [
             "light_technique_lv1_rally",
             "light_light_technique_lv2_divine_shield",
             "ice_technique_lv1_chilling_blow",
-            "ice_ice_technique_lv2_frost_nova",
+            "lv2_hostile_ability_ice_light_magic_frost_nova",
             "light_ice_technique_lv3_winters_grace",
             "light_light_ice_technique_lv4_final_stand"
         ]

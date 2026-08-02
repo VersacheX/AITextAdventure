@@ -47,7 +47,7 @@ LEVEL_3_MAGIC_SEEDS = [
     {"id": "earth_earth_earth_magic_lv3_earthshaker", "name": "Earthshaker", "description": "A powerful quake that shakes the ground.", "ability_type": "magic", "level":3, "elements": ["earth", "earth", "earth"], "base_power":90, "ap_cost":95, "effect": "damage", "can_aoe": True},
     {"id": "air_air_air_magic_lv3_storm_surge", "name": "Storm Surge", "description": "A surge of violent winds.", "ability_type": "magic", "level":3, "elements": ["air", "air", "air"], "base_power":88, "ap_cost":95, "effect": "damage", "can_aoe": True},
     {"id": "light_light_light_magic_lv3_radiant_burst", "name": "Radiant Burst", "description": "A burst of pure light energy.", "ability_type": "magic", "level":3, "elements": ["light", "light", "light"], "base_power":92, "ap_cost":100, "effect": "damage", "can_aoe": True},
-    {"id": "ice_ice_ice_magic_lv3_frost_nova", "name": "Frost Nova", "description": "A nova of freezing energy.", "ability_type": "magic", "level":3, "elements": ["ice", "ice", "ice"], "base_power":86, "ap_cost":95, "effect": "damage", "can_aoe": True},
+    {"id": "ice_ice_ice_magic_lv3_hailstorm", "name": "Hailstorm", "description": "A nova of freezing energy.", "ability_type": "magic", "level":3, "elements": ["ice", "ice", "ice"], "base_power":86, "ap_cost":95, "effect": "damage", "can_aoe": True},
     {"id": "electric_electric_electric_magic_lv3_thunderstorm", "name": "Thunderstorm", "description": "A storm of electric fury.", "ability_type": "magic", "level":3, "elements": ["electric", "electric", "electric"], "base_power":90, "ap_cost":100, "effect": "damage", "can_aoe": True},
 
       ##CONTINUOUS DAMAGE

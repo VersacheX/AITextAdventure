@@ -16,9 +16,9 @@ DUNGEON_NPCS: List[Dict] = [
 ]
 
 DUNGEON_ITEMS: List[Dict] = [
-    {'id': 'herb_large',         'location': 'treasure_room'},
+    {'id': 'herb_med',         'location': 'treasure_room'},
     {'id': 'stimulant_large',    'location': 'treasure_room'},
-    {'id': 'remedy_med',         'location': 'final_chamber'},
+    {'id': 'petrify_salve',         'location': 'final_chamber'},
 ]
 
 FLOOR_HOSTILES: Dict[int, List[str]] = {
@@ -30,16 +30,26 @@ HOSTILE_SEEDS: List[Dict] = [
         'id': 'murk_drifter',
         'name': 'Murk Drifter',
         'hostile_type': 'humanoid',
-        'min_spawn_level': 32,
         'role': 'damage',
+
+        'min_spawn_level': 32,        
         'rarity': 'common',
         'base_xp': 210,
+
         'common_drop': 'herb_med',
         'rare_drop': None,
         'money_range': (55, 140),
+
         'basic_attack': 'slams with a waterlogged club',
         'strong_attack': 'dredging slam',
-        'player_abilities': ['heavy_strike', 'taunt'],
+        'player_abilities': ['water_technique_lv1_slick_manuever', 'earth_technique_lv1_armor_up'],
+
+        'base_str': 6, 'base_dex': 5, 'base_con': 5, 'base_int': 3,
+        'base_hp': 200, 'base_ap': 54,
+        'str_per_level': 5, 'dex_per_level': 3, 'con_per_level': 3, 'int_per_level': 1,
+        'resistances': ['water'],
+        'immunities': [],
+        'weaknesses': ['fire']
     },
     {
         'id': 'rot_tendril',
@@ -49,12 +59,19 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'hazard',
         'rarity': 'uncommon',
         'base_xp': 245,
-        'common_drop': 'remedy_small',
-        'rare_drop': 'remedy_med',
+        'common_drop': 'ointment',
+        'rare_drop': 'petrify_salve',
         'money_range': (60, 155),
         'basic_attack': 'lashes with a rotting tendril',
         'strong_attack': 'constricting wrap',
         'player_abilities': ['poison_strike', 'ensnare'],
+
+        'base_str': 5, 'base_dex': 6, 'base_con': 5, 'base_int': 2,
+        'base_hp': 220, 'base_ap': 48,
+        'str_per_level': 4, 'dex_per_level': 4, 'con_per_level': 3, 'int_per_level': 1,
+        'resistances': ['continuous_damage'],
+        'immunities': [],
+        'weaknesses': ['fire']
     },
     {
         'id': 'sludge_crawler',
@@ -65,11 +82,18 @@ HOSTILE_SEEDS: List[Dict] = [
         'rarity': 'rare',
         'base_xp': 295,
         'common_drop': 'stimulant_med',
-        'rare_drop': 'armor_shard',
+        'rare_drop': 'plasma_carapace',
         'money_range': (80, 200),
         'basic_attack': 'crashes forward with its armored shell',
         'strong_attack': 'sludge crush',
-        'player_abilities': ['fortify', 'ground_slam'],
+        'player_abilities': ['earth_light_technique_lv2_stone_guard', 'earth_earth_technique_lv2_brutal_swing'],
+
+        'base_str': 8, 'base_dex': 4, 'base_con': 8, 'base_int': 2,
+        'base_hp': 300, 'base_ap': 60,
+        'str_per_level': 5, 'dex_per_level': 2, 'con_per_level': 4, 'int_per_level': 1,
+        'resistances': ['earth'],
+        'immunities': ['stun'],
+        'weaknesses': ['water']
     },
     {
         'id': 'channel_wraith',
@@ -80,11 +104,18 @@ HOSTILE_SEEDS: List[Dict] = [
         'rarity': 'superrare',
         'base_xp': 370,
         'common_drop': 'tome_int',
-        'rare_drop': 'rift_shard',
+        'rare_drop': 'greatsword',
         'money_range': (110, 280),
         'basic_attack': 'phases through and drains life',
         'strong_attack': 'channel devour',
-        'player_abilities': ['void_strike', 'life_drain'],
+        'player_abilities': ['lv2_hostile_ability_dark_electric_magic_abyssal_storm', 'air_dark_magic_lv2_gloom_vortex'],
+
+        'base_str': 6, 'base_dex': 7, 'base_con': 5, 'base_int': 8,
+        'base_hp': 250, 'base_ap': 70,
+        'str_per_level': 4, 'dex_per_level': 4, 'con_per_level': 3, 'int_per_level': 5,
+        'resistances': ['dark', 'electric'],
+        'immunities': ['sleep', 'silence'],
+        'weaknesses': ['light']
     },
 ]
 

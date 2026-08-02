@@ -37,7 +37,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'pattern_enforcer', 'name': 'Pattern Enforcer', 'hostile_type': 'aberration', 'min_spawn_level': 101, 'role': 'damage', 'rarity': 'rare',
-        'base_xp': 12000, 'common_drop': 'elixir_full', 'rare_drop': 'tome_str_superrare', 'money_range': (1100, 1700),
+        'base_xp': 12000, 'common_drop': 'elixir_full_heal', 'rare_drop': 'tome_str_superrare', 'money_range': (1100, 1700),
         'basic_attack': 'repetition strike', 'strong_attack': 'pattern lock', 'player_abilities': [],
         'base_str': 65, 'base_dex': 60, 'base_con': 58, 'base_int': 52, 'base_hp': 52000, 'base_ap': 370,
         'str_per_level': 8, 'dex_per_level': 7, 'con_per_level': 7, 'int_per_level': 6,
@@ -45,7 +45,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'recursive_horror', 'name': 'Recursive Horror', 'hostile_type': 'aberration', 'min_spawn_level': 102, 'role': 'hazard', 'rarity': 'superrare',
-        'base_xp': 13000, 'common_drop': 'phoenix_down', 'rare_drop': 'tome_int_superrare', 'money_range': (1200, 1800),
+        'base_xp': 13000, 'common_drop': 'revive_kit', 'rare_drop': 'tome_int_superrare', 'money_range': (1200, 1800),
         'basic_attack': 'feedback loop', 'strong_attack': 'recursive collapse', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
         'base_str': 52, 'base_dex': 55, 'base_con': 60, 'base_int': 72, 'base_hp': 54000, 'base_ap': 460,
         'str_per_level': 6, 'dex_per_level': 6, 'con_per_level': 7, 'int_per_level': 9,
@@ -105,8 +105,8 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'hostile_seeds': HOSTILE_SEEDS,
     'npcs': DUNGEON_NPCS,
     'items': [
-        {'id': 'elixir_full', 'location': 'treasure_room'},
-        {'id': 'phoenix_down', 'location': 'treasure_room'},
+        {'id': 'elixir_full_heal', 'location': 'treasure_room'},
+        {'id': 'revive_kit', 'location': 'treasure_room'},
         {'id': 'tome_hp_superrare', 'location': 'treasure_room'},
     ],
     'boss_mob': BOSS_MOB,

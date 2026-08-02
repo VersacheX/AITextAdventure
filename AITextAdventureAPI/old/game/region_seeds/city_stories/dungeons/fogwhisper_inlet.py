@@ -23,9 +23,9 @@ DUNGEON_NPCS: List[Dict] = [
 ]
 
 DUNGEON_ITEMS: List[Dict] = [
-    {'id': 'herb_large',      'location': 'treasure_room'},
+    {'id': 'herb_med',      'location': 'treasure_room'},
     {'id': 'stimulant_large', 'location': 'treasure_room'},
-    {'id': 'remedy_large',    'location': 'final_chamber'},
+    {'id': 'stimulant_med',    'location': 'final_chamber'},
 ]
 
 FLOOR_HOSTILES: Dict[int, List[str]] = {
@@ -41,7 +41,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'common',
         'base_xp': 496,
-        'common_drop': 'herb_large',
+        'common_drop': 'herb_med',
         'rare_drop': None,
         'money_range': (134, 428),
         'basic_attack': 'drifts through the fog and strikes from an unseen angle',
@@ -62,8 +62,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'hazard',
         'rarity': 'uncommon',
         'base_xp': 604,
-        'common_drop': 'remedy_large',
-        'rare_drop': 'herb_large',
+        'common_drop': 'stimulant_med',
+        'rare_drop': 'herb_med',
         'money_range': (162, 516),
         'basic_attack': 'sends a devoured warning as a concussive strike',
         'strong_attack': 'warning drain',
@@ -84,7 +84,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'rarity': 'rare',
         'base_xp': 768,
         'common_drop': 'stimulant_large',
-        'rare_drop': 'remedy_large',
+        'rare_drop': 'stimulant_med',
         'money_range': (202, 646),
         'basic_attack': 'holds the inlet passage and strikes with tide-pressure force',
         'strong_attack': 'inlet crush',
@@ -104,8 +104,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'superrare',
         'base_xp': 1034,
-        'common_drop': 'herb_large',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'herb_med',
+        'rare_drop': 'stimulant_med',
         'money_range': (242, 774),
         'basic_attack': 'condenses void-infused fog into a focused strike',
         'strong_attack': 'void fog collapse',

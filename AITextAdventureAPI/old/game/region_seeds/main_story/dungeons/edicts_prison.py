@@ -29,7 +29,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 're-education_drone', 'name': 'Re-Education Drone', 'hostile_type': 'construct', 'min_spawn_level': 70, 'role': 'hazard', 'rarity': 'uncommon',
-        'base_xp': 1400, 'common_drop': 'herb_large', 'rare_drop': None, 'money_range': (280, 560),
+        'base_xp': 1400, 'common_drop': 'herb_med', 'rare_drop': None, 'money_range': (280, 560),
         'basic_attack': 'psionic pulse', 'strong_attack': 'conformity beam', 'player_abilities': ['light_faith_lv1_convert'],
         'base_str': 25, 'base_dex': 45, 'base_con': 40, 'base_int': 50, 'base_hp': 3800, 'base_ap': 110,
         'str_per_level': 3, 'dex_per_level': 6, 'con_per_level': 5, 'int_per_level': 7,
@@ -66,7 +66,7 @@ BOSS_MOB = {
 BOSS_HOSTILES = [
     {
         'id': 'prison_warden_boss', 'name': 'Prison Warden', 'hostile_type': 'construct', 'min_spawn_level': 72, 'role': 'damage', 'rarity': 'notfound',
-        'base_xp': 20000, 'common_drop': 'tome_con_superrare', 'rare_drop': 'warden_key', 'money_range': (2500, 5000),
+        'base_xp': 20000, 'common_drop': 'tome_con_superrare', 'rare_drop': 'standard_warblade', 'money_range': (2500, 5000),
         'basic_attack': 'judgement strike', 'strong_attack': 'protocol omega', 'player_abilities': ['earth_technique_lv1_armor_up'],
         'base_str': 65, 'base_dex': 35, 'base_con': 65, 'base_int': 30, 'base_hp': 80000, 'base_ap': 400,
         'str_per_level': 9, 'dex_per_level': 4, 'con_per_level': 9, 'int_per_level': 3,

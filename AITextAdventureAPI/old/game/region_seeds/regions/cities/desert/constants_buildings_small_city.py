@@ -16,7 +16,7 @@ ROOM_MENU = [
 
 # Rough survival rations and brews
 DRINK_MENU = [
-	{"id": "water", "name": "Sterilized Water", "value":2, "hp_fraction":0.05, "ap_fraction":0.0, "min_level":1},
+	{"id": "sterilized_water", "name": "Sterilized Water", "value":2, "hp_fraction":0.05, "ap_fraction":0.0, "min_level":1},
 	{"id": "jerkyshot", "name": "Jerky Shot", "value":8, "hp_fraction":0.18, "ap_fraction":0.05, "min_level":1},
 	{"id": "radtea", "name": "Rad Tea", "value":20, "hp_fraction":0.40, "ap_fraction":0.15, "min_level":2},
 	{"id": "adrenaline", "name": "Adrenaline Draught", "value":60, "hp_fraction":0.75, "ap_fraction":0.40, "min_level":4},

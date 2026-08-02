@@ -23,9 +23,9 @@ DUNGEON_NPCS: List[Dict] = [
 ]
 
 DUNGEON_ITEMS: List[Dict] = [
-    {'id': 'herb_large',      'location': 'treasure_room'},
+    {'id': 'herb_med',      'location': 'treasure_room'},
     {'id': 'stimulant_large', 'location': 'treasure_room'},
-    {'id': 'remedy_large',    'location': 'final_chamber'},
+    {'id': 'stimulant_med',    'location': 'final_chamber'},
 ]
 
 FLOOR_HOSTILES: Dict[int, List[str]] = {
@@ -41,7 +41,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'common',
         'base_xp': 252,
-        'common_drop': 'herb_large',
+        'common_drop': 'herb_med',
         'rare_drop': None,
         'money_range': (66, 210),
         'basic_attack': 'slashes with a script-hardened tendril',
@@ -62,8 +62,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'hazard',
         'rarity': 'uncommon',
         'base_xp': 308,
-        'common_drop': 'remedy_med',
-        'rare_drop': 'herb_large',
+        'common_drop': 'petrify_salve',
+        'rare_drop': 'herb_med',
         'money_range': (78, 248),
         'basic_attack': 'blots out vision with a spray of corrupted ink',
         'strong_attack': 'ink blind',
@@ -84,7 +84,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'rarity': 'rare',
         'base_xp': 392,
         'common_drop': 'stimulant_large',
-        'rare_drop': 'remedy_large',
+        'rare_drop': 'stimulant_med',
         'money_range': (96, 308),
         'basic_attack': 'pins targets beneath archival weight',
         'strong_attack': 'vault lock',
@@ -104,8 +104,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'superrare',
         'base_xp': 532,
-        'common_drop': 'herb_large',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'herb_med',
+        'rare_drop': 'stimulant_med',
         'money_range': (128, 412),
         'basic_attack': "rewrites the target's defenses with stolen identity-ink",
         'strong_attack': 'identity rewrite',
@@ -134,8 +134,8 @@ BOSS_HOSTILES: List[Dict] = [
         'role': 'damage',
         'rarity': 'notfound',
         'base_xp': 8500,
-        'common_drop': 'remedy_large',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'stimulant_med',
+        'rare_drop': 'stimulant_med',
         'money_range': (210, 630),
         'basic_attack': 'floods the sanctum with identity-corroding ink',
         'strong_attack': 'veilscript erasure',

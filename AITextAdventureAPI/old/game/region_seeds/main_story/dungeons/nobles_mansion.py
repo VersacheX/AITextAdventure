@@ -35,7 +35,7 @@ HOSTILE_SEEDS = [
  'money_range': (20,40),
  'basic_attack': 'phantasmal touch',
  'strong_attack': 'soul lash',
- 'player_abilities': ['dark_dark_magic_lv2_umbra_storm', 'air_dark_tech_lv2_hush_now'],
+ 'player_abilities': ['dark_dark_magic_lv2_umbra_storm', 'dark_air_lv2_echo_displacer'],
  'base_str':8,
  'base_dex':12,
  'base_con':10,

@@ -79,7 +79,7 @@ Every entry in both `hostile_seeds` and `boss_hostiles` must include **all** of 
 | Field          | Type              | Description                                              | Example          |
 | -------------- | ----------------- | -------------------------------------------------------- | ---------------- |
 | `base_xp`      | `int`             | Base XP awarded on defeat.                               | `28`             |
-| `common_drop`  | `str` / `None`    | Item ID of the common drop. `None` for no common drop.   | `'herb_small'`   |
+| `common_drop`  | `str` / `None`    | Item ID of the common drop. `None` for no common drop.   | `'herb_minor'`   |
 | `rare_drop`    | `str` / `None`    | Item ID of the rare drop. `None` for no rare drop.       | `'tome_dex'`     |
 | `money_range`  | `Tuple[int, int]` | Min/max gold dropped on defeat.                          | `(5, 18)`        |
 
@@ -296,7 +296,7 @@ HOSTILE_SEEDS = [
         'role': 'damage',
         'rarity': 'common',
         'base_xp': 6,
-        'common_drop': 'herb_small',
+        'common_drop': 'herb_minor',
         'rare_drop': None,
         'money_range': (1, 5),
         'basic_attack': 'gnaws at exposed skin',
@@ -317,7 +317,7 @@ HOSTILE_SEEDS = [
         'role': 'hazard',
         'rarity': 'uncommon',
         'base_xp': 14,
-        'common_drop': 'remedy_small',
+        'common_drop': 'ointment',
         'rare_drop': None,
         'money_range': (2, 8),
         'basic_attack': 'bites with venom-coated fangs',
@@ -347,7 +347,7 @@ BOSS_HOSTILES = [
         'role': 'damage',
         'rarity': 'notfound',
         'base_xp': 320,
-        'common_drop': 'herb_small',
+        'common_drop': 'herb_minor',
         'rare_drop': 'tome_str',
         'money_range': (20, 60),
         'basic_attack': 'slams with a sceptre of bound rat-bones',

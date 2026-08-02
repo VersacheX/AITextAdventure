@@ -77,7 +77,7 @@ class DataMgmtScreen(BaseScreen):
     }
 
     #dm-filter {
-        width: 1fr;
+        width: 24;
     }
 
     #dm-dialog-filter-row {
@@ -110,14 +110,64 @@ class DataMgmtScreen(BaseScreen):
         align: left middle;
     }
 
+    #dm-hostile-filter-row {
+        width: 1fr;
+        height: auto;
+        display: none;
+        padding: 1 0;
+    }
+
+    #dm-hostile-filter-row Label {
+        width: auto;
+        padding: 0 1;
+        content-align: left middle;
+    }
+
+    #dm-hostile-filter-row Horizontal {
+        height: auto;
+        width: 1fr;
+        align: left middle;
+    }
+
     #dm-equipment-table {
+        height: 1fr;
+        display: none;
+    }
+
+    #dm-hostile-table {
+        height: 1fr;
+        display: none;
+    }
+
+    #dm-ability-filter-row {
+        width: 1fr;
+        height: auto;
+        display: none;
+        padding: 1 0;
+    }
+
+    #dm-ability-filter-row Label {
+        width: auto;
+        padding: 0 1;
+        content-align: left middle;
+    }
+
+    #dm-ability-filter-row Horizontal {
+        height: auto;
+        width: 1fr;
+        align: left middle;
+    }
+
+    #dm-ability-table {
         height: 1fr;
         display: none;
     }
 
     #dm-equipment-type-radio,
     #dm-equipment-slot-radio,
-    #dm-equipment-sort-radio {
+    #dm-equipment-sort-radio,
+    #dm-hostile-sort-radio,
+    #dm-ability-sort-radio {
         width: 1fr;
         height: auto;
         layout: horizontal;
@@ -133,7 +183,22 @@ class DataMgmtScreen(BaseScreen):
         margin-right: 1;
     }
 
-    #dm-equip-sort-dir {
+    #dm-hostile-sort-radio RadioButton {
+        width: auto;
+        min-width: 6;
+        margin-right: 0;
+        padding: 0 1;
+    }
+
+    #dm-ability-sort-radio RadioButton {
+        width: auto;
+        min-width: 6;
+        margin-right: 0;
+        padding: 0 1;
+    }
+
+    #dm-equip-sort-dir,
+    #dm-hostile-sort-dir {
         width: auto;
         min-width: 3;
         height: auto;
@@ -281,6 +346,12 @@ class DataMgmtScreen(BaseScreen):
 
         # Equipment sort state
         self._equipment_sort_asc: bool = True
+        # Hostile sort state
+        self._hostile_sort_asc: bool = True
+        self._hostile_flat_nodes: List[Any] = []
+        # Ability sort state
+        self._ability_sort_asc: bool = True
+        self._ability_flat_nodes: List[Any] = []
 
         self._npc_music = NPCMusicController(
             music_dir=_MUSIC_DIR,
@@ -329,6 +400,25 @@ class DataMgmtScreen(BaseScreen):
                         yield RadioButton("TSP",  id="equip-sort-tsp")
                         yield RadioButton("TEP",  id="equip-sort-tep")
                         yield RadioButton("TP",   id="equip-sort-tp")
+            with Vertical(id="dm-hostile-filter-row"):
+                with Horizontal():
+                    yield Label("Sort:")
+                    with RadioSet(id="dm-hostile-sort-radio"):
+                        yield RadioButton("Lv",       value=True, id="hostile-sort-lv")
+                        yield RadioButton("Rar",                  id="hostile-sort-rarity")
+                        yield RadioButton("Dungeon",              id="hostile-sort-dungeon")
+                        yield RadioButton("Region",               id="hostile-sort-region")
+                        yield RadioButton("Name",                 id="hostile-sort-name")
+                        yield RadioButton("Severity",             id="hostile-sort-severity")
+            with Vertical(id="dm-ability-filter-row"):
+                with Horizontal():
+                    yield Label("Sort:")
+                    with RadioSet(id="dm-ability-sort-radio"):
+                        yield RadioButton("Type",     value=True, id="ability-sort-type")
+                        yield RadioButton("Lv",                   id="ability-sort-lv")
+                        yield RadioButton("Effect",               id="ability-sort-effect")
+                        yield RadioButton("Name",                 id="ability-sort-name")
+                        yield RadioButton("Severity",             id="ability-sort-severity")
             yield Button("++", id="dm-expand", variant="default")
             yield Button("--", id="dm-collapse", variant="default")
             yield Button("Copy", id="dm-copy", variant="default")
@@ -337,6 +427,8 @@ class DataMgmtScreen(BaseScreen):
             yield Button("Validate Hostiles", id="dm-validate-hostiles", variant="default")
             yield Button("Validate Dungeons", id="dm-validate-dungeons", variant="default")
             yield Button("↑", id="dm-equip-sort-dir", variant="default")
+            yield Button("↑", id="dm-hostile-sort-dir", variant="default")
+            yield Button("↑", id="dm-ability-sort-dir", variant="default")
             yield Button("⤢", id="dm-detail-expand", variant="default")
             yield Static("Loading...", id="dm-status")
         with Horizontal(id="dm-main-row"):
@@ -344,6 +436,8 @@ class DataMgmtScreen(BaseScreen):
                 yield NpcMusicPlayerWidget(id="npc-player")
                 yield ListView(id="dm-list")
                 yield DataTable(id="dm-equipment-table", cursor_type="row", show_cursor=True)
+                yield DataTable(id="dm-hostile-table",   cursor_type="row", show_cursor=True)
+                yield DataTable(id="dm-ability-table",   cursor_type="row", show_cursor=True)
                 dialog_tree: Tree[DialogueLine] = Tree("Dialogue", id="dm-dialog-tree")
                 dialog_tree.show_root = False
                 yield dialog_tree
@@ -639,13 +733,33 @@ class DataMgmtScreen(BaseScreen):
         handle_button_pressed(self, event)
 
     def on_data_table_row_highlighted(self, event: DataTable.RowHighlighted) -> None:
-        from tui.screens.dev.data_mgmt.detail_panel import update_detail_for_record  # noqa: PLC0415
-        records = self._last_filtered or []
-        try:
-            idx = int(event.row_key.value)
-            update_detail_for_record(self, records[idx])
-        except Exception:
-            pass
+        from tui.screens.dev.data_mgmt.detail_panel import (  # noqa: PLC0415
+            update_detail_for_ability,
+            update_detail_for_hostile,
+            update_detail_for_record,
+        )
+        table_id = event.data_table.id if event.data_table else ""
+        if table_id == "dm-hostile-table":
+            try:
+                idx  = int(event.row_key.value)
+                node = self._hostile_flat_nodes[idx]
+                update_detail_for_hostile(self, node)
+            except Exception:
+                pass
+        elif table_id == "dm-ability-table":
+            try:
+                idx  = int(event.row_key.value)
+                node = self._ability_flat_nodes[idx]
+                update_detail_for_ability(self, node)
+            except Exception:
+                pass
+        else:
+            records = self._last_filtered or []
+            try:
+                idx = int(event.row_key.value)
+                update_detail_for_record(self, records[idx])
+            except Exception:
+                pass
 
     def on_tree_node_expanded(self, event: Tree.NodeExpanded) -> None:
         """Track user-expanded nodes for accurate copy serialization."""

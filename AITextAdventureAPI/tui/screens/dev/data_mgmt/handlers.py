@@ -56,6 +56,7 @@ from tui.screens.dev.data_mgmt.utils import (
 )
 from tui.services.dev.dataservices import (
     CATEGORIES,
+    AbilityNode,
     DialogueLine,
     DungeonNode,
     HostileNode,
@@ -110,27 +111,33 @@ def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
     is_hostile    = category == _HOSTILE_CATEGORY
     is_dungeon    = category == _DUNGEON_CATEGORY
     is_simulation = category == _SIMULATION_CATEGORY
-    is_tree       = is_dialog or is_timeline or is_npc or is_ability or is_hostile or is_dungeon
+    is_tree       = is_dialog or is_timeline or is_npc or is_dungeon
 
-    screen.query_one("#dm-filter", Input).display                  = not (is_dialog or is_equipment or is_simulation)
+    screen.query_one("#dm-filter", Input).display                  = not (is_dialog or is_equipment or is_ability or is_hostile or is_simulation)
     screen.query_one("#dm-dialog-filter-row").display              = is_dialog
     screen.query_one("#dm-equipment-filter-row", Vertical).display = is_equipment
-    screen.query_one("#dm-list", ListView).display                 = not is_tree and not is_equipment and not is_simulation
+    screen.query_one("#dm-hostile-filter-row",   Vertical).display = is_hostile
+    screen.query_one("#dm-ability-filter-row",   Vertical).display = is_ability
+    screen.query_one("#dm-list", ListView).display                 = not is_tree and not is_equipment and not is_hostile and not is_ability and not is_simulation
     screen.query_one("#dm-equipment-table", DataTable).display     = is_equipment
-    screen.query_one("#dm-dialog-tree", Tree).display              = is_dialog
+    screen.query_one("#dm-hostile-table",   DataTable).display     = is_hostile
+    screen.query_one("#dm-ability-table",   DataTable).display     = is_ability
+    screen.query_one("#dm-dialog-tree",  Tree).display             = is_dialog
     screen.query_one("#dm-timeline-tree", Tree).display            = is_timeline
-    screen.query_one("#dm-npc-tree", Tree).display                 = is_npc
-    screen.query_one("#dm-ability-tree", Tree).display             = is_ability
-    screen.query_one("#dm-hostile-tree", Tree).display             = is_hostile
+    screen.query_one("#dm-npc-tree",     Tree).display             = is_npc
+    screen.query_one("#dm-ability-tree", Tree).display             = False
+    screen.query_one("#dm-hostile-tree", Tree).display             = False
     screen.query_one("#dm-dungeon-tree", Tree).display             = is_dungeon
-    screen.query_one("#dm-expand", Button).display                 = is_tree
+    screen.query_one("#dm-expand",   Button).display               = is_tree
     screen.query_one("#dm-collapse", Button).display               = is_tree
-    screen.query_one("#dm-copy", Button).display                   = is_tree or is_equipment
-    screen.query_one("#dm-validate-timeline", Button).display      = is_timeline
+    screen.query_one("#dm-copy",     Button).display               = is_tree or is_equipment or is_hostile or is_ability
+    screen.query_one("#dm-validate-timeline",  Button).display     = is_timeline
     screen.query_one("#dm-validate-abilities", Button).display     = is_ability
-    screen.query_one("#dm-validate-hostiles", Button).display      = is_hostile
-    screen.query_one("#dm-validate-dungeons", Button).display      = is_dungeon
-    screen.query_one("#dm-equip-sort-dir", Button).display         = is_equipment
+    screen.query_one("#dm-validate-hostiles",  Button).display     = is_hostile
+    screen.query_one("#dm-validate-dungeons",  Button).display     = is_dungeon
+    screen.query_one("#dm-equip-sort-dir",    Button).display      = is_equipment
+    screen.query_one("#dm-hostile-sort-dir",  Button).display      = is_hostile
+    screen.query_one("#dm-ability-sort-dir",  Button).display      = is_ability
     screen.query_one(NpcMusicPlayerWidget).display                 = is_npc
 
     # Simulation panel: mount on demand, remove when leaving
@@ -182,14 +189,14 @@ def handle_input_changed(screen: "DataMgmtScreen", event: Input.Changed) -> None
             rebuild_timeline_tree_for_screen(screen)
         elif screen._category == _NPC_CATEGORY:
             rebuild_npc_tree_for_screen(screen)
-        elif screen._category == _ABILITY_CATEGORY:
-            rebuild_ability_tree_for_screen(screen)
         elif screen._category == _HOSTILE_CATEGORY:
             rebuild_hostile_tree_for_screen(screen)
         elif screen._category == _DUNGEON_CATEGORY:
             rebuild_dungeon_tree_for_screen(screen)
         else:
             rebuild_list_for_screen(screen)
+    elif input_id == "dm-ability-filter":
+        rebuild_ability_tree_for_screen(screen)
     elif input_id in ("dm-filter-act", "dm-filter-chapter", "dm-filter-task", "dm-filter-character"):
         rebuild_dialog_tree_for_screen(screen)
 
@@ -205,6 +212,12 @@ def handle_radio_set_changed(screen: "DataMgmtScreen", event: RadioSet.Changed) 
             slot_radio  = screen.query_one("#dm-equipment-slot-radio", RadioSet)
             slot_radio.disabled = type_filter in ("weapon", "accessory")
         rebuild_list_for_screen(screen)
+
+    elif event.radio_set.id == "dm-hostile-sort-radio":
+        rebuild_hostile_tree_for_screen(screen)
+
+    elif event.radio_set.id == "dm-ability-sort-radio":
+        rebuild_ability_tree_for_screen(screen)
 
 
 _SORT_COL_MAP: dict[str, str] = {
@@ -348,6 +361,14 @@ def handle_button_pressed(screen: "DataMgmtScreen", event: Button.Pressed) -> No
         screen._equipment_sort_asc = not screen._equipment_sort_asc
         event.button.label = "↑" if screen._equipment_sort_asc else "↓"
         rebuild_list_for_screen(screen)
+    elif bid == "dm-hostile-sort-dir":
+        screen._hostile_sort_asc = not screen._hostile_sort_asc
+        event.button.label = "↑" if screen._hostile_sort_asc else "↓"
+        rebuild_hostile_tree_for_screen(screen)
+    elif bid == "dm-ability-sort-dir":
+        screen._ability_sort_asc = not screen._ability_sort_asc
+        event.button.label = "↑" if screen._ability_sort_asc else "↓"
+        rebuild_ability_tree_for_screen(screen)
 
 
 def _handle_copy(screen: "DataMgmtScreen") -> None:
@@ -371,11 +392,79 @@ def _handle_copy(screen: "DataMgmtScreen") -> None:
             tree = screen.query_one("#dm-npc-tree", Tree)
             text = "\n".join(serialize_node_visible(tree.root, depth=0))
 
+    elif category == _ABILITY_CATEGORY:
+        nodes = getattr(screen, "_ability_flat_nodes", [])
+        header = "\t".join(_ABILITY_COLUMNS + ["Messages"])
+        rows = [header]
+        for node in nodes:
+            if not isinstance(node, AbilityNode):
+                continue
+            seed        = node.record.extras.get("_seed") or {}
+            elements    = seed.get("elements") or []
+            status_keys = seed.get("status_keys") or []
+            effect      = str(seed.get("effect", "") or "")
+            error_count = len(node.errors)
+            has_error   = any(e.severity == "error"   for e in node.errors)
+            has_warning = any(e.severity == "warning" for e in node.errors)
+            if error_count == 0:
+                err_cell = "✓"
+            elif has_error:
+                err_cell = f"✗ {error_count}"
+            elif has_warning:
+                err_cell = f"⚠ {error_count}"
+            else:
+                err_cell = f"• {error_count}"
+            messages = " | ".join(
+                f"[{e.severity.upper()}] {e.code}: {e.message}"
+                for e in node.errors
+            ) if node.errors else ""
+            rows.append("\t".join([
+                node.label,
+                node.ability_id,
+                str(node.level),
+                node.ability_type,
+                _fmt_elem_list(elements),
+                effect,
+                _fmt_status_list(status_keys),
+                err_cell,
+                messages,
+            ]))
+        text = "\n".join(rows)
+
     elif category == _HOSTILE_CATEGORY:
-        from tui.services.dev.dataservices.catalog import get_hostile_tree          # noqa: PLC0415
-        from tui.screens.dev.data_mgmt.utils import serialize_hostile_tree          # noqa: PLC0415
-        filtered = screen._last_hostile_filtered or get_hostile_tree()
-        text = serialize_hostile_tree(filtered)
+        nodes = getattr(screen, "_hostile_flat_nodes", [])
+        header = "\t".join(_HOSTILE_COLUMNS + ["Messages"])
+        rows = [header]
+        for node in nodes:
+            if not isinstance(node, HostileNode):
+                continue
+            rar_abbr    = _HOSTILE_RARITY_ABBR.get(node.rarity, node.rarity[:3].title())
+            error_count = len(node.errors)
+            has_error   = any(e.severity == "error"   for e in node.errors)
+            has_warning = any(e.severity == "warning" for e in node.errors)
+            if error_count == 0:
+                err_cell = "✓"
+            elif has_error:
+                err_cell = f"✗ {error_count}"
+            elif has_warning:
+                err_cell = f"⚠ {error_count}"
+            else:
+                err_cell = f"• {error_count}"
+            messages = " | ".join(
+                f"[{e.severity.upper()}] {e.code}: {e.message}"
+                for e in node.errors
+            ) if node.errors else ""
+            rows.append("\t".join([
+                node.label,
+                node.hostile_id,
+                node.location_dungeon or "Overworld",
+                node.location_region  or "—",
+                str(node.level),
+                rar_abbr,
+                err_cell,
+                messages,
+            ]))
+        text = "\n".join(rows)
 
     elif category == _EQUIPMENT_CATEGORY:
         records = screen._last_filtered or []
@@ -502,14 +591,18 @@ def rebuild_npc_tree_for_screen(screen: "DataMgmtScreen") -> None:
 
 def rebuild_ability_tree_for_screen(screen: "DataMgmtScreen") -> None:
     from tui.screens.dev.data_mgmt.treehandlers.ability_handler import rebuild_ability_tree  # noqa: PLC0415
+    from tui.services.dev.dataservices.ability_service import _flat_ability_nodes             # noqa: PLC0415
+    from tui.services.dev.dataservices.catalog import get_ability_tree                        # noqa: PLC0415
 
     if not screen._loaded:
         return
     query = ""
     try:
-        query = screen.query_one("#dm-filter", Input).value.strip()
+        query = screen.query_one("#dm-ability-filter", Input).value.strip()
     except Exception:
         pass
+
+    # Keep hidden tree in sync (backing store for validator)
     tree = screen.query_one("#dm-ability-tree", Tree)
     total, filtered = rebuild_ability_tree(
         tree,
@@ -518,15 +611,19 @@ def rebuild_ability_tree_for_screen(screen: "DataMgmtScreen") -> None:
         user_collapsed=screen._ability_user_collapsed,
     )
     screen._last_ability_filtered = filtered
+
+    # Repopulate the visible DataTable
+    nodes = _flat_ability_nodes(filtered if filtered is not None else get_ability_tree())
+    _populate_ability_table(screen, nodes)
+
     screen.query_one("#dm-status", Static).update(f"{total} ability(s)")
-    # Blank detail panel on rebuild
-    from tui.screens.dev.data_mgmt.detail_panel import update_detail_for_ability_group  # noqa: PLC0415
     update_detail_for_ability_group(screen, [])
 
 
 def rebuild_hostile_tree_for_screen(screen: "DataMgmtScreen") -> None:
     from tui.screens.dev.data_mgmt.treehandlers.hostile_handler import rebuild_hostile_tree  # noqa: PLC0415
-    from tui.screens.dev.data_mgmt.detail_panel import update_detail_for_hostile_group       # noqa: PLC0415
+    from tui.services.dev.dataservices.hostile_service import flat_hostile_nodes             # noqa: PLC0415
+    from tui.services.dev.dataservices.catalog import get_hostile_tree                       # noqa: PLC0415
 
     if not screen._loaded:
         return
@@ -535,6 +632,8 @@ def rebuild_hostile_tree_for_screen(screen: "DataMgmtScreen") -> None:
         query = screen.query_one("#dm-filter", Input).value.strip()
     except Exception:
         pass
+
+    # Keep hidden tree in sync (used by validator to iterate HostileNode.errors)
     tree = screen.query_one("#dm-hostile-tree", Tree)
     total, filtered = rebuild_hostile_tree(
         tree,
@@ -543,8 +642,12 @@ def rebuild_hostile_tree_for_screen(screen: "DataMgmtScreen") -> None:
         user_collapsed=screen._hostile_user_collapsed,
     )
     screen._last_hostile_filtered = filtered
+
+    # Repopulate the visible DataTable
+    nodes = flat_hostile_nodes(filtered if filtered is not None else get_hostile_tree())
+    _populate_hostile_table(screen, nodes)
+
     screen.query_one("#dm-status", Static).update(f"{total} hostile(s)")
-    update_detail_for_hostile_group(screen, [])
 
 
 def rebuild_dungeon_tree_for_screen(screen: "DataMgmtScreen") -> None:
@@ -601,17 +704,8 @@ def validate_timeline_for_screen(screen: "DataMgmtScreen") -> None:
     if total_tasks == 0:
         screen.notify("✓ Timeline integrity OK — no errors found.", timeout=3.0)
     else:
-        parts = []
-        if error_tasks:
-            parts.append(f"{error_tasks} error task(s)")
-        if warning_tasks:
-            parts.append(f"{warning_tasks} warning task(s)")
-        if duplicate_tasks:
-            parts.append(f"{duplicate_tasks} duplicate task(s)")
-        if notice_tasks:
-            parts.append(f"{notice_tasks} notice task(s)")
         screen.notify(
-            f"✗ {total_tasks} total affected task(s): {', '.join(parts)}.",
+            f"✗ {total_tasks} issue(s) found in timeline — flagged in tree.",
             severity="warning",
             timeout=5.0,
         )
@@ -624,7 +718,6 @@ def validate_abilities_for_screen(screen: "DataMgmtScreen") -> None:
     tree    = get_ability_tree()
     summary = validate_ability_tree(tree)
 
-    # Repaint tree so flagged leaves render in colour
     rebuild_ability_tree_for_screen(screen)
 
     invalid      = summary.get("invalid", 0)
@@ -634,7 +727,7 @@ def validate_abilities_for_screen(screen: "DataMgmtScreen") -> None:
         screen.notify("✓ Ability integrity OK — no issues found.", timeout=3.0)
     else:
         screen.notify(
-            f"✗ {total_errors} issue(s) across {invalid} ability(s) — flagged in tree.",
+            f"✗ {total_errors} issue(s) across {invalid} ability(s) — flagged in table.",
             severity="warning",
             timeout=5.0,
         )
@@ -701,21 +794,28 @@ _ELEMENT_SYMBOLS: dict[str, str] = {
 
 # Unicode single-char glyphs for status effects — chosen for terminal readability
 _STATUS_SYMBOLS: dict[str, str] = {
-    "petrify":            "⬡",   # hollow hexagon → frozen/stone
-    "stun":               "✦",   # burst star → shocked/dazed
-    "sleep":              "☽",   # crescent → unconscious
-    "confuse":            "⁈",   # interrobang → disoriented
-    "paralyze":           "≋",   # triple tilde → locked in place
-    "silence":            "⊘",   # slashed circle → no voice
-    "fear":               "☠",   # skull → terror
-    "continuous_damage":  "♾",   # infinity → ongoing tick
-    "elemental_debuff":   "◆",   # filled diamond → elemental weakness
-    "attack_debuff":      "↓A",  # arrow + letter → attack lowered
-    "defense_debuff":     "↓D",
-    "strength_debuff":    "↓S",
-    "dexterity_debuff":   "↓X",
-    "intelligence_debuff":"↓I",
-    "constitution_debuff":"↓C",
+    "petrify":               "⬡",   # hollow hexagon → frozen/stone
+    "stun":                  "✦",   # burst star → shocked/dazed
+    "sleep":                 "☽",   # crescent → unconscious
+    "confuse":               "⁈",   # interrobang → disoriented
+    "silence":               "⊘",   # slashed circle → no voice
+    "continuous_damage":     "♾",   # infinity → ongoing tick
+    "elemental_debuff":      "◆",   # filled diamond → elemental weakness
+    "attack_debuff":         "↓A",
+    "defense_debuff":        "↓D",
+    "strength_debuff":       "↓S",
+    "dexterity_debuff":      "↓X",
+    "intelligence_debuff":   "↓I",
+    "constitution_debuff":   "↓C",
+    "attack_buff":           "↑A",  # arrow + letter → attack raised
+    "defense_buff":          "↑D",
+    "strength_buff":         "↑S",
+    "dexterity_buff":        "↑X",
+    "intelligence_buff":     "↑I",
+    "constitution_buff":     "↑C",
+    "elemental_attack_buff": "↑EA", # elemental attack raised
+    "elemental_defense_buff":"↑ED", # elemental defense raised
+    "scanned":               "👁"   # eye → analysed/revealed
 }
 
 
@@ -751,14 +851,10 @@ _EQUIP_COLUMNS = (
     "DMG", "DEF", "CRIT", "TSP", "TEP", "TAP", "TP",
     "Imm", "Res", "Wk",
 )
-def _balance_ratings(records: list) -> list[str]:
-    """Return a 'weak' / 'strong' / '' rating for each record.
 
-    Strategy: group records by (broad_type, level), compute the mean TP
-    for each group, then flag items whose TP is < 65% (weak) or > 145%
-    (strong) of their group mean.  Groups with only one member are not
-    flagged so unique high-level uniques don't get false positives.
-    """
+
+def _balance_ratings(records: list) -> list[str]:
+    """Return a 'weak' / 'strong' / '' rating for each record."""
     tp_by_group: dict = defaultdict(list)
     for r in records:
         x = r.extras
@@ -858,6 +954,237 @@ def _populate_equipment_table(screen: "DataMgmtScreen", records: list) -> None:
             key=str(idx),
         )
 
+
+# ── Ability table ─────────────────────────────────────────────────────────────
+
+_ABILITY_COLUMNS = [
+    "Name", "ID", "Level", "Type", "Elements", "Effect", "Statuses", "Errors",
+]
+
+_ABILITY_SORT_KEYS: dict[str, str] = {
+    "ability-sort-type":     "ability_type",
+    "ability-sort-lv":       "level",
+    "ability-sort-effect":   "effect",
+    "ability-sort-name":     "name",
+    "ability-sort-severity": "severity_rank",
+}
+
+_ROW_ERROR_STYLE   = Style(color="red")
+_ROW_WARN_STYLE    = Style(color="yellow")
+_ROW_OK_STYLE      = Style(color="green", dim=True)
+_ROW_DEFAULT_STYLE = Style()
+
+
+def _ability_row_style(errors: list) -> Style:
+    if not errors:
+        return _ROW_DEFAULT_STYLE
+    if any(e.severity == "error" for e in errors):
+        return _ROW_ERROR_STYLE
+    if any(e.severity == "warning" for e in errors):
+        return _ROW_WARN_STYLE
+    return _ROW_DEFAULT_STYLE
+
+
+def _ability_error_cell(errors: list) -> Text:
+    if not errors:
+        return Text("✓", style=_ROW_OK_STYLE)
+    has_error   = any(e.severity == "error"   for e in errors)
+    has_warning = any(e.severity == "warning" for e in errors)
+    count = len(errors)
+    if has_error:
+        return Text(f"✗ {count}", style=_ROW_ERROR_STYLE)
+    if has_warning:
+        return Text(f"⚠ {count}", style=_ROW_WARN_STYLE)
+    return Text(f"• {count}")
+
+
+def _ability_severity_rank(node: "AbilityNode") -> int:
+    if any(e.severity == "error"   for e in node.errors):
+        return 0
+    if any(e.severity == "warning" for e in node.errors):
+        return 1
+    if node.errors:
+        return 2
+    return 3
+
+
+def get_ability_sort_col(screen: "DataMgmtScreen") -> str:
+    try:
+        sort_radio = screen.query_one("#dm-ability-sort-radio", RadioSet)
+        pressed_id = sort_radio.pressed_button.id if sort_radio.pressed_button else "ability-sort-type"
+        return _ABILITY_SORT_KEYS.get(pressed_id, "ability_type")
+    except Exception:
+        return "ability_type"
+
+
+def _populate_ability_table(screen: "DataMgmtScreen", nodes: list) -> None:
+    """Populate #dm-ability-table from a flat list of AbilityNode, with sort and colour."""
+    sort_col = get_ability_sort_col(screen)
+    sort_asc = getattr(screen, "_ability_sort_asc", True)
+
+    def _sort_key(n: "AbilityNode"):
+        seed = n.record.extras.get("_seed") or {}
+        if sort_col == "ability_type":
+            primary = n.ability_type.lower()
+        elif sort_col == "level":
+            primary = n.level
+        elif sort_col == "effect":
+            primary = str(seed.get("effect", "") or "").lower()
+        elif sort_col == "name":
+            primary = n.label.lower()
+        elif sort_col == "severity_rank":
+            primary = _ability_severity_rank(n)
+        else:
+            primary = n.ability_type.lower()
+        return (primary, n.level)   # level is always the base secondary key
+
+    valid_nodes  = [n for n in nodes if isinstance(n, AbilityNode)]
+    sorted_nodes = sorted(valid_nodes, key=_sort_key, reverse=not sort_asc)
+
+    table: DataTable = screen.query_one("#dm-ability-table", DataTable)
+    table.clear(columns=True)
+    for col in _ABILITY_COLUMNS:
+        table.add_column(col, key=col)
+
+    screen._ability_flat_nodes = sorted_nodes
+
+    for idx, node in enumerate(sorted_nodes):
+        row_style   = _ability_row_style(node.errors)
+        seed        = node.record.extras.get("_seed") or {}
+        elements    = seed.get("elements") or []
+        status_keys = seed.get("status_keys") or []
+        effect      = str(seed.get("effect", "") or "")
+        table.add_row(
+            Text(node.label,                    style=row_style),
+            Text(node.ability_id,               style=row_style),
+            Text(str(node.level),               style=row_style),
+            Text(node.ability_type,             style=row_style),
+            Text(_fmt_elem_list(elements),      style=row_style),
+            Text(effect,                        style=row_style),
+            Text(_fmt_status_list(status_keys), style=row_style),
+            _ability_error_cell(node.errors),
+            key=str(idx),
+        )
+
+
+# ── Hostile table ─────────────────────────────────────────────────────────────
+
+_HOSTILE_COLUMNS = [
+    "Name", "ID", "Dungeon", "Region", "Level", "Rarity", "Errors",
+]
+
+_HOSTILE_RARITY_ABBR: dict[str, str] = {
+    "common":    "Com",
+    "uncommon":  "Unc",
+    "rare":      "Rar",
+    "superrare": "SR",
+    "notfound":  "?",
+}
+
+_HOSTILE_RARITY_RANK: dict[str, int] = {
+    "common": 0, "uncommon": 1, "rare": 2, "superrare": 3, "notfound": 99,
+}
+
+_HOSTILE_SORT_KEYS = {
+    "hostile-sort-lv":       "level",
+    "hostile-sort-rarity":   "rarity_rank",
+    "hostile-sort-dungeon":  "location_dungeon",
+    "hostile-sort-region":   "location_region",
+    "hostile-sort-name":     "name",
+    "hostile-sort-severity": "severity_rank",
+}
+
+
+def _hostile_row_style(errors: list) -> Style:
+    if not errors:
+        return _ROW_DEFAULT_STYLE
+    if any(e.severity == "error" for e in errors):
+        return _ROW_ERROR_STYLE
+    if any(e.severity == "warning" for e in errors):
+        return _ROW_WARN_STYLE
+    return _ROW_DEFAULT_STYLE
+
+
+def _hostile_error_cell(errors: list) -> Text:
+    if not errors:
+        return Text("✓", style=_ROW_OK_STYLE)
+    has_error   = any(e.severity == "error"   for e in errors)
+    has_warning = any(e.severity == "warning" for e in errors)
+    count = len(errors)
+    if has_error:
+        return Text(f"✗ {count}", style=_ROW_ERROR_STYLE)
+    if has_warning:
+        return Text(f"⚠ {count}", style=_ROW_WARN_STYLE)
+    return Text(f"• {count}")
+
+
+def _hostile_severity_rank(node: "HostileNode") -> int:
+    if any(e.severity == "error"   for e in node.errors):
+        return 0
+    if any(e.severity == "warning" for e in node.errors):
+        return 1
+    if node.errors:
+        return 2
+    return 3
+
+
+def get_hostile_sort_col(screen: "DataMgmtScreen") -> str:
+    try:
+        sort_radio = screen.query_one("#dm-hostile-sort-radio", RadioSet)
+        pressed_id = sort_radio.pressed_button.id if sort_radio.pressed_button else "hostile-sort-lv"
+        return _HOSTILE_SORT_KEYS.get(pressed_id, "level")
+    except Exception:
+        return "level"
+
+
+def _populate_hostile_table(screen: "DataMgmtScreen", nodes: list) -> None:
+    """Populate #dm-hostile-table from a flat list of HostileNode, with sort and colour."""
+    sort_col = get_hostile_sort_col(screen)
+    sort_asc = getattr(screen, "_hostile_sort_asc", True)
+
+    def _sort_key(n: "HostileNode"):
+        if sort_col == "level":
+            primary = n.level
+        elif sort_col == "rarity_rank":
+            primary = _HOSTILE_RARITY_RANK.get(n.rarity, 99)
+        elif sort_col == "location_dungeon":
+            primary = (n.location_dungeon or "").lower()
+        elif sort_col == "location_region":
+            primary = (n.location_region or "").lower()
+        elif sort_col == "name":
+            primary = n.label.lower()
+        elif sort_col == "severity_rank":
+            primary = _hostile_severity_rank(n)
+        else:
+            primary = n.level
+        secondary = n.level
+        return (primary, secondary)
+
+    valid_nodes = [n for n in nodes if isinstance(n, HostileNode)]
+    sorted_nodes = sorted(valid_nodes, key=_sort_key, reverse=not sort_asc)
+
+    table: DataTable = screen.query_one("#dm-hostile-table", DataTable)
+    table.clear(columns=True)
+    for col in _HOSTILE_COLUMNS:
+        table.add_column(col, key=col)
+
+    screen._hostile_flat_nodes = sorted_nodes
+
+    for idx, node in enumerate(sorted_nodes):
+        row_style = _hostile_row_style(node.errors)
+        rar_abbr  = _HOSTILE_RARITY_ABBR.get(node.rarity, node.rarity[:3].title())
+        table.add_row(
+            Text(node.label,                           style=row_style),
+            Text(node.hostile_id,                      style=row_style),
+            Text(node.location_dungeon or "Overworld", style=row_style),
+            Text(node.location_region  or "—",         style=row_style),
+            Text(str(node.level),                      style=row_style),
+            Text(rar_abbr,                             style=row_style),
+            _hostile_error_cell(node.errors),
+            key=str(idx),
+        )
+
+
 def rebuild_list_for_screen(screen: "DataMgmtScreen") -> None:
     """Rebuild the flat ListView (or equipment DataTable) for the active non-tree category."""
     if not screen._loaded:
@@ -940,3 +1267,17 @@ def handle_copy_action(screen: "DataMgmtScreen") -> None:
         ):
             rebuild_list_for_screen(screen)
     screen.query_one("#dm-status", Static).update(status)
+
+_SEVERITY_RANK: dict[str, int] = {
+    "error":   0,
+    "warning": 1,
+    "notice":  2,
+    "info":    3,
+}
+
+def _hostile_severity_rank(node: "HostileNode") -> int:
+    """0 = has errors, 1 = warnings only, 2 = notices/info only, 3 = clean."""
+    if not node.errors:
+        return 3
+    best = min(_SEVERITY_RANK.get(e.severity, 99) for e in node.errors)
+    return best

@@ -8,7 +8,7 @@ SEEDS_LV1TO10 = [
  "basic_attack": "rusty jab", "strong_attack": "sand swipe", "player_abilities": [], "base_str":2, "base_dex":3, "base_con":2, "base_int":1, "base_hp":12, "base_ap":2, "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":0},
 
  {"id": "mirage_waif", "name": "Mirage Waif", "hostile_type": "spirit", "role": "hazard", "min_spawn_level":1, "rarity": "rare", "base_xp":40, "common_drop": "herb_minor", "rare_drop": "tome_int", "money_range": (2,12),
- "basic_attack": "ghostly touch", "strong_attack": "fading wail", "player_abilities": ["night_whisper"], "base_str":1, "base_dex":4, "base_con":1, "base_int":6, "base_hp":18, "base_ap":6, "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":2},
+ "basic_attack": "ghostly touch", "strong_attack": "fading wail", "player_abilities": ["level_1_hostile_ability_night_whisper"], "base_str":1, "base_dex":4, "base_con":1, "base_int":6, "base_hp":18, "base_ap":6, "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":2},
 
  # Level2
  {"id": "scorpionling", "name": "Scorpionling", "hostile_type": "creature", "role": "damage", "min_spawn_level":2, "rarity": "common", "base_xp":14, "common_drop": "herb_minor", "money_range": (1,8),
@@ -37,7 +37,7 @@ SEEDS_LV1TO10 = [
  {"id": "wind_skiff", "name": "Wind Skiff", "hostile_type": "creature", "role": "damage", "min_spawn_level":4, "rarity": "common", "base_xp":10, "common_drop": "herb_minor", "money_range": (0,4),
  "basic_attack": "peck", "strong_attack": "gusty flap", "player_abilities": [], "base_str":1, "base_dex":5, "base_con":1, "base_int":1, "base_hp":10, "base_ap":1, "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":0},
 
- {"id": "desert_pickpocket", "name": "Desert Pickpocket", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":4, "rarity": "uncommon", "base_xp":30, "common_drop": "lockpick", "money_range": (3,18),
+ {"id": "desert_pickpocket", "name": "Desert Pickpocket", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":4, "rarity": "uncommon", "base_xp":30, "common_drop": "stimulant_small", "money_range": (3,18),
  "basic_attack": "flick hand", "strong_attack": "distract-and-stab", "player_abilities": None, "base_str":2, "base_dex":6, "base_con":2, "base_int":3, "base_hp":28, "base_ap":3, "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":1},
 
  # Level5

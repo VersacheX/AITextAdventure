@@ -4,7 +4,7 @@
 SEEDS_LV11TO20 = [
  {"id": "hollow_savant", "name": "Hollow Savant", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":11, "rarity": "rare", "base_xp":220,
  "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (30,140),
- "basic_attack": "spent rune", "strong_attack": "mind latch", "player_abilities": ["nightmare_wave", "void_veil"],
+ "basic_attack": "spent rune", "strong_attack": "mind latch", "player_abilities": ["lv2_hostile_ability_dark_air_skill_nightmare_wave", "lv2_hostile_ability_dark_dark_faith_void_veil"],
  "base_str":2, "base_dex":3, "base_con":4, "base_int":12, "base_hp":110, "base_ap":9,
  "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
 
@@ -16,7 +16,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "marauder_matriarch", "name": "Marauder Matriarch", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":12, "rarity": "rare", "base_xp":180,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (40,160),
- "basic_attack": "maw of the clan", "strong_attack": "wrathful onslaught", "player_abilities": ["berserker_tech"],
+ "basic_attack": "maw of the clan", "strong_attack": "wrathful onslaught", "player_abilities": ["earth_fire_technique_lv2_berserker_tech"],
  "base_str":7, "base_dex":4, "base_con":6, "base_int":3, "base_hp":90, "base_ap":6,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":1},
 
@@ -34,7 +34,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "ember_drake", "name": "Ember Drake", "hostile_type": "creature", "role": "damage", "min_spawn_level":14, "rarity": "uncommon", "base_xp":300,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (40,180),
- "basic_attack": "scalding snap", "strong_attack": "molten breath", "player_abilities": ["abyssal_storm"],
+ "basic_attack": "scalding snap", "strong_attack": "molten breath", "player_abilities": ["lv2_hostile_ability_dark_electric_magic_abyssal_storm"],
  "base_str":9, "base_dex":6, "base_con":8, "base_int":4, "base_hp":200, "base_ap":6,
  "str_per_level":3, "dex_per_level":2, "con_per_level":2, "int_per_level":1},
 
@@ -46,25 +46,25 @@ SEEDS_LV11TO20 = [
 
  {"id": "hollow_colossus", "name": "Hollow Colossus", "hostile_type": "construct", "role": "support", "min_spawn_level":15, "rarity": "rare", "base_xp":340,
  "common_drop": "stimulant_large", "rare_drop": "kevlar_vest", "money_range": (60,260),
- "basic_attack": "piston slam", "strong_attack": "hydraulic stomp", "player_abilities": ["reinforce_frame"],
+ "basic_attack": "piston slam", "strong_attack": "hydraulic stomp", "player_abilities": ["level_1_hostile_ability_reinforce_frame"],
  "base_str":12, "base_dex":2, "base_con":14, "base_int":2, "base_hp":260, "base_ap":5,
  "str_per_level":3, "dex_per_level":0, "con_per_level":3, "int_per_level":0},
 
  {"id": "dream_stag", "name": "Dream Stag", "hostile_type": "eldritch", "role": "hazard", "min_spawn_level":16, "rarity": "superrare", "base_xp":480,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,320),
- "basic_attack": "antler gouge", "strong_attack": "maddening charge", "player_abilities": ["nightmare_wave"],
+ "basic_attack": "antler gouge", "strong_attack": "maddening charge", "player_abilities": ["lv2_hostile_ability_dark_air_skill_nightmare_wave"],
  "base_str":8, "base_dex":8, "base_con":8, "base_int":10, "base_hp":260, "base_ap":12,
  "str_per_level":3, "dex_per_level":2, "con_per_level":2, "int_per_level":3},
 
  {"id": "forge_warden", "name": "Forge Warden", "hostile_type": "construct", "role": "support", "min_spawn_level":17, "rarity": "uncommon", "base_xp":520,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,340),
- "basic_attack": "anvil strike", "strong_attack": "seismic core", "player_abilities": ["reinforce_frame", "chain_reactor"],
+ "basic_attack": "anvil strike", "strong_attack": "seismic core", "player_abilities": ["level_1_hostile_ability_reinforce_frame", "earth_electric_lv2_technique_chain_reactor"],
  "base_str":14, "base_dex":3, "base_con":16, "base_int":4, "base_hp":360, "base_ap":8,
  "str_per_level":4, "dex_per_level":0, "con_per_level":3, "int_per_level":1},
 
  {"id": "timber_wyrm", "name": "Timber Wyrm", "hostile_type": "eldritch", "role": "damage", "min_spawn_level":18, "rarity": "uncommon", "base_xp":600,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (120,480),
- "basic_attack": "timber lash", "strong_attack": "rooted cataclysm", "player_abilities": ["berserker_tech", "inspire"],
+ "basic_attack": "timber lash", "strong_attack": "rooted cataclysm", "player_abilities": ["earth_fire_technique_lv2_berserker_tech", "level_1_hostile_ability_inspire"],
  "base_str":12, "base_dex":6, "base_con":14, "base_int":8, "base_hp":400, "base_ap":12,
  "str_per_level":4, "dex_per_level":1, "con_per_level":3, "int_per_level":2},
 

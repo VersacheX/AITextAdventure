@@ -238,7 +238,7 @@ BOSS_HOSTILES = [
     {
         "id": "mire_thrall", "name": "Mire Thrall", "hostile_type": "magic", "role": "hazard",
         "min_spawn_level": 25, "rarity": "superrare", "base_xp": 480,
-        "common_drop": "herb_major", "rare_drop": "tome_tech", "money_range": (45,180),
+        "common_drop": "herb_major", "rare_drop": "tome_dex", "money_range": (45,180),
         "basic_attack": "rot swipe", "strong_attack": "bog burst",
         "player_abilities": ["light_dark_tech_lv2_contrast_burst", 'dark_faith_lv1_shade_whisper'],
         "base_str": 8, "base_dex": 6, "base_con": 12, "base_int": 10,
@@ -251,7 +251,7 @@ BOSS_HOSTILES = [
     {
         "id": "miregloom_1", "name": "Lich‑King Miregloom", "hostile_type": "magic", "role": "boss",
         "min_spawn_level": 30, "rarity": "notfound", "base_xp": 1200,
-        "common_drop": "herb_major", "rare_drop": "tome_tech", "money_range": (100,300),
+        "common_drop": "herb_major", "rare_drop": "tome_dex", "money_range": (100,300),
         "basic_attack": "necrotic lash", "strong_attack": "swampfire surge",
         "player_abilities": ["air_dark_magic_lv2_gloom_vortex", "dark_dark_magic_lv2_umbra_storm", 'dark_dark_dark_magic_lv3_shadow_blast'],
         "base_str": 12, "base_dex": 8, "base_con": 16, "base_int": 18,

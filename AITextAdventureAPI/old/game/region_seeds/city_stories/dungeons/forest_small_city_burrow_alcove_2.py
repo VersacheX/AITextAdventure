@@ -23,9 +23,9 @@ DUNGEON_NPCS: List[Dict] = [
 ]
 
 DUNGEON_ITEMS: List[Dict] = [
-    {'id': 'herb_large',      'location': 'treasure_room'},
+    {'id': 'herb_med',      'location': 'treasure_room'},
     {'id': 'stimulant_large', 'location': 'treasure_room'},
-    {'id': 'remedy_large',    'location': 'final_chamber'},
+    {'id': 'stimulant_med',    'location': 'final_chamber'},
 ]
 
 FLOOR_HOSTILES: Dict[int, List[str]] = {
@@ -41,7 +41,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'common',
         'base_xp': 572,
-        'common_drop': 'herb_large',
+        'common_drop': 'herb_med',
         'rare_drop': None,
         'money_range': (154, 492),
         'basic_attack': 'strikes with limbs heavy with absorbed forest memory',
@@ -62,8 +62,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'hazard',
         'rarity': 'uncommon',
         'base_xp': 698,
-        'common_drop': 'remedy_large',
-        'rare_drop': 'herb_large',
+        'common_drop': 'stimulant_med',
+        'rare_drop': 'herb_med',
         'money_range': (186, 594),
         'basic_attack': 'releases a pulse of drained forest memory as a concussive wave',
         'strong_attack': 'echofern drain',
@@ -84,7 +84,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'rarity': 'rare',
         'base_xp': 888,
         'common_drop': 'stimulant_large',
-        'rare_drop': 'remedy_large',
+        'rare_drop': 'stimulant_med',
         'money_range': (232, 742),
         'basic_attack': 'blocks the burrow passage and drives memory-dense fists forward',
         'strong_attack': 'deep burrow press',
@@ -104,8 +104,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'superrare',
         'base_xp': 1196,
-        'common_drop': 'herb_large',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'herb_med',
+        'rare_drop': 'stimulant_med',
         'money_range': (278, 888),
         'basic_attack': 'weaponizes drained forest memories into a void-charged strike',
         'strong_attack': 'void recollection',
@@ -134,8 +134,8 @@ BOSS_HOSTILES: List[Dict] = [
         'role': 'damage',
         'rarity': 'notfound',
         'base_xp': 39000,
-        'common_drop': 'remedy_large',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'stimulant_med',
+        'rare_drop': 'stimulant_med',
         'money_range': (940, 2820),
         'basic_attack': 'floods the deep burrow with every memory it has drained from the root network',
         'strong_attack': 'memory network collapse',

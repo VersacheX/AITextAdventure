@@ -83,4 +83,68 @@ WEAPONS_LV66_80 = [
         "constitution": 74,
         "elements": ["light", "water", "earth", "air"]
     },
+    # ── World-drop weapons ────────────────────────────────────────────────────
+    # uncommon / skill — lv67
+    {
+        "id": "balanced_rapier",
+        "name": "Balanced Rapier",
+        "description": "A dueling rapier with a counterweighted hilt — the balance point is exactly where the maker intended it, which is to say better than most people can hold.",
+        "damage": 84,
+        "damage_type": "slashing",
+        "ap_cost": 2,
+        "range": 1,
+        "critical_chance": 16.0,
+        "value": 16400,
+        "min_spawn_level": 67,
+        "rarity": "uncommon",
+        "durability": 228,
+        "max_durability": 228,
+        "strength": 44,
+        "dexterity": 44,
+        "intelligence": 20,
+        "constitution": 16,
+        "elements": ["air"]
+    },
+    # rare / tech — lv73
+    {
+        "id": "pulse_emitter",
+        "name": "Pulse Emitter",
+        "description": "A long-barreled emitter that fires focused charge pulses at range. The cooling fins were added after the second prototype. Both prior versions still function.",
+        "damage": 98,
+        "damage_type": "energy",
+        "ap_cost": 2,
+        "range": 4,
+        "critical_chance": 17.0,
+        "value": 30400,
+        "min_spawn_level": 73,
+        "rarity": "rare",
+        "durability": 242,
+        "max_durability": 242,
+        "strength": 8,
+        "dexterity": 90,
+        "intelligence": 60,
+        "constitution": 12,
+        "elements": ["electric", "ice"]
+    },
+    # superrare / faith — lv79
+    {
+        "id": "covenant_staff",
+        "name": "Covenant Staff",
+        "description": "A staff that carries the binding weight of a promise made between entities that no longer exist. Whatever they agreed to, it still holds — and so does the staff.",
+        "damage": 108,
+        "damage_type": "energy",
+        "ap_cost": 3,
+        "range": 4,
+        "critical_chance": 14.0,
+        "value": 44400,
+        "min_spawn_level": 79,
+        "rarity": "superrare",
+        "durability": 258,
+        "max_durability": 258,
+        "strength": 4,
+        "dexterity": 10,
+        "intelligence": 142,
+        "constitution": 74,
+        "elements": ["light", "earth", "water", "air"]
+    },
 ]

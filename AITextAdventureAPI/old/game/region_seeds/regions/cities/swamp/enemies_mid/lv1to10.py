@@ -3,7 +3,7 @@
 SEEDS_LV1TO10 = [
  # Level1: include common, uncommon, rare
  {"id": "bayou_pick", "name": "Bayou Pick", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":1, "rarity": "common", "base_xp":8,
- "common_drop": "lockpick", "rare_drop": None, "money_range": (0,6),
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (0,6),
  "basic_attack": "nicks with a trinket", "strong_attack": "snatch-and-run", "player_abilities": None,
  "base_str":1, "base_dex":5, "base_con":1, "base_int":2, "base_hp":9, "base_ap":2,
  "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":0},
@@ -20,7 +20,7 @@ SEEDS_LV1TO10 = [
  "base_str":1, "base_dex":1, "base_con":1, "base_int":1, "base_hp":6, "base_ap":1,
  "str_per_level":1, "dex_per_level":0, "con_per_level":0, "int_per_level":0},
 
- {"id": "last_call", "name": "Last Call (the Barfly)", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":1, "rarity": "common", "base_xp":6, "common_drop": "herb_minor", "rare_drop": None, "money_range": (0,5),
+ {"id": "last_call", "name": "Last Call", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":1, "rarity": "common", "base_xp":6, "common_drop": "herb_minor", "rare_drop": None, "money_range": (0,5),
  "basic_attack": "drunken swing", "strong_attack": "broken bottle surprise", "player_abilities": [],
  "base_str":1, "base_dex":1, "base_con":2, "base_int":1, "base_hp":6, "base_ap":1, "str_per_level":1, "dex_per_level":0, "con_per_level":0, "int_per_level":0},
 
@@ -28,14 +28,14 @@ SEEDS_LV1TO10 = [
 
  # ensure at least one uncommon and one rare at level1
  {"id": "board_bandit", "name": "Boardwalk Bandit", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":1, "rarity": "uncommon", "base_xp":28,
- "common_drop": "lockpick", "rare_drop": "cloth_pants", "money_range": (3,14),
- "basic_attack": "slash with a plank", "strong_attack": "precise splinter stab", "player_abilities": [ "smoke_bomb" ],
+ "common_drop": "stimulant_small", "rare_drop": "cloth_pants", "money_range": (3,14),
+ "basic_attack": "slash with a plank", "strong_attack": "precise splinter stab", "player_abilities": [ "level_1_hostile_ability_smoke_bomb" ],
  "base_str":3, "base_dex":3, "base_con":2, "base_int":1, "base_hp":14, "base_ap":4,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
 
  {"id": "slick_rogue", "name": "Slick Rogue", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":1, "rarity": "rare", "base_xp":48,
- "common_drop": "lockpick", "rare_drop": "pipe_wrench", "money_range": (10,44),
- "basic_attack": "backstab from the shadows", "strong_attack": "toxic flourish", "player_abilities": [ "shadow_flicker", "poison_dart" ],
+ "common_drop": "stimulant_small", "rare_drop": "pipe_wrench", "money_range": (10,44),
+ "basic_attack": "backstab from the shadows", "strong_attack": "toxic flourish", "player_abilities": [ "level_1_hostile_ability_shadow_flicker", "level_1_hostile_ability_poison_dart" ],
  "base_str":2, "base_dex":5, "base_con":2, "base_int":2, "base_hp":12, "base_ap":5,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
 
@@ -113,19 +113,19 @@ SEEDS_LV1TO10 = [
  "str_per_level":2, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
 
  {"id": "tunnel_mole2", "name": "Gutter Mole", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":4, "rarity": "uncommon", "base_xp":28,
- "common_drop": "lockpick", "rare_drop": None, "money_range": (3,14),
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (3,14),
  "basic_attack": "stabs with a broken fingernail", "strong_attack": "backstab from the drain", "player_abilities": None,
  "base_str":2, "base_dex":3, "base_con":2, "base_int":3, "base_hp":20, "base_ap":3,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":1},
 
  # Level5
- {"id": "sly_madam_bay", "name": "Sly Madam of the Bay", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":5, "rarity": "uncommon", "base_xp":36, "common_drop": "lockpick", "money_range": (6,28),
+ {"id": "sly_madam_bay", "name": "Sly Madam of the Bay", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":5, "rarity": "uncommon", "base_xp":36, "common_drop": "stimulant_small", "money_range": (6,28),
  "basic_attack": "swift con move", "strong_attack": "outsmarting elbow", "player_abilities": [],
  "base_str":2, "base_dex":4, "base_con":2, "base_int":4, "base_hp":20, "base_ap":4, "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":1},
 
  {"id": "swamp_cultist", "name": "Lily-Cultist", "hostile_type": "humanoid", "role": "support", "min_spawn_level":5, "rarity": "rare", "base_xp":78,
  "common_drop": "herb_major", "rare_drop": "short_sword", "money_range": (22,80),
- "basic_attack": "casts a bog bolt", "strong_attack": "bone-lotus spear", "player_abilities":[ "heal_minor", "arcane_blast", "bone_spear" ],
+ "basic_attack": "casts a bog bolt", "strong_attack": "bone-lotus spear", "player_abilities":[ "light_faith_lv1_minor_heal", "level_1_hostile_ability_arcane_blast", "level_1_hostile_ability_bone_spear" ],
  "base_str":1, "base_dex":2, "base_con":2, "base_int":4, "base_hp":12, "base_ap":6, "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":2},
 
  # Level6
@@ -134,18 +134,18 @@ SEEDS_LV1TO10 = [
  "base_str":4, "base_dex":3, "base_con":3, "base_int":2, "base_hp":30, "base_ap":4, "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":1},
 
  {"id": "neglected_banshee", "name": "Neglected Banshee of the Bog", "hostile_type": "spirit", "role": "support", "min_spawn_level":6, "rarity": "rare", "base_xp":136, "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (4,36),
- "basic_attack": "piercing wail", "strong_attack": "baneful shriek", "player_abilities": ["night_whisper"], "base_str":1, "base_dex":4, "base_con":1, "base_int":8, "base_hp":28, "base_ap":8, "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":3},
+ "basic_attack": "piercing wail", "strong_attack": "baneful shriek", "player_abilities": ["level_1_hostile_ability_night_whisper"], "base_str":1, "base_dex":4, "base_con":1, "base_int":8, "base_hp":28, "base_ap":8, "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":3},
 
  # Level7
- {"id": "bay_void_spider", "name": "Bay Void Spider", "hostile_type": "creature", "role": "damage", "min_spawn_level":7, "rarity": "uncommon", "base_xp":92, "common_drop": "herb_med", "rare_drop": "ointment", "money_range": (2,30), "basic_attack": "fanged bite", "strong_attack": "venomous tear", "player_abilities": ["venom_trace"], "base_str":2, "base_dex":8, "base_con":3, "base_int":2, "base_hp":40, "base_ap":6, "str_per_level":1, "dex_per_level":3, "con_per_level":1, "int_per_level":0},
+ {"id": "bay_void_spider", "name": "Bay Void Spider", "hostile_type": "creature", "role": "damage", "min_spawn_level":7, "rarity": "uncommon", "base_xp":92, "common_drop": "herb_med", "rare_drop": "ointment", "money_range": (2,30), "basic_attack": "fanged bite", "strong_attack": "venomous tear", "player_abilities": ["level_1_hostile_ability_dark_skill_corrosive_spit"], "base_str":2, "base_dex":8, "base_con":3, "base_int":2, "base_hp":40, "base_ap":6, "str_per_level":1, "dex_per_level":3, "con_per_level":1, "int_per_level":0},
 
  # Level8
- {"id": "spectral_hag_bay2", "name": "Spectral Hag", "hostile_type": "spirit", "role": "support", "min_spawn_level":8, "rarity": "uncommon", "base_xp":120, "common_drop": "herb_med", "rare_drop": "tome_con", "money_range": (8,44), "basic_attack": "withering curse", "strong_attack": "spectral claws", "player_abilities": ["shadow_lash"], "base_str":1, "base_dex":3, "base_con":2, "base_int":9, "base_hp":36, "base_ap":10, "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":2},
+ {"id": "spectral_hag_bay2", "name": "Spectral Hag", "hostile_type": "spirit", "role": "support", "min_spawn_level":8, "rarity": "uncommon", "base_xp":120, "common_drop": "herb_med", "rare_drop": "tome_con", "money_range": (8,44), "basic_attack": "withering curse", "strong_attack": "spectral claws", "player_abilities": ["level_1_hostile_ability_shadow_lash"], "base_str":1, "base_dex":3, "base_con":2, "base_int":9, "base_hp":36, "base_ap":10, "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":2},
 
  {"id": "antique_snatcher", "name": "Antique Snatcher", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":8, "rarity": "rare", "base_xp":92, "common_drop": "stimulant_med", "rare_drop": "herb_major", "money_range": (24,100), "basic_attack": "stab with a crooked spatula", "strong_attack": "crippling antiquity swing", "player_abilities": [], "base_str":2, "base_dex":5, "base_con":2, "base_int":3, "base_hp":28, "base_ap":5, "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
 
  # Level9
- {"id": "plague_stoker_bay", "name": "Plague Stoker", "hostile_type": "undead", "role": "damage", "min_spawn_level":9, "rarity": "uncommon", "base_xp":160, "common_drop": "ointment", "rare_drop": "stimulant_large", "money_range": (6,60), "basic_attack": "diseased swipe", "strong_attack": "virulent spray", "player_abilities": ["corrosive_spit"], "base_str":4, "base_dex":3, "base_con":6, "base_int":6, "base_hp":120, "base_ap":6, "str_per_level":1, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
+ {"id": "plague_stoker_bay", "name": "Plague Stoker", "hostile_type": "undead", "role": "damage", "min_spawn_level":9, "rarity": "uncommon", "base_xp":160, "common_drop": "ointment", "rare_drop": "stimulant_large", "money_range": (6,60), "basic_attack": "diseased swipe", "strong_attack": "virulent spray", "player_abilities": ["level_1_hostile_ability_dark_skill_corrosive_spit"], "base_str":4, "base_dex":3, "base_con":6, "base_int":6, "base_hp":120, "base_ap":6, "str_per_level":1, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
 
  # Level10 (add one superrare here)
  {"id": "mind_nibbler2", "name": "Mind Nibbler", "hostile_type": "eldritch", "role": "damage", "min_spawn_level":10, "rarity": "superrare", "base_xp":420, "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (60,220), "basic_attack": "psychic tickle", "strong_attack": "brain buffet", "player_abilities": ["dark_magic_lv5_abyssal_shadow"], "base_str":2, "base_dex":3, "base_con":3, "base_int":14, "base_hp":80, "base_ap":12, "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":4},

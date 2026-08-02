@@ -31,7 +31,7 @@ SEEDS_LV11TO20 = [
  {"id": "bog_hulker", "name": "Bog Hulker", "hostile_type": "creature", "role": "damage", "min_spawn_level":15, "rarity": "common", "base_xp":240, "common_drop": "herb_major", "money_range": (36,160),
  "basic_attack": "ram", "strong_attack": "frozen stomp", "player_abilities": [], "base_str":12, "base_dex":3, "base_con":12, "base_int":2, "base_hp":300, "base_ap":8, "str_per_level":3, "dex_per_level":0, "con_per_level":3, "int_per_level":0},
 
- {"id": "sawmp_man", "name": "Swamp Man", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":15, "rarity": "uncommon", "base_xp":180, "common_drop": "lockpick", "money_range": (18,90),
+ {"id": "sawmp_man", "name": "Swamp Man", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":15, "rarity": "uncommon", "base_xp":180, "common_drop": "stimulant_small", "money_range": (18,90),
  "basic_attack": "sneak stab", "strong_attack": "fisher's swipe", "player_abilities": [], "base_str":6, "base_dex":8, "base_con":6, "base_int":4, "base_hp":220, "base_ap":6, "str_per_level":2, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
 
  {"id": "swamp_ox", "name": "Swamp Ox", "hostile_type": "creature", "role": "damage", "min_spawn_level":16, "rarity": "common", "base_xp":280, "common_drop": "herb_major", "money_range": (40,180),

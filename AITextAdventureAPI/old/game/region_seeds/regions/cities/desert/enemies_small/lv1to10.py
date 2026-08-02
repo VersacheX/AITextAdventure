@@ -10,7 +10,7 @@ RANDOM_HOSTILE_SEEDS = [
  "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":0, "resistances": [], "immunities": [], "weaknesses": []},
 
  {"id": "scav_runner", "name": "Scav Runner", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":1, "rarity": "uncommon", "base_xp":10,
- "common_drop": "herb_minor", "rare_drop": "lockpick", "money_range": (1,6),
+ "common_drop": "herb_minor", "rare_drop": "stimulant_small", "money_range": (1,6),
  "basic_attack": "shove and snatch", "strong_attack": "garrote of wire", "player_abilities": None,
  "base_str":2, "base_dex":5, "base_con":1, "base_int":2, "base_hp":10, "base_ap":2,
  "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":0, "resistances": [], "immunities": [], "weaknesses": []},
@@ -23,13 +23,13 @@ RANDOM_HOSTILE_SEEDS = [
 
  # min_spawn_level ==2
  {"id": "jerky_barker", "name": "Jerky Barker", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":2, "rarity": "rare", "base_xp":18,
- "common_drop": "jerkyshot", "rare_drop": None, "money_range": (0,8),
+ "common_drop": None, "rare_drop": "herb_med", "money_range": (0,8),
  "basic_attack": "yell and slap", "strong_attack": "spit-toss", "player_abilities": None,
  "base_str":2, "base_dex":3, "base_con":2, "base_int":1, "base_hp":20, "base_ap":2,
  "str_per_level":2, "dex_per_level":0, "con_per_level":1, "int_per_level":0, "resistances": [], "immunities": [], "weaknesses": []},
 
  {"id": "canteen_keeper", "name": "Canteen Keeper", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":2, "rarity": "common", "base_xp":14,
- "common_drop": "water", "rare_drop": "herb_minor", "money_range": (0,10),
+ "common_drop": "stimulant_small", "rare_drop": "herb_minor", "money_range": (0,10),
  "basic_attack": "spill hot brew", "strong_attack": "barstool bash", "player_abilities": None,
  "base_str":2, "base_dex":2, "base_con":3, "base_int":2, "base_hp":14, "base_ap":2,
  "str_per_level":1, "dex_per_level":0, "con_per_level":1, "int_per_level":0, "resistances": [], "immunities": [], "weaknesses": []},
@@ -55,8 +55,8 @@ RANDOM_HOSTILE_SEEDS = [
  "str_per_level":2, "dex_per_level":1, "con_per_level":1, "int_per_level":0, "resistances": [], "immunities": [], "weaknesses": []},
 
  {"id": "radio_fix", "name": "Radio Fixer", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":4, "rarity": "uncommon", "base_xp":44,
- "common_drop": "lockpick", "rare_drop": "stimulant_small", "money_range": (6,32),
- "basic_attack": "wrench jab", "strong_attack": "electro-spark", "player_abilities": ["fire_water_tech_lv2_steam_grenade", "fire_air_tech_lv2_aero_flare"],
+ "common_drop": "stimulant_small", "rare_drop": "stimulant_small", "money_range": (6,32),
+ "basic_attack": "wrench jab", "strong_attack": "electro-spark", "player_abilities": ["lv2_hostile_ability_fire_water_tech_steam_grenade", "fire_air_tech_lv2_aero_flare"],
  "base_str":2, "base_dex":4, "base_con":3, "base_int":6, "base_hp":24, "base_ap":5,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":2, "resistances": [], "immunities": [], "weaknesses": []},
 
@@ -82,7 +82,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "scrap_siren", "name": "Scrap Siren", "hostile_type": "humanoid", "role": "support", "min_spawn_level":6, "rarity": "rare", "base_xp":120,
  "common_drop": "stimulant_med", "rare_drop": "tome_int", "money_range": (25,100),
- "basic_attack": "siren wail", "strong_attack": "distracting chorus", "player_abilities": ["light_faith_lv4_hearthsong", "light_fire_faith_lv3_dawn_heal"],
+ "basic_attack": "siren wail", "strong_attack": "distracting chorus", "player_abilities": ["air_light_faith_lv2_serene_breath", "light_faith_lv1_minor_heal"],
  "base_str":2, "base_dex":5, "base_con":3, "base_int":7, "base_hp":40, "base_ap":6,
  "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":2, "resistances": [], "immunities": [], "weaknesses": []},
 
@@ -95,13 +95,13 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "rust_clubber", "name": "Rust Clubber", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":7, "rarity": "uncommon", "base_xp":30,
  "common_drop": "herb_med", "rare_drop": "pipe_wrench", "money_range": (4,24),
- "basic_attack": "club swing", "strong_attack": "overhead smash", "player_abilities": ["fire_technique_lv4_berserker_tech"],
+ "basic_attack": "club swing", "strong_attack": "overhead smash", "player_abilities": ["earth_fire_technique_lv2_berserker_tech"],
  "base_str":6, "base_dex":2, "base_con":4, "base_int":1, "base_hp":28, "base_ap":3,
  "str_per_level":2, "dex_per_level":0, "con_per_level":1, "int_per_level":0, "resistances": ["fire"], "immunities": [], "weaknesses": []},
 
  # min_spawn_level ==8
  {"id": "vault_microthief", "name": "Vault Microthief", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":8, "rarity": "rare", "base_xp":160,
- "common_drop": "lockpick", "rare_drop": "stimulant_large", "money_range": (40,160),
+ "common_drop": "stimulant_small", "rare_drop": "stimulant_large", "money_range": (40,160),
  "basic_attack": "silent pry", "strong_attack": "back-alley vanish", "player_abilities": ["dark_magic_lv1_shadow_tendril"],
  "base_str":3, "base_dex":9, "base_con":2, "base_int":6, "base_hp":48, "base_ap":8,
  "str_per_level":1, "dex_per_level":3, "con_per_level":0, "int_per_level":2, "resistances": [], "immunities": [], "weaknesses": []},
@@ -115,7 +115,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==9
  {"id": "mad_mechanic", "name": "Mad Mechanic", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":9, "rarity": "uncommon", "base_xp":180,
  "common_drop": "stimulant_large", "rare_drop": "energy_pistol", "money_range": (45,180),
- "basic_attack": "wrench flurry", "strong_attack": "overclocked blast", "player_abilities": ["fire_water_tech_lv2_steam_grenade", "air_fire_magic_lv4_chain_lightning"],
+ "basic_attack": "wrench flurry", "strong_attack": "overclocked blast", "player_abilities": ["lv2_hostile_ability_fire_water_tech_steam_grenade", "level_1_hostile_ability_electric_magic_chain_lightning"],
  "base_str":4, "base_dex":6, "base_con":4, "base_int":10, "base_hp":80, "base_ap":8,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":3, "resistances": [], "immunities": [], "weaknesses": []},
 
@@ -128,13 +128,13 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==10
  {"id": "peddler_phantom", "name": "Peddler Phantom", "hostile_type": "spirit", "role": "hazard", "min_spawn_level":10, "rarity": "rare", "base_xp":200,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (40,160),
- "basic_attack": "haunting pitch", "strong_attack": "phantom grasp", "player_abilities": ["dark_magic_lv2_night_whisper", "dark_magic_lv5_abyssal_shadow"],
+ "basic_attack": "haunting pitch", "strong_attack": "phantom grasp", "player_abilities": ["level_1_hostile_ability_night_whisper", "dark_magic_lv5_abyssal_shadow"],
  "base_str":1, "base_dex":4, "base_con":4, "base_int":12, "base_hp":80, "base_ap":10,
  "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":3, "resistances": [], "immunities": [], "weaknesses": []},
 
  {"id": "revenant_bard", "name": "Revenant Bard", "hostile_type": "spirit", "role": "support", "min_spawn_level":10, "rarity": "superrare", "base_xp":420,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,320),
- "basic_attack": "lamenting chord", "strong_attack": "shrieking reprise", "player_abilities": ["night_whisper", "streamlet"],
+ "basic_attack": "lamenting chord", "strong_attack": "shrieking reprise", "player_abilities": ["level_1_hostile_ability_night_whisper", "level_1_hostile_ability_streamlet"],
  "base_str":2, "base_dex":6, "base_con":4, "base_int":14, "base_hp":160, "base_ap":12,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":4},
 ]

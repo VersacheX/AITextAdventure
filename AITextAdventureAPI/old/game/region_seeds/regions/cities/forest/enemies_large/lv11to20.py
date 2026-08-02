@@ -5,7 +5,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==11
  {"id": "elder_tentacle", "name": "Elder Tendril", "hostile_type": "eldritch", "role": "hazard", "min_spawn_level":11, "rarity": "rare", "base_xp":260,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (30,140),
- "basic_attack": "slick lash", "strong_attack": "barbed crush", "player_abilities": ["dark_water_air_magic_lv6_abyssal_storm"],
+ "basic_attack": "slick lash", "strong_attack": "barbed crush", "player_abilities": ["lv2_hostile_ability_dark_electric_magic_abyssal_storm"],
  "base_str":12, "base_dex":2, "base_con":10, "base_int":2, "base_hp":160, "base_ap":6,
  "str_per_level":3, "dex_per_level":0, "con_per_level":2, "int_per_level":0},
 
@@ -18,7 +18,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==12
  {"id": "willow_witch", "name": "Willow Witch", "hostile_type": "humanoid", "role": "support", "min_spawn_level":12, "rarity": "rare", "base_xp":300,
  "common_drop": "herb_major", "rare_drop": "tome_con", "money_range": (50,200),
- "basic_attack": "whisper charm", "strong_attack": "binding sorrow", "player_abilities": ["dark_magic_lv2_night_whisper", "light_faith_lv1_minor_heal"],
+ "basic_attack": "whisper charm", "strong_attack": "binding sorrow", "player_abilities": ["level_1_hostile_ability_night_whisper", "light_faith_lv1_minor_heal"],
  "base_str":2, "base_dex":3, "base_con":5, "base_int":12, "base_hp":140, "base_ap":10,
  "str_per_level":0, "dex_per_level":1, "con_per_level":2, "int_per_level":3},
 
@@ -44,7 +44,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==14
  {"id": "dreamstalker", "name": "Dreamstalker", "hostile_type": "eldritch", "role": "hazard", "min_spawn_level":14, "rarity": "rare", "base_xp":420,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,320),
- "basic_attack": "suffocating lull", "strong_attack": "nightmare release", "player_abilities": ["dark_air_light_magic_lv4_nightmare_wave", "dark_magic_lv5_abyssal_shadow"],
+ "basic_attack": "suffocating lull", "strong_attack": "nightmare release", "player_abilities": ["lv2_hostile_ability_dark_air_skill_nightmare_wave", "dark_magic_lv5_abyssal_shadow"],
  "base_str":4, "base_dex":6, "base_con":6, "base_int":16, "base_hp":180, "base_ap":12,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":4},
 
@@ -70,7 +70,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==16
  {"id": "vine_colossus", "name": "Vine Colossus", "hostile_type": "construct", "role": "support", "min_spawn_level":16, "rarity": "superrare", "base_xp":520,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (100,400),
- "basic_attack": "massive swipe", "strong_attack": "entangling crush", "player_abilities": ["fire_air_earth_water_tech_lv4_chain_reactor"],
+ "basic_attack": "massive swipe", "strong_attack": "entangling crush", "player_abilities": ["earth_electric_lv2_technique_chain_reactor"],
  "base_str":18, "base_dex":2, "base_con":20, "base_int":2, "base_hp":420, "base_ap":6,
  "str_per_level":5, "dex_per_level":0, "con_per_level":4, "int_per_level":0},
 
@@ -82,8 +82,8 @@ RANDOM_HOSTILE_SEEDS = [
 
  # min_spawn_level ==17
  {"id": "shadow_briar", "name": "Shadow Briar", "hostile_type": "shadow", "role": "hazard", "min_spawn_level":17, "rarity": "uncommon", "base_xp":240,
- "common_drop": "herb_med", "rare_drop": "lockpick", "money_range": (90,360),
- "basic_attack": "dark tendril", "strong_attack": "vanishing thorn", "player_abilities": ["shadow_flicker"],
+ "common_drop": "herb_med", "rare_drop": "stimulant_small", "money_range": (90,360),
+ "basic_attack": "dark tendril", "strong_attack": "vanishing thorn", "player_abilities": ["level_1_hostile_ability_shadow_flicker"],
  "base_str":8, "base_dex":10, "base_con":7, "base_int":6, "base_hp":240, "base_ap":9,
  "str_per_level":2, "dex_per_level":3, "con_per_level":2, "int_per_level":1},
 
@@ -96,7 +96,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==18
  {"id": "starwarden", "name": "Starwarden", "hostile_type": "celestial", "role": "support", "min_spawn_level":18, "rarity": "uncommon", "base_xp":600,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (120,480),
- "basic_attack": "stellar talons", "strong_attack": "meteor flare", "player_abilities": ["light_air_fire_water_faith_lv5_stellar_fall"],
+ "basic_attack": "stellar talons", "strong_attack": "meteor flare", "player_abilities": ["light_light_faith_lv2_seraphic_nova"],
  "base_str":12, "base_dex":8, "base_con":12, "base_int":10, "base_hp":360, "base_ap":12,
  "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":3},
 
@@ -115,7 +115,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "night_warden", "name": "Night Warden", "hostile_type": "shadow", "role": "hazard", "min_spawn_level":19, "rarity": "uncommon", "base_xp":260,
  "common_drop": "herb_med", "rare_drop": "ointment", "money_range": (80,320),
- "basic_attack": "ethereal swipe", "strong_attack": "void grasp", "player_abilities": ["night_whisper"], "base_str":6, "base_dex":9, "base_con":6, "base_int":8, "base_hp":280, "base_ap":10,
+ "basic_attack": "ethereal swipe", "strong_attack": "void grasp", "player_abilities": ["level_1_hostile_ability_night_whisper"], "base_str":6, "base_dex":9, "base_con":6, "base_int":8, "base_hp":280, "base_ap":10,
  "str_per_level":2, "dex_per_level":3, "con_per_level":2, "int_per_level":2},
 
  # min_spawn_level ==20
@@ -127,7 +127,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "dusk_colossus", "name": "Dusk Colossus", "hostile_type": "construct", "role": "support", "min_spawn_level":20, "rarity": "uncommon", "base_xp":420,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (150,700),
- "basic_attack": "twilight crush", "strong_attack": "dusken cataclysm", "player_abilities": ["reinforce_frame", "berserker_tech"],
+ "basic_attack": "twilight crush", "strong_attack": "dusken cataclysm", "player_abilities": ["level_1_hostile_ability_reinforce_frame", "earth_fire_technique_lv2_berserker_tech"],
  "base_str":12, "base_dex":6, "base_con":12, "base_int":6, "base_hp":420, "base_ap":12,
  "str_per_level":4, "dex_per_level":2, "con_per_level":3, "int_per_level":2},
 ]

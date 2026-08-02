@@ -23,9 +23,9 @@ DUNGEON_NPCS: List[Dict] = [
 ]
 
 DUNGEON_ITEMS: List[Dict] = [
-    {'id': 'herb_large',      'location': 'treasure_room'},
+    {'id': 'herb_med',      'location': 'treasure_room'},
     {'id': 'stimulant_large', 'location': 'treasure_room'},
-    {'id': 'remedy_large',    'location': 'final_chamber'},
+    {'id': 'stimulant_med',    'location': 'final_chamber'},
 ]
 
 FLOOR_HOSTILES: Dict[int, List[str]] = {
@@ -41,7 +41,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'common',
         'base_xp': 534,
-        'common_drop': 'herb_large',
+        'common_drop': 'herb_med',
         'rare_drop': None,
         'money_range': (144, 460),
         'basic_attack': 'drives a blue-flame-heated fist through the target',
@@ -62,8 +62,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'hazard',
         'rarity': 'uncommon',
         'base_xp': 652,
-        'common_drop': 'remedy_large',
-        'rare_drop': 'herb_large',
+        'common_drop': 'stimulant_med',
+        'rare_drop': 'herb_med',
         'money_range': (174, 556),
         'basic_attack': 'channels an ancient rune-frequency into a draining pulse',
         'strong_attack': 'rune drain',
@@ -84,7 +84,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'rarity': 'rare',
         'base_xp': 828,
         'common_drop': 'stimulant_large',
-        'rare_drop': 'remedy_large',
+        'rare_drop': 'stimulant_med',
         'money_range': (218, 696),
         'basic_attack': 'blocks the depths passage and strikes with blue-iron force',
         'strong_attack': 'depths press',
@@ -104,8 +104,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'superrare',
         'base_xp': 1114,
-        'common_drop': 'herb_large',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'herb_med',
+        'rare_drop': 'stimulant_med',
         'money_range': (260, 832),
         'basic_attack': 'channels void-corruption through the blue-forge flame into a strike',
         'strong_attack': 'void forge burst',
@@ -134,8 +134,8 @@ BOSS_HOSTILES: List[Dict] = [
         'role': 'damage',
         'rarity': 'notfound',
         'base_xp': 36000,
-        'common_drop': 'remedy_large',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'stimulant_med',
+        'rare_drop': 'stimulant_med',
         'money_range': (875, 2625),
         'basic_attack': 'floods the depths with the rune-frequency it has fed on since the first forge burned here',
         'strong_attack': 'blueforge dominion',

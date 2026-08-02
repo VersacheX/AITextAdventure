@@ -8,6 +8,8 @@ H2  HOSTILE_MISSING_ATTACKS        basic_attack is empty or absent
 H3  HOSTILE_MISSING_BASE_STATS     base_hp or base_ap is 0 / absent
 H4  HOSTILE_ABILITY_MISMATCH       ability count below expected minimum for rarity
                                    (common=0, uncommon≥1, rare≥2, superrare≥3)
+H4b HOSTILE_UNKNOWN_ABILITY      player_abilities references an id that is not
+                                   registered in PLAYER_ABILITY_SEEDS
 H5  HOSTILE_MISSING_TYPE           hostile_type is empty or absent
 H6  HOSTILE_DROP_UNKNOWN_ITEM      common_drop or rare_drop references an item
                                    id that is not registered in the game's
@@ -89,7 +91,12 @@ def _err(code: str, message: str, severity: str = "error") -> HostileValidationE
 def _build_known_item_ids(const: Any) -> Set[str]:
     """Collect every valid item id from the game constants."""
     ids: Set[str] = set()
-    for attr in ("SEED_UTILITY_IDS", "SEED_SPECIAL_IDS", "SEED_WEAPON_IDS"):
+    for attr in (
+        "SEED_UTILITY_IDS",
+        "SEED_SPECIAL_IDS",
+        "SEED_WEAPON_IDS",
+        "SEED_ACCESSORY_IDS",
+    ):
         val = getattr(const, attr, None)
         if isinstance(val, list):
             ids.update(str(i) for i in val if i)
@@ -272,6 +279,19 @@ def validate_hostile_tree(
             ))
             by_code["HOSTILE_ABILITY_MISMATCH"] += 1
 
+        # H4b — unknown ability id cross-reference
+        if isinstance(abilities, list):
+            for aid in abilities:
+                if not aid:
+                    continue
+                if str(aid) not in ability_index:
+                    node.errors.append(_err(
+                        "HOSTILE_UNKNOWN_ABILITY",
+                        f"player_abilities references '{aid}' which is not registered "
+                        "in PLAYER_ABILITY_SEEDS.",
+                    ))
+                    by_code["HOSTILE_UNKNOWN_ABILITY"] += 1
+
         # H5
         if not str(seed.get("hostile_type", "") or "").strip():
             node.errors.append(_err(
@@ -292,8 +312,7 @@ def validate_hostile_tree(
                     "HOSTILE_DROP_UNKNOWN_ITEM",
                     f"{drop_field} '{drop_id}' is not registered in any item "
                     "constant (SEED_UTILITY_IDS, SEED_SPECIAL_IDS, "
-                    "SEED_WEAPON_IDS, SEED_ARMOR_IDS).",
-                    severity="warning",
+                    "SEED_WEAPON_IDS, SEED_ARMOR_IDS, SEED_ACCESSORY_IDS).",
                 ))
                 by_code["HOSTILE_DROP_UNKNOWN_ITEM"] += 1
 

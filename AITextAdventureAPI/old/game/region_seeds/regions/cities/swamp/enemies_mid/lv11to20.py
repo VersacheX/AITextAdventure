@@ -11,7 +11,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "fixer_hacker_bay", "name": "Bay Net-Whisperer", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":11, "rarity": "uncommon", "base_xp":130,
  "common_drop": "stimulant_large", "rare_drop": "tome_int", "money_range": (40,160),
- "basic_attack": "cybernetic tch", "strong_attack": "powerful jolt", "player_abilities": ["hack_overload", "emp_burst"],
+ "basic_attack": "cybernetic tch", "strong_attack": "powerful jolt", "player_abilities": ["level_1_hostile_ability_electric_tech_hack_overload", "level_1_hostile_ability_electric_tech_hack_overload"],
  "base_str":2, "base_dex":4, "base_con":2, "base_int":8, "base_hp":36, "base_ap":6,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
 
@@ -37,7 +37,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "lich_apprentice_bay", "name": "Dirty Lich Apprentice", "hostile_type": "undead", "role": "hazard", "min_spawn_level":13, "rarity": "rare", "base_xp":320,
  "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (30,140),
- "basic_attack": "bone bolt", "strong_attack": "necrotic spear", "player_abilities": ["bone_spear"],
+ "basic_attack": "bone bolt", "strong_attack": "necrotic spear", "player_abilities": ["level_1_hostile_ability_bone_spear"],
  "base_str":2, "base_dex":3, "base_con":4, "base_int":12, "base_hp":100, "base_ap":10,
  "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
 
@@ -83,7 +83,7 @@ SEEDS_LV11TO20 = [
  # Level17
  {"id": "harbinger_woe", "name": "Harbinger of Woe", "hostile_type": "elemental", "role": "hazard", "min_spawn_level":17, "rarity": "rare", "base_xp":340,
  "common_drop": "stimulant_med", "rare_drop": "tome_int", "money_range": (30,140),
- "basic_attack": "ice shard throw", "strong_attack": "freezing blast", "player_abilities": ["frost_nova"],
+ "basic_attack": "ice shard throw", "strong_attack": "freezing blast", "player_abilities": ["lv2_hostile_ability_ice_light_magic_frost_nova"],
  "base_str":6, "base_dex":5, "base_con":8, "base_int":7, "base_hp":180, "base_ap":9,
  "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
 
@@ -96,7 +96,7 @@ SEEDS_LV11TO20 = [
  # Level18
  {"id": "dark_watchman", "name": "Dark Watchman", "hostile_type": "humanoid", "role": "support", "min_spawn_level":18, "rarity": "uncommon", "base_xp":260,
  "common_drop": "stimulant_large", "rare_drop": "kevlar_vest", "money_range": (80,320),
- "basic_attack": "cybernetic precision jab", "strong_attack": "devastating barrage of servo-fists", "player_abilities": ["reinforce_frame", "chain_reactor"],
+ "basic_attack": "cybernetic precision jab", "strong_attack": "devastating barrage of servo-fists", "player_abilities": ["level_1_hostile_ability_reinforce_frame", "earth_electric_lv2_technique_chain_reactor"],
  "base_str":6, "base_dex":5, "base_con":6, "base_int":4, "base_hp":120, "base_ap":8,
  "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":1},
 
@@ -109,20 +109,20 @@ SEEDS_LV11TO20 = [
  # Level19
  {"id": "black_market_crook", "name": "Black Market Cat", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":19, "rarity": "common", "base_xp":200,
  "common_drop": "stimulant_large", "rare_drop": "stimulant_large", "money_range": (60,260),
- "basic_attack": "slap with a velvet paw", "strong_attack": "critical contraband shot", "player_abilities": ["primal_unison", "nether_cataclysm"],
+ "basic_attack": "slap with a velvet paw", "strong_attack": "critical contraband shot", "player_abilities": ["lv2_hostile_ability_earth_light_tech_primal_disunion", "lv2_hostile_ability_dark_electric_tech_nether_catalyst_bomb"],
  "base_str":3, "base_dex":4, "base_con":3, "base_int":6, "base_hp":48, "base_ap":6,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":2},
 
  {"id": "rogue_mistress_bay", "name": "Rogue Mistress", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":19, "rarity": "uncommon", "base_xp":220,
- "common_drop": "lockpick", "rare_drop": "stimulant_large", "money_range": (60,240),
- "basic_attack": "shadowed riposte", "strong_attack": "deadly silk rip", "player_abilities": ["poison_dart"],
+ "common_drop": "stimulant_small", "rare_drop": "stimulant_large", "money_range": (60,240),
+ "basic_attack": "shadowed riposte", "strong_attack": "deadly silk rip", "player_abilities": ["level_1_hostile_ability_poison_dart"],
  "base_str":5, "base_dex":9, "base_con":4, "base_int":6, "base_hp":90, "base_ap":9,
  "str_per_level":2, "dex_per_level":4, "con_per_level":1, "int_per_level":3},
 
  # Level20 - boss-tier
  {"id": "mob_lieutenant_bay", "name": "Bay Lieutenant", "hostile_type": "humanoid", "role": "support", "min_spawn_level":20, "rarity": "superrare", "base_xp":400,
  "common_drop": "herb_major", "rare_drop": "nano_suit", "money_range": (150,600),
- "basic_attack": "ruthless cane strikes", "strong_attack": "mobster beatdown of legend", "player_abilities": ["inspire", "berserker_tech"],
+ "basic_attack": "ruthless cane strikes", "strong_attack": "mobster beatdown of legend", "player_abilities": ["level_1_hostile_ability_inspire", "earth_fire_technique_lv2_berserker_tech"],
  "base_str":9, "base_dex":5, "base_con":8, "base_int":5, "base_hp":200, "base_ap":10,
  "str_per_level":4, "dex_per_level":2, "con_per_level":3, "int_per_level":2},
 ]

@@ -3,18 +3,18 @@
 
 RANDOM_HOSTILE_SEEDS = [
  {"id": "coin_mumbler", "name": "Coin Mumbler", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":1, "rarity": "common", "base_xp":8,
- "common_drop": "lockpick", "rare_drop": None, "money_range": (1,6),
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (1,6),
  "basic_attack": "mumbles and swipes", "strong_attack": "bold snatch", "player_abilities": None,
  "base_str":1, "base_dex":5, "base_con":1, "base_int":2, "base_hp":9, "base_ap":2,
  "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":0},
 
  {"id": "shifty_apprentice", "name": "Shifty Apprentice", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":1, "rarity": "uncommon", "base_xp":9,
- "common_drop": "lockpick", "rare_drop": None, "money_range": (1,6),
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (1,6),
  "basic_attack": "light jab", "strong_attack": "sudden vanish", "player_abilities": None,
  "base_str":1, "base_dex":5, "base_con":1, "base_int":2, "base_hp":9, "base_ap":2,
  "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":0},
 
- {"id": "homeless_lyric", "name": "Homeless Lyric (loud)", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":1, "rarity": "common", "base_xp":6,
+ {"id": "homeless_lyric", "name": "Homeless Lyric)", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":1, "rarity": "common", "base_xp":6,
  "common_drop": "herb_minor", "rare_drop": None, "money_range": (0,4),
  "basic_attack": "sloppy shove", "strong_attack": "lamenting wail", "player_abilities": None,
  "base_str":1, "base_dex":1, "base_con":1, "base_int":2, "base_hp":6, "base_ap":1,
@@ -70,7 +70,7 @@ RANDOM_HOSTILE_SEEDS = [
  "base_str":5, "base_dex":3, "base_con":4, "base_int":1, "base_hp":22, "base_ap":3,
  "str_per_level":2, "dex_per_level":0, "con_per_level":1, "int_per_level":0},
 
- {"id": "inked_row", "name": "Inked Row (tattoo show-off)", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":3, "rarity": "uncommon", "base_xp":24,
+ {"id": "inked_row", "name": "Inked Row", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":3, "rarity": "uncommon", "base_xp":24,
  "common_drop": "herb_med", "rare_drop": "cloth_pants", "money_range": (4,18),
  "basic_attack": "deez knuckles", "strong_attack": "furious flurry", "player_abilities": None,
  "base_str":3, "base_dex":3, "base_con":2, "base_int":1, "base_hp":14, "base_ap":3,
@@ -90,12 +90,12 @@ RANDOM_HOSTILE_SEEDS = [
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":0},
 
  {"id": "mole_apothecary", "name": "Mole Apothecary", "hostile_type": "humanoid", "role": "support", "min_spawn_level":4, "rarity": "uncommon", "base_xp":30,
- "common_drop": "lockpick", "rare_drop": None, "money_range": (3,18),
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (3,18),
  "basic_attack": "stabs with a small scalpel", "strong_attack": "tunnel lunge", "player_abilities": None,
  "base_str":2, "base_dex":4, "base_con":2, "base_int":4, "base_hp":24, "base_ap":3,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":1},
 
- {"id": "rogue_minstrel", "name": "Rogue Minstrel (off-key)", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":4, "rarity": "uncommon", "base_xp":36,
+ {"id": "rogue_minstrel", "name": "Rogue Minstrel", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":4, "rarity": "uncommon", "base_xp":36,
  "common_drop": "herb_med", "rare_drop": "pipe_wrench", "money_range": (5,22),
  "basic_attack": "launches a sour verse", "strong_attack": "emotional strike", "player_abilities": ["dark_magic_lv4_nightmare_echo"],
  "base_str":2, "base_dex":6, "base_con":2, "base_int":4, "base_hp":22, "base_ap":5,
@@ -117,7 +117,7 @@ RANDOM_HOSTILE_SEEDS = [
  # level6
  {"id": "canon_enforcer", "name": "Canon Enforcer", "hostile_type": "humanoid", "role": "support", "min_spawn_level":6, "rarity": "rare", "base_xp":80,
  "common_drop": "stimulant_small", "rare_drop": "cloth_gloves", "money_range": (10,50),
- "basic_attack": "bashes with a ceremonial staff", "strong_attack": "crushing consecration", "player_abilities": ["fire_earth_technique_lv3_embershield"],
+ "basic_attack": "bashes with a ceremonial staff", "strong_attack": "crushing consecration", "player_abilities": ["level_1_hostile_ability_fire_faith_ember_shield"],
  "base_str":6, "base_dex":3, "base_con":6, "base_int":2, "base_hp":36, "base_ap":4,
  "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":0},
 
@@ -127,7 +127,7 @@ RANDOM_HOSTILE_SEEDS = [
  "base_str":5, "base_dex":4, "base_con":4, "base_int":1, "base_hp":36, "base_ap":4,
  "str_per_level":2, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
 
- {"id": "doorwatch", "name": "Doorwatch (inn bouncer)", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":6, "rarity": "uncommon", "base_xp":62,
+ {"id": "doorwatch", "name": "Doorwatch", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":6, "rarity": "uncommon", "base_xp":62,
  "common_drop": "stimulant_small", "rare_drop": None, "money_range": (6,30),
  "basic_attack": "shoulder ram", "strong_attack": "haymaker swing", "player_abilities": None,
  "base_str":5, "base_dex":3, "base_con":5, "base_int":1, "base_hp":34, "base_ap":3,
@@ -140,14 +140,14 @@ RANDOM_HOSTILE_SEEDS = [
  "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":3},
 
  # level7
- {"id": "altar_fixit", "name": "Altar Fixit (greasy smile)", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":7, "rarity": "uncommon", "base_xp":48,
- "common_drop": "lockpick", "rare_drop": "tome_dex", "money_range": (8,40),
- "basic_attack": "fiddles with a brazier", "strong_attack": "electrostatic lurch", "player_abilities": ["air_tech_lv4_gale_surge"] if False else None,
+ {"id": "altar_fixit", "name": "Altar Fixit", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":7, "rarity": "uncommon", "base_xp":48,
+ "common_drop": "stimulant_small", "rare_drop": "tome_dex", "money_range": (8,40),
+ "basic_attack": "fiddles with a brazier", "strong_attack": "electrostatic lurch", "player_abilities": ["level_1_hostile_ability_air_magic_gale_surge"] if False else None,
  "base_str":2, "base_dex":4, "base_con":3, "base_int":6, "base_hp":28, "base_ap":5,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":2},
 
  {"id": "smuggler_chorister", "name": "Smuggler Chorister", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":7, "rarity": "uncommon", "base_xp":50,
- "common_drop": "lockpick", "rare_drop": "stimulant_med", "money_range": (12,60),
+ "common_drop": "stimulant_small", "rare_drop": "stimulant_med", "money_range": (12,60),
  "basic_attack": "brandishes a wrapped relic", "strong_attack": "poisoned dart", "player_abilities": None,
  "base_str":3, "base_dex":5, "base_con":2, "base_int":3, "base_hp":30, "base_ap":4,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
@@ -160,7 +160,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "siren_of_halls", "name": "Siren of Halls", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":7, "rarity": "rare", "base_xp":72,
  "common_drop": "stimulant_small", "rare_drop": "tome_int", "money_range": (12,60),
- "basic_attack": "siren song", "strong_attack": "mesmerize", "player_abilities": ["light_faith_lv4_hearthsong", "dark_magic_lv4_nightmare_echo"],
+ "basic_attack": "siren song", "strong_attack": "mesmerize", "player_abilities": ["air_light_faith_lv2_serene_breath", "dark_magic_lv4_nightmare_echo"],
  "base_str":2, "base_dex":5, "base_con":2, "base_int":7, "base_hp":30, "base_ap":6,
  "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":3},
 
@@ -180,12 +180,12 @@ RANDOM_HOSTILE_SEEDS = [
  # level9
  {"id": "jester_sermon", "name": "Jester of Sermon", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":9, "rarity": "rare", "base_xp":98,
  "common_drop": "stimulant_small", "rare_drop": "dagger", "money_range": (10,60),
- "basic_attack": "juggling knives", "strong_attack": "banana peel ambush", "player_abilities": ["air_skill_lv4_gale_dash"],
+ "basic_attack": "juggling knives", "strong_attack": "banana peel ambush", "player_abilities": ["level_1_hostile_ability_air_skill_gale_dash"],
  "base_str":3, "base_dex":8, "base_con":3, "base_int":5, "base_hp":34, "base_ap":6,
  "str_per_level":1, "dex_per_level":3, "con_per_level":1, "int_per_level":1},
 
  {"id": "vault_warden", "name": "Vault Warden", "hostile_type": "humanoid", "role": "support", "min_spawn_level":9, "rarity": "uncommon", "base_xp":48,
- "common_drop": "lockpick", "rare_drop": "stimulant_large", "money_range": (12,50),
+ "common_drop": "stimulant_small", "rare_drop": "stimulant_large", "money_range": (12,50),
  "basic_attack": "bashes with a ledger", "strong_attack": "stunning baton strike", "player_abilities": None,
  "base_str":4, "base_dex":2, "base_con":4, "base_int":3, "base_hp":30, "base_ap":3,
  "str_per_level":1, "dex_per_level":0, "con_per_level":1, "int_per_level":1},
@@ -197,7 +197,7 @@ RANDOM_HOSTILE_SEEDS = [
  "str_per_level":3, "dex_per_level":0, "con_per_level":2, "int_per_level":0},
 
  {"id": "umbral_courser", "name": "Umbral Courser", "hostile_type": "shadow", "role": "hazard", "min_spawn_level":9, "rarity": "uncommon", "base_xp":180,
- "common_drop": "herb_med", "rare_drop": "lockpick", "money_range": (6,48),
+ "common_drop": "herb_med", "rare_drop": "stimulant_small", "money_range": (6,48),
  "basic_attack": "dark slash", "strong_attack": "vanishing strike", "player_abilities": ["dark_magic_lv4_mind_shiver"],
  "base_str":5, "base_dex":10, "base_con":4, "base_int":3, "base_hp":80, "base_ap":7,
  "str_per_level":2, "dex_per_level":3, "con_per_level":1, "int_per_level":1},

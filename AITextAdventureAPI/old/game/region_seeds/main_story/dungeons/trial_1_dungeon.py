@@ -37,7 +37,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'purpose_void', 'name': 'Purpose Void', 'hostile_type': 'aberration', 'min_spawn_level': 97, 'role': 'hazard', 'rarity': 'rare',
-        'base_xp': 10000, 'common_drop': 'elixir_full', 'rare_drop': 'tome_con_superrare', 'money_range': (900, 1500),
+        'base_xp': 10000, 'common_drop': 'elixir_full_heal', 'rare_drop': 'tome_con_superrare', 'money_range': (900, 1500),
         'basic_attack': 'meaningless motion', 'strong_attack': 'emptiness cascade', 'player_abilities': [],
         'base_str': 40, 'base_dex': 35, 'base_con': 45, 'base_int': 55, 'base_hp': 42000, 'base_ap': 400,
         'str_per_level': 4, 'dex_per_level': 4, 'con_per_level': 5, 'int_per_level': 7,
@@ -45,7 +45,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'efficiency_construct', 'name': 'Efficiency Construct', 'hostile_type': 'construct', 'min_spawn_level': 98, 'role': 'damage', 'rarity': 'superrare',
-        'base_xp': 11000, 'common_drop': 'phoenix_down', 'rare_drop': 'tome_str_superrare', 'money_range': (1000, 1600),
+        'base_xp': 11000, 'common_drop': 'revive_kit', 'rare_drop': 'tome_str_superrare', 'money_range': (1000, 1600),
         'basic_attack': 'optimized strike', 'strong_attack': 'process termination', 'player_abilities': [],
         'base_str': 52, 'base_dex': 48, 'base_con': 50, 'base_int': 42, 'base_hp': 50000, 'base_ap': 350,
         'str_per_level': 6, 'dex_per_level': 5, 'con_per_level': 5, 'int_per_level': 5,
@@ -113,8 +113,8 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'hostile_seeds': HOSTILE_SEEDS,
     'npcs': DUNGEON_NPCS,
     'items': [
-        {'id': 'elixir_full', 'location': 'treasure_room'},
-        {'id': 'phoenix_down', 'location': 'treasure_room'},
+        {'id': 'elixir_full_heal', 'location': 'treasure_room'},
+        {'id': 'revive_kit', 'location': 'treasure_room'},
         {'id': 'tome_hp_superrare', 'location': 'treasure_room'},
     ],
     'boss_mob': BOSS_MOB,

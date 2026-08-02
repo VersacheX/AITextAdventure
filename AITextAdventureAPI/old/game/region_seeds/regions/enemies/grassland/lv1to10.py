@@ -31,7 +31,7 @@ SEEDS_LV1TO10 = [
  "basic_attack": "thorn jab", "strong_attack": "vicious bind", "player_abilities": [], "base_str":3, "base_dex":4, "base_con":3, "base_int":2, "base_hp":20, "base_ap":3, "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
 
  {"id": "gale_rider", "name": "Gale Rider", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":3, "rarity": "uncommon", "base_xp":36, "common_drop": "stimulant_small", "money_range": (6,30),
- "basic_attack": "gust strike", "strong_attack": "aerial clap", "player_abilities": ["air_skill_lv2_swift_tap"], "base_str":3, "base_dex":5, "base_con":3, "base_int":3, "base_hp":34, "base_ap":4, "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
+ "basic_attack": "gust strike", "strong_attack": "aerial clap", "player_abilities": ["air_light_skill_lv2_dawn_cut"], "base_str":3, "base_dex":5, "base_con":3, "base_int":3, "base_hp":34, "base_ap":4, "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
 
  # Level4
  {"id": "stonefolk", "name": "Stonefolk", "hostile_type": "construct", "role": "damage", "min_spawn_level":4, "rarity": "uncommon", "base_xp":48, "common_drop": "herb_med", "money_range": (10,44),
@@ -42,21 +42,21 @@ SEEDS_LV1TO10 = [
 
  # Level5
  {"id": "thorn_shaman", "name": "Thorn Shaman", "hostile_type": "magic", "role": "support", "min_spawn_level":5, "rarity": "rare", "base_xp":90, "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (20,100),
- "basic_attack": "curse prickle", "strong_attack": "sap burst", "player_abilities": ["light_faith_lv2_prism_burst", "earth_earth_technique_lv2_terra_slam"], "base_str":3, "base_dex":3, "base_con":5, "base_int":10, "base_hp":92, "base_ap":6, "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":2},
+ "basic_attack": "curse prickle", "strong_attack": "sap burst", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst", "earth_earth_technique_lv2_terra_slam"], "base_str":3, "base_dex":3, "base_con":5, "base_int":10, "base_hp":92, "base_ap":6, "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":2},
 
  {"id": "wind_hound", "name": "Wind Hound", "hostile_type": "creature", "role": "damage", "min_spawn_level":5, "rarity": "uncommon", "base_xp":62, "common_drop": "herb_med", "money_range": (12,56),
  "basic_attack": "rending bite", "strong_attack": "gust maul", "player_abilities": [], "base_str":6, "base_dex":6, "base_con":5, "base_int":2, "base_hp":64, "base_ap":6, "str_per_level":2, "dex_per_level":2, "con_per_level":1, "int_per_level":0},
 
  # Level6
  {"id": "meadow_priest", "name": "Meadow Priest", "hostile_type": "faith", "role": "support", "min_spawn_level":6, "rarity": "rare", "base_xp":120, "common_drop": "herb_major", "rare_drop": "tome_con", "money_range": (20,100),
- "basic_attack": "blessed palm", "strong_attack": "lumen flare", "player_abilities": ["light_faith_lv2_prism_burst", "light_faith_lv1_glimmer"], "base_str":3, "base_dex":3, "base_con":6, "base_int":10, "base_hp":96, "base_ap":8, "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":2},
+ "basic_attack": "blessed palm", "strong_attack": "lumen flare", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst", "light_faith_lv1_glimmer"], "base_str":3, "base_dex":3, "base_con":6, "base_int":10, "base_hp":96, "base_ap":8, "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":2},
 
  {"id": "field_reaver", "name": "Field Reaver", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":6, "rarity": "rare", "base_xp":140, "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (18,80),
- "basic_attack": "chrome slash", "strong_attack": "gutting rip", "player_abilities": ["fire_technique_lv4_berserker_tech"], "base_str":8, "base_dex":6, "base_con":6, "base_int":4, "base_hp":120, "base_ap":8, "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":1},
+ "basic_attack": "chrome slash", "strong_attack": "gutting rip", "player_abilities": ["earth_fire_technique_lv2_berserker_tech"], "base_str":8, "base_dex":6, "base_con":6, "base_int":4, "base_hp":120, "base_ap":8, "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":1},
 
  # Level7
  {"id": "prairie_wraith", "name": "Prairie Wraith", "hostile_type": "spirit", "role": "hazard", "min_spawn_level":7, "rarity": "rare", "base_xp":160, "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (25,120),
- "basic_attack": "soul chill", "strong_attack": "wailing gust", "player_abilities": ["dark_magic_lv2_night_whisper"], "base_str":2, "base_dex":4, "base_con":5, "base_int":10, "base_hp":120, "base_ap":8, "str_per_level":1, "dex_per_level":1, "con_per_level":2, "int_per_level":3},
+ "basic_attack": "soul chill", "strong_attack": "wailing gust", "player_abilities": ["level_1_hostile_ability_night_whisper"], "base_str":2, "base_dex":4, "base_con":5, "base_int":10, "base_hp":120, "base_ap":8, "str_per_level":1, "dex_per_level":1, "con_per_level":2, "int_per_level":3},
 
  # Level8
  {"id": "fen_guardian", "name": "Fen Guardian", "hostile_type": "creature", "role": "damage", "min_spawn_level":8, "rarity": "rare", "base_xp":200, "common_drop": "herb_major", "rare_drop": "kevlar_vest", "money_range": (30,140),

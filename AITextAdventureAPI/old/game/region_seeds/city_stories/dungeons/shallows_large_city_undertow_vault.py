@@ -23,9 +23,9 @@ DUNGEON_NPCS: List[Dict] = [
 ]
 
 DUNGEON_ITEMS: List[Dict] = [
-    {'id': 'herb_large',    'location': 'treasure_room'},
+    {'id': 'herb_med',    'location': 'treasure_room'},
     {'id': 'stimulant_med', 'location': 'treasure_room'},
-    {'id': 'remedy_med',    'location': 'final_chamber'},
+    {'id': 'petrify_salve',    'location': 'final_chamber'},
 ]
 
 FLOOR_HOSTILES: Dict[int, List[str]] = {
@@ -62,7 +62,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'hazard',
         'rarity': 'uncommon',
         'base_xp': 210,
-        'common_drop': 'remedy_med',
+        'common_drop': 'petrify_salve',
         'rare_drop': 'herb_med',
         'money_range': (34, 108),
         'basic_attack': 'corrodes armor with brine-saturated strikes',
@@ -84,7 +84,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'rarity': 'rare',
         'base_xp': 272,
         'common_drop': 'stimulant_med',
-        'rare_drop': 'remedy_med',
+        'rare_drop': 'petrify_salve',
         'money_range': (44, 138),
         'basic_attack': 'crashes with the force of a pulling undertow',
         'strong_attack': 'undertow slam',
@@ -104,8 +104,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'superrare',
         'base_xp': 368,
-        'common_drop': 'herb_large',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'herb_med',
+        'rare_drop': 'stimulant_med',
         'money_range': (62, 196),
         'basic_attack': 'strikes with the last bearings of every drowned navigator',
         'strong_attack': "navigator's curse",
@@ -134,8 +134,8 @@ BOSS_HOSTILES: List[Dict] = [
         'role': 'damage',
         'rarity': 'notfound',
         'base_xp': 5800,
-        'common_drop': 'remedy_med',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'petrify_salve',
+        'rare_drop': 'stimulant_med',
         'money_range': (155, 445),
         'basic_attack': 'pulls the chamber into a concentrated undertow surge',
         'strong_attack': "drowned navigator's tide",

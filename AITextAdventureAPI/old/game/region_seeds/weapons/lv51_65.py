@@ -146,4 +146,68 @@ WEAPONS_LV51_65 = [
         "constitution": 50,
         "elements": ["dark", "light", "earth"]
     },
+    # ── World-drop weapons ────────────────────────────────────────────────────
+    # common / technique — lv52
+    {
+        "id": "worn_longsword",
+        "name": "Worn Longsword",
+        "description": "A longsword with a blade that has been re-ground so many times the profile has shifted. It still cuts true. Someone sharpened it for a living.",
+        "damage": 60,
+        "damage_type": "slashing",
+        "ap_cost": 2,
+        "range": 1,
+        "critical_chance": 14.0,
+        "value": 5800,
+        "min_spawn_level": 52,
+        "rarity": "common",
+        "durability": 196,
+        "max_durability": 196,
+        "strength": 46,
+        "dexterity": 20,
+        "intelligence": 4,
+        "constitution": 14,
+        "elements": ["earth"]
+    },
+    # uncommon / faith — lv58
+    {
+        "id": "restoration_crook",
+        "name": "Restoration Crook",
+        "description": "A shepherd's crook repurposed as a faith-casting focus — a common enough conversion in the lower regions. The original owner's initials are still carved into the base.",
+        "damage": 66,
+        "damage_type": "energy",
+        "ap_cost": 3,
+        "range": 3,
+        "critical_chance": 12.0,
+        "value": 9200,
+        "min_spawn_level": 58,
+        "rarity": "uncommon",
+        "durability": 204,
+        "max_durability": 204,
+        "strength": 4,
+        "dexterity": 8,
+        "intelligence": 76,
+        "constitution": 44,
+        "elements": ["light", "water"]
+    },
+    # rare / magic — lv63
+    {
+        "id": "convergence_rod",
+        "name": "Convergence Rod",
+        "description": "A casting rod engineered at the intersection of three elemental disciplines. The theory behind it is sound. The instability is a feature, according to the original design notes.",
+        "damage": 76,
+        "damage_type": "energy",
+        "ap_cost": 3,
+        "range": 4,
+        "critical_chance": 16.0,
+        "value": 18400,
+        "min_spawn_level": 63,
+        "rarity": "rare",
+        "durability": 218,
+        "max_durability": 218,
+        "strength": 4,
+        "dexterity": 14,
+        "intelligence": 90,
+        "constitution": 28,
+        "elements": ["ice", "electric", "dark"]
+    },
 ]

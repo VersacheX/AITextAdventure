@@ -14,14 +14,14 @@ SEEDS_LV11TO20 = [
  "str_per_level":3, "dex_per_level":0, "con_per_level":2, "int_per_level":0},
 
  {"id": "slick_buoy", "name": "Slick Buoy", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":12, "rarity": "common", "base_xp":96,
- "common_drop": "lockpick", "rare_drop": None, "money_range": (8,44),
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (8,44),
  "basic_attack": "sabotage swipe", "strong_attack": "tripline kick", "player_abilities": None,
  "base_str":2, "base_dex":5, "base_con":3, "base_int":2, "base_hp":80, "base_ap":4,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":0},
 
  {"id": "grease_snare", "name": "Grease Snare", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":12, "rarity": "uncommon", "base_xp":180,
- "common_drop": "lockpick", "rare_drop": "stimulant_large", "money_range": (24,120),
- "basic_attack": "greasy swipe", "strong_attack": "silent choke", "player_abilities": ["void_veil"],
+ "common_drop": "stimulant_small", "rare_drop": "stimulant_large", "money_range": (24,120),
+ "basic_attack": "greasy swipe", "strong_attack": "silent choke", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
  "base_str":3, "base_dex":8, "base_con":4, "base_int":6, "base_hp":92, "base_ap":7,
  "str_per_level":1, "dex_per_level":3, "con_per_level":1, "int_per_level":2},
 
@@ -33,7 +33,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "tin_watchman", "name": "Tin Watchman", "hostile_type": "construct", "role": "support", "min_spawn_level":13, "rarity": "uncommon", "base_xp":220,
  "common_drop": "stimulant_large", "rare_drop": "kevlar_vest", "money_range": (40,180),
- "basic_attack": "piston jab", "strong_attack": "hydraulic crush", "player_abilities": ["reinforce_frame"],
+ "basic_attack": "piston jab", "strong_attack": "hydraulic crush", "player_abilities": ["level_1_hostile_ability_reinforce_frame"],
  "base_str":10, "base_dex":2, "base_con":12, "base_int":2, "base_hp":200, "base_ap":5,
  "str_per_level":3, "dex_per_level":0, "con_per_level":3, "int_per_level":0},
 
@@ -51,19 +51,19 @@ SEEDS_LV11TO20 = [
 
  {"id": "keeper_knell", "name": "Keeper Knell", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":16, "rarity": "superrare", "base_xp":480,
  "common_drop": "stimulant_large", "rare_drop": "gale_gauntlets", "money_range": (80,320),
- "basic_attack": "lantern bludgeon", "strong_attack": "blinding cataclysm", "player_abilities": ["prism_burst", "void_veil"],
+ "basic_attack": "lantern bludgeon", "strong_attack": "blinding cataclysm", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst", "lv2_hostile_ability_dark_dark_faith_void_veil"],
  "base_str":8, "base_dex":5, "base_con":10, "base_int":8, "base_hp":260, "base_ap":10,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
 
  {"id": "harbor_shade", "name": "Harbor Shade", "hostile_type": "shadow", "role": "hazard", "min_spawn_level":17, "rarity": "rare", "base_xp":320,
  "common_drop": "herb_major", "rare_drop": "stimulant_large", "money_range": (40,180),
- "basic_attack": "gloom swipe", "strong_attack": "ethereal maul", "player_abilities": ["shadow_flicker"],
+ "basic_attack": "gloom swipe", "strong_attack": "ethereal maul", "player_abilities": ["level_1_hostile_ability_shadow_flicker"],
  "base_str":4, "base_dex":7, "base_con":6, "base_int":6, "base_hp":200, "base_ap":7,
  "str_per_level":1, "dex_per_level":2, "con_per_level":2, "int_per_level":1},
 
  {"id": "brine_warden", "name": "Brine Warden", "hostile_type": "eldritch", "role": "hazard", "min_spawn_level":18, "rarity": "rare", "base_xp":560,
  "common_drop": "stimulant_large", "rare_drop": "spectral_hauberk", "money_range": (100,420),
- "basic_attack": "soul-surge claw", "strong_attack": "abyssal command", "player_abilities": ["nightmare_wave", "abyssal_storm"],
+ "basic_attack": "soul-surge claw", "strong_attack": "abyssal command", "player_abilities": ["lv2_hostile_ability_dark_air_skill_nightmare_wave", "lv2_hostile_ability_dark_electric_magic_abyssal_storm"],
  "base_str":10, "base_dex":6, "base_con":10, "base_int":10, "base_hp":360, "base_ap":12,
  "str_per_level":4, "dex_per_level":1, "con_per_level":3, "int_per_level":3},
 

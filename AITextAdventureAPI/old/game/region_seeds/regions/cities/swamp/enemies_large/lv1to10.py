@@ -8,9 +8,9 @@ SEEDS_LV1TO10 = [
  "base_str":1, "base_dex":2, "base_con":2, "base_int":1, "base_hp":12, "base_ap":1,
  "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":0},
 
- {"id": "grave_hawker", "name": "Grave Hawker (sells dubious relics)", "hostile_type": "humanoid", "role": "support", "min_spawn_level":1, "rarity": "common", "base_xp":12,
- "common_drop": "lockpick", "rare_drop": "tome_dex", "money_range": (1,12),
- "basic_attack": "rusty patter", "strong_attack": "jar heave", "player_abilities": ["inspire"],
+ {"id": "grave_hawker", "name": "Grave Hawker", "hostile_type": "humanoid", "role": "support", "min_spawn_level":1, "rarity": "common", "base_xp":12,
+ "common_drop": "stimulant_small", "rare_drop": "tome_dex", "money_range": (1,12),
+ "basic_attack": "rusty patter", "strong_attack": "jar heave", "player_abilities": ["level_1_hostile_ability_inspire"],
  "base_str":1, "base_dex":3, "base_con":2, "base_int":4, "base_hp":16, "base_ap":2,
  "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":1},
 
@@ -36,14 +36,14 @@ SEEDS_LV1TO10 = [
 
  # Level1: uncommon + rare required
  {"id": "shade_picker", "name": "Shade Picker", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":1, "rarity": "uncommon", "base_xp":20,
- "common_drop": "lockpick", "rare_drop": None, "money_range": (2,12),
- "basic_attack": "slick snatch", "strong_attack": "shadow trip", "player_abilities": ["shadow_flicker"],
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (2,12),
+ "basic_attack": "slick snatch", "strong_attack": "shadow trip", "player_abilities": ["level_1_hostile_ability_shadow_flicker"],
  "base_str":2, "base_dex":7, "base_con":2, "base_int":3, "base_hp":24, "base_ap":4,
  "str_per_level":1, "dex_per_level":2, "con_per_level":0, "int_per_level":1},
 
  {"id": "mourning_wisp", "name": "Mourning Wisp", "hostile_type": "spirit", "role": "hazard", "min_spawn_level":1, "rarity": "rare", "base_xp":80,
  "common_drop": "herb_minor", "rare_drop": "tome_int", "money_range": (6,36),
- "basic_attack": "whisper cold", "strong_attack": "spectral chill", "player_abilities": ["night_whisper"],
+ "basic_attack": "whisper cold", "strong_attack": "spectral chill", "player_abilities": ["level_1_hostile_ability_night_whisper"],
  "base_str":1, "base_dex":5, "base_con":2, "base_int":8, "base_hp":44, "base_ap":6,
  "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":2},
 
@@ -51,8 +51,8 @@ SEEDS_LV1TO10 = [
  {"id": "cryptling_02", "name": "Cryptling Whelp", "hostile_type": "undead", "role": "damage", "min_spawn_level":2, "rarity": "common", "base_xp":8, "common_drop": "herb_minor", "rare_drop": None, "money_range": (0,6), "basic_attack": "nibble", "strong_attack": "fang rut", "player_abilities": None, "base_str":2, "base_dex":4, "base_con":1, "base_int":1, "base_hp":10, "base_ap":1, "str_per_level":1, "dex_per_level":1, "con_per_level":0, "int_per_level":0},
 
  {"id": "coffin_cutpurse", "name": "Coffin Cutpurse", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":2, "rarity": "common", "base_xp":14,
- "common_drop": "lockpick", "rare_drop": None, "money_range": (1,10),
- "basic_attack": "pilfer jab", "strong_attack": "dagger flourish", "player_abilities": ["shadow_flicker"],
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (1,10),
+ "basic_attack": "pilfer jab", "strong_attack": "dagger flourish", "player_abilities": ["level_1_hostile_ability_shadow_flicker"],
  "base_str":1, "base_dex":6, "base_con":1, "base_int":2, "base_hp":14, "base_ap":3,
  "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":0},
 
@@ -99,7 +99,7 @@ SEEDS_LV1TO10 = [
  "base_str":4, "base_dex":2, "base_con":4, "base_int":2, "base_hp":40, "base_ap":2,
  "str_per_level":1, "dex_per_level":0, "con_per_level":1, "int_per_level":0},
 
- {"id": "talon_merchant", "name": "Talon Merchant (too smug)", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":3, "rarity": "common", "base_xp":18,
+ {"id": "talon_merchant", "name": "Talon Merchant", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":3, "rarity": "common", "base_xp":18,
  "common_drop": "herb_minor", "rare_drop": "tome_int", "money_range": (2,20),
  "basic_attack": "invoice slap", "strong_attack": "ink lash", "player_abilities": None,
  "base_str":2, "base_dex":3, "base_con":2, "base_int":6, "base_hp":22, "base_ap":3,
@@ -120,7 +120,7 @@ SEEDS_LV1TO10 = [
  # Level4
  {"id": "tomb_wight_01", "name": "Tomb Wight", "hostile_type": "undead", "role": "hazard", "min_spawn_level":4, "rarity": "uncommon", "base_xp":44,
  "common_drop": "herb_med", "rare_drop": "tome_int", "money_range": (6,44),
- "basic_attack": "pale grasp", "strong_attack": "life sap", "player_abilities": ["corrosive_spit"],
+ "basic_attack": "pale grasp", "strong_attack": "life sap", "player_abilities": ["level_1_hostile_ability_dark_skill_corrosive_spit"],
  "base_str":4, "base_dex":3, "base_con":6, "base_int":4, "base_hp":60, "base_ap":5,
  "str_per_level":2, "dex_per_level":0, "con_per_level":1, "int_per_level":1},
 
@@ -139,7 +139,7 @@ SEEDS_LV1TO10 = [
  # Level5
  {"id": "skeleton_archer_02", "name": "Crossbone Marksman", "hostile_type": "undead", "role": "damage", "min_spawn_level":5, "rarity": "uncommon", "base_xp":36,
  "common_drop": "herb_med", "rare_drop": "handgun_basic", "money_range": (6,36),
- "basic_attack": "pierce shot", "strong_attack": "deadeye volley", "player_abilities": ["quick_shot"],
+ "basic_attack": "pierce shot", "strong_attack": "deadeye volley", "player_abilities": ["level_1_hostile_ability_air_skill_quick_shot"],
  "base_str":3, "base_dex":7, "base_con":3, "base_int":2, "base_hp":30, "base_ap":4,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":0},
 
@@ -149,7 +149,7 @@ SEEDS_LV1TO10 = [
  "base_str":4, "base_dex":3, "base_con":5, "base_int":2, "base_hp":64, "base_ap":4,
  "str_per_level":1, "dex_per_level":0, "con_per_level":1, "int_per_level":0},
 
- {"id": "moss_jester", "name": "Moss Jester (keeps slipping on punchlines)", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":5, "rarity": "uncommon", "base_xp":36,
+ {"id": "moss_jester", "name": "Moss Jester", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":5, "rarity": "uncommon", "base_xp":36,
  "common_drop": "herb_med", "rare_drop": None, "money_range": (2,20),
  "basic_attack": "slapstick flail", "strong_attack": "custard of rot", "player_abilities": None,
  "base_str":2, "base_dex":5, "base_con":3, "base_int":5, "base_hp":36, "base_ap":3,
@@ -181,7 +181,7 @@ SEEDS_LV1TO10 = [
  "base_str":6, "base_dex":6, "base_con":5, "base_int":2, "base_hp":90, "base_ap":4,
  "str_per_level":2, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
 
- {"id": "tomb_stalker_01", "name": "Tomb Stalker", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":7, "rarity": "uncommon", "base_xp":78, "common_drop": "lockpick", "rare_drop": "pipe_wrench", "money_range": (8,44), "basic_attack": "silent cut", "strong_attack": "rear rip", "player_abilities": ["shadow_flicker"], "base_str":4, "base_dex":8, "base_con":3, "base_int":4, "base_hp":88, "base_ap":6, "str_per_level":2, "dex_per_level":3, "con_per_level":1, "int_per_level":1},
+ {"id": "tomb_stalker_01", "name": "Tomb Stalker", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":7, "rarity": "uncommon", "base_xp":78, "common_drop": "stimulant_small", "rare_drop": "pipe_wrench", "money_range": (8,44), "basic_attack": "silent cut", "strong_attack": "rear rip", "player_abilities": ["level_1_hostile_ability_shadow_flicker"], "base_str":4, "base_dex":8, "base_con":3, "base_int":4, "base_hp":88, "base_ap":6, "str_per_level":2, "dex_per_level":3, "con_per_level":1, "int_per_level":1},
 
  {"id": "sexton_mad", "name": "Sexton Mad", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":7, "rarity": "uncommon", "base_xp":40,
  "common_drop": "herb_med", "rare_drop": None, "money_range": (4,24),
@@ -191,27 +191,27 @@ SEEDS_LV1TO10 = [
 
  # Level8
  {"id": "bone_tinker", "name": "Bone Tinker", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":8, "rarity": "rare", "base_xp":120,
- "common_drop": "lockpick", "rare_drop": "tome_dex", "money_range": (18,90),
- "basic_attack": "wrench snap", "strong_attack": "spine clamp", "player_abilities": ["hack_overload", "emp_burst"],
+ "common_drop": "stimulant_small", "rare_drop": "tome_dex", "money_range": (18,90),
+ "basic_attack": "wrench snap", "strong_attack": "spine clamp", "player_abilities": ["level_1_hostile_ability_electric_tech_hack_overload", "level_1_hostile_ability_electric_tech_hack_overload"],
  "base_str":2, "base_dex":4, "base_con":5, "base_int":9, "base_hp":64, "base_ap":6,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
 
  # Level9
  {"id": "bog_wyrm", "name": "Bog Wyrm", "hostile_type": "creature", "role": "damage", "min_spawn_level":9, "rarity": "rare", "base_xp":220,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (30,160),
- "basic_attack": "toxic bite", "strong_attack": "constricting coil", "player_abilities": ["venom_trace"],
+ "basic_attack": "toxic bite", "strong_attack": "constricting coil", "player_abilities": ["level_1_hostile_ability_dark_skill_corrosive_spit"],
  "base_str":9, "base_dex":5, "base_con":8, "base_int":3, "base_hp":220, "base_ap":6,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":0},
 
  {"id": "ossuary_priest_01", "name": "Ossuary Priest", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":9, "rarity": "rare", "base_xp":180,
  "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (18,96),
- "basic_attack": "bone incant", "strong_attack": "curse of marrow", "player_abilities": ["arcane_blast", "night_whisper"],
+ "basic_attack": "bone incant", "strong_attack": "curse of marrow", "player_abilities": ["level_1_hostile_ability_arcane_blast", "level_1_hostile_ability_night_whisper"],
  "base_str":2, "base_dex":3, "base_con":6, "base_int":12, "base_hp":140, "base_ap":8,
  "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":3},
 
  {"id": "marrow_collector", "name": "Marrow Collector", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":9, "rarity": "rare", "base_xp":160,
  "common_drop": "herb_major", "rare_drop": "tome_con", "money_range": (18,96),
- "basic_attack": "pick bone", "strong_attack": "marrow rip", "player_abilities": ["corrosive_spit"],
+ "basic_attack": "pick bone", "strong_attack": "marrow rip", "player_abilities": ["level_1_hostile_ability_dark_skill_corrosive_spit"],
  "base_str":4, "base_dex":3, "base_con":8, "base_int":6, "base_hp":140, "base_ap":6,
  "str_per_level":2, "dex_per_level":0, "con_per_level":2, "int_per_level":1},
 
@@ -222,17 +222,17 @@ SEEDS_LV1TO10 = [
  "str_per_level":2, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
 
  # Level10
- {"id": "tomb_stalker_02", "name": "Sepulchre Shade", "hostile_type": "shadow", "role": "hazard", "min_spawn_level":10, "rarity": "rare", "base_xp":200, "common_drop": "herb_med", "rare_drop": "lockpick", "money_range": (20,100), "basic_attack": "ink swipe", "strong_attack": "vanishing cleave", "player_abilities": ["shadow_flicker", "void_veil"], "base_str":5, "base_dex":9, "base_con":4, "base_int":6, "base_hp":140, "base_ap":8, "str_per_level":2, "dex_per_level":3, "con_per_level":1, "int_per_level":2},
+ {"id": "tomb_stalker_02", "name": "Sepulchre Shade", "hostile_type": "shadow", "role": "hazard", "min_spawn_level":10, "rarity": "rare", "base_xp":200, "common_drop": "herb_med", "rare_drop": "stimulant_small", "money_range": (20,100), "basic_attack": "ink swipe", "strong_attack": "vanishing cleave", "player_abilities": ["level_1_hostile_ability_shadow_flicker", "lv2_hostile_ability_dark_dark_faith_void_veil"], "base_str":5, "base_dex":9, "base_con":4, "base_int":6, "base_hp":140, "base_ap":8, "str_per_level":2, "dex_per_level":3, "con_per_level":1, "int_per_level":2},
 
- {"id": "vault_keeper", "name": "Vault Keeper (sour)", "hostile_type": "humanoid", "role": "support", "min_spawn_level":10, "rarity": "rare", "base_xp":180,
+ {"id": "vault_keeper", "name": "Vault Keeper", "hostile_type": "humanoid", "role": "support", "min_spawn_level":10, "rarity": "rare", "base_xp":180,
  "common_drop": "stimulant_med", "rare_drop": "stimulant_large", "money_range": (20,120),
- "basic_attack": "staff bash", "strong_attack": "seal slam", "player_abilities": ["reinforce_frame"],
+ "basic_attack": "staff bash", "strong_attack": "seal slam", "player_abilities": ["level_1_hostile_ability_reinforce_frame"],
  "base_str":5, "base_dex":3, "base_con":6, "base_int":4, "base_hp":120, "base_ap":5,
  "str_per_level":2, "dex_per_level":0, "con_per_level":2, "int_per_level":1},
 
  {"id": "ossuary_lantern", "name": "Ossuary Lantern", "hostile_type": "undead", "role": "hazard", "min_spawn_level":10, "rarity": "superrare", "base_xp":520,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,340),
- "basic_attack": "lantern swing", "strong_attack": "blinding flare", "player_abilities": ["prism_burst", "void_veil"],
+ "basic_attack": "lantern swing", "strong_attack": "blinding flare", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst", "lv2_hostile_ability_dark_dark_faith_void_veil"],
  "base_str":8, "base_dex":5, "base_con":10, "base_int":9, "base_hp":240, "base_ap":10,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
 ]

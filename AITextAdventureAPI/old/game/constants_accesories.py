@@ -114,7 +114,7 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
         'name': 'Iron Sigil Band',
         'description': 'A band stamped with a warding sigil. Disrupts paralysis frequencies. Resists electric, weak to water.',
         'min_level': 6, 'rarity': 'uncommon', 'value': 400,
-        'immunities': ['paralyze'], 'resistances': ['electric'], 'weaknesses': ['water'],
+        'immunities': ['stun'], 'resistances': ['electric'], 'weaknesses': ['water'],
         'strength': 2, 'dexterity': 0, 'intelligence': 0, 'constitution': 1,
         'crit_bonus': 0.0, 'damage_bonus': 1, 'special_effect': '',
     },
@@ -267,7 +267,7 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
         'name': 'Voidborn Seal',
         'description': 'A seal pressed from void-metal. Immunity to all crowd-control. Resists dark, ice, and electric. Weak to light.',
         'min_level': 30, 'rarity': 'notfound', 'value': 14000,
-        'immunities': ['petrify', 'stun', 'sleep', 'confuse', 'paralyze', 'silence'],
+        'immunities': ['petrify', 'stun', 'sleep', 'confuse', 'stun', 'silence'],
         'resistances': ['dark', 'ice', 'electric'], 'weaknesses': ['light'],
         'strength': 8, 'dexterity': 8, 'intelligence': 8, 'constitution': 8,
         'crit_bonus': 3.0, 'damage_bonus': 6, 'special_effect': '',
@@ -297,7 +297,7 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
         'description': 'Forged from the oath of a warrior who refused death. Immunity to all harmful statuses. Resists all elements except light.',
         'min_level': 45, 'rarity': 'notfound', 'value': 28000,
         'immunities': [
-            'petrify', 'stun', 'sleep', 'confuse', 'paralyze', 'silence',
+            'petrify', 'stun', 'sleep', 'confuse', 'stun', 'silence',
             'fear', 'continuous_damage', 'elemental_debuff',
             'attack_debuff', 'defense_debuff', 'strength_debuff',
             'dexterity_debuff', 'intelligence_debuff', 'constitution_debuff',
@@ -312,7 +312,7 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
         'name': 'Sovereign Emblem',
         'description': 'The emblem of an extinct empire. Every stat surges. Immunity to all crowd-control. Resists all elements.',
         'min_level': 60, 'rarity': 'notfound', 'value': 50000,
-        'immunities': ['petrify', 'stun', 'sleep', 'confuse', 'paralyze', 'silence', 'fear'],
+        'immunities': ['petrify', 'stun', 'sleep', 'confuse', 'stun', 'silence', 'fear'],
         'resistances': ['dark', 'light', 'fire', 'water', 'earth', 'air', 'ice', 'electric'],
         'weaknesses': [],
         'strength': 20, 'dexterity': 20, 'intelligence': 20, 'constitution': 20,
@@ -349,3 +349,6 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
         'crit_bonus': 2.0, 'damage_bonus': 8, 'special_effect': '',
     },
 ]
+
+# Export convenience list — mirrors SEED_WEAPON_IDS / SEED_UTILITY_IDS pattern
+SEED_ACCESSORY_IDS = [a['id'] for a in ACCESSORY_SEEDS]

@@ -63,7 +63,7 @@ for slot in SLOTS:
     )
     ARMOR_SEEDS[slot] = combined_sorted
 
-# Utility items like healing herbs, lockpicks, stimulants
+# Utility items like healing herbs, stimulant_smalls, stimulants
 # User requested rarities in order: common, rare, uncommon, uncommon
 UTILITY_ITEM_SEEDS = [
     # HP healing tiers (fractions of max HP: small=25%, mid=50%, large=75%, full=100%)
@@ -194,7 +194,12 @@ SPECIAL_ITEM_SEEDS = [
     {"id": "necropolis_marrow_shard", "name": "Necropolis Marrow Shard", "description": "A fragment of marrow-crystal harvested from the Necropolis's oldest chamber. It pulses faintly with residual undeath energy and smells of old stone.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
     {"id": "swamp_mid_city_e_bayou_memory_vessel", "name": "Bayou Memory Vessel", "description": "A sealed clay vessel recovered from the bayou floor. The contents are unknown — something inside shifts when the vessel is tilted. It has never been opened.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
     {"id": "forge_dominion_shard", "name": "Forge Dominion Shard", "description": "A fragment of dominion-ore extracted from the mountain's primary vein during a controlled collapse. It carries the compressed heat of a sealed forge chamber.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
-    {"id": "swamp_small_city_e_gnashwater_memory_vessel", "name": "Gnashwater Memory Vessel", "description": "A sealed clay vessel recovered from the swamp floor. The contents are unknown — something inside shifts when the vessel is tilted. It has never been opened.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"}
+    {"id": "swamp_small_city_e_gnashwater_memory_vessel", "name": "Gnashwater Memory Vessel", "description": "A sealed clay vessel recovered from the swamp floor. The contents are unknown — something inside shifts when the vessel is tilted. It has never been opened.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+
+    # EXTRAS
+    {"id": "arc_core", "name": "Arc Core", "description": "A core of condensed arcane energy, humming with latent power.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "polar_amplifier", "name": "Polar Amplifier", "description": "A device that amplifies polar energy, used in advanced alchemical experiments.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "storm_etched_plating", "name": "Storm-Etched Plating", "description": "A piece of metal plating etched by storm energy, used in crafting resilient armor.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"}
 ]
 
 

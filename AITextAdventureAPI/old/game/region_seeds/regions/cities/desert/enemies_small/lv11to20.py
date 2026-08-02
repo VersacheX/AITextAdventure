@@ -10,7 +10,7 @@ RANDOM_HOSTILE_SEEDS = [
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
 
  {"id": "pawn_stalker", "name": "Pawn Stalker", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":11, "rarity": "uncommon", "base_xp":96,
- "common_drop": "lockpick", "rare_drop": None, "money_range": (12,56),
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (12,56),
  "basic_attack": "shadow nibble", "strong_attack": "bleeding rip", "player_abilities": [],
  "base_str":4, "base_dex":7, "base_con":4, "base_int":3, "base_hp":96, "base_ap":5,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":0},
@@ -18,7 +18,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==12
  {"id": "wasteland_wrecker", "name": "Wasteland Wrecker", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":12, "rarity": "rare", "base_xp":220,
  "common_drop": "stimulant_large", "rare_drop": "sawed_off", "money_range": (50,200),
- "basic_attack": "ram and smash", "strong_attack": "cataclysmic swing", "player_abilities": ["fire_technique_lv4_berserker_tech"],
+ "basic_attack": "ram and smash", "strong_attack": "cataclysmic swing", "player_abilities": ["earth_fire_technique_lv2_berserker_tech"],
  "base_str":10, "base_dex":2, "base_con":8, "base_int":1, "base_hp":140, "base_ap":6,
  "str_per_level":3, "dex_per_level":0, "con_per_level":2, "int_per_level":0, "resistances": [], "immunities": [], "weaknesses": []},
 
@@ -37,14 +37,14 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "scrap_shaman", "name": "Scrap Shaman", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":13, "rarity": "uncommon", "base_xp":150,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (30,140),
- "basic_attack": "rattle and curse", "strong_attack": "metallic hex", "player_abilities": ["dark_magic_lv2_night_whisper", "fire_magic_lv1_fireball"],
+ "basic_attack": "rattle and curse", "strong_attack": "metallic hex", "player_abilities": ["level_1_hostile_ability_night_whisper", "fire_magic_lv1_fireball"],
  "base_str":1, "base_dex":3, "base_con":3, "base_int":10, "base_hp":60, "base_ap":8,
  "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
 
  # min_spawn_level ==14
  {"id": "elite_mad_mechanic", "name": "Elite Mad Mechanic", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":14, "rarity": "rare", "base_xp":180,
  "common_drop": "stimulant_large", "rare_drop": "energy_pistol", "money_range": (45,180),
- "basic_attack": "wrench flurry", "strong_attack": "overclocked blast", "player_abilities": ["fire_water_tech_lv2_steam_grenade", "air_fire_magic_lv4_chain_lightning"],
+ "basic_attack": "wrench flurry", "strong_attack": "overclocked blast", "player_abilities": ["lv2_hostile_ability_fire_water_tech_steam_grenade", "level_1_hostile_ability_electric_magic_chain_lightning"],
  "base_str":4, "base_dex":6, "base_con":4, "base_int":10, "base_hp":80, "base_ap":8,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":3},
 
@@ -62,7 +62,7 @@ RANDOM_HOSTILE_SEEDS = [
  "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":0},
 
  {"id": "vault_guardian", "name": "Vault Guardian", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":15, "rarity": "uncommon", "base_xp":160,
- "common_drop": "lockpick", "rare_drop": "stimulant_large", "money_range": (30,120),
+ "common_drop": "stimulant_small", "rare_drop": "stimulant_large", "money_range": (30,120),
  "basic_attack": "silent pry", "strong_attack": "vault slam", "player_abilities": ["dark_magic_lv1_shadow_tendril"],
  "base_str":5, "base_dex":6, "base_con":6, "base_int":4, "base_hp":160, "base_ap":7,
  "str_per_level":2, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
@@ -88,8 +88,8 @@ RANDOM_HOSTILE_SEEDS = [
  "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":1},
 
  {"id": "shadow_knitter", "name": "Shadow Knitter", "hostile_type": "shadow", "role": "hazard", "min_spawn_level":17, "rarity": "uncommon", "base_xp":200,
- "common_drop": "herb_med", "rare_drop": "lockpick", "money_range": (60,240),
- "basic_attack": "dark slash", "strong_attack": "vanishing strike", "player_abilities": ["shadow_flicker"],
+ "common_drop": "herb_med", "rare_drop": "stimulant_small", "money_range": (60,240),
+ "basic_attack": "dark slash", "strong_attack": "vanishing strike", "player_abilities": ["level_1_hostile_ability_shadow_flicker"],
  "base_str":7, "base_dex":12, "base_con":6, "base_int":5, "base_hp":220, "base_ap":8,
  "str_per_level":2, "dex_per_level":3, "con_per_level":2, "int_per_level":1},
 
@@ -102,7 +102,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "shade_sentry", "name": "Shade Sentry", "hostile_type": "humanoid", "role": "support", "min_spawn_level":18, "rarity": "rare", "base_xp":280,
  "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (110,420),
- "basic_attack": "guard charge", "strong_attack": "stunning volley", "player_abilities": ["reinforce_frame"],
+ "basic_attack": "guard charge", "strong_attack": "stunning volley", "player_abilities": ["level_1_hostile_ability_reinforce_frame"],
  "base_str":8, "base_dex":6, "base_con":10, "base_int":4, "base_hp":260, "base_ap":10,
  "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":1},
 
@@ -115,7 +115,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "sand_phantom_small", "name": "Sand Phantom", "hostile_type": "spirit", "role": "hazard", "min_spawn_level":19, "rarity": "uncommon", "base_xp":260,
  "common_drop": "herb_med", "rare_drop": "ointment", "money_range": (80,320),
- "basic_attack": "ethereal swipe", "strong_attack": "void grasp", "player_abilities": ["night_whisper"],
+ "basic_attack": "ethereal swipe", "strong_attack": "void grasp", "player_abilities": ["level_1_hostile_ability_night_whisper"],
  "base_str":6, "base_dex":9, "base_con":6, "base_int":8, "base_hp":280, "base_ap":10,
  "str_per_level":2, "dex_per_level":3, "con_per_level":2, "int_per_level":2},
 
@@ -128,7 +128,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "dune_lieutenant_small", "name": "Dune Lieutenant", "hostile_type": "humanoid", "role": "support", "min_spawn_level":20, "rarity": "rare", "base_xp":420,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (150,700),
- "basic_attack": "ruthless sand-strikes", "strong_attack": "lieutenant's onslaught", "player_abilities": ["inspire", "berserker_tech"],
+ "basic_attack": "ruthless sand-strikes", "strong_attack": "lieutenant's onslaught", "player_abilities": ["level_1_hostile_ability_inspire", "earth_fire_technique_lv2_berserker_tech"],
  "base_str":9, "base_dex":6, "base_con":9, "base_int":5, "base_hp":220, "base_ap":10,
  "str_per_level":4, "dex_per_level":2, "con_per_level":3, "int_per_level":2},
 ]

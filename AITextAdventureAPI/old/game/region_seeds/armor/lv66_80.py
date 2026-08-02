@@ -40,6 +40,8 @@ ARMOR_LV66_80 = {
             "strength": 4, "dexterity": 10, "intelligence": 54, "constitution": 30,
             "elements": ["light", "water", "earth"]
         },
+        # ── world-drop: common / technique ──
+        { "id": "infantry_helm_lv67", "name": "Infantry Helm", "description": "A standard-issue steel helm worn by standing infantry across most of the regional conflicts of the last generation. Several generations of the same family have owned this one.", "defense": 42, "durability": 600, "max_durability": 600, "value": 8400, "min_spawn_level": 67, "rarity": "common", "strength": 24, "dexterity": 8, "intelligence": 4, "constitution": 12, "elements": ["earth"] },
     ],
     "body": [
         # --- Andrea Starveil (lv70) ---
@@ -80,6 +82,8 @@ ARMOR_LV66_80 = {
             "strength": 6, "dexterity": 12, "intelligence": 72, "constitution": 42,
             "elements": ["light", "water", "earth", "air"]
         },
+        # ── world-drop: superrare / magic ──
+        { "id": "resonance_robe_lv78", "name": "Resonance Robe", "description": "A robe whose weave was tuned to a specific elemental frequency during construction. Everything cast through it arrives at that frequency. The effect is not always intended.", "defense": 70, "durability": 820, "max_durability": 820, "value": 40400, "min_spawn_level": 78, "rarity": "superrare", "strength": 4, "dexterity": 14, "intelligence": 80, "constitution": 36, "elements": ["dark", "electric", "air"] },
     ],
     "arms": [
         # --- Andrea Starveil (lv70) ---
@@ -160,5 +164,7 @@ ARMOR_LV66_80 = {
             "strength": 4, "dexterity": 8, "intelligence": 46, "constitution": 28,
             "elements": ["light", "water", "earth"]
         },
+        # ── world-drop: rare / tech ──
+        { "id": "stabiliser_greaves_lv74", "name": "Stabiliser Greaves", "description": "Greaves fitted with gyro-stabiliser units at the knee — originally a medical device for balance disorders. Someone in a foundry noticed they absorbed impact well.", "defense": 50, "durability": 660, "max_durability": 660, "value": 28400, "min_spawn_level": 74, "rarity": "rare", "strength": 10, "dexterity": 56, "intelligence": 36, "constitution": 16, "elements": ["electric", "earth"] },
     ]
 }

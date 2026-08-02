@@ -494,4 +494,68 @@ WEAPONS_LV36_50 = [
         "constitution": 22,
         "elements": ["earth", "fire"]
     },
+    # ── World-drop weapons ────────────────────────────────────────────────────
+    # common / skill — lv37
+    {
+        "id": "fieldwork_blade",
+        "name": "Fieldwork Blade",
+        "description": "A standard-issue work blade carried by regional surveyors and scouts. Its edge is maintained to a serviceable standard by people who rely on it daily.",
+        "damage": 40,
+        "damage_type": "slashing",
+        "ap_cost": 2,
+        "range": 1,
+        "critical_chance": 13.0,
+        "value": 2600,
+        "min_spawn_level": 37,
+        "rarity": "common",
+        "durability": 160,
+        "max_durability": 160,
+        "strength": 20,
+        "dexterity": 20,
+        "intelligence": 10,
+        "constitution": 14,
+        "elements": ["earth"]
+    },
+    # uncommon / tech — lv43
+    {
+        "id": "arc_pistol",
+        "name": "Arc Pistol",
+        "description": "A compact sidearm built around a compressed charge cell. The trigger pull is lighter than regulation. The previous owner filed it down — an improvement, generally.",
+        "damage": 46,
+        "damage_type": "energy",
+        "ap_cost": 2,
+        "range": 4,
+        "critical_chance": 16.0,
+        "value": 4800,
+        "min_spawn_level": 43,
+        "rarity": "uncommon",
+        "durability": 168,
+        "max_durability": 168,
+        "strength": 6,
+        "dexterity": 50,
+        "intelligence": 28,
+        "constitution": 6,
+        "elements": ["electric", "air"]
+    },
+    # superrare / technique — lv49
+    {
+        "id": "bloodbound_cleaver",
+        "name": "Bloodbound Cleaver",
+        "description": "A cleaver forged with a temper that responds to sustained combat — the edge sharpens with continued use, which is a problem for anyone standing opposite it.",
+        "damage": 62,
+        "damage_type": "slashing",
+        "ap_cost": 3,
+        "range": 1,
+        "critical_chance": 13.0,
+        "value": 12400,
+        "min_spawn_level": 49,
+        "rarity": "superrare",
+        "durability": 202,
+        "max_durability": 202,
+        "strength": 88,
+        "dexterity": 18,
+        "intelligence": 6,
+        "constitution": 42,
+        "elements": ["fire", "dark"]
+    },
 ]

@@ -4,7 +4,7 @@
 from game.region_seeds.player_abilities.level_1_abilities import LEVEL_1_PLAYER_ABILITY_SEEDS
 from game.region_seeds.player_abilities.level_2_abilities import LEVEL_2_PLAYER_ABILITY_SEEDS
 from game.region_seeds.player_abilities.level_3_abilities import LEVEL_3_PLAYER_ABILITY_SEEDS
-from game.region_seeds.player_abilities.level_4_abitilies import LEVEL_4_PLAYER_ABILITY_SEEDS
+from game.region_seeds.player_abilities.level_4_abilities import LEVEL_4_PLAYER_ABILITY_SEEDS
 from game.region_seeds.player_abilities.level_5_abilities import LEVEL_5_PLAYER_ABILITY_SEEDS
 
 # Compose final PLAYER_ABILITY_SEEDS from per-level lists and the remaining inline list

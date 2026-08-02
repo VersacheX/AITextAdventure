@@ -78,6 +78,8 @@ ARMOR_LV81_105 = {
             "strength": 36, "dexterity": 72, "intelligence": 8, "constitution": 8,
             "elements": ["fire", "earth", "electric"]
         },
+        # ── world-drop: common / technique ──
+        { "id": "warband_helm_lv83", "name": "Warband Helm", "description": "A production-grade full helm issued in bulk to standing warbands. The interior padding has been replaced by every owner. The shell has not.", "defense": 52, "durability": 650, "max_durability": 650, "value": 22400, "min_spawn_level": 83, "rarity": "common", "strength": 30, "dexterity": 12, "intelligence": 6, "constitution": 14, "elements": ["earth"] },
     ],
     "body": [
         # --- Korina Brightvein (lv85) ---
@@ -156,6 +158,8 @@ ARMOR_LV81_105 = {
             "strength": 48, "dexterity": 96, "intelligence": 10, "constitution": 12,
             "elements": ["fire", "earth", "electric", "air"]
         },
+        # ── world-drop: rare / faith ──
+        { "id": "sanctuary_robe_lv91", "name": "Sanctuary Robe", "description": "A robe woven inside a consecrated space that no longer exists. The weavers finished it the day before the space was closed. They knew.", "defense": 78, "durability": 860, "max_durability": 860, "value": 50400, "min_spawn_level": 91, "rarity": "rare", "strength": 6, "dexterity": 10, "intelligence": 92, "constitution": 54, "elements": ["light", "water", "earth"] },
     ],
     "arms": [
         # --- Korina Brightvein (lv85) ---
@@ -312,5 +316,7 @@ ARMOR_LV81_105 = {
             "strength": 36, "dexterity": 62, "intelligence": 8, "constitution": 8,
             "elements": ["fire", "earth", "electric", "air"]
         },
+        # ── world-drop: superrare / tech ──
+        { "id": "exo_greaves_lv102", "name": "Exo-Greaves", "description": "Greaves built around a powered exo-frame that amplifies stride force and absorbs impact on landing. The power cell is sealed. No one has found a way to replace it. It has never run out.", "defense": 84, "durability": 900, "max_durability": 900, "value": 86400, "min_spawn_level": 102, "rarity": "superrare", "strength": 20, "dexterity": 100, "intelligence": 60, "constitution": 24, "elements": ["electric", "earth"] },
     ]
 }

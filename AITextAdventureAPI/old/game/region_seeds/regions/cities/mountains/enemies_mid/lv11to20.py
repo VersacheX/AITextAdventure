@@ -11,7 +11,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "abyssal_serpent", "name": "Abyssal Serpent", "hostile_type": "creature", "role": "damage", "min_spawn_level":11, "rarity": "uncommon", "base_xp":300,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (40,180),
- "basic_attack": "maw lash", "strong_attack": "constrict", "player_abilities": ["abyssal_storm"],
+ "basic_attack": "maw lash", "strong_attack": "constrict", "player_abilities": ["lv2_hostile_ability_dark_electric_magic_abyssal_storm"],
  "base_str":10, "base_dex":7, "base_con":9, "base_int":2, "base_hp":220, "base_ap":6,
  "str_per_level":3, "dex_per_level":2, "con_per_level":2, "int_per_level":0},
 
@@ -30,7 +30,7 @@ SEEDS_LV11TO20 = [
  # min_spawn_level =12
  {"id": "party_rivet_fiend", "name": "Party Rivet Fiend", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":12, "rarity": "uncommon", "base_xp":160,
  "common_drop": "herb_major", "rare_drop": "sawed_off", "money_range": (30,160),
- "basic_attack": "crashes with pipe", "strong_attack": "wrecking chain", "player_abilities": ["berserker_tech"],
+ "basic_attack": "crashes with pipe", "strong_attack": "wrecking chain", "player_abilities": ["earth_fire_technique_lv2_berserker_tech"],
  "base_str":8, "base_dex":2, "base_con":8, "base_int":1, "base_hp":100, "base_ap":6,
  "str_per_level":3, "dex_per_level":0, "con_per_level":3, "int_per_level":0},
 
@@ -42,7 +42,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "wandering_lich_apprentice", "name": "Wandering Lich Apprentice", "hostile_type": "undead", "role": "hazard", "min_spawn_level":12, "rarity": "rare", "base_xp":320,
  "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (30,140),
- "basic_attack": "bone bolt", "strong_attack": "necrotic spear", "player_abilities": ["bone_spear"],
+ "basic_attack": "bone bolt", "strong_attack": "necrotic spear", "player_abilities": ["level_1_hostile_ability_bone_spear"],
  "base_str":2, "base_dex":3, "base_con":4, "base_int":12, "base_hp":100, "base_ap":10,
  "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
 
@@ -61,7 +61,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "magma_serpent2", "name": "Magma Serpent", "hostile_type": "creature", "role": "damage", "min_spawn_level":13, "rarity": "uncommon", "base_xp":300,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (30,140),
- "basic_attack": "scalding snap", "strong_attack": "molten constrict", "player_abilities": ["abyssal_storm"],
+ "basic_attack": "scalding snap", "strong_attack": "molten constrict", "player_abilities": ["lv2_hostile_ability_dark_electric_magic_abyssal_storm"],
  "base_str":9, "base_dex":6, "base_con":8, "base_int":3, "base_hp":180, "base_ap":6,
  "str_per_level":3, "dex_per_level":2, "con_per_level":2, "int_per_level":1},
 
@@ -80,7 +80,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "steamwork_colossus", "name": "Steamwork Colossus", "hostile_type": "construct", "role": "support", "min_spawn_level":14, "rarity": "rare", "base_xp":320,
  "common_drop": "stimulant_large", "rare_drop": "kevlar_vest", "money_range": (60,220),
- "basic_attack": "piston swing", "strong_attack": "hydraulic crush", "player_abilities": ["reinforce_frame"],
+ "basic_attack": "piston swing", "strong_attack": "hydraulic crush", "player_abilities": ["level_1_hostile_ability_reinforce_frame"],
  "base_str":14, "base_dex":1, "base_con":18, "base_int":1, "base_hp":300, "base_ap":3,
  "str_per_level":4, "dex_per_level":0, "con_per_level":3, "int_per_level":0},
 
@@ -93,84 +93,84 @@ SEEDS_LV11TO20 = [
  # min_spawn_level =15
  {"id": "dream_eater6", "name": "Dream Eater", "hostile_type": "eldritch", "role": "hazard", "min_spawn_level":15, "rarity": "uncommon", "base_xp":480,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (60,280),
- "basic_attack": "mind gnaw", "strong_attack": "maddening shriek", "player_abilities": ["nightmare_wave"],
+ "basic_attack": "mind gnaw", "strong_attack": "maddening shriek", "player_abilities": ["lv2_hostile_ability_dark_air_skill_nightmare_wave"],
  "base_str":3, "base_dex":6, "base_con":5, "base_int":14, "base_hp":140, "base_ap":14,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":4},
 
  {"id": "dream_smoke", "name": "Dream Smoke", "hostile_type": "eldritch", "role": "hazard", "min_spawn_level":15, "rarity": "common", "base_xp":480,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (60,280),
- "basic_attack": "mind-scent wisp", "strong_attack": "maddening swirl", "player_abilities": ["nightmare_wave"],
+ "basic_attack": "mind-scent wisp", "strong_attack": "maddening swirl", "player_abilities": ["lv2_hostile_ability_dark_air_skill_nightmare_wave"],
  "base_str":2, "base_dex":6, "base_con":4, "base_int":14, "base_hp":140, "base_ap":12,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":4},
 
  {"id": "dream_eater_prime", "name": "Dream Eater Prime", "hostile_type": "eldritch", "role": "hazard", "min_spawn_level":15, "rarity": "common", "base_xp":480,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (60,280),
- "basic_attack": "mind gnaw", "strong_attack": "maddening shriek", "player_abilities": ["nightmare_wave"],
+ "basic_attack": "mind gnaw", "strong_attack": "maddening shriek", "player_abilities": ["lv2_hostile_ability_dark_air_skill_nightmare_wave"],
  "base_str":4, "base_dex":6, "base_con":6, "base_int":16, "base_hp":180, "base_ap":16,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":4},
 
  {"id": "underground_market_dealer", "name": "Underground Market Dealer", "hostile_type": "humanoid", "role": "support", "min_spawn_level":15, "rarity": "rare", "base_xp":200,
  "common_drop": "stimulant_large", "rare_drop": "stimulant_large", "money_range": (60,260),
- "basic_attack": "slick trade", "strong_attack": "underhand strike", "player_abilities": ["primal_unison"],
+ "basic_attack": "slick trade", "strong_attack": "underhand strike", "player_abilities": ["lv2_hostile_ability_earth_light_tech_primal_disunion"],
  "base_str":3, "base_dex":4, "base_con":3, "base_int":6, "base_hp":48, "base_ap":6,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":2},
 
  # min_spawn_level =16
  {"id": "forge_colossus", "name": "Forge Colossus", "hostile_type": "construct", "role": "support", "min_spawn_level":16, "rarity": "common", "base_xp":520,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,340),
- "basic_attack": "anvil swing", "strong_attack": "seismic crush", "player_abilities": ["reinforce_frame"],
+ "basic_attack": "anvil swing", "strong_attack": "seismic crush", "player_abilities": ["level_1_hostile_ability_reinforce_frame"],
  "base_str":14, "base_dex":2, "base_con":16, "base_int":2, "base_hp":320, "base_ap":6,
  "str_per_level":4, "dex_per_level":0, "con_per_level":3, "int_per_level":1},
 
  {"id": "ravine_stalker", "name": "Ravine Stalker", "hostile_type": "creature", "role": "damage", "min_spawn_level":16, "rarity": "uncommon", "base_xp":240,
  "common_drop": "herb_major", "rare_drop": None, "money_range": (20,90),
- "basic_attack": "lunge and slash", "strong_attack": "ferocious maul", "player_abilities": ["venom_trace"],
+ "basic_attack": "lunge and slash", "strong_attack": "ferocious maul", "player_abilities": ["level_1_hostile_ability_dark_skill_corrosive_spit"],
  "base_str":8, "base_dex":6, "base_con":7, "base_int":2, "base_hp":160, "base_ap":6,
  "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":0},
 
  # min_spawn_level =17
  {"id": "bridge_reaver", "name": "Bridge Reaver", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":17, "rarity": "uncommon", "base_xp":280,
- "common_drop": "lockpick", "rare_drop": "cloth_gloves", "money_range": (30,120),
- "basic_attack": "slashes with cleaver", "strong_attack": "bridge smash", "player_abilities": ["berserker_tech"],
+ "common_drop": "stimulant_small", "rare_drop": "cloth_gloves", "money_range": (30,120),
+ "basic_attack": "slashes with cleaver", "strong_attack": "bridge smash", "player_abilities": ["earth_fire_technique_lv2_berserker_tech"],
  "base_str":9, "base_dex":4, "base_con":8, "base_int":1, "base_hp":200, "base_ap":6,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":0},
 
  {"id": "cliff_phantom", "name": "Cliff Phantom", "hostile_type": "spirit", "role": "hazard", "min_spawn_level":17, "rarity": "rare", "base_xp":360,
  "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (25,140),
- "basic_attack": "ethereal swipe", "strong_attack": "voiding shriek", "player_abilities": ["night_whisper"],
+ "basic_attack": "ethereal swipe", "strong_attack": "voiding shriek", "player_abilities": ["level_1_hostile_ability_night_whisper"],
  "base_str":2, "base_dex":6, "base_con":4, "base_int":12, "base_hp":220, "base_ap":8,
  "str_per_level":0, "dex_per_level":2, "con_per_level":1, "int_per_level":3},
 
  # min_spawn_level =18
  {"id": "pit_lieutenant", "name": "Pit Lieutenant", "hostile_type": "humanoid", "role": "support", "min_spawn_level":18, "rarity": "rare", "base_xp":600,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (100,420),
- "basic_attack": "ruthless barrage", "strong_attack": "commanding roar", "player_abilities": ["berserker_tech", "inspire"],
+ "basic_attack": "ruthless barrage", "strong_attack": "commanding roar", "player_abilities": ["earth_fire_technique_lv2_berserker_tech", "level_1_hostile_ability_inspire"],
  "base_str":10, "base_dex":6, "base_con":10, "base_int":6, "base_hp":360, "base_ap":10,
  "str_per_level":4, "dex_per_level":2, "con_per_level":3, "int_per_level":2},
 
  # min_spawn_level =19
  {"id": "mountain_reaver", "name": "Mountain Reaver", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":19, "rarity": "uncommon", "base_xp":380,
  "common_drop": "stimulant_large", "rare_drop": None, "money_range": (50,200),
- "basic_attack": "rending strike", "strong_attack": "colossal maul", "player_abilities": ["berserker_tech"],
+ "basic_attack": "rending strike", "strong_attack": "colossal maul", "player_abilities": ["earth_fire_technique_lv2_berserker_tech"],
  "base_str":11, "base_dex":5, "base_con":10, "base_int":2, "base_hp":260, "base_ap":7,
  "str_per_level":3, "dex_per_level":1, "con_per_level":3, "int_per_level":0},
 
  {"id": "vein_colossus", "name": "Vein Colossus", "hostile_type": "construct", "role": "support", "min_spawn_level":19, "rarity": "rare", "base_xp":500,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,320),
- "basic_attack": "mace crush", "strong_attack": "seismic rupture", "player_abilities": ["reinforce_frame"],
+ "basic_attack": "mace crush", "strong_attack": "seismic rupture", "player_abilities": ["level_1_hostile_ability_reinforce_frame"],
  "base_str":14, "base_dex":2, "base_con":14, "base_int":1, "base_hp":360, "base_ap":6,
  "str_per_level":4, "dex_per_level":0, "con_per_level":4, "int_per_level":0},
 
  # min_spawn_level =20
  {"id": "rift_archer", "name": "Rift Archer", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":20, "rarity": "uncommon", "base_xp":420,
- "common_drop": "lockpick", "rare_drop": "handgun_basic", "money_range": (60,240),
- "basic_attack": "precise shot", "strong_attack": "piercing volley", "player_abilities": ["quick_shot"],
+ "common_drop": "stimulant_small", "rare_drop": "handgun_basic", "money_range": (60,240),
+ "basic_attack": "precise shot", "strong_attack": "piercing volley", "player_abilities": ["level_1_hostile_ability_air_skill_quick_shot"],
  "base_str":3, "base_dex":10, "base_con":5, "base_int":3, "base_hp":220, "base_ap":7,
  "str_per_level":1, "dex_per_level":3, "con_per_level":2, "int_per_level":1},
 
  {"id": "mountain_overlord", "name": "Mountain Overlord", "hostile_type": "humanoid", "role": "support", "min_spawn_level":20, "rarity": "rare", "base_xp":650,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (120,480),
- "basic_attack": "ruthless barrage", "strong_attack": "overlord's cleave", "player_abilities": ["inspire", "berserker_tech"],
+ "basic_attack": "ruthless barrage", "strong_attack": "overlord's cleave", "player_abilities": ["level_1_hostile_ability_inspire", "earth_fire_technique_lv2_berserker_tech"],
  "base_str":12, "base_dex":6, "base_con":12, "base_int":6, "base_hp":420, "base_ap":10,
  "str_per_level":4, "dex_per_level":2, "con_per_level":4, "int_per_level":2},
 ]

@@ -24,9 +24,9 @@ DUNGEON_NPCS: List[Dict] = [
 ]
 
 DUNGEON_ITEMS: List[Dict] = [
-    {'id': 'herb_large',      'location': 'treasure_room'},
+    {'id': 'herb_med',      'location': 'treasure_room'},
     {'id': 'stimulant_large', 'location': 'treasure_room'},
-    {'id': 'remedy_large',    'location': 'final_chamber'},
+    {'id': 'stimulant_med',    'location': 'final_chamber'},
 ]
 
 FLOOR_HOSTILES: Dict[int, List[str]] = {
@@ -42,7 +42,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'common',
         'base_xp': 292,
-        'common_drop': 'herb_large',
+        'common_drop': 'herb_med',
         'rare_drop': None,
         'money_range': (76, 240),
         'basic_attack': 'transmits a relay shock through contact',
@@ -63,8 +63,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'hazard',
         'rarity': 'uncommon',
         'base_xp': 356,
-        'common_drop': 'remedy_med',
-        'rare_drop': 'herb_large',
+        'common_drop': 'petrify_salve',
+        'rare_drop': 'herb_med',
         'money_range': (88, 282),
         'basic_attack': 'disrupts with a static-charged strike',
         'strong_attack': 'static burst',
@@ -85,7 +85,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'rarity': 'rare',
         'base_xp': 452,
         'common_drop': 'stimulant_large',
-        'rare_drop': 'remedy_large',
+        'rare_drop': 'stimulant_med',
         'money_range': (108, 346),
         'basic_attack': 'resonates at a frequency that disrupts armor',
         'strong_attack': 'frequency shatter',
@@ -105,8 +105,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'superrare',
         'base_xp': 608,
-        'common_drop': 'herb_large',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'herb_med',
+        'rare_drop': 'stimulant_med',
         'money_range': (145, 464),
         'basic_attack': 'sends a void-infused broadcast through the relay network',
         'strong_attack': 'void broadcast',
@@ -135,8 +135,8 @@ BOSS_HOSTILES: List[Dict] = [
         'role': 'damage',
         'rarity': 'notfound',
         'base_xp': 9800,
-        'common_drop': 'remedy_large',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'stimulant_med',
+        'rare_drop': 'stimulant_med',
         'money_range': (245, 735),
         'basic_attack': 'floods the relay with every transaction ever recorded',
         'strong_attack': 'frequency devour',

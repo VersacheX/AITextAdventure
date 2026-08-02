@@ -28,7 +28,7 @@ SEEDS_LV11TO20 = [
  {"id": "shiver_ruffian", "name": "Shiver Ruffian", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":15, "rarity": "common", "base_xp":160, "common_drop": "stimulant_small", "rare_drop": None, "money_range": (18,90),
  "basic_attack": "palm strike", "strong_attack": "frosty flurry", "player_abilities": [], "base_str":8, "base_dex":5, "base_con":6, "base_int":3, "base_hp":180, "base_ap":6, "str_per_level":2, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
 
- {"id": "pilfering_pelt", "name": "Pilfering Pelt", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":15, "rarity": "uncommon", "base_xp":150, "common_drop": "lockpick", "rare_drop": None, "money_range": (18,90),
+ {"id": "pilfering_pelt", "name": "Pilfering Pelt", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":15, "rarity": "uncommon", "base_xp":150, "common_drop": "stimulant_small", "rare_drop": None, "money_range": (18,90),
  "basic_attack": "sneak stab", "strong_attack": "fisher's swipe", "player_abilities": [], "base_str":6, "base_dex":8, "base_con":6, "base_int":4, "base_hp":140, "base_ap":6, "str_per_level":2, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
 
  {"id": "frozen_ox", "name": "Frozen Ox", "hostile_type": "creature", "role": "damage", "min_spawn_level":16, "rarity": "common", "base_xp":200, "common_drop": "herb_major", "rare_drop": None, "money_range": (30,140),

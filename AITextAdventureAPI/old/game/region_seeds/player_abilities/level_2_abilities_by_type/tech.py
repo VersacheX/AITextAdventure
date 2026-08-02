@@ -90,4 +90,13 @@ LEVEL_2_TECH_ABILITY_SEEDS = [
 
    ##STATUS EFFECT
  {"id": "dark_air_lv2_echo_displacer", "name": "Echo Displacer", "description": "A device that disrupts sound resonance nearby.", "ability_type": "tech", "level":2, "elements": ["dark", "air"], "base_power":0, "ap_cost":30, "effect": "status", "status_keys": ["silence"], "can_aoe": True},
+
+
+
+   ##NON-PLAYER ABILITIES
+ {"id": "lv2_hostile_ability_fire_water_tech_steam_grenade", "name": "Steam Grenade", "description": "A grenade that releases scalding steam.", "ability_type": "skill", "level":2, "elements": ["fire", "water"], "base_power":0, "ap_cost":10, "effect": "status", "status_keys": ["continuous_damage"], "can_aoe": True, "non_player_ability": True},
+ {"id": "lv2_hostile_ability_earth_light_tech_primal_disunion", "name": "Primal Disunion", "description": "A device that emits an invasive harmonic pulse.", "ability_type": "skill", "level":2, "elements": ["earth", "light"], "base_power":0, "ap_cost":10, "effect": "status", "status_keys": ["continuous_damage"], "can_aoe": True, "non_player_ability": True},
+ {"id": "lv2_hostile_ability_dark_electric_tech_nether_catalyst_bomb", "name": "Nether Catalyst Bomb", "description": "A device that releases a disruptive energy pulse.", "ability_type": "skill", "level":2, "elements": ["dark", "electric"], "base_power":0, "ap_cost":10, "effect": "status", "status_keys": ["continuous_damage"], "can_aoe": True, "non_player_ability": True},
+ {"id": "lv2_hostile_ability_dark_water_tech_void_spatter", "name": "Void Spatter", "description": "A device that releases a corrosive void liquid.", "ability_type": "skill", "level":2, "elements": ["dark", "water"], "base_power":1, "ap_cost":20, "effect": "status", "status_keys": ["continuous_damage"], "can_aoe": True, "non_player_ability": True},
+ {"id": "lv2_hostile_ability_electric_earth_tech_ion_leech", "name": "Ion Leech", "description": "A device that drains energy from nearby electronics.", "ability_type": "skill", "level":2, "elements": ["electric", "earth"], "base_power":1, "ap_cost":20, "effect": "status", "status_keys": ["continuous_damage"], "can_aoe": True, "non_player_ability": True},
 ]

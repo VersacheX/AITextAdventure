@@ -23,9 +23,9 @@ DUNGEON_NPCS: List[Dict] = [
 ]
 
 DUNGEON_ITEMS: List[Dict] = [
-    {'id': 'herb_large',    'location': 'treasure_room'},
+    {'id': 'herb_med',    'location': 'treasure_room'},
     {'id': 'stimulant_med', 'location': 'treasure_room'},
-    {'id': 'remedy_med',    'location': 'final_chamber'},
+    {'id': 'petrify_salve',    'location': 'final_chamber'},
 ]
 
 FLOOR_HOSTILES: Dict[int, List[str]] = {
@@ -62,8 +62,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'hazard',
         'rarity': 'uncommon',
         'base_xp': 248,
-        'common_drop': 'remedy_med',
-        'rare_drop': 'herb_large',
+        'common_drop': 'petrify_salve',
+        'rare_drop': 'herb_med',
         'money_range': (44, 140),
         'basic_attack': 'charges through the hollow trailing a blizzard',
         'strong_attack': 'blizzard surge',
@@ -84,7 +84,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'rarity': 'rare',
         'base_xp': 318,
         'common_drop': 'stimulant_large',
-        'rare_drop': 'remedy_large',
+        'rare_drop': 'stimulant_med',
         'money_range': (56, 175),
         'basic_attack': 'stands fast and strikes with a heavy frost-plated gauntlet',
         'strong_attack': 'frost guard slam',
@@ -104,8 +104,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'superrare',
         'base_xp': 432,
-        'common_drop': 'herb_large',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'herb_med',
+        'rare_drop': 'stimulant_med',
         'money_range': (76, 238),
         'basic_attack': 'embodies the battle-wind of every siege that buried this outpost',
         'strong_attack': 'siege memory',
@@ -134,8 +134,8 @@ BOSS_HOSTILES: List[Dict] = [
         'role': 'damage',
         'rarity': 'notfound',
         'base_xp': 6500,
-        'common_drop': 'remedy_large',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'stimulant_med',
+        'rare_drop': 'stimulant_med',
         'money_range': (168, 490),
         'basic_attack': 'unleashes the accumulated battle-wind of every siege through the hollow',
         'strong_attack': 'siege storm',

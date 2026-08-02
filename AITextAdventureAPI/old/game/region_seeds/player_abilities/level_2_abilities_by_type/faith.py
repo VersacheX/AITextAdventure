@@ -59,7 +59,7 @@ LEVEL_2_FAITH_ABILITY_SEEDS = [
  {"id": "ice_light_faith_lv2_purging_veil", "name": "Purging Veil", "description": "A frost veil that ends lingering wounds.", "ability_type": "faith", "level":2, "elements": ["ice", "light"], "base_power":0, "ap_cost":20, "effect": "cure", "status_keys": ["continuous_damage"], "can_aoe": True},
  {"id": "fire_light_faith_lv2_dream_awakening", "name": "Dream Awakening", "description": "A warming light that wakes the sleeping.", "ability_type": "faith", "level":2, "elements": ["fire", "light"], "base_power":0, "ap_cost":20, "effect": "cure", "status_keys": ["sleep"], "can_aoe": True},
  {"id": "earth_light_faith_lv2_clarity_balm", "name": "Clarity Balm", "description": "An earthen salve that clears confusion.", "ability_type": "faith", "level":2, "elements": ["earth", "light"], "base_power":0, "ap_cost":20, "effect": "cure", "status_keys": ["confuse"], "can_aoe": False},
- {"id": "electric_dark_faith_lv2_purge_tide", "name": "Purge Tide", "description": "A black-light surge that strips debuffs.", "ability_type": "faith", "level":2, "elements": ["electric", "dark"], "base_power":0, "ap_cost":20, "effect": "cure", "status_keys": ["debuff"], "can_aoe": True},
+ {"id": "electric_dark_faith_lv2_purge_tide", "name": "Purge Tide", "description": "A black-light surge that strips debuffs.", "ability_type": "faith", "level":2, "elements": ["electric", "dark"], "base_power":0, "ap_cost":20, "effect": "cure", "status_keys": ["elemental_debuff"], "can_aoe": True},
 
  ## BUFFS (elemental defense buffs, AoE)
  {"id": "fire_dark_faith_lv2_sanctified_shield", "name": "Sanctified Shield", "description": "A dark-fire aura that bolsters defense.", "ability_type": "faith", "level":2, "elements": ["fire", "dark"], "base_power":0, "ap_cost":20, "effect": "status", "status_keys": ["elemental_defense_buff"], "can_aoe": True},
@@ -84,4 +84,11 @@ LEVEL_2_FAITH_ABILITY_SEEDS = [
  ## STATUS EFFECT (special)
  {"id": "light_dark_faith_lv2_dusk_confessional", "name": "Dusk Confessional", "description": "A twilight rite that confuses foes.", "ability_type": "faith", "level":2, "elements": ["light", "dark"], "base_power":0, "ap_cost":50, "effect": "status", "status_keys": ["confuse"], "can_aoe": True},
 
+
+ ##NON-PLAYER ABILITIES
+ {"id": "lv2_hostile_ability_dark_dark_faith_void_veil", "name": "Void Veil", "description": "A dark shroud that confuses enemies.", "ability_type": "skill", "level":2, "elements": ["dark", "dark"], "base_power":1, "ap_cost":10, "effect": "status", "status_keys": ["elemental_debuff"], "can_aoe": True, "non_player_ability": True},
+ {"id": "lv2_hostile_ability_air_water_faith_gale_of_silence", "name": "Gale of Silence", "description": "A wind that silences all foes.", "ability_type": "skill", "level":2, "elements": ["air", "water"], "base_power":1, "ap_cost":10, "effect": "status", "status_keys": ["silence"], "can_aoe": True, "non_player_ability": True},
+ {"id": "lv2_hostile_ability_water_light_fae_glimmer", "name": "Glimmer", "description": "A shimmering light that confuses enemies.", "ability_type": "skill", "level":2, "elements": ["water", "light"], "base_power":1, "ap_cost":10, "effect": "status", "status_keys": ["confuse"], "can_aoe": False, "non_player_ability": True},
+ {"id": "lv2_hostile_ability_dark_light_faith_calm_bleat", "name": "Calm Bleat", "description": "A soothing sound that confuses enemies.", "ability_type": "skill", "level":2, "elements": ["dark", "light"], "base_power":30, "ap_cost":30, "effect": "heal", "can_aoe": False, "non_player_ability": True},
+ {"id": "lv2_hostile_ability_earth_air_faith_thornbind", "name": "Thornbind", "description": "A binding thorn that immobilizes foes.", "ability_type": "skill", "level":2, "elements": ["earth", "air"], "base_power":1, "ap_cost":10, "effect": "status", "status_keys": ["stun"], "can_aoe": False, "non_player_ability": True},
 ]

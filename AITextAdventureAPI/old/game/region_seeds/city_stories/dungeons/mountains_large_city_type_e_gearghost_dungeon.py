@@ -25,7 +25,7 @@ DUNGEON_NPCS: List[Dict] = [
 DUNGEON_ITEMS: List[Dict] = [
     {'id': 'herb_med',      'location': 'treasure_room'},
     {'id': 'stimulant_med', 'location': 'treasure_room'},
-    {'id': 'remedy_med',    'location': 'final_chamber'},
+    {'id': 'petrify_salve',    'location': 'final_chamber'},
 ]
 
 FLOOR_HOSTILES: Dict[int, List[str]] = {
@@ -62,7 +62,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'hazard',
         'rarity': 'uncommon',
         'base_xp': 162,
-        'common_drop': 'remedy_small',
+        'common_drop': 'ointment',
         'rare_drop': 'herb_med',
         'money_range': (28, 88),
         'basic_attack': 'scatters razor-edged metal shards',
@@ -84,7 +84,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'rarity': 'rare',
         'base_xp': 212,
         'common_drop': 'stimulant_med',
-        'rare_drop': 'remedy_med',
+        'rare_drop': 'petrify_salve',
         'money_range': (36, 115),
         'basic_attack': 'crashes forward along the relay conduits',
         'strong_attack': 'conduit surge',
@@ -105,7 +105,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'rarity': 'superrare',
         'base_xp': 288,
         'common_drop': 'herb_med',
-        'rare_drop': 'remedy_med',
+        'rare_drop': 'petrify_salve',
         'money_range': (52, 162),
         'basic_attack': 'strikes charged by centuries of forge-frequency',
         'strong_attack': 'resonance discharge',
@@ -134,8 +134,8 @@ BOSS_HOSTILES: List[Dict] = [
         'role': 'damage',
         'rarity': 'notfound',
         'base_xp': 4200,
-        'common_drop': 'remedy_med',
-        'rare_drop': 'remedy_med',
+        'common_drop': 'petrify_salve',
+        'rare_drop': 'petrify_salve',
         'money_range': (120, 350),
         'basic_attack': 'phases through the forge walls to strike from every direction',
         'strong_attack': 'gearghost rupture',

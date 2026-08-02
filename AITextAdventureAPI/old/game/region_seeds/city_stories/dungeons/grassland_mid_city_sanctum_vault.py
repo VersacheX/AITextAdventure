@@ -24,8 +24,8 @@ DUNGEON_NPCS: List[Dict] = [
 
 DUNGEON_ITEMS: List[Dict] = [
     {'id': 'herb_med',     'location': 'treasure_room'},
-    {'id': 'remedy_small', 'location': 'treasure_room'},
-    {'id': 'remedy_med',   'location': 'final_chamber'},
+    {'id': 'ointment', 'location': 'treasure_room'},
+    {'id': 'petrify_salve',   'location': 'final_chamber'},
 ]
 
 FLOOR_HOSTILES: Dict[int, List[str]] = {
@@ -41,7 +41,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'common',
         'base_xp': 95,
-        'common_drop': 'herb_small',
+        'common_drop': 'herb_minor',
         'rare_drop': None,
         'money_range': (18, 55),
         'basic_attack': 'strikes with a doctrine-branded weapon',
@@ -62,7 +62,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'hazard',
         'rarity': 'uncommon',
         'base_xp': 122,
-        'common_drop': 'remedy_small',
+        'common_drop': 'ointment',
         'rare_drop': 'herb_med',
         'money_range': (22, 68),
         'basic_attack': 'lashes with a chain of broken vows',
@@ -84,7 +84,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'rarity': 'rare',
         'base_xp': 158,
         'common_drop': 'stimulant_med',
-        'rare_drop': 'remedy_med',
+        'rare_drop': 'petrify_salve',
         'money_range': (28, 88),
         'basic_attack': 'slams with the weight of a corrupted doctrine',
         'strong_attack': 'false verse crush',
@@ -105,7 +105,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'rarity': 'superrare',
         'base_xp': 212,
         'common_drop': 'herb_med',
-        'rare_drop': 'remedy_med',
+        'rare_drop': 'petrify_salve',
         'money_range': (40, 128),
         'basic_attack': 'channels broken oaths into a directed strike',
         'strong_attack': 'sanctum rupture',
@@ -134,8 +134,8 @@ BOSS_HOSTILES: List[Dict] = [
         'role': 'damage',
         'rarity': 'notfound',
         'base_xp': 3200,
-        'common_drop': 'remedy_med',
-        'rare_drop': 'remedy_med',
+        'common_drop': 'petrify_salve',
+        'rare_drop': 'petrify_salve',
         'money_range': (100, 280),
         'basic_attack': 'fills the chamber with the crushing weight of broken vows',
         'strong_attack': 'voice of the false verse',

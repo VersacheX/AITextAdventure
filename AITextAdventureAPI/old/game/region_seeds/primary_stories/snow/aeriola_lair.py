@@ -242,7 +242,7 @@ BOSS_HOSTILES = [
         "min_spawn_level": 30, "rarity": "notfound", "base_xp": 1200,
         "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (100,300),
         "basic_attack": "frozen grasp", "strong_attack": "absolute zero",
-        "player_abilities": ["ice_dark_magic_lv2_shadowfrost_bolt", "ice_water_magic_lv2_glacier_spike", 'ice_ice_ice_magic_lv3_frost_nova'],
+        "player_abilities": ["ice_dark_magic_lv2_shadowfrost_bolt", "ice_water_magic_lv2_glacier_spike", 'lv2_hostile_ability_ice_light_magic_frost_nova'],
         "base_str": 10, "base_dex": 8, "base_con": 12, "base_int": 16,
         "base_hp": 2200, "base_ap": 12,
         "str_per_level": 2, "dex_per_level": 1, "con_per_level": 2, "int_per_level": 3

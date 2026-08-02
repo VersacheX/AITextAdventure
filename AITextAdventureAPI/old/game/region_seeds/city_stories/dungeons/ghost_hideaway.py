@@ -23,9 +23,9 @@ DUNGEON_NPCS: List[Dict] = [
 ]
 
 DUNGEON_ITEMS: List[Dict] = [
-    {'id': 'herb_large',      'location': 'treasure_room'},
+    {'id': 'herb_med',      'location': 'treasure_room'},
     {'id': 'stimulant_large', 'location': 'treasure_room'},
-    {'id': 'remedy_med',      'location': 'final_chamber'},
+    {'id': 'petrify_salve',      'location': 'final_chamber'},
 ]
 
 FLOOR_HOSTILES: Dict[int, List[str]] = {
@@ -62,8 +62,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'hazard',
         'rarity': 'uncommon',
         'base_xp': 248,
-        'common_drop': 'remedy_small',
-        'rare_drop': 'remedy_med',
+        'common_drop': 'ointment',
+        'rare_drop': 'petrify_salve',
         'money_range': (62, 155),
         'basic_attack': 'seeps through the shadow to corrode on contact',
         'strong_attack': 'shadow drain',
@@ -84,7 +84,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'rarity': 'rare',
         'base_xp': 298,
         'common_drop': 'stimulant_large',
-        'rare_drop': 'remedy_large',
+        'rare_drop': 'stimulant_med',
         'money_range': (80, 200),
         'basic_attack': 'phases through obstacles to strike directly',
         'strong_attack': 'spectral press',
@@ -104,8 +104,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'superrare',
         'base_xp': 375,
-        'common_drop': 'herb_large',
-        'rare_drop': 'remedy_large',
+        'common_drop': 'herb_med',
+        'rare_drop': 'stimulant_med',
         'money_range': (110, 280),
         'basic_attack': 'channels the night channels into a focused void-strike',
         'strong_attack': 'nightchannel surge',

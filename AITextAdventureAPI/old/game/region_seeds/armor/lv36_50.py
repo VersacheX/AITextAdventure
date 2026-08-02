@@ -6,35 +6,35 @@ ARMOR_LV36_50 = {
     "head": [
         # --- Lyren Vale (lv35) ---
         {
-      "id": "softbloom_cowl",
-     "name": "Softbloom Cowl",
-    "description": "A cowl woven from moonpetal silk and river reeds. It quiets the mind and amplifies restorative intent.",
-      "defense": 24, "durability": 400, "max_durability": 400, "value": 5800,
-     "min_spawn_level": 35, "rarity": "notfound",
-       "strength": 4, "dexterity": 12, "intelligence": 34, "constitution": 26,
-   "elements": ["water", "light"]
+            "id": "softbloom_cowl",
+            "name": "Softbloom Cowl",
+            "description": "A cowl woven from moonpetal silk and river reeds. It quiets the mind and amplifies restorative intent.",
+            "defense": 24, "durability": 400, "max_durability": 400, "value": 5800,
+            "min_spawn_level": 35, "rarity": "notfound",
+            "strength": 4, "dexterity": 12, "intelligence": 34, "constitution": 26,
+            "elements": ["water", "light"]
         },
         # --- Marshal Vek Drast (lv45) ---
         {
-    "id": "commanders_helm",
+            "id": "commanders_helm",
             "name": "Commander's Helm",
-       "description": "A battle-scarred command helm bearing the insignia of the march — heavy, authoritative, and fireforged.",
-  "defense": 38, "durability": 560, "max_durability": 560, "value": 9200,
+            "description": "A battle-scarred command helm bearing the insignia of the march — heavy, authoritative, and fireforged.",
+            "defense": 38, "durability": 560, "max_durability": 560, "value": 9200,
             "min_spawn_level": 45, "rarity": "notfound",
-      "strength": 32, "dexterity": 6, "intelligence": 10, "constitution": 26,
-         "elements": ["fire", "earth"]
-   },
+            "strength": 32, "dexterity": 6, "intelligence": 10, "constitution": 26,
+            "elements": ["fire", "earth"]
+        },
         # --- Warden Hale Brimholt (lv50) ---
         {
- "id": "sentinel_mask",
+            "id": "sentinel_mask",
             "name": "Sentinel Mask",
-     "description": "A smooth white mask worn by the Warden — featureless by design, so every face it guards is the only one that matters.",
+            "description": "A smooth white mask worn by the Warden — featureless by design, so every face it guards is the only one that matters.",
             "defense": 34, "durability": 540, "max_durability": 540, "value": 11000,
             "min_spawn_level": 50, "rarity": "notfound",
             "strength": 8, "dexterity": 8, "intelligence": 42, "constitution": 34,
             "elements": ["water", "light"]
-        },
-        # --- Sera Flameweaver (lv40) — fire/dark caster ---
+        },  
+        # --- Sera Flameweaver (lv40) ---
         {
             "id": "ember_crown",
             "name": "Ember Crown",
@@ -53,7 +53,7 @@ ARMOR_LV36_50 = {
             "strength": 4, "dexterity": 6, "intelligence": 28, "constitution": 14,
             "elements": ["fire", "dark"]
         },
-        # --- Regent Sylvara (lv40) — dark/electric caster ---
+        # --- Regent Sylvara (lv40) ---
         {
             "id": "schemer_circlet",
             "name": "Schemer's Circlet",
@@ -72,7 +72,7 @@ ARMOR_LV36_50 = {
             "strength": 4, "dexterity": 4, "intelligence": 30, "constitution": 12,
             "elements": ["dark", "electric"]
         },
-        # --- Spark Maddox (lv40) — electric/air agile ---
+        # --- Spark Maddox (lv40) ---
         {
             "id": "crackling_goggles",
             "name": "Crackling Goggles",
@@ -91,7 +91,7 @@ ARMOR_LV36_50 = {
             "strength": 6, "dexterity": 26, "intelligence": 14, "constitution": 4,
             "elements": ["electric", "air"]
         },
-        # --- Commander Drax (lv40) — earth/light brawler ---
+        # --- Commander Drax (lv40) ---
         {
             "id": "ironfront_helm",
             "name": "Ironfront Helm",
@@ -110,7 +110,7 @@ ARMOR_LV36_50 = {
             "strength": 30, "dexterity": 2, "intelligence": 6, "constitution": 16,
             "elements": ["earth", "light"]
         },
-        # --- Ghost (lv40) — dark/air balanced ---
+        # --- Ghost (lv40) ---
         {
             "id": "voidmask",
             "name": "Voidmask",
@@ -121,583 +121,488 @@ ARMOR_LV36_50 = {
             "elements": ["dark", "air"]
         },
         {
-            "id": "nullface_hood",
-            "name": "Nullface Hood",
-            "description": "A deep hood whose interior is lined with facial-nulling fabric — it doesn't conceal features so much as make them irrelevant to look at. Ghost has worn it so long the fabric has memorized the shape of silence.",
+            "id": "shroud_wrap",
+            "name": "Shroud Wrap",
+            "description": "A head wrap treated with light-absorbing compound. Ghost applies it in exactly the same order every time.",
             "defense": 26, "durability": 440, "max_durability": 440, "value": 6800,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 22, "dexterity": 16, "intelligence": 8, "constitution": 8,
             "elements": ["dark", "air"]
         },
-        # --- Elyra Dawnseer (lv40) — light/dark caster ---
+        # --- Elyra Dawnseer (lv40) ---
         {
-            "id": "veilsight_crown",
-            "name": "Veilsight Crown",
-            "description": "A crown of tarnished silver threaded with translucent membrane — visions pass through it like light through frosted glass, softened but never lost.",
-            "defense": 28, "durability": 460, "max_durability": 460, "value": 7200,
+            "id": "seer_veil",
+            "name": "Seer's Veil",
+            "description": "A translucent veil that softens physical vision and sharpens prophetic sight. Elyra wears it loose.",
+            "defense": 24, "durability": 440, "max_durability": 440, "value": 7000,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 6, "intelligence": 28, "constitution": 14,
+            "strength": 2, "dexterity": 8, "intelligence": 32, "constitution": 16,
             "elements": ["light", "dark"]
         },
         {
-            "id": "oracle_veil",
-            "name": "Oracle's Veil",
-            "description": "A veil of translucent silver gauze that hangs across the face without obscuring sight. Every vision Elyra receives sharpens the moment it settles into place.",
-            "defense": 28, "durability": 460, "max_durability": 460, "value": 7200,
+            "id": "omen_hood",
+            "name": "Omen Hood",
+            "description": "A deep hood stitched with sigils Elyra drew before she understood what they meant. She understands them now.",
+            "defense": 24, "durability": 440, "max_durability": 440, "value": 7000,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 6, "intelligence": 28, "constitution": 14,
+            "strength": 2, "dexterity": 8, "intelligence": 32, "constitution": 16,
             "elements": ["light", "dark"]
         },
-        # --- Voss Caldera (lv50) — light/fire brawler ---
+        # --- Voss Caldera (lv50) ---
         {
-            "id": "boardroom_helm",
-            "name": "Boardroom Helm",
-            "description": "Polished corporate-grade combat plating shaped like a boardroom crown. It was custom commissioned. No one else was ever going to wear it.",
-            "defense": 36, "durability": 560, "max_durability": 560, "value": 11200,
+            "id": "executive_helm",
+            "name": "Executive Helm",
+            "description": "A reinforced helmet with a brushed-alloy finish — Voss had it made to match his boardroom aesthetic. It is not decorative.",
+            "defense": 36, "durability": 540, "max_durability": 540, "value": 11200,
             "min_spawn_level": 50, "rarity": "notfound",
-            "strength": 38, "dexterity": 2, "intelligence": 6, "constitution": 18,
+            "strength": 38, "dexterity": 4, "intelligence": 8, "constitution": 20,
             "elements": ["light", "fire"]
         },
         {
-            "id": "authority_visor",
-            "name": "Authority Visor",
-            "description": "A tinted visor that reflects the room back at whoever is speaking. Voss had it made after someone tried to read her face in a negotiation. They did not succeed.",
-            "defense": 36, "durability": 560, "max_durability": 560, "value": 11200,
+            "id": "acquisition_visor",
+            "name": "Acquisition Visor",
+            "description": "A tactical visor fitted with threat-assessment overlays. It was commissioned for a corporate security team. Voss kept it.",
+            "defense": 36, "durability": 540, "max_durability": 540, "value": 11200,
             "min_spawn_level": 50, "rarity": "notfound",
-            "strength": 38, "dexterity": 2, "intelligence": 6, "constitution": 18,
-            "elements": ["light", "fire"]
+            "strength": 38, "dexterity": 4, "intelligence": 8, "constitution": 20,
+            "elements": ["light", "electric"]
+        },
+        # ── world-drop ────────────────────────────────────────────────────
+        # uncommon / tech — lv42
+        {
+            "id": "sensor_visor_lv42",
+            "name": "Sensor Visor",
+            "description": "A visor with integrated proximity sensors and a heads-up display that pre-dates current tech standards. It still works. It never stopped.",
+            "defense": 30, "durability": 480, "max_durability": 480, "value": 4200,
+            "min_spawn_level": 42, "rarity": "uncommon",
+            "strength": 4, "dexterity": 22, "intelligence": 20, "constitution": 8,
+            "elements": ["electric", "air"]
         },
     ],
     "body": [
         # --- Lyren Vale (lv35) ---
         {
-     "id": "heartroot_wrap",
-    "name": "Heartroot Wrap",
-            "description": "Layered wrappings of living root-cloth, damp with healing essence — they pulse gently with each breath.",
-            "defense": 32, "durability": 540, "max_durability": 540, "value": 8000,
-     "min_spawn_level": 35, "rarity": "notfound",
-      "strength": 6, "dexterity": 14, "intelligence": 38, "constitution": 36,
-       "elements": ["water", "light", "earth"]
+            "id": "riverwarden_vestment",
+            "name": "Riverwarden Vestment",
+            "description": "A flowing healer's vestment layered with water-blessed linen. Its sleeves trail long — a deliberate choice.",
+            "defense": 28, "durability": 500, "max_durability": 500, "value": 7400,
+            "min_spawn_level": 35, "rarity": "notfound",
+            "strength": 4, "dexterity": 14, "intelligence": 42, "constitution": 30,
+            "elements": ["water", "light", "air"]
         },
         # --- Marshal Vek Drast (lv45) ---
-  {
-            "id": "edictbound_plate",
-    "name": "Edictbound Plate",
-         "description": "Heavy ceremonial plate worn by those sworn to enforce Edict's laws — each panel stamped with an article of absolute compliance.",
-        "defense": 52, "durability": 720, "max_durability": 720, "value": 12500,
+        {
+            "id": "warfront_plate",
+            "name": "Warfront Plate",
+            "description": "A full-torso battle plate forged with volcanic alloys. Every seam has been repaired in the field.",
+            "defense": 52, "durability": 700, "max_durability": 700, "value": 12400,
             "min_spawn_level": 45, "rarity": "notfound",
-            "strength": 42, "dexterity": -6, "intelligence": 14, "constitution": 38,
-      "elements": ["fire", "earth"]
-    },
+            "strength": 44, "dexterity": -4, "intelligence": 8, "constitution": 34,
+            "elements": ["fire", "earth"]
+        },
+        {
+            "id": "march_cuirass",
+            "name": "March Cuirass",
+            "description": "A command cuirass bearing old campaign insignia — the campaigns are over but Drast still carries their weight.",
+            "defense": 52, "durability": 700, "max_durability": 700, "value": 12400,
+            "min_spawn_level": 45, "rarity": "notfound",
+            "strength": 44, "dexterity": -4, "intelligence": 8, "constitution": 34,
+            "elements": ["fire", "earth"]
+        },
         # --- Warden Hale Brimholt (lv50) ---
         {
-    "id": "memoryforge_plate",
-            "name": "Memoryforge Plate",
-            "description": "Plate armor forged from the melted-down shields of soldiers who fell in Hale's care — every scratch is a name remembered.",
-         "defense": 46, "durability": 680, "max_durability": 680, "value": 14000,
-       "min_spawn_level": 50, "rarity": "notfound",
-            "strength": 12, "dexterity": 6, "intelligence": 48, "constitution": 44,
+            "id": "vigil_robe",
+            "name": "Vigil Robe",
+            "description": "A robe worn through night vigils for those who could not wake themselves. It carries the weight of every one Brimholt kept.",
+            "defense": 42, "durability": 660, "max_durability": 660, "value": 14000,
+            "min_spawn_level": 50, "rarity": "notfound",
+            "strength": 10, "dexterity": 10, "intelligence": 52, "constitution": 44,
             "elements": ["water", "light"]
-   },
+        },
+        {
+            "id": "warden_surcoat",
+            "name": "Warden's Surcoat",
+            "description": "A surcoat layered with protective weave beneath the ceremonial outer face. Brimholt stopped maintaining the ceremony. He never stopped maintaining the weave.",
+            "defense": 42, "durability": 660, "max_durability": 660, "value": 14000,
+            "min_spawn_level": 50, "rarity": "notfound",
+            "strength": 10, "dexterity": 10, "intelligence": 52, "constitution": 44,
+            "elements": ["water", "light"]
+        },
         # --- Sera Flameweaver (lv40) ---
         {
-            "id": "firesoul_robe",
-            "name": "Firesoul Robe",
-            "description": "A robe woven from salamander-silk treated with distilled magma essence. It doesn't just resist fire — it breathes it.",
-            "defense": 36, "durability": 560, "max_durability": 560, "value": 9600,
+            "id": "cinder_robe",
+            "name": "Cinder Robe",
+            "description": "A robe threaded with fire-resistant cinder-silk and scorched at the hem from early experimentation.",
+            "defense": 32, "durability": 540, "max_durability": 540, "value": 9000,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 6, "dexterity": 8, "intelligence": 38, "constitution": 18,
             "elements": ["fire", "dark"]
         },
         {
-            "id": "scorchthread_robe",
-            "name": "Scorchthread Robe",
-            "description": "A robe whose thread was drawn through open flame before weaving. The heat sealed the fibres into something that should not be wearable. Sera wears it.",
-            "defense": 36, "durability": 560, "max_durability": 560, "value": 9600,
+            "id": "emberstitch_coat",
+            "name": "Emberstitch Coat",
+            "description": "A long coat embroidered with heat-reactive thread that glows brighter the more emotional Sera becomes.",
+            "defense": 32, "durability": 540, "max_durability": 540, "value": 9000,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 6, "dexterity": 8, "intelligence": 38, "constitution": 18,
             "elements": ["fire", "dark"]
         },
         # --- Regent Sylvara (lv40) ---
         {
-            "id": "voidweave_mantle",
-            "name": "Voidweave Mantle",
-            "description": "A mantle spun from shadow-thread harvested at the edge of a collapsed fracture node. It absorbs ambient light and radiates cold intention.",
-            "defense": 34, "durability": 560, "max_durability": 560, "value": 9600,
+            "id": "void_court_robe",
+            "name": "Void Court Robe",
+            "description": "A formal robe of deep obsidian layered weave — worn for court and combat with equal disregard for the distinction.",
+            "defense": 30, "durability": 540, "max_durability": 540, "value": 9000,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 4, "intelligence": 40, "constitution": 16,
-            "elements": ["dark", "electric"]
+            "strength": 4, "dexterity": 6, "intelligence": 42, "constitution": 16,
+            "elements": ["dark", "electric", "air"]
         },
         {
-            "id": "edictweave_mantle",
-            "name": "Edictweave Mantle",
-            "description": "A mantle structured with the same geometric precision as an executive mandate — every fold carries intention, every seam a decision that cannot be undone.",
-            "defense": 34, "durability": 560, "max_durability": 560, "value": 9600,
+            "id": "dominion_mantle",
+            "name": "Dominion Mantle",
+            "description": "A mantle with a collar high enough to obscure the jaw. Sylvara finds this useful.",
+            "defense": 30, "durability": 540, "max_durability": 540, "value": 9000,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 4, "intelligence": 40, "constitution": 16,
+            "strength": 4, "dexterity": 6, "intelligence": 42, "constitution": 16,
             "elements": ["dark", "electric"]
         },
         # --- Spark Maddox (lv40) ---
         {
-            "id": "circuit_coat",
-            "name": "Circuit Coat",
-            "description": "A long coat lined with printed circuit panels and portable capacitors. Half the components were never in the original design — Maddox added them himself.",
-            "defense": 30, "durability": 520, "max_durability": 520, "value": 9000,
+            "id": "charge_rig_vest",
+            "name": "Charge-Rig Vest",
+            "description": "A vest rebuilt around a portable charge accumulator — every component has a purpose and nothing was added for looks.",
+            "defense": 28, "durability": 520, "max_durability": 520, "value": 8400,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 8, "dexterity": 34, "intelligence": 18, "constitution": 6,
+            "strength": 8, "dexterity": 36, "intelligence": 18, "constitution": 6,
             "elements": ["electric", "air"]
         },
         {
-            "id": "patchwork_conduit_vest",
-            "name": "Patchwork Conduit Vest",
-            "description": "A vest rebuilt so many times the original structure exists only in Maddox's memory. Every patch is a different experiment. Most of them still run current.",
-            "defense": 30, "durability": 520, "max_durability": 520, "value": 9000,
+            "id": "static_harness",
+            "name": "Static Harness",
+            "description": "A harness rewired from a safety device into a charge distribution system. It is no longer safe. It is effective.",
+            "defense": 28, "durability": 520, "max_durability": 520, "value": 8400,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 8, "dexterity": 34, "intelligence": 18, "constitution": 6,
+            "strength": 8, "dexterity": 36, "intelligence": 18, "constitution": 6,
             "elements": ["electric", "air"]
         },
         # --- Commander Drax (lv40) ---
         {
-            "id": "warfront_plate",
-            "name": "Warfront Plate",
-            "description": "Thick combat plate bearing the dents of a hundred engagements. Drax has never had it fully repaired — the damage reminds him what's worth fighting for.",
-            "defense": 44, "durability": 640, "max_durability": 640, "value": 10000,
+            "id": "command_plate",
+            "name": "Command Plate",
+            "description": "Full-torso plate forged for the front line — every piece made for someone who planned to be hit first.",
+            "defense": 44, "durability": 620, "max_durability": 620, "value": 9600,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 42, "dexterity": -4, "intelligence": 8, "constitution": 22,
+            "strength": 44, "dexterity": -2, "intelligence": 4, "constitution": 20,
             "elements": ["earth", "light"]
         },
         {
-            "id": "bulwark_plate",
-            "name": "Bulwark Plate",
-            "description": "Plate forged with double-layered shoulder guards and a reinforced sternum panel — built to absorb what others step aside from. Drax steps into it.",
-            "defense": 44, "durability": 640, "max_durability": 640, "value": 10000,
+            "id": "vanguard_breastplate",
+            "name": "Vanguard Breastplate",
+            "description": "A breastplate scored from thirty-one known engagements. Drax stopped counting at thirty. He counts again now.",
+            "defense": 44, "durability": 620, "max_durability": 620, "value": 9600,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 42, "dexterity": -4, "intelligence": 8, "constitution": 22,
+            "strength": 44, "dexterity": -2, "intelligence": 4, "constitution": 20,
             "elements": ["earth", "light"]
         },
         # --- Ghost (lv40) ---
         {
-            "id": "nightweave_coat",
-            "name": "Nightweave Coat",
-            "description": "A coat whose fibres are woven from captured shadow and compressed air — it muffles the wearer's outline as much as their footsteps.",
-            "defense": 32, "durability": 520, "max_durability": 520, "value": 9000,
+            "id": "shadow_weave_coat",
+            "name": "Shadow-Weave Coat",
+            "description": "A long coat woven with light-absorbing composite — it doesn't make Ghost invisible. It makes the eye slide past him.",
+            "defense": 30, "durability": 540, "max_durability": 540, "value": 8800,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 30, "dexterity": 22, "intelligence": 10, "constitution": 10,
+            "strength": 26, "dexterity": 24, "intelligence": 10, "constitution": 10,
             "elements": ["dark", "air"]
         },
         {
-            "id": "voidstep_leathers",
-            "name": "Voidstep Leathers",
-            "description": "Leathers cured in void-oil — they don't just reduce sound, they reduce presence. Cameras misread the silhouette. Witnesses remember the feeling more than the shape.",
-            "defense": 32, "durability": 520, "max_durability": 520, "value": 9000,
+            "id": "null_jacket",
+            "name": "Null Jacket",
+            "description": "A reinforced jacket treated to suppress heat signature and sound resonance. Ghost had it made to specification. He didn't explain the specification.",
+            "defense": 30, "durability": 540, "max_durability": 540, "value": 8800,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 30, "dexterity": 22, "intelligence": 10, "constitution": 10,
+            "strength": 26, "dexterity": 24, "intelligence": 10, "constitution": 10,
             "elements": ["dark", "air"]
         },
         # --- Elyra Dawnseer (lv40) ---
         {
-            "id": "fractured_prophet_robe",
-            "name": "Fractured Prophet's Robe",
-            "description": "A robe whose seams are stitched from visions that never quite resolved — half its patterns shift depending on the angle and the light.",
-            "defense": 36, "durability": 560, "max_durability": 560, "value": 9600,
+            "id": "vision_robe",
+            "name": "Vision Robe",
+            "description": "A robe covered in woven sigil-paths that channel prophetic resonance away from the spine.",
+            "defense": 28, "durability": 520, "max_durability": 520, "value": 8800,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 8, "intelligence": 38, "constitution": 18,
+            "strength": 2, "dexterity": 10, "intelligence": 38, "constitution": 20,
             "elements": ["light", "dark", "earth"]
         },
         {
-            "id": "visionweave_robe",
-            "name": "Visionweave Robe",
-            "description": "A robe whose weave was set by a seer who wove while in trance — the pattern encodes three visions that have not yet resolved. Elyra recognizes two of them.",
-            "defense": 36, "durability": 560, "max_durability": 560, "value": 9600,
+            "id": "oracle_mantle",
+            "name": "Oracle's Mantle",
+            "description": "A mantle Elyra wears when she knows the vision will be difficult. The weave dampens the physical shock of seeing too far ahead.",
+            "defense": 28, "durability": 520, "max_durability": 520, "value": 8800,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 8, "intelligence": 38, "constitution": 18,
-            "elements": ["light", "dark", "earth"]
+            "strength": 2, "dexterity": 10, "intelligence": 38, "constitution": 20,
+            "elements": ["light", "dark"]
         },
         # --- Voss Caldera (lv50) ---
         {
-            "id": "corporate_plate",
-            "name": "Corporate Plate",
-            "description": "Custom-forged executive combat plating — heavier than standard issue by design. She pays for weight, not comfort.",
-            "defense": 50, "durability": 700, "max_durability": 700, "value": 14500,
+            "id": "acquisition_plate",
+            "name": "Acquisition Plate",
+            "description": "A reinforced plate commissioned for hostile-environment negotiations. Voss wears it to meetings he expects to go badly.",
+            "defense": 52, "durability": 680, "max_durability": 680, "value": 14400,
             "min_spawn_level": 50, "rarity": "notfound",
-            "strength": 52, "dexterity": -4, "intelligence": 8, "constitution": 26,
+            "strength": 52, "dexterity": 2, "intelligence": 6, "constitution": 30,
             "elements": ["light", "fire"]
         },
         {
-            "id": "boardroom_plate",
-            "name": "Boardroom Plate",
-            "description": "Plate milled to look like a business suit at distance. Up close it's four centimetres of layered composite with a lacquered finish. Voss sees no contradiction.",
-            "defense": 50, "durability": 700, "max_durability": 700, "value": 14500,
+            "id": "leverage_harness",
+            "name": "Leverage Harness",
+            "description": "A heavy tactical harness Voss had designed to hold field equipment and stop bullets. Both functions are intended.",
+            "defense": 52, "durability": 680, "max_durability": 680, "value": 14400,
             "min_spawn_level": 50, "rarity": "notfound",
-            "strength": 52, "dexterity": -4, "intelligence": 8, "constitution": 26,
+            "strength": 52, "dexterity": 2, "intelligence": 6, "constitution": 30,
             "elements": ["light", "fire"]
         },
-        # ── Mythic Armor (D-chain rewards) ──────────────────────────────────
+        # ── world-drop ────────────────────────────────────────────────────
+        # superrare / skill — lv48
         {
-            "id": "mythic_snow_large_frostgate_sovereign",
-            "name": "Frostgate Sovereign Plate",
-            "description": "Plate forged from frostgate-iron crystallized during a vault collapse — each panel carries the cold of a sealed chamber that has never been opened since.",
-            "defense": 58, "durability": 760, "max_durability": 760, "value": 30000,
-            "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 20, "dexterity": -4, "intelligence": 16, "constitution": 36,
-            "elements": ["ice", "earth"]
-        },
-        {
-            "id": "mythic_snow_small_bleakwatch_warden_plate",
-            "name": "Bleakwatch Warden Plate",
-            "description": "Plate issued to Bleakwatch's final active warden — worn through three winters without removal, then buried with its owner. It came back up.",
-            "defense": 54, "durability": 720, "max_durability": 720, "value": 24000,
-            "min_spawn_level": 38, "rarity": "notfound",
-            "strength": 16, "dexterity": -2, "intelligence": 14, "constitution": 30,
-            "elements": ["ice", "air"]
-        },
-        {
-            "id": "mythic_swamp_mid_mirebound_sovereign",
-            "name": "Mirebound Sovereign Plate",
-            "description": "Plate formed from mire-iron that was compressed under bayou sediment for a century — heavy, dark, and impervious to moisture of any kind.",
-            "defense": 56, "durability": 740, "max_durability": 740, "value": 27000,
-            "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 18, "dexterity": -3, "intelligence": 18, "constitution": 34,
-            "elements": ["dark", "water"]
-        },
-        {
-            "id": "mythic_mountains_large_ironveil_warplate",
-            "name": "Ironveil Warplate",
-            "description": "Plate forged with a veil-iron core — an ore found only where the mountain presses hardest against itself. It weighs less than it should and holds more than it has any right to.",
-            "defense": 60, "durability": 780, "max_durability": 780, "value": 32000,
-            "min_spawn_level": 42, "rarity": "notfound",
-            "strength": 22, "dexterity": -4, "intelligence": 14, "constitution": 38,
-            "elements": ["earth", "fire"]
-        },
-        {
-            "id": "mythic_snow_mid_blueforge_warplate",
-            "name": "Blueforge Warplate",
-            "description": "Warplate hammered from blue-forge crystal — it chimes faintly in cold air and rings like a bell when struck. Enemies hesitate. That hesitation is enough.",
-            "defense": 56, "durability": 740, "max_durability": 740, "value": 26000,
-            "min_spawn_level": 38, "rarity": "notfound",
-            "strength": 18, "dexterity": -3, "intelligence": 16, "constitution": 32,
-            "elements": ["ice", "electric"]
+            "id": "adaptive_leathers_lv48",
+            "name": "Adaptive Leathers",
+            "description": "Leathers cured with a compound that stiffens on impact and relaxes at rest. The formula was never patented. The person who developed it didn't want it to be.",
+            "defense": 46, "durability": 640, "max_durability": 640, "value": 13400,
+            "min_spawn_level": 48, "rarity": "superrare",
+            "strength": 28, "dexterity": 28, "intelligence": 20, "constitution": 18,
+            "elements": ["earth", "air"]
         },
     ],
     "arms": [
         # --- Lyren Vale (lv35) ---
         {
-         "id": "petalwoven_bracers",
-    "name": "Petalwoven Bracers",
- "description": "Bracers threaded through with preserved bloom-petals, each one carrying a whisper of calm.",
- "defense": 20, "durability": 400, "max_durability": 400, "value": 4600,
+            "id": "currentflow_bracers",
+            "name": "Currentflow Bracers",
+            "description": "Bracers that guide healing energy along the forearms with a current that Lyren says feels like standing in a slow river.",
+            "defense": 18, "durability": 420, "max_durability": 420, "value": 4800,
             "min_spawn_level": 35, "rarity": "notfound",
-            "strength": 4, "dexterity": 16, "intelligence": 30, "constitution": 22,
- "elements": ["water", "air"]
-      },
+            "strength": 2, "dexterity": 14, "intelligence": 30, "constitution": 22,
+            "elements": ["water", "light"]
+        },
         # --- Marshal Vek Drast (lv45) ---
         {
-            "id": "ironmarch_gauntlets",
-     "name": "Ironmarch Gauntlets",
- "description": "Heavy gauntlets that leave dented impressions in whatever they grip — designed to command, not protect.",
-            "defense": 28, "durability": 500, "max_durability": 500, "value": 7800,
+            "id": "ironband_gauntlets",
+            "name": "Ironband Gauntlets",
+            "description": "Heavy gauntlets banded with volcanic alloy at every joint. Drast had the fingers widened after the third pair split.",
+            "defense": 28, "durability": 520, "max_durability": 520, "value": 7400,
             "min_spawn_level": 45, "rarity": "notfound",
-   "strength": 36, "dexterity": 4, "intelligence": 8, "constitution": 24,
-  "elements": ["fire", "earth"]
+            "strength": 36, "dexterity": 4, "intelligence": 8, "constitution": 22,
+            "elements": ["fire", "earth"]
         },
-    # --- Warden Hale Brimholt (lv50) ---
         {
-         "id": "oathbinder_vambraces",
-            "name": "Oathbinder Vambraces",
-    "description": "Vambraces inscribed on the inside with personal oaths — Hale never removes them. The words have worn into his skin.",
-        "defense": 26, "durability": 480, "max_durability": 480, "value": 9000,
-   "min_spawn_level": 50, "rarity": "notfound",
- "strength": 10, "dexterity": 8, "intelligence": 38, "constitution": 28,
+            "id": "campaign_vambraces",
+            "name": "Campaign Vambraces",
+            "description": "Vambraces worn through four full campaigns — the engraving has worn flat but the metal is still sound.",
+            "defense": 28, "durability": 520, "max_durability": 520, "value": 7400,
+            "min_spawn_level": 45, "rarity": "notfound",
+            "strength": 36, "dexterity": 4, "intelligence": 8, "constitution": 22,
+            "elements": ["fire", "earth"]
+        },
+        # --- Warden Hale Brimholt (lv50) ---
+        {
+            "id": "shelter_bracers",
+            "name": "Shelter Bracers",
+            "description": "Bracers etched with names — not enemies, but the people behind him. Brimholt looks at them before every engagement.",
+            "defense": 26, "durability": 500, "max_durability": 500, "value": 8800,
+            "min_spawn_level": 50, "rarity": "notfound",
+            "strength": 8, "dexterity": 10, "intelligence": 38, "constitution": 32,
             "elements": ["water", "light"]
- },
-        # --- Sera Flameweaver (lv40) ---
+        },
         {
-            "id": "cindertrace_bracers",
-            "name": "Cindertrace Bracers",
-            "description": "Bracers scorched by repeated fire-casting into an almost decorative char pattern. The burns have hardened into natural armoring.",
-            "defense": 22, "durability": 440, "max_durability": 440, "value": 5600,
+            "id": "covenant_bracers",
+            "name": "Covenant Bracers",
+            "description": "Bracers woven with a single faith-binding — a promise made before he took the post and never revisited.",
+            "defense": 26, "durability": 500, "max_durability": 500, "value": 8800,
+            "min_spawn_level": 50, "rarity": "notfound",
+            "strength": 8, "dexterity": 10, "intelligence": 38, "constitution": 32,
+            "elements": ["water", "light"]
+        },
+        # --- Sera / Sylvara / Maddox / Drax / Ghost / Elyra / Voss arms ---
+        {
+            "id": "cinder_bracers",
+            "name": "Cinder Bracers",
+            "description": "Bracers soaked in fire-retardant compound and then fired anyway. The compound held.",
+            "defense": 22, "durability": 460, "max_durability": 460, "value": 5800,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 4, "intelligence": 22, "constitution": 12,
+            "strength": 6, "dexterity": 8, "intelligence": 24, "constitution": 12,
             "elements": ["fire", "dark"]
         },
         {
-            "id": "emberweave_bracers",
-            "name": "Emberweave Bracers",
-            "description": "Bracers woven from ember-thread — a material that only holds its weave when the temperature around it exceeds normal body heat. Sera keeps them very warm.",
-            "defense": 22, "durability": 440, "max_durability": 440, "value": 5600,
+            "id": "current_gloves",
+            "name": "Current Gloves",
+            "description": "Thin gloves woven with conductive thread — Maddox built them to test charge paths without getting burned. They work about sixty percent of the time.",
+            "defense": 20, "durability": 440, "max_durability": 440, "value": 5400,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 4, "intelligence": 22, "constitution": 12,
-            "elements": ["fire", "dark"]
-        },
-        # --- Regent Sylvara (lv40) ---
-        {
-            "id": "nullthread_bracers",
-            "name": "Nullthread Bracers",
-            "description": "Bracers wound in thread that cancels magical resonance at the wrist — a deliberate dampener, worn so spells pass through her arms without feedback.",
-            "defense": 20, "durability": 440, "max_durability": 440, "value": 5600,
-            "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 4, "intelligence": 24, "constitution": 10,
-            "elements": ["dark", "electric"]
-        },
-        {
-            "id": "ironveil_vambraces",
-            "name": "Ironveil Vambraces",
-            "description": "Vambraces of veil-iron alloy — lighter than standard plate and harder to read under scanning. Sylvara wears them specifically because they register as ordinary.",
-            "defense": 20, "durability": 440, "max_durability": 440, "value": 5600,
-            "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 4, "intelligence": 24, "constitution": 10,
-            "elements": ["dark", "electric"]
-        },
-        # --- Spark Maddox (lv40) ---
-        {
-            "id": "shockwire_gauntlets",
-            "name": "Shockwire Gauntlets",
-            "description": "Gauntlets threaded with exposed copper wire that channels surplus charge from his coat into his strikes. Completely intentional.",
-            "defense": 20, "durability": 420, "max_durability": 420, "value": 5200,
-            "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 20, "intelligence": 10, "constitution": 4,
+            "strength": 4, "dexterity": 28, "intelligence": 16, "constitution": 4,
             "elements": ["electric", "air"]
         },
         {
-            "id": "overclock_gauntlets",
-            "name": "Overclock Gauntlets",
-            "description": "Gauntlets fitted with hidden processing chips that overclock reaction speed at the cost of heat buildup. Maddox added a cooling vent. It is not large enough.",
-            "defense": 20, "durability": 420, "max_durability": 420, "value": 5200,
+            "id": "siege_gauntlets",
+            "name": "Siege Gauntlets",
+            "description": "Gauntlets built for sustained front-line engagement — every surface is reinforced and the grip-plate is riveted double.",
+            "defense": 26, "durability": 500, "max_durability": 500, "value": 6200,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 20, "intelligence": 10, "constitution": 4,
-            "elements": ["electric", "air"]
-        },
-        # --- Commander Drax (lv40) ---
-        {
-            "id": "conquest_gauntlets",
-            "name": "Conquest Gauntlets",
-            "description": "Spiked heavy gauntlets. Functional first, intimidating second — though the distinction rarely matters in the field.",
-            "defense": 26, "durability": 460, "max_durability": 460, "value": 5800,
-            "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 28, "dexterity": 2, "intelligence": 4, "constitution": 14,
-            "elements": ["earth", "light"]
+            "strength": 36, "dexterity": 2, "intelligence": 4, "constitution": 16,
+            "elements": ["earth"]
         },
         {
-            "id": "vanguard_gauntlets",
-            "name": "Vanguard Gauntlets",
-            "description": "Heavy gauntlets with extended knuckle plating — built for pushing through formations rather than individual engagement. Drax has never needed to be subtle about it.",
-            "defense": 26, "durability": 460, "max_durability": 460, "value": 5800,
+            "id": "traceless_gloves",
+            "name": "Traceless Gloves",
+            "description": "Thin leather gloves with grip-coat inner palms. Ghost has worn out six pairs. He keeps a seventh unused.",
+            "defense": 20, "durability": 440, "max_durability": 440, "value": 5600,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 28, "dexterity": 2, "intelligence": 4, "constitution": 14,
-            "elements": ["earth", "light"]
-        },
-        # --- Ghost (lv40) ---
-        {
-            "id": "shadowgrip_gloves",
-            "name": "Shadowgrip Gloves",
-            "description": "Thin tactical gloves treated with an adhesion compound derived from shadow-lichen. They leave no prints and make no sound.",
-            "defense": 20, "durability": 420, "max_durability": 420, "value": 5200,
-            "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 20, "dexterity": 14, "intelligence": 6, "constitution": 6,
-            "elements": ["dark", "air"]
+            "strength": 18, "dexterity": 18, "intelligence": 6, "constitution": 6,
+            "elements": ["dark"]
         },
         {
-            "id": "shadowweave_wraps",
-            "name": "Shadowweave Wraps",
-            "description": "Wraps knit from shadow-thread and compression weave — they fit like a second skin and register on contact as nothing at all.",
-            "defense": 20, "durability": 420, "max_durability": 420, "value": 5200,
+            "id": "dawnseer_gloves",
+            "name": "Dawnseer Gloves",
+            "description": "Soft gloves Elyra wears during readings — the fingertips are left bare so she can maintain contact with the vision-surfaces.",
+            "defense": 20, "durability": 440, "max_durability": 440, "value": 5600,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 20, "dexterity": 14, "intelligence": 6, "constitution": 6,
-            "elements": ["dark", "air"]
-        },
-        # --- Elyra Dawnseer (lv40) ---
-        {
-            "id": "seerthread_bracers",
-            "name": "Seerthread Bracers",
-            "description": "Bracers woven from thread said to have passed through a vision intact — they carry residual impressions of futures Elyra has already seen.",
-            "defense": 22, "durability": 440, "max_durability": 440, "value": 5600,
-            "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 4, "intelligence": 22, "constitution": 12,
+            "strength": 2, "dexterity": 8, "intelligence": 28, "constitution": 14,
             "elements": ["light", "dark"]
         },
         {
-            "id": "dawnthread_bracers",
-            "name": "Dawnthread Bracers",
-            "description": "Bracers threaded at first light — the moment of weaving matters to whoever made them. Elyra has never asked why. The bracers work regardless.",
-            "defense": 22, "durability": 440, "max_durability": 440, "value": 5600,
-            "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 4, "intelligence": 22, "constitution": 12,
-            "elements": ["light", "dark"]
-        },
-        # --- Voss Caldera (lv50) ---
-        {
-            "id": "irontakeover_vambraces",
-            "name": "Iron Takeover Vambraces",
-            "description": "Vambraces forged from reclaimed structural steel — sourced from the first building she ever acquired. She keeps track.",
-            "defense": 28, "durability": 500, "max_durability": 500, "value": 9200,
+            "id": "boardroom_gauntlets",
+            "name": "Boardroom Gauntlets",
+            "description": "Armored gloves with a polished finish — Voss wears them to signal that the meeting is already over.",
+            "defense": 26, "durability": 500, "max_durability": 500, "value": 9200,
             "min_spawn_level": 50, "rarity": "notfound",
-            "strength": 34, "dexterity": 2, "intelligence": 4, "constitution": 16,
+            "strength": 40, "dexterity": 2, "intelligence": 6, "constitution": 18,
             "elements": ["light", "fire"]
         },
+        # ── world-drop ────────────────────────────────────────────────────
+        # common / technique — lv37
         {
-            "id": "executive_vambraces",
-            "name": "Executive Vambraces",
-            "description": "Vambraces finished in a corporate-grade composite — lighter than iron but rated higher. Voss had them commissioned after the third time someone tried to grab her arm in a meeting.",
-            "defense": 28, "durability": 500, "max_durability": 500, "value": 9200,
-            "min_spawn_level": 50, "rarity": "notfound",
-            "strength": 34, "dexterity": 2, "intelligence": 4, "constitution": 16,
-            "elements": ["light", "fire"]
+            "id": "field_vambraces_lv37",
+            "name": "Field Vambraces",
+            "description": "Standard-issue leather vambraces reinforced with a thin steel strip at the forearm. They have survived several owners.",
+            "defense": 20, "durability": 430, "max_durability": 430, "value": 1800,
+            "min_spawn_level": 37, "rarity": "common",
+            "strength": 14, "dexterity": 6, "intelligence": 2, "constitution": 10,
+            "elements": ["earth"]
         },
     ],
     "legs": [
         # --- Lyren Vale (lv35) ---
         {
-            "id": "dewthread_sandals",
-            "name": "Dewthread Sandals",
-      "description": "Light sandals woven from dew-soaked thread — they leave no sound and carry the wearer as if on water.",
-            "defense": 22, "durability": 440, "max_durability": 440, "value": 5000,
+            "id": "meadowstep_greaves",
+            "name": "Meadowstep Greaves",
+            "description": "Greaves grown from living fibre that flex without resistance — they move with Lyren rather than behind him.",
+            "defense": 22, "durability": 460, "max_durability": 460, "value": 5200,
             "min_spawn_level": 35, "rarity": "notfound",
-        "strength": 4, "dexterity": 18, "intelligence": 28, "constitution": 22,
-            "elements": ["water", "air"]
+            "strength": 2, "dexterity": 16, "intelligence": 24, "constitution": 20,
+            "elements": ["water", "earth"]
         },
-   # --- Marshal Vek Drast (lv45) ---
-      {
-            "id": "marchforge_greaves",
-   "name": "Marchforge Greaves",
-    "description": "Heavy forged greaves built for campaigns — they echo on stone and leave marks in soft earth.",
-            "defense": 38, "durability": 580, "max_durability": 580, "value": 9500,
-        "min_spawn_level": 45, "rarity": "notfound",
- "strength": 36, "dexterity": 4, "intelligence": 10, "constitution": 28,
+        # --- Marshal Vek Drast (lv45) ---
+        {
+            "id": "warfront_greaves",
+            "name": "Warfront Greaves",
+            "description": "Greaves forged as a matched set with the Warfront Plate — they have never been separated.",
+            "defense": 34, "durability": 560, "max_durability": 560, "value": 8400,
+            "min_spawn_level": 45, "rarity": "notfound",
+            "strength": 38, "dexterity": 2, "intelligence": 6, "constitution": 26,
+            "elements": ["fire", "earth"]
+        },
+        {
+            "id": "march_sabatons",
+            "name": "March Sabatons",
+            "description": "Heavy sabatons that leave deep prints. Drast finds the accountability appropriate.",
+            "defense": 34, "durability": 560, "max_durability": 560, "value": 8400,
+            "min_spawn_level": 45, "rarity": "notfound",
+            "strength": 38, "dexterity": 2, "intelligence": 6, "constitution": 26,
             "elements": ["fire", "earth"]
         },
         # --- Warden Hale Brimholt (lv50) ---
-   {
-            "id": "dutystride_greaves",
-      "name": "Dutystride Greaves",
-            "description": "Greaves built for ceaseless patrol — reinforced at the knee and ankle for standing vigils that last days.",
-            "defense": 34, "durability": 540, "max_durability": 540, "value": 11000,
+        {
+            "id": "guardian_greaves",
+            "name": "Guardian Greaves",
+            "description": "Greaves built wide at the shin to shield the stance — Brimholt doesn't advance in battle, he holds ground.",
+            "defense": 30, "durability": 540, "max_durability": 540, "value": 9600,
             "min_spawn_level": 50, "rarity": "notfound",
-       "strength": 10, "dexterity": 8, "intelligence": 40, "constitution": 32,
+            "strength": 10, "dexterity": 8, "intelligence": 32, "constitution": 38,
             "elements": ["water", "light"]
         },
-        # --- Sera Flameweaver (lv40) ---
         {
-            "id": "ashstep_boots",
-            "name": "Ashstep Boots",
-            "description": "Boots built from compressed ash-resin and fire-cured leather. The soles leave a faint scorch trace with each step.",
-            "defense": 24, "durability": 460, "max_durability": 460, "value": 6200,
+            "id": "keeper_greaves",
+            "name": "Keeper Greaves",
+            "description": "Greaves etched with a repeating keep-glyph down the shin. Each repetition was added after a vigil Brimholt didn't expect to survive.",
+            "defense": 30, "durability": 540, "max_durability": 540, "value": 9600,
+            "min_spawn_level": 50, "rarity": "notfound",
+            "strength": 10, "dexterity": 8, "intelligence": 32, "constitution": 38,
+            "elements": ["water", "light"]
+        },
+        # --- Extended character legs ---
+        {
+            "id": "cinder_greaves",
+            "name": "Cinder Greaves",
+            "description": "Greaves baked in forge-heat until the alloy fused with the fire-coating. They run warm. Sera prefers it.",
+            "defense": 24, "durability": 480, "max_durability": 480, "value": 6200,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 4, "intelligence": 24, "constitution": 14,
+            "strength": 6, "dexterity": 6, "intelligence": 20, "constitution": 14,
             "elements": ["fire", "dark"]
         },
         {
-            "id": "ashstep_sandals",
-            "name": "Ashstep Sandals",
-            "description": "Open sandals soled with the same ash-resin compound — lighter than the boots and preferred for precision casting where ground-feel matters.",
-            "defense": 24, "durability": 460, "max_durability": 460, "value": 6200,
+            "id": "circuit_greaves",
+            "name": "Circuit Greaves",
+            "description": "Greaves with exposed charge-routing along the outer shin. Maddox added the routing after the third time his legs overloaded.",
+            "defense": 22, "durability": 460, "max_durability": 460, "value": 6000,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 4, "intelligence": 24, "constitution": 14,
-            "elements": ["fire", "dark"]
-        },
-        # --- Regent Sylvara (lv40) ---
-        {
-            "id": "silentfall_boots",
-            "name": "Silentfall Boots",
-            "description": "Boots soled with acoustic-deadening polymer and lined with null-silk. They are designed to arrive without announcement.",
-            "defense": 22, "durability": 460, "max_durability": 460, "value": 6200,
-            "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 4, "intelligence": 26, "constitution": 12,
-            "elements": ["dark", "electric"]
-        },
-        {
-            "id": "coldmarch_greaves",
-            "name": "Coldmarch Greaves",
-            "description": "Greaves built for cold-climate deployment — the insulation was removed and replaced with conductive null-silk. Warmth would slow her down.",
-            "defense": 22, "durability": 460, "max_durability": 460, "value": 6200,
-            "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 4, "intelligence": 26, "constitution": 12,
-            "elements": ["dark", "electric"]
-        },
-        # --- Spark Maddox (lv40) ---
-        {
-            "id": "quickcharge_boots",
-            "name": "Quickcharge Boots",
-            "description": "Boots fitted with kinetic charge plates — every step feeds a small reserve that powers his gadgets. He runs partly to save on batteries.",
-            "defense": 22, "durability": 440, "max_durability": 440, "value": 5800,
-            "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 6, "dexterity": 22, "intelligence": 12, "constitution": 4,
+            "strength": 6, "dexterity": 26, "intelligence": 14, "constitution": 6,
             "elements": ["electric", "air"]
         },
         {
-            "id": "springcoil_boots",
-            "name": "Springcoil Boots",
-            "description": "Boots with mechanical spring-coil soles that amplify jump height and step speed. The coils are loud. Maddox claims he prefers the warning.",
-            "defense": 22, "durability": 440, "max_durability": 440, "value": 5800,
+            "id": "siege_sabatons",
+            "name": "Siege Sabatons",
+            "description": "Heavy sabatons with reinforced toe-caps for sustained pushing engagement. Drax uses the toe-cap more than the rest.",
+            "defense": 30, "durability": 500, "max_durability": 500, "value": 6800,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 6, "dexterity": 22, "intelligence": 12, "constitution": 4,
-            "elements": ["electric", "air"]
+            "strength": 36, "dexterity": 0, "intelligence": 4, "constitution": 18,
+            "elements": ["earth"]
         },
-        # --- Commander Drax (lv40) ---
         {
-            "id": "stormtread_greaves",
-            "name": "Stormtread Greaves",
-            "description": "Greaves reinforced at every stress point from decades of active service. The ankle joints have been rebuilt four times.",
-            "defense": 28, "durability": 480, "max_durability": 480, "value": 6400,
+            "id": "silent_step_boots",
+            "name": "Silent-Step Boots",
+            "description": "Boots with sound-dampening sole compound applied in three layers. Ghost applies each layer himself.",
+            "defense": 22, "durability": 460, "max_durability": 460, "value": 6200,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 34, "dexterity": 2, "intelligence": 4, "constitution": 18,
-            "elements": ["earth", "light"]
-        },
-        # --- Ghost (lv40) ---
-        {
-            "id": "silentmarch_boots",
-            "name": "Silentmarch Boots",
-            "description": "Boots engineered for zero acoustic signature on any surface. The inner lining is imprinted with micro-channels that absorb ground vibration.",
-            "defense": 24, "durability": 460, "max_durability": 460, "value": 6200,
-            "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 24, "dexterity": 18, "intelligence": 8, "constitution": 8,
+            "strength": 16, "dexterity": 20, "intelligence": 6, "constitution": 6,
             "elements": ["dark", "air"]
         },
         {
-            "id": "silent_stride_boots",
-            "name": "Silent Stride Boots",
-            "description": "A later iteration of the Silentmarch design — tighter sole, no lining gap, micro-channel density doubled. Ghost field-tested fourteen prototypes. These are number fourteen.",
-            "defense": 24, "durability": 460, "max_durability": 460, "value": 6200,
+            "id": "seer_boots",
+            "name": "Seer's Boots",
+            "description": "Soft boots Elyra wears when a vision requires movement — she has learned that standing still during prophecy is a choice, not a necessity.",
+            "defense": 20, "durability": 440, "max_durability": 440, "value": 5800,
             "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 24, "dexterity": 18, "intelligence": 8, "constitution": 8,
-            "elements": ["dark", "air"]
-        },
-        # --- Elyra Dawnseer (lv40) ---
-        {
-            "id": "dawnwalk_sandals",
-            "name": "Dawnwalk Sandals",
-            "description": "Sandals whose straps are woven from dried dawn-lotus — a plant that only blooms at the precise moment between night and day.",
-            "defense": 24, "durability": 460, "max_durability": 460, "value": 6200,
-            "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 6, "intelligence": 24, "constitution": 14,
-            "elements": ["light", "dark"]
+            "strength": 2, "dexterity": 10, "intelligence": 24, "constitution": 14,
+            "elements": ["light", "earth"]
         },
         {
-            "id": "starfall_sandals",
-            "name": "Starfall Sandals",
-            "description": "Sandals fitted with starfall crystal inlays along the arch — the crystals respond to prophetic resonance and glow faintly when Elyra is walking toward something she has already seen.",
-            "defense": 24, "durability": 460, "max_durability": 460, "value": 6200,
-            "min_spawn_level": 40, "rarity": "notfound",
-            "strength": 4, "dexterity": 6, "intelligence": 24, "constitution": 14,
-            "elements": ["light", "dark"]
-        },
-        # --- Voss Caldera (lv50) ---
-        {
-            "id": "marchsteel_greaves",
-            "name": "Marchsteel Greaves",
-            "description": "Greaves milled from high-grade industrial steel alloy. Each step on a boardroom floor costs someone something.",
-            "defense": 36, "durability": 560, "max_durability": 560, "value": 11400,
+            "id": "takeover_sabatons",
+            "name": "Takeover Sabatons",
+            "description": "Heavy sabatons Voss had fitted with pressure-monitoring soles — he wanted to know exactly how hard he was landing every step.",
+            "defense": 32, "durability": 540, "max_durability": 540, "value": 10400,
             "min_spawn_level": 50, "rarity": "notfound",
-            "strength": 40, "dexterity": 2, "intelligence": 6, "constitution": 20,
+            "strength": 44, "dexterity": 2, "intelligence": 4, "constitution": 24,
             "elements": ["light", "fire"]
         },
+        # ── world-drop ────────────────────────────────────────────────────
+        # rare / faith — lv46
         {
-            "id": "powerstride_greaves",
-            "name": "Powerstride Greaves",
-            "description": "Greaves with powered ankle-assist mechanisms built into the joint housing — each stride carries the momentum of a room being entered with intent.",
-            "defense": 36, "durability": 560, "max_durability": 560, "value": 11400,
-            "min_spawn_level": 50, "rarity": "notfound",
-            "strength": 40, "dexterity": 2, "intelligence": 6, "constitution": 20,
-            "elements": ["light", "fire"]
+            "id": "warded_greaves_lv46",
+            "name": "Warded Greaves",
+            "description": "Greaves inscribed with a ward-circuit passed down through a faith tradition that considers the legs the foundation of all protection. The inscription is correct.",
+            "defense": 34, "durability": 540, "max_durability": 540, "value": 9200,
+            "min_spawn_level": 46, "rarity": "rare",
+            "strength": 6, "dexterity": 8, "intelligence": 34, "constitution": 30,
+            "elements": ["light", "earth"]
         },
-    ]
+    ],
 }

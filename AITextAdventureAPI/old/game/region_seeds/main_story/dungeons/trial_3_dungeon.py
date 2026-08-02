@@ -37,7 +37,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'contradiction_beast', 'name': 'Contradiction Beast', 'hostile_type': 'aberration', 'min_spawn_level': 99, 'role': 'hazard', 'rarity': 'rare',
-        'base_xp': 11000, 'common_drop': 'elixir_full', 'rare_drop': 'tome_con_superrare', 'money_range': (1000, 1600),
+        'base_xp': 11000, 'common_drop': 'elixir_full_heal', 'rare_drop': 'tome_con_superrare', 'money_range': (1000, 1600),
         'basic_attack': 'paradoxical strike', 'strong_attack': 'logic collapse', 'player_abilities': [],
         'base_str': 50, 'base_dex': 50, 'base_con': 50, 'base_int': 50, 'base_hp': 50000, 'base_ap': 400,
         'str_per_level': 6, 'dex_per_level': 6, 'con_per_level': 6, 'int_per_level': 6,
@@ -45,7 +45,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'escalation_construct', 'name': 'Escalation Construct', 'hostile_type': 'construct', 'min_spawn_level': 100, 'role': 'damage', 'rarity': 'superrare',
-        'base_xp': 12000, 'common_drop': 'phoenix_down', 'rare_drop': 'tome_dex_superrare', 'money_range': (1100, 1700),
+        'base_xp': 12000, 'common_drop': 'revive_kit', 'rare_drop': 'tome_dex_superrare', 'money_range': (1100, 1700),
         'basic_attack': 'intensity spike', 'strong_attack': 'unsustainable peak', 'player_abilities': [],
         'base_str': 62, 'base_dex': 58, 'base_con': 48, 'base_int': 40, 'base_hp': 52000, 'base_ap': 360,
         'str_per_level': 8, 'dex_per_level': 7, 'con_per_level': 5, 'int_per_level': 4,
@@ -113,8 +113,8 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'hostile_seeds': HOSTILE_SEEDS,
     'npcs': DUNGEON_NPCS,
     'items': [
-        {'id': 'elixir_full', 'location': 'treasure_room'},
-        {'id': 'phoenix_down', 'location': 'treasure_room'},
+        {'id': 'elixir_full_heal', 'location': 'treasure_room'},
+        {'id': 'revive_kit', 'location': 'treasure_room'},
         {'id': 'tome_hp_superrare', 'location': 'treasure_room'},
     ],
     'boss_mob': BOSS_MOB,

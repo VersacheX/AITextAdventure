@@ -73,12 +73,15 @@ def _dungeon_leaf_label(node: DungeonNode) -> str:
     name = rich_escape(node.label)
     did  = rich_escape(node.dungeon_id)
     if node.errors:
-        has_error = any(e.severity == "error"   for e in node.errors)
-        has_warn  = any(e.severity == "warning" for e in node.errors)
+        has_error  = any(e.severity == "error"   for e in node.errors)
+        has_warn   = any(e.severity == "warning" for e in node.errors)
+        has_notice = any(e.severity == "notice"  for e in node.errors)
         if has_error:
-            colour, kind = "red", "error"
+            colour, kind = "red",  "error"
         elif has_warn:
             colour, kind = "yellow", "warn"
+        elif has_notice:
+            colour, kind = "cyan", "notice"
         else:
             colour, kind = "magenta", "notice"
         n = len(node.errors)

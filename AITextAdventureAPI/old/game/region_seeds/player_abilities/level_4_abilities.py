@@ -12,7 +12,7 @@
 # skill: dexterity, strength...speed, critical hit rate; evasion
 LEVEL_4_PLAYER_ABILITY_SEEDS = [
  {"id": "air_earth_technique_lv4_whirlwind", "name": "Whirlwind", "description": "Spin and strike multiple foes.", "ability_type": "technique", "level":4, "elements": ["air", "earth", "light", "water"], "base_power":55, "ap_cost":4, "effect": "damage", "can_aoe": False},
- {"id": "fire_technique_lv4_berserker_tech", "name": "Berserker Pulse", "description": "A violent surge of energy that empowers attacks.", "ability_type": "technique", "level":4, "elements": ["fire"], "base_power":0, "ap_cost":4, "effect": "status", "status_keys": ["attack_buff"], "can_aoe": True},
+ {"id": "fire_technique_lv4_berserker_pulse", "name": "Berserker Pulse", "description": "A violent surge of energy that empowers attacks.", "ability_type": "technique", "level":4, "elements": ["fire"], "base_power":0, "ap_cost":4, "effect": "status", "status_keys": ["attack_buff"], "can_aoe": True},
  
  {"id": "light_light_light_light_faith_lv4_pure_ascendance", "name": "Pure Ascendance", "description": "A concentrated beam of pure light that mends grievous wounds of a single ally.", "ability_type": "faith", "level":4, "elements": ["light", "light", "light", "light"], "base_power":120, "ap_cost":8, "effect": "heal", "can_aoe": False},
  {"id": "light_light_light_water_faith_lv4_prismatic_shower", "name": "Prismatic Shower", "description": "A broad shower of light and water that soothes and restores multiple allies.", "ability_type": "faith", "level":4, "elements": ["light", "light", "light", "water"], "base_power":50, "ap_cost":6, "effect": "heal", "can_aoe": True},
@@ -23,9 +23,8 @@ LEVEL_4_PLAYER_ABILITY_SEEDS = [
 
  {"id": "dark_magic_lv4_nightmare_echo", "name": "Nightmare Echo", "description": "A psychic backlash that erodes comprehension.", "ability_type": "magic", "level":4, "elements": ["dark", "air"], "base_power":0, "ap_cost":4, "effect": "status", "status_keys": ["intelligence_debuff"], "can_aoe": True},
  {"id": "dark_magic_lv4_mind_shiver", "name": "Mind Shiver", "description": "A psychic twinge that makes strikes hesitant.", "ability_type": "magic", "level":4, "elements": ["dark"], "base_power":0, "ap_cost":4, "effect": "status", "status_keys": ["attack_debuff"], "can_aoe": True},
- {"id": "water_air_light_magic_lv4_frost_nova", "name": "Frost Nova", "description": "Freezing pulse that slows and damages.", "ability_type": "magic", "level":4, "elements": ["water", "air", "light"], "base_power":150, "ap_cost":8, "effect": "status", "status_keys": ["continuous_damage"], "can_aoe": False},
- {"id": "dark_earth_air_magic_lv4_void_spike", "name": "Void Spike", "description": "A spear of pure nothingness.", "ability_type": "magic", "level":4, "elements": ["dark", "earth", "air", "dark"], "base_power":210, "ap_cost":10, "effect": "damage", "can_aoe": False},
- {"id": "water_air_dark_fire_magic_lv4_maelstrom_burst", "name": "Maelstrom Burst", "description": "A focused maelstrom burst into a point.", "ability_type": "magic", "level":4, "elements": ["water", "air", "dark", "fire"], "base_power":220, "ap_cost":10, "effect": "damage", "can_aoe": False},
+ {"id": "dark_earth_air_magic_lv4_void_rupture", "name": "Void Rupture", "description": "A spear of pure nothingness.", "ability_type": "magic", "level":4, "elements": ["dark", "earth", "air", "dark"], "base_power":210, "ap_cost":10, "effect": "damage", "can_aoe": False},
+ {"id": "water_air_dark_fire_magic_lv4_cataclysmic_maelstrom", "name": "Cataclysmic Maelstrom", "description": "A focused maelstrom burst into a point.", "ability_type": "magic", "level":4, "elements": ["water", "air", "dark", "fire"], "base_power":220, "ap_cost":10, "effect": "damage", "can_aoe": False},
  {"id": "earth_air_light_light_magic_lv4_sodom_and_gamora", "name": "Sodom and Gamora", "description": "Judgement is passed.  The wicked are turned to salt.", "ability_type": "magic", "level":4, "elements": ["earth","air","light","light"], "base_power":0, "ap_cost":200, "effect": "status", "status_keys": ["petrify"], "can_aoe": True},
 ]
 

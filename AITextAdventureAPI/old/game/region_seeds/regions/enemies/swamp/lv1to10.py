@@ -40,7 +40,7 @@ SEEDS_LV1TO10 = [
  "base_str":4, "base_dex":3, "base_con":4, "base_int":2, "base_hp":32, "base_ap":4, "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
 
  {"id": "rot_walker", "name": "Rot Walker", "hostile_type": "undead", "role": "hazard", "min_spawn_level":3, "rarity": "common", "base_xp":28, "common_drop": "herb_med", "money_range": (4,22),
- "basic_attack": "putrid punch", "strong_attack": "decay slam", "player_abilities": ["earth_skill_lv5_corrosive_spit"],
+ "basic_attack": "putrid punch", "strong_attack": "decay slam", "player_abilities": ["level_1_hostile_ability_dark_skill_corrosive_spit"],
  "base_str":3, "base_dex":2, "base_con":5, "base_int":1, "base_hp":36, "base_ap":4, "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":0},
 
  {"id": "bog_slither", "name": "Bog Slither", "hostile_type": "creature", "role": "hazard", "min_spawn_level":3, "rarity": "common", "base_xp":18, "common_drop": "herb_minor", "money_range": (2,12),
@@ -69,7 +69,7 @@ SEEDS_LV1TO10 = [
 
  # Level6
  {"id": "swamp_priest", "name": "Swamp Priest", "hostile_type": "faith", "role": "support", "min_spawn_level":6, "rarity": "rare", "base_xp":120, "common_drop": "herb_major", "rare_drop": "tome_con", "money_range": (20,100),
- "basic_attack": "blighted palm", "strong_attack": "curse flare", "player_abilities": ["light_light_air_faith_lv3_major_heal", "light_faith_lv5_halo_coat"],
+ "basic_attack": "blighted palm", "strong_attack": "curse flare", "player_abilities": ["light_light_air_faith_lv3_major_heal", "air_faith_lv1_zephyr_bless"],
  "base_str":3, "base_dex":3, "base_con":6, "base_int":10, "base_hp":96, "base_ap":8, "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":2},
 
  {"id": "neon_reaver", "name": "Neon Reaver", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":6, "rarity": "rare", "base_xp":140, "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (18,80),
@@ -78,7 +78,7 @@ SEEDS_LV1TO10 = [
 
  # Level7
  {"id": "bog_wraith", "name": "Bog Wraith", "hostile_type": "spirit", "role": "hazard", "min_spawn_level":7, "rarity": "rare", "base_xp":160, "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (25,120),
- "basic_attack": "soul chill", "strong_attack": "wailing gust", "player_abilities": ["dark_magic_lv2_night_whisper"],
+ "basic_attack": "soul chill", "strong_attack": "wailing gust", "player_abilities": ["level_1_hostile_ability_night_whisper"],
  "base_str":2, "base_dex":4, "base_con":5, "base_int":10, "base_hp":120, "base_ap":8, "str_per_level":1, "dex_per_level":1, "con_per_level":2, "int_per_level":3},
 
  # Level8

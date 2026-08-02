@@ -240,7 +240,7 @@ BOSS_HOSTILES = [
         "min_spawn_level": 23, "rarity": "superrare", "base_xp": 480,
         "common_drop": "herb_major", "rare_drop": "tome_dex", "money_range": (45,180),
         "basic_attack": "whisper slash", "strong_attack": "future echo burst",
-        "player_abilities": ["wind_magic_lv1_gust", "air_light_magic_lv2_starbreeze"],
+        "player_abilities": ["air_magic_lv1_shredding_gust", "air_light_magic_lv2_starbreeze"],
         "base_str": 6, "base_dex": 10, "base_con": 8, "base_int": 12,
         "base_hp": 1500, "base_ap": 10,
         "str_per_level": 1, "dex_per_level": 3, "con_per_level": 1, "int_per_level": 2

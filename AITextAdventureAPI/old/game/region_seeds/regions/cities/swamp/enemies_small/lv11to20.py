@@ -8,14 +8,14 @@ SEEDS_LV11TO20 = [
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":0},
 
  {"id": "scrap_rigger", "name": "Scrap Rigger", "hostile_type": "humanoid", "role": "support", "min_spawn_level":11, "rarity": "uncommon", "base_xp":110,
- "common_drop": "lockpick", "rare_drop": None, "money_range": (12,60),
- "basic_attack": "wrench jab", "strong_attack": "shard toss", "player_abilities": ["reinforce_frame"],
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (12,60),
+ "basic_attack": "wrench jab", "strong_attack": "shard toss", "player_abilities": ["level_1_hostile_ability_reinforce_frame"],
  "base_str":4, "base_dex":4, "base_con":4, "base_int":3, "base_hp":64, "base_ap":5,
  "str_per_level":2, "dex_per_level":1, "con_per_level":1, "int_per_level":1},
 
  {"id": "net_whisperer", "name": "Net Whisperer", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":11, "rarity": "rare", "base_xp":130,
  "common_drop": "stimulant_large", "rare_drop": "tome_int", "money_range": (36,160),
- "basic_attack": "taps with a data-squid", "strong_attack": "jolt of rusted circuitry", "player_abilities": ["hack_overload", "emp_burst"],
+ "basic_attack": "taps with a data-squid", "strong_attack": "jolt of rusted circuitry", "player_abilities": ["level_1_hostile_ability_electric_tech_hack_overload", "level_1_hostile_ability_electric_tech_hack_overload"],
  "base_str":2, "base_dex":4, "base_con":2, "base_int":8, "base_hp":36, "base_ap":6,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
 
@@ -26,13 +26,13 @@ SEEDS_LV11TO20 = [
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
 
  {"id": "sump_tinker", "name": "Sump Tinker", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":12, "rarity": "uncommon", "base_xp":120,
- "common_drop": "lockpick", "rare_drop": "stimulant_large", "money_range": (14,72),
- "basic_attack": "pipe jab", "strong_attack": "oil slick", "player_abilities": ["emp_burst"],
+ "common_drop": "stimulant_small", "rare_drop": "stimulant_large", "money_range": (14,72),
+ "basic_attack": "pipe jab", "strong_attack": "oil slick", "player_abilities": ["level_1_hostile_ability_electric_tech_hack_overload"],
  "base_str":3, "base_dex":5, "base_con":3, "base_int":6, "base_hp":48, "base_ap":6,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":2},
 
  {"id": "young_lich_apprentice", "name": "Young Lich Apprentice", "hostile_type": "undead", "role": "hazard", "min_spawn_level":12, "rarity": "rare", "base_xp":320,
- "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (30,140), "basic_attack": "bone bolt", "strong_attack": "necrotic spear", "player_abilities": ["bone_spear"],
+ "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (30,140), "basic_attack": "bone bolt", "strong_attack": "necrotic spear", "player_abilities": ["level_1_hostile_ability_bone_spear"],
  "base_str":2, "base_dex":3, "base_con":4, "base_int":12, "base_hp":100, "base_ap":10,
  "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
 
@@ -43,7 +43,7 @@ SEEDS_LV11TO20 = [
  "str_per_level":2, "dex_per_level":2, "con_per_level":1, "int_per_level":0},
 
  {"id": "canal_huckster", "name": "Canal Huckster", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":13, "rarity": "uncommon", "base_xp":100,
- "common_drop": "lockpick", "rare_drop": None, "money_range": (12,64),
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (12,64),
  "basic_attack": "flailing bargain", "strong_attack": "smuggled strike", "player_abilities": None,
  "base_str":3, "base_dex":5, "base_con":3, "base_int":4, "base_hp":54, "base_ap":4,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
@@ -61,7 +61,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "ratcatcher", "name": "Ratcatcher", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":14, "rarity": "uncommon", "base_xp":110,
  "common_drop": "herb_med", "rare_drop": None, "money_range": (12,64),
- "basic_attack": "net jab", "strong_attack": "toxic bait", "player_abilities": ["venom_trace"],
+ "basic_attack": "net jab", "strong_attack": "toxic bait", "player_abilities": ["level_1_hostile_ability_dark_skill_corrosive_spit"],
  "base_str":3, "base_dex":6, "base_con":3, "base_int":4, "base_hp":60, "base_ap":6,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
 
@@ -77,7 +77,7 @@ SEEDS_LV11TO20 = [
  "str_per_level":2, "dex_per_level":0, "con_per_level":2, "int_per_level":0},
 
  {"id": "net_slicer", "name": "Net Slicer", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":15, "rarity": "uncommon", "base_xp":150,
- "common_drop": "lockpick", "rare_drop": None, "money_range": (20,100), "basic_attack": "reap with net", "strong_attack": "entangling slash", "player_abilities": None,
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (20,100), "basic_attack": "reap with net", "strong_attack": "entangling slash", "player_abilities": None,
  "base_str":5, "base_dex":6, "base_con":4, "base_int":3, "base_hp":84, "base_ap":6,
  "str_per_level":2, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
 
@@ -99,6 +99,6 @@ SEEDS_LV11TO20 = [
  "base_str":5, "base_dex":7, "base_con":5, "base_int":3, "base_hp":160, "base_ap":6, "str_per_level":2, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
 
  {"id": "mob_lieutenant", "name": "Hollow Lieutenant", "hostile_type": "humanoid", "role": "support", "min_spawn_level":20, "rarity": "superrare", "base_xp":400,
- "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (150,600), "basic_attack": "ruthless cane strikes", "strong_attack": "legendary beatdown", "player_abilities": ["inspire", "berserker_tech"],
+ "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (150,600), "basic_attack": "ruthless cane strikes", "strong_attack": "legendary beatdown", "player_abilities": ["level_1_hostile_ability_inspire", "earth_fire_technique_lv2_berserker_tech"],
  "base_str":9, "base_dex":5, "base_con":8, "base_int":5, "base_hp":200, "base_ap":10, "str_per_level":4, "dex_per_level":2, "con_per_level":3, "int_per_level":2},
 ]

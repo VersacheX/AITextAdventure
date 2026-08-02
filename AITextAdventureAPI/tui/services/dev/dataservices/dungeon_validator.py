@@ -48,6 +48,7 @@ def _build_known_item_ids(const: Any) -> Set[str]:
         "SEED_UTILITY_IDS",
         "SEED_SPECIAL_IDS",
         "SEED_WEAPON_IDS",
+        "SEED_ACCESSORY_IDS",
     ):
         val = getattr(const, attr, None)
         if isinstance(val, list):
@@ -140,6 +141,7 @@ def validate_dungeon_tree(
                         "DUNGEON_BOSS_MOB_HOSTILE_MISSING",
                         f"boss_mob.hostiles references '{ref}' "
                         f"which is not defined in boss_hostiles.",
+                        severity="warning",
                     ))
                     by_code["DUNGEON_BOSS_MOB_HOSTILE_MISSING"] += 1
 

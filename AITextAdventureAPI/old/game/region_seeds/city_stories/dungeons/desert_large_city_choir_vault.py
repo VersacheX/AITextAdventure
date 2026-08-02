@@ -23,8 +23,8 @@ DUNGEON_NPCS: List[Dict] = [
 ]
 
 DUNGEON_ITEMS: List[Dict] = [
-    {'id': 'herb_small',      'location': 'treasure_room'},
-    {'id': 'remedy_small',    'location': 'treasure_room'},
+    {'id': 'herb_minor',      'location': 'treasure_room'},
+    {'id': 'ointment',    'location': 'treasure_room'},
     {'id': 'stimulant_small', 'location': 'final_chamber'},
 ]
 
@@ -41,7 +41,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'common',
         'base_xp': 28,
-        'common_drop': 'herb_small',
+        'common_drop': 'herb_minor',
         'rare_drop': None,
         'money_range': (5, 18),
         'basic_attack': 'swings with a sand-worn blade',
@@ -62,7 +62,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'hazard',
         'rarity': 'uncommon',
         'base_xp': 42,
-        'common_drop': 'remedy_small',
+        'common_drop': 'ointment',
         'rare_drop': None,
         'money_range': (8, 24),
         'basic_attack': 'claws from below with desiccated hands',
@@ -104,7 +104,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'role': 'damage',
         'rarity': 'superrare',
         'base_xp': 82,
-        'common_drop': 'remedy_small',
+        'common_drop': 'ointment',
         'rare_drop': 'herb_med',
         'money_range': (18, 52),
         'basic_attack': 'strikes with a resonant frequency blast',
@@ -134,7 +134,7 @@ BOSS_HOSTILES: List[Dict] = [
         'role': 'damage',
         'rarity': 'notfound',
         'base_xp': 320,
-        'common_drop': 'remedy_small',
+        'common_drop': 'ointment',
         'rare_drop': 'herb_med',
         'money_range': (40, 120),
         'basic_attack': 'releases a resonance wave that fills the vault',

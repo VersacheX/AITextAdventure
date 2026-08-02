@@ -70,6 +70,9 @@ ARMOR_LV51_65 = {
             "strength": 24, "dexterity": 12, "intelligence": 24, "constitution": 20,
             "elements": ["dark", "light"]
         },
+        # World drops
+        { "id": "soldiers_cap_lv53", "name": "Soldier's Cap", "description": "A pressed steel cap worn by mid-tier infantry across every region that has had a conflict in the last fifty years. Most of them have.", "defense": 32, "durability": 530, "max_durability": 530, "value": 5200, "min_spawn_level": 53, "rarity": "common", "strength": 20, "dexterity": 8, "intelligence": 4, "constitution": 10, "elements": ["earth"] },
+ 
     ],
     "body": [
         # --- Seraphine Dawnwell (lv60) ---
@@ -139,6 +142,9 @@ ARMOR_LV51_65 = {
             "strength": 32, "dexterity": 16, "intelligence": 32, "constitution": 28,
             "elements": ["dark", "light", "earth"]
         },
+        # World drops        
+        { "id": "channeling_robe_lv59", "name": "Channeling Robe", "description": "A robe whose inner lining is woven in a continuous spiral from hem to collar — it guides elemental flow through the body without resistance. The tailor who made it never explained how.", "defense": 46, "durability": 690, "max_durability": 690, "value": 14200, "min_spawn_level": 59, "rarity": "uncommon", "strength": 4, "dexterity": 16, "intelligence": 62, "constitution": 22, "elements": ["fire", "ice"] },
+  
     ],
     "arms": [
         # --- Seraphine Dawnwell (lv60) ---
@@ -208,6 +214,7 @@ ARMOR_LV51_65 = {
             "strength": 20, "dexterity": 10, "intelligence": 20, "constitution": 16,
             "elements": ["dark", "light"]
         },
+
     ],
     "legs": [
         # --- Seraphine Dawnwell (lv60) ---
@@ -277,5 +284,8 @@ ARMOR_LV51_65 = {
             "strength": 22, "dexterity": 12, "intelligence": 22, "constitution": 18,
             "elements": ["dark", "light", "earth"]
         },
+        # World drops        
+        { "id": "evasion_greaves_lv63", "name": "Evasion Greaves", "description": "Greaves built narrow at the shin and wide at the ankle for lateral pivot. The design is old — it predates several wars and outlasted all of them.", "defense": 42, "durability": 620, "max_durability": 620, "value": 17400, "min_spawn_level": 63, "rarity": "rare", "strength": 18, "dexterity": 44, "intelligence": 16, "constitution": 20, "elements": ["air", "water"] },
+
     ]
 }

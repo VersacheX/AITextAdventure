@@ -52,7 +52,7 @@ SEEDS_LV1TO10 = [
 
  # Level7
  {"id": "ash_berserker", "name": "Ash Berserker", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":7, "rarity": "rare", "base_xp":180, "common_drop": "stimulant_large", "rare_drop": "cleaver", "money_range": (30,140),
- "basic_attack": "searing slash", "strong_attack": "rending maul", "player_abilities": ["fire_technique_lv3_berserker_tech"], "base_str":8, "base_dex":5, "base_con":8, "base_int":3, "base_hp":160, "base_ap":7, "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":0},
+ "basic_attack": "searing slash", "strong_attack": "rending maul", "player_abilities": ["fire_technique_lv1_scorch_slash"], "base_str":8, "base_dex":5, "base_con":8, "base_int":3, "base_hp":160, "base_ap":7, "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":0},
 
  {"id": "summit_spriggan", "name": "Summit Spriggan", "hostile_type": "creature", "role": "damage", "min_spawn_level":7, "rarity": "uncommon", "base_xp":120, "common_drop": "herb_major", "money_range": (20,90),
  "basic_attack": "vine lash", "strong_attack": "root bind", "player_abilities": ["earth_earth_technique_lv2_terra_slam"], "base_str":6, "base_dex":4, "base_con":6, "base_int":3, "base_hp":140, "base_ap":6, "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":1},
@@ -65,7 +65,7 @@ SEEDS_LV1TO10 = [
 
  # Level10
  {"id": "pyre_witch", "name": "Pyre Witch", "hostile_type": "magic", "role": "hazard", "min_spawn_level":10, "rarity": "superrare", "base_xp":640, "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (50,220),
- "basic_attack": "ember finger", "strong_attack": "magma lance", "player_abilities": ["fire_magic_lv3_pyroclasm", "fire_magic_lv1_fireball"], "base_str":10, "base_dex":6, "base_con":12, "base_int":18, "base_hp":720, "base_ap":12, "str_per_level":3, "dex_per_level":1, "con_per_level":3, "int_per_level":4},
+ "basic_attack": "ember finger", "strong_attack": "magma lance", "player_abilities": ["lv2_hostile_ability_fire_earth_magic_pyroclasm", "fire_magic_lv1_fireball"], "base_str":10, "base_dex":6, "base_con":12, "base_int":18, "base_hp":720, "base_ap":12, "str_per_level":3, "dex_per_level":1, "con_per_level":3, "int_per_level":4},
 
  {"id": "granite_pup", "name": "Granite Pup", "hostile_type": "creature", "role": "damage", "min_spawn_level":10, "rarity": "common", "base_xp":48, "common_drop": "herb_med", "rare_drop": None, "money_range": (6,28),
  "basic_attack": "stone nip", "strong_attack": "rock maul", "player_abilities": [], "base_str":6, "base_dex":3, "base_con":6, "base_int":1, "base_hp":80, "base_ap":4, "str_per_level":2, "dex_per_level":0, "con_per_level":2, "int_per_level":0},

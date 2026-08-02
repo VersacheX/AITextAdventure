@@ -9,6 +9,8 @@ A3  ABILITY_DAMAGE_NO_POWER    effect=damage but base_power == 0
 A4  ABILITY_HEAL_NO_POWER      effect=heal but base_power == 0
 A5  ABILITY_STATUS_NO_KEYS     effect=status/cure but status_keys is empty
 A6  ABILITY_NO_ELEMENTS        damage/status/heal ability has no elements  (warning)
+A7  ABILITY_UNKNOWN_ELEMENT    an element in 'elements' is not in ELEMENTAL_CHAR_KEYS
+A8  ABILITY_UNKNOWN_STATUS     a key in 'status_keys' is not in STATUS_EFFECTS
 
 Balance rules  (warning — mirrors equipment TP balance check)
 ---------------
@@ -27,7 +29,7 @@ total_value formula
 from __future__ import annotations
 
 from collections import defaultdict
-from typing import Dict, List, Any
+from typing import Any, Dict, List
 
 from tui.services.dev.dataservices.models import (
     AbilityNode,
@@ -62,10 +64,24 @@ def _flat_nodes(tree: List[AbilityTypeNode]) -> List[AbilityNode]:
 def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
     """Validate every AbilityNode in *tree*, annotating .errors in-place.
 
+    *const* should be the ``game.constants`` module.  When supplied, known
+    elements are taken from ``const.ELEMENTAL_CHAR_KEYS`` and known statuses
+    from ``const.STATUS_EFFECTS`` so the validator stays in sync with the
+    game's authoritative data rather than a duplicated hardcoded set.
+
     Returns a summary dict::
         {"abilities_scanned": int, "invalid": int, "total_errors": int,
          "by_code": {code: count}}
     """
+    from game import constants as const
+    # Derive known sets from const when available; fall back to safe defaults
+    known_elements: frozenset[str] = frozenset(
+        str(k).lower() for k in (getattr(const, "ELEMENTAL_CHAR_KEYS", {}) or {}).keys()
+    )
+    known_statuses: frozenset[str] = frozenset(
+        str(k).lower() for k in (getattr(const, "STATUS_EFFECTS", {}) or {}).keys()
+    )
+
     all_nodes = _flat_nodes(tree)
 
     # Reset existing errors
@@ -75,9 +91,8 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
     by_code: Dict[str, int] = defaultdict(int)
 
     # ── Build balance groups ──────────────────────────────────────────────
-    # group key: (ability_type, level, effect)
     tv_by_group: Dict[tuple, List[float]] = defaultdict(list)
-    node_group:  Dict[str, tuple]         = {}   # ability_id → group key
+    node_group:  Dict[str, tuple]         = {}
 
     for node in all_nodes:
         seed   = node.record.extras.get("_seed") or {}
@@ -153,6 +168,24 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
             ))
             by_code["ABILITY_NO_ELEMENTS"] += 1
 
+        # A7 — each unknown element is a separate error
+        for elem in elements:
+            if str(elem).lower() not in known_elements:
+                node.errors.append(_err(
+                    "ABILITY_UNKNOWN_ELEMENT",
+                    f"Element '{elem}' is not in ELEMENTAL_CHAR_KEYS.",
+                ))
+                by_code["ABILITY_UNKNOWN_ELEMENT"] += 1
+
+        # A8 — each unknown status key is a separate error
+        for sk in status_keys:
+            if str(sk).lower() not in known_statuses:
+                node.errors.append(_err(
+                    "ABILITY_UNKNOWN_STATUS",
+                    f"status_key '{sk}' is not in STATUS_EFFECTS.",
+                ))
+                by_code["ABILITY_UNKNOWN_STATUS"] += 1
+
         # B1 / B2
         gkey = node_group.get(node.ability_id)
         if gkey and gkey in group_avg:
@@ -188,3 +221,26 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
         "total_errors":      total_errors,
         "by_code":           dict(by_code),
     }
+
+
+def validate_abilities_for_screen(screen: "DataMgmtScreen") -> None:
+    from tui.services.dev.dataservices.ability_validator import validate_ability_tree  # noqa: PLC0415
+    from tui.services.dev.dataservices.catalog import get_ability_tree               # noqa: PLC0415
+
+    tree    = get_ability_tree()
+    summary = validate_ability_tree(tree)
+
+    # Repopulate table so flagged rows render in colour
+    rebuild_ability_tree_for_screen(screen)
+
+    invalid      = summary.get("invalid", 0)
+    total_errors = summary.get("total_errors", 0)
+
+    if total_errors == 0:
+        screen.notify("✓ Ability integrity OK — no issues found.", timeout=3.0)
+    else:
+        screen.notify(
+            f"✗ {total_errors} issue(s) across {invalid} ability(s) — flagged in table.",
+            severity="warning",
+            timeout=5.0,
+        )

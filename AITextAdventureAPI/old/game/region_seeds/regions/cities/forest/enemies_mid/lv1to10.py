@@ -4,19 +4,19 @@
 RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==1 (common, uncommon, rare)
  {"id": "pocket_imp", "name": "Pocket Imp", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":1, "rarity": "common", "base_xp":10,
- "common_drop": "lockpick", "rare_drop": None, "money_range": (0,6),
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (0,6),
  "basic_attack": "nasty nip", "strong_attack": "snatch and vanish", "player_abilities": None,
  "base_str":1, "base_dex":6, "base_con":1, "base_int":3, "base_hp":10, "base_ap":2,
  "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":1},
 
  {"id": "tea_barker", "name": "Tea Barker", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":1, "rarity": "uncommon", "base_xp":8,
- "common_drop": "water", "rare_drop": None, "money_range": (0,6),
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (0,6),
  "basic_attack": "yelled insult", "strong_attack": "hot splash", "player_abilities": None,
  "base_str":2, "base_dex":2, "base_con":2, "base_int":1, "base_hp":10, "base_ap":2,
  "str_per_level":1, "dex_per_level":0, "con_per_level":1, "int_per_level":0},
 
  {"id": "imp_chieftain", "name": "Imp Chieftain", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":1, "rarity": "rare", "base_xp":34,
- "common_drop": "lockpick", "rare_drop": "tome_dex", "money_range": (6,30),
+ "common_drop": "stimulant_small", "rare_drop": "tome_dex", "money_range": (6,30),
  "basic_attack": "leader's bite", "strong_attack": "commanding shriek", "player_abilities": ["dark_magic_lv1_shadow_tendril"],
  "base_str":3, "base_dex":8, "base_con":4, "base_int":6, "base_hp":23, "base_ap":6,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":2},
@@ -82,7 +82,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "whisper_acolyte", "name": "Whisper Acolyte", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":6, "rarity": "rare", "base_xp":82,
  "common_drop": "herb_major", "rare_drop": "short_sword", "money_range": (18,70),
- "basic_attack": "murmured hex", "strong_attack": "drain whisper", "player_abilities": ["dark_magic_lv2_night_whisper", "dark_dark_magic_lv2_umbra_storm"],
+ "basic_attack": "murmured hex", "strong_attack": "drain whisper", "player_abilities": ["level_1_hostile_ability_night_whisper", "dark_dark_magic_lv2_umbra_storm"],
  "base_str":1, "base_dex":2, "base_con":3, "base_int":8, "base_hp":28, "base_ap":7,
  "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
 
@@ -94,27 +94,27 @@ RANDOM_HOSTILE_SEEDS = [
  "str_per_level":1, "dex_per_level":2, "con_per_level":0, "int_per_level":1},
 
  {"id": "fixer_ike", "name": "Fixer Ike", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":7, "rarity": "uncommon", "base_xp":40,
- "common_drop": "lockpick", "rare_drop": "stimulant_large", "money_range": (8,32),
- "basic_attack": "spanner jab", "strong_attack": "glitched spark", "player_abilities": ["fire_water_tech_lv2_steam_grenade", "fire_air_tech_lv2_aero_flare"],
+ "common_drop": "stimulant_small", "rare_drop": "stimulant_large", "money_range": (8,32),
+ "basic_attack": "spanner jab", "strong_attack": "glitched spark", "player_abilities": ["lv2_hostile_ability_fire_water_tech_steam_grenade", "fire_air_tech_lv2_aero_flare"],
  "base_str":2, "base_dex":4, "base_con":2, "base_int":6, "base_hp":22, "base_ap":5,
  "str_per_level":1, "dex_per_level":1, "con_per_level":0, "int_per_level":2},
 
  # min_spawn_level ==8
  {"id": "coven_fixer", "name": "Coven Fixer", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":8, "rarity": "common", "base_xp":48,
- "common_drop": "lockpick", "rare_drop": "tome_dex", "money_range": (10,60),
- "basic_attack": "tinker's prod", "strong_attack": "rune short-circuit", "player_abilities": ["fire_water_tech_lv2_steam_grenade", "fire_air_tech_lv2_aero_flare"],
+ "common_drop": "stimulant_small", "rare_drop": "tome_dex", "money_range": (10,60),
+ "basic_attack": "tinker's prod", "strong_attack": "rune short-circuit", "player_abilities": ["lv2_hostile_ability_fire_water_tech_steam_grenade", "fire_air_tech_lv2_aero_flare"],
  "base_str":2, "base_dex":4, "base_con":3, "base_int":7, "base_hp":26, "base_ap":5,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
 
  {"id": "forest_siren", "name": "Forest Siren", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":8, "rarity": "common", "base_xp":100,
  "common_drop": "stimulant_med", "rare_drop": "tome_int", "money_range": (20,90),
- "basic_attack": "glowing blade", "strong_attack": "stunning strike", "player_abilities": ["light_faith_lv2_prism_burst"],
+ "basic_attack": "glowing blade", "strong_attack": "stunning strike", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst"],
  "base_str":3, "base_dex":7, "base_con":3, "base_int":6, "base_hp":44, "base_ap":6,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":2},
 
  # min_spawn_level ==9
  {"id": "moss_smuggler", "name": "Moss Smuggler", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":9, "rarity": "common", "base_xp":52,
- "common_drop": "lockpick", "rare_drop": "stimulant_large", "money_range": (12,70),
+ "common_drop": "stimulant_small", "rare_drop": "stimulant_large", "money_range": (12,70),
  "basic_attack": "quick jab", "strong_attack": "mossy lariat", "player_abilities": None,
  "base_str":3, "base_dex":6, "base_con":2, "base_int":3, "base_hp":28, "base_ap":4,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
@@ -127,8 +127,8 @@ RANDOM_HOSTILE_SEEDS = [
 
  # min_spawn_level ==10
  {"id": "shadow_assassin", "name": "Shadow Assassin", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":10, "rarity": "rare", "base_xp":160,
- "common_drop": "lockpick", "rare_drop": "tome_int", "money_range": (40,160),
- "basic_attack": "silent strike", "strong_attack": "nightmare release", "player_abilities": ["dark_magic_lv1_shadow_tendril", "dark_air_light_magic_lv4_nightmare_wave"],
+ "common_drop": "stimulant_small", "rare_drop": "tome_int", "money_range": (40,160),
+ "basic_attack": "silent strike", "strong_attack": "nightmare release", "player_abilities": ["dark_magic_lv1_shadow_tendril", "lv2_hostile_ability_dark_air_skill_nightmare_wave"],
  "base_str":6, "base_dex":12, "base_con":4, "base_int":7, "base_hp":80, "base_ap":10,
  "str_per_level":2, "dex_per_level":3, "con_per_level":1, "int_per_level":2},
 

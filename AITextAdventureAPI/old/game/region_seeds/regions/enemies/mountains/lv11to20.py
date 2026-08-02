@@ -17,16 +17,16 @@ SEEDS_LV11TO20 = [
  "basic_attack": "knife jab", "strong_attack": "ice toss", "player_abilities": [], "base_str":5, "base_dex":8, "base_con":6, "base_int":4, "base_hp":110, "base_ap":5, "str_per_level":2, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
 
  {"id": "ridge_shaman", "name": "Ridge Shaman", "hostile_type": "magic", "role": "hazard", "min_spawn_level":13, "rarity": "uncommon", "base_xp":130, "common_drop": "herb_med", "rare_drop": "tome_int", "money_range": (14,72),
- "basic_attack": "cold touch", "strong_attack": "frost burst", "player_abilities": ["water_air_light_magic_lv4_frost_nova"], "base_str":4, "base_dex":5, "base_con":6, "base_int":10, "base_hp":120, "base_ap":8, "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
+ "basic_attack": "cold touch", "strong_attack": "frost burst", "player_abilities": ["lv2_hostile_ability_ice_light_magic_frost_nova"], "base_str":4, "base_dex":5, "base_con":6, "base_int":10, "base_hp":120, "base_ap":8, "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
 
- {"id": "alpine_poacher", "name": "Alpine Poacher", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":13, "rarity": "uncommon", "base_xp":112, "common_drop": "lockpick", "rare_drop": None, "money_range": (12,64),
+ {"id": "alpine_poacher", "name": "Alpine Poacher", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":13, "rarity": "uncommon", "base_xp":112, "common_drop": "stimulant_small", "rare_drop": None, "money_range": (12,64),
  "basic_attack": "snare jab", "strong_attack": "clubbed flank", "player_abilities": [], "base_str":6, "base_dex":6, "base_con":5, "base_int":3, "base_hp":108, "base_ap":5, "str_per_level":2, "dex_per_level":1, "con_per_level":1, "int_per_level":1},
 
  {"id": "peak_sentry", "name": "Peak Sentry", "hostile_type": "construct", "role": "damage", "min_spawn_level":14, "rarity": "common", "base_xp":140, "common_drop": "herb_med", "rare_drop": None, "money_range": (14,72),
  "basic_attack": "iron swipe", "strong_attack": "boulder crush", "player_abilities": [], "base_str":10, "base_dex":3, "base_con":10, "base_int":2, "base_hp":180, "base_ap":6, "str_per_level":3, "dex_per_level":0, "con_per_level":3, "int_per_level":0},
 
  {"id": "peak_warden", "name": "Peak Warden", "hostile_type": "celestial", "role": "hazard", "min_spawn_level":14, "rarity": "rare", "base_xp":420, "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (40,200),
- "basic_attack": "radiant talons", "strong_attack": "celestial volley", "player_abilities": ["light_air_fire_water_faith_lv5_stellar_fall"], "base_str":12, "base_dex":8, "base_con":12, "base_int":12, "base_hp":420, "base_ap":12, "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":3},
+ "basic_attack": "radiant talons", "strong_attack": "celestial volley", "player_abilities": ["air_air_faith_lv2_tempest_hymn"], "base_str":12, "base_dex":8, "base_con":12, "base_int":12, "base_hp":420, "base_ap":12, "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":3},
 
  {"id": "ember_colossus", "name": "Ember Colossus", "hostile_type": "creature", "role": "damage", "min_spawn_level":14, "rarity": "common", "base_xp":160, "common_drop": "herb_med", "rare_drop": None, "money_range": (16,80),
  "basic_attack": "magma club", "strong_attack": "lava heave", "player_abilities": [], "base_str":12, "base_dex":4, "base_con":12, "base_int":3, "base_hp":240, "base_ap":6, "str_per_level":3, "dex_per_level":0, "con_per_level":3, "int_per_level":1},
@@ -56,11 +56,11 @@ SEEDS_LV11TO20 = [
  "basic_attack": "arcane flick", "strong_attack": "meteor shard", "player_abilities": ["electric_fire_magic_lv2_arclance"], "base_str":8, "base_dex":8, "base_con":10, "base_int":20, "base_hp":980, "base_ap":14, "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":4},
 
  {"id": "ash_revenant", "name": "Ash Revenant", "hostile_type": "undead", "role": "hazard", "min_spawn_level":18, "rarity": "common", "base_xp":360, "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (60,220),
- "basic_attack": "ichor swipe", "strong_attack": "necrotic gale", "player_abilities": ["dark_dark_magic_lv2_umbra_storm", "dark_magic_lv2_night_whisper"], "base_str":12, "base_dex":8, "base_con":12, "base_int":12, "base_hp":520, "base_ap":12, "str_per_level":4, "dex_per_level":2, "con_per_level":3, "int_per_level":3},
+ "basic_attack": "ichor swipe", "strong_attack": "necrotic gale", "player_abilities": ["dark_dark_magic_lv2_umbra_storm", "level_1_hostile_ability_night_whisper"], "base_str":12, "base_dex":8, "base_con":12, "base_int":12, "base_hp":520, "base_ap":12, "str_per_level":4, "dex_per_level":2, "con_per_level":3, "int_per_level":3},
 
  {"id": "storm_colossus", "name": "Storm Colossus", "hostile_type": "construct", "role": "hazard", "min_spawn_level":19, "rarity": "common", "base_xp":600, "common_drop": "stimulant_large", "rare_drop": "kevlar_vest", "money_range": (120,480),
- "basic_attack": "thunder stomp", "strong_attack": "tempest crush", "player_abilities": ["air_fire_magic_lv4_chain_lightning"], "base_str":18, "base_dex":6, "base_con":18, "base_int":10, "base_hp":1400, "base_ap":14, "str_per_level":5, "dex_per_level":1, "con_per_level":4, "int_per_level":2},
+ "basic_attack": "thunder stomp", "strong_attack": "tempest crush", "player_abilities": ["level_1_hostile_ability_electric_magic_chain_lightning"], "base_str":18, "base_dex":6, "base_con":18, "base_int":10, "base_hp":1400, "base_ap":14, "str_per_level":5, "dex_per_level":1, "con_per_level":4, "int_per_level":2},
 
  {"id": "auric_chalice", "name": "Auric Chalice", "hostile_type": "celestial", "role": "support", "min_spawn_level":20, "rarity": "uncommon", "base_xp":760, "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (140,560),
- "basic_attack": "luminous tap", "strong_attack": "solar cascade", "player_abilities": ["light_faith_lv5_holy_light", "light_faith_lv2_prism_burst"], "base_str":14, "base_dex":8, "base_con":14, "base_int":16, "base_hp":980, "base_ap":12, "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":3},
+ "basic_attack": "luminous tap", "strong_attack": "solar cascade", "player_abilities": ["light_light_faith_lv2_seraphic_nova", "level_1_hostile_ability_light_faith_prism_burst"], "base_str":14, "base_dex":8, "base_con":14, "base_int":16, "base_hp":980, "base_ap":12, "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":3},
 ]

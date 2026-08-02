@@ -4,7 +4,7 @@
 RANDOM_HOSTILE_SEEDS = [
  # level1
  {"id": "stump_thief", "name": "Stump Thief", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":1, "rarity": "rare", "base_xp":8,
- "common_drop": "lockpick", "rare_drop": None, "money_range": (1,5),
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (1,5),
  "basic_attack": "fumbles a grab", "strong_attack": "bold pluck", "player_abilities": None,
  "base_str":1, "base_dex":5, "base_con":1, "base_int":2, "base_hp":9, "base_ap":2,
  "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":0},
@@ -29,7 +29,7 @@ RANDOM_HOSTILE_SEEDS = [
  "str_per_level":1, "dex_per_level":0, "con_per_level":1, "int_per_level":0},
 
  {"id": "market_bandit", "name": "Market Bandit", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":2, "rarity": "common", "base_xp":14,
- "common_drop": "lockpick", "rare_drop": "cloth_pants", "money_range": (2,12),
+ "common_drop": "stimulant_small", "rare_drop": "cloth_pants", "money_range": (2,12),
  "basic_attack": "snatches a purse", "strong_attack": "precise stab", "player_abilities": None,
  "base_str":3, "base_dex":4, "base_con":2, "base_int":1, "base_hp":12, "base_ap":4,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
@@ -61,14 +61,14 @@ RANDOM_HOSTILE_SEEDS = [
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
 
  # level4
- {"id": "loft_watch", "name": "Loft Watch (cantankerous)", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":4, "rarity": "uncommon", "base_xp":36,
+ {"id": "loft_watch", "name": "Loft Watch", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":4, "rarity": "uncommon", "base_xp":36,
  "common_drop": "stimulant_small", "rare_drop": "cloth_gloves", "money_range": (6,24),
  "basic_attack": "raises a cudgel", "strong_attack": "crushing whack", "player_abilities": None,
  "base_str":5, "base_dex":2, "base_con":5, "base_int":1, "base_hp":28, "base_ap":3,
  "str_per_level":2, "dex_per_level":0, "con_per_level":1, "int_per_level":0},
 
  {"id": "mole_troublemaker", "name": "Mole Troublemaker", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":4, "rarity": "uncommon", "base_xp":28,
- "common_drop": "lockpick", "rare_drop": None, "money_range": (3,16),
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (3,16),
  "basic_attack": "stabs from below", "strong_attack": "subterranean lunge", "player_abilities": None,
  "base_str":2, "base_dex":4, "base_con":2, "base_int":3, "base_hp":20, "base_ap":3,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":1},
@@ -82,26 +82,26 @@ RANDOM_HOSTILE_SEEDS = [
  "str_per_level":1, "dex_per_level":0, "con_per_level":1, "int_per_level":0},
 
  {"id": "pawn_guard", "name": "Pawnshop Guard", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":5, "rarity": "uncommon", "base_xp":45,
- "common_drop": "lockpick", "rare_drop": "stimulant_large", "money_range": (10,40),
+ "common_drop": "stimulant_small", "rare_drop": "stimulant_large", "money_range": (10,40),
  "basic_attack": "bashes with a baton", "strong_attack": "stunning strike", "player_abilities": None,
  "base_str":4, "base_dex":2, "base_con":3, "base_int":2, "base_hp":26, "base_ap":3,
  "str_per_level":1, "dex_per_level":0, "con_per_level":1, "int_per_level":1},
 
  {"id": "sly_country_madam", "name": "Sly Country Madam", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":5, "rarity": "uncommon", "base_xp":40,
- "common_drop": "lockpick", "rare_drop": None, "money_range": (6,28),
+ "common_drop": "stimulant_small", "rare_drop": None, "money_range": (6,28),
  "basic_attack": "swift move", "strong_attack": "outsmart", "player_abilities": None,
  "base_str":2, "base_dex":4, "base_con":2, "base_int":4, "base_hp":20, "base_ap":4,
  "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":1},
 
  # level6
  {"id": "peasant_fixit", "name": "Peasant Fixit", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":6, "rarity": "uncommon", "base_xp":48,
- "common_drop": "lockpick", "rare_drop": "tome_dex", "money_range": (8,40),
+ "common_drop": "stimulant_small", "rare_drop": "tome_dex", "money_range": (8,40),
  "basic_attack": "taps your gear with a wrench", "strong_attack": "sparked lurch", "player_abilities": None,
  "base_str":2, "base_dex":4, "base_con":2, "base_int":6, "base_hp":26, "base_ap":5,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":2},
 
  {"id": "ledger_guard_praerie", "name": "Ledger Guard of the Praerie", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":6, "rarity": "uncommon", "base_xp":46,
- "common_drop": "lockpick", "rare_drop": "stimulant_large", "money_range": (8,36),
+ "common_drop": "stimulant_small", "rare_drop": "stimulant_large", "money_range": (8,36),
  "basic_attack": "bashes with a ledger", "strong_attack": "stunning baton", "player_abilities": None,
  "base_str":4, "base_dex":2, "base_con":4, "base_int":2, "base_hp":30, "base_ap":3,
  "str_per_level":1, "dex_per_level":0, "con_per_level":1, "int_per_level":1},
@@ -114,14 +114,14 @@ RANDOM_HOSTILE_SEEDS = [
 
  # level7
  {"id": "lady_cutpurse_small", "name": "Lady Cutpurse", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":7, "rarity": "rare", "base_xp":100,
- "common_drop": "lockpick", "rare_drop": "dagger", "money_range": (15,70),
- "basic_attack": "swift stab", "strong_attack": "lethal twirl", "player_abilities": ["air_skill_lv4_gale_dash"],
+ "common_drop": "stimulant_small", "rare_drop": "dagger", "money_range": (15,70),
+ "basic_attack": "swift stab", "strong_attack": "lethal twirl", "player_abilities": ["level_1_hostile_ability_air_skill_gale_dash"],
  "base_str":3, "base_dex":8, "base_con":3, "base_int":3, "base_hp":34, "base_ap":6,
  "str_per_level":1, "dex_per_level":3, "con_per_level":1, "int_per_level":1},
 
  {"id": "meadaow_void_spider", "name": "Meadow Void Spider", "hostile_type": "creature", "role": "damage", "min_spawn_level":7, "rarity": "uncommon", "base_xp":90,
  "common_drop": "herb_med", "rare_drop": "ointment", "money_range": (2,30),
- "basic_attack": "fanged bite", "strong_attack": "venomous tear", "player_abilities": ["venom_trace"],
+ "basic_attack": "fanged bite", "strong_attack": "venomous tear", "player_abilities": ["level_1_hostile_ability_dark_skill_corrosive_spit"],
  "base_str":2, "base_dex":8, "base_con":3, "base_int":2, "base_hp":40, "base_ap":6,
  "str_per_level":1, "dex_per_level":3, "con_per_level":1, "int_per_level":0},
 
@@ -145,7 +145,7 @@ RANDOM_HOSTILE_SEEDS = [
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
 
  {"id": "lady_rogue", "name": "Lady Rogue", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":8, "rarity": "rare", "base_xp":110,
- "common_drop": "lockpick", "rare_drop": "pipe_wrench", "money_range": (20,80),
+ "common_drop": "stimulant_small", "rare_drop": "pipe_wrench", "money_range": (20,80),
  "basic_attack": "stab", "strong_attack": "lethal dance", "player_abilities": ["fire_earth_technique_lv2_blaze_hammer"],
  "base_str":3, "base_dex":8, "base_con":3, "base_int":3, "base_hp":30, "base_ap":6,
  "str_per_level":1, "dex_per_level":3, "con_per_level":1, "int_per_level":1},
@@ -166,13 +166,13 @@ RANDOM_HOSTILE_SEEDS = [
  # level10
  {"id": "forlorn_fixer_tinker", "name": "Forlorn Fixer Tinker", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":10, "rarity": "rare", "base_xp":120,
  "common_drop": "stimulant_large", "rare_drop": "tome_int", "money_range": (30,140),
- "basic_attack": "throws a gadget", "strong_attack": "sparking overload", "player_abilities": ["air_tech_lv4_gale_surge", "dark_magic_lv4_mind_shiver"],
+ "basic_attack": "throws a gadget", "strong_attack": "sparking overload", "player_abilities": ["level_1_hostile_ability_air_magic_gale_surge", "dark_magic_lv4_mind_shiver"],
  "base_str":2, "base_dex":4, "base_con":3, "base_int":9, "base_hp":36, "base_ap":6,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
 
  {"id": "madam_ratchet", "name": "Madam Ratchet", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":10, "rarity": "rare", "base_xp":130,
- "common_drop": "lockpick", "rare_drop": "tome_dex", "money_range": (30,120),
- "basic_attack": "precision strikes", "strong_attack": "wrenching attack", "player_abilities": ["fire_water_tech_lv2_steam_grenade"],
+ "common_drop": "stimulant_small", "rare_drop": "tome_dex", "money_range": (30,120),
+ "basic_attack": "precision strikes", "strong_attack": "wrenching attack", "player_abilities": ["lv2_hostile_ability_fire_water_tech_steam_grenade"],
  "base_str":3, "base_dex":4, "base_con":3, "base_int":6, "base_hp":40, "base_ap":6,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":2},
 

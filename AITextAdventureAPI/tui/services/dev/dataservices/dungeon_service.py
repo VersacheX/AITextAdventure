@@ -30,28 +30,42 @@ _PRIMARY_STORY_FRAGMENTS = frozenset({
     "aeriola", "miregloom",
 })
 
-# City/regional dungeon_id fragments (region names + known city dungeon patterns)
+# City/regional dungeon_id fragments — checked BEFORE primary story to
+# prevent city dungeons sharing a boss name from being mis-classified.
 _CITY_REGIONAL_FRAGMENTS = frozenset({
     "murkchannel", "rotfen", "swallowed_path",
     "swamp_mid_city", "miregloom_resurrection",
-    "shallows_large_city", "shallows_small_city", "uulthars",
-    "mountains_large_city", "mountains_mid_city", "rokhulls_fracture",
-    "desert_large_city", "desert_mid_city", "zaruuns_sanctum",
-    "forest_large_city", "marrowroots_deep",
+    "shallows_large_city", "shallows_mid_city", "shallows_small_city", "uulthars",
+    "mountains_large_city", "mountains_mid_emberwake", "rokhulls_fracture",
+    "desert_large_city", "desert_mid_ink", "desert_mid_city", "desert_small_city",
+    "zaruuns_sanctum",
+    "forest_large_city", "forest_mid_city", "forest_small_city", "marrowroots_deep",
     "grassland_large_city", "grassland_mid_city", "serenes_wind",
-    "snow_large_city", "aeriolass_frozen",
+    "snow_large_city", "snow_mid_city", "aeriolass_frozen",
+    "stormhollow",
+    "ghost_hideaway",
+    "windcarve_den",
+    "charmroot_den",
+    "relicmire_sump",
+    "fogwhisper_inlet",
+    "coveveil_passage",
 })
 
 
 def _classify_dungeon(dungeon_id: str) -> str:
-    """Classify a dungeon_id into its source group."""
+    """Classify a dungeon_id into its source group.
+
+    City/regional fragments are checked first so that city dungeons whose
+    boss names also appear in _PRIMARY_STORY_FRAGMENTS (e.g. zaruun,
+    miregloom, rokhuld) are not mis-classified as primary_story.
+    """
     did_lower = dungeon_id.lower()
-    for fragment in _PRIMARY_STORY_FRAGMENTS:
-        if fragment in did_lower:
-            return "primary_story"
     for fragment in _CITY_REGIONAL_FRAGMENTS:
         if fragment in did_lower:
             return "city_regional"
+    for fragment in _PRIMARY_STORY_FRAGMENTS:
+        if fragment in did_lower:
+            return "primary_story"
     return "main_story"
 
 

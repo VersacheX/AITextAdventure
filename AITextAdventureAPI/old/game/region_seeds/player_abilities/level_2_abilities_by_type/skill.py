@@ -72,4 +72,9 @@ LEVEL_2_SKILL_ABILITY_SEEDS = [
  ##STATUS EFFECTS (special)
  {"id": "electric_air_skill_lv2_static_caltrops", "name": "Static Caltrops", "description": "Deploy electrified spikes that stun.", "ability_type": "skill", "level":2, "elements": ["electric", "air"], "base_power":0, "ap_cost":30, "effect": "status", "status_keys": ["stun"], "can_aoe": True},
  {"id": "earth_dark_skill_lv2_petrify_dart", "name": "Petrify Dart", "description": "A dark mineral dart that petrifies.", "ability_type": "skill", "level":2, "elements": ["earth", "dark"], "base_power":0, "ap_cost":50, "effect": "status", "status_keys": ["petrify"], "can_aoe": False},
+
+ 
+   ##NON-PLAYER ABILITIES
+ {"id": "lv2_hostile_ability_dark_air_skill_nightmare_wave", "name": "Nightmare Wave", "description": "A dark gust that terrifies.", "ability_type": "skill", "level":2, "elements": ["dark", "air"], "base_power":0, "ap_cost":30, "effect": "status", "status_keys": ["confuse"], "can_aoe": False, "non_player_ability": True},
+ {"id": "lv2_hostile_ability_dark_ice_skill_void_spike", "name": "Void Spike", "description": "A chilling spike that saps will.", "ability_type": "skill", "level":2, "elements": ["dark", "ice"], "base_power":15, "ap_cost":15, "effect": "damage", "can_aoe": False, "non_player_ability": True},
 ]
