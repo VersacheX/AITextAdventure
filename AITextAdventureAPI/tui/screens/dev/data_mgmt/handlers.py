@@ -81,6 +81,7 @@ _NPC_CATEGORY         = "npc"
 _ABILITY_CATEGORY     = "ability"
 _HOSTILE_CATEGORY     = "hostile"
 _DUNGEON_CATEGORY     = "dungeon"
+_CITY_CATEGORY        = "city"
 _SIMULATION_CATEGORY  = "simulation"
 
 
@@ -110,6 +111,7 @@ def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
     is_ability    = category == _ABILITY_CATEGORY
     is_hostile    = category == _HOSTILE_CATEGORY
     is_dungeon    = category == _DUNGEON_CATEGORY
+    is_city       = category == _CITY_CATEGORY
     is_simulation = category == _SIMULATION_CATEGORY
     is_tree       = is_dialog or is_timeline or is_npc or is_dungeon
 
@@ -131,10 +133,11 @@ def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
     screen.query_one("#dm-expand",   Button).display               = is_tree
     screen.query_one("#dm-collapse", Button).display               = is_tree
     screen.query_one("#dm-copy",     Button).display               = is_tree or is_equipment or is_hostile or is_ability
-    screen.query_one("#dm-validate-timeline",  Button).display     = is_timeline
-    screen.query_one("#dm-validate-abilities", Button).display     = is_ability
-    screen.query_one("#dm-validate-hostiles",  Button).display     = is_hostile
-    screen.query_one("#dm-validate-dungeons",  Button).display     = is_dungeon
+    screen.query_one("#dm-validate-timeline",     Button).display = is_timeline
+    screen.query_one("#dm-validate-abilities",    Button).display = is_ability
+    screen.query_one("#dm-validate-hostiles",     Button).display = is_hostile
+    screen.query_one("#dm-validate-dungeons",     Button).display = is_dungeon
+    screen.query_one("#dm-validate-city-region",  Button).display = is_city
     screen.query_one("#dm-equip-sort-dir",    Button).display      = is_equipment
     screen.query_one("#dm-hostile-sort-dir",  Button).display      = is_hostile
     screen.query_one("#dm-ability-sort-dir",  Button).display      = is_ability
@@ -357,6 +360,8 @@ def handle_button_pressed(screen: "DataMgmtScreen", event: Button.Pressed) -> No
         validate_hostiles_for_screen(screen)
     elif bid == "dm-validate-dungeons":
         validate_dungeons_for_screen(screen)
+    elif bid == "dm-validate-city-region":
+        validate_city_region_for_screen(screen)
     elif bid == "dm-equip-sort-dir":
         screen._equipment_sort_asc = not screen._equipment_sort_asc
         event.button.label = "↑" if screen._equipment_sort_asc else "↓"
@@ -776,6 +781,58 @@ def validate_dungeons_for_screen(screen: "DataMgmtScreen") -> None:
             f"✗ {total_errors} issue(s) across {invalid} dungeon(s) — flagged in tree.",
             severity="warning",
             timeout=5.0,
+        )
+
+
+def validate_city_region_for_screen(screen: "DataMgmtScreen") -> None:
+    from tui.services.dev.dataservices.city_region_validator import validate_region_for_screen  # noqa: PLC0415
+    from tui.services.dev.dataservices.catalog import get_records                              # noqa: PLC0415
+    import game.constants as const  # noqa: PLC0415
+
+    summary = validate_region_for_screen(const)
+
+    total_errors = summary.get("total_errors", 0)
+    invalid      = summary.get("invalid", 0)
+    scanned      = summary.get("regions_scanned", 0)
+    by_code      = summary.get("by_code", {})
+    nodes        = summary.get("nodes", [])
+
+    if scanned == 0:
+        screen.notify("⚠ No REGION_DATA found in constants — nothing to validate.", severity="warning", timeout=4.0)
+        return
+
+    # Store validation errors back onto the matching DevRecords so the list
+    # and detail panel can render them with color.
+    city_records = {r.id: r for r in get_records(_CITY_CATEGORY)}
+    for node in nodes:
+        record_id = f"region_{node.region_id}"
+        rec = city_records.get(record_id)
+        if rec is not None:
+            if rec.extras is None:
+                rec.extras = {}
+            rec.extras["_errors"]    = node.errors
+            rec.extras["_validated"] = True
+
+    rebuild_list_for_screen(screen)
+
+    gaps     = by_code.get("REGION_HOSTILE_COVERAGE_GAP", 0)
+    sparse   = by_code.get("REGION_HOSTILE_COVERAGE_SPARSE", 0)
+    no_seeds = by_code.get("REGION_HOSTILE_NO_SEEDS", 0)
+
+    if total_errors == 0:
+        screen.notify(f"✓ All {scanned} regions have full Lv 1–100 hostile coverage.", timeout=3.0)
+    else:
+        parts = []
+        if no_seeds:
+            parts.append(f"{no_seeds} zone(s) empty")
+        if gaps:
+            parts.append(f"{gaps} coverage gap(s)")
+        if sparse:
+            parts.append(f"{sparse} sparse band(s)")
+        screen.notify(
+            f"✗ {invalid}/{scanned} region(s) have issues — {', '.join(parts)}.",
+            severity="warning",
+            timeout=6.0,
         )
 
 

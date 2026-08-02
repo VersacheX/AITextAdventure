@@ -693,11 +693,50 @@ def update_detail_for_record(screen: "DataMgmtScreen", record: "DevRecord | None
         detail_panel.mount(DungeonDetailPanel(record))
         return
 
+    if record.category == "city":
+        _render_city_detail(detail_panel, record)
+        return
+
     static = _ensure_static(detail_panel)
     header = f"[bold]{rich_escape(record.name)}[/bold]"
     if record.subtitle:
         header += f"\n[dim]{rich_escape(record.subtitle)}[/dim]"
     static.update(f"{header}\n\n{rich_escape(record.detail)}")
+
+
+def _render_city_detail(detail_panel: Any, record: "DevRecord") -> None:
+    """Render a city or region DevRecord, including validation errors if present."""
+    static = _ensure_static(detail_panel)
+    lines: list[str] = []
+    lines.append(f"[bold]{rich_escape(record.name)}[/bold]")
+    if record.subtitle:
+        lines.append(f"[dim]{rich_escape(record.subtitle)}[/dim]")
+    lines.append("")
+
+    errors = (record.extras or {}).get("_errors") or []
+    if errors:
+        has_error   = any(getattr(e, "severity", "") == "error"   for e in errors)
+        has_warning = any(getattr(e, "severity", "") == "warning" for e in errors)
+        if has_error:
+            hc, kind = "red",    "FAIL"
+        elif has_warning:
+            hc, kind = "yellow", "WARN"
+        else:
+            hc, kind = "cyan",   "INFO"
+        lines.append(f"[{hc}]Integrity: {kind}  ({len(errors)} issue(s))[/{hc}]")
+        for e in errors:
+            sev = getattr(e, "severity", "error")
+            c   = "red" if sev == "error" else "yellow" if sev == "warning" else "cyan"
+            zone_tag = f" [{rich_escape(getattr(e, 'zone', ''))}]" if getattr(e, "zone", "") else ""
+            lines.append(f"  [{c}]{rich_escape(e.code)}[/{c}]{zone_tag}  [dim]{rich_escape(e.message)}[/dim]")
+    elif (record.extras or {}).get("_validated"):
+        lines.append("[green]Integrity: OK — full Lv 1–100 coverage[/green]")
+
+    lines.append("")
+    if record.detail:
+        lines.append(rich_escape(record.detail))
+
+    static.update("\n".join(lines))
 
 
 def update_detail_for_single_dialogue(screen: "DataMgmtScreen", line: "DialogueLine | None") -> None:

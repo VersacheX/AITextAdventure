@@ -8,6 +8,9 @@ EXTENDED_CHARACTERS_NPCS = [
             'A sharp, high-profile corporate executive who rose through cutthroat boardrooms. '
             'She treats life like a hostile takeover — decisive, commanding, and always three steps ahead.'
         ),
+        "theme_song": "Power (instrumental), Kanye West",
+        "song_id": "power_instrumental_kanye_west",
+        "image": "extended_characters:voss_caldera1",
         "psychology": {
             "mbti": "ESTJ",
             "dominant": "Te — Commands rooms with natural authority and razor-sharp efficiency.",
@@ -24,9 +27,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "growth_line": "Moves to Type 6 — Becomes more cooperative and loyal.",
             "instinctual_variant": "so/sp — Focused on social status and control through competence."
         },
-        "theme_song": "",
-        "song_id": "",
-        "image": ""
+
     },
     {
         'npc_id': 'rynn',
@@ -35,6 +36,9 @@ EXTENDED_CHARACTERS_NPCS = [
             'A quiet, steadfast field medic and community anchor. '
             'He remembers every wound, every promise, and every person he couldn\'t save.'
         ),
+        "theme_song": "Fix You (instrumental), Coldplay",
+        "song_id": "fix_you_instrumental_coldplay",
+        "image": "extended_characters:rynn1",
         "psychology": {
             "mbti": "ISFJ",
             "dominant": "Si — Deeply attuned to the needs of others and the weight of past experiences.",
@@ -51,9 +55,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "growth_line": "Moves to Type 3 — Becomes more assertive and goal-oriented.",
             "instinctual_variant": "sp/so — Seeks personal security through service."
         },
-        "theme_song": "",
-        "song_id": "",
-        "image": ""
+
     },
     {
         'npc_id': 'elyra_dawnseer',
@@ -61,6 +63,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'description': (
             'A serene but intense prophet who receives fragmented visions of possible futures.'
         ),
+        "theme_song": "Teardrop (instrumental), Massive Attack",
+        "song_id": "teardrop_instrumental_massive_attack",
+        "image": "extended_characters:elyra_dawnseer1",
         "psychology": {
             "mbti": "INFJ",
             "dominant": "Ni — Receives deep, symbolic visions of what may come.",
@@ -77,9 +82,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "growth_line": "Moves to Type 1 — Becomes principled and disciplined.",
             "instinctual_variant": "sx/sp — Experiences intense personal visions."
         },
-        "theme_song": "",
-        "song_id": "",
-        "image": ""
+
     },
     {
         'npc_id': 'regent_sylvara',
@@ -87,6 +90,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'description': (
             'A cold, visionary strategist who pulls strings from behind thrones and corporations.'
         ),
+        "theme_song": "Requiem for a Dream (instrumental), Clint Mansell",
+        "song_id": "requiem_for_a_dream_instrumental_clint_mansell",
+        "image": "extended_characters:regent_sylvara1",
         "psychology": {
             "mbti": "INTJ",
             "dominant": "Ni — Sees long-term patterns and inevitable outcomes with chilling clarity.",
@@ -103,9 +109,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "growth_line": "Moves to Type 8 — Becomes confident and decisive.",
             "instinctual_variant": "sp/so — Hoards knowledge for security."
         },
-        "theme_song": "",
-        "song_id": "",
-        "image": ""
+
     },
     {
         'npc_id': 'ghost',
@@ -113,6 +117,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'description': (
             'A silent, hyper-competent lone operative who moves like a shadow and strikes with surgical precision.'
         ),
+        "theme_song": "Enjoy the Silence (instrumental), Depeche Mode",
+        "song_id": "enjoy_the_silence_instrumental_depeche_mode",
+        "image": "extended_characters:ghost1",
         "psychology": {
             "mbti": "ISTP",
             "dominant": "Ti — Analyzes systems and people with cold internal logic.",
@@ -129,9 +136,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "growth_line": "Moves to Type 3 — Becomes a focused, unstoppable executor who channels precision into decisive action.",
             "instinctual_variant": "sp/sx — Withdrawn and self-contained, forming intense bonds only with a select few."
         },
-        "theme_song": "",
-        "song_id": "",
-        "image": ""
+
     },
     {
         'npc_id': 'lira_emberforge',
@@ -139,6 +144,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'description': (
             'A gifted artisan and weaponsmith who pours her soul into every creation.'
         ),
+        "theme_song": "Immigrant Song (instrumental), Led Zeppelin",
+        "song_id": "immigrant_song_instrumental_led_zeppelin",
+        "image": "extended_characters:lira_emberforge1",
         "psychology": {
             "mbti": "ISFP",
             "dominant": "Fi — Guided by deep personal values and authentic expression.",
@@ -155,9 +163,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "growth_line": "Moves to Type 1 — Develops discipline and structure.",
             "instinctual_variant": "sp/sx — Focuses on personal mastery and intense creation."
         },
-        "theme_song": "",
-        "song_id": "",
-        "image": ""
+
     },
     {
         'npc_id': 'osten_dreamweaver',
@@ -165,6 +171,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'description': (
             'A wandering storyteller and dream interpreter who blurs the line between reality and fantasy.'
         ),
+        "theme_song": "The Chain (instrumental), Fleetwood Mac",
+        "song_id": "the_chain_instrumental_fleetwood_mac",
+        "image": "extended_characters:osten_dreamweaver1",
         "psychology": {
             "mbti": "INFP",
             "dominant": "Fi — Lives by a rich inner moral and emotional compass.",
@@ -181,9 +190,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "growth_line": "Moves to Type 1 — Becomes more disciplined and action-oriented.",
             "instinctual_variant": "sx/sp — Deeply romantic and introspective."
         },
-        "theme_song": "",
-        "song_id": "",
-        "image": ""
+
     },
     {
         'npc_id': 'lyric',
@@ -191,6 +198,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'description': (
             'A brilliant but eccentric theorist who spends days lost in abstract systems and possibilities.'
         ),
+        "theme_song": "Comfortably Numb (instrumental), Pink Floyd",
+        "song_id": "comfortably_numb_instrumental_pink_floyd",
+        "image": "extended_characters:lyric1",
         "psychology": {
             "mbti": "INTP",
             "dominant": "Ti — Seeks precise internal logical consistency.",
@@ -207,9 +217,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "growth_line": "Moves to Type 8 — Becomes more assertive in the real world.",
             "instinctual_variant": "sp/sx — Hoards knowledge while seeking intense intellectual stimulation."
         },
-        "theme_song": "",
-        "song_id": "",
-        "image": ""
+
     },
     {
         'npc_id': 'dare',
@@ -217,6 +225,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'description': (
             'A fearless thrill-seeker and elite scout who lives for danger and adrenaline.'
         ),
+        "theme_song": "Born to Be Wild (instrumental), Steppenwolf",
+        "song_id": "born_to_be_wild_instrumental_steppenwolf",
+        "image": "extended_characters:dare1",
         "psychology": {
             "mbti": "ESTP",
             "dominant": "Se — Lives fully in the present moment, reacting instantly.",
@@ -233,9 +244,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "growth_line": "Moves to Type 5 — Becomes more thoughtful and strategic.",
             "instinctual_variant": "sx/sp — Craves intense experiences."
         },
-        "theme_song": "",
-        "song_id": "",
-        "image": ""
+
     },
     {
         'npc_id': 'andrea_starveil',
@@ -243,6 +252,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'description': (
             'A charismatic performer and morale officer who lifts spirits even in the darkest times.'
         ),
+        "theme_song": "Uptown Funk (instrumental), Bruno Mars",
+        "song_id": "uptown_funk_instrumental_bruno_mars",
+        "image": "extended_characters:andrea_starveil1",
         "psychology": {
             "mbti": "ESFP",
             "dominant": "Se — Fully engages with the present and reads people instantly.",
@@ -259,9 +271,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "growth_line": "Moves to Type 5 — Becomes more introspective and focused.",
             "instinctual_variant": "so/sx — Seeks social connection through performance."
         },
-        "theme_song": "",
-        "song_id": "",
-        "image": ""
+
     },
     {
         'npc_id': 'sera_flameweaver',
@@ -269,6 +279,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'description': (
             'A passionate and theatrical fire mage who believes emotion is the source of true power.'
         ),
+        "theme_song": "Kings and Queens (instrumental), 30 Seconds to Mars",
+        "song_id": "kings_and_queens_instrumental_30_seconds_to_mars",
+        "image": "extended_characters:sera_flameweaver1",
         "psychology": {
             "mbti": "ENFP",
             "dominant": "Ne — Sees endless creative and destructive possibilities.",
@@ -285,9 +298,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "growth_line": "Moves to Type 1 — Becomes disciplined and principled.",
             "instinctual_variant": "sx/so — Seeks intense emotional experiences."
         },
-        "theme_song": "",
-        "song_id": "",
-        "image": ""
+
     },
     {
         'npc_id': 'spark_maddox',
@@ -295,6 +306,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'description': (
             'A wildly brilliant and unpredictable inventor who treats reality as his personal playground.'
         ),
+        "theme_song": "Uprising (instrumental), Muse",
+        "song_id": "uprising_instrumental_muse",
+        "image": "extended_characters:spark_maddox1",
         "psychology": {
             "mbti": "ENTP",
             "dominant": "Ne — Constantly exploding with new ideas and dangerous experiments.",
@@ -311,9 +325,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "growth_line": "Moves to Type 5 — Becomes more focused and masterful.",
             "instinctual_variant": "sx/sp — Seeks intense experiences."
         },
-        "theme_song": "",
-        "song_id": "",
-        "image": ""
+
     },
     {
         'npc_id': 'anita',
@@ -321,6 +333,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'description': (
             'A meticulous archivist and information broker who collects secrets like currency.'
         ),
+        "theme_song": "In the Air Tonight (instrumental), Phil Collins",
+        "song_id": "in_the_air_tonight_instrumental_phil_collins",
+        "image": "extended_characters:anita1",
         "psychology": {
             "mbti": "ISTJ",
             "dominant": "Si — Preserves and organizes vast amounts of detailed information.",
@@ -337,9 +352,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "growth_line": "Moves to Type 9 — Becomes more trusting and peaceful.",
             "instinctual_variant": "sp/so — Focuses on personal security through knowledge."
         },
-        "theme_song": "",
-        "song_id": "",
-        "image": ""
+
     },
     {
         'npc_id': 'talia_softheart',
@@ -347,6 +360,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'description': (
             'A deeply compassionate healer who feels the pain of others as her own.'
         ),
+        "theme_song": "Bridge Over Troubled Water (instrumental), Simon & Garfunkel",
+        "song_id": "bridge_over_troubled_water_instrumental_simon_and_garfunkel",
+        "image": "extended_characters:talia_softheart1",
         "psychology": {
             "mbti": "ESFJ",
             "dominant": "Fe — Creates harmony and meets the emotional needs of the group.",
@@ -363,9 +379,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "growth_line": "Moves to Type 4 — Becomes more self-aware.",
             "instinctual_variant": "so/sp — Focuses on being central to her community."
         },
-        "theme_song": "",
-        "song_id": "",
-        "image": ""
+
     },
     {
         'npc_id': 'korina_brightvein',
@@ -373,6 +387,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'description': (
             'A charismatic leader and motivator who inspires others to reach their highest potential.'
         ),
+        "theme_song": "Hall of Fame (instrumental), The Script",
+        "song_id": "hall_of_fame_instrumental_the_script",
+        "image": "extended_characters:korina_brightvein1",
         "psychology": {
             "mbti": "ENFJ",
             "dominant": "Fe — Naturally senses and guides the emotional needs of groups.",
@@ -389,9 +406,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "growth_line": "Moves to Type 4 — Becomes more authentic and self-aware.",
             "instinctual_variant": "so/sx — Finds value in being a central, inspiring figure."
         },
-        "theme_song": "",
-        "song_id": "",
-        "image": ""
+
     },
     {
         'npc_id': 'commander_drax',
@@ -399,6 +414,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'description': (
             'A battle-hardened commander who leads from the front and demands excellence.'
         ),
+        "theme_song": "War Pigs (instrumental), Black Sabbath",
+        "song_id": "war_pigs_instrumental_black_sabbath",
+        "image": "extended_characters:commander_drax1",
         "psychology": {
             "mbti": "ENTJ",
             "dominant": "Te — Commands with natural authority and long-term vision.",
@@ -415,9 +433,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "growth_line": "Moves to Type 2 — Uses power to protect and empower others.",
             "instinctual_variant": "so/sp — Leads with dominance and strategic vision."
         },
-        "theme_song": "",
-        "song_id": "",
-        "image": ""
+
     }
 ]
 

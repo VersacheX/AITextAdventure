@@ -854,12 +854,6 @@ TASKS += [
                     'npc_id': 'gearghost'
                 }
             },
-            {
-                'event_type': 'award_item',
-                'params': {
-                    'item_id': 'mountains_large_city_e_forge_echo_core'
-                }
-            },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_large_e_defeat_gearghost' } },
             {
                 'event_type': 'set_npc_standing_text',

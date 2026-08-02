@@ -632,6 +632,36 @@ def _build_cities(const: Any) -> List[DevRecord]:
                     detail="\n".join(lines),
                 ))
 
+    # ── Region records from REGION_DATA ──────────────────────────────────────
+    region_data: Dict[str, Any] = getattr(const, "REGION_DATA", None) or {}
+    _REGION_SIZE_LABELS = {
+        "region_hostile_seeds":     "Overworld",
+        "large_city_hostile_seeds": "Large City",
+        "mid_city_hostile_seeds":   "Mid City",
+        "small_city_hostile_seeds": "Small City",
+    }
+    for region_name, entry in region_data.items():
+        region_id = f"region_{region_name}"
+        lines = [f"Region: {region_name.title()}"]
+        lines.append("")
+        total = 0
+        for key, label in _REGION_SIZE_LABELS.items():
+            seeds = entry.get(key) or []
+            total += len(seeds)
+            lines.append(f"{label} ({len(seeds)} hostiles):")
+            if seeds:
+                min_lv = min((s.get("min_spawn_level", 0) for s in seeds if isinstance(s, dict)), default=0)
+                max_lv = max((s.get("min_spawn_level", 0) for s in seeds if isinstance(s, dict)), default=0)
+                lines.append(f"  Lv range: {min_lv}–{max_lv}")
+            else:
+                lines.append("  (none)")
+        records.append(DevRecord(
+            category="city", id=region_id, name=region_name.title(),
+            subtitle=f"Region · {total} total hostiles",
+            detail="\n".join(lines),
+            extras={"region_data": entry, "region_name": region_name},
+        ))
+
     return records
 
 

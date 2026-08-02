@@ -44,7 +44,7 @@ HOSTILE_SEEDS = [  # all level 8–10, ~10 hostiles total
         'base_con': 3,
         'base_int': 2,
         'base_hp': 24,
-        'base_ap': 0,
+        'base_ap': 5,
         'str_per_level': 1,
         'dex_per_level': 2,
         'con_per_level': 1,

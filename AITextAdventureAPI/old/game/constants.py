@@ -716,6 +716,63 @@ CITY_DATA: dict = {
         "sublocation_defs": SWAMP_SMALL_CITY_SUBLOCATION_DEFS,
     },
 }
+# ── Region hostile data registry ─────────────────────────────────────────────
+# Provides the dev data service with a single lookup for per-region enemy seeds
+# across the open-world zone (RANDOM_HOSTILE_SEEDS) and all city sizes.
+# Keyed by region name (matches REGION_TYPES entries).
+from game.region_seeds.regions.enemies.constants_enemies_desert   import RANDOM_HOSTILE_SEEDS as DESERT_REGION_HOSTILE_SEEDS
+from game.region_seeds.regions.enemies.constants_enemies_forest   import RANDOM_HOSTILE_SEEDS as FOREST_REGION_HOSTILE_SEEDS
+from game.region_seeds.regions.enemies.constants_enemies_grassland import RANDOM_HOSTILE_SEEDS as GRASSLAND_REGION_HOSTILE_SEEDS
+from game.region_seeds.regions.enemies.constants_enemies_mountains import RANDOM_HOSTILE_SEEDS as MOUNTAINS_REGION_HOSTILE_SEEDS
+from game.region_seeds.regions.enemies.constants_enemies_shallows import RANDOM_HOSTILE_SEEDS as SHALLOWS_REGION_HOSTILE_SEEDS
+from game.region_seeds.regions.enemies.constants_enemies_snow     import RANDOM_HOSTILE_SEEDS as SNOW_REGION_HOSTILE_SEEDS
+from game.region_seeds.regions.enemies.constants_enemies_swamp    import RANDOM_HOSTILE_SEEDS as SWAMP_REGION_HOSTILE_SEEDS
+
+REGION_DATA: dict = {
+	"desert": {
+		"region_hostile_seeds":      DESERT_RANDOM_HOSTILE_SEEDS + DESERT_REGION_HOSTILE_SEEDS,
+		"large_city_hostile_seeds":  DESERT_LARGE_CITY_RANDOM_HOSTILE_SEEDS,
+		"mid_city_hostile_seeds":    DESERT_MID_CITY_RANDOM_HOSTILE_SEEDS,
+		"small_city_hostile_seeds":  DESERT_SMALL_CITY_RANDOM_HOSTILE_SEEDS,
+	},
+	"forest": {
+		"region_hostile_seeds":      FOREST_RANDOM_HOSTILE_SEEDS + FOREST_REGION_HOSTILE_SEEDS,
+		"large_city_hostile_seeds":  FOREST_LARGE_CITY_RANDOM_HOSTILE_SEEDS,
+		"mid_city_hostile_seeds":    FOREST_MID_CITY_RANDOM_HOSTILE_SEEDS,
+		"small_city_hostile_seeds":  FOREST_SMALL_CITY_RANDOM_HOSTILE_SEEDS,
+	},
+	"grassland": {
+		"region_hostile_seeds":      GRASSLAND_RANDOM_HOSTILE_SEEDS + GRASSLAND_REGION_HOSTILE_SEEDS,
+		"large_city_hostile_seeds":  GRASSLAND_LARGE_CITY_RANDOM_HOSTILE_SEEDS,
+		"mid_city_hostile_seeds":    GRASSLAND_MID_CITY_RANDOM_HOSTILE_SEEDS,
+		"small_city_hostile_seeds":  GRASSLAND_SMALL_CITY_RANDOM_HOSTILE_SEEDS,
+	},
+	"mountains": {
+		"region_hostile_seeds":      MOUNTAINS_RANDOM_HOSTILE_SEEDS + MOUNTAINS_REGION_HOSTILE_SEEDS,
+		"large_city_hostile_seeds":  MOUNTAINS_LARGE_CITY_RANDOM_HOSTILE_SEEDS,
+		"mid_city_hostile_seeds":    MOUNTAINS_MID_CITY_RANDOM_HOSTILE_SEEDS,
+		"small_city_hostile_seeds":  MOUNTAINS_SMALL_CITY_RANDOM_HOSTILE_SEEDS,
+	},
+	"shallows": {
+		"region_hostile_seeds":      SHALLOWS_RANDOM_HOSTILE_SEEDS + SHALLOWS_REGION_HOSTILE_SEEDS,
+		"large_city_hostile_seeds":  SHALLOWS_LARGE_CITY_RANDOM_HOSTILE_SEEDS,
+		"mid_city_hostile_seeds":    SHALLOWS_MID_CITY_RANDOM_HOSTILE_SEEDS,
+		"small_city_hostile_seeds":  SHALLOWS_SMALL_CITY_RANDOM_HOSTILE_SEEDS,
+	},
+	"snow": {
+		"region_hostile_seeds":      SNOW_RANDOM_HOSTILE_SEEDS + SNOW_REGION_HOSTILE_SEEDS,
+		"large_city_hostile_seeds":  SNOW_LARGE_CITY_RANDOM_HOSTILE_SEEDS,
+		"mid_city_hostile_seeds":    SNOW_MID_CITY_RANDOM_HOSTILE_SEEDS,
+		"small_city_hostile_seeds":  SNOW_SMALL_CITY_RANDOM_HOSTILE_SEEDS,
+	},
+	"swamp": {
+		"region_hostile_seeds":      SWAMP_RANDOM_HOSTILE_SEEDS + SWAMP_REGION_HOSTILE_SEEDS,
+		"large_city_hostile_seeds":  SWAMP_LARGE_CITY_RANDOM_HOSTILE_SEEDS,
+		"mid_city_hostile_seeds":    SWAMP_MID_CITY_RANDOM_HOSTILE_SEEDS,
+		"small_city_hostile_seeds":  SWAMP_SMALL_CITY_RANDOM_HOSTILE_SEEDS,
+	},
+}
+
 ##### POSSIBLE GAME PIECES #####
 
 # Walls / cliffs → █ ▓ ▒ ░
@@ -978,7 +1035,7 @@ _gather_hostile_seed_sources(HOSTILE_SEED_PATHS)
 
 
 __all__ = [
-	"TASKS", "TASK_GROUPS", "NPCS", "NPC_GROUPS", "CITY_DATA", 
+	"TASKS", "TASK_GROUPS", "NPCS", "NPC_GROUPS", "CITY_DATA", "REGION_DATA",
 	"MAIN_STORY_SETTINGS","PRIMARY_STORIES","CITY_STORIES", "STORY_GROUPS", "EXTENDED_CHARACTER_NPCS",
 	"NPC_DIALOG", "ATTAINABLE_PLAYER_CHARACTERS","DUNGEON_ENTRANCE_CHAR",
 

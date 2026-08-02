@@ -263,7 +263,6 @@ def validate_hostile_tree(
             node.errors.append(_err(
                 "HOSTILE_MISSING_BASE_STATS",
                 "base_ap is 0 or absent — hostile cannot use abilities.",
-                severity="warning",
             ))
             by_code["HOSTILE_MISSING_BASE_STATS"] += 1
 

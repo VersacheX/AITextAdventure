@@ -426,6 +426,7 @@ class DataMgmtScreen(BaseScreen):
             yield Button("Validate Abilities", id="dm-validate-abilities", variant="default")
             yield Button("Validate Hostiles", id="dm-validate-hostiles", variant="default")
             yield Button("Validate Dungeons", id="dm-validate-dungeons", variant="default")
+            yield Button("Validate Regions", id="dm-validate-city-region", variant="default")
             yield Button("↑", id="dm-equip-sort-dir", variant="default")
             yield Button("↑", id="dm-hostile-sort-dir", variant="default")
             yield Button("↑", id="dm-ability-sort-dir", variant="default")
