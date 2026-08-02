@@ -41,3 +41,15 @@ LEVEL_5_PLAYER_ABILITY_SEEDS = [
  {"id": "tech_lv5_plasma_spike", "name": "Plasma Spike", "description": "A concentrated plasma impalement.", "ability_type": "tech", "level":5, "elements": ["fire", "light", "air", "earth", "water"], "base_power":54, "ap_cost":6, "effect": "damage", "can_aoe": False},
  {"id": "water_faith_lv5_soothing_tide", "name": "Soothing Tide", "description": "A flowing ward that steadies and protects allies.", "ability_type": "faith", "level":5, "elements": ["water", "light", "earth", "air", "fire"], "base_power":0, "ap_cost":6, "effect": "status", "status_keys": ["defense_buff"], "can_aoe": True},
 ]
+
+from .level_5_abilities_by_type.tech import LEVEL_5_TECH_ABILITY_SEEDS
+from .level_5_abilities_by_type.skill import LEVEL_5_SKILL_ABILITY_SEEDS
+from .level_5_abilities_by_type.magic import LEVEL_5_MAGIC_ABILITY_SEEDS
+from .level_5_abilities_by_type.technique import LEVEL_5_TECHNIQUE_ABILITY_SEEDS
+from .level_5_abilities_by_type.faith import LEVEL_5_FAITH_ABILITY_SEEDS
+
+LEVEL_5_PLAYER_ABILITY_SEEDS += LEVEL_5_TECH_ABILITY_SEEDS
+LEVEL_5_PLAYER_ABILITY_SEEDS += LEVEL_5_SKILL_ABILITY_SEEDS
+LEVEL_5_PLAYER_ABILITY_SEEDS += LEVEL_5_MAGIC_ABILITY_SEEDS
+LEVEL_5_PLAYER_ABILITY_SEEDS += LEVEL_5_TECHNIQUE_ABILITY_SEEDS
+LEVEL_5_PLAYER_ABILITY_SEEDS += LEVEL_5_FAITH_ABILITY_SEEDS

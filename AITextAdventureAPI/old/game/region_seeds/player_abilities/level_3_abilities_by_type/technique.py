@@ -1,4 +1,4 @@
-# Technique seeds extracted from level_3_player_ability_seeds
+﻿# Technique seeds extracted from level_3_player_ability_seeds
 LEVEL_3_TECHNIQUE_SEEDS = [
   ## Single-target Damage (8)
   {"id":"dark_fire_ice_technique_lv3_flame_wraith_strike","name":"Flame Wraith Strike","description":"A spectral blaze that scorches then chills the foe, leaving them slowed.","ability_type":"technique","level":3,"elements":["dark","fire","ice"],"base_power":92,"ap_cost":70,"effect":"damage","secondary_status":"slow","can_aoe":False},
@@ -32,5 +32,13 @@ LEVEL_3_TECHNIQUE_SEEDS = [
 
   ## Extra Single-target Status Effects (2)
   {"id":"air_dark_technique_lv3_immortalize","name":"Immortalize","description":"A focused whirl that petrifies the target.","ability_type":"technique","level":3,"elements":["air","dark","dark"],"base_power":10,"ap_cost":65,"effect":"status","status_keys":["silence"],"can_aoe":False},
-  {"id":"light_water_ice_technique_lv3_luminous_lull","name":"Luminous Lull","description":"A soothing beam of light and water that can put a single foe to sleep.","ability_type":"technique","level":3,"elements":["light","water","ice"],"base_power":12,"ap_cost":60,"effect":"status","status_keys":["sleep"],"can_aoe":False}
+  {"id":"light_water_ice_technique_lv3_luminous_lull","name":"Luminous Lull","description":"A soothing beam of light and water that can put a single foe to sleep.","ability_type":"technique","level":3,"elements":["light","water","ice"],"base_power":12,"ap_cost":60,"effect":"status","status_keys":["sleep"],"can_aoe":False},
+
+  ## NON PLAYER ABILITIES
+  #scalpel
+  {"id": "detached_slaughter", "name": "Detached Slaughter", "description": "A sweeping series of strikes conducted without hesitation or mercy, cutting through all nearby targets with cold indifference.", "ability_type": "technique", "level": 3, "elements": ["ice", "dark", "air"], "base_power": 80, "ap_cost": 85, "effect": "damage", "can_aoe": True, "non_player_ability": True},
+  {"id": "seizing_the_moment", "name": "Seizing the Moment", "description": "Rapture exploits a single instant of vulnerability — a devastating single strike timed to land the moment the target's guard wavers.", "ability_type": "technique", "level": 3, "elements": ["dark", "fire", "air"], "base_power": 90, "ap_cost": 72, "effect": "damage", "can_aoe": False, "non_player_ability": True},
+  {"id": "predator_rush", "name": "Predator Rush", "description": "A thunderous charge across the arena that slams through any enemy in the path — raw physical domination disguised as momentum.", "ability_type": "technique", "level": 3, "elements": ["dark", "fire", "fire"], "base_power": 82, "ap_cost": 78, "effect": "damage", "can_aoe": True, "non_player_ability": True},
+
+
 ]

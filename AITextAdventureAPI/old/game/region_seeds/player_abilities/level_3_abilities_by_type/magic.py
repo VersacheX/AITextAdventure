@@ -1,4 +1,4 @@
-"""
+﻿"""
 MAGIC ABILITIES  ARE  BASED ON INTELLIGENCE STAT.
 they should be offensive magic attacks, or damage over time effects... possible status effects
 they have high power but also high ap cost
@@ -58,7 +58,10 @@ LEVEL_3_MAGIC_SEEDS = [
     {"id": "electric_water_fire_magic_lv3_shockwave_burn", "name": "Shockwave Burn", "description": "A wave of electric and fire energy that burns and stuns.", "ability_type": "magic", "level":3, "elements": ["electric", "water", "fire"], "base_power":12, "ap_cost":65, "effect": "status", "status_keys": ["continuous_damage"], "can_aoe": False},
     {"id": "water_fire_ice_magic_lv3_boiling_frost", "name": "Boiling Frost", "description": "A freezing and scalding assault.", "ability_type": "magic", "level":3, "elements": ["water", "fire", "ice"], "base_power":10, "ap_cost":60, "effect": "status", "status_keys": ["continuous_damage"], "can_aoe": False},
 
-      ##CONTINUOUS DAMAGE AOE
+    ##CONTINUOUS DAMAGE AOE
     {"id": "ice_earth_water_magic_lv3_glacial_mudslide", "name": "Glacial Mudslide", "description": "A sliding wave of ice and earth that chills and roots.", "ability_type": "magic", "level":3, "elements": ["ice", "earth", "water"], "base_power":0, "ap_cost":75, "effect": "status", "status_keys": ["continuous_damage"], "can_aoe": True},
     {"id": "air_electric_fire_magic_lv3_storm_of_flames", "name": "Storm of Flames", "description": "A fiery storm charged with electric energy that burns and shocks.", "ability_type": "magic", "level":3, "elements": ["air", "electric", "fire"], "base_power":0, "ap_cost":75, "effect": "status", "status_keys": ["continuous_damage"], "can_aoe": True},
+    ## NON PLAYER ABILITIES
+    {"id": "wild_possibility", "name": "Wild Possibility", "description": "Revelry channels unfiltered chaos into a single volatile blast — every particle of air and electricity crackling with the unbounded energy of a world refusing to be tamed.", "ability_type": "magic", "level": 3, "elements": ["air", "electric", "fire"], "base_power": 95, "ap_cost": 68, "effect": "damage", "can_aoe": False, "non_player_ability": True},
+
 ]

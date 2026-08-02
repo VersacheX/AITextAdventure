@@ -1,4 +1,4 @@
-# Skill abilities for level4
+﻿# Skill abilities for level4
 LEVEL_4_SKILL_ABILITY_SEEDS = [
  {"id": "fire_air_light_earth_skill_lv4_blazing_feint", "name": "Blazing Feint", "description": "A deceptive strike followed by a flare of heat.", "ability_type": "skill", "level":4, "elements": ["fire","air","light","earth"], "base_power":72, "ap_cost":75, "effect": "damage", "can_aoe": True},
  {"id": "water_air_earth_light_skill_lv4_torrent_step", "name": "Torrent Step", "description": "A fluid movement that eases follow-up attacks.", "ability_type": "skill", "level":4, "elements": ["water","air","earth","light"], "base_power":60, "ap_cost":70, "effect": "damage", "can_aoe": True},
@@ -46,4 +46,11 @@ LEVEL_4_SKILL_ABILITY_SEEDS = [
 
  {"id": "fire_earth_light_dark_skill_lv4_prismatic_inferno", "name": "Prismatic Inferno", "description": "A prismatic burst layered over searing flame.", "ability_type": "skill", "level":4, "elements": ["fire","earth","light","dark"], "base_power":96, "ap_cost":96, "effect": "damage", "can_aoe": False},
  {"id": "water_air_dark_light_skill_lv4_gloaming_flow", "name": "Gloaming Flow", "description": "A flowing sequence that muddles senses.", "ability_type": "skill", "level":4, "elements": ["water","air","dark","light"], "base_power":0, "ap_cost":80, "effect": "status", "status_keys": ["intelligence_debuff"], "can_aoe": True},
+
+  #### NON PLAYER ABILITIES
+  #scalpel
+ {"id": "perfect_cut", "name": "Perfect Cut", "description": "An impossibly precise slash that threads through every gap in the target's guard in a single, silent motion.", "ability_type": "skill", "level": 4, "elements": ["air", "ice", "dark", "electric"], "base_power": 96, "ap_cost": 85, "effect": "damage", "can_aoe": False, "non_player_ability": True},
+ {"id": "thrill_of_ruin", "name": "Thrill of Ruin", "description": "A predatory burst of speed and force — Rapture pinpoints every weakness and strikes them all in one savage, exhilarating sequence.", "ability_type": "skill", "level": 4, "elements": ["dark", "fire", "air", "electric"], "base_power": 104, "ap_cost": 92, "effect": "damage", "can_aoe": False, "non_player_ability": True},
+
+
 ]

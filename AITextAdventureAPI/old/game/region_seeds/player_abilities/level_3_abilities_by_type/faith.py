@@ -1,4 +1,4 @@
-"""
+﻿"""
 FAITH ABILITIES  ARE  BASED ON MYTHICAL PRAYERS TO GODS AND DIETIES... AND THOSE ANSWERS
 they channel divine energy to heal, buff, cure statuses... they can also call down holy damage upon foes
 some lore for faith in a neo noir fantasy setting is created with these abilities
@@ -99,4 +99,9 @@ LEVEL_3_FAITH_SEEDS = [
 
    ##DEBUFF 1*aoe constitution debuff
  {"id": "light_dark_dark_faith_lv3_twilight_woe", "name": "Twilight Woe", "description": "A shadowy lament that weakens foes' constitution.", "ability_type": "faith", "level":3, "elements": ["light","dark","dark"], "base_power":0, "ap_cost":60, "effect": "status", "status_keys": ["constitution_debuff"], "can_aoe": True},
+
+ ## NON PLAYER ABILITIES
+ #glamour
+ {"id": "suffocating_allure", "name": "Suffocating Allure", "description": "An aura of oppressive beauty radiates outward, closing the throats of all who behold it and stealing their voice.", "ability_type": "faith", "level": 3, "elements": ["light", "dark", "air"], "base_power": 0, "ap_cost": 85, "effect": "status", "status_keys": ["silence"], "can_aoe": True, "non_player_ability": True},
+
 ]

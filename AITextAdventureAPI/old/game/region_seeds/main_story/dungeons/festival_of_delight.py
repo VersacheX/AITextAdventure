@@ -67,7 +67,7 @@ BOSS_HOSTILES = [
     {
         'id': 'rapture_boss', 'name': 'Rapture', 'hostile_type': 'aberration', 'min_spawn_level': 57, 'role': 'damage', 'rarity': 'notfound',
         'base_xp': 8000, 'common_drop': 'tome_int', 'rare_drop': 'tome_str_superrare', 'money_range': (1000, 2000),
-        'basic_attack': 'painful truth', 'strong_attack': 'agony spike', 'player_abilities': ['blood_spectacle', 'thrill_of_ruin', 'seizing_the_moment'],
+        'basic_attack': 'painful truth', 'strong_attack': 'agony spike', 'player_abilities': ['blood_spectacle', 'thrill_of_ruin', 'seizing_the_moment', 'predator_rush'],
         'base_str': 40, 'base_dex': 35, 'base_con': 30, 'base_int': 25, 'base_hp': 25000, 'base_ap': 350,
         'str_per_level': 5, 'dex_per_level': 4, 'con_per_level': 3, 'int_per_level': 3,
         'resistances': ['dark', 'physical'], 'immunities': ['fear'], 'weaknesses': ['light']
@@ -75,7 +75,7 @@ BOSS_HOSTILES = [
     {
         'id': 'revelry_boss', 'name': 'Revelry', 'hostile_type': 'aberration', 'min_spawn_level': 57, 'role': 'hazard', 'rarity': 'notfound',
         'base_xp': 8000, 'common_drop': 'tome_dex_superrare', 'rare_drop': 'unstable_relic', 'money_range': (1000, 2000),
-        'basic_attack': 'manic burst', 'strong_attack': 'endless party', 'player_abilities': ['manic_freedom', 'collapse_of_joy', 'wild_possibility'],
+        'basic_attack': 'manic burst', 'strong_attack': 'endless party', 'player_abilities': ['manic_freedom', 'collapse_of_joy', 'wild_possibility', 'entropic_spiral'],
         'base_str': 30, 'base_dex': 40, 'base_con': 25, 'base_int': 35, 'base_hp': 22000, 'base_ap': 400,
         'str_per_level': 3, 'dex_per_level': 5, 'con_per_level': 3, 'int_per_level': 4,
         'resistances': ['air', 'light'], 'immunities': ['confuse', 'sleep'], 'weaknesses': ['earth']

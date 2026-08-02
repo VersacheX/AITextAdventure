@@ -60,6 +60,7 @@ constitution_buff       constitution_debuff
 continuous_damage
 petrify   stun   sleep   confuse   silence   scanned
 
+*note* - High level abilities can have multiple status_keys for effect=cure and effect=status
 
 ---
 

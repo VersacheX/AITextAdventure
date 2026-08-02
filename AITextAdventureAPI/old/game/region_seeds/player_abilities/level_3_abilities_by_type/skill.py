@@ -1,4 +1,4 @@
-"""
+﻿"""
 SKILL ABILITIES ARE FOCUSED ON DEXTERITY AND SPEED, CRITICAL HIT RATE, AND EVASION.
 they should be low cost and low damage,
 examples of skillsets include:
@@ -65,4 +65,9 @@ LEVEL_3_SKILL_SEEDS = [
     ##STATUS EFFECTS
     {"id": "ice_earth_water_skill_lv3_confusing_mist", "name": "Confusing Mist", "description": "A mist that clouds the mind, causing confusion among allies.", "ability_type": "skill", "level":3, "elements": ["ice","earth","water"], "base_power":0, "ap_cost":150, "effect": "status", "status_keys": ["confuse"], "can_aoe": True},
     {"id": "air_electric_fire_skill_lv3_silencing_gale", "name": "Silencing Gale", "description": "A swift gale that silences allies, preventing spellcasting.", "ability_type": "skill", "level":3, "elements": ["air","electric","fire"], "base_power":0, "ap_cost":125, "effect": "status", "status_keys": ["silence"], "can_aoe": True},
+
+    ## NON PLAYER ABILITIES
+    #raptrure
+    {"id": "entropic_spiral", "name": "Entropic Spiral", "description": "Revelry spins into a chaotic whirling dance, scattering electric and void energy outward in every direction — unpredictable, unblockable, and joyfully destructive.", "ability_type": "skill", "level": 3, "elements": ["air", "dark", "electric"], "base_power": 76, "ap_cost": 80, "effect": "damage", "can_aoe": True, "non_player_ability": True},
+
 ]
