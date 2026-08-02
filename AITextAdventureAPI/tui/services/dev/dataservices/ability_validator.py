@@ -199,7 +199,7 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
                         f"Total value {tv:.1f} is only {ratio:.0%} of "
                         f"group average {avg:.1f} "
                         f"(type={gkey[0]}, lv={gkey[1]}, effect={gkey[2]}).",
-                        severity="warning",
+                        severity="info",
                     ))
                     by_code["ABILITY_BALANCE_WEAK"] += 1
                 elif ratio > 1.45:
@@ -208,7 +208,7 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
                         f"Total value {tv:.1f} is {ratio:.0%} of "
                         f"group average {avg:.1f} "
                         f"(type={gkey[0]}, lv={gkey[1]}, effect={gkey[2]}).",
-                        severity="warning",
+                        severity="notice",
                     ))
                     by_code["ABILITY_BALANCE_STRONG"] += 1
 

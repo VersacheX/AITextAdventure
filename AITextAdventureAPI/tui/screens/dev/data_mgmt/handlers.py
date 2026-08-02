@@ -978,26 +978,47 @@ _ROW_OK_STYLE      = Style(color="green", dim=True)
 _ROW_DEFAULT_STYLE = Style()
 
 
+_ABILITY_BLUE_NOTICE_CODES  = frozenset({"ABILITY_BALANCE_STRONG"})
+_ABILITY_MGNTA_NOTICE_CODES = frozenset({"ABILITY_BALANCE_WEAK"})  # unused — info only
+
+
 def _ability_row_style(errors: list) -> Style:
+    """Row tint for ability grid: error=red, warning=yellow, notice=blue, info=cyan."""
     if not errors:
         return _ROW_DEFAULT_STYLE
-    if any(e.severity == "error" for e in errors):
+    if any(e.severity == "error"   for e in errors):
         return _ROW_ERROR_STYLE
     if any(e.severity == "warning" for e in errors):
         return _ROW_WARN_STYLE
+    if any(e.severity == "notice" and e.code in _ABILITY_BLUE_NOTICE_CODES for e in errors):
+        return _ROW_BLUE_STYLE
+    if any(e.severity == "notice" for e in errors):
+        return _ROW_NOTICE_STYLE
+    if any(e.severity == "info"   for e in errors):
+        return _ROW_INFO_STYLE
     return _ROW_DEFAULT_STYLE
 
 
 def _ability_error_cell(errors: list) -> Text:
+    """Cell indicator for ability grid matching hostile severity colors."""
     if not errors:
         return Text("✓", style=_ROW_OK_STYLE)
-    has_error   = any(e.severity == "error"   for e in errors)
-    has_warning = any(e.severity == "warning" for e in errors)
+    has_error      = any(e.severity == "error"   for e in errors)
+    has_warning    = any(e.severity == "warning" for e in errors)
+    has_blue_notice = any(e.severity == "notice" and e.code in _ABILITY_BLUE_NOTICE_CODES for e in errors)
+    has_notice     = any(e.severity == "notice"  for e in errors)
+    has_info       = any(e.severity == "info"    for e in errors)
     count = len(errors)
     if has_error:
         return Text(f"✗ {count}", style=_ROW_ERROR_STYLE)
     if has_warning:
         return Text(f"⚠ {count}", style=_ROW_WARN_STYLE)
+    if has_blue_notice:
+        return Text(f"● {count}", style=_ROW_BLUE_STYLE)
+    if has_notice:
+        return Text(f"● {count}", style=_ROW_NOTICE_STYLE)
+    if has_info:
+        return Text(f"• {count}", style=_ROW_INFO_STYLE)
     return Text(f"• {count}")
 
 
@@ -1006,9 +1027,15 @@ def _ability_severity_rank(node: "AbilityNode") -> int:
         return 0
     if any(e.severity == "warning" for e in node.errors):
         return 1
-    if node.errors:
+    if any(e.severity == "notice" and e.code not in _ABILITY_BLUE_NOTICE_CODES for e in node.errors):
         return 2
-    return 3
+    if any(e.severity == "notice" and e.code in _ABILITY_BLUE_NOTICE_CODES for e in node.errors):
+        return 3
+    if any(e.severity == "info"   for e in node.errors):
+        return 4
+    if node.errors:
+        return 5
+    return 6
 
 
 def get_ability_sort_col(screen: "DataMgmtScreen") -> str:
@@ -1026,6 +1053,7 @@ def _populate_ability_table(screen: "DataMgmtScreen", nodes: list) -> None:
     sort_asc = getattr(screen, "_ability_sort_asc", True)
 
     def _sort_key(n: "AbilityNode"):
+        sev  = _ability_severity_rank(n)
         seed = n.record.extras.get("_seed") or {}
         if sort_col == "ability_type":
             primary = n.ability_type.lower()
@@ -1036,10 +1064,10 @@ def _populate_ability_table(screen: "DataMgmtScreen", nodes: list) -> None:
         elif sort_col == "name":
             primary = n.label.lower()
         elif sort_col == "severity_rank":
-            primary = _ability_severity_rank(n)
+            primary = sev
         else:
             primary = n.ability_type.lower()
-        return (primary, n.level)   # level is always the base secondary key
+        return (primary, sev, n.level)
 
     valid_nodes  = [n for n in nodes if isinstance(n, AbilityNode)]
     sorted_nodes = sorted(valid_nodes, key=_sort_key, reverse=not sort_asc)
