@@ -78,6 +78,38 @@ ARMOR_LV81_105 = {
             "strength": 36, "dexterity": 72, "intelligence": 8, "constitution": 8,
             "elements": ["fire", "earth", "electric"]
         },
+        # ── Trial Voidwalker boss drops (notfound) ──────────────────────────────
+        # Glamour Trial — support caster, light/air/ice — lv98
+        {
+            "id": "glamour_illusion_veil",
+            "name": "Glamour Illusion Veil",
+            "description": "A veil woven from manufactured serenity — it does not hide the face so much as replace it with something the observer finds easier to agree with. Wearing it makes doubt feel impolite.",
+            "defense": 62, "durability": 720, "max_durability": 720, "value": 74400,
+            "min_spawn_level": 98, "rarity": "notfound",
+            "strength": 4, "dexterity": 14, "intelligence": 72, "constitution": 28,
+            "elements": ["light", "air", "ice"]
+        },
+        # Stigma Trial — hazard caster, dark/ice — lv99
+        {
+            "id": "stigma_classification_lens",
+            "name": "Stigma Classification Lens",
+            "description": "A single lens mounted in a lightweight frame that categorises everything it sees. The wearer understands exactly what class of threat stands before them — and exactly what class they themselves occupy. The classification is never flattering.",
+            "defense": 64, "durability": 730, "max_durability": 730, "value": 78400,
+            "min_spawn_level": 99, "rarity": "notfound",
+            "strength": 4, "dexterity": 16, "intelligence": 76, "constitution": 26,
+            "elements": ["dark", "ice"]
+        },
+
+        # Pageant Trial — hazard dex/int, air/light — lv101
+        {
+            "id": "pageant_performance_mask",
+            "name": "Pageant Performance Mask",
+            "description": "A rigid performance mask with no expression — smooth, perfect, and completely unreadable. The audience sees whatever it needs to see. The wearer sees everything clearly.",
+            "defense": 66, "durability": 740, "max_durability": 740, "value": 82400,
+            "min_spawn_level": 101, "rarity": "notfound",
+            "strength": 6, "dexterity": 80, "intelligence": 74, "constitution": 26,
+            "elements": ["air", "light"]
+        },
         # ── world-drop: common / technique ──
         { "id": "warband_helm_lv83", "name": "Warband Helm", "description": "A production-grade full helm issued in bulk to standing warbands. The interior padding has been replaced by every owner. The shell has not.", "defense": 52, "durability": 650, "max_durability": 650, "value": 22400, "min_spawn_level": 83, "rarity": "common", "strength": 30, "dexterity": 12, "intelligence": 6, "constitution": 14, "elements": ["earth"] },
     ],
@@ -158,6 +190,27 @@ ARMOR_LV81_105 = {
             "strength": 48, "dexterity": 96, "intelligence": 10, "constitution": 12,
             "elements": ["fire", "earth", "electric", "air"]
         },
+        # ── Trial Voidwalker boss drops (notfound) ──────────────────────────────
+        # Edict Trial — tank con/int, dark/earth/light — lv98
+        {
+            "id": "edict_enforcement_seal",
+            "name": "Edict Enforcement Seal",
+            "description": "A heavy breastplate sealed at its centre with an enforcement glyph — the kind that does not ask permission. Every rule it embodies is written into the metal. The wearer does not have the option to forget them.",
+            "defense": 92, "durability": 900, "max_durability": 900, "value": 74400,
+            "min_spawn_level": 98, "rarity": "notfound",
+            "strength": 14, "dexterity": 8, "intelligence": 60, "constitution": 80,
+            "elements": ["dark", "earth", "light"]
+        },
+        # Lament Trial — hazard caster, dark/ice — lv100
+        {
+            "id": "lament_sorrow_shroud",
+            "name": "Lament Sorrow Shroud",
+            "description": "A robe that absorbs grief the way cloth absorbs water — it grows heavier over time, but the weight is distributed so perfectly that the wearer never quite notices how much they are carrying.",
+            "defense": 88, "durability": 900, "max_durability": 900, "value": 80400,
+            "min_spawn_level": 100, "rarity": "notfound",
+            "strength": 8, "dexterity": 10, "intelligence": 98, "constitution": 50,
+            "elements": ["dark", "ice"]
+        },
         # ── world-drop: rare / faith ──
         { "id": "sanctuary_robe_lv91", "name": "Sanctuary Robe", "description": "A robe woven inside a consecrated space that no longer exists. The weavers finished it the day before the space was closed. They knew.", "defense": 78, "durability": 860, "max_durability": 860, "value": 50400, "min_spawn_level": 91, "rarity": "rare", "strength": 6, "dexterity": 10, "intelligence": 92, "constitution": 54, "elements": ["light", "water", "earth"] },
     ],
@@ -218,6 +271,27 @@ ARMOR_LV81_105 = {
             "min_spawn_level": 100, "rarity": "notfound",
             "strength": 6, "dexterity": 6, "intelligence": 54, "constitution": 26,
             "elements": ["dark", "light", "water"]
+        },
+        # ── Trial Voidwalker boss drops (notfound) ──────────────────────────────
+        # Reliquary Trial — hazard con/int, dark/ice — lv102
+        {
+            "id": "reliquary_preservation_shard",
+            "name": "Reliquary Preservation Shard",
+            "description": "Bracers fitted with a shard of Reliquary's archive at each wrist — shards that preserve the state of whatever they touch at the moment of contact. Injuries do not deepen. They simply are, exactly as they were the moment the bracers took note of them.",
+            "defense": 54, "durability": 682, "max_durability": 682, "value": 90400,
+            "min_spawn_level": 102, "rarity": "notfound",
+            "strength": 10, "dexterity": 14, "intelligence": 62, "constitution": 80,
+            "elements": ["dark", "ice"]
+        },
+        # Garbage Trial — hazard int/dex, dark/earth — lv101
+        {
+            "id": "garbage_doubt_seed",
+            "name": "Garbage Doubt Seed",
+            "description": "Gauntlets grown around a seed of cultivated doubt — the kind that was planted with precision, tended with patience, and harvested at the exact moment of maximum yield. The wearer does not feel the doubt. They redirect it.",
+            "defense": 48, "durability": 646, "max_durability": 646, "value": 86400,
+            "min_spawn_level": 101, "rarity": "notfound",
+            "strength": 8, "dexterity": 60, "intelligence": 76, "constitution": 38,
+            "elements": ["dark", "earth"]
         },
         # --- Lira Emberforge (lv105) ---
         {

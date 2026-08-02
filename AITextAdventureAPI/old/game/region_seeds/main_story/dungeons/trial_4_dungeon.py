@@ -29,7 +29,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'prophecy_sentinel', 'name': 'Prophecy Sentinel', 'hostile_type': 'construct', 'min_spawn_level': 99, 'role': 'tank', 'rarity': 'uncommon',
-        'base_xp': 10000, 'common_drop': 'stimulant_full', 'rare_drop': 'tome_con_rare', 'money_range': (1000, 1450),
+        'base_xp': 10000, 'common_drop': 'stimulant_full', 'rare_drop': 'warlord_signet', 'money_range': (1000, 1450),
         'basic_attack': 'inevitable strike', 'strong_attack': 'fate lock', 'player_abilities': [],
         'base_str': 58, 'base_dex': 48, 'base_con': 65, 'base_int': 52, 'base_hp': 52000, 'base_ap': 340,
         'str_per_level': 7, 'dex_per_level': 5, 'con_per_level': 8, 'int_per_level': 6,

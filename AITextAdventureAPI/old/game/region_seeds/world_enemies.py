@@ -195,7 +195,7 @@ WORLD_HOSTILES = [
         'id': 'the_void',
         'name': 'Void',
         'hostile_type': 'void_entity',
-        'min_spawn_level': 100,
+        'min_spawn_level': 150,
         'role': 'damage',
         'rarity': 'notfound',
         'base_xp': 50000,
@@ -223,7 +223,7 @@ WORLD_HOSTILES = [
         'id': 'dominion',
         'name': 'Dominion',
         'hostile_type': 'void_entity',
-        'min_spawn_level': 95,
+        'min_spawn_level': 125,
         'role': 'tank',
         'rarity': 'notfound',
         'base_xp': 80000,
@@ -364,7 +364,7 @@ WORLD_HOSTILES = [
         'weaknesses': ['ice', 'dark']
     },
     {
-        'id': 'oracle_boss_2', 'name': 'Oracle - Reset', 'hostile_type': 'aberration', 'min_spawn_level': 103, 'role': 'hazard', 'rarity': 'notfound',
+        'id': 'oracle_boss_2', 'name': 'Oracle - Reset', 'hostile_type': 'aberration', 'min_spawn_level': 97, 'role': 'hazard', 'rarity': 'notfound',
         'base_xp': 50000, 'common_drop': 'tome_int_superrare', 'rare_drop': 'shattered_prophecy', 'money_range': (12000, 24000),
         'basic_attack': 'immutable future', 'strong_attack': 'the only ending', 'player_abilities': ['inescapable_prophecy', 'vision_of_ruin', 'fate_lock'],
         'base_str': 60, 'base_dex': 70, 'base_con': 62, 'base_int': 110, 'base_hp': 180000, 'base_ap': 1800,
@@ -372,7 +372,7 @@ WORLD_HOSTILES = [
         'resistances': ['dark', 'ice', 'electric', 'air'], 'immunities': ['fear', 'confuse', 'sleep', 'stun'], 'weaknesses': ['light']
     },
     {
-        'id': 'reliquary_boss_2', 'name': 'Reliquary - Reset', 'hostile_type': 'aberration', 'min_spawn_level': 103, 'role': 'damage', 'rarity': 'notfound',
+        'id': 'reliquary_boss_2', 'name': 'Reliquary - Reset', 'hostile_type': 'aberration', 'min_spawn_level': 97, 'role': 'damage', 'rarity': 'notfound',
         'base_xp': 50000, 'common_drop': 'tome_con_superrare', 'rare_drop': 'final_archive', 'money_range': (12000, 24000),
         'basic_attack': 'the past always returns', 'strong_attack': 'inescapable record', 'player_abilities': ['eternal_wound', 'memory_of_suffering', 'burden_of_the_lost'],
         'base_str': 65, 'base_dex': 60, 'base_con': 80, 'base_int': 92, 'base_hp': 200000, 'base_ap': 1600,

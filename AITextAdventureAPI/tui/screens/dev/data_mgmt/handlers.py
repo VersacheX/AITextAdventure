@@ -971,6 +971,9 @@ _ABILITY_SORT_KEYS: dict[str, str] = {
 
 _ROW_ERROR_STYLE   = Style(color="red")
 _ROW_WARN_STYLE    = Style(color="yellow")
+_ROW_NOTICE_STYLE  = Style(color="#e040fb")   # magenta — matches timeline notice
+_ROW_BLUE_STYLE    = Style(color="#2323ff")   # blue — matches timeline blue-notice
+_ROW_INFO_STYLE    = Style(color="cyan")
 _ROW_OK_STYLE      = Style(color="green", dim=True)
 _ROW_DEFAULT_STYLE = Style()
 
@@ -1095,26 +1098,47 @@ _HOSTILE_SORT_KEYS = {
 }
 
 
+_BLUE_NOTICE_CODES  = frozenset({"HOSTILE_BALANCE_STRONG"})
+_MGNTA_NOTICE_CODES = frozenset({"HOSTILE_ABILITY_MISMATCH"})
+
+
 def _hostile_row_style(errors: list) -> Style:
+    """Row tint: error=red, warning=yellow, notice-magenta, notice-blue, info=cyan."""
     if not errors:
         return _ROW_DEFAULT_STYLE
     if any(e.severity == "error" for e in errors):
         return _ROW_ERROR_STYLE
     if any(e.severity == "warning" for e in errors):
         return _ROW_WARN_STYLE
+    if any(e.severity == "notice" and e.code in _MGNTA_NOTICE_CODES for e in errors):
+        return _ROW_NOTICE_STYLE
+    if any(e.severity == "notice" and e.code in _BLUE_NOTICE_CODES for e in errors):
+        return _ROW_BLUE_STYLE
+    if any(e.severity == "info" for e in errors):
+        return _ROW_INFO_STYLE
     return _ROW_DEFAULT_STYLE
 
 
 def _hostile_error_cell(errors: list) -> Text:
+    """Cell indicator: ✗ red, ⚠ yellow, ● magenta, ● blue (notice), • cyan (info)."""
     if not errors:
         return Text("✓", style=_ROW_OK_STYLE)
-    has_error   = any(e.severity == "error"   for e in errors)
-    has_warning = any(e.severity == "warning" for e in errors)
+    has_error         = any(e.severity == "error"   for e in errors)
+    has_warning       = any(e.severity == "warning" for e in errors)
+    has_magenta_notice = any(e.severity == "notice" and e.code in _MGNTA_NOTICE_CODES for e in errors)
+    has_blue_notice   = any(e.severity == "notice" and e.code in _BLUE_NOTICE_CODES   for e in errors)
+    has_info          = any(e.severity == "info"    for e in errors)
     count = len(errors)
     if has_error:
         return Text(f"✗ {count}", style=_ROW_ERROR_STYLE)
     if has_warning:
         return Text(f"⚠ {count}", style=_ROW_WARN_STYLE)
+    if has_magenta_notice:
+        return Text(f"● {count}", style=_ROW_NOTICE_STYLE)
+    if has_blue_notice:
+        return Text(f"● {count}", style=_ROW_BLUE_STYLE)
+    if has_info:
+        return Text(f"• {count}", style=_ROW_INFO_STYLE)
     return Text(f"• {count}")
 
 
@@ -1123,9 +1147,15 @@ def _hostile_severity_rank(node: "HostileNode") -> int:
         return 0
     if any(e.severity == "warning" for e in node.errors):
         return 1
-    if node.errors:
+    if any(e.severity == "notice" and e.code in _MGNTA_NOTICE_CODES for e in node.errors):
         return 2
-    return 3
+    if any(e.severity == "notice" and e.code in _BLUE_NOTICE_CODES  for e in node.errors):
+        return 3
+    if any(e.severity == "info"    for e in node.errors):
+        return 4
+    if node.errors:
+        return 5
+    return 6
 
 
 def get_hostile_sort_col(screen: "DataMgmtScreen") -> str:
@@ -1143,6 +1173,7 @@ def _populate_hostile_table(screen: "DataMgmtScreen", nodes: list) -> None:
     sort_asc = getattr(screen, "_hostile_sort_asc", True)
 
     def _sort_key(n: "HostileNode"):
+        sev = _hostile_severity_rank(n)
         if sort_col == "level":
             primary = n.level
         elif sort_col == "rarity_rank":
@@ -1154,11 +1185,10 @@ def _populate_hostile_table(screen: "DataMgmtScreen", nodes: list) -> None:
         elif sort_col == "name":
             primary = n.label.lower()
         elif sort_col == "severity_rank":
-            primary = _hostile_severity_rank(n)
+            primary = sev
         else:
             primary = n.level
-        secondary = n.level
-        return (primary, secondary)
+        return (primary, sev, n.label.lower())
 
     valid_nodes = [n for n in nodes if isinstance(n, HostileNode)]
     sorted_nodes = sorted(valid_nodes, key=_sort_key, reverse=not sort_asc)
@@ -1267,17 +1297,3 @@ def handle_copy_action(screen: "DataMgmtScreen") -> None:
         ):
             rebuild_list_for_screen(screen)
     screen.query_one("#dm-status", Static).update(status)
-
-_SEVERITY_RANK: dict[str, int] = {
-    "error":   0,
-    "warning": 1,
-    "notice":  2,
-    "info":    3,
-}
-
-def _hostile_severity_rank(node: "HostileNode") -> int:
-    """0 = has errors, 1 = warnings only, 2 = notices/info only, 3 = clean."""
-    if not node.errors:
-        return 3
-    best = min(_SEVERITY_RANK.get(e.severity, 99) for e in node.errors)
-    return best

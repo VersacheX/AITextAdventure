@@ -521,7 +521,7 @@ class TimelineDetailPanel(Widget):
                         colour = "cyan"
                     elif err.severity == "warning":
                         colour = "yellow"
-                    elif err.severity == "notice" and err.code == "MEET_DELIVER_NO_CHARACTER_DIALOG":
+                    elif err.severity == "notice" and err.code in ("MEET_DELIVER_NO_CHARACTER_DIALOG", "HOSTILE_ABILITY_MISMATCH"):
                         colour = "blue"
                     elif err.severity == "notice":
                         colour = "#e040fb"
@@ -1796,12 +1796,13 @@ def update_detail_for_hostile(
     lines.append("")
 
     if errors:
-        has_error = any(e.severity == "error" for e in errors)
-        colour    = "red" if has_error else "yellow"
-        kind      = "FAIL" if has_error else "WARN"
+        has_error   = any(e.severity == "error"   for e in errors)
+        has_warning = any(e.severity == "warning" for e in errors)
+        colour = "red" if has_error else ("yellow" if has_warning else "cyan")
+        kind   = "FAIL" if has_error else ("WARN" if has_warning else "INFO")
         lines.append(f"[{colour}]Integrity: {kind}  ({len(errors)} issue(s))[/{colour}]")
         for e in errors:
-            c = "red" if e.severity == "error" else "yellow"
+            c = "red" if e.severity == "error" else ("yellow" if e.severity == "warning" else "cyan")
             lines.append(f"  [{c}]{rich_escape(e.code)}[/{c}]  [dim]{rich_escape(e.message)}[/dim]")
     else:
         lines.append("[green]Integrity: OK[/green]")

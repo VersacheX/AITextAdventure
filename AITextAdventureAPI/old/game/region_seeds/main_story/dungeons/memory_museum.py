@@ -67,7 +67,7 @@ BOSS_MOB = {
 
 BOSS_HOSTILES = [
 	{
-		'id': 'oracle_boss_1', 'name': 'Oracle', 'hostile_type': 'aberration', 'min_spawn_level': 102, 'role': 'hazard', 'rarity': 'notfound',
+		'id': 'oracle_boss_1', 'name': 'Oracle', 'hostile_type': 'aberration', 'min_spawn_level': 95, 'role': 'hazard', 'rarity': 'notfound',
 		'base_xp': 40000, 'common_drop': 'tome_int_superrare', 'rare_drop': 'prophecy_remnant', 'money_range': (10000, 20000),
 		'basic_attack': 'written verdict', 'strong_attack': 'prophetic collapse', 'player_abilities': ['inescapable_prophecy', 'vision_of_ruin', 'fate_lock'],
 		'base_str': 55, 'base_dex': 65, 'base_con': 58, 'base_int': 100, 'base_hp': 150000, 'base_ap': 1500,
@@ -75,7 +75,7 @@ BOSS_HOSTILES = [
 		'resistances': ['dark', 'ice', 'electric'], 'immunities': ['fear', 'confuse', 'sleep'], 'weaknesses': ['light', 'fire']
 	},
 	{
-		'id': 'reliquary_boss_1', 'name': 'Reliquary', 'hostile_type': 'aberration', 'min_spawn_level': 102, 'role': 'hazard', 'rarity': 'notfound',
+		'id': 'reliquary_boss_1', 'name': 'Reliquary', 'hostile_type': 'aberration', 'min_spawn_level': 95, 'role': 'hazard', 'rarity': 'notfound',
 		'base_xp': 40000, 'common_drop': 'tome_con_superrare', 'rare_drop': 'archive_shard', 'money_range': (10000, 20000),
 		'basic_attack': 'preserved anguish', 'strong_attack': 'permanent collection', 'player_abilities': ['eternal_wound', 'memory_of_suffering', 'burden_of_the_lost'],
 		'base_str': 58, 'base_dex': 55, 'base_con': 72, 'base_int': 85, 'base_hp': 160000, 'base_ap': 1300,

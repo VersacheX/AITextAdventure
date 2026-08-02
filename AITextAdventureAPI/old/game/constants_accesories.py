@@ -337,6 +337,47 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
 
     # ── MYTHIC D-CHAIN ACCESSORY REWARDS (notfound) ────────────────────────
 
+    # ── MEMORY MUSEUM BOSS DROPS (notfound) ───────────────────────────────────
+
+    {
+        'id': 'prophecy_remnant',
+        'name': 'Prophecy Remnant',
+        'description': 'A sliver of Oracle\'s sight that broke free when its hold over the future was shattered. It still hums with the weight of endings it predicted. Prevents the mind from being bent by illusion or contradiction. Resists dark and ice — the colours of inevitability.',
+        'min_level': 40, 'rarity': 'notfound', 'value': 22000,
+        'immunities': ['confuse'], 'resistances': ['dark', 'ice'], 'weaknesses': ['light', 'fire'],
+        'strength': 0, 'dexterity': 12, 'intelligence': 18, 'constitution': 6,
+        'crit_bonus': 2.0, 'damage_bonus': 4, 'special_effect': '',
+    },
+    {
+        'id': 'archive_shard',
+        'name': 'Archive Shard',
+        'description': 'A fragment from Reliquary\'s collection — a sliver of perfectly preserved pain that no longer has an owner. Carrying it makes wounds seal faster, as though the body refuses to add to the archive. Grants immunity to Continuous Damage. Resists dark, earth, and water.',
+        'min_level': 40, 'rarity': 'notfound', 'value': 22000,
+        'immunities': ['continuous_damage'], 'resistances': ['dark', 'earth', 'water'], 'weaknesses': ['light', 'fire'],
+        'strength': 6, 'dexterity': 0, 'intelligence': 14, 'constitution': 16,
+        'crit_bonus': 0.0, 'damage_bonus': 0, 'special_effect': '',
+    },
+    {
+        'id': 'shattered_prophecy',
+        'name': 'Shattered Prophecy',
+        'description': 'What remains of Oracle\'s timeline after the loop was broken twice. The shard no longer shows a single fixed future — it fractures the light into every possibility at once, shielding the wearer from paralysis of certainty. Immunity to Confuse and Petrify. Resists dark, ice, and air.',
+        'min_level': 45, 'rarity': 'notfound', 'value': 28000,
+        'immunities': ['confuse', 'petrify'], 'resistances': ['dark', 'ice', 'air'], 'weaknesses': ['light'],
+        'strength': 0, 'dexterity': 14, 'intelligence': 22, 'constitution': 8,
+        'crit_bonus': 3.0, 'damage_bonus': 6, 'special_effect': '',
+    },
+    {
+        'id': 'final_archive',
+        'name': 'Final Archive',
+        'description': 'The last record Reliquary ever made — a memory of the moment it lost the ability to preserve anything at all. It does not grieve. It simply endures. Grants immunity to Continuous Damage and Attack Debuff. Resists dark, earth, and water.',
+        'min_level': 45, 'rarity': 'notfound', 'value': 28000,
+        'immunities': ['continuous_damage', 'attack_debuff'], 'resistances': ['dark', 'earth', 'water'], 'weaknesses': ['light', 'fire'],
+        'strength': 8, 'dexterity': 0, 'intelligence': 16, 'constitution': 20,
+        'crit_bonus': 0.0, 'damage_bonus': 4, 'special_effect': '',
+    },
+
+    # ── MYTHIC D-CHAIN ACCESSORY REWARDS (notfound) ────────────────────────
+
     {
         'id': 'mythic_grassland_large_windcarvers_mantle',
         'name': "Windcarver's Mantle",

@@ -17,14 +17,14 @@ H6  HOSTILE_DROP_UNKNOWN_ITEM      common_drop or rare_drop references an item
 
 Balance rules  (warning, rarity-aware)
 --------------------------------------
-Groups are (rarity, level_bucket) — rarities are NEVER mixed.
-B1  HOSTILE_BALANCE_WEAK           combat_score < 65% of group average
-B2  HOSTILE_BALANCE_STRONG         combat_score > 145% of group average
+Groups are (rarity, level) — same rarity, same exact level. Never mixed.
+B1  HOSTILE_BALANCE_WEAK           combat_score < 65% of peer average
+B2  HOSTILE_BALANCE_STRONG         combat_score > 145% of peer average
 B3  HOSTILE_RARITY_SCORE_LOW       combat_score below the expected floor for the
                                    rarity at this level (higher rarity should be
                                    strictly stronger than lower at the same level).
     Floor = group_avg(rarity-1) * 0.90 where group_avg is computed across all
-    same-level-bucket nodes of the next-lower rarity.
+    same-level nodes of the next-lower rarity.
 
 Combat score formula (mirrors hostile_seed_engine.py)
 ------------------------------------------------------
@@ -206,15 +206,16 @@ def validate_hostile_tree(
     for node in all_nodes:
         scores[node.hostile_id] = _estimate_combat_score(node.seed, ability_index)
 
-    # ── Build balance groups: (rarity, bucket_id) → [score] ──────────────
-    # Groups are STRICTLY same-rarity — never mix rarities for balance comparison.
+    # ── Build balance groups: (rarity, level) → [score] ─────────────────
+    # Groups are STRICTLY same-rarity and same-level — pure peers only.
     score_by_group: Dict[tuple, List[float]] = defaultdict(list)
     node_group:     Dict[str, tuple]         = {}
 
     for rarity_node in tree:
         for bucket in rarity_node.level_buckets:
-            gkey = (rarity_node.rarity_id, bucket.bucket_id)
             for node in bucket.hostiles:
+                level = int(node.seed.get("min_spawn_level", 1) or 1)
+                gkey  = (rarity_node.rarity_id, level)
                 score_by_group[gkey].append(scores[node.hostile_id])
                 node_group[node.hostile_id] = gkey
 
@@ -224,9 +225,9 @@ def validate_hostile_tree(
         if len(v) > 1
     }
 
-    # ── Build cross-rarity floor: for each bucket, the avg of the rarity below ──
+    # ── Build cross-rarity floor: for each level, the avg of the rarity below ──
     # Used for B3: a rare's score should be ≥ 90% of the uncommon avg at the same level.
-    rarity_bucket_avg: Dict[tuple, float] = dict(group_avg)  # (rarity, bucket) → avg
+    rarity_bucket_avg: Dict[tuple, float] = dict(group_avg)  # (rarity, level) → avg
 
     # ── Per-node structural checks ────────────────────────────────────────
     for node in all_nodes:
@@ -275,7 +276,7 @@ def validate_hostile_tree(
                 "HOSTILE_ABILITY_MISMATCH",
                 f"Rarity '{rarity}' expects at least {expected_min} ability(s); "
                 f"has {actual_count}.",
-                severity="warning",
+                severity="notice",
             ))
             by_code["HOSTILE_ABILITY_MISMATCH"] += 1
 
@@ -320,26 +321,27 @@ def validate_hostile_tree(
         score = scores[node.hostile_id]
         gkey  = node_group.get(node.hostile_id)
 
-        # B1 / B2 — within same rarity + level bucket
+        # B1 / B2 — within same rarity + level
         if gkey and gkey in group_avg:
             avg   = group_avg[gkey]
             ratio = score / avg if avg else 1.0
+            level_val = gkey[1]
             if ratio < 0.65:
                 node.errors.append(_err(
                     "HOSTILE_BALANCE_WEAK",
                     f"Combat score {score:.1f} is only {ratio:.0%} of the "
-                    f"{_rarity_label(gkey[0])} {_bucket_label(gkey[1])} "
-                    f"group average {avg:.1f}.",
-                    severity="warning",
+                    f"{_rarity_label(gkey[0])} Lv {level_val} "
+                    f"peer average {avg:.1f}.",
+                    severity="info",
                 ))
                 by_code["HOSTILE_BALANCE_WEAK"] += 1
             elif ratio > 1.45:
                 node.errors.append(_err(
                     "HOSTILE_BALANCE_STRONG",
                     f"Combat score {score:.1f} is {ratio:.0%} of the "
-                    f"{_rarity_label(gkey[0])} {_bucket_label(gkey[1])} "
-                    f"group average {avg:.1f}.",
-                    severity="warning",
+                    f"{_rarity_label(gkey[0])} Lv {level_val} "
+                    f"peer average {avg:.1f}.",
+                    severity="notice",
                 ))
                 by_code["HOSTILE_BALANCE_STRONG"] += 1
 
@@ -356,7 +358,7 @@ def validate_hostile_tree(
                         "HOSTILE_RARITY_SCORE_LOW",
                         f"{_rarity_label(rarity)} hostile score {score:.1f} is below "
                         f"90% of the {_rarity_label(lower_rarity)} average "
-                        f"{lower_avg:.1f} at {_bucket_label(gkey[1])}. "
+                        f"{lower_avg:.1f} at Lv {gkey[1]}. "
                         f"Higher rarity should generally be stronger.",
                         severity="warning",
                     ))

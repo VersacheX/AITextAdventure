@@ -80,10 +80,12 @@ def _hostile_leaf_label(node: HostileNode) -> str:
     name = rich_escape(node.label)
     hid  = rich_escape(node.hostile_id)
     if node.errors:
-        has_error = any(e.severity == "error"   for e in node.errors)
-        colour    = "red" if has_error else "yellow"
-        kind      = "error" if has_error else "warn"
-        n         = len(node.errors)
+        has_error   = any(e.severity == "error"   for e in node.errors)
+        has_warning = any(e.severity == "warning" for e in node.errors)
+        has_notice  = any(e.severity == "notice"  for e in node.errors)
+        colour = "red" if has_error else ("yellow" if has_warning else ("blue" if has_notice else "cyan"))
+        kind   = "error" if has_error else ("warn" if has_warning else ("notice" if has_notice else "info"))
+        n      = len(node.errors)
         return (
             f"[{colour}]{name}[/{colour}]  "
             f"[dim {colour}]{hid}[/dim {colour}]  "
