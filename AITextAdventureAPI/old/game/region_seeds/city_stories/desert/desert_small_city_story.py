@@ -45,13 +45,14 @@ NPCS = [
         )
     },
     {
-        'npc_id': 'signal_wraith_2',
-        'name': 'Signal Wraith',
+        'npc_id': 'tempest_warden',
+        'name': 'Tempest Warden',
         'description': (
-            'A shimmering figure made of distorted radio waves and static. '
-            'It flickers between frequencies as it speaks.'
+            "A semi‑sentient storm‑construct left behind in the old research bunker."
+            " It manifests as a humanoid silhouette made of crackling lightning and compressed wind."
+            " Its purpose is to guard unstable storm‑tech from intruders."
         )
-    }
+    },
 ]
 
 
@@ -437,7 +438,7 @@ NPC_DIALOG += [
         'npc_id': 'tech',
         'dialog_id': 'tech_desert_small_d_deliver_ledger_plate',
         'dialog': [
-            "The plate is still humming. Venn will know what it's trying to say."
+            "The plate is still humming. Storm-research signatures — pre-fracture. Venn will know what they mean."
         ]
     },
     {
@@ -453,67 +454,67 @@ NPC_DIALOG += [
         'npc_id': 'tech',
         'dialog_id': 'tech_desert_small_d_consult_venn',
         'dialog': [
-            "Every entry is a frequency signature. The Wraith has been feeding on them since BioHazard was built."
+            "The Tempest Warden has been absorbing these frequencies since before the fracture. Of course it has."
         ]
     },
     {
         'npc_id': 'grimnaw',
         'dialog_id': 'grimnaw_desert_small_d_consult_venn',
         'dialog': [
-            "Draw it out with the plate's own resonance and the static crystallizes. Elegant, in a violent way."
+            "Bring the plate into its chamber and the static crystallizes. Elegant, in a violent way."
         ]
     },
     {
         'npc_id': 'skill',
         'dialog_id': 'skill_desert_small_d_consult_venn',
         'dialog': [
-            "Then we call it and finish it."
+            "Then we take it into the bunker and finish it."
         ]
     },
 
-    # Type D – Meet Signal Wraith (2)
-    {
-        'npc_id': 'skill',
-        'dialog_id': 'skill_desert_small_d_meet_signal_wraith',
-        'dialog': [
-            "It's been listening to every transaction since the post was built."
-        ]
-    },
-    {
-        'npc_id': 'magic',
-        'dialog_id': 'magic_desert_small_d_meet_signal_wraith',
-        'dialog': [
-            "'I will drown you in static first.' At least it's honest about its methods."
-        ]
-    },
-    {
-        'npc_id': 'lyren',
-        'dialog_id': 'lyren_desert_small_d_meet_signal_wraith',
-        'dialog': [
-            "It's not defending territory. It's defending the only conversation it still understands."
-        ]
-    },
-
-    # Type D – Defeat Signal Wraith (2)
+    # Type D – Meet Tempest Warden
     {
         'npc_id': 'technique',
-        'dialog_id': 'technique_desert_small_d_defeat_signal_wraith',
+        'dialog_id': 'technique_desert_small_d_meet_tempest_warden',
         'dialog': [
-            "Quiet. Take the crystallized static."
-        ]
-    },
-    {
-        'npc_id': 'tech',
-        'dialog_id': 'tech_desert_small_d_defeat_signal_wraith',
-        'dialog': [
-            "A blade that reads every ward and shield before the swing. That's a dangerous edge."
+            "It's running a threat assessment. Every move we make is already logged."
         ]
     },
     {
         'npc_id': 'grimnaw',
-        'dialog_id': 'grimnaw_desert_small_d_defeat_signal_wraith',
+        'dialog_id': 'grimnaw_desert_small_d_meet_tempest_warden',
         'dialog': [
-            "The machines stopped screaming. The broadcast is finally over."
+            "It doesn't have fear. Just a directive and everything it needs to enforce it."
+        ]
+    },
+    {
+        'npc_id': 'nia',
+        'dialog_id': 'nia_desert_small_d_meet_tempest_warden',
+        'dialog': [
+            "It's not afraid of us. It's afraid of failing its function."
+        ]
+    },
+
+    # Type D – Defeat Tempest Warden
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_desert_small_d_defeat_tempest_warden',
+        'dialog': [
+            "Protocol terminated. Take what crystallized."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_desert_small_d_defeat_tempest_warden',
+        'dialog': [
+            "Crystallized storm-static — frequencies compressed under pressure. Diego will know what to do with this."
+        ]
+    },
+    {
+        'npc_id': 'grimnaw',
+        'dialog_id': 'grimnaw_desert_small_d_defeat_tempest_warden',
+        'dialog': [
+            "The bunker's gone quiet. Whatever the Warden was holding here, it belongs to us now."
         ]
     },
 
@@ -891,10 +892,10 @@ NPC_DIALOG += [
 		'dialog': [
 			"That plate…",
 			"(holds it near his ear for a second)",
-			"Yeah. Frequency's still live. Whatever was recorded on this left a resonance that didn't die with the entries.",
-			"I've heard scrap talk before. This isn't scrap talk. This is a machine still trying to finish a sentence.",
-			"Venn speaks that language better than anyone in BioHazard. Take it to him before the static decides to answer itself.",
-			"And if every device in the district starts humming at once… that's not a coincidence."
+			"Yeah. Frequency's still live. Storm-research signatures — pre-fracture.",
+			"There's a bunker out past the scrap fields. Tempest Research Bunker.",
+			"Venn will know what the resonance is trying to say. Take it to him first.",
+			"If the construct in that bunker starts reacting to this frequency… don't hesitate."
 		]
 	},
 	{
@@ -903,21 +904,21 @@ NPC_DIALOG += [
 		'dialog': [
 			"This ledger plate — it doesn't just record transactions.",
 			"Every entry is a frequency signature.",
-			"The Signal Wraith has been feeding on those exact frequencies since BioHazard was built.",
-			"Draw it out with the plate's resonance and its static will crystallize.",
-			"Diego can forge crystallized signal-static into an edge that cuts through interference.",
-			"Any shield, any armor, any ward — this blade reads the frequency and bypasses it."
+			"These match the storm research frequencies from the old Tempest Bunker.",
+			"There is a construct there — the Tempest Warden — that has been absorbing these exact patterns since before the fracture.",
+			"Bring the plate into its chamber and its static will crystallize under the resonance.",
+			"Diego can forge crystallized storm-static into an edge that reads every ward and shield before the swing."
 		]
 	},
 
 	{
-		'npc_id': 'signal_wraith_2',
-		'dialog_id': 'signal_wraith_d_awakens',
+		'npc_id': 'tempest_warden',
+		'dialog_id': 'tempest_warden_d_protocol_breach',
 		'dialog': [
-			"The ledger plate opens my frequency.",
-			"Every transaction ever recorded here — I have been listening.",
-			"You want to silence me.",
-			"I will drown you in static first."
+			"Resonance signature detected. Origin: classified ledger archive.",
+			"The frequencies you carry are a breach of containment protocol.",
+			"This facility and its contents are under permanent lock.",
+			"You will not leave with them."
 		]
 	},
 
@@ -939,8 +940,8 @@ TASKS += [
 					'npc_id': 'diego',
 					'standing_text': [
 						"That plate — I can hear a frequency humming off the metal.",
-						"Whatever was recorded on it left a resonance behind.",
-						"Find Venn. He speaks machine. He'll know what it's trying to say."
+						"Storm-research signatures. Pre-fracture.",
+						"Find Venn. He'll know what the bunker's construct has to do with it."
 					]
 				}
 			},
@@ -965,7 +966,7 @@ TASKS += [
 		]
 	},
 
-	# D-1 — Consult Venn for the plate reading
+	# D-1 — Consult Venn; opens Tempest Bunker
 	{
 		'task_id': 'desert_small_city_type_d_consult_venn',
 		'type': 'meet',
@@ -984,64 +985,60 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_desert_small_d_consult_venn'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_small_d_consult_venn' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_desert_small_d_consult_venn'   } },
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'scrap_seer_venn', 'standing_text': ["The Wraith has been feeding on those frequencies since BioHazard was built.", "Draw it out with the plate's resonance and its static will crystallize.", "Diego can forge crystallized signal-static into an edge that cuts through interference."] } },
-            {
-                'event_type': 'create_npc',
-                'params': {
-                    'npc_id': 'signal_wraith_2',
-                    'location': None
-                }
-            },
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'signal_wraith_2', 'standing_text': ["The ledger plate opens my frequency.", "Every transaction ever recorded here — I have been listening.", "You want to silence me.", "I will drown you in static first."] } },
-            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'desert_small_city_signal_relay', 'location': 'region_open_area' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'scrap_seer_venn', 'standing_text': ["The Warden in the Tempest Bunker has been absorbing these frequencies since before the fracture.", "Bring the plate into its chamber and the static will crystallize.", "Diego can forge crystallized storm-static into an edge that cuts through any interference."] } },
+            { 'event_type': 'create_npc', 'params': { 'npc_id': 'tempest_warden', 'location': None } },
+            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'tempest_bunker_ch5', 'location': 'region_open_area' } },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'tempest_bunker_ch5', 'item_id': 'polar_amplifier', 'location': 'treasure_room' } },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'tempest_bunker_ch5', 'item_id': 'arc_core', 'location': 'treasure_room' } },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'tempest_bunker_ch5', 'item_id': 'storm_etched_plating', 'location': 'treasure_room' } },
 			{
 				'event_type': 'award_task',
 				'params': {
-					'task_id': 'desert_small_city_type_d_meet_signal_wraith'
+					'task_id': 'desert_small_city_type_d_meet_tempest_warden'
 				}
 			},
 		]
 	},
 
-	# D-2 — Meet the Signal Wraith (boss intro)
+	# D-2 — Meet the Tempest Warden (boss intro)
 	{
-		'task_id': 'desert_small_city_type_d_meet_signal_wraith',
+		'task_id': 'desert_small_city_type_d_meet_tempest_warden',
 		'type': 'meet',
 		'to_type': 'npc',
-		'to_id': 'signal_wraith_2',
+		'to_id': 'tempest_warden',
 		'task_acquire_events': [
 		],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
-					'npc_id': 'signal_wraith_2',
-					'dialog_id': 'signal_wraith_d_awakens'
+					'npc_id': 'tempest_warden',
+					'dialog_id': 'tempest_warden_d_protocol_breach'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_desert_small_d_meet_signal_wraith'  } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_desert_small_d_meet_signal_wraith'  } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren',  'dialog_id': 'lyren_desert_small_d_meet_signal_wraith'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_small_d_meet_tempest_warden' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_desert_small_d_meet_tempest_warden'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',       'dialog_id': 'nia_desert_small_d_meet_tempest_warden'       } },
 			{
 				'event_type': 'award_task',
 				'params': {
-					'task_id': 'desert_small_city_type_d_defeat_signal_wraith'
+					'task_id': 'desert_small_city_type_d_defeat_tempest_warden'
 				}
 			},
 		]
 	},
 
-	# D-3 — Defeat the Signal Wraith; Diego forges the mythic weapon
+	# D-3 — Defeat the Tempest Warden; Diego forges the mythic weapon
 	{
-		'task_id': 'desert_small_city_type_d_defeat_signal_wraith',
+		'task_id': 'desert_small_city_type_d_defeat_tempest_warden',
 		'type': 'defeat',
 		'to_type': 'mob',
-		'to_id': 'signal_wraith_2',
-		'task_acquire_events': [            
+		'to_id': 'tempest_warden_1',
+		'task_acquire_events': [
 			{
 				'event_type': 'begin_combat',
 				'params': {
-					'boss_mob_id': 'signal_wraith_2',
+					'boss_mob_id': 'tempest_warden_1',
 					'combat_type': 'boss_battle'
 				}
 			}
@@ -1053,15 +1050,15 @@ TASKS += [
 					'item_id': 'mythic_desert_small_scrapwrights_edge'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_small_d_defeat_signal_wraith' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_desert_small_d_defeat_signal_wraith'      } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_desert_small_d_defeat_signal_wraith'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_small_d_defeat_tempest_warden' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_desert_small_d_defeat_tempest_warden'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_desert_small_d_defeat_tempest_warden'   } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
 					'npc_id': 'diego',
 					'standing_text': [
-						"Crystallized signal-static — I've never worked with anything like it.",
+						"Crystallized storm-static — I've never worked with anything like it.",
 						"I've hammered it into the blade.",
 						"It reads every ward and shield before you swing.",
 						"Nothing will hold against this."
@@ -1073,8 +1070,8 @@ TASKS += [
 				'params': {
 					'npc_id': 'scrap_seer_venn',
 					'standing_text': [
-						"The machines are quiet again.",
-						"Whatever the Wraith was broadcasting — it's gone.",
+						"The bunker's gone quiet.",
+						"Whatever the Warden was broadcasting — it's over.",
 						"Jexa says her circuits finally stopped screaming."
 					]
 				}

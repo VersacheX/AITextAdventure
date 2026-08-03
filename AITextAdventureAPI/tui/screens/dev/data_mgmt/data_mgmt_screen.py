@@ -226,7 +226,7 @@ class DataMgmtScreen(BaseScreen):
     }
 
     #dm-expand, #dm-collapse, #dm-copy, #dm-validate-timeline,
-    #dm-validate-abilities, #dm-validate-hostiles {
+    #dm-validate-abilities, #dm-validate-hostiles, #dm-validate-npc {
         display: none;
         margin-left: 1;
         padding: 0 1;
@@ -422,11 +422,14 @@ class DataMgmtScreen(BaseScreen):
             yield Button("++", id="dm-expand", variant="default")
             yield Button("--", id="dm-collapse", variant="default")
             yield Button("Copy", id="dm-copy", variant="default")
-            yield Button("Validate Timeline", id="dm-validate-timeline", variant="default")
-            yield Button("Validate Abilities", id="dm-validate-abilities", variant="default")
-            yield Button("Validate Hostiles", id="dm-validate-hostiles", variant="default")
-            yield Button("Validate Dungeons", id="dm-validate-dungeons", variant="default")
-            yield Button("Validate Regions", id="dm-validate-city-region", variant="default")
+            yield Button("Validate Timeline",  id="dm-validate-timeline",   variant="default")
+            yield Button("Validate Abilities", id="dm-validate-abilities",  variant="default")
+            yield Button("Validate Hostiles",  id="dm-validate-hostiles",   variant="default")
+            yield Button("Validate Dungeons",  id="dm-validate-dungeons",   variant="default")
+            yield Button("Validate Regions",   id="dm-validate-city-region", variant="default")
+            yield Button("Validate Equipment",  id="dm-validate-equipment",   variant="default")
+            yield Button("Validate Characters", id="dm-validate-characters",  variant="default")
+            yield Button("Validate NPCs", id="dm-validate-npc", variant="default")
             yield Button("↑", id="dm-equip-sort-dir", variant="default")
             yield Button("↑", id="dm-hostile-sort-dir", variant="default")
             yield Button("↑", id="dm-ability-sort-dir", variant="default")

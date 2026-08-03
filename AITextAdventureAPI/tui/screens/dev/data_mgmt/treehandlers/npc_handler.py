@@ -24,6 +24,29 @@ from tui.services.dev.dataservices import (
 )
 
 
+def _npc_leaf_label(npc_node: NpcRecordNode) -> str:
+    """Build a Rich-markup label for a leaf node, with severity prefix if validated."""
+    base = (
+        f"{rich_escape(npc_node.label)}  "
+        f"[dim]{rich_escape(npc_node.npc_id)}[/dim]"
+    )
+    extras = npc_node.record.extras if npc_node.record else {}
+    if not extras.get("_validated"):
+        return base
+
+    errors = extras.get("_errors") or []
+    hard   = [e for e in errors if e.severity == "error"]
+    info   = [e for e in errors if e.severity == "info"]
+
+    if hard:
+        count = len(hard)
+        return f"[red]✗[/red] {base}  [red dim]{count} err[/red dim]"
+    if info:
+        count = len(info)
+        return f"[cyan]ℹ[/cyan] {base}  [cyan dim]{count} info[/cyan dim]"
+    return f"[green]✓[/green] {base}"
+
+
 def rebuild_npc_tree(
     tree: Tree,
     query: str,
@@ -49,10 +72,7 @@ def rebuild_npc_tree(
         group_branch = tree.root.add(group_node.label, expand=True)
         for npc_node in group_node.npcs:
             total_npcs += 1
-            label = (
-                f"{rich_escape(npc_node.label)}  "
-                f"[dim]{rich_escape(npc_node.npc_id)}[/dim]"
-            )
+            label = _npc_leaf_label(npc_node)
             group_branch.add_leaf(label, data=npc_node)
 
     restore_user_expansion_state(tree, user_expanded, user_collapsed, filter_active)

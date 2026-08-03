@@ -250,3 +250,13 @@ class DungeonGroupNode:
     group_id: str       # "main_story" | "primary_story" | "city_regional"
     label: str
     dungeons: List[DungeonNode]
+
+
+# ── Equipment validation model ────────────────────────────────────────────
+
+@dataclass
+class EquipmentValidationError:
+    """One validation error attached to an equipment DevRecord."""
+    code: str
+    message: str
+    severity: str = "error"   # "error" | "warning" | "info"

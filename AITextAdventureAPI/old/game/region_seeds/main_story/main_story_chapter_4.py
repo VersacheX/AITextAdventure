@@ -468,7 +468,7 @@ NPC_DIALOG = [
 	        "After you took it from Kirn she told me what happened.  How you dissapeared into a rift, then not long after, the rift collapsed and shook the whole city.",
 	        "Waters rose where there were none before.  The world is changed.  I need to take that bracelet off your hands and examine it before it causes any more damage.",
 	        "This little thing has opened rifts in nearby wilds surrounding many cities.",
-            "Kirn said he got it from Mira.",
+            "Kirn said she got it from Mira.",
             "Go back to Mira and find out what you can about it. There will be a reward if you manage to track it down."
         ]
     },
@@ -520,7 +520,7 @@ NPC_DIALOG = [
         'dialog': [
             "You say Marlo Finch confiscated the Bracelet of Void and is now looking for the Bracelet of Existence?",
             "I split that couplet in two... But you're gonna have to track the other one down yourself, I don't sell out my buyers.",
-            "I haven't had it for days.  You should visit Kirn again, he might be able to dig up information on the courier that carried it."
+            "I haven't had it for days.  You should visit Kirn again, she might be able to dig up information on the courier that carried it."
         ]
     },
     {

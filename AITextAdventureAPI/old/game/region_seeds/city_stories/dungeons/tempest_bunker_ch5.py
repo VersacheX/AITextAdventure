@@ -170,10 +170,7 @@ DUNGEON_NPCS = [
 ]
 
 DUNGEON_ITEMS = [
-    {'id': 'polar_amplifier', 'location': 'final_chamber'},
     {'id': 'stimulant_large', 'location': 'treasure_room'},
-    {'id': 'arc_core', 'location': 'treasure_room'},
-    {'id': 'storm_etched_plating', 'location': 'treasure_room'},
     {'id': 'tome_int', 'location': 'treasure_room'}
 ]
 

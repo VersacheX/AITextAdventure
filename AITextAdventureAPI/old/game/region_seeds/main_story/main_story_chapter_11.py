@@ -950,8 +950,7 @@ TASKS = [
         'to_id': 'nihilist_leader',
         'task_acquire_events': [
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'nihilist_leader', 'location': None }},
-            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'nihilist_camp', 'location': 'region_open_area' }},
-            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'nihilist_camp', 'item_id': 'shallows_large_city_e_brine_compass', 'location': 'treasure_room' }}
+            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'nihilist_camp', 'location': 'region_open_area' }}
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'nihilist_leader', 'dialog_id': 'nihilist_leader_ch11_intro' }},

@@ -1222,7 +1222,7 @@ TASKS = [
 					'location': 'region_open_area'
 				}
 			},
-			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'abandoned_ruin_ch2', 'item_id': 'grove_lattice', 'location': 'treasure_room'}},
+			#{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'abandoned_ruin_ch2', 'item_id': 'grove_lattice', 'location': 'treasure_room'}},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'abandoned_ruin_ch2', 'item_id': 'veil_memory_leaf', 'location': 'treasure_room'}},
 			#{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'abandoned_ruin_ch2', 'item_id': 'coreforge_shard', 'location': 'treasure_room'}},
 			{

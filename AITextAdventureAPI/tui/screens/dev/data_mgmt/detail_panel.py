@@ -197,6 +197,36 @@ class NpcDetailPanel(Widget):
                     yield Static("[dim]  (no image)[/dim]", id="npc-portrait")
             with Vertical(id="npc-info-col"):
                 yield Static("\n".join(info_parts), id="npc-name-bar")
+
+        # ── Integrity section ─────────────────────────────────────────
+        errors = (r.extras or {}).get("_errors") if r.extras else None
+        if errors is not None:
+            hard_errors = [e for e in errors if e.severity == "error"]
+            info_items  = [e for e in errors if e.severity == "info"]
+            if not hard_errors and not info_items:
+                yield Static("Integrity: [green]OK[/green]", classes="tl-section-header")
+            else:
+                if hard_errors:
+                    parts = [f"[red]{len(hard_errors)} error(s)[/red]"]
+                    if info_items:
+                        parts.append(f"[cyan]{len(info_items)} info[/cyan]")
+                    yield Static(
+                        f"Integrity: [red]FAIL[/red]  ({', '.join(parts)})",
+                        classes="tl-section-header",
+                    )
+                else:
+                    yield Static(
+                        f"Integrity: [cyan]INFO  ({len(info_items)} note(s))[/cyan]",
+                        classes="tl-section-header",
+                    )
+                for err in errors:
+                    colour = "cyan" if err.severity == "info" else "red"
+                    yield Static(
+                        f"  [{colour}]{rich_escape(err.code)}[/{colour}]"
+                        f"  [dim]{rich_escape(err.message)}[/dim]",
+                        classes="tl-section-header",
+                    )
+
         yield Static(rich_escape(r.detail), id="npc-detail-body")
 
     def on_mount(self) -> None:
@@ -697,11 +727,79 @@ def update_detail_for_record(screen: "DataMgmtScreen", record: "DevRecord | None
         _render_city_detail(detail_panel, record)
         return
 
+    if record.category == "character":
+        _render_character_detail(detail_panel, record)
+        return
+
+    if record.category == "equipment":
+        _render_equipment_detail(detail_panel, record)
+        return
+
     static = _ensure_static(detail_panel)
     header = f"[bold]{rich_escape(record.name)}[/bold]"
     if record.subtitle:
         header += f"\n[dim]{rich_escape(record.subtitle)}[/dim]"
     static.update(f"{header}\n\n{rich_escape(record.detail)}")
+
+def _render_character_detail(detail_panel: Any, record: "DevRecord") -> None:
+    """Render a character DevRecord, highlighting any invalid equipment or
+    ability ids inline in red within the detail text."""
+    static = _ensure_static(detail_panel)
+
+    invalid_equip    = (record.extras or {}).get("_invalid_equip")    or set()
+    invalid_abilities = (record.extras or {}).get("_invalid_abilities") or set()
+    errors            = (record.extras or {}).get("_errors")           or []
+    validated         = (record.extras or {}).get("_validated", False)
+
+    lines: list[str] = []
+
+    # Header
+    lines.append(f"[bold]{rich_escape(record.name)}[/bold]")
+    if record.subtitle:
+        lines.append(f"[dim]{rich_escape(record.subtitle)}[/dim]")
+    lines.append("")
+
+    # Integrity summary banner
+    if validated and errors:
+        lines.append(f"[red]Integrity: FAIL  ({len(errors)} issue(s))[/red]")
+        for e in errors:
+            lines.append(f"  [red]{rich_escape(e.code)}[/red]  [dim]{rich_escape(e.message)}[/dim]")
+        lines.append("")
+    elif validated:
+        lines.append("[green]Integrity: OK[/green]")
+        lines.append("")
+
+    # Detail body — walk line-by-line, highlight invalid ids inline
+    for raw_line in record.detail.splitlines():
+        if not (invalid_equip or invalid_abilities):
+            # Nothing to highlight — fast path
+            lines.append(rich_escape(raw_line))
+            continue
+
+        # Equipment lines: "Weapon : some_id"  /  "Head   : some_id"  etc.
+        # The id is the token after the last colon, stripped.
+        stripped = raw_line.strip()
+        if ":" in stripped and any(
+            stripped.startswith(prefix)
+            for prefix in ("Weapon", "Head", "Body", "Arms", "Legs", "Accessory")
+        ):
+            label, _, value = raw_line.partition(":")
+            item_id = value.strip()
+            if item_id in invalid_equip:
+                lines.append(
+                    f"{rich_escape(label)}: [red]{rich_escape(item_id)}[/red]"
+                )
+                continue
+
+        # Ability lines: the line is indented and contains only the ability id
+        if stripped and stripped in invalid_abilities:
+            indent = raw_line[: len(raw_line) - len(raw_line.lstrip())]
+            lines.append(f"{indent}[red]{rich_escape(stripped)}[/red]")
+            continue
+
+        lines.append(rich_escape(raw_line))
+
+    static.update("\n".join(lines))
 
 
 def _render_city_detail(detail_panel: Any, record: "DevRecord") -> None:
@@ -738,6 +836,44 @@ def _render_city_detail(detail_panel: Any, record: "DevRecord") -> None:
 
     static.update("\n".join(lines))
 
+
+def _render_equipment_detail(detail_panel: Any, record: "DevRecord") -> None:
+    """Render an equipment DevRecord, showing validation errors in the header
+    when the equipment validator has run."""
+    static = _ensure_static(detail_panel)
+    lines: list[str] = []
+
+    lines.append(f"[bold]{rich_escape(record.name)}[/bold]")
+    if record.subtitle:
+        lines.append(f"[dim]{rich_escape(record.subtitle)}[/dim]")
+    lines.append("")
+
+    errors    = (record.extras or {}).get("_errors")    or []
+    validated = (record.extras or {}).get("_validated", False)
+
+    if validated and errors:
+        has_error   = any(getattr(e, "severity", "") == "error"   for e in errors)
+        has_warning = any(getattr(e, "severity", "") == "warning" for e in errors)
+        if has_error:
+            hc, kind = "red",    "FAIL"
+        elif has_warning:
+            hc, kind = "yellow", "WARN"
+        else:
+            hc, kind = "cyan",   "INFO"
+        lines.append(f"[{hc}]Integrity: {kind}  ({len(errors)} issue(s))[/{hc}]")
+        for e in errors:
+            sev = getattr(e, "severity", "error")
+            c   = "red" if sev == "error" else "yellow" if sev == "warning" else "cyan"
+            lines.append(f"  [{c}]{rich_escape(e.code)}[/{c}]  [dim]{rich_escape(e.message)}[/dim]")
+        lines.append("")
+    elif validated:
+        lines.append("[green]Integrity: OK — item has a valid award source[/green]")
+        lines.append("")
+
+    if record.detail:
+        lines.append(rich_escape(record.detail))
+
+    static.update("\n".join(lines))
 
 def update_detail_for_single_dialogue(screen: "DataMgmtScreen", line: "DialogueLine | None") -> None:
     """Update detail panel with a single DialogueLine."""
@@ -959,597 +1095,6 @@ def _parse_chapter_data(task_nodes: "List[TimelineTaskNode]") -> "dict | None":
         city_name    = city_name,
         region        = region,
         size_label   = size_label,
-        created_npcs  = created_npcs,
-        joined_chars  = joined_chars,
-        created_dung  = created_dung,
-    )
-
-
-class ChapterDetailPanel(Widget):
-    """Two-section detail panel for a chapter-level timeline selection.
-
-    Layout mirrors NpcDetailPanel:
-      ┌─ Chapter header (city, region/size, counts) ──────┐  border-bottom
-      └─ Task breakdown (scrollable body)  ───────────────┘
-    """
-
-    DEFAULT_CSS = """
-    ChapterDetailPanel {
-        width: 100%;
-        height: auto;
-        layout: vertical;
-    }
-    #ch-header {
-        width: 100%;
-        height: auto;
-        padding: 1 2;
-        border-bottom: solid $accent 30%;
-    }
-    #ch-header-title {
-        width: 100%;
-        height: auto;
-    }
-    #ch-meta-col {
-        width: 100%;
-        height: auto;
-        padding: 1 0 0 0;
-    }
-    #ch-body {
-        width: 100%;
-        height: auto;
-        padding: 1 2;
-    }
-    .ch-meta-label {
-        width: 100%;
-        height: auto;
-        color: $accent;
-        text-style: bold;
-    }
-    .ch-meta-value {
-        width: 100%;
-        height: auto;
-        padding: 0 0 0 2;
-        color: $text 85%;
-    }
-    .ch-task-row {
-        width: 100%;
-        height: auto;
-        color: $text 85%;
-    }
-    .ch-integrity {
-        width: 100%;
-        height: auto;
-        padding: 1 0 0 0;
-    }
-    """
-
-    def __init__(
-        self,
-        data: dict,
-        task_nodes: "List[TimelineTaskNode]",
-    ) -> None:
-        super().__init__()
-        self._data       = data
-        self._task_nodes = task_nodes
-
-    def compose(self) -> ComposeResult:
-        d = self._data
-
-        def _list_markup(items: list[str]) -> str:
-            return "  ".join(rich_escape(i) for i in items) if items else "[dim]none[/dim]"
-
-        # ── Header block ──────────────────────────────────────────────
-        with Vertical(id="ch-header"):
-            title_markup = f"[bold cyan]{rich_escape(d['title'])}[/bold cyan]"
-            if d["subtitle"]:
-                title_markup += f"\n[dim]{rich_escape(d['subtitle'])}[/dim]"
-            yield Static(title_markup, id="ch-header-title")
-
-            with Vertical(id="ch-meta-col"):
-                if d["region"] and d["size_label"]:
-                    yield Static("Region / Size", classes="ch-meta-label")
-                    yield Static(
-                        f"{rich_escape(d['region'])}  ·  {rich_escape(d['size_label'])}",
-                        classes="ch-meta-value",
-                    )
-                elif d["region"]:
-                    yield Static("Region", classes="ch-meta-label")
-                    yield Static(rich_escape(d["region"]), classes="ch-meta-value")
-
-                yield Static("New NPCs", classes="ch-meta-label")
-                yield Static(_list_markup(d["created_npcs"]), classes="ch-meta-value")
-                yield Static("Dungeons", classes="ch-meta-label")
-                yield Static(_list_markup(d["created_dung"]), classes="ch-meta-value")
-                yield Static("Character Joins", classes="ch-meta-label")
-                yield Static(_list_markup(d["joined_chars"]), classes="ch-meta-value")
-
-        # ── Task breakdown body ───────────────────────────────────────
-        with Vertical(id="ch-body"):
-            invalid       = sum(1 for t in self._task_nodes if t.errors)
-            total_errors  = sum(len(t.errors) for t in self._task_nodes)
-            any_validated = any(t.errors is not None for t in self._task_nodes)
-
-            if invalid:
-                yield Static(
-                    f"[red]Integrity: {invalid} invalid task(s), "
-                    f"{total_errors} error(s)[/red]",
-                    classes="ch-integrity",
-                )
-            elif any_validated:
-                yield Static("[green]Integrity: OK[/green]", classes="ch-integrity")
-
-            for t in self._task_nodes:
-                error_suffix = (
-                    f"  [red](errors: {len(t.errors)})[/red]" if t.errors else ""
-                )
-                yield Static(
-                    f"[bold]{rich_escape(t.label)}[/bold]  "
-                    f"[dim]{rich_escape(t.task_id)}[/dim]"
-                    + error_suffix,
-                    classes="ch-task-row",
-                )
-
-
-def update_detail_for_timeline_task(screen: "DataMgmtScreen", task_node: "TimelineTaskNode") -> None:
-    """Update the detail panel with a single TimelineTaskNode (sectioned)."""
-    detail_panel = screen.query_one("#dm-detail-panel")
-    detail_panel.remove_children()
-    detail_panel.mount(TimelineDetailPanel(task_node))
-
-
-def update_detail_for_timeline_subtree(
-    screen: "DataMgmtScreen",
-    task_nodes: "List[TimelineTaskNode]",
-) -> None:
-    """Update the detail panel with an aggregate summary of task nodes from a subtree."""
-    detail_panel = screen.query_one("#dm-detail-panel")
-    detail_panel.remove_children()
-    if not task_nodes:
-        detail_panel.mount(TimelineDetailPanel(None))
-        return
-
-    header_data = _parse_subtree_header_data(task_nodes)
-    if header_data is not None:
-        detail_panel.mount(ChapterDetailPanel(header_data, task_nodes))
-        return
-
-    invalid      = sum(1 for t in task_nodes if t.errors)
-    total_errors = sum(len(t.errors) for t in task_nodes)
-
-    if invalid:
-        integrity_line = (
-            f"\n[red]Integrity: {invalid} invalid task(s), "
-            f"{total_errors} error(s) in subtree[/red]"
-        )
-    else:
-        any_validated = any(t.errors is not None for t in task_nodes)
-        integrity_line = "\n[green]Integrity: OK[/green]" if any_validated else ""
-
-    summary = "\n".join(
-        f"[bold]{rich_escape(t.label)}[/bold]  "
-        f"[dim]{rich_escape(t.task_id)}[/dim]  "
-        f"[dim]({rich_escape(t.source_path)})[/dim]"
-        + (f"  [red](errors: {len(t.errors)})[/red]" if t.errors else "")
-        for t in task_nodes
-    ) + integrity_line
-
-    detail_panel.mount(TimelineDetailPanel(None, summary_text=summary))
-
-
-def update_detail_for_npc_group(
-    screen: "DataMgmtScreen",
-    npc_nodes: "List[NpcRecordNode]",
-) -> None:
-    """Update the detail panel with an aggregate view of NPCs from a group selection."""
-    detail_panel = screen.query_one("#dm-detail-panel")
-    static = _ensure_static(detail_panel)
-    if not npc_nodes:
-        static.update("[dim]← select an NPC from the tree[/dim]")
-        return
-    parts = [
-        f"[bold]{rich_escape(n.label)}[/bold]  "
-        f"[dim]{rich_escape(n.npc_id)}[/dim]  "
-        f"[dim]({rich_escape(n.source_group)})[/dim]"
-        for n in npc_nodes
-    ]
-    static.update("\n".join(parts))
-
-
-def update_detail_for_ability(
-    screen: "DataMgmtScreen",
-    ability_node: "AbilityNode",
-) -> None:
-    """Update the detail panel for a single AbilityNode."""
-    from tui.services.dev.dataservices.models import AbilityNode as _AbilityNode  # noqa: PLC0415
-
-    detail_panel = screen.query_one("#dm-detail-panel")
-    detail_panel.remove_children()
-
-    record  = ability_node.record
-    errors  = ability_node.errors
-    lines: list[str] = []
-
-    # Header
-    lines.append(f"[bold]{rich_escape(record.name)}[/bold]")
-    lines.append(f"[dim]{rich_escape(record.id)}[/dim]")
-    lines.append("")
-
-    # Validation block
-    if errors:
-        has_error  = any(e.severity == "error"   for e in errors)
-        has_warn   = any(e.severity == "warning" for e in errors)
-        has_notice = any(e.severity == "notice"  for e in errors)
-        if has_error:
-            header_colour, kind = "red",    "FAIL"
-        elif has_warn:
-            header_colour, kind = "yellow", "WARN"
-        elif has_notice:
-            header_colour, kind = "cyan",   "INFO"
-        else:
-            header_colour, kind = "cyan",   "INFO"
-        lines.append(f"[{header_colour}]Integrity: {kind}  ({len(errors)} issue(s))[/{header_colour}]")
-        for e in errors:
-            if e.severity == "error":
-                c = "red"
-            elif e.severity == "warning":
-                c = "yellow"
-            else:
-                c = "cyan"
-            lines.append(f"  [{c}]{rich_escape(e.code)}[/{c}]  [dim]{rich_escape(e.message)}[/dim]")
-    else:
-        lines.append("[green]Integrity: OK[/green]")
-
-    lines.append("")
-    lines.append(rich_escape(record.detail))
-
-    detail_panel.mount(Static("\n".join(lines)))
-
-
-def update_detail_for_ability_group(
-    screen: "DataMgmtScreen",
-    ability_nodes: "List[AbilityNode]",
-) -> None:
-    """Update the detail panel with an aggregate view of a selected ability subtree."""
-    detail_panel = screen.query_one("#dm-detail-panel")
-    detail_panel.remove_children()
-
-    if not ability_nodes:
-        detail_panel.mount(Static("[dim]← select an ability from the tree[/dim]"))
-        return
-
-    invalid      = sum(1 for n in ability_nodes if n.errors)
-    total_errors = sum(len(n.errors) for n in ability_nodes)
-
-    if invalid:
-        integrity_line = (
-            f"\n[red]Integrity: {invalid} invalid, "
-            f"{total_errors} issue(s) in subtree[/red]"
-        )
-    else:
-        any_validated = any(n.errors is not None for n in ability_nodes)
-        integrity_line = "\n[green]Integrity: OK[/green]" if any_validated else ""
-
-    parts = [
-        f"[bold]{rich_escape(n.label)}[/bold]  "
-        f"[dim]{rich_escape(n.ability_id)}[/dim]"
-        + (f"  [red](issues: {len(n.errors)})[/red]" if n.errors else "")
-        for n in ability_nodes
-    ]
-    detail_panel.mount(Static("\n".join(parts) + integrity_line))
-
-
-def update_detail_for_hostile(
-    screen: "DataMgmtScreen",
-    hostile_node: "HostileNode",
-) -> None:
-    """Update the detail panel for a single HostileNode."""
-    detail_panel = screen.query_one("#dm-detail-panel")
-    detail_panel.remove_children()
-
-    record = hostile_node.record
-    errors = hostile_node.errors
-    lines: list[str] = []
-
-    lines.append(f"[bold]{rich_escape(record.name)}[/bold]")
-    lines.append(f"[dim]{rich_escape(record.id)}[/dim]")
-    lines.append("")
-
-    if errors:
-        has_error  = any(e.severity == "error"   for e in errors)
-        has_warn   = any(e.severity == "warning" for e in errors)
-        has_notice = any(e.severity == "notice"  for e in errors)
-        if has_error:
-            header_colour, kind = "red",    "FAIL"
-        elif has_warn:
-            header_colour, kind = "yellow", "WARN"
-        elif has_notice:
-            header_colour, kind = "cyan",   "INFO"
-        else:
-            header_colour, kind = "cyan",   "INFO"
-        lines.append(f"[{header_colour}]Integrity: {kind}  ({len(errors)} issue(s))[/{header_colour}]")
-        for e in errors:
-            if e.severity == "error":
-                c = "red"
-            elif e.severity == "warning":
-                c = "yellow"
-            else:
-                c = "cyan"
-            lines.append(f"  [{c}]{rich_escape(e.code)}[/{c}]  [dim]{rich_escape(e.message)}[/dim]")
-    else:
-        lines.append("[green]Integrity: OK[/green]")
-
-    lines.append("")
-    lines.append(rich_escape(record.detail))
-
-    detail_panel.mount(Static("\n".join(lines)))
-
-
-def update_detail_for_hostile_group(
-    screen: "DataMgmtScreen",
-    hostile_nodes: "List[HostileNode]",
-) -> None:
-    """Update the detail panel with an aggregate view of a hostile subtree."""
-    detail_panel = screen.query_one("#dm-detail-panel")
-    detail_panel.remove_children()
-
-    if not hostile_nodes:
-        detail_panel.mount(Static("[dim]← select a hostile from the tree[/dim]"))
-        return
-
-    invalid      = sum(1 for n in hostile_nodes if n.errors)
-    total_errors = sum(len(n.errors) for n in hostile_nodes)
-
-    if invalid:
-        integrity_line = (
-            f"\n[red]Integrity: {invalid} invalid, "
-            f"{total_errors} issue(s) in subtree[/red]"
-        )
-    else:
-        any_validated = any(n.errors is not None for n in hostile_nodes)
-        integrity_line = "\n[green]Integrity: OK[/green]" if any_validated else ""
-
-    parts = [
-        f"[bold]{rich_escape(n.label)}[/bold]  "
-        f"[dim]{rich_escape(n.hostile_id)}[/dim]"
-        + (f"  [red](issues: {len(n.errors)})[/red]" if n.errors else "")
-        for n in hostile_nodes
-    ]
-    detail_panel.mount(Static("\n".join(parts) + integrity_line))
-
-
-def update_detail_for_dungeon(
-    screen: "DataMgmtScreen",
-    dungeon_node: "DungeonNode",
-) -> None:
-    """Update the detail panel for a single DungeonNode."""
-    detail_panel = screen.query_one("#dm-detail-panel")
-    detail_panel.remove_children()
-
-    record   = dungeon_node.record
-    errors   = dungeon_node.errors
-    settings = dungeon_node.settings
-    lines: list[str] = []
-
-    lines.append(f"[bold]{rich_escape(record.name)}[/bold]")
-    lines.append(f"[dim]{rich_escape(dungeon_node.dungeon_id)}[/dim]")
-    lines.append(f"[dim]Group: {rich_escape(dungeon_node.group_id)}[/dim]")
-    lines.append("")
-
-    if errors:
-        has_error  = any(e.severity == "error"   for e in errors)
-        has_warn   = any(e.severity == "warning" for e in errors)
-        has_notice = any(e.severity == "notice"  for e in errors)
-        if has_error:
-            header_colour, kind = "red",    "FAIL"
-        elif has_warn:
-            header_colour, kind = "yellow", "WARN"
-        elif has_notice:
-            header_colour, kind = "cyan",   "INFO"
-        else:
-            header_colour, kind = "cyan",   "INFO"
-        lines.append(f"[{header_colour}]Integrity: {kind}  ({len(errors)} issue(s))[/{header_colour}]")
-        for e in errors:
-            if e.severity == "error":
-                c = "red"
-            elif e.severity == "warning":
-                c = "yellow"
-            else:
-                c = "cyan"
-            lines.append(f"  [{c}]{rich_escape(e.code)}[/{c}]  [dim]{rich_escape(e.message)}[/dim]")
-    else:
-        lines.append("[green]Integrity: OK[/green]")
-
-    lines.append("")
-
-    if settings:
-        for key, val in settings.items():
-            lines.append(f"[dim]{rich_escape(str(key))}:[/dim] {rich_escape(str(val))}")
-        lines.append("")
-
-    if record.detail:
-        lines.append(rich_escape(record.detail))
-
-    detail_panel.mount(Static("\n".join(lines)))
-
-    
-# ── Subtree header data extraction ───────────────────────────────────────
-
-def _parse_subtree_header_data(task_nodes: "List[TimelineTaskNode]") -> "dict | None":
-    """Extract display metadata from a uniform single-bucket task list.
-
-    Handles all three group types:
-      • ``main:chN``           → chapter header
-      • ``extended:<bucket>``  → city-story header
-      • ``regional:<region>``  → regional-story header
-
-    Returns a dict with keys:
-        kind            "chapter" | "extended" | "regional"
-        title           primary bold title string
-        subtitle        secondary dim string (may be empty)
-        region          humanized region name (may be empty)
-        size_label      "Large City" / "Mid City" / "Small City" (may be empty)
-        chapter_num     int or None
-        continent_num   int or None
-        created_npcs    list[str]
-        joined_chars    list[str]
-        created_dung    list[str]
-
-    Returns ``None`` if tasks span multiple buckets/groups.
-    """
-    import re  # noqa: PLC0415
-
-    if not task_nodes:
-        return None
-    paths = {t.source_path for t in task_nodes}
-    if len(paths) != 1:
-        return None
-    source_path = next(iter(paths))
-    if ":" not in source_path:
-        return None
-
-    group_key, bucket_key = source_path.split(":", 1)
-
-    kind         = ""
-    title        = ""
-    subtitle     = ""
-    region       = ""
-    size_label   = ""
-    chapter_num  = None
-    continent_num = None
-
-    if group_key == "main":
-        m = re.fullmatch(r"ch(\d+)", bucket_key)
-        if not m:
-            return None
-        kind        = "chapter"
-        chapter_num = int(m.group(1))
-
-        # city for this chapter
-        city_key  = ""
-        city_name = ""
-        try:
-            from game.region_seeds.world_constants import CHAPTER_CITY_ORDER  # noqa: PLC0415
-            if 1 <= chapter_num <= len(CHAPTER_CITY_ORDER):
-                city_key = CHAPTER_CITY_ORDER[chapter_num - 1]
-        except Exception:
-            pass
-
-        if city_key:
-            _SIZE_MAP = {
-                "large_city": "Large City",
-                "mid_city":   "Mid City",
-                "small_city": "Small City",
-            }
-            for suffix, lbl in _SIZE_MAP.items():
-                if city_key.endswith("_" + suffix):
-                    region     = city_key[: -(len(suffix) + 1)].replace("_", " ").title()
-                    size_label = lbl
-                    break
-            try:
-                import importlib  # noqa: PLC0415
-                bkt      = city_key[:-5] if city_key.endswith("_city") else city_key
-                mod_path = (
-                    f"game.region_seeds.regions.cities"
-                    f".{bkt.split('_')[0]}"
-                    f".constants_buildings_{bkt.split('_', 1)[1]}_city"
-                )
-                city_name = getattr(importlib.import_module(mod_path), "CITY_NAME", "")
-            except Exception:
-                pass
-
-        from tui.services.dev.dataservices.timeline_service import _CHAPTER_TITLES  # noqa: PLC0415
-        ch_title = _CHAPTER_TITLES.get(chapter_num, "")
-        title    = f"Chapter {chapter_num}" + (f" — {ch_title}" if ch_title else "")
-        subtitle = (city_name or city_key or "").strip()
-
-    elif group_key == "extended":
-        # bucket_key is e.g. "desert_large" (no trailing _city)
-        kind = "extended"
-        _SIZE_MAP = {
-            "large": "Large City",
-            "mid":   "Mid City",
-            "small": "Small City",
-        }
-        parts = bucket_key.rsplit("_", 1)
-        if len(parts) == 2 and parts[1] in _SIZE_MAP:
-            region     = parts[0].replace("_", " ").title()
-            size_label = _SIZE_MAP[parts[1]]
-        else:
-            region = bucket_key.replace("_", " ").title()
-
-        # look up city name and chapter/continent from timeline service metadata
-        city_name = ""
-        try:
-            import importlib  # noqa: PLC0415
-            mod_path  = (
-                f"game.region_seeds.regions.cities"
-                f".{parts[0]}"
-                f".constants_buildings_{bucket_key}_city"
-            )
-            city_name = getattr(importlib.import_module(mod_path), "CITY_NAME", "")
-        except Exception:
-            pass
-
-        try:
-            from tui.services.dev.dataservices.timeline_service import _CITY_METADATA  # noqa: PLC0415
-            meta = _CITY_METADATA.get(bucket_key)
-            if meta:
-                chapter_num, continent_num = meta
-        except Exception:
-            pass
-
-        title    = city_name or (region + (" " + size_label if size_label else ""))
-        subtitle = (
-            "  ·  ".join(
-                s for s in [
-                    f"Ch.{chapter_num}"   if chapter_num   else "",
-                    f"Cont.{continent_num}" if continent_num else "",
-                ]
-                if s
-            )
-        )
-
-    elif group_key == "regional":
-        kind   = "regional"
-        region = bucket_key.replace("_", " ").title()
-        title  = f"{region} Region"
-        subtitle = "Regional Story"
-
-    else:
-        return None
-
-    # ── Scan events ───────────────────────────────────────────────────
-    created_npcs: list[str] = []
-    joined_chars: list[str] = []
-    created_dung: list[str] = []
-
-    for task_node in task_nodes:
-        task = task_node.task
-        for bucket in ("task_acquire_events", "task_complete_events"):
-            for evt in task.get(bucket) or []:
-                etype  = evt.get("event_type", "")
-                params = evt.get("params") or {}
-                if etype == "create_npc":
-                    npc_id = params.get("npc_id") or params.get("id") or ""
-                    if npc_id and npc_id not in created_npcs:
-                        created_npcs.append(npc_id)
-                elif etype == "character_join":
-                    char_id = params.get("character_id") or params.get("npc_id") or ""
-                    if char_id and char_id not in joined_chars:
-                        joined_chars.append(char_id)
-                elif etype == "create_dungeon":
-                    dung_id = params.get("dungeon_id") or params.get("id") or ""
-                    if dung_id and dung_id not in created_dung:
-                        created_dung.append(dung_id)
-
-    return dict(
-        kind          = kind,
-        title         = title,
-        subtitle      = subtitle,
-        region        = region,
-        size_label    = size_label,
-        chapter_num   = chapter_num,
-        continent_num = continent_num,
         created_npcs  = created_npcs,
         joined_chars  = joined_chars,
         created_dung  = created_dung,
@@ -1848,6 +1393,94 @@ def update_detail_for_hostile(
 
     lines.append("")
     lines.append(rich_escape(record.detail))
+
+    detail_panel.mount(Static("\n".join(lines)))
+
+
+def update_detail_for_hostile_group(
+    screen: "DataMgmtScreen",
+    hostile_nodes: "List[HostileNode]",
+) -> None:
+    """Update the detail panel with an aggregate view of a hostile subtree."""
+    detail_panel = screen.query_one("#dm-detail-panel")
+    detail_panel.remove_children()
+
+    if not hostile_nodes:
+        detail_panel.mount(Static("[dim]← select a hostile from the tree[/dim]"))
+        return
+
+    invalid      = sum(1 for n in hostile_nodes if n.errors)
+    total_errors = sum(len(n.errors) for n in hostile_nodes)
+
+    if invalid:
+        integrity_line = (
+            f"\n[red]Integrity: {invalid} invalid, "
+            f"{total_errors} issue(s) in subtree[/red]"
+        )
+    else:
+        any_validated = any(n.errors is not None for n in hostile_nodes)
+        integrity_line = "\n[green]Integrity: OK[/green]" if any_validated else ""
+
+    parts = [
+        f"[bold]{rich_escape(n.label)}[/bold]  "
+        f"[dim]{rich_escape(n.hostile_id)}[/dim]"
+        + (f"  [red](issues: {len(n.errors)})[/red]" if n.errors else "")
+        for n in hostile_nodes
+    ]
+    detail_panel.mount(Static("\n".join(parts) + integrity_line))
+
+
+def update_detail_for_dungeon(
+    screen: "DataMgmtScreen",
+    dungeon_node: "DungeonNode",
+) -> None:
+    """Update the detail panel for a single DungeonNode."""
+    detail_panel = screen.query_one("#dm-detail-panel")
+    detail_panel.remove_children()
+
+    record   = dungeon_node.record
+    errors   = dungeon_node.errors
+    settings = dungeon_node.settings
+    lines: list[str] = []
+
+    lines.append(f"[bold]{rich_escape(record.name)}[/bold]")
+    lines.append(f"[dim]{rich_escape(dungeon_node.dungeon_id)}[/dim]")
+    lines.append(f"[dim]Group: {rich_escape(dungeon_node.group_id)}[/dim]")
+    lines.append("")
+
+    if errors:
+        has_error  = any(e.severity == "error"   for e in errors)
+        has_warn   = any(e.severity == "warning" for e in errors)
+        has_notice = any(e.severity == "notice"  for e in errors)
+        if has_error:
+            header_colour, kind = "red",    "FAIL"
+        elif has_warn:
+            header_colour, kind = "yellow", "WARN"
+        elif has_notice:
+            header_colour, kind = "cyan",   "INFO"
+        else:
+            header_colour, kind = "cyan",   "INFO"
+        lines.append(f"[{header_colour}]Integrity: {kind}  ({len(errors)} issue(s))[/{header_colour}]")
+        for e in errors:
+            if e.severity == "error":
+                c = "red"
+            elif e.severity == "warning":
+                c = "yellow"
+            else:
+                c = "cyan"
+            lines.append(f"  [{c}]{rich_escape(e.code)}[/{c}]  [dim]{rich_escape(e.message)}[/dim]")
+    else:
+        lines.append("[green]Integrity: OK[/green]")
+
+    lines.append("")
+
+    if settings:
+        for key, val in settings.items():
+            lines.append(f"[dim]{rich_escape(str(key))}:[/dim] {rich_escape(str(val))}")
+        lines.append("")
+
+    if record.detail:
+        lines.append(rich_escape(record.detail))
 
     detail_panel.mount(Static("\n".join(lines)))
 

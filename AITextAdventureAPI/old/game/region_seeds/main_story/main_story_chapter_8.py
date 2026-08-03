@@ -714,7 +714,6 @@ TASKS = [
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'scalpel', 'location': None }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'scalpel', 'standing_text': ["Glamour was soft. I only need one clean cut."]}},
             { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'theatre_of_echoed_faces', 'location': 'region_city_open_area' }},
-            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'theatre_of_echoed_faces', 'item_id': 'forest_small_city_e_thornshade_root_graft', 'location': 'treasure_room' }},
             { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'theatre_of_echoed_faces', 'item_id': 'ink_resonance_vial', 'location': 'final_chamber' }},
         ],
         'task_complete_events': [

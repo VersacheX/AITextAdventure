@@ -22,6 +22,9 @@ D7  DUNGEON_RARITY_COVERAGE          a dungeon floor does not have at least
 D8  DUNGEON_MISSING_ITEMS            items list is empty (notice)
 D9  DUNGEON_NPC_NO_LOCATION          an NPC in the 'npcs' list has location
                                      set to None (notice)
+D10 DUNGEON_NO_CREATE_EVENT          no create_dungeon event for this dungeon_id
+                                     exists in any timeline task, or more than
+                                     one such event exists (error)
 """
 from __future__ import annotations
 
@@ -76,6 +79,23 @@ def validate_dungeon_tree(
     """
     known_item_ids = _build_known_item_ids(const)
     by_code: Dict[str, int] = defaultdict(int)
+
+    # ── Pre-build create_dungeon event counts across all timeline tasks ───
+    # Counts how many times each dungeon_id appears in a create_dungeon event
+    # across every task in const.TASKS.  Used for D10.
+    create_dungeon_counts: Dict[str, int] = defaultdict(int)
+    for task in list(getattr(const, "TASKS", []) or []):
+        if not isinstance(task, dict):
+            continue
+        for stage in ("task_acquire_events", "task_complete_events"):
+            for ev in task.get(stage) or []:
+                if not isinstance(ev, dict):
+                    continue
+                if ev.get("event_type") == "create_dungeon":
+                    params = ev.get("params") or {}
+                    did = str(params.get("dungeon_id") or params.get("id") or "")
+                    if did:
+                        create_dungeon_counts[did] += 1
 
     all_nodes: List[DungeonNode] = [
         d for group in tree for d in group.dungeons
@@ -215,8 +235,24 @@ def validate_dungeon_tree(
                 ))
                 by_code["DUNGEON_NPC_NO_LOCATION"] += 1
 
-    invalid      = sum(1 for n in all_nodes if n.errors)
+        # ── D10 DUNGEON_NO_CREATE_EVENT ───────────────────────────────────
+        count = create_dungeon_counts.get(node.dungeon_id, 0)
+        if count == 0:
+            node.errors.append(_err(
+                "DUNGEON_NO_CREATE_EVENT",
+                f"No create_dungeon event found for '{node.dungeon_id}' "
+                "in any timeline task — dungeon is never created at runtime.",
+            ))
+            by_code["DUNGEON_NO_CREATE_EVENT"] += 1
+        elif count > 1:
+            node.errors.append(_err(
+                "DUNGEON_NO_CREATE_EVENT",
+                f"create_dungeon for '{node.dungeon_id}' appears {count} time(s) "
+                "across timeline tasks — should appear exactly once.",
+            ))
+            by_code["DUNGEON_NO_CREATE_EVENT"] += 1
     total_errors = sum(len(n.errors) for n in all_nodes)
+    invalid = sum(1 for n in all_nodes if n.errors)
 
     return {
         "dungeons_scanned": len(all_nodes),

@@ -82,6 +82,7 @@ _ABILITY_CATEGORY     = "ability"
 _HOSTILE_CATEGORY     = "hostile"
 _DUNGEON_CATEGORY     = "dungeon"
 _CITY_CATEGORY        = "city"
+_CHARACTER_CATEGORY   = "character"
 _SIMULATION_CATEGORY  = "simulation"
 
 
@@ -114,6 +115,7 @@ def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
     is_city       = category == _CITY_CATEGORY
     is_simulation = category == _SIMULATION_CATEGORY
     is_tree       = is_dialog or is_timeline or is_npc or is_dungeon
+    is_character  = category == _CHARACTER_CATEGORY
 
     screen.query_one("#dm-filter", Input).display                  = not (is_dialog or is_equipment or is_ability or is_hostile or is_simulation)
     screen.query_one("#dm-dialog-filter-row").display              = is_dialog
@@ -138,9 +140,12 @@ def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
     screen.query_one("#dm-validate-hostiles",     Button).display = is_hostile
     screen.query_one("#dm-validate-dungeons",     Button).display = is_dungeon
     screen.query_one("#dm-validate-city-region",  Button).display = is_city
-    screen.query_one("#dm-equip-sort-dir",    Button).display      = is_equipment
-    screen.query_one("#dm-hostile-sort-dir",  Button).display      = is_hostile
-    screen.query_one("#dm-ability-sort-dir",  Button).display      = is_ability
+    screen.query_one("#dm-validate-equipment", Button).display = is_equipment
+    screen.query_one("#dm-validate-characters", Button).display = is_character
+    screen.query_one("#dm-validate-npc",          Button).display  = is_npc
+    screen.query_one("#dm-equip-sort-dir",   Button).display       = is_equipment
+    screen.query_one("#dm-hostile-sort-dir", Button).display       = is_hostile
+    screen.query_one("#dm-ability-sort-dir", Button).display       = is_ability
     screen.query_one(NpcMusicPlayerWidget).display                 = is_npc
 
     # Simulation panel: mount on demand, remove when leaving
@@ -362,6 +367,12 @@ def handle_button_pressed(screen: "DataMgmtScreen", event: Button.Pressed) -> No
         validate_dungeons_for_screen(screen)
     elif bid == "dm-validate-city-region":
         validate_city_region_for_screen(screen)
+    elif bid == "dm-validate-equipment":
+        validate_equipment_for_screen(screen)
+    elif bid == "dm-validate-characters":
+        validate_characters_for_screen(screen)
+    elif bid == "dm-validate-npc":
+        validate_npc_for_screen(screen)
     elif bid == "dm-equip-sort-dir":
         screen._equipment_sort_asc = not screen._equipment_sort_asc
         event.button.label = "↑" if screen._equipment_sort_asc else "↓"
@@ -906,7 +917,7 @@ _TYPE_ABBR_MAP = {
 _EQUIP_COLUMNS = (
     "Name", "Type", "Lv", "Rarity", "Elem",
     "DMG", "DEF", "CRIT", "TSP", "TEP", "TAP", "TP",
-    "Imm", "Res", "Wk",
+    "Imm", "Res", "Wk", "Err",
 )
 
 
@@ -942,10 +953,38 @@ def _balance_ratings(records: list) -> list[str]:
 def _cell(value: str, rating: str) -> Text:
     """Wrap a cell value in a Rich Text with the appropriate balance colour."""
     if rating == "weak":
-        return Text(value, style=Style(color="red", dim=True))
+        return Text(value, style=Style(color="cyan", dim=True))
     if rating == "strong":
-        return Text(value, style=Style(color="yellow"))
+        return Text(value, style=Style(color="#2323ff"))
     return Text(value)
+
+
+_EQUIP_ERROR_STYLE  = Style(color="red")
+_EQUIP_STRONG_STYLE = Style(color="#2323ff")   # blue — balance high
+_EQUIP_WEAK_STYLE   = Style(color="cyan", dim=True)   # cyan — balance low
+
+
+def _equip_row_style(record: Any, rating: str) -> Style:
+    """Row tint priority: error (not found) > balance-strong > balance-weak > default."""
+    errors = record.extras.get("_errors") or [] if record.extras else []
+    if any(e.severity == "error" for e in errors):
+        return _EQUIP_ERROR_STYLE
+    if rating == "strong":
+        return _EQUIP_STRONG_STYLE
+    if rating == "weak":
+        return _EQUIP_WEAK_STYLE
+    return _ROW_DEFAULT_STYLE
+
+
+def _equip_error_cell(record: Any) -> Text:
+    """Compact error indicator cell for the equipment table."""
+    errors = record.extras.get("_errors") or [] if record.extras else []
+    if not errors:
+        return Text("✓", style=Style(color="green", dim=True))
+    has_error = any(e.severity == "error" for e in errors)
+    if has_error:
+        return Text(f"✗{len(errors)}", style=_EQUIP_ERROR_STYLE)
+    return Text(f"⚠{len(errors)}", style=Style(color="yellow"))
 
 
 def _populate_equipment_table(screen: "DataMgmtScreen", records: list) -> None:
@@ -992,22 +1031,25 @@ def _populate_equipment_table(screen: "DataMgmtScreen", records: list) -> None:
         res_disp = _fmt_mixed(res_raw)
         wk_disp  = _fmt_mixed(wk_raw)
 
+        row_style = _equip_row_style(r, rating)
+
         table.add_row(
-            _cell(r.name,                   rating),
-            _cell(type_abbr,                rating),
-            _cell(str(x.get("level", 0)),   rating),
-            _cell(rar_disp,                 rating),
-            _cell(elem,                     rating),
-            _cell(dmg,                      rating),
-            _cell(defn,                     rating),
-            _cell(crit,                     rating),
-            _cell(tsp,                      rating),
-            _cell(tep,                      rating),
-            _cell(tap,                      rating),
-            _cell(tp,                       rating),
-            _cell(imm_disp,                 rating),
-            _cell(res_disp,                 rating),
-            _cell(wk_disp,                  rating),
+            Text(r.name,                  style=row_style),
+            Text(type_abbr,               style=row_style),
+            Text(str(x.get("level", 0)), style=row_style),
+            Text(rar_disp,                style=row_style),
+            Text(elem,                    style=row_style),
+            Text(dmg,                     style=row_style),
+            Text(defn,                    style=row_style),
+            Text(crit,                    style=row_style),
+            Text(tsp,                     style=row_style),
+            Text(tep,                     style=row_style),
+            Text(tap,                     style=row_style),
+            Text(tp,                      style=row_style),
+            Text(imm_disp,                style=row_style),
+            Text(res_disp,                style=row_style),
+            Text(wk_disp,                 style=row_style),
+            _equip_error_cell(r),
             key=str(idx),
         )
 
@@ -1084,9 +1126,9 @@ def _ability_severity_rank(node: "AbilityNode") -> int:
         return 0
     if any(e.severity == "warning" for e in node.errors):
         return 1
-    if any(e.severity == "notice" and e.code not in _ABILITY_BLUE_NOTICE_CODES for e in node.errors):
-        return 2
     if any(e.severity == "notice" and e.code in _ABILITY_BLUE_NOTICE_CODES for e in node.errors):
+        return 2
+    if any(e.severity == "notice" for e in node.errors):
         return 3
     if any(e.severity == "info"   for e in node.errors):
         return 4
@@ -1382,3 +1424,79 @@ def handle_copy_action(screen: "DataMgmtScreen") -> None:
         ):
             rebuild_list_for_screen(screen)
     screen.query_one("#dm-status", Static).update(status)
+
+
+def validate_equipment_for_screen(screen: "DataMgmtScreen") -> None:
+    from tui.services.dev.dataservices.equipment_validator import validate_equipment  # noqa: PLC0415
+    from tui.services.dev.dataservices.catalog import get_timeline_tree, filter_equipment_records  # noqa: PLC0415
+    import game.constants as const                                                     # noqa: PLC0415
+
+    all_equipment   = filter_equipment_records()
+    timeline_groups = get_timeline_tree()
+    summary         = validate_equipment(all_equipment, timeline_groups, const=const)
+
+    rebuild_list_for_screen(screen)
+
+    total_errors = summary.get("total_errors", 0)
+    invalid      = summary.get("invalid", 0)
+
+    if total_errors == 0:
+        screen.notify("✓ Equipment integrity OK — all items are reachable.", timeout=3.0)
+    else:
+        screen.notify(
+            f"✗ {invalid} item(s) not found in timeline — flagged in table.",
+            severity="warning",
+            timeout=5.0,
+        )
+
+
+def validate_characters_for_screen(screen: "DataMgmtScreen") -> None:
+    from tui.services.dev.dataservices.character_validator import validate_characters  # noqa: PLC0415
+    from tui.services.dev.dataservices.catalog import get_records                     # noqa: PLC0415
+    import game.constants as const                                                     # noqa: PLC0415
+
+    records = get_records(_CHARACTER_CATEGORY)
+    summary = validate_characters(records, const)
+
+    rebuild_list_for_screen(screen)
+
+    total_errors = summary.get("total_errors", 0)
+    invalid      = summary.get("invalid", 0)
+
+    if total_errors == 0:
+        screen.notify("✓ Character equipment OK — all slots reference valid items.", timeout=3.0)
+    else:
+        screen.notify(
+            f"✗ {total_errors} invalid slot(s) across {invalid} character(s) — flagged in list.",
+            severity="warning",
+            timeout=5.0,
+        )
+
+
+def validate_npc_for_screen(screen: "DataMgmtScreen") -> None:
+    from tui.services.dev.dataservices.npc_validator import validate_npc_tree  # noqa: PLC0415
+    import game.constants as const                                              # noqa: PLC0415
+
+    tree    = get_npc_tree()
+    summary = validate_npc_tree(tree, const)
+
+    rebuild_npc_tree_for_screen(screen)
+
+    total_errors = summary.get("total_errors", 0)
+    total_info   = summary.get("total_info", 0)
+    invalid      = summary.get("invalid", 0)
+
+    if total_errors == 0 and total_info == 0:
+        screen.notify("✓ NPC integrity OK — all seeds complete.", timeout=3.0)
+    elif total_errors == 0:
+        screen.notify(
+            f"ℹ {total_info} optional field(s) unset across {invalid} NPC(s) — shown in cyan.",
+            severity="information",
+            timeout=5.0,
+        )
+    else:
+        screen.notify(
+            f"✗ {total_errors} error(s) across {invalid} NPC(s) — flagged in tree.",
+            severity="warning",
+            timeout=5.0,
+        )

@@ -97,7 +97,6 @@ from game.region_seeds.main_story.dungeons.nobles_mansion import DUNGEON_SETTING
 from game.region_seeds.main_story.dungeons.seth_hideout_ch3 import DUNGEON_SETTINGS as SETH_HIDEOUT_CH3_DUNGEON_SETTINGS
 from game.region_seeds.main_story.dungeons.rift_dungeon import DUNGEON_SETTINGS as RIFT_DUNGEON_DUNGEON_SETTINGS
 from game.region_seeds.main_story.dungeons.stormglass_alley import DUNGEON_SETTINGS as STORMGLASS_ALLEY_DUNGEON_SETTINGS
-from game.region_seeds.main_story.dungeons.tempest_bunker_ch5 import DUNGEON_SETTINGS as TEMPEST_BUNKER_DUNGEON_SETTINGS
 from game.region_seeds.main_story.dungeons.riftland_breach_site import DUNGEON_SETTINGS as RIFTLAND_BREACH_DUNGEON_SETTINGS
 from game.region_seeds.main_story.dungeons.rift_dungeon_outskirts import DUNGEON_SETTINGS as RIFT_DUNGEON_OUTSKIRTS_DUNGEON_SETTINGS
 from game.region_seeds.main_story.dungeons.theatre_of_echoed_faces import DUNGEON_SETTINGS as THEATRE_ECHOED_FACES_DUNGEON_SETTINGS
@@ -156,13 +155,14 @@ from game.region_seeds.city_stories.dungeons.mountains_mid_emberwake_cavern impo
 from game.region_seeds.city_stories.dungeons.marrowroots_deep_grove import DUNGEON_SETTINGS as MARROWROOTS_DEEP_GROVE_DUNGEON_SETTINGS
 from game.region_seeds.city_stories.dungeons.aeriolass_frozen_sanctum import DUNGEON_SETTINGS as AERIOLASS_FROZEN_SANCTUM_DUNGEON_SETTINGS
 from game.region_seeds.city_stories.dungeons.swamp_mid_city_oathrot_channel import DUNGEON_SETTINGS as SWAMP_MID_CITY_OATHROT_CHANNEL_DUNGEON_SETTINGS
+from game.region_seeds.city_stories.dungeons.tempest_bunker_ch5 import DUNGEON_SETTINGS as TEMPEST_BUNKER_DUNGEON_SETTINGS
 DUNGEON_SETTINGS = [
 	# Ch1-4
 	SETH_HIDEOUT_DUNGEON_SETTINGS, ABANDONED_RUIN_CH2_DUNGEON_SETTINGS,
 	NOBLES_MANSION_DUNGEON_SETTINGS, SETH_HIDEOUT_CH3_DUNGEON_SETTINGS,
 	RIFT_DUNGEON_DUNGEON_SETTINGS,
 	# Ch5-7
-	STORMGLASS_ALLEY_DUNGEON_SETTINGS, TEMPEST_BUNKER_DUNGEON_SETTINGS,
+	STORMGLASS_ALLEY_DUNGEON_SETTINGS,
 	RIFTLAND_BREACH_DUNGEON_SETTINGS, RIFT_DUNGEON_OUTSKIRTS_DUNGEON_SETTINGS,
 	# Ch8-11
 	THEATRE_ECHOED_FACES_DUNGEON_SETTINGS, BLOODSPARK_ARENA_DUNGEON_SETTINGS,
@@ -215,6 +215,7 @@ DUNGEON_SETTINGS = [
 	MARROWROOTS_DEEP_GROVE_DUNGEON_SETTINGS,
 	AERIOLASS_FROZEN_SANCTUM_DUNGEON_SETTINGS,
 	SWAMP_MID_CITY_OATHROT_CHANNEL_DUNGEON_SETTINGS,
+	TEMPEST_BUNKER_DUNGEON_SETTINGS,
 ]
 
 #WORLD BOSS AND WORLD ENEMIES

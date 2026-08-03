@@ -176,6 +176,14 @@ R23 CREATE_NPC_NO_STANDING_TEXT  (warning)
     the point of creation so they have interaction text from the moment they
     exist.  Use author discretion to suppress — e.g. a meet-defeat boss that
     is never interactable before the defeat may not need standing text.
+
+R24 MEET_DELIVER_NO_NPC_STANDING_TEXT  (warning)
+    A meet or deliver task has no set_npc_standing_text event for its target
+    npc_id (the task's to_id field) in task_complete_events.  The target NPC
+    is the canonical interaction point for that task — completing the task
+    without updating the NPC's standing text means the player will keep seeing
+    stale interaction text after the narrative beat resolves.
+    Rendered as yellow in the timeline tree; counted separately in the toast.
 """
 from __future__ import annotations
 
@@ -1165,6 +1173,31 @@ def validate_timeline_integrity(
                 f"this warning can be ignored.",
                 severity="notice",
             ))
+
+    # ── R24: Meet / deliver tasks with no set_npc_standing_text for to_id ──
+    for tn in all_tasks:
+        task_type = str(tn.task.get("type", "")).lower()
+        if task_type not in ("meet", "deliver"):
+            continue
+        target_npc_id = str(tn.task.get("to_id") or "")
+        if not target_npc_id:
+            continue
+        has_standing = any(
+            ev.get("event_type") == "set_npc_standing_text"
+            and str((ev.get("params") or {}).get("npc_id") or "") == target_npc_id
+            for ev in _events(tn.task, "task_complete_events")
+        )
+        if not has_standing:
+            errors_map[tn.task_id].append(_err(
+                "MEET_DELIVER_NO_NPC_STANDING_TEXT",
+                f"'{task_type}' task '{tn.task_id}' has no set_npc_standing_text for target "
+                f"npc '{target_npc_id}' in task_complete_events.  The NPC's standing text "
+                f"should be updated at task completion to reflect the new story state.",
+                event_type="set_npc_standing_text",
+                related_entity_id=target_npc_id,
+                severity="warning",
+            ))
+
 
     # ── R4: Unreachable tasks (no inbound award) ──────────────────────────
     for tn in all_tasks:
