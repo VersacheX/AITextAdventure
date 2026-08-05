@@ -9,7 +9,7 @@ from collections import defaultdict
 from rich.style import Style
 from rich.text import Text
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from textual.containers import Vertical
 from textual.widgets import Button, DataTable, Input, ListView, RadioSet, Static, Tabs, Tree
@@ -134,7 +134,7 @@ def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
     screen.query_one("#dm-dungeon-tree", Tree).display             = is_dungeon
     screen.query_one("#dm-expand",   Button).display               = is_tree
     screen.query_one("#dm-collapse", Button).display               = is_tree
-    screen.query_one("#dm-copy",     Button).display               = is_tree or is_equipment or is_hostile or is_ability
+    screen.query_one("#dm-copy",     Button).display               = is_tree or is_equipment or is_hostile or is_ability or is_character
     screen.query_one("#dm-validate-timeline",     Button).display = is_timeline
     screen.query_one("#dm-validate-abilities",    Button).display = is_ability
     screen.query_one("#dm-validate-hostiles",     Button).display = is_hostile
@@ -229,15 +229,16 @@ def handle_radio_set_changed(screen: "DataMgmtScreen", event: RadioSet.Changed) 
 
 
 _SORT_COL_MAP: dict[str, str] = {
-    "equip-sort-lv":     "level",
-    "equip-sort-rarity": "rarity_rank",
-    "equip-sort-dmg":    "damage",
-    "equip-sort-def":    "defense",
-    "equip-sort-crit":   "crit",
-    "equip-sort-tsp":    "tsp",
-    "equip-sort-tep":    "tep",
-    "equip-sort-tap":    "tap",
-    "equip-sort-tp":     "tp",
+    "equip-sort-lv":       "level",
+    "equip-sort-rarity":   "rarity_rank",
+    "equip-sort-dmg":      "damage",
+    "equip-sort-def":      "defense",
+    "equip-sort-crit":     "crit",
+    "equip-sort-tsp":      "tsp",
+    "equip-sort-tep":      "tep",
+    "equip-sort-tap":      "tap",
+    "equip-sort-tp":       "tp",
+    "equip-sort-severity": "severity_rank",
 }
 
 
@@ -484,7 +485,37 @@ def _handle_copy(screen: "DataMgmtScreen") -> None:
 
     elif category == _EQUIPMENT_CATEGORY:
         records = screen._last_filtered or []
-        text = "\n".join(f"{r.name}  {r.subtitle}" for r in records)
+        lines = []
+        for r in records:
+            x       = r.extras or {}
+            errors  = x.get("_errors") or []
+            rating  = x.get("_balance_rating") or ""
+            if any(e.severity == "error"  for e in errors):
+                tag = "  ·  [ERROR]"
+            elif any(e.severity == "notice" for e in errors):
+                tag = "  ·  [NOTICE]"
+            elif rating == "strong":
+                tag = "  ·  [STRONG]"
+            elif rating == "weak":
+                tag = "  ·  [WEAK]"
+            else:
+                tag = ""
+            lines.append(f"{r.name}  {r.subtitle}{tag}")
+        text = "\n".join(lines)
+
+    elif category == _CHARACTER_CATEGORY:
+        records = screen._last_filtered or []
+        lines = []
+        for r in records:
+            errors = (r.extras or {}).get("_errors") or []
+            if any(e.severity == "error" for e in errors):
+                messages = "  ·  [ERROR] " + " | ".join(
+                    f"{e.code}: {e.message}" for e in errors if e.severity == "error"
+                )
+            else:
+                messages = ""
+            lines.append(f"{r.name}  {r.subtitle}{messages}")
+        text = "\n".join(lines)
 
     else:
         if screen._last_filtered is not None:
@@ -845,8 +876,6 @@ def validate_city_region_for_screen(screen: "DataMgmtScreen") -> None:
             severity="warning",
             timeout=6.0,
         )
-
-
 # ── Symbol maps ───────────────────────────────────────────────────────────────
 
 _ELEMENT_SYMBOLS: dict[str, str] = {
@@ -887,24 +916,7 @@ _STATUS_SYMBOLS: dict[str, str] = {
 }
 
 
-def _fmt_elem_list(elems: list[str]) -> str:
-    """Format a list of element names as compact symbols."""
-    if not elems:
-        return "—"
-    return "".join(_ELEMENT_SYMBOLS.get(e, f"({e[:1].upper()})") for e in elems)
-
-
-def _fmt_status_list(statuses: list[str]) -> str:
-    """Format a list of status ids as compact unicode glyphs."""
-    if not statuses:
-        return "—"
-    return " ".join(_STATUS_SYMBOLS.get(s, f"[{s[:2]}]") for s in statuses)
-
-
-_RARITY_ABBR_MAP = {
-    "common": "Com", "uncommon": "Unc", "rare": "Rar", "superrare": "SR", "notfound": "Not",
-}
-
+# ── Equipment table ───────────────────────────────────────────────────────────
 _TYPE_ABBR_MAP = {
     "weapon":       "WPN",
     "armor · head": "A-HD",
@@ -920,55 +932,36 @@ _EQUIP_COLUMNS = (
     "Imm", "Res", "Wk", "Err",
 )
 
-
-def _balance_ratings(records: list) -> list[str]:
-    """Return a 'weak' / 'strong' / '' rating for each record."""
-    tp_by_group: dict = defaultdict(list)
-    for r in records:
-        x = r.extras
-        broad = "weapon" if x.get("damage") else "armor"
-        key   = (broad, x.get("level", 0))
-        tp_by_group[key].append(x.get("tp", 0))
-
-    tp_avg: dict = {
-        k: sum(v) / len(v) for k, v in tp_by_group.items() if len(v) > 1
-    }
-
-    ratings: list[str] = []
-    for r in records:
-        x     = r.extras
-        broad = "weapon" if x.get("damage") else "armor"
-        key   = (broad, x.get("level", 0))
-        avg   = tp_avg.get(key, 0)
-        tp    = x.get("tp", 0)
-        if avg and tp / avg < 0.65:
-            ratings.append("weak")
-        elif avg and tp / avg > 1.45:
-            ratings.append("strong")
-        else:
-            ratings.append("")
-    return ratings
+def _fmt_elem_list(elems: list[str]) -> str:
+    """Format a list of element names as compact symbols."""
+    if not elems:
+        return "—"
+    return "".join(_ELEMENT_SYMBOLS.get(e, f"({e[:1].upper()})") for e in elems)
 
 
-def _cell(value: str, rating: str) -> Text:
-    """Wrap a cell value in a Rich Text with the appropriate balance colour."""
-    if rating == "weak":
-        return Text(value, style=Style(color="cyan", dim=True))
-    if rating == "strong":
-        return Text(value, style=Style(color="#2323ff"))
-    return Text(value)
+def _fmt_status_list(statuses: list[str]) -> str:
+    """Format a list of status ids as compact unicode glyphs."""
+    if not statuses:
+        return "—"
+    return " ".join(_STATUS_SYMBOLS.get(s, f"[{s[:2]}]") for s in statuses)
 
+_RARITY_ABBR_MAP = {
+    "common": "Com", "uncommon": "Unc", "rare": "Rar", "superrare": "SR", "notfound": "Not"
+}
 
 _EQUIP_ERROR_STYLE  = Style(color="red")
+_EQUIP_NOTICE_STYLE = Style(color="#e040fb")   # magenta — hostile-drop-only notice
 _EQUIP_STRONG_STYLE = Style(color="#2323ff")   # blue — balance high
 _EQUIP_WEAK_STYLE   = Style(color="cyan", dim=True)   # cyan — balance low
 
 
 def _equip_row_style(record: Any, rating: str) -> Style:
-    """Row tint priority: error (not found) > balance-strong > balance-weak > default."""
+    """Row tint priority: error > notice > balance-strong > balance-weak > default."""
     errors = record.extras.get("_errors") or [] if record.extras else []
-    if any(e.severity == "error" for e in errors):
+    if any(e.severity == "error"  for e in errors):
         return _EQUIP_ERROR_STYLE
+    if any(e.severity == "notice" for e in errors):
+        return _EQUIP_NOTICE_STYLE
     if rating == "strong":
         return _EQUIP_STRONG_STYLE
     if rating == "weak":
@@ -981,11 +974,14 @@ def _equip_error_cell(record: Any) -> Text:
     errors = record.extras.get("_errors") or [] if record.extras else []
     if not errors:
         return Text("✓", style=Style(color="green", dim=True))
-    has_error = any(e.severity == "error" for e in errors)
+    has_error  = any(e.severity == "error"  for e in errors)
+    has_notice = any(e.severity == "notice" for e in errors)
+    count = len(errors)
     if has_error:
-        return Text(f"✗{len(errors)}", style=_EQUIP_ERROR_STYLE)
-    return Text(f"⚠{len(errors)}", style=Style(color="yellow"))
-
+        return Text(f"✗{count}", style=_EQUIP_ERROR_STYLE)
+    if has_notice:
+        return Text(f"◆{count}", style=_EQUIP_NOTICE_STYLE)
+    return Text(f"⚠{count}", style=Style(color="yellow"))
 
 def _populate_equipment_table(screen: "DataMgmtScreen", records: list) -> None:
     table = screen.query_one("#dm-equipment-table", DataTable)
@@ -993,9 +989,7 @@ def _populate_equipment_table(screen: "DataMgmtScreen", records: list) -> None:
     for col in _EQUIP_COLUMNS:
         table.add_column(col, key=col)
 
-    ratings = _balance_ratings(records)
-
-    for idx, (r, rating) in enumerate(zip(records, ratings)):
+    for idx, r in enumerate(records):
         x         = r.extras
         rarity    = x.get("rarity", "")
         rar_disp  = _RARITY_ABBR_MAP.get(rarity, rarity[:3].title() if rarity else "—")
@@ -1003,8 +997,8 @@ def _populate_equipment_table(screen: "DataMgmtScreen", records: list) -> None:
         dmg  = str(x["damage"])     if x.get("damage")  else "—"
         defn = str(x["defense"])    if x.get("defense") else "—"
         crit = f"{x['crit']:.1f}"  if x.get("crit")    else "—"
-        tsp  = str(x.get("tsp, 0"))
-        tep  = str(x.get("tep, 0"))
+        tsp  = str(x.get("tsp", 0))
+        tep  = str(x.get("tep", 0))
         tap_val = x.get("tap", 0)
         tap  = str(tap_val) if tap_val != 0 else "—"
         tp   = str(x.get("tp",  0))
@@ -1031,6 +1025,7 @@ def _populate_equipment_table(screen: "DataMgmtScreen", records: list) -> None:
         res_disp = _fmt_mixed(res_raw)
         wk_disp  = _fmt_mixed(wk_raw)
 
+        rating    = (r.extras.get("_balance_rating") or "") if r.extras else ""
         row_style = _equip_row_style(r, rating)
 
         table.add_row(
@@ -1076,7 +1071,6 @@ _ROW_INFO_STYLE    = Style(color="cyan")
 _ROW_OK_STYLE      = Style(color="green", dim=True)
 _ROW_DEFAULT_STYLE = Style()
 
-
 _ABILITY_BLUE_NOTICE_CODES  = frozenset({"ABILITY_BALANCE_STRONG"})
 _ABILITY_MGNTA_NOTICE_CODES = frozenset({"ABILITY_BALANCE_WEAK"})  # unused — info only
 
@@ -1102,11 +1096,11 @@ def _ability_error_cell(errors: list) -> Text:
     """Cell indicator for ability grid matching hostile severity colors."""
     if not errors:
         return Text("✓", style=_ROW_OK_STYLE)
-    has_error      = any(e.severity == "error"   for e in errors)
-    has_warning    = any(e.severity == "warning" for e in errors)
+    has_error       = any(e.severity == "error"   for e in errors)
+    has_warning     = any(e.severity == "warning" for e in errors)
     has_blue_notice = any(e.severity == "notice" and e.code in _ABILITY_BLUE_NOTICE_CODES for e in errors)
-    has_notice     = any(e.severity == "notice"  for e in errors)
-    has_info       = any(e.severity == "info"    for e in errors)
+    has_notice      = any(e.severity == "notice"  for e in errors)
+    has_info        = any(e.severity == "info"    for e in errors)
     count = len(errors)
     if has_error:
         return Text(f"✗ {count}", style=_ROW_ERROR_STYLE)
@@ -1130,92 +1124,91 @@ def _ability_severity_rank(node: "AbilityNode") -> int:
         return 2
     if any(e.severity == "notice" for e in node.errors):
         return 3
-    if any(e.severity == "info"   for e in node.errors):
+    if any(e.severity == "info"    for e in node.errors):
         return 4
     if node.errors:
         return 5
     return 6
 
 
-def get_ability_sort_col(screen: "DataMgmtScreen") -> str:
+def _populate_ability_table(screen: "DataMgmtScreen", nodes: list) -> None:
+    from tui.services.dev.dataservices.ability_service import _flat_ability_nodes  # noqa: PLC0415
+    from tui.services.dev.dataservices.catalog import get_ability_tree             # noqa: PLC0415
+
+    sort_asc = getattr(screen, "_ability_sort_asc", True)
+    sort_radio = None
     try:
         sort_radio = screen.query_one("#dm-ability-sort-radio", RadioSet)
-        pressed_id = sort_radio.pressed_button.id if sort_radio.pressed_button else "ability-sort-type"
-        return _ABILITY_SORT_KEYS.get(pressed_id, "ability_type")
     except Exception:
-        return "ability_type"
+        pass
 
-
-def _populate_ability_table(screen: "DataMgmtScreen", nodes: list) -> None:
-    """Populate #dm-ability-table from a flat list of AbilityNode, with sort and colour."""
-    sort_col = get_ability_sort_col(screen)
-    sort_asc = getattr(screen, "_ability_sort_asc", True)
+    sort_key_id = ""
+    if sort_radio and sort_radio.pressed_button:
+        sort_key_id = sort_radio.pressed_button.id or ""
+    sort_col = _ABILITY_SORT_KEYS.get(sort_key_id, "")
 
     def _sort_key(n: "AbilityNode"):
-        sev  = _ability_severity_rank(n)
-        seed = n.record.extras.get("_seed") or {}
+        sev = _ability_severity_rank(n)
         if sort_col == "ability_type":
             primary = n.ability_type.lower()
         elif sort_col == "level":
             primary = n.level
         elif sort_col == "effect":
-            primary = str(seed.get("effect", "") or "").lower()
+            primary = str(n.record.extras.get("_seed", {}).get("effect", "") or "").lower()
         elif sort_col == "name":
             primary = n.label.lower()
         elif sort_col == "severity_rank":
             primary = sev
         else:
             primary = n.ability_type.lower()
-        return (primary, sev, n.level)
+        return (primary, sev, n.label.lower())
 
-    valid_nodes  = [n for n in nodes if isinstance(n, AbilityNode)]
+    valid_nodes = [n for n in nodes if isinstance(n, AbilityNode)]
     sorted_nodes = sorted(valid_nodes, key=_sort_key, reverse=not sort_asc)
+    screen._ability_flat_nodes = sorted_nodes
 
     table: DataTable = screen.query_one("#dm-ability-table", DataTable)
     table.clear(columns=True)
     for col in _ABILITY_COLUMNS:
         table.add_column(col, key=col)
 
-    screen._ability_flat_nodes = sorted_nodes
-
     for idx, node in enumerate(sorted_nodes):
-        row_style   = _ability_row_style(node.errors)
         seed        = node.record.extras.get("_seed") or {}
         elements    = seed.get("elements") or []
         status_keys = seed.get("status_keys") or []
         effect      = str(seed.get("effect", "") or "")
+        errors      = node.errors or []
+        row_style   = _ability_row_style(errors)
+
         table.add_row(
-            Text(node.label,                    style=row_style),
-            Text(node.ability_id,               style=row_style),
-            Text(str(node.level),               style=row_style),
-            Text(node.ability_type,             style=row_style),
-            Text(_fmt_elem_list(elements),      style=row_style),
-            Text(effect,                        style=row_style),
+            Text(node.label,         style=row_style),
+            Text(node.ability_id,    style=row_style),
+            Text(str(node.level),    style=row_style),
+            Text(node.ability_type,  style=row_style),
+            Text(_fmt_elem_list(elements),    style=row_style),
+            Text(effect,             style=row_style),
             Text(_fmt_status_list(status_keys), style=row_style),
-            _ability_error_cell(node.errors),
+            _ability_error_cell(errors),
             key=str(idx),
         )
 
 
 # ── Hostile table ─────────────────────────────────────────────────────────────
 
-_HOSTILE_COLUMNS = [
-    "Name", "ID", "Dungeon", "Region", "Level", "Rarity", "Errors",
-]
+_HOSTILE_COLUMNS = ["Name", "ID", "Location", "Region", "Lv", "Rar", "Err"]
 
 _HOSTILE_RARITY_ABBR: dict[str, str] = {
-    "common":    "Com",
-    "uncommon":  "Unc",
-    "rare":      "Rar",
-    "superrare": "SR",
-    "notfound":  "?",
+    "common": "Com", "uncommon": "Unc", "rare": "Rar", "superrare": "SR", "notfound": "Not",
 }
 
 _HOSTILE_RARITY_RANK: dict[str, int] = {
-    "common": 0, "uncommon": 1, "rare": 2, "superrare": 3, "notfound": 99,
+    "common": 0, "uncommon": 1, "rare": 2, "superrare": 3, "notfound": 4,
 }
 
-_HOSTILE_SORT_KEYS = {
+_MGNTA_NOTICE_CODES = frozenset({"HOSTILE_DROP_UNKNOWN_ITEM"})
+_BLUE_NOTICE_CODES  = frozenset({"HOSTILE_BALANCE_STRONG", "HOSTILE_ABILITY_MISMATCH"})
+
+_HOSTILE_SORT_KEYS: dict[str, str] = {
     "hostile-sort-lv":       "level",
     "hostile-sort-rarity":   "rarity_rank",
     "hostile-sort-dungeon":  "location_dungeon",
@@ -1225,36 +1218,32 @@ _HOSTILE_SORT_KEYS = {
 }
 
 
-_BLUE_NOTICE_CODES  = frozenset({"HOSTILE_BALANCE_STRONG"})
-_MGNTA_NOTICE_CODES = frozenset({"HOSTILE_ABILITY_MISMATCH"})
-
-
 def _hostile_row_style(errors: list) -> Style:
-    """Row tint: error=red, warning=yellow, notice-magenta, notice-blue, info=cyan."""
     if not errors:
         return _ROW_DEFAULT_STYLE
-    if any(e.severity == "error" for e in errors):
+    if any(e.severity == "error"   for e in errors):
         return _ROW_ERROR_STYLE
     if any(e.severity == "warning" for e in errors):
         return _ROW_WARN_STYLE
     if any(e.severity == "notice" and e.code in _MGNTA_NOTICE_CODES for e in errors):
         return _ROW_NOTICE_STYLE
-    if any(e.severity == "notice" and e.code in _BLUE_NOTICE_CODES for e in errors):
+    if any(e.severity == "notice" and e.code in _BLUE_NOTICE_CODES  for e in errors):
         return _ROW_BLUE_STYLE
-    if any(e.severity == "info" for e in errors):
+    if any(e.severity == "notice"  for e in errors):
+        return _ROW_NOTICE_STYLE
+    if any(e.severity == "info"    for e in errors):
         return _ROW_INFO_STYLE
     return _ROW_DEFAULT_STYLE
 
 
 def _hostile_error_cell(errors: list) -> Text:
-    """Cell indicator: ✗ red, ⚠ yellow, ● magenta, ● blue (notice), • cyan (info)."""
     if not errors:
         return Text("✓", style=_ROW_OK_STYLE)
-    has_error         = any(e.severity == "error"   for e in errors)
-    has_warning       = any(e.severity == "warning" for e in errors)
+    has_error          = any(e.severity == "error"   for e in errors)
+    has_warning        = any(e.severity == "warning" for e in errors)
     has_magenta_notice = any(e.severity == "notice" and e.code in _MGNTA_NOTICE_CODES for e in errors)
-    has_blue_notice   = any(e.severity == "notice" and e.code in _BLUE_NOTICE_CODES   for e in errors)
-    has_info          = any(e.severity == "info"    for e in errors)
+    has_blue_notice    = any(e.severity == "notice" and e.code in _BLUE_NOTICE_CODES  for e in errors)
+    has_info           = any(e.severity == "info"    for e in errors)
     count = len(errors)
     if has_error:
         return Text(f"✗ {count}", style=_ROW_ERROR_STYLE)
@@ -1295,7 +1284,6 @@ def get_hostile_sort_col(screen: "DataMgmtScreen") -> str:
 
 
 def _populate_hostile_table(screen: "DataMgmtScreen", nodes: list) -> None:
-    """Populate #dm-hostile-table from a flat list of HostileNode, with sort and colour."""
     sort_col = get_hostile_sort_col(screen)
     sort_asc = getattr(screen, "_hostile_sort_asc", True)
 
@@ -1317,19 +1305,20 @@ def _populate_hostile_table(screen: "DataMgmtScreen", nodes: list) -> None:
             primary = n.level
         return (primary, sev, n.label.lower())
 
-    valid_nodes = [n for n in nodes if isinstance(n, HostileNode)]
+    valid_nodes  = [n for n in nodes if isinstance(n, HostileNode)]
     sorted_nodes = sorted(valid_nodes, key=_sort_key, reverse=not sort_asc)
+    screen._hostile_flat_nodes = sorted_nodes
 
     table: DataTable = screen.query_one("#dm-hostile-table", DataTable)
     table.clear(columns=True)
     for col in _HOSTILE_COLUMNS:
         table.add_column(col, key=col)
 
-    screen._hostile_flat_nodes = sorted_nodes
-
     for idx, node in enumerate(sorted_nodes):
-        row_style = _hostile_row_style(node.errors)
+        errors    = node.errors or []
+        row_style = _hostile_row_style(errors)
         rar_abbr  = _HOSTILE_RARITY_ABBR.get(node.rarity, node.rarity[:3].title())
+
         table.add_row(
             Text(node.label,                           style=row_style),
             Text(node.hostile_id,                      style=row_style),
@@ -1337,10 +1326,26 @@ def _populate_hostile_table(screen: "DataMgmtScreen", nodes: list) -> None:
             Text(node.location_region  or "—",         style=row_style),
             Text(str(node.level),                      style=row_style),
             Text(rar_abbr,                             style=row_style),
-            _hostile_error_cell(node.errors),
+            _hostile_error_cell(errors),
             key=str(idx),
         )
 
+
+# ── List / table rebuild ──────────────────────────────────────────────────────
+
+def _equip_severity_rank(record: Any) -> int:
+    errors = (record.extras.get("_errors") or []) if record.extras else []
+    if any(e.severity == "error"   for e in errors):
+        return 0
+    if any(e.severity == "notice"  for e in errors):
+        return 1
+    if any(e.severity == "warning" for e in errors):
+        return 2
+    if any(e.severity == "info"    for e in errors):
+        return 3
+    if errors:
+        return 4
+    return 5
 
 def rebuild_list_for_screen(screen: "DataMgmtScreen") -> None:
     """Rebuild the flat ListView (or equipment DataTable) for the active non-tree category."""
@@ -1354,18 +1359,25 @@ def rebuild_list_for_screen(screen: "DataMgmtScreen") -> None:
         pass
 
     if category == _EQUIPMENT_CATEGORY:
-        records = filter_equipment_records(
+        records  = filter_equipment_records(
             get_equipment_type_filter(screen),
             get_equipment_slot_filter(screen),
         )
         sort_col = get_equipment_sort_col(screen)
         if sort_col:
             sort_asc = getattr(screen, "_equipment_sort_asc", True)
-            records = sorted(
-                records,
-                key=lambda r: r.extras.get(sort_col, 0),
-                reverse=not sort_asc,
-            )
+            if sort_col == "severity_rank":
+                records = sorted(
+                    records,
+                    key=lambda r: (_equip_severity_rank(r), r.name.lower()),
+                    reverse=not sort_asc,
+                )
+            else:
+                records = sorted(
+                    records,
+                    key=lambda r: r.extras.get(sort_col, 0),
+                    reverse=not sort_asc,
+                )
         screen._last_filtered = records
         _populate_equipment_table(screen, records)
         screen.query_one("#dm-status", Static).update(f"{len(records)} record(s)")
@@ -1380,58 +1392,14 @@ def rebuild_list_for_screen(screen: "DataMgmtScreen") -> None:
     screen.query_one("#dm-status", Static).update(f"{len(records)} record(s)")
 
 
-def handle_copy_action(screen: "DataMgmtScreen") -> None:
-    """Copy visible tree content to clipboard for whichever tree is active."""
-    category = screen._category
-    tree_id  = _active_tree_id(screen)
-
-    try:
-        tree = screen.query_one(tree_id, Tree)
-    except Exception:
-        tree = None
-
-    text        = ""
-    highlighted = None
-    if tree is not None:
-        highlighted = getattr(tree, "highlighted_node", None) or getattr(tree, "focused_node", None)
-
-    if highlighted and highlighted is not getattr(tree, "root", None):
-        text = "\n".join(serialize_node_visible(highlighted, depth=0))
-    elif tree is not None:
-        lines = []
-        for child in get_node_children(tree.root):
-            lines.extend(serialize_node_visible(child, depth=0))
-        text = "\n".join(lines)
-    else:
-        if category == _TIMELINE_CATEGORY:
-            from tui.services.dev.dataservices import get_timeline_tree  # noqa: PLC0415
-            from tui.screens.dev.data_mgmt.utils import serialize_timeline_tree_visible  # noqa: PLC0415
-            tree_widget = screen.query_one("#dm-timeline-tree", Tree)
-            text = serialize_timeline_tree_visible(tree_widget, get_timeline_tree(), screen)
-        elif category == _NPC_CATEGORY:
-            text = serialize_npc_tree(screen._last_npc_filtered or get_npc_tree())
-        else:
-            filtered = screen._last_filtered or get_dialogue_tree()
-            text = serialize_filtered_tree(filtered)
-
-    copied = copy_to_clipboard(text)
-    status = "Copied to clipboard" if copied else "Saved to temp file (fallback)"
-    def handle_radio_set_changed(screen: "DataMgmtScreen", event: RadioSet.Changed) -> None:
-        if event.radio_set.id in (
-            "dm-equipment-type-radio",
-            "dm-equipment-slot-radio",
-            "dm-equipment-sort-radio",
-        ):
-            rebuild_list_for_screen(screen)
-    screen.query_one("#dm-status", Static).update(status)
-
+# ── Validators ────────────────────────────────────────────────────────────────
 
 def validate_equipment_for_screen(screen: "DataMgmtScreen") -> None:
     from tui.services.dev.dataservices.equipment_validator import validate_equipment  # noqa: PLC0415
-    from tui.services.dev.dataservices.catalog import get_timeline_tree, filter_equipment_records  # noqa: PLC0415
+    from tui.services.dev.dataservices.catalog import get_timeline_tree, filter_equipment_records as _fer  # noqa: PLC0415
     import game.constants as const                                                     # noqa: PLC0415
 
-    all_equipment   = filter_equipment_records()
+    all_equipment   = _fer()
     timeline_groups = get_timeline_tree()
     summary         = validate_equipment(all_equipment, timeline_groups, const=const)
 
@@ -1464,10 +1432,10 @@ def validate_characters_for_screen(screen: "DataMgmtScreen") -> None:
     invalid      = summary.get("invalid", 0)
 
     if total_errors == 0:
-        screen.notify("✓ Character equipment OK — all slots reference valid items.", timeout=3.0)
+        screen.notify("✓ Character integrity OK — no issues found.", timeout=3.0)
     else:
         screen.notify(
-            f"✗ {total_errors} invalid slot(s) across {invalid} character(s) — flagged in list.",
+            f"✗ {total_errors} issue(s) across {invalid} character(s) — flagged in list.",
             severity="warning",
             timeout=5.0,
         )

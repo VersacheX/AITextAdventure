@@ -110,6 +110,21 @@ class DataMgmtScreen(BaseScreen):
         align: left middle;
     }
 
+    #dm-equipment-sort-radio {
+        width: 1fr;
+        height: auto;
+        layout: horizontal;
+        border: none;
+        background: transparent;
+    }
+
+    #dm-equipment-sort-radio RadioButton {
+        width: auto;
+        min-width: 7;
+        margin-right: 0;
+        padding: 0 1;
+    }
+
     #dm-hostile-filter-row {
         width: 1fr;
         height: auto;
@@ -384,22 +399,24 @@ class DataMgmtScreen(BaseScreen):
                 with Horizontal():
                     yield Label("Slot:")
                     with RadioSet(id="dm-equipment-slot-radio"):
-                        yield RadioButton("All", value=True, id="equip-slot-all")
-                        yield RadioButton("Head", id="equip-slot-head")
-                        yield RadioButton("Body", id="equip-slot-body")
-                        yield RadioButton("Arms", id="equip-slot-arms")
-                        yield RadioButton("Legs", id="equip-slot-legs")
+                        yield RadioButton("All",  value=True, id="equip-slot-all")
+                        yield RadioButton("Head",              id="equip-slot-head")
+                        yield RadioButton("Body",              id="equip-slot-body")
+                        yield RadioButton("Arms",              id="equip-slot-arms")
+                        yield RadioButton("Legs",              id="equip-slot-legs")
+                with Horizontal():
                     yield Label("Sort:")
                     with RadioSet(id="dm-equipment-sort-radio"):
                         yield RadioButton("None", value=True, id="equip-sort-none")
-                        yield RadioButton("Lv",   id="equip-sort-lv")
-                        yield RadioButton("Rar",  id="equip-sort-rarity")
-                        yield RadioButton("DMG",  id="equip-sort-dmg")
-                        yield RadioButton("DEF",  id="equip-sort-def")
-                        yield RadioButton("CRIT", id="equip-sort-crit")
-                        yield RadioButton("TSP",  id="equip-sort-tsp")
-                        yield RadioButton("TEP",  id="equip-sort-tep")
-                        yield RadioButton("TP",   id="equip-sort-tp")
+                        yield RadioButton("Lv",               id="equip-sort-lv")
+                        yield RadioButton("Rar",              id="equip-sort-rarity")
+                        yield RadioButton("DMG",              id="equip-sort-dmg")
+                        yield RadioButton("DEF",              id="equip-sort-def")
+                        yield RadioButton("CRIT",             id="equip-sort-crit")
+                        yield RadioButton("TSP",              id="equip-sort-tsp")
+                        yield RadioButton("TEP",              id="equip-sort-tep")
+                        yield RadioButton("TP",               id="equip-sort-tp")
+                        yield RadioButton("Sev",              id="equip-sort-severity")
             with Vertical(id="dm-hostile-filter-row"):
                 with Horizontal():
                     yield Label("Sort:")
