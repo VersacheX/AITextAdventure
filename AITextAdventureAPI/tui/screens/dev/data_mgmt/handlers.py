@@ -229,15 +229,16 @@ def handle_radio_set_changed(screen: "DataMgmtScreen", event: RadioSet.Changed) 
 
 
 _SORT_COL_MAP: dict[str, str] = {
-    "equip-sort-lv":     "level",
-    "equip-sort-rarity": "rarity_rank",
-    "equip-sort-dmg":    "damage",
-    "equip-sort-def":    "defense",
-    "equip-sort-crit":   "crit",
-    "equip-sort-tsp":    "tsp",
-    "equip-sort-tep":    "tep",
-    "equip-sort-tap":    "tap",
-    "equip-sort-tp":     "tp",
+    "equip-sort-lv":       "level",
+    "equip-sort-rarity":   "rarity_rank",
+    "equip-sort-dmg":      "damage",
+    "equip-sort-def":      "defense",
+    "equip-sort-crit":     "crit",
+    "equip-sort-tsp":      "tsp",
+    "equip-sort-tep":      "tep",
+    "equip-sort-tap":      "tap",
+    "equip-sort-tp":       "tp",
+    "equip-sort-severity": "severity_rank",
 }
 
 
@@ -960,15 +961,18 @@ def _cell(value: str, rating: str) -> Text:
 
 
 _EQUIP_ERROR_STYLE  = Style(color="red")
+_EQUIP_NOTICE_STYLE = Style(color="#e040fb")   # magenta — hostile-drop-only notice
 _EQUIP_STRONG_STYLE = Style(color="#2323ff")   # blue — balance high
 _EQUIP_WEAK_STYLE   = Style(color="cyan", dim=True)   # cyan — balance low
 
 
 def _equip_row_style(record: Any, rating: str) -> Style:
-    """Row tint priority: error (not found) > balance-strong > balance-weak > default."""
+    """Row tint priority: error > notice > balance-strong > balance-weak > default."""
     errors = record.extras.get("_errors") or [] if record.extras else []
-    if any(e.severity == "error" for e in errors):
+    if any(e.severity == "error"  for e in errors):
         return _EQUIP_ERROR_STYLE
+    if any(e.severity == "notice" for e in errors):
+        return _EQUIP_NOTICE_STYLE
     if rating == "strong":
         return _EQUIP_STRONG_STYLE
     if rating == "weak":
@@ -981,21 +985,25 @@ def _equip_error_cell(record: Any) -> Text:
     errors = record.extras.get("_errors") or [] if record.extras else []
     if not errors:
         return Text("✓", style=Style(color="green", dim=True))
-    has_error = any(e.severity == "error" for e in errors)
+    has_error  = any(e.severity == "error"  for e in errors)
+    has_notice = any(e.severity == "notice" for e in errors)
+    count = len(errors)
     if has_error:
-        return Text(f"✗{len(errors)}", style=_EQUIP_ERROR_STYLE)
-    return Text(f"⚠{len(errors)}", style=Style(color="yellow"))
+        return Text(f"✗{count}", style=_EQUIP_ERROR_STYLE)
+    if has_notice:
+        return Text(f"◆{count}", style=_EQUIP_NOTICE_STYLE)
+    return Text(f"⚠{count}", style=Style(color="yellow"))
 
 
 def _populate_equipment_table(screen: "DataMgmtScreen", records: list) -> None:
+    _inject_balance_errors(records)
+
     table = screen.query_one("#dm-equipment-table", DataTable)
     table.clear(columns=True)
     for col in _EQUIP_COLUMNS:
         table.add_column(col, key=col)
 
-    ratings = _balance_ratings(records)
-
-    for idx, (r, rating) in enumerate(zip(records, ratings)):
+    for idx, r in enumerate(records):
         x         = r.extras
         rarity    = x.get("rarity", "")
         rar_disp  = _RARITY_ABBR_MAP.get(rarity, rarity[:3].title() if rarity else "—")
@@ -1003,8 +1011,8 @@ def _populate_equipment_table(screen: "DataMgmtScreen", records: list) -> None:
         dmg  = str(x["damage"])     if x.get("damage")  else "—"
         defn = str(x["defense"])    if x.get("defense") else "—"
         crit = f"{x['crit']:.1f}"  if x.get("crit")    else "—"
-        tsp  = str(x.get("tsp, 0"))
-        tep  = str(x.get("tep, 0"))
+        tsp  = str(x.get("tsp", 0))
+        tep  = str(x.get("tep", 0))
         tap_val = x.get("tap", 0)
         tap  = str(tap_val) if tap_val != 0 else "—"
         tp   = str(x.get("tp",  0))
@@ -1031,7 +1039,7 @@ def _populate_equipment_table(screen: "DataMgmtScreen", records: list) -> None:
         res_disp = _fmt_mixed(res_raw)
         wk_disp  = _fmt_mixed(wk_raw)
 
-        row_style = _equip_row_style(r, rating)
+        row_style = _equip_row_style(r)
 
         table.add_row(
             Text(r.name,                  style=row_style),
@@ -1361,11 +1369,18 @@ def rebuild_list_for_screen(screen: "DataMgmtScreen") -> None:
         sort_col = get_equipment_sort_col(screen)
         if sort_col:
             sort_asc = getattr(screen, "_equipment_sort_asc", True)
-            records = sorted(
-                records,
-                key=lambda r: r.extras.get(sort_col, 0),
-                reverse=not sort_asc,
-            )
+            if sort_col == "severity_rank":
+                records = sorted(
+                    records,
+                    key=lambda r: (_equip_severity_rank(r), r.name.lower()),
+                    reverse=not sort_asc,
+                )
+            else:
+                records = sorted(
+                    records,
+                    key=lambda r: r.extras.get(sort_col, 0),
+                    reverse=not sort_asc,
+                )
         screen._last_filtered = records
         _populate_equipment_table(screen, records)
         screen.query_one("#dm-status", Static).update(f"{len(records)} record(s)")
@@ -1500,3 +1515,18 @@ def validate_npc_for_screen(screen: "DataMgmtScreen") -> None:
             severity="warning",
             timeout=5.0,
         )
+
+
+def _equip_severity_rank(record: Any) -> int:
+    errors = (record.extras.get("_errors") or []) if record.extras else []
+    if any(e.severity == "error"   for e in errors):
+        return 0
+    if any(e.severity == "notice"  for e in errors):
+        return 1
+    if any(e.severity == "warning" for e in errors):
+        return 2
+    if any(e.severity == "info"    for e in errors):
+        return 3
+    if errors:
+        return 4
+    return 5
