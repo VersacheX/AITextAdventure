@@ -165,7 +165,7 @@ class OverworldScreen(BaseScreen):
 
         with Horizontal(id="content-row"):
             with Vertical(id="map-panel"):
-                yield Static("", id="map-content")
+                yield Static("", id="map-content", markup=True)
             with Vertical(id="side-panel"):
                 yield Static("", id="legend-panel")
                 yield Static("", id="stats-panel")

@@ -656,6 +656,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'kade_shallows_large_f_find_astra'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'moxie_shallows_large_f_find_astra'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_shallows_large_f_find_astra' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'astra_wynn', 'standing_text': [ "There's a pattern I can't quite close. I need Syrin's tide anomaly records." ] } },
             {
                 'event_type': 'award_task',
                 'params': {

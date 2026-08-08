@@ -569,6 +569,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_mountains_mid_c_consult_harrock' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_mountains_mid_c_consult_harrock'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_mountains_mid_c_consult_harrock' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'warden_harrock', 'standing_text': [ "Korina kept three separate survivor camps from falling apart last season.", "She didn't use authority — she used belief.", "Tell her I said the Rift paths are safer when your party walks them.", "She'll know what that means." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -683,6 +684,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_mountains_mid_d_deliver_forge_core'      } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_mid_d_deliver_forge_core' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',     'dialog_id': 'magic_mountains_mid_d_deliver_forge_core'     } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'brawn', 'standing_text': [ "The forge-pressure inside it is still active.", "Something in the Gallows Rift resonates with this exact frequency.", "Korrin reads fall-lines and mountain pressure. He'll know what the core is calling to." ] } },
 			{
 				'event_type': 'create_npc',
 				'params': {

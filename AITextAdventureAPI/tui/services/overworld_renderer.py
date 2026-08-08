@@ -138,9 +138,9 @@ def _tile_char(x: int, y: int, player_game: Any) -> str:
     if getattr(player_game, "aircraft_location", None) == (x, y):
         return AIRCRAFT_CHAR
 
-    # player marker
+    # player marker — rendered in bright green
     if x == player_game.x and y == player_game.y:
-        return PLAYER_CHAR
+        return _colorize(PLAYER_CHAR, "bright_green")
 
     # resolve tile from world_tiles (same priority order as legacy)
     t = player_game.world_tiles.get((x, y))

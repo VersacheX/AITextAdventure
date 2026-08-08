@@ -463,6 +463,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_mountains_small_e_investigate_resonance'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_mountains_small_e_investigate_resonance' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_mountains_small_e_investigate_resonance'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'forgehand_belkan', 'standing_text': [ "The shard hums with a resonance I've never felt in raw ore. The pattern etched into it matches marks we found on collapsed tunnel walls. Someone or something drove it deep into the stone. Deliberately." ] } },
 			# Spawn Thalric here so his standing text is ready before the meet task
 			{
 				'event_type': 'create_npc',
@@ -508,6 +509,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_mountains_small_e_consult_thalric'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_mountains_small_e_consult_thalric' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique',   'dialog_id': 'chock_mountains_small_e_consult_thalric'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'depth_seer_thalric', 'standing_text': [ "The shard is a dominion anchor. Whoever placed it claimed authority over the forge-heat in this range. That claim must be dissolved before it spreads deeper." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -601,6 +603,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_c_find_vorn' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_c_find_vorn'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_mountains_small_c_find_vorn' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'vorn_ashpike', 'standing_text': [ "Someone lit the secondary forge three nights ago. I didn't hire them. Belkan didn't either. The lock didn't stop them — and the work they left behind is nothing I've seen. Not hollow technique. Not foundry style. Go ask Belkan. He looked closer than I did." ] } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -638,6 +641,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_c_consult_belkan'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_mountains_small_c_consult_belkan' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_mountains_small_c_consult_belkan' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'forgehand_belkan', 'standing_text': [ "She appeared without introduction and asked to use the secondary forge. I said no. She worked it anyway. Her welds are flawless — not trained, innate. The ore remembers her touch differently than anyone I've ever watched. I've asked around. No one in the hollow knows her name. She's still there. Go find out who she is." ] } },
 			{
 				'event_type': 'create_npc',
 				'params': {
@@ -750,6 +754,7 @@ TASKS += [
 					'item_id': 'forge_dominion_shard'
 				}
 			},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'forgehand_belkan', 'standing_text': [ "That shard hums against my maps. I know what it wants. Come — I'll show you the descent path." ] } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -787,6 +792,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_mountains_small_d_consult_korla'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_mountains_small_d_consult_korla' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_mountains_small_d_consult_korla'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'marshal_korla', 'standing_text': [ "The shard resonates against every map I carry. The Dominion Edge has been below since before any tunnel I've charted. Thalric must perform the rite to wake it — but its guardian will answer first." ] } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -824,6 +830,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_d_meet_thalric'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_d_meet_thalric' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_mountains_small_d_meet_thalric' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'depth_seer_thalric', 'standing_text': [ "The fault-echoes confirm it. The blade is real. The Dominion Hollow was its keeper. You've already broken it once. This time it guards the blade itself. It won't hold back." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {

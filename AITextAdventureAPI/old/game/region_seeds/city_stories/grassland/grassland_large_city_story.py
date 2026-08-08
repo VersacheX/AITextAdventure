@@ -578,6 +578,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_grassland_large_c_find_voss' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_grassland_large_c_find_voss'      } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg',     'dialog_id': 'bragg_grassland_large_c_find_voss'     } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'voss_caldera', 'standing_text': [ "Delphi's the only one I trust to vouch for you. Go find her." ] } },
 			# Prime Delphi's standing text before the party goes to her
 			{
 				'event_type': 'set_npc_standing_text',

@@ -885,6 +885,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_small_d_deliver_tidekin_seal'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_small_d_deliver_tidekin_seal' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_small_d_deliver_tidekin_seal' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'diego','standing_text': [ "The Tidekin Seal is not just old iron.", "It remembers the current. It remembers the tide.", "Loryth reads the mist glyphs here. She'll know what it means." ] } },
 			{
 				'event_type': 'remove_item',
 				'params': {

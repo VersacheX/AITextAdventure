@@ -488,6 +488,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_large_c_consult_lyndra'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_large_c_consult_lyndra' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_large_c_consult_lyndra' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'artificer_lyndra', 'standing_text': [ "Lyric? The theorist from the eastern cold-labs. If they say the pattern is solvable, it probably is." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -546,6 +547,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_large_d_deliver_armor_key'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_large_d_deliver_armor_key' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_large_d_deliver_armor_key' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'concordant_ivar', 'standing_text': [ "An Armory Seal from the Frostgate deep vaults. The warplate locked inside hasn't been touched since the last glacier war." ] } },
 			{
 				'event_type': 'remove_item',
 				'params': {

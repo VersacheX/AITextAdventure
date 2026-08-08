@@ -744,6 +744,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_grassland_mid_c_find_sylvara'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_grassland_mid_c_find_sylvara' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_grassland_mid_c_find_sylvara' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'regent_sylvara', 'standing_text': [ "I need Seris's assessment before I can speak plainly." ] } },
 			# Prime Seris's standing text before the party goes to her
 			{
 				'event_type': 'set_npc_standing_text',

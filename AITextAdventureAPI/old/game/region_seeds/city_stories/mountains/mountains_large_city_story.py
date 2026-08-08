@@ -1065,6 +1065,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_mountains_large_d_consult_gorvak'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grinmaw_mountains_large_d_consult_gorvak' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_mountains_large_d_consult_gorvak'   } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rustscribe_gorvak', 'standing_text': ["The resonance key came out of the rift?", "The frequency it carries matches the Conduit Maw's deepest chamber.", "Something inside that chamber forged itself into armor long before the city existed.", "Brawn can work with this — but the Conduit Echo will fight to keep it.", "It guards the armoring-frequency like a living lock."] } },
 			{
 				'event_type': 'create_npc',
 				'params': {

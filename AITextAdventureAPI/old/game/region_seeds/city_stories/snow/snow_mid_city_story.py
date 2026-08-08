@@ -687,6 +687,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_f_find_marlo'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_f_find_marlo' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_f_find_marlo' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'marlo_finch', 'standing_text': [ "I need a witness testimony. Someone in this city saw the original transaction." ] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -751,6 +752,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_f_return_to_marlo'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_snow_mid_f_return_to_marlo' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_f_return_to_marlo' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'marlo_finch', 'standing_text': [ "Yrsa's testimony is exactly what I needed. With this, the audit trail leads directly to the distribution end — which means Bayou Nocturne." ] } },
             {
                 'event_type': 'award_item',
                 'params': {

@@ -657,7 +657,8 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_c_consult_vexa'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_mid_c_consult_vexa' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_shallows_mid_c_consult_vexa' } },
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lanternrunner_vexa', 'standing_text': [ "Vexa says you're reliable. High praise from her — she doesn't say that about anyone.", "I've been scouting this coastline for a month. The undertunnel is the most interesting thing I've found.", "You look like you know how to move through interesting places without dying." ] },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lanternrunner_vexa', 'standing_text': [ "Vexa says you're reliable. High praise from her — she doesn't say that about anyone.", "I've been scouting this coastline for a month. The undertunnel is the most interesting thing I've found.", "You look like you know how to move through interesting places without dying." ] } },
+            {
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'shallows_mid_city_type_c_earn_dare'

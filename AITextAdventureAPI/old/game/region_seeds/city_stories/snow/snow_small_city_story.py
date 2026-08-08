@@ -416,6 +416,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_small_meet_survivor_mira' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_meet_survivor_mira'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_meet_survivor_mira' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'survivor_mira', 'standing_text': [ "Supply routes have gone quiet.", "The cold comes from the wrong direction.", "If the outpost loses its watch, the whole frontier falls dark." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {

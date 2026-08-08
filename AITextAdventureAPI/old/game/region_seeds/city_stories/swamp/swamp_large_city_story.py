@@ -409,6 +409,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_swamp_large_c_consult_morwen'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',   'dialog_id': 'moxie_swamp_large_c_consult_morwen'   } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_large_c_consult_morwen' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'reliquarist_morwen', 'standing_text': [ "Anita catalogued the reliquary's entire spirit-manifest index in a single sitting.", "She noticed patterns I've spent twenty years missing.", "Tell her I said the relics recognize her methodology.", "She'll understand the weight of that." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -510,6 +511,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_swamp_large_d_deliver_marrow_shard'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',   'dialog_id': 'moxie_swamp_large_d_deliver_marrow_shard'   } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_large_d_deliver_marrow_shard' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'diego', 'standing_text': [ "Marrow that won't decay… Rift exposure should have eaten this thing weeks ago. Something in the Necropolis is keeping it whole on purpose.", "Halveth reads bone tides better than anyone in this mire. He'll know what frequency this is calling.", "Take it to him before the Sump finishes noticing you're carrying it.", "And if the bones start humming louder… don't stop walking." ] } },
 			{
 				'event_type': 'remove_item',
 				'params': {
@@ -562,6 +564,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_swamp_large_d_consult_halveth'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_swamp_large_d_consult_halveth' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_swamp_large_d_consult_halveth'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'mire_seer_halveth', 'standing_text': [ "This marrow shard — it came through a rift?", "The bone-tide resonance on it is unlike anything native to this swamp.", "But the Relicmire Voice recognizes it.", "It has been waiting for this exact frequency since the Sump formed.", "Draw it out with the shard and the drowned metal it guards will surface.", "Diego can forge drowned Necropolis metal into a weapon that remembers every kill." ] } },
 			{
 				'event_type': 'create_npc',
 				'params': {

@@ -119,8 +119,14 @@ class CombatTargetOverlay(Widget):
             footer_parts.append("(a) select all")
         footer_parts.append("Esc cancel")
 
+        display_title = (
+            f"{self._title}  [dim]or [bold](a)[/bold]ll[/dim]"
+            if self._allow_multi
+            else self._title
+        )
+
         with Vertical():
-            yield Static(self._title, id="tgt-title")
+            yield Static(display_title, id="tgt-title", markup=True)
             with ListView(id="tgt-list"):
                 for unit in self._current_list():
                     yield _TargetItem(unit)

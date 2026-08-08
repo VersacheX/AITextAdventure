@@ -33,19 +33,19 @@ from __future__ import annotations
 
 from typing import Any, List, Optional
 
-from textual import on
+from textual import events, on
 from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal, Vertical
-from textual.widgets import Button, Static
+from textual.widgets import Static
 
 from tui.screens.base_screen import BaseScreen
-from tui.screens.combat_menu_overlay import CombatMenuOverlay
+from tui.screens.combat_menu_overlay import CombatMenuOverlay, build_ability_detail, build_item_detail
 from tui.screens.combat_target_overlay import CombatTargetOverlay
 from tui.services.combat_renderer import (
     build_hostile_card_text,
     build_player_card_text,
-    build_turn_order_text,
+    build_timeline_rows,
 )
 from tui.services.combat_service import (
     build_simulation,
@@ -64,7 +64,6 @@ from tui.services.combat_service import (
     perform_hostile_auto_action,
     perform_player_ability,
     perform_player_attack,
-    perform_player_escape,
     perform_player_item,
 )
 
@@ -86,11 +85,13 @@ class CombatScreen(BaseScreen):
     show_header = False
 
     BINDINGS = [
-        Binding("a", "attack", "Attack", show=True),
-        Binding("b", "ability", "Ability", show=True),
-        Binding("u", "item", "Item", show=True),
-        Binding("r", "flee", "Flee", show=True),
-        Binding("escape", "go_back", "Forfeit disabled", show=False),
+        Binding("a", "attack", "Attack", show=False),
+        Binding("b", "ability", "A(b)ility", show=False),
+        Binding("u", "item", "Item", show=False),
+        Binding("up", "menu_up", "Up", show=False),
+        Binding("down", "menu_down", "Down", show=False),
+        Binding("enter", "menu_confirm", "Confirm", show=False),
+        Binding("escape", "noop", "", show=False),  # disable base-class go_back in combat
     ]
 
     DEFAULT_CSS = """
@@ -105,17 +106,48 @@ class CombatScreen(BaseScreen):
     }
 
     #players-col {
-        width: 30;
+        width: 26;
         height: 100%;
-        border-right: solid $accent;
+        border-right: solid $accent 40%;
         padding: 1;
         overflow-y: auto;
     }
 
-    #hostiles-col {
-        width: 30;
+    #actions-col {
+        width: 18;
         height: 100%;
-        border-left: solid $accent;
+        border-right: solid $accent;
+        padding: 1 0;
+        background: $surface;
+    }
+
+    #actions-title {
+        width: 100%;
+        text-align: center;
+        text-style: bold;
+        color: $accent;
+        padding: 0 1;
+        margin-bottom: 1;
+        border-bottom: solid $accent 40%;
+    }
+
+    .action-item {
+        width: 100%;
+        height: 1;
+        padding: 0 2;
+        color: $text;
+    }
+
+    .action-item.action-selected {
+        background: $accent;
+        color: $text;
+        text-style: bold;
+    }
+
+    #hostiles-col {
+        width: 26;
+        height: 100%;
+        border-left: solid $accent 40%;
         padding: 1;
         overflow-y: auto;
     }
@@ -124,12 +156,21 @@ class CombatScreen(BaseScreen):
         width: 1fr;
         height: 100%;
         padding: 1;
+        layout: vertical;
     }
 
     #combat-log {
         width: 100%;
-        height: 100%;
+        height: 1fr;
         overflow-y: auto;
+    }
+
+    #timeline {
+        width: 100%;
+        height: auto;
+        border-top: solid $accent 40%;
+        padding: 1 0 0 0;
+        color: $text-muted;
     }
 
     .combat-card {
@@ -143,20 +184,6 @@ class CombatScreen(BaseScreen):
     .combat-card.active-card {
         border: double $accent;
         background: $surface-lighten-1;
-    }
-
-    #action-bar {
-        height: 3;
-        background: $panel;
-        border-top: solid $accent;
-        padding: 0 1;
-    }
-
-    #action-bar Button {
-        height: 1;
-        min-width: 14;
-        margin-right: 1;
-        border: none;
     }
 
     Footer {
@@ -174,6 +201,13 @@ class CombatScreen(BaseScreen):
         self._active_unit: Optional[Any] = None
         self._message_log: List[str] = []
         self._awaiting_player_input = False
+        # Action panel state: display label (hotkey embedded in label text)
+        self._ACTION_ENTRIES = [
+            "Attack  (a)",
+            "A(b)ility",
+            "(U)se Item",
+        ]
+        self._action_index = 0  # currently highlighted row
 
     # ── compose ──────────────────────────────────────────────────────────
 
@@ -185,29 +219,33 @@ class CombatScreen(BaseScreen):
             with Vertical(id="players-col"):
                 for u in players:
                     yield Static("", id=f"card-{u.entity._uuid}", classes="combat-card")
+            with Vertical(id="actions-col"):
+                yield Static("Actions", id="actions-title")
+                for i, label in enumerate(self._ACTION_ENTRIES):
+                    yield Static(
+                        label,
+                        id=f"action-row-{i}",
+                        classes="action-item" + (" action-selected" if i == 0 else ""),
+                    )
             with Vertical(id="center-col"):
                 yield Static("", id="combat-log")
+                yield Static("", id="timeline", markup=True)
             with Vertical(id="hostiles-col"):
                 for u in hostiles:
                     yield Static("", id=f"card-{u.entity._uuid}", classes="combat-card")
 
-        with Horizontal(id="action-bar"):
-            yield Button("Attack (a)", id="btn-attack", variant="default")
-            yield Button("Ability (b)", id="btn-ability", variant="default")
-            yield Button("Item (u)", id="btn-item", variant="default")
-            yield Button("Flee (r)", id="btn-flee", variant="default")
 
     def on_mount(self) -> None:
         self._refresh_cards()
+        self._refresh_action_panel()
         self._update_log()
+        self._refresh_timeline()
         self.set_timer(0.4, self._advance_turn)
 
-    # ── escape is intentionally not "go back" mid-combat ───────────────────
-
-    def action_go_back(self) -> None:
-        self.notify("You can't leave combat. Use Flee (r) to attempt an escape.", severity="warning")
-
     # ── turn loop ────────────────────────────────────────────────────────
+
+    def action_noop(self) -> None:
+        """Intentional no-op — swallows escape so combat cannot be quit."""
 
     def _advance_turn(self) -> None:
         outcome = check_combat_over(self._sim)
@@ -217,14 +255,14 @@ class CombatScreen(BaseScreen):
 
         unit = get_next_ready_unit(self._sim)
         if unit is None:
-            # Defensive only: next_active_unit() should always return a unit
-            # when alive units remain, since check_combat_over() already
-            # guarded against an empty roster above.
             self.set_timer(0.05, self._advance_turn)
             return
 
+        # Timer normalisation has just run inside next_active_unit(), so
+        # refresh the timeline now — values are correct for this moment.
         self._active_unit = unit
         self._refresh_cards()
+        self._refresh_timeline()
 
         blocking = get_blocking_status_result(unit)
         if blocking is not None:
@@ -240,12 +278,14 @@ class CombatScreen(BaseScreen):
         if is_unit_player(unit):
             self._awaiting_player_input = True
             self._update_log(prompt=f"{unit.entity.name}'s turn — choose an action.")
+            self._refresh_action_panel()
         else:
             res = perform_hostile_auto_action(self._sim, unit)
             self._show_messages_then(res.get("messages", []), self._advance_turn)
 
     def _finish_combat(self, players_won: bool) -> None:
         self._awaiting_player_input = False
+        self._refresh_action_panel()
         if players_won:
             messages = distribute_rewards(self._sim) or ["Victory!"]
             self._show_messages_then(messages, lambda: self.dismiss(True))
@@ -292,14 +332,60 @@ class CombatScreen(BaseScreen):
         if prompt:
             lines.append("")
             lines.append(f"[bold cyan]{prompt}[/bold cyan]")
-        turn_order = build_turn_order_text(self._sim)
-        if turn_order:
-            lines.append("")
-            lines.append(f"[dim]{turn_order}[/dim]")
         try:
             self.query_one("#combat-log", Static).update("\n".join(lines))
         except Exception:
             pass
+
+    def _refresh_timeline(self) -> None:
+        """Rebuild the timeline inset — called after each full turn completes,
+        not during per-message pacing, so values reflect post-advance_schedule
+        state."""
+        try:
+            tl_widget = self.query_one("#timeline", Static)
+            tl_width  = max(20, (tl_widget.size.width or 40) - 2)
+            tl_lines  = build_timeline_rows(self._sim, tl_width)
+            tl_widget.update("\n".join(tl_lines))
+        except Exception:
+            pass
+
+    # ── action panel ─────────────────────────────────────────────────────
+
+    def _refresh_action_panel(self) -> None:
+        """Highlight the currently selected action row."""
+        for i, label in enumerate(self._ACTION_ENTRIES):
+            try:
+                w = self.query_one(f"#action-row-{i}", Static)
+                if i == self._action_index and self._awaiting_player_input:
+                    w.update(f"[bold]▶ {label}[/bold]")
+                    w.add_class("action-selected")
+                else:
+                    w.update(f"  {label}")
+                    w.remove_class("action-selected")
+            except Exception:
+                pass
+
+    def action_menu_up(self) -> None:
+        if not self._awaiting_player_input or self._overlay_open():
+            return
+        self._action_index = (self._action_index - 1) % len(self._ACTION_ENTRIES)
+        self._refresh_action_panel()
+
+    def action_menu_down(self) -> None:
+        if not self._awaiting_player_input or self._overlay_open():
+            return
+        self._action_index = (self._action_index + 1) % len(self._ACTION_ENTRIES)
+        self._refresh_action_panel()
+
+    def action_menu_confirm(self) -> None:
+        if not self._awaiting_player_input or self._overlay_open():
+            return
+        _dispatch = [
+            self.action_attack,
+            self.action_ability,
+            self.action_item,
+        ]
+        _dispatch[self._action_index]()
 
     # ── overlay guard ────────────────────────────────────────────────────
 
@@ -343,7 +429,9 @@ class CombatScreen(BaseScreen):
             if not targets:
                 return
             self._awaiting_player_input = False
+            self._refresh_action_panel()
             res = perform_player_attack(self._sim, unit, targets)
+            self._refresh_timeline()
             self._show_messages_then(res.get("messages", []), self._advance_turn)
 
         self._prompt_target(hostiles, allies, _on_result, title="Attack who?", prefer_hostiles=True)
@@ -361,14 +449,20 @@ class CombatScreen(BaseScreen):
         if not abilities:
             self.notify("No usable abilities (check AP).", severity="warning")
             return
-        entries = [(f"{a.name}  (cost {a.ap_cost} AP)", a) for a in abilities]
+        cur_ap  = getattr(unit.entity, "current_ap", 0)
+        entries = [(a.name, a) for a in abilities]
 
         def _on_menu_result(ability: Optional[Any]) -> None:
             if ability is None:
                 return
             self._on_ability_chosen(ability)
 
-        self.mount(CombatMenuOverlay("Choose ability", entries, _on_menu_result))
+        self.mount(CombatMenuOverlay(
+            "Choose Ability",
+            entries,
+            _on_menu_result,
+            detail_fn=lambda a: build_ability_detail(a, cur_ap),
+        ))
 
     def _on_ability_chosen(self, ability: Any) -> None:
         unit = self._active_unit
@@ -380,7 +474,9 @@ class CombatScreen(BaseScreen):
             if not targets:
                 return
             self._awaiting_player_input = False
+            self._refresh_action_panel()
             res = perform_player_ability(self._sim, unit, ability, targets)
+            self._refresh_timeline()
             self._show_messages_then(res.get("messages", []), self._advance_turn)
 
         self._prompt_target(
@@ -410,7 +506,12 @@ class CombatScreen(BaseScreen):
                 return
             self._on_item_chosen(payload)
 
-        self.mount(CombatMenuOverlay("Choose item", menu_entries, _on_menu_result))
+        self.mount(CombatMenuOverlay(
+            "Use Item",
+            menu_entries,
+            _on_menu_result,
+            detail_fn=lambda p: build_item_detail(p[1]),
+        ))
 
     def _on_item_chosen(self, payload: Any) -> None:
         idx, item = payload
@@ -423,37 +524,12 @@ class CombatScreen(BaseScreen):
             if not targets:
                 return
             self._awaiting_player_input = False
+            self._refresh_action_panel()
             res = perform_player_item(self._sim, unit, idx, targets)
+            self._refresh_timeline()
             self._show_messages_then(res.get("messages", []), self._advance_turn)
 
         self._prompt_target(
             hostiles, allies, _on_result, title=f"Use {item.name} on?", prefer_hostiles=prefer_hostiles
         )
 
-    # ── player actions: flee ─────────────────────────────────────────────
-
-    def action_flee(self) -> None:
-        if not self._awaiting_player_input or self._overlay_open():
-            return
-        unit = self._active_unit
-        self._awaiting_player_input = False
-        res = perform_player_escape(self._sim, unit)
-        self._show_messages_then(res.get("messages", []), self._advance_turn)
-
-    # ── action-bar button wiring (mouse support) ────────────────────────
-
-    @on(Button.Pressed, "#btn-attack")
-    def _btn_attack(self) -> None:
-        self.action_attack()
-
-    @on(Button.Pressed, "#btn-ability")
-    def _btn_ability(self) -> None:
-        self.action_ability()
-
-    @on(Button.Pressed, "#btn-item")
-    def _btn_item(self) -> None:
-        self.action_item()
-
-    @on(Button.Pressed, "#btn-flee")
-    def _btn_flee(self) -> None:
-        self.action_flee()
