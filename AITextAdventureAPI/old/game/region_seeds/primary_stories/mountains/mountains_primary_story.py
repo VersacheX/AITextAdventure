@@ -511,6 +511,17 @@ TASKS = [
                 }
             },
             {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'relaytech_sindra',
+                    'standing_text': [
+                        "The sparks have shapes and the shapes have intent.",
+                        "That's not machinery. That's something wearing machinery.",
+                        "Hit it."
+                    ]
+                }
+            },
+            {
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'mountains_primary_nightmare_wave_1'

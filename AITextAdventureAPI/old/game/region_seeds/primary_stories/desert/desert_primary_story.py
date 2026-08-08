@@ -545,6 +545,15 @@ TASKS = [
 				}
 			},
 			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'oren',
+					'standing_text': [
+						"The Sundial is yours. The desert speaks, you know, most people just don't listen."
+					]
+				}
+			},
+			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'desert_oren_puzzle_1'

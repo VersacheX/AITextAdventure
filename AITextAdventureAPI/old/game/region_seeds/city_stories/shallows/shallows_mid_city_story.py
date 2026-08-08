@@ -25,7 +25,23 @@ NPCS = [
         'name': 'Thalen the Signal‑Seer',
         'description': (
             'A coastal mystic who reads broken lantern patterns drifting across the waves.'
-        )
+        ),
+        "psychology": {
+            "mbti": "INFJ",
+            "dominant": "Ni — Perceives hidden meaning in fractured signals, trusting intuition over the literal.",
+            "auxiliary": "Fe — Reads the moods of sailors and townsfolk as easily as lantern codes, offering quiet reassurance.",
+            "tertiary": "Ti — Cross-checks each pattern against internal logic before committing to a reading.",
+            "inferior": "Se — Uneasy in the immediate chaos of storms, retreating into contemplation rather than action."
+        },
+        "enneagram": {
+            "enneagram_type": "5w4",
+            "core_fear": "Being overwhelmed by meaninglessness — signals that resolve to nothing.",
+            "core_desire": "To understand the hidden order beneath the coast's noise.",
+            "defense_mechanism": "Isolation — withdraws into study when patterns turn contradictory.",
+            "stress_line": "Moves to Type 7 — scatters into frantic over-interpretation, chasing every flicker.",
+            "growth_line": "Moves to Type 8 — acts decisively on his readings instead of endlessly deliberating.",
+            "instinctual_variant": "sp/sx — Guards his solitude and energy, but bonds intensely with those who share his search."
+        }
     },
     {
         'npc_id': 'lanternfade_echo',
@@ -939,8 +955,6 @@ TASKS += [
 	},
 
 ]
-
-
 PRIMARY_STORY_SETTINGS = {
 	'story_id': 'shallows_mid_city_story',
 	'tasks': TASKS,

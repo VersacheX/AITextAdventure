@@ -23,11 +23,11 @@ ATTAINABLE_PLAYER_CHARACTERS = [
 		"id": "seraphine",
 		"name": "Seraphine",
 		"level": 45,
-		"arm_armor": "resonance_bracers",
-		"head_armor": "songweaver_circlet",
-		"body_armor": "harmony_vestment",
-		"leg_armor": "verdant_sandals",
-		"equipped_weapon": "the_living_chord",
+		"arm_armor": "chronoweave_bracers",
+		"head_armor": "hourglass_veil",
+		"body_armor": "epochthread_robe",
+		"leg_armor": "timelock_sandals",
+		"equipped_weapon": "aurora_staff",
 		"max_hp": 1200,
 		"current_hp": 1200,
 		"max_ap": 420,
@@ -562,6 +562,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_ch19_false_memory' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_ch19_haunted' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'soren', 'dialog_id': 'soren_ch19_gratitude' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'soren', 'standing_text': ["Thank you. Most who come here only want to take from the Veil. You... seem to understand what it means to remember truly."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch19_meet_astra_wynn' }}
 		]
 	},
@@ -578,6 +579,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch19_true_care' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch19_professionals' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'astra_wynn', 'dialog_id': 'astra_wynn_ch19_then_go' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'astra_wynn', 'standing_text': ["Then go. And try not to get lost in your own echoes."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch19_meet_jinn' }}
 		]
 	},
@@ -594,6 +596,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch19_worth_remembering' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_ch19_degradation' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'jinn', 'dialog_id': 'jinn_ch19_no_fun' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'jinn', 'standing_text': ["You lot are no fun at all."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch19_meet_twisted_darkwoo' }}
 		]
 	},
@@ -651,6 +654,8 @@ TASKS = [
 			{ 'event_type': 'set_npc_met', 'params': { 'npc_id': 'seraphine' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'seraphine', 'standing_text': ["My song... it must hold. For their sake... for all of us."]}},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch19_melody' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'astra_wynn', 'standing_text': ["Good timing. Marlo Finch has been asking for you specifically. He's holed up in Bayou Nocturn, digging through old memories and artifacts that might help with... whatever this reconstruction mess is. I promised I'd send you his way if you showed up. Ready for another jump?"]}},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'soren', 'standing_text': ["Astra Wynn is right. Marlo Finch has been asking for you. He may have information that can help with the reconstruction."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch19_meet_seraphine' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch19_meet_astra_wynn_again' }}
 		]
@@ -706,6 +711,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch19_sing_with_us' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch19_broken_songs' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seraphine', 'dialog_id': 'seraphine_ch19_wants_to_try' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'seraphine', 'standing_text': ["I will try. With all of you."]}},
 			{ 'event_type': 'hide_npc', 'params': { 'npc_id': 'seraphine' }},
 			{ 'event_type': 'character_join', 'params': { 'character_id': 'seraphine' }}
 		]
@@ -727,6 +733,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch19_high_praise' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'astra_wynn', 'dialog_id': 'astra_wynn_ch19_flattery' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch19_teleport' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'astra_wynn', 'standing_text': ["Good timing. Marlo Finch has been asking for you specifically. He's holed up in Bayou Nocturn, digging through old memories and artifacts that might help with... whatever this reconstruction mess is. I promised I'd send you his way if you showed up. Ready for another jump?"]}},
 			{ 'event_type': 'advance_chapter' }
 		]
 	}

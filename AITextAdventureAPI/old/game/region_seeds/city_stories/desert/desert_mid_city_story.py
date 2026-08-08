@@ -606,6 +606,7 @@ TASKS += [
 				}
 			},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'archivist_warden_threx', 'standing_text': ["Ink Resonance Vial — designation: identity anchor.", "This compound was used to bind a living identity into script.", "The Ink Specter in the Inkwell Depths carries the matching frequency.", "Dissolve the Specter correctly and the vial's compound crystallizes.", "Mira can set crystallized identity-ink into an accessory unlike any other."] } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'mira', 'standing_text': ["Ink that moves on its own…", "(tilts the vial, watching the liquid crawl against the glass)", "Identity anchors are rare. Most of them were locked away after the first Vault collapse.", "You didn't open it. Smart. Things like this rewrite whatever they touch.", "Threx will know how to finish what this started. Take it to him before it decides it wants a new host.", "And if it starts writing… don't read what it writes."] } },
 			{
 				'event_type': 'award_task',
 				'params': {

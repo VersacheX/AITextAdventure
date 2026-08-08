@@ -601,6 +601,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch9_boss_response' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'glamour', 'dialog_id': 'glamour_ch9_boss_taunt' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'scalpel', 'dialog_id': 'scalpel_ch9_boss_taunt' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'scalpel', 'standing_text': ["The arena is mine. You will break, and you will enjoy it."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch9_defeat_glamour_and_scalpel' }}
         ]
     },
@@ -629,6 +630,7 @@ TASKS = [
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lira', 'standing_text': ["The wounded are finally resting. Thank the stars."]}},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'tess', 'standing_text': ["The high is gone. Now comes the crash. I've seen this look on people's faces before. They're vulnerable."]}},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'sam', 'standing_text': ["The system broke. Now we see the cost. Every grift has a price."]}},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'ember', 'standing_text': ["The arena's influence is waning. But the world outside is still in danger."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch9_return_to_ember_after_scalpel' }}
         ]
     },
@@ -654,6 +656,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch9_to_ember_depart' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'tess', 'standing_text': ["I feel... more like myself again. Time to find the next angle."]}},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'sam', 'standing_text': ["The immediate threat is neutralized. Now to analyze the fallout."]}},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'ember', 'standing_text': ["The arena's influence is waning. But the world outside is still in danger."]}},
             { 'event_type': 'advance_chapter' }
         ]
     }

@@ -860,6 +860,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch13_boss_response' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lament', 'dialog_id': 'lament_ch13_final_words' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'garbage', 'dialog_id': 'garbage_ch13_final_words' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lament', 'standing_text': ["The Grand Mausoleum is their sanctum. Be careful."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch13_defeat_lament_and_garbage' }}
         ]
     },
@@ -921,6 +922,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_farewell' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch13_act_end' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch13_act_end' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'seth', 'standing_text': ["The Rustwing is yours now. Use it wisely."]}},
             { 'event_type': 'advance_chapter' }
         ]
     }

@@ -1112,7 +1112,7 @@ def validate_timeline_integrity(
                     related_entity_id=npc_id,
                 ))
 
-    # ── R23: create_npc without set_npc_standing_text in same task ───────────
+    # ── R23: create_npc without set_npc_standing_text in the same task ───────────
     for tn in all_tasks:
         created_in_task = [
             str(ev.get("params", {}).get("npc_id") or ev.get("params", {}).get("id") or "")
@@ -1175,6 +1175,16 @@ def validate_timeline_integrity(
             ))
 
     # ── R24: Meet / deliver tasks with no set_npc_standing_text for to_id ──
+    # Exception: if the target NPC is removed from the world at task completion
+    # — hidden via hide_npc, or recruited via character_join /
+    # player_character_join / add_pending_character — then there is no standing
+    # state left to update, so the missing standing text is expected.
+    _NPC_REMOVAL_EVENT_TYPES: FrozenSet[str] = frozenset({
+        "hide_npc",
+        "character_join",
+        "player_character_join",
+        "add_pending_character",
+    })
     for tn in all_tasks:
         task_type = str(tn.task.get("type", "")).lower()
         if task_type not in ("meet", "deliver"):
@@ -1187,17 +1197,29 @@ def validate_timeline_integrity(
             and str((ev.get("params") or {}).get("npc_id") or "") == target_npc_id
             for ev in _events(tn.task, "task_complete_events")
         )
-        if not has_standing:
-            errors_map[tn.task_id].append(_err(
-                "MEET_DELIVER_NO_NPC_STANDING_TEXT",
-                f"'{task_type}' task '{tn.task_id}' has no set_npc_standing_text for target "
-                f"npc '{target_npc_id}' in task_complete_events.  The NPC's standing text "
-                f"should be updated at task completion to reflect the new story state.",
-                event_type="set_npc_standing_text",
-                related_entity_id=target_npc_id,
-                severity="warning",
-            ))
-
+        if has_standing:
+            continue
+        # If the target NPC is hidden or joins the party at completion, the
+        # standing text is intentionally not updated — skip the warning.
+        target_removed = any(
+            ev.get("event_type") in _NPC_REMOVAL_EVENT_TYPES
+            and target_npc_id in (
+                str((ev.get("params") or {}).get("npc_id") or ""),
+                str((ev.get("params") or {}).get("character_id") or ""),
+            )
+            for ev in _events(tn.task, "task_complete_events")
+        )
+        if target_removed:
+            continue
+        errors_map[tn.task_id].append(_err(
+            "MEET_DELIVER_NO_NPC_STANDING_TEXT",
+            f"'{task_type}' task '{tn.task_id}' has no set_npc_standing_text for target "
+            f"npc '{target_npc_id}' in task_complete_events.  The NPC's standing text "
+            f"should be updated at task completion to reflect the new story state.",
+            event_type="set_npc_standing_text",
+            related_entity_id=target_npc_id,
+            severity="warning",
+        ))
 
     # ── R4: Unreachable tasks (no inbound award) ──────────────────────────
     for tn in all_tasks:

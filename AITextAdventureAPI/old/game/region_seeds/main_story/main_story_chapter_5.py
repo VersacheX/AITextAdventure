@@ -77,10 +77,20 @@ NPCS = [
             ' It is aggressive and territorial, attacking anything that comes too close.'
         ),
         "psychology": {
-            "mbti": "N/A",            
+            "mbti":      "N/A",
+            "dominant":  "N/A",
+            "auxiliary": "N/A",
+            "tertiary":  "N/A",
+            "inferior":  "N/A",
         },
         "enneagram": {
-          "enneagram_type": "N/A",
+            "enneagram_type":       "N/A",
+            "core_fear":            "N/A",
+            "core_desire":          "N/A",
+            "defense_mechanism":    "N/A",
+            "stress_line":          "N/A",
+            "growth_line":          "N/A",
+            "instinctual_variant":  "N/A",
         },
         'image': 'bosses:static_wraith1'
     }

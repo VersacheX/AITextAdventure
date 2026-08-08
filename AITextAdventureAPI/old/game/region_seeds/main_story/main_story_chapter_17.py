@@ -615,6 +615,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'mira', 'dialog_id': 'mira_ch17_sends_to_mountains' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch17_another_contradiction' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch17_delightfully_messy' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'mira', 'standing_text': ["Fancy meeting you here, I see you found the Bracelet of Existence."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch17_deliver_echofoil_nullglass_to_mira' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch17_meet_displacer_gargantuan' }}
 		]
@@ -671,6 +672,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch17_becoming_contradictions' }},
 			{ 'event_type': 'remove_item', 'params': { 'item_id': 'echofoil_nullglass' }},
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'puzzle_box' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'mira', 'standing_text': ["Fancy meeting you here, I see you found the Bracelet of Existence."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch17_deliver_puzzle_box_to_vex' }}
 		]
 	},
@@ -689,6 +691,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_ch17_splitting' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch17_no_hesitation' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch17_transported' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'vex', 'standing_text': ["Every possibility cancels another. The tighter the contradiction, the easier it is to slip through."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch17_meet_paradox_and_crux' }}
 		]
 	},
@@ -759,6 +762,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_ch17_temporal_recursion' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_ch17_different_tomorrow' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'scribe_halden', 'dialog_id': 'scribe_halden_ch17_go_frostgate' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'scribe_halden', 'standing_text': ["Compliance is mandatory. Non-compliance is impossible. You are already in violation."]}},
 			{ 'event_type': 'advance_chapter' }
 		]
 	}

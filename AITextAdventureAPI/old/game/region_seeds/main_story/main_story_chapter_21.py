@@ -1801,6 +1801,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'warden_hale', 'dialog_id': 'warden_hale_ch21_dangerous' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_function_without_sense' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'edict', 'dialog_id': 'edict_ch21_perfect' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'glamour', 'standing_text': ["You've arrived. Good. There's a certain peace in following the path laid out for you, isn't there?"] }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_meet_edict_glamour_crux' }}
         ]
     },
@@ -1823,6 +1824,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_follow_path' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch21_follow_path' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch21_follow_path' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'edict', 'standing_text': ["Follow what's in front of you. The rest doesn't concern you."] }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_defeat_edict_glamour_crux' }}
         ]
     },
@@ -1889,6 +1891,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch21_stripping' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_filtration' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rapture', 'dialog_id': 'rapture_ch21_more_pressure' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'stigma', 'standing_text': ["The hesitation was the response. Correction was appropriate."] }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_meet_scalpel' }}
         ]
     },
@@ -1912,6 +1915,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_stripping_down' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_filtration_emphasis' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rapture', 'dialog_id': 'rapture_ch21_apply_pressure' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'scalpel', 'standing_text': ["Your deaths will be artistic precision."] }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_defeat_stigma_rapture_scalpel' }}
         ]
     },
@@ -1972,6 +1976,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lament', 'dialog_id': 'lament_ch21_quieter' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch21_not_peace' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'paradox', 'dialog_id': 'paradox_ch21_define_difference' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'revelry', 'standing_text': ["Their joy was weak. Let's see how you perform"] }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_meet_paradox' }}
         ]
     },
@@ -1992,6 +1997,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_ch21_meet_paradox' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_meet_paradox' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch21_meet_paradox' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'paradox', 'standing_text': ["Anything and everything is possible... Somehow."] }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_defeat_revelry_lament_paradox' }}
         ]
     },
@@ -2051,6 +2057,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'oracle', 'dialog_id': 'oracle_ch21_deviation' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'pageant', 'dialog_id': 'pageant_ch21_under_pressure' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_watch_me' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'pageant', 'standing_text': ["The show only matters if the audience appreciates it.  The audience only appreciates it if you wear the mask they want to see."] }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_meet_garbage' }}
         ]
     },
@@ -2071,6 +2078,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_meet_garbage' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_meet_garbage' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch21_meet_garbage' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'garbage', 'standing_text': ["The only thing you continuously suffer is humanity... is yourselves."] }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_defeat_pageant_oracle_garbage' }}
         ]
     },
@@ -2124,6 +2132,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'reliquary', 'dialog_id': 'reliquary_ch21_continuity' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch21_continuity_from_choice' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch21_stop_predicting' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'reliquary', 'standing_text': ["History doesn't lie. It tells the same story again and again."] }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_meet_cataclysm' }}
         ]
     },
@@ -2143,16 +2152,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_enter_trial' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_enter_trial' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch21_enter_trial' }},
-
-            # add chacter_ch21_enter_trial dialog for each character
-            # Character Dialog Chock
-            #   "Another trial. Let’s finish this."
-            # Character Dialog Kade
-            #   "They’re going to try to turn every past failure into a weapon. Don’t let them."
-            # Character Dialog Kaera
-            #   "Memory is not a cage. We will not be trapped by what has already been recorded."
-            # Character Dialog Poise
-            #   "Then we rewrite the record."
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'cataclysm', 'standing_text': ["The end is coming. The end is here."] }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_defeat_cataclysm_reliquary' }}
         ]
     },
@@ -2215,6 +2215,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch21_or_matter' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'dominion', 'dialog_id': 'dominion_ch21_instability' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch21_its_choice' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'dominion', 'standing_text': ["The only way you can survive is by living imprisoned from yourselves."] }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_defeat_dominion' }}
         ]
     },

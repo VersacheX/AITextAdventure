@@ -665,14 +665,13 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'tech_forest_small_e_investigate_graft'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_small_e_investigate_graft'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_forest_small_e_investigate_graft' } },
-			# Prime Lyss's standing text before the party goes to her
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
-					'npc_id': 'scout_lyss',
+					'npc_id': 'archivist_fernhollow',
 					'standing_text': [
-						"I know the alcove Fernhollow means.",
-						"The Burrow Whisper circles it more than anywhere else in the tunnels."
+						"Lyss has been through that section of the burrows.",
+						"She can tell you what the Burrow Whisper is guarding."
 					]
 				}
 			},
@@ -704,10 +703,13 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_forest_small_e_consult_lyss' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_forest_small_e_consult_lyss'  } },
 			{
-				'event_type': 'create_dungeon',
+				'event_type': 'set_npc_standing_text',
 				'params': {
-					'dungeon_id': 'forest_small_city_burrow_alcove',
-					'location': 'region_open_area'
+					'npc_id': 'scout_lyss',
+					'standing_text': [
+						"The Burrow Whisper guards the sealed alcove.",
+						"It is not protecting the space. It is protecting something inside it."
+					]
 				}
 			},
 			{
@@ -715,6 +717,13 @@ TASKS += [
 				'params': {
 					'npc_id': 'burrow_whisper',
 					'location': None
+				}
+			},
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'forest_small_city_burrow_alcove',
+					'location': 'region_open_area'
 				}
 			},
 			{
@@ -794,17 +803,6 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_forest_small_e_defeat_burrow_whisper' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_forest_small_e_defeat_burrow_whisper'     } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_forest_small_e_defeat_burrow_whisper'      } },
-			# Set Fernhollow's standing text for the return step
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'archivist_fernhollow',
-					'standing_text': [
-						"You retrieved it. And it's still alive.",
-						"Come — I need to see it."
-					]
-				}
-			},
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -832,8 +830,9 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_small_e_return_to_fernhollow'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'tech_forest_small_e_return_to_fernhollow'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_forest_small_e_return_to_fernhollow' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'archivist_fernhollow', 'standing_text': [ "The graft is still alive. Carry it carefully — the mycelium at Boiling Bubble will recognize it." ] } },
 		]
-	},
+	}
 
 ]
 
@@ -864,17 +863,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_forest_small_c_find_talia' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_forest_small_c_find_talia'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_forest_small_c_find_talia' } },
-			# Prime Lyss's standing text for the C vouch step
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'scout_lyss',
-					'standing_text': [
-						"Talia asked me about you.",
-						"I told her what I know. She's worth your time."
-					]
-				}
-			},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'talia_softheart', 'standing_text': [ "Lyss has been through the burrows. She can tell you what the Burrow Whisper is guarding." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -902,17 +891,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_small_c_consult_lyss'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_forest_small_c_consult_lyss'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',    'dialog_id': 'nia_forest_small_c_consult_lyss'    } },
-			# Update Talia's standing text so she signals she is ready
-			{
-				'event_type': 'set_npc_standing_text',
-				'params': {
-					'npc_id': 'talia_softheart',
-					'standing_text': [
-						"I've made my decision.",
-						"The forest needs more than this hamlet can give right now."
-					]
-				}
-			},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'scout_lyss', 'standing_text': [ "Talia has been hoping for someone who actually listens. She'll come with you if you ask." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -984,6 +963,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'tech_forest_small_d_deliver_memory_spore'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_forest_small_d_deliver_memory_spore'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_small_d_deliver_memory_spore'  } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'diego', 'standing_text': [ "That spore — the memory-network residue is still active inside it.", "Something in Thornshade Hamlet resonates with it.", "Find Selen. She follows moth-spirits that carry forest memories.", "She'll know where this frequency leads." ] } },
 			# Place Selen and set her standing text for the consult step
 			{
 				'event_type': 'create_npc',
@@ -1030,6 +1010,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_forest_small_d_consult_selen'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grmnaw_forest_small_d_consult_selen' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',   'dialog_id': 'faith_forest_small_d_consult_selen'   } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'whisper_moth_selen', 'standing_text': [ "The moth-spirits clustered around you the moment you entered the hamlet.", "That spore you carry — it speaks to every memory the forest has ever lost.", "Come quickly. The Burrow already stirs." ] } },
 			# Set Burrow Whisper's standing text for the D meet step
 			{ 'event_type': 'create_npc',
 				'params': {

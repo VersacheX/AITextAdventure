@@ -183,26 +183,6 @@ NPC_DIALOG += [
             "I gave her a frequency marker. She's probably still out there."
         ]
     },
-    {
-        'npc_id': 'tess',
-        'dialog_id': 'tess_bio_hazard_intro',
-        'dialog': [
-            "Oh good, someone who doesn't look like they work for a government.",
-            "I've been pulling records out of a buried cache for three weeks.",
-            "Someone logged every black market drop in this region going back fifteen years.",
-            "Names, dates, locations. I don't know who made this — but it's very, very useful."
-        ]
-    },
-    {
-        'npc_id': 'tess',
-        'dialog_id': 'tess_bio_hazard_registry_handoff',
-        'dialog': [
-            "I'm keeping the originals. Obviously.",
-            "But you can have a copy. The Bleakwatch entries are the interesting ones.",
-            "Someone's been running drops through that outpost for years.",
-            "If you ever end up there — and you will — this'll tell you exactly who to ask about."
-        ]
-    },
 
 ]
 
@@ -375,30 +355,58 @@ NPC_DIALOG += [
         ]
     },
 
-    # Type F – Find Tess
+    # Type F – Tass Bio Hazard
+    {
+        'npc_id': 'tess',
+        'dialog_id': 'tess_bio_hazard_intro',
+        'dialog': [
+            "Sam's been pulling records out of a buried cache for three weeks.",
+            "Someone logged every black market drop in this region going back fifteen years.",
+            "Names, dates, locations. I don't know who made this — but it's very, very useful."
+        ]
+    },
     {
         'npc_id': 'technique',
-        'dialog_id': 'technique_desert_small_f_find_tess',
+        'dialog_id': 'technique_desert_small_f_bio_hazard_intro',
         'dialog': [
-            "Three weeks pulling records out of a buried cache. She's committed, I'll give her that."
+            "Fifteen years of drops in one cache. That's not a record. That's a leash on half the region."
+        ]
+    },
+    {
+        'npc_id': 'sam',
+        'dialog_id': 'sam_desert_small_f_bio_hazard_intro',
+        'dialog': [
+            "Tess. Whoever built this didn't lose it by accident.",
+            "People kill for a lot less than fifteen years of names."
         ]
     },
     {
         'npc_id': 'tech',
-        'dialog_id': 'tech_desert_small_f_find_tess',
+        'dialog_id': 'tech_desert_small_f_bio_hazard_intro',
         'dialog': [
-            "Fifteen years of black-market drops. Names, dates, locations. That's not a hobby — that's leverage."
+            "Three weeks in a hole in the desert for a stack of somebody else's secrets. Sounds about right for you."
         ]
     },
     {
         'npc_id': 'magic',
-        'dialog_id': 'magic_desert_small_f_find_tess',
+        'dialog_id': 'magic_desert_small_f_bio_hazard_intro',
         'dialog': [
-            "Someone logged every quiet transaction in the region. Tess found the only copy that matters."
+            "Names, dates, and locations? Oh, I have so many questions and exactly zero patience."
         ]
     },
 
     # Type F – Receive Registry
+    
+    {
+        'npc_id': 'tess',
+        'dialog_id': 'tess_bio_hazard_registry_handoff',
+        'dialog': [
+            "We're keeping the originals. Obviously.",
+            "But you can have a copy. The Bleakwatch entries are the interesting ones.",
+            "Someone's been running drops through that outpost for years.",
+            "If you ever end up there — and you will — this'll tell you exactly who to ask about."
+        ]
+    },
     {
         'npc_id': 'tech',
         'dialog_id': 'tech_desert_small_f_receive_registry',
@@ -420,7 +428,13 @@ NPC_DIALOG += [
             "If we ever end up in Bleakwatch, we'll know exactly who to ask."
         ]
     },
-
+    {
+        'npc_id': 'sam',
+        'dialog_id': 'sam_desert_small_f_receive_registry',
+        'dialog': [
+            "I don't know who built this, but they were thorough. Every drop for fifteen years."
+        ]
+    }
 ]
 
 # --- Character dialogs: Type D ---
@@ -837,26 +851,10 @@ TASKS += [
                     'dialog_id': 'tess_bio_hazard_intro'
                 }
             },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_small_f_find_tess' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_desert_small_f_find_tess'      } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',     'dialog_id': 'magic_desert_small_f_find_tess'     } },
-            {
-                'event_type': 'award_task',
-                'params': {
-                    'task_id': 'desert_small_city_type_f_receive_registry'
-                }
-            }
-        ]
-    },
-
-    {
-        'task_id': 'desert_small_city_type_f_receive_registry',
-        'type': 'meet',
-        'to_type': 'npc',
-        'to_id': 'tess',
-        'task_acquire_events': [
-        ],
-        'task_complete_events': [
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_small_f_bio_hazard_intro' } },
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'sam', 'dialog_id': 'sam_desert_small_f_bio_hazard_intro' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_desert_small_f_bio_hazard_intro'      } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',     'dialog_id': 'magic_desert_small_f_bio_hazard_intro'     } },
             {
                 'event_type': 'initiate_dialog',
                 'params': {
@@ -867,10 +865,32 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_desert_small_f_receive_registry'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_desert_small_f_receive_registry' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_desert_small_f_receive_registry'   } },
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'sam', 'dialog_id': 'sam_desert_small_f_receive_registry' } },
             {
                 'event_type': 'award_item',
                 'params': {
                     'item_id': 'desert_small_city_f_contraband_registry'
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'tess',
+                    'standing_text': [
+                        "I'm keeping the originals. Obviously.",
+                        "But you can have a copy. The Bleakwatch entries are the interesting ones.",
+                        "Someone's been running drops through that outpost for years.",
+                        "If you ever end up there — and you will — this'll tell you exactly who to ask about."
+                    ]
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'sam',
+                    'standing_text': [
+                        "I don't know who built this, but they were thorough. Every drop for fifteen years."
+                    ]
                 }
             }
         ]
@@ -957,6 +977,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_small_d_deliver_ledger_plate' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_desert_small_d_deliver_ledger_plate'      } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_desert_small_d_deliver_ledger_plate'   } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'diego', 'standing_text': ["That plate — I can hear a frequency humming off the metal.", "Storm-research signatures. Pre-fracture.", "Find Venn. He'll know what the bunker's construct has to do with it."] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -986,11 +1007,6 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_small_d_consult_venn' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'skill_desert_small_d_consult_venn'   } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'scrap_seer_venn', 'standing_text': ["The Warden in the Tempest Bunker has been absorbing these frequencies since before the fracture.", "Bring the plate into its chamber and the static will crystallize.", "Diego can forge crystallized storm-static into an edge that cuts through any interference."] } },
-            { 'event_type': 'create_npc', 'params': { 'npc_id': 'tempest_warden', 'location': None } },
-            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'tempest_bunker_ch5', 'location': 'region_open_area' } },
-            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'tempest_bunker_ch5', 'item_id': 'polar_amplifier', 'location': 'treasure_room' } },
-            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'tempest_bunker_ch5', 'item_id': 'arc_core', 'location': 'treasure_room' } },
-            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'tempest_bunker_ch5', 'item_id': 'storm_etched_plating', 'location': 'treasure_room' } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -1006,7 +1022,12 @@ TASKS += [
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'tempest_warden',
-		'task_acquire_events': [
+		'task_acquire_events': [            
+            { 'event_type': 'create_npc', 'params': { 'npc_id': 'tempest_warden', 'location': None } },
+            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'tempest_bunker_ch5', 'location': 'region_open_area' } },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'tempest_bunker_ch5', 'item_id': 'polar_amplifier', 'location': 'treasure_room' } },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'tempest_bunker_ch5', 'item_id': 'arc_core', 'location': 'treasure_room' } },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'tempest_bunker_ch5', 'item_id': 'storm_etched_plating', 'location': 'treasure_room' } }
 		],
 		'task_complete_events': [
 			{

@@ -17,11 +17,11 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         "id": "warden_hale",
         "name": "Warden Hale",
         "level": 45,
-        "arm_armor": "aegis_vambraces",
-        "head_armor": "vigilant_helm",
-        "body_armor": "citadel_plate",
-        "leg_armor": "foundation_greaves",
-        "equipped_weapon": "memory_of_duty",
+        "arm_armor": "covenant_bracers",
+        "head_armor": "sentinel_mask",
+        "body_armor": "vigil_robe",
+        "leg_armor": "guardian_greaves",
+        "equipped_weapon": "ledgerbrand_mace",
         "max_hp": 1400,
         "current_hp": 1400,
         "max_ap": 350,
@@ -1010,6 +1010,7 @@ TASKS = [
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'skill', 'dialog_id': 'skill_ch15_where_is_he'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'ravel', 'dialog_id': 'ravel_ch15_jett_knows'}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'warden_hale', 'standing_text': ["I am Warden Hale. I enforce Edict’s vision of perfection."]}},
+            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'ravel', 'standing_text': ["Warden Hale is a man of duty and memory. He was locked away for refusing to perform."]}},
             {'event_type': 'award_task', 'params': {'task_id': 'main_story_ch15_meet_jett_for_warden_hale'}}
         ]
     },
@@ -1025,6 +1026,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'jett', 'dialog_id': 'jett_ch15_correctional_facility'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch15_then_who'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'jett', 'dialog_id': 'jett_ch15_elian_knows'}},
+            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'jett', 'standing_text': ["The poet. Elian. He hears things. The guards talk, they get drunk, they let things slip."]}},
             {'event_type': 'award_task', 'params': {'task_id': 'main_story_ch15_meet_elian_for_warden_hale'}}
         ]
     },
@@ -1038,6 +1040,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'elian', 'dialog_id': 'elian_ch15_hale_intro'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch15_hask'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'elian', 'dialog_id': 'elian_ch15_hask_plan'}},
+            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'elian', 'standing_text': ["No. But he's proud. He's a true believer in Edict's system. He sees dissent as a personal insult."]}},
             {'event_type': 'award_task', 'params': {'task_id': 'main_story_ch15_meet_hask_for_warden_hale'}}
         ]
     },
@@ -1055,6 +1058,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'hask', 'dialog_id': 'hask_ch15_prison_reveal'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch15_got_it'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'hask', 'dialog_id': 'hask_ch15_contaminated'}},
+            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'hask', 'standing_text': ["I am Hask. I enforce Edict’s vision of perfection."]}},
             {'event_type': 'award_task', 'params': {'task_id': 'main_story_ch15_meet_prison_warden'}}
         ]
     },

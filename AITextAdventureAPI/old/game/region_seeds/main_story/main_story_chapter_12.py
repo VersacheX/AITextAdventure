@@ -538,6 +538,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch12_narrator_lament_fades_again' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch12_after_lament_taunt' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch12_after_lament_taunt' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'veyla', 'standing_text': ["The silence... it's almost worse than the noise. I keep hearing Ember's song in my head... but it's fading. She tried so hard to keep us grounded. Now everything feels... hollow."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch12_meet_serin' }}
         ]
     },
@@ -556,6 +557,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch12_to_lament_final_taunt' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch12_to_lament_final_taunt' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch12_resolve' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'serin', 'standing_text': ["I... I should be happy, right? We won. The music stopped. Why does everything feel so heavy now? Ember used to sing real songs... but now when I try to remember them, there's just this... emptiness. Like something is pulling on my chest."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch12_meet_rell_again' }}
         ]
     },
@@ -583,6 +585,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch12_to_rell_final' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch12_to_rell_final' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_ember_keepsake_request' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rell', 'standing_text': ["Ember's gone... but her fight isn't over. What do you need from me?"]}},
             { 'event_type': 'advance_chapter' }
         ]
     }

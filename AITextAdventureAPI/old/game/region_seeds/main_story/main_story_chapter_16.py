@@ -671,6 +671,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch16_on_records' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'jessa', 'dialog_id': 'jessa_ch16_directs' }},
 			{ 'event_type': 'remove_item', 'params': { 'item_id': 'fracture_logs' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'jessa', 'standing_text': ["The Spire is the source of the wound. Marlo Finch can guide you there."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch16_meet_marlo_finch' }}
 		]
 	},
@@ -692,6 +693,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch16_after_marlo_explains' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch16_to_marlo' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'marlo_finch', 'dialog_id': 'marlo_finch_ch16_sends_off' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'marlo_finch', 'standing_text': ["The Spire is the source of the wound. Crux is at its heart."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch16_meet_crux_origin_form' }}
 		]
 	},
@@ -753,6 +755,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch16_rallies' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_ch16_mutters' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'marlo_finch', 'dialog_id': 'marlo_finch_ch16_final' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'marlo_finch', 'standing_text': ["The Spire is stable for now, but the paradox remains. Crux didn't die. It just burrowed deeper."]}},
 			{ 'event_type': 'advance_chapter' }
 		]
 	}

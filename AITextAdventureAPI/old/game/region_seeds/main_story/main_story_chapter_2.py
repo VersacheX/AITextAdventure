@@ -1095,6 +1095,15 @@ TASKS = [
 				}
 			},
 			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'the_demigorgon',
+					'standing_text': [
+						"Grrrr. Arghhh!"
+					]
+				}
+			},
+			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'main_story_ch_2_defeat_demigorgon'

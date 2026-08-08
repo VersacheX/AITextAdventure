@@ -19,10 +19,10 @@ ATTAINABLE_PLAYER_CHARACTERS = [
     "id": "lyren",
     "name": "Lyren Vale",
     "level": 35,
-    "arm_armor": "petalwoven_bracers",
+    "arm_armor": "currentflow_bracers",
     "head_armor": "softbloom_cowl",
-    "body_armor": "heartroot_wrap",
-    "leg_armor": "dewthread_sandals",
+    "body_armor": "riverwarden_vestment",
+    "leg_armor": "meadowstep_greaves",
     "equipped_weapon": "gentlecurrent_staff",
     "max_hp": 1120,
     "current_hp": 1120,
@@ -41,7 +41,7 @@ ATTAINABLE_PLAYER_CHARACTERS = [
       "ice_light_faith_lv2_purging_veil",
       "earth_light_faith_lv2_clarity_balm",
       "light_faith_lv1_minor_heal",
-      "light_light_faith_lv4_soulflare_bloom"
+      "light_light_fire_faith_lv3_soulflare_bloom"
     ]
   }
 ]
@@ -337,6 +337,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch7_after_hibiscus' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_response_to_magic' }},
             { 'event_type': 'remove_item', 'params': { 'item_id': 'fragrant_hibiscus' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lyren', 'standing_text': ["The land is breaking down faster than we can fix it. Help stabilize the region before Seth can prepare the airship for departure."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch7_deliver_vale_pendant_to_lyren' }}
         ]
     },
@@ -357,6 +358,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch7_after_relic' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_joins_2' }},
             { 'event_type': 'remove_item', 'params': { 'item_id': 'vale_pendant' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lyren', 'standing_text': ["The land is breaking down faster than we can fix it. Help stabilize the region before Seth can prepare the airship for departure."]}},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'lyren' }},
             { 'event_type': 'character_join', 'params': { 'character_id': 'lyren' }}
         ]
@@ -375,6 +377,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch7_airship_ready' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch7_airship_ready' }},
             { 'event_type': 'remove_task', 'params': { 'task_id': 'meet_astra_wynn_go_back' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'seth', 'standing_text': ["The airship is ready. All aboard!"]}},
             { 'event_type': 'advance_chapter' }
         ]
     }

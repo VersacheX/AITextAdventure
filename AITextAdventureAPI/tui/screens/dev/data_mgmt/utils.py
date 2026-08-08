@@ -566,12 +566,42 @@ def serialize_timeline_task_detail(
     return "\n".join(out)
 
 def serialize_npc_tree(filtered) -> str:
-    """Serialize NPC group/npc into plain text."""
+    """Serialize NPC group/npc into plain text.
+
+    When the NPC validator has run (records carry ``extras["_errors"]``), each
+    NPC's integrity status and every error/info code+message is included so the
+    copied text is directly actionable.
+    """
     out: List[str] = []
     for group in filtered:
         out.append(group.label)
         for npc in group.npcs:
             out.append(f"  {npc.label}  [{npc.npc_id}]")
+
+            record = getattr(npc, "record", None)
+            extras = getattr(record, "extras", None) or {}
+            errors = extras.get("_errors")
+            if errors is None:
+                continue  # validator hasn't run — keep bare listing
+
+            hard_errors = [e for e in errors if getattr(e, "severity", "error") == "error"]
+            info_items  = [e for e in errors if getattr(e, "severity", "") == "info"]
+
+            if not hard_errors and not info_items:
+                out.append("    Integrity: OK")
+                continue
+
+            if hard_errors:
+                summary = f"{len(hard_errors)} error(s)"
+                if info_items:
+                    summary += f", {len(info_items)} info"
+                out.append(f"    Integrity: FAIL  ({summary})")
+            else:
+                out.append(f"    Integrity: INFO  ({len(info_items)} note(s))")
+
+            for e in errors:
+                sev = getattr(e, "severity", "error").upper()
+                out.append(f"      [{sev}] {e.code}: {e.message}")
     return "\n".join(out)
 
 def serialize_dialog_tree_from_widget(tree_widget: "Tree") -> str:

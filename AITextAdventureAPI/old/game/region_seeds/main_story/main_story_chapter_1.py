@@ -931,7 +931,6 @@ TASKS = [
 					'location': 'region_open_area'
 				}
 			}
-			#,{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'seth_hideout', 'item_id': 'dune_sundial', 'location': 'treasure_room'}}
 		],
 		'task_complete_events': [
 			{
@@ -946,6 +945,15 @@ TASKS = [
 				'params': {
 					'npc_id': 'technique',
 					'dialog_id': 'technique_you_got_it_coming'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'seth',
+					'standing_text': [
+						"Ha!Ha! You guys are good. I don't intend to hang around for you to finish the job. See you later!"
+					]
 				}
 			},
 			{
@@ -1040,6 +1048,15 @@ TASKS = [
 				'event_type': 'award_money',
 				'params': {
 					'amount': '400'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'rook',
+					'standing_text': [
+						"Bring him to me and I'll give you half the bounty. He's camped up in a hideout somewhere in the outskirts."
+					]
 				}
 			},
 			{
@@ -1211,7 +1228,16 @@ TASKS = [
                     'npc_id': 'magic',
                     'dialog_id': 'magic_reacts_to_logger'
                 }
-            }
+            },
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'sam',
+					'standing_text': [
+						"That logger should help you keep track of your progress."
+					]
+				}
+			}
         ]
     },
 	# TASK 7: meet diego at the Æ

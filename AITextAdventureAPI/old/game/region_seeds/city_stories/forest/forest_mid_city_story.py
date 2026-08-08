@@ -1008,6 +1008,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_forest_mid_d_deliver_root_graft'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_forest_mid_d_deliver_root_graft' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_forest_mid_d_deliver_root_graft' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'mira','standing_text': ["Show Thera first. She reads moonfire better than anyone.","And if the lanterns start answering it before she does… don't wait around."] } },
 			{
 				'event_type': 'award_task',
 				'params': {

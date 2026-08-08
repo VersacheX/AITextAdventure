@@ -22,11 +22,11 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         "id": "vek",
         "name": "Vek",
         "level": 35,
-        "arm_armor": "sentinel_bracers",
-        "head_armor": "guardian_helm",
-        "body_armor": "bulwark_plate",
-        "leg_armor": "bastion_greaves",
-        "equipped_weapon": "enforcer_maul",
+        "arm_armor": "campaign_vambraces",
+        "head_armor": "commanders_helm",
+        "body_armor": "warfront_plate",
+        "leg_armor": "warfront_greaves",
+        "equipped_weapon": "dominion_halberd",
         "max_hp": 1200,
         "current_hp": 1200,
         "max_ap": 300,
@@ -39,12 +39,11 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         "intelligence": 60,
         "constitution": 150,
         "abilities": [
-            "earth_technique_lv1_armor_up",
+            "fire_technique_lv1_scorch_slash",
             "earth_earth_technique_lv2_terra_slam",
-            "light_technique_lv1_rally",
-            "light_light_technique_lv2_blinding_strike",
-            "earth_light_technique_lv3_unbreakable",
-            "earth_earth_light_technique_lv4_judgment"
+            "earth_light_technique_lv2_lawbind_strike",
+            "earth_earth_light_technique_lv3_unbreakable",
+            "earth_earth_light_technique_lv3_judgment"
         ]
     }
 ]
@@ -918,6 +917,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch11_new_quest' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch11_new_quest' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch11_new_quest' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'sam', 'standing_text': ["We need to get to Quantford Hollow. Ember had a brother there — Rell. We need to tell him what happened."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch11_meet_vek_again' }},
             { 'event_type': 'advance_chapter' }
         ]
@@ -997,6 +997,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch11_vek_joins' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch11_vek_joins' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch11_settled' }},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'vek', 'standing_text': ["I will join you on the Rustwing. Someone needs to keep order while the rest of you do the impossible."]}},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'vek' }},
             { 'event_type': 'character_join', 'params': { 'character_id': 'vek' }}
         ]

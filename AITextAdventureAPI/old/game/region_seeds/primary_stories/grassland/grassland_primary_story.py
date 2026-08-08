@@ -590,6 +590,17 @@ TASKS = [
                 }
             },
             {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'sylvi',
+                    'standing_text': [
+                        "Tess and Sam are usually at the same table. Tell them both.",
+                        "Tess will see the angle. Sam will see the buyer.",
+                        "Not me — them."
+                    ]
+                }
+            },
+            {
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'grassland_primary_tell_tess_and_sam'
@@ -635,6 +646,26 @@ TASKS = [
                 }
             },
             {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'tess',
+                    'standing_text': [
+                        "Seris first. Her word turns rumour into leverage.",
+                        "Once she confirms it, then we talk about who actually wants the ledger."
+                    ]
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'sam',
+                    'standing_text': [
+                        "Seris. The oathwarden. She'll hear the ledger and know if it's true.",
+                        "Her confirmation is what makes it worth carrying further. Find her."
+                    ]
+                }
+            },
+            {
                 'event_type': 'award_task',
                 'params': {
                     'task_id': 'grassland_primary_tell_seris'
@@ -670,6 +701,18 @@ TASKS = [
                 'params': {
                     'npc_id': 'magic',
                     'dialog_id': 'moxie_seris_reaction'
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'oathwarden_seris',
+                    'standing_text': [
+                        "Mira has been searching for Althorin's ledger.",
+                        "She asked me whether an oathwarden's word could authenticate a record of debts.",
+                        "Now you know what she was preparing for.",
+                        "Go to her. Tell her the ledger exists."
+                    ]
                 }
             },
             {
@@ -714,6 +757,18 @@ TASKS = [
                 'event_type': 'award_item',
                 'params': {
                     'item_id': 'heirloom_ring'
+                }
+            },
+            {
+                'event_type': 'set_npc_standing_text',
+                'params': {
+                    'npc_id': 'mira',
+                    'standing_text': [
+                        "I don't carry gold on me — not the kind this warrants.",
+                        "But I have something. A debtor left this with me as collateral. Never came back for it.",
+                        "An heirloom ring. Old family piece. I kept it because things like this always find a use eventually.",
+                        "It has one now."
+                    ]
                 }
             },
             {

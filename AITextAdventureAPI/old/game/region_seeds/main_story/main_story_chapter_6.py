@@ -557,6 +557,8 @@ TASKS = [
 
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_karrek_done' },
               'condition': { 'type': 'is_task_completed', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'seth', 'standing_text': ["Meet my contact at the city outskirts bar."]},
+              'condition': { 'type': 'is_task_completed', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch6_meet_seth_local_contact' },
               'condition': { 'type': 'is_task_completed', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch6_after_contact' },

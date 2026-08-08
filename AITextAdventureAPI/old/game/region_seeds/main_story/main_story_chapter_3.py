@@ -823,6 +823,15 @@ TASKS = [
 				}
 			},
 			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'pending_character',
+					'standing_text': [
+						"I think I'll stay here for now and figure things out."
+					]
+				}
+			},
+			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'unlock_player_character_deliver_memory_tonic' 
@@ -849,6 +858,16 @@ TASKS = [
 				'params': {
 					'npc_id': 'rook',
 					'dialog_id': 'rook_ch3_after_talla'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'rook',
+					'standing_text': [
+						"Last I heard, Seth was holed up in an old hideout out in the open area.",
+						"Be careful though, he's got a few new tricks up his sleeve."
+					]
 				}
 			},
 			{
@@ -1054,6 +1073,16 @@ TASKS = [
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
+					'npc_id': 'rook',
+					'standing_text': [
+						"Looking for someone tough? Talla Renn might have a job for you.",
+						"She's always in need of reliable help to keep the streets safe."
+					]
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
 					'npc_id': 'sylvi', # sylvi is a street performer who has heard of the players exploits in ch1
 					'standing_text': [
 						"I've never seen that person at the bar before.",
@@ -1109,6 +1138,15 @@ TASKS = [
 				'params': {
 					'npc_id': 'skill',
 					'dialog_id': 'skill_ch3_meet_relic_guardian'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'relic_guardian',
+					'standing_text': [
+						"The relic guardian stands vigilant, protecting the ancient artifact with unwavering resolve."
+					]
 				}
 			},
 			{
@@ -1273,6 +1311,15 @@ TASKS = [
 				}
 			},
 			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'kess_thornwrite',
+					'standing_text': [
+						"Thanks for bringing me the scribe mint. Please find the scarred thyme."
+					]
+				}
+			},
+			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'deliver_scarred_thyme_to_kess_ch3'
@@ -1338,6 +1385,15 @@ TASKS = [
 				}
 			},
 			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'kess_thornwrite',
+					'standing_text': [
+						"Thanks for bringing me the scarred thyme. Here is the memory tonic."
+					]
+				}
+			},
+			{
 				'event_type': 'award_item',
 				'params': {
 					'item_id': 'memory_tonic_ch3',
@@ -1394,6 +1450,15 @@ TASKS = [
 				'event_type': 'remove_item',
 				'params': {
 					'item_id': 'memory_tonic_ch3'
+				}
+			},
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'pending_character',
+					'standing_text': [
+						"Thanks for helping me remember who I am. I think I'll stay here for now and figure things out."
+					]
 				}
 			},
 			{

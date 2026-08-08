@@ -442,6 +442,15 @@ ARMOR_LV36_50 = {
             "elements": ["electric", "air"]
         },
         {
+            "id": "ironveil_vambraces",
+            "name": "Ironveil Vambraces",
+            "description": "Slim black-alloy vambraces etched with the same dimming micro-runes as Sylvara's circlet. They channel dark current along the forearm without a flicker of warmth.",
+            "defense": 22, "durability": 460, "max_durability": 460, "value": 5800,
+            "min_spawn_level": 40, "rarity": "notfound",
+            "strength": 4, "dexterity": 6, "intelligence": 26, "constitution": 12,
+            "elements": ["dark", "electric"]
+        },
+        {
             "id": "siege_gauntlets",
             "name": "Siege Gauntlets",
             "description": "Gauntlets built for sustained front-line engagement — every surface is reinforced and the grip-plate is riveted double.",
@@ -547,6 +556,15 @@ ARMOR_LV36_50 = {
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 6, "dexterity": 6, "intelligence": 20, "constitution": 14,
             "elements": ["fire", "dark"]
+        },
+        {
+            "id": "coldmarch_greaves",
+            "name": "Coldmarch Greaves",
+            "description": "Greaves of matte obsidian plate that make no sound on any surface. Sylvara had them balanced so her approach never announces itself.",
+            "defense": 24, "durability": 480, "max_durability": 480, "value": 6200,
+            "min_spawn_level": 40, "rarity": "notfound",
+            "strength": 4, "dexterity": 6, "intelligence": 24, "constitution": 12,
+            "elements": ["dark", "electric"]
         },
         {
             "id": "circuit_greaves",

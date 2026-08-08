@@ -518,6 +518,16 @@ TASKS = [
 				}
 			},
 			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'elder_saphrin',
+					'standing_text': [
+						"The leaf is real. The old promises are still alive inside it.",
+						"Seek Loryn. She knows the old ways of binding memory back to bark."
+					]
+				}
+			},
+			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'forest_large_city_type_d_consult_loryn'

@@ -663,6 +663,7 @@ TASKS = [
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'mountains_mid_city_b_void_gauntlet' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'forest_large_city_b_void_gauntlet' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'snow_large_city_b_void_gauntlet' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'marlo_finch', 'standing_text': ["The Hyperway is open. You can travel anywhere in the world now."]}}
 		]
 	},
 	{
@@ -677,6 +678,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch20_memory_tonic_good' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch20_degradation_loop' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_kess_thornwrite' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'curator_lysa', 'standing_text': ["I feel like I'm losing myself. I can't remember who I am or what I was doing."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_complete_regional_quest_2_lock' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_meet_kess_for_memory_tonic' }}
 		]
@@ -694,6 +696,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_ch20_alchemical_synergy' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'temporal_echoes', 'item_id': 'dream_essence', 'location': 'final_chamber' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rotwood', 'item_id': 'forgotten_promises', 'location': 'final_chamber' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'kess_thornwrite', 'standing_text': ["I can brew the tonic, but I'll need dream essence from the Temporal Echoes and forgotten promises from the Rotwood."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_deliver_dream_essence_to_kess' }}
 		]
 	},
@@ -709,6 +712,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_echoes_who_we_were' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch20_little_piece_future' }},
 			{ 'event_type': 'remove_item', 'params': { 'item_id': 'dream_essence' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'kess_thornwrite', 'standing_text': ["The Dream Essence is still humming with energy. This will anchor the tonic nicely."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_deliver_forgotten_promises_to_kess' }}
 		]
 	},
@@ -723,6 +727,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'kess_thornwrite', 'dialog_id': 'kess_ch20_forgotten_promises' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_exactly_needs' }},
 			{ 'event_type': 'remove_item', 'params': { 'item_id': 'forgotten_promises' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'kess_thornwrite', 'standing_text': ["The forgotten promises... bittersweet. Exactly what we need to reconnect emotion to memory."]}},
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'memory_tonic_ch20' }}
 		]
 	},
@@ -755,6 +760,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch20_deja_vu' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch20_not_again' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_remind_again' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'curator_lysa', 'standing_text': ["The past is a comfort, a warm blanket. Why would anyone choose the cold, uncertain future?"]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_defeat_oracle_and_reliquary_again' }}
 		]
 	},
@@ -799,6 +805,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch20_deja_vu_blank' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'marlo_finch', 'dialog_id': 'marlo_finch_ch20_bracelet_second' }},
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'bracelet_of_void' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'marlo_finch', 'standing_text': ["The Hyperway is open. You can travel anywhere in the world now."]}},
 			{ 'event_type': 'unlock_hyperway' }
 		]
 	},
@@ -819,6 +826,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'reliquary', 'dialog_id': 'reliquary_ch20_keepers' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'oracle', 'dialog_id': 'oracle_ch20_cannot_avoid' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch20_void_power' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'curator_lysa', 'standing_text': ["The past is a comfort, a warm blanket. Why would anyone choose the cold, uncertain future?"]}},
 			{ 'event_type': 'set_player_location', 'params': { 'location': 'city_number_21_region_city_bar' }},
 			{ 'event_type': 'advance_chapter' }
 		]

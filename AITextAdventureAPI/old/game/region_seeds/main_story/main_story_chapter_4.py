@@ -786,6 +786,8 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'final_character', 'dialog_id': 'final_character_ch4_intro' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_final_character_ch4_join' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_final_character_ch4_join' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'final_character', 'standing_text': [
+                "I’m ready. Whatever’s tearing this place apart... We end it together."] } },
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'final_character'} },
             { 'event_type': 'player_character_join', 'params': { 'dialog_id': 'final_character_ch4_join', 'is_final_character': True } }
         ]
@@ -807,6 +809,10 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch4_after_catalyst' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch4_after_catalyst' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch4_after_catalyst' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'catalyst', 'standing_text': [
+                "I am the Catalyst. The fracture’s herald and harbinger.",
+                "You cannot stop the collapse, but you can beg for a swift end."
+            ] } },
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch4_defeat_catalyst' } }
         ]
     },
@@ -847,10 +853,14 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'marlo_finch', 'dialog_id': 'marlo_finch_ch4_after_rift' } },
             { 'event_type': 'remove_item', 'params': { 'item_id': 'bracelet_of_void' } },
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'marlo_finch', 'dialog_id': 'marlo_finch_ch4_after_rift_2' } },
-            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch4_return_to_mira' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch4_after_marlo_finch' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch4_after_marlo_finch' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch4_after_marlo_finch' } }
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch4_after_marlo_finch' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'marlo_finch', 'standing_text': [
+                "If you find the other half of that bracelet, bring it to me.",
+                "I’ll need to examine it before it causes any more damage."
+            ]}},
+            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch4_return_to_mira' } }
 
         ]
     },
@@ -871,6 +881,10 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch4_after_mira_outro' } },
             { 'event_type': 'award_task', 'params': { 'task_id': 'ch4_deliver_rift_dust_to_kess' } },
             { 'event_type': 'award_task', 'params': { 'task_id': 'ch4_deliver_unstable_relic_to_mira' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'mira', 'standing_text': [
+                "If you come across more relics like that, don’t hesitate.",
+                "I always pay well for dangerous curios."
+            ]}},
             { 'event_type': 'advance_chapter' }
         ]
     },

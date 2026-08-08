@@ -845,6 +845,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'stigma', 'dialog_id': 'stigma_ch14_venom'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch14_done_with_tools'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch14_end_this'}},
+            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'stigma', 'standing_text': ["Hailward Hold is a test. See the lies, and then we can talk about the truth."]}},
             {'event_type': 'award_task', 'params': {'task_id': 'main_story_ch14_defeat_stigma'}}
         ]
     },

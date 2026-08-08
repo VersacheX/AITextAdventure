@@ -608,6 +608,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_desert_large_e_investigate_resonance'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_large_e_investigate_resonance' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple',  'dialog_id': 'ripple_desert_large_e_investigate_resonance'  } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'kadeem', 'standing_text': [ "Something came in from the deep desert.", "Buyers won't touch it. Figured you might want a look." ] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -967,6 +968,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_desert_large_d_deliver_cipher_stone'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable',     'dialog_id': 'sable_desert_large_d_deliver_cipher_stone'     } },
             { 'event_type': 'remove_item', 'params': { 'item_id': 'desert_large_city_e_dune_cipher_stone' } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'diego', 'standing_text': [ "The cipher stone is in safe hands.", "Rhyla will know what to do with it." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
