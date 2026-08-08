@@ -9,7 +9,24 @@ NPCS = [
 			'A master smith who trains apprentices in the Fellowship\'s traditions.'
 			' Belkan\'s hammer strikes ring with rhythmic precision.'
 			' He believes metal reveals its true nature only under pressure.'
-		)
+		),
+		"image": "mountains_small:forgehand_belkan1",
+		"psychology": {
+			"mbti": "ISFJ",
+			"dominant": "Si — Teaches tradition with absolute fidelity; the Fellowship's forge-techniques are as sacred as scripture.",
+			"auxiliary": "Fe — Invests deeply in every apprentice; a failed student is a weight he carries personally.",
+			"tertiary": "Ti — Refines techniques through quiet, internal analysis; his adjustments are small and exact.",
+			"inferior": "Ne — Resistant to new methods; tradition is the forge's foundation and he won't gamble with it."
+		},
+		"enneagram": {
+			"enneagram_type": "6w5",
+			"core_fear": "The Fellowship's forge-tradition dying with the last apprentice who knew it.",
+			"core_desire": "To pass every technique on perfectly and see it preserved.",
+			"defense_mechanism": "Reaction Formation — Channels anxiety about the forge's cooling into ever-more-rigorous training.",
+			"stress_line": "Moves to Type 3 — Becomes performatively demanding when the village questions his methods.",
+			"growth_line": "Moves to Type 9 — Accepts that new hands will carry the tradition forward differently, and trusts them.",
+			"instinctual_variant": "so/sp — Community craft-tradition as personal mission and identity."
+		}
 	},
 	{
 		'npc_id': 'marshal_korla',
@@ -18,14 +35,48 @@ NPCS = [
 			'A disciplined marshal who organizes expeditions into the mountain depths.'
 			' Korla\'s armor is etched with maps of tunnels long since collapsed.'
 			' She carries herself with the confidence of someone who has survived the dark.'
-		)
+		),
+		"image": "mountains_small:marshal_korla1",
+		"psychology": {
+			"mbti": "ENTJ",
+			"dominant": "Te — Plans every expedition with tactical precision; contingencies have contingencies.",
+			"auxiliary": "Ni — Reads the mountain's behaviour as a strategic problem with a solvable pattern.",
+			"tertiary": "Se — Maintains physical composure under pressure; the dark does not unsteady her.",
+			"inferior": "Fi — Rarely acknowledges the personal cost of sending teams into danger; duty comes first."
+		},
+		"enneagram": {
+			"enneagram_type": "8w9",
+			"core_fear": "An expedition lost because of poor planning or weak leadership.",
+			"core_desire": "To bring every team back from the depths.",
+			"defense_mechanism": "Denial — Suppresses fear of the depths by focusing entirely on logistics.",
+			"stress_line": "Moves to Type 5 — Becomes cold and over-analytical when a plan collapses and she has no answer.",
+			"growth_line": "Moves to Type 2 — Becomes genuinely supportive and present with her team when the mission is at its hardest.",
+			"instinctual_variant": "so/sp — Leadership as the highest form of community responsibility."
+		}
 	},
 	{
 		'npc_id': 'depth_seer_thalric',
 		'name': 'Thalric the Depth‑Seer',
 		'description': (
 			'A tunnel mystic who reads fault‑echoes and senses disturbances in the deep stone.'
-		)
+		),
+		"image": "mountains_small:depth_seer_thalric1",
+		"psychology": {
+			"mbti": "INFJ",
+			"dominant": "Ni — Perceives fault-echoes as a language; the stone's disturbances are sentences he is still translating.",
+			"auxiliary": "Fe — Communicates warnings with quiet insistence; his concern for the village is the emotional driver of his work.",
+			"tertiary": "Ti — Cross-checks each echo against the geological logic of the hollow before committing to a reading.",
+			"inferior": "Se — Absorbed in deep-listening; the physical world surfaces slowly when he is in the tunnels."
+		},
+		"enneagram": {
+			"enneagram_type": "5w4",
+			"core_fear": "A fault-echo he misread that causes a collapse he could have prevented.",
+			"core_desire": "To map every disturbance in the deep stone before it reaches the surface.",
+			"defense_mechanism": "Isolation — Retreats further into the tunnels when his readings are dismissed or misunderstood.",
+			"stress_line": "Moves to Type 7 — Becomes restless when the echoes multiply faster than he can parse them.",
+			"growth_line": "Moves to Type 8 — Steps into decisive, protective action when the hollow demands more than listening.",
+			"instinctual_variant": "sp/sx — Deep-listening as solitary craft; bonds intensely with those who trust his readings."
+		}
 	},
 	{
 		'npc_id': 'vorn_ashpike',
@@ -33,7 +84,24 @@ NPCS = [
 		'description': (
 			'A seasoned tunnel-runner who knows every mood and creak of the hollow.'
 			' Stubborn as cold iron, but his instincts have kept the village standing.'
-		)
+		),
+		"image": "mountains_small:vorn_ashpike1",
+		"psychology": {
+			"mbti": "ISTP",
+			"dominant": "Ti — Reads the tunnel's sounds and shifts as a precise internal map; his instincts are conclusions, not guesses.",
+			"auxiliary": "Se — Physically at home in the dark; every creak and shift is registered before he consciously processes it.",
+			"tertiary": "Ni — Has a runner's gut-sense for when the hollow is about to turn.",
+			"inferior": "Fe — Stubborn to the point of refusing help; asking is a weakness he'd rather not show."
+		},
+		"enneagram": {
+			"enneagram_type": "8w9",
+			"core_fear": "The hollow swallowing the village because he wasn't fast enough or stubborn enough.",
+			"core_desire": "To be the last line of warning that keeps the village standing.",
+			"defense_mechanism": "Denial — Refuses to acknowledge how bad the disturbances have become until it's undeniable.",
+			"stress_line": "Moves to Type 5 — Goes quiet and cold when the hollow finally defies everything he knows.",
+			"growth_line": "Moves to Type 2 — Opens up and accepts help when the village's survival requires it.",
+			"instinctual_variant": "sp/so — Self-reliance in service of the community; the village stands because he runs."
+		}
 	},
 ]
 

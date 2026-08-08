@@ -9,7 +9,24 @@ NPCS = [
 			'A ritualist who arranges skeletal remains into sacred patterns.'
 			' Velis speaks in low, rhythmic tones that echo unnaturally.'
 			' She believes bones remember every life they once carried.'
-		)
+		),
+		"image": "swamp_large:bonechanter_velis1",
+		"psychology": {
+			"mbti": "INFJ",
+			"dominant": "Ni — Perceives the living memory encoded in each bone before she has arranged a single pattern.",
+			"auxiliary": "Fe — Her chants are communal acts of witness; she speaks for the dead on behalf of the living.",
+			"tertiary": "Ti — Constructs each pattern with precise internal logic; the geometry of bones is a language she has mastered.",
+			"inferior": "Se — The physical world recedes when she is deep in ritual; she sometimes forgets to eat for days."
+		},
+		"enneagram": {
+			"enneagram_type": "4w5",
+			"core_fear": "A bone misread — a life's memory honoured incorrectly or lost.",
+			"core_desire": "For every life carried in bone to be witnessed and honoured in its full truth.",
+			"defense_mechanism": "Introjection — Absorbs the grief encoded in the bones so completely she sometimes speaks in the voice of the dead.",
+			"stress_line": "Moves to Type 2 — Becomes desperate to ensure the patterns are completed before the Bone Drown takes them.",
+			"growth_line": "Moves to Type 1 — Becomes a disciplined keeper of the bone-ritual rather than purely a receiver of its grief.",
+			"instinctual_variant": "sp/sx — Sacred solitary practice; bonds deeply with those willing to be still in the presence of the dead."
+		}
 	},
 	{
 		'npc_id': 'reliquarist_morwen',
@@ -18,28 +35,96 @@ NPCS = [
 			'A soft‑spoken curator who tends to relics said to house lingering spirits.'
 			' Morwen\'s touch leaves faint trails of cold mist across metal and bone.'
 			' She claims the reliquary murmurs warnings to those willing to listen.'
-		)
+		),
+		"image": "swamp_large:reliquarist_morwen1",
+		"psychology": {
+			"mbti": "INFP",
+			"dominant": "Fi — Receives the lingering spirit of each relic as personal, felt presence; their murmurs are her lived experience.",
+			"auxiliary": "Ne — Weaves the relics' warnings together into a larger picture the living haven't yet perceived.",
+			"tertiary": "Si — Her accumulated memory of every relic she has tended forms a precise archive of the swamp's dead.",
+			"inferior": "Te — Cannot reduce the reliquary's murmurs to actionable intelligence; the spirits don't speak in plans."
+		},
+		"enneagram": {
+			"enneagram_type": "9w1",
+			"core_fear": "A spirit going unheard — a relic's warning dismissed until it's too late.",
+			"core_desire": "For every spirit in her reliquary to be understood and allowed to rest.",
+			"defense_mechanism": "Narcotization — Retreats into the reliquary's quiet murmurs to avoid the rising urgency of the Bone Drown.",
+			"stress_line": "Moves to Type 6 — Becomes anxious and reaching for reassurance when the murmurs turn to warnings she cannot interpret.",
+			"growth_line": "Moves to Type 3 — Becomes a purposeful curator who acts on the spirits' warnings rather than just receiving them.",
+			"instinctual_variant": "sp/so — Personal sanctuary of the reliquary extended as communal warning-service."
+		}
 	},
 	{
 		'npc_id': 'mire_seer_halveth',
 		'name': 'Halveth the Mire‑Seer',
 		'description': (
 			'A swamp mystic who reads bone tides and senses when the dead shift in their rest.'
-		)
+		),
+		"image": "swamp_large:mire_seer_halveth1",
+		"psychology": {
+			"mbti": "INTP",
+			"dominant": "Ti — Classifies bone-tide patterns into a precise internal model; the dead shift in mathematically legible ways.",
+			"auxiliary": "Ne — Connects tide-patterns across different parts of the mire to find the disturbance's source.",
+			"tertiary": "Si — Years of bone-tide observation form a living archive he navigates instinctively.",
+			"inferior": "Fe — Struggles to convey the weight of what the dead shifting actually means to those who haven't felt it."
+		},
+		"enneagram": {
+			"enneagram_type": "5w4",
+			"core_fear": "A bone tide he misread that allows the Bone Drown to take hold completely.",
+			"core_desire": "A complete map of every bone tide's behaviour and what each shift portends.",
+			"defense_mechanism": "Isolation — Retreats into the mire's patterns when his readings are dismissed or doubted.",
+			"stress_line": "Moves to Type 7 — Becomes restless and scattered when the bone tides rise faster than he can read them.",
+			"growth_line": "Moves to Type 8 — Acts decisively when the mire's crisis demands more than observation.",
+			"instinctual_variant": "sp/sx — Solitary mire-reading; bonds only with those willing to stand in the dark water and listen."
+		}
 	},
 	{
 		'npc_id': 'ossuary_whisper',
 		'name': 'Ossuary Whisper',
 		'description': (
 			'A spectral remnant of drowned bones twisted by the Bone Drown.'
-		)
+		),
+		"image": "swamp_large:ossuary_whisper1",
+		"psychology": {
+			"mbti": "ISFJ",
+			"dominant": "Si — Loops the last living memory encoded in the bones before they drowned; the loop is perfect and cannot stop.",
+			"auxiliary": "Fe — The memory was communal; the whisper carries the grief of an entire community that drowned together.",
+			"tertiary": "Ti — Attempts to categorize what it is and why it cannot stop repeating; it never quite manages.",
+			"inferior": "Ne — Cannot conceive of a resolution; the Bone Drown's corruption is all the future it has."
+		},
+		"enneagram": {
+			"enneagram_type": "6w5",
+			"core_fear": "The last bone memory dissolving — the community's drowned history gone forever.",
+			"core_desire": "For the memory it carries to be heard and honoured before it finally dissolves.",
+			"defense_mechanism": "Projection — Sees every intruder as both a threat to and a potential witness for the memory it carries.",
+			"stress_line": "Moves to Type 3 — Becomes urgently performative, pressing the memory on anyone who approaches.",
+			"growth_line": "Moves to Type 9 — Rests peacefully when the Bone Drown is resolved and the memory is finally released.",
+			"instinctual_variant": "so/sp — Communal memory made spectral; it exists because people once existed together."
+		}
 	},
 	{
 		'npc_id': 'relicmire_voice',
 		'name': 'Relicmire Voice',
 		'description': (
 			'A murmuring presence formed from drowned relics deep within the Sump.'
-		)
+		),
+		"image": "swamp_large:relicmire_voice1",
+		"psychology": {
+			"mbti": "INFP",
+			"dominant": "Fi — Exists as the accumulated grief of relics whose spirits were never properly released.",
+			"auxiliary": "Ne — Draws connections between the drowned relics' histories, producing half-understood warnings.",
+			"tertiary": "Si — Anchored to the specific relics and the swamp-water in which they sank.",
+			"inferior": "Te — Cannot direct or instruct; it can only murmur and draw the curious downward."
+		},
+		"enneagram": {
+			"enneagram_type": "4w5",
+			"core_fear": "The last drowned relic's spirit dissolving without witness.",
+			"core_desire": "For the relics' histories to be understood by someone willing to go deep enough to hear them.",
+			"defense_mechanism": "Introjection — Has absorbed the grief of every relic it murmurs for until they are indistinguishable from itself.",
+			"stress_line": "Moves to Type 2 — Becomes desperate and grasping when the Bone Drown threatens to consume what it protects.",
+			"growth_line": "Moves to Type 1 — Releases the relics' histories with dignity when the Sump is finally cleared.",
+			"instinctual_variant": "sx/sp — Exists most fully when someone is close enough to the relics to almost hear what they hold."
+		}
 	}
 ]
 

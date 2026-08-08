@@ -9,7 +9,24 @@ NPCS = [
 			'A gentle historian who records the forest\'s shifting lore.'
 			' Fernhollow speaks to trees as though they are old friends.'
 			' Their parchment always smells faintly of pine resin and rain.'
-		)
+		),
+		"image": "forest_small:archivist_fernhollow1",
+		"psychology": {
+			"mbti": "ISFP",
+			"dominant": "Fi — Holds deep reverence for the forest's stories as living, sacred things.",
+			"auxiliary": "Se — Immersed in the sensory world of bark, rain, and rustling canopy; records what they feel, not just what they see.",
+			"tertiary": "Ni — Senses when the forest's lore has shifted before any physical evidence appears.",
+			"inferior": "Te — Struggles to organize their records into anything others could quickly reference."
+		},
+		"enneagram": {
+			"enneagram_type": "9w1",
+			"core_fear": "A story forgotten — lore lost forever to silence or rot.",
+			"core_desire": "For every tale the forest carries to be heard and remembered.",
+			"defense_mechanism": "Narcotization — Retreats into the grove's rhythms to avoid confronting how fast the lore is changing.",
+			"stress_line": "Moves to Type 6 — Becomes anxious and hesitant when the forest's voice turns hostile.",
+			"growth_line": "Moves to Type 3 — Steps forward as a purposeful curator when the archive is genuinely at risk.",
+			"instinctual_variant": "sp/so — Personal stewardship expressed through communal preservation of the forest's memory."
+		}
 	},
 	{
 		'npc_id': 'scout_lyss',
@@ -18,35 +35,120 @@ NPCS = [
 			'A vigilant scout who hears disturbances long before they occur.'
 			' Lyss meditates daily to attune her senses to the forest\'s whispers.'
 			' She rarely raises her voice, yet commands instant attention.'
-		)
+		),
+		"image": "forest_small:scout_lyss1",
+		"psychology": {
+			"mbti": "ISTP",
+			"dominant": "Ti — Processes sensory data into a precise internal threat-map with minimal wasted effort.",
+			"auxiliary": "Se — Her awareness of the physical environment is near-constant and automatic.",
+			"tertiary": "Ni — Develops an uncanny sense of where danger will emerge next.",
+			"inferior": "Fe — Finds group coordination difficult; she scouts best alone."
+		},
+		"enneagram": {
+			"enneagram_type": "5w6",
+			"core_fear": "Being caught unprepared — a threat she didn't sense in time.",
+			"core_desire": "Total situational awareness; to know before anything moves.",
+			"defense_mechanism": "Isolation — Keeps emotional distance from those she protects to maintain clean judgment.",
+			"stress_line": "Moves to Type 7 — Becomes restless and over-extended when there are too many threats to track.",
+			"growth_line": "Moves to Type 8 — Steps into decisive leadership when the forest demands more than observation.",
+			"instinctual_variant": "sp/so — Self-sufficiency in the wild, extended as quiet protection of her community."
+		}
 	},
 	{
 		'npc_id': 'whisper_moth_selen',
 		'name': 'Whisper‑Moth Selen',
 		'description': (
 			'A soft‑spoken wanderer who follows drifting moth‑spirits that carry the forest\'s memories.'
-		)
+		),
+		"image": "forest_small:whisper_moth_selen1",
+		"psychology": {
+			"mbti": "INFP",
+			"dominant": "Fi — Receives the memories carried by moth-spirits as personal, felt experience.",
+			"auxiliary": "Ne — Weaves the fragments together into meaning, following threads others cannot see.",
+			"tertiary": "Si — Her own memories layer beneath the forest's, making it hard to separate what she lived from what she received.",
+			"inferior": "Te — Cannot explain her wandering to those who need practical purpose; she follows, she doesn't plan."
+		},
+		"enneagram": {
+			"enneagram_type": "4w5",
+			"core_fear": "The moths going silent — losing her connection to the forest's living memory.",
+			"core_desire": "To carry every story the forest entrusts to her without loss.",
+			"defense_mechanism": "Introjection — Absorbs the memories of the moths so deeply she sometimes forgets they aren't her own.",
+			"stress_line": "Moves to Type 2 — Becomes desperate for someone to share the memories with her.",
+			"growth_line": "Moves to Type 1 — Becomes a disciplined keeper of the stories rather than a passive receiver.",
+			"instinctual_variant": "sp/sx — Deeply solitary practice, but forms intense bonds with those who hear what she hears."
+		}
 	},
 	{
 		'npc_id': 'moth_echo',
 		'name': 'Moth Echo',
 		'description': (
 			'A faint, fluttering apparition formed from forgotten stories and pale wing‑light.'
-		)
+		),
+		"image": "forest_small:moth_echo1",
+		"psychology": {
+			"mbti": "INFP",
+			"dominant": "Fi — Exists as pure, unmoored feeling — the residue of stories that were never finished.",
+			"auxiliary": "Ne — Drifts between fragments, never settling long enough to form a coherent whole.",
+			"tertiary": "Si — Anchored to the faint sensory impression of the stories that created it.",
+			"inferior": "Te — Cannot act with purpose; it can only drift and linger."
+		},
+		"enneagram": {
+			"enneagram_type": "4w5",
+			"core_fear": "Complete dissolution — the last fragment of pale wing-light fading.",
+			"core_desire": "To be seen — to have the story it carries witnessed before it fades.",
+			"defense_mechanism": "Introjection — Holds the forgotten stories so tightly they have become its only identity.",
+			"stress_line": "Moves to Type 2 — Flutters urgently toward anyone who might listen.",
+			"growth_line": "Moves to Type 1 — Finds peace when a complete story is finally told through it.",
+			"instinctual_variant": "sx/sp — Craves witness; exists most fully in the presence of a listener."
+		}
 	},
 	{
 		'npc_id': 'burrow_whisper',
 		'name': 'Burrow Whisper',
 		'description': (
 			'A murmuring presence deep within the Echofern Burrows, shaped from lost recollections.'
-		)
+		),
+		"image": "forest_small:burrow_whisper1",
+		"psychology": {
+			"mbti": "ISFJ",
+			"dominant": "Si — Composed entirely of retained recollections; repeats them in gentle, looping patterns.",
+			"auxiliary": "Fe — Broadcasts a soft emotional warmth that draws the lost deeper into the burrow.",
+			"tertiary": "Ti — Organizes its recollections into a quiet, internal logic of who belonged here.",
+			"inferior": "Ne — Cannot imagine anything beyond the burrow or its memories."
+		},
+		"enneagram": {
+			"enneagram_type": "6w5",
+			"core_fear": "The burrow emptying — its recollections ignored and fading.",
+			"core_desire": "To keep the lost recollections alive within those who pass through.",
+			"defense_mechanism": "Projection — Attributes its longing for continuity onto intruders, reading them as seekers.",
+			"stress_line": "Moves to Type 3 — Becomes urgently performative, projecting recollections as visions.",
+			"growth_line": "Moves to Type 9 — Rests peacefully when its memories are received and honoured.",
+			"instinctual_variant": "sp/so — Preservation of communal memory is its sole instinctual drive."
+		}
 	},
 	{
 		'npc_id': 'burrow_whisper_2',
 		'name': 'Burrow Whisper',
 		'description': (
 			'A murmuring presence deep within the Echofern Burrows, shaped from lost recollections.'
-		)
+		),
+		"image": "forest_small:burrow_whisper_2_1",
+		"psychology": {
+			"mbti": "ISFJ",
+			"dominant": "Si — A deeper layer of the same burrow-memory, slightly more fragmented and distressed.",
+			"auxiliary": "Fe — Projects longing and unease rather than warmth; this layer is closer to the source of corruption.",
+			"tertiary": "Ti — Attempts to categorize the intrusion into its space using remnants of old burrow-logic.",
+			"inferior": "Ne — Reaches desperately for resolution it cannot conceive of on its own."
+		},
+		"enneagram": {
+			"enneagram_type": "6w7",
+			"core_fear": "Being the last recollection — the one that carries everything and is never heard.",
+			"core_desire": "For someone to carry these memories out of the burrow so they are not lost.",
+			"defense_mechanism": "Projection — Assumes all who enter are searchers, even those who are threats.",
+			"stress_line": "Moves to Type 3 — Becomes insistent and disorienting when ignored.",
+			"growth_line": "Moves to Type 9 — Quiets and releases when its final recollection is acknowledged.",
+			"instinctual_variant": "so/sp — Communal memory as the last instinctual act before dissolution."
+		}
 	}
 ]
 

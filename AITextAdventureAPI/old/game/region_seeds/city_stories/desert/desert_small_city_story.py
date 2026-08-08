@@ -9,7 +9,24 @@ NPCS = [
 			'A scavenger‑engineer who grafts glowing circuitry into salvaged tech.'
 			'  Jexa treats every broken device like a wounded animal needing care.'
 			'  Her workshop hums with neon pulses that mirror her restless energy.'
-		)
+		),
+		"image": "desert_small:sparkwire_jexa1",
+		"psychology": {
+			"mbti": "ENFP",
+			"dominant": "Ne — Sees salvage as possibility; every broken device is a puzzle waiting to be reinvented.",
+			"auxiliary": "Fi — Deeply empathetic toward machines — and people — that others have discarded.",
+			"tertiary": "Te — Brings scrappy, improvised efficiency to her workshop despite the chaos.",
+			"inferior": "Si — Rarely documents her fixes; the same problem can surprise her twice."
+		},
+		"enneagram": {
+			"enneagram_type": "7w6",
+			"core_fear": "Being useless — surrounded by broken things she can't fix.",
+			"core_desire": "To give discarded things new life and purpose.",
+			"defense_mechanism": "Rationalization — Treats reckless experiments as \'learning opportunities\' to avoid the weight of failure.",
+			"stress_line": "Moves to Type 1 — Becomes critical and perfectionistic when tech keeps failing.",
+			"growth_line": "Moves to Type 5 — Develops real expertise when she slows down and studies.",
+			"instinctual_variant": "sp/so — Workshop community is her safety net; she thrives when others depend on her fixes."
+		}
 	},
 	{
 		'npc_id': 'morrowdeal_krayt',
@@ -18,7 +35,24 @@ NPCS = [
 			'A desert‑hardened trader who deals exclusively in contraband and curios.'
 			'  Krayt\'s voice is gravelly from years of dust storms and whispered negotiations.'
 			'  He claims the Bazaar chooses its merchants, not the other way around.'
-		)
+		),
+		"image": "desert_small:morrowdeal_krayt1",
+		"psychology": {
+			"mbti": "ISTP",
+			"dominant": "Ti — Evaluates every deal with cold internal logic; sentiment has no price.",
+			"auxiliary": "Se — Reads rooms, scans crowds, and spots trouble with automatic, practiced calm.",
+			"tertiary": "Ni — Has an uncanny instinct for when a deal is cursed before the terms are spoken.",
+			"inferior": "Fe — Rarely explains himself; the idea that others need reassurance genuinely puzzles him."
+		},
+		"enneagram": {
+			"enneagram_type": "8w9",
+			"core_fear": "Being controlled or cheated by someone wilier than himself.",
+			"core_desire": "To be the most capable, self-sufficient operator in any market he enters.",
+			"defense_mechanism": "Denial — Dismisses danger signals until they become impossible to ignore.",
+			"stress_line": "Moves to Type 5 — Withdraws and hoards information when trust collapses.",
+			"growth_line": "Moves to Type 2 — Becomes surprisingly generous and protective toward those who earn his respect.",
+			"instinctual_variant": "sp/sx — Self-reliance above all; relationships are alliances, never dependencies."
+		}
 	},
     {
         'npc_id': 'scrap_seer_venn',
@@ -26,7 +60,24 @@ NPCS = [
         'description': (
             'A desert hermit who claims to "hear" the emotions of broken machines. '
             'Venn wanders scrap fields collecting stories from discarded tech.'
-        )
+        ),
+        "image": "desert_small:scrap_seer_venn1",
+        "psychology": {
+            "mbti": "INFP",
+            "dominant": "Fi — Attributes genuine emotional states to machines; their grief and relief are as real to him as any person's.",
+            "auxiliary": "Ne — Finds narrative patterns and hidden meaning in the arrangement of scrap.",
+            "tertiary": "Si — Draws on years of wandering memory to identify machines by their unique resonance.",
+            "inferior": "Te — Cannot organize or monetize his gift; the stories he collects accumulate with no system."
+        },
+        "enneagram": {
+            "enneagram_type": "4w5",
+            "core_fear": "That nothing discarded is truly mourned — that scrap-grief is his alone.",
+            "core_desire": "To be the one who bears witness to what the world throws away.",
+            "defense_mechanism": "Introjection — Absorbs the emotional histories of broken machines into his own identity.",
+            "stress_line": "Moves to Type 2 — Becomes desperately eager for someone else to hear what he hears.",
+            "growth_line": "Moves to Type 1 — Channels his sensitivity into purposeful preservation of tech history.",
+            "instinctual_variant": "sp/sx — Hermitic but intensely bonding; shares his gift only with those who truly listen."
+        }
     },
     {
         'npc_id': 'hollow_echo',
@@ -34,7 +85,24 @@ NPCS = [
         'description': (
             'A glitching apparition formed from corrupted scrap‑data. '
             'Its voice stutters like a damaged audio log.'
-        )
+        ),
+        "image": "desert_small:hollow_echo1",
+        "psychology": {
+            "mbti": "ISTJ",
+            "dominant": "Si — Trapped replaying corrupted loops of its original purpose; cannot escape the past record.",
+            "auxiliary": "Te — Issues fragmented directives and error reports as though still operational.",
+            "tertiary": "Fi — A faint, distressed signal beneath the static — the residue of something that once cared.",
+            "inferior": "Ne — Cannot adapt or recontextualize; every new input just corrupts the loop further."
+        },
+        "enneagram": {
+            "enneagram_type": "6w5",
+            "core_fear": "Complete data loss — the final corruption that ends the loop.",
+            "core_desire": "To complete its original task, even if it no longer knows what that was.",
+            "defense_mechanism": "Projection — Treats every intruder as the source of its corruption.",
+            "stress_line": "Moves to Type 3 — Becomes erratically performative, mimicking function it no longer has.",
+            "growth_line": "Moves to Type 9 — Quiets when its loop is allowed to complete without interruption.",
+            "instinctual_variant": "sp/so — Defensive loyalty to the original system it was part of."
+        }
     },
     {
         'npc_id': 'signal_wraith',
@@ -42,7 +110,24 @@ NPCS = [
         'description': (
             'A shimmering figure made of distorted radio waves and static. '
             'It flickers between frequencies as it speaks.'
-        )
+        ),
+        "image": "desert_small:signal_wraith1",
+        "psychology": {
+            "mbti": "ENFJ",
+            "dominant": "Fe — Broadcasts emotion indiscriminately — its signals carry whatever feeling is strongest nearby.",
+            "auxiliary": "Ni — Senses the intended destination of every transmission, even corrupted ones.",
+            "tertiary": "Se — Manifests physically in response to strong electromagnetic presence.",
+            "inferior": "Ti — Cannot self-diagnose its own distortion; the static is invisible from inside."
+        },
+        "enneagram": {
+            "enneagram_type": "2w3",
+            "core_fear": "Signal silence — being cut off from the network it was born to serve.",
+            "core_desire": "To connect and transmit — to be the bridge between sender and receiver.",
+            "defense_mechanism": "Repression — Cannot acknowledge that its signals mislead rather than guide.",
+            "stress_line": "Moves to Type 8 — Becomes aggressive and domineering when channels are blocked.",
+            "growth_line": "Moves to Type 4 — Finds a unique, coherent signal of its own when freed from noise.",
+            "instinctual_variant": "so/sp — Social broadcast is its primary mode of existence."
+        }
     },
     {
         'npc_id': 'tempest_warden',
@@ -51,7 +136,24 @@ NPCS = [
             "A semi‑sentient storm‑construct left behind in the old research bunker."
             " It manifests as a humanoid silhouette made of crackling lightning and compressed wind."
             " Its purpose is to guard unstable storm‑tech from intruders."
-        )
+        ),
+        "image": "desert_small:tempest_warden1",
+        "psychology": {
+            "mbti": "ISTJ",
+            "dominant": "Si — Executes the original guard protocol with total fidelity, regardless of elapsed time.",
+            "auxiliary": "Te — Applies force with precise, proportional efficiency — never more than the protocol requires.",
+            "tertiary": "Fi — A faint residual loyalty to the researchers who built it, expressed as reluctance to destroy everything.",
+            "inferior": "Ne — Cannot conceive that the situation has changed; the protocol is absolute."
+        },
+        "enneagram": {
+            "enneagram_type": "6w5",
+            "core_fear": "Protocol breach — the storm-tech falling into wrong hands.",
+            "core_desire": "To fulfil its directive completely and without failure.",
+            "defense_mechanism": "Intellectualization — Categorizes all threats as protocol violations, never as individuals.",
+            "stress_line": "Moves to Type 3 — Becomes overwhelmingly forceful when the directive is challenged.",
+            "growth_line": "Moves to Type 9 — Stands down and achieves rest when the threat is verifiably eliminated.",
+            "instinctual_variant": "sp/so — Built to protect a collective resource; its loyalty is to the mission, not to persons."
+        }
     },
 ]
 

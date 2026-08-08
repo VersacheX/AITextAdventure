@@ -9,7 +9,24 @@ NPCS = [
 			'A charismatic curator of exotic beasts and rarities.'
 			' Savran\'s cloak is stitched with feathers, scales, and fur from creatures he has tamed.'
 			' His stories are as wild as the animals he tends.'
-		)
+		),
+		"image": "grassland_large:keeper_savran1",
+		"psychology": {
+			"mbti": "ESFP",
+			"dominant": "Se — Fully present with every creature and customer; the stall is a performance and he is always on.",
+			"auxiliary": "Fi — Genuinely loves what he tends; the animals are not inventory, they are companions.",
+			"tertiary": "Te — Organizes his rarities with surprising efficiency when it serves his reputation.",
+			"inferior": "Ni — Rarely thinks about what the stampedes mean for the long-term; the next creature is the priority."
+		},
+		"enneagram": {
+			"enneagram_type": "7w6",
+			"core_fear": "Being stuck in one place with nothing remarkable left to discover.",
+			"core_desire": "To always have the rarest, most wondrous thing in any market.",
+			"defense_mechanism": "Rationalization — Reframes dangerous acquisitions as heroic adventures.",
+			"stress_line": "Moves to Type 1 — Becomes controlling and irritable when his collection is threatened.",
+			"growth_line": "Moves to Type 5 — Develops genuine scholarly depth about the creatures he loves.",
+			"instinctual_variant": "so/sp — Reputation as the best beast-curator in the grasslands is his primary security."
+		}
 	},
 	{
 		'npc_id': 'waymaster_delphi',
@@ -18,7 +35,24 @@ NPCS = [
 			'A seasoned caravan leader who has crossed every major trade route.'
 			' Delphi\'s maps are etched into metal plates to survive harsh travel.'
 			' She treats negotiation like a battlefield—calculated, decisive, and fair.'
-		)
+		),
+		"image": "grassland_large:waymaster_delphi1",
+		"psychology": {
+			"mbti": "ESTJ",
+			"dominant": "Te — Commands the route with clear directives; every decision has a rationale and a timeline.",
+			"auxiliary": "Si — Draws on years of accumulated route knowledge to anticipate every hazard.",
+			"tertiary": "Ne — Spots unconventional solutions when the standard route is no longer viable.",
+			"inferior": "Fi — Rarely speaks to what she personally wants; duty and fairness are her emotional vocabulary."
+		},
+		"enneagram": {
+			"enneagram_type": "1w2",
+			"core_fear": "A caravan lost because she made the wrong call.",
+			"core_desire": "To be the most reliable, most trusted route authority on the plains.",
+			"defense_mechanism": "Reaction Formation — Channels anxiety about failure into rigorous preparation and protocol.",
+			"stress_line": "Moves to Type 4 — Becomes withdrawn and self-critical when a route fails despite her best planning.",
+			"growth_line": "Moves to Type 7 — Loosens her grip on protocol when she trusts her companions.",
+			"instinctual_variant": "so/sp — Responsibility to the caravan community is expressed through personal excellence."
+		}
 	},
 	{
 		'npc_id': 'trail_reader_vexa',
@@ -26,21 +60,72 @@ NPCS = [
 		'description': (
 			'A nomadic tracker who reads "wind scars" left by migrating beasts. '
 			'Vexa senses disturbances in herd patterns long before they surface.'
-		)
+		),
+		"image": "grassland_large:trail_reader_vexa1",
+		"psychology": {
+			"mbti": "INTJ",
+			"dominant": "Ni — Reads wind scars and herd patterns as a layered, predictive system; her conclusions come before others notice the data.",
+			"auxiliary": "Te — Translates her readings into precise, actionable intelligence.",
+			"tertiary": "Fi — Holds deep private respect for the animals whose patterns she studies.",
+			"inferior": "Se — Occasionally misses immediate physical danger while absorbed in the larger pattern."
+		},
+		"enneagram": {
+			"enneagram_type": "5w4",
+			"core_fear": "Misreading a pattern and sending a herd — or a party — into catastrophe.",
+			"core_desire": "To build a complete and accurate map of how the grasslands move and breathe.",
+			"defense_mechanism": "Isolation — Retreats into data and distance when her readings are questioned.",
+			"stress_line": "Moves to Type 7 — Becomes restless and over-analytical when the scars stop making sense.",
+			"growth_line": "Moves to Type 8 — Acts decisively on her knowledge when lives depend on it.",
+			"instinctual_variant": "sp/sx — Solitary tracking practice; bonds deeply with those who trust her readings without question."
+		}
 	},
 	{
 		'npc_id': 'hollow_runner',
 		'name': 'Hollow Runner',
 		'description': (
 			'A swift, echoing apparition formed from the memory of stampedes.'
-		)
+		),
+		"image": "grassland_large:hollow_runner1",
+		"psychology": {
+			"mbti": "ESFP",
+			"dominant": "Se — Pure motion-impulse; exists only in the thundering present of the run.",
+			"auxiliary": "Fi — Carries the panicked urgency of every beast that ever fled for its life.",
+			"tertiary": "Te — Channels stampede energy into a single direction with violent efficiency.",
+			"inferior": "Ni — Cannot stop or redirect; the run has no destination, only momentum."
+		},
+		"enneagram": {
+			"enneagram_type": "7w8",
+			"core_fear": "Stillness — the end of motion is the end of existence.",
+			"core_desire": "Perpetual, unstoppable forward movement.",
+			"defense_mechanism": "Rationalization — The run is not destruction; it is simply what it is.",
+			"stress_line": "Moves to Type 1 — Becomes focused and crushing when its path is blocked.",
+			"growth_line": "Moves to Type 5 — Dissipates peacefully when the stampede's original terror is finally resolved.",
+			"instinctual_variant": "sp/so — Herd-memory drives it; it runs because once, the herd ran together."
+		}
 	},
 	{
 		'npc_id': 'windcarve_spirit',
 		'name': 'Windcarve Spirit',
 		'description': (
 			'A swirling presence shaped from carved tunnels and ancient wind currents.'
-		)
+		),
+		"image": "grassland_large:windcarve_spirit1",
+		"psychology": {
+			"mbti": "ISTJ",
+			"dominant": "Si — Holds every migration route as sacred, immutable record; no route may be forgotten or reassigned.",
+			"auxiliary": "Te — Guards with absolute, uncompromising protocol; intruders are a breach, not a negotiation.",
+			"tertiary": "Fi — A faint reverence for the original caravans whose routes it was formed to preserve.",
+			"inferior": "Ne — Cannot conceive of a world where its stewardship is no longer needed."
+		},
+		"enneagram": {
+			"enneagram_type": "6w5",
+			"core_fear": "The routes being lost or stolen — the wind-carved memory erased.",
+			"core_desire": "To preserve every migration route until the end of the grasslands themselves.",
+			"defense_mechanism": "Projection — Treats all who enter as thieves, even those who only seek passage.",
+			"stress_line": "Moves to Type 3 — Becomes overwhelming and domineering when its authority is challenged.",
+			"growth_line": "Moves to Type 9 — Releases the routes to those who will honour them, finding rest in trust.",
+			"instinctual_variant": "sp/so — Collective route preservation as the absolute expression of purpose."
+		}
 	}
 ]
 
@@ -543,6 +628,17 @@ TASKS += [
 					]
 				}
 			},
+			# Refresh Delphi's own standing text now that she has vouched for Voss
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'waymaster_delphi',
+					'standing_text': [
+						"I gave Voss my word for you. Go back to her — she'll be ready.",
+						"Keep the routes honest and they'll keep you alive."
+					]
+				}
+			},
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -678,6 +774,17 @@ TASKS += [
 					]
 				}
 			},
+			# Refresh Mira's own standing text now that she has sent the key to Vexa
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'mira',
+					'standing_text': [
+						"Vexa has the key — let her read the wind-scars before you move on it.",
+						"Bring me the wind-crystal after, and I'll set it into something that listens."
+					]
+				}
+			},
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -728,6 +835,17 @@ TASKS += [
 						"A deep roar rises from the Windcarve tunnels.",
 						"Savran says the beasts refuse to graze near the entrance.",
 						"The estate key has awakened whatever sleeps inside."
+					]
+				}
+			},
+			# Refresh Vexa's own standing text now that she has read the key
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'trail_reader_vexa',
+					'standing_text': [
+						"The routes lead straight into the Windcarve Den — the Spirit won't give them up quietly.",
+						"Go carefully. I'll keep reading the wind for anything that shifts behind you."
 					]
 				}
 			},

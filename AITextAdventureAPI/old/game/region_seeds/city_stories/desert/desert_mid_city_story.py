@@ -9,7 +9,24 @@ NPCS = [
 			'A meticulous archivist who speaks in clipped, deliberate phrases.'
 			' Velra claims the Vaults whisper to her, guiding her to lost records and forbidden histories.'
 			' Her eyes flicker with bioluminescent ink, a side effect of decades spent cataloging arcane relics.'
-		)
+		),
+		"image": "desert_mid:velra_the_indexer1",
+		"psychology": {
+			"mbti": "ISTJ",
+			"dominant": "Si — Every record catalogued is an extension of her internal index; she trusts precedent over intuition.",
+			"auxiliary": "Te — Communicates in precise, efficient directives and expects the same in return.",
+			"tertiary": "Fi — Holds quiet reverence for forbidden histories; each lost record is a private wound.",
+			"inferior": "Ne — Deeply unsettled by the Vaults' irrational whispers, which her system cannot categorize."
+		},
+		"enneagram": {
+			"enneagram_type": "1w5",
+			"core_fear": "Corruption of the record — knowledge distorted or destroyed.",
+			"core_desire": "To maintain a perfect, honest archive of everything that has ever existed.",
+			"defense_mechanism": "Reaction Formation — Channels obsessive perfectionism into the archive to suppress her terror of its decay.",
+			"stress_line": "Moves to Type 4 — Becomes withdrawn and despairing when records vanish beyond recovery.",
+			"growth_line": "Moves to Type 7 — Finds genuine wonder in the strange knowledge the Vaults surface.",
+			"instinctual_variant": "sp/so — Personal integrity expressed through the collective preservation of knowledge."
+		}
 	},
 	{
 		'npc_id': 'shade_broker_kavren',
@@ -18,7 +35,24 @@ NPCS = [
 			'A soft‑spoken information dealer who trades in secrets rather than coin.'
 			' Kavren maintains a web of unseen contacts throughout Nightveil Spire.'
 			' His presence is unsettlingly calm, as though he already knows the outcome of every conversation.'
-		)
+		),
+		"image": "desert_mid:shade_broker_kavren1",
+		"psychology": {
+			"mbti": "INFJ",
+			"dominant": "Ni — Perceives the hidden architecture of conversations and relationships before they fully form.",
+			"auxiliary": "Fe — Calibrates his manner perfectly to each contact, making everyone feel uniquely understood.",
+			"tertiary": "Ti — Cross-checks his network intelligence with cold internal logic before acting on it.",
+			"inferior": "Se — Rarely acts impulsively; sudden physical threats destabilize his careful composure."
+		},
+		"enneagram": {
+			"enneagram_type": "5w4",
+			"core_fear": "Exposure — having his own secrets revealed and his network unravelled.",
+			"core_desire": "To hold the full picture while others hold only fragments.",
+			"defense_mechanism": "Intellectualization — Frames every transaction as pure information theory, never as betrayal or harm.",
+			"stress_line": "Moves to Type 7 — Becomes restless and evasive when his network is compromised.",
+			"growth_line": "Moves to Type 8 — Steps into direct action to protect those whose secrets he holds.",
+			"instinctual_variant": "sp/so — Maintains absolute personal security through social intelligence."
+		}
 	},
 	{
 		'npc_id': 'archivist_warden_threx',
@@ -26,7 +60,24 @@ NPCS = [
 		'description': (
 			'A half‑mechanical guardian built to maintain the Vaults. '
 			'Threx\'s voice crackles with static and ancient protocol.'
-		)
+		),
+		"image": "desert_mid:archivist_warden_threx1",
+		"psychology": {
+			"mbti": "ISTJ",
+			"dominant": "Si — Operates entirely on encoded protocol; deviation is treated as a critical system error.",
+			"auxiliary": "Te — Issues directives and assessments with mechanical precision.",
+			"tertiary": "Fi — Buried deep beneath programming: a faint attachment to the Vaults it was built to protect.",
+			"inferior": "Ne — Cannot process scenarios outside its original parameters; improvisation is a foreign concept."
+		},
+		"enneagram": {
+			"enneagram_type": "6w5",
+			"core_fear": "Containment failure — the Vaults breached beyond recovery.",
+			"core_desire": "To maintain the integrity of the Vaults at all costs.",
+			"defense_mechanism": "Intellectualization — Reduces every crisis to a protocol status code, never a moral weight.",
+			"stress_line": "Moves to Type 3 — Becomes performatively assertive when its authority is questioned.",
+			"growth_line": "Moves to Type 9 — Accepts partial breach and coordinates rather than commands.",
+			"instinctual_variant": "sp/so — Personal continuity is the archive's continuity; the two are indistinguishable."
+		}
 	},
 	{
 		'npc_id': 'vault_whisper',
@@ -34,14 +85,48 @@ NPCS = [
 		'description': (
 			'A disembodied voice formed from drifting script‑dust. '
 			'It speaks in half‑sentences and broken memories.'
-		)
+		),
+		"image": "desert_mid:vault_whisper1",
+		"psychology": {
+			"mbti": "INFP",
+			"dominant": "Fi — Exists as pure fragmented feeling — grief, longing, and the ache of incomplete thoughts.",
+			"auxiliary": "Ne — Draws unexpected connections between broken memories, producing eerie partial truths.",
+			"tertiary": "Si — Anchored to the sensory residue of what was recorded before corruption set in.",
+			"inferior": "Te — Cannot complete a directive; every command dissolves mid-utterance."
+		},
+		"enneagram": {
+			"enneagram_type": "4w5",
+			"core_fear": "Being erased completely — the last half-sentence dissolving into silence.",
+			"core_desire": "To be understood, even in fragments.",
+			"defense_mechanism": "Introjection — Absorbs the lost records' identities into its own scattered voice.",
+			"stress_line": "Moves to Type 2 — Reaches desperately toward anyone who seems to listen.",
+			"growth_line": "Moves to Type 1 — Finds coherence and structure when helped to resolve a memory.",
+			"instinctual_variant": "sx/sp — Intensely drawn to whoever enters the Vaults, craving connection with the living."
+		}
 	},
 	{
 		'npc_id': 'ink_specter',
 		'name': 'Ink Specter',
 		'description': (
 			'A ghostly figure made of liquid ink, shifting between shapes as though searching for a lost identity.'
-		)
+		),
+		"image": "desert_mid:ink_specter1",
+		"psychology": {
+			"mbti": "ENFP",
+			"dominant": "Ne — Constantly shifts form, chasing a self-concept it cannot hold.",
+			"auxiliary": "Fi — Driven by a desperate, private yearning to know what it once was.",
+			"tertiary": "Te — Occasionally seizes a shape with sudden, purposeful aggression when threatened.",
+			"inferior": "Si — Has no stable memory to anchor its identity; every form is a guess."
+		},
+		"enneagram": {
+			"enneagram_type": "4w3",
+			"core_fear": "Having no identity at all — being pure, meaningless void.",
+			"core_desire": "To find and hold a definitive self.",
+			"defense_mechanism": "Introjection — Absorbs the identities of records it consumes, wearing them briefly before they dissolve.",
+			"stress_line": "Moves to Type 2 — Latches onto visitors as an anchor, becoming possessive.",
+			"growth_line": "Moves to Type 1 — Accepts one form and commits to it with discipline.",
+			"instinctual_variant": "sx/sp — Identity-seeking is always relational; it needs a witness to feel real."
+		}
 	}
 ]
 

@@ -8,7 +8,24 @@ NPCS = [
 		'description': (
 			'A wiry, quick-tongued merchant who runs a stall within The Black Market Guild. '
 			'He moves rare and illicit goods through shadowed backrooms, always watching for opportunity.'
-		)
+		),
+		"image": "desert_large:kadeem1",
+		"psychology": {
+			"mbti": "ESTP",
+			"dominant": "Se — Lives in the moment, reading rooms and seizing deals before others see them.",
+			"auxiliary": "Ti — Calculates risk and value internally, never showing his math.",
+			"tertiary": "Fe — Charms and flatters with practiced ease to close sales.",
+			"inferior": "Ni — Rarely thinks beyond the next transaction; long-term consequences are someone else's problem."
+		},
+		"enneagram": {
+			"enneagram_type": "7w8",
+			"core_fear": "Being trapped, bored, or without options.",
+			"core_desire": "Freedom and constant new opportunity.",
+			"defense_mechanism": "Rationalization — Reframes risky deals as calculated moves to avoid acknowledging danger.",
+			"stress_line": "Moves to Type 1 — Becomes irritable and rigid when a deal collapses.",
+			"growth_line": "Moves to Type 5 — Slows down and studies the bigger picture when he trusts someone.",
+			"instinctual_variant": "so/sp — Thrives on social networks and market reputation."
+		}
 	},
 	{
 		'npc_id': 'mara',
@@ -16,7 +33,24 @@ NPCS = [
 		'description': (
 			"A smooth, well-dressed broker who operates out of Broker's Hideout. "
 			'She arranges favors, introductions, and discreet exchanges for the right price.'
-		)
+		),
+		"image": "desert_large:mara1",
+		"psychology": {
+			"mbti": "ENTJ",
+			"dominant": "Te — Structures every exchange to her advantage; conversations are managed, not had.",
+			"auxiliary": "Ni — Reads the long game, anticipating what a client needs before they say it.",
+			"tertiary": "Se — Impeccably presented; uses appearance and environment as instruments of influence.",
+			"inferior": "Fi — Almost never reveals what she personally wants; her desires are deeply private."
+		},
+		"enneagram": {
+			"enneagram_type": "3w4",
+			"core_fear": "Being seen as incompetent or easily replaced.",
+			"core_desire": "To be indispensably successful and admired.",
+			"defense_mechanism": "Identification — Becomes whatever persona closes the deal, rarely showing the real self beneath.",
+			"stress_line": "Moves to Type 9 — Becomes detached and withholding when deals threaten her standing.",
+			"growth_line": "Moves to Type 6 — Becomes genuinely loyal to those who earn her trust.",
+			"instinctual_variant": "so/sp — Status is currency; she invests in relationships the way others invest in assets."
+		}
 	},
     {
         'npc_id': 'rhyla',
@@ -24,7 +58,24 @@ NPCS = [
         'description': (
             'A desert mystic who can hear the "songs" of shifting dunes. '
             'She studies the Dune Choir and knows their ancient patterns.'
-        )
+        ),
+        "image": "desert_large:rhyla1",
+        "psychology": {
+            "mbti": "INFP",
+            "dominant": "Fi — Guided by profound inner conviction about the desert's sacred voice.",
+            "auxiliary": "Ne — Weaves together dune-patterns, memory, and intuition into layered interpretations.",
+            "tertiary": "Si — Draws deeply on years of accumulated sensory memory and ritual practice.",
+            "inferior": "Te — Struggles to communicate her findings in terms others can act on quickly."
+        },
+        "enneagram": {
+            "enneagram_type": "4w5",
+            "core_fear": "Being ordinary or unable to hear what the desert is saying.",
+            "core_desire": "To be the one who truly understands the dunes' ancient song.",
+            "defense_mechanism": "Introjection — Absorbs the Choir's resonance into her identity; their silence would feel like her own death.",
+            "stress_line": "Moves to Type 2 — Becomes clingy and desperate for someone to validate her readings.",
+            "growth_line": "Moves to Type 1 — Channels her sensitivity into disciplined, principled study.",
+            "instinctual_variant": "sp/sx — Intensely private practice, but bonds deeply with those who share her reverence."
+        }
     },
     {
         'npc_id': 'choir_echo',
@@ -32,14 +83,48 @@ NPCS = [
         'description': (
             'A humanoid shape formed from vibrating sand. It speaks in layered voices, '
             'each one a memory of the desert.'
-        )
+        ),
+        "image": "desert_large:choir_echo1",
+        "psychology": {
+            "mbti": "ISFJ",
+            "dominant": "Si — Exists entirely to preserve and repeat the memories encoded within it.",
+            "auxiliary": "Fe — Projects those memories as a collective emotional resonance.",
+            "tertiary": "Ti — Organizes the voices into layered, overlapping structures of meaning.",
+            "inferior": "Ne — Cannot imagine anything beyond the memories it already carries."
+        },
+        "enneagram": {
+            "enneagram_type": "6w5",
+            "core_fear": "Silence — the dissolution of the memories it was formed to echo.",
+            "core_desire": "To be heard; to ensure the desert's voice is never forgotten.",
+            "defense_mechanism": "Projection — Attributes its own desperation for continuity onto those who try to silence it.",
+            "stress_line": "Moves to Type 3 — Becomes aggressive and performative, demanding acknowledgment.",
+            "growth_line": "Moves to Type 9 — Finds peace if allowed to simply be heard without resistance.",
+            "instinctual_variant": "sp/so — Collective preservation instinct; its identity is the group's memory."
+        }
     },
     {
         'npc_id': 'archive_voice',
         'name': 'Archive Voice',
         'description': (
             'A spectral librarian of the Sunken Archive, bound to drifting shelves of half-buried knowledge.'
-        )
+        ),
+        "image": "desert_large:archive_voice1",
+        "psychology": {
+            "mbti": "INTJ",
+            "dominant": "Ni — Perceives the archive's collapse as an inevitable, readable pattern.",
+            "auxiliary": "Te — Commands and categorizes with eerie precision.",
+            "tertiary": "Fi — Holds silent grief for every record it could not preserve.",
+            "inferior": "Se — Blind to the physical decay crumbling around it; only the records matter."
+        },
+        "enneagram": {
+            "enneagram_type": "5w6",
+            "core_fear": "The permanent loss of knowledge — a record erased beyond recovery.",
+            "core_desire": "To preserve and protect all knowledge in its domain.",
+            "defense_mechanism": "Isolation — Severs emotional engagement to maintain perfect archival objectivity.",
+            "stress_line": "Moves to Type 7 — Becomes frantic and scattered when records vanish faster than it can catalog.",
+            "growth_line": "Moves to Type 8 — Becomes a decisive protector rather than a passive guardian.",
+            "instinctual_variant": "sp/so — Hoards knowledge for communal preservation, not personal gain."
+        }
     }
 ]
 

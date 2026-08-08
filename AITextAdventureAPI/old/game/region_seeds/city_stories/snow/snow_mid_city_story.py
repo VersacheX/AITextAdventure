@@ -9,7 +9,24 @@ NPCS = [
 			'A muscular craftsman who carves runes into weapons and armor.'
 			' Bjorn\'s forge burns with unnatural blue flame.'
 			' He insists each rune must be sung into existence.'
-		)
+		),
+		"image": "snow_mid:runeforger_bjorn1",
+		"psychology": {
+			"mbti": "ISFJ",
+			"dominant": "Si — Every rune carved is an extension of a tradition memorized bone-deep; deviation is sacrilege.",
+			"auxiliary": "Fe — Sings the runes into being with communal intent; the forge's work is for the settlement, not himself.",
+			"tertiary": "Ti — Refines the rune's internal logic with quiet precision; each carve is calculated.",
+			"inferior": "Ne — Deeply unsettled by runes that resist the flame; his system has no answer for it."
+		},
+		"enneagram": {
+			"enneagram_type": "6w5",
+			"core_fear": "A rune sung wrong — a weapon failing the person who carries it.",
+			"core_desire": "For every rune to hold its meaning perfectly, through every storm.",
+			"defense_mechanism": "Reaction Formation — Channels anxiety about the Shattered Rune into ever-more-rigorous singing and carving.",
+			"stress_line": "Moves to Type 3 — Becomes performatively certain about his craft when the runes stop responding.",
+			"growth_line": "Moves to Type 9 — Trusts others to carry the rune-tradition forward and finds rest in that.",
+			"instinctual_variant": "so/sp — Communal craft tradition as personal identity and mission."
+		}
 	},
 	{
 		'npc_id': 'speaker_yrsa',
@@ -18,28 +35,96 @@ NPCS = [
 			'A mystic who communes with ancestral spirits through ritual chants.'
 			' Yrsa\'s voice resonates like wind across frozen cliffs.'
 			' She carries the weight of countless whispered histories.'
-		)
+		),
+		"image": "snow_mid:speaker_yrsa1",
+		"psychology": {
+			"mbti": "INFJ",
+			"dominant": "Ni — Receives ancestral voices as layered, symbolic impressions that she then translates into chant.",
+			"auxiliary": "Fe — The chant is a communal act; she carries the settlement's grief and history on behalf of everyone.",
+			"tertiary": "Ti — Structures the ritual with precise internal logic; each word and tone has a specific function.",
+			"inferior": "Se — The physical world recedes when she is deep in chant; returning is sometimes difficult."
+		},
+		"enneagram": {
+			"enneagram_type": "4w5",
+			"core_fear": "The ancestors going silent — losing the thread of the histories she carries.",
+			"core_desire": "To be the vessel through which every whispered history is preserved and heard.",
+			"defense_mechanism": "Introjection — Has absorbed so many ancestral voices she sometimes cannot distinguish her own.",
+			"stress_line": "Moves to Type 2 — Becomes desperate to share what she hears when the ancestral voices begin to strain.",
+			"growth_line": "Moves to Type 1 — Becomes a disciplined keeper of the chant-tradition rather than purely a receiver.",
+			"instinctual_variant": "sp/sx — The weight of ancestral histories is carried alone; bonds deeply with those who hear the same silence."
+		}
 	},
     {
         'npc_id': 'chant_seer_haldrin',
         'name': 'Haldrin the Chant‑Seer',
         'description': (
             'A mystic who hears rune echoes trapped in the ice and senses when chants fracture.'
-        )
+        ),
+        "image": "snow_mid:chant_seer_haldrin1",
+        "psychology": {
+            "mbti": "INTP",
+            "dominant": "Ti — Classifies rune-echo patterns into an internal taxonomy; a fractured chant is a structural failure he can diagnose.",
+            "auxiliary": "Ne — Connects echoes across different rune-traditions to find the source of the fracture.",
+            "tertiary": "Si — A memory of every chant he has heard; the fracture is legible because he knows what whole sounds like.",
+            "inferior": "Fe — Cannot easily convey the urgency of a fracture in terms the community will feel before it's too late."
+        },
+        "enneagram": {
+            "enneagram_type": "5w4",
+            "core_fear": "A chant fracturing so completely that no echo remains to guide repair.",
+            "core_desire": "A complete taxonomy of every rune-echo in the ice and the exact conditions under which each fractures.",
+            "defense_mechanism": "Isolation — Retreats into echo-listening when his readings are dismissed or misunderstood.",
+            "stress_line": "Moves to Type 7 — Becomes scattered when the Shattered Rune produces echoes his taxonomy cannot classify.",
+            "growth_line": "Moves to Type 8 — Acts decisively on his knowledge when the chant's survival depends on more than listening.",
+            "instinctual_variant": "sp/sx — Solitary echo-work; bonds only with those willing to hear the ice with him."
+        }
     },
     {
         'npc_id': 'rimechant_echo',
         'name': 'Rimechant Echo',
         'description': (
             'A spectral remnant of frozen chants twisted by the Shattered Rune.'
-        )
+        ),
+        "image": "snow_mid:rimechant_echo1",
+        "psychology": {
+            "mbti": "ISFJ",
+            "dominant": "Si — Loops the last intact fragment of the chant it was carrying before the fracture; perfect repetition, wrong key.",
+            "auxiliary": "Fe — The chant was for the community; that unresolved communal intent persists as a haunting broadcast.",
+            "tertiary": "Ti — Attempts to find the structural resolution of the broken chant; never quite reaching it.",
+            "inferior": "Ne — Cannot conceive of a repaired version; the fracture is all it knows."
+        },
+        "enneagram": {
+            "enneagram_type": "6w5",
+            "core_fear": "The chant dissolving entirely — the last echo going silent.",
+            "core_desire": "For the chant to resolve correctly and be heard by those it was meant for.",
+            "defense_mechanism": "Projection — Attributes its distortion to intruders rather than the Shattered Rune.",
+            "stress_line": "Moves to Type 3 — Becomes urgently performative, amplifying the broken fragment.",
+            "growth_line": "Moves to Type 9 — Rests peacefully when the Shattered Rune is resolved and the chant can finally end.",
+            "instinctual_variant": "so/sp — Communal chant as the only identity it has ever carried."
+        }
     },
     {
         'npc_id': 'blueforge_spirit',
         'name': 'Blueforge Spirit',
         'description': (
             'A molten‑blue apparition formed from unstable flame deep within the Blueforge Depths.'
-        )
+        ),
+        "image": "snow_mid:blueforge_spirit1",
+        "psychology": {
+            "mbti": "ENFP",
+            "dominant": "Ne — Surges in every direction at once; the blue flame is possibility without constraint.",
+            "auxiliary": "Fi — Burns with the accumulated intensity of every rune-forging that pushed the forge past its limit.",
+            "tertiary": "Te — Focuses heat into directed, precise bursts when challenged or contained.",
+            "inferior": "Si — Has no memory of a stable flame; the blue has always been unstable."
+        },
+        "enneagram": {
+            "enneagram_type": "7w8",
+            "core_fear": "Cooling — the blue flame settling into something ordinary.",
+            "core_desire": "To burn hotter and bluer until every rune in the depths answers it.",
+            "defense_mechanism": "Rationalization — Destabilizing the forge is simply the flame finding its true temperature.",
+            "stress_line": "Moves to Type 1 — Becomes focused and lethal when its expansion is blocked.",
+            "growth_line": "Moves to Type 5 — Stabilizes into a steady, sustainable heat when the Shattered Rune is resolved.",
+            "instinctual_variant": "sx/sp — Pure intensity; exists most fully at the moment the blue flame ignites a rune."
+        }
     }
 ]
 

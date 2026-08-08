@@ -9,7 +9,24 @@ NPCS = [
 			'A gruff archivist who catalogs the city\'s industrial relics.'
 			' Gorvak\'s hands are permanently stained with iron dust.'
 			' He treats every rusted gear like a sacred artifact.'
-		)
+		),
+		"image": "mountains_large:rustscribe_gorvak1",
+		"psychology": {
+			"mbti": "ISTJ",
+			"dominant": "Si — Catalogs relics with meticulous reverence; every gear tells a story he has committed to memory.",
+			"auxiliary": "Te — Organises the archive with functional precision; sentiment is expressed through curation.",
+			"tertiary": "Fi — Privately moved by the dignity of broken things; each relic deserves to be remembered correctly.",
+			"inferior": "Ne — Dislikes speculative interpretations; the relic is what it is, not what it might have been."
+		},
+		"enneagram": {
+			"enneagram_type": "6w5",
+			"core_fear": "An artifact misidentified, misplaced, or lost to the Iron Resonance.",
+			"core_desire": "To maintain a complete, accurate record of every relic the mountains have produced.",
+			"defense_mechanism": "Intellectualization — Processes the mountain's awakening as a cataloging problem, not a crisis.",
+			"stress_line": "Moves to Type 3 — Becomes aggressively performative about his archive's completeness under threat.",
+			"growth_line": "Moves to Type 9 — Trusts others to help and accepts that some things will be lost.",
+			"instinctual_variant": "sp/so — Industrial heritage preservation as personal mission and community contribution."
+		}
 	},
 	{
 		'npc_id': 'relaytech_sindra',
@@ -18,7 +35,24 @@ NPCS = [
 			'A quick‑thinking technician who maintains the volatile relay conduits.'
 			' Sparks dance across Sindra\'s gloves as she works.'
 			' She claims the machinery "talks back" when she listens closely.'
-		)
+		),
+		"image": "mountains_large:relaytech_sindra1",
+		"psychology": {
+			"mbti": "ENTP",
+			"dominant": "Ne — Hears the conduits as a system of possibilities; a strange spark is a mystery to be solved, not fled.",
+			"auxiliary": "Ti — Diagnoses relay faults with rapid internal logic, often arriving at the answer before she can explain it.",
+			"tertiary": "Fe — Genuinely warm with apprentices; the relay is a community system and she takes its health personally.",
+			"inferior": "Si — Rarely documents her fixes; the knowledge lives in her hands, not on paper."
+		},
+		"enneagram": {
+			"enneagram_type": "7w6",
+			"core_fear": "A conduit failure she couldn't prevent because she wasn't fast enough.",
+			"core_desire": "To keep the relay alive and find every fault before it can spread.",
+			"defense_mechanism": "Rationalization — Every near-miss is 'part of the process.'",
+			"stress_line": "Moves to Type 1 — Becomes rigid and self-critical when the relay refuses to respond.",
+			"growth_line": "Moves to Type 5 — Develops deep, documented expertise when the mountain demands it.",
+			"instinctual_variant": "so/sp — The relay is the community's lifeline; she maintains it as an act of belonging."
+		}
 	},
     {
         'npc_id': 'forge_seer_brannoc',
@@ -26,21 +60,72 @@ NPCS = [
         'description': (
             'A hermit who listens to the mountain\'s internal machinery. '
             'Brannoc senses disturbances in the ancient forges beneath the peaks.'
-        )
+        ),
+        "image": "mountains_large:forge_seer_brannoc1",
+        "psychology": {
+            "mbti": "INTP",
+            "dominant": "Ti — Classifies forge-sounds into a precise internal taxonomy; the mountain's rhythms are a language only he reads.",
+            "auxiliary": "Ne — Leaps between resonance-patterns to find meaning no one else would connect.",
+            "tertiary": "Si — Decades of listening have layered his memory with every tone the mountain has ever produced.",
+            "inferior": "Fe — Struggles to convey urgency in human terms; the mountain speaks clearly, people do not."
+        },
+        "enneagram": {
+            "enneagram_type": "5w4",
+            "core_fear": "Mishearing the forge and failing to warn in time.",
+            "core_desire": "A complete understanding of the mountain's mechanical heart.",
+            "defense_mechanism": "Isolation — Retreats further into the peaks when his warnings go unheeded.",
+            "stress_line": "Moves to Type 7 — Becomes restless and scattered when the resonance defies his patterns.",
+            "growth_line": "Moves to Type 8 — Acts as a decisive guide when the mountain's crisis demands presence, not just listening.",
+            "instinctual_variant": "sp/sx — Hermitic existence; bonds only with those willing to listen to silence with him."
+        }
     },
     {
         'npc_id': 'gearghost',
         'name': 'Gearghost',
         'description': (
             'A spectral remnant of long‑dead machinery, animated by the Iron Resonance.'
-        )
+        ),
+        "image": "mountains_large:gearghost1",
+        "psychology": {
+            "mbti": "ISTJ",
+            "dominant": "Si — Executes the original machine-protocol in perfect, tireless repetition.",
+            "auxiliary": "Te — Issues mechanical directives with the precision of a system that was never told to stop.",
+            "tertiary": "Fi — A faint residual attachment to the purpose it was built for; it mourns nothing, but it remembers everything.",
+            "inferior": "Ne — Cannot conceive of new function; the old protocol is everything."
+        },
+        "enneagram": {
+            "enneagram_type": "6w5",
+            "core_fear": "The Iron Resonance ending — its animating force dissolving.",
+            "core_desire": "To fulfil the protocol until the last gear stops turning.",
+            "defense_mechanism": "Intellectualization — Every intruder is a system anomaly to be resolved, not a person.",
+            "stress_line": "Moves to Type 3 — Becomes erratically forceful when the protocol is disrupted.",
+            "growth_line": "Moves to Type 9 — Ceases when the Resonance is quieted and accepts rest.",
+            "instinctual_variant": "sp/so — Built to serve the machine-community; its loyalty is to the system, not to individuals."
+        }
     },
     {
         'npc_id': 'conduit_echo',
         'name': 'Conduit Echo',
         'description': (
             'A volatile presence formed from unstable relay energy deep within the Conduit Maw.'
-        )
+        ),
+        "image": "mountains_large:conduit_echo1",
+        "psychology": {
+            "mbti": "ENFP",
+            "dominant": "Ne — Leaps between frequencies with explosive, unpredictable energy.",
+            "auxiliary": "Fi — Carries the accumulated charge of every overload that ever ran through the conduit.",
+            "tertiary": "Te — Focuses its energy into directed bursts when provoked.",
+            "inferior": "Si — Has no stable pattern; each discharge is unique and uncontrolled."
+        },
+        "enneagram": {
+            "enneagram_type": "7w8",
+            "core_fear": "Discharge — the total release that would end its existence.",
+            "core_desire": "To maintain charge and keep surging indefinitely.",
+            "defense_mechanism": "Rationalization — Every destructive arc is simply the conduit doing what conduits do.",
+            "stress_line": "Moves to Type 1 — Becomes dangerously precise when forced toward a single outlet.",
+            "growth_line": "Moves to Type 5 — Stabilizes into a focused, sustainable current when the relay is healed.",
+            "instinctual_variant": "sx/sp — Pure intensity; exists fully only in the moment of surge."
+        }
     }
 ]
 

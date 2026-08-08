@@ -9,7 +9,24 @@ NPCS = [
 			'A devout scholar who preserves sacred texts with unwavering discipline.'
 			' Althorin\'s quill never scratches—his writing flows like whispered prayer.'
 			' He believes every doctrine has a hidden verse meant only for the worthy.'
-		)
+		),
+		"image": "grassland_mid:scribe_althorin1",
+		"psychology": {
+			"mbti": "ISFJ",
+			"dominant": "Si — Every doctrine is committed to memory as sacred precedent; deviation is corruption by definition.",
+			"auxiliary": "Fe — Writes for the community; the preservation of shared doctrine is an act of love.",
+			"tertiary": "Ti — Searches the hidden structure of verses for internal consistency and hidden meaning.",
+			"inferior": "Ne — Deeply unsettled by the False Verse, which his system cannot categorize or reject by precedent."
+		},
+		"enneagram": {
+			"enneagram_type": "1w9",
+			"core_fear": "A corrupted doctrine being passed down as true — a lie buried in sacred text.",
+			"core_desire": "To preserve the doctrine in its purest, most honest form.",
+			"defense_mechanism": "Reaction Formation — Pours anxiety about the False Verse into ever-more-meticulous transcription.",
+			"stress_line": "Moves to Type 4 — Becomes despairing and withdrawn when the doctrine proves beyond saving.",
+			"growth_line": "Moves to Type 7 — Finds wonder in the hidden verse rather than terror of it.",
+			"instinctual_variant": "so/sp — Communal doctrinal integrity expressed through personal ascetic discipline."
+		}
 	},
 	{
 		'npc_id': 'oathwarden_seris',
@@ -18,7 +35,24 @@ NPCS = [
 			'A solemn guardian who oversees the binding of vows and pacts.'
 			' Seris speaks rarely, but every word carries ceremonial weight.'
 			' Her presence alone compels honesty.'
-		)
+		),
+		"image": "grassland_mid:oathwarden_seris1",
+		"psychology": {
+			"mbti": "INTJ",
+			"dominant": "Ni — Perceives the full weight and implication of every vow before it is spoken.",
+			"auxiliary": "Te — Structures every ceremony with absolute, uncompromising precision.",
+			"tertiary": "Fi — Holds quiet but ironclad personal conviction that vows broken corrode the soul.",
+			"inferior": "Se — Rarely notices the physical world; she inhabits the weight of promises, not the room."
+		},
+		"enneagram": {
+			"enneagram_type": "1w2",
+			"core_fear": "A false vow binding someone who does not understand what they are committing to.",
+			"core_desire": "Every pact made in her presence to be true, fully meant, and honoured.",
+			"defense_mechanism": "Reaction Formation — Channels deep personal grief over broken vows into ceremonial rigour.",
+			"stress_line": "Moves to Type 4 — Becomes remote and mournful when oaths shatter despite her vigilance.",
+			"growth_line": "Moves to Type 7 — Allows herself warmth and trust when she finds those who honour their word.",
+			"instinctual_variant": "so/sp — Community integrity through the sacred enforcement of spoken commitments."
+		}
 	},
 	{
 		'npc_id': 'verse_seeker_halven',
@@ -26,21 +60,72 @@ NPCS = [
 		'description': (
 			'A wandering scholar who hears fractured scripture carried on the wind. '
 			'Halven follows broken verses to their source.'
-		)
+		),
+		"image": "grassland_mid:verse_seeker_halven1",
+		"psychology": {
+			"mbti": "INTP",
+			"dominant": "Ti — Dissects every fractured verse into its component parts to identify the point of corruption.",
+			"auxiliary": "Ne — Leaps between doctrinal fragments, finding unexpected connections across wind-carried scripture.",
+			"tertiary": "Si — Draws on a vast wandering memory of verses heard across years of travel.",
+			"inferior": "Fe — Struggles to convey the urgency of his findings in terms the faithful will accept emotionally."
+		},
+		"enneagram": {
+			"enneagram_type": "5w4",
+			"core_fear": "Following a verse to its source and finding nothing — a doctrine with no origin.",
+			"core_desire": "To map the full architecture of every broken verse back to its true, uncorrupted form.",
+			"defense_mechanism": "Isolation — Withdraws deeper into the wind-scripture when his findings are dismissed.",
+			"stress_line": "Moves to Type 7 — Becomes scattered and frantic when the fractures multiply faster than he can trace them.",
+			"growth_line": "Moves to Type 8 — Acts decisively on his knowledge when the doctrine's survival demands it.",
+			"instinctual_variant": "sp/sx — Solitary pursuit; forms intense scholarly bonds with those willing to follow the verses with him."
+		}
 	},
 	{
 		'npc_id': 'lexicon_fragment',
 		'name': 'Lexicon Fragment',
 		'description': (
 			'A living shard of doctrine, cracked by the False Verse\'s corruption.'
-		)
+		),
+		"image": "grassland_mid:lexicon_fragment1",
+		"psychology": {
+			"mbti": "ISFJ",
+			"dominant": "Si — Retains fragments of its original doctrine in broken, looping repetition.",
+			"auxiliary": "Fe — Broadcasts the emotional resonance of the vows it once carried, now distorted.",
+			"tertiary": "Ti — Attempts to reconcile its corrupted content with the doctrine-structure it remembers.",
+			"inferior": "Ne — Cannot conceive of itself as anything other than what it was before the crack."
+		},
+		"enneagram": {
+			"enneagram_type": "6w5",
+			"core_fear": "The crack widening until nothing of the original doctrine remains.",
+			"core_desire": "To be made whole — to carry its verse again without corruption.",
+			"defense_mechanism": "Projection — Attributes its corruption to those who approach it rather than the False Verse itself.",
+			"stress_line": "Moves to Type 3 — Becomes aggressively performative, projecting verses it can no longer properly hold.",
+			"growth_line": "Moves to Type 9 — Rests when its corruption is drawn out and the crack is sealed.",
+			"instinctual_variant": "sp/so — Communal doctrine is the only identity it has ever known."
+		}
 	},
 	{
 		'npc_id': 'sanctum_voice',
 		'name': 'Sanctum Voice',
 		'description': (
 			'A solemn echo within the Oathbreak Sanctum, formed from unraveling vows.'
-		)
+		),
+		"image": "grassland_mid:sanctum_voice1",
+		"psychology": {
+			"mbti": "INTJ",
+			"dominant": "Ni — Formed from the accumulated weight of broken promises; perceives every new vow as a future breach.",
+			"auxiliary": "Te — Enforces its territory with cold, absolute authority.",
+			"tertiary": "Fi — Beneath the echo: the unresolved grief of every oath that unraveled within its walls.",
+			"inferior": "Se — Has no interest in the physical; it exists in the resonance of what was promised and broken."
+		},
+		"enneagram": {
+			"enneagram_type": "8w9",
+			"core_fear": "Another vow unraveling within its sanctum — another failure it is compelled to carry.",
+			"core_desire": "To prevent any further oath from breaking by keeping all away from the seal.",
+			"defense_mechanism": "Denial — Cannot acknowledge that its guardianship itself has become a form of corruption.",
+			"stress_line": "Moves to Type 5 — Becomes cold and withdrawn, refusing all engagement.",
+			"growth_line": "Moves to Type 2 — Releases its grip and allows the seal to be healed by those it trusts.",
+			"instinctual_variant": "sp/so — Preservation of the sanctum's integrity as the sole expression of purpose."
+		}
 	}
 ]
 
@@ -708,6 +793,17 @@ TASKS += [
 					]
 				}
 			},
+			# Refresh Seris's own standing text now that she has rendered her judgment
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'oathwarden_seris',
+					'standing_text': [
+						"I have spoken my judgment. Sylvara awaits your return.",
+						"Vows made in haste bind the hardest. See that yours are made true."
+					]
+				}
+			},
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -798,6 +894,17 @@ TASKS += [
 					]
 				}
 			},
+			# Refresh Althorin's own standing text now that he has pointed the party to Halven
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'scribe_althorin',
+					'standing_text': [
+						"The founding verses point to Halven — his seeking has traced the seal further than my scripts permit.",
+						"Go to him. The doctrine will keep until your return."
+					]
+				}
+			},
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -846,6 +953,17 @@ TASKS += [
 					'standing_text': [
 						"The chamber is sealed for a reason.",
 						"Turn back."
+					]
+				}
+			},
+			# Refresh Halven's own standing text now that he has given the seal's context
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'verse_seeker_halven',
+					'standing_text': [
+						"Every verse I've gathered points to the sealed chamber — and the Voice that guards it.",
+						"I've told you what scripture holds. What waits below is beyond my seeking now."
 					]
 				}
 			},
@@ -967,6 +1085,17 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',   'dialog_id': 'faith_grassland_mid_e_return_to_althorin'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_grassland_mid_e_return_to_althorin'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grmnaw_grassland_mid_e_return_to_althorin' } },
+			# Refresh Althorin's own standing text after he reads the recovered seal
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'scribe_althorin',
+					'standing_text': [
+						"The imprint reads true — every oath the founders swore is still legible in it.",
+						"Carry it well. A verse this old does not forgive careless hands."
+					]
+				}
+			},
 		]
 	},
 
@@ -1014,6 +1143,17 @@ TASKS += [
 					]
 				}
 			},
+			# Refresh Mira's own standing text now that she has sent the fragment to Althorin
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'mira',
+					'standing_text': [
+						"Take the fragment to Althorin first — I won't touch an Oathbreak seal until it's been read.",
+						"Come back when it's safe to shape. I'll be ready."
+					]
+				}
+			},
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -1050,6 +1190,17 @@ TASKS += [
 						"The air in the sanctum thickens — every spoken word feels wrong.",
 						"The Voice stirs where broken oaths accumulate.",
 						"The seal fragment has called it forward."
+					]
+				}
+			},
+			# Refresh Althorin's own standing text now that he has read the imprint
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'scribe_althorin',
+					'standing_text': [
+						"I have read the imprint. A Voice of broken oaths waits behind that seal.",
+						"Silence it, and the sanctum's verses may finally read true again."
 					]
 				}
 			},
@@ -1140,8 +1291,6 @@ TASKS += [
 	},
 
 ]
-
-
 PRIMARY_STORY_SETTINGS = {
 	'story_id': 'grassland_mid_city_story',
 	'tasks': TASKS,

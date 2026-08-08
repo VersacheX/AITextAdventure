@@ -9,7 +9,24 @@ NPCS = [
 			'A stoic guardian who ensures travelers survive the treacherous paths.'
 			' Harrock\'s voice carries like distant thunder across the cliffs.'
 			' He has an uncanny sense for impending rockslides.'
-		)
+		),
+		"image": "mountains_mid:warden_harrock1",
+		"psychology": {
+			"mbti": "ISTJ",
+			"dominant": "Si — Has memorized the cliffs' every creak, shift, and warning sign through years of vigilant watch.",
+			"auxiliary": "Te — Responds to rockfall threats with immediate, organized directives.",
+			"tertiary": "Fi — Carries private grief for every traveler he could not warn in time.",
+			"inferior": "Ne — Struggles when the rockslides stop following any pattern he recognizes."
+		},
+		"enneagram": {
+			"enneagram_type": "6w5",
+			"core_fear": "A traveler dying on a path he was supposed to be watching.",
+			"core_desire": "To make every route through the cliffs as safe as stone and vigilance can make it.",
+			"defense_mechanism": "Projection — Attributes every unusual rockfall to an identifiable external cause to maintain the illusion of control.",
+			"stress_line": "Moves to Type 3 — Becomes performatively authoritative when the Shatterpeak Core shakes his competence.",
+			"growth_line": "Moves to Type 9 — Accepts that some falls cannot be stopped, and guides others around them instead.",
+			"instinctual_variant": "so/sp — Warden duty as the ultimate expression of community responsibility."
+		}
 	},
 	{
 		'npc_id': 'emberguide_ryla',
@@ -18,7 +35,24 @@ NPCS = [
 			'A fire‑touched wanderer who teaches survival through controlled flame.'
 			' Ryla\'s campfires burn with unnatural colors, shifting with her mood.'
 			' She believes every ember remembers the mountain\'s ancient fury.'
-		)
+		),
+		"image": "mountains_mid:emberguide_ryla1",
+		"psychology": {
+			"mbti": "ENFP",
+			"dominant": "Ne — Reads the mountain's anger through the language of flame; every color is a word.",
+			"auxiliary": "Fi — Teaches through emotional resonance; her students survive because they feel the fire, not just obey it.",
+			"tertiary": "Te — Applies structured fire-control techniques when lives are immediately at stake.",
+			"inferior": "Si — The Emberwake's colours are new; her accumulated fire-memory doesn't have a name for what she's seeing."
+		},
+		"enneagram": {
+			"enneagram_type": "4w3",
+			"core_fear": "The mountain's fire turning on those she guided to trust it.",
+			"core_desire": "For the ember to be a teacher, not a destroyer.",
+			"defense_mechanism": "Introjection — Has absorbed the mountain's fury into her identity; she understands it because she has become it.",
+			"stress_line": "Moves to Type 2 — Becomes desperate to be the one who saves everyone when the flame turns hostile.",
+			"growth_line": "Moves to Type 1 — Channels her fire-touch into disciplined, principled teaching.",
+			"instinctual_variant": "sx/sp — Intensity first; bonds forged in survival fire are the deepest she knows."
+		}
 	},
 	{
 		'npc_id': 'avalanche_seer_korrin',
@@ -26,21 +60,72 @@ NPCS = [
 		'description': (
 			'A hermit who reads fall‑lines and predicts collapses. '
 			'Korrin senses disturbances in the mountain\'s pressure and stone.'
-		)
+		),
+		"image": "mountains_mid:avalanche_seer_korrin1",
+		"psychology": {
+			"mbti": "INTP",
+			"dominant": "Ti — Reads fall-line geometry as a precise internal model; predictions are calculations, not intuitions.",
+			"auxiliary": "Ne — Connects pressure-pattern variations across vast distances to identify the source of disturbance.",
+			"tertiary": "Si — Decades of fall-lines memorized; the mountain's past collapses are the dataset he works from.",
+			"inferior": "Fe — Cannot easily express urgency in terms others will respond to in time."
+		},
+		"enneagram": {
+			"enneagram_type": "5w4",
+			"core_fear": "An avalanche he predicted incorrectly — or failed to predict at all.",
+			"core_desire": "A complete, accurate model of the mountain's collapse behaviour.",
+			"defense_mechanism": "Isolation — Retreats into the peaks when his predictions are ignored.",
+			"stress_line": "Moves to Type 7 — Becomes scattered and restless when the Shatterpeak Core defies every model.",
+			"growth_line": "Moves to Type 8 — Leads the party decisively when the collapse is imminent and only he can read it.",
+			"instinctual_variant": "sp/sx — Hermitic precision; bonds only with those willing to trust numbers over instinct."
+		}
 	},
 	{
 		'npc_id': 'fallshadow_echo',
 		'name': 'Fallshadow Echo',
 		'description': (
 			'A spectral remnant of ancient rockslides, awakened by the Shatterpeak Core.'
-		)
+		),
+		"image": "mountains_mid:fallshadow_echo1",
+		"psychology": {
+			"mbti": "ISTP",
+			"dominant": "Ti — Moves with the precise, inevitable logic of falling stone; every trajectory is calculated.",
+			"auxiliary": "Se — Exists entirely in the kinetic present of descent and impact.",
+			"tertiary": "Ni — Has a dim awareness of where it was heading before the original collapse.",
+			"inferior": "Fe — No sense of who is in the path; obstruction is simply a variable in the fall."
+		},
+		"enneagram": {
+			"enneagram_type": "8w9",
+			"core_fear": "Being stopped — the fall arrested before completion.",
+			"core_desire": "To complete the collapse the original rockslide began.",
+			"defense_mechanism": "Denial — Cannot acknowledge that the original collapse already resolved; it loops in perpetual mid-fall.",
+			"stress_line": "Moves to Type 5 — Becomes cold and methodical when obstacles repeatedly interrupt the trajectory.",
+			"growth_line": "Moves to Type 2 — Dissipates peacefully when the Shatterpeak Core is resolved and the fall is finally over.",
+			"instinctual_variant": "sp/so — The momentum of the old herd-collapse; it runs because stone once ran together."
+		}
 	},
 	{
 		'npc_id': 'emberwake_spirit',
 		'name': 'Emberwake Spirit',
 		'description': (
 			'A fiery apparition formed from unstable heat deep within the Emberwake Cavern.'
-		)
+		),
+		"image": "mountains_mid:emberwake_spirit1",
+		"psychology": {
+			"mbti": "ENFP",
+			"dominant": "Ne — Surges in every direction at once; its fire is possibility without constraint.",
+			"auxiliary": "Fi — Burns with the raw, accumulated fury of every eruption the cavern has ever suppressed.",
+			"tertiary": "Te — Channels heat into focused, devastating bursts when challenged.",
+			"inferior": "Si — Has no memory of a time before the heat; cannot conceive of cooling."
+		},
+		"enneagram": {
+			"enneagram_type": "7w8",
+			"core_fear": "Cooling — the end of fire is the end of self.",
+			"core_desire": "To burn without limit and wake every dormant forge in the mountain.",
+			"defense_mechanism": "Rationalization — Destruction is simply heat finding its level.",
+			"stress_line": "Moves to Type 1 — Becomes laser-focused and devastating when its expansion is blocked.",
+			"growth_line": "Moves to Type 5 — Settles into a steady, sustainable heat when the Emberwake Core is resolved.",
+			"instinctual_variant": "sx/sp — Pure intensity of flame; it exists most fully at the moment of ignition."
+		}
 	}
 ]
 

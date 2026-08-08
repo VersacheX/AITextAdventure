@@ -9,7 +9,24 @@ NPCS = [
 			'A witch whose lantern glows with shifting orange runes.'
 			' Thera studies flame‑born spirits and believes each spark carries a prophecy.'
 			' Her laughter crackles like burning cedar.'
-		)
+		),
+		"image": "forest_mid:emberwitch_thera1",
+		"psychology": {
+			"mbti": "ENFJ",
+			"dominant": "Fe — Reads the emotional charge in every flame-born spirit and shapes her prophecies for the person who needs to hear them.",
+			"auxiliary": "Ni — The shifting runes are a language she receives before she can articulate; insight arrives as image, not argument.",
+			"tertiary": "Se — Fully present with every crackle and shift of firelight; the physical flame is her primary instrument.",
+			"inferior": "Ti — Rarely cross-checks her prophecies against logic; the spark either carries truth or it doesn't."
+		},
+		"enneagram": {
+			"enneagram_type": "4w3",
+			"core_fear": "A prophecy she delivered that led someone wrong — the spark lying through her.",
+			"core_desire": "To be the one through whom fire speaks truthfully to those who most need its warning.",
+			"defense_mechanism": "Introjection — Has absorbed the flame's voice so completely she sometimes can't tell the prophecy from herself.",
+			"stress_line": "Moves to Type 2 — Becomes urgently giving, pressing prophecies on those who haven't asked.",
+			"growth_line": "Moves to Type 1 — Becomes a disciplined practitioner who tests each reading before delivering it.",
+			"instinctual_variant": "sx/so — Fire as the medium of intimate revelation; her gift is most alive in one-to-one encounters."
+		}
 	},
 	{
 		'npc_id': 'alchemist_mirlo',
@@ -19,6 +36,7 @@ NPCS = [
 			' Mirlo\'s potions glow with soft moonlight, even underground.'
 			' He often forgets whether he\'s brewing medicine or mild chaos.'
 		),
+		"image": "forest_mid:alchemist_mirlo1",
 		"psychology": {
 			"mbti": "ENTP",
 			"dominant": "Ne — Endlessly curious. Combines ingredients, theories, and side-effects with reckless, joyful creativity.",
@@ -43,6 +61,7 @@ NPCS = [
             'A wandering mystic who reads moon-embers drifting through the forest. '
             'Vael senses disturbances where flame and night intertwine.'
         ),
+        "image": "forest_mid:glimmer_hermit_vael1",
 		"psychology": {
 			"mbti": "INTJ",
 			"dominant": "Ni — Reads the world through invisible patterns. Moon-embers tell him what others cannot perceive.",
@@ -65,14 +84,48 @@ NPCS = [
         'name': 'Riftspark',
         'description': (
             'A flickering ember‑spirit born from unstable flame‑magic within the Embergrove Rift.'
-        )
+        ),
+        "image": "forest_mid:riftspark1",
+        "psychology": {
+            "mbti": "ENFP",
+            "dominant": "Ne — Leaps between flames with unpredictable, explosive energy; exists in perpetual becoming.",
+            "auxiliary": "Fi — Driven by a raw, instinctual desire to burn — not from malice but from the urgency of its nature.",
+            "tertiary": "Te — Channels energy into sudden, directed bursts when its existence is threatened.",
+            "inferior": "Si — Has no memory of what it was before the Rift; it cannot be other than what it is now."
+        },
+        "enneagram": {
+            "enneagram_type": "7w8",
+            "core_fear": "Extinguishment — being snuffed out before it can fully ignite.",
+            "core_desire": "To burn freely and completely.",
+            "defense_mechanism": "Rationalization — Every destructive flare is simply its nature expressing itself.",
+            "stress_line": "Moves to Type 1 — Becomes erratically precise and destructive when cornered.",
+            "growth_line": "Moves to Type 5 — Steadies into a focused ember rather than a wildfire when given space.",
+            "instinctual_variant": "sx/sp — Intensity is everything; it exists most fully in the moment of ignition."
+        }
     },
     {
         'npc_id': 'lunarcask_shade',
         'name': 'Lunarcask Shade',
         'description': (
             'A spectral figure formed from condensed moonlight and alchemical fumes.'
-        )
+        ),
+        "image": "forest_mid:lunarcask_shade1",
+        "psychology": {
+            "mbti": "INTJ",
+            "dominant": "Ni — Moves with slow, purposeful inevitability; its intentions are opaque until the last moment.",
+            "auxiliary": "Te — Manipulates its alchemical fumes with calculated, surgical precision.",
+            "tertiary": "Fi — Holds a deep, silent attachment to the lunar cycles that sustain its form.",
+            "inferior": "Se — Vulnerable to sudden, intense light that disrupts its condensed moonlight body."
+        },
+        "enneagram": {
+            "enneagram_type": "5w4",
+            "core_fear": "Dawn — the dissolution of moonlight that would end its form.",
+            "core_desire": "To endure through perpetual, perfect condensation.",
+            "defense_mechanism": "Isolation — Drifts apart from anything that could disturb its delicate alchemical equilibrium.",
+            "stress_line": "Moves to Type 7 — Becomes erratic and dispersed when the lunar cycle is disrupted.",
+            "growth_line": "Moves to Type 8 — Coalesces into decisive, protective action when the grove it haunts is threatened.",
+            "instinctual_variant": "sp/sx — Survival through perfect self-containment; bonds only with the night itself."
+        }
     }
 ]
 

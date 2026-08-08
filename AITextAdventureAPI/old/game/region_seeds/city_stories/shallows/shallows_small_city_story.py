@@ -9,7 +9,24 @@ NPCS = [
 			'A vigilant lookout who monitors the coastline for danger.'
 			' Errol\'s signal flags move with flawless precision, even in storms.'
 			' He claims he can read the sea\'s intentions like a book.'
-		)
+		),
+		"image": "shallows_small:signalwatch_errol1",
+		"psychology": {
+			"mbti": "ISTJ",
+			"dominant": "Si — Every signal flag position catalogued and muscle-memorized; the protocol is the safety.",
+			"auxiliary": "Te — Communicates threat assessments in precise, efficient signals without wasted motion.",
+			"tertiary": "Fi — Quietly proud of every life his vigilance has kept from the rocks.",
+			"inferior": "Ne — Deeply unsettled when the sea behaves outside every pattern he has recorded."
+		},
+		"enneagram": {
+			"enneagram_type": "6w5",
+			"core_fear": "A ship lost because his signal came a second too late.",
+			"core_desire": "To be the most reliable signal-post on the coast.",
+			"defense_mechanism": "Reaction Formation — Channels anxiety about failure into ever-more-precise flag technique.",
+			"stress_line": "Moves to Type 3 — Becomes performatively certain when the fog questions his competence.",
+			"growth_line": "Moves to Type 9 — Accepts that some warnings cannot be given in time, and trusts the sea's rhythm.",
+			"instinctual_variant": "so/sp — Communal coastline safety expressed through personal disciplinary precision."
+		}
 	},
 	{
 		'npc_id': 'runner_sylka',
@@ -18,29 +35,97 @@ NPCS = [
 			'A swift courier who navigates hidden passages beneath the docks.'
 			' Sylka\'s boots are always damp with seawater and secrets.'
 			' She knows every smuggler\'s route but keeps her own path hidden.'
-		)
+		),
+		"image": "shallows_small:runner_sylka1",
+		"psychology": {
+			"mbti": "ISTP",
+			"dominant": "Ti — Maps the hidden passages as a precise internal model; wrong turns are solved, not panicked over.",
+			"auxiliary": "Se — Reads the dock's physical environment — tide, shadow, sound — with automatic precision.",
+			"tertiary": "Ni — Has a runner's gut-sense for when a route is about to be compromised.",
+			"inferior": "Fe — Keeps her own path hidden because sharing means depending, and depending means slowing down."
+		},
+		"enneagram": {
+			"enneagram_type": "8w9",
+			"core_fear": "A route closing because someone else revealed it.",
+			"core_desire": "To be the only one who knows the passage, and to keep it open.",
+			"defense_mechanism": "Denial — Dismisses how badly the fog has corrupted the routes until she runs into a wall.",
+			"stress_line": "Moves to Type 5 — Goes cold and methodical when the cove passages stop making sense.",
+			"growth_line": "Moves to Type 2 — Shares a route when someone's life genuinely depends on it.",
+			"instinctual_variant": "sp/so — Self-sufficiency in the passages extended as quiet protection for those she runs for."
+		}
 	},
-    {
-        'npc_id': 'mist_seer_loryth',
-        'name': 'Loryth the Mist‑Seer',
-        'description': (
-            'A fog‑reader who interprets drifting mist glyphs and senses drowned warnings.'
-        )
-    },
-    {
-        'npc_id': 'fogwhisper_echo',
-        'name': 'Fogwhisper Echo',
-        'description': (
-            'A spectral remnant of lost coastal warnings swallowed by fog.'
-        )
-    },
-    {
-        'npc_id': 'coveveil_voice',
-        'name': 'Coveveil Voice',
-        'description': (
-            'A whispering presence formed from hidden cove passages and drowned secrets.'
-        )
-    }
+	{
+		'npc_id': 'mist_seer_loryth',
+		'name': 'Loryth the Mist‑Seer',
+		'description': (
+			'A fog‑reader who interprets drifting mist glyphs and senses drowned warnings.'
+		),
+		"image": "shallows_small:mist_seer_loryth1",
+		"psychology": {
+			"mbti": "INFJ",
+			"dominant": "Ni — Reads the mist glyphs as a language that speaks before the danger arrives.",
+			"auxiliary": "Fe — Senses the emotional weight of drowned warnings and conveys them with quiet, careful urgency.",
+			"tertiary": "Ti — Cross-checks each glyph pattern against the internal grammar of fog-reading she has built over years.",
+			"inferior": "Se — So absorbed in the mist's deeper language that immediate physical danger sometimes arrives unannounced."
+		},
+		"enneagram": {
+			"enneagram_type": "5w4",
+			"core_fear": "A drowned warning she misread that cost the cove its voice.",
+			"core_desire": "A complete understanding of every mist glyph the cove produces.",
+			"defense_mechanism": "Isolation — Retreats deeper into the fog when her readings are ignored or doubted.",
+			"stress_line": "Moves to Type 7 — Becomes restless and over-interpreting when the glyphs contradict each other.",
+			"growth_line": "Moves to Type 8 — Acts decisively on a reading when the cove cannot afford hesitation.",
+			"instinctual_variant": "sp/sx — Solitary fog-reading; bonds deeply with those willing to stand in the mist and listen."
+		}
+	},
+	{
+		'npc_id': 'fogwhisper_echo',
+		'name': 'Fogwhisper Echo',
+		'description': (
+			'A spectral remnant of lost coastal warnings swallowed by fog.'
+		),
+		"image": "shallows_small:fogwhisper_echo1",
+		"psychology": {
+			"mbti": "ISFJ",
+			"dominant": "Si — Repeats the last warning it was carrying when the fog swallowed it; the loop is perfect and unending.",
+			"auxiliary": "Fe — The warning was for someone specific; that unresolved care persists as a haunting pull.",
+			"tertiary": "Ti — Attempts to find the logical end of the warning — the moment it can stop repeating.",
+			"inferior": "Ne — Cannot conceive of a world beyond the fog or the warning it carries."
+		},
+		"enneagram": {
+			"enneagram_type": "6w5",
+			"core_fear": "The warning going unheard and the cove paying the price.",
+			"core_desire": "For the warning to finally reach whoever needs it.",
+			"defense_mechanism": "Projection — Sees every traveller as the one who needs the warning it is still trying to deliver.",
+			"stress_line": "Moves to Type 3 — Becomes frantic and overwhelming when no one responds to the warning.",
+			"growth_line": "Moves to Type 9 — Rests when the Silent Buoy is resolved and the warning is finally received.",
+			"instinctual_variant": "so/sp — Its entire existence is an unfinished act of communal protection."
+		}
+	},
+	{
+		'npc_id': 'coveveil_voice',
+		'name': 'Coveveil Voice',
+		'description': (
+			'A whispering presence formed from hidden cove passages and drowned secrets.'
+		),
+		"image": "shallows_small:coveveil_voice1",
+		"psychology": {
+			"mbti": "INFP",
+			"dominant": "Fi — Exists as the accumulated weight of secrets that were kept too long and went under with their keepers.",
+			"auxiliary": "Ne — Traces connections between hidden passages and the secrets buried within them.",
+			"tertiary": "Si — Anchored to the specific cove passages where the secrets were first concealed.",
+			"inferior": "Te — Cannot reveal; it can only whisper and conceal further."
+		},
+		"enneagram": {
+			"enneagram_type": "4w5",
+			"core_fear": "The secrets it carries being revealed indiscriminately — or lost without ever being understood.",
+			"core_desire": "For the right person to find the right passage and understand what was hidden there.",
+			"defense_mechanism": "Introjection — Has absorbed the drowned secrets so completely they are its identity.",
+			"stress_line": "Moves to Type 2 — Becomes urgently guiding when someone is close to the truth.",
+			"growth_line": "Moves to Type 1 — Releases the secrets with dignity when the time and person are finally right.",
+			"instinctual_variant": "sx/sp — Exists most fully when someone is close enough to almost understand what it holds."
+		}
+	}
 ]
 
 

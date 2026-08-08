@@ -9,7 +9,24 @@ NPCS = [
 			'A stern adjudicator who settles disputes among sailors and merchants.'
 			' Merrik\'s gavel is carved from driftwood older than the town itself.'
 			' He has a reputation for fairness, but never softness.'
-		)
+		),
+		"image": "shallows_mid:tidejudge_merrik1",
+		"psychology": {
+			"mbti": "ISTJ",
+			"dominant": "Si — Has presided over enough maritime disputes to have every precedent memorized; justice follows the established tide-chart of law.",
+			"auxiliary": "Te — Delivers rulings with unambiguous, efficient finality; there is no appeal in his tone.",
+			"tertiary": "Fi — Privately holds that fairness and kindness are different instruments; fairness is the one he trusts.",
+			"inferior": "Ne — Deeply unsettled when the False Lantern disrupts a case he could have resolved cleanly."
+		},
+		"enneagram": {
+			"enneagram_type": "1w2",
+			"core_fear": "An unjust ruling — his gavel falling on the wrong side of a case.",
+			"core_desire": "For every dispute brought before him to be resolved with full and honest fairness.",
+			"defense_mechanism": "Reaction Formation — Channels personal discomfort with the coast's chaos into ever-more-rigorous procedural adherence.",
+			"stress_line": "Moves to Type 4 — Becomes withdrawn and self-critical when the lantern codes corrupt a case he cannot cleanly adjudicate.",
+			"growth_line": "Moves to Type 7 — Allows himself warmth and trust when the coast's order is genuinely restored.",
+			"instinctual_variant": "so/sp — Community justice as the highest form of personal integrity."
+		}
 	},
 	{
 		'npc_id': 'lanternrunner_vexa',
@@ -18,7 +35,24 @@ NPCS = [
 			'A cunning smuggler who uses coded lantern signals to move goods unseen.'
 			' Vexa\'s grin is sharp, and her footsteps are softer than sea foam.'
 			' She claims the Lanternhouse has secret tunnels even she hasn\'t found.'
-		)
+		),
+		"image": "shallows_mid:lanternrunner_vexa1",
+		"psychology": {
+			"mbti": "ESTP",
+			"dominant": "Se — Reads the dock's physical signals — light, shadow, tide — with automatic, practiced precision.",
+			"auxiliary": "Ti — Encodes and decodes lantern signals with rapid internal logic, never writing anything down.",
+			"tertiary": "Fe — Charm and misdirection deployed with perfect timing to keep officials looking the wrong way.",
+			"inferior": "Ni — Rarely thinks about what the False Lantern means long-term; the next shipment is the priority."
+		},
+		"enneagram": {
+			"enneagram_type": "7w8",
+			"core_fear": "Every route she knows going dark — no safe passage left.",
+			"core_desire": "To keep the goods moving and the lanterns reading true.",
+			"defense_mechanism": "Rationalization — Smuggling is just commerce without the paperwork; the risk is just the price of freedom.",
+			"stress_line": "Moves to Type 1 — Becomes rigid and paranoid when routes go wrong and signals contradict each other.",
+			"growth_line": "Moves to Type 5 — Develops a deep, systematic knowledge of the coast's signal network when she has to.",
+			"instinctual_variant": "sp/so — Freedom through social networks; the route only stays open because she knows everyone on it."
+		}
 	},
     {
         'npc_id': 'signal_seer_thalen',
@@ -26,6 +60,7 @@ NPCS = [
         'description': (
             'A coastal mystic who reads broken lantern patterns drifting across the waves.'
         ),
+        "image": "shallows_mid:signal_seer_thalen1",
         "psychology": {
             "mbti": "INFJ",
             "dominant": "Ni — Perceives hidden meaning in fractured signals, trusting intuition over the literal.",
@@ -48,14 +83,48 @@ NPCS = [
         'name': 'Lanternfade Echo',
         'description': (
             'A spectral remnant of lost lantern signals swallowed by storms and fog.'
-        )
+        ),
+        "image": "shallows_mid:lanternfade_echo1",
+        "psychology": {
+            "mbti": "ISFJ",
+            "dominant": "Si — Loops the last signal it carried before the storm took it; the pattern repeats perfectly, emptily.",
+            "auxiliary": "Fe — The signal was meant to guide someone home; that intention persists as a haunting emotional broadcast.",
+            "tertiary": "Ti — Attempts to resolve the signal into a coherent pattern, finding only static.",
+            "inferior": "Ne — Cannot conceive of a message beyond the one it was carrying when it drowned."
+        },
+        "enneagram": {
+            "enneagram_type": "6w5",
+            "core_fear": "The last light going out — nothing left to guide or warn.",
+            "core_desire": "For its signal to reach the recipient it never found.",
+            "defense_mechanism": "Projection — Sees every arrival as the ship that never came.",
+            "stress_line": "Moves to Type 3 — Becomes urgently performative, flashing the lost signal with increasing desperation.",
+            "growth_line": "Moves to Type 9 — Rests when the signal is finally received and understood.",
+            "instinctual_variant": "so/sp — Its entire existence is a failed act of communal service; the longing has outlasted the storm."
+        }
     },
     {
         'npc_id': 'undertunnel_voice',
         'name': 'Undertunnel Voice',
         'description': (
             'A whispering presence formed from misdirected signals deep within the smuggler tunnels.'
-        )
+        ),
+        "image": "shallows_mid:undertunnel_voice1",
+        "psychology": {
+            "mbti": "INFP",
+            "dominant": "Fi — Exists as the accumulated frustration of messages that reached the wrong destination.",
+            "auxiliary": "Ne — Loops through every possible intended recipient, never settling on the right one.",
+            "tertiary": "Si — Anchored to the specific tunnels and the signals that misfired within them.",
+            "inferior": "Te — Cannot redirect itself; misdirection is its nature, not a choice."
+        },
+        "enneagram": {
+            "enneagram_type": "4w5",
+            "core_fear": "Never reaching the right recipient — an eternity of misdirection.",
+            "core_desire": "To finally deliver the message correctly and be at rest.",
+            "defense_mechanism": "Introjection — Has absorbed the identity of every misdirected signal until it no longer knows its origin.",
+            "stress_line": "Moves to Type 2 — Becomes desperately persistent, redirecting anyone who enters the tunnels.",
+            "growth_line": "Moves to Type 1 — Finds order and peace when the False Lantern's corruption is resolved.",
+            "instinctual_variant": "sx/sp — Craves connection through communication; its tragedy is that it keeps just missing."
+        }
     }
 ]
 

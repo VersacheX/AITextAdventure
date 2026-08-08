@@ -9,7 +9,24 @@ NPCS = [
 			'A stoic mediator who resolves disputes with icy calm.'
 			'  Ivar\'s breath forms intricate frost patterns when he speaks.'
 			'  He believes harmony is forged like ice—slowly, under pressure.'
-		)
+		),
+		"image": "snow_large:concordant_ivar1",
+		"psychology": {
+			"mbti": "INFJ",
+			"dominant": "Ni — Perceives the shape of a conflict before anyone has named it; harmony is a pattern he reads, not negotiates.",
+			"auxiliary": "Fe — Creates emotional equilibrium in the room through presence and precisely chosen words.",
+			"tertiary": "Ti — Applies the frost's own logic — slow, incremental, structural — to every dispute.",
+			"inferior": "Se — Physically still; discomfort with the sudden, the loud, the unplanned."
+		},
+		"enneagram": {
+			"enneagram_type": "9w1",
+			"core_fear": "Harmony shattered beyond repair — a fracture in the ice that cannot be re-frozen.",
+			"core_desire": "A city in which every dispute resolves cleanly and the frost can settle.",
+			"defense_mechanism": "Narcotization — Retreats into mediation's quiet rhythm to avoid acknowledging how deep the fractures run.",
+			"stress_line": "Moves to Type 6 — Becomes cautious and over-consulting when the Fractured Chime destabilizes his process.",
+			"growth_line": "Moves to Type 3 — Steps into decisive leadership when the city's harmony requires more than patience.",
+			"instinctual_variant": "so/sp — Community harmony as the primary expression of personal purpose."
+		}
 	},
 	{
 		'npc_id': 'artificer_lyndra',
@@ -18,14 +35,48 @@ NPCS = [
 			'A brilliant inventor who blends cold magic with delicate machinery.'
 			'  Lyndra\'s creations glow with pale blue radiance.'
 			'  She works tirelessly, claiming inspiration strikes like sudden snowfall.'
-		)
+		),
+		"image": "snow_large:artificer_lyndra1",
+		"psychology": {
+			"mbti": "INTP",
+			"dominant": "Ti — Designs frost-engine systems with elegant internal logic; every component is where it must be.",
+			"auxiliary": "Ne — Inspiration arrives unpredictably; sudden connections between cold magic and mechanism are her creative core.",
+			"tertiary": "Si — Draws on a precise memory of every machine she has built and every failure she has learned from.",
+			"inferior": "Fe — Struggles to explain her designs to non-technical audiences; the logic is self-evident to her."
+		},
+		"enneagram": {
+			"enneagram_type": "5w4",
+			"core_fear": "A design failure that causes the frost-engines to collapse entirely.",
+			"core_desire": "To build a machine that perfectly harmonises cold magic and mechanism.",
+			"defense_mechanism": "Isolation — Retreats into the workshop when the engines behave unpredictably, treating it as a systems problem, not a crisis.",
+			"stress_line": "Moves to Type 7 — Becomes scattered and restless when the cold magic splinters beyond her current understanding.",
+			"growth_line": "Moves to Type 8 — Steps out of the workshop and applies her expertise decisively when the city needs it.",
+			"instinctual_variant": "sp/sx — Workshop as sanctuary; forms deep bonds with those who understand what she is building."
+		}
 	},
 	{
 		'npc_id': 'glacier_seer_thryna',
 		'name': 'Thryna the Glacier‑Seer',
 		'description': (
 			'A mystic who reads ice harmonics and senses fractures before they form.'
-		)
+		),
+		"image": "snow_large:glacier_seer_thryna1",
+		"psychology": {
+			"mbti": "INFJ",
+			"dominant": "Ni — Perceives ice-fracture patterns as a language; what the glacier is about to do is legible to her before it happens.",
+			"auxiliary": "Fe — Communicates her readings with careful, measured compassion; she never wants her warnings to cause panic.",
+			"tertiary": "Ti — Cross-checks harmonic readings against the glacier's internal structural logic.",
+			"inferior": "Se — So absorbed in the harmonics that the physical cold sometimes takes her by surprise."
+		},
+		"enneagram": {
+			"enneagram_type": "5w4",
+			"core_fear": "A fracture she sensed but didn't warn about in time.",
+			"core_desire": "To map every ice harmonic until no fracture can form without her knowing first.",
+			"defense_mechanism": "Isolation — Retreats into the glacier's harmonics when her readings are dismissed.",
+			"stress_line": "Moves to Type 7 — Becomes restless when the Fractured Chime defies every harmonic she knows.",
+			"growth_line": "Moves to Type 8 — Acts as a decisive, protective guide when the glacier's crisis demands presence.",
+			"instinctual_variant": "sp/sx — Solitary practice; bonds intensely with those willing to listen to the ice with her."
+		}
 	}
 ]
 

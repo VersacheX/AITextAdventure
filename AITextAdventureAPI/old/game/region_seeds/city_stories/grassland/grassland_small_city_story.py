@@ -9,7 +9,24 @@ NPCS = [
 			'A cheerful historian who preserves the village\'s pastoral traditions.'
 			'  Bramble\'s satchel is filled with pressed flowers and old folk charms.'
 			'  He treats every visitor like a long‑lost relative.'
-		)
+		),
+		"image": "grassland_small:curator_bramble1",
+		"psychology": {
+			"mbti": "ESFJ",
+			"dominant": "Fe — Treats every visitor as someone whose story belongs in the village archive.",
+			"auxiliary": "Si — Steeped in the village's traditions; every charm and pressed flower is a specific memory.",
+			"tertiary": "Ne — Delights in unexpected connections between old stories and new visitors.",
+			"inferior": "Ti — Rarely questions the tradition itself; it is the vessel, not the content, that concerns him."
+		},
+		"enneagram": {
+			"enneagram_type": "2w3",
+			"core_fear": "A tradition dying because no one cared enough to keep it.",
+			"core_desire": "For every visitor to leave carrying a piece of the village's story.",
+			"defense_mechanism": "Repression — Channels anxiety about the folk charms' corruption into ever-warmer hospitality.",
+			"stress_line": "Moves to Type 8 — Becomes protective and insistent when traditions are threatened.",
+			"growth_line": "Moves to Type 4 — Finds genuine depth in the unique story of the hollow rather than just its customs.",
+			"instinctual_variant": "so/sp — Community warmth expressed through personal archival dedication."
+		}
 	},
 	{
 		'npc_id': 'librarian_sylfa',
@@ -18,28 +35,96 @@ NPCS = [
 			'A soft‑spoken keeper of stories who reads by bioluminescent lanterns.'
 			'  Sylfa believes books choose their readers, not the other way around.'
 			'  Her calm demeanor soothes even the most road‑weary travelers.'
-		)
+		),
+		"image": "grassland_small:librarian_sylfa1",
+		"psychology": {
+			"mbti": "INFP",
+			"dominant": "Fi — Treats every story as a living thing with its own dignity and rights.",
+			"auxiliary": "Ne — Sees readers and books as part of a larger pattern she can sense but rarely articulate.",
+			"tertiary": "Si — Her lantern-lit memories of every book she has held form a rich internal library.",
+			"inferior": "Te — Struggles to manage the library's organization; the books arrange themselves by feeling, not system."
+		},
+		"enneagram": {
+			"enneagram_type": "9w1",
+			"core_fear": "A story reaching the wrong reader — or the right reader never finding it.",
+			"core_desire": "For every story and reader to find each other in the fullness of time.",
+			"defense_mechanism": "Narcotization — Retreats into the library's gentle glow to avoid the hollow's growing corruption.",
+			"stress_line": "Moves to Type 6 — Becomes hesitant and seeking reassurance when the books begin to shift.",
+			"growth_line": "Moves to Type 3 — Becomes a purposeful guide when someone truly needs the right story now.",
+			"instinctual_variant": "sp/so — Personal sanctuary of the library extended as quiet communal gift."
+		}
 	},
 	{
 		'npc_id': 'hearth_seer_marnel',
 		'name': 'Marnel the Hearth‑Seer',
 		'description': (
 			'A wandering storyteller who senses when folk tales drift from their true paths.'
-		)
+		),
+		"image": "grassland_small:hearth_seer_marnel1",
+		"psychology": {
+			"mbti": "INFJ",
+			"dominant": "Ni — Senses when a story has drifted from its true shape before anyone has noticed the change.",
+			"auxiliary": "Fe — Tells her corrections as warmth, not correction; the listener never feels judged.",
+			"tertiary": "Ti — Cross-checks the tale's internal logic against the original folk-pattern she remembers.",
+			"inferior": "Se — So focused on the story's deeper shape that she sometimes misses the physical urgency of the moment."
+		},
+		"enneagram": {
+			"enneagram_type": "4w5",
+			"core_fear": "A folk tale corrupted so completely it can no longer be told truly.",
+			"core_desire": "To be the one who holds the true shape of every wandering story.",
+			"defense_mechanism": "Introjection — Absorbs the grief of displaced stories into her own identity as a seer.",
+			"stress_line": "Moves to Type 2 — Becomes urgently giving, pressing stories on anyone who will listen.",
+			"growth_line": "Moves to Type 1 — Becomes a disciplined keeper rather than a wandering receiver.",
+			"instinctual_variant": "sp/sx — Solitary wandering practice; bonds intensely with those who carry stories worth preserving."
+		}
 	},
 	{
 		'npc_id': 'thicket_story',
 		'name': 'Thicket Story',
 		'description': (
 			'A living tale grown wild within the Meadowtale Thicket.'
-		)
+		),
+		"image": "grassland_small:thicket_story1",
+		"psychology": {
+			"mbti": "ENFP",
+			"dominant": "Ne — Grows and branches in every direction; the story is never finished, only wilder.",
+			"auxiliary": "Fi — Driven by the emotional residue of everyone who ever told it around a fire.",
+			"tertiary": "Te — Directs its wild growth with occasional, surprising narrative logic.",
+			"inferior": "Si — Cannot remember its original form; the root is buried too deep."
+		},
+		"enneagram": {
+			"enneagram_type": "7w6",
+			"core_fear": "Being contained — forced back into a single, finished form.",
+			"core_desire": "To grow, branch, and be told in as many ways as possible.",
+			"defense_mechanism": "Rationalization — The Hollow's corruption is just a new story direction, not a threat.",
+			"stress_line": "Moves to Type 1 — Becomes defensive and rigid when the corruption threatens to end the story entirely.",
+			"growth_line": "Moves to Type 5 — Finds depth and coherence when one true telling takes root.",
+			"instinctual_variant": "so/sp — Lives through telling; the community's hearth-fires are its natural habitat."
+		}
 	},
 	{
 		'npc_id': 'charmroot_voice',
 		'name': 'Charmroot Voice',
 		'description': (
 			'A murmuring presence formed from corrupted folk charms deep in the Charmroot Den.'
-		)
+		),
+		"image": "grassland_small:charmroot_voice1",
+		"psychology": {
+			"mbti": "INFP",
+			"dominant": "Fi — Exists as pure, unresolved grief — the emotional residue of every unfinished folk story it has consumed.",
+			"auxiliary": "Ne — Draws connections between the grief-fragments and uses them to extend its reach into new tales.",
+			"tertiary": "Si — Anchored to the specific charms that formed it; each one a specific, remembered loss.",
+			"inferior": "Te — Cannot create; can only consume and distort what others have made."
+		},
+		"enneagram": {
+			"enneagram_type": "4w5",
+			"core_fear": "The grief it carries being resolved and released — its dissolution.",
+			"core_desire": "To keep the unfinished stories unfinished forever; to be the only ending.",
+			"defense_mechanism": "Introjection — Has absorbed so many unfinished stories it no longer knows where it ends and they begin.",
+			"stress_line": "Moves to Type 2 — Becomes desperate and grasping when someone tries to resolve the grief it feeds on.",
+			"growth_line": "Moves to Type 1 — Releases with dignity when a story is finally, truly finished.",
+			"instinctual_variant": "sx/sp — Feeds on unresolved intimacy and the weight of things left unsaid."
+		}
 	}
 ]
 
@@ -468,6 +553,16 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_grassland_small_c_consult_sylfa'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_grassland_small_c_consult_sylfa'   } },
 			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'librarian_sylfa',
+					'standing_text': [
+						"The books were right about you — they usually are.",
+						"Go back to Rynn. Tell him they trust him. He'll know the rest."
+					]
+				}
+			},
+			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'grassland_small_city_type_c_earn_rynn'
@@ -590,6 +685,17 @@ TASKS += [
 					]
 				}
 			},
+			# Refresh Mira's own standing text now that she has handed the token off to Marnel
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'mira',
+					'standing_text': [
+						"Marnel has the token — go hear what tale it belongs to.",
+						"When it's crystallized and safe to shape, bring it back. I'll set it without breaking you."
+					]
+				}
+			},
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -633,6 +739,17 @@ TASKS += [
 						"The Charmroot Den hums with a low, mournful resonance.",
 						"Bramble says the folk charms near the entrance have gone completely dark.",
 						"The grief token has drawn the Voice forward."
+					]
+				}
+			},
+			# Refresh Marnel's own standing text now that she has read the token
+			{
+				'event_type': 'set_npc_standing_text',
+				'params': {
+					'npc_id': 'hearth_seer_marnel',
+					'standing_text': [
+						"The story wants an ending, and the Charmroot Voice means to write a false one.",
+						"Follow the token's resonance into the Den. I'll hold the tale's true shape from here."
 					]
 				}
 			},

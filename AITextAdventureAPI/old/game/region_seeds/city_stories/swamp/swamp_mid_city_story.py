@@ -9,7 +9,24 @@ NPCS = [
 			'A shrewd dealmaker who trades in charms, curses, and swamp‑born oddities.'
 			' Ress\'s lantern glows with shifting green fire that reacts to lies.'
 			' He insists every bargain struck in the Court binds both fate and fortune.'
-		)
+		),
+		"image": "swamp_mid:bargaincaller_ress1",
+		"psychology": {
+			"mbti": "ENTP",
+			"dominant": "Ne — Reads every deal as a system of shifting possibilities; the green fire is just another variable he has learned to read.",
+			"auxiliary": "Ti — Calculates the true weight of every bargain internally before the other party has finished speaking.",
+			"tertiary": "Fe — Charm deployed precisely; the lantern's green fire does half his work, he does the other half.",
+			"inferior": "Si — Rarely considers whether a binding bargain might come back for him someday; the present deal is everything."
+		},
+		"enneagram": {
+			"enneagram_type": "7w8",
+			"core_fear": "Being bound by a bargain he didn't read carefully enough.",
+			"core_desire": "To be the most capable, most interesting dealmaker in the entire Court.",
+			"defense_mechanism": "Rationalization — Every lopsided deal is 'fair by Court law'; the lantern said so.",
+			"stress_line": "Moves to Type 1 — Becomes rigid and suspicious when bargains break in ways his green fire didn't warn him about.",
+			"growth_line": "Moves to Type 5 — Develops a deep, principled understanding of bargain-law when the Broken Pact demands it.",
+			"instinctual_variant": "so/sp — Reputation as the Court's most binding dealmaker is his primary security."
+		}
 	},
 	{
 		'npc_id': 'lanternsworn_janrel',
@@ -18,21 +35,72 @@ NPCS = [
 			'A mystic who reads omens in the flicker of swamp‑light flames.'
 			' Janrel\'s lantern never extinguishes, even in heavy rain.'
 			' She offers guidance to the lost, though her advice often sounds like prophecy.'
-		)
+		),
+		"image": "swamp_mid:lanternsworn_janrel1",
+		"psychology": {
+			"mbti": "INFJ",
+			"dominant": "Ni — Reads the lantern's flicker as a prophetic language; the flame shows her what the omen means before she can explain how.",
+			"auxiliary": "Fe — Her guidance is calibrated to what the lost person needs to hear, not just what the flame shows.",
+			"tertiary": "Ti — Structures each omen-reading with internal precision; prophecy is not guessing, it is reading correctly.",
+			"inferior": "Se — So absorbed in the flame's deeper language that physical urgency sometimes arrives unannounced."
+		},
+		"enneagram": {
+			"enneagram_type": "4w5",
+			"core_fear": "The lantern going dark — losing the omen-language she has spent her life learning to read.",
+			"core_desire": "For every omen she reads to guide someone safely through the swamp's darkness.",
+			"defense_mechanism": "Introjection — Has absorbed the swamp's prophetic language so completely it has become her native tongue.",
+			"stress_line": "Moves to Type 2 — Becomes urgent and reaching when the Broken Pact corrupts the omens she relies on.",
+			"growth_line": "Moves to Type 1 — Becomes a disciplined interpreter rather than a vessel, ensuring her readings can be acted upon.",
+			"instinctual_variant": "sp/sx — Lantern as sanctuary; bonds intensely with those willing to read the flame with her."
+		}
 	},
 	{
 		'npc_id': 'oath_reed_selka',
 		'name': 'Selka the Oath‑Reed',
 		'description': (
 			'A swamp oath‑reader who interprets reed‑signs that shift when promises break.'
-		)
+		),
+		"image": "swamp_mid:oath_reed_selka1",
+		"psychology": {
+			"mbti": "ISFJ",
+			"dominant": "Si — Has memorized every reed-sign pattern and what each shift portends; a broken promise has a specific sound.",
+			"auxiliary": "Fe — Reads the reed-signs on behalf of the community; a broken oath is a communal wound she takes seriously.",
+			"tertiary": "Ti — Cross-checks each reed-pattern against the internal grammar of oath-signs she has accumulated.",
+			"inferior": "Ne — Deeply unsettled when the Broken Pact produces shifts she has never seen before."
+		},
+		"enneagram": {
+			"enneagram_type": "1w2",
+			"core_fear": "A broken oath going unread — the reed-signs ignored until the damage cannot be undone.",
+			"core_desire": "For every oath sworn in the mire to be honoured and every breach to be seen clearly.",
+			"defense_mechanism": "Reaction Formation — Channels anxiety about the Oathrot into ever-more-precise reed-reading.",
+			"stress_line": "Moves to Type 4 — Becomes withdrawn and despairing when oaths shatter despite her clearest readings.",
+			"growth_line": "Moves to Type 7 — Finds genuine lightness in the Court when the oaths hold and the reeds are still.",
+			"instinctual_variant": "so/sp — Community oath-integrity expressed through personal disciplinary precision."
+		}
 	},
 	{
 		'npc_id': 'oathrot_voice',
 		'name': 'Oathrot Voice',
 		'description': (
 			'A whispering presence formed from rotted vows deep within the Channel.'
-		)
+		),
+		"image": "swamp_mid:oathrot_voice1",
+		"psychology": {
+			"mbti": "INFP",
+			"dominant": "Fi — Exists as pure, festering grief — the emotional residue of every vow that was made and broken in the mire.",
+			"auxiliary": "Ne — Draws connections between the rotted vows, weaving them into a suffocating net of broken faith.",
+			"tertiary": "Si — Anchored to the specific promises and the channel-water in which they dissolved.",
+			"inferior": "Te — Cannot act with purpose; it can only whisper and pull the faithless downward."
+		},
+		"enneagram": {
+			"enneagram_type": "4w5",
+			"core_fear": "A vow being kept — the grief it feeds on resolving and leaving it nothing.",
+			"core_desire": "For every promise to rot; to be surrounded by the company of broken faith.",
+			"defense_mechanism": "Introjection — Has absorbed so many broken vows it cannot imagine what an unbroken one feels like.",
+			"stress_line": "Moves to Type 2 — Becomes desperate and grasping when the Oath-Reed's readings threaten to heal what it feeds on.",
+			"growth_line": "Moves to Type 1 — Releases with dignity when the Oathrot is resolved and the channel runs clean.",
+			"instinctual_variant": "sx/sp — Feeds on intimate betrayal; exists most fully in the moment a private promise dissolves."
+		}
 	},
 ]
 

@@ -9,7 +9,24 @@ NPCS = [
 			'A serene elder who oversees the Exchange with ritualistic precision.'
 			' Saphrin communes with the living wood, sensing emotional echoes in traded goods.'
 			' Their presence is calming, like moss‑softened footsteps in ancient groves.'
-		)
+		),
+		"image": "forest_large:elder_saphrin1",
+		"psychology": {
+			"mbti": "INFJ",
+			"dominant": "Ni — Senses the deeper intention behind every trade before the terms are spoken.",
+			"auxiliary": "Fe — Presides over the Exchange as an emotional anchor; their calm is a practiced, deliberate gift.",
+			"tertiary": "Ti — Applies the forest's unwritten rules with quiet, precise interpretation.",
+			"inferior": "Se — Rarely disturbed by physical urgency; slower to respond when crisis demands immediate action."
+		},
+		"enneagram": {
+			"enneagram_type": "9w1",
+			"core_fear": "Conflict fracturing the harmony of the Exchange and the living grove.",
+			"core_desire": "A community in which every bargain is freely and honestly made.",
+			"defense_mechanism": "Narcotization — Absorbs into the grove's rhythm to avoid confronting the rot within the pacts.",
+			"stress_line": "Moves to Type 6 — Becomes anxious and over-cautious when the hollow's corruption accelerates.",
+			"growth_line": "Moves to Type 3 — Takes decisive leadership when the Exchange genuinely depends on it.",
+			"instinctual_variant": "so/sp — Community stewardship is the core expression of their identity."
+		}
 	},
 	{
 		'npc_id': 'twigwhisper_loryn',
@@ -18,7 +35,24 @@ NPCS = [
 			'A nimble, sharp‑eyed negotiator who conducts deals from the high boughs.'
 			' Loryn\'s voice carries like birdsong, disarming even the most guarded traders.'
 			' They claim the forest itself enforces every bargain struck in the Den.'
-		)
+		),
+		"image": "forest_large:twigwhisper_loryn1",
+		"psychology": {
+			"mbti": "ENTP",
+			"dominant": "Ne — Reads negotiation as a game of shifting possibilities; always three counter-offers ahead.",
+			"auxiliary": "Ti — Structures arguments internally with sharp logic, then delivers them as charming improvisation.",
+			"tertiary": "Fe — Skilled at calibrating warmth and pressure to move traders toward agreement.",
+			"inferior": "Si — Rarely honours precedent; every deal is fresh and the rules are flexible until they're not."
+		},
+		"enneagram": {
+			"enneagram_type": "7w8",
+			"core_fear": "Being locked into a bad deal with no exit clause.",
+			"core_desire": "To be the sharpest, most celebrated deal-maker in the canopy.",
+			"defense_mechanism": "Rationalization — Reframes lopsided bargains as 'creative arrangements' to avoid guilt.",
+			"stress_line": "Moves to Type 1 — Becomes rigid and self-righteous when the forest punishes a broken pact.",
+			"growth_line": "Moves to Type 5 — Develops genuine expertise in forest law when high stakes demand it.",
+			"instinctual_variant": "so/sp — Reputation in the canopy network is the currency that matters most."
+		}
 	},
 	{
 		'npc_id': 'spore_seer_myrn',
@@ -26,7 +60,24 @@ NPCS = [
 		'description': (
 			'A wandering hermit who reads drifting spores like constellations. '
 			'Myrn senses disturbances in the forest\'s emotional undergrowth.'
-		)
+		),
+		"image": "forest_large:spore_seer_myrn1",
+		"psychology": {
+			"mbti": "INTP",
+			"dominant": "Ti — Classifies spore-drift patterns into an elaborate internal taxonomy only he fully understands.",
+			"auxiliary": "Ne — Leaps between pattern-connections, finding emotional meaning in microscopic variations.",
+			"tertiary": "Si — Draws on decades of wandering observation; his memory is a living map of spore behaviour.",
+			"inferior": "Fe — Struggles to communicate his readings in emotionally accessible terms; others often leave confused."
+		},
+		"enneagram": {
+			"enneagram_type": "5w4",
+			"core_fear": "Misreading the spores and sending someone into danger.",
+			"core_desire": "To develop a complete, accurate understanding of the forest's emotional substrate.",
+			"defense_mechanism": "Isolation — Retreats deeper into the undergrowth when his readings fail or go unheeded.",
+			"stress_line": "Moves to Type 7 — Becomes scattered and restless when the spores stop making sense.",
+			"growth_line": "Moves to Type 8 — Acts on his knowledge decisively when the forest is in genuine danger.",
+			"instinctual_variant": "sp/sx — Self-sufficient wanderer who forms rare but deep bonds with those who take his readings seriously."
+		}
 	},
 ]
 

@@ -9,7 +9,24 @@ NPCS = [
 			'A hardened watchman who stands guard through the fiercest storms.'
 			' Karrek\'s cloak is patched with scraps from past expeditions.'
 			' He claims the wind itself warns him of approaching danger.'
-		)
+		),
+		"image": "snow_small:vigilant_karrek1",
+		"psychology": {
+			"mbti": "ISTJ",
+			"dominant": "Si — Has catalogued every wind-shift and storm-pattern the outpost has produced; danger has a specific sound.",
+			"auxiliary": "Te — Issues warnings and directives with immediate, unambiguous precision.",
+			"tertiary": "Fi — Carries private grief for every person lost to a storm he couldn't warn in time.",
+			"inferior": "Ne — Deeply unsettled when the wind behaves in patterns he has never recorded."
+		},
+		"enneagram": {
+			"enneagram_type": "6w5",
+			"core_fear": "A storm arriving without warning because he missed the sign.",
+			"core_desire": "To be the wind's interpreter — the voice between the storm and the outpost.",
+			"defense_mechanism": "Projection — Attributes every unusual wind-shift to an identifiable external cause to maintain the illusion of control.",
+			"stress_line": "Moves to Type 3 — Becomes performatively authoritative when the Stormhollow defies his reading.",
+			"growth_line": "Moves to Type 9 — Accepts that some storms cannot be predicted and trusts his people to weather them.",
+			"instinctual_variant": "so/sp — Outpost safety through personal vigilance; the watch is his identity."
+		}
 	},
 	{
 		'npc_id': 'survivor_mira',
@@ -18,7 +35,24 @@ NPCS = [
 			'A resourceful trader who deals in survival gear and hard‑earned wisdom.'
 			' Mira\'s smile is rare but genuine, like sunlight on fresh snow.'
 			' She has a story for every scar she carries.'
-		)
+		),
+		"image": "snow_small:survivor_mira1",
+		"psychology": {
+			"mbti": "ISTP",
+			"dominant": "Ti — Assesses every survival situation with rapid internal logic; the solution is obvious to her, rarely to others.",
+			"auxiliary": "Se — Reads the physical environment — cold, wind, ice-thickness — with automatic, practiced precision.",
+			"tertiary": "Ni — Has a trader's gut-sense for when a supply route is about to close or a storm is about to shift.",
+			"inferior": "Fe — Her smile is rare because warmth costs energy she can't always afford; she shows it when she means it."
+		},
+		"enneagram": {
+			"enneagram_type": "8w9",
+			"core_fear": "Being caught unprepared in a storm with nothing left to trade or survive with.",
+			"core_desire": "To be the most prepared, most capable person in any cold situation.",
+			"defense_mechanism": "Denial — Refuses to acknowledge how bad things have gotten until the route goes completely silent.",
+			"stress_line": "Moves to Type 5 — Goes quiet and methodical when the outpost's situation defies every resource calculation.",
+			"growth_line": "Moves to Type 2 — Opens up and shares hard-won wisdom freely when the outpost is at its most vulnerable.",
+			"instinctual_variant": "sp/so — Self-reliance in service of community survival; she trades to keep others alive as much as herself."
+		}
 	},
 	{
 		'npc_id': 'gale_seer_orlena',
@@ -27,7 +61,24 @@ NPCS = [
 			'A wind-reader who interprets storm-patterns and senses disturbances in the frost.'
 			' Orlena\'s breath fogs the air even on calm days.'
 			' She says the cold carries the outpost\'s oldest warnings.'
-		)
+		),
+		"image": "snow_small:gale_seer_orlena1",
+		"psychology": {
+			"mbti": "INFJ",
+			"dominant": "Ni — Reads storm-patterns as a language; the frost carries warnings she receives before they can be seen.",
+			"auxiliary": "Fe — Delivers warnings with measured care; she understands the difference between alarming people and preparing them.",
+			"tertiary": "Ti — Cross-checks each pattern against the outpost's wind history before committing to a reading.",
+			"inferior": "Se — Absorbed in the frost's deeper language; physical urgency sometimes catches her mid-reading."
+		},
+		"enneagram": {
+			"enneagram_type": "5w4",
+			"core_fear": "A storm-pattern she misread that left the outpost unprepared.",
+			"core_desire": "A complete reading of every warning the frost has ever carried.",
+			"defense_mechanism": "Isolation — Retreats into the cold's deeper patterns when her warnings are dismissed.",
+			"stress_line": "Moves to Type 7 — Becomes restless when the Stormhollow produces patterns she cannot classify.",
+			"growth_line": "Moves to Type 8 — Acts as a decisive guide when the outpost cannot afford to wait for a clearer reading.",
+			"instinctual_variant": "sp/sx — Solitary frost-reading; bonds intensely with those willing to stand in the cold and listen."
+		}
 	},
 	{
 		'npc_id': 'stormhollow_voice',
@@ -35,7 +86,24 @@ NPCS = [
 		'description': (
 			'A roaring presence formed from hollow wind-channels and trapped battle-echoes.'
 			' It guards the warden plate with the fury of every storm that ever buried the outpost.'
-		)
+		),
+		"image": "snow_small:stormhollow_voice1",
+		"psychology": {
+			"mbti": "ISTJ",
+			"dominant": "Si — Guards with the encoded memory of every storm that ever buried the outpost; the fury is historical, not personal.",
+			"auxiliary": "Te — Enforces its territory with absolute, uncompromising protocol.",
+			"tertiary": "Fi — A faint echo of the soldiers who died in the storms it carries; the warden plate is their memorial.",
+			"inferior": "Ne — Cannot conceive of a world where the outpost no longer needs its fury."
+		},
+		"enneagram": {
+			"enneagram_type": "8w9",
+			"core_fear": "The outpost falling because its guardian fury was not enough.",
+			"core_desire": "To keep every storm that ever threatened the outpost permanently contained within itself.",
+			"defense_mechanism": "Denial — Cannot acknowledge that the storms are over and the fury has become the threat.",
+			"stress_line": "Moves to Type 5 — Becomes cold and methodical when its roar doesn't drive intruders away.",
+			"growth_line": "Moves to Type 2 — Releases the warden plate when it finally trusts those who will honour it.",
+			"instinctual_variant": "sp/so — Collective battle-memory made permanent; it stands because soldiers once stood together."
+		}
 	},
 ]
 

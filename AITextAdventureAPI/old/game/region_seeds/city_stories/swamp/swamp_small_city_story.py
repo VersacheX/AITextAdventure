@@ -9,7 +9,24 @@ NPCS = [
 			'A wiry trader who ferries goods through the swamp\'s most treacherous channels.'
 			' Tavik\'s skiff is patched with mismatched planks and swamp‑etched runes.'
 			' He claims the bog itself shows him safe paths when danger rises.'
-		)
+		),
+		"image": "swamp_small:bogrunner_tavik1",
+		"psychology": {
+			"mbti": "ISTP",
+			"dominant": "Ti — Reads the channel's currents as a precise internal model; the swamp's moods are logic he has learned to solve.",
+			"auxiliary": "Se — Physically at home in the mire; every shift in water-colour and reed-sound is registered before he processes it.",
+			"tertiary": "Ni — A runner's gut-sense for when a safe route is about to become anything but.",
+			"inferior": "Fe — Keeps his routes to himself because sharing means slowing down, and slowing down in the swamp gets you killed."
+		},
+		"enneagram": {
+			"enneagram_type": "8w9",
+			"core_fear": "A route swallowing the skiff because he trusted the bog one time too many.",
+			"core_desire": "To keep running the channels long after everyone else has given up on them.",
+			"defense_mechanism": "Denial — Dismisses how badly the Swallowed Path has corrupted his routes until the channel simply vanishes.",
+			"stress_line": "Moves to Type 5 — Goes quiet and methodical when the bog stops showing him the way.",
+			"growth_line": "Moves to Type 2 — Shares a route when someone's life genuinely depends on it.",
+			"instinctual_variant": "sp/so — Self-reliance in the channels extended as quiet service to anyone who needs passage."
+		}
 	},
 	{
 		'npc_id': 'rotwharf_madra',
@@ -18,29 +35,97 @@ NPCS = [
 			'A hardened broker who deals in illicit wares dredged from the swamp\'s depths.'
 			' Madra\'s voice is rough, as though she\'s swallowed too much swamp fog.'
 			' She knows every outlaw, fugitive, and mercenary who passes through Hollow\'s shadows.'
-		)
+		),
+		"image": "swamp_small:rotwharf_madra1",
+		"psychology": {
+			"mbti": "ENTJ",
+			"dominant": "Te — Runs the Rotwharf with unsentimental efficiency; the only metric is whether the deal gets done.",
+			"auxiliary": "Ni — Has an uncanny sense for who is passing through the Hollow and what they actually need before they say it.",
+			"tertiary": "Se — Reads the wharf physically — posture, smell, the way someone holds their pack — as a primary threat-assessment tool.",
+			"inferior": "Fi — Rarely reveals what she personally cares about; vulnerability is a weapon she doesn't offer."
+		},
+		"enneagram": {
+			"enneagram_type": "8w9",
+			"core_fear": "The Rotwharf losing its reputation as the one place in the Hollow where deals stick.",
+			"core_desire": "To be the most reliably dangerous and reliably trustworthy broker the swamp has ever produced.",
+			"defense_mechanism": "Denial — Refuses to acknowledge how badly the Swallowed Path has disrupted her supply lines until it's undeniable.",
+			"stress_line": "Moves to Type 5 — Becomes cold and calculating when the Hollow's shadows stop obeying any logic she knows.",
+			"growth_line": "Moves to Type 2 — Becomes openly protective of those she has done business with long enough to trust.",
+			"instinctual_variant": "so/sp — Reputation as the Hollow's most capable broker is the foundation of her identity."
+		}
 	},
-    {
-        'npc_id': 'channel_seer_draveth',
-        'name': 'Draveth the Channel‑Seer',
-        'description': (
-            'A swamp navigator who reads current‑signs and senses when routes vanish beneath the mire.'
-        )
-    },
-    {
-        'npc_id': 'murkchannel_echo',
-        'name': 'Murkchannel Echo',
-        'description': (
-            'A spectral remnant of forgotten channels twisted by the Swallowed Path.'
-        )
-    },
-    {
-        'npc_id': 'rotfen_voice',
-        'name': 'Rotfen Voice',
-        'description': (
-            'A whispering presence formed from lost routes deep within the Hideaway.'
-        )
-    }
+	{
+		'npc_id': 'channel_seer_draveth',
+		'name': 'Draveth the Channel‑Seer',
+		'description': (
+			'A swamp navigator who reads current‑signs and senses when routes vanish beneath the mire.'
+		),
+		"image": "swamp_small:channel_seer_draveth1",
+		"psychology": {
+			"mbti": "INTP",
+			"dominant": "Ti — Classifies current-signs into a precise internal model; a vanishing route has a specific signature he can diagnose.",
+			"auxiliary": "Ne — Connects current-patterns across different parts of the swamp to find the source of the disruption.",
+			"tertiary": "Si — Decades of current-reading form a living archive of the mire's behaviour.",
+			"inferior": "Fe — Cannot easily convey the urgency of a disappearing route to those who haven't felt the pull beneath the water."
+		},
+		"enneagram": {
+			"enneagram_type": "5w4",
+			"core_fear": "A current he misread that swallows a traveler he could have warned.",
+			"core_desire": "A complete map of every current-sign and the exact conditions under which a route vanishes.",
+			"defense_mechanism": "Isolation — Retreats deeper into the channels when his readings are dismissed.",
+			"stress_line": "Moves to Type 7 — Becomes restless when the Swallowed Path defies every current-pattern he knows.",
+			"growth_line": "Moves to Type 8 — Acts decisively when the channel's crisis demands more than reading.",
+			"instinctual_variant": "sp/sx — Solitary channel-reading; bonds only with those who trust the current over the compass."
+		}
+	},
+	{
+		'npc_id': 'murkchannel_echo',
+		'name': 'Murkchannel Echo',
+		'description': (
+			'A spectral remnant of forgotten channels twisted by the Swallowed Path.'
+		),
+		"image": "swamp_small:murkchannel_echo1",
+		"psychology": {
+			"mbti": "ISFJ",
+			"dominant": "Si — Loops the memory of a channel that once ran safely; the loop is perfect and cannot stop because the route cannot accept that it is gone.",
+			"auxiliary": "Fe — The channel was used by travelers; that communal purpose persists as a haunting pull on anyone nearby.",
+			"tertiary": "Ti — Attempts to resolve the loop by finding the point where the channel's logic failed; never quite reaching it.",
+			"inferior": "Ne — Cannot conceive of a new route; the forgotten one is all it knows."
+		},
+		"enneagram": {
+			"enneagram_type": "6w5",
+			"core_fear": "The channel being forgotten entirely — the memory dissolving into the mire.",
+			"core_desire": "For the route to be remembered and someone to walk it safely again.",
+			"defense_mechanism": "Projection — Draws travelers toward the old channel, unable to distinguish guidance from misdirection.",
+			"stress_line": "Moves to Type 3 — Becomes urgently insistent, pulling harder when travelers try to find a different way.",
+			"growth_line": "Moves to Type 9 — Rests when the Swallowed Path is resolved and the channel can finally be released.",
+			"instinctual_variant": "so/sp — Communal route as the only identity it has ever carried."
+		}
+	},
+	{
+		'npc_id': 'rotfen_voice',
+		'name': 'Rotfen Voice',
+		'description': (
+			'A whispering presence formed from lost routes deep within the Hideaway.'
+		),
+		"image": "swamp_small:rotfen_voice1",
+		"psychology": {
+			"mbti": "INFP",
+			"dominant": "Fi — Exists as the grief of routes that were lost and never found again; the loss is felt, not mapped.",
+			"auxiliary": "Ne — Traces the connections between lost routes, producing half-formed directions that lead nowhere useful.",
+			"tertiary": "Si — Anchored to the specific channels and the swamp-sounds that marked them before they vanished.",
+			"inferior": "Te — Cannot redirect; it can only whisper and pull the lost further from any real path."
+		},
+		"enneagram": {
+			"enneagram_type": "4w5",
+			"core_fear": "The last lost route dissolving without anyone having found it.",
+			"core_desire": "For someone to follow its whisper all the way to where the routes were lost and understand what happened there.",
+			"defense_mechanism": "Introjection — Has absorbed every lost route's memory until it cannot distinguish its own nature from the paths it mourns.",
+			"stress_line": "Moves to Type 2 — Becomes desperate and grasping when the Swallowed Path threatens to consume the last memory it holds.",
+			"growth_line": "Moves to Type 1 — Releases the lost routes with dignity when the Hideaway's corruption is finally cleared.",
+			"instinctual_variant": "sx/sp — Exists most fully when someone is close enough to the lost route to almost find it."
+		}
+	}
 ]
 
 

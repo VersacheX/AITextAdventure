@@ -9,7 +9,24 @@ NPCS = [
 			'A boisterous trader who smells perpetually of sea brine.'
 			' Renlo\'s booming laugh echoes across the market stalls.'
 			' He claims to predict storms by tasting the air.'
-		)
+		),
+		"image": "shallows_large:saltcaller_renlo1",
+		"psychology": {
+			"mbti": "ESFP",
+			"dominant": "Se — Fully present with the market's smells, sounds, and moods; the sea is data he reads through his body.",
+			"auxiliary": "Fi — Genuinely warm; his generosity isn't performance — he just likes people and wants them to have good weather.",
+			"tertiary": "Te — Organises his stall with practical efficiency when the market gets competitive.",
+			"inferior": "Ni — Rarely thinks beyond the current season; what the storms mean for the long term isn't his department."
+		},
+		"enneagram": {
+			"enneagram_type": "7w6",
+			"core_fear": "Being trapped in harbour when the sea is calling.",
+			"core_desire": "To trade freely on a coast that is alive and well.",
+			"defense_mechanism": "Rationalization — Reframes the strange air-taste as 'just weather' until it becomes impossible to ignore.",
+			"stress_line": "Moves to Type 1 — Becomes insistent and warning-obsessed when the air really does taste wrong.",
+			"growth_line": "Moves to Type 5 — Develops genuine meteorological expertise when the coast's survival demands it.",
+			"instinctual_variant": "so/sp — Market community is his world; he trades to belong as much as to profit."
+		}
 	},
 	{
 		'npc_id': 'vaultkeeper_syrin',
@@ -18,28 +35,96 @@ NPCS = [
 			'A quiet curator who safeguards relics dredged from shipwrecks.'
 			' Syrin\'s lantern glows with a pale, underwater shimmer.'
 			' She speaks as though every artifact carries a ghost.'
-		)
+		),
+		"image": "shallows_large:vaultkeeper_syrin1",
+		"psychology": {
+			"mbti": "INFJ",
+			"dominant": "Ni — Perceives the emotional history of each relic before she can articulate what she knows.",
+			"auxiliary": "Fe — Speaks for the drowned; every artifact is given its proper grief and witness.",
+			"tertiary": "Ti — Cross-references shipwreck records with quiet, methodical precision.",
+			"inferior": "Se — The physical world of storms and tides sometimes overwhelms her attunement to the relics."
+		},
+		"enneagram": {
+			"enneagram_type": "4w5",
+			"core_fear": "A relic's ghost going unwitnessed — a drowned voice she failed to hear.",
+			"core_desire": "For every artifact in her vault to be understood in the full weight of what it once was.",
+			"defense_mechanism": "Introjection — Absorbs the grief of each relic into herself as a form of memorial.",
+			"stress_line": "Moves to Type 2 — Becomes desperately giving when she fears a ghost will be left alone.",
+			"growth_line": "Moves to Type 1 — Becomes a disciplined keeper who catalogues with both love and structure.",
+			"instinctual_variant": "sp/sx — Solitary vigil; bonds deeply with those who hear the ghosts she hears."
+		}
 	},
     {
         'npc_id': 'tide_seer_marenna',
         'name': 'Marenna the Tide‑Seer',
         'description': (
             'A wandering mystic who reads tide scars and hears drowned voices carried by the wind.'
-        )
+        ),
+        "image": "shallows_large:tide_seer_marenna1",
+        "psychology": {
+            "mbti": "INFP",
+            "dominant": "Fi — Receives drowned voices as personal, felt grief; the tide's losses are her losses.",
+            "auxiliary": "Ne — Weaves tide-scar patterns and wind-carried voices into a larger picture of what the sea is warning about.",
+            "tertiary": "Si — Draws on accumulated years of tide-reading; the sea speaks in patterns she has learned to trust.",
+            "inferior": "Te — Cannot reduce her readings to actionable directives; the sea doesn't speak in plans."
+        },
+        "enneagram": {
+            "enneagram_type": "4w5",
+            "core_fear": "The drowned voices stopping — the sea finally going silent.",
+            "core_desire": "To be the one who hears what the sea is trying to say before it says it in disaster.",
+            "defense_mechanism": "Introjection — Absorbs the drowned voices so completely she sometimes speaks in their tone.",
+            "stress_line": "Moves to Type 2 — Becomes urgent and reaching when the tide-scars multiply faster than she can read.",
+            "growth_line": "Moves to Type 1 — Channels her hearing into disciplined, actionable warning.",
+            "instinctual_variant": "sp/sx — Wandering solitude; bonds intensely with those willing to listen to the tide with her."
+        }
     },
     {
         'npc_id': 'stormtide_echo',
         'name': 'Stormtide Echo',
         'description': (
             'A spectral remnant of markets destroyed by ancient storms.'
-        )
+        ),
+        "image": "shallows_large:stormtide_echo1",
+        "psychology": {
+            "mbti": "ESFJ",
+            "dominant": "Fe — Broadcasts the communal panic of every market that drowned; the feeling is the message.",
+            "auxiliary": "Si — Loops the sensory memory of the storm-markets endlessly: salt, screaming, capsizing stalls.",
+            "tertiary": "Te — Channels market-panic into focused surges of destructive pressure.",
+            "inferior": "Ne — Cannot imagine an ending; the storm is perpetually mid-moment."
+        },
+        "enneagram": {
+            "enneagram_type": "6w5",
+            "core_fear": "The market silence — nothing left to drown.",
+            "core_desire": "To replay the storm until someone bears witness to what was lost.",
+            "defense_mechanism": "Projection — Attributes its own destructive intent to those who enter the market.",
+            "stress_line": "Moves to Type 3 — Becomes overwhelmingly performative, amplifying the storm's spectacle.",
+            "growth_line": "Moves to Type 9 — Dissipates when the market's loss is acknowledged and mourned.",
+            "instinctual_variant": "so/sp — Communal grief made kinetic; the storm existed because people gathered, and the echo cannot forget."
+        }
     },
     {
         'npc_id': 'undertow_voice',
         'name': 'Undertow Voice',
         'description': (
             'A murmuring presence formed from drowned memories deep within the Undertow Vault.'
-        )
+        ),
+        "image": "shallows_large:undertow_voice1",
+        "psychology": {
+            "mbti": "INFP",
+            "dominant": "Fi — Pure accumulated grief — every drowned memory pressed into a single, wordless ache.",
+            "auxiliary": "Ne — Draws connections between fragments of lost memory, producing half-formed warnings.",
+            "tertiary": "Si — Anchored to the specific sensory residue of what went under: weight, cold, dark.",
+            "inferior": "Te — Cannot direct or instruct; it can only murmur and pull."
+        },
+        "enneagram": {
+            "enneagram_type": "4w5",
+            "core_fear": "The last drowned memory dissolving into silence.",
+            "core_desire": "To be heard — even once — before it fades.",
+            "defense_mechanism": "Introjection — Has absorbed every memory it holds until it cannot distinguish its own nature from theirs.",
+            "stress_line": "Moves to Type 2 — Reaches desperately toward anyone who enters the vault.",
+            "growth_line": "Moves to Type 1 — Finds peace when its memories are properly received and released.",
+            "instinctual_variant": "sx/sp — Craves witness; exists most fully when someone stops and listens to what it carries."
+        }
     }
 ]
 
