@@ -136,6 +136,8 @@ class NpcRecordNode:
     group_id: str       # "regional_story", "extended", "main_story"
     source_group: str   # Humanized group label, e.g. "Regional Story"
     record: DevRecord   # Full DevRecord (includes image, detail, psychology …)
+    mbti: str = ""      # e.g. "INTJ"
+    enneagram: str = "" # e.g. "5w4"
 
 
 @dataclass

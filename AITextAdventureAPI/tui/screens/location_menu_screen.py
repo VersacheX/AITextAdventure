@@ -26,8 +26,9 @@ from __future__ import annotations
 
 from typing import Any, Callable, List
 
-from textual import on
+from textual import events, on
 from textual.app import ComposeResult
+from textual.binding import Binding
 from textual.containers import Vertical
 from textual.widget import Widget
 from textual.widgets import Button, Label, ListItem, ListView, Static
@@ -46,8 +47,14 @@ class _ActionItem(ListItem):
 class LocationOverlay(Widget):
     """Floating action-menu widget overlaid on the map panel."""
 
-    # Do not steal focus — WASD stays with OverworldScreen
-    can_focus = False
+    can_focus = True
+
+    BINDINGS = [
+        Binding("up",     "cursor_up",   "Up",    show=False),
+        Binding("down",   "cursor_down", "Down",  show=False),
+        Binding("enter",  "confirm",     "Select", show=False),
+        Binding("escape", "close",       "Close",  show=False),
+    ]
 
     DEFAULT_CSS = """
     LocationOverlay {
@@ -94,15 +101,121 @@ class LocationOverlay(Widget):
         self._on_action = on_action
 
     def compose(self) -> ComposeResult:
-        # Items are yielded here — not in on_mount — so they are part of the
-        # initial compose tree and are guaranteed to exist when the widget mounts.
         title = _get_location_title(self._pg, self._active_area)
         with Vertical():
-            yield Static(f"── {title} ──", id="ov-title")
+            yield Static(f"── {title} ──  [dim](a) to focus[/dim]", id="ov-title", markup=True)
             with ListView(id="ov-list"):
                 for action in self._actions:
                     yield _ActionItem(action)
             yield Button("✕  Close", id="ov-close", variant="default")
+
+    def refresh_actions(
+        self,
+        pg: Any,
+        active_area: Any,
+        actions: List[LocationAction],
+        on_action: Callable[[bool], None],
+    ) -> None:
+        """Replace the action list and callback in-place without remounting."""
+        self._pg          = pg
+        self._active_area = active_area
+        self._actions     = actions
+        self._on_action   = on_action
+        try:
+            lv = self.query_one("#ov-list", ListView)
+            # Remember the currently highlighted action id before clearing
+            prev_id: str | None = None
+            try:
+                highlighted = lv.highlighted_child
+                if isinstance(highlighted, _ActionItem):
+                    prev_id = highlighted.action.id
+            except Exception:
+                pass
+
+            lv.clear()
+            for action in actions:
+                lv.append(_ActionItem(action))
+
+            # Restore the highlight after the DOM settles so the blue
+            # selection background repaints correctly.
+            restore_index = 0
+            if prev_id is not None:
+                for i, action in enumerate(actions):
+                    if action.id == prev_id:
+                        restore_index = i
+                        break
+
+            if actions:
+                def _restore(idx: int = restore_index) -> None:
+                    try:
+                        self.query_one("#ov-list", ListView).index = idx
+                    except Exception:
+                        pass
+                self.call_after_refresh(_restore)
+
+            focused = lv.has_focus
+        except Exception:
+            focused = False
+        self._set_title_hint(focused=focused)
+
+    # ── keyboard navigation ────────────────────────────────────────────────
+
+    def focus_list(self) -> None:
+        """Give focus to the ListView so arrow keys + Enter work."""
+        try:
+            self.query_one("#ov-list", ListView).focus()
+        except Exception:
+            self.focus()
+
+    def _set_title_hint(self, focused: bool) -> None:
+        hint = "[dim](esc) to exit[/dim]" if focused else "[dim](a) to focus[/dim]"
+        try:
+            title = _get_location_title(self._pg, self._active_area)
+            self.query_one("#ov-title", Static).update(
+                f"── {title} ──  {hint}"
+            )
+        except Exception:
+            pass
+
+    def on_descendant_focus(self, event: events.DescendantFocus) -> None:
+        self._set_title_hint(focused=True)
+
+    def on_descendant_blur(self, event: events.DescendantBlur) -> None:
+        self._set_title_hint(focused=False)
+
+    def action_cursor_up(self) -> None:
+        try:
+            lv = self.query_one("#ov-list", ListView)
+            lv.action_cursor_up()
+        except Exception:
+            pass
+
+    def action_cursor_down(self) -> None:
+        try:
+            lv = self.query_one("#ov-list", ListView)
+            lv.action_cursor_down()
+        except Exception:
+            pass
+
+    def action_confirm(self) -> None:
+        try:
+            lv = self.query_one("#ov-list", ListView)
+            item = lv.highlighted_child
+            if isinstance(item, _ActionItem):
+                self._execute(item.action)
+        except Exception:
+            pass
+
+    def action_close(self) -> None:
+        """Escape while focused: release focus back to the screen."""
+        try:
+            lv = self.query_one("#ov-list", ListView)
+            if lv.has_focus:
+                self.screen.set_focus(None)
+                return
+        except Exception:
+            pass
+        self.remove()
 
     # ── close ─────────────────────────────────────────────────────────────
 
@@ -195,6 +308,7 @@ class LocationOverlay(Widget):
             sl = data.get("subloc", {})
             prompt = sl.get("prompt") or f"You examine the {name}."
             self.app.notify(prompt, title=name or "Examine")
+            self._on_action(False)
             return
 
         sl = data.get("subloc", {})
@@ -226,6 +340,9 @@ class LocationOverlay(Widget):
                 if result:
                     self.app.notify(result, title="Looted")
                 self._on_action(True)
+            else:
+                # Player chose to leave — stay put, overlay refreshes in-place
+                self._on_action(False)
 
         self.app.push_screen(
             ConfirmScreen(msg, yes_label="Take", no_label="Leave"),

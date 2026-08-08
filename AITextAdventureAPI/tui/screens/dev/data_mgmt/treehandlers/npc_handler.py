@@ -26,9 +26,17 @@ from tui.services.dev.dataservices import (
 
 def _npc_leaf_label(npc_node: NpcRecordNode) -> str:
     """Build a Rich-markup label for a leaf node, with severity prefix if validated."""
+    psych_parts = []
+    if npc_node.mbti:
+        psych_parts.append(rich_escape(npc_node.mbti))
+    if npc_node.enneagram:
+        psych_parts.append(rich_escape(npc_node.enneagram))
+    psych_str = ("  [dim magenta]" + "  ".join(psych_parts) + "[/dim magenta]") if psych_parts else ""
+
     base = (
         f"{rich_escape(npc_node.label)}  "
         f"[dim]{rich_escape(npc_node.npc_id)}[/dim]"
+        f"{psych_str}"
     )
     extras = npc_node.record.extras if npc_node.record else {}
     if not extras.get("_validated"):

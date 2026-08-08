@@ -244,7 +244,7 @@ def build_viewport_lines(
 
 # ── stats panel ────────────────────────────────────────────────────────────
 
-def build_stats_lines(player_game: Any) -> List[str]:
+def build_stats_lines(player_game: Any, has_actions: bool = False) -> List[str]:
     """Return text lines for the stats sidebar panel.
     Shows party members (name / level / HP) and gold.
     """
@@ -274,6 +274,11 @@ def build_stats_lines(player_game: Any) -> List[str]:
         lines.append(f" ({player_game.x}, {player_game.y})")
     except Exception:
         lines.append(" ?")
+
+    if has_actions:
+        lines.append("")
+        lines.append("── Open Area ──")
+        lines.append(" [dim](a) Actions[/dim]")
 
     return lines
 

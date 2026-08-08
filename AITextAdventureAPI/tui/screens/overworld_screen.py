@@ -73,7 +73,7 @@ class OverworldScreen(BaseScreen):
         Binding("up", "move_north", "North", show=False),
         Binding("s", "move_south", "South", show=False),
         Binding("down", "move_south", "South", show=False),
-        Binding("a", "move_west", "West", show=False),
+        Binding("a", "move_or_focus", "West", show=False),
         Binding("left", "move_west", "West", show=False),
         Binding("d", "move_east", "East", show=False),
         Binding("right", "move_east", "East", show=False),
@@ -185,16 +185,45 @@ class OverworldScreen(BaseScreen):
 
     # ── movement actions ──────────────────────────────────────────────────
 
+    def _overlay_list_focused(self) -> bool:
+        """Return True if the LocationOverlay's list currently has focus."""
+        try:
+            from textual.widgets import ListView  # noqa: PLC0415
+            lv = self.query_one(LocationOverlay).query_one("#ov-list", ListView)
+            return lv.has_focus
+        except Exception:
+            return False
+
     def action_move_north(self) -> None:
+        if self._overlay_list_focused():
+            return
         self._handle_move("w")
 
     def action_move_south(self) -> None:
+        if self._overlay_list_focused():
+            return
         self._handle_move("s")
 
     def action_move_west(self) -> None:
+        if self._overlay_list_focused():
+            return
+        self._handle_move("a")
+
+    def action_move_or_focus(self) -> None:
+        """'a' key: focus the location overlay if visible, otherwise move west."""
+        if self._overlay_list_focused():
+            return
+        try:
+            overlay = self.query_one(LocationOverlay)
+            overlay.focus_list()
+            return
+        except Exception:
+            pass
         self._handle_move("a")
 
     def action_move_east(self) -> None:
+        if self._overlay_list_focused():
+            return
         self._handle_move("d")
 
     def action_open_inventory(self) -> None:
@@ -461,13 +490,13 @@ class OverworldScreen(BaseScreen):
             pass
 
     def _update_overlay(self) -> None:
-        """Rebuild the location overlay for the player's current tile.
+        """Refresh the location overlay for the player's current tile.
 
-        Called automatically after every move and on screen resume.
-        Silently removes the overlay when there is nothing to interact with.
-        Does nothing while another overlay (shop, fast travel, etc.) is open.
+        - If an overlay is already mounted, updates its action list in-place.
+        - If no overlay exists, mounts a new one.
+        - If there are no actions, removes any existing overlay.
+        - Does nothing while a shop / travel / other .ow-overlay is open.
         """
-        # Suppress location actions while a shop / travel / other ow-overlay is up
         if self.query(".ow-overlay"):
             return
 
@@ -483,16 +512,22 @@ class OverworldScreen(BaseScreen):
             self._remove_overlay()
             return
 
-        self._remove_overlay()
-
         def _on_action_complete(took_action: bool) -> None:
-            self._remove_overlay()
             if took_action:
                 self._check_dialogs_and_refresh()
             else:
                 self._refresh_all()
-            # Rebuild overlay for the (possibly new) tile position
+            # Refresh the overlay in-place for the (possibly updated) tile
             self._update_overlay()
+
+        # Re-use existing overlay instead of remove+remount to avoid flicker
+        # and duplicate overlays when _update_overlay is called multiple times.
+        try:
+            existing = self.query_one(LocationOverlay)
+            existing.refresh_actions(pg, active_area, actions, _on_action_complete)
+            return
+        except Exception:
+            pass
 
         self.mount(LocationOverlay(pg, active_area, actions, _on_action_complete))
 
@@ -530,7 +565,14 @@ class OverworldScreen(BaseScreen):
         except Exception:
             active_area = None
         legend_lines = build_legend_lines(active_area)
-        stats_lines = build_stats_lines(pg)
+        from tui.services.location_actions import get_location_actions  # noqa: PLC0415
+        from tui.services.movement_service import get_active_area as _gaa  # noqa: PLC0415
+        try:
+            _area = _gaa(pg)
+            _has_actions = bool(get_location_actions(pg, _area))
+        except Exception:
+            _has_actions = False
+        stats_lines = build_stats_lines(pg, has_actions=_has_actions)
 
         if worker.is_cancelled:
             return

@@ -33,6 +33,8 @@ from textual import events, on
 from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal
+from textual.message import Message
+from textual.widget import Widget
 from textual.widgets import Button, Static
 
 from tui.screens.base_screen import BaseScreen
@@ -123,6 +125,12 @@ def _build_card_text(player: Any, player_game: Any) -> str:
 class CharacterCard(Static):
     """Single character info panel.  The CSS class 'selected' highlights it."""
 
+    class CardClicked(Message):
+        """Posted when the card is clicked; carries the display slot index."""
+        def __init__(self, slot: int) -> None:
+            super().__init__()
+            self.slot = slot
+
     DEFAULT_CSS = """
     CharacterCard {
         width: 1fr;
@@ -137,6 +145,15 @@ class CharacterCard(Static):
         background: $surface-lighten-1;
     }
     """
+
+    def __init__(self, *args: Any, slot: int = 0, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        self._slot = slot
+
+    def on_click(self, event: events.Click) -> None:
+        """Select this character slot without disturbing focus."""
+        event.stop()  # don't propagate — no focus change
+        self.post_message(self.CardClicked(self._slot))
 
 
 class InventoryScreen(BaseScreen):
@@ -240,7 +257,7 @@ class InventoryScreen(BaseScreen):
 
         with Horizontal(id="characters-row"):
             for slot in range(_MAX_DISPLAY):
-                yield CharacterCard("", id=f"char-card-{slot}")
+                yield CharacterCard("", id=f"char-card-{slot}", slot=slot)
 
         yield Static("", id="pager-bar")
 
@@ -280,31 +297,25 @@ class InventoryScreen(BaseScreen):
         self._refresh_cards()
 
     def _open_items_overlay(self) -> None:
-        if self._overlay_active():
-            self._close_overlay()
-        else:
-            pg = get_active_game()
-            if pg is None:
-                self.notify("No active game.", title="Items")
-                return
-            from tui.screens.items_overlay import ItemsOverlay
-            self.mount(ItemsOverlay(pg, self._close_overlay))
+        self._close_overlay()
+        pg = get_active_game()
+        if pg is None:
+            self.notify("No active game.", title="Items")
+            return
+        from tui.screens.items_overlay import ItemsOverlay
+        self.mount(ItemsOverlay(pg, self._close_overlay))
 
     def _open_equip_overlay(self) -> None:
-        if self._overlay_active():
-            self._close_overlay()
-        else:
-            pg = get_active_game()
-            if pg is None:
-                self.notify("No active game.", title="Equip")
-                return
-            from tui.screens.equip_overlay import EquipOverlay
-            self.mount(EquipOverlay(pg, self._close_overlay))
+        self._close_overlay()
+        pg = get_active_game()
+        if pg is None:
+            self.notify("No active game.", title="Equip")
+            return
+        from tui.screens.equip_overlay import EquipOverlay
+        self.mount(EquipOverlay(pg, self._close_overlay))
 
     def _open_party_overlay(self) -> None:
-        if self._overlay_active():
-            self._close_overlay()
-            return
+        self._close_overlay()
         pg = get_active_game()
         if pg is None:
             self.notify("No active game.", title="Party")
@@ -313,9 +324,7 @@ class InventoryScreen(BaseScreen):
         self.mount(PartyOverlay(pg, self._close_overlay))
 
     def _open_abilities_overlay(self) -> None:
-        if self._overlay_active():
-            self._close_overlay()
-            return
+        self._close_overlay()
         pg = get_active_game()
         if pg is None:
             self.notify("No active game.", title="Abilities")
@@ -332,9 +341,7 @@ class InventoryScreen(BaseScreen):
         if pg is None:
             self.notify("No active game.", title="Monster Log")
             return
-        if self._overlay_active():
-            self._close_overlay()
-            return
+        self._close_overlay()
         from tui.screens.monster_log_overlay import MonsterLogOverlay
         self.mount(MonsterLogOverlay(pg, self._close_overlay))
 
@@ -346,16 +353,12 @@ class InventoryScreen(BaseScreen):
         if getattr(pg, "npc_log_locked", True):
             self.notify("The NPC log has not been unlocked yet.", title="NPC Log")
             return
-        if self._overlay_active():
-            self._close_overlay()
-            return
+        self._close_overlay()
         from tui.screens.npc_log_overlay import NPCLogOverlay
         self.mount(NPCLogOverlay(pg, self._close_overlay))
 
     def _open_city_log_overlay(self) -> None:
-        if self._overlay_active():
-            self._close_overlay()
-            return
+        self._close_overlay()
         pg = get_active_game()
         if pg is None:
             self.notify("No active game.", title="City Log")
@@ -424,21 +427,16 @@ class InventoryScreen(BaseScreen):
 
         if self._overlay_active():
             self._close_overlay()
-            return
         from tui.screens.save_overlay import SaveOverlay
         self.mount(SaveOverlay(pg, self._close_overlay))
 
     def _open_load_overlay(self) -> None:
-        if self._overlay_active():
-            self._close_overlay()
-            return
+        self._close_overlay()
         from tui.screens.load_overlay import LoadOverlay
         self.mount(LoadOverlay(self._close_overlay))
 
     def _open_dungeon_log_overlay(self) -> None:
-        if self._overlay_active():
-            self._close_overlay()
-            return
+        self._close_overlay()
         pg = get_active_game()
         if pg is None:
             self.notify("No active game.", title="Dungeon Log")
@@ -455,6 +453,23 @@ class InventoryScreen(BaseScreen):
             self.app.go_back()
 
     # ── navigation ────────────────────────────────────────────────────────────
+
+    @on(CharacterCard.CardClicked)
+    def _on_card_clicked(self, event: CharacterCard.CardClicked) -> None:
+        """Click a character card to select it — no focus change."""
+        pg = get_active_game()
+        if pg is None:
+            return
+        characters = list(getattr(pg, "characters", []))
+        # Convert display slot to absolute index
+        absolute = self._offset + event.slot
+        if absolute >= len(characters):
+            return
+        if absolute == self._selected:
+            return  # already selected, nothing to do
+        self._selected = absolute
+        self._refresh_cards()
+        self._notify_overlays_player_changed()
 
     def action_move_left(self) -> None:
         pg = get_active_game()

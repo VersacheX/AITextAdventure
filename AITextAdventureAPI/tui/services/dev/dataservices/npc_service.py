@@ -353,12 +353,16 @@ def _build_npc_tree(const: Any) -> List[NpcGroupNode]:
                 continue
             cid    = str(npc.get("npc_id", "?"))
             record = _make_npc_record(npc, "NPC", "", location_index, city_info_index)
+            psych  = npc.get("psychology") or {}
+            ennea  = npc.get("enneagram")  or {}
             npcs.append(NpcRecordNode(
                 npc_id=cid,
                 label=str(npc.get("name", cid)),
                 group_id="all",
                 source_group="",
                 record=record,
+                mbti=str(psych.get("mbti", "") or ""),
+                enneagram=str(ennea.get("enneagram_type", "") or ""),
             ))
         if not npcs:
             return []
@@ -383,12 +387,16 @@ def _build_npc_tree(const: Any) -> List[NpcGroupNode]:
                 )
             seen_ids[cid] = group_key
             record = _make_npc_record(npc, subtitle, group_key, location_index, city_info_index)
+            psych  = npc.get("psychology") or {}
+            ennea  = npc.get("enneagram")  or {}
             npc_nodes.append(NpcRecordNode(
                 npc_id=cid,
                 label=str(npc.get("name", cid)),
                 group_id=group_key,
                 source_group=group_label,
                 record=record,
+                mbti=str(psych.get("mbti", "") or ""),
+                enneagram=str(ennea.get("enneagram_type", "") or ""),
             ))
 
         if npc_nodes:
