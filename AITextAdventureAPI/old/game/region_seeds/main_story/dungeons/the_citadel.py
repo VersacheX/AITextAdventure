@@ -49,7 +49,7 @@ HOSTILE_SEEDS = [
         'basic_attack': 'power cleave', 'strong_attack': 'annihilation protocol', 'player_abilities': [],
         'base_str': 70, 'base_dex': 40, 'base_con': 70, 'base_int': 20, 'base_hp': 9000, 'base_ap': 120,
         'str_per_level': 10, 'dex_per_level': 5, 'con_per_level': 10, 'int_per_level': 2,
-        'resistances': ['physical', 'fire', 'ice', 'electric'], 'immunities': ['stun', 'petrify', 'fear'], 'weaknesses': []
+        'resistances': ['physical', 'fire', 'ice', 'electric'], 'immunities': ['stun', 'petrify'], 'weaknesses': []
     }
 ]
 
@@ -78,7 +78,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'love bomb', 'strong_attack': 'unconditional acceptance', 'player_abilities': ['void_refraction', 'the_darkness_consuming', 'identity_collapse', 'you_can_be_me'],
         'base_str': 50, 'base_dex': 70, 'base_con': 60, 'base_int': 75, 'base_hp': 80000, 'base_ap': 1200,
         'str_per_level': 6, 'dex_per_level': 9, 'con_per_level': 7, 'int_per_level': 9,
-        'resistances': ['light', 'air'], 'immunities': ['fear', 'sleep'], 'weaknesses': ['dark']
+        'resistances': ['light', 'air'], 'immunities': ['sleep'], 'weaknesses': ['dark']
     },
     {
         'id': 'pageant_boss_final', 'name': 'Pageant', 'hostile_type': 'spirit', 'min_spawn_level': 78, 'role': 'hazard', 'rarity': 'notfound',

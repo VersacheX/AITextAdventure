@@ -26,7 +26,7 @@ HOSTILE_SEEDS = [
 		'basic_attack': 'distorted image', 'strong_attack': 'looping recall', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
 		'base_str': 30, 'base_dex': 48, 'base_con': 32, 'base_int': 65, 'base_hp': 3000, 'base_ap': 150,
 		'str_per_level': 3, 'dex_per_level': 6, 'con_per_level': 3, 'int_per_level': 8,
-		'resistances': ['dark', 'ice'], 'immunities': ['fear', 'sleep'], 'weaknesses': ['light', 'fire']
+		'resistances': ['dark', 'ice'], 'immunities': ['sleep'], 'weaknesses': ['light', 'fire']
 	},
 	{
 		'id': 'loop_shambler', 'name': 'Loop Shambler', 'hostile_type': 'undead', 'min_spawn_level': 95, 'role': 'damage', 'rarity': 'uncommon',
@@ -50,7 +50,7 @@ HOSTILE_SEEDS = [
 		'basic_attack': 'phantom strike', 'strong_attack': 'echo collapse', 'player_abilities': ['dark_skill_lv1_creeping_strike'],
 		'base_str': 58, 'base_dex': 68, 'base_con': 50, 'base_int': 48, 'base_hp': 6500, 'base_ap': 140,
 		'str_per_level': 7, 'dex_per_level': 8, 'con_per_level': 6, 'int_per_level': 5,
-		'resistances': ['dark', 'ice', 'physical'], 'immunities': ['stun', 'fear'], 'weaknesses': ['light']
+		'resistances': ['dark', 'ice', 'physical'], 'immunities': ['stun'], 'weaknesses': ['light']
 	}
 ]
 

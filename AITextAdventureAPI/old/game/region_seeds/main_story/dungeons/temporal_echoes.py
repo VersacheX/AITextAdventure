@@ -26,7 +26,7 @@ HOSTILE_SEEDS = [
 		'basic_attack': 'hollow resonance', 'strong_attack': 'emptiness wave', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
 		'base_str': 35, 'base_dex': 40, 'base_con': 35, 'base_int': 45, 'base_hp': 3000, 'base_ap': 110,
 		'str_per_level': 4, 'dex_per_level': 5, 'con_per_level': 4, 'int_per_level': 6,
-		'resistances': ['dark'], 'immunities': ['fear'], 'weaknesses': ['light']
+		'resistances': ['dark'], 'immunities': ['stun'], 'weaknesses': ['light']
 	},
 	{
 		'id': 'temporal_rift', 'name': 'Temporal Rift', 'hostile_type': 'aberration', 'min_spawn_level': 80, 'role': 'damage', 'rarity': 'uncommon',

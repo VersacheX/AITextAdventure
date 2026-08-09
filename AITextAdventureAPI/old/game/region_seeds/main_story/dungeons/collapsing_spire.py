@@ -49,7 +49,7 @@ HOSTILE_SEEDS = [
 		'basic_attack': 'mandatory destruction', 'strong_attack': 'final verdict', 'player_abilities': ['earth_technique_lv1_armor_up'],
 		'base_str': 78, 'base_dex': 28, 'base_con': 75, 'base_int': 18, 'base_hp': 9000, 'base_ap': 115,
 		'str_per_level': 10, 'dex_per_level': 3, 'con_per_level': 10, 'int_per_level': 2,
-		'resistances': ['physical', 'fire', 'electric', 'earth'], 'immunities': ['stun', 'petrify', 'fear'], 'weaknesses': []
+		'resistances': ['physical', 'fire', 'electric', 'earth'], 'immunities': ['stun', 'petrify'], 'weaknesses': []
 	}
 ]
 
@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
 		'player_abilities': ['absolute_destruction', 'calamity', 'eternal_nerve', 'scheduled_obliteration'],
 		'base_str': 85, 'base_dex': 40, 'base_con': 90, 'base_int': 60, 'base_hp': 180000, 'base_ap': 1000,
 		'str_per_level': 11, 'dex_per_level': 5, 'con_per_level': 11, 'int_per_level': 7,
-		'resistances': ['physical', 'fire', 'electric', 'earth', 'ice'], 'immunities': ['stun', 'petrify', 'confuse', 'fear', 'sleep'], 'weaknesses': ['dark']
+		'resistances': ['physical', 'fire', 'electric', 'earth', 'ice'], 'immunities': ['stun', 'petrify', 'confuse', 'sleep'], 'weaknesses': ['dark']
 	}
 ]
 

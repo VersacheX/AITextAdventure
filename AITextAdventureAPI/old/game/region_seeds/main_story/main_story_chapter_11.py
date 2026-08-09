@@ -854,6 +854,9 @@ TASKS = [
             { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'festival_of_delight', 'location': 'region_open_area' }}
         ],
         'task_complete_events': [
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'festival_of_delight', 'item_id': 'watch_of_perpetuation', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'festival_of_delight', 'item_id': 'morale_blade', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'festival_of_delight', 'item_id': 'stagelight_crown', 'location': 'treasure_room' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch11_narrator_boss_intro' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'revelry', 'dialog_id': 'revelry_ch11_intro' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rapture', 'dialog_id': 'rapture_ch11_intro' }},
@@ -953,6 +956,9 @@ TASKS = [
             { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'nihilist_camp', 'location': 'region_open_area' }}
         ],
         'task_complete_events': [
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'nihilist_camp', 'item_id': 'ring_of_eternal_flame', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'nihilist_camp', 'item_id': 'encore_blades', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'nihilist_camp', 'item_id': 'hearthroot_robe', 'location': 'treasure_room' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'nihilist_leader', 'dialog_id': 'nihilist_leader_ch11_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch11_to_nihilist' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch11_to_nihilist' }},

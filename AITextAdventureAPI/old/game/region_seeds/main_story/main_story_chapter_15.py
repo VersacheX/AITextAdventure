@@ -917,6 +917,9 @@ TASKS = [
         'task_acquire_events': [
             {'event_type': 'create_npc', 'params': {'npc_id': 'pageant', 'location': None}},
             {'event_type': 'create_dungeon', 'params': {'dungeon_id': 'velvet_veil_nightclub', 'location': 'region_city_open_area'}},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'velvet_veil_nightclub', 'item_id': 'undying_oath_ring', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'velvet_veil_nightclub', 'item_id': 'mercy_staff', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'velvet_veil_nightclub', 'item_id': 'performer_coat', 'location': 'treasure_room' }},
         ],
         'task_complete_events': [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': None, 'dialog_id': 'narrator_ch15_velvet_veil'}},
@@ -1070,6 +1073,9 @@ TASKS = [
         'task_acquire_events': [
             {'event_type': 'create_npc', 'params': {'npc_id': 'prison_warden', 'location': None}},
             {'event_type': 'create_dungeon', 'params': {'dungeon_id': 'edicts_prison', 'location': 'region_city_open_area'}},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'edicts_prison', 'item_id': 'sovereign_emblem', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'edicts_prison', 'item_id': 'kindness_staff', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'edicts_prison', 'item_id': 'compassion_circlet', 'location': 'treasure_room' }},
         ],
         'task_complete_events': [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'prison_warden', 'dialog_id': 'warden_ch15_intro'}},

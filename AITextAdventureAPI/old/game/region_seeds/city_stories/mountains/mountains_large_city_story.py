@@ -895,7 +895,10 @@ TASKS += [
                     'dungeon_id': 'mountains_large_city_type_e_gearghost_dungeon',
                     'location': None
                 }
-            }
+            },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'mountains_large_city_type_e_gearghost_dungeon', 'item_id': 'ironfront_helm', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'mountains_large_city_type_e_gearghost_dungeon', 'item_id': 'vanguard_breastplate', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'mountains_large_city_type_e_gearghost_dungeon', 'item_id': 'march_cuirass', 'location': 'treasure_room' }},
         ],
         'task_complete_events': [
             {
@@ -1087,14 +1090,17 @@ TASKS += [
 			{
 				'event_type': 'create_dungeon',
 				'params': {
-					'dungeon_id': 'mountains_large_city_conduit_maw',
-					'location': 'region_open_area'
-				}
-			},
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'mountains_large_city_type_d_meet_conduit_echo'
+						'dungeon_id': 'mountains_large_city_conduit_maw',
+							'location': 'region_open_area'
+						}
+					},
+					{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'mountains_large_city_conduit_maw', 'item_id': 'mythic_mountains_small_dominion_edge', 'location': 'treasure_room' }},
+					{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'mountains_large_city_conduit_maw', 'item_id': 'command_greataxe', 'location': 'treasure_room' }},
+					{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'mountains_large_city_conduit_maw', 'item_id': 'ironwill_helm', 'location': 'treasure_room' }},
+					{
+						'event_type': 'award_task',
+						'params': {
+							'task_id': 'mountains_large_city_type_d_meet_conduit_echo'
 				}
 			},
 		]

@@ -799,7 +799,10 @@ TASKS += [
                     'dungeon_id': 'forest_mid_city_type_e_riftspark_dungeon',
                     'location': 'region_open_area'
                 }
-            }
+            },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'forest_mid_city_type_e_riftspark_dungeon', 'item_id': 'voltage_wrench', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'forest_mid_city_type_e_riftspark_dungeon', 'item_id': 'static_harness', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'forest_mid_city_type_e_riftspark_dungeon', 'item_id': 'cinder_robe', 'location': 'treasure_room' }},
         ],
         'task_complete_events': [
             {
@@ -1109,13 +1112,16 @@ TASKS += [
                     ]
                 }
             },
-            {
-                'event_type': 'create_dungeon',
-                'params': {
-                    'dungeon_id': 'forest_mid_city_type_d_lunarcask_shade_dungeon',
-                    'location': 'region_open_area'
-                }
-            },
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'forest_mid_city_type_d_lunarcask_shade_dungeon',
+					'location': 'region_open_area'
+				}
+			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'forest_mid_city_type_d_lunarcask_shade_dungeon', 'item_id': 'ledgerbrand_mace', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'forest_mid_city_type_d_lunarcask_shade_dungeon', 'item_id': 'warden_surcoat', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'forest_mid_city_type_d_lunarcask_shade_dungeon', 'item_id': 'schemer_circlet', 'location': 'treasure_room' }},
 			{
 				'event_type': 'award_task',
 				'params': {

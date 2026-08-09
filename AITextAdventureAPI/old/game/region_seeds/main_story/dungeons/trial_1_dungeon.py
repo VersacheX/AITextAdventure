@@ -25,7 +25,7 @@ HOSTILE_SEEDS = [
         'basic_attack': 'protocol enforcement', 'strong_attack': 'mandatory compliance', 'player_abilities': [],
         'base_str': 45, 'base_dex': 30, 'base_con': 55, 'base_int': 35, 'base_hp': 45000, 'base_ap': 300,
         'str_per_level': 5, 'dex_per_level': 3, 'con_per_level': 6, 'int_per_level': 4,
-        'resistances': ['physical', 'dark'], 'immunities': ['confuse', 'fear'], 'weaknesses': ['light']
+        'resistances': ['physical', 'dark'], 'immunities': ['confuse', 'stun'], 'weaknesses': ['light']
     },
     {
         'id': 'certainty_wraith', 'name': 'Certainty Wraith', 'hostile_type': 'undead', 'min_spawn_level': 96, 'role': 'damage', 'rarity': 'uncommon',
@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'lawful decree', 'strong_attack': 'absolute order', 'player_abilities': ['system_lockdown', 'rule_enforcement', 'procedural_inevitability'],
         'base_str': 55, 'base_dex': 35, 'base_con': 75, 'base_int': 60, 'base_hp': 350000, 'base_ap': 500,
         'str_per_level': 6, 'dex_per_level': 4, 'con_per_level': 8, 'int_per_level': 7,
-        'resistances': ['physical', 'dark'], 'immunities': ['confuse', 'stun', 'fear', 'silence'], 'weaknesses': ['light']
+        'resistances': ['physical', 'dark'], 'immunities': ['confuse', 'stun', 'silence'], 'weaknesses': ['light']
     },
     {
         'id': 'glamour_trial', 'name': 'Glamour', 'hostile_type': 'void_entity', 'min_spawn_level': 98, 'role': 'support', 'rarity': 'notfound',
@@ -79,7 +79,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'false serenity', 'strong_attack': 'manufactured peace', 'player_abilities': ['certainty_field', 'doubt_erasure', 'calm_enforcement'],
         'base_str': 40, 'base_dex': 45, 'base_con': 50, 'base_int': 70, 'base_hp': 280000, 'base_ap': 600,
         'str_per_level': 4, 'dex_per_level': 5, 'con_per_level': 5, 'int_per_level': 9,
-        'resistances': ['ice', 'dark'], 'immunities': ['confuse', 'fear', 'sleep'], 'weaknesses': ['light', 'fire']
+        'resistances': ['ice', 'dark'], 'immunities': ['confuse', 'sleep'], 'weaknesses': ['light', 'fire']
     },
     {
         'id': 'crux_trial', 'name': 'Crux', 'hostile_type': 'void_entity', 'min_spawn_level': 98, 'role': 'hazard', 'rarity': 'notfound',

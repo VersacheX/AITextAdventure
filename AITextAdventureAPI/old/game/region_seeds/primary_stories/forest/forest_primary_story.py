@@ -838,7 +838,10 @@ TASKS = [
                     'dungeon_id': 'marrowroot_lair',
                     'location': 'region_open_area'
                 }
-            }
+            },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'marrowroot_lair', 'item_id': 'wildroot_fangblade', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'marrowroot_lair', 'item_id': 'heartwood_carapace', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'marrowroot_lair', 'item_id': 'barkhide_helm', 'location': 'treasure_room' }},
         ],
         'task_complete_events': [
             {

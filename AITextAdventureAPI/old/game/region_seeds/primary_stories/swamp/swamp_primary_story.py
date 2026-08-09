@@ -513,7 +513,10 @@ TASKS = [
                     'dungeon_id': 'miregloom_lair',
                     'location': 'region_open_area'
                 }
-            }
+            },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'miregloom_lair', 'item_id': 'cursespark_engine_rod', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'miregloom_lair', 'item_id': 'mireforged_carapace', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'miregloom_lair', 'item_id': 'rotlens_goggles', 'location': 'treasure_room' }},
         ],
         'task_complete_events': [
             {

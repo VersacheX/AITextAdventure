@@ -824,10 +824,13 @@ TASKS += [
 			{
 				'event_type': 'create_dungeon',
 				'params': {
-					'dungeon_id': 'windcarve_den',
-					'location': 'region_open_area'
-				}
-			},
+						'dungeon_id': 'windcarve_den',
+							'location': 'region_open_area'
+						}
+					},
+					{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'windcarve_den', 'item_id': 'mythic_grassland_large_windcarvers_mantle', 'location': 'treasure_room' }},
+					{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'windcarve_den', 'item_id': 'omen_staff', 'location': 'treasure_room' }},
+					{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'windcarve_den', 'item_id': 'sovereignty_circlet', 'location': 'treasure_room' }},
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -1026,6 +1029,9 @@ TASKS += [
 		'type': 'gated',
 		'task_acquire_events': [
 			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'serenes_wind_vault', 'location': 'region_open_area' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'serenes_wind_vault', 'item_id': 'sash_of_vitality', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'serenes_wind_vault', 'item_id': 'convergence_rod', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'serenes_wind_vault', 'item_id': 'epochthread_robe', 'location': 'treasure_room' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_b_echo_resonance' }},
 			{ 'event_type': 'complete_task', 'params': { 'task_id': 'grassland_large_city_b_void_gauntlet' }},
 		],

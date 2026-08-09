@@ -145,7 +145,7 @@ BOSS_HOSTILES: List[Dict] = [
         'base_hp': 22000, 'base_ap': 380,
         'str_per_level': 4, 'dex_per_level': 4, 'con_per_level': 4, 'int_per_level': 5,
         'resistances': ['dark', 'earth', 'physical'],
-        'immunities': ['sleep', 'confuse', 'fear', 'stun'],
+        'immunities': ['sleep', 'confuse', 'stun'],
         'weaknesses': ['light', 'water'],
     },
 ]

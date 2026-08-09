@@ -41,7 +41,7 @@ HOSTILE_SEEDS = [
 		'basic_attack': 'blink bite', 'strong_attack': 'recursive lunge', 'player_abilities': [],
 		'base_str': 52, 'base_dex': 65, 'base_con': 42, 'base_int': 22, 'base_hp': 4200, 'base_ap': 115,
 		'str_per_level': 6, 'dex_per_level': 8, 'con_per_level': 5, 'int_per_level': 2,
-		'resistances': ['ice', 'dark'], 'immunities': ['fear'], 'weaknesses': ['light']
+		'resistances': ['ice', 'dark'], 'immunities': ['stun'], 'weaknesses': ['light']
 	},
 	{
 		'id': 'impossibility_engine', 'name': 'Impossibility Engine', 'hostile_type': 'construct', 'min_spawn_level': 87, 'role': 'hazard', 'rarity': 'superrare',
@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
 		'player_abilities': ['demonic_fury', 'infuriating_revelation', 'they_arent_who_you_are', 'paradox_touch'],
 		'base_str': 55, 'base_dex': 60, 'base_con': 55, 'base_int': 90, 'base_hp': 110000, 'base_ap': 1300,
 		'str_per_level': 7, 'dex_per_level': 7, 'con_per_level': 7, 'int_per_level': 11,
-		'resistances': ['dark', 'electric', 'ice'], 'immunities': ['confuse', 'fear', 'sleep'], 'weaknesses': ['light']
+		'resistances': ['dark', 'electric', 'ice'], 'immunities': ['confuse', 'sleep'], 'weaknesses': ['light']
 	},
 	{
 		'id': 'crux_boss', 'name': 'Crux', 'hostile_type': 'aberration', 'min_spawn_level': 87, 'role': 'damage', 'rarity': 'notfound',

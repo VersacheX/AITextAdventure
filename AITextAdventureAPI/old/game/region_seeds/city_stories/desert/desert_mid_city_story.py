@@ -739,6 +739,9 @@ TASKS += [
 				}
 			},
 			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'desert_mid_ink_sanctum', 'location': 'region_open_area' } },
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'desert_mid_ink_sanctum', 'item_id': 'mythic_desert_small_scrapwrights_edge', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'desert_mid_ink_sanctum', 'item_id': 'regency_rod', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'desert_mid_ink_sanctum', 'item_id': 'acquisition_visor', 'location': 'treasure_room' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'archivist_warden_threx', 'standing_text': ["The Ink Specter in the Inkwell Depths carries the matching frequency.", "Dissolve the Specter correctly and the vial's compound crystallizes.", "Mira can set crystallized identity-ink into an accessory unlike any other."] } },
 			{
 				'event_type': 'award_task',
@@ -909,6 +912,9 @@ TASKS += [
 		'type': 'gated',
 		'task_acquire_events': [
 			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'zaruuns_sanctum', 'location': 'region_open_area' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'zaruuns_sanctum', 'item_id': 'voidborn_seal', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'zaruuns_sanctum', 'item_id': 'codex_blade', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'zaruuns_sanctum', 'item_id': 'cipher_hood', 'location': 'treasure_room' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_b_shadow_returns' }},
 			{ 'event_type': 'complete_task', 'params': { 'task_id': 'desert_mid_city_b_void_gauntlet' }},
 		],

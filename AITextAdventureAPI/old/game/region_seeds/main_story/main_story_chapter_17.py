@@ -627,7 +627,10 @@ TASKS = [
 		'to_id': 'displacer_gargantuan',
 		'task_acquire_events': [
 			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'displacer_gargantuan', 'location': None }},
-			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'mountain_ruin', 'location': 'region_open_area' }}
+			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'mountain_ruin', 'location': 'region_open_area' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'mountain_ruin', 'item_id': 'rallying_bracers', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'mountain_ruin', 'item_id': 'rallying_crown', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'mountain_ruin', 'item_id': 'brightpath_sandals', 'location': 'treasure_room' }},
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch17_gargantuan_entrance' }},
@@ -704,6 +707,9 @@ TASKS = [
 			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'paradox', 'location': None }},
 			{ 'event_type': 'show_npc', 'params': { 'npc_id': 'crux', 'location': None }},
 			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'punishment_engines', 'location': 'region_city_open_area' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'punishment_engines', 'item_id': 'prophecy_remnant', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'punishment_engines', 'item_id': 'beacon_staff', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'punishment_engines', 'item_id': 'brightcall_crown', 'location': 'treasure_room' }},
 			{ 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'punishment_engines', 'location': 'entrance' }}
 		],
 		'task_complete_events': [

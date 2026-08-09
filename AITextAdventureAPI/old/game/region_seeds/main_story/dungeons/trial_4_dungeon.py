@@ -49,7 +49,7 @@ HOSTILE_SEEDS = [
         'basic_attack': 'predicted assault', 'strong_attack': 'scripted outcome', 'player_abilities': [],
         'base_str': 60, 'base_dex': 62, 'base_con': 55, 'base_int': 58, 'base_hp': 54000, 'base_ap': 380,
         'str_per_level': 7, 'dex_per_level': 8, 'con_per_level': 6, 'int_per_level': 7,
-        'resistances': ['physical', 'electric'], 'immunities': ['stun', 'confuse', 'fear'], 'weaknesses': ['light']
+        'resistances': ['physical', 'electric'], 'immunities': ['stun', 'confuse'], 'weaknesses': ['light']
     }
 ]
 
@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'perfect composure', 'strong_attack': 'audience judgment', 'player_abilities': ['mask_of_expectation', 'crushing_reputation', 'obligation_chain'],
         'base_str': 50, 'base_dex': 70, 'base_con': 55, 'base_int': 62, 'base_hp': 340000, 'base_ap': 640,
         'str_per_level': 6, 'dex_per_level': 9, 'con_per_level': 6, 'int_per_level': 8,
-        'resistances': ['air', 'light'], 'immunities': ['confuse', 'fear'], 'weaknesses': ['dark', 'earth']
+        'resistances': ['air', 'light'], 'immunities': ['confuse', 'stun'], 'weaknesses': ['dark', 'earth']
     },
     {
         'id': 'oracle_trial', 'name': 'Oracle', 'hostile_type': 'void_entity', 'min_spawn_level': 101, 'role': 'hazard', 'rarity': 'notfound',
@@ -87,7 +87,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'whispered doubt', 'strong_attack': 'belief collapse', 'player_abilities': ['intrusive_truth', 'self_sabotage', 'unwanted_knowing'],
         'base_str': 45, 'base_dex': 55, 'base_con': 58, 'base_int': 75, 'base_hp': 330000, 'base_ap': 680,
         'str_per_level': 5, 'dex_per_level': 6, 'con_per_level': 7, 'int_per_level': 9,
-        'resistances': ['dark', 'poison'], 'immunities': ['confuse', 'silence', 'fear'], 'weaknesses': ['light']
+        'resistances': ['dark', 'poison'], 'immunities': ['confuse', 'silence', 'stun'], 'weaknesses': ['light']
     }
 ]
 

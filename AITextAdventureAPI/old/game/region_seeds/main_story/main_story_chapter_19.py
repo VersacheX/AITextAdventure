@@ -607,7 +607,12 @@ TASKS = [
 		'to_id': 'twisted_darkwood',
 		'task_acquire_events': [
 			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'twisted_darkwood', 'location': None }},
-			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'rotwood', 'location': 'region_open_area' }}
+			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'rotwood', 'location': 'region_open_area' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rotwood', 'item_id': 'archive_shard', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rotwood', 'item_id': 'collapse_staff', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rotwood', 'item_id': 'inspirator_robe', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rotwood', 'item_id': 'reverie_hood', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rotwood', 'item_id': 'folklore_robe', 'location': 'treasure_room' }},
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch19_twisted_darkwood_approach' }},

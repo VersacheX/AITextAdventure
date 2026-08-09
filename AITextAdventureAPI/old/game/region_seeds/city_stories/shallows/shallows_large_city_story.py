@@ -551,7 +551,10 @@ TASKS += [
                     'dungeon_id': 'shallows_large_city_stormtide_vault',
                     'location': 'region_open_area'
                 }
-            }
+            },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'shallows_large_city_stormtide_vault', 'item_id': 'mending_scepter', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'shallows_large_city_stormtide_vault', 'item_id': 'wavechaser_boots', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'shallows_large_city_stormtide_vault', 'item_id': 'corsair_bracers', 'location': 'treasure_room' }},
         ],
         'task_complete_events': [
             {
@@ -841,24 +844,27 @@ TASKS += [
 					'npc_id': 'undertow_voice',
 					'location': None
 				}
+				},
+					{
+						'event_type': 'create_dungeon',
+						'params': {
+							'dungeon_id': 'shallows_large_city_undertow_vault',
+							'location': 'region_open_area'
+						}
+					},
+					{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'shallows_large_city_undertow_vault', 'item_id': 'restoration_crook', 'location': 'treasure_room' }},
+					{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'shallows_large_city_undertow_vault', 'item_id': 'timelock_sandals', 'location': 'treasure_room' }},
+					{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'shallows_large_city_undertow_vault', 'item_id': 'rigging_bracers', 'location': 'treasure_room' }},
+					{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'undertow_voice', 'standing_text': [ "The harbor water darkens around the vault entrance. A low murmur rises — dozens of voices overlapping into one. The compass has drawn it to the surface." ] } },
+					{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'tide_seer_marenna', 'standing_text': [ "The tide scars have gone quiet. The Vault is empty now. Whatever bearings those sailors carried — they can rest." ] } },
+					{
+						'event_type': 'award_task',
+						'params': {
+							'task_id': 'shallows_large_city_type_d_meet_undertow_voice'
+						}
+					},
+				]
 			},
-			{
-				'event_type': 'create_dungeon',
-				'params': {
-					'dungeon_id': 'shallows_large_city_undertow_vault',
-					'location': 'region_open_area'
-				}
-			},
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'undertow_voice', 'standing_text': [ "The harbor water darkens around the vault entrance. A low murmur rises — dozens of voices overlapping into one. The compass has drawn it to the surface." ] } },
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'tide_seer_marenna', 'standing_text': [ "The tide scars have gone quiet. The Vault is empty now. Whatever bearings those sailors carried — they can rest." ] } },
-			{
-				'event_type': 'award_task',
-				'params': {
-					'task_id': 'shallows_large_city_type_d_meet_undertow_voice'
-				}
-			},
-		]
-	},
 
 	# D-2 — Meet the Undertow Voice (boss intro)
 	{

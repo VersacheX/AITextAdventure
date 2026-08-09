@@ -27,7 +27,7 @@ HOSTILE_SEEDS = [
 		'basic_attack': 'pristine pain', 'strong_attack': 'perfect preservation', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
 		'base_str': 38, 'base_dex': 45, 'base_con': 40, 'base_int': 65, 'base_hp': 3500, 'base_ap': 150,
 		'str_per_level': 4, 'dex_per_level': 5, 'con_per_level': 4, 'int_per_level': 8,
-		'resistances': ['dark', 'ice'], 'immunities': ['fear', 'sleep'], 'weaknesses': ['light', 'fire']
+		'resistances': ['dark', 'ice'], 'immunities': ['sleep'], 'weaknesses': ['light', 'fire']
 	},
 	{
 		'id': 'archival_specter', 'name': 'Archival Specter', 'hostile_type': 'spirit', 'min_spawn_level': 100, 'role': 'damage', 'rarity': 'uncommon',
@@ -51,7 +51,7 @@ HOSTILE_SEEDS = [
 		'basic_attack': 'classification strike', 'strong_attack': 'final indexing', 'player_abilities': ['earth_technique_lv1_armor_up'],
 		'base_str': 68, 'base_dex': 45, 'base_con': 72, 'base_int': 50, 'base_hp': 9000, 'base_ap': 140,
 		'str_per_level': 8, 'dex_per_level': 5, 'con_per_level': 9, 'int_per_level': 6,
-		'resistances': ['physical', 'dark', 'ice'], 'immunities': ['stun', 'petrify', 'fear'], 'weaknesses': ['fire']
+		'resistances': ['physical', 'dark', 'ice'], 'immunities': ['stun', 'petrify'], 'weaknesses': ['fire']
 	}
 ]
 
@@ -72,7 +72,7 @@ BOSS_HOSTILES = [
 		'basic_attack': 'written verdict', 'strong_attack': 'prophetic collapse', 'player_abilities': ['inescapable_prophecy', 'vision_of_ruin', 'fate_lock'],
 		'base_str': 55, 'base_dex': 65, 'base_con': 58, 'base_int': 100, 'base_hp': 150000, 'base_ap': 1500,
 		'str_per_level': 6, 'dex_per_level': 8, 'con_per_level': 7, 'int_per_level': 12,
-		'resistances': ['dark', 'ice', 'electric'], 'immunities': ['fear', 'confuse', 'sleep'], 'weaknesses': ['light', 'fire']
+		'resistances': ['dark', 'ice', 'electric'], 'immunities': ['confuse', 'sleep'], 'weaknesses': ['light', 'fire']
 	},
 	{
 		'id': 'reliquary_boss_1', 'name': 'Reliquary', 'hostile_type': 'aberration', 'min_spawn_level': 95, 'role': 'hazard', 'rarity': 'notfound',

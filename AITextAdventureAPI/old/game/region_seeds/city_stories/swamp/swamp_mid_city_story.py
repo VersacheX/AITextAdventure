@@ -486,7 +486,10 @@ TASKS += [
 					'dungeon_id': 'swamp_mid_city_oathrot_channel',
 					'location': 'region_open_area'
 				}
-			}
+			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'swamp_mid_city_oathrot_channel', 'item_id': 'mythic_swamp_large_bonedrown_reliquary', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'swamp_mid_city_oathrot_channel', 'item_id': 'dominion_halberd', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'swamp_mid_city_oathrot_channel', 'item_id': 'void_court_robe', 'location': 'treasure_room' }},
 		],
 		'task_complete_events': [
 			{

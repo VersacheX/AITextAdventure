@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'optimized failure', 'strong_attack': 'efficient collapse', 'player_abilities': ['systematic_destruction', 'refinement_loop', 'inevitable_failure'],
         'base_str': 70, 'base_dex': 62, 'base_con': 68, 'base_int': 65, 'base_hp': 380000, 'base_ap': 600,
         'str_per_level': 9, 'dex_per_level': 8, 'con_per_level': 9, 'int_per_level': 8,
-        'resistances': ['physical', 'dark', 'fire'], 'immunities': ['stun', 'petrify', 'fear'], 'weaknesses': ['light']
+        'resistances': ['physical', 'dark', 'fire'], 'immunities': ['stun', 'petrify'], 'weaknesses': ['light']
     },
     {
         'id': 'reliquary_trial', 'name': 'Reliquary', 'hostile_type': 'void_entity', 'min_spawn_level': 102, 'role': 'hazard', 'rarity': 'notfound',

@@ -737,6 +737,9 @@ TASKS += [
 					'location': 'region_open_area'
 				}
 			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'mountains_mid_emberwake_cavern', 'item_id': 'emberstitch_coat', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'mountains_mid_emberwake_cavern', 'item_id': 'ironband_gauntlets', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'mountains_mid_emberwake_cavern', 'item_id': 'march_sabatons', 'location': 'treasure_room' }},
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -913,6 +916,9 @@ TASKS += [
 		'type': 'gated',
 		'task_acquire_events': [
 			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'rokhulls_fracture_core', 'location': 'region_open_area' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rokhulls_fracture_core', 'item_id': 'fracture_core', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rokhulls_fracture_core', 'item_id': 'cryptseal_blade', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rokhulls_fracture_core', 'item_id': 'stormrider_helm', 'location': 'treasure_room' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_b_fracture_echo' }},
 			{ 'event_type': 'complete_task', 'params': { 'task_id': 'mountains_mid_city_b_void_gauntlet' }},
 		],

@@ -497,7 +497,10 @@ TASKS = [
                     'dungeon_id': 'aeriola_lair',
                     'location': 'region_open_area'
                 }
-            }
+            },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'aeriola_lair', 'item_id': 'sandglass_staff', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'aeriola_lair', 'item_id': 'glacial_breastplate', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'aeriola_lair', 'item_id': 'glacial_vambraces_mk2', 'location': 'treasure_room' }},
         ],
         'task_complete_events': [
             {

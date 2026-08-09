@@ -760,6 +760,9 @@ TASKS += [
 					'location': 'region_open_area'
 				}
 			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'charmroot_den', 'item_id': 'mythic_grassland_small_folklore_hollow_talisman', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'charmroot_den', 'item_id': 'phantom_blade', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'charmroot_den', 'item_id': 'ember_crown', 'location': 'treasure_room' }},
 			{
 				'event_type': 'award_task',
 				'params': {

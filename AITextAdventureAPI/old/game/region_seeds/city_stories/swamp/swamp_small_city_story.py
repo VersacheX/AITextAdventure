@@ -628,15 +628,18 @@ TASKS = [
                     'location': None
                 }
             },
-            {
-                'event_type': 'create_dungeon',
-                'params': {
-                    'dungeon_id': 'murkchannel_run',
-                    'location': 'region_open_area'
-                }
-            }
-        ],
-        'task_complete_events': [
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'murkchannel_run',
+					'location': 'region_open_area'
+				}
+			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'murkchannel_run', 'item_id': 'dominion_mantle', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'murkchannel_run', 'item_id': 'current_gloves', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'murkchannel_run', 'item_id': 'siege_sabatons', 'location': 'treasure_room' }},
+		],
+		'task_complete_events': [
             {
                 'event_type': 'initiate_dialog',
                 'params': {
@@ -671,14 +674,17 @@ TASKS = [
                     'location': None
                 }
             },
-            {
-                'event_type': 'create_dungeon',
-                'params': {
-                    'dungeon_id': 'rotfen_hideaway',
-                    'location': 'region_open_area'
-                }
-            }
-        ],
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'rotfen_hideaway',
+					'location': 'region_open_area'
+				}
+			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rotfen_hideaway', 'item_id': 'mythic_swamp_small_rotfen_dredge_blade', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rotfen_hideaway', 'item_id': 'phantom_edge', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rotfen_hideaway', 'item_id': 'seer_veil', 'location': 'treasure_room' }},
+		],
         'task_complete_events': [
             {
                 'event_type': 'initiate_dialog',
@@ -1027,7 +1033,10 @@ TASKS += [
 					'dungeon_id': 'ghost_hideaway',
 					'location': 'region_open_area'
 				}
-			}
+			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'ghost_hideaway', 'item_id': 'saltwind_leathers', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'ghost_hideaway', 'item_id': 'ledger_bracers', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'ghost_hideaway', 'item_id': 'archive_coat', 'location': 'treasure_room' }},
 		],
 		'task_complete_events': [
 			{

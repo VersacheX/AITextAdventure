@@ -798,6 +798,9 @@ TASKS = [
                     'location': 'region_open_area'
                 }
             },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rokhuld_lair', 'item_id': 'corebreaker_hammer', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rokhuld_lair', 'item_id': 'forgeplate_harness', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rokhuld_lair', 'item_id': 'coresight_visor', 'location': 'treasure_room' }},
             {
                 'event_type': 'create_npc',
                 'params': {

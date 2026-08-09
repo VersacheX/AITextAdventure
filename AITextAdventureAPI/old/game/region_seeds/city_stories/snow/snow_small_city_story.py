@@ -664,7 +664,10 @@ TASKS += [
 					'dungeon_id': 'stormhollow_voice_1',
 					'location': 'region_open_area'
 				}
-			}
+			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'stormhollow_voice_1', 'item_id': 'wardens_claymore', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'stormhollow_voice_1', 'item_id': 'command_plate', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'stormhollow_voice_1', 'item_id': 'glacial_crown', 'location': 'treasure_room' }},
 
 		],
 		'task_complete_events': [

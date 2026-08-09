@@ -580,6 +580,9 @@ TASKS += [
 					'location': 'region_open_area'
 				}
 			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'relicmire_sump', 'item_id': 'aurora_staff', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'relicmire_sump', 'item_id': 'fieldmedic_wrap', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'relicmire_sump', 'item_id': 'breakneck_boots', 'location': 'treasure_room' }},
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -786,6 +789,9 @@ TASKS += [
 		'type': 'gated',
 		'task_acquire_events': [
 			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'miregloom_resurrection_pit', 'location': 'region_open_area' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'miregloom_resurrection_pit', 'item_id': 'rotwood_heartstone', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'miregloom_resurrection_pit', 'item_id': 'mending_staff', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'miregloom_resurrection_pit', 'item_id': 'caretaker_hood', 'location': 'treasure_room' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_b_miregloom_stirs' }},
 			{ 'event_type': 'complete_task', 'params': { 'task_id': 'swamp_large_city_b_void_gauntlet' }},
 		],

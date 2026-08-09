@@ -510,15 +510,18 @@ TASKS = [
                     'location': None
                 }
             },
-            {
-                'event_type': 'create_dungeon',
-                'params': {
-                    'dungeon_id': 'fogwhisper_inlet',
-                    'location': 'region_open_area'
-                }
-            }
-        ],
-        'task_complete_events': [
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'fogwhisper_inlet',
+					'location': 'region_open_area'
+				}
+			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'fogwhisper_inlet', 'item_id': 'mythic_shallows_large_tidecleaver', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'fogwhisper_inlet', 'item_id': 'riverwarden_vestment', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'fogwhisper_inlet', 'item_id': 'tidecaller_veil', 'location': 'treasure_room' }},
+		],
+		'task_complete_events': [
             {
                 'event_type': 'initiate_dialog',
                 'params': {
@@ -553,15 +556,18 @@ TASKS = [
                     'location': None
                 }
             },
-            {
-                'event_type': 'create_dungeon',
-                'params': {
-                    'dungeon_id': 'coveveil_passage',
-                    'location': 'region_open_area'
-                }
-            }
-        ],
-        'task_complete_events': [
+			{
+				'event_type': 'create_dungeon',
+				'params': {
+					'dungeon_id': 'coveveil_passage',
+					'location': 'region_open_area'
+				}
+			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'coveveil_passage', 'item_id': 'mythic_shallows_small_tidecaller_edge', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'coveveil_passage', 'item_id': 'flameheart_staff', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'coveveil_passage', 'item_id': 'voidmask', 'location': 'treasure_room' }},
+		],
+		'task_complete_events': [
             {
                 'event_type': 'initiate_dialog',
                 'params': {
@@ -762,6 +768,9 @@ TASKS += [
 		'type': 'gated',
 		'task_acquire_events': [
 			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'uulthars_tidal_maw', 'location': 'region_open_area' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'uulthars_tidal_maw', 'item_id': 'memory_shard', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'uulthars_tidal_maw', 'item_id': 'tiderunner_blades', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'uulthars_tidal_maw', 'item_id': 'hourglass_veil', 'location': 'treasure_room' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_b_tide_wrong' }},
 			{ 'event_type': 'complete_task', 'params': { 'task_id': 'shallows_small_city_b_void_gauntlet' }},
 		],

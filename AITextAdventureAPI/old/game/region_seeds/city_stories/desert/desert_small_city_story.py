@@ -792,7 +792,10 @@ TASKS += [
                     'dungeon_id': 'desert_small_city_signal_relay',
                     'location': 'region_open_area'
                 }
-            }
+            },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'desert_small_city_signal_relay', 'item_id': 'shroud_wrap', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'desert_small_city_signal_relay', 'item_id': 'oracle_mantle', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'desert_small_city_signal_relay', 'item_id': 'crackling_goggles', 'location': 'treasure_room' }},
         ],
         'task_complete_events': [
             {

@@ -41,7 +41,7 @@ HOSTILE_SEEDS = [
         'basic_attack': 'frenzied strike', 'strong_attack': 'uncontrolled rage', 'player_abilities': [],
         'base_str': 48, 'base_dex': 45, 'base_con': 40, 'base_int': 15, 'base_hp': 4800, 'base_ap': 110,
         'str_per_level': 6, 'dex_per_level': 6, 'con_per_level': 5, 'int_per_level': 2,
-        'resistances': [], 'immunities': ['fear'], 'weaknesses': ['ice']
+        'resistances': [], 'immunities': ['stun'], 'weaknesses': ['ice']
     },
     {
         'id': 'elite_enforcer', 'name': 'Elite Enforcer', 'hostile_type': 'humanoid', 'min_spawn_level': 77, 'role': 'damage', 'rarity': 'superrare',
@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'perfect smile', 'strong_attack': 'final performance', 'player_abilities': ['mask_of_expectation', 'crushing_reputation', 'obligation_chain', 'performance_is_mandatory'],
         'base_str': 40, 'base_dex': 60, 'base_con': 45, 'base_int': 55, 'base_hp': 60000, 'base_ap': 800,
         'str_per_level': 5, 'dex_per_level': 8, 'con_per_level': 5, 'int_per_level': 7,
-        'resistances': ['light', 'air'], 'immunities': ['confuse', 'fear'], 'weaknesses': ['dark', 'earth']
+        'resistances': ['light', 'air'], 'immunities': ['confuse', 'stun'], 'weaknesses': ['dark', 'earth']
     }
 ]
 

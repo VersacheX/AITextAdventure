@@ -518,7 +518,10 @@ TASKS += [
                     'dungeon_id': 'shallows_mid_city_type_e_defeat_lanternfade_echo',
                     'location': 'region_open_area'
                 }
-            }
+            },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'shallows_mid_city_type_e_defeat_lanternfade_echo', 'item_id': 'shockdart_launcher', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'shallows_mid_city_type_e_defeat_lanternfade_echo', 'item_id': 'null_jacket', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'shallows_mid_city_type_e_defeat_lanternfade_echo', 'item_id': 'sentinel_mask', 'location': 'treasure_room' }},
         ],
         'task_complete_events': [
             {
@@ -842,6 +845,9 @@ TASKS += [
                     'location': 'region_open_area'
                 }
             },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'shallows_mid_city_type_d_defeat_undertunnel_voice', 'item_id': 'arc_pistol', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'shallows_mid_city_type_d_defeat_undertunnel_voice', 'item_id': 'vision_robe', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'shallows_mid_city_type_d_defeat_undertunnel_voice', 'item_id': 'circuit_greaves', 'location': 'treasure_room' }},
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {

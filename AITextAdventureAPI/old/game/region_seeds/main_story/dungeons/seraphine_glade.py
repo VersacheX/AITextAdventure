@@ -35,7 +35,7 @@ HOSTILE_SEEDS = [
 		'basic_attack': 'freeze moment', 'strong_attack': 'permanent now', 'player_abilities': [],
 		'base_str': 25, 'base_dex': 55, 'base_con': 28, 'base_int': 72, 'base_hp': 2600, 'base_ap': 170,
 		'str_per_level': 3, 'dex_per_level': 7, 'con_per_level': 3, 'int_per_level': 9,
-		'resistances': ['light', 'ice'], 'immunities': ['confuse', 'fear'], 'weaknesses': ['fire']
+		'resistances': ['light', 'ice'], 'immunities': ['confuse'], 'weaknesses': ['fire']
 	},
 	{
 		'id': 'preserved_wraith', 'name': 'Preserved Wraith', 'hostile_type': 'undead', 'min_spawn_level': 96, 'role': 'damage', 'rarity': 'rare',
@@ -51,7 +51,7 @@ HOSTILE_SEEDS = [
 		'basic_attack': 'mirror strike', 'strong_attack': 'infinite refrain', 'player_abilities': ['light_faith_lv1_convert'],
 		'base_str': 42, 'base_dex': 65, 'base_con': 42, 'base_int': 65, 'base_hp': 5000, 'base_ap': 180,
 		'str_per_level': 5, 'dex_per_level': 8, 'con_per_level': 5, 'int_per_level': 8,
-		'resistances': ['light', 'air', 'ice'], 'immunities': ['fear', 'confuse'], 'weaknesses': ['dark', 'fire']
+		'resistances': ['light', 'air', 'ice'], 'immunities': ['confuse'], 'weaknesses': ['dark', 'fire']
 	}
 ]
 

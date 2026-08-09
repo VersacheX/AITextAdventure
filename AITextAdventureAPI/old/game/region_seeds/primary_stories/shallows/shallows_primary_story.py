@@ -936,7 +936,10 @@ TASKS = [
                     'dungeon_id': 'uulthar_lair',
                     'location': 'region_open_area'
                 }
-            }
+            },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'uulthar_lair', 'item_id': 'moontide_staff', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'uulthar_lair', 'item_id': 'abyssal_flow_robe', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'uulthar_lair', 'item_id': 'tidecaller_veil', 'location': 'treasure_room' }},
         ],
         'task_complete_events': [
             {

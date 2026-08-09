@@ -25,7 +25,7 @@ HOSTILE_SEEDS = [
         'basic_attack': 'empty gaze', 'strong_attack': 'draining touch', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
         'base_str': 30, 'base_dex': 30, 'base_con': 30, 'base_int': 30, 'base_hp': 2000, 'base_ap': 80,
         'str_per_level': 3, 'dex_per_level': 3, 'con_per_level': 3, 'int_per_level': 3,
-        'resistances': ['dark'], 'immunities': ['fear'], 'weaknesses': ['light']
+        'resistances': ['dark'], 'immunities': ['stun'], 'weaknesses': ['light']
     },
     {
         'id': 'hollow_zealot', 'name': 'Hollow Zealot', 'hostile_type': 'humanoid', 'min_spawn_level': 60, 'role': 'damage', 'rarity': 'uncommon',
@@ -54,7 +54,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'final word', 'strong_attack': 'entropic cascade', 'player_abilities': ['dark_dark_technique_lv2_void_crush'],
         'base_str': 38, 'base_dex': 38, 'base_con': 35, 'base_int': 40, 'base_hp': 30000, 'base_ap': 500,
         'str_per_level': 4, 'dex_per_level': 4, 'con_per_level': 4, 'int_per_level': 5,
-        'resistances': ['dark', 'ice'], 'immunities': ['fear', 'sleep', 'confuse'], 'weaknesses': ['light']
+        'resistances': ['dark', 'ice'], 'immunities': ['sleep', 'confuse'], 'weaknesses': ['light']
     },
     {
         'id': 'anarchist', 'name': 'Anarchist', 'hostile_type': 'humanoid', 'min_spawn_level': 55, 'role': 'damage', 'rarity': 'uncommon',

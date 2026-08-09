@@ -828,6 +828,9 @@ TASKS += [
 					'location': 'region_open_area'
 				}
 			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'forest_small_city_burrow_alcove', 'item_id': 'shelter_bracers', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'forest_small_city_burrow_alcove', 'item_id': 'keeper_greaves', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'forest_small_city_burrow_alcove', 'item_id': 'leverage_harness', 'location': 'treasure_room' }},
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -1139,6 +1142,9 @@ TASKS += [
 					'location': 'region_open_area'
 				}
 			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'forest_small_city_burrow_alcove_2', 'item_id': 'takeover_blade', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'forest_small_city_burrow_alcove_2', 'item_id': 'daredevil_coat', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'forest_small_city_burrow_alcove_2', 'item_id': 'steadyhands_bracers', 'location': 'treasure_room' }},
 			{
 				'event_type': 'award_task',
 				'params': {

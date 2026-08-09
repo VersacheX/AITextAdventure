@@ -41,7 +41,7 @@ HOSTILE_SEEDS = [
         'basic_attack': 'erase thought', 'strong_attack': 'identity wipe', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
         'base_str': 30, 'base_dex': 40, 'base_con': 38, 'base_int': 55, 'base_hp': 3500, 'base_ap': 130,
         'str_per_level': 3, 'dex_per_level': 5, 'con_per_level': 4, 'int_per_level': 8,
-        'resistances': ['dark', 'ice'], 'immunities': ['sleep', 'fear'], 'weaknesses': ['fire']
+        'resistances': ['dark', 'ice'], 'immunities': ['sleep', 'stun'], 'weaknesses': ['fire']
     },
     {
         'id': 'warden_enforcer', 'name': 'Warden Enforcer', 'hostile_type': 'construct', 'min_spawn_level': 72, 'role': 'damage', 'rarity': 'superrare',

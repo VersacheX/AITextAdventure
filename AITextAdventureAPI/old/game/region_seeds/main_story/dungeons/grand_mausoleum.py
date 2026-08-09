@@ -25,7 +25,7 @@ HOSTILE_SEEDS = [
         'basic_attack': 'sorrowful touch', 'strong_attack': 'weeping wail', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
         'base_str': 30, 'base_dex': 35, 'base_con': 32, 'base_int': 40, 'base_hp': 2500, 'base_ap': 100,
         'str_per_level': 3, 'dex_per_level': 4, 'con_per_level': 3, 'int_per_level': 5,
-        'resistances': ['dark', 'ice'], 'immunities': ['fear'], 'weaknesses': ['light', 'fire']
+        'resistances': ['dark', 'ice'], 'immunities': ['stun'], 'weaknesses': ['light', 'fire']
     },
     {
         'id': 'self-loathing_specter', 'name': 'Self-Loathing Specter', 'hostile_type': 'undead', 'min_spawn_level': 65, 'role': 'hazard', 'rarity': 'uncommon',
@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'endless sorrow', 'strong_attack': 'grief wave', 'player_abilities': ['endless_tragedy', 'collapse_of_self', 'singularity_of_grief', 'weight_of_memory'],
         'base_str': 35, 'base_dex': 45, 'base_con': 40, 'base_int': 50, 'base_hp': 40000, 'base_ap': 600,
         'str_per_level': 4, 'dex_per_level': 5, 'con_per_level': 4, 'int_per_level': 7,
-        'resistances': ['dark', 'ice'], 'immunities': ['fear', 'sleep'], 'weaknesses': ['light', 'fire']
+        'resistances': ['dark', 'ice'], 'immunities': ['sleep'], 'weaknesses': ['light', 'fire']
     },
     {
         'id': 'garbage_boss', 'name': 'Garbage', 'hostile_type': 'aberration', 'min_spawn_level': 67, 'role': 'damage', 'rarity': 'notfound',

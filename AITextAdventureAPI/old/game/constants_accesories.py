@@ -213,13 +213,74 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
     },
 
     # ── LV 16-20 · SUPER RARE ──────────────────────────────────────────────
-
+    #adds 
+    # + bandana protection confusion +small int and dex
+    # + ? pro stun +small buffs
+    # + ? pro silence +small buffs
+    # + ? pro continuous_damage +small buffs
+    # + ? pro petrify +small buffs
+    # + ? pro confuse +small buffs
+    # + ? pro sleep +small buffs
+    {
+        'id': 'bandana_of_focus',
+        'name': 'Bandana of Focus',
+        'description': 'A bandana that keeps the mind sharp and the body steady. Immunity to Confuse. Resists air and fire, weak to dark.',
+        'min_level': 16, 'rarity': 'superrare', 'value': 3500,
+        'immunities': ['confuse'], 'resistances': ['air', 'fire'], 'weaknesses': ['dark'],
+        'strength': 0, 'dexterity': 2, 'intelligence': 2, 'constitution': 0,
+        'crit_bonus': 1.0, 'damage_bonus': 0, 'special_effect': '',        
+    },
+    {
+        'id': 'amulet_of_clarity',
+        'name': 'Amulet of Clarity',
+        'description': 'An amulet that clears the mind and protects against mental manipulation. Immunity to Confuse and Silence. Resists light and dark, weak to fire.',
+        'min_level': 16, 'rarity': 'superrare', 'value': 3800,
+        'immunities': ['confuse', 'silence'], 'resistances': ['light', 'dark'], 'weaknesses': ['fire'],
+        'strength': 0, 'dexterity': 0, 'intelligence': 4, 'constitution': 2,
+        'crit_bonus': 0.0, 'damage_bonus': 0, 'special_effect': '',
+    },
+    {
+        'id': 'ring_of_resilience',
+        'name': 'Ring of Resilience',
+        'description': 'A ring that fortifies the wearer against debilitating effects. Immunity to Stun and Sleep. Resists earth and water, weak to fire.',
+        'min_level': 16, 'rarity': 'superrare', 'value': 4200,
+        'immunities': ['stun', 'sleep'], 'resistances': ['earth', 'water'], 'weaknesses': ['fire'],
+        'strength': 2, 'dexterity': 0, 'intelligence': 0, 'constitution': 4,
+        'crit_bonus': 0.0, 'damage_bonus': 2, 'special_effect': '',
+    },
+    {
+        'id': 'bracelet_of_vitality',
+        'name': 'Bracelet of Vitality',
+        'description': 'A bracelet that enhances the wearer\'s constitution and vitality. Immunity to Petrify and Confuse. Resists fire and ice, weak to electric.',
+        'min_level': 16, 'rarity': 'superrare', 'value': 4500,
+        'immunities': ['petrify', 'confuse'], 'resistances': ['fire', 'ice'], 'weaknesses': ['electric'],
+        'strength': 0, 'dexterity': 0, 'intelligence': 0, 'constitution': 8,
+        'crit_bonus': 0.0, 'damage_bonus': 0, 'special_effect': '',
+    },
+    {
+        'id': 'amulet_of_protection',
+        'name': 'Amulet of Protection',
+        'description': 'An amulet that shields the wearer from harmful effects. Immunity to Silence and Sleep. Resists light and dark, weak to fire.',
+        'min_level': 16, 'rarity': 'superrare', 'value': 4800,
+        'immunities': ['silence', 'sleep'], 'resistances': ['light', 'dark'], 'weaknesses': ['fire'],
+        'strength': 0, 'dexterity': 0, 'intelligence': 4, 'constitution': 4,
+        'crit_bonus': 0.0, 'damage_bonus': 0, 'special_effect': '',
+    },
+    {
+        'id': 'ring_of_endurance',
+        'name': 'Ring of Endurance',
+        'description': 'A ring that enhances the wearer\'s endurance and stamina. Immunity to Stun and Petrify. Resists earth and water, weak to fire.',
+        'min_level': 16, 'rarity': 'superrare', 'value': 5000,
+        'immunities': ['stun', 'petrify'], 'resistances': ['earth', 'water'], 'weaknesses': ['fire'],
+        'strength': 2, 'dexterity': 0, 'intelligence': 0, 'constitution': 6,
+        'crit_bonus': 0.0, 'damage_bonus': 2, 'special_effect': '',
+    },
     {
         'id': 'iron_will_talisman',
         'name': 'Iron Will Talisman',
-        'description': 'A dense medallion inscribed with resolve. Immunity to Fear and Confuse. Resists dark and earth, weak to light.',
+        'description': 'A dense medallion inscribed with resolve. Immunity to Stun and Confuse. Resists dark and earth, weak to light.',
         'min_level': 16, 'rarity': 'superrare', 'value': 4000,
-        'immunities': ['fear', 'confuse'], 'resistances': ['dark', 'earth'], 'weaknesses': ['light'],
+        'immunities': ['stun', 'confuse'], 'resistances': ['dark', 'earth'], 'weaknesses': ['light'],
         'strength': 4, 'dexterity': 0, 'intelligence': 0, 'constitution': 6,
         'crit_bonus': 0.0, 'damage_bonus': 3, 'special_effect': '',
     },
@@ -267,7 +328,7 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
         'name': 'Voidborn Seal',
         'description': 'A seal pressed from void-metal. Immunity to all crowd-control. Resists dark, ice, and electric. Weak to light.',
         'min_level': 30, 'rarity': 'notfound', 'value': 14000,
-        'immunities': ['petrify', 'stun', 'sleep', 'confuse', 'stun', 'silence'],
+        'immunities': ['petrify', 'stun', 'sleep', 'confuse', 'silence'],
         'resistances': ['dark', 'ice', 'electric'], 'weaknesses': ['light'],
         'strength': 8, 'dexterity': 8, 'intelligence': 8, 'constitution': 8,
         'crit_bonus': 3.0, 'damage_bonus': 6, 'special_effect': '',
@@ -284,12 +345,66 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
     {
         'id': 'memory_shard',
         'name': 'Memory Shard',
-        'description': 'A shard from the Memory Museum. Immunity to Fear and Continuous Damage. Resists dark and light equally — it belongs to neither.',
+        'description': 'A shard from the Memory Museum. Immunity to Stun and Continuous Damage. Resists dark and light equally — it belongs to neither.',
         'min_level': 35, 'rarity': 'notfound', 'value': 18000,
-        'immunities': ['fear', 'continuous_damage'],
+        'immunities': ['stun', 'continuous_damage'],
         'resistances': ['dark', 'light'], 'weaknesses': [],
         'strength': 0, 'dexterity': 0, 'intelligence': 16, 'constitution': 12,
         'crit_bonus': 0.0, 'damage_bonus': 0, 'special_effect': '',
+    },
+    {
+        'id': 'eternal_flame_crest',
+        'name': 'Eternal Flame Crest',
+        'description': 'A crest forged from the eternal flame. Immunity to all harmful statuses. Resists fire and light, weak to water and dark.',
+        'min_level': 40, 'rarity': 'notfound', 'value': 20000,
+        'immunities': [
+            'petrify', 'stun', 'sleep', 'confuse', 'stun', 'silence',
+            'continuous_damage', 'elemental_debuff',
+            'attack_debuff', 'defense_debuff', 'strength_debuff',
+            'dexterity_debuff', 'intelligence_debuff', 'constitution_debuff',
+        ],
+    }, #add an earring, a sash, a watch, ?
+    {
+        'id': 'earrings_of_insight',
+        'name': 'Earrings of Insight',
+        'description': 'A pair of earrings that enhance perception and mental acuity. Immunity to Confuse and Silence. Resists light and dark, weak to fire.',
+        'min_level': 42, 'rarity': 'notfound', 'value': 22000,
+        'immunities': ['confuse', 'silence', 'petrify', 'intelligence_debuff'], 'resistances': ['light', 'dark'], 'weaknesses': [],
+        'strength': 0, 'dexterity': 0, 'intelligence': 20, 'constitution': 10,
+        'crit_bonus': 0.0, 'damage_bonus': 0, 'special_effect': '',
+    },
+    {
+        'id': 'sash_of_vitality',
+        'name': 'Sash of Vitality',
+        'description': 'A sash that enhances the wearer\'s constitution and vitality. Immunity to Continuous Damage and Sleep. Resists water and earth, weak to fire.',
+        'min_level': 43, 'rarity': 'notfound', 'value': 24000,
+        'immunities': ['continuous_damage', 'sleep', 'constitution_debuff', 'petrify', 'stun'], 'resistances': ['water', 'earth'], 'weaknesses': ['fire'],
+        'strength': 0, 'dexterity': 0, 'intelligence': 0, 'constitution': 20,
+        'crit_bonus': 0.0, 'damage_bonus': 0, 'special_effect': '',
+    },
+    {
+        'id': 'watch_of_perpetuation',
+        'name': 'Watch of Perpetuation',
+        'description': 'A watch that seems to manipulate time itself. Immunity to Stun and Sleep. Resists air and electric, weak to dark.',
+        'min_level': 44, 'rarity': 'notfound', 'value': 26000,
+        'immunities': ['stun', 'sleep', 'petrify', 'dexterity_debuff'], 'resistances': ['air', 'electric'], 'weaknesses': ['dark'],
+        'strength': 0, 'dexterity': 20, 'intelligence': 0, 'constitution': 0,
+        'crit_bonus': 0.0, 'damage_bonus': 0, 'special_effect': '',
+    },
+    {
+        'id': 'ring_of_eternal_flame',
+        'name': 'Ring of Eternal Flame',
+        'description': 'A ring that burns with an eternal flame. Immunity to all harmful statuses. Resists fire and light, weak to water and dark.',
+        'min_level': 45, 'rarity': 'notfound', 'value': 28000,
+        'immunities': [
+            'petrify', 'stun', 'sleep', 'confuse', 'stun', 'silence',
+            'continuous_damage', 'elemental_debuff',
+            'attack_debuff', 'defense_debuff', 'strength_debuff',
+            'dexterity_debuff', 'intelligence_debuff', 'constitution_debuff',
+        ],
+        'resistances': ['fire', 'light'], 'weaknesses': ['water', 'dark'],
+        'strength': 10, 'dexterity': 10, 'intelligence': 10, 'constitution': 10,
+        'crit_bonus': 5.0, 'damage_bonus': 10, 'special_effect': '', 
     },
     {
         'id': 'undying_oath_ring',
@@ -298,7 +413,7 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
         'min_level': 45, 'rarity': 'notfound', 'value': 28000,
         'immunities': [
             'petrify', 'stun', 'sleep', 'confuse', 'stun', 'silence',
-            'fear', 'continuous_damage', 'elemental_debuff',
+            'continuous_damage', 'elemental_debuff',
             'attack_debuff', 'defense_debuff', 'strength_debuff',
             'dexterity_debuff', 'intelligence_debuff', 'constitution_debuff',
         ],
@@ -312,7 +427,7 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
         'name': 'Sovereign Emblem',
         'description': 'The emblem of an extinct empire. Every stat surges. Immunity to all crowd-control. Resists all elements.',
         'min_level': 60, 'rarity': 'notfound', 'value': 50000,
-        'immunities': ['petrify', 'stun', 'sleep', 'confuse', 'stun', 'silence', 'fear'],
+        'immunities': ['petrify', 'stun', 'sleep', 'confuse', 'stun', 'silence'],
         'resistances': ['dark', 'light', 'fire', 'water', 'earth', 'air', 'ice', 'electric'],
         'weaknesses': [],
         'strength': 20, 'dexterity': 20, 'intelligence': 20, 'constitution': 20,
@@ -325,7 +440,7 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
         'min_level': 70, 'rarity': 'notfound', 'value': 60000,
         'immunities': [
             'petrify', 'stun', 'sleep', 'confuse', 'stun', 'silence',
-            'fear', 'continuous_damage', 'elemental_debuff',
+            'continuous_damage', 'elemental_debuff',
             'attack_debuff', 'defense_debuff', 'strength_debuff',
             'dexterity_debuff', 'intelligence_debuff', 'constitution_debuff',
         ],

@@ -1814,7 +1814,12 @@ TASKS = [
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'edict' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'glamour' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'crux' }},
-            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'trial_1_dungeon', 'location': 'region_open_area' }}
+            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'trial_1_dungeon', 'location': 'region_open_area' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_1_dungeon', 'item_id': 'crux_logic_core', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_1_dungeon', 'item_id': 'mythic_grassland_mid_oathbreakers_sigil', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_1_dungeon', 'item_id': 'axiom_focus_rod', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_1_dungeon', 'item_id': 'glamour_illusion_veil', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_1_dungeon', 'item_id': 'edict_enforcement_seal', 'location': 'treasure_room' }},
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'edict', 'dialog_id': 'edict_ch21_enter_trial' }},
@@ -1904,7 +1909,12 @@ TASKS = [
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'stigma' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'rapture' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'scalpel' }},
-            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'trial_2_dungeon', 'location': 'region_open_area' }}
+            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'trial_2_dungeon', 'location': 'region_open_area' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_2_dungeon', 'item_id': 'scalpel_precision_blade', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_2_dungeon', 'item_id': 'rapture_intensity_core', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_2_dungeon', 'item_id': 'theorem_circlet', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_2_dungeon', 'item_id': 'stigma_classification_lens', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_2_dungeon', 'item_id': 'forgegrip_gauntlets', 'location': 'treasure_room' }},
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'scalpel', 'dialog_id': 'scalpel_ch21_enter_trial' }},
@@ -1989,7 +1999,12 @@ TASKS = [
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'revelry' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'lament' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'paradox' }},
-            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'trial_3_dungeon', 'location': 'region_open_area' }}
+            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'trial_3_dungeon', 'location': 'region_open_area' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_3_dungeon', 'item_id': 'paradox_duality_orb', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_3_dungeon', 'item_id': 'revelry_euphoria_crystal', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_3_dungeon', 'item_id': 'paradox_robe', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_3_dungeon', 'item_id': 'reverie_bracers', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_3_dungeon', 'item_id': 'lament_sorrow_shroud', 'location': 'treasure_room' }},
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'paradox', 'dialog_id': 'paradox_ch21_meet_paradox' }},
@@ -2070,7 +2085,12 @@ TASKS = [
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'pageant' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'oracle' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'garbage' }},
-            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'trial_4_dungeon', 'location': 'region_open_area' }}
+            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'trial_4_dungeon', 'location': 'region_open_area' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_4_dungeon', 'item_id': 'oracle_prophecy_tome', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_4_dungeon', 'item_id': 'storyteller_staff', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_4_dungeon', 'item_id': 'storywoven_robe', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_4_dungeon', 'item_id': 'pageant_performance_mask', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_4_dungeon', 'item_id': 'garbage_doubt_seed', 'location': 'treasure_room' }},
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'garbage', 'dialog_id': 'garbage_ch21_meet_garbage' }},
@@ -2144,7 +2164,14 @@ TASKS = [
         'task_acquire_events': [
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'cataclysm' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'reliquary' }},
-            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'trial_5_dungeon', 'location': 'region_city_shoparmor' }}
+            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'trial_5_dungeon', 'location': 'region_city_shoparmor' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_5_dungeon', 'item_id': 'cataclysm_refinement_core', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_5_dungeon', 'item_id': 'masterwork_blade', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_5_dungeon', 'item_id': 'smithsong_helm', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_5_dungeon', 'item_id': 'reliquary_preservation_shard', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_5_dungeon', 'item_id': 'hammerfall_boots', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_5_dungeon', 'item_id': 'embercraft_coat', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'trial_5_dungeon', 'item_id': 'wanderer_sandals', 'location': 'treasure_room' }},
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'cataclysm', 'dialog_id': 'cataclysm_ch21_enter_trial' }},

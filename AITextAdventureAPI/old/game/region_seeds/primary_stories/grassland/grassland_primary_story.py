@@ -864,7 +864,11 @@ TASKS = [
                     'dungeon_id': 'serene_lair',
                     'location': 'region_open_area'
                 }
-            }
+            },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'serene_lair', 'item_id': 'glacial_spear', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'serene_lair', 'item_id': 'whisperwind_blades', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'serene_lair', 'item_id': 'glacial_crown', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'serene_lair', 'item_id': 'zephyr_hood', 'location': 'treasure_room' }},
         ],
         'task_complete_events': [
             {

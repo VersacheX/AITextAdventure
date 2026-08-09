@@ -33,7 +33,7 @@ HOSTILE_SEEDS = [
 		'basic_attack': 'null grasp', 'strong_attack': 'purposeless pull', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
 		'base_str': 35, 'base_dex': 45, 'base_con': 35, 'base_int': 52, 'base_hp': 3100, 'base_ap': 130,
 		'str_per_level': 4, 'dex_per_level': 5, 'con_per_level': 4, 'int_per_level': 7,
-		'resistances': ['dark'], 'immunities': ['fear'], 'weaknesses': ['light']
+		'resistances': ['dark'], 'immunities': ['stun'], 'weaknesses': ['light']
 	},
 	{
 		'id': 'meaning_wraith', 'name': 'Meaning Wraith', 'hostile_type': 'spirit', 'min_spawn_level': 81, 'role': 'hazard', 'rarity': 'rare',
@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
 		'player_abilities': ['impossibility_storm', 'debuff_the_wicked', 'glitch_cascade', 'static_erasure'],
 		'base_str': 55, 'base_dex': 55, 'base_con': 60, 'base_int': 80, 'base_hp': 120000, 'base_ap': 1200,
 		'str_per_level': 7, 'dex_per_level': 7, 'con_per_level': 8, 'int_per_level': 10,
-		'resistances': ['dark', 'ice', 'electric'], 'immunities': ['fear', 'confuse', 'sleep', 'stun'], 'weaknesses': ['light']
+		'resistances': ['dark', 'ice', 'electric'], 'immunities': ['confuse', 'sleep', 'stun'], 'weaknesses': ['light']
 	}
 ]
 

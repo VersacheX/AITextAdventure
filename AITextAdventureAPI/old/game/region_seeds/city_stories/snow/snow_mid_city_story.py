@@ -531,6 +531,9 @@ TASKS += [
                     'location': 'region_open_area'
                 }
             },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'snow_mid_city_rimechant_hall', 'item_id': 'field_medic_cap', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'snow_mid_city_rimechant_hall', 'item_id': 'chronoweave_bracers', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'snow_mid_city_rimechant_hall', 'item_id': 'surefoot_sandals', 'location': 'treasure_room' }},
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
@@ -952,11 +955,14 @@ TASKS += [
             },
             {
                 'event_type': 'create_dungeon',
-                'params': {
-                    'dungeon_id': 'snow_mid_city_blueforge_depths',
-                    'location': 'region_open_area'
-                }
-            },
+				'params': {
+					'dungeon_id': 'snow_mid_city_blueforge_depths',
+					'location': 'region_open_area'
+				}
+			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'snow_mid_city_blueforge_depths', 'item_id': 'cryptseal_blade', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'snow_mid_city_blueforge_depths', 'item_id': 'vault_boots', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'snow_mid_city_blueforge_depths', 'item_id': 'steadfast_wraps', 'location': 'treasure_room' }},
 			{
 				'event_type': 'award_task',
 				'params': {

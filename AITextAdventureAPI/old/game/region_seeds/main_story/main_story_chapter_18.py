@@ -363,7 +363,10 @@ TASKS = [
 		'to_id': 'cataclysm',
 		'task_acquire_events': [
 			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'cataclysm', 'location': None }},
-			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'collapsing_spire', 'location': 'region_city_open_area' }}
+			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'collapsing_spire', 'location': 'region_city_open_area' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'collapsing_spire', 'item_id': 'axiom_bracers', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'collapsing_spire', 'item_id': 'postulate_boots', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'collapsing_spire', 'item_id': 'theorem_bracers', 'location': 'treasure_room' }},
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch18_cataclysm_manifests' }},

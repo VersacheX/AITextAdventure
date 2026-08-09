@@ -947,6 +947,9 @@ TASKS += [
 					'location': 'region_open_area'
 				}
 			},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'grassland_mid_city_sanctum_vault', 'item_id': 'gentlecurrent_staff', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'grassland_mid_city_sanctum_vault', 'item_id': 'vigil_robe', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'grassland_mid_city_sanctum_vault', 'item_id': 'ember_crown', 'location': 'treasure_room' }},
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {

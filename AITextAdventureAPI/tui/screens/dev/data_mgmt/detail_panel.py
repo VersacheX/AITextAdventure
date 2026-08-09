@@ -695,8 +695,20 @@ def _reset_to_static(container: Any, markup: str) -> None:
 
 
 def _ensure_static(container: Any) -> "Static":
-    """Return the first Static child of *container*, creating one if needed."""
+    """Return the first Static child of *container*, creating one if needed.
+
+    If any composite children (NpcDetailPanel, DungeonDetailPanel, etc.) are
+    still mounted from a previous selection, remove them first so they don't
+    leak into non-NPC detail renders.
+    """
     from textual.widgets import Static as _Static  # noqa: PLC0415
+
+    # Remove any composite widget children — keep plain Statics intact so
+    # _ensure_static can reuse them without a remove/remount race.
+    for child in list(container.children):
+        if not isinstance(child, _Static):
+            child.remove()
+
     try:
         return container.query_one(_Static)
     except Exception:
@@ -804,6 +816,7 @@ def _render_character_detail(detail_panel: Any, record: "DevRecord") -> None:
 
 def _render_city_detail(detail_panel: Any, record: "DevRecord") -> None:
     """Render a city or region DevRecord, including validation errors if present."""
+    #detail_panel.remove_children()
     static = _ensure_static(detail_panel)
     lines: list[str] = []
     lines.append(f"[bold]{rich_escape(record.name)}[/bold]")
@@ -840,6 +853,7 @@ def _render_city_detail(detail_panel: Any, record: "DevRecord") -> None:
 def _render_equipment_detail(detail_panel: Any, record: "DevRecord") -> None:
     """Render an equipment DevRecord, showing validation errors in the header
     when the equipment validator has run."""
+    #detail_panel.remove_children()
     static = _ensure_static(detail_panel)
     lines: list[str] = []
 
@@ -1045,10 +1059,10 @@ def _parse_chapter_data(task_nodes: "List[TimelineTaskNode]") -> "dict | None":
                 "mid_city":   "Mid City",
                 "small_city": "Small City",
             }
-            for suffix, label in _SIZE_LABELS.items():
+            for suffix, lbl in _SIZE_LABELS.items():
                 if city_key.endswith("_" + suffix):
                     region     = city_key[: -(len(suffix) + 1)].replace("_", " ").title()
-                    size_label = label
+                    size_label = lbl
                     break
     except Exception:
         pass
@@ -1628,7 +1642,7 @@ def update_detail_for_ability(
         kind      = "FAIL" if has_error else "WARN"
         lines.append(f"[{colour}]Integrity: {kind}  ({len(errors)} issue(s))[/{colour}]")
         for e in errors:
-            c = "red" if e.severity == "error" else "yellow"
+            c = "red" if e.severity == "error" else "yellow" if e.severity == "warning" else "cyan"
             lines.append(f"  [{c}]{rich_escape(e.code)}[/{c}]  [dim]{rich_escape(e.message)}[/dim]")
     else:
         lines.append("[green]Integrity: OK[/green]")
@@ -1695,7 +1709,7 @@ def update_detail_for_hostile(
         kind   = "FAIL" if has_error else ("WARN" if has_warning else "INFO")
         lines.append(f"[{colour}]Integrity: {kind}  ({len(errors)} issue(s))[/{colour}]")
         for e in errors:
-            c = "red" if e.severity == "error" else ("yellow" if e.severity == "warning" else "cyan")
+            c = "red" if e.severity == "error" else "yellow" if e.severity == "warning" else "cyan"
             lines.append(f"  [{c}]{rich_escape(e.code)}[/{c}]  [dim]{rich_escape(e.message)}[/dim]")
     else:
         lines.append("[green]Integrity: OK[/green]")

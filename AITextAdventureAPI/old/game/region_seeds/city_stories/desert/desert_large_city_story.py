@@ -1085,7 +1085,10 @@ TASKS += [
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'archive_voice', 'location': None } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'archive_voice', 'standing_text': [ "The frequency stirs in the deep archive.", "Something ancient recognizes the cipher stone.", "Approach — it will not wait." ] } },
             { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'desert_large_city_archive_voice', 'location': 'region_open_area' } },
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rhyla', 'standing_text': [ "The resonance blueprint is complete.", "The Archive Voice will not give it freely.", "You must silence it before the frequency can be made steel." ] } },
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'desert_large_city_archive_voice', 'item_id': 'mythic_desert_large_dune_resonance_blade', 'location': 'treasure_room' }},
+            { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'desert_large_city_archive_voice', 'item_id': 'seer_focus_wand', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'desert_large_city_archive_voice', 'item_id': 'omen_hood', 'location': 'treasure_room' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rhyla', 'standing_text': [ "The resonance blueprint is complete.", "The Archive Voice will not give it freely.", "You must silence it before the frequency can be made steel." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {

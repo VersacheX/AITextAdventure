@@ -874,12 +874,15 @@ TASKS = [
 			{
 				'event_type': 'create_dungeon',
 				'params': {
-					'dungeon_id': 'zaruun_lair',
-					'location': 'region_open_area'
-				}
-			}
-		],
-		'task_complete_events': [
+							'dungeon_id': 'zaruun_lair',
+								'location': 'region_open_area'
+							}
+						},
+						{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'zaruun_lair', 'item_id': 'runic_wand', 'location': 'treasure_room' }},
+						{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'zaruun_lair', 'item_id': 'duneweave_mantle', 'location': 'treasure_room' }},
+						{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'zaruun_lair', 'item_id': 'mirage_crown', 'location': 'treasure_room' }},
+					],
+					'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
 				'params': {

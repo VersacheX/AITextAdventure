@@ -747,6 +747,9 @@ TASKS += [
 		'type': 'gated',
 		'task_acquire_events': [
 			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'marrowroots_deep_grove', 'location': 'region_open_area' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'marrowroots_deep_grove', 'item_id': 'earrings_of_insight', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'marrowroots_deep_grove', 'item_id': 'hurricane_blade', 'location': 'treasure_room' }},
+			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'marrowroots_deep_grove', 'item_id': 'archivists_hood', 'location': 'treasure_room' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_b_roots_move' }},
 			{ 'event_type': 'complete_task', 'params': { 'task_id': 'forest_large_city_b_void_gauntlet' }},
 		],

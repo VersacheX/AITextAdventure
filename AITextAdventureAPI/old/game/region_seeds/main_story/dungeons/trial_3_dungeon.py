@@ -25,7 +25,7 @@ HOSTILE_SEEDS = [
         'basic_attack': 'frenzied assault', 'strong_attack': 'manic rush', 'player_abilities': [],
         'base_str': 52, 'base_dex': 48, 'base_con': 42, 'base_int': 35, 'base_hp': 43000, 'base_ap': 330,
         'str_per_level': 6, 'dex_per_level': 6, 'con_per_level': 5, 'int_per_level': 4,
-        'resistances': ['fire'], 'immunities': ['fear'], 'weaknesses': ['ice', 'light']
+        'resistances': ['fire'], 'immunities': ['stun'], 'weaknesses': ['ice', 'light']
     },
     {
         'id': 'silence_wraith', 'name': 'Silence Wraith', 'hostile_type': 'undead', 'min_spawn_level': 98, 'role': 'hazard', 'rarity': 'uncommon',
@@ -49,7 +49,7 @@ HOSTILE_SEEDS = [
         'basic_attack': 'intensity spike', 'strong_attack': 'unsustainable peak', 'player_abilities': [],
         'base_str': 62, 'base_dex': 58, 'base_con': 48, 'base_int': 40, 'base_hp': 52000, 'base_ap': 360,
         'str_per_level': 8, 'dex_per_level': 7, 'con_per_level': 5, 'int_per_level': 4,
-        'resistances': ['fire', 'electric'], 'immunities': ['stun', 'fear'], 'weaknesses': ['ice', 'light']
+        'resistances': ['fire', 'electric'], 'immunities': ['stun'], 'weaknesses': ['ice', 'light']
     }
 ]
 
@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'intoxicating rush', 'strong_attack': 'crescendo', 'player_abilities': ['euphoric_cascade', 'sensory_overload', 'the_rush'],
         'base_str': 58, 'base_dex': 68, 'base_con': 52, 'base_int': 48, 'base_hp': 330000, 'base_ap': 600,
         'str_per_level': 7, 'dex_per_level': 9, 'con_per_level': 6, 'int_per_level': 5,
-        'resistances': ['fire', 'air'], 'immunities': ['fear', 'sleep', 'confuse'], 'weaknesses': ['ice', 'light']
+        'resistances': ['fire', 'air'], 'immunities': ['sleep', 'confuse'], 'weaknesses': ['ice', 'light']
     },
     {
         'id': 'lament_trial', 'name': 'Lament', 'hostile_type': 'void_entity', 'min_spawn_level': 100, 'role': 'hazard', 'rarity': 'notfound',
