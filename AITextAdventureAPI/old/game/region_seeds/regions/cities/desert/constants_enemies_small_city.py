@@ -3,8 +3,10 @@
 
 from .enemies_small.lv1to10 import RANDOM_HOSTILE_SEEDS as LV1TO10
 from .enemies_small.lv11to20 import RANDOM_HOSTILE_SEEDS as LV11TO20
+from .enemies_small.lv21to30 import RANDOM_HOSTILE_SEEDS as LV21TO30
+from .enemies_small.lv31to100 import RANDOM_HOSTILE_SEEDS as LV31TO100
 
-RANDOM_HOSTILE_SEEDS = LV1TO10 + LV11TO20
+RANDOM_HOSTILE_SEEDS = LV1TO10 + LV11TO20 + LV21TO30 + LV31TO100
 
 # Map spawn zones to new hostile ids
 RANDOM_HOSTILE_LINKS = {

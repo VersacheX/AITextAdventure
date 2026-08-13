@@ -2,9 +2,9 @@
 # Each entry is a dict used by encounter/spawn systems.
 from .enemies_small.lv1to10 import RANDOM_HOSTILE_SEEDS as _LV1
 from .enemies_small.lv11to20 import RANDOM_HOSTILE_SEEDS as _LV11
-#from .enemies_small.lv21to30 import RANDOM_HOSTILE_SEEDS as _LV21
+from .enemies_small.lv21to100 import RANDOM_HOSTILE_SEEDS as _LV21
 
-RANDOM_HOSTILE_SEEDS = _LV1 + _LV11 #+ _LV21
+RANDOM_HOSTILE_SEEDS = _LV1 + _LV11 + _LV21
 
 # Mapping of zone/subtype -> list of hostile ids that can spawn there.
 RANDOM_HOSTILE_LINKS = {

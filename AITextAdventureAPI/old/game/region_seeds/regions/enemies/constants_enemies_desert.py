@@ -2,10 +2,14 @@
 # Seeds are organized per-level in `desert` submodules.
 from game.region_seeds.regions.enemies.desert.lv1to10 import SEEDS_LV1TO10
 from game.region_seeds.regions.enemies.desert.lv11to20 import SEEDS_LV11TO20
+from game.region_seeds.regions.enemies.desert.lv21to30 import SEEDS_LV21TO30
+from game.region_seeds.regions.enemies.desert.lv31to100 import SEEDS_LV31TO100
 
 RANDOM_HOSTILE_SEEDS = []
 RANDOM_HOSTILE_SEEDS.extend(SEEDS_LV1TO10)
 RANDOM_HOSTILE_SEEDS.extend(SEEDS_LV11TO20)
+RANDOM_HOSTILE_SEEDS.extend(SEEDS_LV21TO30)
+RANDOM_HOSTILE_SEEDS.extend(SEEDS_LV31TO100)
 
 # Mapping of zone/subtype -> list of hostile ids that can spawn there.
 RANDOM_HOSTILE_LINKS = {

@@ -5,16 +5,25 @@
 from game.region_seeds.regions.cities.desert.enemies_large.lv1to10 import RANDOM_HOSTILE_SEEDS as LV1TO10_HOSTILES
 from game.region_seeds.regions.cities.desert.enemies_large.lv11to20 import RANDOM_HOSTILE_SEEDS as LV11TO20_HOSTILES
 from game.region_seeds.regions.cities.desert.enemies_large.lv21to30 import RANDOM_HOSTILE_SEEDS as LV21TO30_HOSTILES
+from game.region_seeds.regions.cities.desert.enemies_large.lv31to40 import RANDOM_HOSTILE_SEEDS as LV31TO40_HOSTILES
+from game.region_seeds.regions.cities.desert.enemies_large.lv41to50 import RANDOM_HOSTILE_SEEDS as LV41TO50_HOSTILES
+from game.region_seeds.regions.cities.desert.enemies_large.lv51to60 import RANDOM_HOSTILE_SEEDS as LV51TO60_HOSTILES
+from game.region_seeds.regions.cities.desert.enemies_large.lv61to80 import RANDOM_HOSTILE_SEEDS as LV61TO80_HOSTILES
+from game.region_seeds.regions.cities.desert.enemies_large.lv81to100 import RANDOM_HOSTILE_SEEDS as LV81TO100_HOSTILES
 
-# Higher-tier seeds (min_spawn_level >10)
-HIGHER_LEVEL_SEEDS = [
-]
+# Higher-tier seeds (min_spawn_level >30)
+HIGHER_LEVEL_SEEDS = []
 
-# Compose final seed list: include level1-10 seeds first, then higher-level seeds
+# Compose final seed list
 RANDOM_HOSTILE_SEEDS = []
 RANDOM_HOSTILE_SEEDS.extend(LV1TO10_HOSTILES or [])
 RANDOM_HOSTILE_SEEDS.extend(LV11TO20_HOSTILES or [])
 RANDOM_HOSTILE_SEEDS.extend(LV21TO30_HOSTILES or [])
+RANDOM_HOSTILE_SEEDS.extend(LV31TO40_HOSTILES or [])
+RANDOM_HOSTILE_SEEDS.extend(LV41TO50_HOSTILES or [])
+RANDOM_HOSTILE_SEEDS.extend(LV51TO60_HOSTILES or [])
+RANDOM_HOSTILE_SEEDS.extend(LV61TO80_HOSTILES or [])
+RANDOM_HOSTILE_SEEDS.extend(LV81TO100_HOSTILES or [])
 RANDOM_HOSTILE_SEEDS.extend(HIGHER_LEVEL_SEEDS or [])
 
                             

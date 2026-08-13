@@ -35,10 +35,10 @@ NPCS = [
 		),
 		"theme_song": "The Host of Seraphim, Dead Can Dance",
 		"psychology": {
-			"mbti": "INTJ-shadow",
+			"mbti": "INFJ-shadow",
 			"dominant": "Ni - Forces singular prophetic vision onto all possibilities, collapsing infinite potential into a single predetermined endpoint that it then enforces as the only truth.",
-			"auxiliary": "Te - Deploys prophecy as cold, systematic verdicts delivered with the efficiency of a final judgment; it administers fate like a bureaucratic sentence.",
-			"tertiary": "Fi - Has no genuine values of its own; its apparent 'care' for the story is purely instrumental to the act of controlling its outcome.",
+			"auxiliary": "Fe - Uses the weight of its prophetic authority to manipulate others into compliance; it is a master of social influence and moral leverage.",
+			"tertiary": "Ti - Has developed a complex internal logic to justify its actions and maintain the coherence of its prophetic vision; it is a perfectionist of reasoning.",
 			"inferior": "Se - Cannot respond to the spontaneous, the improvised, or the real-time; actions that fall outside its foreseen parameters cause visible disruption."
 		},
 		"enneagram": {

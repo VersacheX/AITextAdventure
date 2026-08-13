@@ -134,7 +134,7 @@ def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
     screen.query_one("#dm-dungeon-tree", Tree).display             = is_dungeon
     screen.query_one("#dm-expand",   Button).display               = is_tree
     screen.query_one("#dm-collapse", Button).display               = is_tree
-    screen.query_one("#dm-copy",     Button).display               = is_tree or is_equipment or is_hostile or is_ability or is_character
+    screen.query_one("#dm-copy",     Button).display               = is_tree or is_equipment or is_hostile or is_ability or is_character or is_city
     screen.query_one("#dm-validate-timeline",     Button).display  = is_timeline
     screen.query_one("#dm-validate-abilities",    Button).display  = is_ability
     screen.query_one("#dm-validate-hostiles",     Button).display  = is_hostile
@@ -364,6 +364,7 @@ def _handle_copy(screen: "DataMgmtScreen") -> None:
     from tui.screens.dev.data_mgmt.handlers.hostile_handler    import copy_hostiles    # noqa: PLC0415
     from tui.screens.dev.data_mgmt.handlers.ability_handler    import copy_abilities   # noqa: PLC0415
     from tui.screens.dev.data_mgmt.handlers.character_handler  import copy_characters  # noqa: PLC0415
+    from tui.screens.dev.data_mgmt.handlers.city_region_handler import copy_city       # noqa: PLC0415
 
     category = screen._category
 
@@ -395,6 +396,9 @@ def _handle_copy(screen: "DataMgmtScreen") -> None:
 
     elif category == _CHARACTER_CATEGORY:
         text = copy_characters(screen)
+
+    elif category == _CITY_CATEGORY:
+        text = copy_city(screen)
 
     else:
         text = serialize_filtered_tree(screen._last_filtered) if screen._last_filtered is not None else ""

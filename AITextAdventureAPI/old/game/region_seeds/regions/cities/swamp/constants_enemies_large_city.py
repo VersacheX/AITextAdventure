@@ -2,11 +2,13 @@
 # Each entry is a dict used by encounter/spawn systems.
 from game.region_seeds.regions.cities.swamp.enemies_large.lv1to10 import SEEDS_LV1TO10
 from game.region_seeds.regions.cities.swamp.enemies_large.lv11to20 import SEEDS_LV11TO20
+from game.region_seeds.regions.cities.swamp.enemies_large.lv21to100 import RANDOM_HOSTILE_SEEDS as SEEDS_LV21TO100
 
 # Compose RANDOM_HOSTILE_SEEDS from level-specific lists
 RANDOM_HOSTILE_SEEDS = []
 RANDOM_HOSTILE_SEEDS.extend(SEEDS_LV1TO10)
 RANDOM_HOSTILE_SEEDS.extend(SEEDS_LV11TO20)
+RANDOM_HOSTILE_SEEDS.extend(SEEDS_LV21TO100)
 
 # Mapping of zone/subtype -> list of hostile ids that can spawn there.
 # Use building type names (matching normalized building types), plus 'street' and 'alley'.

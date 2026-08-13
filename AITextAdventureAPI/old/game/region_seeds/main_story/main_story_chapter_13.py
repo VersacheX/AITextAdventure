@@ -29,11 +29,11 @@ NPCS = [
         "description": "A Voidwalker that embodies self-loathing, fraudulence, and the feeling of worthlessness. It manifests as a rotting, many-mouthed shadow, whispering insecurities and lies to break its victims' spirits.",
         "theme_song": "Creep, Radiohead",
         "psychology": {
-            "mbti": "ESTP",
-            "dominant": "Se - Focuses on the immediate, tangible flaws and failures of its targets, exploiting them in the moment.",
-            "auxiliary": "Ti - Uses a twisted, internal logic to deconstruct a person's self-worth, making its insults feel like objective truths.",
-            "tertiary": "Fe - Has a keen, predatory sense of others' emotional vulnerabilities and social anxieties, which it uses to craft personalized psychological attacks.",
-            "inferior": "Ni - Lacks any deeper vision or goal beyond the immediate act of tearing others down; it is pure, destructive impulse."
+            "mbti": "ISFP-Shadow",
+            "dominant": "Fi - Absorbs the self-loathing of others, making it the core of its being.",
+            "auxiliary": "Se - Observes the world with a keen eye for the failures and insecurities of others, using them to feed its own sense of worthlessness.",
+            "tertiary": "Ni - Has an intuitive understanding of the cyclical nature of grief and self-loathing, using this knowledge to manipulate and trap its victims.",
+            "inferior": "Te - Struggles to implement effective strategies or achieve tangible results, often sabotaging its own efforts through self-doubt and indecision."
         },
         "enneagram": {
           "enneagram_type": "4w5",

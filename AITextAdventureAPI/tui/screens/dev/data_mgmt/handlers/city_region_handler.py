@@ -84,3 +84,45 @@ def validate_city_region_for_screen(screen: "DataMgmtScreen") -> None:
             severity="warning",
             timeout=6.0,
         )
+
+
+# ── Copy ─────────────────────────────────────────────────────────────────────
+
+def copy_city(screen: "DataMgmtScreen") -> str:
+    from tui.services.dev.dataservices.catalog import get_records  # noqa: PLC0415
+
+    records = screen._last_filtered if screen._last_filtered is not None else get_records("city")
+
+    lines: list[str] = []
+    for r in records:
+        errors = (r.extras or {}).get("_errors") if r.extras else None
+        validated = (r.extras or {}).get("_validated", False) if r.extras else False
+
+        if validated and errors is not None:
+            if errors:
+                hard = [e for e in errors if e.severity == "error"]
+                info = [e for e in errors if e.severity == "info"]
+                if hard:
+                    status = f"FAIL ({len(hard)} error(s)" + (f", {len(info)} info" if info else "") + ")"
+                else:
+                    status = f"INFO ({len(info)} note(s))"
+            else:
+                status = "OK"
+        else:
+            status = "—"
+
+        subtitle = f"  {r.subtitle}" if r.subtitle else ""
+        lines.append(f"{r.name}{subtitle}  [{status}]")
+
+        if errors:
+            for e in errors:
+                severity_label = e.severity.upper()
+                lines.append(f"  {severity_label}  {e.code}   {e.message}")
+
+        if r.detail:
+            for detail_line in r.detail.splitlines():
+                lines.append(f"  {detail_line}")
+
+        lines.append("")
+
+    return "\n".join(lines).rstrip()

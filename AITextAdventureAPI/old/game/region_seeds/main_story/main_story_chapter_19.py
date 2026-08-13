@@ -63,10 +63,10 @@ NPCS = [
 		),
         "theme_song": "Outro, M83",
 		"psychology": {
-			"mbti": "ENFJ",
+			"mbti": "ESFJ",
 			"dominant": "Fe - Pours herself entirely into the emotional wellbeing of her community, making their feelings her reason for existing.",
-			"auxiliary": "Ni - Has a deep, intuitive understanding of how harmony, memory, and identity are interconnected; she sees the whole system of her community's soul.",
-			"tertiary": "Se - Is acutely attuned to the sensory and aesthetic quality of her song; she can hear the exact moment it begins to fray.",
+			"auxiliary": "Si - Relies on past experiences and established routines to maintain harmony and stability within her community.",
+			"tertiary": "Ne - Explores possibilities and potential outcomes, considering how changes might affect the emotional landscape of her community.",
 			"inferior": "Ti - Cannot apply cold logic to her situation; the idea that her perfect harmony might be the problem is almost impossible for her to process."
 		},
 		"enneagram": {

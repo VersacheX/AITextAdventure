@@ -4,8 +4,9 @@
 
 from .enemies_large.lv1to10 import RANDOM_HOSTILE_SEEDS as LV1TO10
 from .enemies_large.lv11to20 import RANDOM_HOSTILE_SEEDS as LV11TO20
+from .enemies_large.lv21to100 import RANDOM_HOSTILE_SEEDS as LV21TO100
 
-RANDOM_HOSTILE_SEEDS = LV1TO10 + LV11TO20
+RANDOM_HOSTILE_SEEDS = LV1TO10 + LV11TO20 + LV21TO100
 
 # Mapping of zones / building subtypes to hostile ids for Aurelion Veil
 RANDOM_HOSTILE_LINKS = {
