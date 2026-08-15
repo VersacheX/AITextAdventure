@@ -36,9 +36,11 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         'intelligence': 38,
         'constitution': 102,
         'level': 30,
-        'abilities': ['earth_earth_earth_technique_lv3_earthshaker', 'light_earth_water_technique_lv3_solar_haven', 
-                      'earth_water_technique_lv2_mire_cleave', 'earth_earth_technique_lv2_terra_slam', 'earth_light_technique_lv2_rally_up',
-                      'earth_technique_lv1_armor_up', 'air_technique_lv1_sonic_strike'
+        'abilities': [
+            'lv2_unique_ability_technique_thorn_root_snap',
+            'lv2_unique_ability_technique_thorn_bark_skin',
+            'lv3_unique_ability_technique_thorn_feral_surge',
+            'lv3_unique_ability_technique_thorn_guardian_of_the_grove',
         ]
     }
 ]

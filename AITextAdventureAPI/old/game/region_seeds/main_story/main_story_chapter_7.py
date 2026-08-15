@@ -35,14 +35,12 @@ ATTAINABLE_PLAYER_CHARACTERS = [
     "dexterity": 40,
     "intelligence": 180,
     "constitution": 140,
-    "abilities": [
-      "water_light_faith_lv2_holy_fountain",
-      "air_light_faith_lv2_serene_breath",
-      "ice_light_faith_lv2_purging_veil",
-      "earth_light_faith_lv2_clarity_balm",
-      "light_faith_lv1_minor_heal",
-      "light_light_fire_faith_lv3_soulflare_bloom"
-    ]
+	"abilities": [
+		"lv2_unique_ability_faith_lyren_riftwater_balm",
+		"lv2_unique_ability_faith_lyren_gentle_warding",
+		"lv3_unique_ability_faith_lyren_world_remembers",
+		"lv3_unique_ability_faith_lyren_hibiscus_light",
+	]
   }
 ]
 

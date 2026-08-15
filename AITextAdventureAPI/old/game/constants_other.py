@@ -6,6 +6,7 @@ from game.region_seeds.player_abilities.level_2_abilities import LEVEL_2_PLAYER_
 from game.region_seeds.player_abilities.level_3_abilities import LEVEL_3_PLAYER_ABILITY_SEEDS
 from game.region_seeds.player_abilities.level_4_abilities import LEVEL_4_PLAYER_ABILITY_SEEDS
 from game.region_seeds.player_abilities.level_5_abilities import LEVEL_5_PLAYER_ABILITY_SEEDS
+from game.region_seeds.player_abilities.unique_character_abilities import UNIQUE_CHARACTER_ABILITY_SEEDS
 
 # Compose final PLAYER_ABILITY_SEEDS from per-level lists and the remaining inline list
 PLAYER_ABILITY_SEEDS = []
@@ -14,6 +15,7 @@ PLAYER_ABILITY_SEEDS.extend(LEVEL_2_PLAYER_ABILITY_SEEDS)
 PLAYER_ABILITY_SEEDS.extend(LEVEL_3_PLAYER_ABILITY_SEEDS)
 PLAYER_ABILITY_SEEDS.extend(LEVEL_4_PLAYER_ABILITY_SEEDS)
 PLAYER_ABILITY_SEEDS.extend(LEVEL_5_PLAYER_ABILITY_SEEDS)
+PLAYER_ABILITY_SEEDS.extend(UNIQUE_CHARACTER_ABILITY_SEEDS)
 
 # sort by level so module export is ordered
 PLAYER_ABILITY_SEEDS.sort(key=lambda s: s.get("level",0))

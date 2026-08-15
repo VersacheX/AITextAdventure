@@ -167,7 +167,7 @@ Common values used across existing seeds:
 | `"tome_con"` | Constitution tome |
 | `None` | No drop |
 
-For higher-level hostiles (Lv 61+), rare drops can reference weapon or armor `item_id` strings from the seed files (e.g. `"sawed_off"`, `"kevlar_vest"`).
+For higher-rarity hostiles (rare, superrare), rare drops can reference weapon or armor `item_id` strings from the seed files (e.g. `"sawed_off"`, `"kevlar_vest"`) of appropriate level.
 
 ---
 
@@ -265,6 +265,15 @@ Notable IDs: `radiant_lie`, `collapse_of_joy`, `endless_tragedy`, `the_darkness_
 Defined in `level_5_abilities_by_type/`. Reserved for highest-tier enemies.
 
 Notable IDs: `procedural_inevitability`, `certainty_field`, `doubt_erasure`, `calm_enforcement`, `inescapable_prophecy`, `fate_lock`, `eternal_wound`, `burden_of_the_lost`, `unwanted_knowing`, `inescapable_fate`, `absolution`, `calamity`, `vision_of_ruin`, `memory_of_suffering`, `crushing_despair`, `hollow_silence`, `the_emptiness`, `paradox_embrace`, `euphoric_cascade`, `sensory_overload`, `intrusive_truth`, `self_sabotage`, `inevitable_failure`, `void_lattice`, `eternal_void`, `unfinity`, `adrenaline_surge`, `reckless_abandon`, `thrill_addiction`, `the_rush`, `contradiction_loop`, `simulated_truth`, `system_lockdown`, `impossible_truth`, `systematic_destruction`, `refinement_loop`, `inevitability_matrix`, `absolute_destruction`, `objective_elimination`, `rule_enforcement`
+
+### Appriate Abilities for creature type, hazard, or support role hostiles can be found in the respective level 2–5 ability files. Use thematic judgment to select abilities that fit the hostile's type and narrative.
+
+Hostiles Should follow ability requirement count per hostile rarity (common 0-1, uncommon 1-2, rare 2-3, superrare 3-4, notfound 3-4) and per hostile level band (see table below).
+
+## Creating new abilities for hostiles
+
+It is ok to create new abilities for hostiles which follow the naming conventions...
+When creating new abilities, be sure to include them in the appropriate level_#_abilities_by_type/ file and mark them with `"non_player_ability": True`. Avoid creating abilities that are too similar to existing ones unless they have a unique effect or thematic twist. Always ensure that new abilities are balanced for the level band and role of the hostile.
 
 ---
 

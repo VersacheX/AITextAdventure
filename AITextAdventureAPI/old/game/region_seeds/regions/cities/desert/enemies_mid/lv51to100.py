@@ -49,6 +49,13 @@ RANDOM_HOSTILE_SEEDS = [
   "base_str": 70, "base_dex": 18, "base_con": 64, "base_int": 12, "base_hp": 12000, "base_ap": 16,
   "str_per_level": 14, "dex_per_level": 3, "con_per_level": 12, "int_per_level": 2},
 
+ {"id": "spire_shadow_reaper", "name": "Spire Shadow Reaper", "hostile_type": "shadow", "role": "hazard", "min_spawn_level": 75, "rarity": "superrare", "base_xp": 16000,
+  "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (5000, 17000),
+  "basic_attack": "shadow reap", "strong_attack": "nocturne annihilation",
+  "player_abilities": ["dark_dark_magic_lv2_umbra_storm", "dark_dark_dark_magic_lv3_shadow_blast"],
+  "base_str": 18, "base_dex": 32, "base_con": 20, "base_int": 72, "base_hp": 10000, "base_ap": 60,
+  "str_per_level": 3, "dex_per_level": 6, "con_per_level": 3, "int_per_level": 15},
+
  # min_spawn_level == 80
  {"id": "void_city_leviathan", "name": "Void City Leviathan", "hostile_type": "eldritch", "role": "damage", "min_spawn_level": 80, "rarity": "superrare", "base_xp": 22000,
   "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (8000, 26000),
@@ -57,6 +64,13 @@ RANDOM_HOSTILE_SEEDS = [
   "base_str": 86, "base_dex": 16, "base_con": 80, "base_int": 22, "base_hp": 22000, "base_ap": 18,
   "str_per_level": 17, "dex_per_level": 2, "con_per_level": 16, "int_per_level": 4},
 
+ {"id": "nightveil_sand_titan", "name": "Nightveil Sand Titan", "hostile_type": "elemental", "role": "damage", "min_spawn_level": 84, "rarity": "superrare", "base_xp": 28000,
+  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (10000, 34000),
+  "basic_attack": "sand titan slam", "strong_attack": "spire dune collapse",
+  "player_abilities": ["earth_earth_earth_magic_lv3_earthshaker"],
+  "base_str": 100, "base_dex": 14, "base_con": 94, "base_int": 14, "base_hp": 32000, "base_ap": 14,
+  "str_per_level": 20, "dex_per_level": 2, "con_per_level": 19, "int_per_level": 3},
+
  # min_spawn_level == 90
  {"id": "spire_god_avatar", "name": "Spire God Avatar", "hostile_type": "elemental", "role": "hazard", "min_spawn_level": 90, "rarity": "superrare", "base_xp": 50000,
   "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (18000, 60000),
@@ -64,6 +78,13 @@ RANDOM_HOSTILE_SEEDS = [
   "player_abilities": ["earth_magic_lv1_tremor", "earth_earth_magic_lv2_quake_field", "earth_earth_earth_magic_lv3_earthshaker"],
   "base_str": 38, "base_dex": 26, "base_con": 38, "base_int": 110, "base_hp": 40000, "base_ap": 90,
   "str_per_level": 7, "dex_per_level": 5, "con_per_level": 7, "int_per_level": 22},
+
+ {"id": "nocturne_arch_wraith", "name": "Nocturne Arch Wraith", "hostile_type": "shadow", "role": "hazard", "min_spawn_level": 94, "rarity": "superrare", "base_xp": 55000,
+  "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (20000, 66000),
+  "basic_attack": "arch shadow decree", "strong_attack": "void spire annihilation",
+  "player_abilities": ["dark_dark_magic_lv2_umbra_storm", "dark_dark_dark_magic_lv3_shadow_blast"],
+  "base_str": 26, "base_dex": 40, "base_con": 28, "base_int": 138, "base_hp": 72000, "base_ap": 114,
+  "str_per_level": 5, "dex_per_level": 8, "con_per_level": 5, "int_per_level": 28},
 
  # min_spawn_level == 100
  {"id": "nightveil_god", "name": "The Nightveil God", "hostile_type": "eldritch", "role": "hazard", "min_spawn_level": 100, "rarity": "superrare", "base_xp": 100000,

@@ -68,7 +68,7 @@ SEEDS_LV31TO100 = [
  {"id": "plains_elder_basilisk", "name": "Elder Basilisk", "hostile_type": "creature", "role": "hazard", "min_spawn_level": 71, "rarity": "superrare", "base_xp": 18000,
   "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (5000, 17000),
   "basic_attack": "basilisk gaze", "strong_attack": "petrify stare",
-  "player_abilities": ["level_1_hostile_ability_petrify_gaze"],
+  "player_abilities": ["lv2_hostile_ability_earth_air_technique_petrify_gaze"],
   "base_str": 70, "base_dex": 16, "base_con": 66, "base_int": 18, "base_hp": 14000, "base_ap": 18,
   "str_per_level": 14, "dex_per_level": 3, "con_per_level": 13, "int_per_level": 3},
 

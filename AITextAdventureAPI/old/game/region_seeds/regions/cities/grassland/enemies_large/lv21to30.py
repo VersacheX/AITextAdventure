@@ -1,0 +1,27 @@
+# Grassland Large City (Crosswind Bazaar) — hostile seeds Lv 21–30.
+
+RANDOM_HOSTILE_SEEDS = [
+ {"id": "plains_champion", "name": "Plains Champion", "hostile_type": "humanoid", "role": "damage", "min_spawn_level": 21, "rarity": "common", "base_xp": 280,
+  "common_drop": "stimulant_large", "rare_drop": None, "money_range": (60, 200),
+  "basic_attack": "plains slash", "strong_attack": "champion charge",
+  "player_abilities": [], "base_str": 12, "base_dex": 10, "base_con": 10, "base_int": 4, "base_hp": 320, "base_ap": 10,
+  "str_per_level": 3, "dex_per_level": 2, "con_per_level": 2, "int_per_level": 0},
+ {"id": "grassland_revenant", "name": "Grassland Revenant", "hostile_type": "undead", "role": "hazard", "min_spawn_level": 21, "rarity": "uncommon", "base_xp": 360,
+  "common_drop": "herb_major", "rare_drop": None, "money_range": (20, 80),
+  "basic_attack": "necrotic grasp", "strong_attack": "wail of the plains",
+  "player_abilities": ["level_1_hostile_ability_bone_spear"],
+  "base_str": 10, "base_dex": 8, "base_con": 8, "base_int": 12, "base_hp": 360, "base_ap": 12,
+  "str_per_level": 2, "dex_per_level": 1, "con_per_level": 2, "int_per_level": 3},
+ {"id": "storm_caller", "name": "Storm Caller", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level": 26, "rarity": "uncommon", "base_xp": 440,
+  "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (80, 300),
+  "basic_attack": "storm bolt", "strong_attack": "tempest call",
+  "player_abilities": ["electric_magic_lv1_fireball", "electric_fire_magic_lv2_arclance"],
+  "base_str": 4, "base_dex": 10, "base_con": 6, "base_int": 20, "base_hp": 280, "base_ap": 18,
+  "str_per_level": 0, "dex_per_level": 1, "con_per_level": 1, "int_per_level": 5},
+ {"id": "thunder_warlord", "name": "Thunder Warlord", "hostile_type": "humanoid", "role": "damage", "min_spawn_level": 30, "rarity": "rare", "base_xp": 900,
+  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (300, 1000),
+  "basic_attack": "thunder cleave", "strong_attack": "storm war cry",
+  "player_abilities": ["level_1_hostile_ability_inspire", "electric_fire_magic_lv2_arclance"],
+  "base_str": 24, "base_dex": 12, "base_con": 22, "base_int": 8, "base_hp": 700, "base_ap": 12,
+  "str_per_level": 5, "dex_per_level": 2, "con_per_level": 4, "int_per_level": 1},
+]

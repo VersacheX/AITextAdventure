@@ -1,0 +1,26 @@
+# Grassland Mid City (Highsteeple Crossing) — hostile seeds Lv 21–30.
+
+RANDOM_HOSTILE_SEEDS = [
+ {"id": "crossing_thug", "name": "Crossing Thug", "hostile_type": "humanoid", "role": "damage", "min_spawn_level": 21, "rarity": "common", "base_xp": 240,
+  "common_drop": "stimulant_large", "rare_drop": None, "money_range": (50, 180),
+  "basic_attack": "cobble punch", "strong_attack": "street rush",
+  "player_abilities": [], "base_str": 12, "base_dex": 8, "base_con": 10, "base_int": 4, "base_hp": 280, "base_ap": 8,
+  "str_per_level": 3, "dex_per_level": 1, "con_per_level": 2, "int_per_level": 0},
+ {"id": "prairie_shade", "name": "Prairie Shade", "hostile_type": "spirit", "role": "hazard", "min_spawn_level": 21, "rarity": "uncommon", "base_xp": 300,
+  "common_drop": "herb_major", "rare_drop": None, "money_range": (20, 80),
+  "basic_attack": "shade touch", "strong_attack": "plains wail",
+  "player_abilities": ["level_1_hostile_ability_night_whisper"],
+  "base_str": 4, "base_dex": 12, "base_con": 6, "base_int": 14, "base_hp": 260, "base_ap": 14,
+  "str_per_level": 0, "dex_per_level": 2, "con_per_level": 1, "int_per_level": 3},
+ {"id": "cathedral_cultist", "name": "Cathedral Cultist", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level": 25, "rarity": "uncommon", "base_xp": 360,
+  "common_drop": "tome_int", "rare_drop": None, "money_range": (80, 280),
+  "basic_attack": "ritual blade", "strong_attack": "dark blessing",
+  "player_abilities": ["dark_faith_lv1_shade_whisper"],
+  "base_str": 8, "base_dex": 8, "base_con": 8, "base_int": 14, "base_hp": 280, "base_ap": 14,
+  "str_per_level": 1, "dex_per_level": 1, "con_per_level": 1, "int_per_level": 3},
+ {"id": "steeple_berserker", "name": "Steeple Berserker", "hostile_type": "humanoid", "role": "damage", "min_spawn_level": 29, "rarity": "common", "base_xp": 320,
+  "common_drop": "stimulant_large", "rare_drop": None, "money_range": (100, 340),
+  "basic_attack": "spire slash", "strong_attack": "steeple fury",
+  "player_abilities": [], "base_str": 16, "base_dex": 8, "base_con": 14, "base_int": 3, "base_hp": 380, "base_ap": 8,
+  "str_per_level": 4, "dex_per_level": 1, "con_per_level": 3, "int_per_level": 0},
+]

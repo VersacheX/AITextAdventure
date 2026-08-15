@@ -21,30 +21,29 @@ ATTAINABLE_PLAYER_CHARACTERS = [
     {
         "id": "vek",
         "name": "Vek",
-        "level": 35,
+        "level": 50,
         "arm_armor": "campaign_vambraces",
         "head_armor": "commanders_helm",
         "body_armor": "warfront_plate",
         "leg_armor": "warfront_greaves",
         "equipped_weapon": "dominion_halberd",
-        "max_hp": 1200,
-        "current_hp": 1200,
-        "max_ap": 300,
-        "current_ap": 300,
+        "max_hp": 1800,
+        "current_hp": 1800,
+        "max_ap": 450,
+        "current_ap": 450,
         "unused_ability_slots": 0,
         "unused_stat_points": 0,
         "unused_power_points": 0,
-        "strength": 160,
-        "dexterity": 80,
-        "intelligence": 60,
-        "constitution": 150,
-        "abilities": [
-            "fire_technique_lv1_scorch_slash",
-            "earth_earth_technique_lv2_terra_slam",
-            "earth_light_technique_lv2_lawbind_strike",
-            "earth_earth_light_technique_lv3_unbreakable",
-            "earth_earth_light_technique_lv3_judgment"
-        ]
+        "strength": 200,
+        "dexterity": 95,
+        "intelligence": 95,
+        "constitution": 180,
+		"abilities": [
+			"lv2_unique_ability_technique_vek_command_strike",
+			"lv2_unique_ability_technique_vek_rally_line",
+			"lv3_unique_ability_technique_vek_dominion_breach",
+			"lv4_unique_ability_technique_vek_iron_verdict",
+		]
     }
 ]
 

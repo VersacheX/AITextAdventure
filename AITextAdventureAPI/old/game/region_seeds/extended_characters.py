@@ -480,11 +480,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 138,
         'level': 40,
         'abilities': [
-            'fire_magic_lv1_fireball',
-            'fire_technique_lv1_scorch_slash',
-            'fire_faith_lv1_warmth_blessing',
-            'electric_faith_lv1_shock_blessing',
-            'dark_faith_lv1_shade_whisper',
+            'lv2_unique_ability_magic_sera_flameweaver_passionate_spark',
+            'lv2_unique_ability_magic_sera_flameweaver_embers_veil',
+            'lv3_unique_ability_magic_sera_flameweaver_stage_ignition',
+            'lv4_unique_ability_magic_sera_flameweaver_hearts_conflagration',
         ]
     },
 
@@ -495,7 +494,7 @@ EXTENDED_CHARACTERS = [
         'name': 'Regent Sylvara',
         'arm_armor': 'ironveil_vambraces',
         'head_armor': 'sovereignty_circlet',
-        'body_armor': 'edictweave_mantle',
+        'body_armor': 'void_court_robe',
         'leg_armor': 'coldmarch_greaves',
         'equipped_weapon': 'scepter_of_dominion',
         'max_hp': 432,
@@ -511,11 +510,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 142,
         'level': 40,
         'abilities': [
-            'dark_magic_lv1_shadow_bolt',
-            'electric_magic_lv1_shock_pulse',
-            'dark_faith_lv1_shade_whisper',
-            'light_faith_lv1_convert',
-            'air_technique_lv1_sonic_strike',
+            'lv2_unique_ability_magic_regent_sylvara_cold_analysis',
+            'lv2_unique_ability_magic_regent_sylvara_dominance_field',
+            'lv3_unique_ability_magic_regent_sylvara_inevitable_outcome',
+            'lv4_unique_ability_magic_regent_sylvara_strategic_unraveling',
         ]
     },
 
@@ -542,11 +540,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 68,
         'level': 40,
         'abilities': [
-            'electric_tech_lv1_circuit_burst',
-            'electric_technique_lv1_stun_strike',
-            'air_technique_lv1_sonic_strike',
-            'air_skill_lv1_phantom_step',
-            'electric_skill_lv1_overcharge',
+            'lv2_unique_ability_tech_spark_maddox_shock_gadget',
+            'lv2_unique_ability_tech_spark_maddox_overclock',
+            'lv3_unique_ability_tech_spark_maddox_chain_explosion',
+            'lv4_unique_ability_tech_spark_maddox_volatile_prototype',
         ]
     },
 
@@ -573,15 +570,14 @@ EXTENDED_CHARACTERS = [
         'intelligence': 18,
         'level': 40,
         'abilities': [
-            'ice_technique_lv1_frozen_slash',
-            'earth_technique_lv1_armor_up',
-            'light_technique_lv1_radiant_slash',
-            'electric_technique_lv1_stun_strike',
-            'air_technique_lv1_sonic_strike',
+            'lv2_unique_ability_technique_commander_drax_field_order',
+            'lv2_unique_ability_technique_commander_drax_siege_strike',
+            'lv3_unique_ability_technique_commander_drax_warfront_crush',
+            'lv4_unique_ability_technique_commander_drax_iron_command',
         ]
     },
 
-    # ── Ghost  (Ch.7 · Gnashwater Hollow · level 40) ─────────────────────
+    # ── Ghost
     # ISTP · 9w8 · silent operative — STR primary, DEX secondary, balanced
     {
         'id': 'ghost',
@@ -604,11 +600,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 32,
         'level': 40,
         'abilities': [
-            'dark_technique_lv1_night_claw',
-            'water_technique_lv1_slick_manuever',
-            'air_skill_lv1_phantom_step',
-            'dark_skill_lv1_shadow_step',
-            'electric_technique_lv1_stun_strike',
+            'lv2_unique_ability_skill_ghost_shadow_mark',
+            'lv2_unique_ability_skill_ghost_silent_read',
+            'lv3_unique_ability_skill_ghost_disappearing_act',
+            'lv4_unique_ability_skill_ghost_void_efface',
         ]
     },
 
@@ -635,11 +630,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 140,
         'level': 40,
         'abilities': [
-            'light_faith_lv1_minor_heal',
-            'light_faith_lv1_glimmer',
-            'earth_faith_lv1_earthen_blessing',
-            'light_faith_lv1_convert',
-            'dark_faith_lv1_shade_whisper',
+            'lv2_unique_ability_faith_elyra_dawnseer_seer_shield',
+            'lv2_unique_ability_faith_elyra_dawnseer_fragment_vision',
+            'lv3_unique_ability_faith_elyra_dawnseer_dawnsight_strike',
+            'lv4_unique_ability_faith_elyra_dawnseer_prophetic_vision',
         ]
     },
 
@@ -666,15 +660,14 @@ EXTENDED_CHARACTERS = [
         'intelligence': 22,
         'level': 50,
         'abilities': [
-            'light_technique_lv1_radiant_slash',
-            'earth_technique_lv1_armor_up',
-            'fire_technique_lv1_scorch_slash',
-            'electric_technique_lv1_stun_strike',
-            'air_technique_lv1_sonic_strike',
+            'lv2_unique_ability_technique_voss_caldera_leverage',
+            'lv3_unique_ability_technique_voss_caldera_boardroom_blitz',
+            'lv3_unique_ability_technique_voss_caldera_non_negotiable',
+            'lv4_unique_ability_technique_voss_caldera_hostile_acquisition',
         ]
     },
 
-    # ── Dare  (Ch.11 · Blackwake Bay · level 55) ─────────────────────────
+    # ── Dare
     # ESTP · 7w8 · agile thrill-seeker — DEX primary, STR secondary, agile
     {
         'id': 'dare',
@@ -697,11 +690,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 28,
         'level': 55,
         'abilities': [
-            'water_technique_lv1_slick_manuever',
-            'air_skill_lv1_phantom_step',
-            'fire_technique_lv1_scorch_slash',
-            'electric_technique_lv1_stun_strike',
-            'dark_technique_lv1_night_claw',
+            'lv2_unique_ability_skill_dare_reckless_opening',
+            'lv3_unique_ability_skill_dare_full_tilt',
+            'lv3_unique_ability_skill_dare_edge_runner',
+            'lv4_unique_ability_skill_dare_death_defying_rush',
         ]
     },
 
@@ -728,15 +720,14 @@ EXTENDED_CHARACTERS = [
         'intelligence': 200,
         'level': 60,
         'abilities': [
-            'light_faith_lv1_minor_heal',
-            'water_faith_lv1_mending_streams',
-            'light_faith_lv1_glimmer',
-            'earth_faith_lv1_earthen_blessing',
-            'air_faith_lv1_zephyr_bless',
+            'lv2_unique_ability_faith_rynn_field_dressing',
+            'lv3_unique_ability_faith_rynn_medics_blessing',
+            'lv3_unique_ability_faith_rynn_still_standing',
+            'lv4_unique_ability_faith_rynn_field_mercy',
         ]
     },
 
-    # ── Anita  (Ch.13 · The Necropolis · level 65) ────────────────────────
+    # ── Anita
     # ISTJ · 6w5 · archivist broker — balanced STR/INT, CON secondary
     {
         'id': 'anita',
@@ -759,11 +750,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 120,
         'level': 65,
         'abilities': [
-            'dark_magic_lv1_shadow_bolt',
-            'dark_faith_lv1_shade_whisper',
-            'light_faith_lv1_convert',
-            'earth_technique_lv1_armor_up',
-            'electric_technique_lv1_stun_strike',
+            'lv2_unique_ability_magic_anita_catalogued_flaw',
+            'lv3_unique_ability_magic_anita_classified_suppression',
+            'lv3_unique_ability_magic_anita_archive_bolt',
+            'lv4_unique_ability_magic_anita_exposed_weakness',
         ]
     },
 
@@ -790,11 +780,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 38,
         'level': 70,
         'abilities': [
-            'air_skill_lv1_phantom_step',
-            'water_technique_lv1_slick_manuever',
-            'light_faith_lv1_minor_heal',
-            'air_faith_lv1_zephyr_bless',
-            'fire_technique_lv1_scorch_slash',
+            'lv2_unique_ability_skill_andrea_starveil_crowd_read',
+            'lv3_unique_ability_skill_andrea_starveil_encore',
+            'lv3_unique_ability_skill_andrea_starveil_raise_the_roof',
+            'lv4_unique_ability_skill_andrea_starveil_curtain_call',
         ]
     },
 
@@ -821,15 +810,14 @@ EXTENDED_CHARACTERS = [
         'intelligence': 270,
         'level': 80,
         'abilities': [
-            'light_faith_lv1_minor_heal',
-            'water_faith_lv1_mending_streams',
-            'light_faith_lv1_glimmer',
-            'earth_faith_lv1_earthen_blessing',
-            'air_faith_lv1_zephyr_bless',
+            'lv2_unique_ability_faith_talia_softheart_tender_mend',
+            'lv3_unique_ability_faith_talia_softheart_needed_now',
+            'lv3_unique_ability_faith_talia_softheart_community_light',
+            'lv4_unique_ability_faith_talia_softheart_heartroot_restoration',
         ]
     },
 
-    # ── Korina Brightvein  (Ch.17 · Gallows Rift · level 85) ─────────────
+    # ── Korina
     # ENFJ · 2w3 · leader — INT primary, CON secondary, caster/support
     {
         'id': 'korina_brightvein',
@@ -852,11 +840,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 286,
         'level': 85,
         'abilities': [
-            'light_faith_lv1_minor_heal',
-            'electric_faith_lv1_shock_blessing',
-            'fire_faith_lv1_warmth_blessing',
-            'earth_faith_lv1_earthen_blessing',
-            'air_faith_lv1_zephyr_bless',
+            'lv2_unique_ability_faith_korina_brightvein_rally_call',
+            'lv3_unique_ability_faith_korina_brightvein_inspired_defense',
+            'lv3_unique_ability_faith_korina_brightvein_leaders_mend',
+            'lv4_unique_ability_faith_korina_brightvein_rallying_light',
         ]
     },
 
@@ -883,11 +870,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 340,
         'level': 95,
         'abilities': [
-            'electric_magic_lv1_shock_pulse',
-            'electric_tech_lv1_circuit_burst',
-            'dark_magic_lv1_shadow_bolt',
-            'air_tech_lv1_system_scan',
-            'electric_technique_lv1_stun_strike',
+            'lv2_unique_ability_tech_lyric_axiom_probe',
+            'lv3_unique_ability_tech_lyric_logical_collapse',
+            'lv3_unique_ability_tech_lyric_theoretical_discharge',
+            'lv4_unique_ability_tech_lyric_system_override',
         ]
     },
 
@@ -914,11 +900,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 360,
         'level': 100,
         'abilities': [
-            'dark_magic_lv1_shadow_bolt',
-            'dark_faith_lv1_shade_whisper',
-            'light_faith_lv1_minor_heal',
-            'water_faith_lv1_mending_streams',
-            'light_faith_lv1_convert',
+            'lv2_unique_ability_magic_osten_dreamweaver_waking_shadow',
+            'lv3_unique_ability_magic_osten_dreamweaver_narrators_hex',
+            'lv3_unique_ability_magic_osten_dreamweaver_dreamfall',
+            'lv4_unique_ability_magic_osten_dreamweaver_the_story_that_ends',
         ]
     },
 
@@ -945,11 +930,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 50,
         'level': 105,
         'abilities': [
-            'fire_technique_lv1_scorch_slash',
-            'earth_technique_lv1_armor_up',
-            'fire_faith_lv1_warmth_blessing',
-            'air_skill_lv1_phantom_step',
-            'electric_technique_lv1_stun_strike',
+            'lv2_unique_ability_technique_lira_emberforge_smiths_edge',
+            'lv3_unique_ability_technique_lira_emberforge_masterwork_stance',
+            'lv3_unique_ability_technique_lira_emberforge_forge_sweep',
+            'lv4_unique_ability_technique_lira_emberforge_primas_edge',
         ]
     },
 

@@ -8,9 +8,20 @@ E1  EQUIPMENT_NOT_FOUND_IN_TIMELINE
     dungeon_add_treasure event across the entire loaded timeline tree.  The
     item exists in the seed constants but is unreachable by the player through
     normal play.  Rendered as red in the equipment table.
+
+Balance rules
+-------------
+B1  EQUIPMENT_TP_LOW  (warning) 
+    The item's TP is below 65 % of the peer-group average for items of the
+    same type and level.  Rendered as yellow/orange in the equipment table.
+
+B2  EQUIPMENT_TP_HIGH  (info)
+    The item's TP exceeds 145 % of the peer-group average for items of the
+    same type and level.  Rendered as cyan in the equipment table.
 """
 from __future__ import annotations
 
+from collections import defaultdict
 from typing import Any, Dict, List, Set
 
 from tui.services.dev.dataservices.models import EquipmentValidationError
@@ -100,6 +111,58 @@ def validate_equipment(records: list, timeline_groups: list, const: Any = None) 
             by_code["EQUIPMENT_NOT_FOUND_IN_TIMELINE"] = (
                 by_code.get("EQUIPMENT_NOT_FOUND_IN_TIMELINE", 0) + 1
             )
+            total_errors += 1
+            invalid      += 1
+
+    # ── B1 / B2: TP balance checks ────────────────────────────────────────
+    # Group items by (type_label, level) and compute peer-average TP.
+    # Items with no TP value (0 or None) are excluded from comparison so that
+    # accessories and purely defensive pieces don't skew weapon averages.
+    group_tp: Dict[tuple, List[float]] = defaultdict(list)
+    for record in records:
+        tp  = record.extras.get("tp") or 0
+        if tp <= 0:
+            continue
+        key = (record.extras.get("type_label", ""), record.extras.get("level", 0))
+        group_tp[key].append(float(tp))
+
+    group_avg: Dict[tuple, float] = {
+        k: sum(v) / len(v) for k, v in group_tp.items() if v
+    }
+
+    for record in records:
+        tp = record.extras.get("tp") or 0
+        if tp <= 0:
+            continue
+        key = (record.extras.get("type_label", ""), record.extras.get("level", 0))
+        avg = group_avg.get(key)
+        if avg is None or avg == 0:
+            continue
+        ratio = float(tp) / avg
+        type_label = key[0] or "unknown"
+        level      = key[1]
+        if ratio < 0.65:
+            err = _err(
+                "EQUIPMENT_TP_LOW",
+                f"'{record.id}' TP {tp} is only {ratio:.0%} of the "
+                f"{type_label} Lv {level} peer average {avg:.1f}. "
+                f"Consider raising TP or verifying this is intentional.",
+                severity="warning",
+            )
+            record.extras["_errors"].append(err)
+            by_code["EQUIPMENT_TP_LOW"] = by_code.get("EQUIPMENT_TP_LOW", 0) + 1
+            total_errors += 1
+            invalid      += 1
+        elif ratio > 1.45:
+            err = _err(
+                "EQUIPMENT_TP_HIGH",
+                f"'{record.id}' TP {tp} is {ratio:.0%} of the "
+                f"{type_label} Lv {level} peer average {avg:.1f}. "
+                f"Consider lowering TP or verifying this is intentional.",
+                severity="info",
+            )
+            record.extras["_errors"].append(err)
+            by_code["EQUIPMENT_TP_HIGH"] = by_code.get("EQUIPMENT_TP_HIGH", 0) + 1
             total_errors += 1
             invalid      += 1
 

@@ -1,0 +1,28 @@
+# Forest Mid City (Boiling Bubble) — hostile seeds Lv 31–40.
+
+RANDOM_HOSTILE_SEEDS = [
+ {"id": "elder_bark_golem", "name": "Elder Bark Golem", "hostile_type": "elemental", "role": "damage", "min_spawn_level": 38, "rarity": "rare", "base_xp": 1000,
+  "common_drop": None, "rare_drop": "herb_major", "money_range": (0, 40),
+  "basic_attack": "elder bark fist", "strong_attack": "canopy stomp",
+  "player_abilities": ["level_1_hostile_ability_reinforce_frame", "earth_magic_lv1_tremor"],
+  "base_str": 30, "base_dex": 2, "base_con": 28, "base_int": 6, "base_hp": 1000, "base_ap": 8,
+  "str_per_level": 6, "dex_per_level": 0, "con_per_level": 5, "int_per_level": 1},
+ {"id": "coven_enforcer", "name": "Coven Enforcer", "hostile_type": "humanoid", "role": "damage", "min_spawn_level": 31, "rarity": "common", "base_xp": 420,
+  "common_drop": "stimulant_large", "rare_drop": None, "money_range": (90, 320),
+  "basic_attack": "hexed blade", "strong_attack": "coven charge",
+  "player_abilities": ["earth_fire_technique_lv2_berserker_tech"],
+  "base_str": 18, "base_dex": 10, "base_con": 16, "base_int": 6, "base_hp": 680, "base_ap": 9,
+  "str_per_level": 4, "dex_per_level": 1, "con_per_level": 3, "int_per_level": 1},
+ {"id": "spire_witch", "name": "Spire Witch", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level": 34, "rarity": "uncommon", "base_xp": 580,
+  "common_drop": "tome_int", "rare_drop": None, "money_range": (100, 380),
+  "basic_attack": "cursed hex", "strong_attack": "cauldron burst",
+  "player_abilities": ["lv2_hostile_ability_water_light_fae_glimmer", "lv2_hostile_ability_dark_dark_faith_void_veil"],
+  "base_str": 6, "base_dex": 10, "base_con": 8, "base_int": 20, "base_hp": 600, "base_ap": 14,
+  "str_per_level": 1, "dex_per_level": 2, "con_per_level": 1, "int_per_level": 4},
+ {"id": "bog_shambler_mid", "name": "Bog Shambler", "hostile_type": "undead", "role": "support", "min_spawn_level": 36, "rarity": "uncommon", "base_xp": 520,
+  "common_drop": "herb_major", "rare_drop": None, "money_range": (40, 160),
+  "basic_attack": "bog slam", "strong_attack": "putrid surge",
+  "player_abilities": ["lv2_hostile_ability_dark_light_faith_calm_bleat"],
+  "base_str": 16, "base_dex": 4, "base_con": 20, "base_int": 10, "base_hp": 780, "base_ap": 10,
+  "str_per_level": 3, "dex_per_level": 0, "con_per_level": 4, "int_per_level": 2},
+]

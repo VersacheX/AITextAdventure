@@ -58,13 +58,10 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         'constitution': 38,
         'level': 30,
         'abilities': [
-            'air_air_air_skill_lv3_gale_slash',
-            'air_earth_electric_skill_lv3_gale_shockwave',
-            'air_dark_skill_lv2_gale_of_doubt',
-            'air_light_skill_lv2_dawn_cut',
-            'air_air_skill_lv2_gust_blitz',
-            'air_skill_lv1_smoke_bomb',
-            'electric_skill_lv1_lightning_strike',
+            'lv2_unique_ability_skill_nia_wind_read',
+            'lv2_unique_ability_skill_nia_gale_step',
+            'lv3_unique_ability_skill_nia_echo_step',
+            'lv3_unique_ability_skill_nia_futures_edge',
         ]
     }
 ]

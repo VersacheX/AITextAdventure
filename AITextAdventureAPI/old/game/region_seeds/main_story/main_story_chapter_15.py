@@ -16,31 +16,29 @@ ATTAINABLE_PLAYER_CHARACTERS = [
     {
         "id": "warden_hale",
         "name": "Warden Hale",
-        "level": 45,
+        "level": 65,
         "arm_armor": "covenant_bracers",
         "head_armor": "sentinel_mask",
         "body_armor": "vigil_robe",
         "leg_armor": "guardian_greaves",
         "equipped_weapon": "ledgerbrand_mace",
-        "max_hp": 1400,
-        "current_hp": 1400,
-        "max_ap": 350,
-        "current_ap": 350,
+        "max_hp": 20000,
+        "current_hp": 2000,
+        "max_ap": 500,
+        "current_ap": 500,
         "unused_ability_slots": 0,
         "unused_stat_points": 0,
         "unused_power_points": 0,
-        "strength": 180,
-        "dexterity": 90,
-        "intelligence": 70,
-        "constitution": 170,
-        "abilities": [
-            "light_technique_lv1_rally",
-            "light_light_technique_lv2_divine_shield",
-            "ice_technique_lv1_chilling_blow",
-            "lv2_hostile_ability_ice_light_magic_frost_nova",
-            "light_ice_technique_lv3_winters_grace",
-            "light_light_ice_technique_lv4_final_stand"
-        ]
+        "strength": 225,
+        "dexterity": 100,
+        "intelligence": 90,
+        "constitution": 200,
+		"abilities": [
+			"lv2_unique_ability_technique_warden_hale_ledger_guard",
+			"lv3_unique_ability_technique_warden_hale_rite_of_record",
+			"lv3_unique_ability_technique_warden_hale_sentinel_ward",
+			"lv4_unique_ability_technique_warden_hale_judgment_hammer",
+		]
     }
 ]
 

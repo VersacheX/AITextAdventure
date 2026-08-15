@@ -38,13 +38,10 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         'constitution': 38,
         'level': 30,
         'abilities': [
-            'dark_earth_electric_tech_lv3_petrifying_shock',
-            'dark_dark_dark_tech_lv3_shadow_enhancer',
-            'ice_dark_tech_lv2_shadowfrost_emitter',
-            'dark_dark_tech_lv2_abyssal_core',
-            'dark_air_lv2_echo_displacer',
-            'fire_tech_lv1_flux_dampener',
-            'electric_tech_lv1_taze_charge',
+            'lv2_unique_ability_tech_grimnaw_hex_charge',
+            'lv2_unique_ability_tech_grimnaw_resonance_shell',
+            'lv3_unique_ability_tech_grimnaw_whisper_resonance',
+            'lv3_unique_ability_tech_grimnaw_cursed_circuit',
         ]
     }
 ]

@@ -254,6 +254,16 @@ class DungeonGroupNode:
     dungeons: List[DungeonNode]
 
 
+# ── Special item validation model ───────────────────────────────────────
+
+@dataclass
+class SpecialItemValidationError:
+    """One validation error attached to a special-item DevRecord."""
+    code: str
+    message: str
+    severity: str = "error"   # "error" | "info"
+
+
 # ── Equipment validation model ────────────────────────────────────────────
 
 @dataclass

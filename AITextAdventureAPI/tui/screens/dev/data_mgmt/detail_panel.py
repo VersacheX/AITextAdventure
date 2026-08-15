@@ -747,6 +747,10 @@ def update_detail_for_record(screen: "DataMgmtScreen", record: "DevRecord | None
         _render_equipment_detail(detail_panel, record)
         return
 
+    if record.category == "special_item":
+        _render_special_item_detail(detail_panel, record)
+        return
+
     static = _ensure_static(detail_panel)
     header = f"[bold]{rich_escape(record.name)}[/bold]"
     if record.subtitle:
@@ -882,6 +886,39 @@ def _render_equipment_detail(detail_panel: Any, record: "DevRecord") -> None:
         lines.append("")
     elif validated:
         lines.append("[green]Integrity: OK — item has a valid award source[/green]")
+        lines.append("")
+
+    if record.detail:
+        lines.append(rich_escape(record.detail))
+
+    static.update("\n".join(lines))
+
+def _render_special_item_detail(detail_panel: Any, record: "DevRecord") -> None:
+    static = _ensure_static(detail_panel)
+    lines: list[str] = []
+
+    lines.append(f"[bold]{rich_escape(record.name)}[/bold]")
+    if record.subtitle:
+        lines.append(f"[dim]{rich_escape(record.subtitle)}[/dim]")
+    lines.append("")
+
+    errors    = (record.extras or {}).get("_errors")    or []
+    validated = (record.extras or {}).get("_validated", False)
+
+    if validated and errors:
+        has_error = any(getattr(e, "severity", "") == "error" for e in errors)
+        if has_error:
+            hc, kind = "red",  "FAIL"
+        else:
+            hc, kind = "cyan", "INFO"
+        lines.append(f"[{hc}]Integrity: {kind}  ({len(errors)} issue(s))[/{hc}]")
+        for e in errors:
+            sev = getattr(e, "severity", "error")
+            c   = "red" if sev == "error" else "cyan"
+            lines.append(f"  [{c}]{rich_escape(e.code)}[/{c}]  [dim]{rich_escape(e.message)}[/dim]")
+        lines.append("")
+    elif validated:
+        lines.append("[green]Integrity: OK[/green]")
         lines.append("")
 
     if record.detail:

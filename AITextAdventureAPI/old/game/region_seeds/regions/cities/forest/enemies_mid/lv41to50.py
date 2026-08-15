@@ -1,0 +1,28 @@
+# Forest Mid City (Boiling Bubble) — hostile seeds Lv 41–50.
+
+RANDOM_HOSTILE_SEEDS = [
+ {"id": "twilight_beast", "name": "Twilight Beast", "hostile_type": "creature", "role": "damage", "min_spawn_level": 50, "rarity": "superrare", "base_xp": 4500,
+  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (800, 2800),
+  "basic_attack": "twilight lunge", "strong_attack": "dusk maul",
+  "player_abilities": ["dark_magic_lv1_shadow_tendril"],
+  "base_str": 44, "base_dex": 18, "base_con": 40, "base_int": 8, "base_hp": 3200, "base_ap": 12,
+  "str_per_level": 9, "dex_per_level": 3, "con_per_level": 8, "int_per_level": 1},
+ {"id": "shade_raptor_mid", "name": "Shade Raptor", "hostile_type": "creature", "role": "damage", "min_spawn_level": 41, "rarity": "common", "base_xp": 850,
+  "common_drop": "stimulant_large", "rare_drop": None, "money_range": (120, 440),
+  "basic_attack": "raptor slash", "strong_attack": "shadow pounce",
+  "player_abilities": ["lv2_hostile_ability_dark_ice_skill_void_spike"],
+  "base_str": 24, "base_dex": 22, "base_con": 22, "base_int": 6, "base_hp": 1100, "base_ap": 10,
+  "str_per_level": 5, "dex_per_level": 4, "con_per_level": 4, "int_per_level": 1},
+ {"id": "arcane_lurker_mid", "name": "Arcane Lurker", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level": 45, "rarity": "uncommon", "base_xp": 1200,
+  "common_drop": "tome_int", "rare_drop": None, "money_range": (180, 600),
+  "basic_attack": "rune lash", "strong_attack": "arcane unravelling",
+  "player_abilities": ["lv2_hostile_ability_dark_electric_magic_abyssal_storm"],
+  "base_str": 12, "base_dex": 18, "base_con": 14, "base_int": 28, "base_hp": 1000, "base_ap": 16,
+  "str_per_level": 2, "dex_per_level": 3, "con_per_level": 2, "int_per_level": 6},
+ {"id": "blight_wolf_mid", "name": "Blight Wolf", "hostile_type": "creature", "role": "damage", "min_spawn_level": 47, "rarity": "uncommon", "base_xp": 1350,
+  "common_drop": "herb_major", "rare_drop": None, "money_range": (200, 700),
+  "basic_attack": "infected bite", "strong_attack": "blight howl",
+  "player_abilities": ["level_1_hostile_ability_dark_skill_corrosive_spit"],
+  "base_str": 28, "base_dex": 24, "base_con": 26, "base_int": 8, "base_hp": 1280, "base_ap": 10,
+  "str_per_level": 6, "dex_per_level": 4, "con_per_level": 5, "int_per_level": 1},
+]

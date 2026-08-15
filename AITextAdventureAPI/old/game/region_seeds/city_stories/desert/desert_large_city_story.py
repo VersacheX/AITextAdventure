@@ -9,7 +9,7 @@ NPCS = [
 			'A wiry, quick-tongued merchant who runs a stall within The Black Market Guild. '
 			'He moves rare and illicit goods through shadowed backrooms, always watching for opportunity.'
 		),
-		"image": "desert_large:kadeem1",
+		"image": "npcs:kadeem1",
 		"psychology": {
 			"mbti": "ESTP",
 			"dominant": "Se — Lives in the moment, reading rooms and seizing deals before others see them.",
@@ -34,7 +34,7 @@ NPCS = [
 			"A smooth, well-dressed broker who operates out of Broker's Hideout. "
 			'She arranges favors, introductions, and discreet exchanges for the right price.'
 		),
-		"image": "desert_large:mara1",
+		"image": "npcs:mara1",
 		"psychology": {
 			"mbti": "ENTJ",
 			"dominant": "Te — Structures every exchange to her advantage; conversations are managed, not had.",
@@ -59,7 +59,7 @@ NPCS = [
             'A desert mystic who can hear the "songs" of shifting dunes. '
             'She studies the Dune Choir and knows their ancient patterns.'
         ),
-        "image": "desert_large:rhyla1",
+        "image": "npcs:rhyla1",
         "psychology": {
             "mbti": "INFP",
             "dominant": "Fi — Guided by profound inner conviction about the desert's sacred voice.",
@@ -84,7 +84,7 @@ NPCS = [
             'A humanoid shape formed from vibrating sand. It speaks in layered voices, '
             'each one a memory of the desert.'
         ),
-        "image": "desert_large:choir_echo1",
+        "image": "npcs:choir_echo1",
         "psychology": {
             "mbti": "ISFJ",
             "dominant": "Si — Exists entirely to preserve and repeat the memories encoded within it.",

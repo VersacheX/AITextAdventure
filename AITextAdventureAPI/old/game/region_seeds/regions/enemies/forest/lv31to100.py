@@ -13,7 +13,7 @@ SEEDS_LV31TO100 = [
  {"id": "nightmare_dryad", "name": "Nightmare Dryad", "hostile_type": "spirit", "role": "hazard", "min_spawn_level": 31, "rarity": "uncommon", "base_xp": 500,
   "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (40, 160),
   "basic_attack": "nightmare touch", "strong_attack": "dream entangle",
-  "player_abilities": ["dark_magic_lv1_sleep_gloom", "air_dark_magic_lv2_night_wind"],
+  "player_abilities": ["level_1_hostile_ability_earth_magic_sap_bloom", "air_dark_magic_lv2_night_wind"],
   "base_str": 6, "base_dex": 14, "base_con": 8, "base_int": 22, "base_hp": 360, "base_ap": 20,
   "str_per_level": 1, "dex_per_level": 2, "con_per_level": 1, "int_per_level": 5},
 

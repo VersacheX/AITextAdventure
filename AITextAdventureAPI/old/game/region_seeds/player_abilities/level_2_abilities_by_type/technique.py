@@ -102,6 +102,7 @@ LEVEL_2_TECHNIQUE_ABILITY_SEEDS = [
   {"id": "earth_light_technique_lv2_stone_guard", "name": "Stone Guard", "description": "A defensive technique that fortifies allies.", "ability_type": "technique", "level":2, "elements": ["earth", "light"], "base_power":0, "ap_cost":20, "effect": "status", "status_keys": ["defense_buff"], "can_aoe": True, "non_player_ability": True},
   {"id": "air_air_technique_lv2_whirlwind_barrage", "name": "Whirlwind Barrage", "description": "A flurry of wind attacks that hits multiple enemies.", "ability_type": "technique", "level":2, "elements": ["air", "air"], "base_power":30, "ap_cost":25, "effect": "damage", "can_aoe": True, "non_player_ability": True},
   {"id": "earth_electric_lv2_technique_chain_reactor", "name": "Chain Reactor", "description": "A chain reaction of electric energy that jumps between enemies.", "ability_type": "technique", "level":2, "elements": ["earth", "electric"], "base_power":28, "ap_cost":30, "effect": "damage", "can_aoe": True, "non_player_ability": True},
+  {"id": "lv2_hostile_ability_earth_air_technique_petrify_gaze", "name": "Petrify Gaze", "description": "A gaze that turns enemies to stone, immobilizing them.", "ability_type": "technique", "level":2, "elements": ["earth", "air"], "base_power":0, "ap_cost":35, "effect": "status", "status_keys": ["petrify"], "can_aoe": False, "non_player_ability": True},
 
   #### UNIQUE CHARACTER ABILITIES
   {

@@ -16,6 +16,7 @@ from tui.screens.dev.data_mgmt.handlers._constants import (
     EQUIPMENT_CATEGORY,
     ROW_DEFAULT_STYLE,
     ROW_ERROR_STYLE,
+    ROW_WARN_STYLE,
     ROW_NOTICE_STYLE,
     ROW_BLUE_STYLE,
     ROW_INFO_STYLE,
@@ -76,12 +77,16 @@ _SORT_COL_MAP: dict[str, str] = {
 # ── Row style / error cell helpers ────────────────────────────────────────────
 
 def _equip_row_style(record: Any, rating: str) -> Style:
-    """Row tint priority: error > notice > balance-strong > balance-weak > default."""
+    """Row tint priority: error > notice > warning > info > balance-strong > balance-weak > default."""
     errors = (record.extras.get("_errors") or []) if record.extras else []
-    if any(e.severity == "error"  for e in errors):
+    if any(e.severity == "error"   for e in errors):
         return _EQUIP_ERROR_STYLE
-    if any(e.severity == "notice" for e in errors):
+    if any(e.severity == "notice"  for e in errors):
         return _EQUIP_NOTICE_STYLE
+    if any(e.severity == "warning" for e in errors):
+        return ROW_WARN_STYLE
+    if any(e.severity == "info"    for e in errors):
+        return ROW_INFO_STYLE
     if rating == "strong":
         return _EQUIP_STRONG_STYLE
     if rating == "weak":
@@ -94,14 +99,20 @@ def _equip_error_cell(record: Any) -> Text:
     errors = (record.extras.get("_errors") or []) if record.extras else []
     if not errors:
         return Text("✓", style=ROW_OK_STYLE)
-    has_error  = any(e.severity == "error"  for e in errors)
-    has_notice = any(e.severity == "notice" for e in errors)
+    has_error   = any(e.severity == "error"   for e in errors)
+    has_notice  = any(e.severity == "notice"  for e in errors)
+    has_warning = any(e.severity == "warning" for e in errors)
+    has_info    = any(e.severity == "info"    for e in errors)
     count = len(errors)
     if has_error:
         return Text(f"✗{count}", style=_EQUIP_ERROR_STYLE)
     if has_notice:
         return Text(f"◆{count}", style=_EQUIP_NOTICE_STYLE)
-    return Text(f"⚠{count}", style=Style(color="yellow"))
+    if has_warning:
+        return Text(f"⚠{count}", style=ROW_WARN_STYLE)
+    if has_info:
+        return Text(f"i{count}", style=ROW_INFO_STYLE)
+    return Text(f"⚠{count}", style=ROW_WARN_STYLE)
 
 
 def _equip_severity_rank(record: Any) -> int:
@@ -271,6 +282,10 @@ def copy_equipment(screen: "DataMgmtScreen") -> str:
             tag = "  ·  [ERROR]"
         elif any(e.severity == "notice" for e in errors):
             tag = "  ·  [NOTICE]"
+        elif any(e.severity == "warning" for e in errors):
+            tag = "  ·  [WARNING]"
+        elif any(e.severity == "info" for e in errors):
+            tag = "  ·  [INFO]"
         elif rating == "strong":
             tag = "  ·  [STRONG]"
         elif rating == "weak":
@@ -299,12 +314,21 @@ def validate_equipment_for_screen(screen: "DataMgmtScreen") -> None:
 
     total_errors = summary.get("total_errors", 0)
     invalid      = summary.get("invalid", 0)
+    by_code      = summary.get("by_code", {})
 
     if total_errors == 0:
         screen.notify("✓ Equipment integrity OK — all items are reachable.", timeout=3.0)
     else:
+        parts = []
+        if by_code.get("EQUIPMENT_NOT_FOUND_IN_TIMELINE"):
+            parts.append(f"{by_code['EQUIPMENT_NOT_FOUND_IN_TIMELINE']} unreachable")
+        if by_code.get("EQUIPMENT_TP_LOW"):
+            parts.append(f"{by_code['EQUIPMENT_TP_LOW']} low-TP")
+        if by_code.get("EQUIPMENT_TP_HIGH"):
+            parts.append(f"{by_code['EQUIPMENT_TP_HIGH']} high-TP")
+        detail = ", ".join(parts) if parts else f"{invalid} issue(s)"
         screen.notify(
-            f"✗ {invalid} item(s) not found in timeline — flagged in table.",
+            f"✗ {total_errors} equipment issue(s): {detail} — flagged in table.",
             severity="warning",
             timeout=5.0,
         )

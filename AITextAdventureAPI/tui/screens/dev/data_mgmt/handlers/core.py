@@ -62,6 +62,7 @@ from tui.screens.dev.data_mgmt.handlers._constants import (
     CITY_CATEGORY,
     CHARACTER_CATEGORY,
     SIMULATION_CATEGORY,
+    SPECIAL_ITEM_CATEGORY,
 )
 
 # Lazy imports of per-category handlers (avoids circular imports at module level)
@@ -70,16 +71,17 @@ if TYPE_CHECKING:
     from tui.screens.dev.data_mgmt.data_mgmt_screen import DataMgmtScreen
 
 # Keep old private aliases so any internal call in this file resolves cleanly
-_DIALOG_CATEGORY     = DIALOG_CATEGORY
-_EQUIPMENT_CATEGORY  = EQUIPMENT_CATEGORY
-_TIMELINE_CATEGORY   = TIMELINE_CATEGORY
-_NPC_CATEGORY        = NPC_CATEGORY
-_ABILITY_CATEGORY    = ABILITY_CATEGORY
-_HOSTILE_CATEGORY    = HOSTILE_CATEGORY
-_DUNGEON_CATEGORY    = DUNGEON_CATEGORY
-_CITY_CATEGORY       = CITY_CATEGORY
-_CHARACTER_CATEGORY  = CHARACTER_CATEGORY
-_SIMULATION_CATEGORY = SIMULATION_CATEGORY
+_DIALOG_CATEGORY      = DIALOG_CATEGORY
+_EQUIPMENT_CATEGORY   = EQUIPMENT_CATEGORY
+_TIMELINE_CATEGORY    = TIMELINE_CATEGORY
+_NPC_CATEGORY         = NPC_CATEGORY
+_ABILITY_CATEGORY     = ABILITY_CATEGORY
+_HOSTILE_CATEGORY     = HOSTILE_CATEGORY
+_DUNGEON_CATEGORY     = DUNGEON_CATEGORY
+_CITY_CATEGORY        = CITY_CATEGORY
+_CHARACTER_CATEGORY   = CHARACTER_CATEGORY
+_SIMULATION_CATEGORY  = SIMULATION_CATEGORY
+_SPECIAL_ITEM_CATEGORY = SPECIAL_ITEM_CATEGORY
 
 
 # ── Toolbar active-tree helper ────────────────────────────────────────────────
@@ -105,27 +107,29 @@ def _active_tree_id(screen: "DataMgmtScreen") -> str:
 def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
     from tui.screens.dev.data_mgmt.simulation_panel import SimulationPanel  # noqa: PLC0415
 
-    is_dialog     = category == _DIALOG_CATEGORY
-    is_equipment  = category == _EQUIPMENT_CATEGORY
-    is_timeline   = category == _TIMELINE_CATEGORY
-    is_npc        = category == _NPC_CATEGORY
-    is_ability    = category == _ABILITY_CATEGORY
-    is_hostile    = category == _HOSTILE_CATEGORY
-    is_dungeon    = category == _DUNGEON_CATEGORY
-    is_city       = category == _CITY_CATEGORY
-    is_simulation = category == _SIMULATION_CATEGORY
-    is_character  = category == _CHARACTER_CATEGORY
-    is_tree       = is_dialog or is_timeline or is_npc or is_dungeon
+    is_dialog      = category == _DIALOG_CATEGORY
+    is_equipment   = category == _EQUIPMENT_CATEGORY
+    is_timeline    = category == _TIMELINE_CATEGORY
+    is_npc         = category == _NPC_CATEGORY
+    is_ability     = category == _ABILITY_CATEGORY
+    is_hostile     = category == _HOSTILE_CATEGORY
+    is_dungeon     = category == _DUNGEON_CATEGORY
+    is_city        = category == _CITY_CATEGORY
+    is_simulation  = category == _SIMULATION_CATEGORY
+    is_character   = category == _CHARACTER_CATEGORY
+    is_special_item = category == _SPECIAL_ITEM_CATEGORY
+    is_tree        = is_dialog or is_timeline or is_npc or is_dungeon
 
-    screen.query_one("#dm-filter", Input).display                  = not (is_dialog or is_equipment or is_ability or is_hostile or is_simulation)
-    screen.query_one("#dm-dialog-filter-row").display              = is_dialog
-    screen.query_one("#dm-equipment-filter-row", Vertical).display = is_equipment
-    screen.query_one("#dm-hostile-filter-row",   Vertical).display = is_hostile
-    screen.query_one("#dm-ability-filter-row",   Vertical).display = is_ability
-    screen.query_one("#dm-list", ListView).display                 = not is_tree and not is_equipment and not is_hostile and not is_ability and not is_simulation
-    screen.query_one("#dm-equipment-table", DataTable).display     = is_equipment
-    screen.query_one("#dm-hostile-table",   DataTable).display     = is_hostile
-    screen.query_one("#dm-ability-table",   DataTable).display     = is_ability
+    screen.query_one("#dm-filter", Input).display                   = not (is_dialog or is_equipment or is_ability or is_hostile or is_simulation)
+    screen.query_one("#dm-dialog-filter-row").display               = is_dialog
+    screen.query_one("#dm-equipment-filter-row", Vertical).display  = is_equipment
+    screen.query_one("#dm-hostile-filter-row",   Vertical).display  = is_hostile
+    screen.query_one("#dm-ability-filter-row",   Vertical).display  = is_ability
+    screen.query_one("#dm-list", ListView).display                  = not is_tree and not is_equipment and not is_hostile and not is_ability and not is_simulation and not is_special_item
+    screen.query_one("#dm-equipment-table",    DataTable).display   = is_equipment
+    screen.query_one("#dm-hostile-table",      DataTable).display   = is_hostile
+    screen.query_one("#dm-ability-table",      DataTable).display   = is_ability
+    screen.query_one("#dm-special-item-table", DataTable).display   = is_special_item
     screen.query_one("#dm-dialog-tree",  Tree).display             = is_dialog
     screen.query_one("#dm-timeline-tree", Tree).display            = is_timeline
     screen.query_one("#dm-npc-tree",     Tree).display             = is_npc
@@ -134,7 +138,7 @@ def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
     screen.query_one("#dm-dungeon-tree", Tree).display             = is_dungeon
     screen.query_one("#dm-expand",   Button).display               = is_tree
     screen.query_one("#dm-collapse", Button).display               = is_tree
-    screen.query_one("#dm-copy",     Button).display               = is_tree or is_equipment or is_hostile or is_ability or is_character or is_city
+    screen.query_one("#dm-copy",     Button).display               = is_tree or is_equipment or is_hostile or is_ability or is_character or is_city or is_special_item
     screen.query_one("#dm-validate-timeline",     Button).display  = is_timeline
     screen.query_one("#dm-validate-abilities",    Button).display  = is_ability
     screen.query_one("#dm-validate-hostiles",     Button).display  = is_hostile
@@ -143,10 +147,11 @@ def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
     screen.query_one("#dm-validate-equipment",    Button).display  = is_equipment
     screen.query_one("#dm-validate-characters",   Button).display  = is_character
     screen.query_one("#dm-validate-npc",          Button).display  = is_npc
+    screen.query_one("#dm-validate-special-items", Button).display = is_special_item
     screen.query_one("#dm-equip-sort-dir",   Button).display       = is_equipment
     screen.query_one("#dm-hostile-sort-dir", Button).display       = is_hostile
     screen.query_one("#dm-ability-sort-dir", Button).display       = is_ability
-    screen.query_one(NpcMusicPlayerWidget).display                 = is_npc
+    screen.query_one(NpcMusicPlayerWidget).display                  = is_npc
 
     detail_panel = screen.query_one("#dm-detail-panel")
     existing_sim = list(detail_panel.query(SimulationPanel))
@@ -318,6 +323,7 @@ def handle_button_pressed(screen: "DataMgmtScreen", event: Button.Pressed) -> No
     from tui.screens.dev.data_mgmt.handlers.equipment_handler   import validate_equipment_for_screen   # noqa: PLC0415
     from tui.screens.dev.data_mgmt.handlers.character_handler   import validate_characters_for_screen  # noqa: PLC0415
     from tui.screens.dev.data_mgmt.handlers.npc_handler         import validate_npc_for_screen         # noqa: PLC0415
+    from tui.screens.dev.data_mgmt.handlers.special_item_handler import validate_special_items_for_screen  # noqa: PLC0415
 
     bid = event.button.id or ""
     if bid == "dm-expand":
@@ -342,6 +348,8 @@ def handle_button_pressed(screen: "DataMgmtScreen", event: Button.Pressed) -> No
         validate_characters_for_screen(screen)
     elif bid == "dm-validate-npc":
         validate_npc_for_screen(screen)
+    elif bid == "dm-validate-special-items":
+        validate_special_items_for_screen(screen)
     elif bid == "dm-equip-sort-dir":
         screen._equipment_sort_asc = not screen._equipment_sort_asc
         event.button.label = "↑" if screen._equipment_sort_asc else "↓"
@@ -360,11 +368,12 @@ def handle_button_pressed(screen: "DataMgmtScreen", event: Button.Pressed) -> No
 
 def _handle_copy(screen: "DataMgmtScreen") -> None:
     from tui.screens.dev.data_mgmt.utils import serialize_dialog_tree_from_widget  # noqa: PLC0415
-    from tui.screens.dev.data_mgmt.handlers.equipment_handler  import copy_equipment   # noqa: PLC0415
-    from tui.screens.dev.data_mgmt.handlers.hostile_handler    import copy_hostiles    # noqa: PLC0415
-    from tui.screens.dev.data_mgmt.handlers.ability_handler    import copy_abilities   # noqa: PLC0415
-    from tui.screens.dev.data_mgmt.handlers.character_handler  import copy_characters  # noqa: PLC0415
-    from tui.screens.dev.data_mgmt.handlers.city_region_handler import copy_city       # noqa: PLC0415
+    from tui.screens.dev.data_mgmt.handlers.equipment_handler   import copy_equipment    # noqa: PLC0415
+    from tui.screens.dev.data_mgmt.handlers.hostile_handler     import copy_hostiles     # noqa: PLC0415
+    from tui.screens.dev.data_mgmt.handlers.ability_handler     import copy_abilities    # noqa: PLC0415
+    from tui.screens.dev.data_mgmt.handlers.character_handler   import copy_characters   # noqa: PLC0415
+    from tui.screens.dev.data_mgmt.handlers.city_region_handler import copy_city         # noqa: PLC0415
+    from tui.screens.dev.data_mgmt.handlers.special_item_handler import copy_special_items  # noqa: PLC0415
 
     category = screen._category
 
@@ -400,6 +409,9 @@ def _handle_copy(screen: "DataMgmtScreen") -> None:
     elif category == _CITY_CATEGORY:
         text = copy_city(screen)
 
+    elif category == _SPECIAL_ITEM_CATEGORY:
+        text = copy_special_items(screen)
+
     else:
         text = serialize_filtered_tree(screen._last_filtered) if screen._last_filtered is not None else ""
 
@@ -411,12 +423,16 @@ def _handle_copy(screen: "DataMgmtScreen") -> None:
 # ── Generic list rebuild (non-equipment categories) ──────────────────────────
 
 def rebuild_list_for_screen(screen: "DataMgmtScreen") -> None:
-    from tui.screens.dev.data_mgmt.handlers.equipment_handler import rebuild_list_for_screen as _equip_rebuild  # noqa: PLC0415
+    from tui.screens.dev.data_mgmt.handlers.equipment_handler    import rebuild_list_for_screen as _equip_rebuild         # noqa: PLC0415
+    from tui.screens.dev.data_mgmt.handlers.special_item_handler import rebuild_list_for_screen as _special_item_rebuild  # noqa: PLC0415
 
     if not screen._loaded:
         return
     if screen._category == EQUIPMENT_CATEGORY:
         _equip_rebuild(screen)
+        return
+    if screen._category == _SPECIAL_ITEM_CATEGORY:
+        _special_item_rebuild(screen)
         return
 
     query = ""

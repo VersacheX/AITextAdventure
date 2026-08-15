@@ -1,0 +1,28 @@
+# Forest Large City (Aurelion Veil) — hostile seeds levels 31–40.
+
+RANDOM_HOSTILE_SEEDS = [
+ {"id": "dusk_archon", "name": "Dusk Archon", "hostile_type": "shadow", "role": "hazard", "min_spawn_level": 30, "rarity": "superrare", "base_xp": 1400,
+  "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (200, 700),
+  "basic_attack": "dusk decree", "strong_attack": "archon's veil",
+  "player_abilities": ["level_1_hostile_ability_night_whisper", "dark_dark_magic_lv2_umbra_storm"],
+  "base_str": 10, "base_dex": 14, "base_con": 10, "base_int": 22, "base_hp": 600, "base_ap": 20,
+  "str_per_level": 1, "dex_per_level": 2, "con_per_level": 2, "int_per_level": 5},
+ {"id": "forest_warlord", "name": "Forest Warlord", "hostile_type": "humanoid", "role": "damage", "min_spawn_level": 33, "rarity": "uncommon", "base_xp": 500,
+  "common_drop": "stimulant_large", "rare_drop": None, "money_range": (140, 480),
+  "basic_attack": "warlord cleave", "strong_attack": "forest siege",
+  "player_abilities": ["level_1_hostile_ability_inspire"],
+  "base_str": 20, "base_dex": 10, "base_con": 18, "base_int": 6, "base_hp": 520, "base_ap": 10,
+  "str_per_level": 4, "dex_per_level": 1, "con_per_level": 3, "int_per_level": 1},
+ {"id": "twilight_sorcerer", "name": "Twilight Sorcerer", "hostile_type": "magic", "role": "hazard", "min_spawn_level": 33, "rarity": "uncommon", "base_xp": 520,
+  "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (100, 360),
+  "basic_attack": "twilight bolt", "strong_attack": "dusk nova",
+  "player_abilities": ["dark_magic_lv1_shadow_tendril", "air_dark_magic_lv2_night_wind"],
+  "base_str": 4, "base_dex": 10, "base_con": 6, "base_int": 22, "base_hp": 320, "base_ap": 20,
+  "str_per_level": 0, "dex_per_level": 1, "con_per_level": 1, "int_per_level": 5},
+ {"id": "ancient_treant_lord", "name": "Ancient Treant Lord", "hostile_type": "elemental", "role": "damage", "min_spawn_level": 38, "rarity": "rare", "base_xp": 1000,
+  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (60, 220),
+  "basic_attack": "ancient branch", "strong_attack": "forest earthquake",
+  "player_abilities": ["earth_magic_lv1_tremor", "earth_earth_magic_lv2_quake_field"],
+  "base_str": 28, "base_dex": 2, "base_con": 26, "base_int": 10, "base_hp": 1200, "base_ap": 12,
+  "str_per_level": 6, "dex_per_level": 0, "con_per_level": 5, "int_per_level": 2},
+]

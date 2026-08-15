@@ -42,6 +42,44 @@ RANDOM_HOSTILE_SEEDS = [
   "base_str": 34, "base_dex": 18, "base_con": 30, "base_int": 10, "base_hp": 1600, "base_ap": 14,
   "str_per_level": 7, "dex_per_level": 3, "con_per_level": 6, "int_per_level": 2},
 
+ # min_spawn_level == 51
+ {"id": "blight_runner_small", "name": "Blight Runner", "hostile_type": "creature", "role": "damage", "min_spawn_level": 51, "rarity": "common", "base_xp": 1300,
+  "common_drop": "stimulant_large", "rare_drop": None, "money_range": (280, 850),
+  "basic_attack": "infected lunge", "strong_attack": "blight sprint",
+  "player_abilities": ["lv2_hostile_ability_dark_ice_skill_void_spike"],
+  "base_str": 28, "base_dex": 30, "base_con": 24, "base_int": 8, "base_hp": 1300, "base_ap": 11,
+  "str_per_level": 5, "dex_per_level": 5, "con_per_level": 4, "int_per_level": 1},
+
+ {"id": "shade_ravager_small", "name": "Shade Ravager", "hostile_type": "undead", "role": "hazard", "min_spawn_level": 56, "rarity": "uncommon", "base_xp": 1800,
+  "common_drop": "herb_major", "rare_drop": None, "money_range": (180, 640),
+  "basic_attack": "shadow gouge", "strong_attack": "darkwood dirge",
+  "player_abilities": ["lv2_hostile_ability_dark_air_skill_nightmare_wave"],
+  "base_str": 12, "base_dex": 30, "base_con": 16, "base_int": 28, "base_hp": 1440, "base_ap": 13,
+  "str_per_level": 2, "dex_per_level": 5, "con_per_level": 2, "int_per_level": 4},
+
+ # min_spawn_level == 71
+ {"id": "grovekeeper_revenant", "name": "Grovekeeper Revenant", "hostile_type": "undead", "role": "support", "min_spawn_level": 71, "rarity": "rare", "base_xp": 8500,
+  "common_drop": "herb_major", "rare_drop": "tome_con", "money_range": (2000, 7000),
+  "basic_attack": "revenant grasp", "strong_attack": "grove restoration curse",
+  "player_abilities": ["seizing_the_moment", "predator_rush"],
+  "base_str": 20, "base_dex": 50, "base_con": 28, "base_int": 58, "base_hp": 5600, "base_ap": 18,
+  "str_per_level": 3, "dex_per_level": 7, "con_per_level": 4, "int_per_level": 8},
+
+ {"id": "arcane_warden_small", "name": "Arcane Warden", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level": 76, "rarity": "uncommon", "base_xp": 10000,
+  "common_drop": "tome_int", "rare_drop": None, "money_range": (2500, 8000),
+  "basic_attack": "runic lash", "strong_attack": "ward burst",
+  "player_abilities": ["wild_possibility"],
+  "base_str": 16, "base_dex": 44, "base_con": 20, "base_int": 62, "base_hp": 4800, "base_ap": 18,
+  "str_per_level": 2, "dex_per_level": 6, "con_per_level": 3, "int_per_level": 9},
+
+ # min_spawn_level == 81
+ {"id": "void_forest_stalker", "name": "Void Forest Stalker", "hostile_type": "eldritch", "role": "damage", "min_spawn_level": 81, "rarity": "rare", "base_xp": 13000,
+  "common_drop": "stimulant_large", "rare_drop": "tome_int", "money_range": (4000, 13000),
+  "basic_attack": "void tendril strike", "strong_attack": "forest annihilation",
+  "player_abilities": ["rot_of_potential", "detached_slaughter"],
+  "base_str": 78, "base_dex": 54, "base_con": 72, "base_int": 36, "base_hp": 6500, "base_ap": 20,
+  "str_per_level": 9, "dex_per_level": 7, "con_per_level": 9, "int_per_level": 5},
+
  # min_spawn_level == 70
  {"id": "elder_vine_titan", "name": "Elder Vine Titan", "hostile_type": "elemental", "role": "damage", "min_spawn_level": 70, "rarity": "superrare", "base_xp": 14000,
   "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (4000, 14000),

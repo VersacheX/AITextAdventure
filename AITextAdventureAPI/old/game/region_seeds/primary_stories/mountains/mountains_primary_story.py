@@ -53,13 +53,10 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         'constitution': 38,
         'level': 30,
         'abilities': [
-            'dark_earth_electric_tech_lv3_petrifying_shock',
-            'earth_electric_water_tech_lv3_tectonic_current',
-            'fire_earth_tech_lv2_forge_pulse',
-            'earth_earth_tech_lv2_seismic_rupture',
-            'electric_earth_tech_lv2_grounded_spike',
-            'fire_tech_lv1_flux_dampener',
-            'earth_tech_lv1_fault_inhibitor',
+            'lv2_unique_ability_tech_bragg_golem_pulse',
+            'lv2_unique_ability_tech_bragg_forge_armor',
+            'lv3_unique_ability_tech_bragg_fracture_pulse',
+            'lv3_unique_ability_tech_bragg_core_overload',
         ]
     }
 ]

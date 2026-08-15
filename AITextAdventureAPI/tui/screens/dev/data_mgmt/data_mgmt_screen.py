@@ -178,6 +178,10 @@ class DataMgmtScreen(BaseScreen):
         display: none;
     }
 
+    #dm-special-item-table {
+        height: 1fr;
+        display: none;
+    }
     #dm-equipment-type-radio,
     #dm-equipment-slot-radio,
     #dm-equipment-sort-radio,
@@ -276,7 +280,7 @@ class DataMgmtScreen(BaseScreen):
 
     #dm-list-panel {
         width: 1fr;
-        height: 100%;
+        height: 1fr;
     }
 
     #dm-list {
@@ -284,38 +288,38 @@ class DataMgmtScreen(BaseScreen):
     }
 
     #dm-dialog-tree {
-        height: 100%;
+        height: 1fr;
         display: none;
     }
 
     #dm-timeline-tree {
-        height: 100%;
+        height: 1fr;
         display: none;
     }
 
     #dm-npc-tree {
-        height: 100%;
+        height: 1fr;
         display: none;
     }
 
     #dm-ability-tree {
-        height: 100%;
+        height: 1fr;
         display: none;
     }
 
     #dm-hostile-tree {
-        height: 100%;
+        height: 1fr;
         display: none;
     }
 
     #dm-dungeon-tree {
-        height: 100%;
+        height: 1fr;
         display: none;
     }
 
     #dm-detail-panel {
         width: 80;
-        height: 100%;
+        height: 1fr;
         padding: 0;
         border-left: solid $accent 30%;
     }
@@ -444,9 +448,10 @@ class DataMgmtScreen(BaseScreen):
             yield Button("Validate Hostiles",  id="dm-validate-hostiles",   variant="default")
             yield Button("Validate Dungeons",  id="dm-validate-dungeons",   variant="default")
             yield Button("Validate Regions",   id="dm-validate-city-region", variant="default")
-            yield Button("Validate Equipment",  id="dm-validate-equipment",   variant="default")
-            yield Button("Validate Characters", id="dm-validate-characters",  variant="default")
-            yield Button("Validate NPCs", id="dm-validate-npc", variant="default")
+            yield Button("Validate Equipment",     id="dm-validate-equipment",     variant="default")
+            yield Button("Validate Characters",    id="dm-validate-characters",    variant="default")
+            yield Button("Validate NPCs",          id="dm-validate-npc",           variant="default")
+            yield Button("Validate Special Items", id="dm-validate-special-items", variant="default")
             yield Button("↑", id="dm-equip-sort-dir", variant="default")
             yield Button("↑", id="dm-hostile-sort-dir", variant="default")
             yield Button("↑", id="dm-ability-sort-dir", variant="default")
@@ -456,9 +461,10 @@ class DataMgmtScreen(BaseScreen):
             with Vertical(id="dm-list-panel"):
                 yield NpcMusicPlayerWidget(id="npc-player")
                 yield ListView(id="dm-list")
-                yield DataTable(id="dm-equipment-table", cursor_type="row", show_cursor=True)
-                yield DataTable(id="dm-hostile-table",   cursor_type="row", show_cursor=True)
-                yield DataTable(id="dm-ability-table",   cursor_type="row", show_cursor=True)
+                yield DataTable(id="dm-equipment-table",    cursor_type="row", show_cursor=True)
+                yield DataTable(id="dm-hostile-table",      cursor_type="row", show_cursor=True)
+                yield DataTable(id="dm-ability-table",      cursor_type="row", show_cursor=True)
+                yield DataTable(id="dm-special-item-table", cursor_type="row", show_cursor=True)
                 dialog_tree: Tree[DialogueLine] = Tree("Dialogue", id="dm-dialog-tree")
                 dialog_tree.show_root = False
                 yield dialog_tree

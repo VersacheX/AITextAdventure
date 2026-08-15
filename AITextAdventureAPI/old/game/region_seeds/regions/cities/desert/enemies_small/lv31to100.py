@@ -65,12 +65,26 @@ RANDOM_HOSTILE_SEEDS = [
   "base_str": 54, "base_dex": 6, "base_con": 50, "base_int": 22, "base_hp": 7000, "base_ap": 14,
   "str_per_level": 11, "dex_per_level": 1, "con_per_level": 10, "int_per_level": 4},
 
+ {"id": "wasteland_ironskin_brute", "name": "Wasteland Ironskin Brute", "hostile_type": "humanoid", "role": "damage", "min_spawn_level": 53, "rarity": "rare", "base_xp": 3500,
+  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (700, 2400),
+  "basic_attack": "ironskin bash", "strong_attack": "wasteland surge",
+  "player_abilities": [],
+  "base_str": 44, "base_dex": 8, "base_con": 40, "base_int": 4, "base_hp": 3200, "base_ap": 8,
+  "str_per_level": 9, "dex_per_level": 1, "con_per_level": 8, "int_per_level": 0},
+
  {"id": "scrap_necromancer", "name": "Scrap Necromancer", "hostile_type": "undead", "role": "hazard", "min_spawn_level": 62, "rarity": "rare", "base_xp": 5000,
   "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (800, 2800),
   "basic_attack": "death weld", "strong_attack": "undead parts barrage",
   "player_abilities": ["dark_magic_lv1_shadow_tendril", "dark_dark_magic_lv2_umbra_storm"],
   "base_str": 10, "base_dex": 10, "base_con": 12, "base_int": 46, "base_hp": 2400, "base_ap": 40,
   "str_per_level": 1, "dex_per_level": 1, "con_per_level": 2, "int_per_level": 10},
+
+ {"id": "toxic_wasteland_titan", "name": "Toxic Wasteland Titan", "hostile_type": "elemental", "role": "damage", "min_spawn_level": 67, "rarity": "superrare", "base_xp": 11000,
+  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (3000, 10000),
+  "basic_attack": "toxic titan slam", "strong_attack": "biohazard shockwave",
+  "player_abilities": ["level_1_hostile_ability_dark_skill_corrosive_spit"],
+  "base_str": 64, "base_dex": 10, "base_con": 58, "base_int": 10, "base_hp": 11000, "base_ap": 10,
+  "str_per_level": 13, "dex_per_level": 1, "con_per_level": 12, "int_per_level": 2},
 
  # min_spawn_level == 75
  {"id": "wasteland_god_beast", "name": "Wasteland God Beast", "hostile_type": "creature", "role": "damage", "min_spawn_level": 75, "rarity": "superrare", "base_xp": 18000,
@@ -109,4 +123,11 @@ RANDOM_HOSTILE_SEEDS = [
   "player_abilities": ["dark_dark_magic_lv2_umbra_storm", "dark_dark_dark_magic_lv3_shadow_blast"],
   "base_str": 24, "base_dex": 28, "base_con": 26, "base_int": 130, "base_hp": 70000, "base_ap": 110,
   "str_per_level": 4, "dex_per_level": 5, "con_per_level": 4, "int_per_level": 26},
+
+ {"id": "biohazard_apex_titan", "name": "Biohazard Apex Titan", "hostile_type": "elemental", "role": "damage", "min_spawn_level": 94, "rarity": "superrare", "base_xp": 45000,
+  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (16000, 54000),
+  "basic_attack": "apex rad slam", "strong_attack": "biohazard world collapse",
+  "player_abilities": ["level_1_hostile_ability_dark_skill_corrosive_spit"],
+  "base_str": 114, "base_dex": 14, "base_con": 108, "base_int": 16, "base_hp": 66000, "base_ap": 14,
+  "str_per_level": 23, "dex_per_level": 2, "con_per_level": 22, "int_per_level": 3},
 ]

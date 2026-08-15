@@ -1,0 +1,28 @@
+# Grassland Large City (Crosswind Bazaar) — hostile seeds Lv 31–40.
+
+RANDOM_HOSTILE_SEEDS = [
+ {"id": "tempest_colossus", "name": "Tempest Colossus", "hostile_type": "elemental", "role": "damage", "min_spawn_level": 38, "rarity": "rare", "base_xp": 1200,
+  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (100, 400),
+  "basic_attack": "tempest slam", "strong_attack": "storm obliteration",
+  "player_abilities": ["electric_electric_magic_lv2_chain_bolt"],
+  "base_str": 30, "base_dex": 8, "base_con": 28, "base_int": 10, "base_hp": 1400, "base_ap": 12,
+  "str_per_level": 6, "dex_per_level": 1, "con_per_level": 5, "int_per_level": 2},
+ {"id": "bazaar_enforcer", "name": "Bazaar Enforcer", "hostile_type": "humanoid", "role": "damage", "min_spawn_level": 31, "rarity": "common", "base_xp": 440,
+  "common_drop": "stimulant_large", "rare_drop": None, "money_range": (100, 360),
+  "basic_attack": "caravan club", "strong_attack": "market rush",
+  "player_abilities": ["earth_fire_technique_lv2_berserker_tech"],
+  "base_str": 20, "base_dex": 10, "base_con": 18, "base_int": 4, "base_hp": 720, "base_ap": 9,
+  "str_per_level": 4, "dex_per_level": 1, "con_per_level": 3, "int_per_level": 0},
+ {"id": "wind_hexer_bazaar", "name": "Wind Hexer", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level": 34, "rarity": "uncommon", "base_xp": 600,
+  "common_drop": "tome_int", "rare_drop": None, "money_range": (120, 420),
+  "basic_attack": "wind curse", "strong_attack": "gale affliction",
+  "player_abilities": ["lv2_hostile_ability_air_water_faith_gale_of_silence", "lv2_hostile_ability_dark_dark_faith_void_veil"],
+  "base_str": 6, "dex_per_level": 2, "base_con": 8, "base_int": 20, "base_hp": 560, "base_ap": 14,
+  "base_dex": 10, "str_per_level": 1, "con_per_level": 1, "int_per_level": 4},
+ {"id": "steppe_predator_lg", "name": "Steppe Predator", "hostile_type": "creature", "role": "damage", "min_spawn_level": 36, "rarity": "uncommon", "base_xp": 660,
+  "common_drop": "herb_major", "rare_drop": None, "money_range": (80, 300),
+  "basic_attack": "predator bite", "strong_attack": "steppe ambush",
+  "player_abilities": [],
+  "base_str": 24, "base_dex": 22, "base_con": 22, "base_int": 4, "base_hp": 760, "base_ap": 8,
+  "str_per_level": 5, "dex_per_level": 4, "con_per_level": 4, "int_per_level": 0},
+]

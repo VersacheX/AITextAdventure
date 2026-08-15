@@ -64,13 +64,10 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         'constitution': 102,
         'level': 30,
         'abilities': [
-            'light_light_dark_faith_lv3_dusk_balm',
-            'water_water_water_faith_lv3_poseidon_wrath',
-            'water_light_faith_lv2_holy_fountain',
-            'air_water_faith_lv2_mute_cleansing',
-            'water_water_faith_lv2_deluge_benedict',
-            'light_faith_lv1_minor_heal',
-            'water_faith_lv1_mending_streams',
+            'lv2_unique_ability_faith_ripple_tidal_mend',
+            'lv2_unique_ability_faith_ripple_drowned_blessing',
+            'lv3_unique_ability_faith_ripple_returned_tide',
+            'lv3_unique_ability_faith_ripple_deep_current_surge',
         ]
     }
 ]

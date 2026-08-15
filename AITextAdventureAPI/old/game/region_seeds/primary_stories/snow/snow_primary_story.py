@@ -40,14 +40,10 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         'constitution': 102,
         'level': 30,
         'abilities': [
-            'dark_ice_air_technique_lv3_frost_bite_strike',
-            'ice_earth_water_technique_lv3_glacial_guard',
-            'ice_earth_technique_lv2_permafrost_crush',
-            'ice_ice_technique_lv2_frost_smash',
-            'ice_air_technique_lv2_hailwind_edge',
-            'ice_light_technique_lv2_crystal_lance',
-            'ice_technique_lv1_frozen_slash',
-            'earth_technique_lv1_armor_up',
+            'lv2_unique_ability_technique_korin_frost_step',
+            'lv2_unique_ability_technique_korin_grief_mantle',
+            'lv3_unique_ability_technique_korin_grief_driven_lance',
+            'lv3_unique_ability_technique_korin_stillwater_strike',
         ]
     }
 ]

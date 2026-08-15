@@ -28,7 +28,7 @@ SEEDS_LV21TO30 = [
  {"id": "mirage_witch", "name": "Mirage Witch", "hostile_type": "magic", "role": "hazard", "min_spawn_level": 23, "rarity": "uncommon", "base_xp": 400,
   "common_drop": "tome_int", "rare_drop": None, "money_range": (80, 300),
   "basic_attack": "illusion bolt", "strong_attack": "desert mirage hex",
-  "player_abilities": ["dark_magic_lv1_confuse_whisper", "earth_water_magic_lv2_mudslide"],
+  "player_abilities": ["level_1_hostile_ability_dark_magic_daze_whisper", "earth_water_magic_lv2_mudslide"],
   "base_str": 4, "base_dex": 8, "base_con": 6, "base_int": 16, "base_hp": 260, "base_ap": 16,
   "str_per_level": 0, "dex_per_level": 1, "con_per_level": 1, "int_per_level": 4},
 

@@ -635,7 +635,6 @@ TASKS = [
 					'location': 'region_open_area'
 				}
 			},
-			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'murkchannel_run', 'item_id': 'dominion_mantle', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'murkchannel_run', 'item_id': 'current_gloves', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'murkchannel_run', 'item_id': 'siege_sabatons', 'location': 'treasure_room' }},
 		],

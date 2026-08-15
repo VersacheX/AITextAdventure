@@ -70,11 +70,12 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         'intelligence': 224,                            # + 184
         'constitution': 38,
         'level': 30,
-        'abilities': ['earth_earth_earth_magic_lv3_earthshaker', 'air_earth_electric_magic_lv3_gale_shock', 
-                      'earth_air_magic_lv2_sandstream', 'earth_light_magic_lv2_prism_shard', 'earth_earth_magic_lv2_quake_field',
-                      'earth_magic_lv1_tremor', 'light_magic_lv1_luminous_spike'
-
-        ]
+		'abilities': [
+			'lv2_unique_ability_magic_sable_desert_read',
+			'lv2_unique_ability_magic_sable_sandwitch_brew',
+			'lv3_unique_ability_magic_sable_miragebreaker',
+			'lv3_unique_ability_magic_sable_consuming_dunes',
+		]
 
     }
 ]

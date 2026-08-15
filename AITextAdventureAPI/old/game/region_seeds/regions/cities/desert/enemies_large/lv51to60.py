@@ -77,7 +77,7 @@ RANDOM_HOSTILE_SEEDS = [
  {"id": "mind_devourer", "name": "Mind Devourer", "hostile_type": "eldritch", "role": "hazard", "min_spawn_level": 59, "rarity": "superrare", "base_xp": 6000,
   "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (800, 2800),
   "basic_attack": "psychic lance", "strong_attack": "mind consume",
-  "player_abilities": ["dark_magic_lv1_confuse_whisper", "dark_dark_magic_lv2_umbra_storm"],
+  "player_abilities": ["level_1_hostile_ability_dark_magic_daze_whisper", "dark_dark_magic_lv2_umbra_storm"],
   "base_str": 6, "base_dex": 18, "base_con": 10, "base_int": 54, "base_hp": 1800, "base_ap": 46,
   "str_per_level": 0, "dex_per_level": 3, "con_per_level": 1, "int_per_level": 12},
 

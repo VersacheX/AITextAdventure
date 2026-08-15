@@ -7,16 +7,17 @@ from rich.style import Style
 
 # ── Category name constants ────────────────────────────────────────────────────
 
-DIALOG_CATEGORY      = "character_dialog"
-EQUIPMENT_CATEGORY   = "equipment"
-TIMELINE_CATEGORY    = "timeline"
-NPC_CATEGORY         = "npc"
-ABILITY_CATEGORY     = "ability"
-HOSTILE_CATEGORY     = "hostile"
-DUNGEON_CATEGORY     = "dungeon"
-CITY_CATEGORY        = "city"
-CHARACTER_CATEGORY   = "character"
-SIMULATION_CATEGORY  = "simulation"
+DIALOG_CATEGORY       = "character_dialog"
+EQUIPMENT_CATEGORY    = "equipment"
+TIMELINE_CATEGORY     = "timeline"
+NPC_CATEGORY          = "npc"
+ABILITY_CATEGORY      = "ability"
+HOSTILE_CATEGORY      = "hostile"
+DUNGEON_CATEGORY      = "dungeon"
+CITY_CATEGORY         = "city"
+CHARACTER_CATEGORY    = "character"
+SIMULATION_CATEGORY   = "simulation"
+SPECIAL_ITEM_CATEGORY = "special_item"
 
 # ── Shared row styles ──────────────────────────────────────────────────────────
 

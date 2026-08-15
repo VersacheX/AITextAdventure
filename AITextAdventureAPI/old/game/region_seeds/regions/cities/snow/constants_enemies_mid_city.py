@@ -2,9 +2,18 @@
 # Each entry is a dict used by encounter/spawn systems.
 from .enemies_mid.lv1to10 import SEEDS_LV1TO10
 from .enemies_mid.lv11to20 import SEEDS_LV11TO20
-from .enemies_mid.lv21to100 import RANDOM_HOSTILE_SEEDS as SEEDS_LV21TO100
+from .enemies_mid.lv21to30 import RANDOM_HOSTILE_SEEDS as SEEDS_LV21TO30
+from .enemies_mid.lv31to40 import RANDOM_HOSTILE_SEEDS as SEEDS_LV31TO40
+from .enemies_mid.lv41to50 import RANDOM_HOSTILE_SEEDS as SEEDS_LV41TO50
+from .enemies_mid.lv51to60 import RANDOM_HOSTILE_SEEDS as SEEDS_LV51TO60
+from .enemies_mid.lv61to70 import RANDOM_HOSTILE_SEEDS as SEEDS_LV61TO70
+from .enemies_mid.lv71to80 import RANDOM_HOSTILE_SEEDS as SEEDS_LV71TO80
+from .enemies_mid.lv81to90 import RANDOM_HOSTILE_SEEDS as SEEDS_LV81TO90
+from .enemies_mid.lv91to100 import RANDOM_HOSTILE_SEEDS as SEEDS_LV91TO100
 
-RANDOM_HOSTILE_SEEDS = SEEDS_LV1TO10 + SEEDS_LV11TO20 + SEEDS_LV21TO100
+RANDOM_HOSTILE_SEEDS = (SEEDS_LV1TO10 + SEEDS_LV11TO20 + SEEDS_LV21TO30 + SEEDS_LV31TO40 +
+                        SEEDS_LV41TO50 + SEEDS_LV51TO60 + SEEDS_LV61TO70 + SEEDS_LV71TO80 +
+                        SEEDS_LV81TO90 + SEEDS_LV91TO100)
 
 # Mapping of zone/subtype -> list of hostile ids that can spawn there.
 # Use building type names (matching normalized building types), plus 'street' and 'alley'.
