@@ -96,19 +96,19 @@ UTILITY_ITEM_SEEDS = [
 
 
     # Permanent stat-increase tomes (superrare)
-    {"id": "tome_hp", "name": "Dummy's Guide to Health", "description": "Permanently increases your max HP by1.", "effect": "stat_increase", "uses":1, "value":5000, "min_spawn_level":10, "rarity": "notfound", "stat": "max_hp", "amount":1},
-    {"id": "tome_ap", "name": "Dummy's Guide to Focus", "description": "Permanently increases your max AP by1.", "effect": "stat_increase", "uses":1, "value":5000, "min_spawn_level":10, "rarity": "notfound", "stat": "max_ap", "amount":1},
-    {"id": "tome_str", "name": "Dummy's Guide to Lifting", "description": "Permanently increases your Strength by1.", "effect": "stat_increase", "uses":1, "value":5000, "min_spawn_level":10, "rarity": "notfound", "stat": "strength", "amount":1},
-    {"id": "tome_dex", "name": "Dummy's Guide to Crossfit", "description": "Permanently increases your Dexterity by1.", "effect": "stat_increase", "uses":1, "value":5000, "min_spawn_level":10, "rarity": "notfound", "stat": "dexterity", "amount":1},
-    {"id": "tome_int", "name": "Dummy's Encyclopedia of Everything", "description": "Permanently increases your Intelligence by1.", "effect": "stat_increase", "uses":1, "value":5000, "min_spawn_level":10, "rarity": "notfound", "stat": "intelligence", "amount":1},
-    {"id": "tome_con", "name": "Dummy's Way to Resistance", "description": "Permanently increases your Constitution by1.", "effect": "stat_increase", "uses":1, "value":5000, "min_spawn_level":10, "rarity": "notfound", "stat": "constitution", "amount":1},
+    {"id": "tome_hp", "name": "Dummy's Guide to Health", "description": "Permanently increases your max HP by1.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":10, "rarity": "notfound", "stat": "max_hp", "amount":1},
+    {"id": "tome_ap", "name": "Dummy's Guide to Focus", "description": "Permanently increases your max AP by1.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":10, "rarity": "notfound", "stat": "max_ap", "amount":1},
+    {"id": "tome_str", "name": "Dummy's Guide to Lifting", "description": "Permanently increases your Strength by1.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":10, "rarity": "notfound", "stat": "strength", "amount":1},
+    {"id": "tome_dex", "name": "Dummy's Guide to Crossfit", "description": "Permanently increases your Dexterity by1.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":10, "rarity": "notfound", "stat": "dexterity", "amount":1},
+    {"id": "tome_int", "name": "Dummy's Encyclopedia of Everything", "description": "Permanently increases your Intelligence by1.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":10, "rarity": "notfound", "stat": "intelligence", "amount":1},
+    {"id": "tome_con", "name": "Dummy's Way to Resistance", "description": "Permanently increases your Constitution by1.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":10, "rarity": "notfound", "stat": "constitution", "amount":1},
     # Stronger/superrare versions of the tomes (grant +2 to stat)
-    {"id": "tome_hp_superrare", "name": "Masterwork Guide to Health", "description": "Permanently increases your max HP by2.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":15, "rarity": "notfound", "stat": "max_hp", "amount":2},
-    {"id": "tome_ap_superrare", "name": "Masterwork Guide to Focus", "description": "Permanently increases your max AP by2.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":15, "rarity": "notfound", "stat": "max_ap", "amount":2},
-    {"id": "tome_str_superrare", "name": "Masterwork Guide to Strength", "description": "Permanently increases your Strength by2.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":15, "rarity": "notfound", "stat": "strength", "amount":2},
-    {"id": "tome_dex_superrare", "name": "Masterwork Guide to Agility", "description": "Permanently increases your Dexterity by2.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":15, "rarity": "notfound", "stat": "dexterity", "amount":2},
-    {"id": "tome_int_superrare", "name": "Masterwork Encyclopedia of Lore", "description": "Permanently increases your Intelligence by2.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":15, "rarity": "notfound", "stat": "intelligence", "amount":2},
-    {"id": "tome_con_superrare", "name": "Masterwork Way to Resistance", "description": "Permanently increases your Constitution by2.", "effect": "stat_increase", "uses":1, "value":15000, "min_spawn_level":15, "rarity": "notfound", "stat": "constitution", "amount":2},
+    {"id": "tome_hp_superrare", "name": "Masterwork Guide to Health", "description": "Permanently increases your max HP by 5.", "effect": "stat_increase", "uses":1, "value":50000, "min_spawn_level":25, "rarity": "notfound", "stat": "max_hp", "amount":5},
+    {"id": "tome_ap_superrare", "name": "Masterwork Guide to Focus", "description": "Permanently increases your max AP by 5.", "effect": "stat_increase", "uses":1, "value":50000, "min_spawn_level":25, "rarity": "notfound", "stat": "max_ap", "amount":5},
+    {"id": "tome_str_superrare", "name": "Masterwork Guide to Strength", "description": "Permanently increases your Strength by 5.", "effect": "stat_increase", "uses":1, "value":50000, "min_spawn_level":25, "rarity": "notfound", "stat": "strength", "amount":5},
+    {"id": "tome_dex_superrare", "name": "Masterwork Guide to Agility", "description": "Permanently increases your Dexterity by 5.", "effect": "stat_increase", "uses":1, "value":50000, "min_spawn_level":25, "rarity": "notfound", "stat": "dexterity", "amount":5},
+    {"id": "tome_int_superrare", "name": "Masterwork Encyclopedia of Lore", "description": "Permanently increases your Intelligence by 5.", "effect": "stat_increase", "uses":1, "value":50000, "min_spawn_level":25, "rarity": "notfound", "stat": "intelligence", "amount":5},
+    {"id": "tome_con_superrare", "name": "Masterwork Way to Resistance", "description": "Permanently increases your Constitution by 5.", "effect": "stat_increase", "uses":1, "value":50000, "min_spawn_level":25, "rarity": "notfound", "stat": "constitution", "amount":5},
 ]
 
 
