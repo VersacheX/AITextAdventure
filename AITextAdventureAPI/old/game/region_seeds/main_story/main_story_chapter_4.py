@@ -396,14 +396,14 @@ NPC_DIALOG = [
         'npc_id': 'technique',
         'dialog_id': 'technique_ch4_after_catalyst',
         'dialog': [
-            "Yeah, yeah, collapse, eternity, whatever. You look like something to take a hit."
+            "Yeah, yeah, collapse, eternity, whatever. You look like somebody who can take a beating."
         ]
     },
     {
         'npc_id': 'tech',
         'dialog_id': 'tech_ch4_after_catalyst',
         'dialog': [
-            "It thinks in inevitability. Surprising how often inevitable is prevented and nobody bats an eyelid."
+            "It thinks in inevitability. Surprising how often inevitable is prevented and nobody blinks."
         ]
     },
     {
