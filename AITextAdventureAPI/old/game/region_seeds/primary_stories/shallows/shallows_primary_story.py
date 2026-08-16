@@ -79,7 +79,9 @@ NPCS = [
         'description': (
             'A tide oracle who drowned during the first Fracture wave—'
             'and returned changed. She now fears deep water even as she channels its power.'
-            ' Ripple believes the party stands at the center of the next collapse.'
+            ' Ripple speaks in patient, measured words that often land truer than she intends.'
+            ' She believes the party stands at the center of the next collapse,'
+            ' and she has seen enough of the tide\'s patterns to know that fighting it is different from surviving it.'
         ),
         "theme_song": "We Move Lightly, Dustin O'Halloran",
         "psychology": {

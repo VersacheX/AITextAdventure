@@ -53,7 +53,9 @@ NPCS = [
         'description': (
             'A cursed gadgeteer who once built a device that accidentally opened a micro-fracture—'
             'and something whispered back. He claims to be rational, but fears his own mind.'
-            ' Grimnaw now seeks to understand the voice that answered him.'
+            ' Grimnaw now seeks to understand the voice that answered him,'
+            ' cataloguing every anomaly with feverish precision while pretending it\'s all just data.'
+            ' The goggles hide nothing. His eyes still flinch when the silence gets too structured.'
         ),
         "theme_song": "Madness, Muse",
         "psychology": {

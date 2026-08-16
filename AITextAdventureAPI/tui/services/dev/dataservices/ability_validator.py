@@ -11,6 +11,7 @@ A5  ABILITY_STATUS_NO_KEYS     effect=status/cure but status_keys is empty
 A6  ABILITY_NO_ELEMENTS        damage/status/heal ability has no elements  (warning)
 A7  ABILITY_UNKNOWN_ELEMENT    an element in 'elements' is not in ELEMENTAL_CHAR_KEYS
 A8  ABILITY_UNKNOWN_STATUS     a key in 'status_keys' is not in STATUS_EFFECTS
+A9  ABILITY_STATUS_THIN        effect=status but len(status_keys) < level  (warning)
 
 Balance rules  (warning — mirrors equipment TP balance check)
 ---------------
@@ -185,6 +186,16 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
                     f"status_key '{sk}' is not in STATUS_EFFECTS.",
                 ))
                 by_code["ABILITY_UNKNOWN_STATUS"] += 1
+
+        # A9 — status-effect abilities should have at least as many status_keys as their level
+        if effect == "status" and len(status_keys) < node.level:
+            node.errors.append(_err(
+                "ABILITY_STATUS_THIN",
+                f"Status ability at level {node.level} only has "
+                f"{len(status_keys)} status_key(s) (expected ≥ {node.level}).",
+                severity="warning",
+            ))
+            by_code["ABILITY_STATUS_THIN"] += 1
 
         # B1 / B2
         gkey = node_group.get(node.ability_id)

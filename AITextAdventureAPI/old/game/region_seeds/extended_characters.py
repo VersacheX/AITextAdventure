@@ -5,8 +5,10 @@ EXTENDED_CHARACTERS_NPCS = [
         'npc_id': 'voss_caldera',
         'name': 'Voss Caldera',
         'description': (
-            'A sharp, high-profile corporate executive who rose through cutthroat boardrooms. '
-            'She treats life like a hostile takeover — decisive, commanding, and always three steps ahead.'
+            'A sharp, high-profile corporate executive who rose through cutthroat boardrooms.'
+            ' She treats life like a hostile takeover — decisive, commanding, and always three steps ahead.'
+            ' Voss carries the cold ease of someone who has won enough times to stop being surprised by loss.'
+            ' She does not confide in allies. She positions them. The unsettling part is that she is usually right.'
         ),
         "theme_song": "Power (instrumental), Kanye West",
         "song_id": "power_instrumental_kanye_west",
@@ -33,8 +35,10 @@ EXTENDED_CHARACTERS_NPCS = [
         'npc_id': 'rynn',
         'name': 'Rynn',
         'description': (
-            'A quiet, steadfast field medic and community anchor. '
-            'He remembers every wound, every promise, and every person he couldn\'t save.'
+            'A quiet, steadfast field medic and community anchor.'
+            ' He remembers every wound, every promise, and every person he couldn\'t save.'
+            ' Rynn moves through crisis with a stillness that others mistake for calm — it is closer to grief made functional.'
+            ' He will patch you up, note your name, and carry you forward without ever asking to be carried himself.'
         ),
         "theme_song": "Fix You (instrumental), Coldplay",
         "song_id": "fix_you_instrumental_coldplay",
@@ -62,6 +66,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'name': 'Elyra Dawnseer',
         'description': (
             'A serene but intense prophet who receives fragmented visions of possible futures.'
+            ' Each one arrives unbidden and leaves a residue she cannot wash off.'
+            ' Elyra speaks carefully, knowing that what she says reshapes what people do — and therefore what comes true.'
+            ' She does not claim to know the future. She claims to carry pieces of it, whether she wants them or not.'
         ),
         "theme_song": "Teardrop (instrumental), Massive Attack",
         "song_id": "teardrop_instrumental_massive_attack",
@@ -89,6 +96,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'name': 'Regent Sylvara',
         'description': (
             'A cold, visionary strategist who pulls strings from behind thrones and corporations.'
+            ' Sylvara does not lead; she arranges the conditions under which others believe they are leading.'
+            ' She has identified the optimal outcome of nearly every situation she has ever entered.'
+            ' What unsettles those closest to her is that she has never once been wrong about which relationships were expendable.'
         ),
         "theme_song": "Requiem for a Dream (instrumental), Clint Mansell",
         "song_id": "requiem_for_a_dream_instrumental_clint_mansell",
@@ -116,6 +126,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'name': 'Ghost',
         'description': (
             'A silent, hyper-competent lone operative who moves like a shadow and strikes with surgical precision.'
+            ' Ghost does not explain decisions, does not debrief, and does not stay.'
+            ' There is nothing performative about the stillness — it is simply the absence of waste.'
+            ' Those who earn a nod from Ghost tend to remember it longer than most praise they have ever received.'
         ),
         "theme_song": "Enjoy the Silence (instrumental), Depeche Mode",
         "song_id": "enjoy_the_silence_instrumental_depeche_mode",
@@ -143,6 +156,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'name': 'Lira Emberforge',
         'description': (
             'A gifted artisan and weaponsmith who pours her soul into every creation.'
+            ' Lira does not separate herself from her work — each blade carries a piece of what she believed when she forged it.'
+            ' She is slow to speak and quick to judge character through observation.'
+            ' What she builds for you says more about what she thinks of you than anything she will ever say aloud.'
         ),
         "theme_song": "Immigrant Song (instrumental), Led Zeppelin",
         "song_id": "immigrant_song_instrumental_led_zeppelin",
@@ -170,6 +186,8 @@ EXTENDED_CHARACTERS_NPCS = [
         'name': 'Osten Dreamweaver',
         'description': (
             'A wandering storyteller and dream interpreter who blurs the line between reality and fantasy.'
+            ' Osten has lived so many borrowed narratives that the original self underneath is genuinely unclear — possibly to him most of all.'
+            ' He is generous with meaning, reckless with truth, and fiercely protective of anyone who has ever let him witness their real story.'
         ),
         "theme_song": "The Chain (instrumental), Fleetwood Mac",
         "song_id": "the_chain_instrumental_fleetwood_mac",
@@ -197,6 +215,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'name': 'Lyric',
         'description': (
             'A brilliant but eccentric theorist who spends days lost in abstract systems and possibilities.'
+            ' Lyric speaks in layers — the surface answer is almost never the point.'
+            ' She is deeply uncomfortable with being misunderstood, which is unfortunate, since most people manage it within the first sentence.'
+            ' Her loyalty, once extended, is precise and enduring. She has simply never figured out how to offer it comfortably.'
         ),
         "theme_song": "Comfortably Numb (instrumental), Pink Floyd",
         "song_id": "comfortably_numb_instrumental_pink_floyd",
@@ -224,6 +245,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'name': 'Dare',
         'description': (
             'A fearless thrill-seeker and elite scout who lives for danger and adrenaline.'
+            ' Dare operates in a permanent present tense — the next ten seconds, the next obstacle, the next drop.'
+            ' Long-term consequences are something that happens to other people.'
+            ' What she lacks in caution she returns tenfold in instinct, presence, and the particular gift of making survival look effortless.'
         ),
         "theme_song": "Born to Be Wild (instrumental), Steppenwolf",
         "song_id": "born_to_be_wild_instrumental_steppenwolf",
@@ -251,6 +275,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'name': 'Andrea Starveil',
         'description': (
             'A charismatic performer and morale officer who lifts spirits even in the darkest times.'
+            ' Andrea reads a room the way a compass reads north — instinctively and without error.'
+            ' She performs joy not because she always feels it, but because she has learned that someone has to be the one who keeps going.'
+            ' The act has become so practiced that even she is sometimes unsure where the performance ends.'
         ),
         "theme_song": "Uptown Funk (instrumental), Bruno Mars",
         "song_id": "uptown_funk_instrumental_bruno_mars",
@@ -278,6 +305,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'name': 'Sera Flameweaver',
         'description': (
             'A passionate and theatrical fire mage who believes emotion is the source of true power.'
+            ' Sera does not cast spells so much as she detonates feelings.'
+            ' Her magic is proportional to what she feels, which makes her either devastatingly effective or genuinely dangerous depending on the day.'
+            ' She considers both outcomes acceptable and the people who disagree deeply boring.'
         ),
         "theme_song": "Kings and Queens (instrumental), 30 Seconds to Mars",
         "song_id": "kings_and_queens_instrumental_30_seconds_to_mars",
@@ -305,6 +335,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'name': 'Maddox "Spark" Quill',
         'description': (
             'A wildly brilliant and unpredictable inventor who treats reality as his personal playground.'
+            ' Spark does not iterate — he detonates and observes. Most of his best discoveries were accidents.'
+            ' Most of his worst accidents were also discoveries.'
+            ' He is genuinely enthusiastic about everything, which would be charming if it did not include things that are actively on fire.'
         ),
         "theme_song": "Uprising (instrumental), Muse",
         "song_id": "uprising_instrumental_muse",
@@ -332,6 +365,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'name': 'Anita',
         'description': (
             'A meticulous archivist and information broker who collects secrets like currency.'
+            ' Anita knows more about most people than they would find comfortable, and she has organised it all.'
+            ' She does not weaponise what she holds — unless pushed.'
+            ' Her value is in the reliability of her records and the precision of her silence, which she extends or withdraws with the same quiet deliberateness.'
         ),
         "theme_song": "In the Air Tonight (instrumental), Phil Collins",
         "song_id": "in_the_air_tonight_instrumental_phil_collins",
@@ -359,6 +395,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'name': 'Talia Softheart',
         'description': (
             'A deeply compassionate healer who feels the pain of others as her own.'
+            ' Talia absorbs suffering the way cloth absorbs water — completely, and without choosing to.'
+            ' She has never learned to ask for help with the same ease she offers it.'
+            ' Her presence steadies rooms and people alike, though the cost of that steadiness never shows on her face, and she prefers it that way.'
         ),
         "theme_song": "Bridge Over Troubled Water (instrumental), Simon & Garfunkel",
         "song_id": "bridge_over_troubled_water_instrumental_simon_and_garfunkel",
@@ -386,6 +425,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'name': 'Korina Brightvein',
         'description': (
             'A charismatic leader and motivator who inspires others to reach their highest potential.'
+            ' Korina has an almost involuntary awareness of what each person in a room needs to hear.'
+            ' She delivers it with such warmth that most people never notice it was precisely calibrated.'
+            ' The version of herself she shows the world is generous, steady, and lit from inside. What it costs her is a private matter.'
         ),
         "theme_song": "Hall of Fame (instrumental), The Script",
         "song_id": "hall_of_fame_instrumental_the_script",
@@ -413,6 +455,9 @@ EXTENDED_CHARACTERS_NPCS = [
         'name': 'Commander Drax',
         'description': (
             'A battle-hardened commander who leads from the front and demands excellence.'
+            ' Drax does not issue orders from safety — he is already at the breach when the order reaches the others.'
+            ' His standards are high enough to be unreasonable and consistent enough that people stop questioning them.'
+            ' Respect, in his experience, is not given. It is constructed, repetition by repetition, until the structure holds.'
         ),
         "theme_song": "War Pigs (instrumental), Black Sabbath",
         "song_id": "war_pigs_instrumental_black_sabbath",

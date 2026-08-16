@@ -68,7 +68,9 @@ NPCS = [
         'description': (
             'A forge-breaker who survived an explosion caused by a micro-fracture—'
             'an event that killed his entire crew. He masks his fear of losing control beneath swagger and bravado.'
-            ' Bragg now seeks to understand the fracture that destroyed his forge.'
+            ' Bragg now seeks to understand the fracture that destroyed his forge,'
+            ' driven less by answers than by the need to prove the universe cannot hold him down.'
+            ' The guilt barely shows. But it never leaves.'
         ),
         "theme_song": "I Stand Alone, Godsmack",
         "psychology": {

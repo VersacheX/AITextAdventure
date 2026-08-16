@@ -53,7 +53,8 @@ NPCS = [
             'A half-feral forest guardian who once raised a great beast from a cub—'
             'only to be forced to mercy-kill it when corruption overtook the woods.'
             ' He acts detached and instinctive, but his loyalty runs deep and painful.'
-            ' Thorn senses the same corruption spreading far beyond the forest.'
+            ' Thorn senses the same corruption spreading far beyond the forest,'
+            ' and carries his grief like a wound he refuses to name.'
         ),
         "theme_song": "Way Down We Go — Kaleo",
         "psychology": {

@@ -73,7 +73,9 @@ NPCS = [
         'description': (
             'A rebellious wind-dancer who once heard a future echo of her own death—'
             'a moment that has not yet occurred. She hides her fear beneath bright energy and motion,'
-            ' dancing through danger with instinctive grace. She believes the party is tied to the echo she heard.'
+            ' dancing through danger with instinctive grace.'
+            ' She believes the party is tied to the echo she heard,'
+            ' and so she follows — never standing still long enough for the future to catch up.'
         ),
         "theme_song": "Dog Days Are Over — Florence & The Machine",
         "psychology": {

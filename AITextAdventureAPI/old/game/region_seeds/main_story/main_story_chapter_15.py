@@ -47,8 +47,9 @@ NPCS = [
         "npc_id": "warden_hale",
         "name": "Warden Hale Brimholt",
         "description": (
-            "A stoic keeper of the Sinking District’s last sanctuaries. Hale records every loss, every fracture, every name swallowed by the Heap."
-            "He believes duty is the only anchor left in a collapsing world, and he performs sacred rites with the precision of a bookkeeper balancing the dead."
+            "A stoic keeper of the Sinking District's last sanctuaries. Hale records every loss, every fracture, every name swallowed by the Heap."
+            " He believes duty is the only anchor left in a collapsing world, and he performs sacred rites with the precision of a bookkeeper balancing the dead."
+            " Every ledger entry costs him something. He has stopped counting what."
         ),
         "theme_song": "Saturn, Sleeping At Last",
         "psychology": {

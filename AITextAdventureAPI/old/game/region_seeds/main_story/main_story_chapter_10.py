@@ -90,7 +90,7 @@ NPCS = [
     {
         "npc_id": "vek",
         "name": "Marshal Vek Drast",
-        "description": "A tough, no-nonsense city enforcer with a powerful sense of order and duty. She is trying to keep her city from tearing itself apart from the inside out.",
+        "description": "A tough, no-nonsense city enforcer with a powerful sense of order and duty. She holds her city together through sheer force of will when institutions fail around her. Vek does not ask for help and rarely offers softness, but she shows up — every time — when the world starts tearing people apart. Her sense of order isn't cruelty; it's the only form of care she knows how to give.",
         'theme_song': 'Control, Halsey',
         "psychology": {
             "mbti": "ENTJ",

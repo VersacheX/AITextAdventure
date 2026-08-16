@@ -27,7 +27,7 @@ if TYPE_CHECKING:
 
 # ── Columns / sort keys ───────────────────────────────────────────────────────
 
-_ABILITY_COLUMNS = ["Name", "ID", "Level", "Type", "Elements", "Effect", "Statuses", "Errors"]
+_ABILITY_COLUMNS = ["Name", "ID", "Level", "Type", "Elements", "Effect", "AOE", "Statuses", "Errors"]
 
 _ABILITY_SORT_KEYS: dict[str, str] = {
     "ability-sort-type":     "ability_type",
@@ -142,16 +142,19 @@ def _populate_ability_table(screen: "DataMgmtScreen", nodes: list) -> None:
         elements    = seed.get("elements") or []
         status_keys = seed.get("status_keys") or []
         effect      = str(seed.get("effect", "") or "")
+        can_aoe     = "✓" if seed.get("can_aoe") else ""
         errors      = node.errors or []
         row_style   = _ability_row_style(errors)
+        ability_id  = node.ability_id[:20]
 
         table.add_row(
             Text(node.label,                     style=row_style),
-            Text(node.ability_id,                style=row_style),
+            Text(ability_id,                     style=row_style),
             Text(str(node.level),                style=row_style),
             Text(node.ability_type,              style=row_style),
             Text(_fmt_elem_list(elements),       style=row_style),
             Text(effect,                         style=row_style),
+            Text(can_aoe,                        style=row_style),
             Text(_fmt_status_list(status_keys),  style=row_style),
             _ability_error_cell(errors),
             key=str(idx),
@@ -204,6 +207,7 @@ def copy_abilities(screen: "DataMgmtScreen") -> str:
         elements    = seed.get("elements") or []
         status_keys = seed.get("status_keys") or []
         effect      = str(seed.get("effect", "") or "")
+        can_aoe     = "yes" if seed.get("can_aoe") else "no"
         error_count = len(node.errors)
         has_error   = any(e.severity == "error"   for e in node.errors)
         has_warning = any(e.severity == "warning" for e in node.errors)
@@ -220,11 +224,12 @@ def copy_abilities(screen: "DataMgmtScreen") -> str:
         ) if node.errors else ""
         rows.append("\t".join([
             node.label,
-            node.ability_id,
+            node.ability_id[:20],
             str(node.level),
             node.ability_type,
             _fmt_elem_list(elements),
             effect,
+            can_aoe,
             _fmt_status_list(status_keys),
             err_cell,
             messages,
