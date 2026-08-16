@@ -529,7 +529,7 @@ NPC_DIALOG = [
         'npc_id': 'tech',
         'dialog_id': 'tech_ch21_filtration',
         'dialog': [
-            "It's not identity. It's filtration."
+            "You're not classifying — you're cropping. Cutting everything off that doesn't fit the shape you already decided on."
         ]
     },
     {
@@ -585,7 +585,7 @@ NPC_DIALOG = [
         'npc_id': 'tech',
         'dialog_id': 'tech_ch21_filtration_emphasis',
         'dialog': [
-            "It's not identity. It's filtration!"
+            "You never asked who we are. You just decided what survives your process. That's not identity — that's surgery on someone who never consented."
         ]
     },
     {
@@ -648,7 +648,7 @@ NPC_DIALOG = [
         'npc_id': 'tech',
         'dialog_id': 'tech_ch21_filter_broke',
         'dialog': [
-            "It's not identity. It's filtration. And your filter just broke."
+            "You mapped us. Measured us. Filed us under 'correctable' and still couldn't predict this."
         ]
     },
     {
@@ -1012,7 +1012,9 @@ NPC_DIALOG = [
         'npc_id': 'garbage',
         'dialog_id': 'garbage_ch21_meet_garbage',
         'dialog': [
-            "You think you can outsmart me? You think you can outmaneuver me? You think you can outlast me? You think you can outplay me? You think you can outwit me? You think you can outthink me? You think you can outguess me? You think you can outmaneuver me? You think you can outlast me? You think you can outplay me? You think you can outwit me? You think you can outthink me? You think you can outguess me?"
+            "Go ahead. Push back. Tell me I'm wrong.",
+            "That urgency you're feeling right now — that need to correct me, to defend yourself? I put that there. I've been inside those thoughts longer than you have.",
+            "Every certainty you're gripping so hard... I seeded it. You didn't build your convictions. You just found mine and mistook them for your own."
         ]
     },
     {

@@ -306,7 +306,7 @@ NPC_DIALOG = [
 		'npc_id': 'technique',
 		'dialog_id': 'technique_ch19_no_more_mud',
 		'dialog': [
-			"(nodding) Good. One less thing trying to drag us back into the mud."
+			"(exhaling slowly) That thing wasn't just rotting trees. It was rotting what we remembered about ourselves. I'm glad it's gone."
 		]
 	},
 	{

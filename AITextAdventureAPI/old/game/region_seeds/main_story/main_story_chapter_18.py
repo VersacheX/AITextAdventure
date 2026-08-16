@@ -251,7 +251,7 @@ NPC_DIALOG = [
 		'npc_id': 'vek',
 		'dialog_id': 'vek_ch18_go',
 		'dialog': [
-			"Then that's where we go."
+			"(quiet, resolute) Cataclysm wanted us to see every failure as the final entry in the record. It wasn't. This is the next one. Move out."
 		]
 	},
 	{
