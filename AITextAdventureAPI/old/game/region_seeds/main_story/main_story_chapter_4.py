@@ -172,7 +172,7 @@ NPC_DIALOG = [
         'npc_id': 'technique',
         'dialog_id': 'technique_ch4_after_velka',
         'dialog': [
-            "If the maps are fighting back, something’s provoking them.",
+            "Reality’s bending? I’m in. I need a drink for this kind of shit anyway.",
             "Let’s move. I want to see what’s bending reality."
         ]
     },
