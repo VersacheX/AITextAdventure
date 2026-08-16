@@ -12,7 +12,8 @@ A6  ABILITY_NO_ELEMENTS        damage/status/heal ability has no elements  (warn
 A7  ABILITY_UNKNOWN_ELEMENT    an element in 'elements' is not in ELEMENTAL_CHAR_KEYS
 A8  ABILITY_UNKNOWN_STATUS     a key in 'status_keys' is not in STATUS_EFFECTS
 A9  ABILITY_STATUS_THIN        effect=status/cure but the summed status weight
-                               is below the level target  (warning)
+                               is below the gently-scaling level floor
+                               (8 + (level-1)*3)  (warning)
 
 Status weighting
 ----------------
@@ -90,10 +91,17 @@ _STATUS_WEIGHTS: Dict[str, float] = {
 }
 _DEFAULT_STATUS_WEIGHT = 8.0
 
-# Expected summed status weight an ability of a given level should carry.  Used
-# by the A9 thin-check so a single strong status can satisfy a level while
-# weaker stat buffs/debuffs must be stacked to reach the target.
-_STATUS_WEIGHT_PER_LEVEL = 8.0
+# A9 thin-check floor.  The intended design is *one primary status per ability*,
+# so the floor scales gently rather than linearly: a single strong status (e.g.
+# stun/petrify) satisfies most levels, while a lone weak stat buff/debuff is
+# flagged as genuinely thin.  Peer-relative B1/B2 balance checks handle the rest.
+#     target = _STATUS_WEIGHT_BASE + (level - 1) * _STATUS_WEIGHT_PER_LEVEL
+_STATUS_WEIGHT_BASE      = 8.0
+_STATUS_WEIGHT_PER_LEVEL = 3.0
+
+
+def _status_weight_target(level: int) -> float:
+    return _STATUS_WEIGHT_BASE + (max(level, 1) - 1) * _STATUS_WEIGHT_PER_LEVEL
 
 # AOE payload multiplier.  An AOE ability hits multiple targets, so its
 # base_power + status payload is scaled by this factor instead of a flat bonus.
@@ -265,7 +273,7 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
         # weaker stat buffs/debuffs must be stacked to reach the target.
         if effect in ("status", "cure") and status_keys:
             weight_total  = _status_weight_total(status_keys)
-            weight_target = node.level * _STATUS_WEIGHT_PER_LEVEL
+            weight_target = _status_weight_target(node.level)
             if weight_total < weight_target:
                 node.errors.append(_err(
                     "ABILITY_STATUS_THIN",

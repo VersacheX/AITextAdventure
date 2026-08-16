@@ -91,7 +91,7 @@
         "base_power": 0,
         "ap_cost": 85,
         "effect": "status",
-        "status_keys": ["defense_debuff"],
+        "status_keys": ["defense_debuff", "dexterity_debuff", "attack_debuff"],
         "can_aoe": True
     },
 
@@ -105,7 +105,7 @@
         "base_power": 0,
         "ap_cost": 90,
         "effect": "status",
-        "status_keys": ["dexterity_debuff"],
+        "status_keys": ["dexterity_debuff", "stun", "constitution_debuff"],
         "can_aoe": True
     },
 
@@ -134,13 +134,13 @@
         "base_power": 0,
         "ap_cost": 105,
         "effect": "status",
-        "status_keys": ["stun"], # add silence when status_key is updated to status_keys
+        "status_keys": ["stun", "silence"],
         "can_aoe": True
     },
 
     # crux — hazard/damage: scans and debuffs the philosophically corrupt
-    {"id": "debuff_the_wicked", "name": "Debuff the Wicked", "description": "Crux runs a cold diagnostic on the target and finds them logically inconsistent — it catalogues every contradiction in their form and systematically dismantles their ability to act.", "ability_type": "tech", "level": 4, "elements": ["dark", "electric", "ice", "air"], "base_power": 0, "ap_cost": 108, "effect": "status", "status_keys": ["intelligence_debuff"], "can_aoe": False, "non_player_ability": True},
+    {"id": "debuff_the_wicked", "name": "Debuff the Wicked", "description": "Crux runs a cold diagnostic on the target and finds them logically inconsistent — it catalogues every contradiction in their form and systematically dismantles their ability to act, think, and defend.", "ability_type": "tech", "level": 4, "elements": ["dark", "electric", "ice", "air"], "base_power": 0, "ap_cost": 108, "effect": "status", "status_keys": ["intelligence_debuff", "attack_debuff", "defense_debuff"], "can_aoe": False, "non_player_ability": True},
     # crux boss — upgraded debuff as AoE logic collapse
-    {"id": "logic_collapse", "name": "Logic Collapse", "description": "Crux broadcasts a terminal contradiction across the entire field — every mind within range short-circuits as it attempts to process something that cannot be true.", "ability_type": "tech", "level": 4, "elements": ["dark", "dark", "electric", "ice"], "base_power": 0, "ap_cost": 112, "effect": "status", "status_keys": ["intelligence_debuff"], "can_aoe": True, "non_player_ability": True},
+    {"id": "logic_collapse", "name": "Logic Collapse", "description": "Crux broadcasts a terminal contradiction across the entire field — every mind within range short-circuits as it attempts to process something that cannot be true, leaving them slowed, silenced, and unable to reason.", "ability_type": "tech", "level": 4, "elements": ["dark", "dark", "electric", "ice"], "base_power": 0, "ap_cost": 112, "effect": "status", "status_keys": ["intelligence_debuff", "silence", "dexterity_debuff"], "can_aoe": True, "non_player_ability": True},
 
 ]
