@@ -251,7 +251,7 @@ ATTAINABLE_PLAYER_CHARACTERS = [
       "water_light_faith_lv2_holy_fountain",
       "air_light_faith_lv2_serene_breath",
       "ice_light_faith_lv2_purging_veil",
-      "earth_light_faith_lv2_clarity_balm",
+      "earth_light_faith_lv2_clarify",
       "light_faith_lv1_minor_heal",
       "light_light_fire_faith_lv3_soulflare_bloom"
     ]

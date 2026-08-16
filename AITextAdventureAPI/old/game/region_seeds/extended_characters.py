@@ -828,7 +828,7 @@ EXTENDED_CHARACTERS = [
             'lv2_unique_ability_skill_andrea_starveil_crowd_read',
             'lv3_unique_ability_skill_andrea_starveil_encore',
             'lv3_unique_ability_skill_andrea_starveil_raise_the_roof',
-            'lv4_unique_ability_skill_andrea_starveil_curtain_call',
+            'lv4_unique_ability_skill_andrea_starveil_meteor_rave',
         ]
     },
 

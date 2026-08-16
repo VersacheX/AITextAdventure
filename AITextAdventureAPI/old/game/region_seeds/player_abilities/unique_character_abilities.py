@@ -1010,13 +1010,13 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv4_unique_ability_skill_andrea_starveil_curtain_call",
-        "name": "Curtain Call",
+        "id": "lv4_unique_ability_skill_andrea_starveil_meteor_rave",
+        "name": "Meteor Rave",
         "description": "Andrea transforms the battlefield into her stage -- a dazzling finale that stirs every ally to peak performance.",
         "ability_type": "skill", "level": 4,
         "elements": ["air", "light", "fire", "air"],
         "base_power": 0, "ap_cost": 8, "effect": "status",
-        "status_keys": ["attack_buff", "dexterity_buff", "elemental_attack_buff"], "can_aoe": True,
+        "status_keys": ["attack_buff", "defense_buff", "strength_buff", "dexterity_buff", "elemental_attack_buff"], "can_aoe": True,
         "non_player_ability": True,
     },
 

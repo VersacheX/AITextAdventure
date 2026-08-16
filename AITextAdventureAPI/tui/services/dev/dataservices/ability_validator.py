@@ -11,21 +11,35 @@ A5  ABILITY_STATUS_NO_KEYS     effect=status/cure but status_keys is empty
 A6  ABILITY_NO_ELEMENTS        damage/status/heal ability has no elements  (warning)
 A7  ABILITY_UNKNOWN_ELEMENT    an element in 'elements' is not in ELEMENTAL_CHAR_KEYS
 A8  ABILITY_UNKNOWN_STATUS     a key in 'status_keys' is not in STATUS_EFFECTS
-A9  ABILITY_STATUS_THIN        effect=status but len(status_keys) < level  (warning)
+A9  ABILITY_STATUS_THIN        effect=status/cure but the summed status weight
+                               is below the level target  (warning)
+
+Status weighting
+----------------
+Statuses vary enormously in combat impact — a permanent ``petrify`` is worth
+far more than an incremental ``intelligence_debuff``.  ``_status_weight`` maps
+each status key to a relative weight so that both the total_value balance
+score and the A9 thin-check reflect real power rather than a raw key count.
+A single strong status can satisfy a level's expected weight, while weaker
+stat buffs/debuffs must be stacked to reach the same target.
 
 Balance rules  (warning — mirrors equipment TP balance check)
 ---------------
 B1  ABILITY_BALANCE_WEAK       total_value < 65% of group average
 B2  ABILITY_BALANCE_STRONG     total_value > 145% of group average
     Groups are (ability_type, level, effect).  Groups with a single member
-    are not balance-checked (no meaningful average).
+    are not balance-checked (no meaningful average).  Groups whose average is
+    not strictly positive are skipped entirely, since a percentage ratio
+    against a zero/negative baseline is meaningless.
 
 total_value formula
 -------------------
-    tv = base_power
-       + len(status_keys) * 8
-       + (4 if can_aoe else 0)
-       - ap_cost
+    An AOE ability hits multiple targets, so its offensive/effect payload is
+    worth more than a single-target equivalent.  Rather than a flat bonus, AOE
+    scales the payload (base_power + status weight) by ``_AOE_MULTIPLIER``.
+
+    payload = base_power + sum(_status_weight(k) for k in status_keys)
+    tv      = payload * (_AOE_MULTIPLIER if can_aoe else 1.0) - ap_cost
 """
 from __future__ import annotations
 
@@ -41,6 +55,58 @@ from tui.services.dev.dataservices.models import (
 _KNOWN_TYPES   = {"technique", "faith", "magic", "tech", "skill"}
 _KNOWN_EFFECTS = {"damage", "heal", "status", "revive", "cure"}
 
+# ── Status weighting ──────────────────────────────────────────────────────────
+# Relative combat value of each status key.  Hard-disables and permanent effects
+# are worth far more than incremental stat buffs/debuffs.  Keys not listed here
+# fall back to ``_DEFAULT_STATUS_WEIGHT``.
+_STATUS_WEIGHTS: Dict[str, float] = {
+    # ── Hard disables / permanent (very high value) ──
+    "petrify":            22.0,
+    "stun":               16.0,
+    "sleep":              14.0,
+    "silence":            14.0,
+    "confuse":            13.0,
+    # ── Damage-over-time / persistent ──
+    "continuous_damage":  12.0,
+    # ── Utility ──
+    "scanned":             4.0,
+    # ── Elemental buffs/debuffs (moderate) ──
+    "elemental_attack_buff":  9.0,
+    "elemental_defense_buff": 9.0,
+    "elemental_debuff":       9.0,
+    "attack_buff":            9.0,
+    "attack_debuff":          9.0,
+    "defense_buff":           9.0,
+    "defense_debuff":         9.0,
+    # ── Single-stat buffs/debuffs (low value) ──
+    "strength_buff":       6.0,
+    "strength_debuff":     6.0,
+    "dexterity_buff":      6.0,
+    "dexterity_debuff":    6.0,
+    "intelligence_buff":   6.0,
+    "intelligence_debuff": 6.0,
+    "constitution_buff":   6.0,
+    "constitution_debuff": 6.0,
+}
+_DEFAULT_STATUS_WEIGHT = 8.0
+
+# Expected summed status weight an ability of a given level should carry.  Used
+# by the A9 thin-check so a single strong status can satisfy a level while
+# weaker stat buffs/debuffs must be stacked to reach the target.
+_STATUS_WEIGHT_PER_LEVEL = 8.0
+
+# AOE payload multiplier.  An AOE ability hits multiple targets, so its
+# base_power + status payload is scaled by this factor instead of a flat bonus.
+_AOE_MULTIPLIER = 1.5
+
+
+def _status_weight(key: str) -> float:
+    return _STATUS_WEIGHTS.get(str(key).lower(), _DEFAULT_STATUS_WEIGHT)
+
+
+def _status_weight_total(status_keys: List[Any]) -> float:
+    return sum(_status_weight(k) for k in (status_keys or []))
+
 
 def _err(code: str, message: str, severity: str = "error") -> AbilityValidationError:
     return AbilityValidationError(code=code, message=message, severity=severity)
@@ -51,7 +117,10 @@ def _total_value(seed: dict) -> float:
     ap          = float(seed.get("ap_cost",    0) or 0)
     status_keys = seed.get("status_keys") or []
     can_aoe     = bool(seed.get("can_aoe", False))
-    return bp + len(status_keys) * 8.0 + (4.0 if can_aoe else 0.0) - ap
+    payload     = bp + _status_weight_total(status_keys)
+    if can_aoe:
+        payload *= _AOE_MULTIPLIER
+    return payload - ap
 
 
 def _flat_nodes(tree: List[AbilityTypeNode]) -> List[AbilityNode]:
@@ -105,10 +174,14 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
         tv_by_group[gkey].append(tv)
         node_group[node.ability_id] = gkey
 
+    # Only keep groups with more than one member AND a strictly positive
+    # average.  A percentage ratio against a zero/negative baseline is
+    # meaningless (e.g. "5.0 is only -214% of average -2.3"), so those groups
+    # are skipped for balance checking entirely.
     group_avg: Dict[tuple, float] = {
-        k: sum(v) / len(v)
+        k: (sum(v) / len(v))
         for k, v in tv_by_group.items()
-        if len(v) > 1
+        if len(v) > 1 and (sum(v) / len(v)) > 0
     }
 
     # ── Per-node checks ───────────────────────────────────────────────────
@@ -187,15 +260,22 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
                 ))
                 by_code["ABILITY_UNKNOWN_STATUS"] += 1
 
-        # A9 — status-effect abilities should have at least as many status_keys as their level
-        if effect == "status" and len(status_keys) < node.level:
-            node.errors.append(_err(
-                "ABILITY_STATUS_THIN",
-                f"Status ability at level {node.level} only has "
-                f"{len(status_keys)} status_key(s) (expected ≥ {node.level}).",
-                severity="warning",
-            ))
-            by_code["ABILITY_STATUS_THIN"] += 1
+        # A9 — status/cure abilities should carry enough status weight for their
+        # level.  A single strong status (e.g. petrify) can satisfy a level while
+        # weaker stat buffs/debuffs must be stacked to reach the target.
+        if effect in ("status", "cure") and status_keys:
+            weight_total  = _status_weight_total(status_keys)
+            weight_target = node.level * _STATUS_WEIGHT_PER_LEVEL
+            if weight_total < weight_target:
+                node.errors.append(_err(
+                    "ABILITY_STATUS_THIN",
+                    f"{effect.capitalize()} ability at level {node.level} has "
+                    f"status weight {weight_total:.0f} from "
+                    f"{len(status_keys)} key(s) "
+                    f"(expected ≥ {weight_target:.0f}).",
+                    severity="warning",
+                ))
+                by_code["ABILITY_STATUS_THIN"] += 1
 
         # B1 / B2
         gkey = node_group.get(node.ability_id)
