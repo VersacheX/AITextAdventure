@@ -65,7 +65,7 @@ LEVEL_3_FAITH_SEEDS = [
    ##STATUS CLEAN
  {"id": "light_dark_air_faith_lv3_silent_night", "name": "Silent Night", "description": "A hushed prayer that cleanses silence from all allies.", "ability_type": "faith", "level":3, "elements": ["light","dark","air"], "base_power":0, "ap_cost":80, "effect": "cure", "status_keys": ["silence"], "can_aoe": True},
  {"id": "light_dark_earth_faith_lv3_stone_release", "name": "Stone Release", "description": "A grounding chant that frees all allies from petrification.", "ability_type": "faith", "level":3, "elements": ["light","dark","earth"], "base_power":0, "ap_cost":80, "effect": "cure", "status_keys": ["petrify"], "can_aoe": True},
- {"id": "light_dark_light_faith_lv3_clarity_prayer", "name": "Clarity Prayer", "description": "A luminous prayer that clears confusion from all allies.", "ability_type": "faith", "level":3, "elements": ["light","dark","light"], "base_power":0, "ap_cost":80, "effect": "cure", "status_keys": ["confuse"], "can_aoe": True},
+ {"id": "light_dark_light_faith_lv3_clarity_prayer", "name": "Clarity Prayer", "description": "A luminous prayer that clears confusion from all allies.", "ability_type": "faith", "level":3, "elements": ["light","dark","light"], "base_power":0, "ap_cost":80, "effect": "cure", "status_keys": ["confuse", "intelligence_debuff", "strength_debuff"], "can_aoe": True},
 
 
    #buff notes electric->water->fire->ice->air->earth->..electric      light<->dark

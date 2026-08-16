@@ -27,7 +27,7 @@ if TYPE_CHECKING:
 
 # ── Columns / sort keys ───────────────────────────────────────────────────────
 
-_ABILITY_COLUMNS = ["Name", "ID", "Level", "Type", "Elements", "Effect", "AOE", "Statuses", "Errors"]
+_ABILITY_COLUMNS = ["Name", "ID", "Level", "Type", "Elements", "Power", "Effect", "AOE", "Statuses", "Errors"]
 
 _ABILITY_SORT_KEYS: dict[str, str] = {
     "ability-sort-type":     "ability_type",
@@ -142,6 +142,7 @@ def _populate_ability_table(screen: "DataMgmtScreen", nodes: list) -> None:
         elements    = seed.get("elements") or []
         status_keys = seed.get("status_keys") or []
         effect      = str(seed.get("effect", "") or "")
+        base_power  = int(seed.get("base_power", 0) or 0)
         can_aoe     = "✓" if seed.get("can_aoe") else ""
         errors      = node.errors or []
         row_style   = _ability_row_style(errors)
@@ -153,6 +154,7 @@ def _populate_ability_table(screen: "DataMgmtScreen", nodes: list) -> None:
             Text(str(node.level),                style=row_style),
             Text(node.ability_type,              style=row_style),
             Text(_fmt_elem_list(elements),       style=row_style),
+            Text(str(base_power),                style=row_style),
             Text(effect,                         style=row_style),
             Text(can_aoe,                        style=row_style),
             Text(_fmt_status_list(status_keys),  style=row_style),

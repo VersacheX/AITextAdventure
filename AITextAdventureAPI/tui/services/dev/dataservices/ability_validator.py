@@ -28,19 +28,25 @@ Balance rules  (warning — mirrors equipment TP balance check)
 ---------------
 B1  ABILITY_BALANCE_WEAK       total_value < 65% of group average
 B2  ABILITY_BALANCE_STRONG     total_value > 145% of group average
-    Groups are (ability_type, level, effect).  Groups with a single member
-    are not balance-checked (no meaningful average).  Groups whose average is
-    not strictly positive are skipped entirely, since a percentage ratio
-    against a zero/negative baseline is meaningless.
+B3  ABILITY_AP_MISPRICED       value-per-AP efficiency falls outside the healthy
+                               band (70%–135%) around the global median
+                               efficiency  (warning)
+    Balance groups (B1/B2) are (level, effect): abilities are compared across
+    ability_types so cross-type balance surfaces.  Groups with a single member
+    are skipped (no meaningful average), as are groups whose average is not
+    strictly positive.  B3 is *not* peer-grouped — it prices every ability's
+    payload-per-AP against the median efficiency of the whole dataset, so a
+    well-priced dataset produces zero warnings instead of always flagging tails.
 
 total_value formula
 -------------------
-    An AOE ability hits multiple targets, so its offensive/effect payload is
-    worth more than a single-target equivalent.  Rather than a flat bonus, AOE
-    scales the payload (base_power + status weight) by ``_AOE_MULTIPLIER``.
+    The combat value math lives in ``ability_value_calculator`` and folds
+    together the level/element-scaled base power, the status weight, the real
+    per-turn damage of damaging statuses (e.g. ``continuous_damage``), the AOE
+    multiplier, and the AP cost::
 
-    payload = base_power + sum(_status_weight(k) for k in status_keys)
-    tv      = payload * (_AOE_MULTIPLIER if can_aoe else 1.0) - ap_cost
+        payload = (scaled_power + status_weight + status_damage) * aoe_mult
+        tv      = payload - ap_cost
 """
 from __future__ import annotations
 
@@ -52,44 +58,18 @@ from tui.services.dev.dataservices.models import (
     AbilityTypeNode,
     AbilityValidationError,
 )
+from tui.services.dev.dataservices.ability_value_calculator import (
+    AOE_MULTIPLIER as _AOE_MULTIPLIER,
+    ability_power_estimate,
+    compute_ability_value,
+    status_power_estimate,
+    status_weight as _status_weight,
+    status_weight_total as _status_weight_total,
+    total_value as _total_value,
+)
 
 _KNOWN_TYPES   = {"technique", "faith", "magic", "tech", "skill"}
 _KNOWN_EFFECTS = {"damage", "heal", "status", "revive", "cure"}
-
-# ── Status weighting ──────────────────────────────────────────────────────────
-# Relative combat value of each status key.  Hard-disables and permanent effects
-# are worth far more than incremental stat buffs/debuffs.  Keys not listed here
-# fall back to ``_DEFAULT_STATUS_WEIGHT``.
-_STATUS_WEIGHTS: Dict[str, float] = {
-    # ── Hard disables / permanent (very high value) ──
-    "petrify":            22.0,
-    "stun":               16.0,
-    "sleep":              14.0,
-    "silence":            14.0,
-    "confuse":            13.0,
-    # ── Damage-over-time / persistent ──
-    "continuous_damage":  12.0,
-    # ── Utility ──
-    "scanned":             4.0,
-    # ── Elemental buffs/debuffs (moderate) ──
-    "elemental_attack_buff":  9.0,
-    "elemental_defense_buff": 9.0,
-    "elemental_debuff":       9.0,
-    "attack_buff":            9.0,
-    "attack_debuff":          9.0,
-    "defense_buff":           9.0,
-    "defense_debuff":         9.0,
-    # ── Single-stat buffs/debuffs (low value) ──
-    "strength_buff":       6.0,
-    "strength_debuff":     6.0,
-    "dexterity_buff":      6.0,
-    "dexterity_debuff":    6.0,
-    "intelligence_buff":   6.0,
-    "intelligence_debuff": 6.0,
-    "constitution_buff":   6.0,
-    "constitution_debuff": 6.0,
-}
-_DEFAULT_STATUS_WEIGHT = 8.0
 
 # A9 thin-check floor.  The intended design is *one primary status per ability*,
 # so the floor scales gently rather than linearly: a single strong status (e.g.
@@ -103,32 +83,37 @@ _STATUS_WEIGHT_PER_LEVEL = 3.0
 def _status_weight_target(level: int) -> float:
     return _STATUS_WEIGHT_BASE + (max(level, 1) - 1) * _STATUS_WEIGHT_PER_LEVEL
 
-# AOE payload multiplier.  An AOE ability hits multiple targets, so its
-# base_power + status payload is scaled by this factor instead of a flat bonus.
-_AOE_MULTIPLIER = 1.5
 
-
-def _status_weight(key: str) -> float:
-    return _STATUS_WEIGHTS.get(str(key).lower(), _DEFAULT_STATUS_WEIGHT)
-
-
-def _status_weight_total(status_keys: List[Any]) -> float:
-    return sum(_status_weight(k) for k in (status_keys or []))
+# ── AP-cost mispricing check (B3) ─────────────────────────────────────────────
+# AP cost is a *price*: it should be proportional to the combat payload the
+# ability delivers.  Rather than a standard-deviation "outlier" check (which
+# always flags the tails of any spread and can never report a clean dataset), we
+# measure each ability's value-per-AP efficiency against the *median* efficiency
+# of all abilities.  The median self-calibrates to the real data yet is robust
+# to extremes, while the fixed multiplier band gives an absolute healthy range
+# so a well-priced dataset produces zero warnings.
+#     efficiency  = payload / ap_cost
+#     flag when   efficiency < _AP_EFF_LOW  * median_efficiency   (too expensive)
+#            or   efficiency > _AP_EFF_HIGH * median_efficiency   (too cheap)
+_AP_EFF_LOW  = 0.70
+_AP_EFF_HIGH = 1.40
 
 
 def _err(code: str, message: str, severity: str = "error") -> AbilityValidationError:
     return AbilityValidationError(code=code, message=message, severity=severity)
 
 
-def _total_value(seed: dict) -> float:
-    bp          = float(seed.get("base_power", 0) or 0)
-    ap          = float(seed.get("ap_cost",    0) or 0)
-    status_keys = seed.get("status_keys") or []
-    can_aoe     = bool(seed.get("can_aoe", False))
-    payload     = bp + _status_weight_total(status_keys)
-    if can_aoe:
-        payload *= _AOE_MULTIPLIER
-    return payload - ap
+def _median(values: List[float]) -> float:
+    """Return the median of *values* (0.0 if empty)."""
+    if not values:
+        return 0.0
+    ordered = sorted(values)
+    n = len(ordered)
+    mid = n // 2
+    if n % 2:
+        return ordered[mid]
+    return (ordered[mid - 1] + ordered[mid]) / 2.0
+
 
 
 def _flat_nodes(tree: List[AbilityTypeNode]) -> List[AbilityNode]:
@@ -169,18 +154,26 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
     by_code: Dict[str, int] = defaultdict(int)
 
     # ── Build balance groups ──────────────────────────────────────────────
+    # Grouping is by (level, effect): abilities of the same level and effect are
+    # compared against each other regardless of ability_type, so cross-type
+    # outliers surface (B1/B2 total_value balance).
     tv_by_group: Dict[tuple, List[float]] = defaultdict(list)
     node_group:  Dict[str, tuple]         = {}
 
+    # Collect value-per-AP efficiencies for the global B3 mispricing median.
+    efficiencies: List[float] = []
+
     for node in all_nodes:
         seed   = node.record.extras.get("_seed") or {}
-        atype  = str(seed.get("ability_type", "") or "").lower()
         level  = int(seed.get("level", 1) or 1)
         effect = str(seed.get("effect", "") or "").lower()
-        gkey   = (atype, level, effect)
-        tv     = _total_value(seed)
-        tv_by_group[gkey].append(tv)
+        gkey   = (level, effect)
+        tv_by_group[gkey].append(_total_value(seed))
         node_group[node.ability_id] = gkey
+
+        breakdown = compute_ability_value(seed)
+        if breakdown.ap_cost > 0 and breakdown.payload > 0:
+            efficiencies.append(breakdown.payload / breakdown.ap_cost)
 
     # Only keep groups with more than one member AND a strictly positive
     # average.  A percentage ratio against a zero/negative baseline is
@@ -191,6 +184,11 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
         for k, v in tv_by_group.items()
         if len(v) > 1 and (sum(v) / len(v)) > 0
     }
+
+    # Median value-per-AP across all priced abilities.  The median self-calibrates
+    # to the real data while resisting extremes, so the B3 mispricing band is
+    # anchored to a "typical" ability rather than to a spread that always has tails.
+    median_efficiency = _median(efficiencies) if efficiencies else 0.0
 
     # ── Per-node checks ───────────────────────────────────────────────────
     for node in all_nodes:
@@ -297,7 +295,7 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
                         "ABILITY_BALANCE_WEAK",
                         f"Total value {tv:.1f} is only {ratio:.0%} of "
                         f"group average {avg:.1f} "
-                        f"(type={gkey[0]}, lv={gkey[1]}, effect={gkey[2]}).",
+                        f"(lv={gkey[0]}, effect={gkey[1]}).",
                         severity="info",
                     ))
                     by_code["ABILITY_BALANCE_WEAK"] += 1
@@ -306,10 +304,45 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
                         "ABILITY_BALANCE_STRONG",
                         f"Total value {tv:.1f} is {ratio:.0%} of "
                         f"group average {avg:.1f} "
-                        f"(type={gkey[0]}, lv={gkey[1]}, effect={gkey[2]}).",
+                        f"(lv={gkey[0]}, effect={gkey[1]}).",
                         severity="notice",
                     ))
                     by_code["ABILITY_BALANCE_STRONG"] += 1
+
+        # B3 — AP mispricing: value-per-AP efficiency outside the healthy band
+        # around the global median efficiency.  Too-low efficiency means the
+        # ability is overpriced (dead weight); too-high means underpriced
+        # (overpowered for its cost).
+        if median_efficiency > 0:
+            ap_cost = float(seed.get("ap_cost", 0) or 0)
+            breakdown = compute_ability_value(seed)
+            if ap_cost > 0 and breakdown.payload > 0:
+                efficiency = breakdown.payload / ap_cost
+                ratio = efficiency / median_efficiency
+                low_eff  = _AP_EFF_LOW  * median_efficiency
+                high_eff = _AP_EFF_HIGH * median_efficiency
+                if efficiency < low_eff:
+                    # overpriced: expected AP for a typical efficiency
+                    expected_ap = breakdown.payload / median_efficiency
+                    node.errors.append(_err(
+                        "ABILITY_AP_MISPRICED",
+                        f"AP {ap_cost:.0f} buys {ratio:.2f}x the value-per-AP of "
+                        f"a typical ability (overpriced; expected AP ~= "
+                        f"{expected_ap:.0f}).",
+                        severity="warning",
+                    ))
+                    by_code["ABILITY_AP_MISPRICED"] += 1
+                elif efficiency > high_eff:
+                    expected_ap = breakdown.payload / median_efficiency
+                    node.errors.append(_err(
+                        "ABILITY_AP_MISPRICED",
+                        f"AP {ap_cost:.0f} buys {ratio:.2f}x the value-per-AP of "
+                        f"a typical ability (underpriced; expected AP ~= "
+                        f"{expected_ap:.0f}).",
+                        severity="warning",
+                    ))
+                    by_code["ABILITY_AP_MISPRICED"] += 1
+
 
     invalid      = sum(1 for n in all_nodes if n.errors)
     total_errors = sum(len(n.errors) for n in all_nodes)

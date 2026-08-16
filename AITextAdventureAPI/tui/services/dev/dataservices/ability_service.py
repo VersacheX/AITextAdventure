@@ -79,14 +79,46 @@ def _ability_detail(seed: dict) -> str:
     lines.append(f"Level    : {level}")
     lines.append(f"Effect   : {_EFFECT_LABELS.get(effect, effect.title())}")
     lines.append(f"AP Cost  : {ap_cost}")
-    if base_power:
-        lines.append(f"Power    : {base_power}")
+    lines.append(f"Power    : {base_power}")
+    # Status abilities usually declare base_power 0 yet several deal real combat
+    # damage (e.g. continuous_damage).  Surface that estimated damage separately
+    # so the panel reflects real combat value without overriding base_power.
+    if effect == "status" and status_keys:
+        from tui.services.dev.dataservices.ability_value_calculator import (
+            status_power_estimate,
+        )
+        est = int(round(status_power_estimate(seed)))
+        if est:
+            lines.append(f"Status Dmg: ~{est} (per turn)")
     if elements:
         elem_str = "  ".join(_ELEMENT_CHARS.get(str(e).lower(), f"({e})") for e in elements)
         lines.append(f"Elements : {elem_str}")
     if status_keys:
         lines.append(f"Statuses : {', '.join(status_keys)}")
     lines.append(f"AOE      : {'Yes' if can_aoe else 'No'}")
+
+    # ── Calculated value breakout ─────────────────────────────────────────
+    # Show the same combat-value components the validator uses for its balance
+    # and AP-outlier notices, so the numbers behind a WARN/NOTICE are visible.
+    # NOTE: this string is rich-escaped by the detail panel, so it must stay
+    # plain text (no [dim]/markup tags — they would render literally).
+    from tui.services.dev.dataservices.ability_value_calculator import (
+        compute_ability_value,
+    )
+    v = compute_ability_value(seed)
+    lines.append("")
+    lines.append("-- Calculated Value --")
+    lines.append(f"Scaled Power : {v.scaled_power:.1f}")
+    if v.status_weight:
+        lines.append(f"Status Weight: {v.status_weight:.1f}")
+    if v.status_damage:
+        lines.append(f"Status Dmg   : {v.status_damage:.1f}")
+    if v.aoe_multiplier != 1.0:
+        lines.append(f"AOE x{v.aoe_multiplier:g}    : {v.payload:.1f} (payload)")
+    lines.append(f"AP Cost      : -{v.ap_cost:.0f}")
+    lines.append(f"Total Value  : {v.total_value:.1f}")
+    if v.ap_cost > 0 and v.payload > 0:
+        lines.append(f"Value/AP     : {v.payload / v.ap_cost:.2f} (payload per AP)")
     return "\n".join(lines)
 
 
