@@ -386,9 +386,9 @@ NPC_DIALOG = [
         'npc_id': 'catalyst',
         'dialog_id': 'catalyst_ch4_intro',
         'dialog': [
-            "This fracture remembers what your world has forgotten.",
-            "Order. Silence. Eternity.",
-            "I am the Catalyst. The fracture’s herald and harbinger.",
+            "You are not from here.  This reality fractures around you.",
+            "You have as little business in this place as I.",
+            "I am Catalyst. The fracture’s herald and harbinger.",
             "You cannot stop the collapse, but you can beg for a swift end."
         ]
     },
@@ -396,21 +396,21 @@ NPC_DIALOG = [
         'npc_id': 'technique',
         'dialog_id': 'technique_ch4_after_catalyst',
         'dialog': [
-            "Yeah, yeah, collapse, eternity, whatever. Let’s just kill it."
+            "Yeah, yeah, collapse, eternity, whatever. You look like something to take a hit."
         ]
     },
     {
         'npc_id': 'tech',
         'dialog_id': 'tech_ch4_after_catalyst',
         'dialog': [
-            "It thinks the fracture is inevitable. I intend to prove otherwise."
+            "It thinks in inevitability. Surprising how often inevitable is prevented and nobody bats an eyelid."
         ]
     },
     {
         'npc_id': 'magic',
         'dialog_id': 'magic_ch4_after_catalyst',
         'dialog': [
-            "Herald of the end of the world? Cute. I’ve heard better threats."
+            "'Here I am! Herald of the end of the worlds!!!'... Hahahaha! That's one for the record books."
         ]
     },
     # add character dialog after catalyst intro

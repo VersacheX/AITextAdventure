@@ -58,6 +58,11 @@ class TaskEventConditionType(str, Enum):
                 'params': { 'task_id': 'ch1_open_gate' }
             }
         }
+            'condition': {
+                'type': 'has_item',
+                'params': { 'item_id': 'mnemonic_logger' },
+                'operator': 'is_not'
+            }
     """
 
     # Story / task state

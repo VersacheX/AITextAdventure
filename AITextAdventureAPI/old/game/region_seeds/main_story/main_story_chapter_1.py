@@ -260,7 +260,7 @@ NPC_DIALOG = [
 		'dialog_id': 'rook_intro',
 		'dialog': [
 			"You're looking short on funds there my guy.  I'm Rook, the bounty hunter. I'll tell ya what, I'll cut ya a deal.",
-			"I have a bounty for a nearby bandit Seth's head.  He's camped up in the outskirts nearby.  Bring it back to me and I'll give ya some cash.",
+			"I have a bounty for a nearby bandit Seth.  He's camped up in the outskirts nearby.  Bring him back to me and I'll give ya some cash.",
 			"Tell you what, I'll give you a little up front so you can get started.  I recommend buying some Caffeine Shots and Pocket Salves."
 		]
 	},
@@ -275,7 +275,7 @@ NPC_DIALOG = [
 		'npc_id': 'technique', # technique(Chock) is ready to bust some bounty
 		'dialog_id': 'technique_ready_to_bust_bounty',
 		'dialog': [
-			"I've been waiting to hear somebody say I get paid to bust that guy up all day!  Let's go get 'em!"
+			"I knew it when I looked at that guy.  I can't wait to go bust him up for you."
 		]
 	},
 	{
@@ -390,8 +390,8 @@ NPC_DIALOG = [
         'npc_id': 'sam',
         'dialog_id': 'sam_gives_logger',
         'dialog': [
-            "Tess mentioned you were helping out. If you're going to be dealing with all sorts of characters, you should have this.",
-            "It's a Mnemonic Logger. It'll keep track of everyone you meet. Might help you separate the snakes from the saints.",
+            "If you're going to be dealing with all sorts of characters, you should have this.",
+            "It's a Mnemonic Logger. It keeps track of contacts you make who want to be seen. It might help you separate the snakes from the saints.",
             "Just... try to stay out of trouble. This city has enough of it."
         ]
     },
@@ -499,8 +499,14 @@ NPC_DIALOG = [
 			"Aha! you found them!!! Aren't they beautiful.",
 			"Ok Mira will be interested in this cursed couplet I came across.",
 			"She's in Boiling Bubble at the moment and loves to hang out at the bar.",
-			"If you run into her give her the couplet for the Grift Stone...",
-			"Remember to give her my regards."
+			"If you run into her give her the couplet for the Grift Stone..."
+		]
+	},
+	{
+		'npc_id': 'brawn',
+		'dialog_id': 'brawn_ch1_closing_no_logger',
+		'dialog': [
+			"You should speak to Sam before you go, she has something for you to help you out."
 		]
 	},
 	{
@@ -592,6 +598,13 @@ TASKS = [
 				}
 			},
 			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_got_jacked'
+				}
+			},
+			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
 					'npc_id': 'seth',
@@ -605,13 +618,6 @@ TASKS = [
 				'params': {
 					'npc_id': None,
 					'dialog_id': 'chapter_1_our_stuff_is_missing'
-				}
-			},
-			{
-				'event_type': 'initiate_character_dialog',
-				'params': {
-					'npc_id': 'technique',
-					'dialog_id': 'technique_got_jacked'
 				}
 			},
 			{
@@ -1410,6 +1416,18 @@ TASKS = [
 				'params': {
 					'npc_id': 'brawn',
 					'dialog_id': 'brawn_ch1_closing'
+				}
+			},
+			{ # raise dialog for brawn if the players do not have a mnemonic_logger
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'brawn',
+					'dialog_id': 'brawn_ch1_closing_no_logger'
+				},
+				'condition': {
+					'type': 'has_item',
+					'params': { 'item_id': 'mnemonic_logger' },
+					'operator': 'is_not'
 				}
 			},
 			{
