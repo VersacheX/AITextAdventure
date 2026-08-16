@@ -16,13 +16,15 @@ def copy_characters(screen: "DataMgmtScreen") -> str:
     lines = []
     for r in records:
         errors = (r.extras or {}).get("_errors") or []
-        if any(e.severity == "error" for e in errors):
-            messages = "  ·  [ERROR] " + " | ".join(
-                f"{e.code}: {e.message}" for e in errors if e.severity == "error"
-            )
-        else:
-            messages = ""
-        lines.append(f"{r.name}  {r.subtitle}{messages}")
+        parts = []
+        hard = [e for e in errors if e.severity == "error"]
+        warn = [e for e in errors if e.severity == "warning"]
+        if hard:
+            parts.append("[ERROR] " + " | ".join(f"{e.code}: {e.message}" for e in hard))
+        if warn:
+            parts.append("[WARN] " + " | ".join(f"{e.code}: {e.message}" for e in warn))
+        suffix = "  ·  " + "  ·  ".join(parts) if parts else ""
+        lines.append(f"{r.name}  {r.subtitle}{suffix}")
     return "\n".join(lines)
 
 
@@ -38,14 +40,26 @@ def validate_characters_for_screen(screen: "DataMgmtScreen") -> None:
 
     rebuild_list_for_screen(screen)
 
-    total_errors = summary.get("total_errors", 0)
-    invalid      = summary.get("invalid", 0)
+    total_errors   = summary.get("total_errors", 0)
+    invalid        = summary.get("invalid", 0)
+    total_warnings = summary.get("total_warnings", 0)
+    warned         = summary.get("warned", 0)
 
-    if total_errors == 0:
+    if total_errors == 0 and total_warnings == 0:
         screen.notify("✓ Character integrity OK — no issues found.", timeout=3.0)
-    else:
+    elif total_errors == 0:
         screen.notify(
-            f"✗ {total_errors} issue(s) across {invalid} character(s) — flagged in list.",
+            f"⚠ {total_warnings} warning(s) across {warned} character(s) "
+            f"(e.g. short description) — flagged in list.",
             severity="warning",
             timeout=5.0,
+        )
+    else:
+        parts = [f"✗ {total_errors} error(s) across {invalid} character(s)"]
+        if total_warnings:
+            parts.append(f"{total_warnings} warning(s) across {warned} character(s)")
+        screen.notify(
+            " · ".join(parts) + " — flagged in list.",
+            severity="error",
+            timeout=6.0,
         )

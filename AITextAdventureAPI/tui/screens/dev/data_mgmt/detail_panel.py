@@ -202,16 +202,27 @@ class NpcDetailPanel(Widget):
         errors = (r.extras or {}).get("_errors") if r.extras else None
         if errors is not None:
             hard_errors = [e for e in errors if e.severity == "error"]
+            warnings    = [e for e in errors if e.severity == "warning"]
             info_items  = [e for e in errors if e.severity == "info"]
-            if not hard_errors and not info_items:
+            if not hard_errors and not warnings and not info_items:
                 yield Static("Integrity: [green]OK[/green]", classes="tl-section-header")
             else:
                 if hard_errors:
                     parts = [f"[red]{len(hard_errors)} error(s)[/red]"]
+                    if warnings:
+                        parts.append(f"[yellow]{len(warnings)} warning(s)[/yellow]")
                     if info_items:
                         parts.append(f"[cyan]{len(info_items)} info[/cyan]")
                     yield Static(
                         f"Integrity: [red]FAIL[/red]  ({', '.join(parts)})",
+                        classes="tl-section-header",
+                    )
+                elif warnings:
+                    parts = [f"[yellow]{len(warnings)} warning(s)[/yellow]"]
+                    if info_items:
+                        parts.append(f"[cyan]{len(info_items)} info[/cyan]")
+                    yield Static(
+                        f"Integrity: [yellow]WARN[/yellow]  ({', '.join(parts)})",
                         classes="tl-section-header",
                     )
                 else:
@@ -220,7 +231,14 @@ class NpcDetailPanel(Widget):
                         classes="tl-section-header",
                     )
                 for err in errors:
-                    colour = "cyan" if err.severity == "info" else "red"
+                    if err.severity == "error":
+                        colour = "red"
+                    elif err.severity == "warning":
+                        colour = "yellow"
+                    elif err.severity == "info":
+                        colour = "cyan"
+                    else:
+                        colour = "dim"
                     yield Static(
                         f"  [{colour}]{rich_escape(err.code)}[/{colour}]"
                         f"  [dim]{rich_escape(err.message)}[/dim]",

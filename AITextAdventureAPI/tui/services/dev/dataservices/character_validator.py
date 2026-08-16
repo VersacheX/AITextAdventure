@@ -1,5 +1,4 @@
-﻿"""
-Character equipment integrity validator.
+﻿"""Character equipment integrity validator.
 
 Rules
 -----
@@ -17,6 +16,10 @@ C3  CHARACTER_EQUIP_UNKNOWN_ACCESSORY
 
 C4  CHARACTER_UNKNOWN_ABILITY
     An ability id in the abilities list is not registered in PLAYER_ABILITY_SEEDS.
+
+C5  CHARACTER_SHORT_DESCRIPTION  (warning)
+    The NPC seed's description field is shorter than the minimum acceptable
+    length, benchmarked against Lyren Vale's reference description.
 """
 from __future__ import annotations
 
@@ -28,9 +31,22 @@ from tui.services.dev.dataservices.models import DevRecord
 
 _ARMOR_SLOTS: tuple[str, ...] = ("arm_armor", "head_armor", "body_armor", "leg_armor")
 
+# Minimum acceptable description length, benchmarked against Lyren Vale's reference.
+_MIN_DESCRIPTION_LENGTH: int = len(
+    "A gentle wayfarer attuned to the emotional undercurrents of the world. "
+    "Lyren feels the Riftwaters long before she sees them."
+    "The way light bends, the way people's hearts tighten. "
+    "She speaks softly, moves quietly, and heals instinctively, "
+    "as if guided by something older than memory."
+)
+
 
 def _err(code: str, message: str) -> Any:
     return SimpleNamespace(code=code, message=message, severity="error")
+
+
+def _warn(code: str, message: str) -> Any:
+    return SimpleNamespace(code=code, message=message, severity="warning")
 
 
 def _build_weapon_ids(const: Any) -> Set[str]:
@@ -85,24 +101,43 @@ def _build_ability_ids(const: Any) -> Set[str]:
     return ids
 
 
+def _build_player_npc_lookup(const: Any) -> Dict[str, dict]:
+    """Return a mapping of npc_id → NPC seed dict.
+
+    Searches both PLAYER_NPCS and NPCS, mirroring the cross-reference logic
+    in record_builders._build_characters.  Attainable (unlockable) characters
+    store their description in NPCS, not PLAYER_NPCS.
+    """
+    lookup: Dict[str, dict] = {}
+    for source in ("NPCS", "PLAYER_NPCS"):
+        for npc in (getattr(const, source, None) or []):
+            nid = str(npc.get("npc_id", "") or "").strip()
+            if nid:
+                lookup[nid] = npc
+    return lookup
+
+
 def validate_characters(records: List[DevRecord], const: Any) -> Dict[str, Any]:
-    """Validate equipment slots and abilities on every character DevRecord.
+    """Validate equipment slots, abilities, and description quality on every
+    character DevRecord.
 
     Only records whose id appears in ``ATTAINABLE_PLAYER_CHARACTERS`` carry
     equipment/ability slots — ``PLAYER_NPCS`` entries are skipped silently.
 
     Annotates each record's ``extras``:
-      ``_errors``         — list of SimpleNamespace error objects
+      ``_errors``         — list of SimpleNamespace error/warning objects
       ``_validated``      — True
       ``_invalid_equip``  — set of item ids that failed validation
       ``_invalid_abilities`` — set of ability ids that failed validation
 
-    Returns a summary dict: ``total_errors``, ``invalid``, ``by_code``.
+    Returns a summary dict: ``total_errors``, ``invalid``, ``by_code``,
+    ``total_warnings``, ``warned``.
     """
     weapon_ids    = _build_weapon_ids(const)
     armor_ids     = _build_armor_ids(const)
     accessory_ids = _build_accessory_ids(const)
     ability_ids   = _build_ability_ids(const)
+    npc_lookup    = _build_player_npc_lookup(const)
 
     pc_index: Dict[str, dict] = {
         str(pc.get("id", "")): pc
@@ -110,9 +145,11 @@ def validate_characters(records: List[DevRecord], const: Any) -> Dict[str, Any]:
         if isinstance(pc, dict) and pc.get("id")
     }
 
-    by_code:     Dict[str, int] = {}
-    total_errors = 0
-    invalid      = 0
+    by_code:       Dict[str, int] = {}
+    total_errors   = 0
+    invalid        = 0
+    total_warnings = 0
+    warned         = 0
 
     for record in records:
         record.extras["_errors"]           = []
@@ -176,13 +213,38 @@ def validate_characters(records: List[DevRecord], const: Any) -> Dict[str, Any]:
                     by_code.get("CHARACTER_UNKNOWN_ABILITY", 0) + 1
                 )
 
+        # C5 — description length (warning)
+        npc_seed = npc_lookup.get(record.id, {})
+        desc = str(npc_seed.get("description", "") or "").strip()
+        if len(desc) < _MIN_DESCRIPTION_LENGTH:
+            errors.append(_warn(
+                "CHARACTER_SHORT_DESCRIPTION",
+                f"description is {len(desc)} chars "
+                f"(minimum {_MIN_DESCRIPTION_LENGTH}). "
+                "Expand to match Lyren Vale's reference length.",
+            ))
+            by_code["CHARACTER_SHORT_DESCRIPTION"] = (
+                by_code.get("CHARACTER_SHORT_DESCRIPTION", 0) + 1
+            )
+
+        hard_errors   = [e for e in errors if e.severity == "error"]
+        soft_warnings = [e for e in errors if e.severity == "warning"]
+
         if errors:
             record.extras["_errors"] = errors
-            total_errors += len(errors)
+
+        if hard_errors:
+            total_errors += len(hard_errors)
             invalid      += 1
 
+        if soft_warnings:
+            total_warnings += len(soft_warnings)
+            warned         += 1
+
     return {
-        "total_errors": total_errors,
-        "invalid":      invalid,
-        "by_code":      by_code,
+        "total_errors":   total_errors,
+        "invalid":        invalid,
+        "by_code":        by_code,
+        "total_warnings": total_warnings,
+        "warned":         warned,
     }

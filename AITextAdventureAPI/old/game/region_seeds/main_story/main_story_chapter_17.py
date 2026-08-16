@@ -328,7 +328,7 @@ NPC_DIALOG = [
 		'npc_id': 'grimnaw',
 		'dialog_id': 'grimnaw_ch17_splitting',
 		'dialog': [
-			"(muttering) Two states. Simultaneously. My head is going to split."
+			"(muttering) It exists in both states at once. I can't get a read. My instruments agree with each other and that's somehow worse."
 		]
 	},
 	{
@@ -461,7 +461,7 @@ NPC_DIALOG = [
 		'npc_id': 'grimnaw',
 		'dialog_id': 'grimnaw_ch17_equations_breaking',
 		'dialog': [
-			"(muttering rapidly) Two states. Simultaneously. My equations are breaking... fascinating."
+			"(scribbling furiously) Two states. Simultaneously. And we collapsed the waveform by *refusing the premise*. I've never seen a paradox die from sheer stubbornness before. Remarkable."
 		]
 	},
 	{
