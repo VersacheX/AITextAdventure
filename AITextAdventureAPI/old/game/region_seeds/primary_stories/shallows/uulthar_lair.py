@@ -122,7 +122,7 @@ HOSTILE_SEEDS = [  # all level 8–10, ~10 hostiles total
         'money_range': (20, 90),
         'basic_attack': 'rusted cutlass',
         'strong_attack': 'drowning curse',
-        'player_abilities': ['water_dark_skill_lv2_abyssal_mire', 'water_tech_lv1_tide_entangler'],
+        'player_abilities': ['water_dark_skill_lv2_deep_water_blitz', 'water_tech_lv1_tide_entangler'],
         'base_str': 5,
         'base_dex': 4,
         'base_con': 6,

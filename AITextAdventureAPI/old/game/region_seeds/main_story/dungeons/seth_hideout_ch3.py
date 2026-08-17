@@ -66,7 +66,7 @@ HOSTILE_SEEDS = [
         'money_range': (8,15),
         'basic_attack': 'venomous bite',
         'strong_attack': 'web entangle',
-        'player_abilities': ['electric_water_skill_lv2_corrosive_drip'],
+        'player_abilities': ['electric_water_skill_lv2_corrosive_splash_bomb'],
         'base_str':8,
         'base_dex':14,
         'base_con':10,
