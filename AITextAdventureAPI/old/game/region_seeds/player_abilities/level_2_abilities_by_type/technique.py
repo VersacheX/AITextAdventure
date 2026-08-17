@@ -78,29 +78,29 @@ LEVEL_2_TECHNIQUE_ABILITY_SEEDS = [
  {"id": "ice_ice_technique_lv2_frost_smash", "name": "Frost Smash", "description": "A shattering icy strike.", "ability_type": "technique", "level":2, "elements": ["ice", "ice"], "base_power":22, "ap_cost":25, "effect": "damage", "can_aoe": True},
  {"id": "electric_electric_technique_lv2_thunder_clap", "name": "Thunder Clap", "description": "A booming electric strike.", "ability_type": "technique", "level":2, "elements": ["electric", "electric"], "base_power":22, "ap_cost":25, "effect": "damage", "can_aoe": True},
    ###BUFFS   
- {"id": "electric_water_technique_lv2_conductive_wave", "name": "Conductive Wave", "description": "Electrified tide that sharpens attacks.", "ability_type": "technique", "level":2, "elements": ["electric", "water"], "base_power":0, "ap_cost":15, "effect": "status", "status_keys": ["elemental_attack_buff"], "can_aoe": False},
- {"id": "ice_fire_technique_lv2_frostbrand_flame", "name": "Frostbrand Flame", "description": "Cold fire that hones offense.", "ability_type": "technique", "level":2, "elements": ["ice", "fire"], "base_power":0, "ap_cost":15, "effect": "status", "status_keys": ["elemental_attack_buff"], "can_aoe": False},
- {"id": "fire_water_technique_lv2_steam_temper", "name": "Steam Temper", "description": "Scalding steam that sharpens strikes.", "ability_type": "technique", "level":2, "elements": ["fire", "water"], "base_power":0, "ap_cost":15, "effect": "status", "status_keys": ["elemental_attack_buff"], "can_aoe": False},
- {"id": "ice_air_technique_lv2_hailwind_edge", "name": "Hailwind Edge", "description": "Icy gusts that harden strikes.", "ability_type": "technique", "level":2, "elements": ["ice", "air"], "base_power":0, "ap_cost":15, "effect": "status", "status_keys": ["elemental_attack_buff"], "can_aoe": False},
- {"id": "earth_air_technique_lv2_stonewind_fortify", "name": "Stonewind Fortify", "description": "Rock and wind that boost offense.", "ability_type": "technique", "level":2, "elements": ["earth", "air"], "base_power":0, "ap_cost":15, "effect": "status", "status_keys": ["elemental_attack_buff"], "can_aoe": False},
- {"id": "electric_earth_technique_lv2_magnet_quake", "name": "Magnet Quake", "description": "Charged tremors that strengthen hits.", "ability_type": "technique", "level":2, "elements": ["electric", "earth"], "base_power":0, "ap_cost":15, "effect": "status", "status_keys": ["elemental_attack_buff"], "can_aoe": False},
+ {"id": "electric_water_technique_lv2_conductive_wave", "name": "Conductive Wave", "description": "Electrified tide that sharpens attacks.", "ability_type": "technique", "level":2, "elements": ["electric", "water"], "base_power":0, "ap_cost":25, "effect": "status", "status_keys": ["elemental_attack_buff", "strength_buff"], "can_aoe": False},
+ {"id": "ice_fire_technique_lv2_frostbrand_flame", "name": "Frostbrand Flame", "description": "Cold fire that hones offense.", "ability_type": "technique", "level":2, "elements": ["ice", "fire"], "base_power":0, "ap_cost":25, "effect": "status", "status_keys": ["elemental_attack_buff", "strength_buff"], "can_aoe": False},
+ {"id": "fire_water_technique_lv2_steam_temper", "name": "Steam Temper", "description": "Scalding steam that sharpens strikes.", "ability_type": "technique", "level":2, "elements": ["fire", "water"], "base_power":0, "ap_cost":25, "effect": "status", "status_keys": ["elemental_attack_buff", "strength_buff"], "can_aoe": False},
+ {"id": "ice_air_technique_lv2_hailwind_edge", "name": "Hailwind Edge", "description": "Icy gusts that harden strikes.", "ability_type": "technique", "level":2, "elements": ["ice", "air"], "base_power":0, "ap_cost":25, "effect": "status", "status_keys": ["elemental_attack_buff", "strength_buff"], "can_aoe": False},
+ {"id": "earth_air_technique_lv2_stonewind_fortify", "name": "Stonewind Fortify", "description": "Rock and wind that boost offense.", "ability_type": "technique", "level":2, "elements": ["earth", "air"], "base_power":0, "ap_cost":25, "effect": "status", "status_keys": ["elemental_attack_buff", "strength_buff"], "can_aoe": False},
+ {"id": "electric_earth_technique_lv2_magnet_quake", "name": "Magnet Quake", "description": "Charged tremors that strengthen hits.", "ability_type": "technique", "level":2, "elements": ["electric", "earth"], "base_power":0, "ap_cost":25, "effect": "status", "status_keys": ["elemental_attack_buff", "strength_buff"], "can_aoe": False},
 
- {"id": "earth_light_technique_lv2_rally_up", "name": "Rally Up", "description": "A hardens defenses for all those affected.", "ability_type": "technique", "level":2, "elements": ["earth", "light"], "base_power":0, "ap_cost":18, "effect": "status", "status_keys": ["defense_buff"], "can_aoe": True},
+ {"id": "earth_light_technique_lv2_rally_up", "name": "Rally Up", "description": "A hardens defenses for all those affected.", "ability_type": "technique", "level":2, "elements": ["earth", "light"], "base_power":0, "ap_cost":22, "effect": "status", "status_keys": ["defense_buff", "constitution_buff"], "can_aoe": True},
    ###STATUS EFFECTS
    #THIS ISN'T TECHNIQUE WE CHANGE IT .... big slam into ground whammo sonic slam
- {"id": "air_dark_technique_lv2_hush_now", "name": "Sonic Slam", "description": "An effective technique involving slamming a weapon into the ground to create sonic waves.", "ability_type": "technique", "level":2, "elements": ["air", "dark"], "base_power":18, "ap_cost":35, "effect": "status", "status_keys": ["silence"], "can_aoe": True},
+ {"id": "air_dark_technique_lv2_hush_now", "name": "Sonic Slam", "description": "An effective technique involving slamming a weapon into the ground to create sonic waves.", "ability_type": "technique", "level":2, "elements": ["air", "dark"], "base_power":1, "ap_cost":40, "effect": "status", "status_keys": ["silence"], "can_aoe": True},
 
 
 
 
   #### NON PLAYER ABILITIES
   {"id": "earth_dark_technique_lv2_rabid_bite", "name": "Rabid Bite", "description": "A savage bite filled with dark energy.", "ability_type": "technique", "level":2, "elements": ["earth", "dark"], "base_power":30, "ap_cost":25, "effect": "damage", "can_aoe": False, "non_player_ability": True},
-  {"id": "dark_dark_technique_lv2_infectious_bite", "name": "Infectious Bite", "description": "A savage bite filled with dark energy.", "ability_type": "technique", "level":2, "elements": ["earth", "dark"], "base_power":2, "ap_cost":30, "effect": "status", "status_keys": ["continuous_damage"], "can_aoe": False, "non_player_ability": True},
-  {"id": "earth_fire_technique_lv2_berserker_tech", "name": "Berserker Technique", "description": "A berserker technique that increases attack power.", "ability_type": "technique", "level":2, "elements": ["earth", "fire"], "base_power":0, "ap_cost":20, "effect": "status", "status_keys": ["elemental_attack_buff"], "can_aoe": True, "non_player_ability": True},
+  {"id": "dark_dark_technique_lv2_infectious_bite", "name": "Infectious Bite", "description": "A savage bite filled with dark energy.", "ability_type": "technique", "level":2, "elements": ["earth", "dark"], "base_power":5, "ap_cost":30, "effect": "status", "status_keys": ["continuous_damage"], "can_aoe": False, "non_player_ability": True},
+  {"id": "earth_fire_technique_lv2_berserker_tech", "name": "Berserker Technique", "description": "A berserker technique that increases attack power.", "ability_type": "technique", "level":2, "elements": ["earth", "fire"], "base_power":0, "ap_cost":25, "effect": "status", "status_keys": ["elemental_attack_buff", "attack_buff"], "can_aoe": True, "non_player_ability": True},
   {"id": "earth_earth_technique_lv2_earth_sunder", "name": "Earth Sunder", "description": "A devastating earth technique that shatters the ground.", "ability_type": "technique", "level":2, "elements": ["earth", "earth"], "base_power":40, "ap_cost":30, "effect": "damage", "can_aoe": False, "non_player_ability": True},
   {"id": "earth_earth_technique_lv2_brutal_swing", "name": "Brutal Swing", "description": "A powerful swing that crushes enemies.", "ability_type": "technique", "level":2, "elements": ["earth", "earth"], "base_power":35, "ap_cost":25, "effect": "damage", "can_aoe": False, "non_player_ability": True},
-  {"id": "earth_light_technique_lv2_stone_guard", "name": "Stone Guard", "description": "A defensive technique that fortifies allies.", "ability_type": "technique", "level":2, "elements": ["earth", "light"], "base_power":0, "ap_cost":20, "effect": "status", "status_keys": ["defense_buff"], "can_aoe": True, "non_player_ability": True},
-  {"id": "air_air_technique_lv2_whirlwind_barrage", "name": "Whirlwind Barrage", "description": "A flurry of wind attacks that hits multiple enemies.", "ability_type": "technique", "level":2, "elements": ["air", "air"], "base_power":30, "ap_cost":25, "effect": "damage", "can_aoe": True, "non_player_ability": True},
+  {"id": "earth_light_technique_lv2_stone_guard", "name": "Stone Guard", "description": "A defensive technique that fortifies allies.", "ability_type": "technique", "level":2, "elements": ["earth", "light"], "base_power":0, "ap_cost":25, "effect": "status", "status_keys": ["defense_buff", "elemental_defense_buff"], "can_aoe": True, "non_player_ability": True},
+  {"id": "air_air_technique_lv2_whirlwind_barrage", "name": "Whirlwind Barrage", "description": "A flurry of wind attacks that hits multiple enemies.", "ability_type": "technique", "level":2, "elements": ["air", "air"], "base_power":30, "ap_cost":30, "effect": "damage", "can_aoe": True, "non_player_ability": True},
   {"id": "earth_electric_lv2_technique_chain_reactor", "name": "Chain Reactor", "description": "A chain reaction of electric energy that jumps between enemies.", "ability_type": "technique", "level":2, "elements": ["earth", "electric"], "base_power":28, "ap_cost":30, "effect": "damage", "can_aoe": True, "non_player_ability": True},
   {"id": "lv2_hostile_ability_earth_air_technique_petrify_gaze", "name": "Petrify Gaze", "description": "A gaze that turns enemies to stone, immobilizing them.", "ability_type": "technique", "level":2, "elements": ["earth", "air"], "base_power":0, "ap_cost":35, "effect": "status", "status_keys": ["petrify"], "can_aoe": False, "non_player_ability": True},
 
@@ -112,10 +112,10 @@ LEVEL_2_TECHNIQUE_ABILITY_SEEDS = [
       "ability_type": "technique",
       "level": 2,
       "elements": ["earth", "light"],
-      "base_power": 36,
-      "ap_cost": 30,
+      "base_power": 10,
+      "ap_cost": 45,
       "effect": "status",
-      "status_keys": ["attack_debuff", "defense_debuff", "strength_debuff", "elemental_debuff"],
+      "status_keys": ["defense_debuff", "elemental_debuff"],
       "can_aoe": False,
       "non_player_ability": True
   }
