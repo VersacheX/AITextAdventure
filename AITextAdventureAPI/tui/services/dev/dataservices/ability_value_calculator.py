@@ -32,7 +32,7 @@ from typing import Any, Dict, List
 # fall back to ``DEFAULT_STATUS_WEIGHT``.
 STATUS_WEIGHTS: Dict[str, float] = {
     # ── Hard disables / permanent (very high value) ──
-    "petrify":            30.0,
+    "petrify":            22.0,
     "confuse":            17.0,
     "stun":               15.0,
     "sleep":              12.0,
@@ -72,6 +72,14 @@ AOE_MULTIPLIER = 1.5
 # (e.g. an 10 AP ability removes only 7.0 points).
 AP_COST_WEIGHT = 1.00
 
+# Status abilities that also carry ``base_power`` deal it as a *flat secondary
+# hit* applied at half strength in combat (mirrors
+# ``status_utils.LOW_DMG_STATUS_MOD``).  The value model uses the same factor so
+# the previewed power matches what the ability actually deals, and — unlike pure
+# damage abilities — no level multiplier is applied (level's contribution to a
+# status ability already flows through the status mechanics themselves).
+_STATUS_FLAT_POWER_MOD = 0.5
+
 # ── Damage-over-time weighting ────────────────────────────────────────────────
 # Damaging statuses (``continuous_damage``) are valued as *weight*, not as raw
 # stacked per-turn × element damage.  The raw model compounded level and element
@@ -109,13 +117,62 @@ def status_weight_total(status_keys: List[Any]) -> float:
     return sum(status_weight(k) for k in (status_keys or []))
 
 
+# ── Status level scaling ──────────────────────────────────────────────────────
+# A status's real combat impact grows with the ability's level: in
+# ``PlayerAbility._derive_status_effects`` the applied ``magnitude`` scales as
+# ``level * magnitude_per_level`` and ``duration`` grows with level too, so a
+# level-3 debuff lands with ~3x the magnitude of a level-1 one.  That magnitude
+# then feeds *percentage* combat modifiers (mag * 0.25, mag * 0.10, ...) with
+# floors, so the effective impact is sub-linear — crediting the weight at the
+# full ``x level`` would badly over-value high-level statuses.  Instead the
+# status weight earns a per-level percentage bonus that mirrors the established
+# damage level convention (``1.0 + 0.20 * (level - 1)``): +20% per level above 1.
+STATUS_WEIGHT_LEVEL_MOD = 0.20
+
+
+def status_level_multiplier(level: int) -> float:
+    """Return the level-scaling multiplier applied to raw status weight."""
+    return 1.0 + STATUS_WEIGHT_LEVEL_MOD * max(0, int(level) - 1)
+
+
+def status_weight_total_scaled(status_keys: List[Any], level: int) -> float:
+    """Return status weight total scaled by the ability's level.
+
+    Combines the raw :func:`status_weight_total` baseline with
+    :func:`status_level_multiplier` so higher-level statuses are credited for the
+    extra magnitude/duration they deliver without a runaway linear ``x level``.
+    """
+    return status_weight_total(status_keys) * status_level_multiplier(level)
+
+
+
 def scaled_base_power(seed: dict) -> float:
-    """Return base_power scaled by level and element count, mirroring
+    """Return ``base_power`` scaled for its effect type.
+
+    For pure ``damage``/``heal``/``revive`` abilities, ``base_power`` *is* the
+    whole payload, so it is scaled by level and element count to mirror
     ``PlayerAbility.compute_power()``.
+
+    For ``status`` abilities, ``base_power`` is only a *flat secondary hit* that
+    accompanies the status: in combat it is applied at half strength
+    (``status_utils.LOW_DMG_STATUS_MOD``) and — crucially — level's real power
+    contribution already flows through the status mechanics themselves
+    (``_derive_status_effects`` scales magnitude, duration and per-turn
+    damage/heal by ability level).  Multiplying the literal ``base_power`` by a
+    level factor on top of that double-counts level, so a declared ``38`` reads
+    as ``38`` whether the ability is level 1 or level 3.  Only the element
+    multiplier (which does apply to the in-combat flat hit) is retained.
     """
     bp = float(seed.get("base_power", 0) or 0)
     level = int(seed.get("level", 1) or 1)
     n_elem = len(seed.get("elements") or [])
+    elem_mult = 1.0 + 0.35 * n_elem
+
+    effect = str(seed.get("effect", "") or "").lower()
+    if effect == "status":
+        # literal flat hit, halved in combat, no level multiplier
+        return bp * _STATUS_FLAT_POWER_MOD * elem_mult
+
     level_mult = 1.0 + 0.20 * max(0, level - 1)
     elem_mult = 1.0 + 0.35 * n_elem
     return bp * level_mult * elem_mult
@@ -174,9 +231,10 @@ def compute_ability_value(seed: dict) -> AbilityValueBreakdown:
     base power + status weight + damaging-status damage), the AOE multiplier, and
     the AP cost so the validator's balance checks reflect true relative worth.
     """
-    scaled_power = scaled_base_power(seed)
+    scaled_power = scaled_base_power(seed) / _STATUS_FLAT_POWER_MOD
     status_keys  = seed.get("status_keys") or []
-    sw           = status_weight_total(status_keys)
+    level        = int(seed.get("level", 1) or 1)
+    sw           = status_weight_total_scaled(status_keys, level)
     sdmg         = status_power_estimate(seed)
     ap           = float(seed.get("ap_cost", 0) or 0)
     aoe          = AOE_MULTIPLIER if bool(seed.get("can_aoe", False)) else 1.0
