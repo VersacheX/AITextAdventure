@@ -33,30 +33,30 @@ from typing import Any, Dict, List
 STATUS_WEIGHTS: Dict[str, float] = {
     # ── Hard disables / permanent (very high value) ──
     "petrify":            30.0,
-    "confuse":            22.0,
-    "stun":               20.0,
-    "sleep":              18.0,
+    "confuse":            17.0,
+    "stun":               15.0,
+    "sleep":              12.0,
     "silence":            15.0,    
     # ── Damage-over-time / persistent ──
-    "continuous_damage":  11.0,
+    "continuous_damage":  6.0,
     # ── Utility ──
-    "scanned":             9.0,
+    "scanned":             6.0,
     # ── Elemental buffs/debuffs (moderate) ──
     "elemental_attack_buff":  8.0,
     "elemental_defense_buff": 8.0,
     "elemental_debuff":       8.0,
-    "attack_buff":            5.0,
-    "attack_debuff":          5.0,
-    "defense_buff":           5.0,
-    "defense_debuff":         5.0,
+    "attack_buff":            4.0,
+    "attack_debuff":          4.0,
+    "defense_buff":           4.0,
+    "defense_debuff":         4.0,
     # ── Single-stat buffs/debuffs (low value) ──
     "strength_buff":       8.0,
-    "strength_debuff":     8.0,
+    "strength_debuff":     6.0,
     "dexterity_buff":      8.0,
     "dexterity_debuff":    8.0,
     "intelligence_buff":   8.0,
-    "intelligence_debuff": 8.0,
-    "constitution_buff":   8.0,
+    "intelligence_debuff": 6.0,
+    "constitution_buff":   6.0,
     "constitution_debuff": 8.0,
 }
 DEFAULT_STATUS_WEIGHT = 8.0
@@ -65,20 +65,37 @@ DEFAULT_STATUS_WEIGHT = 8.0
 # base_power + status payload is scaled by this factor instead of a flat bonus.
 AOE_MULTIPLIER = 1.5
 
+# AP cost is discounted before being subtracted from the payload: an ability's
+# AP cost only detracts ``AP_COST_WEIGHT`` of its face value from total_value
+# (e.g. an 10 AP ability removes only 7.0 points).
+AP_COST_WEIGHT = 1.00
+
+# ── Damage-over-time weighting ────────────────────────────────────────────────
+# Damaging statuses (``continuous_damage``) are valued as *weight*, not as raw
+# stacked per-turn × element damage.  The raw model compounded level and element
+# count on top of an already level/element-scaled power, so a single lv5 DoT with
+# several elements exploded into the thousands and dwarfed every other status.
+# Instead a damaging status earns its base ``STATUS_WEIGHTS`` entry plus a modest,
+# *capped* per-level bonus so higher-level DoT is worth a little more without
+# distorting the whole status category.
+DOT_WEIGHT_PER_LEVEL = 3.0
+DOT_WEIGHT_CAP       = 30.0
+
+# Final total_value precision.  Intermediate math retains full float precision;
+# only the returned total_value is rounded to this many decimal places.
+_TOTAL_VALUE_PRECISION = 3
+
 # ── Status power preview ──────────────────────────────────────────────────────
-# Only statuses that deal *actual damage* are previewed as combat damage.  Pure
+# Only statuses that deal *actual damage* are previewed as a weight bonus.  Pure
 # stat/defense debuffs (e.g. defense_debuff, elemental_debuff) amplify incoming
 # damage but deal none themselves, and are already credited through the status
 # weight — crediting them here too would double-count them.
 #
-# ``continuous_damage`` template (constants_other.STATUS_EFFECTS):
-#     magnitude_per_level = 0.5,  min_damage_per_turn = 1
-# and ``_derive_status_effects`` computes, per applied status:
-#     damage_per_turn = max(min_dpt, int(level * ability_power * magnitude_per_level))
-#                       * max(1, element_count)
+# Damaging statuses use ``continuous_damage`` (constants_other.STATUS_EFFECTS).
+# Rather than projecting real per-turn damage (which compounds level/element
+# scaling), they contribute a small capped weight bonus via
+# :func:`status_power_estimate` so DoT is valued without distorting the category.
 _DAMAGING_STATUS_KEYS = {"continuous_damage"}
-_CONTINUOUS_DAMAGE_MAG_PER_LEVEL = 0.5
-_CONTINUOUS_DAMAGE_MIN_PER_TURN = 1
 
 
 def status_weight(key: str) -> float:
@@ -102,28 +119,30 @@ def scaled_base_power(seed: dict) -> float:
 
 
 def status_power_estimate(seed: dict) -> float:
-    """Estimate the direct combat damage contributed by a status ability.
+    """Estimate the combat *weight* contributed by damaging statuses.
 
-    Mirrors ``PlayerAbility._derive_status_effects`` for damaging statuses
-    (``continuous_damage``) using the ability's own scaled power as the
-    owner-independent ``ability_power``.  Non-damaging debuffs/buffs contribute
-    nothing here — they are valued via :func:`status_weight_total` instead.
+    Damaging statuses (``continuous_damage``) previously projected their real
+    per-turn damage (``level * scaled_power * 0.5 * elements``), which compounded
+    level/element scaling on top of the already-scaled base power and produced
+    values in the thousands for a single high-level multi-element DoT.  That one
+    term dominated the entire status category and made every ordinary status
+    ability read as balance-weak.
+
+    To keep DoT meaningful but proportionate, it is now folded in as a *capped
+    weight bonus*: a flat per-level increment on top of the status's base
+    ``STATUS_WEIGHTS`` entry (which is already counted via
+    :func:`status_weight_total`).  This preview therefore returns only the
+    *bonus* weight, clamped to :data:`DOT_WEIGHT_CAP`.
     """
     status_keys = seed.get("status_keys") or []
     if not status_keys:
         return 0.0
     level = int(seed.get("level", 1) or 1)
-    n_elem = max(1, len(seed.get("elements") or []))
-    ability_power = scaled_base_power(seed)
-    total = 0.0
+    bonus = 0.0
     for key in status_keys:
         if str(key).lower() in _DAMAGING_STATUS_KEYS:
-            per_turn = max(
-                _CONTINUOUS_DAMAGE_MIN_PER_TURN,
-                int(level * ability_power * _CONTINUOUS_DAMAGE_MAG_PER_LEVEL),
-            )
-            total += per_turn * n_elem
-    return total
+            bonus += min(DOT_WEIGHT_CAP, level * DOT_WEIGHT_PER_LEVEL)
+    return bonus
 
 
 def ability_power_estimate(seed: dict) -> int:
@@ -159,7 +178,10 @@ def compute_ability_value(seed: dict) -> AbilityValueBreakdown:
     ap           = float(seed.get("ap_cost", 0) or 0)
     aoe          = AOE_MULTIPLIER if bool(seed.get("can_aoe", False)) else 1.0
 
+    # Retain full precision through the intermediate calculation; only the final
+    # total_value is rounded to _TOTAL_VALUE_PRECISION decimal places.
     payload = (scaled_power + sw + sdmg) * aoe
+    total = payload - (ap * AP_COST_WEIGHT)
     return AbilityValueBreakdown(
         scaled_power   = scaled_power,
         status_weight  = sw,
@@ -167,7 +189,7 @@ def compute_ability_value(seed: dict) -> AbilityValueBreakdown:
         ap_cost        = ap,
         aoe_multiplier = aoe,
         payload        = payload,
-        total_value    = payload - ap,
+        total_value    = round(total, _TOTAL_VALUE_PRECISION),
     )
 
 

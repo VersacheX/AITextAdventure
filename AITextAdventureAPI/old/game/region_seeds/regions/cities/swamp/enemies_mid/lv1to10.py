@@ -29,7 +29,7 @@ SEEDS_LV1TO10 = [
  # ensure at least one uncommon and one rare at level1
  {"id": "board_bandit", "name": "Boardwalk Bandit", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":1, "rarity": "uncommon", "base_xp":28,
  "common_drop": "stimulant_small", "rare_drop": "cloth_pants", "money_range": (3,14),
- "basic_attack": "slash with a plank", "strong_attack": "precise splinter stab", "player_abilities": [ "level_1_hostile_ability_smoke_bomb" ],
+ "basic_attack": "slash with a plank", "strong_attack": "precise splinter stab", "player_abilities": [ "level_1_hostile_ability_smoke_screen" ],
  "base_str":3, "base_dex":3, "base_con":2, "base_int":1, "base_hp":14, "base_ap":4,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
 

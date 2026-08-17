@@ -198,7 +198,7 @@ These are defined in `level_1_abilities.py` and have `"non_player_ability": True
 | `level_1_hostile_ability_bone_spear` | damage | dark |
 | `level_1_hostile_ability_shadow_lash` | damage | dark |
 | `level_1_hostile_ability_shadow_flicker` | evasion/status | dark |
-| `level_1_hostile_ability_smoke_bomb` | `dexterity_debuff` | air |
+| `level_1_hostile_ability_smoke_screen` | `dexterity_debuff` | air |
 | `level_1_hostile_ability_reinforce_frame` | `defense_buff` | earth |
 | `level_1_hostile_ability_inspire` | `attack_buff` | light |
 | `level_1_hostile_ability_night_whisper` | `confuse` | dark |

@@ -153,7 +153,7 @@ SEEDS_LV1TO10 = [
 
  {"id": "ledger_band", "name": "Ledger Bandit", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":6, "rarity": "uncommon", "base_xp":52,
  "common_drop": "stimulant_small", "rare_drop": "cloth_pants", "money_range": (6,30),
- "basic_attack": "slash-and-claim", "strong_attack": "purse rip", "player_abilities": ["level_1_hostile_ability_smoke_bomb"],
+ "basic_attack": "slash-and-claim", "strong_attack": "purse rip", "player_abilities": ["level_1_hostile_ability_smoke_screen"],
  "base_str":3, "base_dex":4, "base_con":2, "base_int":2, "base_hp":26, "base_ap":4,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
 

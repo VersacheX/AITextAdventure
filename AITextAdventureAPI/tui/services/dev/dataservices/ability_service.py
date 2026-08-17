@@ -80,16 +80,16 @@ def _ability_detail(seed: dict) -> str:
     lines.append(f"Effect   : {_EFFECT_LABELS.get(effect, effect.title())}")
     lines.append(f"AP Cost  : {ap_cost}")
     lines.append(f"Power    : {base_power}")
-    # Status abilities usually declare base_power 0 yet several deal real combat
-    # damage (e.g. continuous_damage).  Surface that estimated damage separately
+    # Status abilities usually declare base_power 0 yet several apply damaging
+    # statuses (e.g. continuous_damage).  Surface the DoT weight bonus separately
     # so the panel reflects real combat value without overriding base_power.
     if effect == "status" and status_keys:
         from tui.services.dev.dataservices.ability_value_calculator import (
             status_power_estimate,
         )
-        est = int(round(status_power_estimate(seed)))
+        est = status_power_estimate(seed)
         if est:
-            lines.append(f"Status Dmg: ~{est} (per turn)")
+            lines.append(f"DoT Bonus: +{est:.1f} (weight)")
     if elements:
         elem_str = "  ".join(_ELEMENT_CHARS.get(str(e).lower(), f"({e})") for e in elements)
         lines.append(f"Elements : {elem_str}")
@@ -112,11 +112,12 @@ def _ability_detail(seed: dict) -> str:
     if v.status_weight:
         lines.append(f"Status Weight: {v.status_weight:.1f}")
     if v.status_damage:
-        lines.append(f"Status Dmg   : {v.status_damage:.1f}")
+        lines.append(f"DoT Bonus    : {v.status_damage:.1f} (weight)")
     if v.aoe_multiplier != 1.0:
         lines.append(f"AOE x{v.aoe_multiplier:g}    : {v.payload:.1f} (payload)")
-    lines.append(f"AP Cost      : -{v.ap_cost:.0f}")
-    lines.append(f"Total Value  : {v.total_value:.1f}")
+    from tui.services.dev.dataservices.ability_value_calculator import AP_COST_WEIGHT
+    lines.append(f"AP Cost      : -{v.ap_cost * AP_COST_WEIGHT:.3f} ({v.ap_cost:.0f} x{AP_COST_WEIGHT:g})")
+    lines.append(f"Total Value  : {v.total_value:.3f}")
     if v.ap_cost > 0 and v.payload > 0:
         lines.append(f"Value/AP     : {v.payload / v.ap_cost:.2f} (payload per AP)")
     return "\n".join(lines)

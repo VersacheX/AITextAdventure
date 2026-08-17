@@ -60,7 +60,7 @@ SEEDS_LV1TO10 = [
  # min_spawn_level =4
  {"id": "baitbox_bandit", "name": "Baitbox Bandit", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":4, "rarity": "uncommon", "base_xp":34,
  "common_drop": "stimulant_small", "rare_drop": "stimulant_small", "money_range": (6,28),
- "basic_attack": "stabs with a fish hook", "strong_attack": "dirty throw", "player_abilities": ["level_1_hostile_ability_smoke_bomb"],
+ "basic_attack": "stabs with a fish hook", "strong_attack": "dirty throw", "player_abilities": ["level_1_hostile_ability_smoke_screen"],
  "base_str":3, "base_dex":5, "base_con":2, "base_int":2, "base_hp":24, "base_ap":4,
  "str_per_level":1, "dex_per_level":2, "con_per_level":0, "int_per_level":0},
 

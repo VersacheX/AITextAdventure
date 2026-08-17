@@ -82,7 +82,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==6
  {"id": "salt_marshall", "name": "Salt Marshall", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":6, "rarity": "rare", "base_xp":88,
  "common_drop": "stimulant_med", "rare_drop": "kevlar_vest", "money_range": (15,56),
- "basic_attack": "fires a sand-laced shot", "strong_attack": "overcharged burst", "player_abilities": ["level_1_hostile_ability_smoke_bomb", "level_1_hostile_ability_electric_tech_hack_overload"],
+ "basic_attack": "fires a sand-laced shot", "strong_attack": "overcharged burst", "player_abilities": ["level_1_hostile_ability_smoke_screen", "level_1_hostile_ability_electric_tech_hack_overload"],
  "base_str":4, "base_dex":5, "base_con":6, "base_int":3, "base_hp":40, "base_ap":5,
  "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":1},
 

@@ -13,7 +13,7 @@ A7  ABILITY_UNKNOWN_ELEMENT    an element in 'elements' is not in ELEMENTAL_CHAR
 A8  ABILITY_UNKNOWN_STATUS     a key in 'status_keys' is not in STATUS_EFFECTS
 A9  ABILITY_STATUS_THIN        effect=status/cure but the summed status weight
                                is below the gently-scaling level floor
-                               (8 + (level-1)*3)  (warning)
+                               (6 + (level-1)*3)  (warning)
 
 Status weighting
 ----------------
@@ -29,14 +29,18 @@ Balance rules  (warning — mirrors equipment TP balance check)
 B1  ABILITY_BALANCE_WEAK       total_value < 65% of group average
 B2  ABILITY_BALANCE_STRONG     total_value > 145% of group average
 B3  ABILITY_AP_MISPRICED       value-per-AP efficiency falls outside the healthy
-                               band (70%–135%) around the global median
+                               band (70%–140%) around the *per-effect* median
                                efficiency  (warning)
     Balance groups (B1/B2) are (level, effect): abilities are compared across
     ability_types so cross-type balance surfaces.  Groups with a single member
     are skipped (no meaningful average), as are groups whose average is not
-    strictly positive.  B3 is *not* peer-grouped — it prices every ability's
-    payload-per-AP against the median efficiency of the whole dataset, so a
-    well-priced dataset produces zero warnings instead of always flagging tails.
+    strictly positive.  B1/B2 additionally skip any ability whose total_value
+    straddles zero relative to the average (opposite sign), because a
+    percent-of-average ratio is meaningless there.  B3 prices each ability's
+    payload-per-AP against the median efficiency *of its own effect category*
+    (damage/status/heal/cure/revive), since payload magnitudes differ by orders
+    of magnitude between categories — a single global median would flag nearly
+    every status as overpriced and nearly every damage ability as underpriced.
 
 total_value formula
 -------------------
@@ -76,7 +80,7 @@ _KNOWN_EFFECTS = {"damage", "heal", "status", "revive", "cure"}
 # stun/petrify) satisfies most levels, while a lone weak stat buff/debuff is
 # flagged as genuinely thin.  Peer-relative B1/B2 balance checks handle the rest.
 #     target = _STATUS_WEIGHT_BASE + (level - 1) * _STATUS_WEIGHT_PER_LEVEL
-_STATUS_WEIGHT_BASE      = 8.0
+_STATUS_WEIGHT_BASE      = 6.0
 _STATUS_WEIGHT_PER_LEVEL = 3.0
 
 
@@ -89,12 +93,16 @@ def _status_weight_target(level: int) -> float:
 # ability delivers.  Rather than a standard-deviation "outlier" check (which
 # always flags the tails of any spread and can never report a clean dataset), we
 # measure each ability's value-per-AP efficiency against the *median* efficiency
-# of all abilities.  The median self-calibrates to the real data yet is robust
-# to extremes, while the fixed multiplier band gives an absolute healthy range
-# so a well-priced dataset produces zero warnings.
+# of abilities *in the same effect category*.  Payload magnitudes differ wildly
+# between categories (a lv5 damage ability delivers hundreds of points while a
+# status ability delivers a handful), so a single global median would price all
+# status abilities as overpriced and all damage abilities as underpriced.  A
+# per-effect median self-calibrates to each category while the fixed multiplier
+# band gives an absolute healthy range so a well-priced set produces zero
+# warnings.
 #     efficiency  = payload / ap_cost
-#     flag when   efficiency < _AP_EFF_LOW  * median_efficiency   (too expensive)
-#            or   efficiency > _AP_EFF_HIGH * median_efficiency   (too cheap)
+#     flag when   efficiency < _AP_EFF_LOW  * median_efficiency[effect] (too dear)
+#            or   efficiency > _AP_EFF_HIGH * median_efficiency[effect] (too cheap)
 _AP_EFF_LOW  = 0.70
 _AP_EFF_HIGH = 1.40
 
@@ -160,8 +168,13 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
     tv_by_group: Dict[tuple, List[float]] = defaultdict(list)
     node_group:  Dict[str, tuple]         = {}
 
-    # Collect value-per-AP efficiencies for the global B3 mispricing median.
-    efficiencies: List[float] = []
+    # Collect value-per-AP efficiencies keyed by (effect, level) for the B3
+    # mispricing median.  Payloads differ by orders of magnitude across effect
+    # categories *and* grow steeply with level (damage roughly quadruples per
+    # level), so pricing against a per-(effect, level) median gives an implicit
+    # expected-payload curve: each ability is judged against a "typical" peer of
+    # the same category and level rather than a flat global figure.
+    efficiencies_by_key: Dict[tuple, List[float]] = defaultdict(list)
 
     for node in all_nodes:
         seed   = node.record.extras.get("_seed") or {}
@@ -173,7 +186,7 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
 
         breakdown = compute_ability_value(seed)
         if breakdown.ap_cost > 0 and breakdown.payload > 0:
-            efficiencies.append(breakdown.payload / breakdown.ap_cost)
+            efficiencies_by_key[(effect, level)].append(breakdown.payload / breakdown.ap_cost)
 
     # Only keep groups with more than one member AND a strictly positive
     # average.  A percentage ratio against a zero/negative baseline is
@@ -185,10 +198,26 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
         if len(v) > 1 and (sum(v) / len(v)) > 0
     }
 
-    # Median value-per-AP across all priced abilities.  The median self-calibrates
-    # to the real data while resisting extremes, so the B3 mispricing band is
-    # anchored to a "typical" ability rather than to a spread that always has tails.
-    median_efficiency = _median(efficiencies) if efficiencies else 0.0
+    # Median value-per-AP within each (effect, level) bucket.  This self-
+    # calibrates to the category's typical payload at that level while resisting
+    # extremes, so the B3 band flags genuine outliers rather than the structural
+    # growth of payload with level or the gap between status and damage scales.
+    # Buckets with too few members fall back to the effect-wide median so a lone
+    # ability at some level is still priced against its category.
+    _MIN_BUCKET = 3
+    effect_efficiencies: Dict[str, List[float]] = defaultdict(list)
+    for (effect, _level), effs in efficiencies_by_key.items():
+        effect_efficiencies[effect].extend(effs)
+
+    median_efficiency_by_key: Dict[tuple, float] = {}
+    for key, effs in efficiencies_by_key.items():
+        if effs:
+            median_efficiency_by_key[key] = _median(effs)
+    median_efficiency_by_effect: Dict[str, float] = {
+        effect: _median(effs)
+        for effect, effs in effect_efficiencies.items()
+        if effs
+    }
 
     # ── Per-node checks ───────────────────────────────────────────────────
     for node in all_nodes:
@@ -288,7 +317,11 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
         if gkey and gkey in group_avg:
             avg = group_avg[gkey]
             tv  = _total_value(seed)
-            if avg != 0:
+            # Only compare when tv and avg share the same sign.  A percent-of-
+            # average ratio across zero is meaningless (e.g. "-9.0 is only -206%
+            # of average 4.4"), so abilities whose value straddles the group
+            # average's sign are left for the A9 / B3 checks instead.
+            if avg > 0 and tv > 0:
                 ratio = tv / avg
                 if ratio < 0.65:
                     node.errors.append(_err(
@@ -310,9 +343,17 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
                     by_code["ABILITY_BALANCE_STRONG"] += 1
 
         # B3 — AP mispricing: value-per-AP efficiency outside the healthy band
-        # around the global median efficiency.  Too-low efficiency means the
-        # ability is overpriced (dead weight); too-high means underpriced
-        # (overpowered for its cost).
+        # around the *per-(effect, level)* median efficiency (an implicit
+        # expected-payload curve).  Thin buckets fall back to the effect-wide
+        # median.  Too-low efficiency means the ability is overpriced (dead
+        # weight); too-high means underpriced (overpowered for its cost).
+        node_level = int(seed.get("level", 1) or 1)
+        bucket_effs = median_efficiency_by_key.get((effect, node_level))
+        bucket_count = len(efficiencies_by_key.get((effect, node_level), []))
+        if bucket_effs is not None and bucket_count >= _MIN_BUCKET:
+            median_efficiency = bucket_effs
+        else:
+            median_efficiency = median_efficiency_by_effect.get(effect, 0.0)
         if median_efficiency > 0:
             ap_cost = float(seed.get("ap_cost", 0) or 0)
             breakdown = compute_ability_value(seed)
@@ -327,7 +368,7 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
                     node.errors.append(_err(
                         "ABILITY_AP_MISPRICED",
                         f"AP {ap_cost:.0f} buys {ratio:.2f}x the value-per-AP of "
-                        f"a typical ability (overpriced; expected AP ~= "
+                        f"a typical {effect} ability (overpriced; expected AP ~= "
                         f"{expected_ap:.0f}).",
                         severity="warning",
                     ))
@@ -337,7 +378,7 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
                     node.errors.append(_err(
                         "ABILITY_AP_MISPRICED",
                         f"AP {ap_cost:.0f} buys {ratio:.2f}x the value-per-AP of "
-                        f"a typical ability (underpriced; expected AP ~= "
+                        f"a typical {effect} ability (underpriced; expected AP ~= "
                         f"{expected_ap:.0f}).",
                         severity="warning",
                     ))
