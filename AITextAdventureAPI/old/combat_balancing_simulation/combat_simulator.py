@@ -166,6 +166,10 @@ class CombatSimulation:
             if cd and cd.get('applied'):
                 result['messages'].append(f"{actor.name} suffers {cd.get('applied')} continuous damage.")
 
+            rg = status_utils.apply_regen(actor)
+            if rg and rg.get('restored'):
+                result['messages'].append(f"{actor.name} regenerates {rg.get('restored')} HP.")
+
             unit.advance_schedule()
             return result
 
@@ -259,6 +263,10 @@ class CombatSimulation:
             cd = status_utils.apply_continuous_damage(actor)
             if cd and cd.get('applied'):
                 result['messages'].append(f"{actor.name} suffers {cd.get('applied')} continuous damage.")
+
+            rg = status_utils.apply_regen(actor)
+            if rg and rg.get('restored'):
+                result['messages'].append(f"{actor.name} regenerates {rg.get('restored')} HP.")
             unit.advance_schedule()
             return result
 
@@ -273,6 +281,10 @@ class CombatSimulation:
             cd = status_utils.apply_continuous_damage(actor)
             if cd and cd.get('applied'):
                 result['messages'].append(f"{actor.name} suffers {cd.get('applied')} continuous damage.")
+
+            rg = status_utils.apply_regen(actor)
+            if rg and rg.get('restored'):
+                result['messages'].append(f"{actor.name} regenerates {rg.get('restored')} HP.")
             # advance schedule here for hostiles as well
             unit.advance_schedule()
             return result

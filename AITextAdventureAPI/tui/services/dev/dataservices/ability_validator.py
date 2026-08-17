@@ -66,6 +66,7 @@ from tui.services.dev.dataservices.ability_value_calculator import (
     AOE_MULTIPLIER as _AOE_MULTIPLIER,
     ability_power_estimate,
     compute_ability_value,
+    scaled_base_power,
     status_power_estimate,
     status_weight as _status_weight,
     status_weight_total as _status_weight_total,
@@ -297,16 +298,19 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
 
         # A9 — status/cure abilities should carry enough status weight for their
         # level.  A single strong status (e.g. petrify) can satisfy a level while
-        # weaker stat buffs/debuffs must be stacked to reach the target.
+        # weaker stat buffs/debuffs must be stacked to reach the target.  Half of
+        # the ability's scaled power counts toward the weight, so a status ability
+        # that also carries meaningful base_power is credited for that payload.
         if effect in ("status", "cure") and status_keys:
-            weight_total  = _status_weight_total(status_keys)
+            power_credit  = scaled_base_power(seed) * 0.5
+            weight_total  = _status_weight_total(status_keys) + power_credit
             weight_target = _status_weight_target(node.level)
             if weight_total < weight_target:
                 node.errors.append(_err(
                     "ABILITY_STATUS_THIN",
                     f"{effect.capitalize()} ability at level {node.level} has "
                     f"status weight {weight_total:.0f} from "
-                    f"{len(status_keys)} key(s) "
+                    f"{len(status_keys)} key(s) + power "
                     f"(expected ≥ {weight_target:.0f}).",
                     severity="warning",
                 ))

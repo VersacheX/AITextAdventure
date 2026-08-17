@@ -154,6 +154,32 @@ def apply_continuous_damage(entity: Optional[object]) -> Dict[str, Any]:
 	return res
 
 
+def apply_regen(entity: Optional[object]) -> Dict[str, Any]:
+	"""Apply heal-per-turn from regeneration statuses on the entity.
+
+	Beneficial mirror of :func:`apply_continuous_damage`. Returns a dict summary:
+	{'total_heal': int, 'restored': int}
+	"""
+	res = {'total_heal':0, 'restored':0}
+	if entity is None:
+		return res
+	statuses = entity.statuses or []
+
+	total =0
+	for s in statuses:
+		if s.get('id') == 'regen':
+			hpt = s.get('heal_per_turn')
+			if hpt is not None:
+				amt = int(hpt * LOW_DMG_STATUS_MOD * 0.10)
+				if amt >0:
+					# use heal if available
+					restored = entity.heal(amt)
+					res['restored'] += restored
+					total += amt
+	res['total_heal'] = total
+	return res
+
+
 def collect_attack_elements(attacker: Optional[object], base_elements: Optional[List[str]] = None) -> List[str]:
 	"""Return a normalized list of element strings to consider for an outgoing attack.
 

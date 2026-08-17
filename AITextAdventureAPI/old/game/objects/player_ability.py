@@ -236,8 +236,18 @@ class PlayerAbility:
 				mag = int(base_mag * (1.0 - percent_reduction) * max(1, len(element_values)))
 				desc['magnitude'] = mag
 
+			# heal per turn: beneficial mirror of continuous damage (e.g. 'regen').
+			# Derived from ability power the same way damage_per_turn is, but applied
+			# as healing each turn instead of damage.
+			if tpl.get('heal_per_turn') is not None:
+				hpt = int(tpl.get('heal_per_turn') * (1.0 - percent_reduction) * max(1, len(element_values)))
+				desc['heal_per_turn'] = hpt
+			elif tpl.get('min_heal_per_turn') is not None:
+				hmt = max(tpl.get('min_heal_per_turn',1), int(self.level * ability_power * float(tpl.get('magnitude_per_level',0))))
+				hmt = int(hmt * (1.0 - percent_reduction) * max(1, len(element_values)))
+				desc['heal_per_turn'] = hmt
 			# damage per turn: prefer explicit template value otherwise derive from magnitude/ability_power
-			if tpl.get('damage_per_turn') is not None:
+			elif tpl.get('damage_per_turn') is not None:
 				dpt = int(tpl.get('damage_per_turn') * (1.0 - percent_reduction) * max(1, len(element_values)))
 				desc['damage_per_turn'] = dpt
 			elif tpl.get('magnitude_per_level') is not None:
@@ -335,23 +345,29 @@ class PlayerAbility:
 					added +=1
 				summary['status_applied'] = added
 
-			# If this status ability also has a non-zero base_power, apply immediate effect like DAMAGE
+			# If this status ability also has a non-zero base_power, apply an immediate
+			# secondary effect. Beneficial (buff) status abilities heal the target;
+			# harmful (debuff) status abilities deal damage to the target.
 			if self.base_power != 0:
 				power = self.compute_power_with_owner(owner, percent_reduction= percent_reduction)
 				if power and power >0 and target is not None:
-					
-					power *= status_utils.LOW_DMG_STATUS_MOD
-					# Build element list and apply outgoing modifiers
-					elems = status_utils.collect_attack_elements(owner, [e.value if hasattr(e, 'value') else str(e) for e in self.elements] if self.elements else None)
-					power = status_utils.compute_outgoing_damage(owner, power, elems)
 
-					applied = None
-					from game.objects.random_hostile import RandomHostile
-				
-					applied = target.take_damage(power, attacker=owner, elements=elems if elems else None, physical=False)
-				
-					if applied is not None:
-						summary['status_damage'] = applied
+					power = int(power * status_utils.LOW_DMG_STATUS_MOD)
+
+					if self._is_beneficial_ability():
+						# beneficial status: convert power into healing for the target
+						restored = target.heal(power)
+						if restored is not None:
+							summary['status_heal'] = restored
+					else:
+						# Build element list and apply outgoing modifiers
+						elems = status_utils.collect_attack_elements(owner, [e.value if hasattr(e, 'value') else str(e) for e in self.elements] if self.elements else None)
+						power = status_utils.compute_outgoing_damage(owner, power, elems)
+
+						applied = target.take_damage(power, attacker=owner, elements=elems if elems else None, physical=False)
+
+						if applied is not None:
+							summary['status_damage'] = applied
 		# Revive effect: computed power is interpreted as a percentage of target.max_hp; clears statuses on revive
 		elif self.effect == EffectType.REVIVE:
 			pct = self.compute_power_with_owner(owner, percent_reduction= percent_reduction)

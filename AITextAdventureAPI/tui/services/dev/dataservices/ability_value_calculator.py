@@ -39,6 +39,8 @@ STATUS_WEIGHTS: Dict[str, float] = {
     "silence":            15.0,    
     # ── Damage-over-time / persistent ──
     "continuous_damage":  6.0,
+    # ── Heal-over-time (beneficial mirror of continuous_damage) ──
+    "regen":              6.0,
     # ── Utility ──
     "scanned":             6.0,
     # ── Elemental buffs/debuffs (moderate) ──
@@ -92,10 +94,11 @@ _TOTAL_VALUE_PRECISION = 3
 # weight — crediting them here too would double-count them.
 #
 # Damaging statuses use ``continuous_damage`` (constants_other.STATUS_EFFECTS).
-# Rather than projecting real per-turn damage (which compounds level/element
+# ``regen`` is the beneficial heal-over-time mirror and is valued the same way.
+# Rather than projecting real per-turn damage/heal (which compounds level/element
 # scaling), they contribute a small capped weight bonus via
-# :func:`status_power_estimate` so DoT is valued without distorting the category.
-_DAMAGING_STATUS_KEYS = {"continuous_damage"}
+# :func:`status_power_estimate` so DoT/HoT is valued without distorting the category.
+_DAMAGING_STATUS_KEYS = {"continuous_damage", "regen"}
 
 
 def status_weight(key: str) -> float:

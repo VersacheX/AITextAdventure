@@ -122,7 +122,7 @@ HOSTILE_SEEDS = [
         'money_range': (9,16),
         'basic_attack': 'spore burst',
         'strong_attack': 'toxic cloud',
-        'player_abilities': ['ice_fire_skill_lv2_frostbrand_burn'],
+        'player_abilities': ['ice_fire_skill_lv2_acid_slime_spray'],
         'base_str':6,
         'base_dex':8,
         'base_con':14,

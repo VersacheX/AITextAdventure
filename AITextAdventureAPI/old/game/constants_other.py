@@ -45,7 +45,7 @@ HARMFUL_STATUS_EFFECTS = {"elemental_debuff",
 BENEFICIAL_ITEM_EFFECTS = [
     "heal_*",
     "restore_ap_*",
-    "cure_*",
+    "cure_*"
 ]
 
 ABILTITY_EFFECT_DISPLAY_NAME = {
@@ -79,6 +79,7 @@ ABILITY_STATUS_KEY_DISPLAY_NAMES = {
     "debuff": "Debuff",
     "scanned": "Scanned",
     "silence": "Silence",
+    "regen": "Regen"
 }
 
 ELEMENTAL_CHAR_KEYS = {
@@ -300,6 +301,15 @@ STATUS_EFFECTS = {
         "type": "status",
         "duration_per_level":2,
         "magnitude_per_level":0,
+    },
+    "regen": {
+        "id": "regen",
+        "display": "Regen",
+        "name": "Regeneration",
+        "type": "status",
+        "duration_per_level":-1,
+        "magnitude_per_level":0.5,
+        "min_heal_per_turn":1,
     },
 }
 
