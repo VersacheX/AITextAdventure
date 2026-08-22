@@ -10,6 +10,7 @@ the `OverworldScreen` widget can set on a `Static`.
 from __future__ import annotations
 
 from typing import Any, List, Optional, Tuple
+from rich.cells import cell_len  # top of file with other imports
 
 
 # ── tile type constants (mirrors game.constants) ───────────────────────────
@@ -237,7 +238,17 @@ def build_viewport_lines(
     for y in range(cy - half_h, cy + half_h + 1):
         row = ""
         for x in range(cx - half_w, cx + half_w + 1):
-            row += _tile_char(x, y, player_game)
+            glyph = _tile_char(x, y, player_game)
+            # Guard against double-width glyphs (e.g. some region tile chars)
+            # breaking column alignment: a cell must occupy exactly 1 column.
+            def _strip_markup(s: str) -> str:
+                """Remove Rich markup tags from a string for plain-text output."""                
+                import re as _re
+                return _re.sub(r'\[/?[^\]]*\]', '', s)
+
+            if cell_len(_strip_markup(glyph)) != 1:
+                glyph = _colorize("*", None)  # fall back to a single-cell glyph
+            row += glyph
         lines.append(row)
     return lines
 

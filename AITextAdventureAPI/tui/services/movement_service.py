@@ -24,6 +24,7 @@ Key → direction mapping
 from __future__ import annotations
 
 from typing import Any, Optional, Tuple
+import threading
 
 # Key → DIRECTIONAL_MAPPING key used by the legacy service
 _KEY_TO_CMD: dict[str, str] = {
@@ -36,6 +37,12 @@ _KEY_TO_CMD: dict[str, str] = {
     "d": "d",
     "right": "d",
 }
+
+# Module-level lock: only one tile-generation pass may mutate a PlayerGame's
+# world state at a time. Rapid movement fires _ensure_tiles_worker repeatedly;
+# without this, concurrent passes race on world_tiles/regions and duplicate
+# region generation, corrupting the map after the first move.
+_ENSURE_TILES_LOCK = threading.Lock()
 
 
 def _resolve_active_area(pg: Any) -> Optional[Any]:
@@ -99,16 +106,23 @@ def ensure_tiles_around_sync(pg: Any, check_rad: int = 4) -> None:
 
     Call this from a `@work(thread=True)` worker — it may generate a new
     region (expensive) when the player approaches unexplored space.
-    The underlying `pg.ensure_tiles_around()` is safe to call from a
-    non-compositor thread because it only mutates `pg.world_tiles` and
-    `pg.regions`, which are not Textual reactive attributes.
+
+    Serialized with a module-level lock: only one generation pass runs at a
+    time even if the UI dispatches several in quick succession, preventing
+    concurrent mutation of pg.world_tiles / pg.regions.
     """
+    # If another pass is already generating, skip this one — the running pass
+    # already covers (or will re-run for) the current radius. Using a
+    # non-blocking acquire avoids piling up queued passes behind a slow region
+    # build.
+    if not _ENSURE_TILES_LOCK.acquire(blocking=False):
+        return
     try:
         pg.ensure_tiles_around(check_rad=check_rad, max_attempts=1)
     except Exception:
         pass  # never crash the worker; the map will just show '?' tiles
-
-
+    finally:
+        _ENSURE_TILES_LOCK.release()
 def check_random_encounter(pg: Any, active_area: Any) -> bool:
     """Count down the encounter timer and return True if a random encounter
     should fire.  Mirrors the legacy game-loop check:

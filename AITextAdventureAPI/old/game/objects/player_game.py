@@ -1271,12 +1271,18 @@ class PlayerGame:
 		return True
 
 	def floodfill_region_with_open_area(self, center: Tuple[int,int], fill_tile_type: str = 'open_area') -> None:
+		"""Fill a contiguous pocket of missing tiles (starting at `center`) with
+		open-area tiles belonging to the PARENT REGION that owns the surrounding
+		space.
+
+		Important: the region is resolved from an existing neighbour of the gap,
+		and we always fill into the parent region (never a child_city). Writing
+		into a child_city here silently expands the city footprint, which then
+		makes get_region_and_active_area_for_position() mis-classify neighbouring
+		region tiles as city tiles and corrupts rendering after the next move.
 		"""
-		self.get_region_and_active_area_for_position()
-		region.create_open_area_tile
-		"""
-		_, active_region = self.get_region_and_active_area_for_position()
-		if not active_region:
+		region = self._resolve_region_for_gap(center)
+		if region is None:
 			return
 		cx, cy = center
 		visited = set()
@@ -1288,14 +1294,32 @@ class PlayerGame:
 			visited.add((tx, ty))
 			if (tx, ty) in self.world_tiles:
 				continue
-			# create open area tile in active region
-			tile = active_region.create_open_area_tile(tx, ty) # <- TODO update this to add roads if appropriate
+			# create open area tile in the owning PARENT region
+			tile = region.create_open_area_tile(tx, ty)
 			self.world_tiles[(tx, ty)] = tile
 			# add neighbors to visit
 			neighbors = [(tx -1, ty), (tx +1, ty), (tx, ty -1), (tx, ty +1)]
 			for n in neighbors:
 				if n not in visited:
 					to_visit.append(n)
+
+	def _resolve_region_for_gap(self, center: Tuple[int,int]):
+		"""Find the parent region that owns the space around a missing tile.
+
+		The gap tile itself is in no region (that's why it's a gap), so we look
+		at the four cardinal neighbours that DO exist and return the parent
+		region for the first one found. Returns the parent REGION, never a
+		child_city.
+		"""
+		cx, cy = center
+		for nx, ny in ((cx - 1, cy), (cx + 1, cy), (cx, cy - 1), (cx, cy + 1)):
+			if (nx, ny) in self.world_tiles:
+				parent_region, _active = self.get_region_and_active_area_for_position((nx, ny))
+				if parent_region is not None:
+					return parent_region
+		# fall back to the region at the player's position, but still the parent
+		parent_region, _active = self.get_region_and_active_area_for_position((self.x, self.y))
+		return parent_region
 
 	def is_empty_area_large_enough_for_region(self, center: Tuple[int,int], min_size: int =1000) -> bool:
 		"""Check if there is a large enough empty area around `center` to build a new region.
@@ -1432,9 +1456,24 @@ class PlayerGame:
 		"""Return the dungeon the player is currently inside, or None.
         Uses dungeon.player_pos as the authoritative presence flag.
         Guards against stale (0,0,0) values written by older saves.
-        """
+		"""
 		for dungeon in self.dungeons:
 			pos = getattr(dungeon, "player_pos", None)
 			if pos is not None and pos != (0, 0, 0):
 				return dungeon
 		return None
+
+	def has_monster_hunter_active(self) -> bool:
+		"""Return True if any active-party member has an accessory equipped whose
+		special_effect is 'monster_hunter'.
+
+		Used by the overworld hostile randomizer: when active, encounters are
+		drawn only from region hostiles the player has NOT yet logged (see
+		enemies_slain), letting the player track down species they missed at
+		lower levels.
+		"""
+		for char in self.get_active_party():
+			for acc in (getattr(char, 'accessories', None) or []):
+				if getattr(acc, 'special_effect', '') == 'monster_hunter':
+					return True
+		return False

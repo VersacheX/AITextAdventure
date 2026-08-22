@@ -533,9 +533,16 @@ class OverworldScreen(BaseScreen):
 
     # ── rendering ─────────────────────────────────────────────────────────
 
-    @work(thread=True)
+    @work(thread=True, exclusive=True, group="ensure_tiles")
     def _ensure_tiles_worker(self, pg: Any) -> None:
-        """Background worker to ensure tiles around the player exist."""
+        """Background worker to ensure tiles around the player exist.
+
+        Marked exclusive + grouped so that rapid movement can never spawn two
+        concurrent generation passes over the same PlayerGame. Concurrent
+        passes race on the shared world_tiles / regions / city.tiles dicts and
+        produce duplicated regions and mis-classified tiles (city glyphs
+        bleeding into region open-area / impassable space).
+        """
         ensure_tiles_around_sync(pg, check_rad=4)
         # No UI update needed; tiles are lazily rendered on next refresh
 

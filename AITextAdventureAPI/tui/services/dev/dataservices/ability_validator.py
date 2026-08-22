@@ -14,6 +14,8 @@ A8  ABILITY_UNKNOWN_STATUS     a key in 'status_keys' is not in STATUS_EFFECTS
 A9  ABILITY_STATUS_THIN        effect=status/cure but the summed status weight
                                is below the gently-scaling level floor
                                (6 + (level-1)*3)  (warning)
+A10 ABILITY_TOO_FEW_ELEMENTS   an ability has fewer elements than its level
+                               (level 4 requires at least 4 elements)
 
 Status weighting
 ----------------
@@ -287,6 +289,17 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
                     f"Element '{elem}' is not in ELEMENTAL_CHAR_KEYS.",
                 ))
                 by_code["ABILITY_UNKNOWN_ELEMENT"] += 1
+
+        # A10 — an ability must carry at least as many elements as its level.
+        # Higher-level abilities are expected to span a broader elemental
+        # profile; a lv4 ability with a single element is under-specified.
+        if len(elements) < node.level:
+            node.errors.append(_err(
+                "ABILITY_TOO_FEW_ELEMENTS",
+                f"Ability at level {node.level} has {len(elements)} element(s) "
+                f"(expected ≥ {node.level}).",
+            ))
+            by_code["ABILITY_TOO_FEW_ELEMENTS"] += 1
 
         # A8 — each unknown status key is a separate error
         for sk in status_keys:

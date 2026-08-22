@@ -743,12 +743,14 @@ def main():
 	
 	pg = PlayerGame()
 	print('Please wait - Building initial region...')
-	rc = pg.create_region_at((0,0), player)
+	rc = pg.create_region_at((0,0))
 	
 	desert_start_location = find_start_point_for_neighboring_region(rc) if rc else None	
 	if desert_start_location is None:
 		desert_start_location = (0,0)
-	desert = build_region_map (rc, const.DESERT_REGION_SETTINGS, desert_start_location, player, pg, True, pg.world_tiles.keys())
+		
+#def build_region_map (player_game, region_settings: dict, origin: Tuple[int,int], hasCity: bool = False, ignored_locations: Tuple[int, int] = None):
+	desert = build_region_map (pg, const.DESERT_REGION_SETTINGS, desert_start_location, True, pg.world_tiles.keys())
 	pg.merge_region(desert)
 	pg.regions.append(desert)
 	pg.previous_region = desert
@@ -764,7 +766,7 @@ def main():
 	forest_start_location = find_start_point_for_neighboring_region(desert) if desert else None	
 	if forest_start_location is None:
 		forest_start_location = (0,0)	
-	forest = build_region_map (desert, const.FOREST_REGION_SETTINGS, forest_start_location, player, pg, True, pg.world_tiles.keys())
+	forest = build_region_map (pg, const.FOREST_REGION_SETTINGS, forest_start_location, True, pg.world_tiles.keys())
 	pg.merge_region(forest)
 	pg.regions.append(forest)
 	pg.previous_region = forest
@@ -779,7 +781,7 @@ def main():
 	grass_start_location = find_start_point_for_neighboring_region(forest) if desert else None	
 	if grass_start_location is None:
 		grass_start_location = (0,0)
-	grass = build_region_map (forest, const.GRASSLAND_REGION_SETTINGS, grass_start_location, player, pg, True, ignored_locations=pg.world_tiles.keys())
+	grass = build_region_map (pg, const.GRASSLAND_REGION_SETTINGS, grass_start_location, True, pg.world_tiles.keys())
 	pg.merge_region(grass)
 	pg.regions.append(grass)
 	pg.previous_region = grass
@@ -794,7 +796,7 @@ def main():
 	mountains_start_location = find_start_point_for_neighboring_region(grass) if grass else None	
 	if mountains_start_location is None:
 		mountains_start_location = (0,0)
-	mountains = build_region_map (grass, const.MOUNTAINS_REGION_SETTINGS, mountains_start_location, player, pg, True, ignored_locations=pg.world_tiles.keys())
+	mountains = build_region_map (pg, const.MOUNTAINS_REGION_SETTINGS, mountains_start_location, True, pg.world_tiles.keys())
 	pg.merge_region(mountains)
 	pg.regions.append(mountains)
 	pg.previous_region = mountains
@@ -810,7 +812,7 @@ def main():
 	shallows_start_location = find_start_point_for_neighboring_region(mountains) if mountains else None	
 	if shallows_start_location is None:
 		shallows_start_location = (0,0)
-	shallows = build_region_map (mountains, const.SHALLOWS_REGION_SETTINGS, shallows_start_location, player, pg, True, ignored_locations=pg.world_tiles.keys())
+	shallows = build_region_map (pg, const.SHALLOWS_REGION_SETTINGS, shallows_start_location, True, pg.world_tiles.keys())
 	pg.merge_region(shallows)
 	pg.regions.append(shallows)
 	pg.previous_region = shallows
@@ -826,7 +828,7 @@ def main():
 	swamp_start_location = find_start_point_for_neighboring_region(shallows) if shallows else None	
 	if swamp_start_location is None:
 		swamp_start_location = (0,0)
-	swamp = build_region_map (shallows, const.SWAMP_REGION_SETTINGS, swamp_start_location, player, pg, True, ignored_locations=pg.world_tiles.keys())
+	swamp = build_region_map (pg, const.SWAMP_REGION_SETTINGS, swamp_start_location, True, pg.world_tiles.keys())
 	pg.merge_region(swamp)
 	pg.regions.append(swamp)
 	pg.previous_region = swamp
@@ -842,7 +844,7 @@ def main():
 	snow_start_location = find_start_point_for_neighboring_region(swamp) if swamp else None	
 	if snow_start_location is None:
 		snow_start_location = (0,0)
-	snow = build_region_map (swamp, const.SNOW_REGION_SETTINGS, snow_start_location, player, pg, True, ignored_locations=pg.world_tiles.keys())
+	snow = build_region_map (pg, const.SNOW_REGION_SETTINGS, snow_start_location, True, pg.world_tiles.keys())
 	pg.merge_region(snow)
 	pg.regions.append(snow)
 	pg.previous_region = snow

@@ -842,12 +842,16 @@ def pick_seeds_at_random(region_seeds: List[Dict[str, Any]], level_min: int = No
 
 
 #########################PUBLIC METHODS #########################
-def instantiate_random_hostiles(count: int, level: int, selected_region: str = None, superrare_count: int = 0, rare_count: int = 0, uncommon_count: int = 0, common_count: int = 0) -> List[RandomHostile]:
+def instantiate_random_hostiles(count: int, level: int, selected_region: str = None, superrare_count: int = 0, rare_count: int = 0, uncommon_count: int = 0, common_count: int = 0, exclude_ids: set = None) -> List[RandomHostile]:
     """Create a RandomHostile instance populated from a seed dict and a target level.
 
     This function uses estimate_stats_from_seed to derive numeric stats and then
     maps seed fields into the RandomHostile dataclass. It will instantiate
     PlayerAbility objects for any `player_abilities` referenced in the seed.
+
+    When `exclude_ids` is provided (Monster Hunter special_effect), seeds whose
+    id is already logged in the player's monster log are removed from the pool
+    so encounters draw only from species the player has not yet recorded.
     """
     # local imports to avoid import cycles at module import time
     from game.objects.player_ability import _instantiate_from_seed as _inst_ability
@@ -866,7 +870,14 @@ def instantiate_random_hostiles(count: int, level: int, selected_region: str = N
     # select count seeds at random from the selected region
     region_seeds = [s for rk, s in seeds if rk == selected_region] if selected_region else [s for rk, s in seeds]
 
-    #superrare_count: int = 0, rare_count: int = 0, uncommon_count: int = 0, common_count: int = 0
+    # Monster Hunter: drop already-logged hostiles so the player can hunt down
+    # species they missed. Only apply while seeds remain — if every species in
+    # the region is already logged there is nothing left to draw.
+    if exclude_ids:
+        remaining = [s for s in region_seeds if s.get("id") not in exclude_ids]
+        if remaining:
+            region_seeds = remaining
+    # superrare_count: int = 0, rare_count: int = 0, uncommon_count: int = 0, common_count: int = 0
     # pick seeds according to requested rarity counts if specified 
     # sort region_seeds by combat score descending
     region_seeds.sort(key=lambda x: compute_combat_score(estimate_stats_from_seed(x, int(x.get("min_spawn_level", 1))) , int(x.get("min_spawn_level", 1))), reverse=True)

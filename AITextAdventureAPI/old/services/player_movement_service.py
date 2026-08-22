@@ -36,8 +36,14 @@ def check_for_random_mob_encounter(player_game, region_key,force_combat:bool = F
 	rng = random.Random()
 
 	if rng.random() < 0.08 or force_combat:  # 8% chance of encounter
-		return generate_random_mob(3, player_game.get_max_character_level(), region_key)
-	
+		# Monster Hunter: when a party member has the effect equipped, restrict
+		# the overworld pool to hostiles the player has not yet logged so they
+		# can find species missed at lower levels.
+		exclude_ids = None
+		if player_game.has_monster_hunter_active():
+			exclude_ids = set((player_game.enemies_slain or {}).keys())
+		return generate_random_mob(3, player_game.get_max_character_level(), region_key, exclude_ids=exclude_ids)
+
 	return []
 
 def select_sublocation(cmd: str, sl: List[Dict], player_game: Optional[object] = None) -> Tuple[bool, Optional[str], Optional[str], Optional[Any], Optional[int]]:

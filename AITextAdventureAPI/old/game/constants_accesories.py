@@ -353,6 +353,15 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
         'crit_bonus': 0.0, 'damage_bonus': 0, 'special_effect': '',
     },
     {
+        'id': 'monster_hunter',
+        'name': 'Monster Hunter',
+        'description': 'A medallion of the hunt deeming the wearer to find even the most elusive prey.',
+        'min_level': 38, 'rarity': 'notfound', 'value': 19000,
+        'immunities': [], 'resistances': [], 'weaknesses': [],
+        'strength': 10, 'dexterity': 10, 'intelligence': 10, 'constitution': 10,
+        'crit_bonus': 5.0, 'damage_bonus': 10, 'special_effect': 'monster_hunter',
+    },
+    {
         'id': 'eternal_flame_crest',
         'name': 'Eternal Flame Crest',
         'description': 'A crest forged from the eternal flame. Immunity to all harmful statuses. Resists fire and light, weak to water and dark.',

@@ -88,7 +88,7 @@ def get_beginning_items(player, pg: PlayerGame, max_heals: int = 5, max_ap: int 
         pg.pick_up_item(uobj)
     return picks
 
-def generate_random_mob(hostile_count, hostile_level, region_key = None):
+def generate_random_mob(hostile_count, hostile_level, region_key = None, exclude_ids = None):
     #select random homstile formation from HOSTILE_MOB_FORMATIONS... 
     # set the count to the total count of hostiles in that formation. 
     #def instantiate_random_hostiles(count: int, level: int, selected_region: str = None, superrare_count: int = 0, rare_count: int = 0, uncommon_count: int = 0, common_count: int = 0) -> List[RandomHostile]:
@@ -122,7 +122,7 @@ def generate_random_mob(hostile_count, hostile_level, region_key = None):
     if total_count == 0:
         total_count = hostile_count
         
-    hostiles = instantiate_random_hostiles(count=total_count, level=hostile_level, superrare_count=superrare_count, rare_count=rare_count, uncommon_count=uncommon_count, common_count=common_count, selected_region=region_key)
+    hostiles = instantiate_random_hostiles(count=total_count, level=hostile_level, superrare_count=superrare_count, rare_count=rare_count, uncommon_count=uncommon_count, common_count=common_count, selected_region=region_key, exclude_ids=exclude_ids)
     # for hostile in hostiles:
     #     hostile.level_to(hostile_level)
     return hostiles
