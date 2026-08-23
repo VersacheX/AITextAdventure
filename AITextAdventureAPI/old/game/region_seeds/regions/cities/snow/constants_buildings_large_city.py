@@ -33,7 +33,7 @@ DRINK_MENU = [
 
 # Buildings
 BUILDINGS = [
-	{ "name": "bar", "display_name": "The Blue Lantern", "type": "bar", "char": "µ", "seed_range":7, "threshold":0.06, "hostile_prob":0.36, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#2b4b5b"},
+	{ "name": "bar", "display_name": "The Blue Lantern", "type": "bar", "char": "µ", "seed_range":7, "threshold":0.06, "hostile_prob":0.36, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#5b7b8b"},
 	{ "name": "inn", "display_name": "Hearth of Frost", "type": "inn", "char": "@", "seed_range":12, "threshold":0.10, "hostile_prob":0.02, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#5b7b8b"},
 	{ "name": "shopweapons", "display_name": "Rivet & Ice", "type": "shop", "char": "Æ", "seed_range":15, "threshold":0.24, "hostile_prob":0.06, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b3b47"},
 	{ "name": "shopitems", "display_name": "Frostworks Emporium", "type": "shop", "char": "₨", "seed_range":15, "threshold":0.42, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#3b5b6b"},
@@ -43,8 +43,8 @@ BUILDINGS = [
 	{ "name": "businesslarge", "display_name": "Clime Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.99, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#5b6b7b"},
 	{ "name": "businesssmall", "display_name": "Ledger Spindles", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#7b8b8b"},
 	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
-	{ "name": "other1", "display_name": "The Glacial Concordium", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
-	{ "name": "other2", "display_name": "Frostlight Artificer’s Annex", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+	{ "name": "other1", "display_name": "The Glacial Concordium", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#7b30a2" }, 
+	{ "name": "other2", "display_name": "Frostlight Artificer’s Annex", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#7b30a2" }
 ]
 
 # Sublocation mapping

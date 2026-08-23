@@ -174,8 +174,8 @@ def scaled_base_power(seed: dict) -> float:
         return bp * _STATUS_FLAT_POWER_MOD * elem_mult
 
     level_mult = 1.0 + 0.20 * max(0, level - 1)
-    elem_mult = 1.0 + 0.35 * n_elem
-    return bp * level_mult * elem_mult
+    #elem_mult = 1.0 + 0.35 * n_elem
+    return bp #* level_mult #* elem_mult
 
 
 def status_power_estimate(seed: dict) -> float:
@@ -231,7 +231,17 @@ def compute_ability_value(seed: dict) -> AbilityValueBreakdown:
     base power + status weight + damaging-status damage), the AOE multiplier, and
     the AP cost so the validator's balance checks reflect true relative worth.
     """
-    scaled_power = scaled_base_power(seed) / _STATUS_FLAT_POWER_MOD
+    # ``scaled_base_power`` halves base_power *only* for status abilities (it is a
+    # flat secondary hit dealt at half strength).  Reverse that halving so the
+    # status's flat power counts at full value in the payload — but leave pure
+    # damage/heal/revive power untouched, since it was never halved and dividing
+    # it here would double-count the base power.
+    effect = str(seed.get("effect", "") or "").lower()
+    if effect == "status":
+        scaled_power = scaled_base_power(seed) / _STATUS_FLAT_POWER_MOD
+    else:
+        scaled_power = scaled_base_power(seed)
+
     status_keys  = seed.get("status_keys") or []
     level        = int(seed.get("level", 1) or 1)
     sw           = status_weight_total_scaled(status_keys, level)

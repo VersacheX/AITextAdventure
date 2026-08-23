@@ -26,18 +26,18 @@ DRINK_MENU = [
 
 # Buildings
 BUILDINGS = [
-	{ "name": "bar", "display_name": "The Rusted Lantern", "type": "bar", "char": "µ", "seed_range":5, "threshold":0.05, "hostile_prob":0.40, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#2f3b3b"},
+	{ "name": "bar", "display_name": "The Rusted Lantern", "type": "bar", "char": "µ", "seed_range":5, "threshold":0.05, "hostile_prob":0.40, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#5f6b6b"},
 	{ "name": "inn", "display_name": "The Crow's Berth", "type": "inn", "char": "@", "seed_range":6, "threshold":0.08, "hostile_prob":0.02, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#4b5a5a"},
-	{ "name": "shopweapons", "display_name": "Harpoon & Hook", "type": "shop", "char": "Æ", "seed_range":10, "threshold":0.20, "hostile_prob":0.07, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5b2f2f"},
-	{ "name": "shopitems", "display_name": "Booty & Bric-a-brac", "type": "shop", "char": "₨", "seed_range":10, "threshold":0.36, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#2f5b4f"},
+	{ "name": "shopweapons", "display_name": "Harpoon & Hook", "type": "shop", "char": "Æ", "seed_range":10, "threshold":0.20, "hostile_prob":0.07, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#8b5f5f"},
+	{ "name": "shopitems", "display_name": "Booty & Bric-a-brac", "type": "shop", "char": "₨", "seed_range":10, "threshold":0.36, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5f8b7f"},
 	{ "name": "shoparmor", "display_name": "Scale & Salvage", "type": "shop", "char": "¥", "seed_range":10, "threshold":0.52, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#606060"},
 	{ "name": "residencelarge", "display_name": "Harbor Blocks", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.74, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#c8dfe0"},
 	{ "name": "residencesmall", "display_name": "Skiff Row", "type": "residence", "char": "î", "seed_range":4, "threshold":0.92, "hostile_prob":0.10, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#dfe7df"},
 	{ "name": "businesslarge", "display_name": "The Wharf Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.98, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#4b6b6b"},
 	{ "name": "businesssmall", "display_name": "Tally & Tar", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#6b6b5b"},
 	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
-	{ "name": "other1", "display_name": "Blackwake Tidecourt", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
-	{ "name": "other2", "display_name": "The Smuggler’s Lanternhouse", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+	{ "name": "other1", "display_name": "Blackwake Tidecourt", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#7b30a2" }, 
+	{ "name": "other2", "display_name": "The Smuggler’s Lanternhouse", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#7b30a2" }
 ]
 
 # Sublocation mapping

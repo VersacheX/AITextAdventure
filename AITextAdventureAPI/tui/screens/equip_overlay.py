@@ -194,6 +194,7 @@ def _build_item_info(item: Any | None) -> str:
     if item is None:
         return "[dim]← Select an item[/dim]"
 
+
     lines: list[str] = []
 
     iname      = rich_escape(str(getattr(item, "name", "?")))
@@ -499,6 +500,7 @@ class EquipOverlay(Widget):
         Binding("right",     "next_member",   "Member ►", show=True),
         Binding("enter",     "open_action",   "Equip",    show=True),
         Binding("delete",    "discard_item",  "Discard",  show=True),
+        Binding("u",         "unequip",       "Unequip",  show=True),
         Binding("tab",       "next_filter",   "Filter→",  show=True),
         Binding("shift+tab", "prev_filter",   "←Filter",  show=True),
         Binding("escape",    "request_close", "Close",    show=True),
@@ -572,7 +574,6 @@ class EquipOverlay(Widget):
     #eq-action-row {
         height: 3;
         padding: 0 1;
-        align: left middle;
         border-top: solid $accent 20%;
     }
 
@@ -582,6 +583,14 @@ class EquipOverlay(Widget):
     }
 
     #eq-btn-discard {
+        width: 12;
+    }
+
+    #eq-action-spacer {
+        width: 1fr;
+    }
+
+    #eq-btn-unequip {
         width: 12;
     }
 
@@ -615,8 +624,10 @@ class EquipOverlay(Widget):
                 with Horizontal(id="eq-action-row"):
                     yield Button("Equip",   id="eq-btn-equip",   variant="primary", disabled=True)
                     yield Button("Discard", id="eq-btn-discard", variant="error",   disabled=True)
+                    yield Static("", id="eq-action-spacer")
+                    yield Button("Unequip", id="eq-btn-unequip", variant="warning", disabled=True)
         yield Static(
-            "[dim]Enter/Equip:equip  Del/Discard:discard  Tab/⇧Tab:filter  ◄►:member  Esc:close[/dim]",
+            "[dim]Enter/Equip:equip  Del/Discard:discard  U/Unequip:unequip  Tab/⇧Tab:filter  ◄►:member  Esc:close[/dim]",
             id="eq-hint",
         )
 
@@ -688,6 +699,7 @@ class EquipOverlay(Widget):
         try:
             self.query_one("#eq-btn-equip",   Button).disabled = not has_item
             self.query_one("#eq-btn-discard", Button).disabled = not has_item
+            self.query_one("#eq-btn-unequip", Button).disabled = player is None
         except Exception:
             pass
 
@@ -714,6 +726,10 @@ class EquipOverlay(Widget):
         item = self._highlighted_item()
         if item is not None:
             self._do_discard(item)
+
+    @on(Button.Pressed, "#eq-btn-unequip")
+    def _on_unequip_btn(self) -> None:
+        self._open_unequip_modal()
 
     # ── actions ───────────────────────────────────────────────────────────
 
@@ -750,6 +766,9 @@ class EquipOverlay(Widget):
     def action_request_close(self) -> None:
         self._on_close(None)
 
+    def action_unequip(self) -> None:
+        self._open_unequip_modal()
+
     # ── internal: modal ───────────────────────────────────────────────────
 
     def _open_action_modal(self) -> None:
@@ -771,6 +790,21 @@ class EquipOverlay(Widget):
                 self._do_discard(item)
 
         self.app.push_screen(ItemActionScreen(item, player, self._pg), _handle)
+
+    def _open_unequip_modal(self) -> None:
+        player = self._resolve_player()
+        if player is None:
+            self.app.notify("No character selected.", title="Equip")
+            return
+
+        def _handle(changed: bool | None) -> None:
+            if changed:
+                # Gear moved back to inventory — refresh list + detail panel.
+                self._rebuild_list()
+                self._update_detail(self._highlighted_item())
+
+        from tui.screens.unequip_screen import UnequipScreen  # noqa: PLC0415
+        self.app.push_screen(UnequipScreen(player, self._pg), _handle)
 
     # ── internal: actions ─────────────────────────────────────────────────
 

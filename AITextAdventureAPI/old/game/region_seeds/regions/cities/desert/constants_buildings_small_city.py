@@ -24,7 +24,7 @@ DRINK_MENU = [
 
 # Canonical building ids kept; display names set to post-apoc variants
 BUILDINGS = [
-	{ "name": "bar", "display_name": "Dust & Drums Tap", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.035, "hostile_prob":0.38, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#5b2e2e" },
+	{ "name": "bar", "display_name": "Dust & Drums Tap", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.035, "hostile_prob":0.38, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#8b5e5e" },
 	{ "name": "inn", "display_name": "Wasteland Rest Stop", "type": "inn", "char": "@", "seed_range":6, "threshold":0.05, "hostile_prob":0.01, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#7fb8ff" },
 	{ "name": "shopweapons", "display_name": "Scavenger's Arsenal", "type": "shop", "char": "Æ", "seed_range":10, "threshold":0.20, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#b05f3f" },
 	{ "name": "shopitems", "display_name": "Junkyard Jewels", "type": "shop", "char": "₨", "seed_range":10, "threshold":0.30, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#c18f6a" },
@@ -36,8 +36,8 @@ BUILDINGS = [
 
 	# region extras
 	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range":1000, "threshold":0.02, "hostile_prob":0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070"},
-	{ "name": "other1", "display_name": "The Neon Spine", "type": "other1", "char": "O", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082"},
-	{ "name": "other2", "display_name": "Black Bazaar", "type": "other2", "char": "0", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082"},
+	{ "name": "other1", "display_name": "The Neon Spine", "type": "other1", "char": "O", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#7b30a2"},
+	{ "name": "other2", "display_name": "Black Bazaar", "type": "other2", "char": "0", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#7b30a2"},
 ]
 
 # Post-apocalyptic sublocation map — assign searchables to building types

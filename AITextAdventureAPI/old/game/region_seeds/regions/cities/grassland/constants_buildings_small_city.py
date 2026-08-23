@@ -40,18 +40,18 @@ DRINK_MENU = [
 # can_buy <- whether the building type supports buying items
 # can_sell <- whether the building type supports selling items
 BUILDINGS = [
-	{ "name": "bar", "display_name": "The Hollow Lantern", "type": "bar", "char": "µ", "seed_range":5, "threshold":0.02, "hostile_prob":0.20, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#4b3b2f"},
+	{ "name": "bar", "display_name": "The Hollow Lantern", "type": "bar", "char": "µ", "seed_range":5, "threshold":0.02, "hostile_prob":0.20, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#7b6b5f"},
 	{ "name": "inn", "display_name": "The Roofed Loft", "type": "inn", "char": "@", "seed_range":7, "threshold":0.04, "hostile_prob":0.00, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#6b6b5a"},
-	{ "name": "shopweapons", "display_name": "Thorn & Peg", "type": "shop", "char": "Æ", "seed_range":6, "threshold":0.12, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5a2f2f"},
-	{ "name": "shopitems", "display_name": "Quant Curios", "type": "shop", "char": "₨", "seed_range":6, "threshold":0.28, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#3b5b4a"},
+	{ "name": "shopweapons", "display_name": "Thorn & Peg", "type": "shop", "char": "Æ", "seed_range":6, "threshold":0.12, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#8a5f5f"},
+	{ "name": "shopitems", "display_name": "Quant Curios", "type": "shop", "char": "₨", "seed_range":6, "threshold":0.28, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b8b7a"},
 	{ "name": "shoparmor", "display_name": "Hide & Patch", "type": "shop", "char": "¥", "seed_range":6, "threshold":0.44, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b6b5b"},
 	{ "name": "residencelarge", "display_name": "Hollowstead", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.60, "hostile_prob":0.01, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#dfe7c8"},
 	{ "name": "residencesmall", "display_name": "Thatched Rows", "type": "residence", "char": "î", "seed_range":4, "threshold":0.85, "hostile_prob":0.06, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#efe7c8"},
 	{ "name": "businesslarge", "display_name": "Guild Bower", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.88, "hostile_prob":0.01, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#c0c0c0"},
 	{ "name": "businesssmall", "display_name": "Ledger Nook", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#c0b88f"},
 	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
-	{ "name": "other1", "display_name": "Hollowfield Heritage", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
-	{ "name": "other2", "display_name": "Meadowlight Reading Room", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+	{ "name": "other1", "display_name": "Hollowfield Heritage", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#7b30a2" }, 
+	{ "name": "other2", "display_name": "Meadowlight Reading Room", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#7b30a2" }
 ]
 
 # Internal sublocations per subtype

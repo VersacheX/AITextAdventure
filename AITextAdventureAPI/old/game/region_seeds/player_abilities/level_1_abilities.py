@@ -34,7 +34,7 @@ LEVEL_1_PLAYER_ABILITY_SEEDS = [
  # --- Faith ---
    ##HEALING
    # # single target heal lvl1 faith heals cost 10ap, 12bp
- {"id": "light_faith_lv1_minor_heal", "name": "Minor Heal", "description": "Restore a small amount of HP.", "ability_type": "faith", "level":1, "elements": ["light"], "base_power":12, "ap_cost":10, "effect": "heal", "can_aoe": True},
+ {"id": "light_faith_lv1_minor_heal", "name": "Minor Heal", "description": "Restore a small amount of HP.", "ability_type": "faith", "level":1, "elements": ["light"], "base_power":9, "ap_cost":10, "effect": "heal", "can_aoe": True},
 
    ## STATUS CLEAN
  {"id": "water_faith_lv1_mending_streams", "name": "Mending Streams", "description": "A soothing stream that cures damaging ailments.", "ability_type": "faith", "level":1, "elements": ["water"], "base_power":0, "ap_cost":6, "effect": "cure", "status_keys": ["continuous_damage"], "can_aoe": False},

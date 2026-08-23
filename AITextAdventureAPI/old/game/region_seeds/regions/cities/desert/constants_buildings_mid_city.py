@@ -44,18 +44,18 @@ DRINK_MENU = [
 # can_buy <- whether the building type supports buying items
 # can_sell <- whether the building type supports selling items
 BUILDINGS = [
-	{ "name": "bar", "display_name": "The Velvet Lantern", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.04, "hostile_prob":0.45, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#2b1b2b"},
-	{ "name": "inn", "display_name": "The Gilded Curtain", "type": "inn", "char": "@", "seed_range":6, "threshold":0.07, "hostile_prob":0.00, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#4a3f55"},
-	{ "name": "shopweapons", "display_name": "Razor & Rune", "type": "shop", "char": "Æ", "seed_range":10, "threshold":0.18, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5a2e2e"},
-	{ "name": "shopitems", "display_name": "Curios & Curatives", "type": "shop", "char": "₨", "seed_range":10, "threshold":0.36, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#3b3b4f"},
+	{ "name": "bar", "display_name": "The Velvet Lantern", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.04, "hostile_prob":0.45, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#5b4b5b"},
+	{ "name": "inn", "display_name": "The Gilded Curtain", "type": "inn", "char": "@", "seed_range":6, "threshold":0.07, "hostile_prob":0.00, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#7a6f85"},
+	{ "name": "shopweapons", "display_name": "Razor & Rune", "type": "shop", "char": "Æ", "seed_range":10, "threshold":0.18, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#8a5e5e"},
+	{ "name": "shopitems", "display_name": "Curios & Curatives", "type": "shop", "char": "₨", "seed_range":10, "threshold":0.36, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b6b7f"},
 	{ "name": "shoparmor", "display_name": "Wardwright", "type": "shop", "char": "¥", "seed_range":10, "threshold":0.52, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b6b5b"},
-	{ "name": "residencelarge", "display_name": "Ironspine Flats", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.72, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#2f2f2f"},
-	{ "name": "residencesmall", "display_name": "Lantern Rooms", "type": "residence", "char": "î", "seed_range":4, "threshold":0.9, "hostile_prob":0.12, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#3d2f2f"},
-	{ "name": "businesslarge", "display_name": "Obsidian Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.96, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#1f1f2f"},
-	{ "name": "businesssmall", "display_name": "Brokerage & Sundries", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#2b2b2b"},
+	{ "name": "residencelarge", "display_name": "Ironspine Flats", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.72, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#5f5f5f"},
+	{ "name": "residencesmall", "display_name": "Lantern Rooms", "type": "residence", "char": "î", "seed_range":4, "threshold":0.9, "hostile_prob":0.12, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#6d5f4f"},
+	{ "name": "businesslarge", "display_name": "Obsidian Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.96, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#4f4f5f"},
+	{ "name": "businesssmall", "display_name": "Brokerage & Sundries", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#5b5b5b"},
 	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range":1000, "threshold":0.02, "hostile_prob":0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070"},
-	{ "name": "other1", "display_name": "The Archive Vaults", "type": "other1", "char": "O", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082"},
-	{ "name": "other2", "display_name": "Broker’s Network", "type": "other2", "char": "0", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082"},
+	{ "name": "other1", "display_name": "The Archive Vaults", "type": "other1", "char": "O", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#7b30a2"},
+	{ "name": "other2", "display_name": "Broker’s Network", "type": "other2", "char": "0", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#7b30a2"},
 ]
 
 # Sublocation mapping

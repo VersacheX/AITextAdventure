@@ -165,6 +165,31 @@ class Player:
 			player_game.pick_up_item(accessory)
 		return True
 
+	def unequip_weapon(self, player_game) -> bool:
+		"""Unequip the current weapon back to inventory.
+
+		Returns True on success, False if no weapon is equipped.
+		"""
+		if self.equipped_weapon is None:
+			return False
+		if player_game is not None:
+			player_game.pick_up_item(self.equipped_weapon)
+		self.equipped_weapon = None
+		return True
+
+	def unequip_armor(self, player_game, slot_attr: str) -> bool:
+		"""Unequip the armor in `slot_attr` (e.g. 'head_armor') back to inventory.
+
+		Returns True on success, False if that slot is empty.
+		"""
+		current = getattr(self, slot_attr, None)
+		if current is None:
+			return False
+		if player_game is not None:
+			player_game.pick_up_item(current)
+		setattr(self, slot_attr, None)
+		return True
+
 	def get_accessory_immunities(self) -> set:
 		"""Return the union of all status immunities granted by equipped accessories."""
 		immunities: set = set()
@@ -324,6 +349,22 @@ class Player:
 
 	def is_alive(self) -> bool:
 		return self.current_hp >0
+
+	def is_incapacitated(self) -> bool:
+		"""Return True if the player is dead or petrified.
+
+		Used to exclude a party member from combat reward distribution: an
+		incapacitated player neither counts toward the XP split nor receives a
+		share of it. Mirrors the petrify check used by the combat simulator's
+		annihilation logic.
+		"""
+		if not self.is_alive():
+			return True
+		return any(
+			(s.get('id') == 'petrify')
+			for s in (self.statuses or [])
+			if isinstance(s, dict)
+		)
 
 	def take_damage(self, amount: int, attacker: Optional[object] = None, elements: Optional[List[str]] = None, physical: bool = False) -> int:
 		"""Reduce HP by amount and return actual damage taken.

@@ -480,6 +480,9 @@ class CombatSimulation:
         messages: List[str] = []
         # collect player objects
         players: List[Player] = list(self.player_game.get_active_party())
+        # Dead/petrified players do not share in combat rewards: they neither
+        # count toward the XP division nor receive a portion of it.
+        players = [p for p in players if not p.is_incapacitated()]
         if not players:
             return messages
 

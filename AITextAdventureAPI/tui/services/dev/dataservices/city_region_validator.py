@@ -15,6 +15,11 @@ R2  REGION_HOSTILE_COVERAGE_SPARSE
 
 R3  REGION_HOSTILE_NO_SEEDS
     A zone has no hostile seeds at all.
+
+R4  REGION_HOSTILE_RARITY_GAP
+    A 5-level window (the band the normal encounter selector inspects) is
+    missing at least one seed of a required rarity (common, uncommon, rare,
+    superrare). Reported per zone, per window, per missing rarity.
 """
 from __future__ import annotations
 
@@ -29,6 +34,12 @@ _LEVEL_MIN  = 1
 _LEVEL_MAX  = 100
 _BAND_SIZE  = 10
 _SPARSE_MIN = 2   # seeds per band below this → sparse warning
+
+# Rarity coverage: normal encounter selection (`pick_seeds_for_rarity`) inspects
+# seeds whose min_spawn_level falls within a 5-level window of the party level,
+# so every such window must contain at least one seed of each required rarity.
+_RARITY_WINDOW    = 5
+_REQUIRED_RARITIES = ("common", "uncommon", "rare", "superrare")
 
 _ZONE_LABELS: Dict[str, str] = {
     "region_hostile_seeds":     "Overworld",
@@ -46,6 +57,7 @@ class RegionValidationError:
     zone:     str = ""
     band_min: int = 0
     band_max: int = 0
+    rarity:   str = ""
 
 
 @dataclass
@@ -59,6 +71,57 @@ class RegionNode:
 
 def _band_label(band_min: int, band_max: int) -> str:
     return f"Lv {band_min}–{band_max}"
+
+
+def _validate_rarity_coverage(
+    seeds: List[Dict[str, Any]],
+    zone_key: str,
+    zone_label: str,
+) -> List[RegionValidationError]:
+    """Ensure every 5-level window has at least one seed of each required rarity.
+
+    Mirrors `pick_seeds_for_rarity`, which only considers seeds whose
+    min_spawn_level is within `_RARITY_WINDOW` levels of the party level. A
+    window missing a rarity means that rarity slot silently degrades at those
+    levels, so it is flagged per missing rarity.
+    """
+    errors: List[RegionValidationError] = []
+
+    # Bucket seed rarities by min_spawn_level for quick per-window lookup.
+    rarities_by_level: Dict[int, set] = defaultdict(set)
+    for seed in seeds:
+        if not isinstance(seed, dict):
+            continue
+        lv = int(seed.get("min_spawn_level", 0) or 0)
+        if lv < _LEVEL_MIN or lv > _LEVEL_MAX:
+            continue
+        rarity = str(seed.get("rarity", "common") or "common").lower()
+        rarities_by_level[lv].add(rarity)
+
+    # Slide a 5-level window across the full range in non-overlapping steps.
+    for window_start in range(_LEVEL_MIN, _LEVEL_MAX + 1, _RARITY_WINDOW):
+        window_end = min(window_start + _RARITY_WINDOW - 1, _LEVEL_MAX)
+
+        present: set = set()
+        for lv in range(window_start, window_end + 1):
+            present |= rarities_by_level.get(lv, set())
+
+        for rarity in _REQUIRED_RARITIES:
+            if rarity not in present:
+                errors.append(RegionValidationError(
+                    code="REGION_HOSTILE_RARITY_GAP",
+                    message=(
+                        f"{zone_label} {_band_label(window_start, window_end)}: "
+                        f"no '{rarity}' hostile seed in this 5-level window."
+                    ),
+                    severity="error",
+                    zone=zone_key,
+                    band_min=window_start,
+                    band_max=window_end,
+                    rarity=rarity,
+                ))
+
+    return errors
 
 
 def _validate_zone(
@@ -115,6 +178,9 @@ def _validate_zone(
                 band_min=band_start,
                 band_max=band_end,
             ))
+
+    # R4: rarity coverage per 5-level window
+    errors.extend(_validate_rarity_coverage(seeds, zone_key, zone_label))
 
     return errors
 

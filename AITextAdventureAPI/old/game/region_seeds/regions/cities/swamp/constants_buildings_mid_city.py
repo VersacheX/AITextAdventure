@@ -26,18 +26,18 @@ DRINK_MENU = [
 
 # Buildings
 BUILDINGS = [
-	{ "name": "bar", "display_name": "The Gator & Gavel", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.05, "hostile_prob":0.30, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#3b2f2f"},
+	{ "name": "bar", "display_name": "The Gator & Gavel", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.05, "hostile_prob":0.30, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#6b5f5f"},
 	{ "name": "inn", "display_name": "Bayou Rest", "type": "inn", "char": "@", "seed_range":9, "threshold":0.08, "hostile_prob":0.03, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#4b5b4b"},
 	{ "name": "shopweapons", "display_name": "Hook & Hex", "type": "shop", "char": "Æ", "seed_range":12, "threshold":0.18, "hostile_prob":0.06, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5b3b2f"},
-	{ "name": "shopitems", "display_name": "Crescent Curios", "type": "shop", "char": "₨", "seed_range":12, "threshold":0.36, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#2f5b4b"},
+	{ "name": "shopitems", "display_name": "Crescent Curios", "type": "shop", "char": "₨", "seed_range":12, "threshold":0.36, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5f8b7b"},
 	{ "name": "shoparmor", "display_name": "Hide & Scale", "type": "shop", "char": "¥", "seed_range":12, "threshold":0.52, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#606060"},
 	{ "name": "residencelarge", "display_name": "Lantern Quarters", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.75, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#c8d8d0"},
 	{ "name": "residencesmall", "display_name": "Shacklines", "type": "residence", "char": "î", "seed_range":4, "threshold":0.92, "hostile_prob":0.10, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#dfe7df"},
 	{ "name": "businesslarge", "display_name": "Bay Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.98, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#5b6b5b"},
 	{ "name": "businesssmall", "display_name": "Tally & Taro", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#6b6b5b"},
 	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
-	{ "name": "other1", "display_name": "Mirelight Bargain Court", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
-	{ "name": "other2", "display_name": "The Lantern‑Sworn Parlour", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+	{ "name": "other1", "display_name": "Mirelight Bargain Court", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#7b30a2" }, 
+	{ "name": "other2", "display_name": "The Lantern‑Sworn Parlour", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#7b30a2" }
 ]
 
 # Sublocation mapping

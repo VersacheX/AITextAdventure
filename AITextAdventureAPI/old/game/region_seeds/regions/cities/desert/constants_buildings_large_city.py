@@ -51,8 +51,8 @@ BUILDINGS = [
 	{ "name": "businesslarge", "display_name": "The Offices", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.95, "hostile_prob":0.01, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#c0c0c0"},
 	{ "name": "businesssmall", "display_name": "Some Random Service", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.01, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#c0c0c0"},
 	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range":1000, "threshold":0.02, "hostile_prob":0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070"},
-	{ "name": "other1", "display_name": "The Black Market Guild", "type": "other1", "char": "O", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082"},
-	{ "name": "other2", "display_name": "Broker's Hideout", "type": "other2", "char": "0", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082"},
+	{ "name": "other1", "display_name": "The Black Market Guild", "type": "other1", "char": "O", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#7b30a2"},
+	{ "name": "other2", "display_name": "Broker's Hideout", "type": "other2", "char": "0", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#7b30a2"},
 	# 
 ]
 

@@ -537,14 +537,33 @@ class OverworldScreen(BaseScreen):
     def _ensure_tiles_worker(self, pg: Any) -> None:
         """Background worker to ensure tiles around the player exist.
 
-        Marked exclusive + grouped so that rapid movement can never spawn two
-        concurrent generation passes over the same PlayerGame. Concurrent
-        passes race on the shared world_tiles / regions / city.tiles dicts and
-        produce duplicated regions and mis-classified tiles (city glyphs
-        bleeding into region open-area / impassable space).
+        Region generation runs here, and `create_region_at` → `acquire_task`
+        can enqueue narrator/info dialogs (e.g. the start of the next chapter's
+        task chain) and/or set `pg.option_dialog`. Those must be surfaced once
+        generation finishes, so we hop back to the compositor thread and run the
+        normal dialog-drain + refresh. Without this the chapter dialog silently
+        sits in `pg.info_dialogs` until some unrelated event triggers a check.
+
+        Marked exclusive + grouped so rapid movement can't spawn two concurrent
+        generation passes racing on world_tiles / regions.
         """
+        # Snapshot queue state so we only force a dialog check when generation
+        # actually produced new dialogs (avoids needless refresh churn on the
+        # common no-op path where all nearby tiles already exist).
+        had_dialogs_before = bool(getattr(pg, "info_dialogs", None)) or bool(
+            getattr(pg, "option_dialog", None)
+        )
+
         ensure_tiles_around_sync(pg, check_rad=4)
-        # No UI update needed; tiles are lazily rendered on next refresh
+
+        has_dialogs_after = bool(getattr(pg, "info_dialogs", None)) or bool(
+            getattr(pg, "option_dialog", None)
+        )
+
+        if has_dialogs_after and not had_dialogs_before:
+            # New dialogs were queued during generation — surface them on the
+            # compositor thread (widget access must not happen off-thread).
+            self.app.call_from_thread(self._check_dialogs_and_refresh)
 
     @work(thread=True, exclusive=True)
     def _refresh_all(self) -> None:

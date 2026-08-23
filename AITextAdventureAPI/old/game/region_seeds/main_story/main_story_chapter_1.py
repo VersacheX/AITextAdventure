@@ -235,7 +235,8 @@ NPC_DIALOG = [
 		'npc_id': 'technique',
 		'dialog_id': 'technique_got_jacked',
 		'dialog': [
-			"If you ask me the first person to question trusting is the guy sayin be careful who to trust."
+			"Trust Issues?!? Hahahaha",
+			"They usually only fool me once."
 		]
 	},
 	{

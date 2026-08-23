@@ -27,18 +27,18 @@ DRINK_MENU = [
 
 # Buildings
 BUILDINGS = [
-	{ "name": "bar", "display_name": "The Lantern Trap", "type": "bar", "char": "µ", "seed_range":4, "threshold":0.02, "hostile_prob":0.28, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#2b3b3b"},
+	{ "name": "bar", "display_name": "The Lantern Trap", "type": "bar", "char": "µ", "seed_range":4, "threshold":0.02, "hostile_prob":0.28, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#5b6b6b"},
 	{ "name": "inn", "display_name": "Wayfarer's Rest", "type": "inn", "char": "@", "seed_range":6, "threshold":0.04, "hostile_prob":0.01, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#5b6b6b"},
 	{ "name": "shopweapons", "display_name": "Spike & Husk", "type": "shop", "char": "Æ", "seed_range":7, "threshold":0.10, "hostile_prob":0.04, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5b2f2f"},
-	{ "name": "shopitems", "display_name": "Trader's Cache", "type": "shop", "char": "₨", "seed_range":7, "threshold":0.26, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#3b5b5b"},
+	{ "name": "shopitems", "display_name": "Trader's Cache", "type": "shop", "char": "₨", "seed_range":7, "threshold":0.26, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b8b8b"},
 	{ "name": "shoparmor", "display_name": "Pelt & Plate", "type": "shop", "char": "¥", "seed_range":7, "threshold":0.42, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#666666"},
 	{ "name": "residencelarge", "display_name": "Watcher's Hall", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.60, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#dfe7ee"},
 	{ "name": "residencesmall", "display_name": "Hutline", "type": "residence", "char": "î", "seed_range":4, "threshold":0.86, "hostile_prob":0.07, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#eef3f5"},
 	{ "name": "businesslarge", "display_name": "Supply Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.90, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#5b6b6b"},
 	{ "name": "businesssmall", "display_name": "Ledger Post", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#7b7b7b"},
 	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
-	{ "name": "other1", "display_name": "The Windbreak Vigil Station", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
-	{ "name": "other2", "display_name": "Frostline Survivor’s Exchange", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+	{ "name": "other1", "display_name": "The Windbreak Vigil Station", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#7b30a2" }, 
+	{ "name": "other2", "display_name": "Frostline Survivor’s Exchange", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#7b30a2" }
 ]
 
 # Sublocation mapping

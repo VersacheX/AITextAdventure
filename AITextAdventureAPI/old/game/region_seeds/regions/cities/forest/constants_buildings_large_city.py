@@ -45,18 +45,18 @@ DRINK_MENU = [
 # can_buy <- whether the building type supports buying items
 # can_sell <- whether the building type supports selling items
 BUILDINGS = [
- {"name": "bar", "display_name": "The Gilded Bramble", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.04, "hostile_prob":0.30, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#2a4a3a"},
+ {"name": "bar", "display_name": "The Gilded Bramble", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.04, "hostile_prob":0.30, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#5a7a6a"},
  {"name": "inn", "display_name": "Evensong Rest", "type": "inn", "char": "@", "seed_range":10, "threshold":0.09, "hostile_prob":0.00, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#4b6b5a"},
- {"name": "shopweapons", "display_name": "Thistle & Fang", "type": "shop", "char": "Æ", "seed_range":12, "threshold":0.22, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5a2f2f"},
- {"name": "shopitems", "display_name": "Silvershard Curios", "type": "shop", "char": "₨", "seed_range":12, "threshold":0.40, "hostile_prob":0.04, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#344b4b"},
+ {"name": "shopweapons", "display_name": "Thistle & Fang", "type": "shop", "char": "Æ", "seed_range":12, "threshold":0.22, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#8a5f5f"},
+ {"name": "shopitems", "display_name": "Silvershard Curios", "type": "shop", "char": "₨", "seed_range":12, "threshold":0.40, "hostile_prob":0.04, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#647b7b"},
  {"name": "shoparmor", "display_name": "Grovewarden Armory", "type": "shop", "char": "¥", "seed_range":12, "threshold":0.56, "hostile_prob":0.04, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b6b5b"},
- {"name": "residencelarge", "display_name": "Palais of Boughs", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.78, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#2e5b3a"},
- {"name": "residencesmall", "display_name": "Sylvan Chambers", "type": "residence", "char": "î", "seed_range":4, "threshold":0.94, "hostile_prob":0.12, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#3b6b4a"},
- {"name": "businesslarge", "display_name": "Council of Veil", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.99, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#243a2f"},
- {"name": "businesssmall", "display_name": "Ledger & Lantern", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#274b3a"},
+ {"name": "residencelarge", "display_name": "Palais of Boughs", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.78, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#5e8b6a"},
+ {"name": "residencesmall", "display_name": "Sylvan Chambers", "type": "residence", "char": "î", "seed_range":4, "threshold":0.94, "hostile_prob":0.12, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#6b9b7a"},
+ {"name": "businesslarge", "display_name": "Council of Veil", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.99, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#546a5f"},
+ {"name": "businesssmall", "display_name": "Ledger & Lantern", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#577b6a"},
  {"name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range":1000, "threshold":0.02, "hostile_prob":0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070"},
- {"name": "other1", "display_name": "Hollow Exchange", "type": "other1", "char": "O", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082"},
- {"name": "other2", "display_name": "Branchbound Broker's Den", "type": "other2", "char": "0", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082"},
+ {"name": "other1", "display_name": "Hollow Exchange", "type": "other1", "char": "O", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#7b30a2"},
+ {"name": "other2", "display_name": "Branchbound Broker's Den", "type": "other2", "char": "0", "seed_range":1000, "threshold":0.06, "hostile_prob":0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#7b30a2"},
 ]
 
 # Internal sublocations per subtype

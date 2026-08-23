@@ -37,18 +37,18 @@ DRINK_MENU = [
 
 # Buildings
 BUILDINGS = [
-	{ "name": "bar", "display_name": "The Coal Lantern", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.05, "hostile_prob":0.40, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#3b2b2b"},
+	{ "name": "bar", "display_name": "The Coal Lantern", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.05, "hostile_prob":0.40, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#6b5b5b"},
 	{ "name": "inn", "display_name": "Smokestack Rest", "type": "inn", "char": "@", "seed_range":10, "threshold":0.08, "hostile_prob":0.01, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#5a4f4a"},
 	{ "name": "shopweapons", "display_name": "Grim Gear", "type": "shop", "char": "Æ", "seed_range":12, "threshold":0.22, "hostile_prob":0.06, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b3b2f"},
-	{ "name": "shopitems", "display_name": "Engineer's Nook", "type": "shop", "char": "₨", "seed_range":12, "threshold":0.40, "hostile_prob":0.04, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#44504f"},
+	{ "name": "shopitems", "display_name": "Engineer's Nook", "type": "shop", "char": "₨", "seed_range":12, "threshold":0.40, "hostile_prob":0.04, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#74807f"},
 	{ "name": "shoparmor", "display_name": "Plate & Rivet", "type": "shop", "char": "¥", "seed_range":12, "threshold":0.56, "hostile_prob":0.04, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#606060"},
 	{ "name": "residencelarge", "display_name": "Rivermill Quarters", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.78, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#c8c8c8"},
 	{ "name": "residencesmall", "display_name": "Worker Shacks", "type": "residence", "char": "î", "seed_range":4, "threshold":0.94, "hostile_prob":0.12, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#bdb4aa"},
-	{ "name": "businesslarge", "display_name": "Foundry Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.99, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#33333a"},
+	{ "name": "businesslarge", "display_name": "Foundry Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.99, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#63636a"},
 	{ "name": "businesssmall", "display_name": "Brokerage Row", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#5b544f"},
 	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
-	{ "name": "other1", "display_name": "The Rustweld Archives", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
-	{ "name": "other2", "display_name": "Embercoil Relay Station", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+	{ "name": "other1", "display_name": "The Rustweld Archives", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#7b30a2" }, 
+	{ "name": "other2", "display_name": "Embercoil Relay Station", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#7b30a2" }
 ]
 
 # Sublocation mapping

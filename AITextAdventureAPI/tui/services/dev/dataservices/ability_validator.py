@@ -79,6 +79,16 @@ from tui.services.dev.dataservices.ability_value_calculator import (
 _KNOWN_TYPES   = {"technique", "faith", "magic", "tech", "skill"}
 _KNOWN_EFFECTS = {"damage", "heal", "status", "revive", "cure"}
 
+# Cure abilities accept special "meta" status keys that are *not* real
+# STATUS_EFFECTS entries — they are consumed directly by
+# ``PlayerAbility.apply()``'s EffectType.CURE branch:
+#   * 'all'    -> target.cure_all_debuffs()
+#   * 'debuff' -> target.cure_elemental_and_stat_debuffs()
+# Any other key is treated as a concrete status id and must exist in
+# STATUS_EFFECTS. These meta keys must be exempt from the A8 unknown-status
+# check so a valid cure ability isn't flagged.
+_CURE_META_STATUS_KEYS = {"all", "debuff"}
+
 # A9 thin-check floor.  The intended design is *one primary status per ability*,
 # so the floor scales gently rather than linearly: a single strong status (e.g.
 # stun/petrify) satisfies most levels, while a lone weak stat buff/debuff is
@@ -301,9 +311,15 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
             ))
             by_code["ABILITY_TOO_FEW_ELEMENTS"] += 1
 
-        # A8 — each unknown status key is a separate error
+        # A8 — each unknown status key is a separate error.
+        # Cure abilities may use meta keys ('all'/'debuff') that are handled
+        # directly by the CURE resolution branch rather than being real
+        # STATUS_EFFECTS entries, so those are exempt.
         for sk in status_keys:
-            if str(sk).lower() not in known_statuses:
+            sk_norm = str(sk).lower()
+            if effect == "cure" and sk_norm in _CURE_META_STATUS_KEYS:
+                continue
+            if sk_norm not in known_statuses:
                 node.errors.append(_err(
                     "ABILITY_UNKNOWN_STATUS",
                     f"status_key '{sk}' is not in STATUS_EFFECTS.",

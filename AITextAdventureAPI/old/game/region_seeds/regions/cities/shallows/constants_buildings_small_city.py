@@ -27,9 +27,9 @@ DRINK_MENU = [
 
 # Buildings
 BUILDINGS = [
-	{ "name": "bar", "display_name": "The Salted Shell", "type": "bar", "char": "µ", "seed_range":5, "threshold":0.03, "hostile_prob":0.25, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#2f5b5b"},
+	{ "name": "bar", "display_name": "The Salted Shell", "type": "bar", "char": "µ", "seed_range":5, "threshold":0.03, "hostile_prob":0.25, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#5f8b8b"},
 	{ "name": "inn", "display_name": "Harbormoss Inn", "type": "inn", "char": "@", "seed_range":7, "threshold":0.05, "hostile_prob":0.00, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#4b6b6b"},
-	{ "name": "shopweapons", "display_name": "Hook & Tine", "type": "shop", "char": "Æ", "seed_range":9, "threshold":0.14, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5b3b2f"},
+	{ "name": "shopweapons", "display_name": "Hook & Tine", "type": "shop", "char": "Æ", "seed_range":9, "threshold":0.14, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#8b6b5f"},
 	{ "name": "shopitems", "display_name": "Drift Oddments", "type": "shop", "char": "₨", "seed_range":9, "threshold":0.30, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#2f6b5b"},
 	{ "name": "shoparmor", "display_name": "Scale & Patch", "type": "shop", "char": "¥", "seed_range":9, "threshold":0.46, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b6b5b"},
 	{ "name": "residencelarge", "display_name": "Quayside Hall", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.65, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#c8e7e0"},
@@ -37,8 +37,8 @@ BUILDINGS = [
 	{ "name": "businesslarge", "display_name": "Cove Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.92, "hostile_prob":0.02, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#5b7b7b"},
 	{ "name": "businesssmall", "display_name": "Ledger Wharf", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#6b6b5b"},
 	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
-	{ "name": "other1", "display_name": "The Brinewharf Signal Post", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
-	{ "name": "other2", "display_name": "Cove‑Runner’s Hideaway", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+	{ "name": "other1", "display_name": "The Brinewharf Signal Post", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#7b30a2" }, 
+	{ "name": "other2", "display_name": "Cove‑Runner’s Hideaway", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#7b30a2" }
 ]
 
 # Sublocation mapping

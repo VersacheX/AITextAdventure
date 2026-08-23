@@ -52,11 +52,13 @@ from tui.services.combat_service import (
     check_combat_over,
     distribute_rewards,
     get_blocking_status_result,
+    get_dead_allies,
     get_next_ready_unit,
     get_targets,
     is_beneficial_ability,
     is_beneficial_item,
     is_confused,
+    is_revive_item,
     is_silenced,
     is_unit_player,
     perform_auto_skip,
@@ -516,6 +518,33 @@ class CombatScreen(BaseScreen):
     def _on_item_chosen(self, payload: Any) -> None:
         idx, item = payload
         unit = self._active_unit
+
+        # Revive items are friendly and may only target *fallen* allies, so
+        # they bypass the normal alive-target roster entirely.
+        if is_revive_item(item):
+            dead_allies = get_dead_allies(self._sim, unit)
+            if not dead_allies:
+                self.notify("No fallen allies to revive.", severity="warning")
+                return
+
+            def _on_revive_result(targets: Optional[List[Any]]) -> None:
+                if not targets:
+                    return
+                self._awaiting_player_input = False
+                self._refresh_action_panel()
+                res = perform_player_item(self._sim, unit, idx, targets)
+                self._refresh_timeline()
+                self._show_messages_then(res.get("messages", []), self._advance_turn)
+
+            self._prompt_target(
+                [],
+                dead_allies,
+                _on_revive_result,
+                title=f"Revive who with {item.name}?",
+                prefer_hostiles=False,
+            )
+            return
+
         hostiles = get_targets(self._sim, unit, want_enemies=True)
         allies = get_targets(self._sim, unit, want_enemies=False)
         prefer_hostiles = not is_beneficial_item(item)

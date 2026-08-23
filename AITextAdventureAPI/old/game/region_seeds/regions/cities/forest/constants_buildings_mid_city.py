@@ -26,17 +26,17 @@ DRINK_MENU = [
 # Ensure there are exactly two residence and two business variants among the list
 BUILDINGS = [
 	{ "name": "bar", "display_name": "The Midnight Kettle", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.04, "hostile_prob":0.20, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar_witch.svg", "color": "#6b3a3a"},
-	{ "name": "inn", "display_name": "The Sleeping Owl Annex", "type": "inn", "char": "@", "seed_range":6, "threshold":0.07, "hostile_prob":0.00, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn_witch.svg", "color": "#4b2e2e"},
+	{ "name": "inn", "display_name": "The Sleeping Owl Annex", "type": "inn", "char": "@", "seed_range":6, "threshold":0.07, "hostile_prob":0.00, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn_witch.svg", "color": "#7b5e5e"},
 	{ "name": "shopweapons", "display_name": "Brooms & Baubles (Tools)", "type": "shop", "char": "Æ", "seed_range":10, "threshold":0.18, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop_brooms.svg", "color": "#7a5a2a"},
 	{ "name": "shopitems", "display_name": "Mist & Mortar (Supplies)", "type": "shop", "char": "₨", "seed_range":10, "threshold":0.36, "hostile_prob":0.03, "can_buy": True, "can_sell": True, "image": "/assets/tiles/apothecary.svg", "color": "#6b4f3b"},
-	{ "name": "shoparmor", "display_name": "Ward & Weave (Charms)", "type": "shop", "char": "¥", "seed_range":10, "threshold":0.52, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/herbal.svg", "color": "#2f5a3f"},
+	{ "name": "shoparmor", "display_name": "Ward & Weave (Charms)", "type": "shop", "char": "¥", "seed_range":10, "threshold":0.52, "hostile_prob":0.02, "can_buy": True, "can_sell": True, "image": "/assets/tiles/herbal.svg", "color": "#5f8a6f"},
 	{ "name": "residencelarge", "display_name": "Loft of Whispered Rites", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.72, "hostile_prob":0.06, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large_witch.svg", "color": "#e6e0e6"},
 	{ "name": "residencesmall", "display_name": "Witch Cottage", "type": "residence", "char": "î", "seed_range":4, "threshold":0.92, "hostile_prob":0.12, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small_witch.svg", "color": "#ffeebb"},
-	{ "name": "businesslarge", "display_name": "Coven Hall (Guild)", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.96, "hostile_prob":0.10, "can_buy": False, "can_sell": False, "image": "/assets/tiles/coven.svg", "color": "#3b2f5c"},
-	{ "name": "businesssmall", "display_name": "Sorcerer's Spire (Study)", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.12, "can_buy": False, "can_sell": False, "image": "/assets/tiles/tower.svg", "color": "#2f2b4a"},
+	{ "name": "businesslarge", "display_name": "Coven Hall (Guild)", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.96, "hostile_prob":0.10, "can_buy": False, "can_sell": False, "image": "/assets/tiles/coven.svg", "color": "#6b5f8c"},
+	{ "name": "businesssmall", "display_name": "Sorcerer's Spire (Study)", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.12, "can_buy": False, "can_sell": False, "image": "/assets/tiles/tower.svg", "color": "#5f5b7a"},
 	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
-	{ "name": "other1", "display_name": "The Emberlight Conclave", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
-	{ "name": "other2", "display_name": "Moonbrew Experimentarium", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+	{ "name": "other1", "display_name": "The Emberlight Conclave", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#7b30a2" }, 
+	{ "name": "other2", "display_name": "Moonbrew Experimentarium", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#7b30a2" }
 ]
 
 # Witchy sublocation map — replace/override mapping

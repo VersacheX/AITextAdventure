@@ -1,4 +1,4 @@
-"""
+﻿"""
 Script to reseed/random-hostile seeds by computing a combat score per seed
 and assigning rarity buckets to match desired spawn weights.
 Outputs a JSON file with reseeded hostiles and prints summary stats.
@@ -827,6 +827,36 @@ def pick_seeds_for_rarity(rarity: str, num: int, region_seeds, level) -> List[Di
         picks = [rng.choice(preferred) for _ in range(num)]
     return picks
 
+def pick_highest_seeds_for_rarity(rarity: str, num: int, region_seeds, level) -> List[Dict[str, Any]]:
+    """Monster Hunter rarity picker.
+
+    Unlike `pick_seeds_for_rarity`, this ignores the ±5 level band because
+    Monster Hunter draws from species the player has NOT yet logged, which are
+    typically LOW level (missed while out-levelling earlier areas).
+
+    It takes the highest-`min_spawn_level` seeds of the requested rarity that
+    are AT OR BELOW the party level. It never returns over-level seeds: if no
+    unlogged seed of this rarity qualifies, it returns an empty list so the
+    caller's rarity-cascade reallocates the slot to a lower rarity rather than
+    spawning an absurdly over-level enemy.
+    """
+    candidates = [
+        s for s in region_seeds
+        if s.get("rarity") == rarity
+        and int(s.get("min_spawn_level", 1) or 1) <= level
+    ]
+    if not candidates:
+        return []
+
+    pool_sorted = sorted(
+        candidates, key=lambda s: int(s.get("min_spawn_level", 1) or 1), reverse=True
+    )
+
+    # Fill `num` slots from the highest available downward, cycling if the pool
+    # is smaller than the requested count so a rarity slot is never left empty
+    # by *this* rarity when it does have qualifying seeds.
+    return [pool_sorted[i % len(pool_sorted)] for i in range(num)]
+
 def pick_seeds_at_random(region_seeds: List[Dict[str, Any]], level_min: int = None, level_max: int = None) -> List[Dict[str, Any]]:
     """Pick a seed at random from region_seeds, optionally within level range."""
     filtered = []
@@ -840,6 +870,48 @@ def pick_seeds_at_random(region_seeds: List[Dict[str, Any]], level_min: int = No
     rng = random.Random()
     return rng.sample(filtered, k=len(filtered))
 
+def _select_seeds_by_rarity(region_seeds, level, pick_for_rarity,
+                            superrare_count, rare_count, uncommon_count, common_count):
+    """Run the rarity-cascade selection over `region_seeds` using `pick_for_rarity`.
+
+    Leftover slots for a rarity (when that rarity is exhausted) cascade down to
+    the next-lower rarity, mirroring the original inline logic. Returned as a
+    flat list of picked seed dicts (may be shorter than the requested total if
+    the pool can't satisfy every slot).
+    """
+    picked_seeds = []
+    total_mob_count = superrare_count + rare_count + uncommon_count + common_count
+
+    if superrare_count > 0:
+        found = pick_for_rarity("superrare", superrare_count, region_seeds, level)
+        picked_seeds.extend(found)
+        superrare_count -= len(found)
+        rare_count += superrare_count
+    if rare_count > 0:
+        found = pick_for_rarity("rare", rare_count, region_seeds, level)
+        picked_seeds.extend(found)
+        rare_count -= len(found)
+        uncommon_count += rare_count
+    if uncommon_count > 0:
+        found = pick_for_rarity("uncommon", uncommon_count, region_seeds, level)
+        picked_seeds.extend(found)
+        uncommon_count -= len(found)
+        common_count += uncommon_count
+    if common_count > 0:
+        found = pick_for_rarity("common", common_count, region_seeds, level)
+        picked_seeds.extend(found)
+        common_count -= len(found)
+        uncommon_count += common_count
+    if uncommon_count > 0 and len(picked_seeds) < total_mob_count:
+        found = pick_for_rarity("uncommon", uncommon_count, region_seeds, level)
+        picked_seeds.extend(found)
+        uncommon_count -= len(found)
+        rare_count += uncommon_count
+    if rare_count > 0 and len(picked_seeds) < total_mob_count:
+        found = pick_for_rarity("rare", rare_count, region_seeds, level)
+        picked_seeds.extend(found)
+
+    return picked_seeds
 
 #########################PUBLIC METHODS #########################
 def instantiate_random_hostiles(count: int, level: int, selected_region: str = None, superrare_count: int = 0, rare_count: int = 0, uncommon_count: int = 0, common_count: int = 0, exclude_ids: set = None) -> List[RandomHostile]:
@@ -870,56 +942,41 @@ def instantiate_random_hostiles(count: int, level: int, selected_region: str = N
     # select count seeds at random from the selected region
     region_seeds = [s for rk, s in seeds if rk == selected_region] if selected_region else [s for rk, s in seeds]
 
+    # Full (non-MH) region pool, kept so we can fall back to it when Monster
+    # Hunter has nothing left to offer in this region.
+    full_region_seeds = list(region_seeds)
+
     # Monster Hunter: drop already-logged hostiles so the player can hunt down
-    # species they missed. Only apply while seeds remain � if every species in
-    # the region is already logged there is nothing left to draw.
+    # species they missed. Only enter MH mode while unlogged species remain in
+    # THIS region.
+    mh_mode = False
     if exclude_ids:
         remaining = [s for s in region_seeds if s.get("id") not in exclude_ids]
         if remaining:
             region_seeds = remaining
-    # superrare_count: int = 0, rare_count: int = 0, uncommon_count: int = 0, common_count: int = 0
-    # pick seeds according to requested rarity counts if specified 
+            mh_mode = True
+
     # sort region_seeds by combat score descending
-    region_seeds.sort(key=lambda x: compute_combat_score(estimate_stats_from_seed(x, int(x.get("min_spawn_level", 1))) , int(x.get("min_spawn_level", 1))), reverse=True)
-    # choose randomly for each rarity tier based on those within +-5 levels of target level
+    region_seeds.sort(key=lambda x: compute_combat_score(estimate_stats_from_seed(x, int(x.get("min_spawn_level", 1))), int(x.get("min_spawn_level", 1))), reverse=True)
+
     picked_seeds = []
-    #print (f"Mob composition: superrare: {superrare_count}, rare: {rare_count}, uncommon: {uncommon_count}, common: {common_count}")
-    total_mob_count = superrare_count + rare_count + uncommon_count + common_count
-    if superrare_count >0:
-        found = pick_seeds_for_rarity("superrare", superrare_count, region_seeds, level)
-        picked_seeds.extend(found)
-        superrare_count -= len(found)
-        #print(f"Picked {len(found)} superrare seeds")
-        rare_count += superrare_count
-    if rare_count >0:
-        found = pick_seeds_for_rarity("rare", rare_count, region_seeds, level)
-        picked_seeds.extend(found)
-        rare_count -= len(found)
-        #print(f"Picked {len(found)} rare seeds")
-        uncommon_count += rare_count
-    if uncommon_count >0:
-        found = pick_seeds_for_rarity("uncommon", uncommon_count, region_seeds, level)
-        picked_seeds.extend(found)
-        uncommon_count -= len(found)
-        #print(f"Picked {len(found)} uncommon seeds")
-        common_count += uncommon_count
-    if common_count >0:
-        found = pick_seeds_for_rarity("common", common_count, region_seeds, level)
-        picked_seeds.extend(found)
-        common_count -= len(found)
-        #print(f"Picked {len(found)} common seeds")
-        uncommon_count += common_count
-    if uncommon_count >0:
-        if len(picked_seeds) < total_mob_count:
-            found = pick_seeds_for_rarity("uncommon", uncommon_count, region_seeds, level)
-            picked_seeds.extend(found)
-            uncommon_count -= len(found)
-            #print(f"Picked {len(found)} uncommon seeds")
-            rare_count += uncommon_count
-    if rare_count >0:
-        if len(picked_seeds) < total_mob_count:
-            found = pick_seeds_for_rarity("rare", rare_count, region_seeds, level)
-            picked_seeds.extend(found)
+    if mh_mode:
+        # MH pass: highest unlogged seed per rarity, capped at party level.
+        picked_seeds = _select_seeds_by_rarity(
+            region_seeds, level, pick_highest_seeds_for_rarity,
+            superrare_count, rare_count, uncommon_count, common_count,
+        )
+
+    # Fallback: if not in MH mode, or MH found nothing (every huntable species
+    # in this region is already logged), run the normal band-based selection
+    # over the FULL region pool so the player still gets level-appropriate
+    # encounters instead of walking around with nothing to fight.
+    if not picked_seeds:
+        full_region_seeds.sort(key=lambda x: compute_combat_score(estimate_stats_from_seed(x, int(x.get("min_spawn_level", 1))), int(x.get("min_spawn_level", 1))), reverse=True)
+        picked_seeds = _select_seeds_by_rarity(
+            full_region_seeds, level, pick_seeds_for_rarity,
+            superrare_count, rare_count, uncommon_count, common_count,
+        )
 
     for seed in picked_seeds:
         lvl = int(seed.get("min_spawn_level",1) or 1)

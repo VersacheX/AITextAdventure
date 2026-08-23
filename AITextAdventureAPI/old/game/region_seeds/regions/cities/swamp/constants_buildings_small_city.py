@@ -22,18 +22,18 @@ DRINK_MENU = [
 
 # Buildings
 BUILDINGS = [
-	{ "name": "bar", "display_name": "The Gulper's Maw", "type": "bar", "char": "µ", "seed_range":4, "threshold":0.03, "hostile_prob":0.45, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#2f2b2b"},
-	{ "name": "inn", "display_name": "Boneshade Rest", "type": "inn", "char": "@", "seed_range":6, "threshold":0.05, "hostile_prob":0.08, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#3b4b3b"},
-	{ "name": "shopweapons", "display_name": "Jaw & Spike", "type": "shop", "char": "Æ", "seed_range":6, "threshold":0.12, "hostile_prob":0.12, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5b2f2f"},
-	{ "name": "shopitems", "display_name": "Bogcurio", "type": "shop", "char": "₨", "seed_range":6, "threshold":0.28, "hostile_prob":0.08, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#2f4b3b"},
+	{ "name": "bar", "display_name": "The Gulper's Maw", "type": "bar", "char": "µ", "seed_range":4, "threshold":0.03, "hostile_prob":0.45, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#5f5b5b"},
+	{ "name": "inn", "display_name": "Boneshade Rest", "type": "inn", "char": "@", "seed_range":6, "threshold":0.05, "hostile_prob":0.08, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#6b7b6b"},
+	{ "name": "shopweapons", "display_name": "Jaw & Spike", "type": "shop", "char": "Æ", "seed_range":6, "threshold":0.12, "hostile_prob":0.12, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#8b5f5f"},
+	{ "name": "shopitems", "display_name": "Bogcurio", "type": "shop", "char": "₨", "seed_range":6, "threshold":0.28, "hostile_prob":0.08, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5f7b6b"},
 	{ "name": "shoparmor", "display_name": "Hide & Husk", "type": "shop", "char": "¥", "seed_range":6, "threshold":0.44, "hostile_prob":0.09, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#606060"},
 	{ "name": "residencelarge", "display_name": "Pit Halls", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.58, "hostile_prob":0.06, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#bcd0c8"},
 	{ "name": "residencesmall", "display_name": "Shackline", "type": "residence", "char": "î", "seed_range":4, "threshold":0.86, "hostile_prob":0.18, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#dfe7d0"},
-	{ "name": "businesslarge", "display_name": "Toll Mort", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.94, "hostile_prob":0.05, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#4b4b4b"},
+	{ "name": "businesslarge", "display_name": "Toll Mort", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.94, "hostile_prob":0.05, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#7b7b7b"},
 	{ "name": "businesssmall", "display_name": "Snap Ledger", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.06, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#6b6b5b"},
 	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
-	{ "name": "other1", "display_name": "The Bogrunner Exchange", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
-	{ "name": "other2", "display_name": "Rotwharf Broker’s Den", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+	{ "name": "other1", "display_name": "The Bogrunner Exchange", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#7b30a2" }, 
+	{ "name": "other2", "display_name": "Rotwharf Broker’s Den", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#7b30a2" }
 ]
 
 # Sublocation mapping

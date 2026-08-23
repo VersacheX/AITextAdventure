@@ -28,14 +28,14 @@ RANDOM_HOSTILE_SEEDS = [
  "base_str":1, "base_dex":5, "base_con":2, "base_int":4, "base_hp":12, "base_ap":3,
  "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":1},
 
- {"id": "elven_court_jester", "name": "Court Jester of Leaves", "hostile_type": "humanoid", "role": "support", "min_spawn_level":2, "rarity": "common", "base_xp":14,
+ {"id": "elven_court_jester", "name": "Court Jester of Leaves", "hostile_type": "humanoid", "role": "support", "min_spawn_level":2, "rarity": "uncommon", "base_xp":14,
  "common_drop": "herb_minor", "rare_drop": None, "money_range": (1,8),
  "basic_attack": "slapstick bop", "strong_attack": "pratfall explosion", "player_abilities": ["water_faith_lv1_mending_streams"],
  "base_str":1, "base_dex":2, "base_con":2, "base_int":5, "base_hp":12, "base_ap":3,
  "str_per_level":0, "dex_per_level":0, "con_per_level":0, "int_per_level":2},
 
  # min_spawn_level ==3
- {"id": "hell_hound", "name": "Hell Hound", "hostile_type": "creature", "role": "damage", "min_spawn_level":3, "rarity": "common", "base_xp":18,
+ {"id": "hell_hound", "name": "Hell Hound", "hostile_type": "creature", "role": "damage", "min_spawn_level":3, "rarity": "superrare", "base_xp":18,
  "common_drop": "herb_minor", "rare_drop": "stimulant_small", "money_range": (2,10),
  "basic_attack": "shredding bite", "strong_attack": "thrashing teeth", "player_abilities": None,
  "base_str":3, "base_dex":5, "base_con":3, "base_int":2, "base_hp":18, "base_ap":3,
@@ -54,7 +54,7 @@ RANDOM_HOSTILE_SEEDS = [
  "base_str":2, "base_dex":7, "base_con":2, "base_int":4, "base_hp":18, "base_ap":4,
  "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":1},
 
- {"id": "kettle_brawler", "name": "Kettle Brawler", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":4, "rarity": "uncommon", "base_xp":30,
+ {"id": "kettle_brawler", "name": "Kettle Brawler", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":4, "rarity": "common", "base_xp":30,
  "common_drop": "herb_minor", "rare_drop": None, "money_range": (2,12),
  "basic_attack": "lopsided haymaker", "strong_attack": "cauldron hook", "player_abilities": None,
  "base_str":6, "base_dex":3, "base_con":4, "base_int":1, "base_hp":22, "base_ap":3,
@@ -67,7 +67,7 @@ RANDOM_HOSTILE_SEEDS = [
  "base_str":1, "base_dex":3, "base_con":2, "base_int":8, "base_hp":28, "base_ap":6,
  "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":3},
 
- {"id": "sprig_scout", "name": "Sprig Scout", "hostile_type": "creature", "role": "damage", "min_spawn_level":5, "rarity": "common", "base_xp":40,
+ {"id": "sprig_scout", "name": "Sprig Scout", "hostile_type": "creature", "role": "damage", "min_spawn_level":5, "rarity": "uncommon", "base_xp":40,
  "common_drop": "herb_med", "rare_drop": None, "money_range": (6,28),
  "basic_attack": "twig jab", "strong_attack": "rapid sprout", "player_abilities": None,
  "base_str":3, "base_dex":6, "base_con":3, "base_int":1, "base_hp":44, "base_ap":4,
@@ -80,14 +80,14 @@ RANDOM_HOSTILE_SEEDS = [
  "base_str":4, "base_dex":4, "base_con":6, "base_int":3, "base_hp":44, "base_ap":5,
  "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":1},
 
- {"id": "whisper_acolyte", "name": "Whisper Acolyte", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":6, "rarity": "rare", "base_xp":82,
+ {"id": "whisper_acolyte", "name": "Whisper Acolyte", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":6, "rarity": "superrare", "base_xp":82,
  "common_drop": "herb_major", "rare_drop": "short_sword", "money_range": (18,70),
  "basic_attack": "murmured hex", "strong_attack": "drain whisper", "player_abilities": ["level_1_hostile_ability_night_whisper", "dark_dark_magic_lv2_umbra_storm"],
  "base_str":1, "base_dex":2, "base_con":3, "base_int":8, "base_hp":28, "base_ap":7,
  "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
 
  # min_spawn_level ==7
- {"id": "cloak_roustabout", "name": "Cloak Roustabout", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":7, "rarity": "uncommon", "base_xp":28,
+ {"id": "cloak_roustabout", "name": "Cloak Roustabout", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":7, "rarity": "common", "base_xp":28,
  "common_drop": "herb_med", "rare_drop": "dagger", "money_range": (4,20),
  "basic_attack": "tumble and kick", "strong_attack": "trip and stab", "player_abilities": ["fire_earth_technique_lv2_blaze_hammer"],
  "base_str":3, "base_dex":6, "base_con":2, "base_int":3, "base_hp":18, "base_ap":4,
@@ -106,7 +106,7 @@ RANDOM_HOSTILE_SEEDS = [
  "base_str":2, "base_dex":4, "base_con":3, "base_int":7, "base_hp":26, "base_ap":5,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
 
- {"id": "forest_siren", "name": "Forest Siren", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":8, "rarity": "common", "base_xp":100,
+ {"id": "forest_siren", "name": "Forest Siren", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":8, "rarity": "rare", "base_xp":100,
  "common_drop": "stimulant_med", "rare_drop": "tome_int", "money_range": (20,90),
  "basic_attack": "glowing blade", "strong_attack": "stunning strike", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst"],
  "base_str":3, "base_dex":7, "base_con":3, "base_int":6, "base_hp":44, "base_ap":6,
@@ -119,7 +119,7 @@ RANDOM_HOSTILE_SEEDS = [
  "base_str":3, "base_dex":6, "base_con":2, "base_int":3, "base_hp":28, "base_ap":4,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":1},
 
- {"id": "leaf_tender", "name": "Leaf Tender", "hostile_type": "creature", "role": "damage", "min_spawn_level":9, "rarity": "common", "base_xp":140,
+ {"id": "leaf_tender", "name": "Leaf Tender", "hostile_type": "creature", "role": "damage", "min_spawn_level":9, "rarity": "uncommon", "base_xp":140,
  "common_drop": "herb_med", "rare_drop": None, "money_range": (18,88),
  "basic_attack": "leaf slash", "strong_attack": "rooted slam", "player_abilities": None,
  "base_str":4, "base_dex":4, "base_con":6, "base_int":2, "base_hp":120, "base_ap":5,

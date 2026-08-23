@@ -29,7 +29,7 @@ DRINK_MENU = [
 
 # Buildings
 BUILDINGS = [
-	{ "name": "bar", "display_name": "The Skald's Lantern", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.05, "hostile_prob":0.32, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#3b4b5b"},
+	{ "name": "bar", "display_name": "The Skald's Lantern", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.05, "hostile_prob":0.32, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#6b7b8b"},
 	{ "name": "inn", "display_name": "Hall of Hearths", "type": "inn", "char": "@", "seed_range":9, "threshold":0.08, "hostile_prob":0.02, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#6b7b8b"},
 	{ "name": "shopweapons", "display_name": "Rivet & Rune", "type": "shop", "char": "Æ", "seed_range":11, "threshold":0.20, "hostile_prob":0.07, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b3b3b"},
 	{ "name": "shopitems", "display_name": "Frostwright's Goods", "type": "shop", "char": "₨", "seed_range":11, "threshold":0.36, "hostile_prob":0.04, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#3b5b6b"},
@@ -39,8 +39,8 @@ BUILDINGS = [
 	{ "name": "businesslarge", "display_name": "Clan Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.96, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#5b6b7b"},
 	{ "name": "businesssmall", "display_name": "Ledger & Tally", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#7b7f7f"},
 	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
-	{ "name": "other1", "display_name": "Runeflare Assembly Yard", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
-	{ "name": "other2", "display_name": "The Icebound Speaker’s Circle", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+	{ "name": "other1", "display_name": "Runeflare Assembly Yard", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#7b30a2" }, 
+	{ "name": "other2", "display_name": "The Icebound Speaker’s Circle", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#7b30a2" }
 ]
 
 # Sublocation mapping

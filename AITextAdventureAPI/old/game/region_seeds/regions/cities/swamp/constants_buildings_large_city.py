@@ -34,18 +34,18 @@ DRINK_MENU = [
 
 # Buildings
 BUILDINGS = [
-	{ "name": "bar", "display_name": "The Sluice & Skull", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.06, "hostile_prob":0.35, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#3b2f2f"},
-	{ "name": "inn", "display_name": "Mirehold Rest", "type": "inn", "char": "@", "seed_range":12, "threshold":0.10, "hostile_prob":0.05, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#4b3b3b"},
+	{ "name": "bar", "display_name": "The Sluice & Skull", "type": "bar", "char": "µ", "seed_range":6, "threshold":0.06, "hostile_prob":0.35, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#6b5f5f"},
+	{ "name": "inn", "display_name": "Mirehold Rest", "type": "inn", "char": "@", "seed_range":12, "threshold":0.10, "hostile_prob":0.05, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#7b6b6b"},
 	{ "name": "shopweapons", "display_name": "Boneworks & Blades", "type": "shop", "char": "Æ", "seed_range":16, "threshold":0.22, "hostile_prob":0.08, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b3b2f"},
-	{ "name": "shopitems", "display_name": "Vial & Talisman", "type": "shop", "char": "₨", "seed_range":16, "threshold":0.40, "hostile_prob":0.06, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#2f4b3b"},
+	{ "name": "shopitems", "display_name": "Vial & Talisman", "type": "shop", "char": "₨", "seed_range":16, "threshold":0.40, "hostile_prob":0.06, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#5f7b6b"},
 	{ "name": "shoparmor", "display_name": "Hide & Husk", "type": "shop", "char": "¥", "seed_range":16, "threshold":0.58, "hostile_prob":0.06, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#575757"},
 	{ "name": "residencelarge", "display_name": "Crypt Quarters", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.82, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#c8c8c8"},
 	{ "name": "residencesmall", "display_name": "Bog Shacks", "type": "residence", "char": "î", "seed_range":4, "threshold":0.96, "hostile_prob":0.14, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#dfe7d0"},
 	{ "name": "businesslarge", "display_name": "Mortuary Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.98, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#5b5b5b"},
 	{ "name": "businesssmall", "display_name": "Ledger of Wights", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.05, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#6b6b5b"},
 	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
-	{ "name": "other1", "display_name": "The Ossuary Concord", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
-	{ "name": "other2", "display_name": "Veil‑Whisper Reliquary", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+	{ "name": "other1", "display_name": "The Ossuary Concord", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#7b30a2" }, 
+	{ "name": "other2", "display_name": "Veil‑Whisper Reliquary", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#7b30a2" }
 ]
 
 # Internal sublocations per subtype

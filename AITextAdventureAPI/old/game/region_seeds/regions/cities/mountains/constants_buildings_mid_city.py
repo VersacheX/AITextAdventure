@@ -41,18 +41,18 @@ DRINK_MENU = [
 # can_buy <- whether the building type supports buying items
 # can_sell <- whether the building type supports selling items
 BUILDINGS = [
-	{ "name": "bar", "display_name": "The Iron Maw", "type": "bar", "char": "µ", "seed_range":5, "threshold":0.05, "hostile_prob":0.45, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#3b2f2f"},
+	{ "name": "bar", "display_name": "The Iron Maw", "type": "bar", "char": "µ", "seed_range":5, "threshold":0.05, "hostile_prob":0.45, "can_buy": True, "can_sell": False, "image": "/assets/tiles/bar.svg", "color": "#6b5f5f"},
 	{ "name": "inn", "display_name": "Rook's Rest", "type": "inn", "char": "@", "seed_range":6, "threshold":0.07, "hostile_prob":0.03, "can_buy": True, "can_sell": False, "image": "/assets/tiles/inn.svg", "color": "#5a4b42"},
 	{ "name": "shopweapons", "display_name": "Scrap & Spike", "type": "shop", "char": "Æ", "seed_range":9, "threshold":0.18, "hostile_prob":0.07, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#6b2f2f"},
-	{ "name": "shopitems", "display_name": "Oddments of the Rift", "type": "shop", "char": "₨", "seed_range":9, "threshold":0.34, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#4b3b3a"},
+	{ "name": "shopitems", "display_name": "Oddments of the Rift", "type": "shop", "char": "₨", "seed_range":9, "threshold":0.34, "hostile_prob":0.05, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#7b6b6a"},
 	{ "name": "shoparmor", "display_name": "Patch & Plate", "type": "shop", "char": "¥", "seed_range":9, "threshold":0.50, "hostile_prob":0.06, "can_buy": True, "can_sell": True, "image": "/assets/tiles/shop.svg", "color": "#575757"},
 	{ "name": "residencelarge", "display_name": "Garrison Halls", "type": "residence", "char": "Î", "seed_range":6, "threshold":0.70, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#a8a8a8"},
 	{ "name": "residencesmall", "display_name": "Rift Shacks", "type": "residence", "char": "î", "seed_range":4, "threshold":0.88, "hostile_prob":0.12, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#7b6b5b"},
-	{ "name": "businesslarge", "display_name": "The Pit Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.95, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#4a4a4a"},
+	{ "name": "businesslarge", "display_name": "The Pit Exchange", "type": "business", "char": "Ï", "seed_range":6, "threshold":0.95, "hostile_prob":0.03, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_large.svg", "color": "#7a7a7a"},
 	{ "name": "businesssmall", "display_name": "Skewed Ledger", "type": "business", "char": "ï", "seed_range":4, "threshold":1.0, "hostile_prob":0.04, "can_buy": False, "can_sell": False, "image": "/assets/tiles/residence_small.svg", "color": "#50433d"},
 	{ "name": "hyperway", "display_name": "The Hyperway", "type": "hyperway", "char": "Ṣ", "seed_range": 1000, "threshold": 0.02, "hostile_prob": 0.3, "can_buy": False, "can_sell": False, "image": "/assets/tiles/hyperway.svg", "color": "#707070" }, 
-	{ "name": "other1", "display_name": "The Cliffbound Concord Lodge", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#4b0082" }, 
-	{ "name": "other2", "display_name": "Riftwalker’s Ember Camp", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#4b0082" }
+	{ "name": "other1", "display_name": "The Cliffbound Concord Lodge", "type": "other1", "char": "O", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other1.svg", "color": "#7b30a2" }, 
+	{ "name": "other2", "display_name": "Riftwalker’s Ember Camp", "type": "other2", "char": "0", "seed_range": 1000, "threshold": 0.06, "hostile_prob": 0.25, "can_buy": False, "can_sell": False, "image": "/assets/tiles/other2.svg", "color": "#7b30a2" }
 ]
 
 # Internal sublocations per subtype

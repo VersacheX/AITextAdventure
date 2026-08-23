@@ -181,6 +181,11 @@ def is_beneficial_item(item: Any) -> bool:
     return bool(item._is_beneficial_item())
 
 
+def is_revive_item(item: Any) -> bool:
+    """Return True if the item's effect revives a fallen ally."""
+    return getattr(item, "effect", None) == "revive"
+
+
 def get_targets(sim: Any, unit: Any, *, want_enemies: bool) -> List[Any]:
     """Return alive units on the requested side relative to `unit`.
 
@@ -198,6 +203,19 @@ def get_targets(sim: Any, unit: Any, *, want_enemies: bool) -> List[Any]:
         elif not want_enemies and same_side:
             result.append(u)
     return result
+
+
+def get_dead_allies(sim: Any, unit: Any) -> List[Any]:
+    """Return fallen (not alive) units on `unit`'s own side.
+
+    Used for revive-item targeting, which may only apply to dead allies.
+    """
+    is_player = is_unit_player(unit)
+    return [
+        u
+        for u in sim.units
+        if not u.is_alive() and is_unit_player(u) == is_player
+    ]
 
 
 # ── turn actions (thin wrappers over CombatSimulation.perform_unit_action) ───
