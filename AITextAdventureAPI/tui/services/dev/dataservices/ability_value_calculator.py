@@ -25,6 +25,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import Any, Dict, List
+from collections import defaultdict
 
 # ── Status weighting ──────────────────────────────────────────────────────────
 # Relative combat value of each status key.  Hard-disables and permanent effects
@@ -36,17 +37,17 @@ STATUS_WEIGHTS: Dict[str, float] = {
     "confuse":            17.0,
     "stun":               15.0,
     "sleep":              12.0,
-    "silence":            15.0,    
+    "silence":            14.0,    
     # ── Damage-over-time / persistent ──
-    "continuous_damage":  6.0,
+    "continuous_damage":  8.0,
     # ── Heal-over-time (beneficial mirror of continuous_damage) ──
     "regen":              6.0,
     # ── Utility ──
     "scanned":             6.0,
     # ── Elemental buffs/debuffs (moderate) ──
-    "elemental_attack_buff":  8.0,
-    "elemental_defense_buff": 8.0,
-    "elemental_debuff":       8.0,
+    "elemental_attack_buff":  7.0,
+    "elemental_defense_buff": 7.0,
+    "elemental_debuff":       7.0,
     "attack_buff":            4.0,
     "attack_debuff":          4.0,
     "defense_buff":           4.0,
@@ -54,8 +55,8 @@ STATUS_WEIGHTS: Dict[str, float] = {
     # ── Single-stat buffs/debuffs (low value) ──
     "strength_buff":       8.0,
     "strength_debuff":     6.0,
-    "dexterity_buff":      8.0,
-    "dexterity_debuff":    8.0,
+    "dexterity_buff":      9.0,
+    "dexterity_debuff":    9.0,
     "intelligence_buff":   8.0,
     "intelligence_debuff": 6.0,
     "constitution_buff":   6.0,
@@ -107,6 +108,7 @@ _TOTAL_VALUE_PRECISION = 3
 # scaling), they contribute a small capped weight bonus via
 # :func:`status_power_estimate` so DoT/HoT is valued without distorting the category.
 _DAMAGING_STATUS_KEYS = {"continuous_damage", "regen"}
+_ELEMENTAL_STATUS_KEYS = {"elemental_attack_buff", "elemental_defense_buff", "elemental_debuff"}
 
 
 def status_weight(key: str) -> float:
@@ -169,9 +171,9 @@ def scaled_base_power(seed: dict) -> float:
     elem_mult = 1.0 + 0.35 * n_elem
 
     effect = str(seed.get("effect", "") or "").lower()
-    if effect == "status":
-        # literal flat hit, halved in combat, no level multiplier
-        return bp * _STATUS_FLAT_POWER_MOD * elem_mult
+    if effect in ("status", "cure"):
+        # literal flat hit, halved in combat, no level multiplier ... only add elem multiplier to elemental_attack_buff, elemental_defense_buff, elemental_debuff, and continuous_damage
+        return bp * _STATUS_FLAT_POWER_MOD * (elem_mult if any(k in _ELEMENTAL_STATUS_KEYS for k in (seed.get("status_keys") or [])) else 1.0)
 
     level_mult = 1.0 + 0.20 * max(0, level - 1)
     #elem_mult = 1.0 + 0.35 * n_elem
@@ -237,7 +239,7 @@ def compute_ability_value(seed: dict) -> AbilityValueBreakdown:
     # damage/heal/revive power untouched, since it was never halved and dividing
     # it here would double-count the base power.
     effect = str(seed.get("effect", "") or "").lower()
-    if effect == "status":
+    if effect in ("status", "cure"):
         scaled_power = scaled_base_power(seed) / _STATUS_FLAT_POWER_MOD
     else:
         scaled_power = scaled_base_power(seed)
@@ -267,3 +269,34 @@ def compute_ability_value(seed: dict) -> AbilityValueBreakdown:
 def total_value(seed: dict) -> float:
     """Convenience accessor for just the final combat value figure."""
     return compute_ability_value(seed).total_value
+
+    # Extra buckets for the new balance checks:
+    #   payloads_by_key       -> (effect, level) -> [payload]        (B7 curve)
+    #   support_efficiencies  -> combined heal/revive/cure eff        (B5 band)
+    #   appp_by_aoe           -> (effect, level, is_aoe) -> [ap/payload] (B6 premium)
+    payloads_by_key:      Dict[tuple, List[float]] = defaultdict(list)
+    support_efficiencies: List[float]              = []
+    appp_by_aoe:          Dict[tuple, List[float]] = defaultdict(list)
+
+    for node in all_nodes:
+        seed   = node.record.extras.get("_seed") or {}
+        level  = int(seed.get("level", 1) or 1)
+        effect = str(seed.get("effect", "") or "").lower()
+        gkey   = (level, effect)
+        tv_by_group[gkey].append(_total_value(seed))
+        node_group[node.ability_id] = gkey
+
+        breakdown = compute_ability_value(seed)
+        if breakdown.payload > 0:
+            payloads_by_key[(effect, level)].append(breakdown.payload)
+        if breakdown.ap_cost > 0 and breakdown.payload > 0:
+            is_aoe = bool(seed.get("can_aoe", False))
+            # AP *per unit payload*: a strong status raises both AP and payload,
+            # so this price-per-value normalises status strength out of the
+            # AOE comparison (a strong single-target status is no longer read as
+            # "overpriced" just because its raw AP exceeds a weak AOE peer's).
+            appp_by_aoe[(effect, level, is_aoe)].append(breakdown.ap_cost / breakdown.payload)
+            eff = breakdown.payload / breakdown.ap_cost
+            efficiencies_by_key[(effect, level)].append(eff)
+            if effect in _SUPPORT_EFFECTS:
+                support_efficiencies.append(eff)

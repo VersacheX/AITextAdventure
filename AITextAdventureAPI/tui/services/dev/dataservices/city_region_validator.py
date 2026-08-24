@@ -73,22 +73,54 @@ def _band_label(band_min: int, band_max: int) -> str:
     return f"Lv {band_min}–{band_max}"
 
 
+def _minimal_rarity_additions(
+    present_levels: set,
+    uncovered_starts: List[int],
+) -> List[int]:
+    """Return the fewest seed levels that cover every uncovered sliding window.
+
+    Interval point-cover: an uncovered window ``[s, s+4]`` is closed by any seed
+    whose level lies in that range.  Processing uncovered windows left-to-right
+    and placing each new seed at the *right edge* (``s + _RARITY_WINDOW - 1``) of
+    the earliest still-open window maximises how many later, overlapping windows
+    the same seed also closes — the greedy optimum for covering intervals by
+    points.
+    """
+    additions: List[int] = []
+    ordered = sorted(uncovered_starts)
+    idx = 0
+    while idx < len(ordered):
+        start = ordered[idx]
+        # Place the seed as late as possible while still covering this window,
+        # so it also covers the maximum number of following overlapping windows.
+        level = min(start + _RARITY_WINDOW - 1, _LEVEL_MAX)
+        additions.append(level)
+        # Skip every remaining window this seed now covers (start within
+        # [level - 4, level] — all such starts are >= this start and <= level).
+        idx += 1
+        while idx < len(ordered) and ordered[idx] <= level:
+            idx += 1
+    return additions
+
+
 def _validate_rarity_coverage(
     seeds: List[Dict[str, Any]],
     zone_key: str,
     zone_label: str,
 ) -> List[RegionValidationError]:
-    """Ensure every 5-level window has at least one seed of each required rarity.
+    """Ensure every *sliding* 5-level window has each required rarity, then
+    recommend the minimum set of seed additions that closes all gaps.
 
-    Mirrors `pick_seeds_for_rarity`, which only considers seeds whose
-    min_spawn_level is within `_RARITY_WINDOW` levels of the party level. A
-    window missing a rarity means that rarity slot silently degrades at those
-    levels, so it is flagged per missing rarity.
+    Mirrors `pick_seeds_for_rarity`, which considers seeds whose min_spawn_level
+    is within `_RARITY_WINDOW` levels of the party level.  Because the windows
+    slide (1–5, 2–6, 3–7, …) a single missing rarity spans several overlapping
+    windows; rather than reporting each window, we compute the fewest seed levels
+    that would cover them all and emit one actionable error per addition.
     """
     errors: List[RegionValidationError] = []
 
-    # Bucket seed rarities by min_spawn_level for quick per-window lookup.
-    rarities_by_level: Dict[int, set] = defaultdict(set)
+    # Levels at which each rarity is present (within the valid range).
+    levels_by_rarity: Dict[str, set] = defaultdict(set)
     for seed in seeds:
         if not isinstance(seed, dict):
             continue
@@ -96,30 +128,41 @@ def _validate_rarity_coverage(
         if lv < _LEVEL_MIN or lv > _LEVEL_MAX:
             continue
         rarity = str(seed.get("rarity", "common") or "common").lower()
-        rarities_by_level[lv].add(rarity)
+        levels_by_rarity[rarity].add(lv)
 
-    # Slide a 5-level window across the full range in non-overlapping steps.
-    for window_start in range(_LEVEL_MIN, _LEVEL_MAX + 1, _RARITY_WINDOW):
-        window_end = min(window_start + _RARITY_WINDOW - 1, _LEVEL_MAX)
+    # Sliding window starts: 1–5, 2–6, … up to the last full 5-level window.
+    window_starts = range(_LEVEL_MIN, _LEVEL_MAX - _RARITY_WINDOW + 2)
 
-        present: set = set()
-        for lv in range(window_start, window_end + 1):
-            present |= rarities_by_level.get(lv, set())
+    for rarity in _REQUIRED_RARITIES:
+        present = levels_by_rarity.get(rarity, set())
 
-        for rarity in _REQUIRED_RARITIES:
-            if rarity not in present:
-                errors.append(RegionValidationError(
-                    code="REGION_HOSTILE_RARITY_GAP",
-                    message=(
-                        f"{zone_label} {_band_label(window_start, window_end)}: "
-                        f"no '{rarity}' hostile seed in this 5-level window."
-                    ),
-                    severity="error",
-                    zone=zone_key,
-                    band_min=window_start,
-                    band_max=window_end,
-                    rarity=rarity,
-                ))
+        uncovered_starts = [
+            start for start in window_starts
+            if not any(
+                start <= lv <= start + _RARITY_WINDOW - 1
+                for lv in present
+            )
+        ]
+        if not uncovered_starts:
+            continue
+
+        additions = _minimal_rarity_additions(present, uncovered_starts)
+        for level in additions:
+            band_min = max(_LEVEL_MIN, level - _RARITY_WINDOW + 1)
+            band_max = level
+            errors.append(RegionValidationError(
+                code="REGION_HOSTILE_RARITY_GAP",
+                message=(
+                    f"{zone_label}: add a '{rarity}' hostile seed at "
+                    f"Lv {level} (covers the missing '{rarity}' 5-level "
+                    f"windows around Lv {band_min}–{band_max})."
+                ),
+                severity="error",
+                zone=zone_key,
+                band_min=band_min,
+                band_max=band_max,
+                rarity=rarity,
+            ))
 
     return errors
 

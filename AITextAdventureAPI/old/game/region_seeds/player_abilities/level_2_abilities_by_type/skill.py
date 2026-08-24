@@ -46,14 +46,14 @@ LEVEL_2_SKILL_ABILITY_SEEDS = [
  {"id": "water_light_skill_lv2_lustral_pin", "name": "Lustral Pin", "description": "A cleansing jab that strikes true.", "ability_type": "skill", "level":2, "elements": ["water", "light"], "base_power":5, "ap_cost":25, "effect": "status", "status_keys": ["elemental_debuff"], "can_aoe": False},
 
  ##DAMAGE AOE (wider, low cost)
- {"id": "electric_electric_skill_lv2_static_spread", "name": "Static Spread", "description": "A rapid shock that arcs widely.", "ability_type": "skill", "level":2, "elements": ["electric", "electric"], "base_power":15, "ap_cost":20, "effect": "damage", "can_aoe": True},
- {"id": "ice_ice_skill_lv2_shiver_burst", "name": "Shiver Burst", "description": "A frost burst that chills many.", "ability_type": "skill", "level":2, "elements": ["ice", "ice"], "base_power":16, "ap_cost":20, "effect": "damage", "can_aoe": True},
- {"id": "light_light_skill_lv2_dazzle_wave", "name": "Dazzle Wave", "description": "A blinding slash that hits multiple.", "ability_type": "skill", "level":2, "elements": ["light", "light"], "base_power":15, "ap_cost":19, "effect": "damage", "can_aoe": True},
- {"id": "dark_dark_skill_lv2_void_whorl", "name": "Void Whorl", "description": "A shadowy ripple that strikes many.", "ability_type": "skill", "level":2, "elements": ["dark", "dark"], "base_power":16, "ap_cost":20, "effect": "damage", "can_aoe": True},
- {"id": "water_water_skill_lv2_ripple_cascade", "name": "Ripple Cascade", "description": "A quick splash that slashes a group.", "ability_type": "skill", "level":2, "elements": ["water", "water"], "base_power":15, "ap_cost":19, "effect": "damage", "can_aoe": True},
- {"id": "earth_earth_skill_lv2_grit_swath", "name": "Grit Swath", "description": "A sweeping stony strike.", "ability_type": "skill", "level":2, "elements": ["earth", "earth"], "base_power":16, "ap_cost":20, "effect": "damage", "can_aoe": True},
- {"id": "fire_fire_skill_lv2_singe_wheel", "name": "Singe Wheel", "description": "A fiery wheel of quick strikes.", "ability_type": "skill", "level":2, "elements": ["fire", "fire"], "base_power":15, "ap_cost":19, "effect": "damage", "can_aoe": True},
- {"id": "air_air_skill_lv2_gust_blitz", "name": "Gust Blitz", "description": "A flurry of swift air strikes.", "ability_type": "skill", "level":2, "elements": ["air", "air"], "base_power":16, "ap_cost":20, "effect": "damage", "can_aoe": True},
+ {"id": "electric_electric_skill_lv2_static_spread", "name": "Static Spread", "description": "A rapid shock that arcs widely.", "ability_type": "skill", "level":2, "elements": ["electric", "electric"], "base_power":17, "ap_cost":20, "effect": "damage", "can_aoe": True},
+ {"id": "ice_ice_skill_lv2_shiver_burst", "name": "Shiver Burst", "description": "A frost burst that chills many.", "ability_type": "skill", "level":2, "elements": ["ice", "ice"], "base_power":17, "ap_cost":20, "effect": "damage", "can_aoe": True},
+ {"id": "light_light_skill_lv2_dazzle_wave", "name": "Dazzle Wave", "description": "A blinding slash that hits multiple.", "ability_type": "skill", "level":2, "elements": ["light", "light"], "base_power":16, "ap_cost":19, "effect": "damage", "can_aoe": True},
+ {"id": "dark_dark_skill_lv2_void_whorl", "name": "Void Whorl", "description": "A shadowy ripple that strikes many.", "ability_type": "skill", "level":2, "elements": ["dark", "dark"], "base_power":17, "ap_cost":20, "effect": "damage", "can_aoe": True},
+ {"id": "water_water_skill_lv2_ripple_cascade", "name": "Ripple Cascade", "description": "A quick splash that slashes a group.", "ability_type": "skill", "level":2, "elements": ["water", "water"], "base_power":16, "ap_cost":19, "effect": "damage", "can_aoe": True},
+ {"id": "earth_earth_skill_lv2_grit_swath", "name": "Grit Swath", "description": "A sweeping stony strike.", "ability_type": "skill", "level":2, "elements": ["earth", "earth"], "base_power":17, "ap_cost":20, "effect": "damage", "can_aoe": True},
+ {"id": "fire_fire_skill_lv2_singe_wheel", "name": "Singe Wheel", "description": "A fiery wheel of quick strikes.", "ability_type": "skill", "level":2, "elements": ["fire", "fire"], "base_power":16, "ap_cost":19, "effect": "damage", "can_aoe": True},
+ {"id": "air_air_skill_lv2_gust_blitz", "name": "Gust Blitz", "description": "A flurry of swift air strikes.", "ability_type": "skill", "level":2, "elements": ["air", "air"], "base_power":17, "ap_cost":20, "effect": "damage", "can_aoe": True},
 
  ##CONTINUOUS DAMAGE (low per-turn, sustained)
  {"id": "electric_water_skill_lv2_corrosive_splash_bomb", "name": "Corrosive Splash Bomb", "description": "A splash bomb that corrodes and disrupts elemental defenses over time.", "ability_type": "skill", "level":2, "elements": ["electric", "water"], "base_power":1, "ap_cost":40, "effect": "status", "status_keys": ["continuous_damage", "elemental_debuff"], "can_aoe": True},
@@ -67,7 +67,7 @@ LEVEL_2_SKILL_ABILITY_SEEDS = [
  ##DEBUFFS (aoe, no base damage)
  {"id": "fire_dark_skill_lv2_embersmoke", "name": "Ember Smoke", "description": "A smoky blast that weakens strength.", "ability_type": "skill", "level":2, "elements": ["fire", "dark"], "base_power":1, "ap_cost":30, "effect": "status", "status_keys": ["strength_debuff", "elemental_debuff"], "can_aoe": True},
  {"id": "water_dark_skill_lv2_deep_water_blitz", "name": "Deep Water Blitz", "description": "A deep water attack that disrupts intelligence and elemental defenses.", "ability_type": "skill", "level":2, "elements": ["water", "dark"], "base_power":1, "ap_cost":35, "effect": "status", "status_keys": ["intelligence_debuff", "elemental_debuff"], "can_aoe": True},
- {"id": "air_dark_skill_lv2_gale_of_doubt", "name": "Gale of Doubt", "description": "A dark gust that dulls reflexes.", "ability_type": "skill", "level":2, "elements": ["air", "dark"], "base_power":0, "ap_cost":30, "effect": "status", "status_keys": ["dexterity_debuff", "confuse"], "can_aoe": False},
+ {"id": "air_dark_skill_lv2_gale_of_doubt", "name": "Gale of Doubt", "description": "A dark gust that dulls reflexes.", "ability_type": "skill", "level":2, "elements": ["air", "dark"], "base_power":0, "ap_cost":25, "effect": "status", "status_keys": ["confuse"], "can_aoe": False},
 
  ##STATUS EFFECTS (special)
  {"id": "electric_air_skill_lv2_static_caltrops", "name": "Static Caltrops", "description": "Deploy electrified spikes that stun.", "ability_type": "skill", "level":2, "elements": ["electric", "air"], "base_power":0, "ap_cost":30, "effect": "status", "status_keys": ["stun"], "can_aoe": True},
@@ -76,5 +76,5 @@ LEVEL_2_SKILL_ABILITY_SEEDS = [
  
    ##NON-PLAYER ABILITIES
  {"id": "lv2_hostile_ability_dark_air_skill_nightmare_wave", "name": "Nightmare Wave", "description": "A dark gust that terrifies.", "ability_type": "skill", "level":2, "elements": ["dark", "air"], "base_power":0, "ap_cost":30, "effect": "status", "status_keys": ["confuse"], "can_aoe": False, "non_player_ability": True},
- {"id": "lv2_hostile_ability_dark_ice_skill_void_spike", "name": "Void Spike", "description": "A chilling spike that saps will.", "ability_type": "skill", "level":2, "elements": ["dark", "ice"], "base_power":15, "ap_cost":15, "effect": "damage", "can_aoe": False, "non_player_ability": True},
+ {"id": "lv2_hostile_ability_dark_ice_skill_void_spike", "name": "Void Spike", "description": "A chilling spike that saps will.", "ability_type": "skill", "level":2, "elements": ["dark", "ice"], "base_power":20, "ap_cost":15, "effect": "damage", "can_aoe": False, "non_player_ability": True},
 ]

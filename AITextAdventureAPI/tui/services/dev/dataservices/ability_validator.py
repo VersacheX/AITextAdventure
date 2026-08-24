@@ -33,16 +33,14 @@ B2  ABILITY_BALANCE_STRONG     total_value > 145% of group average
 B3  ABILITY_AP_MISPRICED       value-per-AP efficiency falls outside the healthy
                                band (70%–140%) around the *per-effect* median
                                efficiency  (warning)
-    Balance groups (B1/B2) are (level, effect): abilities are compared across
-    ability_types so cross-type balance surfaces.  Groups with a single member
-    are skipped (no meaningful average), as are groups whose average is not
-    strictly positive.  B1/B2 additionally skip any ability whose total_value
-    straddles zero relative to the average (opposite sign), because a
-    percent-of-average ratio is meaningless there.  B3 prices each ability's
-    payload-per-AP against the median efficiency *of its own effect category*
-    (damage/status/heal/cure/revive), since payload magnitudes differ by orders
-    of magnitude between categories — a single global median would flag nearly
-    every status as overpriced and nearly every damage ability as underpriced.
+B4  ABILITY_STATUS_DENSITY     effect=status but < 50% of payload comes from the
+                               statuses it applies (flat power dominates) (warning)
+B5  ABILITY_SUPPORT_EFFICIENCY heal/revive/cure value-per-AP outside the band
+                               around the combined support median  (warning)
+B6  ABILITY_AOE_PREMIUM        AOE ability not costing more AP than single-target
+                               peers, or vice versa  (warning)
+B7  ABILITY_PROGRESSION_BREAK  a higher-level ability's payload falls below the
+                               data-derived floor of the tiers below it  (error)
 
 total_value formula
 -------------------
@@ -58,6 +56,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from typing import Any, Dict, List
+import math
 
 from tui.services.dev.dataservices.models import (
     AbilityNode,
@@ -119,6 +118,49 @@ def _status_weight_target(level: int) -> float:
 #            or   efficiency > _AP_EFF_HIGH * median_efficiency[effect] (too cheap)
 _AP_EFF_LOW  = 0.70
 _AP_EFF_HIGH = 1.40
+
+# Relative epsilon so an ability sitting *exactly* on a band edge (efficiency ==
+# low_eff/high_eff) is treated as in-band rather than flagged by floating-point
+# noise.  Without this, a value priced precisely at the boundary both trips the
+# check and yields a "recommended AP" equal to its current AP (a contradiction).
+_AP_EFF_EPS  = 1e-6
+
+# ── Status-density check (B4) ─────────────────────────────────────────────────
+# A status/cure ability's worth should come mostly from the *statuses it applies*,
+# not from a large flat base_power riding along.  When the status weight + status
+# damage is a small fraction of the total payload, the ability is really a damage
+# stick wearing a status label — its status_keys are cosmetic.  Flag when the
+# status contribution falls below this fraction of the payload.
+_STATUS_DENSITY_MIN = 0.35
+
+# ── Support-efficiency check (B5) ─────────────────────────────────────────────
+# Heal/revive/cure abilities are priced together as one "support" category: each
+# effect alone is sparse, but they share a payload scale and compete for the same
+# AP budget.  Their value-per-AP must sit inside this band around the combined
+# support median, independently of the per-effect B3 band.
+_SUPPORT_EFFECTS   = frozenset({"heal", "revive", "cure"})
+_SUPPORT_EFF_LOW   = 0.60
+_SUPPORT_EFF_HIGH  = 1.60
+
+# ── AOE-premium check (B6) ────────────────────────────────────────────────────
+# AOE abilities deliver AOE_MULTIPLIER (1.5x) the payload of a single-target peer,
+# so they must cost more AP.  This is a *sticker-price* sanity check on top of the
+# payload-aware B3/B5 bands, so it uses a tolerance band rather than an exact
+# boundary: an ability only trips it when its AP is *clearly* on the wrong side of
+# the opposite bucket's median, not merely a point or two across.  A tie or a
+# small overlap (e.g. a single-target carrying an extra status legitimately
+# costing a little more) must not flag.
+_AOE_PREMIUM_MIN_BUCKET = 2
+_AOE_PREMIUM_TOL        = 1.25   # must be 25%+ across the median to flag
+
+# ── Progression-break check (B7) ──────────────────────────────────────────────
+# Power creep is derived from the data, not a fixed curve: each effect's expected
+# floor at level N is the running maximum of the median payloads of all lower
+# levels.  Using the running max (rather than level N-1 alone) prevents a locally
+# weak tier from lowering the bar below an already-stronger earlier tier.  A
+# higher-level ability delivering below this fraction of the floor is a genuine
+# progression regression and is surfaced as an error.
+_PROGRESSION_TOL = 0.90
 
 
 def _err(code: str, message: str, severity: str = "error") -> AbilityValidationError:
@@ -190,6 +232,14 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
     # the same category and level rather than a flat global figure.
     efficiencies_by_key: Dict[tuple, List[float]] = defaultdict(list)
 
+    # Extra buckets for the new balance checks:
+    #   payloads_by_key       -> (effect, level) -> [payload]           (B7 curve)
+    #   support_efficiencies  -> combined heal/revive/cure eff           (B5 band)
+    #   appp_by_aoe           -> (effect, level, is_aoe) -> [ap/payload] (B6 premium)
+    payloads_by_key:      Dict[tuple, List[float]] = defaultdict(list)
+    support_efficiencies: List[float]              = []
+    appp_by_aoe:          Dict[tuple, List[float]] = defaultdict(list)
+
     for node in all_nodes:
         seed   = node.record.extras.get("_seed") or {}
         level  = int(seed.get("level", 1) or 1)
@@ -199,11 +249,22 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
         node_group[node.ability_id] = gkey
 
         breakdown = compute_ability_value(seed)
+        if breakdown.payload > 0:
+            payloads_by_key[(effect, level)].append(breakdown.payload)
         if breakdown.ap_cost > 0 and breakdown.payload > 0:
-            efficiencies_by_key[(effect, level)].append(breakdown.payload / breakdown.ap_cost)
+            is_aoe = bool(seed.get("can_aoe", False))
+            # AP *per unit payload*: a strong status raises both AP and payload,
+            # so this price-per-value normalises status strength out of the AOE
+            # comparison (a strong single-target status is no longer read as
+            # "overpriced" just because its raw AP exceeds a weaker AOE peer's).
+            appp_by_aoe[(effect, level, is_aoe)].append(breakdown.ap_cost / breakdown.payload)
+            eff = breakdown.payload / breakdown.ap_cost
+            efficiencies_by_key[(effect, level)].append(eff)
+            if effect in _SUPPORT_EFFECTS:
+                support_efficiencies.append(eff)
 
     # Only keep groups with more than one member AND a strictly positive
-    # average.  A percentage ratio against a zero/negative baseline is
+    # average.  A percentage ratio across a zero/negative baseline is
     # meaningless (e.g. "5.0 is only -214% of average -2.3"), so those groups
     # are skipped for balance checking entirely.
     group_avg: Dict[tuple, float] = {
@@ -231,6 +292,39 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
         effect: _median(effs)
         for effect, effs in effect_efficiencies.items()
         if effs
+    }
+
+    # Median payload per (effect, level) — the raw material for the B7 curve.
+    median_payload_by_key: Dict[tuple, float] = {
+        key: _median(vals) for key, vals in payloads_by_key.items() if vals
+    }
+
+    # Per-effect progression floor: floor(effect, level) is the running maximum of
+    # the median payloads of the every *lower* level with a populated bucket.  Judging
+    # against the cumulative max (not just level-1) means a locally weak tier can never
+    # pull the expected minimum below a stronger earlier tier.
+    progression_floor: Dict[tuple, float] = {}
+    levels_by_effect: Dict[str, List[int]] = defaultdict(list)
+    for (effect, level) in median_payload_by_key:
+        levels_by_effect[effect].append(level)
+    for effect, levels in levels_by_effect.items():
+        running_max = 0.0
+        for level in sorted(set(levels)):
+            if running_max > 0:
+                progression_floor[(effect, level)] = running_max
+            bucket = payloads_by_key.get((effect, level), [])
+            if len(bucket) >= _MIN_BUCKET:
+                running_max = max(running_max, median_payload_by_key[(effect, level)])
+
+    # Combined support (heal/revive/cure) median value-per-AP for the B5 band.
+    median_support_efficiency = _median(support_efficiencies) if support_efficiencies else 0.0
+
+    # Median AP-per-payload by (effect, level, is_aoe) for the B6 AOE-premium
+    # comparison.  Comparing price-per-value (not raw AP) means a legitimately
+    # strong single-target status is not flagged merely for costing more AP than
+    # a weaker AOE peer — only a genuine premium mismatch trips the check.
+    median_appp_by_aoe: Dict[tuple, float] = {
+        key: _median(vals) for key, vals in appp_by_aoe.items() if vals
     }
 
     # ── Per-node checks ───────────────────────────────────────────────────
@@ -356,7 +450,7 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
             tv  = _total_value(seed)
             # Only compare when tv and avg share the same sign.  A percent-of-
             # average ratio across zero is meaningless (e.g. "-9.0 is only -206%
-            # of average 4.4"), so abilities whose value straddles the group
+            # of average 4.4"), so abilities whose value straddle the group
             # average's sign are left for the A9 / B3 checks instead.
             if avg > 0 and tv > 0:
                 ratio = tv / avg
@@ -399,27 +493,161 @@ def validate_ability_tree(tree: List[AbilityTypeNode]) -> Dict[str, int]:
                 ratio = efficiency / median_efficiency
                 low_eff  = _AP_EFF_LOW  * median_efficiency
                 high_eff = _AP_EFF_HIGH * median_efficiency
-                if efficiency < low_eff:
-                    # overpriced: expected AP for a typical efficiency
-                    expected_ap = breakdown.payload / median_efficiency
+                rec_low_ap  = breakdown.payload / (_AP_EFF_HIGH * median_efficiency)
+                rec_high_ap = breakdown.payload / (_AP_EFF_LOW  * median_efficiency)
+                # Round the recommended AP band *inward* (up on the low end, down
+                # on the high end) so the suggestion sits strictly inside the
+                # healthy band and never echoes the flagged AP back to the user.
+                rec_low_ap  = math.ceil(breakdown.payload / (_AP_EFF_HIGH * median_efficiency))
+                rec_high_ap = math.floor(breakdown.payload / (_AP_EFF_LOW  * median_efficiency))
+                if rec_high_ap < rec_low_ap:      # band collapsed by rounding
+                    rec_high_ap = rec_low_ap
+                if efficiency < low_eff * (1.0 - _AP_EFF_EPS):
                     node.errors.append(_err(
                         "ABILITY_AP_MISPRICED",
-                        f"AP {ap_cost:.0f} buys {ratio:.2f}x the value-per-AP of "
-                        f"a typical {effect} ability (overpriced; expected AP ~= "
-                        f"{expected_ap:.0f}).",
+                        f"AP {ap_cost:.0f} buys {ratio:.2f}x the value-per-AP of a "
+                        f"typical {effect} ability (overpriced; recommended AP "
+                        f"{rec_low_ap:.0f}–{rec_high_ap:.0f}).",
                         severity="warning",
                     ))
                     by_code["ABILITY_AP_MISPRICED"] += 1
-                elif efficiency > high_eff:
-                    expected_ap = breakdown.payload / median_efficiency
+                elif efficiency > high_eff * (1.0 + _AP_EFF_EPS):
                     node.errors.append(_err(
                         "ABILITY_AP_MISPRICED",
-                        f"AP {ap_cost:.0f} buys {ratio:.2f}x the value-per-AP of "
-                        f"a typical {effect} ability (underpriced; expected AP ~= "
-                        f"{expected_ap:.0f}).",
+                        f"AP {ap_cost:.0f} buys {ratio:.2f}x the value-per-AP of a "
+                        f"typical {effect} ability (underpriced; recommended AP "
+                        f"{rec_low_ap:.0f}–{rec_high_ap:.0f}).",
                         severity="warning",
                     ))
                     by_code["ABILITY_AP_MISPRICED"] += 1
+
+        # B4 — STATUS_DENSITY: a status ability's worth should come mostly from
+        # the statuses it applies, not from a large flat base_power riding along.
+        # ``breakdown.status_weight`` + ``breakdown.status_damage`` is the status
+        # contribution; the remainder of the payload is flat scaled power.  When
+        # statuses supply less than half the payload the ability is really a
+        # damage/heal stick wearing a status label (cosmetic status_keys).
+        if effect in ("status", "cure") and status_keys:
+            breakdown = compute_ability_value(seed)
+            if breakdown.payload > 0:
+                status_contrib  = breakdown.status_weight + breakdown.status_damage
+                status_fraction = status_contrib / breakdown.payload
+                if status_fraction < _STATUS_DENSITY_MIN:
+                    node.errors.append(_err(
+                        "ABILITY_STATUS_DENSITY",
+                        f"{effect.capitalize()} ability at level {node.level} draws "
+                        f"only {status_fraction:.0%} of its payload from statuses "
+                        f"(rest is flat power; expected ≥ {_STATUS_DENSITY_MIN:.0%}).",
+                        severity="warning",
+                    ))
+                    by_code["ABILITY_STATUS_DENSITY"] += 1
+
+        # B5 — SUPPORT_EFFICIENCY: heal/revive/cure value-per-AP must sit inside a
+        # band around the *combined* support median.  The recommended AP range is
+        # the AP that would place this ability's payload back inside the band:
+        #     ap ∈ [ payload / (HIGH*median) , payload / (LOW*median) ]
+        # (higher AP → lower efficiency, so the band inverts into AP-space).
+        if effect in _SUPPORT_EFFECTS and median_support_efficiency > 0:
+            ap_cost   = float(seed.get("ap_cost", 0) or 0)
+            breakdown = compute_ability_value(seed)
+            if ap_cost > 0 and breakdown.payload > 0:
+                support_eff   = breakdown.payload / ap_cost
+                support_ratio = support_eff / median_support_efficiency
+                rec_low_ap  = breakdown.payload / (_SUPPORT_EFF_HIGH * median_support_efficiency)
+                rec_high_ap = breakdown.payload / (_SUPPORT_EFF_LOW  * median_support_efficiency)
+                if support_ratio < _SUPPORT_EFF_LOW:
+                    node.errors.append(_err(
+                        "ABILITY_SUPPORT_EFFICIENCY",
+                        f"Support value-per-AP is {support_ratio:.2f}x the support "
+                        f"median (overpriced; recommended AP "
+                        f"{rec_low_ap:.0f}–{rec_high_ap:.0f}).",
+                        severity="warning",
+                    ))
+                    by_code["ABILITY_SUPPORT_EFFICIENCY"] += 1
+                elif support_ratio > _SUPPORT_EFF_HIGH:
+                    node.errors.append(_err(
+                        "ABILITY_SUPPORT_EFFICIENCY",
+                        f"Support value-per-AP is {support_ratio:.2f}x the support "
+                        f"median (underpriced; recommended AP "
+                        f"{rec_low_ap:.0f}–{rec_high_ap:.0f}).",
+                        severity="warning",
+                    ))
+                    by_code["ABILITY_SUPPORT_EFFICIENCY"] += 1
+
+        # B6 — AOE_PREMIUM (payload-aware): compare *AP-per-payload* between the
+        # AOE and single-target buckets rather than raw AP, so a strong status
+        # (which raises both AP and payload) does not read as mispriced.  Because
+        # AOE payload already includes the _AOE_MULTIPLIER (1.5x), a fairly priced
+        # AOE ability has a *lower* AP-per-payload than its single-target peers.
+        #   * single-target with AP/payload clearly *below* the AOE median
+        #     (cheaper per value than an AOE) => underpriced single-target.
+        #   * single-target with AP/payload clearly *above* the AOE median is
+        #     expected (single-target should cost more per value) and is NOT
+        #     flagged here — B3 handles absolute mispricing.
+        # A tolerance band keeps boundary ties quiet.
+        node_level = int(seed.get("level", 1) or 1)
+        ap_cost    = float(seed.get("ap_cost", 0) or 0)
+        if ap_cost > 0:
+            breakdown = compute_ability_value(seed)
+            is_aoe    = bool(seed.get("can_aoe", False))
+            st_appp   = appp_by_aoe.get((effect, node_level, False), [])
+            aoe_appp  = appp_by_aoe.get((effect, node_level, True), [])
+            if breakdown.payload > 0:
+                node_appp = ap_cost / breakdown.payload
+                if is_aoe and len(st_appp) >= _AOE_PREMIUM_MIN_BUCKET:
+                    median_st = median_appp_by_aoe[(effect, node_level, False)]
+                    # AOE underpriced if it costs *as much or more* per payload
+                    # than single-target (it should cost clearly less).  Fix by
+                    # lowering AP or raising power (payload) so AP-per-payload
+                    # falls to at most the single-target median.
+                    if median_st > 0 and node_appp >= median_st * _AOE_PREMIUM_TOL:
+                        rec_ap = math.floor(breakdown.payload * median_st)
+                        node.errors.append(_err(
+                            "ABILITY_AOE_PREMIUM",
+                            f"AOE ability costs {node_appp:.2f} AP per payload, at "
+                            f"or above the single-target median {median_st:.2f} — "
+                            f"AOE reach (x{_AOE_MULTIPLIER:g}) not reflected in "
+                            f"cost.  Fix: decrease AP (≤ {rec_ap}) or increase "
+                            f"power.",
+                            severity="warning",
+                        ))
+                        by_code["ABILITY_AOE_PREMIUM"] += 1
+                elif (not is_aoe) and len(aoe_appp) >= _AOE_PREMIUM_MIN_BUCKET:
+                    median_aoe = median_appp_by_aoe[(effect, node_level, True)]
+                    # Single-target underpriced if it costs *clearly less* per
+                    # payload than an AOE ability (it should cost more per value).
+                    # Fix by raising AP or lowering power (payload) so AP-per-
+                    # payload rises to at least the AOE median.
+                    if median_aoe > 0 and node_appp <= median_aoe / _AOE_PREMIUM_TOL:
+                        rec_ap = math.ceil(breakdown.payload * median_aoe)
+                        node.errors.append(_err(
+                            "ABILITY_AOE_PREMIUM",
+                            f"Single-target ability costs {node_appp:.2f} AP per "
+                            f"payload, below the AOE median {median_aoe:.2f} — "
+                            f"priced cheaper per value than an AOE peer.  Fix: "
+                            f"increase AP (≥ {rec_ap}) or decrease power.",
+                            severity="warning",
+                        ))
+                        by_code["ABILITY_AOE_PREMIUM"] += 1
+
+        # B7 — PROGRESSION_BREAK (error): a higher-level ability must not deliver
+        # less raw payload than the data-derived floor of the tiers below it.  The
+        # floor is the running maximum of the median payloads of all lower levels
+        # (built once in ``progression_floor``), so a locally weak tier can never
+        # lower the bar beneath a stronger earlier tier.  Judged on raw payload —
+        # B3's per-level normalized efficiency cannot see cross-level regressions.
+        floor = progression_floor.get((effect, node_level))
+        if floor and floor > 0:
+            breakdown = compute_ability_value(seed)
+            if breakdown.payload > 0 and breakdown.payload < _PROGRESSION_TOL * floor:
+                node.errors.append(_err(
+                    "ABILITY_PROGRESSION_BREAK",
+                    f"Level {node_level} {effect} ability delivers payload "
+                    f"{breakdown.payload:.0f}, below the level-progression floor "
+                    f"{floor:.0f} set by lower tiers.",
+                    severity="error",
+                ))
+                by_code["ABILITY_PROGRESSION_BREAK"] += 1
 
 
     invalid      = sum(1 for n in all_nodes if n.errors)

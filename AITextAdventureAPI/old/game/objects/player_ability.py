@@ -388,28 +388,47 @@ class PlayerAbility:
 		elif self.effect == EffectType.CURE:
 			# CURE uses status_key to remove statuses from the target.
 			# If status_key == 'all' then use cure_all_debuffs() to remove common debuffs;
-			# if status_key is a string, remove statuses with that id; if it's a list, remove each.
-						
+			# if status_key == 'debuff' then use cure_elemental_and_stat_debuffs();
+			# otherwise status_key is a concrete status id (single or list) to remove.
+			# CURE also carries a base_power that heals the target on application,
+			# mirroring the beneficial secondary hit of a buff STATUS ability
+			# (flat, halved by status_utils.LOW_DMG_STATUS_MOD, no level multiplier).
+
 			if not target:
 				summary['action'] = f"{self.name} would cure statuses but no target provided"
 				return summary
-			removed =0
+
+			def _apply_cure_heal():
+				"""Apply the cure's base_power as healing, halved like a status hit."""
+				if self.base_power == 0 or target is None:
+					return
+				power = self.compute_power_with_owner(owner, percent_reduction=percent_reduction)
+				if power and power > 0:
+					power = int(power * status_utils.LOW_DMG_STATUS_MOD)
+					restored = target.heal(power)
+					if restored is not None:
+						summary['status_heal'] = restored
+
+			removed = 0
+			cured_all = False
 			# support 'all' keyword
 			for key in (self.status_keys or []):
-				if isinstance(key, str) and key.lower() == 'all':				
+				if isinstance(key, str) and key.lower() == 'all':
 					removed = target.cure_all_debuffs()
-					summary['action'] = f"{self.name} removed {removed} debuff(s) from {target.name}"
-					summary['removed'] = removed
-					return summary
+					cured_all = True
+					break
 				elif isinstance(key, str) and key.lower() == 'debuff':
-					removed = target.cure_elemental_and_stat_debuffs()
+					removed += target.cure_elemental_and_stat_debuffs()
 				# support single id or list of ids
 				else:
 					removed += target.remove_status_by_id(key)
-					# summary['action'] = f"{self.name} removed {removed} status(es) from {target.name}"
-					# summary['removed'] = removed
-				
-			summary['action'] = f"{self.name} removed {removed} status(es) from {target.name}"
+
+			_apply_cure_heal()
+
+			if cured_all:
+				summary['action'] = f"{self.name} removed {removed} debuff(s) from {target.name}"
+			else:
+				summary['action'] = f"{self.name} removed {removed} status(es) from {target.name}"
 			summary['removed'] = removed
 			return summary
 
