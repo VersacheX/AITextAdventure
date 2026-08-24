@@ -11,6 +11,12 @@ from game.region_seeds.regions.cities.desert.enemies_large.lv51to60 import RANDO
 from game.region_seeds.regions.cities.desert.enemies_large.lv61to80 import RANDOM_HOSTILE_SEEDS as LV61TO80_HOSTILES
 from game.region_seeds.regions.cities.desert.enemies_large.lv81to100 import RANDOM_HOSTILE_SEEDS as LV81TO100_HOSTILES
 
+# Shared desert-region rarity-coverage fill seeds (reusable across all desert
+# city sizes and the desert wilderness). A single package import pulls the full 
+# shared roster; these satisfy the validator's sliding 5-level rarity windows
+# (REGION_HOSTILE_RARITY_GAP) for common/uncommon/rare/superrare across Lv 1-100.
+from game.region_seeds.regions.cities.desert.enemies_shared import RANDOM_HOSTILE_SEEDS as RARITY_FILL_HOSTILES
+
 # Higher-tier seeds (min_spawn_level >30)
 HIGHER_LEVEL_SEEDS = []
 
@@ -24,6 +30,7 @@ RANDOM_HOSTILE_SEEDS.extend(LV41TO50_HOSTILES or [])
 RANDOM_HOSTILE_SEEDS.extend(LV51TO60_HOSTILES or [])
 RANDOM_HOSTILE_SEEDS.extend(LV61TO80_HOSTILES or [])
 RANDOM_HOSTILE_SEEDS.extend(LV81TO100_HOSTILES or [])
+RANDOM_HOSTILE_SEEDS.extend(RARITY_FILL_HOSTILES or [])
 RANDOM_HOSTILE_SEEDS.extend(HIGHER_LEVEL_SEEDS or [])
 
                             

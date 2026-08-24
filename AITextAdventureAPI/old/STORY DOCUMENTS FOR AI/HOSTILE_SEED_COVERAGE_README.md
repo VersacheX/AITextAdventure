@@ -8,6 +8,182 @@ The validator (`city_region_validator.py`) reports `REGION_HOSTILE_COVERAGE_GAP`
 
 ---
 
+## Validator Reality & Field Notes (READ FIRST)
+
+> Reconstructed from the current `city_region_validator.py`, `hostile_validator.py`,
+> `old/game/constants.py` (`REGION_DATA`), and the existing seed/aggregator files.
+> These notes correct and extend the older guidance below. **When the two disagree,
+> trust this section** — it reflects what the code actually checks today.
+
+### 1. The real failing rule is R4 `REGION_HOSTILE_RARITY_GAP`, not R1 band coverage
+
+The 10-level-band model in this doc is necessary but **not sufficient**. The hard
+errors come from a **sliding 5-level window** check in `city_region_validator.py`:
+
+- Window size is **5** (`_RARITY_WINDOW = 5`), sliding: Lv 1–5, 2–6, 3–7, … 96–100.
+- For **each** rarity in `("common", "uncommon", "rare", "superrare")`, **every**
+  window must contain at least one seed whose `min_spawn_level` falls inside it.
+- A seed at level `N` covers the windows starting at `N-4 … N` (reaches back 4
+  levels, forward 0).
+- Each error line `add a '<rarity>' hostile seed at Lv N` is the validator's own
+  greedy minimal-fill suggestion (`_minimal_rarity_additions` places seeds at the
+  right edge of the earliest uncovered window). **Placing a seed at exactly the
+  suggested Lv N is the most efficient fix** — one seed there typically clears
+  several stacked error lines at once.
+
+**Practical consequence:** because each seed only covers a 5-wide window, you need
+a seed of every required rarity roughly every 5 levels — including `rare` and
+`superrare`. This overrides the "~5% superrare per band" advice below: you will
+need far more `rare`/`superrare` coverage than that ratio implies. A workable
+pattern per 10-level band is ~2 seeds low (e.g. Lv 21, 23) and ~2 high (e.g. Lv 26,
+29), spread across rarities so no single rarity has a gap wider than 5 levels.
+
+### 2. Band-file names and export names are NOT uniform across zones
+
+Do **not** assume `lv31to40.py`, `lv41to50.py`, … exist everywhere. Confirmed splits vary per zone, e.g.:
+
+- `desert/enemies_large`: per-10 up to 60, then wide — `… lv61to80, lv81to100`.
+- `desert/enemies_mid`: `lv1to10, lv11to20, lv21to30, lv31to50, lv51to100`.
+- `shallows/*` and `swamp/*` large: per-10 files `lv21to30 … lv91to100`.
+
+Export names also differ:
+
+- Most band files export `RANDOM_HOSTILE_SEEDS = [...]`.
+- Some early files (notably shallows/swamp) export `SEEDS_LV1TO10` / `SEEDS_LV11TO20`
+  instead, and the aggregator imports them under an alias.
+
+**Rule:** open the zone's `constants_enemies_*.py` aggregator first and mirror
+whatever import style, module names, and export names it already uses. Match the
+existing convention for that specific zone rather than forcing this doc's names.
+
+### 3. Registration is TWO layers, not one
+
+A new band file must be wired in at **both** levels or it will never load:
+
+1. **Aggregator** — `constants_enemies_<size>_city.py` (cities) or
+   `constants_enemies_<region>.py` (overworld). Add the `import` and append the
+   list. Aggregators use either `RANDOM_HOSTILE_SEEDS.extend(...)` **or** `A + B + C`
+   concatenation, and either absolute (`game.region_seeds…`) or relative
+   (`.enemies_large…`) imports — match the file.
+2. **`old/game/constants.py` `REGION_DATA`** already imports each aggregator's
+   `RANDOM_HOSTILE_SEEDS` (e.g. `DESERT_LARGE_CITY_RANDOM_HOSTILE_SEEDS`). You do
+   **not** normally edit `constants.py` — it re-reads the aggregator — but note the
+   overworld zone is composed as
+   `<REGION>_RANDOM_HOSTILE_SEEDS + <REGION>_REGION_HOSTILE_SEEDS`, so overworld
+   seeds can live in two different modules that are concatenated.
+
+### 3b. Shared per-region hostiles (`enemies_shared/`) — PREFERRED for rarity fill
+
+Because every zone in a region shares the same biome identity, hostiles authored
+to fill rarity gaps can be written **once** and reused by all four zones (large /
+mid / small city + overworld). This avoids duplicating near-identical seeds four
+times per region.
+
+Convention (established for Desert, mirror it per region):
+
+```
+regions/cities/<region>/enemies_shared/
+    __init__.py                 ? aggregates all bands into one RANDOM_HOSTILE_SEEDS
+    lv1to20_rarity_fill.py
+    lv21to40_rarity_fill.py
+    lv41to60_rarity_fill.py
+    lv61to80_rarity_fill.py
+    lv81to100_rarity_fill.py
+```
+
+- Each `lv<a>to<b>_rarity_fill.py` exports `RANDOM_HOSTILE_SEEDS = [...]` and holds
+  the seeds for that band.
+- **Make the shared roster self-sufficient for ANY zone.** The desert file was
+  built reactively (one seed per validator-suggested level, tuned to the large
+  city). The problem: mid/small cities have *different* existing seeds, so those
+  exact levels don't clear their windows — you end up chasing residual gaps per
+  zone. Instead, build the shared roster so it covers every window on its own:
+  **place one seed of every required rarity (`common`, `uncommon`, `rare`,
+  `superrare`) at each 5-level mark — Lv 5, 10, 15, … 100.** A seed at level N
+  covers the sliding windows starting N-4..N, so multiples of 5 blanket all
+  windows 1-5 … 96-100 regardless of what a zone already defines. That is 20 marks
+  × 4 rarities = **80 seeds** split across the five band files (this is how Forest
+  was built). Any zone importing the shared package is then fully covered.
+- **Work small city first.** The small city usually has the fewest existing seeds,
+  so a shared roster that satisfies the small city will satisfy mid and large too.
+  Validate small ? mid ? large per region.
+- `enemies_shared/__init__.py` imports every band module and concatenates them into
+  a single package-level `RANDOM_HOSTILE_SEEDS`, so each city aggregator needs only
+  **one** import — not one per band:
+
+  ```python
+  from game.region_seeds.regions.cities.<region>.enemies_shared import (
+      RANDOM_HOSTILE_SEEDS as RARITY_FILL_HOSTILES,
+  )
+  # then, matching the aggregator's existing style:
+  RANDOM_HOSTILE_SEEDS.extend(RARITY_FILL_HOSTILES or [])   # extend-style files
+  # or
+  RANDOM_HOSTILE_SEEDS = LV1TO10 + ... + RARITY_FILL_HOSTILES  # concat-style files
+  ```
+
+- **Namespace shared ids to avoid collisions.** Prefix shared seed ids with
+  `<region>_shared_` (e.g. `forest_shared_root_golem`) so they never clash with a
+  zone's own band-file ids.
+- **Import the same shared package into every zone aggregator that needs the fill**
+  (`constants_enemies_large_city.py`, `constants_enemies_mid_city.py`,
+  `constants_enemies_small_city.py`, and the overworld `constants_enemies_<region>.py`).
+  Match each aggregator's existing import style (absolute vs relative) and
+  composition style (`.extend()` vs `+`).
+- **Duplicate ids across zones are safe here by design.** The same seed id
+  surfacing in multiple zones resolves to identical data, so there is no data-
+  integrity concern from the overlap — every zone simply gets the same shared
+  hostile definition.
+- Keep zone-specific flavour hostiles in the zone's own `enemies_<size>/` band
+  files; use `enemies_shared/` only for the reusable region-wide roster.
+
+### 4. Other validators also fire on your new seeds (`hostile_validator.py`)
+
+R4 is only the coverage rule. Each seed you add is independently checked:
+
+- **H1 unknown rarity** — must be `common|uncommon|rare|superrare` (`notfound` is
+  also recognised but don't use it).
+- **H2 missing attacks** — `basic_attack` must be non-empty.
+- **H3 missing base stats** — `base_hp` and `base_ap` must be > 0.
+- **H4 ability count vs rarity** — minimum ability counts are enforced
+  (`_RARITY_ABILITY_COUNTS`): `common 0`, `uncommon ?1`, `rare ?2`, `superrare ?3`
+  (`notfound 4`). This is the **hard floor** — stricter than the "common 0-1 /
+  uncommon 1-2 …" ranges below.
+- **H4b unknown ability** — every id in `player_abilities` must exist in
+  `PLAYER_ABILITY_SEEDS`. **Do not invent ability ids.** Verify against the
+  `level_*_abilities*` modules; the tables in this doc are a starting point, confirm
+  before use.
+- **H5 missing type** — `hostile_type` must be set.
+- **H6 unknown drop item** — `common_drop` / `rare_drop` must be `None` or a real id
+  drawn from `SEED_UTILITY_IDS`, `SEED_SPECIAL_IDS`, `SEED_WEAPON_IDS`,
+  `SEED_ACCESSORY_IDS`, or `SEED_ARMOR_IDS` (defined in `constants_items.py` and
+  `constants_accesories.py`). The verified consumable ids are
+  `herb_minor`, `herb_med`, `herb_major`, `elixir_full_heal`, `stimulant_small`,
+  `stimulant_med`, `stimulant_large`, `stimulant_full`, `revive_kit`,
+  `defibrillator`, `ointment`, `petrify_salve`, `wake_potion`, `shock_patch`,
+  `clarity_tonic`, `vocalsalve`, `panacea`, and the `tome_*` line. Note the healing
+  herb id is **`herb_med`** (not `herb_medium`) and the AP items are `stimulant_*`.
+  Weapon/armor/accessory drop ids come from the level-banded seed modules
+  (`region_seeds/weapons/*`, `region_seeds/armor/*`) and `ACCESSORY_SEEDS`.
+
+### 5. Fast validation loop
+
+- Dev TUI: **Validate Regions** (runs `validate_region_data(REGION_DATA)`).
+- Headless: `old/check_bands.py` imports `REGION_DATA` and runs the validator,
+  printing error/warning counts per zone — handy for a quick pass/fail after
+  editing one city.
+
+### 6. Suggested per-zone workflow (city by city)
+
+1. Read the zone's `constants_enemies_*.py` to learn its module/export conventions.
+2. Collect that zone's `REGION_HOSTILE_RARITY_GAP` lines from the report.
+3. For each suggested `Lv N` + rarity, author one themed seed at exactly `Lv N`
+   (grouping several suggestions into shared band files where naming allows).
+4. Satisfy the H4 ability floor for the seed's rarity using verified ability ids.
+5. Wire the new band file(s) into the aggregator, matching its import style.
+6. Re-run validation; confirm that zone's error count drops to 0 before moving on.
+
+---
+
 ## Directory Structure
 
 ```
@@ -154,20 +330,55 @@ Minimum per file: **3–5 seeds** covering different `min_spawn_level` values with
 
 ## Consumable / Drop Keys
 
-Common values used across existing seeds:
+Verified ids from `constants_items.py` (`UTILITY_ITEM_SEEDS` ? `SEED_UTILITY_IDS`).
+Use these exact strings for `common_drop` / `rare_drop`:
+
+### HP / AP restoratives
+
+| Key | Item | Rarity | min_spawn_level |
+|---|---|---|---|
+| `"herb_minor"` | Pocket Salve (heal 25%) | common | 1 |
+| `"herb_med"` | Patch Kit (heal 50%) | uncommon | 4 |
+| `"herb_major"` | Curative Salve (heal 75%) | rare | 10 |
+| `"elixir_full_heal"` | Stimpak (heal 100%) | superrare | 15 |
+| `"stimulant_small"` | Caffeine Shot (AP 25%) | common | 1 |
+| `"stimulant_med"` | Energy Drink (AP 50%) | uncommon | 4 |
+| `"stimulant_large"` | Adrenaline Shot (AP 75%) | rare | 10 |
+| `"stimulant_full"` | Neuro Stim (AP 100%) | superrare | 15 |
+
+> Note the healing item is `herb_med` (**not** `herb_medium`), and the AP items use
+> the `stimulant_*` prefix. `herb_major` is a **rare** drop despite the name.
+
+### Revives / status cures
 
 | Key | Item |
 |---|---|
-| `"herb_minor"` | Minor healing herb |
-| `"herb_major"` | Major healing herb |
-| `"stimulant_small"` | Small combat stimulant |
-| `"stimulant_med"` | Medium stimulant |
-| `"stimulant_large"` | Large stimulant |
-| `"tome_int"` | Intelligence tome |
-| `"tome_con"` | Constitution tome |
+| `"revive_kit"` | Revival Kit (revive 50%) |
+| `"defibrillator"` | Defibrillator (revive 100%) |
+| `"ointment"` | Balm — cure continuous_damage |
+| `"petrify_salve"` | Limestone Salve — cure petrify |
+| `"wake_potion"` | Wake Draught — cure sleep |
+| `"shock_patch"` | Shock Patch — cure stun |
+| `"clarity_tonic"` | Clarity Tonic — cure confuse |
+| `"vocalsalve"` | Vocal Salve — cure silence |
+| `"panacea"` | Doc's Panacea — cure all debuffs |
+
+### Stat tomes (`rarity: notfound` — use sparingly, high-tier only)
+
+`"tome_hp"`, `"tome_ap"`, `"tome_str"`, `"tome_dex"`, `"tome_int"`, `"tome_con"`
+(+1), and the `*_superrare` variants (`"tome_str_superrare"`, etc., +5).
+
+| Key | Item |
+|---|---|
 | `None` | No drop |
 
-For higher-rarity hostiles (rare, superrare), rare drops can reference weapon or armor `item_id` strings from the seed files (e.g. `"sawed_off"`, `"kevlar_vest"`) of appropriate level.
+For higher-rarity hostiles, rare drops can reference **weapon** ids from
+`region_seeds/weapons/*` (`SEED_WEAPON_IDS`), **armor** ids from
+`region_seeds/armor/*` (`SEED_ARMOR_IDS`, keyed by slot: head/body/arms/legs), or
+**accessory** ids from `ACCESSORY_SEEDS` in `constants_accesories.py`
+(`SEED_ACCESSORY_IDS`, e.g. `"toughened_cord"`, `"warlord_signet"`,
+`"voidborn_seal"`). Always pick an item whose `min_spawn_level` / `min_level`
+matches the hostile's band, and confirm the exact id exists before using it.
 
 ---
 

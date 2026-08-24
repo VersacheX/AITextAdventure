@@ -10,7 +10,7 @@ SEEDS_LV21TO30 = [
   "base_str": 16, "base_dex": 2, "base_con": 14, "base_int": 4, "base_hp": 440, "base_ap": 6,
   "str_per_level": 4, "dex_per_level": 0, "con_per_level": 3, "int_per_level": 0},
 
- {"id": "dune_pioneer", "name": "Dune Pioneer", "hostile_type": "humanoid", "role": "damage", "min_spawn_level": 21, "rarity": "common", "base_xp": 240,
+ {"id": "veteran_dune_pioneer", "name": "Veteran Dune Pioneer", "hostile_type": "humanoid", "role": "damage", "min_spawn_level": 21, "rarity": "common", "base_xp": 240,
   "common_drop": "stimulant_large", "rare_drop": None, "money_range": (60, 200),
   "basic_attack": "pioneer strike", "strong_attack": "frontier charge",
   "player_abilities": [],
@@ -25,7 +25,7 @@ SEEDS_LV21TO30 = [
   "base_str": 10, "base_dex": 16, "base_con": 8, "base_int": 4, "base_hp": 280, "base_ap": 12,
   "str_per_level": 2, "dex_per_level": 3, "con_per_level": 1, "int_per_level": 0},
 
- {"id": "mirage_witch", "name": "Mirage Witch", "hostile_type": "magic", "role": "hazard", "min_spawn_level": 23, "rarity": "uncommon", "base_xp": 400,
+ {"id": "crazed_Crazedmirage_witch", "name": "Crazed Mirage Witch", "hostile_type": "magic", "role": "hazard", "min_spawn_level": 23, "rarity": "uncommon", "base_xp": 400,
   "common_drop": "tome_int", "rare_drop": None, "money_range": (80, 300),
   "basic_attack": "illusion bolt", "strong_attack": "desert mirage hex",
   "player_abilities": ["level_1_hostile_ability_dark_magic_daze_whisper", "earth_water_magic_lv2_mudslide"],
@@ -41,7 +41,7 @@ SEEDS_LV21TO30 = [
   "str_per_level": 3, "dex_per_level": 2, "con_per_level": 3, "int_per_level": 1},
 
  # min_spawn_level == 27
- {"id": "sand_howler", "name": "Sand Howler", "hostile_type": "creature", "role": "damage", "min_spawn_level": 27, "rarity": "uncommon", "base_xp": 380,
+ {"id": "screaming_sand_howler", "name": "Screaming Sand Howler", "hostile_type": "creature", "role": "damage", "min_spawn_level": 27, "rarity": "uncommon", "base_xp": 380,
   "common_drop": "herb_major", "rare_drop": None, "money_range": (10, 50),
   "basic_attack": "sand howl lunge", "strong_attack": "pack fury",
   "player_abilities": [],

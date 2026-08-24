@@ -8,6 +8,11 @@ from game.region_seeds.regions.cities.desert.enemies_mid.lv21to30 import RANDOM_
 from game.region_seeds.regions.cities.desert.enemies_mid.lv31to50 import RANDOM_HOSTILE_SEEDS as LV31TO50_HOSTILES
 from game.region_seeds.regions.cities.desert.enemies_mid.lv51to100 import RANDOM_HOSTILE_SEEDS as LV51TO100_HOSTILES
 
+# Shared desert-region rarity-coverage fill seeds (single package import).
+# Same roster used by every desert city size; satisfies the validator's sliding
+# 5-level rarity windows (REGION_HOSTILE_RARITY_GAP) across Lv 1-100.
+from game.region_seeds.regions.cities.desert.enemies_shared import RANDOM_HOSTILE_SEEDS as RARITY_FILL_HOSTILES
+
 # Higher-tier seeds (min_spawn_level >30)
 HIGHER_LEVEL_SEEDS = []
 
@@ -18,6 +23,7 @@ RANDOM_HOSTILE_SEEDS.extend(LV11TO20_HOSTILES or [])
 RANDOM_HOSTILE_SEEDS.extend(LV21TO30_HOSTILES or [])
 RANDOM_HOSTILE_SEEDS.extend(LV31TO50_HOSTILES or [])
 RANDOM_HOSTILE_SEEDS.extend(LV51TO100_HOSTILES or [])
+RANDOM_HOSTILE_SEEDS.extend(RARITY_FILL_HOSTILES or [])
 RANDOM_HOSTILE_SEEDS.extend(HIGHER_LEVEL_SEEDS or [])
 
 # Mapping of zone/subtype -> list of hostile ids that can spawn there.

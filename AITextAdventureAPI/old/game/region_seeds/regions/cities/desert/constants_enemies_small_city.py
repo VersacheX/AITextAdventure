@@ -6,7 +6,12 @@ from .enemies_small.lv11to20 import RANDOM_HOSTILE_SEEDS as LV11TO20
 from .enemies_small.lv21to30 import RANDOM_HOSTILE_SEEDS as LV21TO30
 from .enemies_small.lv31to100 import RANDOM_HOSTILE_SEEDS as LV31TO100
 
-RANDOM_HOSTILE_SEEDS = LV1TO10 + LV11TO20 + LV21TO30 + LV31TO100
+# Shared desert-region rarity-coverage fill seeds (single package import).
+# Same roster used by every desert city size; satisfies the validator's sliding
+# 5-level rarity windows (REGION_HOSTILE_RARITY_GAP) across Lv 1-100.
+from .enemies_shared import RANDOM_HOSTILE_SEEDS as RARITY_FILL_HOSTILES
+
+RANDOM_HOSTILE_SEEDS = LV1TO10 + LV11TO20 + LV21TO30 + LV31TO100 + RARITY_FILL_HOSTILES
 
 # Map spawn zones to new hostile ids
 RANDOM_HOSTILE_LINKS = {

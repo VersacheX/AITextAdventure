@@ -18,7 +18,7 @@ SEEDS_LV31TO100 = [
   "str_per_level": 5, "dex_per_level": 0, "con_per_level": 4, "int_per_level": 0},
 
  # min_spawn_level == 35
- {"id": "tomb_keeper", "name": "Tomb Keeper", "hostile_type": "undead", "role": "hazard", "min_spawn_level": 35, "rarity": "rare", "base_xp": 800,
+ {"id": "rotted_tomb_keeper", "name": "Rotted Tomb Keeper", "hostile_type": "undead", "role": "hazard", "min_spawn_level": 35, "rarity": "rare", "base_xp": 800,
   "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (80, 280),
   "basic_attack": "cursed touch", "strong_attack": "tomb sealing curse",
   "player_abilities": ["level_1_hostile_ability_bone_spear", "dark_dark_magic_lv2_umbra_storm"],

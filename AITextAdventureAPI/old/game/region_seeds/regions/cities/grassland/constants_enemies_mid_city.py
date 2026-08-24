@@ -11,10 +11,11 @@ from .enemies_mid.lv61to70 import RANDOM_HOSTILE_SEEDS as LV61TO70
 from .enemies_mid.lv71to80 import RANDOM_HOSTILE_SEEDS as LV71TO80
 from .enemies_mid.lv81to90 import RANDOM_HOSTILE_SEEDS as LV81TO90
 from .enemies_mid.lv91to100 import RANDOM_HOSTILE_SEEDS as LV91TO100
+from .enemies_shared import RANDOM_HOSTILE_SEEDS as RARITY_FILL_HOSTILES
 
 RANDOM_HOSTILE_SEEDS = (
  LV1TO10 + LV11TO20 + LV21TO30 + LV31TO40 + LV41TO50
- + LV51TO60 + LV61TO70 + LV71TO80 + LV81TO90 + LV91TO100
+ + LV51TO60 + LV61TO70 + LV71TO80 + LV81TO90 + LV91TO100 + RARITY_FILL_HOSTILES
 )
 
 # Mapping of zone/subtype -> list of hostile ids that can spawn there.

@@ -12,9 +12,14 @@ from .enemies_small.lv71to80 import RANDOM_HOSTILE_SEEDS as LV71TO80
 from .enemies_small.lv81to90 import RANDOM_HOSTILE_SEEDS as LV81TO90
 from .enemies_small.lv91to100 import RANDOM_HOSTILE_SEEDS as LV91TO100
 
+# Shared forest-region rarity-coverage fill seeds (single package import).
+# Same roster used by every forest city size; self-sufficient across all zones.
+from .enemies_shared import RANDOM_HOSTILE_SEEDS as RARITY_FILL_HOSTILES
+
 RANDOM_HOSTILE_SEEDS = (
  LV1TO10 + LV11TO20 + LV21TO30 + LV31TO40 + LV41TO50
  + LV51TO60 + LV61TO70 + LV71TO80 + LV81TO90 + LV91TO100
+ + RARITY_FILL_HOSTILES
 )
 
 # Mapping of zone/subtype -> list of hostile ids that can spawn there.

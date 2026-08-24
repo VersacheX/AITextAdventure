@@ -49,7 +49,7 @@ RANDOM_HOSTILE_SEEDS = [
   "str_per_level": 4, "dex_per_level": 0, "con_per_level": 4, "int_per_level": 0},
 
  # min_spawn_level == 34
- {"id": "sand_hydra", "name": "Sand Hydra", "hostile_type": "creature", "role": "damage", "min_spawn_level": 34, "rarity": "superrare", "base_xp": 1400,
+ {"id": "glass_hydra", "name": "Glass Hydra", "hostile_type": "creature", "role": "damage", "min_spawn_level": 34, "rarity": "superrare", "base_xp": 1400,
   "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (50, 200),
   "basic_attack": "multi-head bite", "strong_attack": "venom torrent",
   "player_abilities": ["level_1_hostile_ability_dark_skill_corrosive_spit", "fire_magic_lv1_fireball"],
