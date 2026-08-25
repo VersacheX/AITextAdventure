@@ -108,7 +108,7 @@ NPCS = [
         'description': (
             'A spectral librarian of the Sunken Archive, bound to drifting shelves of half-buried knowledge.'
         ),
-        "image": "desert_large:archive_voice1",
+        "image": "npcs:archive_voice1",
         "psychology": {
             "mbti": "INTJ",
             "dominant": "Ni — Perceives the archive's collapse as an inevitable, readable pattern.",

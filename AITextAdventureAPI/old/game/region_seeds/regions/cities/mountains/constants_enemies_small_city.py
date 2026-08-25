@@ -11,9 +11,13 @@ from .enemies_small.lv71to80 import RANDOM_HOSTILE_SEEDS as SEEDS_LV71TO80
 from .enemies_small.lv81to90 import RANDOM_HOSTILE_SEEDS as SEEDS_LV81TO90
 from .enemies_small.lv91to100 import RANDOM_HOSTILE_SEEDS as SEEDS_LV91TO100
 
+# Shared mountain-region rarity-coverage fill seeds (single package import).
+# Efficient roster: same seeds used by every mountain city size.
+from .enemies_shared import RANDOM_HOSTILE_SEEDS as RARITY_FILL_HOSTILES
+
 RANDOM_HOSTILE_SEEDS = (SEEDS_LV1TO10 + SEEDS_LV11TO20 + SEEDS_LV21TO30 + SEEDS_LV31TO40 +
                         SEEDS_LV41TO50 + SEEDS_LV51TO60 + SEEDS_LV61TO70 + SEEDS_LV71TO80 +
-                        SEEDS_LV81TO90 + SEEDS_LV91TO100)
+                        SEEDS_LV81TO90 + SEEDS_LV91TO100 + RARITY_FILL_HOSTILES)
 
 # Mapping of zone/subtype -> list of hostile ids that can spawn there.
 RANDOM_HOSTILE_LINKS = {

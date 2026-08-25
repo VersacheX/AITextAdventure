@@ -10,7 +10,7 @@ NPCS = [
 			' Velra claims the Vaults whisper to her, guiding her to lost records and forbidden histories.'
 			' Her eyes flicker with bioluminescent ink, a side effect of decades spent cataloging arcane relics.'
 		),
-		"image": "desert_mid:velra_the_indexer1",
+		"image": "npcs:velra_the_indexer1",
 		"psychology": {
 			"mbti": "ISTJ",
 			"dominant": "Si — Every record catalogued is an extension of her internal index; she trusts precedent over intuition.",
@@ -36,7 +36,7 @@ NPCS = [
 			' Kavren maintains a web of unseen contacts throughout Nightveil Spire.'
 			' His presence is unsettlingly calm, as though he already knows the outcome of every conversation.'
 		),
-		"image": "desert_mid:shade_broker_kavren1",
+		"image": "npcs:shade_broker_kavren1",
 		"psychology": {
 			"mbti": "INFJ",
 			"dominant": "Ni — Perceives the hidden architecture of conversations and relationships before they fully form.",
@@ -61,7 +61,7 @@ NPCS = [
 			'A half‑mechanical guardian built to maintain the Vaults. '
 			'Threx\'s voice crackles with static and ancient protocol.'
 		),
-		"image": "desert_mid:archivist_warden_threx1",
+		"image": "npcs:archivist_warden_threx1",
 		"psychology": {
 			"mbti": "ISTJ",
 			"dominant": "Si — Operates entirely on encoded protocol; deviation is treated as a critical system error.",
@@ -86,7 +86,7 @@ NPCS = [
 			'A disembodied voice formed from drifting script‑dust. '
 			'It speaks in half‑sentences and broken memories.'
 		),
-		"image": "desert_mid:vault_whisper1",
+		"image": "npcs:vault_whisper1",
 		"psychology": {
 			"mbti": "INFP",
 			"dominant": "Fi — Exists as pure fragmented feeling — grief, longing, and the ache of incomplete thoughts.",
@@ -110,7 +110,7 @@ NPCS = [
 		'description': (
 			'A ghostly figure made of liquid ink, shifting between shapes as though searching for a lost identity.'
 		),
-		"image": "desert_mid:ink_specter1",
+		"image": "bosses:ink_specter1",
 		"psychology": {
 			"mbti": "ENFP",
 			"dominant": "Ne — Constantly shifts form, chasing a self-concept it cannot hold.",
