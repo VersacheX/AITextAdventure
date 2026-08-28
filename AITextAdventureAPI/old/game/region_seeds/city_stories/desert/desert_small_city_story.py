@@ -3,14 +3,14 @@
 
 NPCS = [
 	{
-		'npc_id': 'sparkwire_Jexa',
+		'npc_id': 'jexa_sparkwire',
 		'name': 'Jexa Sparkwire',
 		'description': (
 			'A scavenger‑engineer who grafts glowing circuitry into salvaged tech.'
 			'  Jexa treats every broken device like a wounded animal needing care.'
 			'  Her workshop hums with neon pulses that mirror her restless energy.'
 		),
-		"image": "desert_small:sparkwire_jexa1",
+		"image": "npcs:jexa_sparkwire1",
 		"psychology": {
 			"mbti": "ENFP",
 			"dominant": "Ne — Sees salvage as possibility; every broken device is a puzzle waiting to be reinvented.",
@@ -36,7 +36,7 @@ NPCS = [
 			'  Krayt\'s voice is gravelly from years of dust storms and whispered negotiations.'
 			'  He claims the Bazaar chooses its merchants, not the other way around.'
 		),
-		"image": "desert_small:morrowdeal_krayt1",
+		"image": "npcs:morrowdeal_krayt1",
 		"psychology": {
 			"mbti": "ISTP",
 			"dominant": "Ti — Evaluates every deal with cold internal logic; sentiment has no price.",
@@ -61,7 +61,7 @@ NPCS = [
             'A desert hermit who claims to "hear" the emotions of broken machines. '
             'Venn wanders scrap fields collecting stories from discarded tech.'
         ),
-        "image": "desert_small:scrap_seer_venn1",
+        "image": "npcs:scrap_seer_venn1",
         "psychology": {
             "mbti": "INFP",
             "dominant": "Fi — Attributes genuine emotional states to machines; their grief and relief are as real to him as any person's.",
@@ -86,7 +86,7 @@ NPCS = [
             'A glitching apparition formed from corrupted scrap‑data. '
             'Its voice stutters like a damaged audio log.'
         ),
-        "image": "desert_small:hollow_echo1",
+        "image": "bosses:hollow_echo1",
         "psychology": {
             "mbti": "ISTJ",
             "dominant": "Si — Trapped replaying corrupted loops of its original purpose; cannot escape the past record.",
@@ -111,7 +111,7 @@ NPCS = [
             'A shimmering figure made of distorted radio waves and static. '
             'It flickers between frequencies as it speaks.'
         ),
-        "image": "desert_small:signal_wraith1",
+        "image": "bosses:signal_wraith1",
         "psychology": {
             "mbti": "ENFJ",
             "dominant": "Fe — Broadcasts emotion indiscriminately — its signals carry whatever feeling is strongest nearby.",
@@ -137,7 +137,7 @@ NPCS = [
             " It manifests as a humanoid silhouette made of crackling lightning and compressed wind."
             " Its purpose is to guard unstable storm‑tech from intruders."
         ),
-        "image": "desert_small:tempest_warden1",
+        "image": "bosses:tempest_warden1",
         "psychology": {
             "mbti": "ISTJ",
             "dominant": "Si — Executes the original guard protocol with total fidelity, regardless of elapsed time.",
@@ -163,7 +163,7 @@ NPC_DIALOG = [
     # --- Base city standing dialog ---
 
     {
-        'npc_id': 'sparkwire_Jexa',
+        'npc_id': 'jexa_sparkwire',
         'dialog_id': 'Jexa_intro',
         'dialog': [
             "Something's wrong with the tech around here.",
@@ -208,7 +208,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'sparkwire_Jexa',
+        'npc_id': 'jexa_sparkwire',
         'dialog_id': 'Jexa_closing',
         'dialog': [
             "You did it. The Heart's gone quiet.",
@@ -277,7 +277,7 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'sparkwire_Jexa',
+        'npc_id': 'jexa_sparkwire',
         'dialog_id': 'Jexa_tess_location',
         'dialog': [
             "Tess? Yeah, she stopped by the workshop.",
@@ -645,14 +645,14 @@ TASKS = [
 			{
 				'event_type': 'create_npc',
 				'params': {
-					'npc_id': 'sparkwire_Jexa',
+					'npc_id': 'jexa_sparkwire',
 					'location': 'region_city_other1'
 				}
 			},
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
-					'npc_id': 'sparkwire_Jexa',
+					'npc_id': 'jexa_sparkwire',
 					'standing_text': [
 						"I mend what others discard — sit and tell me how it broke."
 					]
@@ -917,21 +917,21 @@ TASKS += [
         'task_id': 'desert_small_city_type_f_ask_jexa',
         'type': 'meet',
         'to_type': 'npc',
-        'to_id': 'sparkwire_Jexa',
+        'to_id': 'jexa_sparkwire',
         'task_acquire_events': [
         ],
         'task_complete_events': [
             {
                 'event_type': 'initiate_dialog',
                 'params': {
-                    'npc_id': 'sparkwire_Jexa',
+                    'npc_id': 'jexa_sparkwire',
                     'dialog_id': 'Jexa_tess_location'
                 }
             },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_desert_small_f_ask_jexa'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_desert_small_f_ask_jexa' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_desert_small_f_ask_jexa' } },
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'sparkwire_Jexa', 'standing_text': ["Something's wrong with the tech around here.", "Devices are waking up on their own — humming, twitching, overheating.", "Feels like a sick machine crying for help."] } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'jexa_sparkwire', 'standing_text': ["Something's wrong with the tech around here.", "Devices are waking up on their own — humming, twitching, overheating.", "Feels like a sick machine crying for help."] } },
             {
                 'event_type': 'award_task',
                 'params': {

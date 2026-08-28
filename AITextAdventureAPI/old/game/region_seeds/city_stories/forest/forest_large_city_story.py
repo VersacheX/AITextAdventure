@@ -10,7 +10,7 @@ NPCS = [
 			' Saphrin communes with the living wood, sensing emotional echoes in traded goods.'
 			' Their presence is calming, like moss‑softened footsteps in ancient groves.'
 		),
-		"image": "forest_large:elder_saphrin1",
+		"image": "npcs:elder_saphrin1",
 		"psychology": {
 			"mbti": "INFJ",
 			"dominant": "Ni — Senses the deeper intention behind every trade before the terms are spoken.",
@@ -36,7 +36,7 @@ NPCS = [
 			' Loryn\'s voice carries like birdsong, disarming even the most guarded traders.'
 			' They claim the forest itself enforces every bargain struck in the Den.'
 		),
-		"image": "forest_large:twigwhisper_loryn1",
+		"image": "npcs:twigwhisper_loryn1",
 		"psychology": {
 			"mbti": "ENTP",
 			"dominant": "Ne — Reads negotiation as a game of shifting possibilities; always three counter-offers ahead.",
@@ -61,7 +61,7 @@ NPCS = [
 			'A wandering hermit who reads drifting spores like constellations. '
 			'Myrn senses disturbances in the forest\'s emotional undergrowth.'
 		),
-		"image": "forest_large:spore_seer_myrn1",
+		"image": "npcs:spore_seer_myrn1",
 		"psychology": {
 			"mbti": "INTP",
 			"dominant": "Ti — Classifies spore-drift patterns into an elaborate internal taxonomy only he fully understands.",

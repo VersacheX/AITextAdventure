@@ -10,7 +10,7 @@ NPCS = [
 			' Thera studies flame‑born spirits and believes each spark carries a prophecy.'
 			' Her laughter crackles like burning cedar.'
 		),
-		"image": "forest_mid:emberwitch_thera1",
+		"image": "npcs:emberwitch_thera1",
 		"psychology": {
 			"mbti": "ENFJ",
 			"dominant": "Fe — Reads the emotional charge in every flame-born spirit and shapes her prophecies for the person who needs to hear them.",
@@ -36,7 +36,7 @@ NPCS = [
 			' Mirlo\'s potions glow with soft moonlight, even underground.'
 			' He often forgets whether he\'s brewing medicine or mild chaos.'
 		),
-		"image": "forest_mid:alchemist_mirlo1",
+		"image": "npcs:alchemist_mirlo1",
 		"psychology": {
 			"mbti": "ENTP",
 			"dominant": "Ne — Endlessly curious. Combines ingredients, theories, and side-effects with reckless, joyful creativity.",
@@ -61,7 +61,7 @@ NPCS = [
             'A wandering mystic who reads moon-embers drifting through the forest. '
             'Vael senses disturbances where flame and night intertwine.'
         ),
-        "image": "forest_mid:glimmer_hermit_vael1",
+        "image": "npcs:glimmer_hermit_vael1",
 		"psychology": {
 			"mbti": "INTJ",
 			"dominant": "Ni — Reads the world through invisible patterns. Moon-embers tell him what others cannot perceive.",
@@ -85,7 +85,7 @@ NPCS = [
         'description': (
             'A flickering ember‑spirit born from unstable flame‑magic within the Embergrove Rift.'
         ),
-        "image": "forest_mid:riftspark1",
+        "image": "bosses:riftspark1",
         "psychology": {
             "mbti": "ENFP",
             "dominant": "Ne — Leaps between flames with unpredictable, explosive energy; exists in perpetual becoming.",
@@ -109,7 +109,7 @@ NPCS = [
         'description': (
             'A spectral figure formed from condensed moonlight and alchemical fumes.'
         ),
-        "image": "forest_mid:lunarcask_shade1",
+        "image": "bosses:lunarcask_shade1",
         "psychology": {
             "mbti": "INTJ",
             "dominant": "Ni — Moves with slow, purposeful inevitability; its intentions are opaque until the last moment.",
