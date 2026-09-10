@@ -8,8 +8,8 @@
         "ability_type": "tech",
         "level": 4,
         "elements": ["light", "fire", "electric", "air"],
-        "base_power": 108,
-        "ap_cost": 95,
+        "base_power": 128,
+        "ap_cost": 115,
         "effect": "damage",
         "can_aoe": False
     },
@@ -21,8 +21,8 @@
         "ability_type": "tech",
         "level": 4,
         "elements": ["light", "fire", "earth", "dark"],
-        "base_power": 110,
-        "ap_cost": 100,
+        "base_power": 130,
+        "ap_cost": 118,
         "effect": "damage",
         "can_aoe": False
     },
@@ -34,8 +34,8 @@
         "ability_type": "tech",
         "level": 4,
         "elements": ["light", "ice", "air", "dark"],
-        "base_power": 102,
-        "ap_cost": 90,
+        "base_power": 122,
+        "ap_cost": 110,
         "effect": "damage",
         "can_aoe": False
     },
@@ -48,8 +48,8 @@
         "ability_type": "tech",
         "level": 4,
         "elements": ["light", "water", "fire", "air"],
-        "base_power": 88,
-        "ap_cost": 110,
+        "base_power": 105,
+        "ap_cost": 120,
         "effect": "damage",
         "can_aoe": True
     },
@@ -61,8 +61,8 @@
         "ability_type": "tech",
         "level": 4,
         "elements": ["light", "earth", "electric", "ice"],
-        "base_power": 92,
-        "ap_cost": 115,
+        "base_power": 105,
+        "ap_cost": 122,
         "effect": "damage",
         "can_aoe": True
     },
@@ -74,7 +74,7 @@
         "ability_type": "tech",
         "level": 4,
         "elements": ["light", "fire", "dark", "electric"],
-        "base_power": 95,
+        "base_power": 105,
         "ap_cost": 120,
         "effect": "damage",
         "can_aoe": True
@@ -88,8 +88,8 @@
         "ability_type": "tech",
         "level": 4,
         "elements": ["light", "dark", "air", "water"],
-        "base_power": 0,
-        "ap_cost": 85,
+        "base_power": 20,
+        "ap_cost": 120,
         "effect": "status",
         "status_keys": ["defense_debuff", "dexterity_debuff", "attack_debuff"],
         "can_aoe": True
@@ -102,8 +102,8 @@
         "ability_type": "tech",
         "level": 4,
         "elements": ["light", "ice", "dark", "earth"],
-        "base_power": 0,
-        "ap_cost": 90,
+        "base_power": 25,
+        "ap_cost": 132,
         "effect": "status",
         "status_keys": ["dexterity_debuff", "stun", "constitution_debuff"],
         "can_aoe": True
@@ -118,7 +118,7 @@
         "level": 4,
         "elements": ["light", "fire", "air", "dark"],
         "base_power": 0,
-        "ap_cost": 100,
+        "ap_cost": 120,
         "effect": "status",
         "status_keys": ["petrify"],
         "can_aoe": True
@@ -131,16 +131,16 @@
         "ability_type": "tech",
         "level": 4,
         "elements": ["light", "earth", "water", "electric"],
-        "base_power": 0,
-        "ap_cost": 105,
+        "base_power": 2,
+        "ap_cost": 125,
         "effect": "status",
         "status_keys": ["stun", "silence"],
         "can_aoe": True
     },
 
     # crux — hazard/damage: scans and debuffs the philosophically corrupt
-    {"id": "debuff_the_wicked", "name": "Debuff the Wicked", "description": "Crux runs a cold diagnostic on the target and finds them logically inconsistent — it catalogues every contradiction in their form and systematically dismantles their ability to act, think, and defend.", "ability_type": "tech", "level": 4, "elements": ["dark", "electric", "ice", "air"], "base_power": 0, "ap_cost": 108, "effect": "status", "status_keys": ["intelligence_debuff", "attack_debuff", "defense_debuff"], "can_aoe": False, "non_player_ability": True},
+    {"id": "debuff_the_wicked", "name": "Debuff the Wicked", "description": "Crux runs a cold diagnostic on the target and finds them logically inconsistent — it catalogues every contradiction in their form and systematically dismantles their ability to act, think, and defend.", "ability_type": "tech", "level": 4, "elements": ["dark", "electric", "ice", "air"], "base_power": 28, "ap_cost": 128, "effect": "status", "status_keys": ["intelligence_debuff", "attack_debuff", "defense_debuff", "constitution_debuff"], "can_aoe": False, "non_player_ability": True},
     # crux boss — upgraded debuff as AoE logic collapse
-    {"id": "logic_collapse", "name": "Logic Collapse", "description": "Crux broadcasts a terminal contradiction across the entire field — every mind within range short-circuits as it attempts to process something that cannot be true, leaving them slowed, silenced, and unable to reason.", "ability_type": "tech", "level": 4, "elements": ["dark", "dark", "electric", "ice"], "base_power": 0, "ap_cost": 112, "effect": "status", "status_keys": ["intelligence_debuff", "silence", "dexterity_debuff"], "can_aoe": True, "non_player_ability": True},
+    {"id": "logic_collapse", "name": "Logic Collapse", "description": "Crux broadcasts a terminal contradiction across the entire field — every mind within range short-circuits as it attempts to process something that cannot be true, leaving them slowed, silenced, and unable to reason.", "ability_type": "tech", "level": 4, "elements": ["dark", "dark", "electric", "ice"], "base_power": 15, "ap_cost": 132, "effect": "status", "status_keys": ["intelligence_debuff", "silence", "dexterity_debuff"], "can_aoe": True, "non_player_ability": True},
 
 ]

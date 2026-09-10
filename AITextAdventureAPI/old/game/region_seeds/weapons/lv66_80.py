@@ -1,5 +1,5 @@
 ﻿# Weapons for levels 66-80
-# Extended characters: Andrea Starveil (70), Talia Softheart (80)
+# Extended characters: Andrea Starveil (70), Talon (80)
 WEAPONS_LV66_80 = [
     # --- Andrea Starveil (level 70) — Fire/Air/Water agile ---
     {
@@ -42,11 +42,11 @@ WEAPONS_LV66_80 = [
         "constitution": 8,
         "elements": ["fire", "air", "water"]
     },
-    # --- Talia Softheart (level 80) — Light/Water/Earth/Air caster ---
+    # --- Talon (level 80) — Light/Water/Earth/Air caster ---
     {
         "id": "mercy_staff",
         "name": "Mercy Staff",
-        "description": "A staff carved from a fallen healer's tree — species unknown, never catalogued. It blooms with pale flowers when near the dying. Talia has stopped being surprised by it.",
+        "description": "A staff carved from a fallen healer's tree — species unknown, never catalogued. It blooms with pale flowers when near the dying. Talon has stopped being surprised by it.",
         "damage": 106,
         "damage_type": "energy",
         "ap_cost": 3,
@@ -66,7 +66,7 @@ WEAPONS_LV66_80 = [
     {
         "id": "kindness_staff",
         "name": "Kindness Staff",
-        "description": "A staff Talia refuses to have repaired by anyone else — she re-wraps the grip herself at the start of every season. The wood has absorbed so much healing energy it glows faintly on overcast days.",
+        "description": "A staff Talon refuses to have repaired by anyone else — she re-wraps the grip herself at the start of every season. The wood has absorbed so much healing energy it glows faintly on overcast days.",
         "damage": 106,
         "damage_type": "energy",
         "ap_cost": 3,

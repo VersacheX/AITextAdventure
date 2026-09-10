@@ -236,10 +236,10 @@ NPC_DIALOG += [
 
 NPC_DIALOG += [
 
-    # --- Type C: Sera Flameweaver ---
+    # --- Type C: Veyr Ashcant ---
 
     {
-        'npc_id': 'sera_flameweaver',
+        'npc_id': 'veyr_ashcant',
         'dialog_id': 'sera_type_c_intro',
         'dialog': [
             "Oh! You actually stopped. Most people walk past.",
@@ -249,7 +249,7 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'sera_flameweaver',
+        'npc_id': 'veyr_ashcant',
         'dialog_id': 'sera_type_c_thera_reaction',
         'dialog': [
             "Thera said that? She sees the sparks and calls them warnings.",
@@ -258,7 +258,7 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'sera_flameweaver',
+        'npc_id': 'veyr_ashcant',
         'dialog_id': 'sera_type_c_join',
         'dialog': [
             "You're not going to tell me to be careful, are you.",
@@ -420,7 +420,7 @@ NPC_DIALOG += [
         'npc_id': 'faith',
         'dialog_id': 'faith_forest_mid_c_consult_thera',
         'dialog': [
-            "Thera sees warnings in the sparks. Sera sees invitations. Both can be true."
+            "Thera sees warnings in the sparks. Veyr sees invitations. Both can be true."
         ]
     },
     {
@@ -891,8 +891,8 @@ TASKS += [
 TASKS += [
 
     # =========================================================
-    # TYPE C — Sera Flameweaver
-    # Extended Character: sera_flameweaver
+    # TYPE C — Veyr Ashcant
+    # Extended Character: veyr_ashcant
     # Final event: character_join
     # Awarded by: forest_mid_city_regional_complete_gate (is_chapter_gte 2)
     # =========================================================
@@ -901,12 +901,12 @@ TASKS += [
         'task_id': 'forest_mid_city_type_c_find_sera',
         'type': 'meet',
         'to_type': 'npc',
-        'to_id': 'sera_flameweaver',
+        'to_id': 'veyr_ashcant',
         'task_acquire_events': [
             {
                 'event_type': 'create_npc',
                 'params': {
-                    'npc_id': 'sera_flameweaver',
+                    'npc_id': 'veyr_ashcant',
                     'location': 'region_city_other2'
                 }
             }
@@ -915,14 +915,14 @@ TASKS += [
             {
                 'event_type': 'initiate_dialog',
                 'params': {
-                    'npc_id': 'sera_flameweaver',
+                    'npc_id': 'veyr_ashcant',
                     'dialog_id': 'sera_type_c_intro'
                 }
             },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_forest_mid_c_find_sera' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_forest_mid_c_find_sera' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_forest_mid_c_find_sera'   } },
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'sera_flameweaver','standing_text': ["The Rift pulses like a heartbeat.","I've been trying to figure out whose."] } },
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'veyr_ashcant','standing_text': ["The Rift pulses like a heartbeat.","I've been trying to figure out whose."] } },
             {
                 'event_type': 'award_task',
                 'params': {
@@ -943,7 +943,7 @@ TASKS += [
             {
                 'event_type': 'initiate_dialog',
                 'params': {
-                    'npc_id': 'sera_flameweaver',
+                    'npc_id': 'veyr_ashcant',
                     'dialog_id': 'sera_type_c_thera_reaction'
                 }
             },
@@ -964,14 +964,14 @@ TASKS += [
         'task_id': 'forest_mid_city_type_c_earn_sera',
         'type': 'meet',
         'to_type': 'npc',
-        'to_id': 'sera_flameweaver',
+        'to_id': 'veyr_ashcant',
         'task_acquire_events': [
         ],
         'task_complete_events': [
             {
                 'event_type': 'initiate_dialog',
                 'params': {
-                    'npc_id': 'sera_flameweaver',
+                    'npc_id': 'veyr_ashcant',
                     'dialog_id': 'sera_type_c_join'
                 }
             },
@@ -981,13 +981,13 @@ TASKS += [
             {
                 'event_type': 'character_join',
                 'params': {
-                    'character_id': 'sera_flameweaver'
+                    'character_id': 'veyr_ashcant'
                 }
             },
             {
                 'event_type': 'hide_npc',
                 'params': {
-                    'npc_id': 'sera_flameweaver'
+                    'npc_id': 'veyr_ashcant'
                 }
             }
         ]

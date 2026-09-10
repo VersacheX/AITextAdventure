@@ -470,7 +470,7 @@ NPC_DIALOG = [
         'npc_id': 'glamour',
         'dialog_id': 'glamour_ch8_intro',
         'dialog': [
-            "Look at me. LOOK AT ME. You can't look away. Attention is the only currency that matters here. And you're all bankrupt."
+            "Look at you looking at me. You can't look away. Attention is the only currency that matters here. And you're all bankrupt."
         ]
     },
     {

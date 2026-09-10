@@ -1,5 +1,9 @@
 ﻿# Skill abilities for level5
 LEVEL_5_SKILL_ABILITY_SEEDS = [
+    {"id": "water_earth_skill_lv5_sap_overgrowth", "name": "Sap Overgrowth", "description": "A sticky bloom that weakens plating and hide.", "ability_type": "skill", "level":5, "elements": ["water", "earth", "fire", "air", "light"], "base_power":0, "ap_cost":160, "effect": "status", "status_keys": ["defense_debuff", "dexterity_debuff", "stun"], "can_aoe": True},
+    {"id": "earth_dark_skill_lv5_venom_trace", "name": "Venom Trace", "description": "A lingering toxin that deals ongoing harm.", "ability_type": "skill", "level":5, "elements": ["earth", "dark", "fire", "water", "air"], "base_power":28, "ap_cost":160, "effect": "status", "status_keys": ["continuous_damage", "elemental_debuff"], "can_aoe": True},
+    {"id": "water_skill_lv5_riptide_chain", "name": "Riptide Chain", "description": "A linked rip that catches multiple foes.", "ability_type": "skill", "level":5, "elements": ["water", "water", "air", "light", "earth"], "base_power":165, "ap_cost":170, "effect": "damage", "can_aoe": True},
+    {"id": "fire_skill_lv5_ember_wake", "name": "Ember Wake", "description": "A wake of embers follows your strike.", "ability_type": "skill", "level":5, "elements": ["fire", "earth", "air", "light", "dark"], "base_power":165, "ap_cost":170, "effect": "damage", "can_aoe": True},
 
   #### NON PLAYER ABILITIES
     # rapture_trial — damage: pure adrenaline burst

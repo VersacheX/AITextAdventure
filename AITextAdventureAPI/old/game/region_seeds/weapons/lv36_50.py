@@ -1,7 +1,7 @@
 ﻿# Weapons for levels 36-50
 # Covers endgame attainable characters: Lyren Vale (35), Marshal Vek Drast (45), Warden Hale Brimholt (50)
-# Extended characters: Sera Flameweaver (40), Regent Sylvara (40), Spark Maddox (40),
-#                      Commander Drax (40), Ghost (40), Elyra Dawnseer (40), Voss Caldera (50)
+# Extended characters: Veyr Ashcant (40), Regent Sylvara (40), Spark Maddox (40),
+#                      Commander Drax (40), Ghost (40), Eldon Dawnseer (40), Voss Caldera (50)
 WEAPONS_LV36_50 = [
     # --- Lyren Vale (level 35) — Water/Light/Air Faith healer ---
     {
@@ -66,7 +66,7 @@ WEAPONS_LV36_50 = [
      "constitution": 40,
         "elements": ["water", "light"]
     },
-    # --- Sera Flameweaver (level 40) — Fire/Dark/Electric caster ---
+    # --- Veyr Ashcant (level 40) — Fire/Dark/Electric caster ---
     {
         "id": "flameheart_staff",
         "name": "Flameheart Staff",
@@ -90,7 +90,7 @@ WEAPONS_LV36_50 = [
     {
         "id": "blazeheart_staff",
         "name": "Blazeheart Staff",
-        "description": "A twin-core variant of the Flameheart — two preserved embers wound together, their competing heat creating an unstable surge that Sera has learned to channel.",
+        "description": "A twin-core variant of the Flameheart — two preserved embers wound together, their competing heat creating an unstable surge that Veyr has learned to channel.",
         "damage": 44,
         "damage_type": "energy",
         "ap_cost": 3,
@@ -271,11 +271,11 @@ WEAPONS_LV36_50 = [
         "constitution": 14,
         "elements": ["dark", "air", "electric"]
     },
-    # --- Elyra Dawnseer (level 40) — Light/Dark/Earth caster ---
+    # --- Eldon Dawnseer (level 40) — Light/Dark/Earth caster ---
     {
         "id": "omen_staff",
         "name": "Omen Staff",
-        "description": "A gnarled staff grown from a tree struck by lightning at the exact moment of a fracture event. Every vision Elyra has had since has passed through it first.",
+        "description": "A gnarled staff grown from a tree struck by lightning at the exact moment of a fracture event. Every vision Eldon has had since has passed through it first.",
         "damage": 44,
         "damage_type": "energy",
         "ap_cost": 3,
@@ -295,7 +295,7 @@ WEAPONS_LV36_50 = [
     {
         "id": "seer_focus_wand",
         "name": "Seer's Focus Wand",
-        "description": "A short wand carved from vision-bone — a material that softens at the moment of prophecy and hardens again when the vision resolves. Elyra keeps it in constant contact with her palm.",
+        "description": "A short wand carved from vision-bone — a material that softens at the moment of prophecy and hardens again when the vision resolves. Eldon keeps it in constant contact with her palm.",
         "damage": 44,
         "damage_type": "energy",
         "ap_cost": 3,

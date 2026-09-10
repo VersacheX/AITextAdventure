@@ -184,6 +184,18 @@ R24 MEET_DELIVER_NO_NPC_STANDING_TEXT  (warning)
     without updating the NPC's standing text means the player will keep seeing
     stale interaction text after the narrative beat resolves.
     Rendered as yellow in the timeline tree; counted separately in the toast.
+
+R25 NPC placement location validity (delegated to npc_placement_validator)
+    create_npc / show_npc location params are validated against the buildings
+    and areas that actually exist for the region or city the owning task belongs
+    to.  See ``npc_placement_validator`` for the full location grammar and the
+    emitted codes:
+    - NPC_LOCATION_UNKNOWN_CITY_BUILDING (error)
+    - NPC_LOCATION_UNKNOWN_REGION_AREA  (error)
+    - NPC_LOCATION_UNRESOLVED_CONTEXT   (warning)
+    Unplaced ('(no location)'), center, and open-area forms are always safe.
+    Runtime-resolved locations (city_number_N / named city) still have their
+    trailing building token validated against all known buildings.
 """
 from __future__ import annotations
 
@@ -196,6 +208,10 @@ from tui.services.dev.dataservices.models import (
     TimelineTaskNode,
     TimelineValidationError,
 )
+from tui.services.dev.dataservices.npc_placement_validator import (
+    validate_npc_placements,
+)
+from tui.services.dev.dataservices.npc_service import _build_chapter_to_city_bucket
 
 log = logging.getLogger(__name__)
 
@@ -1386,6 +1402,15 @@ def validate_timeline_integrity(
                         f"Main-story bucket '{bucket_id}' has no advance_chapter event. "
                         f"(Warning — may be intentional for final chapters.)",
                     ))
+
+    # ── R25: NPC placement location validity (delegated) ──────────────────
+    # The location grammar / building resolution is complex enough to live in a
+    # dedicated module; pass it the flat task list and const and merge results.
+    placement_errors = validate_npc_placements(
+        all_tasks, const, _build_chapter_to_city_bucket()
+    )
+    for task_id, errs in placement_errors.items():
+        errors_map[task_id].extend(errs)
 
     # ── Attach errors to nodes ────────────────────────────────────────────
     # task_node_map is built earlier — do not reassign here

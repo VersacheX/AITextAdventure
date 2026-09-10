@@ -1,7 +1,7 @@
 ﻿# Weapons for levels 81-105
-# Extended characters: Korina Brightvein (85), Lyric (95), Osten Dreamweaver (100), Lira Emberforge (105)
+# Extended characters: Alden Brightvein (85), Lyric (95), Osten Dreamweaver (100), Lira Emberforge (105)
 WEAPONS_LV81_105 = [
-    # --- Korina Brightvein (level 85) — Light/Electric/Fire/Earth/Air caster ---
+    # --- Alden Brightvein (level 85) — Light/Electric/Fire/Earth/Air caster ---
     {
         "id": "beacon_staff",
         "name": "Beacon Staff",
@@ -25,7 +25,7 @@ WEAPONS_LV81_105 = [
     {
         "id": "voice_of_valor_staff",
         "name": "Voice of Valor Staff",
-        "description": "A staff that resonates at the frequency of collective will — when Korina speaks through it, people remember why they started. She has ended more fights with it than she has started.",
+        "description": "A staff that resonates at the frequency of collective will — when Alden speaks through it, people remember why they started. She has ended more fights with it than she has started.",
         "damage": 114,
         "damage_type": "energy",
         "ap_cost": 3,

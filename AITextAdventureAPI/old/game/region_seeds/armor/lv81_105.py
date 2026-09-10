@@ -1,8 +1,8 @@
 ﻿# Armor for levels 81-105
-# Extended characters: Korina Brightvein (85), Lyric (95), Osten Dreamweaver (100), Lira Emberforge (105)
+# Extended characters: Alden Brightvein (85), Lyric (95), Osten Dreamweaver (100), Lira Emberforge (105)
 ARMOR_LV81_105 = {
     "head": [
-        # --- Korina Brightvein (lv85) — light/electric/air caster ---
+        # --- Alden Brightvein (lv85) — light/electric/air caster ---
         {
             "id": "brightcall_crown",
             "name": "Brightcall Crown",
@@ -15,7 +15,7 @@ ARMOR_LV81_105 = {
         {
             "id": "rallying_crown",
             "name": "Rallying Crown",
-            "description": "A crown of interlocked light-bands — each band was added after Korina pulled a different group back from the edge. She doesn't remember how many there are now.",
+            "description": "A crown of interlocked light-bands — each band was added after Alden pulled a different group back from the edge. She doesn't remember how many there are now.",
             "defense": 56, "durability": 680, "max_durability": 680, "value": 30400,
             "min_spawn_level": 85, "rarity": "notfound",
             "strength": 4, "dexterity": 10, "intelligence": 58, "constitution": 32,
@@ -114,7 +114,7 @@ ARMOR_LV81_105 = {
         { "id": "warband_helm_lv83", "name": "Warband Helm", "description": "A production-grade full helm issued in bulk to standing warbands. The interior padding has been replaced by every owner. The shell has not.", "defense": 52, "durability": 650, "max_durability": 650, "value": 22400, "min_spawn_level": 83, "rarity": "common", "strength": 30, "dexterity": 12, "intelligence": 6, "constitution": 14, "elements": ["earth"] },
     ],
     "body": [
-        # --- Korina Brightvein (lv85) ---
+        # --- Alden Brightvein (lv85) ---
         {
             "id": "inspirator_robe",
             "name": "Inspirator Robe",
@@ -127,7 +127,7 @@ ARMOR_LV81_105 = {
         {
             "id": "brightweave_mantle",
             "name": "Brightweave Mantle",
-            "description": "A mantle woven from brightweave — a material that radiates a faint warmth without heat. People lean toward Korina when she wears it. She says this is about presence, not magic.",
+            "description": "A mantle woven from brightweave — a material that radiates a faint warmth without heat. People lean toward Alden when she wears it. She says this is about presence, not magic.",
             "defense": 72, "durability": 840, "max_durability": 840, "value": 38400,
             "min_spawn_level": 85, "rarity": "notfound",
             "strength": 6, "dexterity": 12, "intelligence": 76, "constitution": 44,
@@ -215,7 +215,7 @@ ARMOR_LV81_105 = {
         { "id": "sanctuary_robe_lv91", "name": "Sanctuary Robe", "description": "A robe woven inside a consecrated space that no longer exists. The weavers finished it the day before the space was closed. They knew.", "defense": 78, "durability": 860, "max_durability": 860, "value": 50400, "min_spawn_level": 91, "rarity": "rare", "strength": 6, "dexterity": 10, "intelligence": 92, "constitution": 54, "elements": ["light", "water", "earth"] },
     ],
     "arms": [
-        # --- Korina Brightvein (lv85) ---
+        # --- Alden Brightvein (lv85) ---
         {
             "id": "rallying_bracers",
             "name": "Rallying Bracers",
@@ -228,7 +228,7 @@ ARMOR_LV81_105 = {
         {
             "id": "goldvein_bracers",
             "name": "Goldvein Bracers",
-            "description": "Bracers threaded with compressed goldvein ore along the inner channel — a material that conducts inspiration the way copper conducts current. Korina had them made to specification.",
+            "description": "Bracers threaded with compressed goldvein ore along the inner channel — a material that conducts inspiration the way copper conducts current. Alden had them made to specification.",
             "defense": 40, "durability": 600, "max_durability": 600, "value": 22400,
             "min_spawn_level": 85, "rarity": "notfound",
             "strength": 4, "dexterity": 8, "intelligence": 42, "constitution": 26,
@@ -314,11 +314,11 @@ ARMOR_LV81_105 = {
         },
     ],
     "legs": [
-        # --- Korina Brightvein (lv85) ---
+        # --- Alden Brightvein (lv85) ---
         {
             "id": "brightpath_sandals",
             "name": "Brightpath Sandals",
-            "description": "Sandals whose straps glow faintly when Korina walks toward someone who needs her. She insists this is not a magical effect. The sandals disagree.",
+            "description": "Sandals whose straps glow faintly when Alden walks toward someone who needs her. She insists this is not a magical effect. The sandals disagree.",
             "defense": 48, "durability": 660, "max_durability": 660, "value": 26400,
             "min_spawn_level": 85, "rarity": "notfound",
             "strength": 4, "dexterity": 8, "intelligence": 50, "constitution": 30,

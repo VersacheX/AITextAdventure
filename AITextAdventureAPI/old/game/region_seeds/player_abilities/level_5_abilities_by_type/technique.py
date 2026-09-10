@@ -1,5 +1,8 @@
 ﻿# Technique abilities for level 5
-LEVEL_5_TECHNIQUE_ABILITY_SEEDS = [
+LEVEL_5_TECHNIQUE_ABILITY_SEEDS = [ 
+    {"id": "earth_technique_lv5_seismic_wave", "name": "Seismic Wave", "description": "A concussive wall of earth.", "ability_type": "technique", "level":5, "elements": ["earth", "earth", "air", "dark", "fire"], "base_power":194, "ap_cost":174, "effect": "damage", "can_aoe": False}, 
+    {"id": "technique_lv5_ravaging_strike", "name": "Ravaging Strike", "description": "A devastating single-target brutal strike.", "ability_type": "technique", "level":5, "elements": ["earth", "fire", "dark", "air", "light"], "base_power":192, "ap_cost":180, "effect": "damage", "can_aoe": False},
+
 
     #### NON PLAYER ABILITIES
     # cataclysm — damage: apocalyptic physical annihilation, the scheduled end of things

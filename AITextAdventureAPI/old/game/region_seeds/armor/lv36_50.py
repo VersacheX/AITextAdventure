@@ -1,7 +1,7 @@
 ﻿# Armor for levels 36-50
 # Covers endgame attainable characters: Lyren Vale (35), Marshal Vek Drast (45), Warden Hale Brimholt (50)
-# Extended characters: Sera Flameweaver (40), Regent Sylvara (40), Spark Maddox (40),
-#                      Commander Drax (40), Ghost (40), Elyra Dawnseer (40), Voss Caldera (50)
+# Extended characters: Veyr Ashcant (40), Regent Sylvara (40), Spark Maddox (40),
+#                      Commander Drax (40), Ghost (40), Eldon Dawnseer (40), Voss Caldera (50)
 ARMOR_LV36_50 = {
     "head": [
         # --- Lyren Vale (lv35) ---
@@ -34,7 +34,7 @@ ARMOR_LV36_50 = {
             "strength": 8, "dexterity": 8, "intelligence": 42, "constitution": 34,
             "elements": ["water", "light"]
         },  
-        # --- Sera Flameweaver (lv40) ---
+        # --- Veyr Ashcant (lv40) ---
         {
             "id": "ember_crown",
             "name": "Ember Crown",
@@ -47,7 +47,7 @@ ARMOR_LV36_50 = {
         {
             "id": "flamecrest_circlet",
             "name": "Flamecrest Circlet",
-            "description": "A circlet crowned with a single raised flame-crest that pulses brighter with each emotion Sera lets through. She lets through a lot.",
+            "description": "A circlet crowned with a single raised flame-crest that pulses brighter with each emotion Veyr lets through. She lets through a lot.",
             "defense": 28, "durability": 460, "max_durability": 460, "value": 7200,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 4, "dexterity": 6, "intelligence": 28, "constitution": 14,
@@ -129,11 +129,11 @@ ARMOR_LV36_50 = {
             "strength": 22, "dexterity": 16, "intelligence": 8, "constitution": 8,
             "elements": ["dark", "air"]
         },
-        # --- Elyra Dawnseer (lv40) ---
+        # --- Eldon Dawnseer (lv40) ---
         {
             "id": "seer_veil",
             "name": "Seer's Veil",
-            "description": "A translucent veil that softens physical vision and sharpens prophetic sight. Elyra wears it loose.",
+            "description": "A translucent veil that softens physical vision and sharpens prophetic sight. Eldon wears it loose.",
             "defense": 24, "durability": 440, "max_durability": 440, "value": 7000,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 2, "dexterity": 8, "intelligence": 32, "constitution": 16,
@@ -142,7 +142,7 @@ ARMOR_LV36_50 = {
         {
             "id": "omen_hood",
             "name": "Omen Hood",
-            "description": "A deep hood stitched with sigils Elyra drew before she understood what they meant. She understands them now.",
+            "description": "A deep hood stitched with sigils Eldon drew before she understood what they meant. She understands them now.",
             "defense": 24, "durability": 440, "max_durability": 440, "value": 7000,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 2, "dexterity": 8, "intelligence": 32, "constitution": 16,
@@ -228,7 +228,7 @@ ARMOR_LV36_50 = {
             "strength": 10, "dexterity": 10, "intelligence": 52, "constitution": 44,
             "elements": ["water", "light"]
         },
-        # --- Sera Flameweaver (lv40) ---
+        # --- Veyr Ashcant (lv40) ---
         {
             "id": "cinder_robe",
             "name": "Cinder Robe",
@@ -241,7 +241,7 @@ ARMOR_LV36_50 = {
         {
             "id": "emberstitch_coat",
             "name": "Emberstitch Coat",
-            "description": "A long coat embroidered with heat-reactive thread that glows brighter the more emotional Sera becomes.",
+            "description": "A long coat embroidered with heat-reactive thread that glows brighter the more emotional Veyr becomes.",
             "defense": 32, "durability": 540, "max_durability": 540, "value": 9000,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 6, "dexterity": 8, "intelligence": 38, "constitution": 18,
@@ -323,7 +323,7 @@ ARMOR_LV36_50 = {
             "strength": 26, "dexterity": 24, "intelligence": 10, "constitution": 10,
             "elements": ["dark", "air"]
         },
-        # --- Elyra Dawnseer (lv40) ---
+        # --- Eldon Dawnseer (lv40) ---
         {
             "id": "vision_robe",
             "name": "Vision Robe",
@@ -336,7 +336,7 @@ ARMOR_LV36_50 = {
         {
             "id": "oracle_mantle",
             "name": "Oracle's Mantle",
-            "description": "A mantle Elyra wears when she knows the vision will be difficult. The weave dampens the physical shock of seeing too far ahead.",
+            "description": "A mantle Eldon wears when she knows the vision will be difficult. The weave dampens the physical shock of seeing too far ahead.",
             "defense": 28, "durability": 520, "max_durability": 520, "value": 8800,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 2, "dexterity": 10, "intelligence": 38, "constitution": 20,
@@ -422,7 +422,7 @@ ARMOR_LV36_50 = {
             "strength": 8, "dexterity": 10, "intelligence": 38, "constitution": 32,
             "elements": ["water", "light"]
         },
-        # --- Sera / Sylvara / Maddox / Drax / Ghost / Elyra / Voss arms ---
+        # --- Veyr / Sylvara / Maddox / Drax / Ghost / Eldon / Voss arms ---
         {
             "id": "cinder_bracers",
             "name": "Cinder Bracers",
@@ -471,7 +471,7 @@ ARMOR_LV36_50 = {
         {
             "id": "dawnseer_gloves",
             "name": "Dawnseer Gloves",
-            "description": "Soft gloves Elyra wears during readings — the fingertips are left bare so she can maintain contact with the vision-surfaces.",
+            "description": "Soft gloves Eldon wears during readings — the fingertips are left bare so she can maintain contact with the vision-surfaces.",
             "defense": 20, "durability": 440, "max_durability": 440, "value": 5600,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 2, "dexterity": 8, "intelligence": 28, "constitution": 14,
@@ -551,7 +551,7 @@ ARMOR_LV36_50 = {
         {
             "id": "cinder_greaves",
             "name": "Cinder Greaves",
-            "description": "Greaves baked in forge-heat until the alloy fused with the fire-coating. They run warm. Sera prefers it.",
+            "description": "Greaves baked in forge-heat until the alloy fused with the fire-coating. They run warm. Veyr prefers it.",
             "defense": 24, "durability": 480, "max_durability": 480, "value": 6200,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 6, "dexterity": 6, "intelligence": 20, "constitution": 14,
@@ -596,7 +596,7 @@ ARMOR_LV36_50 = {
         {
             "id": "seer_boots",
             "name": "Seer's Boots",
-            "description": "Soft boots Elyra wears when a vision requires movement — she has learned that standing still during prophecy is a choice, not a necessity.",
+            "description": "Soft boots Eldon wears when a vision requires movement — she has learned that standing still during prophecy is a choice, not a necessity.",
             "defense": 20, "durability": 440, "max_durability": 440, "value": 5800,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 2, "dexterity": 10, "intelligence": 24, "constitution": 14,
