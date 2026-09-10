@@ -81,19 +81,19 @@ Completing this chain unlocks one of the 16 secret extended characters. The char
 
 | City (Ch.) | Extended Character |
 |------------|--------------------|
-| Boiling Bubble (2) | Sera Flameweaver |
+| Boiling Bubble (2) | Veyr Ashcant |
 | Highsteeple Crossing (3) | Regent Sylvara |
 | Ironveil Foundry (4) | Spark Maddox |
 | Bleakwatch Outpost (6) | Commander Drax |
 | Gnashwater Hollow (7) | Ghost |
-| Nightveil Spire (8) | Elyra Dawnseer |
+| Nightveil Spire (8) | Eldon Dawnseer |
 | Crosswind Bazaar (10) | Voss Caldera |
 | Blackwake Bay (11) | Dare |
 | Quantford Hollow (12) | Rynn |
 | The Necropolis (13) | Anita |
 | Tidekin Cove (14) | Andrea Starveil |
-| Thornshade Hamlet (16) | Talia Softheart |
-| Gallows Rift (17) | Korina Brightvein |
+| Thornshade Hamlet (16) | Talon |
+| Gallows Rift (17) | Alden Brightvein |
 | Frostgate Spire (19) | Lyric |
 | Hollerforge Hollow (21) | Lira Emberforge |
 | Bayou Nocturne (20) | Osten Dreamweaver |

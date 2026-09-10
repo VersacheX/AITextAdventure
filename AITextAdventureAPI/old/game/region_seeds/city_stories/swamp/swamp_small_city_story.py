@@ -1002,7 +1002,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_swamp_small_c_madra_vouch' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_c_madra_vouch' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_swamp_small_c_madra_vouch'   } },
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rotwharf_madra', 'standing_text': [ "The Hideaway's channels are a maze. The Ghost knows the way.", "They move when they decide. We point the direction. That's the arrangement." ] } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rotwharf_madra', 'standing_text': [ "The Hideaway's channels are a maze. Ghost knows the way.", "They move when they decide. We point the direction. That's the arrangement." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {

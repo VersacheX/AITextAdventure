@@ -243,7 +243,7 @@ TASKS = [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'voss_caldera',
-					'location': 'region_city_other3'
+					'location': 'region_city_other2'
 				}
 			},
 			{

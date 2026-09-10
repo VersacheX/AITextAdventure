@@ -264,10 +264,10 @@ NPC_DIALOG += [
 
 NPC_DIALOG += [
 
-	# ── Type C dialogs — Talia Softheart ───────────────────────────
+	# ── Type C dialogs — Talon ───────────────────────────
 
 	{
-		'npc_id': 'talia_softheart',
+		'npc_id': 'talon',
 		'dialog_id': 'talia_type_c_intro',
 		'dialog': [
 			"You look like you've been carrying a lot.",
@@ -277,7 +277,7 @@ NPC_DIALOG += [
 		]
 	},
 	{
-		'npc_id': 'talia_softheart',
+		'npc_id': 'talon',
 		'dialog_id': 'talia_type_c_lyss_check',
 		'dialog': [
 			"Lyss told you about me? That's — actually that means a lot.",
@@ -286,7 +286,7 @@ NPC_DIALOG += [
 		]
 	},
 	{
-		'npc_id': 'talia_softheart',
+		'npc_id': 'talon',
 		'dialog_id': 'talia_type_c_join',
 		'dialog': [
 			"I'll come with you.",
@@ -473,7 +473,7 @@ NPC_DIALOG += [
         ]
     },
 
-    # Type C – Consult Lyss (Talia path)
+    # Type C – Consult Lyss (Talon path)
     {
         'npc_id': 'faith',
         'dialog_id': 'faith_forest_small_c_consult_lyss',
@@ -682,18 +682,18 @@ TASKS = [
 					]
 				}
 			},
-			# Place Talia so she is ready when the C chain meet task fires
+			# Place Talon so she is ready when the C chain meet task fires
 			{
 				'event_type': 'create_npc',
 				'params': {
-					'npc_id': 'talia_softheart',
-					'location': 'region_city_other3'
+					'npc_id': 'talon',
+					'location': 'region_city_other2'
 				}
 			},
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
-					'npc_id': 'talia_softheart',
+					'npc_id': 'talon',
 					'standing_text': [
 						"The hamlet's wounded keep coming.",
 						"The forest's distress reaches people in ways I'm only starting to understand."
@@ -944,31 +944,31 @@ TASKS += [
 TASKS += [
 
 	# =========================================================
-	# TYPE C — Talia Softheart (extended character, slot 2)
+	# TYPE C — Talon (extended character, slot 2)
 	# Awarded by: forest_small_city_initialize
-	# Chain: find Talia → Lyss vouches → return to Talia → Talia joins
-	# Talia placed in initialize complete events.
+	# Chain: find Talon → Lyss vouches → return to Talon → Talon joins
+	# Talon placed in initialize complete events.
 	# =========================================================
 
-	# C-1 — Talia introduces herself and asks Lyss to speak for the party
+	# C-1 — Talon introduces herself and asks Lyss to speak for the party
 	{
 		'task_id': 'forest_small_city_type_c_find_talia',
 		'type': 'meet',
 		'to_type': 'npc',
-		'to_id': 'talia_softheart',
+		'to_id': 'talon',
 		'task_acquire_events': [],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
-					'npc_id': 'talia_softheart',
+					'npc_id': 'talon',
 					'dialog_id': 'talia_type_c_intro'
 				}
 			},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_forest_small_c_find_talia' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_forest_small_c_find_talia'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_forest_small_c_find_talia' } },
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'talia_softheart', 'standing_text': [ "Lyss has been through the burrows. She can tell you what the Burrow Whisper is guarding." ] } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'talon', 'standing_text': [ "Lyss has been through the burrows. She can tell you what the Burrow Whisper is guarding." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -978,7 +978,7 @@ TASKS += [
 		]
 	},
 
-	# C-2 — Lyss vouches; Talia's dialog response fires; Talia updated for C-3
+	# C-2 — Lyss vouches; Talia's dialog response fires; Talon updated for C-3
 	{
 		'task_id': 'forest_small_city_type_c_consult_lyss',
 		'type': 'meet',
@@ -989,14 +989,14 @@ TASKS += [
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
-					'npc_id': 'talia_softheart',
+					'npc_id': 'talon',
 					'dialog_id': 'talia_type_c_lyss_check'
 				}
 			},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_small_c_consult_lyss'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_forest_small_c_consult_lyss'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',    'dialog_id': 'nia_forest_small_c_consult_lyss'    } },
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'scout_lyss', 'standing_text': [ "Talia has been hoping for someone who actually listens. She'll come with you if you ask." ] } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'scout_lyss', 'standing_text': [ "Talon has been hoping for someone who actually listens. She'll come with you if you ask." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -1011,13 +1011,13 @@ TASKS += [
 		'task_id': 'forest_small_city_type_c_earn_talia',
 		'type': 'meet',
 		'to_type': 'npc',
-		'to_id': 'talia_softheart',
+		'to_id': 'talon',
 		'task_acquire_events': [],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
-					'npc_id': 'talia_softheart',
+					'npc_id': 'talon',
 					'dialog_id': 'talia_type_c_join'
 				}
 			},
@@ -1026,11 +1026,11 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_forest_small_c_earn_talia'  } },
 			{
 				'event_type': 'hide_npc',
-				'params': { 'npc_id': 'talia_softheart' }
+				'params': { 'npc_id': 'talon' }
 			},
 			{
 				'event_type': 'character_join',
-				'params': { 'character_id': 'talia_softheart' }
+				'params': { 'character_id': 'talon' }
 			},
 		]
 	},

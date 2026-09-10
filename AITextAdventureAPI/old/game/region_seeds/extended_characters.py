@@ -62,29 +62,29 @@ EXTENDED_CHARACTERS_NPCS = [
 
     },
     {
-        'npc_id': 'elyra_dawnseer',
-        'name': 'Elyra Dawnseer',
+        'npc_id': 'eldon_dawnseer',
+        'name': 'Eldon Dawnseer',
         'description': (
             'A serene but intense prophet who receives fragmented visions of possible futures.'
-            ' Each one arrives unbidden and leaves a residue she cannot wash off.'
-            ' Elyra speaks carefully, knowing that what she says reshapes what people do — and therefore what comes true.'
-            ' She does not claim to know the future. She claims to carry pieces of it, whether she wants them or not.'
+            ' Each one arrives unbidden and leaves a residue he cannot wash off.'
+            ' Eldon speaks carefully, knowing that what he says reshapes what people do — and therefore what comes true.'
+            ' He does not claim to know the future. He claims to carry pieces of it, whether he wants them or not.'
         ),
         "theme_song": "Teardrop (instrumental), Massive Attack",
         "song_id": "teardrop_instrumental_massive_attack",
-        "image": "extended_characters:elyra_dawnseer1",
+        "image": "extended_characters:eldon_dawnseer1",
         "psychology": {
             "mbti": "INFJ",
             "dominant": "Ni — Receives deep, symbolic visions of what may come.",
-            "auxiliary": "Fe — Feels the emotional weight of the futures she sees.",
-            "tertiary": "Ti — Analyzes the meaning behind her visions.",
+            "auxiliary": "Fe — Feels the emotional weight of the futures he sees.",
+            "tertiary": "Ti — Analyzes the meaning behind his visions.",
             "inferior": "Se — Can become disconnected from the present moment."
         },
         "enneagram": {
             "enneagram_type": "4w5",
             "core_fear": "Being ordinary.",
             "core_desire": "To find unique purpose.",
-            "defense_mechanism": "Introjection — Absorbs her visions into her identity.",
+            "defense_mechanism": "Introjection — Absorbs his visions into his identity.",
             "stress_line": "Moves to Type 2 — Becomes overly dependent on others.",
             "growth_line": "Moves to Type 1 — Becomes principled and disciplined.",
             "instinctual_variant": "sx/sp — Experiences intense personal visions."
@@ -130,8 +130,8 @@ EXTENDED_CHARACTERS_NPCS = [
             ' There is nothing performative about the stillness — it is simply the absence of waste.'
             ' Those who earn a nod from Ghost tend to remember it longer than most praise they have ever received.'
         ),
-        "theme_song": "Enjoy the Silence (instrumental), Depeche Mode",
-        "song_id": "enjoy_the_silence_instrumental_depeche_mode",
+        "theme_song": "Clint Eastwoood, Gorillaz",
+        "song_id": "clint_eastwood_gorillaz",
         "image": "extended_characters:ghost1",
         "psychology": {
             "mbti": "ISTP",
@@ -164,10 +164,10 @@ EXTENDED_CHARACTERS_NPCS = [
         "song_id": "immigrant_song_instrumental_led_zeppelin",
         "image": "extended_characters:lira_emberforge1",
         "psychology": {
-            "mbti": "ISFP",
+            "mbti": "INFP",
             "dominant": "Fi — Guided by deep personal values and authentic expression.",
-            "auxiliary": "Se — Masters her craft through sensory precision and flow.",
-            "tertiary": "Ni — Occasionally receives flashes of insight or symbolic meaning in her work.",
+            "auxiliary": "Ne — Sees symbolic meaning and creative possibility in every piece she forges.",
+            "tertiary": "Si — Draws on remembered craft traditions and personal experience.",
             "inferior": "Te — Struggles with structure, planning, and external organization under pressure."
         },
         "enneagram": {
@@ -301,21 +301,22 @@ EXTENDED_CHARACTERS_NPCS = [
 
     },
     {
-        'npc_id': 'sera_flameweaver',
-        'name': 'Sera Flameweaver',
+        'npc_id': 'veyr_ashcant',
+        'name': 'Veyr Ashcant',
         'description': (
-            'A passionate and theatrical fire mage who believes emotion is the source of true power.'
-            ' Sera does not cast spells so much as she detonates feelings.'
-            ' Her magic is proportional to what she feels, which makes her either devastatingly effective or genuinely dangerous depending on the day.'
-            ' She considers both outcomes acceptable and the people who disagree deeply boring.'
+            'A theatrical fire mage who treats every spell like a stage performance and every emotion like fuel he is legally required to overuse.'
+            ' Veyr does not simply cast fire—he stages it.'
+            ' He builds rituals out of dramatic pauses, sweeping gestures, and the exact intensity of whatever he is currently feeling, then lets the result land wherever it lands.'
+            ' On a good day this produces spectacular, controlled infernos. On a bad day it produces spectacular, uncontrolled infernos.'
+            ' He considers both outcomes artistically valid and finds people who prefer “predictable” magic deeply uninteresting.'
         ),
         "theme_song": "Kings and Queens (instrumental), 30 Seconds to Mars",
         "song_id": "kings_and_queens_instrumental_30_seconds_to_mars",
-        "image": "extended_characters:sera_flameweaver1",
+        "image": "extended_characters:veyr_ashcant1",
         "psychology": {
             "mbti": "ENFP",
             "dominant": "Ne — Sees endless creative and destructive possibilities.",
-            "auxiliary": "Fi — Channels deep personal emotion into her magic.",
+            "auxiliary": "Fi — Channels deep personal emotion into his magic.",
             "tertiary": "Te — Can become forceful and organized when pursuing a vision.",
             "inferior": "Si — Struggles with routine, details, and past consequences."
         },
@@ -323,7 +324,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "enneagram_type": "4w3",
             "core_fear": "Being ordinary or insignificant.",
             "core_desire": "To be unique and emotionally authentic.",
-            "defense_mechanism": "Introjection — Absorbs dramatic emotion into her identity.",
+            "defense_mechanism": "Introjection — Absorbs dramatic emotion into his identity.",
             "stress_line": "Moves to Type 2 — Becomes overly dependent on validation.",
             "growth_line": "Moves to Type 1 — Becomes disciplined and principled.",
             "instinctual_variant": "sx/so — Seeks intense emotional experiences."
@@ -391,21 +392,21 @@ EXTENDED_CHARACTERS_NPCS = [
 
     },
     {
-        'npc_id': 'talia_softheart',
-        'name': 'Talia Softheart',
+        'npc_id': 'talon',
+        'name': 'Talon',
         'description': (
             'A deeply compassionate healer who feels the pain of others as her own.'
-            ' Talia absorbs suffering the way cloth absorbs water — completely, and without choosing to.'
-            ' She has never learned to ask for help with the same ease she offers it.'
-            ' Her presence steadies rooms and people alike, though the cost of that steadiness never shows on her face, and she prefers it that way.'
+            ' Talon absorbs suffering the way cloth absorbs water — completely, and without choosing to.'
+            ' He has never learned to ask for help with the same ease he offers it.'
+            ' His presence steadies rooms and people alike, though the cost of that steadiness never shows on his face, and he prefers it that way.'
         ),
         "theme_song": "Bridge Over Troubled Water (instrumental), Simon & Garfunkel",
         "song_id": "bridge_over_troubled_water_instrumental_simon_and_garfunkel",
-        "image": "extended_characters:talia_softheart1",
+        "image": "extended_characters:talon1",
         "psychology": {
             "mbti": "ESFJ",
             "dominant": "Fe — Creates harmony and meets the emotional needs of the group.",
-            "auxiliary": "Si — Remembers personal details about everyone she helps.",
+            "auxiliary": "Si — Remembers personal details about everyone he helps.",
             "tertiary": "Ne — Explores possibilities for how to best support others.",
             "inferior": "Ti — Struggles with cold logical analysis when emotions are high."
         },
@@ -413,7 +414,7 @@ EXTENDED_CHARACTERS_NPCS = [
             "enneagram_type": "2w1",
             "core_fear": "Being unwanted.",
             "core_desire": "To be needed and loved.",
-            "defense_mechanism": "Repression — Suppresses her own needs to help others.",
+            "defense_mechanism": "Repression — Suppresses his own needs to help others.",
             "stress_line": "Moves to Type 8 — Becomes demanding when unappreciated.",
             "growth_line": "Moves to Type 4 — Becomes more self-aware.",
             "instinctual_variant": "so/sp — Focuses on being central to her community."
@@ -421,21 +422,21 @@ EXTENDED_CHARACTERS_NPCS = [
 
     },
     {
-        'npc_id': 'korina_brightvein',
-        'name': 'Korina Brightvein',
+        'npc_id': 'alden_brightvein',
+        'name': 'Alden Brightvein',
         'description': (
             'A charismatic leader and motivator who inspires others to reach their highest potential.'
-            ' Korina has an almost involuntary awareness of what each person in a room needs to hear.'
-            ' She delivers it with such warmth that most people never notice it was precisely calibrated.'
-            ' The version of herself she shows the world is generous, steady, and lit from inside. What it costs her is a private matter.'
+            ' Alden has an almost involuntary awareness of what each person in a room needs to hear.'
+            ' He delivers it with such warmth that most people never notice it was precisely calibrated.'
+            ' The version of himself he shows the world is generous, steady, and lit from inside. What it costs him is a private matter.'
         ),
         "theme_song": "Hall of Fame (instrumental), The Script",
         "song_id": "hall_of_fame_instrumental_the_script",
-        "image": "extended_characters:korina_brightvein1",
+        "image": "extended_characters:alden_brightvein1",
         "psychology": {
             "mbti": "ENFJ",
             "dominant": "Fe — Naturally senses and guides the emotional needs of groups.",
-            "auxiliary": "Ni — Sees the best possible future for those she leads.",
+            "auxiliary": "Ni — Sees the best possible future for those he leads.",
             "tertiary": "Se — Engages warmly and dynamically in the present moment.",
             "inferior": "Ti — Can struggle with impersonal logical analysis under stress."
         },
@@ -502,11 +503,11 @@ EXTENDED_CHARACTERS_NPCS = [
 
 EXTENDED_CHARACTERS = [
 
-    # ── Sera Flameweaver  (Ch.2 · Boiling Bubble · level 40) ──────────────
+    # ── Veyr Ashcant  (Ch.2 · Boiling Bubble · level 40) ──────────────
     # ENFP · 4w3 · fire mage — INT primary, CON secondary, caster
     {
-        'id': 'sera_flameweaver',
-        'name': 'Sera Flameweaver',
+        'id': 'veyr_ashcant',
+        'name': 'Veyr Ashcant',
         'arm_armor': 'cinder_bracers',
         'head_armor': 'flamecrest_circlet',
         'body_armor': 'cinder_robe',
@@ -525,10 +526,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 138,
         'level': 40,
         'abilities': [
-            'lv2_unique_ability_magic_sera_flameweaver_passionate_spark',
-            'lv2_unique_ability_magic_sera_flameweaver_embers_veil',
-            'lv3_unique_ability_magic_sera_flameweaver_stage_ignition',
-            'lv4_unique_ability_magic_sera_flameweaver_hearts_conflagration',
+            'lv2_unique_ability_magic_veyr_ashcant_passionate_spark',
+            'lv2_unique_ability_magic_veyr_ashcant_embers_veil',
+            'lv3_unique_ability_magic_veyr_ashcant_stage_ignition',
+            'lv4_unique_ability_magic_veyr_ashcant_hearts_conflagration',
         ]
     },
 
@@ -652,11 +653,11 @@ EXTENDED_CHARACTERS = [
         ]
     },
 
-    # ── Elyra Dawnseer  (Ch.8 · Nightveil Spire · level 40) ──────────────
+    # ── Eldon Dawnseer  (Ch.8 · Nightveil Spire · level 40) ──────────────
     # INFJ · 4w5 · prophet — INT primary, CON secondary, caster
     {
-        'id': 'elyra_dawnseer',
-        'name': 'Elyra Dawnseer',
+        'id': 'eldon_dawnseer',
+        'name': 'Eldon Dawnseer',
         'arm_armor': 'dawnseer_gloves',
         'head_armor': 'seer_veil',
         'body_armor': 'vision_robe',
@@ -675,10 +676,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 140,
         'level': 40,
         'abilities': [
-            'lv2_unique_ability_faith_elyra_dawnseer_seer_shield',
-            'lv2_unique_ability_faith_elyra_dawnseer_fragment_vision',
-            'lv3_unique_ability_faith_elyra_dawnseer_dawnsight_strike',
-            'lv4_unique_ability_faith_elyra_dawnseer_prophetic_vision',
+            'lv2_unique_ability_faith_eldon_dawnseer_seer_shield',
+            'lv2_unique_ability_faith_eldon_dawnseer_fragment_vision',
+            'lv3_unique_ability_faith_eldon_dawnseer_dawnsight_strike',
+            'lv4_unique_ability_faith_eldon_dawnseer_prophetic_vision',
         ]
     },
 
@@ -699,16 +700,16 @@ EXTENDED_CHARACTERS = [
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 186,
-        'dexterity': 14,
-        'constitution': 90,
-        'intelligence': 22,
+        'strength': 52,
+        'dexterity': 130,
+        'constitution': 514,
+        'intelligence': 186,
         'level': 50,
         'abilities': [
-            'lv2_unique_ability_technique_voss_caldera_leverage',
-            'lv3_unique_ability_technique_voss_caldera_boardroom_blitz',
-            'lv3_unique_ability_technique_voss_caldera_non_negotiable',
-            'lv4_unique_ability_technique_voss_caldera_hostile_acquisition',
+            'lv2_unique_ability_tech_voss_caldera_leverage',
+            'lv3_unique_ability_tech_voss_caldera_boardroom_blitz',
+            'lv3_unique_ability_tech_voss_caldera_non_negotiable',
+            'lv4_unique_ability_tech_voss_caldera_hostile_acquisition',
         ]
     },
 
@@ -832,11 +833,11 @@ EXTENDED_CHARACTERS = [
         ]
     },
 
-    # ── Talia Softheart  (Ch.16 · Thornshade Hamlet · level 80) ──────────
+    # ── Talon  (Ch.16 · Thornshade Hamlet · level 80) ──────────
     # ESFJ · 2w1 · healer — INT primary, CON secondary, caster
     {
-        'id': 'talia_softheart',
-        'name': 'Talia Softheart',
+        'id': 'talon',
+        'name': 'Talon',
         'arm_armor': 'gentleweave_bracers',
         'head_armor': 'warmth_cowl',
         'body_armor': 'hearthroot_robe',
@@ -855,18 +856,18 @@ EXTENDED_CHARACTERS = [
         'intelligence': 270,
         'level': 80,
         'abilities': [
-            'lv2_unique_ability_faith_talia_softheart_tender_mend',
-            'lv3_unique_ability_faith_talia_softheart_needed_now',
-            'lv3_unique_ability_faith_talia_softheart_community_light',
-            'lv4_unique_ability_faith_talia_softheart_heartroot_restoration',
+            'lv2_unique_ability_faith_talon_tender_mend',
+            'lv3_unique_ability_faith_talon_needed_now',
+            'lv3_unique_ability_faith_talon_community_light',
+            'lv4_unique_ability_faith_talon_heartroot_restoration',
         ]
     },
 
     # ── Korina
     # ENFJ · 2w3 · leader — INT primary, CON secondary, caster/support
     {
-        'id': 'korina_brightvein',
-        'name': 'Korina Brightvein',
+        'id': 'alden_brightvein',
+        'name': 'Alden Brightvein',
         'arm_armor': 'goldvein_bracers',
         'head_armor': 'rallying_crown',
         'body_armor': 'brightweave_mantle',
@@ -885,10 +886,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 286,
         'level': 85,
         'abilities': [
-            'lv2_unique_ability_faith_korina_brightvein_rally_call',
-            'lv3_unique_ability_faith_korina_brightvein_inspired_defense',
-            'lv3_unique_ability_faith_korina_brightvein_leaders_mend',
-            'lv4_unique_ability_faith_korina_brightvein_rallying_light',
+            'lv2_unique_ability_faith_alden_brightvein_rally_call',
+            'lv3_unique_ability_faith_alden_brightvein_inspired_defense',
+            'lv3_unique_ability_faith_alden_brightvein_leaders_mend',
+            'lv4_unique_ability_faith_alden_brightvein_rallying_light',
         ]
     },
 

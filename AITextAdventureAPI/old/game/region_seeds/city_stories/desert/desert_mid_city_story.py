@@ -238,23 +238,23 @@ TASKS = [
 		'type': 'complete_regional_quests',
 		'task_acquire_events': [],
 		'task_complete_events': [
-			{ 'event_type': 'award_task', 'params': { 'task_id': 'desert_mid_city_type_c_find_elyra' } },
+			{ 'event_type': 'award_task', 'params': { 'task_id': 'desert_mid_city_type_c_find_eldon' } },
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'desert_mid_city_type_d_deliver_ink_vial' } },
 		]
 	},
 ]
 
 
-# ── Type C ── Elyra Dawnseer (extended character) ─────────────────────────────
-# Gated by is_chapter_gte: 8. Elyra is drawn to Nightveil Spire by the
+# ── Type C ── Eldon Dawnseer (extended character) ─────────────────────────────
+# Gated by is_chapter_gte: 8. Eldon is drawn to Nightveil Spire by the
 # Vault Whisper's resonance — she has been receiving fragmented visions of
 # the city's erasure. Velra's recommendation earns her trust.
 
 NPC_DIALOG += [
 
 	{
-		'npc_id': 'elyra_dawnseer',
-		'dialog_id': 'elyra_c_first_meet',
+		'npc_id': 'eldon_dawnseer',
+		'dialog_id': 'eldon_c_first_meet',
 		'dialog': [
 			"The visions brought me here.",
 			"Fragments — ink dissolving, names going dark one by one.",
@@ -267,7 +267,7 @@ NPC_DIALOG += [
 		'npc_id': 'velra_the_indexer',
 		'dialog_id': 'velra_c_vouch',
 		'dialog': [
-			"Elyra appeared the morning the Vaults first whispered of the Erasure.",
+			"Eldon appeared the morning the Vaults first whispered of the Erasure.",
 			"I don't believe in coincidence — I believe in pattern.",
 			"She reads the pattern the way I read the archive.",
 			"If she trusts you, tell her I said the index has a new entry."
@@ -275,8 +275,8 @@ NPC_DIALOG += [
 	},
 
 	{
-		'npc_id': 'elyra_dawnseer',
-		'dialog_id': 'elyra_c_joins',
+		'npc_id': 'eldon_dawnseer',
+		'dialog_id': 'eldon_c_joins',
 		'dialog': [
 			"Velra indexed you.",
 			"That means you exist in a way the Erasure cannot touch.",
@@ -290,24 +290,24 @@ NPC_DIALOG += [
 # --- Character dialogs: Type C ---
 NPC_DIALOG += [
 
-    # Type C – Find Elyra
+    # Type C – Find Eldon
     {
         'npc_id': 'faith',
-        'dialog_id': 'faith_desert_mid_c_find_elyra',
+        'dialog_id': 'faith_desert_mid_c_find_eldon',
         'dialog': [
             "She's seen this city erased a hundred times and still chooses to stay. That takes a particular kind of strength."
         ]
     },
     {
         'npc_id': 'ripple',
-        'dialog_id': 'ripple_desert_mid_c_find_elyra',
+        'dialog_id': 'ripple_desert_mid_c_find_eldon',
         'dialog': [
             "Visions of ink dissolving and names going dark… she's not just watching the future. She's trying to understand why it keeps failing."
         ]
     },
     {
         'npc_id': 'kor_in',
-        'dialog_id': 'kor_in_desert_mid_c_find_elyra',
+        'dialog_id': 'kor_in_desert_mid_c_find_eldon',
         'dialog': [
             "Some people stay in a place because they hope it will finally choose a better ending."
         ]
@@ -325,7 +325,7 @@ NPC_DIALOG += [
         'npc_id': 'grimnaw',
         'dialog_id': 'grimnaw_desert_mid_c_consult_velra',
         'dialog': [
-            "She reads the archive the same way Elyra reads possible futures. Two different indexes of the same threat."
+            "She reads the archive the same way Eldon reads possible futures. Two different indexes of the same threat."
         ]
     },
     {
@@ -336,24 +336,24 @@ NPC_DIALOG += [
         ]
     },
 
-    # Type C – Earn Elyra
+    # Type C – Earn Eldon
     {
         'npc_id': 'faith',
-        'dialog_id': 'faith_desert_mid_c_earn_elyra',
+        'dialog_id': 'faith_desert_mid_c_earn_eldon',
         'dialog': [
             "She saw us in every future that ends well. That's not a small thing to carry."
         ]
     },
     {
         'npc_id': 'magic',
-        'dialog_id': 'magic_desert_mid_c_earn_elyra',
+        'dialog_id': 'magic_desert_mid_c_earn_eldon',
         'dialog': [
             "Indexed by the Vaults themselves. I like the sound of being un-erasable."
         ]
     },
     {
         'npc_id': 'ripple',
-        'dialog_id': 'ripple_desert_mid_c_earn_elyra',
+        'dialog_id': 'ripple_desert_mid_c_earn_eldon',
         'dialog': [
             "Some people join because of duty. She's joining because the pattern finally included us."
         ]
@@ -515,17 +515,17 @@ NPC_DIALOG += [
 
 TASKS += [
 
-	# C-1 — Find Elyra Dawnseer
+	# C-1 — Find Eldon Dawnseer
 	{
-		'task_id': 'desert_mid_city_type_c_find_elyra',
+		'task_id': 'desert_mid_city_type_c_find_eldon',
 		'type': 'meet',
 		'to_type': 'npc',
-		'to_id': 'elyra_dawnseer',
+		'to_id': 'eldon_dawnseer',
 		'task_acquire_events': [
 			{
 				'event_type': 'create_npc',
 				'params': {
-					'npc_id': 'elyra_dawnseer',
+					'npc_id': 'eldon_dawnseer',
 					'location': 'region_city_other1'
 				}
 			}
@@ -534,14 +534,14 @@ TASKS += [
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
-					'npc_id': 'elyra_dawnseer',
-					'dialog_id': 'elyra_c_first_meet'
+					'npc_id': 'eldon_dawnseer',
+					'dialog_id': 'eldon_c_first_meet'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_desert_mid_c_find_elyra'  } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_desert_mid_c_find_elyra' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_desert_mid_c_find_elyra' } },
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'elyra_dawnseer', 'standing_text': ["The visions brought me here.", "Fragments — ink dissolving, names going dark one by one.", "I have seen this city erased a hundred times in possible futures.", "I stay to understand why it keeps surviving."] } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_desert_mid_c_find_eldon'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_desert_mid_c_find_eldon' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_desert_mid_c_find_eldon' } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'eldon_dawnseer', 'standing_text': ["The visions brought me here.", "Fragments — ink dissolving, names going dark one by one.", "I have seen this city erased a hundred times in possible futures.", "I stay to understand why it keeps surviving."] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -573,38 +573,38 @@ TASKS += [
 			{
 				'event_type': 'award_task',
 				'params': {
-					'task_id': 'desert_mid_city_type_c_earn_elyra'
+					'task_id': 'desert_mid_city_type_c_earn_eldon'
 				}
 			}
 		]
 	},
 
-	# C-3 — Return to Elyra; she joins
+	# C-3 — Return to Eldon; she joins
 	{
-		'task_id': 'desert_mid_city_type_c_earn_elyra',
+		'task_id': 'desert_mid_city_type_c_earn_eldon',
 		'type': 'meet',
 		'to_type': 'npc',
-		'to_id': 'elyra_dawnseer',
+		'to_id': 'eldon_dawnseer',
 		'task_acquire_events': [
 		],
 		'task_complete_events': [
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
-					'npc_id': 'elyra_dawnseer',
-					'dialog_id': 'elyra_c_joins'
+					'npc_id': 'eldon_dawnseer',
+					'dialog_id': 'eldon_c_joins'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_desert_mid_c_earn_elyra'  } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_desert_mid_c_earn_elyra'  } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_desert_mid_c_earn_elyra' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_desert_mid_c_earn_eldon'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_desert_mid_c_earn_eldon'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_desert_mid_c_earn_eldon' } },
 			{
 				'event_type': 'character_join',
 				'params': {
-					'character_id': 'elyra_dawnseer'
+					'character_id': 'eldon_dawnseer'
 				}
 			},
-			{ 'event_type': 'hide_npc', 'params': { 'npc_id': 'elyra_dawnseer' } }
+			{ 'event_type': 'hide_npc', 'params': { 'npc_id': 'eldon_dawnseer' } }
 		]
 	}
 

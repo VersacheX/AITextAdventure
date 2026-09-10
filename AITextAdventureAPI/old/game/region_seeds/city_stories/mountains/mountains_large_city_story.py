@@ -706,7 +706,7 @@ TASKS += [
                 'event_type': 'create_npc',
                 'params': {
                     'npc_id': 'spark_maddox',
-                    'location': 'region_city_other3'
+                    'location': 'region_city_other2'
                 }
             }
         ],

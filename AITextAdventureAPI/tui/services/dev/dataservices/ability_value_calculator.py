@@ -33,7 +33,7 @@ from collections import defaultdict
 # fall back to ``DEFAULT_STATUS_WEIGHT``.
 STATUS_WEIGHTS: Dict[str, float] = {
     # ── Hard disables / permanent (very high value) ──
-    "petrify":            22.0,
+    "petrify":            28.0,
     "confuse":            17.0,
     "stun":               15.0,
     "sleep":              12.0,

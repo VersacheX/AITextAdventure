@@ -49,11 +49,11 @@ NPCS = [
         "description": "A Voidwalker who embodies the concept of unending, unprocessed grief. She is drawn to sorrow and seeks to trap others in loops of loss, believing that grief is the only honest state of being.",
         "theme_song": "Mad World, Gary Jules",
         "psychology": {
-            "mbti": "INFJ-shadow",
-            "dominant": "Ni - Possesses a deep, almost cosmic understanding of sorrow and its patterns, seeing it as the ultimate endpoint of all things.",
-            "auxiliary": "Fe - Perversely empathetic, she feels the grief of others and seeks to amplify it, believing she is guiding them to a state of 'truth'.",
-            "tertiary": "Ti - Has a twisted internal logic that justifies her actions, framing endless grief as a form of purity.",
-            "inferior": "Se - Is ethereal and disconnected from the physical world, manifesting as a being of shadow and sorrow rather than a concrete entity."
+            "mbti": "INFP-shadow",
+            "dominant": "Fi - Possesses a deep, almost cosmic understanding of sorrow and its patterns, seeing it as the ultimate endpoint of all things.",
+            "auxiliary": "Ne - Perversely empathetic, she feels the grief of others and seeks to amplify it, believing she is guiding them to a state of 'truth'.",
+            "tertiary": "Si - Has a twisted internal logic that justifies her actions, framing endless grief as a form of purity.",
+            "inferior": "Te - Is ethereal and disconnected from the physical world, manifesting as a being of shadow and sorrow rather than a concrete entity."
         },
         "enneagram": {
           "enneagram_type": "4w5",

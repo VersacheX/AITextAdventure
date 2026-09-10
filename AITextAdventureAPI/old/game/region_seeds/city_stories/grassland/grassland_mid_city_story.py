@@ -681,11 +681,7 @@ TASKS = [
 				'event_type': 'create_npc',
 				'params': {
 					'npc_id': 'regent_sylvara',
-					'location': 'region_city_other3'
-				},
-				'condition': {
-					'type': 'is_chapter_gte',
-					'params': { 'chapter': 3 }
+					'location': 'region_city_other2'
 				}
 			},
 			{
@@ -696,20 +692,12 @@ TASKS = [
 						"I've been watching this city for some time.",
 						"You're the first person who's looked like they could actually do something about it."
 					]
-				},
-				'condition': {
-					'type': 'is_chapter_gte',
-					'params': { 'chapter': 3 }
 				}
 			},
 			{
 				'event_type': 'award_task',
 				'params': {
 					'task_id': 'grassland_mid_city_type_c_find_sylvara'
-				},
-				'condition': {
-					'type': 'is_chapter_gte',
-					'params': { 'chapter': 3 }
 				}
 			},
 		]

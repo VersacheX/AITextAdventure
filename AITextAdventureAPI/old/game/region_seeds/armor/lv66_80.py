@@ -1,5 +1,5 @@
 ﻿# Armor for levels 66-80
-# Extended characters: Andrea Starveil (70), Talia Softheart (80)
+# Extended characters: Andrea Starveil (70), Talon (80)
 ARMOR_LV66_80 = {
     "head": [
         # --- Andrea Starveil (lv70) — fire/air agile ---
@@ -21,7 +21,7 @@ ARMOR_LV66_80 = {
             "strength": 24, "dexterity": 48, "intelligence": 8, "constitution": 6,
             "elements": ["fire", "air"]
         },
-        # --- Talia Softheart (lv80) — light/water/earth caster ---
+        # --- Talon (lv80) — light/water/earth caster ---
         {
             "id": "compassion_circlet",
             "name": "Compassion Circlet",
@@ -34,7 +34,7 @@ ARMOR_LV66_80 = {
         {
             "id": "warmth_cowl",
             "name": "Warmth Cowl",
-            "description": "A deep cowl woven from sun-linen that holds ambient heat and releases it slowly — Talia uses it to warm cold patients before any other treatment.",
+            "description": "A deep cowl woven from sun-linen that holds ambient heat and releases it slowly — Talon uses it to warm cold patients before any other treatment.",
             "defense": 52, "durability": 660, "max_durability": 660, "value": 26400,
             "min_spawn_level": 80, "rarity": "notfound",
             "strength": 4, "dexterity": 10, "intelligence": 54, "constitution": 30,
@@ -63,7 +63,7 @@ ARMOR_LV66_80 = {
             "strength": 32, "dexterity": 64, "intelligence": 10, "constitution": 8,
             "elements": ["fire", "air", "water"]
         },
-        # --- Talia Softheart (lv80) ---
+        # --- Talon (lv80) ---
         {
             "id": "tenderheart_robe",
             "name": "Tenderheart Robe",
@@ -105,7 +105,7 @@ ARMOR_LV66_80 = {
             "strength": 18, "dexterity": 36, "intelligence": 6, "constitution": 4,
             "elements": ["fire", "air"]
         },
-        # --- Talia Softheart (lv80) ---
+        # --- Talon (lv80) ---
         {
             "id": "gentlehand_bracers",
             "name": "Gentlehand Bracers",
@@ -145,7 +145,7 @@ ARMOR_LV66_80 = {
             "strength": 24, "dexterity": 42, "intelligence": 8, "constitution": 6,
             "elements": ["fire", "air", "water"]
         },
-        # --- Talia Softheart (lv80) ---
+        # --- Talon (lv80) ---
         {
             "id": "softstep_sandals",
             "name": "Softstep Sandals",
@@ -158,7 +158,7 @@ ARMOR_LV66_80 = {
         {
             "id": "softpath_sandals",
             "name": "Softpath Sandals",
-            "description": "Sandals woven to carry no sound and leave no impression — Talia had them made after a patient startled at her approach. She never startles anyone now.",
+            "description": "Sandals woven to carry no sound and leave no impression — Talon had them made after a patient startled at her approach. She never startles anyone now.",
             "defense": 44, "durability": 640, "max_durability": 640, "value": 24400,
             "min_spawn_level": 80, "rarity": "notfound",
             "strength": 4, "dexterity": 8, "intelligence": 46, "constitution": 28,
