@@ -1,4 +1,3 @@
-Here's the improved `README.md` file incorporating the new content while maintaining the existing structure and coherence:
 # Fracture
 
 **Fracture** is a text-based adventure RPG rendered in a flicker-free terminal UI.
@@ -109,15 +108,19 @@ Map symbols (overworld): `µ` bar · `@` inn · `Æ` weapons · `?` items · `¥` armor
 
 ## Building a standalone executable
 
-Both entry points are frozen with [PyInstaller](https://pyinstaller.org). A
-custom hook (`AITextAdventureAPI/hooks/hook-textual.py`) is required because
+Both entry points are frozen with [PyInstaller](https://pyinstaller.org) using
+committed `.spec` files in `AITextAdventureAPI/`. Build with the spec (not the
+raw script) so the required assets and package metadata come along — the specs
+bundle the `tui/styles` and `tui/assets` folders, `readchar`/`tzdata` metadata,
+set `pathex=['.', 'old']`, and load the custom Textual hook from `hooks/`.
+
+The custom hook (`AITextAdventureAPI/hooks/hook-textual.py`) is required because
 Textual lazy-imports its widgets via `__getattr__`, which PyInstaller's static
 analyzer cannot follow; the hook force-collects every `textual` and `rich`
 submodule plus Textual's CSS/TCSS data files.
 
-> Note: `.spec`, `build/`, and `dist/` are gitignored, so there is no committed
-> spec file — build straight from the entry-point scripts with the hooks
-> directory below.
+> Note: `*.spec`, `build/`, and `dist/` are gitignored, so the spec files live
+> in your working tree but are not tracked in git.
 
 ```bash
 # Install the build tool
@@ -126,17 +129,26 @@ pip install pyinstaller
 # From the AITextAdventureAPI/ directory:
 cd AITextAdventureAPI
 
-# Build the game (single-file executable)
-pyinstaller --onefile --additional-hooks-dir hooks run_tui.py
+# Build the game
+pyinstaller fracture_tui.spec
 
 # Build the developer data browser
-pyinstaller --onefile --additional-hooks-dir hooks run_dev_tui.py
+pyinstaller fracture_dev_tui.spec
+
+# (Legacy) build the old console prototype
+pyinstaller fracture.spec
 ```
+
+| Spec file | Entry point | Output name |
+|---|---|---|
+| `fracture_tui.spec` | `run_tui.py` | `fracture_tui` |
+| `fracture_dev_tui.spec` | `run_dev_tui.py` | `fracture_dev_tui` |
+| `fracture.spec` | `old/console_game.py` | `fracture` (legacy console prototype) |
 
 The resulting executables are written to `AITextAdventureAPI/dist/`.
 
 > If a run of the frozen build reports a missing module, add it to the hook's
-> `hiddenimports` (or pass `--hidden-import <module>`) and rebuild.
+> `hiddenimports` (or the spec's `hiddenimports` list) and rebuild.
 
 ---
 
