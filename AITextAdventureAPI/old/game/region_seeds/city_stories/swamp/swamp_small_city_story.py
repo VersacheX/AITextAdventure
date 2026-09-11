@@ -412,7 +412,7 @@ NPC_DIALOG += [
 
 	# Type A – Relay to Madra
 	{ 'npc_id': 'bragg', 'dialog_id': 'bragg_swamp_small_a_relay_to_madra', 'dialog': [ "Draveth's read is in. Network's quiet — no bounties, no interference." ] },
-	{ 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_a_relay_to_madra', 'dialog': [ "Hollow's clear. Tell Seth he can lift off." ] },
+	{ 'npc_id': 'sable', 'dialog_id': 'sable_swamp_small_a_relay_to_madra', 'dialog': [ "The city's stopped watching. Tell Seth he can take the sky." ] },
 	{ 'npc_id': 'thorn', 'dialog_id': 'thorn_swamp_small_a_relay_to_madra', 'dialog': [ "Finally." ] },
 
 ]

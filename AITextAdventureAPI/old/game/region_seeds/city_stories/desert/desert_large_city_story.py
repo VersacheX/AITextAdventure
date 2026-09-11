@@ -272,21 +272,21 @@ NPC_DIALOG += [
         'npc_id': 'tech',
         'dialog_id': 'tech_desert_large_e_investigate_resonance',
         'dialog': [
-            "A stone that makes people's teeth ache isn't just resonant. It's actively rejecting contact."
+            "Teeth aching isn't resonance. That's active rejection. Whatever's inside that stone doesn't want to be touched."
         ]
     },
     {
         'npc_id': 'grimnaw',
         'dialog_id': 'grimnaw_desert_large_e_investigate_resonance',
         'dialog': [
-            "They reburied it like it was still dangerous. That kind of caution is rarely wasted."
+            "They didn't just bury it. They treated it like it was still live. People only do that when the data's already bitten them once."
         ]
     },
     {
         'npc_id': 'ripple',
         'dialog_id': 'ripple_desert_large_e_investigate_resonance',
         'dialog': [
-            "Something that old doesn't stay quiet by accident."
+            "Things that old don't go quiet by accident. The silence is the part that lasts."
         ]
     },
 
@@ -295,21 +295,21 @@ NPC_DIALOG += [
         'npc_id': 'faith',
         'dialog_id': 'faith_desert_large_e_consult_rhyla',
         'dialog': [
-            "A record sealed in frequency instead of language… they didn't want it read. They wanted it heard correctly."
+            "They sealed it in frequency so it could only be heard the right way... not read, not forced. There's a kind of care in that."
         ]
     },
     {
         'npc_id': 'grimnaw',
         'dialog_id': 'grimnaw_desert_large_e_consult_rhyla',
         'dialog': [
-            "The Choir locked knowledge away so thoroughly that even the land around it stayed silent."
+            "They didn't just lock the knowledge. They made the land itself forget how to speak around it. That's not caution. That's containment."
         ]
     },
     {
         'npc_id': 'sable',
         'dialog_id': 'sable_desert_large_e_consult_rhyla',
         'dialog': [
-            "If the vault is still guarded after this long, whatever's inside was never meant to leave."
+            "If the vault is still guarded after this long, whatever's inside was never meant to walk free. The desert remembers what it was told to keep."
         ]
     },
 
@@ -318,21 +318,21 @@ NPC_DIALOG += [
         'npc_id': 'skill',
         'dialog_id': 'skill_desert_large_e_confront_choir_echo',
         'dialog': [
-            "It already decided we don't belong here."
+            "It's already decided. We don't belong in the equation."
         ]
     },
     {
         'npc_id': 'grimnaw',
         'dialog_id': 'grimnaw_desert_large_e_confront_choir_echo',
         'dialog': [
-            "'Wrong hands' is an easy judgment when you're the one who set the lock."
+            "'Wrong hands' is a clean verdict when you're the one who wrote the criteria. Convenient."
         ]
     },
     {
         'npc_id': 'lyren',
         'dialog_id': 'lyren_desert_large_e_confront_choir_echo',
         'dialog': [
-            "It's not protecting knowledge. It's protecting the decision to keep it buried."
+            "It's not guarding the knowledge. It's guarding the choice to leave it buried. That's a quieter kind of fear."
         ]
     },
 
@@ -341,21 +341,21 @@ NPC_DIALOG += [
         'npc_id': 'technique',
         'dialog_id': 'technique_desert_large_e_defeat_choir_echo',
         'dialog': [
-            "It's done. Take the stone and let's move."
+            "It's done. Take the stone. We're moving."
         ]
     },
     {
         'npc_id': 'grimnaw',
         'dialog_id': 'grimnaw_desert_large_e_defeat_choir_echo',
         'dialog': [
-            "The lock is broken. The record is free whether it wanted to be or not."
+            "Lock's broken. The record's free whether it consented to the extraction or not. Data doesn't get a vote."
         ]
     },
     {
         'npc_id': 'ripple',
         'dialog_id': 'ripple_desert_large_e_defeat_choir_echo',
         'dialog': [
-            "Even sealed things eventually want to be known."
+            "Even the ones that were sealed the longest still lean toward being known. The pattern doesn't stop just because someone buried it."
         ]
     },
 
@@ -364,21 +364,21 @@ NPC_DIALOG += [
         'npc_id': 'magic',
         'dialog_id': 'magic_desert_large_e_return_to_rhyla',
         'dialog': [
-            "Older than the Choir. Older than the cities. This thing has been waiting a very long time."
+            "Older than the Choir, older than the cities... this thing's been waiting so long it probably forgot what it was waiting for."
         ]
     },
     {
         'npc_id': 'kor_in',
         'dialog_id': 'kor_in_desert_large_e_return_to_rhyla',
         'dialog': [
-            "Some things wait so long they forget why they were waiting."
+            "Some things wait so long the reason freezes solid. Then someone comes along and shatters it anyway."
         ]
     },
     {
         'npc_id': 'sable',
         'dialog_id': 'sable_desert_large_e_return_to_rhyla',
         'dialog': [
-            "Keep it close. The desert has a habit of taking back what it thinks still belongs to it."
+            "Keep it close. The desert has a long memory for what it was told still belongs under the sand."
         ]
     },
 
@@ -392,21 +392,21 @@ NPC_DIALOG += [
         'npc_id': 'technique',
         'dialog_id': 'technique_desert_large_f_find_seth_trail',
         'dialog': [
-            "Seth left in a hurry. That's never a good sign with him."
+            "Seth doesn't run for nothing. Whatever shook him, it's real."
         ]
     },
     {
         'npc_id': 'thorn',
         'dialog_id': 'thorn_desert_large_f_find_seth_trail',
         'dialog': [
-            "If something rattled him badly enough to run, I want to know what it was."
+            "If it hit him hard enough to bolt, I want the scent of it. Now."
         ]
     },
     {
         'npc_id': 'nia',
         'dialog_id': 'nia_desert_large_f_find_seth_trail',
         'dialog': [
-            "He always moves salvage through Mara when he's nervous. She's the next stop."
+            "He always funnels the nervous stuff through Mara. She's the next stop before the trail goes cold."
         ]
     },
 
@@ -415,21 +415,21 @@ NPC_DIALOG += [
         'npc_id': 'tech',
         'dialog_id': 'tech_desert_large_f_speak_to_mara',
         'dialog': [
-            "He left the crate but took the only entry that mattered. Classic misdirection."
+            "Left the crate, took the only line that mattered. Textbook misdirection. He wanted eyes on the junk, not the real haul."
         ]
     },
     {
         'npc_id': 'grimnaw',
         'dialog_id': 'grimnaw_desert_large_f_speak_to_mara',
         'dialog': [
-            "Circled and crossed out. He didn't want a paper trail of whatever he pulled."
+            "Circled and struck. He wasn't covering a client. He was erasing a trail he already knew was toxic."
         ]
     },
     {
         'npc_id': 'thorn',
         'dialog_id': 'thorn_desert_large_f_speak_to_mara',
         'dialog': [
-            "Let's see the manifest."
+            "Show me the list."
         ]
     },
 
@@ -438,21 +438,21 @@ NPC_DIALOG += [
         'npc_id': 'tech',
         'dialog_id': 'tech_desert_large_f_retrieve_manifest',
         'dialog': [
-            "'Recovered — Desert Metropolis vault. Rerouted. Do not log.' That wasn't client work."
+            "'Recovered — Desert Metropolis vault. Rerouted. Do not log.' That's not client work. That's freelancing with a body count attached."
         ]
     },
     {
         'npc_id': 'nia',
         'dialog_id': 'nia_desert_large_f_retrieve_manifest',
         'dialog': [
-            "Seth was freelancing something he knew he shouldn't touch."
+            "He knew the second he touched it that it wasn't something you log. He was already running before the ink dried."
         ]
     },
     {
         'npc_id': 'ripple',
         'dialog_id': 'ripple_desert_large_f_retrieve_manifest',
         'dialog': [
-            "Whatever came out of that vault, he didn't want anyone else to know it existed."
+            "Whatever came out of that vault, he needed it gone from every record that still remembered it existed."
         ]
     },
 
@@ -494,21 +494,21 @@ NPC_DIALOG += [
         'npc_id': 'tech',
         'dialog_id': 'tech_desert_large_d_deliver_cipher_stone',
         'dialog': [
-            "A resonance blueprint older than the network. Diego’s right to look nervous."
+            "A resonance blueprint older than the network itself. Diego's already calculating risk versus payoff. Watch his hands."
         ]
     },
     {
         'npc_id': 'grimnaw',
         'dialog_id': 'grimnaw_desert_large_d_deliver_cipher_stone',
         'dialog': [
-            "He’s already calculating who will pay for the finished frequency. Typical."
+            "He's not nervous about the frequency. He's nervous about who will own the finished product. Classic."
         ]
     },
     {
         'npc_id': 'sable',
         'dialog_id': 'sable_desert_large_d_deliver_cipher_stone',
         'dialog': [
-            "Some things change the people who hold them. Watch him after he lets it go."
+            "Some things change the people who hold them. Watch what he becomes the moment it's out of his reach."
         ]
     },
 
@@ -517,21 +517,21 @@ NPC_DIALOG += [
         'npc_id': 'faith',
         'dialog_id': 'faith_desert_large_d_consult_rhyla',
         'dialog': [
-            "A resonance blueprint… the dunes have been singing a weapon into existence for centuries."
+            "A weapon the dunes have been singing into shape for centuries... that's not power. That's something that was never meant to finish."
         ]
     },
     {
         'npc_id': 'grimnaw',
         'dialog_id': 'grimnaw_desert_large_d_consult_rhyla',
         'dialog': [
-            "The Archive Voice holds the final frequency. Of course the last piece is still underground."
+            "Of course the last frequency is still underground. The pattern always hides the final piece under the heaviest silence."
         ]
     },
     {
         'npc_id': 'kor_in',
         'dialog_id': 'kor_in_desert_large_d_consult_rhyla',
         'dialog': [
-            "Some songs weren't meant to be finished. We're about to finish one anyway."
+            "Some songs were never meant to be finished. We're about to finish one anyway. The ice remembers what happens when unfinished things are forced."
         ]
     },
 
@@ -540,21 +540,21 @@ NPC_DIALOG += [
         'npc_id': 'skill',
         'dialog_id': 'skill_desert_large_d_meet_archive_voice',
         'dialog': [
-            "It wants us to silence it before it will give up the frequency."
+            "It won't release the frequency until the threat is gone. Clean terms."
         ]
     },
     {
         'npc_id': 'grimnaw',
         'dialog_id': 'grimnaw_desert_large_d_meet_archive_voice',
         'dialog': [
-            "Typical guardian logic. Knowledge only after the threat is removed."
+            "Guardian logic: knowledge only after the variable that can use it is neutralized. Predictable."
         ]
     },
     {
         'npc_id': 'lyren',
         'dialog_id': 'lyren_desert_large_d_meet_archive_voice',
         'dialog': [
-            "Even a voice that old can still be afraid of being fully heard."
+            "Even a voice that old can still flinch at the thought of being fully heard."
         ]
     },
 
@@ -563,21 +563,21 @@ NPC_DIALOG += [
         'npc_id': 'technique',
         'dialog_id': 'technique_desert_large_d_defeat_archive_voice',
         'dialog': [
-            "It's quiet. Take the resonance."
+            "It's quiet. Take the resonance. We're done here."
         ]
     },
     {
         'npc_id': 'ripple',
         'dialog_id': 'ripple_desert_large_d_defeat_archive_voice',
         'dialog': [
-            "The dunes finally went still. I don't think they'll sing again for a long time."
+            "The dunes finally stopped singing. I don't think they'll start again for a very long time."
         ]
     },
     {
         'npc_id': 'sable',
         'dialog_id': 'sable_desert_large_d_defeat_archive_voice',
         'dialog': [
-            "Some silences are earned. This one feels like it was."
+            "Some silences are earned. This one feels like it was paid for in full."
         ]
     },
 
