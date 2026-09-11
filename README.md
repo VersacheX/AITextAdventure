@@ -9,26 +9,26 @@ a branching, event-driven story that spans continents and reality itself.
 
 You and your friends were knocking back a few drinks when blinding light tore
 through the bar and reality shifted around you. When it settled you were
-*here* — a looted, chaotic city in a world that isn't yours, with three of your
+*here* â€” a looted, chaotic city in a world that isn't yours, with three of your
 companions missing. This is the **Fracture**: a wound in reality.
 
-From a single ruined city the journey widens outward — bounty hunts and black
+From a single ruined city the journey widens outward â€” bounty hunts and black
 market deals give way to a resistance, an airship,
 and a continent-spanning search for the scattered halves of... Along
-the way you gather a dozens of party members, battling through seven regions with parties of up to five at a time from — desert,
-forest, grassland, mountains, shallows, snow, and swamp — each with their own
+the way you gather dozens of party members, battling through seven regions with parties of up to five at a time from â€” desert,
+forest, grassland, mountains, shallows, snow, and swamp â€” each with their own
 grief, purpose, and reason to fight. Standing against you are the **Voidwalkers**:
 manifestations of attention, sensation, grief, self-loathing, order, prophecy,
-and inevitability — Glamour, Scalpel, Rapture, Lament, Garbage, Stigma, Edict,
+and inevitability â€” Glamour, Scalpel, Rapture, Lament, Garbage, Stigma, Edict,
 Crux, Oracle, Cataclysm, and finally Dominion and the Void itself. Fracture is a
-story about identity, memory, and meaning — and whether a world can be held
+story about identity, memory, and meaning â€” and whether a world can be held
 together by choice when the systems that once sustained it have decided it
 should end.
 
 ### Under the Hood
 
 The interface is built on [Textual](https://textual.textualize.io), a modern
-compositor that repaints only the terminal cells that change between frames —
+compositor that repaints only the terminal cells that change between frames â€”
 there is no full-screen clear/reprint loop, so the display never flickers and
 never tears. On top of that sits a fully data-driven engine: the entire
 narrative is expressed as an **event-driven timeline** of tasks, dialogs, NPC
@@ -36,7 +36,7 @@ placements, dungeon spawns, and item awards, validated by an integrity checker
 so 21 chapters, regional arcs, and dozens of city stories stay consistent.
 Dungeons are procedurally generated, the party and combat systems are built
 around five archetypes (technique, tech, faith, magic, skill), and the game
-supports both local and online play with named save slots — plus a developer
+supports both local and online play with named save slots â€” plus a developer
 data browser for inspecting saves and seed data.
 
 ---
@@ -52,7 +52,7 @@ data browser for inspecting saves and seed data.
 
 ### Party & progression
 
-- Party system (1–5 characters) with five archetypes: technique, tech, faith, magic, skill
+- Party system (1â€“5 characters) with five archetypes: technique, tech, faith, magic, skill
 - Stat and ability leveling with archetype-specific requirements
 - Spend earned points to raise stats and unlock new abilities as your party grows
 - Equipment and inventory management with weapons, armor, and accessories across multiple rarity tiers
@@ -137,7 +137,7 @@ Full in-game controls and mechanics are documented in
 
 Both entry points are frozen with [PyInstaller](https://pyinstaller.org) using
 committed `.spec` files in `AITextAdventureAPI/`. Build with the spec (not the
-raw script) so the required assets and package metadata come along — the specs
+raw script) so the required assets and package metadata come along â€” the specs
 bundle the `tui/styles` and `tui/assets` folders, `readchar`/`tzdata` metadata,
 set `pathex=['.', 'old']`, and load the custom Textual hook from `hooks/`.
 
