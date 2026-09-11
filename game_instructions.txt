@@ -1,0 +1,84 @@
+if you are in a console window press ctrl + -/+ to zoom out or in. 
+the game will refresh size on the next screen refresh
+***DO NOT EVER RIGHT CLICK IN THE GAME WINDOW***
+
+
+OVERWORLD MAP
+-------------
+Use arrow keys to move
+press i to open inventory
+press q to quit
+
+# Map symbols
+µ - The Bar (found in every city and region)
+@ - The Inn (found in every city)
+Æ - The Weapons Shop (found in every city)
+₨ - The Items Shop (found in every city)
+¥ - The Armor Shop (found in every city)
+Î î Ï ï - Large/Small Residences and Commercial Buildings.  These are great places to loot and stay safe.
+Ṣ - The Hyperway (used to fast travel to any known city)
+O - City Specific Building or location
+0 - City Specific Building or location
+Ð - Dungeon Entrance
+
+*anything else is either open area or an impassable object
+
+INVENTORY
+---------
+use arrow keys left and right to select characters
+press e to equip
+ - you can filter equipment type using -/+
+ - select the items to equip and press enter
+
+# LEVELING
+your starting character will have Unused Awards
+'Pow: 15 | Stat: 10 | Abil: 1'
+press u to upgrade stats
+you start with 15 pow pts and 10 stat
+
+# power points
+HP - Health, sustainable damage
+AP - Ability Points
+
+# stat points
+str - melee damage. primary stat for technique 
+dex - evasion, accuracy, combat speed. primary stat for skill, secondary for tech
+int - pure ability effect. primary stat for tech, magic, and faith
+con - health buff, resistance. secondary stat for technique
+
+press l to learn abilities
+# LEARN ABILITIES
+requirements for level 1
+technique - 13 str/ 9 con
+tech - 13 int/ 9 dex
+faith - 13 int/ 9 con
+magic - 18 int
+skill - 18 dex
+ability level requirements scale, so be sure to spend wisely and focus
+
+press i to use items, press -/+ to filter between
+press enter to use an item
+
+press n to view the npc log
+cycle through them with up and down arrows.  if an npc has a * they have a task waiting
+
+press m to review all hostiles you've encountered
+
+DUNGEONS
+--------
+move with arrow keys
+↑↓ when on an arrow press u or d to change floor
+◘ are treasures, press space to loot
+ß are hostiles and npcs, press space to interact
+
+SAVING
+------
+You can save your game using a slot name.
+Later you can reload from any slot name.
+when you save without entering a slot name it overwrites that slots data
+
+PARTY
+-----
+In the inventory screen press p to select party members.  you can have any amount from 1-5
+
+
