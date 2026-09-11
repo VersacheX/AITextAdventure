@@ -3,23 +3,71 @@
 **Fracture** is a text-based adventure RPG rendered in a flicker-free terminal UI.
 Explore an overworld of cities and regions, fight hostiles, delve procedurally
 generated dungeons, level a party of up to five characters, and progress through
-a branching, event-driven story.
+a branching, event-driven story that spans continents and reality itself.
 
-The interface is built on [Textual](https://textual.textualize.io), which
-repaints only the terminal cells that change between frames — there is no
-full-screen clear/reprint loop, so the display never flickers.
+### The Story
+
+You and your friends were knocking back a few drinks when blinding light tore
+through the bar and reality shifted around you. When it settled you were
+*here* — a looted, chaotic city in a world that isn't yours, with three of your
+companions missing. This is the **Fracture**: a wound in reality.
+
+From a single ruined city the journey widens outward — bounty hunts and black
+market deals give way to a resistance, an airship,
+and a continent-spanning search for the scattered halves of... Along
+the way you gather a dozens of party members, battling through seven regions with parties of up to five at a time from — desert,
+forest, grassland, mountains, shallows, snow, and swamp — each with their own
+grief, purpose, and reason to fight. Standing against you are the **Voidwalkers**:
+manifestations of attention, sensation, grief, self-loathing, order, prophecy,
+and inevitability — Glamour, Scalpel, Rapture, Lament, Garbage, Stigma, Edict,
+Crux, Oracle, Cataclysm, and finally Dominion and the Void itself. Fracture is a
+story about identity, memory, and meaning — and whether a world can be held
+together by choice when the systems that once sustained it have decided it
+should end.
+
+### Under the Hood
+
+The interface is built on [Textual](https://textual.textualize.io), a modern
+compositor that repaints only the terminal cells that change between frames —
+there is no full-screen clear/reprint loop, so the display never flickers and
+never tears. On top of that sits a fully data-driven engine: the entire
+narrative is expressed as an **event-driven timeline** of tasks, dialogs, NPC
+placements, dungeon spawns, and item awards, validated by an integrity checker
+so 21 chapters, regional arcs, and dozens of city stories stay consistent.
+Dungeons are procedurally generated, the party and combat systems are built
+around five archetypes (technique, tech, faith, magic, skill), and the game
+supports both local and online play with named save slots — plus a developer
+data browser for inspecting saves and seed data.
 
 ---
 
 ## Features
 
-- Overworld exploration with cities, regions, shops, inns, and hyperway fast-travel
+### World & exploration
+
+- Overworld exploration across multiple regions and cities, each with shops, inns, and townsfolk to talk to
+- Fast travel between discovered locations via the hyperway network
+- Procedurally generated dungeons with lootable treasure, hidden rooms, and interactive NPCs
+- Region-specific side quests and optional companions to recruit as you explore
+
+### Party & progression
+
 - Party system (1–5 characters) with five archetypes: technique, tech, faith, magic, skill
-- Stat/ability leveling with archetype-specific requirements
-- Procedurally generated dungeons with lootable treasure and interactive NPCs
+- Stat and ability leveling with archetype-specific requirements
+- Spend earned points to raise stats and unlock new abilities as your party grows
+- Equipment and inventory management with weapons, armor, and accessories across multiple rarity tiers
+
+### Encounters & activities
+
+- Turn-based party combat against standard, elite, and boss-tier enemies
+- Optional puzzle, riddle, and games-of-chance encounters tucked away in the world
+- An in-game contact log that keeps track of the NPCs you meet
+
+### Story & structure
+
 - Event-driven story timeline (tasks, dialogs, NPC placement, dungeons)
-- Local and online play modes with save/load to named slots
-- A developer data-management browser for inspecting saves and seed data
+- Local and online play modes with save/load to named slots (*note* online requires setting up the data FastAPI server)
+- A developer data-management browser for inspecting seed data (*note* may be worth investing in having it be able to look at saves)
 
 ---
 
@@ -81,28 +129,7 @@ requiring a login.
 ### How to play
 
 Full in-game controls and mechanics are documented in
-[`game_instructions.txt`](game_instructions.txt). Quick reference:
-
-| Context | Keys |
-|---|---|
-| Overworld | Arrow keys to move · `i` inventory · `n` NPC log · `m` hostiles · `q` quit |
-| Inventory | `?/?` select character · `e` equip · `u` upgrade stats · `l` learn abilities · `p` party |
-| Dungeon | Arrow keys to move · `u`/`d` change floor on arrows · `space` loot/interact |
-
-Map symbols (overworld): `µ` bar · `@` inn · `Æ` weapons · `?` items · `¥` armor
-· `?` hyperway · `Ð` dungeon entrance. See `game_instructions.txt` for the full legend.
-
-> **Do not right-click inside the game window**, and never use `print()` /
-> `input()` for debugging inside a running screen — either will corrupt the
-> Textual display. Use `self.log(...)` or the Textual console instead:
->
-> ```bash
-> # Terminal 1 — Textual log console
-> textual console
->
-> # Terminal 2 — run in dev mode so logs route to the console above
-> textual run --dev AITextAdventureAPI/run_tui.py
-> ```
+[`game_instructions.txt`](game_instructions.txt). 
 
 ---
 
