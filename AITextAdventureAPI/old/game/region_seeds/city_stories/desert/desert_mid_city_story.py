@@ -292,71 +292,71 @@ NPC_DIALOG += [
 
     # Type C – Find Eldon
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_desert_mid_c_find_eldon',
-        'dialog': [
-            "She's seen this city erased a hundred times and still chooses to stay. That takes a particular kind of strength."
-        ]
+		'npc_id': 'faith',
+		'dialog_id': 'faith_desert_mid_c_find_eldon',
+		'dialog': [
+			"She's seen this city erased a hundred times and still chooses to stay. That kind of quiet endurance is rarer than most people realize."
+		]
     },
     {
-        'npc_id': 'ripple',
-        'dialog_id': 'ripple_desert_mid_c_find_eldon',
-        'dialog': [
-            "Visions of ink dissolving and names going dark… she's not just watching the future. She's trying to understand why it keeps failing."
-        ]
+		'npc_id': 'ripple',
+		'dialog_id': 'ripple_desert_mid_c_find_eldon',
+		'dialog': [
+			"Visions of ink dissolving and names going dark... she's not just watching the future fail. She's trying to understand the pattern that keeps letting it survive."
+		]
     },
     {
-        'npc_id': 'kor_in',
-        'dialog_id': 'kor_in_desert_mid_c_find_eldon',
-        'dialog': [
-            "Some people stay in a place because they hope it will finally choose a better ending."
-        ]
+		'npc_id': 'kor_in',
+		'dialog_id': 'kor_in_desert_mid_c_find_eldon',
+		'dialog': [
+			"Some people stay in a place because they hope it will finally choose a better ending. The ice taught me how heavy that hope can become."
+		]
     },
 
     # Type C – Consult Velra
     {
-        'npc_id': 'tech',
-        'dialog_id': 'tech_desert_mid_c_consult_velra',
-        'dialog': [
-            "Velra doesn't believe in coincidence. She believes in pattern. That's useful."
-        ]
+		'npc_id': 'tech',
+		'dialog_id': 'tech_desert_mid_c_consult_velra',
+		'dialog': [
+			"Velra doesn't believe in coincidence. She believes in pattern. That's the kind of mind I can work with."
+		]
     },
     {
-        'npc_id': 'grimnaw',
-        'dialog_id': 'grimnaw_desert_mid_c_consult_velra',
-        'dialog': [
-            "She reads the archive the same way Eldon reads possible futures. Two different indexes of the same threat."
-        ]
+		'npc_id': 'grimnaw',
+		'dialog_id': 'grimnaw_desert_mid_c_consult_velra',
+		'dialog': [
+			"She indexes the archive the same way Eldon indexes possible futures. Two different systems tracking the same threat. Useful overlap."
+		]
     },
     {
-        'npc_id': 'skill',
-        'dialog_id': 'skill_desert_mid_c_consult_velra',
-        'dialog': [
-            "If she trusts the entry she just made, we should take it seriously."
-        ]
+		'npc_id': 'skill',
+		'dialog_id': 'skill_desert_mid_c_consult_velra',
+		'dialog': [
+			"If she just added us to the index, we should treat that entry as real."
+		]
     },
 
     # Type C – Earn Eldon
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_desert_mid_c_earn_eldon',
-        'dialog': [
-            "She saw us in every future that ends well. That's not a small thing to carry."
-        ]
+		'npc_id': 'faith',
+		'dialog_id': 'faith_desert_mid_c_earn_eldon',
+		'dialog': [
+			"She saw us in every future that ends well. That's not a small thing to carry... or to be trusted with."
+		]
     },
     {
-        'npc_id': 'magic',
-        'dialog_id': 'magic_desert_mid_c_earn_eldon',
-        'dialog': [
-            "Indexed by the Vaults themselves. I like the sound of being un-erasable."
-        ]
+		'npc_id': 'magic',
+		'dialog_id': 'magic_desert_mid_c_earn_eldon',
+		'dialog': [
+			"Indexed by the Vaults themselves. Being officially un-erasable has a certain appeal."
+		]
     },
     {
-        'npc_id': 'ripple',
-        'dialog_id': 'ripple_desert_mid_c_earn_eldon',
-        'dialog': [
-            "Some people join because of duty. She's joining because the pattern finally included us."
-        ]
+		'npc_id': 'ripple',
+		'dialog_id': 'ripple_desert_mid_c_earn_eldon',
+		'dialog': [
+			"Some people join from duty. She's joining because the pattern finally made room for us."
+		]
     },
 
 ]
@@ -366,94 +366,94 @@ NPC_DIALOG += [
 
     # Type D – Deliver Ink Vial
     {
-        'npc_id': 'tech',
-        'dialog_id': 'tech_desert_mid_d_deliver_ink_vial',
-        'dialog': [
-            "Ink that moves on its own is looking for a host. We should not let it find one."
-        ]
+		'npc_id': 'tech',
+		'dialog_id': 'tech_desert_mid_d_deliver_ink_vial',
+		'dialog': [
+			"Ink that moves on its own is already looking for a host. We do not let it find one."
+		]
     },
     {
-        'npc_id': 'magic',
-        'dialog_id': 'magic_desert_mid_d_deliver_ink_vial',
-        'dialog': [
-            "Identity anchor in liquid form. Dangerous, elegant, and exactly the kind of thing Mira would notice."
-        ]
+		'npc_id': 'magic',
+		'dialog_id': 'magic_desert_mid_d_deliver_ink_vial',
+		'dialog': [
+			"Identity anchor in liquid form. Dangerous, elegant, and exactly the sort of thing Mira would clock in under three seconds."
+		]
     },
     {
-        'npc_id': 'grimnaw',
-        'dialog_id': 'grimnaw_desert_mid_d_deliver_ink_vial',
-        'dialog': [
-            "Take it to Threx before the vial decides what it wants to write."
-        ]
+		'npc_id': 'grimnaw',
+		'dialog_id': 'grimnaw_desert_mid_d_deliver_ink_vial',
+		'dialog': [
+			"Get it to Threx before the vial decides what it wants to write next. The data is already restless."
+		]
     },
 
     # Type D – Consult Threx
     {
-        'npc_id': 'tech',
-        'dialog_id': 'tech_desert_mid_d_consult_threx',
-        'dialog': [
-            "Binding a living identity into script. That's not archival work — that's containment."
-        ]
+		'npc_id': 'tech',
+		'dialog_id': 'tech_desert_mid_d_consult_threx',
+		'dialog': [
+			"Binding a living identity into script isn't archival work. That's containment with extra steps."
+		]
     },
     {
-        'npc_id': 'grimnaw',
-        'dialog_id': 'grimnaw_desert_mid_d_consult_threx',
-        'dialog': [
-            "The Ink Specter carries the matching frequency. Of course the solution is to dissolve it correctly."
-        ]
+		'npc_id': 'grimnaw',
+		'dialog_id': 'grimnaw_desert_mid_d_consult_threx',
+		'dialog': [
+			"The Specter carries the matching frequency. Of course the solution is to dissolve the variable correctly. Protocol is consistent, at least."
+		]
     },
     {
-        'npc_id': 'skill',
-        'dialog_id': 'skill_desert_mid_d_consult_threx',
-        'dialog': [
-            "Then we find the Specter and finish the process."
-        ]
+		'npc_id': 'skill',
+		'dialog_id': 'skill_desert_mid_d_consult_threx',
+		'dialog': [
+			"Then we find the Specter and finish the process."
+		]
     },
 
     # Type D – Meet Ink Specter
     {
-        'npc_id': 'skill',
-        'dialog_id': 'skill_desert_mid_d_meet_ink_specter',
-        'dialog': [
-            "It already decided we're the ones who took something from it."
-        ]
+		'npc_id': 'skill',
+		'dialog_id': 'skill_desert_mid_d_meet_ink_specter',
+		'dialog': [
+			"It's already decided we're the ones who took something from it."
+		]
     },
     {
-        'npc_id': 'magic',
-        'dialog_id': 'magic_desert_mid_d_meet_ink_specter',
-        'dialog': [
-            "'I will rewrite you before I let it go.' Bold claim for something made of ink."
-        ]
+		'npc_id': 'magic',
+		'dialog_id': 'magic_desert_mid_d_meet_ink_specter',
+		'dialog': [
+			"'I will rewrite you before I let it go.' Bold claim for something that can't even hold a single shape."
+		]
     },
     {
-        'npc_id': 'lyren',
-        'dialog_id': 'lyren_desert_mid_d_meet_ink_specter',
-        'dialog': [
-            "It's not protecting the vial. It's protecting the last piece of itself that still has a name."
-        ]
+		'npc_id': 'lyren',
+		'dialog_id': 'lyren_desert_mid_d_meet_ink_specter',
+		'dialog': [
+			"It's not protecting the vial. It's protecting the last piece of itself that still remembers having a name."
+		]
     },
 
     # Type D – Defeat Ink Specter
     {
-        'npc_id': 'technique',
-        'dialog_id': 'technique_desert_mid_d_defeat_ink_specter',
-        'dialog': [
-            "It's done. Take whatever crystallized."
-        ]
+		'npc_id': 'technique',
+		'dialog_id': 'technique_desert_mid_d_defeat_ink_specter',
+		'dialog': [
+			"It's done. Take whatever crystallized."
+		]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_desert_mid_d_defeat_ink_specter',
-        'dialog': [
-            "An identity that cannot be erased… that's a heavy gift."
-        ]
+		'npc_id': 'faith',
+		'dialog_id': 'faith_desert_mid_d_defeat_ink_specter',
+		'dialog': [
+			"An identity that cannot be erased... that's a heavy gift to carry."
+		]
     },
     {
-        'npc_id': 'grimnaw',
-        'dialog_id': 'grimnaw_desert_mid_d_defeat_ink_specter',
-        'dialog': [
-            "The archive is whole again. The Specter's corruption is indexed and closed."
-        ]
+		'npc_id': 'grimnaw',
+		'dialog_id': 'grimnaw_desert_mid_d_defeat_ink_specter',
+		'dialog': [
+			"The archive is whole again. The Specter's corruption is indexed and closed. Clean."
+		]
     },
 
 ]
@@ -470,11 +470,11 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'sable',
-        'dialog_id': 'sable_desert_mid_b_meet_zaruun',
-        'dialog': [
-            "The dunes here are his memory — and they remember us."
-        ]
+		'npc_id': 'sable',
+		'dialog_id': 'sable_desert_mid_b_meet_zaruun',
+		'dialog': [
+			"The dunes here are his memory now — and they still remember us."
+		]
     },
     {
         'npc_id': 'tech',
