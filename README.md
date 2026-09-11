@@ -1,75 +1,177 @@
 Here's the improved `README.md` file incorporating the new content while maintaining the existing structure and coherence:
+# Fracture
 
-# Project Title
+**Fracture** is a text-based adventure RPG rendered in a flicker-free terminal UI.
+Explore an overworld of cities and regions, fight hostiles, delve procedurally
+generated dungeons, level a party of up to five characters, and progress through
+a branching, event-driven story.
 
-## Overview
+The interface is built on [Textual](https://textual.textualize.io), which
+repaints only the terminal cells that change between frames — there is no
+full-screen clear/reprint loop, so the display never flickers.
 
-This project is designed to create and manage dynamic dungeons for a game environment. It allows for the addition of non-player characters (NPCs) and treasures within specified locations of the dungeon.
+---
 
 ## Features
 
-- Dynamic dungeon generation
-- Placement of NPCs and treasures
-- Customizable dungeon parameters
+- Overworld exploration with cities, regions, shops, inns, and hyperway fast-travel
+- Party system (1–5 characters) with five archetypes: technique, tech, faith, magic, skill
+- Stat/ability leveling with archetype-specific requirements
+- Procedurally generated dungeons with lootable treasure and interactive NPCs
+- Event-driven story timeline (tasks, dialogs, NPC placement, dungeons)
+- Local and online play modes with save/load to named slots
+- A developer data-management browser for inspecting saves and seed data
 
-## Events
-
-### `dungeon_add_npc`
-
-This event allows you to add an NPC to a specified location within the dungeon.
-
-#### Parameters
-
-- `dungeon_id` (string): The identifier for the dungeon.
-- `npc_id` (string): The identifier for the NPC to be added.
-- `location` (string): The type of tile where the NPC will be placed (e.g., corridor, treasure room).
-- `depth` (integer, optional): Determines how deep into the dungeon the NPC is placed. See the `depth` parameter section for more details.
-
-### `dungeon_add_treasure`
-
-This event allows you to add a treasure item to a specified location within the dungeon.
-
-#### Parameters
-
-- `dungeon_id` (string): The identifier for the dungeon.
-- `item_id` (string): The identifier for the treasure item to be added.
-- `location` (string): The type of tile where the treasure will be placed (e.g., corridor, treasure room).
-- `depth` (integer, optional): Determines how deep into the dungeon the treasure is placed. See the `depth` parameter section for more details.
-
-### `dungeon_add_npc` and `dungeon_add_treasure` — `depth` Parameter
-
-Both events accept an optional `depth` parameter (integer, 0–100).
-
-- **Omitted / `None`** — entity is placed anywhere in the specified `location` tile type (original behaviour).
-- **`0`** — places the entity as close to the dungeon entrance as possible.
-- **`100`** — places the entity as deep as possible (near the `final_chamber` end).
-- **Any value in between** — the placement is normalized to the closest matching tile at that percentile of Manhattan distance from the entrance centroid. A ±10% tolerance band is used; if no tiles fall within the band, the single nearest candidate is used so placement never hard-fails.
-
-#### Examples
-
-# NPC placed ~80% deep into the dungeon
-{ 'event_type': 'dungeon_add_npc', 'params': { 'dungeon_id': 'seth_hideout', 'npc_id': 'seth', 'location': 'corridor', 'depth': 80 }}
-
-# Treasure placed near the entrance (~10% depth)
-{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'seth_hideout', 'item_id': 'silver_key', 'location': 'corridor', 'depth': 10 }}
-
-# No depth = full scope (original behaviour)
-{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'seth_hideout', 'item_id': 'ornate_bracers', 'location': 'treasure_room' }}
+---
 
 ## Installation
 
-Instructions on how to install and set up the project.
+### Prerequisites
+
+- **Python 3.10+**
+- A terminal that supports Textual (Windows Terminal, most modern terminals).
+  On Windows, avoid the legacy console host where possible.
+
+### Set up
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/VersacheX/AITextAdventure.git
+cd AITextAdventure
+
+# 2. (Recommended) create and activate a virtual environment
+python -m venv .venv
+# Windows (PowerShell)
+.venv\Scripts\Activate.ps1
+# macOS / Linux
+source .venv/bin/activate
+
+# 3. Install dependencies
+pip install -r AITextAdventureAPI/tui/requirements.txt
+```
+
+---
 
 ## Usage
 
-Instructions on how to use the project, including examples and best practices.
+The application has two entry points, both under `AITextAdventureAPI/`.
+
+### Play the game
+
+```bash
+python AITextAdventureAPI/run_tui.py
+```
+
+This boots the normal flow: title ? server select ? auth ? main menu, from
+which you can start a new game or load a save.
+
+### Developer data browser
+
+```bash
+python AITextAdventureAPI/run_dev_tui.py
+```
+
+This boots directly into the data-management screen (save browsing,
+inspection, deletion, seed-data validation, and load-game testing) without
+requiring a login.
+
+> Both launchers add `AITextAdventureAPI/` and `AITextAdventureAPI/old/` to
+> `sys.path` before importing `tui.app`, so the `tui` package and the legacy
+> bare-import modules under `old/` (e.g. `game.objects.*`) both resolve.
+
+### How to play
+
+Full in-game controls and mechanics are documented in
+[`game_instructions.txt`](game_instructions.txt). Quick reference:
+
+| Context | Keys |
+|---|---|
+| Overworld | Arrow keys to move · `i` inventory · `n` NPC log · `m` hostiles · `q` quit |
+| Inventory | `?/?` select character · `e` equip · `u` upgrade stats · `l` learn abilities · `p` party |
+| Dungeon | Arrow keys to move · `u`/`d` change floor on arrows · `space` loot/interact |
+
+Map symbols (overworld): `µ` bar · `@` inn · `Æ` weapons · `?` items · `¥` armor
+· `?` hyperway · `Ð` dungeon entrance. See `game_instructions.txt` for the full legend.
+
+> **Do not right-click inside the game window**, and never use `print()` /
+> `input()` for debugging inside a running screen — either will corrupt the
+> Textual display. Use `self.log(...)` or the Textual console instead:
+>
+> ```bash
+> # Terminal 1 — Textual log console
+> textual console
+>
+> # Terminal 2 — run in dev mode so logs route to the console above
+> textual run --dev AITextAdventureAPI/run_tui.py
+> ```
+
+---
+
+## Building a standalone executable
+
+Both entry points are frozen with [PyInstaller](https://pyinstaller.org). A
+custom hook (`AITextAdventureAPI/hooks/hook-textual.py`) is required because
+Textual lazy-imports its widgets via `__getattr__`, which PyInstaller's static
+analyzer cannot follow; the hook force-collects every `textual` and `rich`
+submodule plus Textual's CSS/TCSS data files.
+
+> Note: `.spec`, `build/`, and `dist/` are gitignored, so there is no committed
+> spec file — build straight from the entry-point scripts with the hooks
+> directory below.
+
+```bash
+# Install the build tool
+pip install pyinstaller
+
+# From the AITextAdventureAPI/ directory:
+cd AITextAdventureAPI
+
+# Build the game (single-file executable)
+pyinstaller --onefile --additional-hooks-dir hooks run_tui.py
+
+# Build the developer data browser
+pyinstaller --onefile --additional-hooks-dir hooks run_dev_tui.py
+```
+
+The resulting executables are written to `AITextAdventureAPI/dist/`.
+
+> If a run of the frozen build reports a missing module, add it to the hook's
+> `hiddenimports` (or pass `--hidden-import <module>`) and rebuild.
+
+---
 
 ## Contributing
 
-Guidelines for contributing to the project.
+Contributions are welcome. Please keep the following conventions in mind:
+
+- **Never break the no-flicker rule.** Do not add `os.system('cls')` or any
+  full-screen clear/reprint cycle to the `tui` package.
+- **New screens** must inherit from `BaseScreen` (`tui/screens/base_screen.py`)
+  and override `compose_content()` rather than `compose()`.
+- **Blocking I/O** (server calls, save adapters, seed-data loads, the legacy
+  `old/` engine) must run inside a `@work(thread=True)` worker and marshal
+  results back with `self.app.call_from_thread(...)`, never directly from a
+  button handler.
+- **Follow the existing style** of the surrounding code and match the seed-data
+  formatting conventions when editing story/region files.
+- Run and verify the app with `python AITextAdventureAPI/run_tui.py` before
+  opening a pull request.
+
+The `AITextAdventureAPI/tui/README.md` documents the screen architecture and
+navigation API in detail.
+
+### Workflow
+
+1. Fork the repository and create a feature branch.
+2. Make your changes with clear, focused commits.
+3. Verify the app launches and your change behaves as expected.
+4. Open a pull request describing the change and its motivation.
+
+---
 
 ## License
 
-Information about the project's license.
-
-This revised README.md maintains the original structure while seamlessly integrating the new content about the `depth` parameter for the `dungeon_add_npc` and `dungeon_add_treasure` events.
+No license has been specified for this project yet. Until a license is added,
+all rights are reserved by the repository owner. If you intend to use or
+distribute this code, please contact the maintainer via the
+[project repository](https://github.com/VersacheX/AITextAdventure).
