@@ -147,7 +147,7 @@ NPC_DIALOG = [
 		'dialog_id': 'ch2_narrator_contradiction',
 		'dialog': [
 			"Chapter 2",
-			"Contradiction is the root of all movement and life."
+			"Contradiction is the root of all movement and life. - Hegel"
 		]
 	},
 	{

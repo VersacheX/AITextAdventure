@@ -147,7 +147,7 @@ NPC_DIALOG = [
         'npc_id': None,
         'dialog_id': 'narrator_intro_chapter_4',
         'dialog': [
-            "Chapter 4 - Some things only become real the moment they break."
+            "Chapter 4 - Some things only become real the moment they break. - Kant"
         ]
     },
     ###############################################

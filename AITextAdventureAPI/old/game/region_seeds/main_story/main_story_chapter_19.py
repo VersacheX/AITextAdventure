@@ -114,7 +114,7 @@ NPC_DIALOG = [
 		'npc_id': None,
 		'dialog_id': 'narrator_ch19_intro',
 		'dialog': [
-			"Chapter 19 - The past survives... not as something behind us, but as something within us."
+			"Chapter 19 - The past survives... not as something behind us, but as something within us. - Augustine"
 		]
 	},
 	{

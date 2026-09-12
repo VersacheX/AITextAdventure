@@ -87,7 +87,7 @@ NPC_DIALOG = [
 		'npc_id': None,
 		'dialog_id': 'narrator_chapter_intro_3',
 		'dialog': [
-			"Chapter 3 - As far as consciousness reaches backward… so far reaches identity."
+			"Chapter 3 - As far as consciousness reaches backward… so far reaches identity. - Locke"
 		]
 	},
 	{

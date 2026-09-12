@@ -90,7 +90,7 @@ NPC_DIALOG = [
 		'npc_id': None,
 		'dialog_id': 'narrator_ch20_intro',
 		'dialog': [
-			"Chapter 20 - Everything that has been will also be."
+			"Chapter 20 - Everything that has been will also be. - Augustine"
 		]
 	},
 	{

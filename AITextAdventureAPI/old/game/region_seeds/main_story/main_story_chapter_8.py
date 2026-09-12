@@ -269,7 +269,7 @@ NPC_DIALOG = [
         'npc_id': None,
         'dialog_id': 'ch8_narrator_intro',
         'dialog': [
-            "Chapter 8 - The world is what appears to us... and we are shaped by what we attend to."
+            "Chapter 8 - The world is what appears to us... and we are shaped by what we attend to. - Merleau-Ponty"
         ]
     },
     {

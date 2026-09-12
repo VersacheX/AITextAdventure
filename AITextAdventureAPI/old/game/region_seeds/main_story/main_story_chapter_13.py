@@ -120,7 +120,7 @@ NPC_DIALOG = [
         'npc_id': None,
         'dialog_id': 'ch13_narrator_intro',
         'dialog': [
-            "Chapter 13 - The worst lie isn't what the world tells you... it's what you start telling yourself."
+            "Chapter 13 - The worst lie isn't what the world tells you... it's what you start telling yourself. - Sartre"
         ]
     },
     {

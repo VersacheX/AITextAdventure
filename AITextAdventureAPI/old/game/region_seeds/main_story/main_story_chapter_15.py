@@ -148,7 +148,7 @@ NPC_DIALOG = [
         'npc_id': None,
         'dialog_id': 'narrator_ch15_intro',
         'dialog': [
-            "Chapter 15 - If you perform long enough... you forget there was ever a real you."
+            "Chapter 15 - If you perform long enough... you forget there was ever a real you. - Arendt"
         ]
     },
     {

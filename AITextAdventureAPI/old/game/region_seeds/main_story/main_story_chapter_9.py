@@ -72,7 +72,7 @@ NPC_DIALOG = [
         'npc_id': None,
         'dialog_id': 'ch9_narrator_intro',
         'dialog': [
-            "Chapter 9 - The danger isn't when it hurts... it's when you start to enjoy it."
+            "Chapter 9 - The danger isn't when it hurts... it's when you start to enjoy it. - Arendt"
         ]
     },
     {

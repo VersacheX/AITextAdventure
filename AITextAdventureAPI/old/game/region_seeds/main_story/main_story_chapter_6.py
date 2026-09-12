@@ -75,7 +75,7 @@ NPC_DIALOG = [
         'npc_id': None,
         'dialog_id': 'ch6_narrator_intro',
         'dialog': [
-            "Chapter 6 - Life, left to itself, tends toward chaos… unless something holds it together."
+            "Chapter 6 - Life, left to itself, tends toward chaos… unless something holds it together. - Hobbes"
         ]
     },
     {

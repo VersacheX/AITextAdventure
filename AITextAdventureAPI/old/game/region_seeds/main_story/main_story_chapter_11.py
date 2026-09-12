@@ -169,7 +169,7 @@ NPC_DIALOG = [
         'npc_id': None,
         'dialog_id': 'ch11_narrator_intro',
         'dialog': [
-            "Chapter 11 - When you chase feeling long enough... you stop being able to feel at all."
+            "Chapter 11 - When you chase feeling long enough... you stop being able to feel at all. - Epicurus"
         ]
     },
     {

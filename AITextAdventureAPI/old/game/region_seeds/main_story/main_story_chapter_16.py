@@ -262,7 +262,7 @@ NPC_DIALOG = [
 		'npc_id': None,
 		'dialog_id': 'ch16_narrator_intro',
 		'dialog': [
-			"Chapter 16 - When the center no longer holds, the world does not fall apart - it becomes empty."
+			"Chapter 16 - When the center no longer holds, the world does not fall apart - it becomes empty. - Nietzsche"
 		]
 	},
 	{

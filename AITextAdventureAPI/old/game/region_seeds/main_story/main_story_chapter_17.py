@@ -83,7 +83,7 @@ NPC_DIALOG = [
 		'npc_id': None,
 		'dialog_id': 'narrator_ch17_intro',
 		'dialog': [
-			"Chapter 17 - The paradox lies not in reality, but in the way we describe it."
+			"Chapter 17 - The paradox lies not in reality, but in the way we describe it. - Russell"
 		]
 	},
 	{
