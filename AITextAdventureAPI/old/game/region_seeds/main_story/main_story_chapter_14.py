@@ -171,7 +171,7 @@ NPC_DIALOG = [
         'npc_id': None,
         'dialog_id': 'narrator_ch14_intro',
         'dialog': [
-            "Chapter 14 - You are judged for what you were... and punished for not becoming what you’re supposed to be."
+            "Chapter 14 - You are judged for what you were... and punished for not becoming what you’re supposed to be. - Foucault"
         ]
     },
     {

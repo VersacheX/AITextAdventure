@@ -96,7 +96,7 @@ NPC_DIALOG = [
         'npc_id': None,
         'dialog_id': 'ch12_narrator_intro',
         'dialog': [
-            "Chapter 12 - In facing loss, time no longer moves forward... it folds inward."
+            "Chapter 12 - In facing loss, time no longer moves forward... it folds inward. - Heidegger"
         ]
     },
     {

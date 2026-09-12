@@ -56,7 +56,7 @@ NPC_DIALOG = [
 		'npc_id': None,
 		'dialog_id': 'narrator_ch18_intro',
 		'dialog': [
-			"Chapter 18 - When a system knows it is broken, destroying itself is the only honest act left."
+			"Chapter 18 - When a system knows it is broken, destroying itself is the only honest act left. - Marx"
 		]
 	},
 	{

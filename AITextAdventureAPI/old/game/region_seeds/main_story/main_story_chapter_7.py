@@ -79,7 +79,7 @@ NPC_DIALOG = [
         'npc_id': None,
         'dialog_id': 'ch7_narrator_intro',
         'dialog': [
-            "Chapter 7 - A world is not healed by isolated will, but by many working as one."
+            "Chapter 7 - A world is not healed by isolated will, but by many working as one. - Aristotle"
         ]
     },
     {

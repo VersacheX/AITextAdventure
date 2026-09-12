@@ -118,7 +118,7 @@ NPC_DIALOG = [
         'npc_id': None,
         'dialog_id': 'ch10_narrator_intro',
         'dialog': [
-            "Chapter 10 - When feeling becomes mandatory, humanity becomes optional."
+            "Chapter 10 - When feeling becomes mandatory, humanity becomes optional. - Le Bon"
         ]
     },
     {

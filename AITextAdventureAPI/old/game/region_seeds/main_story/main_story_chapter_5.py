@@ -101,7 +101,7 @@ NPC_DIALOG = [
         'npc_id': None,
         'dialog_id': 'ch5_narrator_intro',
         'dialog': [
-            "Chapter 5 - Life can only be understood backward… but it must be lived forward."
+            "Chapter 5 - Life can only be understood backward… but it must be lived forward. - Kierkegaard"
         ]
     },
     {

@@ -201,7 +201,7 @@ NPC_DIALOG = [
 		'dialog_id': 'ch1_narrator_we_do_not_begin',
 		'dialog': [
 			"Chapter 1",
-			"We do not begin by knowing where we are.  We begin by finding ourselves already there."
+			"We do not begin by knowing where we are.  We begin by finding ourselves already there. - Heidegger"
 		]
 	},
 	{
@@ -225,7 +225,8 @@ NPC_DIALOG = [
 		'npc_id': None,
 		'dialog_id': 'chapter_1_our_stuff_is_missing',
 		'dialog': [
-			"You should get somewhere safe to check your things.  Most buildings are safe, except for the bars.",
+			"You should open your inventory (i) and set you character abilities. Check frequently if characters have stats or abilities to distribute.",
+			"Most buildings are safe, except for the bars and the subways.",
 			"Find a residence or business (î Î ï Ï), then press (i) to manage your party.",
 			"Make sure to spend any power points you have to upgrade your stats and ensure your characters learn any abilities",
 			"If you get low head to the @inn."
