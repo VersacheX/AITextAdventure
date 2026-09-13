@@ -685,7 +685,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "description": "Drax drives his weight into the enemy line -- a sweeping strike that knocks back and disorients every foe in range.",
         "ability_type": "technique", "level": 3,
         "elements": ["earth", "light", "electric"],
-        "base_power": 12, "ap_cost": 85, "effect": "status",
+        "base_power": 12, "ap_cost": 90, "effect": "status",
         "status_keys": ["stun"], "can_aoe": True,
         "non_player_ability": True,
     },
