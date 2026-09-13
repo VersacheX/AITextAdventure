@@ -43,12 +43,14 @@ ELEMENT_SYMBOLS: dict[str, str] = {
 }
 
 STATUS_SYMBOLS: dict[str, str] = {
+    "all":                   "☯",
     "petrify":               "⬡",
     "stun":                  "✦",
     "sleep":                 "☽",
     "confuse":               "⁈",
     "silence":               "⊘",
     "continuous_damage":     "♾",
+    "regen":                 "♻",
     "elemental_debuff":      "◆",
     "attack_debuff":         "↓A",
     "defense_debuff":        "↓D",
