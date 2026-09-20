@@ -162,6 +162,7 @@ class LoadOverlay(Widget):
         self.app.call_from_thread(self._on_fetch_success, saves)
 
     def _on_fetch_success(self, saves: List[Dict[str, Any]]) -> None:
+        self._loading = False
         lv     = self.query_one("#load-list", ListView)
         status = self.query_one("#load-status", Static)
         lv.clear()
@@ -178,6 +179,7 @@ class LoadOverlay(Widget):
         self.query_one("#load-refresh", Button).disabled = False
 
     def _on_fetch_error(self, message: str) -> None:
+        self._loading = False
         self.query_one("#load-status", Static).update(
             f"[red]Failed to fetch saves: {rich_escape(message)}[/red]"
         )
@@ -311,7 +313,9 @@ class LoadOverlay(Widget):
         self.app.call_from_thread(self._on_delete_success, save_id)
 
     def _on_delete_success(self, save_id: Any) -> None:
-        self._loading = False
+        # Keep _loading set: _fetch_saves() re-asserts and holds the guard
+        # until its own callbacks clear it, so Esc/Cancel/R can't race the
+        # in-flight refresh.
         self._clear_active_save_id_if_match(save_id)
         self.app.notify("Save deleted.", title="Load Game")
         self._fetch_saves()

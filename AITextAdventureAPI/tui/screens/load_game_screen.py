@@ -129,7 +129,7 @@ class LoadGameScreen(BaseScreen):
         if event.button.id == "refresh":
             self._refresh_saves()
         elif event.button.id == "back":
-            self.app.go_back()
+            self.action_go_back()
 
     def on_list_view_selected(self, event: ListView.Selected) -> None:
         item = event.item
@@ -192,7 +192,11 @@ class LoadGameScreen(BaseScreen):
 
     def _on_delete_error(self, message: str) -> None:
         self._busy = False
-        self.notify(f"Could not delete save: {message}", title="Load Game", severity="error")
+        self.notify(
+            f"Could not delete save: {rich_escape(message)}",
+            title="Load Game",
+            severity="error",
+        )
         self.query_one("#load-status", Static).update("Select a save to load.")
         self.query_one("#save-list", ListView).disabled = False
         self.query_one("#refresh", Button).disabled = False
@@ -283,7 +287,11 @@ class LoadGameScreen(BaseScreen):
 
     def _on_load_error(self, message: str) -> None:
         self._busy = False
-        self.notify(f"Could not load save: {message}", title="Load Game", severity="error")
+        self.notify(
+            f"Could not load save: {rich_escape(message)}",
+            title="Load Game",
+            severity="error",
+        )
         self.query_one("#load-status", Static).update("Select a save to load.")
         self.query_one("#save-list", ListView).disabled = False
         self.query_one("#refresh", Button).disabled = False
