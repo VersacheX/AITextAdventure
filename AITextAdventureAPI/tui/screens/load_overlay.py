@@ -61,6 +61,7 @@ class LoadOverlay(Widget):
 
     BINDINGS = [
         Binding("r",      "refresh_saves", "Refresh", show=False),
+        Binding("delete", "delete_save",   "Delete",  show=True),
         Binding("escape", "request_close", "Close",   show=True),
     ]
 
@@ -133,7 +134,7 @@ class LoadOverlay(Widget):
         yield Static("Loading saves\u2026", id="load-status")
         yield ListView(id="load-list")
         yield Static(
-            "[dim]\u2191\u2193:navigate  Enter/click:load  R:refresh  Esc:close[/dim]",
+            "[dim]\u2191\u2193:navigate  Enter/click:load  R:refresh  Del:delete  Esc:close[/dim]",
             id="load-hint",
         )
 
@@ -259,6 +260,68 @@ class LoadOverlay(Widget):
     def action_refresh_saves(self) -> None:
         if not self._loading:
             self._fetch_saves()
+
+    # ── delete → confirm → refresh ────────────────────────────────────────────
+
+    def action_delete_save(self) -> None:
+        if self._loading:
+            return
+        lv = self.query_one("#load-list", ListView)
+        row = lv.highlighted_child
+        if not isinstance(row, _SaveRow) or row.save_id is None:
+            return
+
+        from tui.screens.confirm_screen import ConfirmScreen  # noqa: PLC0415
+
+        save_id   = row.save_id
+        save_name = row.save_name
+
+        def _confirmed(result: bool | None) -> None:
+            if result:
+                self._do_delete(save_id, save_name)
+
+        self.app.push_screen(
+            ConfirmScreen(
+                f"Delete '{rich_escape(save_name)}'?\nThis cannot be undone.",
+                yes_label="Delete",
+                no_label="Cancel",
+            ),
+            _confirmed,
+        )
+
+    def _do_delete(self, save_id: Any, save_name: str) -> None:
+        self._loading = True
+        self.query_one("#load-list",    ListView).disabled = True
+        self.query_one("#load-refresh", Button).disabled   = True
+        self.query_one("#load-status",  Static).update(
+            f"Deleting '{rich_escape(save_name)}'\u2026"
+        )
+        self._delete_worker(save_id)
+
+    @work(thread=True)
+    def _delete_worker(self, save_id: Any) -> None:
+        from client_api_requests.save_service_adapter import get_adapter  # noqa: PLC0415
+
+        try:
+            adapter = get_adapter()
+            adapter.delete_save(save_id)
+        except Exception as exc:  # noqa: BLE001
+            self.app.call_from_thread(self._on_delete_error, str(exc))
+            return
+        self.app.call_from_thread(self._on_delete_success)
+
+    def _on_delete_success(self) -> None:
+        self._loading = False
+        self.app.notify("Save deleted.", title="Load Game")
+        self._fetch_saves()
+
+    def _on_delete_error(self, message: str) -> None:
+        self._loading = False
+        self.query_one("#load-status", Static).update(
+            f"[red]Could not delete save: {rich_escape(message)}[/red]"
+        )
+        self.query_one("#load-list",    ListView).disabled = False
+        self.query_one("#load-refresh", Button).disabled   = False
 
     def action_request_close(self) -> None:
         if not self._loading:
