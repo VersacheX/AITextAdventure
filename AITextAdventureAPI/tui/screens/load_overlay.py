@@ -308,12 +308,23 @@ class LoadOverlay(Widget):
         except Exception as exc:  # noqa: BLE001
             self.app.call_from_thread(self._on_delete_error, str(exc))
             return
-        self.app.call_from_thread(self._on_delete_success)
+        self.app.call_from_thread(self._on_delete_success, save_id)
 
-    def _on_delete_success(self) -> None:
+    def _on_delete_success(self, save_id: Any) -> None:
         self._loading = False
+        self._clear_active_save_id_if_match(save_id)
         self.app.notify("Save deleted.", title="Load Game")
         self._fetch_saves()
+
+    def _clear_active_save_id_if_match(self, save_id: Any) -> None:
+        # If the deleted slot is the active game's slot, clear its save_id so
+        # the next same-name save creates a new slot instead of updating a
+        # dead row (which the API rejects).
+        from tui.services.game_state import get_active_game  # noqa: PLC0415
+
+        pg = get_active_game()
+        if pg is not None and getattr(pg, "save_id", None) == save_id:
+            pg.save_id = None
 
     def _on_delete_error(self, message: str) -> None:
         self._loading = False

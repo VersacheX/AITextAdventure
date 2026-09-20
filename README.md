@@ -1,6 +1,6 @@
 # Fracture
 
-**Fracture** is a text-based adventure RPG rendered in a TUI UI.
+**Fracture** is a text-based adventure RPG rendered in a flicker-free terminal UI.
 Explore an overworld of cities and regions, fight hostiles, delve procedurally
 generated dungeons, level a party of up to five characters across 32 attainables, and progress through
 a branching, event-driven story that spans continents and reality itself.
