@@ -25,6 +25,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List
 
+from rich.markup import escape as rich_escape
 from textual import work
 from textual.app import ComposeResult
 from textual.containers import Horizontal, Vertical
@@ -50,10 +51,16 @@ class SaveListItem(ListItem):
     def __init__(self, save: Dict[str, Any]) -> None:
         super().__init__(Label(_format_save_row(save)))
         self.save_id = save.get("id")
+        self.save_name = str(save.get("name") or "Unnamed Save")
 
 
 class LoadGameScreen(BaseScreen):
     """Scrollable save-selection screen."""
+
+    BINDINGS = [
+        ("escape", "go_back", "Back"),
+        ("delete", "delete_save", "Delete"),
+    ]
 
     DEFAULT_CSS = """
     LoadGameScreen {
@@ -108,20 +115,103 @@ class LoadGameScreen(BaseScreen):
                 yield Button("Back", id="back")
 
     def on_mount(self) -> None:
+        self._busy = False
         self._refresh_saves()
+
+    def action_go_back(self) -> None:
+        # Block navigation while a load/delete worker is in flight so its
+        # call_from_thread callbacks don't query widgets on a popped screen.
+        if self._busy:
+            return
+        self.app.go_back()
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "refresh":
             self._refresh_saves()
         elif event.button.id == "back":
-            self.app.go_back()
+            self.action_go_back()
 
     def on_list_view_selected(self, event: ListView.Selected) -> None:
         item = event.item
         if isinstance(item, SaveListItem) and item.save_id is not None:
             self._load_save(item.save_id)
 
+    def action_delete_save(self) -> None:
+        list_view = self.query_one("#save-list", ListView)
+        if list_view.disabled:
+            return
+        item = list_view.highlighted_child
+        if not isinstance(item, SaveListItem) or item.save_id is None:
+            return
+
+        from tui.screens.confirm_screen import ConfirmScreen
+
+        save_id = item.save_id
+        save_name = item.save_name
+
+        def _confirmed(result: bool | None) -> None:
+            if result:
+                self._delete_save(save_id, save_name)
+
+        self.app.push_screen(
+            ConfirmScreen(
+                f"Delete save '{rich_escape(save_name)}'?\nThis cannot be undone.",
+                yes_label="Delete",
+                no_label="Cancel",
+            ),
+            _confirmed,
+        )
+
+    def _delete_save(self, save_id: Any, save_name: str) -> None:
+        self._busy = True
+        self.query_one("#load-status", Static).update(
+            f"Deleting '{rich_escape(save_name)}'..."
+        )
+        self.query_one("#save-list", ListView).disabled = True
+        self.query_one("#refresh", Button).disabled = True
+        self._delete_worker(save_id)
+
+    @work(thread=True)
+    def _delete_worker(self, save_id: Any) -> None:
+        from client_api_requests.save_service_adapter import get_adapter
+
+        try:
+            adapter = get_adapter()
+            adapter.delete_save(save_id)
+        except Exception as exc:  # noqa: BLE001 - surfaced to the user below
+            self.app.call_from_thread(self._on_delete_error, str(exc))
+            return
+
+        self.app.call_from_thread(self._on_delete_success, save_id)
+
+    def _on_delete_success(self, save_id: Any) -> None:
+        self._busy = False
+        self._clear_active_save_id_if_match(save_id)
+        self.notify("Save deleted.", title="Load Game")
+        self._refresh_saves()
+
+    def _on_delete_error(self, message: str) -> None:
+        self._busy = False
+        self.notify(
+            f"Could not delete save: {rich_escape(message)}",
+            title="Load Game",
+            severity="error",
+        )
+        self.query_one("#load-status", Static).update("Select a save to load.")
+        self.query_one("#save-list", ListView).disabled = False
+        self.query_one("#refresh", Button).disabled = False
+
+    def _clear_active_save_id_if_match(self, save_id: Any) -> None:
+        # If the deleted slot is the active game's slot, clear its save_id so
+        # the next save creates a new slot instead of updating a dead row.
+        from tui.services.game_state import get_active_game
+
+        pg = get_active_game()
+        if pg is not None and getattr(pg, "save_id", None) == save_id:
+            pg.save_id = None
+
     def _refresh_saves(self) -> None:
+        self._busy = True
         self.query_one("#load-status", Static).update("Loading saves...")
         list_view = self.query_one("#save-list", ListView)
         list_view.clear()
@@ -144,6 +234,7 @@ class LoadGameScreen(BaseScreen):
         self.app.call_from_thread(self._on_fetch_success, saves)
 
     def _on_fetch_success(self, saves: List[Dict[str, Any]]) -> None:
+        self._busy = False
         list_view = self.query_one("#save-list", ListView)
         status = self.query_one("#load-status", Static)
 
@@ -153,18 +244,20 @@ class LoadGameScreen(BaseScreen):
         else:
             for save in saves:
                 list_view.append(SaveListItem(save))
-            status.update(f"{len(saves)} save(s). Use \u2191/\u2193 + Enter, or click, to load.")
+            status.update(f"{len(saves)} save(s). Use \u2191/\u2193 + Enter to load, Del to delete.")
             list_view.focus()
 
         list_view.disabled = False
         self.query_one("#refresh", Button).disabled = False
 
     def _on_fetch_error(self, message: str) -> None:
-        self.query_one("#load-status", Static).update(f"Failed to load saves: {message}")
+        self._busy = False
+        self.query_one("#load-status", Static).update(f"Failed to load saves: {rich_escape(message)}")
         self.query_one("#save-list", ListView).disabled = False
         self.query_one("#refresh", Button).disabled = False
 
     def _load_save(self, save_id: Any) -> None:
+        self._busy = True
         self.query_one("#load-status", Static).update("Loading save...")
         self.query_one("#save-list", ListView).disabled = True
         self.query_one("#refresh", Button).disabled = True
@@ -196,7 +289,12 @@ class LoadGameScreen(BaseScreen):
         self.app.goto_screen("overworld")
 
     def _on_load_error(self, message: str) -> None:
-        self.notify(f"Could not load save: {message}", title="Load Game", severity="error")
+        self._busy = False
+        self.notify(
+            f"Could not load save: {rich_escape(message)}",
+            title="Load Game",
+            severity="error",
+        )
         self.query_one("#load-status", Static).update("Select a save to load.")
         self.query_one("#save-list", ListView).disabled = False
         self.query_one("#refresh", Button).disabled = False
