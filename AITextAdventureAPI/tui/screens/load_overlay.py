@@ -141,6 +141,7 @@ class LoadOverlay(Widget):
     # ── fetch ─────────────────────────────────────────────────────────────────
 
     def _fetch_saves(self) -> None:
+        self._loading = True
         lv = self.query_one("#load-list", ListView)
         lv.clear()
         lv.disabled = True

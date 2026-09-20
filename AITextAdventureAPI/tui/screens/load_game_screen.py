@@ -211,6 +211,7 @@ class LoadGameScreen(BaseScreen):
             pg.save_id = None
 
     def _refresh_saves(self) -> None:
+        self._busy = True
         self.query_one("#load-status", Static).update("Loading saves...")
         list_view = self.query_one("#save-list", ListView)
         list_view.clear()
@@ -233,6 +234,7 @@ class LoadGameScreen(BaseScreen):
         self.app.call_from_thread(self._on_fetch_success, saves)
 
     def _on_fetch_success(self, saves: List[Dict[str, Any]]) -> None:
+        self._busy = False
         list_view = self.query_one("#save-list", ListView)
         status = self.query_one("#load-status", Static)
 
@@ -249,7 +251,8 @@ class LoadGameScreen(BaseScreen):
         self.query_one("#refresh", Button).disabled = False
 
     def _on_fetch_error(self, message: str) -> None:
-        self.query_one("#load-status", Static).update(f"Failed to load saves: {message}")
+        self._busy = False
+        self.query_one("#load-status", Static).update(f"Failed to load saves: {rich_escape(message)}")
         self.query_one("#save-list", ListView).disabled = False
         self.query_one("#refresh", Button).disabled = False
 
