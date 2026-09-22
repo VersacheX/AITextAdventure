@@ -64,10 +64,10 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         'constitution': 102,
         'level': 30,
         'abilities': [
-            'lv2_unique_ability_faith_ripple_tidal_mend',
-            'lv2_unique_ability_faith_ripple_drowned_blessing',
-            'lv3_unique_ability_faith_ripple_returned_tide',
-            'lv3_unique_ability_faith_ripple_deep_current_surge',
+            'lv2_unique_ability_spirit_ripple_tidal_mend',
+            'lv2_unique_ability_spirit_ripple_drowned_blessing',
+            'lv3_unique_ability_spirit_ripple_returned_tide',
+            'lv3_unique_ability_spirit_ripple_deep_current_surge',
         ]
     }
 ]

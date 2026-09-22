@@ -9,7 +9,7 @@ RANDOM_HOSTILE_SEEDS = [
  {"id": "gnash_wraith", "name": "Gnash Wraith", "hostile_type": "spirit", "role": "hazard", "min_spawn_level": 23, "rarity": "uncommon", "base_xp": 280,
   "common_drop": "herb_major", "rare_drop": None, "money_range": (15, 55),
   "basic_attack": "swamp touch", "strong_attack": "gnash wail",
-  "player_abilities": ["dark_faith_lv1_shade_whisper"],
+  "player_abilities": ["dark_spirit_lv1_shade_whisper"],
   "base_str": 3, "base_dex": 10, "base_con": 5, "base_int": 12, "base_hp": 210, "base_ap": 12,
   "str_per_level": 0, "dex_per_level": 1, "con_per_level": 1, "int_per_level": 3},
  {"id": "gnash_raider", "name": "Gnash Raider", "hostile_type": "humanoid", "role": "damage", "min_spawn_level": 28, "rarity": "common", "base_xp": 290,

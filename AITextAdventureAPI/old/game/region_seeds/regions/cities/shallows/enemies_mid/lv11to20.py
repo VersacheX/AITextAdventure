@@ -15,7 +15,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "night_sneak", "name": "Night Sneak", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":13, "rarity": "uncommon", "base_xp":220,
  "common_drop": "stimulant_small", "rare_drop": "stimulant_large", "money_range": (30,140),
- "basic_attack": "grease strike", "strong_attack": "silent garrote", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "grease strike", "strong_attack": "silent garrote", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":3, "base_dex":8, "base_con":4, "base_int":5, "base_hp":92, "base_ap":8,
  "str_per_level":1, "dex_per_level":3, "con_per_level":1, "int_per_level":2},
 
@@ -33,19 +33,19 @@ SEEDS_LV11TO20 = [
 
  {"id": "kraken_whelp", "name": "Kraken Whelp", "hostile_type": "creature", "role": "damage", "min_spawn_level":16, "rarity": "rare", "base_xp":340,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (50,220),
- "basic_attack": "tentacle slap", "strong_attack": "ink burst", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "tentacle slap", "strong_attack": "ink burst", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":8, "base_dex":5, "base_con":9, "base_int":4, "base_hp":220, "base_ap":8,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":1},
 
  {"id": "harbor_lich", "name": "Harbor Lich", "hostile_type": "undead", "role": "hazard", "min_spawn_level":17, "rarity": "superrare", "base_xp":520,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,340),
- "basic_attack": "skeletal lash", "strong_attack": "necrotic tide", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil", "lv2_hostile_ability_dark_air_skill_nightmare_wave"],
+ "basic_attack": "skeletal lash", "strong_attack": "necrotic tide", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil", "lv2_hostile_ability_dark_air_skill_nightmare_wave"],
  "base_str":6, "base_dex":4, "base_con":10, "base_int":14, "base_hp":320, "base_ap":10,
  "str_per_level":2, "dex_per_level":1, "con_per_level":3, "int_per_level":4},
 
  {"id": "captain_tide", "name": "Captain Tidefinger", "hostile_type": "humanoid", "role": "support", "min_spawn_level":18, "rarity": "rare", "base_xp":600,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (100,420),
- "basic_attack": "cutlass rip", "strong_attack": "abyssal command", "player_abilities": ["lv2_hostile_ability_dark_electric_magic_abyssal_storm", "level_1_hostile_ability_light_faith_prism_burst"],
+ "basic_attack": "cutlass rip", "strong_attack": "abyssal command", "player_abilities": ["lv2_hostile_ability_dark_electric_magic_abyssal_storm", "level_1_hostile_ability_light_spirit_prism_burst"],
  "base_str":9, "base_dex":7, "base_con":9, "base_int":8, "base_hp":360, "base_ap":10,
  "str_per_level":3, "dex_per_level":2, "con_per_level":2, "int_per_level":2},
 ]

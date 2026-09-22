@@ -108,7 +108,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch12_to_rell',
+        'dialog_id': 'spirit_ch12_to_rell',
         'dialog': [
             "(gently) You must be Rell, we heard of a performer here related to Ember... I'm sorry. Ember didn't make it. She stayed in the heart of the Festival of Delight, singing against the storm until the very end."
         ]
@@ -171,7 +171,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch12_to_lament',
+        'dialog_id': 'spirit_ch12_to_lament',
         'dialog': [
             "Show yourself plainly. What do you want?"
         ]
@@ -241,7 +241,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch12_observes_loop',
+        'dialog_id': 'spirit_ch12_observes_loop',
         'dialog': [
             "The loop won't let them move past the grief."
         ]
@@ -318,7 +318,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch12_after_lament_taunt',
+        'dialog_id': 'spirit_ch12_after_lament_taunt',
         'dialog': [
             "She's testing us. Or luring us."
         ]
@@ -381,7 +381,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch12_resolve',
+        'dialog_id': 'spirit_ch12_resolve',
         'dialog': [
             "We won't let this stand. We'll speak to Rell first, then head to the Necropolis."
         ]
@@ -395,7 +395,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch12_to_rell_final',
+        'dialog_id': 'spirit_ch12_to_rell_final',
         'dialog': [
             "We spoke with Veyla and Serin. Lament appeared. She wants the Bracelet of Existence - says she'll show us the true shape of grief in The Necropolis. We believe it's connected to these loops. We have to go."
         ]
@@ -482,7 +482,7 @@ TASKS = [
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_intro' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch12_to_rell' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch12_to_rell' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_grief' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch12_to_rell' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_ch12_to_rell' }},
@@ -491,7 +491,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lament', 'dialog_id': 'lament_ch12_intro_1' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lament', 'dialog_id': 'lament_ch12_intro_2' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lament', 'dialog_id': 'lament_ch12_intro_3' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch12_to_lament' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch12_to_lament' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lament', 'dialog_id': 'lament_ch12_response' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch12_narrator_lament_departs' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_resolve' }},
@@ -514,7 +514,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch12_narrator_loop' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch12_villager1_dialog' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch12_villager2_dialog' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch12_observes_loop' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch12_observes_loop' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch12_observes_loop' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_ch12_observes_loop' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch12_observes_loop' }},
@@ -536,7 +536,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch12_narrator_lament_reappears' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lament', 'dialog_id': 'lament_ch12_taunt_1' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch12_narrator_lament_fades_again' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch12_after_lament_taunt' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch12_after_lament_taunt' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch12_after_lament_taunt' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'veyla', 'standing_text': ["The silence... it's almost worse than the noise. I keep hearing Ember's song in my head... but it's fading. She tried so hard to keep us grounded. Now everything feels... hollow."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch12_meet_serin' }}
@@ -556,7 +556,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lament', 'dialog_id': 'lament_ch12_final_taunt' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch12_to_lament_final_taunt' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch12_to_lament_final_taunt' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch12_resolve' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch12_resolve' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'serin', 'standing_text': ["I... I should be happy, right? We won. The music stopped. Why does everything feel so heavy now? Ember used to sing real songs... but now when I try to remember them, there's just this... emptiness. Like something is pulling on my chest."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch12_meet_rell_again' }}
         ]
@@ -579,7 +579,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_farewell' }},
             { 'event_type': 'remove_item', 'params': { 'item_id': 'embers_pressed_flower' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_final_request' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch12_to_rell_final' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch12_to_rell_final' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_final_response' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch12_to_rell_final' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch12_to_rell_final' }},

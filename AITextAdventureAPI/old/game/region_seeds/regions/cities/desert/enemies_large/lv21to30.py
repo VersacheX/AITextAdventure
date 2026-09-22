@@ -50,7 +50,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "oasis_enforcer", "name": "Oasis Enforcer", "hostile_type": "humanoid", "role": "support", "min_spawn_level":24, "rarity": "common", "base_xp":120,
  "common_drop": "stimulant_small", "rare_drop": "cloth_gloves", "money_range": (12,60),
- "basic_attack": "water blade slash", "strong_attack": "drowning lunge", "player_abilities": ["air_light_faith_lv2_serene_breath"],
+ "basic_attack": "water blade slash", "strong_attack": "drowning lunge", "player_abilities": ["air_light_spirit_lv2_serene_breath"],
  "base_str":6, "base_dex":6, "base_con":6, "base_int":3, "base_hp":100, "base_ap":6,
  "str_per_level":2, "dex_per_level":2, "con_per_level":2, "int_per_level":1},
 
@@ -76,7 +76,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "sirene_mirage", "name": "Sirene of the Mirage", "hostile_type": "humanoid", "role": "support", "min_spawn_level":26, "rarity": "rare", "base_xp":76,
  "common_drop": "stimulant_small", "rare_drop": "tome_int", "money_range": (10,64),
- "basic_attack": "luring song", "strong_attack": "mesmeric mirage", "player_abilities": ["level_1_hostile_ability_fire_faith_hearthsong", "air_light_faith_lv2_serene_breath"],
+ "basic_attack": "luring song", "strong_attack": "mesmeric mirage", "player_abilities": ["level_1_hostile_ability_fire_spirit_hearthsong", "air_light_spirit_lv2_serene_breath"],
  "base_str":2, "base_dex":6, "base_con":2, "base_int":6, "base_hp":26, "base_ap":5,
  "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":3},
 

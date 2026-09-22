@@ -30,7 +30,7 @@ HOSTILE_SEEDS = [
     {
         'id': 'joyful_zealot', 'name': 'Joyful Zealot', 'hostile_type': 'humanoid', 'min_spawn_level': 55, 'role': 'hazard', 'rarity': 'uncommon',
         'base_xp': 650, 'common_drop': 'herb_major', 'rare_drop': None, 'money_range': (120, 240),
-        'basic_attack': 'ecstatic strike', 'strong_attack': 'blinding joy', 'player_abilities': ['light_faith_lv1_convert'],
+        'basic_attack': 'ecstatic strike', 'strong_attack': 'blinding joy', 'player_abilities': ['light_spirit_lv1_convert'],
         'base_str': 30, 'base_dex': 28, 'base_con': 26, 'base_int': 25, 'base_hp': 1700, 'base_ap': 80,
         'str_per_level': 3, 'dex_per_level': 3, 'con_per_level': 3, 'int_per_level': 3,
         'resistances': ['light'], 'immunities': [], 'weaknesses': ['dark']

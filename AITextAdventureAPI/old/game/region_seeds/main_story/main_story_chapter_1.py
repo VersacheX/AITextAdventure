@@ -413,7 +413,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_reacts_to_logger',
+        'dialog_id': 'spirit_reacts_to_logger',
         'dialog': [
             "This could be a blessing. Understanding who people are is the first step to helping them."
         ]
@@ -1220,7 +1220,7 @@ TASKS = [
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'spirit',
-                    'dialog_id': 'faith_reacts_to_logger'
+                    'dialog_id': 'spirit_reacts_to_logger'
                 }
             },
             {

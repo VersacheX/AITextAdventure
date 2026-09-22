@@ -182,7 +182,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch11_to_ember_intro',
+        'dialog_id': 'spirit_ch11_to_ember_intro',
         'dialog': [
             "We need to find them and stop this before it spirals out of control."
         ]
@@ -232,7 +232,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch11_to_kael',
+        'dialog_id': 'spirit_ch11_to_kael',
         'dialog': [
             "Ember was right. This place is devouring people's souls under the guise of celebration."
         ]
@@ -261,7 +261,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch11_to_hessa',
+        'dialog_id': 'spirit_ch11_to_hessa',
         'dialog': [
             "Then we end it here. No more lives lost to this madness."
         ]
@@ -306,7 +306,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch11_to_ember_stays',
+        'dialog_id': 'spirit_ch11_to_ember_stays',
         'dialog': [
             "(gently, with respect) Then we’ll carry your hope with us. Stay safe, Ember."
         ]
@@ -400,7 +400,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch11_aftermath_1',
+        'dialog_id': 'spirit_ch11_aftermath_1',
         'dialog': [
             "(looking toward the city) Ember... she’s still out there with the others. I hope she’s safe."
         ]
@@ -428,7 +428,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch11_aftermath_2',
+        'dialog_id': 'spirit_ch11_aftermath_2',
         'dialog': [
             "We should get back. The people will need help recovering... and I need to find Ember."
         ]
@@ -467,7 +467,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch11_mourns_ember_1',
+        'dialog_id': 'spirit_ch11_mourns_ember_1',
         'dialog': [
             "(quiet, heavy, voice breaking) ...Ember...",
             "(tears already falling) She stayed until the very end. Even as everything was collapsing around her, she was still trying to give people something real to hold onto.",
@@ -490,7 +490,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch11_mourns_ember_2',
+        'dialog_id': 'spirit_ch11_mourns_ember_2',
         'dialog': [
             "(voice cracking, tears falling) She stayed until the end. Even as everything was collapsing...",
             "she was still trying to give people something real to hold onto. She told me not to let the world forget how to feel — even the sadness."
@@ -537,7 +537,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch11_new_quest',
+        'dialog_id': 'spirit_ch11_new_quest',
         'dialog': [
             "Then we honor that. We go to Quantford Hollow."
         ]
@@ -572,7 +572,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch11_to_vek',
+        'dialog_id': 'spirit_ch11_to_vek',
         'dialog': [
             "Thank you, Vek. She gave everything so others could feel again."
         ]
@@ -607,7 +607,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch11_informs_vek',
+        'dialog_id': 'spirit_ch11_informs_vek',
         'dialog': [
             "We're heading to Quantford Hollow next. Ember had a brother there — Rell. We need to tell him what happened."
         ]
@@ -673,7 +673,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch11_to_nihilist',
+        'dialog_id': 'spirit_ch11_to_nihilist',
         'dialog': [
             "Grief does not justify dragging others into despair. We will not let you spread this further."
         ]
@@ -708,7 +708,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch11_after_nihilist',
+        'dialog_id': 'spirit_ch11_after_nihilist',
         'dialog': [
             "No one's pain should become a weapon against the living."
         ]
@@ -729,7 +729,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch11_to_vek_after_nihilist',
+        'dialog_id': 'spirit_ch11_to_vek_after_nihilist',
         'dialog': [
             "We couldn't leave this place still bleeding."
         ]
@@ -765,7 +765,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch11_vek_joins',
+        'dialog_id': 'spirit_ch11_vek_joins',
         'dialog': [
             "Your strength and sense of duty are welcome, Vek. We would be honored."
         ]
@@ -795,7 +795,7 @@ TASKS = [
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'ember', 'dialog_id': 'ember_ch11_intro' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch11_to_ember_intro' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch11_to_ember_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch11_to_ember_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch11_to_ember_intro' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'ember', 'dialog_id': 'ember_ch11_directs' }},
@@ -813,7 +813,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'kael', 'dialog_id': 'kael_ch11_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch11_to_kael' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch11_to_kael' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch11_to_kael' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch11_to_kael' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_ch11_to_kael' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'kael', 'dialog_id': 'kael_ch11_directs' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'kael', 'standing_text': ["Hessa can see the paths. She's waiting for you. Break the cycle, for Ember."]}},
@@ -828,13 +828,13 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'hessa', 'dialog_id': 'hessa_ch11_intro' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch11_to_hessa' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch11_to_hessa' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch11_to_hessa' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch11_narrator_ember_arrives' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'ember', 'dialog_id': 'ember_ch11_stays' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch11_to_ember_stays' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'ember', 'dialog_id': 'ember_ch11_response_to_magic' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch11_to_ember_stays' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch11_to_ember_stays' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch11_to_ember_stays' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'hessa', 'standing_text': ["The Festival of Delight is the heart of their power. The deeper you go, the more reality fractures under the weight of their excess."]}},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'ember', 'standing_text': ["I’m staying. They need someone to remind them what real feeling feels like - not this forced euphoria. I’ll keep doing what I can for those who are breaking."]}},
@@ -880,11 +880,11 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch11_narrator_aftermath_1' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch11_aftermath_1' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch11_aftermath_1' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch11_aftermath_1' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch11_aftermath_1' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch11_aftermath_1' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch11_aftermath_1' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_ch11_aftermath_1' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch11_aftermath_2' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch11_aftermath_2' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'revelry' }},
             { 'event_type': 'show_npc', 'params': { 'npc_id': 'tess', 'location': 'region_city_inn' }},
             { 'event_type': 'show_npc', 'params': { 'npc_id': 'sam', 'location': 'region_city_inn' }},
@@ -906,16 +906,16 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'tess', 'dialog_id': 'tess_ch11_breaks_news_2' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch11_narrator_finds_ember' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'sam', 'dialog_id': 'sam_ch11_breaks_news_3' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch11_mourns_ember_1' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch11_mourns_ember_1' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'tess', 'dialog_id': 'tess_ch11_mourns_ember' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'sam', 'dialog_id': 'sam_ch11_mourns_ember' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch11_mourns_ember_2' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch11_mourns_ember_2' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch11_mourns_ember' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch11_mourns_ember' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch11_mourns_ember' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch11_mourns_ember' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'sam', 'dialog_id': 'sam_ch11_ember_brother' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch11_new_quest' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch11_new_quest' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch11_new_quest' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch11_new_quest' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch11_new_quest' }},
@@ -932,12 +932,12 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch11_condolences' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch11_to_vek' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch11_to_vek' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch11_status_report' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch11_to_vek' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch11_to_vek' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch11_response_to_magic' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch11_informs_vek' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch11_informs_vek' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch11_about_rell' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch11_to_vek' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch11_to_vek_nihilists' }},
@@ -963,7 +963,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch11_to_nihilist' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch11_to_nihilist' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch11_to_nihilist' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch11_to_nihilist' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch11_to_nihilist' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'nihilist_leader', 'dialog_id': 'nihilist_leader_ch11_taunt' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'nihilist_leader', 'standing_text': ["Nothing matters. Nothing lasts. Nothing is real."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch11_defeat_nihilist_leader' }}
@@ -981,7 +981,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'nihilist_leader', 'dialog_id': 'nihilist_leader_ch11_outro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch11_after_nihilist' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch11_after_nihilist' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch11_after_nihilist' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch11_after_nihilist' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch11_after_nihilist' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'nihilist_leader' }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch11_meet_vek_after_nihilist' }}
@@ -995,12 +995,12 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch11_after_nihilist' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch11_to_vek_after_nihilist' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch11_to_vek_after_nihilist' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch11_joins' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch11_vek_joins' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch11_vek_joins' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch11_vek_joins' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch11_vek_joins' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch11_vek_joins' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch11_settled' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'vek', 'standing_text': ["I will join you on the Rustwing. Someone needs to keep order while the rest of you do the impossible."]}},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'vek' }},

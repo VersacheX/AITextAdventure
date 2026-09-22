@@ -30,7 +30,7 @@ HOSTILE_SEEDS = [
     {
         'id': 're-education_drone', 'name': 'Re-Education Drone', 'hostile_type': 'construct', 'min_spawn_level': 70, 'role': 'hazard', 'rarity': 'uncommon',
         'base_xp': 1400, 'common_drop': 'herb_med', 'rare_drop': None, 'money_range': (280, 560),
-        'basic_attack': 'psionic pulse', 'strong_attack': 'conformity beam', 'player_abilities': ['light_faith_lv1_convert'],
+        'basic_attack': 'psionic pulse', 'strong_attack': 'conformity beam', 'player_abilities': ['light_spirit_lv1_convert'],
         'base_str': 25, 'base_dex': 45, 'base_con': 40, 'base_int': 50, 'base_hp': 3800, 'base_ap': 110,
         'str_per_level': 3, 'dex_per_level': 6, 'con_per_level': 5, 'int_per_level': 7,
         'resistances': ['light'], 'immunities': ['confuse'], 'weaknesses': ['dark']
@@ -38,7 +38,7 @@ HOSTILE_SEEDS = [
     {
         'id': 'memory_scrubber', 'name': 'Memory Scrubber', 'hostile_type': 'aberration', 'min_spawn_level': 71, 'role': 'hazard', 'rarity': 'rare',
         'base_xp': 1600, 'common_drop': 'panacea', 'rare_drop': 'tome_int_superrare', 'money_range': (350, 700),
-        'basic_attack': 'erase thought', 'strong_attack': 'identity wipe', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
+        'basic_attack': 'erase thought', 'strong_attack': 'identity wipe', 'player_abilities': ['dark_spirit_lv1_shade_whisper'],
         'base_str': 30, 'base_dex': 40, 'base_con': 38, 'base_int': 55, 'base_hp': 3500, 'base_ap': 130,
         'str_per_level': 3, 'dex_per_level': 5, 'con_per_level': 4, 'int_per_level': 8,
         'resistances': ['dark', 'ice'], 'immunities': ['sleep', 'stun'], 'weaknesses': ['fire']

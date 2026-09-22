@@ -163,7 +163,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_harms_people',
+        'dialog_id': 'spirit_ch21_harms_people',
         'dialog': [
             "Functioning without purpose... without understanding... that harms people."
         ]
@@ -212,7 +212,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_losing_themselves',
+        'dialog_id': 'spirit_ch21_losing_themselves',
         'dialog': [
             "Not at the cost of losing themselves."
         ]
@@ -226,7 +226,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_control_without_responsibility',
+        'dialog_id': 'spirit_ch21_control_without_responsibility',
         'dialog': [
             "Then what you've built isn't order. It's control without responsibility."
         ]
@@ -268,7 +268,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_crave_understanding',
+        'dialog_id': 'spirit_ch21_crave_understanding',
         'dialog': [
             "No. They crave understanding. You're just giving them something easier."
         ]
@@ -324,7 +324,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_follow_path',
+        'dialog_id': 'spirit_ch21_follow_path',
         'dialog': [
             "A system that no longer cares whether it is true… only that it continues."
         ]
@@ -387,7 +387,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_violation',
+        'dialog_id': 'spirit_ch21_violation',
         'dialog': [
             "They weren't anything. You gave them peace by taking away their humanity. That isn't a gift. It's a violation."
         ]
@@ -443,7 +443,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_no_chance',
+        'dialog_id': 'spirit_ch21_no_chance',
         'dialog': [
             "Stop- You didn't even give them a chance to respond!"
         ]
@@ -506,7 +506,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_chosen',
+        'dialog_id': 'spirit_ch21_chosen',
         'dialog': [
             "No. I've chosen. That's different."
         ]
@@ -520,7 +520,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_stripping',
+        'dialog_id': 'spirit_ch21_stripping',
         'dialog': [
             "You're not revealing anything. You're stripping people down until the only thing left is what your system can recognize."
         ]
@@ -569,7 +569,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_different',
+        'dialog_id': 'spirit_ch21_different',
         'dialog': [
             "No. I've chosen. That's different than being defined by your actions in a way I can't escape from just by doing something else next time!"
         ]
@@ -702,7 +702,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_smiling_falling',
+        'dialog_id': 'spirit_ch21_smiling_falling',
         'dialog': [
             "They're smiling-while everything is falling apart..."
         ]
@@ -765,7 +765,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_not_peace',
+        'dialog_id': 'spirit_ch21_not_peace',
         'dialog': [
             "That's not peace."
         ]
@@ -807,7 +807,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_meet_paradox',
+        'dialog_id': 'spirit_ch21_meet_paradox',
         'dialog': [
             "Real joy doesn’t need an ending to justify itself."
         ]
@@ -863,7 +863,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_ending_not_only',
+        'dialog_id': 'spirit_ch21_ending_not_only',
         'dialog': [
             "Only if you believe the ending is the only part that matters."
         ]
@@ -961,7 +961,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_reject_it',
+        'dialog_id': 'spirit_ch21_reject_it',
         'dialog': [
             "Then the solution is obvious. You reject it. You refuse to believe it."
         ]
@@ -1194,7 +1194,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_memory_lesson',
+        'dialog_id': 'spirit_ch21_memory_lesson',
         'dialog': [
             "Memory isn't meant to hold us in place. It's meant to give us the chance to act differently when we face it again."
         ]
@@ -1208,7 +1208,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_continuity_from_choice',
+        'dialog_id': 'spirit_ch21_continuity_from_choice',
         'dialog': [
             "No. Continuity comes from choice. Memory only gives us the opportunity to make one."
         ]
@@ -1243,7 +1243,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_enter_trial',
+        'dialog_id': 'spirit_ch21_enter_trial',
         'dialog': [
             "Memory is not a cage. We will not be trapped by what has already been recorded."
         ]
@@ -1299,7 +1299,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_memory_freedom',
+        'dialog_id': 'spirit_ch21_memory_freedom',
         'dialog': [
             "Memory isn't a weapon to trap people. It's a lesson that gives them the freedom to choose differently. You learned the wrong lesson."
         ]
@@ -1391,7 +1391,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_erase_itself',
+        'dialog_id': 'spirit_ch21_erase_itself',
         'dialog': [
             "If a system only exists to reach an ending, and nothing within it carries forward, then all it ever does is erase itself."
         ]
@@ -1475,7 +1475,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_or_chosen',
+        'dialog_id': 'spirit_ch21_or_chosen',
         'dialog': [
             "Or chosen."
         ]
@@ -1531,7 +1531,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_choose_meaning',
+        'dialog_id': 'spirit_ch21_choose_meaning',
         'dialog': [
             "You saw resolution. We see a world without meaning. And we choose meaning."
         ]
@@ -1573,7 +1573,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_build_from_quiet',
+        'dialog_id': 'spirit_ch21_build_from_quiet',
         'dialog': [
             "Meaning is what we build from the quiet. It's the choice to care when nothing requires it."
         ]
@@ -1615,7 +1615,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_make_real',
+        'dialog_id': 'spirit_ch21_make_real',
         'dialog': [
             "Then we make it real again. We assert existence."
         ]
@@ -1643,7 +1643,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_together_4',
+        'dialog_id': 'spirit_ch21_together_4',
         'dialog': [
             "Together."
         ]
@@ -1678,7 +1678,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_final_choice',
+        'dialog_id': 'spirit_ch21_final_choice',
         'dialog': [
             "This is it. The final choice."
         ]
@@ -1692,7 +1692,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch21_we_chose',
+        'dialog_id': 'spirit_ch21_we_chose',
         'dialog': [
             "Whatever comes next... we chose it."
         ]
@@ -1784,22 +1784,22 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'edict', 'dialog_id': 'edict_ch21_efficiency' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_efficiency_toward' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch21_objective' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_harms_people' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_harms_people' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'edict', 'dialog_id': 'edict_ch21_harm_not_evaluated' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'warden_hale', 'dialog_id': 'warden_hale_ch21_should_be' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'edict', 'dialog_id': 'edict_ch21_emotion_error' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'warden_hale', 'dialog_id': 'warden_hale_ch21_emotion_tells' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch21_wrong_undefined' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'glamour', 'dialog_id': 'glamour_ch21_what_people_want' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_losing_themselves' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_losing_themselves' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_removed_meaning' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_control_without_responsibility' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_control_without_responsibility' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'edict', 'dialog_id': 'edict_ch21_definition_removed' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch21_nothing_wrong' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch21_correct' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_system_keeps_running' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'glamour', 'dialog_id': 'glamour_ch21_crave_calm' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_crave_understanding' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_crave_understanding' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'warden_hale', 'dialog_id': 'warden_hale_ch21_dangerous' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_function_without_sense' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'edict', 'dialog_id': 'edict_ch21_perfect' }},
@@ -1829,7 +1829,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch21_simulated' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch21_follow_path' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_follow_path' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_follow_path' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_follow_path' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch21_follow_path' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'edict', 'standing_text': ["Follow what's in front of you. The rest doesn't concern you."] }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_defeat_edict_glamour_crux' }}
@@ -1851,7 +1851,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'edict', 'dialog_id': 'edict_ch21_undefined_variable' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_choice' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'glamour', 'dialog_id': 'glamour_ch21_calm_no_fear' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_violation' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_violation' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch21_function_compromised' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch21_no_purpose' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'edict' }},
@@ -1884,7 +1884,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_handing_conclusions' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rapture', 'dialog_id': 'rapture_ch21_fun_part' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'scalpel', 'dialog_id': 'scalpel_ch21_hesitation_confirmed' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_no_chance' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_no_chance' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'scalpel', 'dialog_id': 'scalpel_ch21_hesitation_response' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch21_decided_before' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch21_shaping' }},
@@ -1893,9 +1893,9 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_ch21_fall_back' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch21_training' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'stigma', 'dialog_id': 'stigma_ch21_simplify' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_chosen' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_chosen' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_not_discovery' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_stripping' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_stripping' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_filtration' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rapture', 'dialog_id': 'rapture_ch21_more_pressure' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'stigma', 'standing_text': ["The hesitation was the response. Correction was appropriate."] }},
@@ -1923,7 +1923,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch21_not_machines' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_surprise' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'scalpel', 'dialog_id': 'scalpel_ch21_counting_on_it' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_different' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_different' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_stripping_down' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_filtration_emphasis' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rapture', 'dialog_id': 'rapture_ch21_apply_pressure' }},
@@ -1977,7 +1977,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'paradox', 'dialog_id': 'paradox_ch21_joy_ending' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch21_pick_one' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'paradox', 'dialog_id': 'paradox_ch21_both' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_smiling_falling' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_smiling_falling' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lament', 'dialog_id': 'lament_ch21_stopping' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'revelry', 'dialog_id': 'revelry_ch21_the_rush' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_until_it_isnt' }},
@@ -1986,7 +1986,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch21_collapse_guaranteed' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'revelry', 'dialog_id': 'revelry_ch21_exactly' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lament', 'dialog_id': 'lament_ch21_quieter' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_not_peace' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_not_peace' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'paradox', 'dialog_id': 'paradox_ch21_define_difference' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'revelry', 'standing_text': ["Their joy was weak. Let's see how you perform"] }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_meet_paradox' }}
@@ -2013,7 +2013,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_meet_paradox' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_ch21_meet_paradox' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_meet_paradox' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_meet_paradox' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_meet_paradox' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'paradox', 'standing_text': ["Anything and everything is possible... Somehow."] }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_defeat_revelry_lament_paradox' }}
         ]
@@ -2034,7 +2034,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'revelry', 'dialog_id': 'revelry_ch21_silence_empty' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_sensation_not_substance' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lament', 'dialog_id': 'lament_ch21_always_ends_repeat' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_ending_not_only' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_ending_not_only' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'revelry' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'lament' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'paradox' }},
@@ -2067,7 +2067,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'oracle', 'dialog_id': 'oracle_ch21_failure_occurred' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'pageant', 'dialog_id': 'pageant_ch21_compensate' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'garbage', 'dialog_id': 'garbage_ch21_already_think' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_reject_it' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_reject_it' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'garbage', 'dialog_id': 'garbage_ch21_belief_not_choice' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_decide_what_to_do' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_break_behavior' }},
@@ -2150,9 +2150,9 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch21_uncertainty_allows' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_reinforcement' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_betting_not_changing' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_memory_lesson' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_memory_lesson' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'reliquary', 'dialog_id': 'reliquary_ch21_continuity' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_continuity_from_choice' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_continuity_from_choice' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch21_stop_predicting' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'reliquary', 'standing_text': ["History doesn't lie. It tells the same story again and again."] }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_meet_cataclysm' }}
@@ -2180,7 +2180,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch21_enter_trial' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_enter_trial' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_enter_trial' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_enter_trial' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_enter_trial' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'cataclysm', 'standing_text': ["The end is coming. The end is here."] }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_defeat_cataclysm_reliquary' }}
         ]
@@ -2200,7 +2200,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'cataclysm', 'dialog_id': 'cataclysm_ch21_data_perfect' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_data_not_whole' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'reliquary', 'dialog_id': 'reliquary_ch21_archive_incomplete' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_memory_freedom' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_memory_freedom' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'cataclysm' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'reliquary' }},
             { 'event_type': 'remove_player_from_dungeon', 'params': { 'dungeon_id': 'trial_5_dungeon' }},
@@ -2228,7 +2228,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch21_not_meaningless' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_uncertainty_allows_alternatives' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch21_cant_handle_change' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_erase_itself' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_erase_itself' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_excuse' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_what_happens_before' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'dominion', 'dialog_id': 'dominion_ch21_unresolved_variables' }},
@@ -2240,7 +2240,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_ch21_or_reworked' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_or_improved' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_ch21_or_experienced' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_or_chosen' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_or_chosen' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch21_or_matter' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'dominion', 'dialog_id': 'dominion_ch21_instability' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch21_its_choice' }},
@@ -2261,7 +2261,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_cant_account_for_will' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'dominion', 'dialog_id': 'dominion_ch21_not_won' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_face_together' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_choose_meaning' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_choose_meaning' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'dominion', 'dialog_id': 'dominion_ch21_unleashed_void' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'dominion' }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch21_defeat_the_void' }}
@@ -2277,7 +2277,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'the_void', 'dialog_id': 'the_void_ch21_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_just_quiet' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'the_void', 'dialog_id': 'the_void_ch21_meaning_lie' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_build_from_quiet' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_build_from_quiet' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'the_void', 'dialog_id': 'the_void_ch21_error' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_get_loud' }},
             { 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'the_void_1', 'combat_type': 'boss_battle' }}
@@ -2286,11 +2286,11 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'the_void', 'dialog_id': 'the_void_ch21_defeat' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch21_dissolves' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch21_unmaking' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_make_real' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_make_real' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_together_1' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_together_2' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch21_together_3' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_together_4' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_together_4' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch21_together_5' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'the_void' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch21_existence_reforms' }},
@@ -2298,11 +2298,11 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch21_void_reforms' }},
             { 'event_type': 'award_item', 'params': { 'item_id': 'bracelet_of_void_reforged' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch21_two_bracelets' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_final_choice' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_final_choice' }},
             { 'event_type': 'remove_item', 'params': { 'item_id': 'bracelet_of_existence_reforged' }},
             { 'event_type': 'remove_item', 'params': { 'item_id': 'bracelet_of_void_reforged' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch21_choice_made' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch21_we_chose' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch21_we_chose' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch21_all_difference' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch21_saga_closes' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch21_but_story' }},

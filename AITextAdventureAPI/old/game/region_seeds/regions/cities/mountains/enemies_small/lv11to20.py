@@ -4,7 +4,7 @@
 SEEDS_LV11TO20 = [
  {"id": "hollow_savant", "name": "Hollow Savant", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":11, "rarity": "rare", "base_xp":220,
  "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (30,140),
- "basic_attack": "spent rune", "strong_attack": "mind latch", "player_abilities": ["lv2_hostile_ability_dark_air_skill_nightmare_wave", "lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "spent rune", "strong_attack": "mind latch", "player_abilities": ["lv2_hostile_ability_dark_air_skill_nightmare_wave", "lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":2, "base_dex":3, "base_con":4, "base_int":12, "base_hp":110, "base_ap":9,
  "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
 

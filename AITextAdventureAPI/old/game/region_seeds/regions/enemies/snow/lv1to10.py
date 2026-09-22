@@ -51,7 +51,7 @@ SEEDS_LV1TO10 = [
 
  # Level5
  {"id": "cold_case_investigator", "name": "Cold-case Investigator", "hostile_type": "humanoid", "role": "support", "min_spawn_level":5, "rarity": "rare", "base_xp":120, "common_drop": "stimulant_med", "rare_drop": "stimulant_small", "money_range": (20,100),
- "basic_attack": "interrogation jab", "strong_attack": "evidence slam", "player_abilities": ["light_faith_lv5_ardent_inspire"], "base_str":6, "base_dex":5, "base_con":6, "base_int":6, "base_hp":92, "base_ap":6, "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
+ "basic_attack": "interrogation jab", "strong_attack": "evidence slam", "player_abilities": ["light_spirit_lv5_ardent_inspire"], "base_str":6, "base_dex":5, "base_con":6, "base_int":6, "base_hp":92, "base_ap":6, "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
 
  {"id": "spectral_trapper", "name": "Spectral Trapper", "hostile_type": "spirit", "role": "hazard", "min_spawn_level":5, "rarity": "uncommon", "base_xp":100, "common_drop": "herb_med", "money_range": (8,48),
  "basic_attack": "ethereal snare", "strong_attack": "phantom crush", "player_abilities": ["level_1_hostile_ability_night_whisper"], "base_str":2, "base_dex":4, "base_con":3, "base_int":6, "base_hp":60, "base_ap":6, "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":2},

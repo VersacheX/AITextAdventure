@@ -240,7 +240,7 @@ BOSS_HOSTILES = [
         "min_spawn_level": 25, "rarity": "superrare", "base_xp": 480,
         "common_drop": "herb_major", "rare_drop": "tome_dex", "money_range": (45,180),
         "basic_attack": "rot swipe", "strong_attack": "bog burst",
-        "player_abilities": ["light_dark_tech_lv2_contrast_burst", 'dark_faith_lv1_shade_whisper'],
+        "player_abilities": ["light_dark_tech_lv2_contrast_burst", 'dark_spirit_lv1_shade_whisper'],
         "base_str": 8, "base_dex": 6, "base_con": 12, "base_int": 10,
         "base_hp": 1700, "base_ap": 10,
         "str_per_level": 2, "dex_per_level": 1, "con_per_level": 2, "int_per_level": 2,

@@ -16,7 +16,7 @@ RANDOM_HOSTILE_SEEDS = [
  {"id": "thornshade_hexer", "name": "Thornshade Hexer", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level": 33, "rarity": "uncommon", "base_xp": 480,
   "common_drop": "tome_int", "rare_drop": None, "money_range": (90, 340),
   "basic_attack": "hex dart", "strong_attack": "thorn curse",
-  "player_abilities": ["lv2_hostile_ability_earth_air_faith_thornbind"],
+  "player_abilities": ["lv2_hostile_ability_earth_air_spirit_thornbind"],
   "base_str": 6, "base_dex": 10, "base_con": 8, "base_int": 18, "base_hp": 540, "base_ap": 12,
   "str_per_level": 1, "dex_per_level": 1, "con_per_level": 1, "int_per_level": 3},
 ]

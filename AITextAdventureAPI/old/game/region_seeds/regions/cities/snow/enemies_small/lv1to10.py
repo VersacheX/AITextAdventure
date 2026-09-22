@@ -139,7 +139,7 @@ SEEDS_LV1TO10 = [
 
  {"id": "beacon_tender", "name": "Beacon Tender", "hostile_type": "humanoid", "role": "support", "min_spawn_level":4, "rarity": "uncommon", "base_xp":48,
  "common_drop": "stimulant_small", "rare_drop": None, "money_range": (6,32),
- "basic_attack": "lamp swing", "strong_attack": "blinding sweep", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst"],
+ "basic_attack": "lamp swing", "strong_attack": "blinding sweep", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst"],
  "base_str":4, "base_dex":3, "base_con":5, "base_int":4, "base_hp":44, "base_ap":4,
  "str_per_level":1, "dex_per_level":0, "con_per_level":1, "int_per_level":1},
 
@@ -216,7 +216,7 @@ SEEDS_LV1TO10 = [
 
  {"id": "bleak_lantern", "name": "Bleak Lantern", "hostile_type": "humanoid", "role": "support", "min_spawn_level":10, "rarity": "superrare", "base_xp":420,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,340),
- "basic_attack": "lantern swing", "strong_attack": "blinding flare", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst", "lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "lantern swing", "strong_attack": "blinding flare", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst", "lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":8, "base_dex":5, "base_con":10, "base_int":9, "base_hp":240, "base_ap":10,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
 ]

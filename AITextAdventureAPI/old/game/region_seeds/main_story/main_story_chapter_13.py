@@ -302,7 +302,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch13_to_bosses',
+        'dialog_id': 'spirit_ch13_to_bosses',
         'dialog': [
             "Enough. We will not let you consume them."
         ]
@@ -358,7 +358,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch13_gives_item',
+        'dialog_id': 'spirit_ch13_gives_item',
         'dialog': [
             "(gently holding out the mirror) We brought you this. A way to remember his voice, not just the loss."
         ]
@@ -409,7 +409,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch13_boss_response',
+        'dialog_id': 'spirit_ch13_boss_response',
         'dialog': [
             "(voice steady but pained) For Ember. For every person you've broken with false joy and endless grief."
         ]
@@ -489,7 +489,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch13_after_boss',
+        'dialog_id': 'spirit_ch13_after_boss',
         'dialog': [
             "(breathing hard, looking at the fading remnants) It's done... The weight is lifting."
         ]
@@ -609,7 +609,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch13_to_seth',
+        'dialog_id': 'spirit_ch13_to_seth',
         'dialog': [
             "We thought you'd abandoned us."
         ]
@@ -674,7 +674,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch13_new_freedom',
+        'dialog_id': 'spirit_ch13_new_freedom',
         'dialog': [
             "We can go anywhere."
         ]
@@ -723,7 +723,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch13_act_end',
+        'dialog_id': 'spirit_ch13_act_end',
         'dialog': [
             "The body has fallen. Sensation. Impulse. Identity."
         ]
@@ -824,7 +824,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch13_narrator_bosses_appear' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lament', 'dialog_id': 'lament_ch13_to_widow' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'garbage', 'dialog_id': 'garbage_ch13_to_widow' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch13_to_bosses' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch13_to_bosses' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'garbage', 'dialog_id': 'garbage_ch13_taunt' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch13_to_garbage' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch13_to_garbage' }},
@@ -832,7 +832,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'garbage', 'dialog_id': 'garbage_ch13_final_taunt' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lament', 'dialog_id': 'lament_ch13_invitation' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch13_narrator_bosses_fade' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch13_gives_item' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch13_gives_item' }},
             { 'event_type': 'remove_item', 'params': { 'item_id': 'voice_of_lost_loved_ones' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'veiled_widow', 'dialog_id': 'veiled_widow_ch13_gives_key' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_ch13_observes_widow' }},
@@ -853,7 +853,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'garbage', 'dialog_id': 'garbage_ch13_boss_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch13_boss_response' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch13_boss_response' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch13_boss_response' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch13_boss_response' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_ch13_boss_response' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_ch13_boss_response' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_ch13_boss_response' }},
@@ -878,7 +878,7 @@ TASKS = [
         'task_complete_events': [
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'lament' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch13_narrator_after_boss' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch13_after_boss' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch13_after_boss' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch13_after_boss' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch13_after_boss' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch13_after_boss' }},
@@ -905,7 +905,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_banter_2' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch13_to_seth' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_banter_3' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch13_to_seth' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch13_to_seth' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_banter_4' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'tess', 'dialog_id': 'tess_ch13_to_seth' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_gives_ship' }},
@@ -916,14 +916,14 @@ TASKS = [
             { 'event_type': 'set_aircraft', 'params': { 'location': 'region_city_open_area' }},
             { 'event_type': 'can_aircraft_fly', 'params': { 'can_fly': True }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch13_narrator_new_freedom' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch13_new_freedom' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch13_new_freedom' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch13_new_freedom' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch13_new_freedom' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch13_new_freedom' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_departs' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch13_what_about_you' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_farewell' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch13_act_end' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch13_act_end' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch13_act_end' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'seth', 'standing_text': ["The Rustwing is yours now. Use it wisely."]}},
             { 'event_type': 'advance_chapter' }

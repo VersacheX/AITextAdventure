@@ -38,7 +38,7 @@ HOSTILE_SEEDS = [  # all level 8–10, ~10 hostiles total
         'money_range': (2, 12),
         'basic_attack': 'gust jab',
         'strong_attack': 'spiral burst',
-        'player_abilities': ['air_faith_lv1_zephyr_bless'],
+        'player_abilities': ['air_spirit_lv1_zephyr_bless'],
         'base_str': 3,
         'base_dex': 4,
         'base_con': 3,

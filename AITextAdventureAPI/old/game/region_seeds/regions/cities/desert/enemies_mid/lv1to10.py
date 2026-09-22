@@ -76,7 +76,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==6
  {"id": "desert_neon_siren", "name": "Desert Neon Siren", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":6, "rarity": "rare", "base_xp":100,
  "common_drop": "stimulant_med", "rare_drop": "tome_int", "money_range": (20,90),
- "basic_attack": "glowing blade", "strong_attack": "stunning strike", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst"],
+ "basic_attack": "glowing blade", "strong_attack": "stunning strike", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst"],
  "base_str":3, "base_dex":7, "base_con":3, "base_int":6, "base_hp":44, "base_ap":6,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":2},
 

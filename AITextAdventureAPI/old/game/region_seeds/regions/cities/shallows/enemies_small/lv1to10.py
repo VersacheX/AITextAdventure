@@ -118,7 +118,7 @@ SEEDS_LV1TO10 = [
 
  {"id": "siren_lure", "name": "Siren Lure", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":10, "rarity": "superrare", "base_xp":120,
  "common_drop": "stimulant_small", "rare_drop": "tome_int", "money_range": (12,60),
- "basic_attack": "haunting hum", "strong_attack": "mesmerize wave", "player_abilities": ["level_1_hostile_ability_fire_faith_hearthsong"],
+ "basic_attack": "haunting hum", "strong_attack": "mesmerize wave", "player_abilities": ["level_1_hostile_ability_fire_spirit_hearthsong"],
  "base_str":1, "base_dex":5, "base_con":2, "base_int":9, "base_hp":56, "base_ap":6,
  "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":3},
 ]

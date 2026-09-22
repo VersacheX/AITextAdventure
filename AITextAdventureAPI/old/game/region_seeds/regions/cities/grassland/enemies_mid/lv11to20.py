@@ -101,7 +101,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "celestial_chalice", "name": "Celestial Chalice", "hostile_type": "celestial", "role": "support", "min_spawn_level":18, "rarity": "common", "base_xp":600,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (100,400),
- "basic_attack": "radiant talons", "strong_attack": "celestial shards", "player_abilities": ["air_light_faith_lv2_serene_breath"],
+ "basic_attack": "radiant talons", "strong_attack": "celestial shards", "player_abilities": ["air_light_spirit_lv2_serene_breath"],
  "base_str":10, "base_dex":8, "base_con":12, "base_int":10, "base_hp":320, "base_ap":12,
  "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":3},
 

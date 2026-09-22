@@ -22,7 +22,7 @@ HOSTILE_SEEDS = [
     {
         'id': 'despair_cultist', 'name': 'Despair Cultist', 'hostile_type': 'humanoid', 'min_spawn_level': 60, 'role': 'hazard', 'rarity': 'common',
         'base_xp': 700, 'common_drop': 'stimulant_med', 'rare_drop': None, 'money_range': (120, 240),
-        'basic_attack': 'empty gaze', 'strong_attack': 'draining touch', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
+        'basic_attack': 'empty gaze', 'strong_attack': 'draining touch', 'player_abilities': ['dark_spirit_lv1_shade_whisper'],
         'base_str': 30, 'base_dex': 30, 'base_con': 30, 'base_int': 30, 'base_hp': 2000, 'base_ap': 80,
         'str_per_level': 3, 'dex_per_level': 3, 'con_per_level': 3, 'int_per_level': 3,
         'resistances': ['dark'], 'immunities': ['stun'], 'weaknesses': ['light']

@@ -204,7 +204,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch8_airship_intro',
+        'dialog_id': 'spirit_ch8_airship_intro',
         'dialog': [
             "The fractures are getting worse. I can feel the strain on everything... even the ship."
         ]
@@ -391,7 +391,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch8_after_ember',
+        'dialog_id': 'spirit_ch8_after_ember',
         'dialog': [
             "Your voice... it's grounding. Like an anchor."
         ]
@@ -447,7 +447,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch8_observes_tess_sam',
+        'dialog_id': 'spirit_ch8_observes_tess_sam',
         'dialog': [
             "Their bond grounds them. We should stay close."
         ]
@@ -628,7 +628,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_ch8_airship_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_ch8_airship_intro' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch8_airship_response' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch8_airship_intro' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch8_airship_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_ch8_airship_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_ch8_airship_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch8_airship_intro' }},
@@ -689,7 +689,7 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'ember', 'dialog_id': 'ember_ch8_intro' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch8_after_ember' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch8_after_ember' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'ember', 'dialog_id': 'ember_ch8_explains' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch8_to_ember' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'ember', 'dialog_id': 'ember_ch8_response_to_technique' }},
@@ -697,7 +697,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'sam', 'dialog_id': 'sam_ch8_intro' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'ember', 'dialog_id': 'ember_ch8_to_tess_sam' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch8_observes_tess_sam' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch8_observes_tess_sam' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch8_observes_tess_sam' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'ember', 'standing_text': ["Stay real, friends. The city wants to copy you. Don't let it."]}},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'tess', 'standing_text': ["This whole city is a giant confidence game, but I can't figure out who's running the table."]}},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'sam', 'standing_text': ["The chaos is a smokescreen. The real trick is happening somewhere we're not looking."]}},

@@ -110,7 +110,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_ch3_after_talla',
+		'dialog_id': 'spirit_ch3_after_talla',
 		'dialog': [
 			"I hope this Seth fellow can be redeemed.",
 			"Perhaps bringing him in will give us a chance to help him find a better path."
@@ -186,7 +186,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_ch3_meet_pending_character1',
+		'dialog_id': 'spirit_ch3_meet_pending_character1',
 		'dialog': [
 			"We will help you find your way. Together, we can overcome any obstacle."
 		]
@@ -221,7 +221,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_ch3_meet_pending_character2',
+		'dialog_id': 'spirit_ch3_meet_pending_character2',
 		'dialog': [
 			"Stay close to us, and your memories will return."
 		]
@@ -318,7 +318,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_ch3_sidequest_intro',
+		'dialog_id': 'spirit_ch3_sidequest_intro',
 		'dialog': [
 			"If this truly helps the one who has lost their memories… then we should take the risk."
 		]
@@ -363,7 +363,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_ch3_after_receiving_scribe_mint',
+		'dialog_id': 'spirit_ch3_after_receiving_scribe_mint',
 		'dialog': [
 			"If this helps restore what was lost, it is worth any effort."
 		]
@@ -408,7 +408,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_ch3_after_receiving_scarred_thyme',
+		'dialog_id': 'spirit_ch3_after_receiving_scarred_thyme',
 		'dialog': [
 			"Please… let this bring them home to us."
 		]
@@ -453,7 +453,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_ch3_after_seth',
+		'dialog_id': 'spirit_ch3_after_seth',
 		'dialog': [
 			"We should speak with her. Gossip can be as useful as prayer sometimes."
 		]
@@ -488,7 +488,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_ch3_meet_relic_guardian',
+		'dialog_id': 'spirit_ch3_meet_relic_guardian',
 		'dialog': [
 			"This place is under sacred protection. We must be careful."
 		]
@@ -530,7 +530,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_ch3_sidequest_complete',
+		'dialog_id': 'spirit_ch3_sidequest_complete',
 		'dialog': [
 			"May whatever spirit bound it find rest."
 		]
@@ -579,7 +579,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'ch3_faith_respond_to_twisted',
+		'dialog_id': 'ch3_spirit_respond_to_twisted',
 		'dialog': [
 			"Oh!  That's, ummmmm, nice... eheh!"
 		]
@@ -708,7 +708,7 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'spirit',
-					'dialog_id': 'faith_ch3_after_talla'
+					'dialog_id': 'spirit_ch3_after_talla'
 				}
 			},
 			{
@@ -770,7 +770,7 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'spirit',
-					'dialog_id': 'faith_ch3_meet_pending_character1'
+					'dialog_id': 'spirit_ch3_meet_pending_character1'
 				}
 			},
 			{
@@ -805,7 +805,7 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'spirit',
-					'dialog_id': 'faith_ch3_meet_pending_character2'
+					'dialog_id': 'spirit_ch3_meet_pending_character2'
 				}
 			},
 			{
@@ -925,7 +925,7 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'spirit',
-					'dialog_id': 'faith_ch3_sidequest_intro'
+					'dialog_id': 'spirit_ch3_sidequest_intro'
 				}
 			},
 			{
@@ -1060,7 +1060,7 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'spirit',
-					'dialog_id': 'faith_ch3_after_seth'
+					'dialog_id': 'spirit_ch3_after_seth'
 				}
 			},
 			{
@@ -1130,7 +1130,7 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'spirit',
-					'dialog_id': 'faith_ch3_meet_relic_guardian'
+					'dialog_id': 'spirit_ch3_meet_relic_guardian'
 				}
 			},
 			{
@@ -1230,7 +1230,7 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'spirit',
-					'dialog_id': 'faith_ch3_sidequest_complete'
+					'dialog_id': 'spirit_ch3_sidequest_complete'
 				}
 			},
 			{
@@ -1286,7 +1286,7 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'spirit',
-					'dialog_id': 'faith_ch3_after_receiving_scribe_mint'
+					'dialog_id': 'spirit_ch3_after_receiving_scribe_mint'
 				}
 			},
 			{
@@ -1360,7 +1360,7 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'spirit',
-					'dialog_id': 'faith_ch3_after_receiving_scarred_thyme'
+					'dialog_id': 'spirit_ch3_after_receiving_scarred_thyme'
 				}
 			},
 			{
@@ -1475,7 +1475,7 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'spirit',
-					'dialog_id': 'ch3_faith_respond_to_twisted'
+					'dialog_id': 'ch3_spirit_respond_to_twisted'
 				}
 			},
 			{

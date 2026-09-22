@@ -30,7 +30,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "elven_court_jester", "name": "Court Jester of Leaves", "hostile_type": "humanoid", "role": "support", "min_spawn_level":2, "rarity": "uncommon", "base_xp":14,
  "common_drop": "herb_minor", "rare_drop": None, "money_range": (1,8),
- "basic_attack": "slapstick bop", "strong_attack": "pratfall explosion", "player_abilities": ["water_faith_lv1_mending_streams"],
+ "basic_attack": "slapstick bop", "strong_attack": "pratfall explosion", "player_abilities": ["water_spirit_lv1_mending_streams"],
  "base_str":1, "base_dex":2, "base_con":2, "base_int":5, "base_hp":12, "base_ap":3,
  "str_per_level":0, "dex_per_level":0, "con_per_level":0, "int_per_level":2},
 
@@ -43,7 +43,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "slicktongue", "name": "Slicktongued Peddler", "hostile_type": "humanoid", "role": "support", "min_spawn_level":3, "rarity": "uncommon", "base_xp":30,
  "common_drop": "herb_med", "rare_drop": "pipe_wrench", "money_range": (3,24),
- "basic_attack": "peddler's shove", "strong_attack": "charm and pick", "player_abilities": ["water_faith_lv1_mending_streams"],
+ "basic_attack": "peddler's shove", "strong_attack": "charm and pick", "player_abilities": ["water_spirit_lv1_mending_streams"],
  "base_str":2, "base_dex":6, "base_con":2, "base_int":6, "base_hp":16, "base_ap":4,
  "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":2},
 
@@ -108,7 +108,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "forest_siren", "name": "Forest Siren", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":8, "rarity": "rare", "base_xp":100,
  "common_drop": "stimulant_med", "rare_drop": "tome_int", "money_range": (20,90),
- "basic_attack": "glowing blade", "strong_attack": "stunning strike", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst"],
+ "basic_attack": "glowing blade", "strong_attack": "stunning strike", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst"],
  "base_str":3, "base_dex":7, "base_con":3, "base_int":6, "base_hp":44, "base_ap":6,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":2},
 

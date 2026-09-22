@@ -76,13 +76,13 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==6
  {"id": "muttering_matron", "name": "Muttering Matron", "hostile_type": "humanoid", "role": "support", "min_spawn_level":6, "rarity": "uncommon", "base_xp":58,
  "common_drop": "herb_med", "rare_drop": "tome_con", "money_range": (8,36),
- "basic_attack": "wagging finger", "strong_attack": "boiling rebuke", "player_abilities": ["water_faith_lv1_mending_streams"],
+ "basic_attack": "wagging finger", "strong_attack": "boiling rebuke", "player_abilities": ["water_spirit_lv1_mending_streams"],
  "base_str":2, "base_dex":2, "base_con":5, "base_int":4, "base_hp":36, "base_ap":5,
  "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":1, "resistances": [], "immunities": [], "weaknesses": []},
 
  {"id": "scrap_siren", "name": "Scrap Siren", "hostile_type": "humanoid", "role": "support", "min_spawn_level":6, "rarity": "rare", "base_xp":120,
  "common_drop": "stimulant_med", "rare_drop": "tome_int", "money_range": (25,100),
- "basic_attack": "siren wail", "strong_attack": "distracting chorus", "player_abilities": ["air_light_faith_lv2_serene_breath", "light_faith_lv1_minor_heal"],
+ "basic_attack": "siren wail", "strong_attack": "distracting chorus", "player_abilities": ["air_light_spirit_lv2_serene_breath", "light_spirit_lv1_minor_heal"],
  "base_str":2, "base_dex":5, "base_con":3, "base_int":7, "base_hp":40, "base_ap":6,
  "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":2, "resistances": [], "immunities": [], "weaknesses": []},
 

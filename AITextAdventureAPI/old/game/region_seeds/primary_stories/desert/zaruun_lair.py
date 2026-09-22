@@ -114,7 +114,7 @@ HOSTILE_SEEDS = [ # all should be level 8 to 10... only araound 10 hostiles tota
 		'money_range': (20, 90),
 		'basic_attack': 'soothing touch',
 		'strong_attack': 'mirage bind',
-		'player_abilities': ['air_light_faith_lv2_serene_breath', 'earth_faith_lv1_earthen_blessing'],
+		'player_abilities': ['air_light_spirit_lv2_serene_breath', 'earth_spirit_lv1_earthen_blessing'],
 		'base_str': 4,
 		'base_dex': 4,
 		'base_con': 6,

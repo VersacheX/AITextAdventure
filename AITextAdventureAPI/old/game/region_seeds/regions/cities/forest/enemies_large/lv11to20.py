@@ -18,13 +18,13 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==12
  {"id": "willow_witch", "name": "Willow Witch", "hostile_type": "humanoid", "role": "support", "min_spawn_level":12, "rarity": "rare", "base_xp":300,
  "common_drop": "herb_major", "rare_drop": "tome_con", "money_range": (50,200),
- "basic_attack": "whisper charm", "strong_attack": "binding sorrow", "player_abilities": ["level_1_hostile_ability_night_whisper", "light_faith_lv1_minor_heal"],
+ "basic_attack": "whisper charm", "strong_attack": "binding sorrow", "player_abilities": ["level_1_hostile_ability_night_whisper", "light_spirit_lv1_minor_heal"],
  "base_str":2, "base_dex":3, "base_con":5, "base_int":12, "base_hp":140, "base_ap":10,
  "str_per_level":0, "dex_per_level":1, "con_per_level":2, "int_per_level":3},
 
  {"id": "thorn_mender", "name": "Thorn Mender", "hostile_type": "humanoid", "role": "support", "min_spawn_level":12, "rarity": "common", "base_xp":140,
  "common_drop": "herb_med", "rare_drop": None, "money_range": (22,96),
- "basic_attack": "prickly stitch", "strong_attack": "entangling weave", "player_abilities": ["water_faith_lv1_mending_streams"],
+ "basic_attack": "prickly stitch", "strong_attack": "entangling weave", "player_abilities": ["water_spirit_lv1_mending_streams"],
  "base_str":4, "base_dex":4, "base_con":6, "base_int":4, "base_hp":160, "base_ap":6,
  "str_per_level":1, "dex_per_level":1, "con_per_level":2, "int_per_level":1},
 
@@ -96,7 +96,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==18
  {"id": "starwarden", "name": "Starwarden", "hostile_type": "celestial", "role": "support", "min_spawn_level":18, "rarity": "uncommon", "base_xp":600,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (120,480),
- "basic_attack": "stellar talons", "strong_attack": "meteor flare", "player_abilities": ["light_light_faith_lv2_seraphic_nova"],
+ "basic_attack": "stellar talons", "strong_attack": "meteor flare", "player_abilities": ["light_light_spirit_lv2_seraphic_nova"],
  "base_str":12, "base_dex":8, "base_con":12, "base_int":10, "base_hp":360, "base_ap":12,
  "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":3},
 

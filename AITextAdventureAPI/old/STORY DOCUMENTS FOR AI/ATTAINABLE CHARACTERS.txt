@@ -153,9 +153,9 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         'intelligence':158,
         'constitution': 102,                            # + 64
         'level': 30,
-        'abilities': ['light_light_dark_faith_lv3_dusk_balm', 'water_water_water_faith_lv3_poseidon_wrath', 
-                      'water_light_faith_lv2_holy_fountain', 'air_water_faith_lv2_mute_cleansing', 'water_water_faith_lv2_deluge_benedict',
-                      'light_faith_lv1_minor_heal', 'water_faith_lv1_mending_streams'
+        'abilities': ['light_light_dark_spirit_lv3_dusk_balm', 'water_water_water_spirit_lv3_poseidon_wrath', 
+                      'water_light_spirit_lv2_holy_fountain', 'air_water_spirit_lv2_mute_cleansing', 'water_water_spirit_lv2_deluge_benedict',
+                      'light_spirit_lv1_minor_heal', 'water_spirit_lv1_mending_streams'
 
         ]
 
@@ -248,12 +248,12 @@ ATTAINABLE_PLAYER_CHARACTERS = [
     "intelligence": 180,
     "constitution": 140,
     "abilities": [
-      "water_light_faith_lv2_holy_fountain",
-      "air_light_faith_lv2_serene_breath",
-      "ice_light_faith_lv2_purging_veil",
-      "earth_light_faith_lv2_clarify",
-      "light_faith_lv1_minor_heal",
-      "light_light_fire_faith_lv3_soulflare_bloom"
+      "water_light_spirit_lv2_holy_fountain",
+      "air_light_spirit_lv2_serene_breath",
+      "ice_light_spirit_lv2_purging_veil",
+      "earth_light_spirit_lv2_clarify",
+      "light_spirit_lv1_minor_heal",
+      "light_light_fire_spirit_lv3_soulflare_bloom"
     ]
   },
 
@@ -311,13 +311,13 @@ ATTAINABLE_PLAYER_CHARACTERS = [
     "intelligence": 200,
     "constitution": 160,
     "abilities": [
-      "light_faith_lv1_minor_heal",
-      "water_faith_lv1_mending_streams",
-      "earth_faith_lv1_earthen_blessing",
-      "water_light_faith_lv2_holy_fountain",
-      "air_light_faith_lv2_serene_breath",
-      "electric_light_faith_lv2_shock_catharsis",
-      "light_light_faith_lv4_eternal_vigil"
+      "light_spirit_lv1_minor_heal",
+      "water_spirit_lv1_mending_streams",
+      "earth_spirit_lv1_earthen_blessing",
+      "water_light_spirit_lv2_holy_fountain",
+      "air_light_spirit_lv2_serene_breath",
+      "electric_light_spirit_lv2_shock_catharsis",
+      "light_light_spirit_lv4_eternal_vigil"
     ]
   },
 

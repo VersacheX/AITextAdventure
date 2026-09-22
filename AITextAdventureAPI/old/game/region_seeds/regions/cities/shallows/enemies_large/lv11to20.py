@@ -9,7 +9,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "hollow_savant_sea", "name": "Hollow Savant of the Sea", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":11, "rarity": "uncommon", "base_xp":220,
  "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (30,140),
- "basic_attack": "spent rune", "strong_attack": "mind latch", "player_abilities": ["lv2_hostile_ability_dark_air_skill_nightmare_wave", "lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "spent rune", "strong_attack": "mind latch", "player_abilities": ["lv2_hostile_ability_dark_air_skill_nightmare_wave", "lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":2, "base_dex":3, "base_con":4, "base_int":12, "base_hp":110, "base_ap":9,
  "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":3},
 
@@ -21,7 +21,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "night_oiler", "name": "Night Oiler", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":12, "rarity": "rare", "base_xp":220,
  "common_drop": "stimulant_small", "rare_drop": "stimulant_large", "money_range": (30,140),
- "basic_attack": "grease swipe", "strong_attack": "silent choke", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "grease swipe", "strong_attack": "silent choke", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":3, "base_dex":7, "base_con":4, "base_int":6, "base_hp":90, "base_ap":8,
  "str_per_level":1, "dex_per_level":3, "con_per_level":1, "int_per_level":2},
 
@@ -45,7 +45,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "brine_krakenling", "name": "Brine Krakenling", "hostile_type": "creature", "role": "hazard", "min_spawn_level":15, "rarity": "uncommon", "base_xp":340,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (40,180),
- "basic_attack": "tentacle lash", "strong_attack": "ink blight", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "tentacle lash", "strong_attack": "ink blight", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":9, "base_dex":5, "base_con":9, "base_int":4, "base_hp":200, "base_ap":8,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":1},
 
@@ -57,7 +57,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "lighthouse_keeper", "name": "Lighthouse Keeper", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":16, "rarity": "superrare", "base_xp":520,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,340),
- "basic_attack": "lantern swing", "strong_attack": "blinding flare", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst", "lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "lantern swing", "strong_attack": "blinding flare", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst", "lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":8, "base_dex":5, "base_con":10, "base_int":8, "base_hp":220, "base_ap":10,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
 
@@ -69,7 +69,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "deep_harvester", "name": "Deep Harvester", "hostile_type": "creature", "role": "hazard", "min_spawn_level":20, "rarity": "common", "base_xp":560,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (100,420),
- "basic_attack": "harvesting bite", "strong_attack": "abyssal pull", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "harvesting bite", "strong_attack": "abyssal pull", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":10, "base_dex":5, "base_con":14, "base_int":6, "base_hp":360, "base_ap":10,
  "str_per_level":4, "dex_per_level":1, "con_per_level":3, "int_per_level":2},
 ]

@@ -30,7 +30,7 @@ HOSTILE_SEEDS = [
     {
         'id': 'mirror_dancer', 'name': 'Mirror Dancer', 'hostile_type': 'spirit', 'min_spawn_level': 75, 'role': 'hazard', 'rarity': 'uncommon',
         'base_xp': 1600, 'common_drop': 'herb_major', 'rare_drop': None, 'money_range': (350, 700),
-        'basic_attack': 'shattered reflection', 'strong_attack': 'dazzling pirouette', 'player_abilities': ['light_faith_lv1_convert'],
+        'basic_attack': 'shattered reflection', 'strong_attack': 'dazzling pirouette', 'player_abilities': ['light_spirit_lv1_convert'],
         'base_str': 35, 'base_dex': 50, 'base_con': 35, 'base_int': 45, 'base_hp': 4500, 'base_ap': 120,
         'str_per_level': 4, 'dex_per_level': 7, 'con_per_level': 4, 'int_per_level': 6,
         'resistances': ['light', 'air'], 'immunities': ['confuse'], 'weaknesses': ['dark']

@@ -507,8 +507,8 @@
         "basic_attack": "smashes with crystalline maul",
         "strong_attack": "cataclysmic shard slam",
         "player_abilities": [
-          "earth_earth_faith_lv2_rooted_revive",
-          "earth_light_faith_lv2_sanctified_earth"
+          "earth_earth_spirit_lv2_rooted_revive",
+          "earth_light_spirit_lv2_sanctified_earth"
         ],
         "base_str": 9,
         "base_dex": 2,
@@ -2061,7 +2061,7 @@
         "basic_attack": "cane lash",
         "strong_attack": "crushing maternal blow",
         "player_abilities": [
-          "earth_earth_faith_lv2_rooted_revive"
+          "earth_earth_spirit_lv2_rooted_revive"
         ],
         "base_str": 5,
         "base_dex": 3,
@@ -5504,8 +5504,8 @@
         "basic_attack": "colossal slam",
         "strong_attack": "bedrock crush",
         "player_abilities": [
-          "fire_earth_light_faith_lv3_boon",
-          "fire_air_light_faith_lv3_boon"
+          "fire_earth_light_spirit_lv3_boon",
+          "fire_air_light_spirit_lv3_boon"
         ],
         "base_str": 18,
         "base_dex": 4,
@@ -5898,7 +5898,7 @@
         "strong_attack": "grave bloom",
         "player_abilities": [
           "dark_earth_magic_lv5_shadow_erode",
-          "level_1_hostile_ability_fire_faith_hearthsong",
+          "level_1_hostile_ability_fire_spirit_hearthsong",
           "fire_earth_dark_technique_lv3_strike"
         ],
         "base_str": 24,
@@ -6702,7 +6702,7 @@
         "basic_attack": "wagging finger",
         "strong_attack": "boiling rebuke",
         "player_abilities": [
-          "earth_faith_lv1_earthen_blessing"
+          "earth_spirit_lv1_earthen_blessing"
         ],
         "base_str": 2,
         "base_dex": 2,
@@ -7136,7 +7136,7 @@
         "basic_attack": "peddler's shove",
         "strong_attack": "charm and pick",
         "player_abilities": [
-          "water_faith_lv1_mending_streams"
+          "water_spirit_lv1_mending_streams"
         ],
         "base_str": 2,
         "base_dex": 6,
@@ -7892,9 +7892,9 @@
         "basic_attack": "massive swipe",
         "strong_attack": "entangling crush",
         "player_abilities": [
-          "light_light_air_faith_lv3_major_heal",
-          "fire_water_light_faith_lv3_boon",
-          "fire_water_water_faith_lv3_boon"
+          "light_light_air_spirit_lv3_major_heal",
+          "fire_water_light_spirit_lv3_boon",
+          "fire_water_water_spirit_lv3_boon"
         ],
         "base_str": 18,
         "base_dex": 2,
@@ -8701,7 +8701,7 @@
         "basic_attack": "flap a tome",
         "strong_attack": "spill ink",
         "player_abilities": [
-          "water_faith_lv1_mending_streams"
+          "water_spirit_lv1_mending_streams"
         ],
         "base_str": 1,
         "base_dex": 2,
@@ -9362,7 +9362,7 @@
         "basic_attack": "antler strike",
         "strong_attack": "phosphor stomp",
         "player_abilities": [
-          "water_faith_lv1_mending_streams"
+          "water_spirit_lv1_mending_streams"
         ],
         "base_str": 6,
         "base_dex": 8,
@@ -9585,7 +9585,7 @@
         "basic_attack": "luminous touch",
         "strong_attack": "dazzling flare",
         "player_abilities": [
-          "level_1_hostile_ability_fire_faith_hearthsong"
+          "level_1_hostile_ability_fire_spirit_hearthsong"
         ],
         "base_str": 2,
         "base_dex": 6,
@@ -9801,7 +9801,7 @@
         "basic_attack": "hexed jab",
         "strong_attack": "mire hex",
         "player_abilities": [
-          "level_1_hostile_ability_fire_faith_hearthsong"
+          "level_1_hostile_ability_fire_spirit_hearthsong"
         ],
         "base_str": 3,
         "base_dex": 5,
@@ -10072,7 +10072,7 @@
         "strong_attack": "gale downpour",
         "player_abilities": [
           "lv2_hostile_ability_water_electric_magic_maelstrom_burst",
-          "light_faith_lv1_minor_heal"
+          "light_spirit_lv1_minor_heal"
         ],
         "base_str": 3,
         "base_dex": 7,
@@ -10613,7 +10613,7 @@
         "basic_attack": "moonbeam touch",
         "strong_attack": "lunar swell",
         "player_abilities": [
-          "level_1_hostile_ability_fire_faith_hearthsong"
+          "level_1_hostile_ability_fire_spirit_hearthsong"
         ],
         "base_str": 4,
         "base_dex": 8,
@@ -11159,7 +11159,7 @@
         "basic_attack": "reef lash",
         "strong_attack": "spore burst",
         "player_abilities": [
-          "light_faith_lv1_minor_heal"
+          "light_spirit_lv1_minor_heal"
         ],
         "base_str": 6,
         "base_dex": 6,
@@ -11531,7 +11531,7 @@
         "basic_attack": "singed lute slap",
         "strong_attack": "crescendo of thorns",
         "player_abilities": [
-          "water_faith_lv1_mending_streams"
+          "water_spirit_lv1_mending_streams"
         ],
         "base_str": 1,
         "base_dex": 5,
@@ -12070,7 +12070,7 @@
         "basic_attack": "rolling pin bash",
         "strong_attack": "boiling rebuke",
         "player_abilities": [
-          "earth_faith_lv1_earthen_blessing"
+          "earth_spirit_lv1_earthen_blessing"
         ],
         "base_str": 3,
         "base_dex": 2,
@@ -12768,7 +12768,7 @@
         "basic_attack": "cleaves with a baton",
         "strong_attack": "earthshaker slam",
         "player_abilities": [
-          "earth_earth_faith_lv2_rooted_revive"
+          "earth_earth_spirit_lv2_rooted_revive"
         ],
         "base_str": 9,
         "base_dex": 2,
@@ -14377,7 +14377,7 @@
         "basic_attack": "cane lash",
         "strong_attack": "crushing blow",
         "player_abilities": [
-          "earth_earth_faith_lv2_rooted_revive"
+          "earth_earth_spirit_lv2_rooted_revive"
         ],
         "base_str": 5,
         "base_dex": 3,
@@ -15908,8 +15908,8 @@
         "basic_attack": "cleaves with a ceremonial club",
         "strong_attack": "earthshaker slam",
         "player_abilities": [
-          "earth_earth_faith_lv2_rooted_revive",
-          "earth_light_faith_lv2_sanctified_earth"
+          "earth_earth_spirit_lv2_rooted_revive",
+          "earth_light_spirit_lv2_sanctified_earth"
         ],
         "base_str": 9,
         "base_dex": 2,
@@ -17406,7 +17406,7 @@
         "basic_attack": "cane lash",
         "strong_attack": "crushing blow",
         "player_abilities": [
-          "earth_earth_faith_lv2_rooted_revive"
+          "earth_earth_spirit_lv2_rooted_revive"
         ],
         "base_str": 5,
         "base_dex": 3,
@@ -19561,7 +19561,7 @@
         "basic_attack": "antler maul",
         "strong_attack": "rending charge",
         "player_abilities": [
-          "earth_earth_faith_lv2_rooted_revive"
+          "earth_earth_spirit_lv2_rooted_revive"
         ],
         "base_str": 12,
         "base_dex": 8,
@@ -19834,7 +19834,7 @@
         "basic_attack": "prayer strike",
         "strong_attack": "consecrate slam",
         "player_abilities": [
-          "light_faith_lv5_ardent_inspire",
+          "light_spirit_lv5_ardent_inspire",
           "fire_earth_magic_lv2_lava_spike"
         ],
         "base_str": 10,
@@ -20115,7 +20115,7 @@
         "player_abilities": [
           "dark_magic_lv5_abyssal_shadow",
           "lv2_hostile_ability_water_electric_magic_maelstrom_burst",
-          "level_1_hostile_ability_fire_faith_hearthsong"
+          "level_1_hostile_ability_fire_spirit_hearthsong"
         ],
         "base_str": 22,
         "base_dex": 12,
@@ -20172,7 +20172,7 @@
         "strong_attack": "grave bloom",
         "player_abilities": [
           "dark_earth_magic_lv5_shadow_erode",
-          "level_1_hostile_ability_fire_faith_hearthsong",
+          "level_1_hostile_ability_fire_spirit_hearthsong",
           "fire_earth_dark_technique_lv3_strike"
         ],
         "base_str": 24,
@@ -21669,8 +21669,8 @@
         "basic_attack": "smashes with a maul",
         "strong_attack": "cataclysmic slam",
         "player_abilities": [
-          "earth_earth_faith_lv2_rooted_revive",
-          "earth_light_faith_lv2_sanctified_earth"
+          "earth_earth_spirit_lv2_rooted_revive",
+          "earth_light_spirit_lv2_sanctified_earth"
         ],
         "base_str": 9,
         "base_dex": 2,
@@ -22899,7 +22899,7 @@
         "basic_attack": "siren song",
         "strong_attack": "mesmerize",
         "player_abilities": [
-          "level_1_hostile_ability_fire_faith_hearthsong"
+          "level_1_hostile_ability_fire_spirit_hearthsong"
         ],
         "base_str": 2,
         "base_dex": 6,
@@ -23330,8 +23330,8 @@
         "basic_attack": "cane lash",
         "strong_attack": "crushing blow",
         "player_abilities": [
-          "earth_earth_faith_lv2_rooted_revive",
-          "earth_light_faith_lv2_sanctified_earth"
+          "earth_earth_spirit_lv2_rooted_revive",
+          "earth_light_spirit_lv2_sanctified_earth"
         ],
         "base_str": 5,
         "base_dex": 3,
@@ -25225,8 +25225,8 @@
         "basic_attack": "crashes with pipe",
         "strong_attack": "wrecking chain",
         "player_abilities": [
-          "fire_fire_faith_lv2_kindling_touch",
-          "fire_light_faith_lv2_luminous_inferno"
+          "fire_fire_spirit_lv2_kindling_touch",
+          "fire_light_spirit_lv2_luminous_inferno"
         ],
         "base_str": 8,
         "base_dex": 2,
@@ -25283,7 +25283,7 @@
         "strong_attack": "wrecking ball",
         "player_abilities": [
           "fire_technique_lv1_scorch_slash",
-          "fire_faith_lv1_warmth_mend"
+          "fire_spirit_lv1_warmth_mend"
         ],
         "base_str": 7,
         "base_dex": 2,
@@ -26318,7 +26318,7 @@
         "basic_attack": "drops a pun-heavy anvil",
         "strong_attack": "comedic smash",
         "player_abilities": [
-          "fire_faith_lv1_warmth_mend"
+          "fire_spirit_lv1_warmth_mend"
         ],
         "base_str": 4,
         "base_dex": 2,
@@ -27541,7 +27541,7 @@
         "basic_attack": "drops a rhythm anvil",
         "strong_attack": "sonic smash",
         "player_abilities": [
-          "fire_faith_lv1_warmth_mend"
+          "fire_spirit_lv1_warmth_mend"
         ],
         "base_str": 3,
         "base_dex": 2,
@@ -28015,8 +28015,8 @@
         "basic_attack": "smashes with a maul",
         "strong_attack": "cataclysmic slam",
         "player_abilities": [
-          "fire_fire_faith_lv2_kindling_touch",
-          "fire_light_faith_lv2_luminous_inferno"
+          "fire_fire_spirit_lv2_kindling_touch",
+          "fire_light_spirit_lv2_luminous_inferno"
         ],
         "base_str": 9,
         "base_dex": 2,
@@ -28070,8 +28070,8 @@
         "basic_attack": "crashes with pipe",
         "strong_attack": "wrecking chain",
         "player_abilities": [
-          "fire_fire_faith_lv2_kindling_touch",
-          "fire_light_faith_lv2_luminous_inferno"
+          "fire_fire_spirit_lv2_kindling_touch",
+          "fire_light_spirit_lv2_luminous_inferno"
         ],
         "base_str": 8,
         "base_dex": 2,
@@ -28128,7 +28128,7 @@
         "strong_attack": "wrecking ball",
         "player_abilities": [
           "fire_technique_lv1_scorch_slash",
-          "fire_faith_lv1_warmth_mend"
+          "fire_spirit_lv1_warmth_mend"
         ],
         "base_str": 7,
         "base_dex": 2,
@@ -30711,8 +30711,8 @@
         "basic_attack": "colossal slam",
         "strong_attack": "magma monolith",
         "player_abilities": [
-          "fire_water_light_faith_lv3_boon",
-          "fire_fire_light_faith_lv3_boon"
+          "fire_water_light_spirit_lv3_boon",
+          "fire_fire_light_spirit_lv3_boon"
         ],
         "base_str": 18,
         "base_dex": 4,
@@ -31105,7 +31105,7 @@
         "strong_attack": "pyroclasm burst",
         "player_abilities": [
           "fire_earth_dark_magic_lv3_pyroclasm",
-          "level_1_hostile_ability_fire_faith_hearthsong",
+          "level_1_hostile_ability_fire_spirit_hearthsong",
           "fire_fire_dark_technique_lv3_strike"
         ],
         "base_str": 24,
@@ -32821,8 +32821,8 @@
         "basic_attack": "scalding snap",
         "strong_attack": "molten breath",
         "player_abilities": [
-          "fire_fire_faith_lv2_kindling_touch",
-          "fire_light_faith_lv2_luminous_inferno"
+          "fire_fire_spirit_lv2_kindling_touch",
+          "fire_light_spirit_lv2_luminous_inferno"
         ],
         "base_str": 9,
         "base_dex": 6,
@@ -33095,7 +33095,7 @@
         "strong_attack": "rocking chair maul",
         "player_abilities": [
           "fire_technique_lv1_scorch_slash",
-          "fire_faith_lv1_warmth_mend"
+          "fire_spirit_lv1_warmth_mend"
         ],
         "base_str": 4,
         "base_dex": 2,
@@ -33959,8 +33959,8 @@
         "basic_attack": "crushing baton",
         "strong_attack": "overhead bash",
         "player_abilities": [
-          "water_water_faith_lv2_fountain_mend",
-          "water_light_faith_lv2_heavenly_mist"
+          "water_water_spirit_lv2_fountain_mend",
+          "water_light_spirit_lv2_heavenly_mist"
         ],
         "base_str": 7,
         "base_dex": 3,
@@ -35632,7 +35632,7 @@
         "strong_attack": "chain swing",
         "player_abilities": [
           "water_technique_lv1_ripple_bash",
-          "water_faith_lv1_mending_streams"
+          "water_spirit_lv1_mending_streams"
         ],
         "base_str": 7,
         "base_dex": 3,
@@ -36120,8 +36120,8 @@
         "basic_attack": "ink lash",
         "strong_attack": "mind-bleak pulse",
         "player_abilities": [
-          "water_water_faith_lv2_fountain_mend",
-          "water_light_faith_lv2_heavenly_mist"
+          "water_water_spirit_lv2_fountain_mend",
+          "water_light_spirit_lv2_heavenly_mist"
         ],
         "base_str": 6,
         "base_dex": 6,
@@ -37180,8 +37180,8 @@
         "basic_attack": "spritz",
         "strong_attack": "torrent burst",
         "player_abilities": [
-          "water_faith_lv1_mending_streams",
-          "light_faith_lv1_minor_heal"
+          "water_spirit_lv1_mending_streams",
+          "light_spirit_lv1_minor_heal"
         ],
         "base_str": 3,
         "base_dex": 3,
@@ -37286,7 +37286,7 @@
         "basic_attack": "throw vial",
         "strong_attack": "toxic cloud",
         "player_abilities": [
-          "light_faith_lv1_minor_heal"
+          "light_spirit_lv1_minor_heal"
         ],
         "base_str": 3,
         "base_dex": 3,
@@ -37610,7 +37610,7 @@
         "basic_attack": "alpha maul",
         "strong_attack": "rending charge",
         "player_abilities": [
-          "water_water_faith_lv2_fountain_mend"
+          "water_water_spirit_lv2_fountain_mend"
         ],
         "base_str": 12,
         "base_dex": 8,
@@ -37777,7 +37777,7 @@
         "basic_attack": "current probe",
         "strong_attack": "mind rot",
         "player_abilities": [
-          "light_faith_lv1_minor_heal",
+          "light_spirit_lv1_minor_heal",
           "water_light_magic_lv2_luminous_tide"
         ],
         "base_str": 6,
@@ -37888,7 +37888,7 @@
         "basic_attack": "prayer strike",
         "strong_attack": "consecrate wave",
         "player_abilities": [
-          "light_faith_lv5_ardent_inspire"
+          "light_spirit_lv5_ardent_inspire"
         ],
         "base_str": 10,
         "base_dex": 8,
@@ -38107,7 +38107,7 @@
         "basic_attack": "luminous tap",
         "strong_attack": "solar cascade",
         "player_abilities": [
-          "light_water_faith_lv5_holy_light",
+          "light_water_spirit_lv5_holy_light",
           "fire_water_earth_technique_lv3_strike"
         ],
         "base_str": 16,
@@ -38164,7 +38164,7 @@
         "player_abilities": [
           "dark_magic_lv5_abyssal_shadow",
           "lv2_hostile_ability_water_electric_magic_maelstrom_burst",
-          "level_1_hostile_ability_fire_faith_hearthsong"
+          "level_1_hostile_ability_fire_spirit_hearthsong"
         ],
         "base_str": 22,
         "base_dex": 12,
@@ -38218,7 +38218,7 @@
         "basic_attack": "rot lash",
         "strong_attack": "grave bloom",
         "player_abilities": [
-          "level_1_hostile_ability_fire_faith_hearthsong",
+          "level_1_hostile_ability_fire_spirit_hearthsong",
           "fire_water_earth_technique_lv3_strike",
           "fire_water_light_technique_lv3_strike"
         ],
@@ -38965,7 +38965,7 @@
         "strong_attack": "stunning sweep",
         "player_abilities": [
           "water_technique_lv1_ripple_bash",
-          "water_faith_lv1_mending_streams"
+          "water_spirit_lv1_mending_streams"
         ],
         "base_str": 6,
         "base_dex": 3,
@@ -39020,7 +39020,7 @@
         "strong_attack": "chain slam",
         "player_abilities": [
           "water_technique_lv1_ripple_bash",
-          "water_faith_lv1_mending_streams"
+          "water_spirit_lv1_mending_streams"
         ],
         "base_str": 7,
         "base_dex": 3,
@@ -39509,8 +39509,8 @@
         "basic_attack": "piston jab",
         "strong_attack": "hydraulic crush",
         "player_abilities": [
-          "water_water_faith_lv2_fountain_mend",
-          "water_light_faith_lv2_heavenly_mist"
+          "water_water_spirit_lv2_fountain_mend",
+          "water_light_spirit_lv2_heavenly_mist"
         ],
         "base_str": 10,
         "base_dex": 2,
@@ -40419,8 +40419,8 @@
         "basic_attack": "crushing bash",
         "strong_attack": "overhead pummel",
         "player_abilities": [
-          "earth_earth_faith_lv2_rooted_revive",
-          "earth_light_faith_lv2_sanctified_earth"
+          "earth_earth_spirit_lv2_rooted_revive",
+          "earth_light_spirit_lv2_sanctified_earth"
         ],
         "base_str": 8,
         "base_dex": 3,
@@ -42259,8 +42259,8 @@
         "basic_attack": "frost rot dirge",
         "strong_attack": "wasting blight",
         "player_abilities": [
-          "earth_earth_faith_lv2_rooted_revive",
-          "earth_light_faith_lv2_sanctified_earth"
+          "earth_earth_spirit_lv2_rooted_revive",
+          "earth_light_spirit_lv2_sanctified_earth"
         ],
         "base_str": 4,
         "base_dex": 3,
@@ -43561,8 +43561,8 @@
         "basic_attack": "veteran strike",
         "strong_attack": "crushing pike",
         "player_abilities": [
-          "earth_earth_faith_lv2_rooted_revive",
-          "earth_light_faith_lv2_sanctified_earth"
+          "earth_earth_spirit_lv2_rooted_revive",
+          "earth_light_spirit_lv2_sanctified_earth"
         ],
         "base_str": 8,
         "base_dex": 3,
@@ -44048,8 +44048,8 @@
         "basic_attack": "cold ink lash",
         "strong_attack": "mind-freeze pulse",
         "player_abilities": [
-          "earth_earth_faith_lv2_rooted_revive",
-          "earth_light_faith_lv2_sanctified_earth"
+          "earth_earth_spirit_lv2_rooted_revive",
+          "earth_light_spirit_lv2_sanctified_earth"
         ],
         "base_str": 6,
         "base_dex": 6,
@@ -45889,8 +45889,8 @@
         "basic_attack": "crystalline shard",
         "strong_attack": "herald blast",
         "player_abilities": [
-          "earth_earth_faith_lv2_rooted_revive",
-          "earth_light_faith_lv2_sanctified_earth"
+          "earth_earth_spirit_lv2_rooted_revive",
+          "earth_light_spirit_lv2_sanctified_earth"
         ],
         "base_str": 6,
         "base_dex": 5,
@@ -46730,7 +46730,7 @@
         "basic_attack": "interrogation jab",
         "strong_attack": "evidence slam",
         "player_abilities": [
-          "light_faith_lv5_ardent_inspire"
+          "light_spirit_lv5_ardent_inspire"
         ],
         "base_str": 6,
         "base_dex": 5,
@@ -47773,7 +47773,7 @@
         "basic_attack": "radiant lance",
         "strong_attack": "celestial volley",
         "player_abilities": [
-          "light_air_earth_water_faith_lv4_starfall",
+          "light_air_earth_water_spirit_lv4_starfall",
           "fire_earth_magic_lv2_lava_spike",
           "earth_earth_magic_lv2_quake_shard"
         ],
@@ -48475,8 +48475,8 @@
         "basic_attack": "veteran strike",
         "strong_attack": "crushing pike",
         "player_abilities": [
-          "earth_earth_faith_lv2_rooted_revive",
-          "earth_light_faith_lv2_sanctified_earth"
+          "earth_earth_spirit_lv2_rooted_revive",
+          "earth_light_spirit_lv2_sanctified_earth"
         ],
         "base_str": 8,
         "base_dex": 3,
@@ -48961,8 +48961,8 @@
         "basic_attack": "ink lash of cold",
         "strong_attack": "mind-freeze pulse",
         "player_abilities": [
-          "earth_earth_faith_lv2_rooted_revive",
-          "earth_light_faith_lv2_sanctified_earth"
+          "earth_earth_spirit_lv2_rooted_revive",
+          "earth_light_spirit_lv2_sanctified_earth"
         ],
         "base_str": 6,
         "base_dex": 6,
@@ -49602,7 +49602,7 @@
         "basic_attack": "lamp swing",
         "strong_attack": "blinding sweep",
         "player_abilities": [
-          "earth_faith_lv1_earthen_blessing"
+          "earth_spirit_lv1_earthen_blessing"
         ],
         "base_str": 4,
         "base_dex": 3,
@@ -49870,7 +49870,7 @@
         "basic_attack": "cane jab",
         "strong_attack": "solitary howl",
         "player_abilities": [
-          "earth_faith_lv1_earthen_blessing"
+          "earth_spirit_lv1_earthen_blessing"
         ],
         "base_str": 2,
         "base_dex": 2,
@@ -51502,8 +51502,8 @@
         "basic_attack": "rotting swipe",
         "strong_attack": "necrotic burst",
         "player_abilities": [
-          "fire_dark_faith_lv2_ember_umbrage",
-          "earth_dark_faith_lv2_tomb_benediction"
+          "fire_dark_spirit_lv2_ember_umbrage",
+          "earth_dark_spirit_lv2_tomb_benediction"
         ],
         "base_str": 8,
         "base_dex": 4,
@@ -52313,7 +52313,7 @@
         "basic_attack": "pale grasp",
         "strong_attack": "life sap",
         "player_abilities": [
-          "dark_faith_lv1_shade_whisper"
+          "dark_spirit_lv1_shade_whisper"
         ],
         "base_str": 4,
         "base_dex": 3,
@@ -53435,8 +53435,8 @@
         "basic_attack": "sentinel crush",
         "strong_attack": "marrow quake",
         "player_abilities": [
-          "fire_dark_faith_lv2_ember_umbrage",
-          "earth_dark_faith_lv2_tomb_benediction"
+          "fire_dark_spirit_lv2_ember_umbrage",
+          "earth_dark_spirit_lv2_tomb_benediction"
         ],
         "base_str": 8,
         "base_dex": 3,
@@ -53492,7 +53492,7 @@
         "basic_attack": "slime swipe",
         "strong_attack": "pustule burst",
         "player_abilities": [
-          "dark_faith_lv1_shade_whisper"
+          "dark_spirit_lv1_shade_whisper"
         ],
         "base_str": 4,
         "base_dex": 3,
@@ -53818,8 +53818,8 @@
         "basic_attack": "lancet jab",
         "strong_attack": "putrid lance",
         "player_abilities": [
-          "fire_dark_faith_lv2_ember_umbrage",
-          "earth_dark_faith_lv2_tomb_benediction"
+          "fire_dark_spirit_lv2_ember_umbrage",
+          "earth_dark_spirit_lv2_tomb_benediction"
         ],
         "base_str": 3,
         "base_dex": 4,
@@ -54364,8 +54364,8 @@
         "basic_attack": "mauls with a clubbed stump",
         "strong_attack": "cataclysmic swamp slam",
         "player_abilities": [
-          "fire_dark_faith_lv2_ember_umbrage",
-          "earth_dark_faith_lv2_tomb_benediction"
+          "fire_dark_spirit_lv2_ember_umbrage",
+          "earth_dark_spirit_lv2_tomb_benediction"
         ],
         "base_str": 9,
         "base_dex": 2,
@@ -55472,7 +55472,7 @@
         "strong_attack": "wrecking ball maul",
         "player_abilities": [
           "dark_technique_lv1_night_claw",
-          "dark_faith_lv1_shade_whisper"
+          "dark_spirit_lv1_shade_whisper"
         ],
         "base_str": 7,
         "base_dex": 2,
@@ -56394,7 +56394,7 @@
         "con_per_level": 3,
         "int_per_level": 1,
         "player_abilities": [
-          "fire_dark_faith_lv2_ember_umbrage"
+          "fire_dark_spirit_lv2_ember_umbrage"
         ],
         "weaknesses": [
           "light"
@@ -57103,7 +57103,7 @@
         "int_per_level": 0,
         "player_abilities": [
           "dark_technique_lv1_night_claw",
-          "dark_faith_lv1_shade_whisper"
+          "dark_spirit_lv1_shade_whisper"
         ],
         "weaknesses": [],
         "resistances": [],
@@ -58698,7 +58698,7 @@
         "basic_attack": "alpha maul",
         "strong_attack": "rending charge",
         "player_abilities": [
-          "fire_dark_faith_lv2_ember_umbrage"
+          "fire_dark_spirit_lv2_ember_umbrage"
         ],
         "base_str": 12,
         "base_dex": 8,
@@ -58753,7 +58753,7 @@
         "strong_attack": "virulent purge",
         "player_abilities": [
           "earth_dark_skill_lv5_venom_trace",
-          "fire_dark_faith_lv2_ember_umbrage"
+          "fire_dark_spirit_lv2_ember_umbrage"
         ],
         "base_str": 9,
         "base_dex": 6,
@@ -59568,8 +59568,8 @@
         "basic_attack": "mauls with a barnacle club",
         "strong_attack": "cataclysmic swamp slam",
         "player_abilities": [
-          "fire_dark_faith_lv2_ember_umbrage",
-          "earth_dark_faith_lv2_tomb_benediction"
+          "fire_dark_spirit_lv2_ember_umbrage",
+          "earth_dark_spirit_lv2_tomb_benediction"
         ],
         "base_str": 9,
         "base_dex": 2,
@@ -61122,7 +61122,7 @@
         "basic_attack": "cane lash",
         "strong_attack": "crushing maternal blow",
         "player_abilities": [
-          "fire_dark_faith_lv2_ember_umbrage"
+          "fire_dark_spirit_lv2_ember_umbrage"
         ],
         "base_str": 5,
         "base_dex": 3,

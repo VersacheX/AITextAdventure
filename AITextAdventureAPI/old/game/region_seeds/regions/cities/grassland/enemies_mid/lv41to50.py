@@ -16,7 +16,7 @@ RANDOM_HOSTILE_SEEDS = [
  {"id": "sanctum_warlock", "name": "Sanctum Warlock", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level": 46, "rarity": "rare", "base_xp": 1600,
   "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (300, 1000),
   "basic_attack": "dark scripture bolt", "strong_attack": "sanctum curse",
-  "player_abilities": ["lv2_hostile_ability_dark_electric_magic_abyssal_storm", "lv2_hostile_ability_dark_dark_faith_void_veil"],
+  "player_abilities": ["lv2_hostile_ability_dark_electric_magic_abyssal_storm", "lv2_hostile_ability_dark_dark_spirit_void_veil"],
   "base_str": 8, "base_dex": 16, "base_con": 10, "base_int": 32, "base_hp": 1000, "base_ap": 18,
   "str_per_level": 1, "dex_per_level": 3, "con_per_level": 2, "int_per_level": 6},
 ]

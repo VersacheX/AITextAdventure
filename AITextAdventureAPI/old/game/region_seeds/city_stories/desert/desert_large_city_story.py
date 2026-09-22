@@ -293,7 +293,7 @@ NPC_DIALOG += [
     # Type E – Consult Rhyla
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_desert_large_e_consult_rhyla',
+        'dialog_id': 'spirit_desert_large_e_consult_rhyla',
         'dialog': [
             "They sealed it in frequency so it could only be heard the right way... not read, not forced. There's a kind of care in that."
         ]
@@ -515,7 +515,7 @@ NPC_DIALOG += [
     # Type D – Consult Rhyla
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_desert_large_d_consult_rhyla',
+        'dialog_id': 'spirit_desert_large_d_consult_rhyla',
         'dialog': [
             "A weapon the dunes have been singing into shape for centuries... that's not power. That's something that was never meant to finish."
         ]
@@ -725,7 +725,7 @@ TASKS += [
                     'dialog_id': 'rhyla_cipher_context'
                 }
             },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',   'dialog_id': 'faith_desert_large_e_consult_rhyla'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',   'dialog_id': 'spirit_desert_large_e_consult_rhyla'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_large_e_consult_rhyla' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable',   'dialog_id': 'sable_desert_large_e_consult_rhyla'   } },
             {
@@ -1079,7 +1079,7 @@ TASKS += [
 					'dialog_id': 'rhyla_d_cipher_read'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',   'dialog_id': 'faith_desert_large_d_consult_rhyla'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',   'dialog_id': 'spirit_desert_large_d_consult_rhyla'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_desert_large_d_consult_rhyla' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in',  'dialog_id': 'kor_in_desert_large_d_consult_rhyla'  } },
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'archive_voice', 'location': None } },

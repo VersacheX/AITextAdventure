@@ -45,7 +45,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "night_shank", "name": "Night Shank", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":13, "rarity": "rare", "base_xp":220,
  "common_drop": "stimulant_small", "rare_drop": "stimulant_large", "money_range": (30,140),
- "basic_attack": "grease strike", "strong_attack": "silent garrote", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "grease strike", "strong_attack": "silent garrote", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":3, "base_dex":8, "base_con":4, "base_int":5, "base_hp":192, "base_ap":8,
  "str_per_level":1, "dex_per_level":3, "con_per_level":1, "int_per_level":2},
 
@@ -75,7 +75,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "kraken_ice_whelp", "name": "Kraken Ice Whelp", "hostile_type": "creature", "role": "hazard", "min_spawn_level":15, "rarity": "rare", "base_xp":340,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (40,180),
- "basic_attack": "tentacle lash", "strong_attack": "frozen ink burst", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "tentacle lash", "strong_attack": "frozen ink burst", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":8, "base_dex":5, "base_con":9, "base_int":4, "base_hp":260, "base_ap":8,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":1},
 
@@ -93,13 +93,13 @@ SEEDS_LV11TO20 = [
 
  {"id": "lorekeeper_frost", "name": "Lorekeeper Frost", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":17, "rarity": "superrare", "base_xp":520,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,340),
- "basic_attack": "lantern swing", "strong_attack": "blinding flare", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst", "lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "lantern swing", "strong_attack": "blinding flare", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst", "lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":8, "base_dex":5, "base_con":10, "base_int":10, "base_hp":320, "base_ap":10,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":3},
 
  {"id": "kraken_ice_whelp_giant", "name": "Kraken Ice Whelp", "hostile_type": "creature", "role": "hazard", "min_spawn_level":17, "rarity": "uncommon", "base_xp":380,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (60,300),
- "basic_attack": "mighty tentacle lash", "strong_attack": "frozen ink maelstrom", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "mighty tentacle lash", "strong_attack": "frozen ink maelstrom", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":12, "base_dex":6, "base_con":12, "base_int":6, "base_hp":360, "base_ap":10,
  "str_per_level":4, "dex_per_level":1, "con_per_level":3, "int_per_level":1},
 

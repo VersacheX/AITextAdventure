@@ -59,5 +59,5 @@ SEEDS_LV11TO20 = [
  "basic_attack": "shadow nip", "strong_attack": "void bite", "player_abilities": ["earth_dark_skill_lv5_venom_trace"], "base_str":8, "base_dex":8, "base_con":8, "base_int":10, "base_hp":480, "base_ap":10, "str_per_level":3, "dex_per_level":2, "con_per_level":2, "int_per_level":3},
 
  {"id": "polar_paladin", "name": "Polar Paladin", "hostile_type": "celestial", "role": "support", "min_spawn_level":20, "rarity": "superrare", "base_xp":1000, "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (160,640),
- "basic_attack": "radiant lance", "strong_attack": "celestial volley", "player_abilities": ["light_air_earth_water_faith_lv4_starfall"], "base_str":14, "base_dex":8, "base_con":12, "base_int":14, "base_hp":800, "base_ap":14, "str_per_level":4, "dex_per_level":2, "con_per_level":3, "int_per_level":3},
+ "basic_attack": "radiant lance", "strong_attack": "celestial volley", "player_abilities": ["light_air_earth_water_spirit_lv4_starfall"], "base_str":14, "base_dex":8, "base_con":12, "base_int":14, "base_hp":800, "base_ap":14, "str_per_level":4, "dex_per_level":2, "con_per_level":3, "int_per_level":3},
 ]

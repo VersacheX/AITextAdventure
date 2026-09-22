@@ -4,13 +4,13 @@ SEEDS_LV11TO20 = [
  # Level11
  {"id": "crypt_revenant", "name": "Crypt Revenant", "hostile_type": "undead", "role": "hazard", "min_spawn_level":11, "rarity": "rare", "base_xp":300,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (30,160),
- "basic_attack": "rotting swipe", "strong_attack": "necrotic burst", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "rotting swipe", "strong_attack": "necrotic burst", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":8, "base_dex":4, "base_con":10, "base_int":5, "base_hp":260, "base_ap":8,
  "str_per_level":3, "dex_per_level":0, "con_per_level":3, "int_per_level":1},
 
  {"id": "tomb_stigilist", "name": "Tomb Sigilist", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":11, "rarity": "rare", "base_xp":220,
  "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (20,120),
- "basic_attack": "sigil tap", "strong_attack": "runic burst", "player_abilities": ["level_1_hostile_ability_arcane_blast", "level_1_hostile_ability_light_faith_prism_burst"],
+ "basic_attack": "sigil tap", "strong_attack": "runic burst", "player_abilities": ["level_1_hostile_ability_arcane_blast", "level_1_hostile_ability_light_spirit_prism_burst"],
  "base_str":2, "base_dex":3, "base_con":4, "base_int":14, "base_hp":120, "base_ap":8,
  "str_per_level":1, "dex_per_level":0, "con_per_level":1, "int_per_level":3},
 
@@ -35,7 +35,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "crypt_warden", "name": "Crypt Warden", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":12, "rarity": "rare", "base_xp":240,
  "common_drop": "herb_major", "rare_drop": "kevlar_vest", "money_range": (30,150),
- "basic_attack": "lantern strike", "strong_attack": "grim pike", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst"],
+ "basic_attack": "lantern strike", "strong_attack": "grim pike", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst"],
  "base_str":7, "base_dex":4, "base_con":8, "base_int":6, "base_hp":200, "base_ap":6,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
 
@@ -54,7 +54,7 @@ SEEDS_LV11TO20 = [
  # Level13
  {"id": "tide_specter", "name": "Tide Specter", "hostile_type": "spirit", "role": "hazard", "min_spawn_level":13, "rarity": "rare", "base_xp":340,
  "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (30,140),
- "basic_attack": "cold ripple", "strong_attack": "spectral tide", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil", "level_1_hostile_ability_night_whisper"],
+ "basic_attack": "cold ripple", "strong_attack": "spectral tide", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil", "level_1_hostile_ability_night_whisper"],
  "base_str":2, "base_dex":5, "base_con":6, "base_int":9, "base_hp":200, "base_ap":9,
  "str_per_level":1, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
 
@@ -73,7 +73,7 @@ SEEDS_LV11TO20 = [
  # Level14
  {"id": "death_herald", "name": "Death Herald", "hostile_type": "spirit", "role": "hazard", "min_spawn_level":14, "rarity": "rare", "base_xp":320,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (40,200),
- "basic_attack": "dirge note", "strong_attack": "pall of death", "player_abilities": ["level_1_hostile_ability_night_whisper", "lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "dirge note", "strong_attack": "pall of death", "player_abilities": ["level_1_hostile_ability_night_whisper", "lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":3, "base_dex":4, "base_con":8, "base_int":14, "base_hp":220, "base_ap":10,
  "str_per_level":1, "dex_per_level":1, "con_per_level":2, "int_per_level":3},
 
@@ -143,7 +143,7 @@ SEEDS_LV11TO20 = [
  # Level18
  {"id": "necromancer_lord", "name": "Necromancer Lord", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":18, "rarity": "superrare", "base_xp":720,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (100,420),
- "basic_attack": "skeletal lash", "strong_attack": "dread invocation", "player_abilities": ["lv2_hostile_ability_dark_electric_magic_abyssal_storm", "lv2_hostile_ability_dark_dark_faith_void_veil", "level_1_hostile_ability_light_faith_prism_burst"],
+ "basic_attack": "skeletal lash", "strong_attack": "dread invocation", "player_abilities": ["lv2_hostile_ability_dark_electric_magic_abyssal_storm", "lv2_hostile_ability_dark_dark_spirit_void_veil", "level_1_hostile_ability_light_spirit_prism_burst"],
  "base_str":6, "base_dex":6, "base_con":10, "base_int":16, "base_hp":420, "base_ap":14,
  "str_per_level":2, "dex_per_level":2, "con_per_level":3, "int_per_level":4},
 
@@ -156,7 +156,7 @@ SEEDS_LV11TO20 = [
  # Level20
  {"id": "mort_queen", "name": "Mort Queen", "hostile_type": "undead", "role": "hazard", "min_spawn_level":20, "rarity": "superrare", "base_xp":900,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (180,700),
- "basic_attack": "regal claw", "strong_attack": "necrotic dominion", "player_abilities": ["lv2_hostile_ability_dark_air_skill_nightmare_wave", "lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "regal claw", "strong_attack": "necrotic dominion", "player_abilities": ["lv2_hostile_ability_dark_air_skill_nightmare_wave", "lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":10, "base_dex":8, "base_con":12, "base_int":14, "base_hp":600, "base_ap":16,
  "str_per_level":4, "dex_per_level":2, "con_per_level":3, "int_per_level":4},
 ]

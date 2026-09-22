@@ -30,7 +30,7 @@ HOSTILE_SEEDS = [
 	{
 		'id': 'void_tendril', 'name': 'Void Tendril', 'hostile_type': 'aberration', 'min_spawn_level': 80, 'role': 'hazard', 'rarity': 'uncommon',
 		'base_xp': 1450, 'common_drop': 'herb_major', 'rare_drop': None, 'money_range': (510, 1020),
-		'basic_attack': 'null grasp', 'strong_attack': 'purposeless pull', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
+		'basic_attack': 'null grasp', 'strong_attack': 'purposeless pull', 'player_abilities': ['dark_spirit_lv1_shade_whisper'],
 		'base_str': 35, 'base_dex': 45, 'base_con': 35, 'base_int': 52, 'base_hp': 3100, 'base_ap': 130,
 		'str_per_level': 4, 'dex_per_level': 5, 'con_per_level': 4, 'int_per_level': 7,
 		'resistances': ['dark'], 'immunities': ['stun'], 'weaknesses': ['light']

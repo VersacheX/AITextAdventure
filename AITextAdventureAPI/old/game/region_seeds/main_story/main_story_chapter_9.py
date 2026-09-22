@@ -119,7 +119,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch9_to_brann',
+        'dialog_id': 'spirit_ch9_to_brann',
         'dialog': [
             "This place feeds on pain. We must be careful not to become what it wants."
         ]
@@ -140,7 +140,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch9_to_lira',
+        'dialog_id': 'spirit_ch9_to_lira',
         'dialog': [
             "This is cruelty disguised as sport."
         ]
@@ -189,7 +189,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch9_to_ember',
+        'dialog_id': 'spirit_ch9_to_ember',
         'dialog': [
             "You're a healer."
         ]
@@ -241,7 +241,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch9_agrees',
+        'dialog_id': 'spirit_ch9_agrees',
         'dialog': [
             "Ember is right. We need to end this quickly before the corruption takes deeper root."
         ]
@@ -327,7 +327,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch9_boss_response',
+        'dialog_id': 'spirit_ch9_boss_response',
         'dialog': [
             "There is no humanity left in either of them. Only hunger and cruelty."
         ]
@@ -357,7 +357,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch9_bracelet_found',
+        'dialog_id': 'spirit_ch9_bracelet_found',
         'dialog': [
             "(softly, eyes widening as the bracelet appears) The Bracelet of Existence..."
         ]
@@ -406,7 +406,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch9_return_to_ember',
+        'dialog_id': 'spirit_ch9_return_to_ember',
         'dialog': [
             "We should return to Ember. She'll want to know the arena has quieted..."
         ]
@@ -420,7 +420,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch9_report_to_ember',
+        'dialog_id': 'spirit_ch9_report_to_ember',
         'dialog': [
             "Glamour and Scalpel are gone. The arena has fallen silent."
         ]
@@ -532,7 +532,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'brann', 'dialog_id': 'brann_ch9_addict_2' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch9_to_brann' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch9_to_brann' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch9_to_brann' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch9_to_brann' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'brann', 'standing_text': ["The arena will test you. Don't let Scalpel make you enjoy it."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch9_meet_lira' }}
         ]
@@ -546,7 +546,7 @@ TASKS = [
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lira', 'dialog_id': 'lira_ch9_intro_1' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lira', 'dialog_id': 'lira_ch9_intro_2' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch9_to_lira' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch9_to_lira' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lira', 'dialog_id': 'lira_ch9_request' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch9_to_lira' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_ch9_to_lira' }},
@@ -564,14 +564,14 @@ TASKS = [
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'ember', 'dialog_id': 'ember_ch9_intro' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lira', 'dialog_id': 'lira_ch9_about_ember' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch9_to_ember' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch9_to_ember' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'ember', 'dialog_id': 'ember_ch9_response' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'tess', 'dialog_id': 'tess_ch9_arena_analysis' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'sam', 'dialog_id': 'sam_ch9_arena_analysis' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch9_to_tess_sam' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch9_to_tess_sam' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'ember', 'dialog_id': 'ember_ch9_warning' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch9_agrees' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch9_agrees' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch9_agrees' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch9_observes' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'ember', 'standing_text': ["The arena calls, but stay human. Don't let Scalpel's domain own your desires."]}},
@@ -598,7 +598,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch9_boss_response' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch9_boss_response' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch9_boss_response' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch9_boss_response' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch9_boss_response' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'glamour', 'dialog_id': 'glamour_ch9_boss_taunt' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'scalpel', 'dialog_id': 'scalpel_ch9_boss_taunt' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'scalpel', 'standing_text': ["The arena is mine. You will break, and you will enjoy it."]}},
@@ -618,14 +618,14 @@ TASKS = [
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'scalpel' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch9_narrator_after_boss' }},
             { 'event_type': 'award_item', 'params': { 'item_id': 'bracelet_of_existence' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch9_bracelet_found' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch9_bracelet_found' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch9_bracelet_found' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch9_bracelet_found' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch9_bracelet_found' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch9_bracelet_found' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch9_bracelet_found' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_ch9_bracelet_found' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch9_return_to_ember' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch9_return_to_ember' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'brann', 'standing_text': ["The arena feels... different now. Maybe there's hope."]}},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lira', 'standing_text': ["The wounded are finally resting. Thank the stars."]}},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'tess', 'standing_text': ["The high is gone. Now comes the crash. I've seen this look on people's faces before. They're vulnerable."]}},
@@ -642,7 +642,7 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'ember', 'dialog_id': 'ember_ch9_after_boss' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch9_report_to_ember' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch9_report_to_ember' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'ember', 'dialog_id': 'ember_ch9_thankful' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'tess', 'dialog_id': 'tess_ch9_recovering' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'sam', 'dialog_id': 'sam_ch9_recovering' }},

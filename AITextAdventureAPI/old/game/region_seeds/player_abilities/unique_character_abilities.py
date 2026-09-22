@@ -204,7 +204,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
     # RIPPLE (lv30, shallows, faith/INFJ)
     # -------------------------------------------------------------------------
     {
-        "id": "lv2_unique_ability_faith_ripple_tidal_mend",
+        "id": "lv2_unique_ability_spirit_ripple_tidal_mend",
         "name": "Tidal Mend",
         "description": "Ripple channels the tide's patient rhythm into a single ally, washing away their wounds.",
         "ability_type": "spirit", "level": 2,
@@ -214,7 +214,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv2_unique_ability_faith_ripple_drowned_blessing",
+        "id": "lv2_unique_ability_spirit_ripple_drowned_blessing",
         "name": "Drowned Blessing",
         "description": "Born of the depths that once claimed her, Ripple blesses her allies with elemental resilience.",
         "ability_type": "spirit", "level": 2,
@@ -224,7 +224,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv3_unique_ability_faith_ripple_returned_tide",
+        "id": "lv3_unique_ability_spirit_ripple_returned_tide",
         "name": "Returned Tide",
         "description": "The tide pulled her under once and brought her back. She can do the same for others -- a revival drawn from that impossible return.",
         "ability_type": "spirit", "level": 3,
@@ -234,7 +234,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv3_unique_ability_faith_ripple_deep_current_surge",
+        "id": "lv3_unique_ability_spirit_ripple_deep_current_surge",
         "name": "Deep Current Surge",
         "description": "Ripple summons a crushing deep-water column that hammers all enemies in a wide arc.",
         "ability_type": "spirit", "level": 3,
@@ -340,7 +340,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
     # LYREN VALE (lv35, ch7, faith/ISFP)
     # -------------------------------------------------------------------------
     {
-        "id": "lv2_unique_ability_faith_lyren_riftwater_balm",
+        "id": "lv2_unique_ability_spirit_lyren_riftwater_balm",
         "name": "Riftwater Balm",
         "description": "Lyren draws on the memory of still water to soothe a single ally's wounds.",
         "ability_type": "spirit", "level": 2,
@@ -350,7 +350,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv2_unique_ability_faith_lyren_gentle_warding",
+        "id": "lv2_unique_ability_spirit_lyren_gentle_warding",
         "name": "Gentle Warding",
         "description": "Lyren quietly raises a ward of earth and light around her allies, shielding them from elemental harm.",
         "ability_type": "spirit", "level": 2,
@@ -360,7 +360,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv3_unique_ability_faith_lyren_world_remembers",
+        "id": "lv3_unique_ability_spirit_lyren_world_remembers",
         "name": "The World Remembers",
         "description": "Lyren channels the shape of what was before the fractures -- a broad healing tide that reminds wounds they were never meant to stay.",
         "ability_type": "spirit", "level": 3,
@@ -370,7 +370,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv3_unique_ability_faith_lyren_hibiscus_light",
+        "id": "lv3_unique_ability_spirit_lyren_hibiscus_light",
         "name": "Hibiscus Light",
         "description": "Named for the flower that refused to die -- a concentrated beam of resilient light that revives a fallen ally.",
         "ability_type": "spirit", "level": 3,
@@ -481,7 +481,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
     # SERAPHINE (lv85, ch19, faith/ESFJ)
     # -------------------------------------------------------------------------
     {
-        "id": "lv2_unique_ability_faith_seraphine_hollow_hymn",
+        "id": "lv2_unique_ability_spirit_seraphine_hollow_hymn",
         "name": "Hollow Hymn",
         "description": "A fragment of Seraphine's old perfect song -- still beautiful enough to soothe wounds, even if it rings slightly false.",
         "ability_type": "spirit", "level": 2,
@@ -491,7 +491,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv3_unique_ability_faith_seraphine_true_harmony",
+        "id": "lv3_unique_ability_spirit_seraphine_true_harmony",
         "name": "True Harmony",
         "description": "Seraphine sings a song that finally holds shadow and light together -- a broad healing wave born from accepted truth rather than performed perfection.",
         "ability_type": "spirit", "level": 3,
@@ -501,7 +501,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv3_unique_ability_faith_seraphine_songs_revive",
+        "id": "lv3_unique_ability_spirit_seraphine_songs_revive",
         "name": "Song's Revive",
         "description": "Seraphine's voice reaches the fallen -- not with a perfect note, but with a broken, honest one that pulls them back.",
         "ability_type": "spirit", "level": 3,
@@ -511,7 +511,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv4_unique_ability_faith_seraphine_shattered_aria",
+        "id": "lv4_unique_ability_spirit_seraphine_shattered_aria",
         "name": "Shattered Aria",
         "description": "Seraphine unleashes the full force of her voice -- not the hollow harmony of preservation, but the raw, imperfect note of someone who finally stopped performing. It heals all allies deeply.",
         "ability_type": "spirit", "level": 4,
@@ -748,7 +748,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
     # Eldon Dawnseer (lv40, faith/INFJ)
     # -------------------------------------------------------------------------
     {
-        "id": "lv2_unique_ability_faith_eldon_dawnseer_seer_shield",
+        "id": "lv2_unique_ability_spirit_eldon_dawnseer_seer_shield",
         "name": "Seer Shield",
         "description": "Eldon glimpses the immediate future and raises a warding light a moment before the blow lands.",
         "ability_type": "spirit", "level": 2,
@@ -758,7 +758,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv2_unique_ability_faith_eldon_dawnseer_fragment_vision",
+        "id": "lv2_unique_ability_spirit_eldon_dawnseer_fragment_vision",
         "name": "Fragment Vision",
         "description": "Eldon shares a fragment of his vision, sharpening an ally's mental acuity.",
         "ability_type": "spirit", "level": 2,
@@ -768,7 +768,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv3_unique_ability_faith_eldon_dawnseer_dawnsight_strike",
+        "id": "lv3_unique_ability_spirit_eldon_dawnseer_dawnsight_strike",
         "name": "Dawnsight Strike",
         "description": "Eldon channels the weight of a terrible vision into a single radiant lance that burns the target with prophetic light.",
         "ability_type": "spirit", "level": 3,
@@ -778,7 +778,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv4_unique_ability_faith_eldon_dawnseer_prophetic_vision",
+        "id": "lv4_unique_ability_spirit_eldon_dawnseer_prophetic_vision",
         "name": "Prophetic Vision",
         "description": "Eldon casts a fragment of his visions outward -- allies briefly glimpse the immediate future, gaining heightened awareness and elemental resistance.",
         "ability_type": "spirit", "level": 4,
@@ -888,7 +888,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
     # RYNN (lv60, faith/ISFJ)
     # -------------------------------------------------------------------------
     {
-        "id": "lv2_unique_ability_faith_rynn_field_dressing",
+        "id": "lv2_unique_ability_spirit_rynn_field_dressing",
         "name": "Field Dressing",
         "description": "Rynn patches wounds with quiet efficiency -- no fanfare, just care that works.",
         "ability_type": "spirit", "level": 2,
@@ -898,7 +898,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv3_unique_ability_faith_rynn_medics_blessing",
+        "id": "lv3_unique_ability_spirit_rynn_medics_blessing",
         "name": "Medic's Blessing",
         "description": "Rynn calls on every promise he made to every patient -- a broad blessing that steadies his entire team.",
         "ability_type": "spirit", "level": 3,
@@ -908,7 +908,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv3_unique_ability_faith_rynn_still_standing",
+        "id": "lv3_unique_ability_spirit_rynn_still_standing",
         "name": "Still Standing",
         "description": "Rynn steadies a fallen ally with the same quiet force he uses for everything -- reviving them with whatever it costs him.",
         "ability_type": "spirit", "level": 3,
@@ -918,7 +918,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv4_unique_ability_faith_rynn_field_mercy",
+        "id": "lv4_unique_ability_spirit_rynn_field_mercy",
         "name": "Field Mercy",
         "description": "Rynn channels quiet grief into care -- a broad healing wave that soothes every ally's wounds with the same steady patience he has carried for years.",
         "ability_type": "spirit", "level": 4,
@@ -1020,7 +1020,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
     # TALIA SOFTHEART (lv80, faith/ESFJ)
     # -------------------------------------------------------------------------
     {
-        "id": "lv2_unique_ability_faith_talon_tender_mend",
+        "id": "lv2_unique_ability_spirit_talon_tender_mend",
         "name": "Tender Mend",
         "description": "Talon lays his hands on an ally and heals with the warmth of someone who truly means it.",
         "ability_type": "spirit", "level": 2,
@@ -1030,7 +1030,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv3_unique_ability_faith_talon_needed_now",
+        "id": "lv3_unique_ability_spirit_talon_needed_now",
         "name": "Needed Now",
         "description": "Talon's deepest fear is not being there -- he pours that fear into a revive that refuses to let someone stay fallen.",
         "ability_type": "spirit", "level": 3,
@@ -1040,7 +1040,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv3_unique_ability_faith_talon_community_light",
+        "id": "lv3_unique_ability_spirit_talon_community_light",
         "name": "Community Light",
         "description": "Talon extends his warmth across the whole team -- a gentle healing wave that touches everyone he cares for.",
         "ability_type": "spirit", "level": 3,
@@ -1050,7 +1050,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv4_unique_ability_faith_talon_heartroot_restoration",
+        "id": "lv4_unique_ability_spirit_talon_heartroot_restoration",
         "name": "Heartroot Restoration",
         "description": "Talon lays both hands on a single ally and pours every ounce of himself into their recovery -- a deep, complete restoration.",
         "ability_type": "spirit", "level": 4,
@@ -1064,7 +1064,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
     # KORINA BRIGHTVEIN (lv85, faith/ENFJ)
     # -------------------------------------------------------------------------
     {
-        "id": "lv2_unique_ability_faith_alden_brightvein_rally_call",
+        "id": "lv2_unique_ability_spirit_alden_brightvein_rally_call",
         "name": "Rally Call",
         "description": "Alden raises his voice and every ally's resolve tightens around it.",
         "ability_type": "spirit", "level": 2,
@@ -1074,7 +1074,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv3_unique_ability_faith_alden_brightvein_inspired_defense",
+        "id": "lv3_unique_ability_spirit_alden_brightvein_inspired_defense",
         "name": "Inspired Defense",
         "description": "Alden's inspiration is structural -- a broad blessing that hardens his team's physical and elemental resilience.",
         "ability_type": "spirit", "level": 3,
@@ -1084,7 +1084,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv3_unique_ability_faith_alden_brightvein_leaders_mend",
+        "id": "lv3_unique_ability_spirit_alden_brightvein_leaders_mend",
         "name": "Leader's Mend",
         "description": "Alden heals by example -- a focused restorative burst that reminds a single ally they are not alone.",
         "ability_type": "spirit", "level": 3,
@@ -1094,7 +1094,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
         "non_player_ability": True,
     },
     {
-        "id": "lv4_unique_ability_faith_alden_brightvein_rallying_light",
+        "id": "lv4_unique_ability_spirit_alden_brightvein_rallying_light",
         "name": "Rallying Light",
         "description": "Alden raises his voice and the light answers -- a rousing divine cry that simultaneously fortifies every aspect of his allies' capability.",
         "ability_type": "spirit", "level": 4,

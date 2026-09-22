@@ -95,7 +95,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_ch17_halden_question',
+		'dialog_id': 'spirit_ch17_halden_question',
 		'dialog': [
 			"How can both be true?"
 		]
@@ -184,7 +184,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_ch17_another_contradiction',
+		'dialog_id': 'spirit_ch17_another_contradiction',
 		'dialog': [
 			"Another contradiction..."
 		]
@@ -220,7 +220,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_ch17_gargantuan_question',
+		'dialog_id': 'spirit_ch17_gargantuan_question',
 		'dialog': [
 			"How do you fight something that is both here and gone?"
 		]
@@ -298,7 +298,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_ch17_becoming_contradictions',
+		'dialog_id': 'spirit_ch17_becoming_contradictions',
 		'dialog': [
 			"Every step deeper into this feels like we're becoming more like the contradictions we fight."
 		]
@@ -375,14 +375,14 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_ch17_faithful_contradiction',
+		'dialog_id': 'spirit_ch17_faithful_contradiction',
 		'dialog': [
 			"(steady but pained) If we are contradictions, then let us choose to be faithful ones anyway."
 		]
 	},
 	{
 		'npc_id': 'crux',
-		'dialog_id': 'crux_ch17_faith_illusion',
+		'dialog_id': 'crux_ch17_spirit_illusion',
 		'dialog': [
 			"Faith is the first illusion we break. Your gods abandoned this place long ago, little priestess."
 		]
@@ -495,7 +495,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_ch17_echo_of_doubts',
+		'dialog_id': 'spirit_ch17_echo_of_doubts',
 		'dialog': [
 			"(softly) They were the echo of every doubt we've ever had..."
 		]
@@ -511,7 +511,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_ch17_trapped_moments',
+		'dialog_id': 'spirit_ch17_trapped_moments',
 		'dialog': [
 			"A place trapped between moments... still trying to exist despite everything."
 		]
@@ -576,7 +576,7 @@ TASKS = [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'scribe_halden', 'dialog_id': 'scribe_halden_ch17_first_contact' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch17_halden_question' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch17_halden_question' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'scribe_halden', 'dialog_id': 'scribe_halden_ch17_legend' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch17_fairy_tales' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch17_loves_paradox' }},
@@ -613,7 +613,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'mira', 'dialog_id': 'mira_ch17_greeting' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch17_puzzle_box_question' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'mira', 'dialog_id': 'mira_ch17_sends_to_mountains' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch17_another_contradiction' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch17_another_contradiction' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch17_delightfully_messy' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'mira', 'standing_text': ["Fancy meeting you here, I see you found the Bracelet of Existence."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch17_deliver_echofoil_nullglass_to_mira' }},
@@ -636,7 +636,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch17_gargantuan_entrance' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'displacer_gargantuan', 'dialog_id': 'displacer_gargantuan_ch17_intro' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch17_gargantuan_first' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch17_gargantuan_question' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch17_gargantuan_question' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch17_gargantuan_choose' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch17_confusing' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch17_between_states' }},
@@ -672,7 +672,7 @@ TASKS = [
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'mira', 'dialog_id': 'mira_ch17_gives_puzzle_box' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch17_back_to_vex' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch17_becoming_contradictions' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch17_becoming_contradictions' }},
 			{ 'event_type': 'remove_item', 'params': { 'item_id': 'echofoil_nullglass' }},
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'puzzle_box' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'mira', 'standing_text': ["Fancy meeting you here, I see you found the Bracelet of Existence."]}},
@@ -717,8 +717,8 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch17_architects' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch17_punch_next_week' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'paradox', 'dialog_id': 'paradox_ch17_both_true' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch17_faithful_contradiction' }},
-			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch17_faith_illusion' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch17_faithful_contradiction' }},
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch17_spirit_illusion' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch17_scream_paradox' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'paradox', 'dialog_id': 'paradox_ch17_chaos_hollow' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch17_unpredictable' }},
@@ -749,7 +749,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch17_fading' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch17_bosses_shatter' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch17_existential_fun' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch17_echo_of_doubts' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch17_echo_of_doubts' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch17_meet_scribe_halden_again' }}
 		]
 	},
@@ -761,7 +761,7 @@ TASKS = [
 		'task_acquire_events': [],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'scribe_halden', 'dialog_id': 'scribe_halden_ch17_returns' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch17_trapped_moments' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch17_trapped_moments' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'scribe_halden', 'dialog_id': 'scribe_halden_ch17_fragments' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch17_break_loop' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch17_fight_to_remember' }},

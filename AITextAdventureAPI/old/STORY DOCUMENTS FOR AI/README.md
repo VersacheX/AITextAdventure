@@ -695,7 +695,7 @@ Player characters react to events based on their personality types:
 # Faith (INFJ) - Spiritual, empathetic, idealistic
 {
     'npc_id': 'spirit',
-    'dialog_id': 'faith_ch5_after_velka',
+    'dialog_id': 'spirit_ch5_after_velka',
  'dialog': ["Then we must find someone who can cross storms without crossing the sea."]
 }
 

@@ -293,7 +293,7 @@ NPC_DIALOG += [
     # Type C – Find Eldon
     {
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_desert_mid_c_find_eldon',
+		'dialog_id': 'spirit_desert_mid_c_find_eldon',
 		'dialog': [
 			"She's seen this city erased a hundred times and still chooses to stay. That kind of quiet endurance is rarer than most people realize."
 		]
@@ -339,7 +339,7 @@ NPC_DIALOG += [
     # Type C – Earn Eldon
     {
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_desert_mid_c_earn_eldon',
+		'dialog_id': 'spirit_desert_mid_c_earn_eldon',
 		'dialog': [
 			"She saw us in every future that ends well. That's not a small thing to carry... or to be trusted with."
 		]
@@ -443,7 +443,7 @@ NPC_DIALOG += [
     },
     {
 		'npc_id': 'spirit',
-		'dialog_id': 'faith_desert_mid_d_defeat_ink_specter',
+		'dialog_id': 'spirit_desert_mid_d_defeat_ink_specter',
 		'dialog': [
 			"An identity that cannot be erased... that's a heavy gift to carry."
 		]
@@ -505,7 +505,7 @@ NPC_DIALOG += [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_desert_mid_b_defeat_zaruun',
+        'dialog_id': 'spirit_desert_mid_b_defeat_zaruun',
         'dialog': [
             "Some silences are earned. This one feels final."
         ]
@@ -538,7 +538,7 @@ TASKS += [
 					'dialog_id': 'eldon_c_first_meet'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',  'dialog_id': 'faith_desert_mid_c_find_eldon'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',  'dialog_id': 'spirit_desert_mid_c_find_eldon'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_desert_mid_c_find_eldon' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_desert_mid_c_find_eldon' } },
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'eldon_dawnseer', 'standing_text': ["The visions brought me here.", "Fragments — ink dissolving, names going dark one by one.", "I have seen this city erased a hundred times in possible futures.", "I stay to understand why it keeps surviving."] } },
@@ -595,7 +595,7 @@ TASKS += [
 					'dialog_id': 'eldon_c_joins'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',  'dialog_id': 'faith_desert_mid_c_earn_eldon'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',  'dialog_id': 'spirit_desert_mid_c_earn_eldon'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_desert_mid_c_earn_eldon'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_desert_mid_c_earn_eldon' } },
 			{
@@ -809,7 +809,7 @@ TASKS += [
 				}
 			},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_mid_d_defeat_ink_specter' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',     'dialog_id': 'faith_desert_mid_d_defeat_ink_specter'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',     'dialog_id': 'spirit_desert_mid_d_defeat_ink_specter'     } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_desert_mid_d_defeat_ink_specter'   } },
 			{
 				'event_type': 'set_npc_standing_text',
@@ -953,7 +953,7 @@ TASKS += [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'zaruun', 'dialog_id': 'zaruun_b_defeated' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_b_victory' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_desert_mid_b_defeat_zaruun' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_desert_mid_b_defeat_zaruun' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_desert_mid_b_defeat_zaruun' } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'desert' }},
 		]
 	}

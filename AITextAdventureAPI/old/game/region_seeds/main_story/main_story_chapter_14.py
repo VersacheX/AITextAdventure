@@ -199,7 +199,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch14_trapped',
+        'dialog_id': 'spirit_ch14_trapped',
         'dialog': [
             "You see this as a performance? These people seem trapped."
         ]
@@ -236,7 +236,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch14_breaks_something',
+        'dialog_id': 'spirit_ch14_breaks_something',
         'dialog': [
             "(gently) Forcing people to pick a side like this… it breaks something inside them."
         ]
@@ -265,7 +265,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch14_stand_whole',
+        'dialog_id': 'spirit_ch14_stand_whole',
         'dialog': [
             "It takes strength to stand whole when the world demands you fracture."
         ]
@@ -328,7 +328,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch14_tyranny',
+        'dialog_id': 'spirit_ch14_tyranny',
         'dialog': [
             "(calm but firm) Forcing people into one shape is not unity. It is tyranny wearing a mask of order."
         ]
@@ -382,7 +382,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch14_who_are_you',
+        'dialog_id': 'spirit_ch14_who_are_you',
         'dialog': [
             "(wary but polite) Who are you?"
         ]
@@ -420,7 +420,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch14_prove_a_point',
+        'dialog_id': 'spirit_ch14_prove_a_point',
         'dialog': [
             "You want us to fly to another city just to prove a point?"
         ]
@@ -462,7 +462,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch14_no_better',
+        'dialog_id': 'spirit_ch14_no_better',
         'dialog': [
             "(frowning) You're saying she's no better than Edict?"
         ]
@@ -514,7 +514,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch14_another_manipulator',
+        'dialog_id': 'spirit_ch14_another_manipulator',
         'dialog': [
             "(voice heavy) We saw fear wearing a mask of perfection. But we also saw something else."
         ]
@@ -616,7 +616,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'faith_ch14_stigma_aftermath',
+        'dialog_id': 'spirit_ch14_stigma_aftermath',
         'dialog': [
             "She wasn’t saving anyone. She was collecting broken people... and making them more broken. Turning their pain into chains she could hold.",
             "I wanted to believe someone could offer real belonging in all this chaos... but not like that."
@@ -725,7 +725,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'tess', 'dialog_id': 'tess_ch14_intro'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'sam', 'dialog_id': 'sam_ch14_intro'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'tess', 'dialog_id': 'tess_ch14_performance'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'faith_ch14_trapped'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch14_trapped'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'tess', 'dialog_id': 'tess_ch14_best_traps'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'sam', 'dialog_id': 'sam_ch14_ravel_opportunity'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch14_poke_system'}},
@@ -742,11 +742,11 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'ravel', 'dialog_id': 'ravel_ch14_intro'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'faith_ch14_breaks_something'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch14_breaks_something'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch14_false_dichotomy'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch14_social_control'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'ravel', 'dialog_id': 'ravel_ch14_hate_me'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'faith_ch14_stand_whole'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch14_stand_whole'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren', 'dialog_id': 'lyren_ch14_broken_version'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'ravel', 'dialog_id': 'ravel_ch14_hask_stigma'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'tess', 'dialog_id': 'tess_ch14_beautiful_grift'}},
@@ -767,7 +767,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'hask', 'dialog_id': 'hask_ch14_intro'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch14_put_together'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'hask', 'dialog_id': 'hask_ch14_error_cleansed'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'faith_ch14_tyranny'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch14_tyranny'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'skill', 'dialog_id': 'skill_ch14_dust'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch14_terrified_of_real'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch14_brittle'}},
@@ -787,12 +787,12 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'stigma', 'dialog_id': 'stigma_ch14_intro'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'faith_ch14_who_are_you'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch14_who_are_you'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'stigma', 'dialog_id': 'stigma_ch14_family'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch14_cult_leader'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch14_how_exactly'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'stigma', 'dialog_id': 'stigma_ch14_tidekin_cove'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'faith_ch14_prove_a_point'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch14_prove_a_point'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'stigma', 'dialog_id': 'stigma_ch14_the_abyss'}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'stigma', 'standing_text': ["Hailward Hold is a test. See the lies, and then we can talk about the truth."]}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'ravel', 'standing_text': ["Stigma... she's offering belonging. But at what cost?"]}},
@@ -814,7 +814,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'caius', 'dialog_id': 'caius_ch14_intro'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch14_nightmare'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'caius', 'dialog_id': 'caius_ch14_stigma_worse'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'faith_ch14_no_better'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch14_no_better'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'caius', 'dialog_id': 'caius_ch14_demands_soul'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch14_played'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch14_manipulator'}},
@@ -838,7 +838,7 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'stigma', 'dialog_id': 'stigma_ch14_return'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'faith_ch14_another_manipulator'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch14_another_manipulator'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch14_another_manipulator'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch14_control'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'stigma', 'dialog_id': 'stigma_ch14_belonging'}},
@@ -864,7 +864,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': None, 'dialog_id': 'narrator_ch14_stigma_defeat'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'stigma', 'dialog_id': 'stigma_ch14_defeat'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': None, 'dialog_id': 'narrator_ch14_aftermath'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'faith_ch14_stigma_aftermath'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch14_stigma_aftermath'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch14_stigma_aftermath'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch14_stigma_aftermath'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch14_stigma_aftermath'}},

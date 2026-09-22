@@ -125,7 +125,7 @@ SEEDS_LV1TO10 = [
 
  {"id": "swamp_cultist", "name": "Lily-Cultist", "hostile_type": "humanoid", "role": "support", "min_spawn_level":5, "rarity": "rare", "base_xp":78,
  "common_drop": "herb_major", "rare_drop": "short_sword", "money_range": (22,80),
- "basic_attack": "casts a bog bolt", "strong_attack": "bone-lotus spear", "player_abilities":[ "light_faith_lv1_minor_heal", "level_1_hostile_ability_arcane_blast", "level_1_hostile_ability_bone_spear" ],
+ "basic_attack": "casts a bog bolt", "strong_attack": "bone-lotus spear", "player_abilities":[ "light_spirit_lv1_minor_heal", "level_1_hostile_ability_arcane_blast", "level_1_hostile_ability_bone_spear" ],
  "base_str":1, "base_dex":2, "base_con":2, "base_int":4, "base_hp":12, "base_ap":6, "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":2},
 
  # Level6

@@ -676,10 +676,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 140,
         'level': 40,
         'abilities': [
-            'lv2_unique_ability_faith_eldon_dawnseer_seer_shield',
-            'lv2_unique_ability_faith_eldon_dawnseer_fragment_vision',
-            'lv3_unique_ability_faith_eldon_dawnseer_dawnsight_strike',
-            'lv4_unique_ability_faith_eldon_dawnseer_prophetic_vision',
+            'lv2_unique_ability_spirit_eldon_dawnseer_seer_shield',
+            'lv2_unique_ability_spirit_eldon_dawnseer_fragment_vision',
+            'lv3_unique_ability_spirit_eldon_dawnseer_dawnsight_strike',
+            'lv4_unique_ability_spirit_eldon_dawnseer_prophetic_vision',
         ]
     },
 
@@ -766,10 +766,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 200,
         'level': 60,
         'abilities': [
-            'lv2_unique_ability_faith_rynn_field_dressing',
-            'lv3_unique_ability_faith_rynn_medics_blessing',
-            'lv3_unique_ability_faith_rynn_still_standing',
-            'lv4_unique_ability_faith_rynn_field_mercy',
+            'lv2_unique_ability_spirit_rynn_field_dressing',
+            'lv3_unique_ability_spirit_rynn_medics_blessing',
+            'lv3_unique_ability_spirit_rynn_still_standing',
+            'lv4_unique_ability_spirit_rynn_field_mercy',
         ]
     },
 
@@ -856,10 +856,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 270,
         'level': 80,
         'abilities': [
-            'lv2_unique_ability_faith_talon_tender_mend',
-            'lv3_unique_ability_faith_talon_needed_now',
-            'lv3_unique_ability_faith_talon_community_light',
-            'lv4_unique_ability_faith_talon_heartroot_restoration',
+            'lv2_unique_ability_spirit_talon_tender_mend',
+            'lv3_unique_ability_spirit_talon_needed_now',
+            'lv3_unique_ability_spirit_talon_community_light',
+            'lv4_unique_ability_spirit_talon_heartroot_restoration',
         ]
     },
 
@@ -886,10 +886,10 @@ EXTENDED_CHARACTERS = [
         'intelligence': 286,
         'level': 85,
         'abilities': [
-            'lv2_unique_ability_faith_alden_brightvein_rally_call',
-            'lv3_unique_ability_faith_alden_brightvein_inspired_defense',
-            'lv3_unique_ability_faith_alden_brightvein_leaders_mend',
-            'lv4_unique_ability_faith_alden_brightvein_rallying_light',
+            'lv2_unique_ability_spirit_alden_brightvein_rally_call',
+            'lv3_unique_ability_spirit_alden_brightvein_inspired_defense',
+            'lv3_unique_ability_spirit_alden_brightvein_leaders_mend',
+            'lv4_unique_ability_spirit_alden_brightvein_rallying_light',
         ]
     },
 

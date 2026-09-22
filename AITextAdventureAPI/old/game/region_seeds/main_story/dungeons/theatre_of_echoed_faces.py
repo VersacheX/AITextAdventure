@@ -38,7 +38,7 @@ HOSTILE_SEEDS = [
     {
         'id': 'glamour_weaver', 'name': 'Glamour Weaver', 'hostile_type': 'humanoid', 'min_spawn_level': 41, 'role': 'hazard', 'rarity': 'rare',
         'base_xp': 500, 'common_drop': 'stimulant_large', 'rare_drop': 'tome_int', 'money_range': (80, 150),
-        'basic_attack': 'mesmerizing glance', 'strong_attack': 'shattering image', 'player_abilities': ['light_faith_lv1_convert'],
+        'basic_attack': 'mesmerizing glance', 'strong_attack': 'shattering image', 'player_abilities': ['light_spirit_lv1_convert'],
         'base_str': 18, 'base_dex': 24, 'base_con': 19, 'base_int': 28, 'base_hp': 1000, 'base_ap': 70,
         'str_per_level': 2, 'dex_per_level': 3, 'con_per_level': 2, 'int_per_level': 4,
         'resistances': ['light'], 'immunities': [], 'weaknesses': ['dark']
@@ -46,7 +46,7 @@ HOSTILE_SEEDS = [
     {
         'id': 'attention_devourer', 'name': 'Attention Devourer', 'hostile_type': 'aberration', 'min_spawn_level': 42, 'role': 'damage', 'rarity': 'superrare',
         'base_xp': 700, 'common_drop': 'panacea', 'rare_drop': 'tome_int_superrare', 'money_range': (150, 300),
-        'basic_attack': 'focus drain', 'strong_attack': 'ego shatter', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
+        'basic_attack': 'focus drain', 'strong_attack': 'ego shatter', 'player_abilities': ['dark_spirit_lv1_shade_whisper'],
         'base_str': 20, 'base_dex': 20, 'base_con': 25, 'base_int': 30, 'base_hp': 1500, 'base_ap': 80,
         'str_per_level': 2, 'dex_per_level': 2, 'con_per_level': 3, 'int_per_level': 4,
         'resistances': ['dark', 'ice'], 'immunities': ['silence'], 'weaknesses': ['fire']

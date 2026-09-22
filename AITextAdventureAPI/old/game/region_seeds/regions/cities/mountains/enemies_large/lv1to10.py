@@ -87,7 +87,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "weldling", "name": "Weldling", "hostile_type": "humanoid", "role": "support", "min_spawn_level":4, "rarity": "uncommon", "base_xp":36,
  "common_drop": "stimulant_small", "rare_drop": "cloth_gloves", "money_range": (5,22),
- "basic_attack": "sparks a strike", "strong_attack": "molten swing", "player_abilities": ["level_1_hostile_ability_fire_faith_ember_shield"],
+ "basic_attack": "sparks a strike", "strong_attack": "molten swing", "player_abilities": ["level_1_hostile_ability_fire_spirit_ember_shield"],
  "base_str":4, "base_dex":3, "base_con":4, "base_int":2, "base_hp":26, "base_ap":4,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":1},
 

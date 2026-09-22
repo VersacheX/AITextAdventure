@@ -70,7 +70,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==16
  {"id": "elder_revenant_small", "name": "Elder Revenant", "hostile_type": "undead", "role": "hazard", "min_spawn_level":16, "rarity": "superrare", "base_xp":420,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (120,480),
- "basic_attack": "regal claw", "strong_attack": "necrotic wave", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "regal claw", "strong_attack": "necrotic wave", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":9, "base_dex":6, "base_con":10, "base_int":8, "base_hp":320, "base_ap":10,
  "str_per_level":4, "dex_per_level":2, "con_per_level":3, "int_per_level":3},
 
@@ -102,7 +102,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "lumen_guard_small", "name": "Lumen Guard", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":18, "rarity": "uncommon", "base_xp":320,
  "common_drop": "stimulant_med", "rare_drop": None, "money_range": (110,420),
- "basic_attack": "gleam strike", "strong_attack": "luminary volley", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst"],
+ "basic_attack": "gleam strike", "strong_attack": "luminary volley", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst"],
  "base_str":9, "base_dex":8, "base_con":9, "base_int":6, "base_hp":320, "base_ap":10,
  "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":2},
 

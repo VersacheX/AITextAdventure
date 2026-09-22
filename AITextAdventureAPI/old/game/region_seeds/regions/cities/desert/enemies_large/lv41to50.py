@@ -89,7 +89,7 @@ RANDOM_HOSTILE_SEEDS = [
  {"id": "golden_cult_zealot", "name": "Golden Cult Zealot", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level": 47, "rarity": "uncommon", "base_xp": 1000,
   "common_drop": "tome_int", "rare_drop": "stimulant_large", "money_range": (160, 520),
   "basic_attack": "blessed strike", "strong_attack": "golden wrath",
-  "player_abilities": ["light_faith_lv1_convert", "fire_light_magic_lv2_solar_spike"],
+  "player_abilities": ["light_spirit_lv1_convert", "fire_light_magic_lv2_solar_spike"],
   "base_str": 14, "base_dex": 10, "base_con": 16, "base_int": 26, "base_hp": 680, "base_ap": 22,
   "str_per_level": 2, "dex_per_level": 1, "con_per_level": 3, "int_per_level": 6},
 
