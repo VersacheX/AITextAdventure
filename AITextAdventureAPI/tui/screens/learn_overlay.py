@@ -7,7 +7,7 @@ then selects one to add to their known abilities. Each learned ability
 consumes one unused_ability_slot.
 
 The console version uses arrow keys for navigation, +/- for ability type
-filtering (all/magic/tech/skill/faith/technique), and Enter to learn. The
+filtering (all/magic/tech/skill/spirit/technique), and Enter to learn. The
 TUI mirrors this with a scrollable list, filter buttons, and a Learn button.
 
 Stat requirements are enforced via `get_potential_player_abilities()` from
@@ -174,7 +174,7 @@ class LearnOverlay(Static):
                         yield Button("Magic", id="filter-magic", variant="default")
                         yield Button("Tech", id="filter-tech", variant="default")
                         yield Button("Skill", id="filter-skill", variant="default")
-                        yield Button("Faith", id="filter-faith", variant="default")
+                        yield Button("Spirit", id="filter-spirit", variant="default")
                         yield Button("Technique", id="filter-technique", variant="default")
 
                     # Ability list

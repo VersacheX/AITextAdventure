@@ -168,7 +168,7 @@ WEAPONS_LV51_65 = [
         "constitution": 14,
         "elements": ["earth"]
     },
-    # uncommon / faith — lv58
+    # uncommon / spirit — lv58
     {
         "id": "restoration_crook",
         "name": "Restoration Crook",

@@ -429,11 +429,11 @@ Defined in `level_2_abilities_by_type/`.
 
 | ID | Type | Effect | Elements |
 |---|---|---|---|
-| `lv2_hostile_ability_dark_dark_spirit_void_veil` | faith | `elemental_debuff` | dark/dark |
-| `lv2_hostile_ability_air_water_spirit_gale_of_silence` | faith | `silence` | air/water |
-| `lv2_hostile_ability_water_light_fae_glimmer` | faith | `confuse` | water/light |
-| `lv2_hostile_ability_dark_light_spirit_calm_bleat` | faith | heal | dark/light |
-| `lv2_hostile_ability_earth_air_spirit_thornbind` | faith | status | earth/air |
+| `lv2_hostile_ability_dark_dark_spirit_void_veil` | spirit | `elemental_debuff` | dark/dark |
+| `lv2_hostile_ability_air_water_spirit_gale_of_silence` | spirit | `silence` | air/water |
+| `lv2_hostile_ability_water_light_fae_glimmer` | spirit | `confuse` | water/light |
+| `lv2_hostile_ability_dark_light_spirit_calm_bleat` | spirit | heal | dark/light |
+| `lv2_hostile_ability_earth_air_spirit_thornbind` | spirit | status | earth/air |
 | `lv2_hostile_ability_fire_earth_magic_pyroclasm` | magic | damage | fire/earth |
 | `lv2_hostile_ability_dark_electric_magic_abyssal_storm` | magic | damage | dark/electric |
 | `lv2_hostile_ability_water_electric_magic_maelstrom_burst` | magic | damage | water/electric |

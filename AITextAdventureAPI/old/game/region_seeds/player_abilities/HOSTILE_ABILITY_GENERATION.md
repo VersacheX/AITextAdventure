@@ -28,7 +28,7 @@ From `ability_requirements.py`:
 | `ability_type` | Primary stats | Combat role | Typical effects |
 |---|---|---|---|
 | `technique` | `strength`, `constitution` | Physical attack / defense | damage, status debuffs (physical), strength/constitution buffs |
-| `faith` | `intelligence`, `constitution` | Spiritual attack / defence, healing, debuff | heal, revive, cure, status, damage |
+| `spirit` | `intelligence`, `constitution` | Spiritual attack / defence, healing, debuff | heal, revive, cure, status, damage |
 | `magic` | `intelligence` | Magical offense, DoT, debuffs | damage, status (elemental\_debuff, continuous\_damage) |
 | `tech` | `intelligence`, `dexterity` | Tech offense, scan, debuffs | damage, status (scanned, silence, debuffs) |
 | `skill` | `dexterity` | Speed, crit, evasion, burst | damage (often AoE), status (attack\_buff, dexterity\_buff) |
@@ -69,7 +69,7 @@ petrify   stun   sleep   confuse   silence   scanned
     "id":           str,   # snake_case; see naming convention below
     "name":         str,   # human-readable display name
     "description":  str,   # flavour text, 1–2 sentences
-    "ability_type": str,   # one of: technique | faith | magic | tech | skill
+    "ability_type": str,   # one of: technique | spirit | magic | tech | skill
     "level":        int,   # 1–5 currently supported
     "elements":    [str],  # exactly N elements where N == ability level; duplicates allowed (e.g. ["fire","fire","water"] for level 3) 
     "base_power":   int,   # see power ranges per level below
@@ -125,7 +125,7 @@ old/game/region_seeds/player_abilities/
 ├── level_5_abilities.py
 ├── level_1_abilities_by_type/
 │   ├── __init__.py
-│   ├── technique.py  faith.py  magic.py  tech.py  skill.py
+│   ├── technique.py  spirit.py  magic.py  tech.py  skill.py
 ├── level_2_abilities_by_type/ ...   (same structure)
 ├── level_3_abilities_by_type/ ...
 ├── level_4_abilities_by_type/ ...
@@ -143,14 +143,14 @@ LEVEL_X_TECHNIQUE_ABILITY_SEEDS = [
 
 ### Creating / updating the `__init__.py`
 # level_X_abilities_by_type/__init__.py
-from game.region_seeds.player_abilities.level_X_abilities_by_type.faith     import LEVEL_X_FAITH_ABILITY_SEEDS
+from game.region_seeds.player_abilities.level_X_abilities_by_type.spirit     import LEVEL_X_SPIRIT_ABILITY_SEEDS
 from game.region_seeds.player_abilities.level_X_abilities_by_type.magic     import LEVEL_X_MAGIC_ABILITY_SEEDS
 from game.region_seeds.player_abilities.level_X_abilities_by_type.skill     import LEVEL_X_SKILL_ABILITY_SEEDS
 from game.region_seeds.player_abilities.level_X_abilities_by_type.technique import LEVEL_X_TECHNIQUE_ABILITY_SEEDS
 from game.region_seeds.player_abilities.level_X_abilities_by_type.tech      import LEVEL_X_TECH_ABILITY_SEEDS
 
 __all__ = [
-    "LEVEL_X_FAITH_ABILITY_SEEDS",
+    "LEVEL_X_SPIRIT_ABILITY_SEEDS",
     "LEVEL_X_MAGIC_ABILITY_SEEDS",
     "LEVEL_X_SKILL_ABILITY_SEEDS",
     "LEVEL_X_TECHNIQUE_ABILITY_SEEDS",
@@ -160,14 +160,14 @@ __all__ = [
 ### Wiring into the top-level file
 # level_X_abilities.py
 from game.region_seeds.player_abilities.level_X_abilities_by_type import (
-    LEVEL_X_FAITH_ABILITY_SEEDS, LEVEL_X_MAGIC_ABILITY_SEEDS,
+    LEVEL_X_SPIRIT_ABILITY_SEEDS, LEVEL_X_MAGIC_ABILITY_SEEDS,
     LEVEL_X_SKILL_ABILITY_SEEDS, LEVEL_X_TECHNIQUE_ABILITY_SEEDS,
     LEVEL_X_TECH_ABILITY_SEEDS,
 )
 
 LEVEL_X_PLAYER_ABILITY_SEEDS = []
 LEVEL_X_PLAYER_ABILITY_SEEDS.extend(LEVEL_X_TECHNIQUE_ABILITY_SEEDS)
-LEVEL_X_PLAYER_ABILITY_SEEDS.extend(LEVEL_X_FAITH_ABILITY_SEEDS)
+LEVEL_X_PLAYER_ABILITY_SEEDS.extend(LEVEL_X_SPIRIT_ABILITY_SEEDS)
 LEVEL_X_PLAYER_ABILITY_SEEDS.extend(LEVEL_X_MAGIC_ABILITY_SEEDS)
 LEVEL_X_PLAYER_ABILITY_SEEDS.extend(LEVEL_X_TECH_ABILITY_SEEDS)
 LEVEL_X_PLAYER_ABILITY_SEEDS.extend(LEVEL_X_SKILL_ABILITY_SEEDS)
@@ -192,7 +192,7 @@ Derived from inline comments in the existing level modules.
 | 5 | exactly 5 | One ability per type per 5-element combination; duplicates allowed |
 
 For each combination there must be **one representative of each ability type**:
-`technique`, `faith`, `magic`, `tech`, `skill`.
+`technique`, `spirit`, `magic`, `tech`, `skill`.
 
 ---
 
@@ -223,16 +223,16 @@ For named hostiles (bosses / story NPCs) referenced in the error table:
 
    | Hostile `role` | Engine priority order | Recommended ability types |
    |---|---|---|
-   | `support` | support buffs → hazard status → damage | `faith` (heals, buffs, revives), then `tech`/`skill` |
-   | `hazard` | hazard status first, then damage | `faith` or `magic` for harmful status effects (`continuous_damage`, `confuse`, `sleep`, `silence`, `*_debuff`); NOT `technique` or `skill` |
+   | `support` | support buffs → hazard status → damage | `spirit` (heals, buffs, revives), then `tech`/`skill` |
+   | `hazard` | hazard status first, then damage | `spirit` or `magic` for harmful status effects (`continuous_damage`, `confuse`, `sleep`, `silence`, `*_debuff`); NOT `technique` or `skill` |
    | `damage` | damage first, then filler | `technique` (physical), `magic` (elemental), `tech` (precision), `skill` (burst/AoE) |
-   | `tank` / `guardian` | hazard → damage | `technique` with constitution emphasis; `faith` for defense buffs |
+   | `tank` / `guardian` | hazard → damage | `technique` with constitution emphasis; `spirit` for defense buffs |
    | `debuffer` / `assassin` | hazard → damage | `skill` or `tech` for debuffs and status |
 
    > **Key rule**: `hazard`-role hostiles use **harmful status effects** as their primary
    > combat tool. The engine selects `effect == "status"` abilities with a `status_key` in
    > `HARMFUL_STATUS_EFFECTS` before damage abilities. Author their abilities accordingly —
-   > `faith` and `magic` (which map to `intelligence`) are the correct types for a
+   > `spirit` and `magic` (which map to `intelligence`) are the correct types for a
    > psychologically-themed hazard boss (e.g. Lament, Garbage). Using `technique` or `skill`
    > for a `hazard` hostile means the engine will deprioritise those abilities in favour of
    > any available status ability — give them what the engine will actually reach for first.
@@ -288,7 +288,7 @@ Supply the hostile's name, dungeon, region, and NPC data when generating hostile
 Before committing new ability seeds, verify:
 
 - [ ] `id` is unique across **all** entries in `PLAYER_ABILITY_SEEDS`
-- [ ] `ability_type` is one of: `technique`, `faith`, `magic`, `tech`, `skill`
+- [ ] `ability_type` is one of: `technique`, `spirit`, `magic`, `tech`, `skill`
 - [ ] Every entry in `elements` is a key of `ELEMENTAL_CHAR_KEYS`
 - [ ] Every entry in `status_keys` is a key of `STATUS_EFFECTS`
 - [ ] `status_keys` is present (and non-empty) when `effect == "status"`
@@ -337,9 +337,9 @@ the hostile can teach the ability to the player.
 | `cold_execution` | Scalpel / Scalpel's Projection | Bloodspark Arena / Theatre of Echoed Faces | BioHazard / Nightveil Spire | technique |
 | `perfect_cut` | Scalpel | Bloodspark Arena | BioHazard | technique / skill |
 | `detached_slaughter` | Scalpel | Bloodspark Arena | BioHazard | technique |
-| `radiant_lie` | Glamour | Bloodspark Arena | BioHazard | faith / magic |
-| `beauty_as_weapon` | Glamour | Bloodspark Arena | BioHazard | skill / faith |
-| `suffocating_allure` | Glamour | Bloodspark Arena | BioHazard | faith |
+| `radiant_lie` | Glamour | Bloodspark Arena | BioHazard | spirit / magic |
+| `beauty_as_weapon` | Glamour | Bloodspark Arena | BioHazard | skill / spirit |
+| `suffocating_allure` | Glamour | Bloodspark Arena | BioHazard | spirit |
 | `blood_spectacle` | Rapture | Festival of Delight | Blackwake Bay | technique / skill |
 | `thrill_of_ruin` | Rapture | Festival of Delight | Blackwake Bay | technique |
 | `seizing_the_moment` | Rapture | Festival of Delight | Blackwake Bay | skill |
@@ -348,46 +348,46 @@ the hostile can teach the ability to the player.
 | `wild_possibility` | Revelry | Festival of Delight | Blackwake Bay | magic / tech |
 | `absolute_disgust` | Garbage | Grand Mausoleum | The Necropolis | magic / tech |
 | `distortion_of_reality` | Garbage | Grand Mausoleum | The Necropolis | magic |
-| `the_epic_you_never_were` | Garbage | Grand Mausoleum | The Necropolis | faith / magic |
-| `endless_tragedy` | Lament | Grand Mausoleum | The Necropolis | faith / magic |
+| `the_epic_you_never_were` | Garbage | Grand Mausoleum | The Necropolis | spirit / magic |
+| `endless_tragedy` | Lament | Grand Mausoleum | The Necropolis | spirit / magic |
 | `collapse_of_self` | Lament | Grand Mausoleum | The Necropolis | magic |
 | `singularity_of_grief` | Lament | Grand Mausoleum | The Necropolis | magic |
 | `void_refraction` | Stigma | The Citadel / Overworld | Hailward Hold | magic / dark |
 | `the_darkness_consuming` | Stigma | The Citadel / Overworld | Hailward Hold | magic |
-| `you_can_be_me` | Stigma | The Citadel / Overworld | Hailward Hold | faith / magic |
-| `mask_of_expectation` | Pageant | The Velvet Veil / The Citadel | Hailward Hold | faith / skill |
-| `crushing_reputation` | Pageant | The Velvet Veil / The Citadel | Hailward Hold | technique / faith |
-| `obligation_chain` | Pageant | The Velvet Veil / The Citadel | Hailward Hold | faith |
-| `ancient_rule` | Edict | The Citadel | Hailward Hold | faith / technique |
-| `inescapable_edict` | Edict | The Citadel | Hailward Hold | faith |
-| `ritual_punishment` | Edict | The Citadel | Hailward Hold | technique / faith |
+| `you_can_be_me` | Stigma | The Citadel / Overworld | Hailward Hold | spirit / magic |
+| `mask_of_expectation` | Pageant | The Velvet Veil / The Citadel | Hailward Hold | spirit / skill |
+| `crushing_reputation` | Pageant | The Velvet Veil / The Citadel | Hailward Hold | technique / spirit |
+| `obligation_chain` | Pageant | The Velvet Veil / The Citadel | Hailward Hold | spirit |
+| `ancient_rule` | Edict | The Citadel | Hailward Hold | spirit / technique |
+| `inescapable_edict` | Edict | The Citadel | Hailward Hold | spirit |
+| `ritual_punishment` | Edict | The Citadel | Hailward Hold | technique / spirit |
 | `impossibility_storm` | Crux / Crux - Origin Form | Punishment Engines / Origin Spire | Gallows Rift / Thornshade Hamlet | magic / tech |
-| `debuff_the_wicked` | Crux | Punishment Engines | Gallows Rift | tech / faith |
+| `debuff_the_wicked` | Crux | Punishment Engines | Gallows Rift | tech / spirit |
 | `demonic_fury` | Paradox | Punishment Engines | Gallows Rift | technique / magic |
 | `infuriating_revelation` | Paradox | Punishment Engines | Gallows Rift | magic |
-| `they_arent_who_you_are` | Paradox | Punishment Engines | Gallows Rift | faith / magic |
+| `they_arent_who_you_are` | Paradox | Punishment Engines | Gallows Rift | spirit / magic |
 | `absolute_destruction` | Cataclysm | Collapsing Spire | Aurelion Veil | magic / technique |
 | `calamity` | Cataclysm | Collapsing Spire | Aurelion Veil | magic |
-| `eternal_nerve` | Cataclysm | Collapsing Spire | Aurelion Veil | technique / faith |
+| `eternal_nerve` | Cataclysm | Collapsing Spire | Aurelion Veil | technique / spirit |
 | `inevitability_matrix` | Dominion | Overworld | — | tech / magic |
-| `inescapable_fate` | Dominion | Overworld | — | faith / magic |
+| `inescapable_fate` | Dominion | Overworld | — | spirit / magic |
 | `void_lattice` | Dominion | Overworld | — | magic / tech |
 | `eternal_void` | Void | Overworld | — | magic |
-| `absolution` | Void | Overworld | — | faith |
+| `absolution` | Void | Overworld | — | spirit |
 | `unfinity` | Void | Overworld | — | magic |
 | `contradiction_loop` | Crux Trial / Paradox Trial | The System of Compliance / Sensation | Hollerforge Hollow | tech / magic |
 | `simulated_truth` | Crux Trial | The System of Compliance | Hollerforge Hollow | tech |
 | `objective_elimination` | Crux Trial | The System of Compliance | Hollerforge Hollow | technique / tech |
-| `system_lockdown` | Edict Trial | The System of Compliance | Hollerforge Hollow | tech / faith |
-| `rule_enforcement` | Edict Trial | The System of Compliance | Hollerforge Hollow | technique / faith |
-| `procedural_inevitability` | Edict Trial | The System of Compliance | Hollerforge Hollow | faith |
-| `certainty_field` | Glamour Trial | The System of Compliance | Hollerforge Hollow | magic / faith |
-| `doubt_erasure` | Glamour Trial | The System of Compliance | Hollerforge Hollow | faith |
-| `calm_enforcement` | Glamour Trial | The System of Compliance | Hollerforge Hollow | faith / tech |
+| `system_lockdown` | Edict Trial | The System of Compliance | Hollerforge Hollow | tech / spirit |
+| `rule_enforcement` | Edict Trial | The System of Compliance | Hollerforge Hollow | technique / spirit |
+| `procedural_inevitability` | Edict Trial | The System of Compliance | Hollerforge Hollow | spirit |
+| `certainty_field` | Glamour Trial | The System of Compliance | Hollerforge Hollow | magic / spirit |
+| `doubt_erasure` | Glamour Trial | The System of Compliance | Hollerforge Hollow | spirit |
+| `calm_enforcement` | Glamour Trial | The System of Compliance | Hollerforge Hollow | spirit / tech |
 | `adrenaline_surge` | Rapture Trial | The System of Identity | Hollerforge Hollow | skill / technique |
 | `reckless_abandon` | Rapture Trial | The System of Identity | Hollerforge Hollow | skill |
 | `thrill_addiction` | Rapture Trial | The System of Identity | Hollerforge Hollow | skill / magic |
-| `crushing_despair` | Lament Trial | The System of Sensation | Hollerforge Hollow | magic / faith |
+| `crushing_despair` | Lament Trial | The System of Sensation | Hollerforge Hollow | magic / spirit |
 | `hollow_silence` | Lament Trial | The System of Sensation | Hollerforge Hollow | magic |
 | `the_emptiness` | Lament Trial | The System of Sensation | Hollerforge Hollow | magic |
 | `impossible_truth` | Paradox Trial | The System of Sensation | Hollerforge Hollow | magic / tech |
@@ -397,16 +397,16 @@ the hostile can teach the ability to the player.
 | `the_rush` | Revelry Trial | The System of Sensation | Hollerforge Hollow | skill |
 | `intrusive_truth` | Garbage Trial | The System of Perception | Hollerforge Hollow | magic / tech |
 | `self_sabotage` | Garbage Trial | The System of Perception | Hollerforge Hollow | magic |
-| `unwanted_knowing` | Garbage Trial | The System of Perception | Hollerforge Hollow | faith / magic |
-| `inescapable_prophecy` | Oracle / Oracle Trial | The System of Perception / Memory Museum | Hollerforge Hollow / Bayou Nocturne | faith / magic |
-| `vision_of_ruin` | Oracle | Memory Museum | Bayou Nocturne | magic / faith |
-| `fate_lock` | Oracle | Memory Museum | Bayou Nocturne | faith |
-| `eternal_wound` | Reliquary | Memory Museum / The System of Memory | Bayou Nocturne / Hollerforge Hollow | faith / technique |
-| `memory_of_suffering` | Reliquary | Memory Museum | Bayou Nocturne | faith / magic |
-| `burden_of_the_lost` | Reliquary | Memory Museum | Bayou Nocturne | faith |
+| `unwanted_knowing` | Garbage Trial | The System of Perception | Hollerforge Hollow | spirit / magic |
+| `inescapable_prophecy` | Oracle / Oracle Trial | The System of Perception / Memory Museum | Hollerforge Hollow / Bayou Nocturne | spirit / magic |
+| `vision_of_ruin` | Oracle | Memory Museum | Bayou Nocturne | magic / spirit |
+| `fate_lock` | Oracle | Memory Museum | Bayou Nocturne | spirit |
+| `eternal_wound` | Reliquary | Memory Museum / The System of Memory | Bayou Nocturne / Hollerforge Hollow | spirit / technique |
+| `memory_of_suffering` | Reliquary | Memory Museum | Bayou Nocturne | spirit / magic |
+| `burden_of_the_lost` | Reliquary | Memory Museum | Bayou Nocturne | spirit |
 | `systematic_destruction` | Cataclysm Trial | The System of Memory | Hollerforge Hollow | tech / magic |
 | `refinement_loop` | Cataclysm Trial | The System of Memory | Hollerforge Hollow | tech |
-| `inevitable_failure` | Cataclysm Trial | The System of Memory | Hollerforge Hollow | magic / faith |
+| `inevitable_failure` | Cataclysm Trial | The System of Memory | Hollerforge Hollow | magic / spirit |
 
 ---
 

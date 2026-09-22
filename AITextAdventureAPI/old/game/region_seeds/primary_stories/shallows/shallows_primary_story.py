@@ -1,6 +1,6 @@
 ﻿#SHALLOWS
 # local characters:
-#  Ripple - Well respected and known Tide Oracle (faith) — INFJ 9w1
+#  Ripple - Well respected and known Tide Oracle (spirit) — INFJ 9w1
 #    She drowned during the first Fracture wave and returned changed.
 #    Her pregame is The Vigil — three return visits to Vaultkeeper Syrin,
 #    who has been sitting with the moontide orb for years and cannot bring

@@ -201,7 +201,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
     },
 
     # -------------------------------------------------------------------------
-    # RIPPLE (lv30, shallows, faith/INFJ)
+    # RIPPLE (lv30, shallows, spirit/INFJ)
     # -------------------------------------------------------------------------
     {
         "id": "lv2_unique_ability_spirit_ripple_tidal_mend",
@@ -337,7 +337,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
     # =========================================================================
 
     # -------------------------------------------------------------------------
-    # LYREN VALE (lv35, ch7, faith/ISFP)
+    # LYREN VALE (lv35, ch7, spirit/ISFP)
     # -------------------------------------------------------------------------
     {
         "id": "lv2_unique_ability_spirit_lyren_riftwater_balm",
@@ -478,7 +478,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
     # =========================================================================
 
     # -------------------------------------------------------------------------
-    # SERAPHINE (lv85, ch19, faith/ESFJ)
+    # SERAPHINE (lv85, ch19, spirit/ESFJ)
     # -------------------------------------------------------------------------
     {
         "id": "lv2_unique_ability_spirit_seraphine_hollow_hymn",
@@ -745,7 +745,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
     },
 
     # -------------------------------------------------------------------------
-    # Eldon Dawnseer (lv40, faith/INFJ)
+    # Eldon Dawnseer (lv40, spirit/INFJ)
     # -------------------------------------------------------------------------
     {
         "id": "lv2_unique_ability_spirit_eldon_dawnseer_seer_shield",
@@ -885,7 +885,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
     # =========================================================================
 
     # -------------------------------------------------------------------------
-    # RYNN (lv60, faith/ISFJ)
+    # RYNN (lv60, spirit/ISFJ)
     # -------------------------------------------------------------------------
     {
         "id": "lv2_unique_ability_spirit_rynn_field_dressing",
@@ -1017,7 +1017,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
     },
 
     # -------------------------------------------------------------------------
-    # TALIA SOFTHEART (lv80, faith/ESFJ)
+    # TALIA SOFTHEART (lv80, spirit/ESFJ)
     # -------------------------------------------------------------------------
     {
         "id": "lv2_unique_ability_spirit_talon_tender_mend",
@@ -1061,7 +1061,7 @@ UNIQUE_CHARACTER_ABILITY_SEEDS = [
     },
 
     # -------------------------------------------------------------------------
-    # KORINA BRIGHTVEIN (lv85, faith/ENFJ)
+    # KORINA BRIGHTVEIN (lv85, spirit/ENFJ)
     # -------------------------------------------------------------------------
     {
         "id": "lv2_unique_ability_spirit_alden_brightvein_rally_call",

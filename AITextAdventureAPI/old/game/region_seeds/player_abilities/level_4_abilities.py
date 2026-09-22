@@ -1,12 +1,12 @@
 # LEVEL4 Abilities can have4 elements.
 # There is1 ability per element combination and1 ability per ability type.
 # An ability may have up to3 of the same element but diverse combinations are preferred.
-# There must be a technique, a faith, a magic, a tech, and a skill ability for each element combination.
-# Ability types are: technique, faith, magic, tech, skill
+# There must be a technique, a spirit, a magic, a tech, and a skill ability for each element combination.
+# Ability types are: technique, spirit, magic, tech, skill
 # elements are: fire, water, earth, air, light, dark, ice, electric
 # Ability type mappings to character and hostile stats:
 # technique: strength, constitution...physical attack, physical defense
-# faith: intelligence, constitution...spiritual attack, spiritual defense; healing power; debuff power
+# spirit: intelligence, constitution...spiritual attack, spiritual defense; healing power; debuff power
 # magic: intelligence...magical attack, magical defense; debuff power
 # tech: intelligence, dexterity...tech attack, tech defense; debuff power
 # skill: dexterity, strength...speed, critical hit rate; evasion
@@ -31,10 +31,10 @@ from .level_4_abilities_by_type.tech import LEVEL_4_TECH_ABILITY_SEEDS
 from .level_4_abilities_by_type.skill import LEVEL_4_SKILL_ABILITY_SEEDS
 from .level_4_abilities_by_type.magic import LEVEL_4_MAGIC_ABILITY_SEEDS
 from .level_4_abilities_by_type.technique import LEVEL_4_TECHNIQUE_ABILITY_SEEDS
-from .level_4_abilities_by_type.faith import LEVEL_4_FAITH_ABILITY_SEEDS
+from .level_4_abilities_by_type.spirit import LEVEL_4_SPIRIT_ABILITY_SEEDS
 
 LEVEL_4_PLAYER_ABILITY_SEEDS += LEVEL_4_TECH_ABILITY_SEEDS
 LEVEL_4_PLAYER_ABILITY_SEEDS += LEVEL_4_SKILL_ABILITY_SEEDS
 LEVEL_4_PLAYER_ABILITY_SEEDS += LEVEL_4_MAGIC_ABILITY_SEEDS
 LEVEL_4_PLAYER_ABILITY_SEEDS += LEVEL_4_TECHNIQUE_ABILITY_SEEDS
-LEVEL_4_PLAYER_ABILITY_SEEDS += LEVEL_4_FAITH_ABILITY_SEEDS
+LEVEL_4_PLAYER_ABILITY_SEEDS += LEVEL_4_SPIRIT_ABILITY_SEEDS

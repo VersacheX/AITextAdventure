@@ -126,7 +126,7 @@ WEAPONS_LV66_80 = [
         "constitution": 12,
         "elements": ["electric", "ice"]
     },
-    # superrare / faith — lv79
+    # superrare / spirit — lv79
     {
         "id": "covenant_staff",
         "name": "Covenant Staff",

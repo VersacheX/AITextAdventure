@@ -460,7 +460,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'crux',
-		'dialog_id': 'crux_ch16_taunts_discipline_faith',
+		'dialog_id': 'crux_ch16_taunts_discipline_spirit',
 		'dialog': [
 			"Discipline without purpose is just violence wearing a uniform. You are empty, Chock. Admit it.",
 			"Faith in nothing is delusion. Your gods abandoned this place long ago."
@@ -710,7 +710,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch16_intro' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch16_to_crux' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch16_to_crux' }},
-			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch16_taunts_discipline_faith' }},
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch16_taunts_discipline_spirit' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch16_to_crux' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch16_taunts_magic' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch16_to_crux' }},

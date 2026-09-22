@@ -18,7 +18,7 @@ class AbilityType(Enum):
 	MAGIC = "magic"
 	TECH = "tech"
 	SKILL = "skill"
-	FAITH = "spirit"
+	SPIRIT = "spirit"
 	TECHNIQUE = "technique"
 
 class AbilityStatType:
@@ -28,7 +28,7 @@ class AbilityStatType:
 	MAGIC = ("magic", [req for req in ABILITY_TYPE_REQUIREMENTS if req.get('ability_type') == 'magic'])
 	TECH = ("tech", [req for req in ABILITY_TYPE_REQUIREMENTS if req.get('ability_type') == 'tech'])
 	SKILL = ("skill", [req for req in ABILITY_TYPE_REQUIREMENTS if req.get('ability_type') == 'skill'])
-	FAITH = ("spirit", [req for req in ABILITY_TYPE_REQUIREMENTS if req.get('ability_type') == 'spirit'])
+	SPIRIT = ("spirit", [req for req in ABILITY_TYPE_REQUIREMENTS if req.get('ability_type') == 'spirit'])
 	TECHNIQUE = ("technique", [req for req in ABILITY_TYPE_REQUIREMENTS if req.get('ability_type') == 'technique'])
 
 
@@ -56,7 +56,7 @@ class PlayerAbility:
 	"""Represents a player ability composed of elemental units.
 
 	Rules implemented:
-	- Ability has a type (magic/tech/skill/faith) and a level.
+	- Ability has a type (magic/tech/skill/spirit) and a level.
 	- The number of element "units" the ability can contain grows with level
 	 (by default: max elements == level).
 	- Elements are chosen from the canonical list and may repeat; repeats
@@ -481,7 +481,7 @@ def get_potential_player_abilities(player: Optional[object] = None) -> List[Dict
 	- Abilities are filtered by stat requirements defined in
 	 `game.region_seeds.player_abilities.ability_requirements.ABILITY_TYPE_REQUIREMENTS`.
 	 Each requirement specifies per-ability-level stat minima; the effective
-	 required stat is (per_level_value * ability_level). For example a faith
+	 required stat is (per_level_value * ability_level). For example a spirit
 	 ability with level2 requires int13*2 and con9*2.@@-< Not the actual formula but yeh.
 	 -actual formula currently --- required = int(per_level_val) + int((int(per_level_val) * ((level - 1)* 1.5)) **1.25)
 	- Only abilities for which the player meets all required stats are returned.

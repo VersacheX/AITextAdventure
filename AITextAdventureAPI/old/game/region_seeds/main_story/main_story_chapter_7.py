@@ -157,7 +157,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'lyren',
-        'dialog_id': 'lyren_ch7_response_to_faith',
+        'dialog_id': 'lyren_ch7_response_to_spirit',
         'dialog': [
             "(nodding slowly) That's what I needed. Not just the flower itself...",
             "but proof that something can still remember what it was supposed to be. Even when the world tries to forget."
@@ -331,7 +331,7 @@ TASKS = [
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_receives_hibiscus' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch7_after_hibiscus' }},
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_response_to_faith' }},
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_response_to_spirit' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch7_after_hibiscus' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_response_to_magic' }},
             { 'event_type': 'remove_item', 'params': { 'item_id': 'fragrant_hibiscus' }},

@@ -1,9 +1,9 @@
 #LEVEL1 Abilities can have1 element. there is1 ability per element and1 ability per ability type.
-# ability types are: technique, faith, magic, tech, skill
+# ability types are: technique, spirit, magic, tech, skill
 # elements are: fire, water, earth, air, light, dark, ice, electric
 # ability type mappings to character and hostile stats:
 # technique: strength, constitution...physical attack, physical defense
-# faith: intelligence, constitution...spiritual attack, spiritual defense; healing power; debuff power
+# spirit: intelligence, constitution...spiritual attack, spiritual defense; healing power; debuff power
 # magic: intelligence...magical attack, magical defense; debuff power
 # tech: intelligence, dexterity...tech attack, tech defense; debuff power
 # skill: dexterity, strength...speed, critical hit rate; evasion
@@ -31,9 +31,9 @@ LEVEL_1_PLAYER_ABILITY_SEEDS = [
 
 
 
- # --- Faith ---
+ # --- Spirit ---
    ##HEALING
-   # # single target heal lvl1 faith heals cost 10ap, 12bp
+   # # single target heal lvl1 spirit heals cost 10ap, 12bp
  {"id": "light_spirit_lv1_minor_heal", "name": "Minor Heal", "description": "Restore a small amount of HP.", "ability_type": "spirit", "level":1, "elements": ["light"], "base_power":9, "ap_cost":10, "effect": "heal", "can_aoe": True},
 
    ## STATUS CLEAN

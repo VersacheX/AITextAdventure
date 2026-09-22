@@ -612,7 +612,7 @@ ARMOR_LV36_50 = {
             "elements": ["light", "fire"]
         },
         # ── world-drop ────────────────────────────────────────────────────
-        # rare / faith — lv46
+        # rare / spirit — lv46
         {
             "id": "warded_greaves_lv46",
             "name": "Warded Greaves",

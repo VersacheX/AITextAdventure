@@ -35,7 +35,7 @@ narrative is expressed as an **event-driven timeline** of tasks, dialogs, NPC
 placements, dungeon spawns, and item awards, validated by an integrity checker
 so 21 chapters, regional arcs, and dozens of city stories stay consistent.
 Dungeons are procedurally generated, the party and combat systems are built
-around five archetypes (technique, tech, faith, magic, skill), and the game
+around five archetypes (technique, tech, spirit, magic, skill), and the game
 supports both local and online play with named save slots — plus a developer
 data browser for inspecting saves and seed data.
 
@@ -52,7 +52,7 @@ data browser for inspecting saves and seed data.
 
 ### Party & progression
 
-- Party system (1–5 characters) with five archetypes: technique, tech, faith, magic, skill
+- Party system (1–5 characters) with five archetypes: technique, tech, spirit, magic, skill
 - Stat and ability leveling with archetype-specific requirements
 - Spend earned points to raise stats and unlock new abilities as your party grows
 - Equipment and inventory management with weapons, armor, and accessories across multiple rarity tiers

@@ -117,7 +117,7 @@ NPC_DIALOG = [
 		]
 	},
 	{ # use character definitions, Chock, Kade, Moxie, Kaera, and Poise
-		"npc_id": "technique", # npc_id, dialog_id is multi key so same dialog has all 5 reserved id's technique, tech, magic, faith, skill
+		"npc_id": "technique", # npc_id, dialog_id is multi key so same dialog has all 5 reserved id's technique, tech, magic, spirit, skill
 		"dialog_id": "pending_character_ch3_lost_memory", # noted pending_character prefix for knowing that it's the one lost
 		"dialog": [ 
 			"Where... am I? I feel like I should know this place, but it's all a blur.",
@@ -1410,7 +1410,7 @@ TASKS = [
 		'to_id': 'pending_character',
 		'task_acquire_events': [],
 		'task_complete_events': [
-			# NOTE initiate dialog for each chracter technique, tech, magic, faith, skill about restoring the memory
+			# NOTE initiate dialog for each chracter technique, tech, magic, spirit, skill about restoring the memory
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {

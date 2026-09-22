@@ -1,5 +1,5 @@
-﻿# Faith abilities for level 4
-LEVEL_4_FAITH_ABILITY_SEEDS = [
+﻿# Spirit abilities for level 4
+LEVEL_4_SPIRIT_ABILITY_SEEDS = [
 
     #### NON PLAYER ABILITIES
     {"id": "radiant_lie", "name": "Radiant Lie", "description": "A dazzling veil of warmth and acceptance that warps the minds of all who behold it, turning allies against one another while dulling their resolve.", "ability_type": "spirit", "level": 4, "elements": ["light", "light", "dark", "air"], "base_power": 10, "ap_cost": 120, "effect": "status", "status_keys": ["confuse", "attack_debuff", "intelligence_debuff"], "can_aoe": True, "non_player_ability": True},

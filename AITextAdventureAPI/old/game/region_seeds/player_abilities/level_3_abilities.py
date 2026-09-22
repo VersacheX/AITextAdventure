@@ -1,12 +1,12 @@
 #LEVEL3 Abilities can have3 elements. 
 # there is1 ability per element combination and1 ability per ability type.
 # an ability may have3 of the same element so effectively fire+fire+fire, fire+fire+water, ...
-# there must be a technique, a faith, a magic, a tech, and a skill ability for each element combination.
-# ability types are: technique, faith, magic, tech, skill
+# there must be a technique, a spirit, a magic, a tech, and a skill ability for each element combination.
+# ability types are: technique, spirit, magic, tech, skill
 # elements are: fire, water, earth, air, light, dark, ice, electric
 # ability type mappings to character and hostile stats:
 # technique: strength, constitution...physical attack, physical defense
-# faith: intelligence, constitution...spiritual attack, spiritual defense; healing power; debuff power
+# spirit: intelligence, constitution...spiritual attack, spiritual defense; healing power; debuff power
 # magic: intelligence...magical attack, magical defense; debuff power
 # tech: intelligence, dexterity...tech attack, tech defense; debuff power
 # skill: dexterity, strength...speed, critical hit rate; evasion
@@ -18,7 +18,7 @@ LEVEL_3_<TYPE>_SEEDS which are imported and concatenated below.
 """
 
 from .level_3_abilities_by_type.technique import LEVEL_3_TECHNIQUE_SEEDS
-from .level_3_abilities_by_type.faith import LEVEL_3_FAITH_SEEDS
+from .level_3_abilities_by_type.spirit import LEVEL_3_SPIRIT_SEEDS
 from .level_3_abilities_by_type.magic import LEVEL_3_MAGIC_SEEDS
 from .level_3_abilities_by_type.tech import LEVEL_3_TECH_SEEDS
 from .level_3_abilities_by_type.skill import LEVEL_3_SKILL_SEEDS
@@ -26,7 +26,7 @@ from .level_3_abilities_by_type.skill import LEVEL_3_SKILL_SEEDS
 # Master list assembled from per-type seed modules
 LEVEL_3_PLAYER_ABILITY_SEEDS = []
 LEVEL_3_PLAYER_ABILITY_SEEDS.extend(LEVEL_3_TECHNIQUE_SEEDS)
-LEVEL_3_PLAYER_ABILITY_SEEDS.extend(LEVEL_3_FAITH_SEEDS)
+LEVEL_3_PLAYER_ABILITY_SEEDS.extend(LEVEL_3_SPIRIT_SEEDS)
 LEVEL_3_PLAYER_ABILITY_SEEDS.extend(LEVEL_3_MAGIC_SEEDS)
 LEVEL_3_PLAYER_ABILITY_SEEDS.extend(LEVEL_3_TECH_SEEDS)
 LEVEL_3_PLAYER_ABILITY_SEEDS.extend(LEVEL_3_SKILL_SEEDS)

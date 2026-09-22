@@ -3,7 +3,7 @@
 # Extended characters: Veyr Ashcant (40), Regent Sylvara (40), Spark Maddox (40),
 #                      Commander Drax (40), Ghost (40), Eldon Dawnseer (40), Voss Caldera (50)
 WEAPONS_LV36_50 = [
-    # --- Lyren Vale (level 35) — Water/Light/Air Faith healer ---
+    # --- Lyren Vale (level 35) — Water/Light/Air Spirit healer ---
     {
         "id": "gentlecurrent_staff",
     "name": "Gentlecurrent Staff",
@@ -45,7 +45,7 @@ WEAPONS_LV36_50 = [
         "constitution": 26,
         "elements": ["fire", "earth"]
     },
-    # --- Warden Hale Brimholt (level 50) — Water/Light Faith INT/CON healer-tank ---
+    # --- Warden Hale Brimholt (level 50) — Water/Light Spirit INT/CON healer-tank ---
     {
         "id": "ledgerbrand_mace",
         "name": "Ledgerbrand Mace",

@@ -663,7 +663,7 @@ When translating dialogue from the Mermaid timeline, it is crucial to use the co
 |---------------|------------------|----------------|
 | `Chock`       | `technique`      | Chock          |
 | `Kade`        | `tech`           | Kade           |
-| `Kaera`       | `faith`          | Kaera          |
+| `Kaera`       | `spirit`          | Kaera          |
 | `Poise`       | `skill`          | Poise          |
 | `Moxie`       | `magic`          | Moxie          |
 
@@ -692,7 +692,7 @@ Player characters react to events based on their personality types:
     'dialog': ["Ooooh, a ghost signal. I hope it screams."]
 }
 
-# Faith (INFJ) - Spiritual, empathetic, idealistic
+# Spirit (INFJ) - Spiritual, empathetic, idealistic
 {
     'npc_id': 'spirit',
     'dialog_id': 'spirit_ch5_after_velka',

@@ -43,7 +43,7 @@ AP - Ability Points
 # stat points
 str - melee damage. primary stat for technique 
 dex - evasion, accuracy, combat speed. primary stat for skill, secondary for tech
-int - pure ability effect. primary stat for tech, magic, and faith
+int - pure ability effect. primary stat for tech, magic, and spirit
 con - health buff, resistance. secondary stat for technique
 
 press l to learn abilities
@@ -51,7 +51,7 @@ press l to learn abilities
 requirements for level 1
 technique - 13 str/ 9 con
 tech - 13 int/ 9 dex
-faith - 13 int/ 9 con
+spirit - 13 int/ 9 con
 magic - 18 int
 skill - 18 dex
 ability level requirements scale, so be sure to spend wisely and focus

@@ -20,7 +20,7 @@ _ABILITY_TREE: List[AbilityTypeNode] = []
 _TYPE_ORDER = ["technique", "spirit", "magic", "tech", "skill"]
 _TYPE_LABELS: Dict[str, str] = {
     "technique": "Technique",
-    "spirit":     "Faith",
+    "spirit":     "Spirit",
     "magic":     "Magic",
     "tech":      "Tech",
     "skill":     "Skill",

@@ -1,7 +1,7 @@
 ﻿"""
-FAITH ABILITIES  ARE  BASED ON MYTHICAL PRAYERS TO GODS AND DIETIES... AND THOSE ANSWERS
+SPIRIT ABILITIES  ARE  BASED ON MYTHICAL PRAYERS TO GODS AND DIETIES... AND THOSE ANSWERS
 they channel divine energy to heal, buff, cure statuses... they can also call down holy damage upon foes
-some lore for faith in a neo noir fantasy setting is created with these abilities
+some lore for spirit in a neo noir fantasy setting is created with these abilities
 
 BENEFICIAL_PLAYER_ABILITY_EFFECTS = [
     "heal",
@@ -38,9 +38,9 @@ ABILITY DIVISION
                           --- Level 3 distribution ---
 """
 
-# Faith seeds extracted from level_3_player_ability_seeds
-LEVEL_3_FAITH_SEEDS = [
-   ##DAMAGE  faith damaging abilities are high cost low power   100 ap for 80 bp   or 90ap for 50bp
+# Spirit seeds extracted from level_3_player_ability_seeds
+LEVEL_3_SPIRIT_SEEDS = [
+   ##DAMAGE  spirit damaging abilities are high cost low power   100 ap for 80 bp   or 90ap for 50bp
  {"id": "fire_ice_air_spirit_lv3_invocation_of_zephyrus", "name": "Invocation of Zephyrus", "description": "A sacred invocation calling Zephyrus' burning breath to sear enemies.", "ability_type": "spirit", "level":3, "elements": ["fire", "ice", "air"], "base_power":78, "ap_cost":70, "effect": "damage", "can_aoe": False},
  {"id": "ice_air_earth_spirit_lv3_skadi_tremor", "name": "Skadi's Tremor", "description": "A prayer to Skadi that conjures a freezing quake to bind foes.", "ability_type": "spirit", "level":3, "elements": ["ice", "air", "earth"], "base_power":78, "ap_cost":70, "effect": "damage", "can_aoe": False},
  {"id": "air_earth_electric_spirit_lv3_raijin_verdict", "name": "Raijin's Verdict", "description": "A thunderous verdict from Raijin that rends the air with electric force.", "ability_type": "spirit", "level":3, "elements": ["air", "earth", "electric"], "base_power":78, "ap_cost":70, "effect": "damage", "can_aoe": False},
@@ -57,10 +57,10 @@ LEVEL_3_FAITH_SEEDS = [
  {"id": "air_air_air_spirit_lv3_aether_hurricane", "name": "Aether's Hurricane", "description": "A divine hurricane from Aether that rends the skies and smites all enemies.", "ability_type": "spirit", "level":3, "elements": ["air", "air", "air"], "base_power": 65, "ap_cost": 70, "effect": "damage", "can_aoe": True},
 
 
-   ##HEALING FAITH ABILITIES
+   ##HEALING SPIRIT ABILITIES
  {"id": "light_light_air_spirit_lv3_major_heal", "name": "Major Heal", "description": "Restore a large amount of HP.", "ability_type": "spirit", "level":3, "elements": ["light", "light", "air"], "base_power":48, "ap_cost":72, "effect": "heal", "can_aoe": True},
  {"id": "light_light_light_spirit_lv3_pure_resurgence", "name": "Pure Resurgence", "description": "A focused, powerful restorative beam that mends a single ally's grievous wounds.", "ability_type": "spirit", "level":3, "elements": ["light", "light", "light"], "base_power":78, "ap_cost":70, "effect": "heal", "can_aoe": False},
-   ##REVIVE FAITH ABILITIES
+   ##REVIVE SPIRIT ABILITIES
  {"id": "light_light_dark_spirit_lv3_dusk_balm", "name": "Dusk Balm", "description": "A twilight balm that can restore life to a fallen ally.", "ability_type": "spirit", "level":3, "elements": ["light", "light", "dark"], "base_power":50, "ap_cost":73, "effect": "revive", "can_aoe": False},
    ##STATUS CLEAN
  {"id": "light_dark_air_spirit_lv3_silent_night", "name": "Silent Night", "description": "A hushed prayer that cleanses silence from all allies.", "ability_type": "spirit", "level":3, "elements": ["light","dark","air"], "base_power":0, "ap_cost":75, "effect": "cure", "status_keys": ["silence", "sleep"], "can_aoe": True},

@@ -1,7 +1,7 @@
 """
-FAITH ABILITIES  ARE  BASED ON MYTHICAL PRAYERS TO GODS AND DIETIES... AND THOSE ANSWERS
+SPIRIT ABILITIES  ARE  BASED ON MYTHICAL PRAYERS TO GODS AND DIETIES... AND THOSE ANSWERS
 they channel divine energy to heal, buff, cure statuses... they can also call down holy damage upon foes
-some lore for faith in a neo noir fantasy setting is created with these abilities
+some lore for spirit in a neo noir fantasy setting is created with these abilities
 
 BENEFICIAL_PLAYER_ABILITY_EFFECTS = [
     "heal",
@@ -37,8 +37,8 @@ ABILITY DIVISION
  STATUS EFFECT:light-dark (aoe confuse) 50ap 0basepower
 """
 
-LEVEL_2_FAITH_ABILITY_SEEDS = [
- # --- faith ---
+LEVEL_2_SPIRIT_ABILITY_SEEDS = [
+ # --- spirit ---
  ## DAMAGE (single-target, divine strikes)
  {"id": "electric_electric_spirit_lv2_heavenly_rupture", "name": "Heavenly Rupture", "description": "A bolt of consecrated electricity.", "ability_type": "spirit", "level":2, "elements": ["electric", "electric"], "base_power":35, "ap_cost":30, "effect": "damage", "can_aoe": False},
  {"id": "ice_ice_spirit_lv2_glacial_fury", "name": "Glacial Fury", "description": "A bitter, holy frost strike.", "ability_type": "spirit", "level":2, "elements": ["ice", "ice"], "base_power":35, "ap_cost":30, "effect": "damage", "can_aoe": False},
