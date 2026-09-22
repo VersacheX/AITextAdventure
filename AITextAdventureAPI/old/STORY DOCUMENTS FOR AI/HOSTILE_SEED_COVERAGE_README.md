@@ -398,14 +398,14 @@ These are defined in `level_1_abilities.py` and have `"non_player_ability": True
 | `level_1_hostile_ability_poison_dart` | `continuous_damage` | dark |
 | `level_1_hostile_ability_streamlet` | damage | water |
 | `level_1_hostile_ability_dark_magic_daze_whisper` | `confuse` | dark |
-| `level_1_hostile_ability_light_faith_prism_burst` | `dexterity_debuff` | light |
+| `level_1_hostile_ability_light_spirit_prism_burst` | `dexterity_debuff` | light |
 | `level_1_hostile_ability_air_skill_quick_shot` | `dexterity_debuff` | air |
 | `level_1_hostile_ability_dark_skill_corrosive_spit` | `strength_debuff` | dark |
-| `level_1_hostile_ability_fire_faith_ember_shield` | `strength_debuff` | fire |
+| `level_1_hostile_ability_fire_spirit_ember_shield` | `strength_debuff` | fire |
 | `level_1_hostile_ability_air_magic_gale_surge` | `dexterity_debuff` | air |
 | `level_1_hostile_ability_air_skill_gale_dash` | `dexterity_debuff` | air |
 | `level_1_hostile_ability_electric_magic_chain_lightning` | damage (AoE) | electric |
-| `level_1_hostile_ability_fire_faith_hearthsong` | `attack_buff` | fire |
+| `level_1_hostile_ability_fire_spirit_hearthsong` | `attack_buff` | fire |
 | `level_1_hostile_ability_bone_spear` | damage | dark |
 | `level_1_hostile_ability_shadow_lash` | damage | dark |
 | `level_1_hostile_ability_shadow_flicker` | evasion/status | dark |
@@ -420,7 +420,7 @@ These are defined in `level_1_abilities.py` and have `"non_player_ability": True
 Standard Lv 1 player abilities also usable (no `non_player_ability` flag required for hostiles):
 
 - `fire_technique_lv1_scorch_slash`, `earth_technique_lv1_armor_up`, `dark_technique_lv1_night_claw`
-- `light_faith_lv1_minor_heal`, `dark_magic_lv1_shadow_tendril`, `fire_magic_lv1_fireball`
+- `light_spirit_lv1_minor_heal`, `dark_magic_lv1_shadow_tendril`, `fire_magic_lv1_fireball`
 - `air_skill_lv1_smoke_bomb`, `ice_skill_lv1_ice_shuriken`
 
 ### Level 2 Hostile Abilities (Lv 21–50 hostiles)
@@ -429,11 +429,11 @@ Defined in `level_2_abilities_by_type/`.
 
 | ID | Type | Effect | Elements |
 |---|---|---|---|
-| `lv2_hostile_ability_dark_dark_faith_void_veil` | faith | `elemental_debuff` | dark/dark |
-| `lv2_hostile_ability_air_water_faith_gale_of_silence` | faith | `silence` | air/water |
-| `lv2_hostile_ability_water_light_fae_glimmer` | faith | `confuse` | water/light |
-| `lv2_hostile_ability_dark_light_faith_calm_bleat` | faith | heal | dark/light |
-| `lv2_hostile_ability_earth_air_faith_thornbind` | faith | status | earth/air |
+| `lv2_hostile_ability_dark_dark_spirit_void_veil` | spirit | `elemental_debuff` | dark/dark |
+| `lv2_hostile_ability_air_water_spirit_gale_of_silence` | spirit | `silence` | air/water |
+| `lv2_hostile_ability_water_light_fae_glimmer` | spirit | `confuse` | water/light |
+| `lv2_hostile_ability_dark_light_spirit_calm_bleat` | spirit | heal | dark/light |
+| `lv2_hostile_ability_earth_air_spirit_thornbind` | spirit | status | earth/air |
 | `lv2_hostile_ability_fire_earth_magic_pyroclasm` | magic | damage | fire/earth |
 | `lv2_hostile_ability_dark_electric_magic_abyssal_storm` | magic | damage | dark/electric |
 | `lv2_hostile_ability_water_electric_magic_maelstrom_burst` | magic | damage | water/electric |
@@ -636,7 +636,7 @@ RANDOM_HOSTILE_SEEDS = [
      "min_spawn_level": 36, "rarity": "uncommon", "base_xp": 350,
      "common_drop": "tome_int", "rare_drop": "tome_con", "money_range": (90, 340),
      "basic_attack": "chrome staff jab", "strong_attack": "resonance pulse",
-     "player_abilities": ["lv2_hostile_ability_dark_light_faith_calm_bleat", "level_1_hostile_ability_reinforce_frame"],
+     "player_abilities": ["lv2_hostile_ability_dark_light_spirit_calm_bleat", "level_1_hostile_ability_reinforce_frame"],
      "base_str": 6, "base_dex": 8, "base_con": 12, "base_int": 14, "base_hp": 160, "base_ap": 12,
      "str_per_level": 1, "dex_per_level": 2, "con_per_level": 3, "int_per_level": 3},
 
@@ -644,7 +644,7 @@ RANDOM_HOSTILE_SEEDS = [
      "min_spawn_level": 38, "rarity": "rare", "base_xp": 560,
      "common_drop": "stimulant_large", "rare_drop": "stimulant_large", "money_range": (120, 420),
      "basic_attack": "abrasive sand blast", "strong_attack": "blinding vortex",
-     "player_abilities": ["lv2_hostile_ability_air_water_faith_gale_of_silence", "lv2_hostile_ability_dark_air_skill_nightmare_wave"],
+     "player_abilities": ["lv2_hostile_ability_air_water_spirit_gale_of_silence", "lv2_hostile_ability_dark_air_skill_nightmare_wave"],
      "base_str": 10, "base_dex": 12, "base_con": 8, "base_int": 12, "base_hp": 220, "base_ap": 11,
      "str_per_level": 2, "dex_per_level": 3, "con_per_level": 2, "int_per_level": 3},
 ]

@@ -16,7 +16,7 @@ RANDOM_HOSTILE_SEEDS = [
  {"id": "bazaar_shaman", "name": "Bazaar Shaman", "hostile_type": "humanoid", "role": "support", "min_spawn_level": 57, "rarity": "uncommon", "base_xp": 2000,
   "common_drop": "tome_int", "rare_drop": "tome_con", "money_range": (400, 1400),
   "basic_attack": "spirit hex", "strong_attack": "market blessing",
-  "player_abilities": ["lv2_hostile_ability_dark_light_faith_calm_bleat"],
+  "player_abilities": ["lv2_hostile_ability_dark_light_spirit_calm_bleat"],
   "base_str": 8, "base_dex": 18, "base_con": 14, "base_int": 36, "base_hp": 1400, "base_ap": 16,
   "str_per_level": 1, "dex_per_level": 3, "con_per_level": 2, "int_per_level": 6},
 ]

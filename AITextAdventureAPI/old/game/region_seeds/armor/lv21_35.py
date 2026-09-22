@@ -63,7 +63,7 @@ ARMOR_LV21_35 = {
         { "id": "currentweaver_bracers", "name": "Currentweaver Bracers", "description": "Bracers that pulse with tidal rhythm, strengthening healing and cleansing rites.", "defense": 18, "durability": 380, "max_durability": 380, "value": 3000, "min_spawn_level": 30, "rarity": "notfound", "strength": 2, "dexterity": 12, "intelligence": 28, "constitution": 18, "elements": ["water", "light"] },
         { "id": "hexsplice_gauntlets", "name": "Hex‑Splice Gauntlets", "description": "Gauntlets laced with cursed wiring that sparks unpredictably with swamp‑fire energy.", "defense": 20, "durability": 380, "max_durability": 380, "value": 3000, "min_spawn_level": 30, "rarity": "notfound", "strength": 4, "dexterity": 24, "intelligence": 28, "constitution": 12, "elements": ["electric", "dark"] },
         # ── world-drop ────────────────────────────────────────────────────
-        # rare / faith — lv32
+        # rare / spirit — lv32
         { "id": "consecrated_vambraces_lv32", "name": "Consecrated Vambraces", "description": "Vambraces blessed during a ritual that no longer has a name — the order that performed it dissolved before it was properly recorded. The blessing persisted.", "defense": 22, "durability": 400, "max_durability": 400, "value": 4800, "min_spawn_level": 32, "rarity": "rare", "strength": 4, "dexterity": 6, "intelligence": 28, "constitution": 22, "elements": ["light", "water"] },
     ],
     "legs": [

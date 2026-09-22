@@ -297,8 +297,8 @@ NPC_DIALOG += [
 
     # Type E – Consult Vael
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_forest_mid_e_consult_vael',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_forest_mid_e_consult_vael',
         'dialog': [
             "A Mycelium Hollow that accumulates memory through spore and root… the forest is keeping records."
         ]
@@ -350,8 +350,8 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_forest_mid_e_defeat_riftspark',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_forest_mid_e_defeat_riftspark',
         'dialog': [
             "A century of absorbed memory in one specimen. Handle it like it still remembers."
         ]
@@ -380,8 +380,8 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_forest_mid_e_return_to_mirlo',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_forest_mid_e_return_to_mirlo',
         'dialog': [
             "Keep it safe until it finds the place that still remembers its first winter."
         ]
@@ -401,8 +401,8 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_forest_mid_c_find_sera',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_forest_mid_c_find_sera',
         'dialog': [
             "Flame magic responds to feeling. Whatever is inside that Rift is feeling something enormous."
         ]
@@ -417,8 +417,8 @@ NPC_DIALOG += [
 
     # Type C – Consult Thera
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_forest_mid_c_consult_thera',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_forest_mid_c_consult_thera',
         'dialog': [
             "Thera sees warnings in the sparks. Veyr sees invitations. Both can be true."
         ]
@@ -447,8 +447,8 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_forest_mid_c_earn_sera',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_forest_mid_c_earn_sera',
         'dialog': [
             "The fire in this forest has things to say. She intends to hear all of them."
         ]
@@ -504,8 +504,8 @@ NPC_DIALOG += [
 
     # Type D – Consult Thera (Root Graft path)
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_forest_mid_d_consult_thera',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_forest_mid_d_consult_thera',
         'dialog': [
             "Moonfire residue from Thornshade's oldest grove memories. The Shade has been feeding on exactly this."
         ]
@@ -557,8 +557,8 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_forest_mid_d_defeat_lunarcask_shade',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_forest_mid_d_defeat_lunarcask_shade',
         'dialog': [
             "A lantern that guides through darkness with no light to reflect. That's a rare kind of hope."
         ]
@@ -578,8 +578,8 @@ NPC_DIALOG += [
 
     # Type E – Meet Vael (Spore path)
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_forest_mid_e_meet_vael',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_forest_mid_e_meet_vael',
         'dialog': [
             "A memory older than the city, preserved by the mycelium network."
         ]
@@ -615,8 +615,8 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_forest_mid_e_collect_spore',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_forest_mid_e_collect_spore',
         'dialog': [
             "Take it before it decides to bloom somewhere it doesn't belong."
         ]
@@ -767,7 +767,7 @@ TASKS += [
                     'dialog_id': 'vael_spore_context'
                 }
             },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',   'dialog_id': 'faith_forest_mid_e_consult_vael'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',   'dialog_id': 'spirit_forest_mid_e_consult_vael'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple',  'dialog_id': 'ripple_forest_mid_e_consult_vael'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grmnaw_forest_mid_e_consult_vael' } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'glimmer_hermit_vael', 'standing_text': ["The Hollow breathes. It will not let go of what it has."] } },
@@ -853,7 +853,7 @@ TASKS += [
                 }
             },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_forest_mid_e_defeat_riftspark' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_forest_mid_e_defeat_riftspark'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',     'dialog_id': 'spirit_forest_mid_e_defeat_riftspark'     } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_forest_mid_e_defeat_riftspark'      } },
             {
                 'event_type': 'award_task',
@@ -881,7 +881,7 @@ TASKS += [
             },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_forest_mid_e_return_to_mirlo' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_forest_mid_e_return_to_mirlo'  } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_forest_mid_e_return_to_mirlo' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_forest_mid_e_return_to_mirlo' } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'alchemist_mirlo', 'standing_text': ["The moonbrews are still. The pulse is gone."] } }
         ]
     },
@@ -920,7 +920,7 @@ TASKS += [
                 }
             },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_forest_mid_c_find_sera' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_forest_mid_c_find_sera' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_forest_mid_c_find_sera' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_forest_mid_c_find_sera'   } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'veyr_ashcant','standing_text': ["The Rift pulses like a heartbeat.","I've been trying to figure out whose."] } },
             {
@@ -947,7 +947,7 @@ TASKS += [
                     'dialog_id': 'sera_type_c_thera_reaction'
                 }
             },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_mid_c_consult_thera'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',  'dialog_id': 'spirit_forest_mid_c_consult_thera'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_forest_mid_c_consult_thera'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',  'dialog_id': 'skill_forest_mid_c_consult_thera'  } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'emberwitch_thera','standing_text': ["Thera sees warnings. I see invitations.","You're the only one who seems curious about both."] } },
@@ -976,7 +976,7 @@ TASKS += [
                 }
             },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_forest_mid_c_earn_sera' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_forest_mid_c_earn_sera' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_forest_mid_c_earn_sera' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_forest_mid_c_earn_sera'   } },
             {
                 'event_type': 'character_join',
@@ -1090,7 +1090,7 @@ TASKS += [
 					'dialog_id': 'thera_d_graft_read'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_mid_d_consult_thera'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',  'dialog_id': 'spirit_forest_mid_d_consult_thera'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'tech_forest_mid_d_consult_thera'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_forest_mid_d_consult_thera'  } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'emberwitch_thera','standing_text': ["The Lunarcask Shade has been feeding on this frequency.","Draw it out with the graft's resonance and the moonlight solidifies."] } },
@@ -1188,7 +1188,7 @@ TASKS += [
 				}
 			},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_forest_mid_d_defeat_lunarcask_shade' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_forest_mid_d_defeat_lunarcask_shade'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',     'dialog_id': 'spirit_forest_mid_d_defeat_lunarcask_shade'     } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_forest_mid_d_defeat_lunarcask_shade'      } },
 			{
 				'event_type': 'set_npc_standing_text',
@@ -1248,7 +1248,7 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'glimmer_hermit_vael', 'dialog_id': 'vael_e_spore_context' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_mid_e_meet_vael'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',  'dialog_id': 'spirit_forest_mid_e_meet_vael'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_forest_mid_e_meet_vael' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_forest_mid_e_meet_vael' } },
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'forest_mid_city_type_e_collect_spore' }},
@@ -1268,7 +1268,7 @@ TASKS += [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'alchemist_mirlo', 'dialog_id': 'mirlo_e_memory_spore' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_forest_mid_e_collect_spore' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_forest_mid_e_collect_spore'  } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_forest_mid_e_collect_spore' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_forest_mid_e_collect_spore' } },
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'forest_mid_city_e_mycelia_memory_spore' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'alchemist_mirlo', 'standing_text': ["The pulse is gone. The moonbrews are still."] }   }
 		]

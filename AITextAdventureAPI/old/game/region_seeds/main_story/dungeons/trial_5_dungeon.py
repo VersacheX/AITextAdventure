@@ -46,7 +46,7 @@ HOSTILE_SEEDS = [
     {
         'id': 'recursive_horror', 'name': 'Recursive Horror', 'hostile_type': 'aberration', 'min_spawn_level': 102, 'role': 'hazard', 'rarity': 'superrare',
         'base_xp': 13000, 'common_drop': 'revive_kit', 'rare_drop': 'tome_int_superrare', 'money_range': (1200, 1800),
-        'basic_attack': 'feedback loop', 'strong_attack': 'recursive collapse', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
+        'basic_attack': 'feedback loop', 'strong_attack': 'recursive collapse', 'player_abilities': ['dark_spirit_lv1_shade_whisper'],
         'base_str': 52, 'base_dex': 55, 'base_con': 60, 'base_int': 72, 'base_hp': 54000, 'base_ap': 460,
         'str_per_level': 6, 'dex_per_level': 6, 'con_per_level': 7, 'int_per_level': 9,
         'resistances': ['dark', 'poison', 'ice'], 'immunities': ['confuse', 'petrify', 'silence'], 'weaknesses': ['light', 'fire']

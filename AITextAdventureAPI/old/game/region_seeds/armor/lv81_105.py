@@ -211,7 +211,7 @@ ARMOR_LV81_105 = {
             "strength": 8, "dexterity": 10, "intelligence": 98, "constitution": 50,
             "elements": ["dark", "ice"]
         },
-        # ── world-drop: rare / faith ──
+        # ── world-drop: rare / spirit ──
         { "id": "sanctuary_robe_lv91", "name": "Sanctuary Robe", "description": "A robe woven inside a consecrated space that no longer exists. The weavers finished it the day before the space was closed. They knew.", "defense": 78, "durability": 860, "max_durability": 860, "value": 50400, "min_spawn_level": 91, "rarity": "rare", "strength": 6, "dexterity": 10, "intelligence": 92, "constitution": 54, "elements": ["light", "water", "earth"] },
     ],
     "arms": [

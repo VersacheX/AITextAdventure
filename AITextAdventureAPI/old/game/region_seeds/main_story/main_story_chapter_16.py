@@ -281,8 +281,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch16_on_silence',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch16_on_silence',
 		'dialog': [
 			"(softly, troubled) The divine presence I used to feel... it's like a whisper now.",
 			"Barely there. If meaning is gone, what am I even holding onto anymore?"
@@ -452,15 +452,15 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch16_to_crux',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch16_to_crux',
 		'dialog': [
 			"If I am an error in your eyes... then let me be a faithful one. I choose to believe anyway."
 		]
 	},
 	{
 		'npc_id': 'crux',
-		'dialog_id': 'crux_ch16_taunts_discipline_faith',
+		'dialog_id': 'crux_ch16_taunts_discipline_spirit',
 		'dialog': [
 			"Discipline without purpose is just violence wearing a uniform. You are empty, Chock. Admit it.",
 			"Faith in nothing is delusion. Your gods abandoned this place long ago."
@@ -645,7 +645,7 @@ TASKS = [
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lumen', 'dialog_id': 'lumen_ch16_intro' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch16_on_silence' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch16_on_silence' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch16_on_silence' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch16_on_silence' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lumen', 'dialog_id': 'lumen_ch16_response' }},
 			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'temporal_echoes', 'location': 'region_open_area' }},
@@ -709,8 +709,8 @@ TASKS = [
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch16_intro' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch16_to_crux' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch16_to_crux' }},
-			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch16_taunts_discipline_faith' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch16_to_crux' }},
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch16_taunts_discipline_spirit' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch16_to_crux' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch16_taunts_magic' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch16_to_crux' }},

@@ -542,8 +542,8 @@ NPC_DIALOG += [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_grassland_large_b_defeat_serene',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_grassland_large_b_defeat_serene',
 		'dialog': [
 			"You can't steal something that won't hold still. She never understood that."
 		]
@@ -1072,7 +1072,7 @@ TASKS += [
 			{ 'event_type': 'initiate_dialog',           'params': { 'npc_id': 'serene',    'dialog_id': 'serene_b_defeated'                              }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',       'dialog_id': 'nia_b_victory'                                  }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_grassland_large_b_defeat_serene' } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_grassland_large_b_defeat_serene'     } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',     'dialog_id': 'spirit_grassland_large_b_defeat_serene'     } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'grassland' }},
 		]
 	},

@@ -222,7 +222,7 @@ SEEDS_LV1TO10 = [
  "str_per_level":2, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
 
  # Level10
- {"id": "tomb_stalker_02", "name": "Sepulchre Shade", "hostile_type": "shadow", "role": "hazard", "min_spawn_level":10, "rarity": "rare", "base_xp":200, "common_drop": "herb_med", "rare_drop": "stimulant_small", "money_range": (20,100), "basic_attack": "ink swipe", "strong_attack": "vanishing cleave", "player_abilities": ["level_1_hostile_ability_shadow_flicker", "lv2_hostile_ability_dark_dark_faith_void_veil"], "base_str":5, "base_dex":9, "base_con":4, "base_int":6, "base_hp":140, "base_ap":8, "str_per_level":2, "dex_per_level":3, "con_per_level":1, "int_per_level":2},
+ {"id": "tomb_stalker_02", "name": "Sepulchre Shade", "hostile_type": "shadow", "role": "hazard", "min_spawn_level":10, "rarity": "rare", "base_xp":200, "common_drop": "herb_med", "rare_drop": "stimulant_small", "money_range": (20,100), "basic_attack": "ink swipe", "strong_attack": "vanishing cleave", "player_abilities": ["level_1_hostile_ability_shadow_flicker", "lv2_hostile_ability_dark_dark_spirit_void_veil"], "base_str":5, "base_dex":9, "base_con":4, "base_int":6, "base_hp":140, "base_ap":8, "str_per_level":2, "dex_per_level":3, "con_per_level":1, "int_per_level":2},
 
  {"id": "vault_keeper", "name": "Vault Keeper", "hostile_type": "humanoid", "role": "support", "min_spawn_level":10, "rarity": "rare", "base_xp":180,
  "common_drop": "stimulant_med", "rare_drop": "stimulant_large", "money_range": (20,120),
@@ -232,7 +232,7 @@ SEEDS_LV1TO10 = [
 
  {"id": "ossuary_lantern", "name": "Ossuary Lantern", "hostile_type": "undead", "role": "hazard", "min_spawn_level":10, "rarity": "superrare", "base_xp":520,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,340),
- "basic_attack": "lantern swing", "strong_attack": "blinding flare", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst", "lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "lantern swing", "strong_attack": "blinding flare", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst", "lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":8, "base_dex":5, "base_con":10, "base_int":9, "base_hp":240, "base_ap":10,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
 ]

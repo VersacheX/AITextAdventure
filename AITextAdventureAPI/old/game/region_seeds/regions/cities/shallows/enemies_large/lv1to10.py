@@ -150,13 +150,13 @@ SEEDS_LV1TO10 = [
 
  {"id": "siren_songster", "name": "Siren Songster", "hostile_type": "humanoid", "role": "support", "min_spawn_level":10, "rarity": "rare", "base_xp":200,
  "common_drop": "stimulant_med", "rare_drop": "tome_int", "money_range": (20,100),
- "basic_attack": "haunting hum", "strong_attack": "mesmerize wave", "player_abilities": ["level_1_hostile_ability_fire_faith_hearthsong"],
+ "basic_attack": "haunting hum", "strong_attack": "mesmerize wave", "player_abilities": ["level_1_hostile_ability_fire_spirit_hearthsong"],
  "base_str":1, "base_dex":5, "base_con":2, "base_int":10, "base_hp":60, "base_ap":6,
  "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":3},
 
  {"id": "harbor_herald", "name": "Harbor Herald", "hostile_type": "humanoid", "role": "support", "min_spawn_level":10, "rarity": "superrare", "base_xp":480,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,320),
- "basic_attack": "resounding call", "strong_attack": "commanding blow", "player_abilities": ["level_1_hostile_ability_inspire", "lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "resounding call", "strong_attack": "commanding blow", "player_abilities": ["level_1_hostile_ability_inspire", "lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":6, "base_dex":5, "base_con":8, "base_int":8, "base_hp":220, "base_ap":10,
  "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
 ]

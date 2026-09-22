@@ -1,9 +1,9 @@
 #LEVEL1 Abilities can have1 element. there is1 ability per element and1 ability per ability type.
-# ability types are: technique, faith, magic, tech, skill
+# ability types are: technique, spirit, magic, tech, skill
 # elements are: fire, water, earth, air, light, dark, ice, electric
 # ability type mappings to character and hostile stats:
 # technique: strength, constitution...physical attack, physical defense
-# faith: intelligence, constitution...spiritual attack, spiritual defense; healing power; debuff power
+# spirit: intelligence, constitution...spiritual attack, spiritual defense; healing power; debuff power
 # magic: intelligence...magical attack, magical defense; debuff power
 # tech: intelligence, dexterity...tech attack, tech defense; debuff power
 # skill: dexterity, strength...speed, critical hit rate; evasion
@@ -31,25 +31,25 @@ LEVEL_1_PLAYER_ABILITY_SEEDS = [
 
 
 
- # --- Faith ---
+ # --- Spirit ---
    ##HEALING
-   # # single target heal lvl1 faith heals cost 10ap, 12bp
- {"id": "light_faith_lv1_minor_heal", "name": "Minor Heal", "description": "Restore a small amount of HP.", "ability_type": "faith", "level":1, "elements": ["light"], "base_power":9, "ap_cost":10, "effect": "heal", "can_aoe": True},
+   # # single target heal lvl1 spirit heals cost 10ap, 12bp
+ {"id": "light_spirit_lv1_minor_heal", "name": "Minor Heal", "description": "Restore a small amount of HP.", "ability_type": "spirit", "level":1, "elements": ["light"], "base_power":9, "ap_cost":10, "effect": "heal", "can_aoe": True},
 
    ## STATUS CLEAN
- {"id": "water_faith_lv1_mending_streams", "name": "Mending Streams", "description": "A soothing stream that cures damaging ailments.", "ability_type": "faith", "level":1, "elements": ["water"], "base_power":0, "ap_cost":8, "effect": "cure", "status_keys": ["continuous_damage"], "can_aoe": False},
- {"id": "light_faith_lv1_glimmer", "name": "Glimmer", "description": "Holy light returns life to the petrified.", "ability_type": "faith", "level":1, "elements": ["light"], "base_power":0, "ap_cost":15, "effect": "cure", "status_keys": ["stun"], "can_aoe": False},
+ {"id": "water_spirit_lv1_mending_streams", "name": "Mending Streams", "description": "A soothing stream that cures damaging ailments.", "ability_type": "spirit", "level":1, "elements": ["water"], "base_power":0, "ap_cost":8, "effect": "cure", "status_keys": ["continuous_damage"], "can_aoe": False},
+ {"id": "light_spirit_lv1_glimmer", "name": "Glimmer", "description": "Holy light returns life to the petrified.", "ability_type": "spirit", "level":1, "elements": ["light"], "base_power":0, "ap_cost":15, "effect": "cure", "status_keys": ["stun"], "can_aoe": False},
 
    ##BUFFS lvel1 faith buffs cost )10ap aoe)8ap, 0bp +status
- {"id": "electric_faith_lv1_shock_blessing", "name": "Shock Blessing", "description": "A fervent blessing that imbues weapons with the power of electricity.", "ability_type": "faith", "level":1, "elements": ["electric"], "base_power":0, "ap_cost":8, "effect": "status", "status_keys": ["elemental_attack_buff"], "can_aoe": True},
- {"id": "fire_faith_lv1_warmth_blessing", "name": "Warmth Blessing", "description": "A fervent blessing that imbues weapons with the power of fire.", "ability_type": "faith", "level":1, "elements": ["fire"], "base_power":0, "ap_cost":8, "effect": "status", "status_keys": ["elemental_attack_buff"], "can_aoe": True},
- {"id": "earth_faith_lv1_earthen_blessing", "name": "Earthen Blessing", "description": "A small grounding aid that bolsters elemental defenses.", "ability_type": "faith", "level":1, "elements": ["earth"], "base_power":0, "ap_cost":8, "effect": "status", "status_keys": ["elemental_defense_buff"], "can_aoe": True},
+ {"id": "electric_spirit_lv1_shock_blessing", "name": "Shock Blessing", "description": "A fervent blessing that imbues weapons with the power of electricity.", "ability_type": "spirit", "level":1, "elements": ["electric"], "base_power":0, "ap_cost":8, "effect": "status", "status_keys": ["elemental_attack_buff"], "can_aoe": True},
+ {"id": "fire_spirit_lv1_warmth_blessing", "name": "Warmth Blessing", "description": "A fervent blessing that imbues weapons with the power of fire.", "ability_type": "spirit", "level":1, "elements": ["fire"], "base_power":0, "ap_cost":8, "effect": "status", "status_keys": ["elemental_attack_buff"], "can_aoe": True},
+ {"id": "earth_spirit_lv1_earthen_blessing", "name": "Earthen Blessing", "description": "A small grounding aid that bolsters elemental defenses.", "ability_type": "spirit", "level":1, "elements": ["earth"], "base_power":0, "ap_cost":8, "effect": "status", "status_keys": ["elemental_defense_buff"], "can_aoe": True},
  
- {"id": "air_faith_lv1_zephyr_bless", "name": "Zephyr Bless", "description": "A swift blessing that quickens allies and sharpens reflexes.", "ability_type": "faith", "level":1, "elements": ["air"], "base_power":0, "ap_cost":7, "effect": "status", "status_keys": ["dexterity_buff"], "can_aoe": False}, 
+ {"id": "air_spirit_lv1_zephyr_bless", "name": "Zephyr Bless", "description": "A swift blessing that quickens allies and sharpens reflexes.", "ability_type": "spirit", "level":1, "elements": ["air"], "base_power":0, "ap_cost":7, "effect": "status", "status_keys": ["dexterity_buff"], "can_aoe": False}, 
    ##DEBUFFS
- {"id": "dark_faith_lv1_shade_whisper", "name": "Blessings from Below", "description": "An unsettling benediction that saps vitality and resilience.", "ability_type": "faith", "level":1, "elements": ["dark"], "base_power":2, "ap_cost":8, "effect": "status", "status_keys": ["constitution_debuff"], "can_aoe": False},
+ {"id": "dark_spirit_lv1_shade_whisper", "name": "Blessings from Below", "description": "An unsettling benediction that saps vitality and resilience.", "ability_type": "spirit", "level":1, "elements": ["dark"], "base_power":2, "ap_cost":8, "effect": "status", "status_keys": ["constitution_debuff"], "can_aoe": False},
    ##STATUS EFFECT
- {"id": "light_faith_lv1_convert", "name": "Convert", "description": "Words of the devout to convert their listeners.", "ability_type": "faith", "level":1, "elements": ["light"], "base_power":0, "ap_cost":13, "effect": "status", "status_keys": ["confuse"], "can_aoe": False},
+ {"id": "light_spirit_lv1_convert", "name": "Convert", "description": "Words of the devout to convert their listeners.", "ability_type": "spirit", "level":1, "elements": ["light"], "base_power":0, "ap_cost":13, "effect": "status", "status_keys": ["confuse"], "can_aoe": False},
 
 
 
@@ -112,7 +112,7 @@ LEVEL_1_PLAYER_ABILITY_SEEDS = [
  {"id": "ruin_sentinel_earthshatter", "name": "Earthshatter", "description": "Violent ground rupture that damages nearby foes.", "ability_type": "technique", "level":1, "elements": ["earth"], "base_power":14, "ap_cost":11, "effect": "damage", "can_aoe": True, "non_player_ability": True},
  {"id": "stone_scarab_chitin_bite", "name": "Chitin Bite", "description": "A quick, precise bite that targets weak points.", "ability_type": "skill", "level":1, "elements": ["earth"], "base_power":10, "ap_cost":6, "effect": "damage", "can_aoe": False, "non_player_ability": True},
  {"id": "stone_scarab_carapace_bash", "name": "Carapace Bash", "description": "A heavy shell bash with a chance to stun the target.", "ability_type": "skill", "level":1, "elements": ["earth"], "base_power":2, "ap_cost":15, "effect": "status", "status_keys": ["stun"], "can_aoe": False, "non_player_ability": True},
- {"id": "level_1_hostile_ability_inspire", "name": "Inspire", "description": "A rallying cry that bolsters allies.", "ability_type": "faith", "level":1, "elements": ["light"], "base_power":0, "ap_cost":10, "effect": "status", "status_keys": ["attack_buff", "defense_buff"], "can_aoe": True, "non_player_ability": True},
+ {"id": "level_1_hostile_ability_inspire", "name": "Inspire", "description": "A rallying cry that bolsters allies.", "ability_type": "spirit", "level":1, "elements": ["light"], "base_power":0, "ap_cost":10, "effect": "status", "status_keys": ["attack_buff", "defense_buff"], "can_aoe": True, "non_player_ability": True},
  {"id": "level_1_hostile_ability_smoke_screen", "name": "Smoke Screen", "description": "A cloud of choking smoke that disorients foes.", "ability_type": "skill", "level":1, "elements": ["air"], "base_power":0, "ap_cost":10, "effect": "status", "status_keys": ["dexterity_debuff"], "can_aoe": True, "non_player_ability": True},
  {"id": "level_1_hostile_ability_reinforce_frame", "name": "Reinforce Frame", "description": "A mechanical reinforcement that bolsters defenses.", "ability_type": "tech", "level":1, "elements": ["earth"], "base_power":0, "ap_cost":12, "effect": "status", "status_keys": ["defense_buff", "constitution_buff"], "can_aoe": True, "non_player_ability": True},
  {"id": "level_1_hostile_ability_shadow_flicker", "name": "Shadow Flicker", "description": "A shadowy flicker that confuses foes.", "ability_type": "magic", "level":1, "elements": ["dark"], "base_power":0, "ap_cost":14, "effect": "status", "status_keys": ["confuse"], "can_aoe": False, "non_player_ability": True},
@@ -123,15 +123,15 @@ LEVEL_1_PLAYER_ABILITY_SEEDS = [
  {"id": "level_1_hostile_ability_poison_dart", "name": "Poison Dart", "description": "A dart that poisons the target.", "ability_type": "skill", "level":1, "elements": ["dark"], "base_power":0, "ap_cost":10, "effect": "status", "status_keys": ["continuous_damage"], "can_aoe": True, "non_player_ability": True},
  {"id": "level_1_hostile_ability_streamlet", "name": "Streamlet", "description": "A stream of water that washes over foes.", "ability_type": "magic", "level":1, "elements": ["water"], "base_power":9, "ap_cost":10, "effect": "damage", "can_aoe": True, "non_player_ability": True},
  {"id": "level_1_hostile_ability_dark_magic_daze_whisper", "name": "Daze Whisper", "description": "A whisper that confuses and disorients foes.", "ability_type": "magic", "level":1, "elements": ["dark"], "base_power":0, "ap_cost":13, "effect": "status", "status_keys": ["confuse"], "can_aoe": False, "non_player_ability": True},
- {"id": "level_1_hostile_ability_light_faith_prism_burst", "name": "Prism Burst", "description": "A burst of light that blinds and disorients foes.", "ability_type": "faith", "level":1, "elements": ["light"], "base_power":0, "ap_cost":10, "effect": "status", "status_keys": ["dexterity_debuff"], "can_aoe": True, "non_player_ability": True},
+ {"id": "level_1_hostile_ability_light_spirit_prism_burst", "name": "Prism Burst", "description": "A burst of light that blinds and disorients foes.", "ability_type": "spirit", "level":1, "elements": ["light"], "base_power":0, "ap_cost":10, "effect": "status", "status_keys": ["dexterity_debuff"], "can_aoe": True, "non_player_ability": True},
  {"id": "level_1_hostile_ability_air_skill_quick_shot", "name": "Quick Shot", "description": "A rapid shot that disorients foes.", "ability_type": "skill", "level":1, "elements": ["air"], "base_power":0, "ap_cost":10, "effect": "status", "status_keys": ["dexterity_debuff"], "can_aoe": True, "non_player_ability": True},
  {"id": "level_1_hostile_ability_dark_skill_corrosive_spit", "name": "Corrosive Spit", "description": "A spit that corrodes and weakens foes.", "ability_type": "skill", "level":1, "elements": ["dark"], "base_power":0, "ap_cost":10, "effect": "status", "status_keys": ["continuous_damage"], "can_aoe": True, "non_player_ability": True},
- {"id": "level_1_hostile_ability_fire_faith_ember_shield", "name": "Ember Shield", "description": "A shield of fire that burns and weakens foes.", "ability_type": "faith", "level":1, "elements": ["fire"], "base_power":1, "ap_cost":9, "effect": "status", "status_keys": ["elemental_attack_buff"], "can_aoe": True, "non_player_ability": True},
+ {"id": "level_1_hostile_ability_fire_spirit_ember_shield", "name": "Ember Shield", "description": "A shield of fire that burns and weakens foes.", "ability_type": "spirit", "level":1, "elements": ["fire"], "base_power":1, "ap_cost":9, "effect": "status", "status_keys": ["elemental_attack_buff"], "can_aoe": True, "non_player_ability": True},
  {"id": "level_1_hostile_ability_air_magic_gale_surge", "name": "Gale Surge", "description": "A surge of wind that knocks back and disorients foes.", "ability_type": "magic", "level":1, "elements": ["air"], "base_power":1, "ap_cost":9, "effect": "status", "status_keys": ["dexterity_debuff"], "can_aoe": True, "non_player_ability": True},
  {"id": "level_1_hostile_ability_electric_tech_hack_overload", "name": "Hack Overload", "description": "An overload that disrupts and weakens foes.", "ability_type": "tech", "level":1, "elements": ["electric"], "base_power":1, "ap_cost":8, "effect": "status", "status_keys": ["intelligence_debuff"], "can_aoe": True, "non_player_ability": True},
  {"id": "level_1_hostile_ability_air_skill_gale_dash", "name": "Gale Dash", "description": "A dash of wind that disorients foes.", "ability_type": "skill", "level":1, "elements": ["air"], "base_power":1, "ap_cost":9, "effect": "status", "status_keys": ["dexterity_debuff"], "can_aoe": True, "non_player_ability": True},
  {"id": "level_1_hostile_ability_electric_magic_chain_lightning", "name": "Chain Lightning", "description": "A bolt of lightning that jumps between foes.", "ability_type": "magic", "level":1, "elements": ["electric"], "base_power":9, "ap_cost":10, "effect": "damage", "can_aoe": True, "non_player_ability": True},
- {"id": "level_1_hostile_ability_fire_faith_hearthsong", "name": "Hearthsong", "description": "A song that warms and strengthens allies.", "ability_type": "faith", "level":1, "elements": ["fire"], "base_power":0, "ap_cost":10, "effect": "status", "status_keys": ["attack_buff", "defense_buff"], "can_aoe": True, "non_player_ability": True},
+ {"id": "level_1_hostile_ability_fire_spirit_hearthsong", "name": "Hearthsong", "description": "A song that warms and strengthens allies.", "ability_type": "spirit", "level":1, "elements": ["fire"], "base_power":0, "ap_cost":10, "effect": "status", "status_keys": ["attack_buff", "defense_buff"], "can_aoe": True, "non_player_ability": True},
  {"id": "level_1_hostile_ability_earth_magic_sap_bloom", "name": "Sap Bloom", "description": "A bloom of sap that slows and weakens foes.", "ability_type": "magic", "level":1, "elements": ["earth"], "base_power":1, "ap_cost":9, "effect": "status", "status_keys": ["dexterity_debuff"], "can_aoe": True, "non_player_ability": True},
  {"id": "light_magic_lv1_luminous_spike", "name": "Luminous Spike", "description": "A piercing spike of pure light.", "ability_type": "magic", "level":1, "elements": ["light"], "base_power":10, "ap_cost":11, "effect": "damage", "can_aoe": True, "non_player_ability": True},
 

@@ -187,7 +187,7 @@ WEAPONS_LV81_105 = [
         "constitution": 18,
         "elements": ["fire"]
     },
-    # rare / faith — lv92
+    # rare / spirit — lv92
     {
         "id": "sanctified_staff",
         "name": "Sanctified Staff",

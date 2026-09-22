@@ -250,7 +250,7 @@ NPC_DIALOG += [
     # Meet Sylka
     { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_small_meet_sylka', 'dialog': [ "Hidden routes feel wrong. The fog is watching back." ] },
     { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_small_meet_sylka', 'dialog': [ "If we don't act, the coves will swallow travelers whole. She's not exaggerating." ] },
-    { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_small_meet_sylka', 'dialog': [ "Find Loryth. The mist glyphs will tell us what's rising." ] },
+    { 'npc_id': 'spirit', 'dialog_id': 'kaera_shallows_small_meet_sylka', 'dialog': [ "Find Loryth. The mist glyphs will tell us what's rising." ] },
 
     # Find Loryth
     { 'npc_id': 'tech',    'dialog_id': 'kade_shallows_small_find_loryth',    'dialog': [ "A Silent Buoy — spirit of drowned warnings. If it awakens, the coast loses its voice." ] },
@@ -269,7 +269,7 @@ NPC_DIALOG += [
 
     # Silent Buoy
     { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_small_silent_buoy', 'dialog': [ "The fog clears. The signals return." ] },
-    { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_small_silent_buoy', 'dialog': [ "You've restored the coast's voice. The Shallows will remember." ] },
+    { 'npc_id': 'spirit', 'dialog_id': 'kaera_shallows_small_silent_buoy', 'dialog': [ "You've restored the coast's voice. The Shallows will remember." ] },
     { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_small_silent_buoy',  'dialog': [ "Errol can read the flags again. That's enough." ] },
 
 ]
@@ -289,7 +289,7 @@ NPC_DIALOG += [
 
     # Type C – Earn Andrea
     { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_small_c_earn_andrea', 'dialog': [ "We're not performing survival — we're actually doing it. That's the most interesting thing she's seen in months." ] },
-    { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_small_c_earn_andrea', 'dialog': [ "Morale isn't a luxury. It's the difference between a party that breaks and one that doesn't." ] },
+    { 'npc_id': 'spirit', 'dialog_id': 'kaera_shallows_small_c_earn_andrea', 'dialog': [ "Morale isn't a luxury. It's the difference between a party that breaks and one that doesn't." ] },
     { 'npc_id': 'nia',   'dialog_id': 'nia_shallows_small_c_earn_andrea',   'dialog': [ "She keeps people standing. Let her come." ] },
 
 ]
@@ -315,7 +315,7 @@ NPC_DIALOG += [
     # Type D – Defeat Coveveil Voice
     { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_small_d_defeat_coveveil_voice', 'dialog': [ "Quiet. Take the Tidekin iron." ] },
     { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_small_d_defeat_coveveil_voice',  'dialog': [ "It doesn't rust, doesn't dull, and it knows where the current is before you do." ] },
-    { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_small_d_defeat_coveveil_voice', 'dialog': [ "Every hidden route the Voice sealed has opened. The cove-runners can move freely again." ] },
+    { 'npc_id': 'spirit', 'dialog_id': 'kaera_shallows_small_d_defeat_coveveil_voice', 'dialog': [ "Every hidden route the Voice sealed has opened. The cove-runners can move freely again." ] },
 
 ]
 
@@ -329,7 +329,7 @@ NPC_DIALOG += [
 
     # B – Defeat Uul'thar
     { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_small_b_defeat_uulthar', 'dialog': [ "Stay down. The tide doesn't need another system to correct." ] },
-    { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_small_b_defeat_uulthar', 'dialog': [ "Some of us used to think the world was a system to be corrected. We learned to let the tide be what it is." ] },
+    { 'npc_id': 'spirit', 'dialog_id': 'kaera_shallows_small_b_defeat_uulthar', 'dialog': [ "Some of us used to think the world was a system to be corrected. We learned to let the tide be what it is." ] },
 
 ]
 
@@ -440,7 +440,7 @@ TASKS = [
             },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_shallows_small_meet_sylka' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_small_meet_sylka' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_small_meet_sylka' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_shallows_small_meet_sylka' } },
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
@@ -672,7 +672,7 @@ TASKS = [
 				}
 			},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_shallows_small_c_earn_andrea' } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_small_c_earn_andrea' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_shallows_small_c_earn_andrea' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_shallows_small_c_earn_andrea'   } },
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'andrea_starveil','standing_text': [ "Morale isn't a luxury.", "It's the difference between a party that breaks and one that doesn't.", "I keep people standing. Let me come." ] } },
 			{
@@ -811,7 +811,7 @@ TASKS += [
 			{ 'event_type': 'initiate_dialog',           'params': { 'npc_id': 'uulthar',   'dialog_id': 'uulthar_b_defeated'                         }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_small_b_defeat_uulthar'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple',    'dialog_id': 'ripple_b_victory'                       } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'kaera_shallows_small_b_defeat_uulthar'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',     'dialog_id': 'kaera_shallows_small_b_defeat_uulthar'  } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'shallows' }},
 		]
 	},
@@ -992,7 +992,7 @@ TASKS += [
 			},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_small_d_defeat_coveveil_voice' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_small_d_defeat_coveveil_voice'  } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_small_d_defeat_coveveil_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_shallows_small_d_defeat_coveveil_voice' } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {

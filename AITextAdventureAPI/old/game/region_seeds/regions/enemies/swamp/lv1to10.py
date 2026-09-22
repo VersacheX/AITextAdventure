@@ -68,8 +68,8 @@ SEEDS_LV1TO10 = [
  "basic_attack": "snarl", "strong_attack": "bog stomp", "player_abilities": [], "base_str":5, "base_dex":5, "base_con":4, "base_int":2, "base_hp":80, "base_ap":5, "str_per_level":2, "dex_per_level":1, "con_per_level":1, "int_per_level":0},
 
  # Level6
- {"id": "swamp_priest", "name": "Swamp Priest", "hostile_type": "faith", "role": "support", "min_spawn_level":6, "rarity": "rare", "base_xp":120, "common_drop": "herb_major", "rare_drop": "tome_con", "money_range": (20,100),
- "basic_attack": "blighted palm", "strong_attack": "curse flare", "player_abilities": ["light_light_air_faith_lv3_major_heal", "air_faith_lv1_zephyr_bless"],
+ {"id": "swamp_priest", "name": "Swamp Priest", "hostile_type": "spirit", "role": "support", "min_spawn_level":6, "rarity": "rare", "base_xp":120, "common_drop": "herb_major", "rare_drop": "tome_con", "money_range": (20,100),
+ "basic_attack": "blighted palm", "strong_attack": "curse flare", "player_abilities": ["light_light_air_spirit_lv3_major_heal", "air_spirit_lv1_zephyr_bless"],
  "base_str":3, "base_dex":3, "base_con":6, "base_int":10, "base_hp":96, "base_ap":8, "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":2},
 
  {"id": "neon_reaver", "name": "Neon Reaver", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":6, "rarity": "rare", "base_xp":140, "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (18,80),

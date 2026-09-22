@@ -68,7 +68,7 @@ WEAPONS_LV21_35 = [
         "constitution": 14,
         "elements": ["fire", "air"]
     },
-    # rare / faith — lv33
+    # rare / spirit — lv33
     {
         "id": "blessed_scepter",
         "name": "Blessed Scepter",

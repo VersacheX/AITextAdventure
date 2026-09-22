@@ -76,7 +76,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "sheepherd_spirit", "name": "Sheepherd Spirit", "hostile_type": "spirit", "role": "support", "min_spawn_level":16, "rarity": "uncommon", "base_xp":130,
  "common_drop": "herb_med", "rare_drop": "tome_con", "money_range": (8,36),
- "basic_attack": "ethereal nudge", "strong_attack": "wailing shepherd", "player_abilities": ["lv2_hostile_ability_dark_light_faith_calm_bleat"],
+ "basic_attack": "ethereal nudge", "strong_attack": "wailing shepherd", "player_abilities": ["lv2_hostile_ability_dark_light_spirit_calm_bleat"],
  "base_str":2, "base_dex":4, "base_con":5, "base_int":6, "base_hp":64, "base_ap":6,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":1},
 
@@ -102,7 +102,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "ancient_dryad_corrupt", "name": "Corrupted Dryad", "hostile_type": "fey", "role": "hazard", "min_spawn_level":18, "rarity": "rare", "base_xp":260,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (30,120),
- "basic_attack": "root slap", "strong_attack": "venomous bramble", "player_abilities": ["lv2_hostile_ability_earth_air_faith_thornbind"],
+ "basic_attack": "root slap", "strong_attack": "venomous bramble", "player_abilities": ["lv2_hostile_ability_earth_air_spirit_thornbind"],
  "base_str":4, "base_dex":4, "base_con":8, "base_int":10, "base_hp":140, "base_ap":6,
  "str_per_level":1, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
 

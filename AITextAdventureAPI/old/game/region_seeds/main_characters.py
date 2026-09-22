@@ -1,6 +1,6 @@
 ﻿CHARACTER_CLASS_MAP = {
     'technique': 'Chock',
-    'faith': 'Kaera',
+    'spirit': 'Kaera',
     'magic': 'Moxie',
     'tech': 'Kade',
     'skill': 'Poise',
@@ -39,7 +39,7 @@ PLAYER_NPCS = [
 		'song_id': 'hero_instrumental_skillet'
     },
     {
-        "npc_id": "faith",
+        "npc_id": "spirit",
         "name": "Kaera",
         "description": (
 			"A devout cleric with a deep connection to the divine. Kaera serves as the steadfast protector and emotional anchor of the group."
@@ -178,7 +178,7 @@ PLAYER_NPC_JOIN_DIALOGS = [
 			"Let's find some shelter and gather our thoughts."
 	]},
 	{
-		'npc_id': 'faith', 
+		'npc_id': 'spirit', 
 		'dialog_id': 'begin_game_add_pc', 
 		'dialog': [
 			"This land feels... different. Like it's alive in a way I've never felt before.",
@@ -220,7 +220,7 @@ PLAYER_NPC_JOIN_DIALOGS = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'ch2_add_pc',
 		'dialog': [
 			"The turmoil in this world is overwhelming. I was gathering ingredients for a ritual when things went awry.",
@@ -260,7 +260,7 @@ PLAYER_NPC_JOIN_DIALOGS = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'add_pending_character',
 		'dialog': [
 			"It's all coming back to me...  Oh god, you heathens!",

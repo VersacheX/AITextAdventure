@@ -16,7 +16,7 @@ RANDOM_HOSTILE_SEEDS = [
  {"id": "wind_hexer_bazaar", "name": "Wind Hexer", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level": 34, "rarity": "uncommon", "base_xp": 600,
   "common_drop": "tome_int", "rare_drop": None, "money_range": (120, 420),
   "basic_attack": "wind curse", "strong_attack": "gale affliction",
-  "player_abilities": ["lv2_hostile_ability_air_water_faith_gale_of_silence", "lv2_hostile_ability_dark_dark_faith_void_veil"],
+  "player_abilities": ["lv2_hostile_ability_air_water_spirit_gale_of_silence", "lv2_hostile_ability_dark_dark_spirit_void_veil"],
   "base_str": 6, "dex_per_level": 2, "base_con": 8, "base_int": 20, "base_hp": 560, "base_ap": 14,
   "base_dex": 10, "str_per_level": 1, "con_per_level": 1, "int_per_level": 4},
  {"id": "steppe_predator_lg", "name": "Steppe Predator", "hostile_type": "creature", "role": "damage", "min_spawn_level": 36, "rarity": "uncommon", "base_xp": 660,

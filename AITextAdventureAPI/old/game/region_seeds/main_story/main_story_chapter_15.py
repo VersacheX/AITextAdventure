@@ -169,8 +169,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch15_real_enemy',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch15_real_enemy',
         'dialog': [
             "Then the real enemy might not be Edict alone."
         ]
@@ -271,8 +271,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch15_pageant_aftermath',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch15_pageant_aftermath',
         'dialog': [
             "She was so afraid of being ordinary... She turned admiration into a cage and locked herself inside it.",
             "No one should have to perform just to feel worthy of existing."
@@ -328,8 +328,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch15_reach_edict',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch15_reach_edict',
         'dialog': [
             "Then help us reach him. Before more people are forced to wear masks they don’t believe in."
         ]
@@ -361,8 +361,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch15_no_masks',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch15_no_masks',
         'dialog': [
             "We won’t wear his masks either."
         ]
@@ -420,8 +420,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch15_no_cages',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch15_no_cages',
         'dialog': [
             "No masks. No cages. Just us."
         ]
@@ -442,8 +442,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch15_who_else',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch15_who_else',
         'dialog': [
             "Who? We need to find anyone who stands against Edict."
         ]
@@ -545,8 +545,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch15_ravel_strength',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch15_ravel_strength',
         'dialog': [
             "We spoke with Ravel. She has a strength you don't see often here. A wholeness."
         ]
@@ -597,8 +597,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch15_not_anomaly',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch15_not_anomaly',
         'dialog': [
             "He's a man, not an anomaly. Let him go."
         ]
@@ -642,8 +642,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch15_world_without_soul',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch15_world_without_soul',
         'dialog': [
             "He's wrong. A world without memory is a world without a soul."
         ]
@@ -686,8 +686,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch15_working_together',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch15_working_together',
         'dialog': [
             "You two are working together? After everything?"
         ]
@@ -761,8 +761,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch15_own_path',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch15_own_path',
         'dialog': [
             "(voice firm, protective) We choose our own path. No more cages."
         ]
@@ -811,8 +811,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch15_collapse',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch15_collapse',
         'dialog': [
             "The collapse... it's not just the city! It's everything!"
         ]
@@ -902,7 +902,7 @@ TASKS = [
         'task_complete_events': [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'caius', 'dialog_id': 'caius_ch15_intro'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch15_played'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'faith', 'dialog_id': 'faith_ch15_real_enemy'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch15_real_enemy'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'caius', 'dialog_id': 'caius_ch15_meet_pageant'}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'caius', 'standing_text': ["Pageant holds the key to Edict’s inner sanctum. But trust nothing that smiles too perfectly here."]}},
             {'event_type': 'award_task', 'params': {'task_id': 'main_story_ch15_meet_pageant'}}
@@ -945,7 +945,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': None, 'dialog_id': 'narrator_ch15_pageant_dissolves'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'pageant', 'dialog_id': 'pageant_ch15_clapped'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': None, 'dialog_id': 'narrator_ch15_pageant_aftermath'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'faith', 'dialog_id': 'faith_ch15_pageant_aftermath'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch15_pageant_aftermath'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch15_pageant_aftermath'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch15_pageant_aftermath'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch15_pageant_aftermath'}},
@@ -966,11 +966,11 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'elian', 'dialog_id': 'elian_ch15_intro'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'faith', 'dialog_id': 'faith_ch15_reach_edict'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch15_reach_edict'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch15_honest_crack'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch15_exploit_weakness'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'elian', 'dialog_id': 'elian_ch15_meet_jett'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'faith', 'dialog_id': 'faith_ch15_no_masks'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch15_no_masks'}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'elian', 'standing_text': ["The stage is cracking. Maybe this time the truth gets a chance to speak."]}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'caius', 'standing_text': ["Pageant’s fall proves even the gatekeepers can break. The Citadel is vulnerable now."]}},
             {'event_type': 'award_task', 'params': {'task_id': 'main_story_ch15_meet_jett'}}
@@ -990,7 +990,7 @@ TASKS = [
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch15_hit_them'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'jett', 'dialog_id': 'jett_ch15_on_your_own'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren', 'dialog_id': 'lyren_ch15_simply_be'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'faith', 'dialog_id': 'faith_ch15_no_cages'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch15_no_cages'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'jett', 'dialog_id': 'jett_ch15_ballsy'}},
             {'event_type': 'unlock_dungeon', 'params': {'dungeon_id': 'the_citadel'}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'jett', 'standing_text': ["The Heap remembers what the Citadel wants forgotten."]}},
@@ -1007,7 +1007,7 @@ TASKS = [
         'task_complete_events': [
             {'event_type': 'create_npc', 'params': {'npc_id': 'warden_hale', 'location': None}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'ravel', 'dialog_id': 'ravel_ch15_warden_hale'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'faith', 'dialog_id': 'faith_ch15_who_else'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch15_who_else'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'ravel', 'dialog_id': 'ravel_ch15_hale_intro'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'skill', 'dialog_id': 'skill_ch15_where_is_he'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'ravel', 'dialog_id': 'ravel_ch15_jett_knows'}},
@@ -1054,7 +1054,7 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'hask', 'dialog_id': 'hask_ch15_cracks'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'faith', 'dialog_id': 'faith_ch15_ravel_strength'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch15_ravel_strength'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'hask', 'dialog_id': 'hask_ch15_ravel_flaw'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch15_ravel_real'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'hask', 'dialog_id': 'hask_ch15_prison_reveal'}},
@@ -1078,7 +1078,7 @@ TASKS = [
         ],
         'task_complete_events': [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'prison_warden', 'dialog_id': 'warden_ch15_intro'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'faith', 'dialog_id': 'faith_ch15_not_anomaly'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch15_not_anomaly'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'prison_warden', 'dialog_id': 'warden_ch15_protocol'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch15_step_aside'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'prison_warden', 'dialog_id': 'warden_ch15_denied'}},
@@ -1097,7 +1097,7 @@ TASKS = [
         'task_complete_events': [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': None, 'dialog_id': 'narrator_ch15_warden_defeat'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'warden_hale', 'dialog_id': 'hale_ch15_freed'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'faith', 'dialog_id': 'faith_ch15_world_without_soul'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch15_world_without_soul'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'warden_hale', 'dialog_id': 'hale_ch15_precisely'}},
             {'event_type': 'hide_npc', 'params': {'npc_id': 'prison_warden'}},
             {'event_type': 'character_join', 'params': {'character_id': 'warden_hale'}}
@@ -1116,7 +1116,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'edict', 'dialog_id': 'edict_ch15_intro'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'stigma', 'dialog_id': 'stigma_ch15_return'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'pageant', 'dialog_id': 'pageant_ch15_return'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'faith', 'dialog_id': 'faith_ch15_working_together'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch15_working_together'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'edict', 'dialog_id': 'edict_ch15_understanding'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'stigma', 'dialog_id': 'stigma_ch15_caretaker'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'pageant', 'dialog_id': 'pageant_ch15_moxie'}},
@@ -1126,7 +1126,7 @@ TASKS = [
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch15_scared_masks'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch15_reject_control'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren', 'dialog_id': 'lyren_ch15_breaking_them'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'faith', 'dialog_id': 'faith_ch15_own_path'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch15_own_path'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'edict', 'dialog_id': 'edict_ch15_final_word'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'stigma', 'dialog_id': 'stigma_ch15_final_word'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'pageant', 'dialog_id': 'pageant_ch15_final_act'}},
@@ -1147,7 +1147,7 @@ TASKS = [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': 'edict', 'dialog_id': 'edict_ch15_defeat_whisper'}},
             {'event_type': 'hide_npc', 'params': {'npc_id': 'edict'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': None, 'dialog_id': 'narrator_ch15_world_collapse'}},
-            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'faith', 'dialog_id': 'faith_ch15_collapse'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'spirit', 'dialog_id': 'spirit_ch15_collapse'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': None, 'dialog_id': 'narrator_ch15_ocean_boils'}},
             {'event_type': 'remove_ocean'},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': None, 'dialog_id': 'narrator_ch15_teleport'}},

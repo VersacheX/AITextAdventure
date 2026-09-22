@@ -36,7 +36,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==3
  {"id": "barkbard", "name": "Barkbard", "hostile_type": "humanoid", "role": "support", "min_spawn_level":3, "rarity": "common", "base_xp":14,
  "common_drop": "herb_minor", "rare_drop": "stimulant_small", "money_range": (1,10),
- "basic_attack": "singed lute slap", "strong_attack": "crescendo of thorns", "player_abilities": ["water_faith_lv1_mending_streams"],
+ "basic_attack": "singed lute slap", "strong_attack": "crescendo of thorns", "player_abilities": ["water_spirit_lv1_mending_streams"],
  "base_str":1, "base_dex":5, "base_con":2, "base_int":5, "base_hp":14, "base_ap":3,
  "str_per_level":0, "dex_per_level":1, "con_per_level":0, "int_per_level":1},
 
@@ -81,7 +81,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==6
  {"id": "herbal_haglet", "name": "Herbal Haglet", "hostile_type": "humanoid", "role": "support", "min_spawn_level":6, "rarity": "rare", "base_xp":80,
  "common_drop": "herb_major", "rare_drop": "tome_con", "money_range": (12,60),
- "basic_attack": "sour pinch", "strong_attack": "potion lob", "player_abilities": ["light_faith_lv1_minor_heal"],
+ "basic_attack": "sour pinch", "strong_attack": "potion lob", "player_abilities": ["light_spirit_lv1_minor_heal"],
  "base_str":2, "base_dex":2, "base_con":5, "base_int":7, "base_hp":40, "base_ap":6,
  "str_per_level":0, "dex_per_level":0, "con_per_level":2, "int_per_level":2},
 
@@ -94,13 +94,13 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==7
  {"id": "cottage_matron_small", "name": "Cottage Matron", "hostile_type": "humanoid", "role": "support", "min_spawn_level":7, "rarity": "uncommon", "base_xp":50,
  "common_drop": "herb_med", "rare_drop": "tome_con", "money_range": (6,30),
- "basic_attack": "rolling pin bash", "strong_attack": "boiling rebuke", "player_abilities": ["light_faith_lv1_minor_heal"],
+ "basic_attack": "rolling pin bash", "strong_attack": "boiling rebuke", "player_abilities": ["light_spirit_lv1_minor_heal"],
  "base_str":3, "base_dex":2, "base_con":6, "base_int":4, "base_hp":56, "base_ap":5,
  "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":1},
 
  {"id": "cottage_matron_small_2", "name": "Cottage Matron", "hostile_type": "humanoid", "role": "support", "min_spawn_level":7, "rarity": "common", "base_xp":60,
  "common_drop": "herb_med", "rare_drop": "tome_con", "money_range": (6,30),
- "basic_attack": "rolling pin bash", "strong_attack": "boiling rebuke", "player_abilities": ["light_faith_lv1_minor_heal"],
+ "basic_attack": "rolling pin bash", "strong_attack": "boiling rebuke", "player_abilities": ["light_spirit_lv1_minor_heal"],
  "base_str":4, "base_dex":3, "base_con":7, "base_int":4, "base_hp":66, "base_ap":6,
  "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":1},
 
@@ -139,7 +139,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "elder_herbalist", "name": "Elder Herbalist", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":10, "rarity": "superrare", "base_xp":420,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,320),
- "basic_attack": "potent pinch", "strong_attack": "vine of ages", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst"],
+ "basic_attack": "potent pinch", "strong_attack": "vine of ages", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst"],
  "base_str":4, "base_dex":5, "base_con":10, "base_int":12, "base_hp":220, "base_ap":10,
  "str_per_level":1, "dex_per_level":1, "con_per_level":3, "int_per_level":4},
 ]

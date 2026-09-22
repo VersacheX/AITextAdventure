@@ -290,7 +290,7 @@ NPC_DIALOG += [
 
 	# Type E – Defeat Oathrot Voice / Return to Janrel
 	{ 'npc_id': 'technique', 'dialog_id': 'chock_swamp_mid_e_return_to_janrel', 'dialog': [ "The lantern steadied the moment we returned. The Voice no longer has it." ] },
-	{ 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_e_return_to_janrel', 'dialog': [ "A sealed vessel — clay, swamp-fired. The omen-light reads it as a memory container compressed over centuries." ] },
+	{ 'npc_id': 'spirit', 'dialog_id': 'kaera_swamp_mid_e_return_to_janrel', 'dialog': [ "A sealed vessel — clay, swamp-fired. The omen-light reads it as a memory container compressed over centuries." ] },
 	{ 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_e_return_to_janrel',  'dialog': [ "It belongs further down the swamp. Carry it sealed. If it opens early, the memory dissipates." ] },
 
 ]
@@ -315,7 +315,7 @@ NPC_DIALOG += [
 
 	# Type D – Defeat Court Guardian
 	{ 'npc_id': 'technique', 'dialog_id': 'chock_swamp_mid_d_defeat_court_guardian', 'dialog': [ "The lantern blazed the moment we returned. Not in warning — in recognition." ] },
-	{ 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_d_defeat_court_guardian', 'dialog': [ "The Mirebound Sovereign has chosen its bearer. That bargain is sealed." ] },
+	{ 'npc_id': 'spirit', 'dialog_id': 'kaera_swamp_mid_d_defeat_court_guardian', 'dialog': [ "The Mirebound Sovereign has chosen its bearer. That bargain is sealed." ] },
 	{ 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_d_defeat_court_guardian',  'dialog': [ "Carry it with the weight it deserves." ] },
 
 ]
@@ -326,7 +326,7 @@ NPC_DIALOG += [
 	# Type C – Find Osten
 	{ 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_c_find_osten', 'dialog': [ "The bayou holds stories the way skin holds warmth — for a little while after the fire goes out. They've been trying to write them all down." ] },
 	{ 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_c_find_osten',  'dialog': [ "There are more than they can carry alone. We look like people who have collected a few of our own." ] },
-	{ 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_c_find_osten', 'dialog': [ "Ress will know whether the lantern trusts them." ] },
+	{ 'npc_id': 'spirit', 'dialog_id': 'kaera_swamp_mid_c_find_osten', 'dialog': [ "Ress will know whether the lantern trusts them." ] },
 
 	# Type C – Consult Ress
 	{ 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_c_consult_ress',  'dialog': [ "The lantern hasn't flared once around them in three days. That means something." ] },
@@ -335,7 +335,7 @@ NPC_DIALOG += [
 
 	# Type C – Earn Osten
 	{ 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_c_earn_osten', 'dialog': [ "The stories they need are moving — they don't stay in one place. Neither should they." ] },
-	{ 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_c_earn_osten', 'dialog': [ "They're coming. The bayou's stories travel better with company." ] },
+	{ 'npc_id': 'spirit', 'dialog_id': 'kaera_swamp_mid_c_earn_osten', 'dialog': [ "They're coming. The bayou's stories travel better with company." ] },
 	{ 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_c_earn_osten',  'dialog': [ "Good. We could use someone who listens to water." ] },
 
 ]
@@ -555,7 +555,7 @@ TASKS += [
 				}
 			},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_swamp_mid_e_return_to_janrel' } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_e_return_to_janrel' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_swamp_mid_e_return_to_janrel' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_e_return_to_janrel'  } },
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lanternsworn_janrel', 'standing_text': [ "The lantern steadied the moment you returned.", "You have it — and the Oathrot Voice no longer does.", "When the Broken Pact dissolved, it pressed this into my hands." ] } },
 			{
@@ -692,7 +692,7 @@ TASKS += [
 				}
 			},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_swamp_mid_d_defeat_court_guardian' } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_d_defeat_court_guardian' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_swamp_mid_d_defeat_court_guardian' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_d_defeat_court_guardian'  } },
 		]
 	},
@@ -732,7 +732,7 @@ TASKS += [
 			},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_c_find_osten' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_c_find_osten'  } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_c_find_osten' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_swamp_mid_c_find_osten' } },
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'osten_dreamweaver', 'standing_text': [ "The bayou holds stories the way skin holds warmth — for a little while after the fire goes out.", "I've been trying to write them all down, but there are more than I can carry alone.", "You look like people who have collected a few of your own." ] } },
 			{
 				'event_type': 'award_task',
@@ -785,7 +785,7 @@ TASKS += [
 				}
 			},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_swamp_mid_c_earn_osten' } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_mid_c_earn_osten' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_swamp_mid_c_earn_osten' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_swamp_mid_c_earn_osten'  } },
 			{
 				'event_type': 'hide_npc',

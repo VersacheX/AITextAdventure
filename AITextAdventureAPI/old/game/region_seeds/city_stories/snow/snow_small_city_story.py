@@ -243,7 +243,7 @@ NPC_DIALOG += [
 	{ 'npc_id': 'skill',   'dialog_id': 'poise_snow_small_meet_karrek',   'dialog': [ "Mira will know what the quiet supply routes mean." ] },
 
 	# Meet Survivor Mira
-	{ 'npc_id': 'faith', 'dialog_id': 'kaera_snow_small_meet_survivor_mira', 'dialog': [ "Supply routes gone quiet. The cold coming from the wrong direction." ] },
+	{ 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_small_meet_survivor_mira', 'dialog': [ "Supply routes gone quiet. The cold coming from the wrong direction." ] },
 	{ 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_meet_survivor_mira',  'dialog': [ "If the outpost loses its watch, the whole frontier falls dark." ] },
 	{ 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_meet_survivor_mira', 'dialog': [ "Find Orlena. The storm-patterns near the hollow are fracturing." ] },
 
@@ -294,7 +294,7 @@ NPC_DIALOG += [
 
 	# Type D – Defeat Stormhollow Voice
 	{ 'npc_id': 'technique', 'dialog_id': 'chock_snow_small_d_defeat_stormhollow_voice', 'dialog': [ "The storm broke clean when we came back." ] },
-	{ 'npc_id': 'faith', 'dialog_id': 'kaera_snow_small_d_defeat_stormhollow_voice', 'dialog': [ "That plate hasn't breathed open air since the second siege. The outpost's warden returns to the wall." ] },
+	{ 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_small_d_defeat_stormhollow_voice', 'dialog': [ "That plate hasn't breathed open air since the second siege. The outpost's warden returns to the wall." ] },
 	{ 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_d_defeat_stormhollow_voice',  'dialog': [ "Brawn says it's the finest warden-grade steel he's handled. Fitting." ] },
 
 ]
@@ -413,7 +413,7 @@ TASKS = [
 					'dialog_id': 'mira_intro'
 				}
 			},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_small_meet_survivor_mira' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_small_meet_survivor_mira' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_meet_survivor_mira'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_meet_survivor_mira' } },
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'survivor_mira', 'standing_text': [ "Supply routes have gone quiet.", "The cold comes from the wrong direction.", "If the outpost loses its watch, the whole frontier falls dark." ] } },
@@ -725,7 +725,7 @@ TASKS += [
 				}
 			},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_snow_small_d_defeat_stormhollow_voice' } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_small_d_defeat_stormhollow_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_small_d_defeat_stormhollow_voice' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_d_defeat_stormhollow_voice'  } },
 		]
 	},

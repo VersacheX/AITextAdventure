@@ -285,8 +285,8 @@ NPC_DIALOG += [
 
     # Type C – Find Rynn
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_grassland_small_c_find_rynn',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_grassland_small_c_find_rynn',
         'dialog': [
             "Folk-charm wounds that won't close the way they should. The corruption is bleeding into the body."
         ]
@@ -308,8 +308,8 @@ NPC_DIALOG += [
 
     # Type C – Consult Sylfa
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_grassland_small_c_consult_sylfa',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_grassland_small_c_consult_sylfa',
         'dialog': [
             "He remembers every patient by name. Sylfa noticed."
         ]
@@ -331,8 +331,8 @@ NPC_DIALOG += [
 
     # Type C – Earn Rynn
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_grassland_small_c_earn_rynn',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_grassland_small_c_earn_rynn',
         'dialog': [
             "Sylfa doesn't say that lightly. It settled it for him."
         ]
@@ -378,8 +378,8 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_grassland_small_d_deliver_grief_token',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_grassland_small_d_deliver_grief_token',
         'dialog': [
             "These are extraordinarily rare. Marnel reads folk tales better than anyone — she'll know which story it belongs to."
         ]
@@ -394,8 +394,8 @@ NPC_DIALOG += [
 
     # Type D – Consult Marnel
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_grassland_small_d_consult_marnel',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_grassland_small_d_consult_marnel',
         'dialog': [
             "It carries the echo of a story that was never finished. The lineage held onto it for generations."
         ]
@@ -447,8 +447,8 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_grassland_small_d_defeat_charmroot_voice',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_grassland_small_d_defeat_charmroot_voice',
         'dialog': [
             "A talisman that carries the weight of every unfinished story — and somehow that makes it stronger."
         ]
@@ -468,8 +468,8 @@ NPC_DIALOG += [
 
     # Type A – Ch12 Find Keepsake
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_grassland_small_a_ch12_find_keepsake',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_grassland_small_a_ch12_find_keepsake',
         'dialog': [
             "Pressed with real care. The petals kept their colour perfectly."
         ]
@@ -517,7 +517,7 @@ TASKS += [
 					'dialog_id': 'rynn_c_first_meet'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_grassland_small_c_find_rynn' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_grassland_small_c_find_rynn' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_grassland_small_c_find_rynn'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_grassland_small_c_find_rynn' } },
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rynn', 'standing_text': [
@@ -549,7 +549,7 @@ TASKS += [
 					'dialog_id': 'sylfa_c_vouch'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_grassland_small_c_consult_sylfa' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_grassland_small_c_consult_sylfa' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_grassland_small_c_consult_sylfa'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_grassland_small_c_consult_sylfa'   } },
 			{
@@ -587,7 +587,7 @@ TASKS += [
 					'dialog_id': 'rynn_c_joins'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_grassland_small_c_earn_rynn' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_grassland_small_c_earn_rynn' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',   'dialog_id': 'nia_grassland_small_c_earn_rynn'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_grassland_small_c_earn_rynn' } },
 			{
@@ -666,7 +666,7 @@ TASKS += [
 				}
 			},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_grassland_small_d_deliver_grief_token'  } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_grassland_small_d_deliver_grief_token' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_grassland_small_d_deliver_grief_token' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_grassland_small_d_deliver_grief_token' } },
 			{
 				'event_type': 'create_npc',
@@ -721,7 +721,7 @@ TASKS += [
 					'dialog_id': 'marnel_d_token_read'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',   'dialog_id': 'faith_grassland_small_d_consult_marnel'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',   'dialog_id': 'spirit_grassland_small_d_consult_marnel'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_grassland_small_d_consult_marnel'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grmnaw_grassland_small_d_consult_marnel' } },
 			{
@@ -829,7 +829,7 @@ TASKS += [
 				}
 			},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_grassland_small_d_defeat_charmroot_voice' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_grassland_small_d_defeat_charmroot_voice'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',     'dialog_id': 'spirit_grassland_small_d_defeat_charmroot_voice'     } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_grassland_small_d_defeat_charmroot_voice'      } },
 			{
 				'event_type': 'set_npc_standing_text',
@@ -896,7 +896,7 @@ TASKS += [
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'curator_bramble', 'dialog_id': 'bramble_a_ch12_pressed_flower' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_grassland_small_a_ch12_find_keepsake'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',  'dialog_id': 'spirit_grassland_small_a_ch12_find_keepsake'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',    'dialog_id': 'nia_grassland_small_a_ch12_find_keepsake'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_grassland_small_a_ch12_find_keepsake'  } },
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'curator_bramble', 'standing_text': [ "That pressed flower — it clearly matters to someone. I can see it in how it was pressed — with real care." ]} },

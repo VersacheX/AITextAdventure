@@ -80,7 +80,7 @@ _STORY_GROUP_ACT_LABELS: Dict[str, str] = {
 
 # The five player-character npc_ids that pending_character resolves to at runtime
 _PENDING_CHARACTER_IDS: Tuple[str, ...] = (
-    "technique", "magic", "tech", "skill", "faith",
+    "technique", "magic", "tech", "skill", "spirit",
 )
 
 

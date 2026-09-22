@@ -75,8 +75,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch18_act_of_defiance',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch18_act_of_defiance',
 		'dialog': [
 			"It sees our very act of choosing as defiance."
 		]
@@ -97,8 +97,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch18_flaw_it_cannot_solve',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch18_flaw_it_cannot_solve',
 		'dialog': [
 			"Then we must be the flaw it cannot solve."
 		]
@@ -154,8 +154,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch18_not_waste',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch18_not_waste',
 		'dialog': [
 			"We are not waste. We are the choice that defies your schedule."
 		]
@@ -204,8 +204,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch18_believed_right',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch18_believed_right',
 		'dialog': [
 			"It believed it was doing the right thing. The only logical thing."
 		]
@@ -240,8 +240,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch18_memory_weight',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch18_memory_weight',
 		'dialog': [
 			"Memory... that's what we have left. Not just echoes, but the weight of what we've carried through every fracture.",
 			"If this city remembers truly, perhaps we can learn to hold ourselves together again."
@@ -313,7 +313,7 @@ TASKS = [
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'korr', 'dialog_id': 'korr_ch18_intro' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch18_big_one' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch18_act_of_defiance' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch18_act_of_defiance' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'korr', 'dialog_id': 'korr_ch18_directs_rhea' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'korr', 'standing_text': ["The system flinched. But Cataclysm was only the symptom. The real wound runs deeper."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch18_meet_rhea' }}
@@ -327,7 +327,7 @@ TASKS = [
 		'task_acquire_events': [],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rhea', 'dialog_id': 'rhea_ch18_cataclysm_approach' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch18_flaw_it_cannot_solve' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch18_flaw_it_cannot_solve' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch18_tribute' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rhea', 'dialog_id': 'rhea_ch18_find_unfindable' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rhea', 'standing_text': ["Cataclysm doesn't hate life. It simply sees it as a flaw in the equation. And it is very, very good at balancing equations."]}},
@@ -372,7 +372,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch18_cataclysm_manifests' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'cataclysm', 'dialog_id': 'cataclysm_ch18_intro' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch18_balance_fists' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch18_not_waste' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch18_not_waste' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch18_loves_monologue' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch18_perfect_order' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'cataclysm', 'dialog_id': 'cataclysm_ch18_failure' }},
@@ -394,7 +394,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'cataclysm', 'dialog_id': 'cataclysm_ch18_fading' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch18_spire_silent' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch18_bookkeeping' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch18_believed_right' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch18_believed_right' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch18_logic_chaos' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch18_irrational_win' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch18_world_watching' }},
@@ -409,7 +409,7 @@ TASKS = [
 		'task_acquire_events': [],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'korr', 'dialog_id': 'korr_ch18_returns' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch18_memory_weight' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch18_memory_weight' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch18_go' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_ch18_memory_architecture' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'korr', 'standing_text': ["The system flinched. But Cataclysm was only the symptom. The real wound runs deeper."]}},

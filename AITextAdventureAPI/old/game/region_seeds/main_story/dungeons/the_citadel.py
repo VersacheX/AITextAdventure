@@ -38,7 +38,7 @@ HOSTILE_SEEDS = [
     {
         'id': 'propaganda_drone', 'name': 'Propaganda Drone', 'hostile_type': 'construct', 'min_spawn_level': 76, 'role': 'hazard', 'rarity': 'rare',
         'base_xp': 2000, 'common_drop': 'panacea', 'rare_drop': 'tome_int_superrare', 'money_range': (500, 1000),
-        'basic_attack': 'sonic disruption', 'strong_attack': 'loyalty broadcast', 'player_abilities': ['light_faith_lv1_convert'],
+        'basic_attack': 'sonic disruption', 'strong_attack': 'loyalty broadcast', 'player_abilities': ['light_spirit_lv1_convert'],
         'base_str': 30, 'base_dex': 55, 'base_con': 45, 'base_int': 60, 'base_hp': 5000, 'base_ap': 150,
         'str_per_level': 4, 'dex_per_level': 8, 'con_per_level': 6, 'int_per_level': 9,
         'resistances': ['air', 'light'], 'immunities': ['sleep'], 'weaknesses': ['dark']

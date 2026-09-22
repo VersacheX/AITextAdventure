@@ -1,6 +1,6 @@
 ﻿#SHALLOWS
 # local characters:
-#  Ripple - Well respected and known Tide Oracle (faith) — INFJ 9w1
+#  Ripple - Well respected and known Tide Oracle (spirit) — INFJ 9w1
 #    She drowned during the first Fracture wave and returned changed.
 #    Her pregame is The Vigil — three return visits to Vaultkeeper Syrin,
 #    who has been sitting with the moontide orb for years and cannot bring
@@ -64,10 +64,10 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         'constitution': 102,
         'level': 30,
         'abilities': [
-            'lv2_unique_ability_faith_ripple_tidal_mend',
-            'lv2_unique_ability_faith_ripple_drowned_blessing',
-            'lv3_unique_ability_faith_ripple_returned_tide',
-            'lv3_unique_ability_faith_ripple_deep_current_surge',
+            'lv2_unique_ability_spirit_ripple_tidal_mend',
+            'lv2_unique_ability_spirit_ripple_drowned_blessing',
+            'lv3_unique_ability_spirit_ripple_returned_tide',
+            'lv3_unique_ability_spirit_ripple_deep_current_surge',
         ]
     }
 ]
@@ -145,7 +145,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'kaera_renlo_reaction',
         'dialog': [
             "He said she talks to relics.",
@@ -175,7 +175,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'kaera_vigil_1',
         'dialog': [
             "We're not here for the relics.",
@@ -230,7 +230,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'kaera_vigil_2',
         'dialog': [
             "Sometimes we keep things lit because we can't bear to be the one who lets them go dark.",
@@ -298,7 +298,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'kaera_vigil_3',
         'dialog': [
             "Syrin.",
@@ -374,7 +374,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'kaera_ripple_join_reaction',
         'dialog': [
             "She made the connection between herself and Syrin without us saying a word.",
@@ -449,7 +449,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'kaera_uulthar_challenge',
         'dialog': [
             "The tides belong to no one.",
@@ -595,7 +595,7 @@ TASKS = [
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
-                    'npc_id': 'faith',
+                    'npc_id': 'spirit',
                     'dialog_id': 'kaera_renlo_reaction'
                 }
             },
@@ -644,7 +644,7 @@ TASKS = [
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
-                    'npc_id': 'faith',
+                    'npc_id': 'spirit',
                     'dialog_id': 'kaera_vigil_1'
                 }
             },
@@ -706,7 +706,7 @@ TASKS = [
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
-                    'npc_id': 'faith',
+                    'npc_id': 'spirit',
                     'dialog_id': 'kaera_vigil_2'
                 }
             },
@@ -775,7 +775,7 @@ TASKS = [
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
-                    'npc_id': 'faith',
+                    'npc_id': 'spirit',
                     'dialog_id': 'kaera_vigil_3'
                 }
             },
@@ -873,7 +873,7 @@ TASKS = [
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
-                    'npc_id': 'faith',
+                    'npc_id': 'spirit',
                     'dialog_id': 'kaera_ripple_join_reaction'
                 }
             },
@@ -972,7 +972,7 @@ TASKS = [
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
-                    'npc_id': 'faith',
+                    'npc_id': 'spirit',
                     'dialog_id': 'kaera_uulthar_challenge'
                 }
             },

@@ -16,7 +16,7 @@ RANDOM_HOSTILE_SEEDS = [
  {"id": "corrupted_dryad_small", "name": "Corrupted Dryad", "hostile_type": "elemental", "role": "hazard", "min_spawn_level": 44, "rarity": "uncommon", "base_xp": 1100,
   "common_drop": "herb_major", "rare_drop": None, "money_range": (150, 520),
   "basic_attack": "blight tendril", "strong_attack": "corruption bloom",
-  "player_abilities": ["lv2_hostile_ability_earth_air_faith_thornbind"],
+  "player_abilities": ["lv2_hostile_ability_earth_air_spirit_thornbind"],
   "base_str": 14, "base_dex": 20, "base_con": 16, "base_int": 26, "base_hp": 1140, "base_ap": 12,
   "str_per_level": 2, "dex_per_level": 3, "con_per_level": 2, "int_per_level": 5},
 ]

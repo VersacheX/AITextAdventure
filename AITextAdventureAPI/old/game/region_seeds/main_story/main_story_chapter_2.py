@@ -191,8 +191,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch2_deliver_couplet',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch2_deliver_couplet',
 		'dialog': [
 			"Knowledge is never wasted. Even when it comes from smugglers."
 		]
@@ -216,8 +216,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch2_after_leera',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch2_after_leera',
 		'dialog': [
 			"Void and Existence... These are deep questions..."
 		]
@@ -262,8 +262,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch2_after_leera',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch2_after_leera',
 		'dialog': [
 			"Resonance Shard. We must find Juno and retrieve it."
 		]
@@ -332,8 +332,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch2_after_kess',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch2_after_kess',
 		'dialog': [
 			"We will recover what was lost. And pray the previous seekers found peace."
 		]
@@ -377,8 +377,8 @@ NPC_DIALOG = [
       ]
     },
 	{
-		"npc_id": "faith",
-		"dialog_id": "faith_ch2_post_demigorgon",
+		"npc_id": "spirit",
+		"dialog_id": "spirit_ch2_post_demigorgon",
 		"dialog": [
 			"That creature radiated a dark energy unlike anything I've seen.",
 			"We must be cautious. Such forces can corrupt even the purest of hearts."
@@ -417,8 +417,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		"npc_id": "faith",
-		"dialog_id": "faith_ch2_random_appearance",
+		"npc_id": "spirit",
+		"dialog_id": "spirit_ch2_random_appearance",
 		"dialog": [
 			"Know that the gods are here with us, even in this strange land."
 		]
@@ -497,8 +497,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_juno_ch2_after_kess',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_juno_ch2_after_kess',
 		'dialog': [
 			"May this shard bring the balance that was promised."
 		]
@@ -522,8 +522,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch2_decoupling',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch2_decoupling',
 		'dialog': [
 			"Let’s return it quickly. Tess is waiting."
 		]
@@ -592,8 +592,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch2_after_tess',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch2_after_tess',
 		'dialog': [
 			"This is no coincidence. We must seek out this newcomer.",
 			"Tess seems to think they are important. We should trust her judgment."
@@ -785,8 +785,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_ch2_deliver_couplet'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch2_deliver_couplet'
 				}
 			},
 			{
@@ -837,8 +837,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_ch2_after_leera'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch2_after_leera'
 				}
 			},
 			{
@@ -911,8 +911,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_ch2_after_leera'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch2_after_leera'
 				}
 			},
 			{
@@ -1036,8 +1036,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_ch2_after_kess'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch2_after_kess'
 				}
 			},
 			{
@@ -1164,8 +1164,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_ch2_post_demigorgon'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch2_post_demigorgon'
 				}
 			},
 			{
@@ -1199,8 +1199,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_ch2_random_appearance'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch2_random_appearance'
 				}
 			},
 			{
@@ -1346,8 +1346,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_juno_ch2_after_kess'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_juno_ch2_after_kess'
 				}
 			},
 			{
@@ -1426,8 +1426,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_ch2_decoupling'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch2_decoupling'
 				}
 			},
 			{
@@ -1549,8 +1549,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_ch2_after_tess'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch2_after_tess'
 				}
 			},
 			{

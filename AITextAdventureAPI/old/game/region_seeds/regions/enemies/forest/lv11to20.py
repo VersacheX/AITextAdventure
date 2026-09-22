@@ -22,7 +22,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "moon_tender", "name": "Moon Tender", "hostile_type": "spirit", "role": "support", "min_spawn_level":12, "rarity": "rare", "base_xp":260,
  "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (22,120),
- "basic_attack": "moonbeam touch", "strong_attack": "lunar swell", "player_abilities": ["lv2_hostile_ability_air_water_faith_gale_of_silence", "level_1_hostile_ability_fire_faith_hearthsong"],
+ "basic_attack": "moonbeam touch", "strong_attack": "lunar swell", "player_abilities": ["lv2_hostile_ability_air_water_spirit_gale_of_silence", "level_1_hostile_ability_fire_spirit_hearthsong"],
  "base_str":4, "base_dex":8, "base_con":6, "base_int":12, "base_hp":200, "base_ap":10, "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":3},
 
  {"id": "nightmare_wolf", "name": "Nightmare Wolf", "hostile_type": "eldritch", "role": "hazard", "min_spawn_level":12, "rarity": "superrare", "base_xp":420,

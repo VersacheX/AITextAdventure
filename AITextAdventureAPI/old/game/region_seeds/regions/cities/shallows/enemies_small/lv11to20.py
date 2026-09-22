@@ -21,7 +21,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "grease_snare", "name": "Grease Snare", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":12, "rarity": "uncommon", "base_xp":180,
  "common_drop": "stimulant_small", "rare_drop": "stimulant_large", "money_range": (24,120),
- "basic_attack": "greasy swipe", "strong_attack": "silent choke", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "greasy swipe", "strong_attack": "silent choke", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":3, "base_dex":8, "base_con":4, "base_int":6, "base_hp":92, "base_ap":7,
  "str_per_level":1, "dex_per_level":3, "con_per_level":1, "int_per_level":2},
 
@@ -51,7 +51,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "keeper_knell", "name": "Keeper Knell", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":16, "rarity": "superrare", "base_xp":480,
  "common_drop": "stimulant_large", "rare_drop": "gale_gauntlets", "money_range": (80,320),
- "basic_attack": "lantern bludgeon", "strong_attack": "blinding cataclysm", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst", "lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "lantern bludgeon", "strong_attack": "blinding cataclysm", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst", "lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":8, "base_dex":5, "base_con":10, "base_int":8, "base_hp":260, "base_ap":10,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
 

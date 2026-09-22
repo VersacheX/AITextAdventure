@@ -45,7 +45,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "neon_siren", "name": "Neon Siren", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":14, "rarity": "uncommon", "base_xp":200,
  "common_drop": "stimulant_large", "rare_drop": "tome_int", "money_range": (44,200),
- "basic_attack": "glowing blade", "strong_attack": "stunning aria", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst"], "base_str":3, "base_dex":7, "base_con":3, "base_int":8, "base_hp":64, "base_ap":8, "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":3},
+ "basic_attack": "glowing blade", "strong_attack": "stunning aria", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst"], "base_str":3, "base_dex":7, "base_con":3, "base_int":8, "base_hp":64, "base_ap":8, "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":3},
 
  {"id": "clockwork_colossus", "name": "Clockwork Colossus", "hostile_type": "construct", "role": "support", "min_spawn_level":14, "rarity": "uncommon", "base_xp":320, "common_drop": "stimulant_large", "rare_drop": "kevlar_vest", "money_range": (60,220),
  "basic_attack": "piston swing", "strong_attack": "hydraulic crush", "player_abilities": ["level_1_hostile_ability_reinforce_frame"], "base_str":14, "base_dex":1, "base_con":18, "base_int":1, "base_hp":300, "base_ap":3, "str_per_level":4, "dex_per_level":0, "con_per_level":3, "int_per_level":0},
@@ -66,10 +66,10 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==16
  {"id": "mirage_stalker", "name": "Mirage Stalker", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":16, "rarity": "rare", "base_xp":240,
  "common_drop": "stimulant_small", "rare_drop": "tome_int", "money_range": (50,220),
- "basic_attack": "silent sand-strike", "strong_attack": "illusory nightmare", "player_abilities": ["level_1_hostile_ability_shadow_flicker", "lv2_hostile_ability_dark_air_skill_nightmare_wave", "lv2_hostile_ability_dark_dark_faith_void_veil"], "base_str":5, "base_dex":9, "base_con":4, "base_int":6, "base_hp":70, "base_ap":8, "str_per_level":2, "dex_per_level":3, "con_per_level":1, "int_per_level":2},
+ "basic_attack": "silent sand-strike", "strong_attack": "illusory nightmare", "player_abilities": ["level_1_hostile_ability_shadow_flicker", "lv2_hostile_ability_dark_air_skill_nightmare_wave", "lv2_hostile_ability_dark_dark_spirit_void_veil"], "base_str":5, "base_dex":9, "base_con":4, "base_int":6, "base_hp":70, "base_ap":8, "str_per_level":2, "dex_per_level":3, "con_per_level":1, "int_per_level":2},
 
  {"id": "revenant_queen", "name": "Revenant Queen", "hostile_type": "undead", "role": "hazard", "min_spawn_level":16, "rarity": "common", "base_xp":520, "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,320),
- "basic_attack": "regal claws", "strong_attack": "necrotic burst", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"], "base_str":9, "base_dex":8, "base_con":10, "base_int":6, "base_hp":260, "base_ap":10, "str_per_level":4, "dex_per_level":3, "con_per_level":3, "int_per_level":2},
+ "basic_attack": "regal claws", "strong_attack": "necrotic burst", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil"], "base_str":9, "base_dex":8, "base_con":10, "base_int":6, "base_hp":260, "base_ap":10, "str_per_level":4, "dex_per_level":3, "con_per_level":3, "int_per_level":2},
 
  # min_spawn_level ==17
  {"id": "baron_guard", "name": "Baron's Guard", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":17, "rarity": "common", "base_xp":260,

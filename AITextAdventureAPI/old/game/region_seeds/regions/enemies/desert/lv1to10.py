@@ -53,7 +53,7 @@ SEEDS_LV1TO10 = [
  "basic_attack": "sand slash", "strong_attack": "rending maul", "player_abilities": ["air_electric_fire_technique_lv3_tempest_charge"], "base_str":8, "base_dex":5, "base_con":8, "base_int":3, "base_hp":160, "base_ap":7, "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":0},
 
  {"id": "oasis_dryad", "name": "Oasis Dryad", "hostile_type": "spirit", "role": "support", "min_spawn_level":7, "rarity": "uncommon", "base_xp":120, "common_drop": "herb_major", "money_range": (20,90),
- "basic_attack": "soothing touch", "strong_attack": "mirage bind", "player_abilities": ["water_faith_lv1_mending_streams"], "base_str":4, "base_dex":4, "base_con":6, "base_int":6, "base_hp":140, "base_ap":6, "str_per_level":1, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
+ "basic_attack": "soothing touch", "strong_attack": "mirage bind", "player_abilities": ["water_spirit_lv1_mending_streams"], "base_str":4, "base_dex":4, "base_con":6, "base_int":6, "base_hp":140, "base_ap":6, "str_per_level":1, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
 
  # Level8
  {"id": "tomb_keeper", "name": "Tomb Keeper", "hostile_type": "undead", "role": "hazard", "min_spawn_level":8, "rarity": "rare", "base_xp":220, "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (30,140),

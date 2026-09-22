@@ -102,7 +102,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "lumen_guard", "name": "Lumen Guard", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":18, "rarity": "uncommon", "base_xp":320,
  "common_drop": "stimulant_med", "rare_drop": None, "money_range": (110,420),
- "basic_attack": "gleam strike", "strong_attack": "luminary volley", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst"],
+ "basic_attack": "gleam strike", "strong_attack": "luminary volley", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst"],
  "base_str":9, "base_dex":8, "base_con":9, "base_int":6, "base_hp":320, "base_ap":10,
  "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":2},
 

@@ -109,15 +109,15 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch3_after_talla',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch3_after_talla',
 		'dialog': [
 			"I hope this Seth fellow can be redeemed.",
 			"Perhaps bringing him in will give us a chance to help him find a better path."
 		]
 	},
 	{ # use character definitions, Chock, Kade, Moxie, Kaera, and Poise
-		"npc_id": "technique", # npc_id, dialog_id is multi key so same dialog has all 5 reserved id's technique, tech, magic, faith, skill
+		"npc_id": "technique", # npc_id, dialog_id is multi key so same dialog has all 5 reserved id's technique, tech, magic, spirit, skill
 		"dialog_id": "pending_character_ch3_lost_memory", # noted pending_character prefix for knowing that it's the one lost
 		"dialog": [ 
 			"Where... am I? I feel like I should know this place, but it's all a blur.",
@@ -144,7 +144,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': "faith",
+		'npc_id': "spirit",
 		'dialog_id': "pending_character_ch3_lost_memory", # use Kaera's description to come up with some compassionate hopeful lines
 		"dialog": [
 			"This place... it feels foreign, there is no peace here. But why can't I remember how I arrived?",
@@ -185,8 +185,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch3_meet_pending_character1',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch3_meet_pending_character1',
 		'dialog': [
 			"We will help you find your way. Together, we can overcome any obstacle."
 		]
@@ -220,8 +220,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch3_meet_pending_character2',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch3_meet_pending_character2',
 		'dialog': [
 			"Stay close to us, and your memories will return."
 		]
@@ -255,7 +255,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'pending_character_ch3_good_where_im_at',
 		'dialog': [
 			"I'll stay here for the moment. I trust that the right path will reveal itself in time."
@@ -317,8 +317,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch3_sidequest_intro',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch3_sidequest_intro',
 		'dialog': [
 			"If this truly helps the one who has lost their memories… then we should take the risk."
 		]
@@ -362,8 +362,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch3_after_receiving_scribe_mint',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch3_after_receiving_scribe_mint',
 		'dialog': [
 			"If this helps restore what was lost, it is worth any effort."
 		]
@@ -407,8 +407,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch3_after_receiving_scarred_thyme',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch3_after_receiving_scarred_thyme',
 		'dialog': [
 			"Please… let this bring them home to us."
 		]
@@ -452,8 +452,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch3_after_seth',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch3_after_seth',
 		'dialog': [
 			"We should speak with her. Gossip can be as useful as prayer sometimes."
 		]
@@ -487,8 +487,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch3_meet_relic_guardian',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch3_meet_relic_guardian',
 		'dialog': [
 			"This place is under sacred protection. We must be careful."
 		]
@@ -529,8 +529,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'faith_ch3_sidequest_complete',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch3_sidequest_complete',
 		'dialog': [
 			"May whatever spirit bound it find rest."
 		]
@@ -564,7 +564,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'character_ch3_we_found_the_tonic',
 		'dialog': [
 			"I have faith in this remedy."
@@ -578,8 +578,8 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
-		'dialog_id': 'ch3_faith_respond_to_twisted',
+		'npc_id': 'spirit',
+		'dialog_id': 'ch3_spirit_respond_to_twisted',
 		'dialog': [
 			"Oh!  That's, ummmmm, nice... eheh!"
 		]
@@ -707,8 +707,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_ch3_after_talla'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch3_after_talla'
 				}
 			},
 			{
@@ -769,8 +769,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_ch3_meet_pending_character1'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch3_meet_pending_character1'
 				}
 			},
 			{
@@ -804,8 +804,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_ch3_meet_pending_character2'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch3_meet_pending_character2'
 				}
 			},
 			{
@@ -924,8 +924,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_ch3_sidequest_intro'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch3_sidequest_intro'
 				}
 			},
 			{
@@ -1059,8 +1059,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_ch3_after_seth'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch3_after_seth'
 				}
 			},
 			{
@@ -1129,8 +1129,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_ch3_meet_relic_guardian'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch3_meet_relic_guardian'
 				}
 			},
 			{
@@ -1229,8 +1229,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_ch3_sidequest_complete'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch3_sidequest_complete'
 				}
 			},
 			{
@@ -1285,8 +1285,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_ch3_after_receiving_scribe_mint'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch3_after_receiving_scribe_mint'
 				}
 			},
 			{
@@ -1359,8 +1359,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'faith_ch3_after_receiving_scarred_thyme'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch3_after_receiving_scarred_thyme'
 				}
 			},
 			{
@@ -1410,7 +1410,7 @@ TASKS = [
 		'to_id': 'pending_character',
 		'task_acquire_events': [],
 		'task_complete_events': [
-			# NOTE initiate dialog for each chracter technique, tech, magic, faith, skill about restoring the memory
+			# NOTE initiate dialog for each chracter technique, tech, magic, spirit, skill about restoring the memory
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
@@ -1435,7 +1435,7 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
+					'npc_id': 'spirit',
 					'dialog_id': 'character_ch3_we_found_the_tonic'
 				}
 			},
@@ -1474,8 +1474,8 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
-					'dialog_id': 'ch3_faith_respond_to_twisted'
+					'npc_id': 'spirit',
+					'dialog_id': 'ch3_spirit_respond_to_twisted'
 				}
 			},
 			{

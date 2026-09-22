@@ -29,7 +29,7 @@ RANDOM_HOSTILE_SEEDS = [
  {"id": "arcane_street_witch", "name": "Arcane Street Witch", "hostile_type": "magic", "role": "hazard", "min_spawn_level": 26, "rarity": "uncommon", "base_xp": 360,
   "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (80, 300),
   "basic_attack": "arcane hex", "strong_attack": "spire curse",
-  "player_abilities": ["dark_magic_lv1_shadow_tendril", "dark_faith_lv1_shade_whisper"],
+  "player_abilities": ["dark_magic_lv1_shadow_tendril", "dark_spirit_lv1_shade_whisper"],
   "base_str": 4, "base_dex": 8, "base_con": 6, "base_int": 16, "base_hp": 240, "base_ap": 14,
   "str_per_level": 0, "dex_per_level": 1, "con_per_level": 1, "int_per_level": 4},
 

@@ -167,7 +167,7 @@ BOSS_HOSTILES = [
  'money_range': (150,400),
  'basic_attack': 'relic slam',
  'strong_attack': 'cataclysmic rupture',
- 'player_abilities': ['earth_dark_magic_lv2_sinkhole', 'dark_dark_technique_lv2_void_crush', 'light_light_faith_lv2_seraphic_nova'],
+ 'player_abilities': ['earth_dark_magic_lv2_sinkhole', 'dark_dark_technique_lv2_void_crush', 'light_light_spirit_lv2_seraphic_nova'],
  'base_str':20,
  'base_dex':10,
  'base_con':22,

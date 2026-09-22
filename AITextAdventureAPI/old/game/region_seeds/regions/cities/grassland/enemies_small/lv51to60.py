@@ -16,7 +16,7 @@ RANDOM_HOSTILE_SEEDS = [
  {"id": "quantford_bone_witch", "name": "Quantford Bone Witch", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level": 59, "rarity": "rare", "base_xp": 2600,
   "common_drop": "tome_int", "rare_drop": "herb_major", "money_range": (500, 1700),
   "basic_attack": "bone hex", "strong_attack": "hollow death curse",
-  "player_abilities": ["lv2_hostile_ability_water_dark_magic_gloom_tide", "lv2_hostile_ability_dark_dark_faith_void_veil"],
+  "player_abilities": ["lv2_hostile_ability_water_dark_magic_gloom_tide", "lv2_hostile_ability_dark_dark_spirit_void_veil"],
   "base_str": 8, "base_dex": 32, "base_con": 12, "base_int": 46, "base_hp": 1480, "base_ap": 16,
   "str_per_level": 1, "dex_per_level": 5, "con_per_level": 2, "int_per_level": 6},
 ]

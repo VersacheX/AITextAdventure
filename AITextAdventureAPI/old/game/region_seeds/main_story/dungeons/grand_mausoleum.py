@@ -22,7 +22,7 @@ HOSTILE_SEEDS = [
     {
         'id': 'grief_wraith', 'name': 'Grief Wraith', 'hostile_type': 'undead', 'min_spawn_level': 65, 'role': 'hazard', 'rarity': 'common',
         'base_xp': 800, 'common_drop': 'herb_major', 'rare_drop': None, 'money_range': (150, 300),
-        'basic_attack': 'sorrowful touch', 'strong_attack': 'weeping wail', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
+        'basic_attack': 'sorrowful touch', 'strong_attack': 'weeping wail', 'player_abilities': ['dark_spirit_lv1_shade_whisper'],
         'base_str': 30, 'base_dex': 35, 'base_con': 32, 'base_int': 40, 'base_hp': 2500, 'base_ap': 100,
         'str_per_level': 3, 'dex_per_level': 4, 'con_per_level': 3, 'int_per_level': 5,
         'resistances': ['dark', 'ice'], 'immunities': ['stun'], 'weaknesses': ['light', 'fire']

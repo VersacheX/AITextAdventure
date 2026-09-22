@@ -30,7 +30,7 @@ HOSTILE_SEEDS = [
     {
         'id': 'silence_wraith', 'name': 'Silence Wraith', 'hostile_type': 'undead', 'min_spawn_level': 98, 'role': 'hazard', 'rarity': 'uncommon',
         'base_xp': 9500, 'common_drop': 'stimulant_full', 'rare_drop': 'panacea', 'money_range': (950, 1400),
-        'basic_attack': 'hollow touch', 'strong_attack': 'aftermath despair', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
+        'basic_attack': 'hollow touch', 'strong_attack': 'aftermath despair', 'player_abilities': ['dark_spirit_lv1_shade_whisper'],
         'base_str': 38, 'base_dex': 42, 'base_con': 40, 'base_int': 58, 'base_hp': 40000, 'base_ap': 380,
         'str_per_level': 4, 'dex_per_level': 5, 'con_per_level': 4, 'int_per_level': 7,
         'resistances': ['dark', 'ice'], 'immunities': ['sleep', 'silence'], 'weaknesses': ['light', 'fire']

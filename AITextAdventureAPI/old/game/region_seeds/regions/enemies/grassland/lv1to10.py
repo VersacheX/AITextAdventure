@@ -42,14 +42,14 @@ SEEDS_LV1TO10 = [
 
  # Level5
  {"id": "thorn_shaman", "name": "Thorn Shaman", "hostile_type": "magic", "role": "support", "min_spawn_level":5, "rarity": "rare", "base_xp":90, "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (20,100),
- "basic_attack": "curse prickle", "strong_attack": "sap burst", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst", "earth_earth_technique_lv2_terra_slam"], "base_str":3, "base_dex":3, "base_con":5, "base_int":10, "base_hp":92, "base_ap":6, "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":2},
+ "basic_attack": "curse prickle", "strong_attack": "sap burst", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst", "earth_earth_technique_lv2_terra_slam"], "base_str":3, "base_dex":3, "base_con":5, "base_int":10, "base_hp":92, "base_ap":6, "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":2},
 
  {"id": "wind_hound", "name": "Wind Hound", "hostile_type": "creature", "role": "damage", "min_spawn_level":5, "rarity": "uncommon", "base_xp":62, "common_drop": "herb_med", "money_range": (12,56),
  "basic_attack": "rending bite", "strong_attack": "gust maul", "player_abilities": [], "base_str":6, "base_dex":6, "base_con":5, "base_int":2, "base_hp":64, "base_ap":6, "str_per_level":2, "dex_per_level":2, "con_per_level":1, "int_per_level":0},
 
  # Level6
- {"id": "meadow_priest", "name": "Meadow Priest", "hostile_type": "faith", "role": "support", "min_spawn_level":6, "rarity": "rare", "base_xp":120, "common_drop": "herb_major", "rare_drop": "tome_con", "money_range": (20,100),
- "basic_attack": "blessed palm", "strong_attack": "lumen flare", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst", "light_faith_lv1_glimmer"], "base_str":3, "base_dex":3, "base_con":6, "base_int":10, "base_hp":96, "base_ap":8, "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":2},
+ {"id": "meadow_priest", "name": "Meadow Priest", "hostile_type": "spirit", "role": "support", "min_spawn_level":6, "rarity": "rare", "base_xp":120, "common_drop": "herb_major", "rare_drop": "tome_con", "money_range": (20,100),
+ "basic_attack": "blessed palm", "strong_attack": "lumen flare", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst", "light_spirit_lv1_glimmer"], "base_str":3, "base_dex":3, "base_con":6, "base_int":10, "base_hp":96, "base_ap":8, "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":2},
 
  {"id": "field_reaver", "name": "Field Reaver", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":6, "rarity": "rare", "base_xp":140, "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (18,80),
  "basic_attack": "chrome slash", "strong_attack": "gutting rip", "player_abilities": ["earth_fire_technique_lv2_berserker_tech"], "base_str":8, "base_dex":6, "base_con":6, "base_int":4, "base_hp":120, "base_ap":8, "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":1},

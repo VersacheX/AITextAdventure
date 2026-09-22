@@ -17,10 +17,10 @@ from tui.services.dev.dataservices.models import (
 # ── Module-level tree cache (mutated by catalog._load_all) ────────────────
 _ABILITY_TREE: List[AbilityTypeNode] = []
 
-_TYPE_ORDER = ["technique", "faith", "magic", "tech", "skill"]
+_TYPE_ORDER = ["technique", "spirit", "magic", "tech", "skill"]
 _TYPE_LABELS: Dict[str, str] = {
     "technique": "Technique",
-    "faith":     "Faith",
+    "spirit":     "Spirit",
     "magic":     "Magic",
     "tech":      "Tech",
     "skill":     "Skill",

@@ -23,7 +23,7 @@ HOSTILE_SEEDS = [
 	{
 		'id': 'void_echo', 'name': 'Void Echo', 'hostile_type': 'aberration', 'min_spawn_level': 80, 'role': 'hazard', 'rarity': 'common',
 		'base_xp': 1200, 'common_drop': 'stimulant_large', 'rare_drop': None, 'money_range': (450, 900),
-		'basic_attack': 'hollow resonance', 'strong_attack': 'emptiness wave', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
+		'basic_attack': 'hollow resonance', 'strong_attack': 'emptiness wave', 'player_abilities': ['dark_spirit_lv1_shade_whisper'],
 		'base_str': 35, 'base_dex': 40, 'base_con': 35, 'base_int': 45, 'base_hp': 3000, 'base_ap': 110,
 		'str_per_level': 4, 'dex_per_level': 5, 'con_per_level': 4, 'int_per_level': 6,
 		'resistances': ['dark'], 'immunities': ['stun'], 'weaknesses': ['light']

@@ -21,7 +21,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "tide_jaw", "name": "Tide Jaw", "hostile_type": "creature", "role": "hazard", "min_spawn_level":12, "rarity": "rare", "base_xp":260,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (30,160),
- "basic_attack": "tentacle swipe", "strong_attack": "ink burst", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "tentacle swipe", "strong_attack": "ink burst", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":8, "base_dex":5, "base_con":9, "base_int":4, "base_hp":220, "base_ap":8,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":1},
 
@@ -81,7 +81,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "cairn_keeper", "name": "Cairn Keeper", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":15, "rarity": "uncommon", "base_xp":300,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (40,200),
- "basic_attack": "stone lash", "strong_attack": "blinding cairn", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst"],
+ "basic_attack": "stone lash", "strong_attack": "blinding cairn", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst"],
  "base_str":7, "base_dex":4, "base_con":9, "base_int":8, "base_hp":220, "base_ap":9,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
 
@@ -99,7 +99,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "wight_captain", "name": "Wight Captain", "hostile_type": "undead", "role": "hazard", "min_spawn_level":16, "rarity": "uncommon", "base_xp":420,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (60,260),
- "basic_attack": "rotten slash", "strong_attack": "necrotic command", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "rotten slash", "strong_attack": "necrotic command", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":8, "base_dex":6, "base_con":10, "base_int":6, "base_hp":300, "base_ap":9,
  "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":1},
 

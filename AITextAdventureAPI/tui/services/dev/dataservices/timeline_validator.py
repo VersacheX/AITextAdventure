@@ -56,7 +56,7 @@ R7  DIALOG_NPC_UNKNOWN
     create_character_npc coverage check (warning):
     When a task uses create_character_npc or references pending_character, the
     validator verifies that dialog coverage exists for every player-character
-    archetype id (technique / tech / magic / faith / skill).  Missing coverage is
+    archetype id (technique / tech / magic / spirit / skill).  Missing coverage is
     reported as DIALOG_REF_MISSING warnings on the task.
 
 R8  TASK_SCHEMA_INVALID
@@ -236,7 +236,7 @@ _DYNAMIC_NPC_IDS: FrozenSet[str] = frozenset({
 # A dialog_id is considered "covered" for a dynamic slot when ALL five
 # archetypes carry that dialog_id.
 _PLAYER_CHARACTER_TYPES: FrozenSet[str] = frozenset({
-    "technique", "tech", "magic", "faith", "skill",
+    "technique", "tech", "magic", "spirit", "skill",
 })
 
 # Condition types → required param keys
@@ -1025,7 +1025,7 @@ def validate_timeline_integrity(
 
                 if npc_id is not None and str(npc_id) in _DYNAMIC_NPC_IDS:
                     # Dynamic slot dialogs are stored once per player-character
-                    # archetype (technique / tech / magic / faith / skill).
+                    # archetype (technique / tech / magic / spirit / skill).
                     # The dialog is valid when ALL five archetypes carry it.
                     missing_archetypes = [
                         pc for pc in sorted(_PLAYER_CHARACTER_TYPES)

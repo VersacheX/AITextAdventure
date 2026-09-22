@@ -24,7 +24,7 @@ HOSTILE_SEEDS = [
 	{
 		'id': 'hollow_harmony', 'name': 'Hollow Harmony', 'hostile_type': 'spirit', 'min_spawn_level': 95, 'role': 'hazard', 'rarity': 'common',
 		'base_xp': 1600, 'common_drop': 'herb_major', 'rare_drop': None, 'money_range': (540, 1080),
-		'basic_attack': 'empty melody', 'strong_attack': 'false comfort', 'player_abilities': ['light_faith_lv1_convert'],
+		'basic_attack': 'empty melody', 'strong_attack': 'false comfort', 'player_abilities': ['light_spirit_lv1_convert'],
 		'base_str': 28, 'base_dex': 50, 'base_con': 30, 'base_int': 68, 'base_hp': 2800, 'base_ap': 160,
 		'str_per_level': 3, 'dex_per_level': 6, 'con_per_level': 3, 'int_per_level': 8,
 		'resistances': ['light', 'air'], 'immunities': ['sleep'], 'weaknesses': ['dark']
@@ -48,7 +48,7 @@ HOSTILE_SEEDS = [
 	{
 		'id': 'perfect_echo', 'name': 'Perfect Echo', 'hostile_type': 'aberration', 'min_spawn_level': 97, 'role': 'hazard', 'rarity': 'superrare',
 		'base_xp': 2800, 'common_drop': 'defibrillator', 'rare_drop': 'tome_dex_superrare', 'money_range': (950, 1900),
-		'basic_attack': 'mirror strike', 'strong_attack': 'infinite refrain', 'player_abilities': ['light_faith_lv1_convert'],
+		'basic_attack': 'mirror strike', 'strong_attack': 'infinite refrain', 'player_abilities': ['light_spirit_lv1_convert'],
 		'base_str': 42, 'base_dex': 65, 'base_con': 42, 'base_int': 65, 'base_hp': 5000, 'base_ap': 180,
 		'str_per_level': 5, 'dex_per_level': 8, 'con_per_level': 5, 'int_per_level': 8,
 		'resistances': ['light', 'air', 'ice'], 'immunities': ['confuse'], 'weaknesses': ['dark', 'fire']

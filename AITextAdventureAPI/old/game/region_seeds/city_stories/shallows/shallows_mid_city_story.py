@@ -292,7 +292,7 @@ NPC_DIALOG += [
     # Type E – Defeat Lanternfade Echo / Return to Vexa
     { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_mid_e_return_to_vexa', 'dialog': [ "It's dispersed. The Seal knows us now." ] },
     { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_e_return_to_vexa',  'dialog': [ "Merrik will say it should go to the courts. Don't. Something that old belongs somewhere specific." ] },
-    { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_mid_e_return_to_vexa', 'dialog': [ "We'll figure out where." ] },
+    { 'npc_id': 'spirit', 'dialog_id': 'kaera_shallows_mid_e_return_to_vexa', 'dialog': [ "We'll figure out where." ] },
 
 ]
 
@@ -337,7 +337,7 @@ NPC_DIALOG += [
     # Type D – Defeat Undertunnel Voice
     { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_mid_d_defeat_undertunnel_voice', 'dialog': [ "Quiet. Take the corsair-tide steel." ] },
     { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_d_defeat_undertunnel_voice',  'dialog': [ "A blade that knows every current and tunnel beneath the bay. Nothing will hold a line against this." ] },
-    { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_mid_d_defeat_undertunnel_voice', 'dialog': [ "Every misdirected signal the Voice held has resolved. The tunnels are finally quiet." ] },
+    { 'npc_id': 'spirit', 'dialog_id': 'kaera_shallows_mid_d_defeat_undertunnel_voice', 'dialog': [ "Every misdirected signal the Voice held has resolved. The tunnels are finally quiet." ] },
 
 ]
 
@@ -591,7 +591,7 @@ TASKS += [
             },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_mid_e_return_to_vexa' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_e_return_to_vexa'  } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_mid_e_return_to_vexa' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_shallows_mid_e_return_to_vexa' } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lanternrunner_vexa', 'standing_text': [ "You got it out clean. Merrik's going to say you should hand it over to the courts.", "Don't. Something that old belongs somewhere specific. You'll figure out where." ] } }
         ]
     },
@@ -927,7 +927,7 @@ TASKS += [
 			},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_mid_d_defeat_undertunnel_voice' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_mid_d_defeat_undertunnel_voice'  } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_mid_d_defeat_undertunnel_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_shallows_mid_d_defeat_undertunnel_voice' } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {

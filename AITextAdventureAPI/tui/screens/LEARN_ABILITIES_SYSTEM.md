@@ -22,7 +22,7 @@ required_stat = base_requirement + (base_requirement * (level - 1) * 1.5) ** 1.2
 - **Magic**: Intelligence (18+ per level)
 - **Tech**: Intelligence (13+) + Dexterity (9+)
 - **Skill**: Dexterity (18+ per level)
-- **Faith**: Intelligence (13+) + Constitution (9+)
+- **Spirit**: Intelligence (13+) + Constitution (9+)
 - **Technique**: Strength (13+) + Constitution (9+)
 
 ### 3. Ability Types
@@ -42,7 +42,7 @@ required_stat = base_requirement + (base_requirement * (level - 1) * 1.5) ** 1.2
 - Physical techniques, precision strikes
 - Low AP cost
 
-#### Faith
+#### Spirit
 - Intelligence + constitution
 - Healing, buffs, holy damage
 - Moderate AP cost
@@ -62,7 +62,7 @@ required_stat = base_requirement + (base_requirement * (level - 1) * 1.5) ** 1.2
 
 ### TUI Implementation
 •	Navigate: Click or arrow keys in list
-•	Filter: Click filter buttons (All/Magic/Tech/Skill/Faith/Technique)
+•	Filter: Click filter buttons (All/Magic/Tech/Skill/Spirit/Technique)
 •	Learn: Click Learn button or press Enter
 •	Cancel: Click Close button or press Escape
 
@@ -98,7 +98,7 @@ player.learn_ability(ability)
 - `id`: Unique identifier
 - `name`: Display name
 - `description`: Flavor text
-- `ability_type`: Magic/Tech/Skill/Faith/Technique (enum)
+- `ability_type`: Magic/Tech/Skill/Spirit/Technique (enum)
 - `level`: Ability level (affects requirements and power)
 
 #### Combat Attributes
@@ -125,7 +125,7 @@ Each filter button shows only abilities of that type:
 - **Magic**: Only magic abilities
 - **Tech**: Only tech abilities
 - **Skill**: Only skill abilities
-- **Faith**: Only faith abilities
+- **Spirit**: Only spirit abilities
 - **Technique**: Only technique abilities
 
 ### Dynamic Filtering
@@ -143,7 +143,7 @@ Abilities appear in the list only if ALL stat requirements are met.
 ### Example: Tech Ability Level 2
 Required: INT 26, DEX 18 Player:   INT 30, DEX 15 Result:   NOT SHOWN (dexterity too low)
 
-### Example: Faith Ability Level 1
+### Example: Spirit Ability Level 1
 Required: INT 13, CON 9 Player:   INT 15, CON 10 Result:   SHOWN (all requirements met)
 
 ## Loading Performance

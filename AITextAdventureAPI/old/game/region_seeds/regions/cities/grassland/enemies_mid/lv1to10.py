@@ -117,7 +117,7 @@ RANDOM_HOSTILE_SEEDS = [
  # level6
  {"id": "canon_enforcer", "name": "Canon Enforcer", "hostile_type": "humanoid", "role": "support", "min_spawn_level":6, "rarity": "rare", "base_xp":80,
  "common_drop": "stimulant_small", "rare_drop": "cloth_gloves", "money_range": (10,50),
- "basic_attack": "bashes with a ceremonial staff", "strong_attack": "crushing consecration", "player_abilities": ["level_1_hostile_ability_fire_faith_ember_shield"],
+ "basic_attack": "bashes with a ceremonial staff", "strong_attack": "crushing consecration", "player_abilities": ["level_1_hostile_ability_fire_spirit_ember_shield"],
  "base_str":6, "base_dex":3, "base_con":6, "base_int":2, "base_hp":36, "base_ap":4,
  "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":0},
 
@@ -160,7 +160,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "siren_of_halls", "name": "Siren of Halls", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":7, "rarity": "rare", "base_xp":72,
  "common_drop": "stimulant_small", "rare_drop": "tome_int", "money_range": (12,60),
- "basic_attack": "siren song", "strong_attack": "mesmerize", "player_abilities": ["air_light_faith_lv2_serene_breath", "dark_magic_lv4_nightmare_echo"],
+ "basic_attack": "siren song", "strong_attack": "mesmerize", "player_abilities": ["air_light_spirit_lv2_serene_breath", "dark_magic_lv4_nightmare_echo"],
  "base_str":2, "base_dex":5, "base_con":2, "base_int":7, "base_hp":30, "base_ap":6,
  "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":3},
 

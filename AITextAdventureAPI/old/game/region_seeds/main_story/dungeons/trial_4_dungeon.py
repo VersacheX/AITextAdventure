@@ -38,7 +38,7 @@ HOSTILE_SEEDS = [
     {
         'id': 'doubt_implanter', 'name': 'Doubt Implanter', 'hostile_type': 'aberration', 'min_spawn_level': 100, 'role': 'hazard', 'rarity': 'rare',
         'base_xp': 11500, 'common_drop': 'elixir_full_heal', 'rare_drop': 'tome_int_superrare', 'money_range': (1050, 1650),
-        'basic_attack': 'intrusive thought', 'strong_attack': 'belief erosion', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
+        'basic_attack': 'intrusive thought', 'strong_attack': 'belief erosion', 'player_abilities': ['dark_spirit_lv1_shade_whisper'],
         'base_str': 40, 'base_dex': 50, 'base_con': 45, 'base_int': 70, 'base_hp': 42000, 'base_ap': 450,
         'str_per_level': 4, 'dex_per_level': 6, 'con_per_level': 5, 'int_per_level': 9,
         'resistances': ['dark', 'poison'], 'immunities': ['confuse', 'silence'], 'weaknesses': ['light', 'fire']

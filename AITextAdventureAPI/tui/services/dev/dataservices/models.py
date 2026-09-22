@@ -162,7 +162,7 @@ class AbilityNode:
     """One ability leaf in the ability tree."""
     ability_id: str
     label: str
-    ability_type: str   # "technique" | "faith" | "magic" | "tech" | "skill"
+    ability_type: str   # "technique" | "spirit" | "magic" | "tech" | "skill"
     level: int
     record: DevRecord
     errors: List[AbilityValidationError] = field(default_factory=list)

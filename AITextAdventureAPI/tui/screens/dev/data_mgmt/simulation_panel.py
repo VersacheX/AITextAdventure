@@ -17,7 +17,7 @@ from textual.widgets import Button, Input, Label, ListItem, ListView, Select, St
 
 # ── helpers ──────────────────────────────────────────────────────────────────
 
-_FOCUSES = ["technique", "faith", "magic", "tech", "skill"]
+_FOCUSES = ["technique", "spirit", "magic", "tech", "skill"]
 _REGIONS = [
     "DESERT", "FOREST", "GRASSLAND", "MOUNTAINS", "SHALLOWS", "SNOW", "SWAMP",
 ]
@@ -244,7 +244,7 @@ def _execute_simulation(
     from combat_balancing_simulation.hostile_ai_service import decide_action  # noqa: PLC0415
     from game.objects.player_game import PlayerGame  # noqa: PLC0415
 
-    _FOCUSES_CYCLE = ["technique", "faith", "magic", "tech", "skill"]
+    _FOCUSES_CYCLE = ["technique", "spirit", "magic", "tech", "skill"]
 
     # ── Build party ───────────────────────────────────────────────────────
     pg = PlayerGame()

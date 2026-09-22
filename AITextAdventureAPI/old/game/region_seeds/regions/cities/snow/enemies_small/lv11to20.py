@@ -51,7 +51,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "night_shank_small", "name": "Night Shank", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":12, "rarity": "rare", "base_xp":200,
  "common_drop": "stimulant_small", "rare_drop": "stimulant_large", "money_range": (30,140),
- "basic_attack": "grease strike", "strong_attack": "silent garrote", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "grease strike", "strong_attack": "silent garrote", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":3, "base_dex":8, "base_con":4, "base_int":5, "base_hp":92, "base_ap":8,
  "str_per_level":1, "dex_per_level":3, "con_per_level":1, "int_per_level":2},
 
@@ -75,7 +75,7 @@ SEEDS_LV11TO20 = [
 
  {"id": "sleet_illusionist", "name": "Sleet Illusionist", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":14, "rarity": "superrare", "base_xp":300,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (40,180),
- "basic_attack": "flicker bolt", "strong_attack": "mirage storm", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil", "level_1_hostile_ability_light_faith_prism_burst"],
+ "basic_attack": "flicker bolt", "strong_attack": "mirage storm", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil", "level_1_hostile_ability_light_spirit_prism_burst"],
  "base_str":3, "base_dex":6, "base_con":5, "base_int":12, "base_hp":200, "base_ap":10,
  "str_per_level":1, "dex_per_level":2, "con_per_level":1, "int_per_level":3},
 
@@ -99,13 +99,13 @@ SEEDS_LV11TO20 = [
 
  {"id": "bone_watchman", "name": "Bone Watchman", "hostile_type": "undead", "role": "hazard", "min_spawn_level":13, "rarity": "uncommon", "base_xp":220,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (30,160),
- "basic_attack": "ribcage smash", "strong_attack": "necrotic wail", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "ribcage smash", "strong_attack": "necrotic wail", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":7, "base_dex":4, "base_con":9, "base_int":5, "base_hp":180, "base_ap":8,
  "str_per_level":3, "dex_per_level":0, "con_per_level":2, "int_per_level":1},
 
  {"id": "keeper_wraith", "name": "Keeper Wraith", "hostile_type": "undead", "role": "hazard", "min_spawn_level":17, "rarity": "superrare", "base_xp":520,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (80,320),
- "basic_attack": "lantern swipe", "strong_attack": "necrotic flare", "player_abilities": ["lv2_hostile_ability_dark_air_skill_nightmare_wave", "lv2_hostile_ability_dark_dark_faith_void_veil"],
+ "basic_attack": "lantern swipe", "strong_attack": "necrotic flare", "player_abilities": ["lv2_hostile_ability_dark_air_skill_nightmare_wave", "lv2_hostile_ability_dark_dark_spirit_void_veil"],
  "base_str":9, "base_dex":6, "base_con":10, "base_int":10, "base_hp":320, "base_ap":12,
  "str_per_level":3, "dex_per_level":1, "con_per_level":2, "int_per_level":2},
 

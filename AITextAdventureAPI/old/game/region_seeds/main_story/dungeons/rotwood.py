@@ -23,7 +23,7 @@ HOSTILE_SEEDS = [
 	{
 		'id': 'false_memory_wisp', 'name': 'False Memory Wisp', 'hostile_type': 'spirit', 'min_spawn_level': 95, 'role': 'hazard', 'rarity': 'common',
 		'base_xp': 1600, 'common_drop': 'herb_major', 'rare_drop': None, 'money_range': (540, 1080),
-		'basic_attack': 'distorted image', 'strong_attack': 'looping recall', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
+		'basic_attack': 'distorted image', 'strong_attack': 'looping recall', 'player_abilities': ['dark_spirit_lv1_shade_whisper'],
 		'base_str': 30, 'base_dex': 48, 'base_con': 32, 'base_int': 65, 'base_hp': 3000, 'base_ap': 150,
 		'str_per_level': 3, 'dex_per_level': 6, 'con_per_level': 3, 'int_per_level': 8,
 		'resistances': ['dark', 'ice'], 'immunities': ['sleep'], 'weaknesses': ['light', 'fire']
@@ -68,7 +68,7 @@ BOSS_HOSTILES = [
 	{
 		'id': 'twisted_darkwood_1', 'name': 'Twisted Darkwood', 'hostile_type': 'plant', 'min_spawn_level': 97, 'role': 'hazard', 'rarity': 'notfound',
 		'base_xp': 55000, 'common_drop': 'tome_int_superrare', 'rare_drop': 'rotwood_heartstone', 'money_range': (9000, 18000),
-		'basic_attack': 'looping shame', 'strong_attack': 'false history', 'player_abilities': ['dark_faith_lv1_shade_whisper', 'dark_magic_lv1_shadow_tendril'],
+		'basic_attack': 'looping shame', 'strong_attack': 'false history', 'player_abilities': ['dark_spirit_lv1_shade_whisper', 'dark_magic_lv1_shadow_tendril'],
 		'base_str': 65, 'base_dex': 55, 'base_con': 80, 'base_int': 70, 'base_hp': 200000, 'base_ap': 1200,
 		'str_per_level': 8, 'dex_per_level': 7, 'con_per_level': 10, 'int_per_level': 9,
 		'resistances': ['dark', 'earth', 'physical'], 'immunities': ['poison', 'sleep', 'confuse'], 'weaknesses': ['fire', 'light']

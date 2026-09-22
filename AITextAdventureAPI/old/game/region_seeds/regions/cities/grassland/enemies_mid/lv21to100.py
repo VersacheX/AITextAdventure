@@ -15,7 +15,7 @@ RANDOM_HOSTILE_SEEDS = [
  {"id": "cathedral_cultist", "name": "Cathedral Cultist", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level": 25, "rarity": "uncommon", "base_xp": 360,
   "common_drop": "tome_int", "rare_drop": None, "money_range": (80, 280),
   "basic_attack": "ritual blade", "strong_attack": "dark blessing",
-  "player_abilities": ["dark_faith_lv1_shade_whisper"],
+  "player_abilities": ["dark_spirit_lv1_shade_whisper"],
   "base_str": 8, "base_dex": 8, "base_con": 8, "base_int": 14, "base_hp": 280, "base_ap": 14,
   "str_per_level": 1, "dex_per_level": 1, "con_per_level": 1, "int_per_level": 3},
  {"id": "steeple_berserker", "name": "Steeple Berserker", "hostile_type": "humanoid", "role": "damage", "min_spawn_level": 29, "rarity": "common", "base_xp": 320,

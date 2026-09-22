@@ -30,7 +30,7 @@ HOSTILE_SEEDS = [
 	{
 		'id': 'efficiency_drone', 'name': 'Efficiency Drone', 'hostile_type': 'construct', 'min_spawn_level': 90, 'role': 'hazard', 'rarity': 'uncommon',
 		'base_xp': 1650, 'common_drop': 'herb_major', 'rare_drop': None, 'money_range': (560, 1120),
-		'basic_attack': 'audit pulse', 'strong_attack': 'waste elimination', 'player_abilities': ['light_faith_lv1_convert'],
+		'basic_attack': 'audit pulse', 'strong_attack': 'waste elimination', 'player_abilities': ['light_spirit_lv1_convert'],
 		'base_str': 35, 'base_dex': 52, 'base_con': 40, 'base_int': 58, 'base_hp': 3400, 'base_ap': 140,
 		'str_per_level': 4, 'dex_per_level': 6, 'con_per_level': 5, 'int_per_level': 7,
 		'resistances': ['electric', 'air'], 'immunities': ['sleep'], 'weaknesses': ['dark']

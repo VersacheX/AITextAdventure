@@ -59,7 +59,7 @@ RANDOM_HOSTILE_SEEDS = [
  {"id": "cursed_dune_priest", "name": "Cursed Dune Priest", "hostile_type": "magic", "role": "hazard", "min_spawn_level": 34, "rarity": "rare", "base_xp": 700,
   "common_drop": "tome_int", "rare_drop": "stimulant_large", "money_range": (60, 240),
   "basic_attack": "hex bolt", "strong_attack": "blasphemous rite",
-  "player_abilities": ["dark_faith_lv1_shade_whisper", "earth_water_magic_lv2_mudslide"],
+  "player_abilities": ["dark_spirit_lv1_shade_whisper", "earth_water_magic_lv2_mudslide"],
   "base_str": 5, "base_dex": 6, "base_con": 7, "base_int": 20, "base_hp": 300, "base_ap": 18,
   "str_per_level": 0, "dex_per_level": 1, "con_per_level": 1, "int_per_level": 5},
 

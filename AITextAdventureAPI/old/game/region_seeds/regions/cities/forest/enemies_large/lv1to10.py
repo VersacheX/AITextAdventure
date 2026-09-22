@@ -37,7 +37,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==3
  {"id": "silvertongue", "name": "Silvertongue Peddler", "hostile_type": "humanoid", "role": "support", "min_spawn_level":3, "rarity": "uncommon", "base_xp":30,
  "common_drop": "herb_med", "rare_drop": "pipe_wrench", "money_range": (3,24),
- "basic_attack": "peddler's shove", "strong_attack": "charm and pick", "player_abilities": ["water_faith_lv1_mending_streams"],
+ "basic_attack": "peddler's shove", "strong_attack": "charm and pick", "player_abilities": ["water_spirit_lv1_mending_streams"],
  "base_str":2, "base_dex":6, "base_con":2, "base_int":6, "base_hp":16, "base_ap":4,
  "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":2},
 
@@ -89,7 +89,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==7
  {"id": "sigil_harvester", "name": "Sigil Harvester", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":7, "rarity": "rare", "base_xp":140,
  "common_drop": "herb_major", "rare_drop": "herb_major", "money_range": (30,120),
- "basic_attack": "rune lunge", "strong_attack": "sigil burst", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst", "fire_magic_lv1_fireball"],
+ "basic_attack": "rune lunge", "strong_attack": "sigil burst", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst", "fire_magic_lv1_fireball"],
  "base_str":2, "base_dex":4, "base_con":4, "base_int":12, "base_hp":60, "base_ap":10,
  "str_per_level":0, "dex_per_level":1, "con_per_level":1, "int_per_level":4},
 

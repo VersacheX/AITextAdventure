@@ -61,7 +61,7 @@ RANDOM_HOSTILE_SEEDS = [
  # min_spawn_level ==3
  {"id": "bazaarkeeper", "name": "Bazaarkeeper Babushka", "hostile_type": "humanoid", "role": "support", "min_spawn_level":3, "rarity": "uncommon", "base_xp":30,
  "common_drop": "herb_med", "rare_drop": "tome_dex", "money_range": (6,30),
- "basic_attack": "hurls a basket", "strong_attack": "ceramic bust", "player_abilities": ["air_light_faith_lv2_serene_breath"],
+ "basic_attack": "hurls a basket", "strong_attack": "ceramic bust", "player_abilities": ["air_light_spirit_lv2_serene_breath"],
  "base_str":2, "base_dex":3, "base_con":4, "base_int":5, "base_hp":22, "base_ap":5,
  "str_per_level":1, "dex_per_level":1, "con_per_level":1, "int_per_level":2},
 
@@ -149,7 +149,7 @@ RANDOM_HOSTILE_SEEDS = [
 
  {"id": "siren_muse", "name": "Siren Muse", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":7, "rarity": "rare", "base_xp":72,
  "common_drop": "stimulant_small", "rare_drop": "tome_int", "money_range": (12,60),
- "basic_attack": "siren song", "strong_attack": "mesmerize", "player_abilities": ["air_light_faith_lv2_serene_breath", "dark_magic_lv4_nightmare_echo"],
+ "basic_attack": "siren song", "strong_attack": "mesmerize", "player_abilities": ["air_light_spirit_lv2_serene_breath", "dark_magic_lv4_nightmare_echo"],
  "base_str":2, "base_dex":5, "base_con":2, "base_int":7, "base_hp":28, "base_ap":6,
  "str_per_level":0, "dex_per_level":2, "con_per_level":0, "int_per_level":3},
 

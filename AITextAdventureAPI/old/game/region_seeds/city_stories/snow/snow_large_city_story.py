@@ -204,7 +204,7 @@ NPC_DIALOG += [
 	# Find Thryna
 	{ 'npc_id': 'tech',    'dialog_id': 'kade_snow_large_find_thryna',    'dialog': [ "A Fractured Chime — spirit of broken harmony. If it awakens fully, the frost will turn against itself." ] },
 	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_large_find_thryna', 'dialog': [ "The ice harmonics are already trembling toward it. We still it before the discord becomes permanent." ] },
-	{ 'npc_id': 'faith',   'dialog_id': 'kaera_snow_large_find_thryna',   'dialog': [ "You've stilled a discord older than the glacier itself. The Snowlands will remember." ] },
+	{ 'npc_id': 'spirit',   'dialog_id': 'kaera_snow_large_find_thryna',   'dialog': [ "You've stilled a discord older than the glacier itself. The Snowlands will remember." ] },
 
 ]
 
@@ -248,7 +248,7 @@ NPC_DIALOG += [
 
 	# Type D – Defeat Vault Guardian
 	{ 'npc_id': 'technique', 'dialog_id': 'chock_snow_large_d_defeat_vault_guardian', 'dialog': [ "The guardian fell. The vault yields." ] },
-	{ 'npc_id': 'faith', 'dialog_id': 'kaera_snow_large_d_defeat_vault_guardian', 'dialog': [ "The Frostgate Sovereign is yours — wear it as a promise. That armour has never known defeat." ] },
+	{ 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_large_d_defeat_vault_guardian', 'dialog': [ "The Frostgate Sovereign is yours — wear it as a promise. That armour has never known defeat." ] },
 	{ 'npc_id': 'tech',  'dialog_id': 'kade_snow_large_d_defeat_vault_guardian',  'dialog': [ "See that it still doesn't." ] },
 
 ]
@@ -264,7 +264,7 @@ NPC_DIALOG += [
 	# B – Defeat Aeriola
 	{ 'npc_id': 'technique',  'dialog_id': 'chock_snow_large_b_defeat_aeriola',  'dialog': [ "Stay down. The frost moves again." ] },
 	{ 'npc_id': 'kor_in', 'dialog_id': 'kor_in_snow_large_b_defeat_aeriola', 'dialog': [ "She thought stopping time was mercy. What matters is that the frost is moving again." ] },
-	{ 'npc_id': 'faith',  'dialog_id': 'kaera_snow_large_b_defeat_aeriola',  'dialog': [ "Things that move can change. Things that stop just wait to be found." ] },
+	{ 'npc_id': 'spirit',  'dialog_id': 'kaera_snow_large_b_defeat_aeriola',  'dialog': [ "Things that move can change. Things that stop just wait to be found." ] },
 
 ]
 
@@ -415,7 +415,7 @@ TASKS = [
 			},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_large_find_thryna'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_large_find_thryna' } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',   'dialog_id': 'kaera_snow_large_find_thryna'   } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',   'dialog_id': 'kaera_snow_large_find_thryna'   } },
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
@@ -645,7 +645,7 @@ TASKS = [
 				}
 			},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_snow_large_d_defeat_vault_guardian' } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_large_d_defeat_vault_guardian' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_large_d_defeat_vault_guardian' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_large_d_defeat_vault_guardian'  } },
 		]
 	},
@@ -750,7 +750,7 @@ NPC_DIALOG += [
 		"That's not a weapon. That's a burden she chose to keep.",
 		"She thinks it makes her unstoppable. It makes her overloaded."
 	]},
-	{ 'npc_id': 'faith', 'dialog_id': 'kaera_snow_large_b_meet_aeriola', 'dialog': [
+	{ 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_large_b_meet_aeriola', 'dialog': [
 		"She asked the void to give back what she lost.",
 		"It answered.",
 		"(quietly) That is never the mercy it looks like. The void returns things unchanged — it doesn't heal them.",
@@ -867,7 +867,7 @@ TASKS += [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique',   'dialog_id': 'chock_snow_large_b_meet_aeriola'   } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in',  'dialog_id': 'kor_in_snow_large_b_meet_aeriola'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_large_b_meet_aeriola'    } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',   'dialog_id': 'kaera_snow_large_b_meet_aeriola'   } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',   'dialog_id': 'kaera_snow_large_b_meet_aeriola'   } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill',   'dialog_id': 'poise_snow_large_b_meet_aeriola'   } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',   'dialog_id': 'moxie_snow_large_b_meet_aeriola'   } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_large_b_meet_aeriola' } },
@@ -897,7 +897,7 @@ TASKS += [
 			{ 'event_type': 'initiate_dialog',           'params': { 'npc_id': 'aeriola',    'dialog_id': 'aeriola_b_defeated' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique',  'dialog_id': 'chock_snow_large_b_defeat_aeriola'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in',     'dialog_id': 'kor_in_b_victory'                  } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',      'dialog_id': 'kaera_snow_large_b_defeat_aeriola'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',      'dialog_id': 'kaera_snow_large_b_defeat_aeriola'  } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'snow' }},
 		]
 	},

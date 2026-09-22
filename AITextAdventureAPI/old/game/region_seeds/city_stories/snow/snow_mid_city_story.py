@@ -302,7 +302,7 @@ NPC_DIALOG += [
 
     # Type E – Defeat Rimechant Echo / Return to Yrsa
     { 'npc_id': 'technique', 'dialog_id': 'chock_snow_mid_e_return_to_yrsa', 'dialog': [ "The bond is broken. The ancestral voice quieted the moment we returned." ] },
-    { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_e_return_to_yrsa', 'dialog': [ "It said what it needed to say. This shard is not meant for an archive — it's meant for someone who will act on it." ] },
+    { 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_mid_e_return_to_yrsa', 'dialog': [ "It said what it needed to say. This shard is not meant for an archive — it's meant for someone who will act on it." ] },
     { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_e_return_to_yrsa',  'dialog': [ "The pact it records will matter again someday. Carry it." ] },
 
 ]
@@ -321,7 +321,7 @@ NPC_DIALOG += [
     { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_f_find_marlo', 'dialog': [ "Get her testimony." ] },
 
     # Type F – Get Yrsa Testimony
-    { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_f_get_yrsa_testimony', 'dialog': [ "She was there when those allocations were approved. She did not agree with the decision then. She will not protect it now." ] },
+    { 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_mid_f_get_yrsa_testimony', 'dialog': [ "She was there when those allocations were approved. She did not agree with the decision then. She will not protect it now." ] },
     { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_f_get_yrsa_testimony',  'dialog': [ "She'll sign whatever document he needs. Long past time someone investigated those records." ] },
     { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_f_get_yrsa_testimony', 'dialog': [ "Return to Marlo." ] },
 
@@ -364,7 +364,7 @@ NPC_DIALOG += [
     # Type D – Defeat Blueforge Spirit
     { 'npc_id': 'technique', 'dialog_id': 'chock_snow_mid_d_defeat_blueforge_spirit', 'dialog': [ "It's down. Take the blue-forge crystal." ] },
     { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_d_defeat_blueforge_spirit',  'dialog': [ "Nothing has ever sung like this. Brawn will hammer it into warplate that holds against ice or rift." ] },
-    { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_d_defeat_blueforge_spirit', 'dialog': [ "The blue flame burns clean again. The runes sing the way they're supposed to." ] },
+    { 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_mid_d_defeat_blueforge_spirit', 'dialog': [ "The blue flame burns clean again. The runes sing the way they're supposed to." ] },
 
 ]
 
@@ -377,7 +377,7 @@ NPC_DIALOG += [
     { 'npc_id': 'skill',   'dialog_id': 'poise_snow_mid_e_consult_bjorn',   'dialog': [ "Collect it from Yrsa." ] },
 
     # Type E – Collect Shard
-    { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_e_collect_shard', 'dialog': [ "The ancestors sent this up from the Depths when the Shattered Rune fell. A formal declaration of something." ] },
+    { 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_mid_e_collect_shard', 'dialog': [ "The ancestors sent this up from the Depths when the Shattered Rune fell. A formal declaration of something." ] },
     { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_e_collect_shard',  'dialog': [ "Bjorn says the rune patterns match a forge-mark used only in Hailward Hold ceremonial work. It must go back there." ] },
     { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_e_collect_shard', 'dialog': [ "The decree wants to be completed." ] },
 
@@ -626,7 +626,7 @@ TASKS += [
                 }
             },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_snow_mid_e_return_to_yrsa' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_e_return_to_yrsa' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_mid_e_return_to_yrsa' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_e_return_to_yrsa'  } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'speaker_yrsa', 'standing_text': [ "The ancestral voice is quiet now. The shard is not meant for an archive — it's meant for someone who will act on it." ] } },
         ]
@@ -715,7 +715,7 @@ TASKS += [
                     'dialog_id': 'yrsa_marlo_testimony'
                 }
             },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_f_get_yrsa_testimony' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_mid_f_get_yrsa_testimony' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_f_get_yrsa_testimony'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_f_get_yrsa_testimony' } },
             {
@@ -828,7 +828,7 @@ TASKS += [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'speaker_yrsa', 'dialog_id': 'yrsa_e_decree_shard' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_e_collect_shard' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_mid_e_collect_shard' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_e_collect_shard'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_mid_e_collect_shard' } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'speaker_yrsa', 'standing_text': [ "The ancestors sent this up from the Depths when the Shattered Rune fell. A formal declaration of something." ] } },
@@ -1031,7 +1031,7 @@ TASKS += [
 			},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_snow_mid_d_defeat_blueforge_spirit' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_mid_d_defeat_blueforge_spirit'  } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_snow_mid_d_defeat_blueforge_spirit' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_mid_d_defeat_blueforge_spirit' } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {

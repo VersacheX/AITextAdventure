@@ -121,8 +121,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch6_after_seth_reveal',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch6_after_seth_reveal',
         'dialog': [
             "Seth, if you're trying to help, we're grateful. Even if your methods are… unconventional."
         ]
@@ -170,8 +170,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch6_after_contact',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch6_after_contact',
         'dialog': [
             "We should move carefully. Something here feels… off. Like the land itself is unsettled."
         ]
@@ -219,15 +219,15 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch6_aberrant_intro',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch6_aberrant_intro',
         'dialog': [
             "Its aura is fractured… like it's in pain."
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch6_after_aberrant',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch6_after_aberrant',
         'dialog': [
             "This creature… it was shaped by the same force that warped the Riftwaters."
         ]
@@ -290,8 +290,8 @@ NPC_DIALOG = [
         'dialog': ["Or losing control of it."]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch6_bracelet_theory',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch6_bracelet_theory',
         'dialog': ["Whatever the case, we must find it."]
     },
     {
@@ -385,8 +385,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch6_after_seth_quest',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch6_after_seth_quest',
         'dialog': [
             "If your intentions are righteous, then we stand with you. But deception breeds danger."
         ]
@@ -434,8 +434,8 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
-        'dialog_id': 'faith_ch6_after_seth_quest_2',
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch6_after_seth_quest_2',
         'dialog': [
             "These guardians must be under great strain. We should aid them swiftly."
         ]
@@ -531,7 +531,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_useful' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch6_after_seth_reveal' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_i_know_people' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch6_after_seth_reveal' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch6_after_seth_reveal' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_kaera_gets_it' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch6_to_seth' }},
             # ── Type A hook: Seth sends them to Karrek before handing off contact ──
@@ -581,7 +581,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rhett', 'dialog_id': 'contact_ch6_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch6_after_contact' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch6_after_contact' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch6_after_contact' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch6_after_contact' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rhett', 'dialog_id': 'contact_ch6_response' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch6_after_contact' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rhett', 'standing_text': ["Clear the breach site. Something crawled out of it, and we need it stopped."]}},
@@ -602,7 +602,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch6_aberrant_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch6_aberrant_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch6_aberrant_intro' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch6_aberrant_intro' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch6_aberrant_intro' }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch6_defeat_riftspawn_aberrant' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'riftspawn_aberrant', 'standing_text': [" *static void crackles*"]}}
         ]
@@ -617,7 +617,7 @@ TASKS = [
         ],
         'task_complete_events': [
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'riftspawn_aberrant' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch6_after_aberrant' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch6_after_aberrant' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch6_after_aberrant' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch6_after_aberrant' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch6_after_aberrant' }},
@@ -638,7 +638,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch6_bracelet_theory' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch6_bracelet_theory' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch6_bracelet_theory' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch6_bracelet_theory' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch6_bracelet_theory' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_airship_reveal' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch6_airship_reveal' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_airship_confirm' }},
@@ -647,7 +647,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch6_after_seth_quest' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch6_after_seth_quest' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch6_after_seth_quest' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch6_after_seth_quest' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch6_after_seth_quest' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch6_after_seth_quest' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_stabilization_2' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch6_after_seth_quest_2' }},
@@ -658,7 +658,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_stabilization_4' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch6_after_seth_quest_3' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch6_after_seth_quest_2' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch6_after_seth_quest_2' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch6_after_seth_quest_2' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch6_after_seth_quest_3' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_stabilization_5' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch6_after_seth_quest_4' }},

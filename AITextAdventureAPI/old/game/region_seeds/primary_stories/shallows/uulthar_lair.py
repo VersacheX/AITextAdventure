@@ -250,7 +250,7 @@ BOSS_HOSTILES = [
         "min_spawn_level": 30, "rarity": "notfound", "base_xp": 1200,
         "common_drop": "herb_major", "rare_drop": "tome_int", "money_range": (100,300),
         "basic_attack": "abyssal pull", "strong_attack": "void tide",
-        "player_abilities": ["dark_dark_magic_lv2_umbra_storm", "water_dark_magic_lv2_abyssal_tide", "dark_faith_lv1_shade_whisper"],
+        "player_abilities": ["dark_dark_magic_lv2_umbra_storm", "water_dark_magic_lv2_abyssal_tide", "dark_spirit_lv1_shade_whisper"],
         "base_str": 10, "base_dex": 10, "base_con": 14, "base_int": 18,
         "base_hp": 2000, "base_ap": 100,
         "str_per_level": 1, "dex_per_level": 2, "con_per_level": 2, "int_per_level": 3

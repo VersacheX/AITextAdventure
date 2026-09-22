@@ -175,7 +175,7 @@ SEEDS_LV1TO10 = [
  # Superrare to satisfy parity (placed at level10)
  {"id": "runekeeper_wardling", "name": "Runekeeper Wardling", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":10, "rarity": "superrare", "base_xp":380,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (60,260),
- "basic_attack": "warding lash", "strong_attack": "arcane cataclysm", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst"],
+ "basic_attack": "warding lash", "strong_attack": "arcane cataclysm", "player_abilities": ["level_1_hostile_ability_light_spirit_prism_burst"],
  "base_str":6, "base_dex":4, "base_con":8, "base_int":10, "base_hp":220, "base_ap":8,
  "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":3},
 ]

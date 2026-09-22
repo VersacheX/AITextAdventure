@@ -24,7 +24,7 @@ HOSTILE_SEEDS = [
 	{
 		'id': 'preserved_horror', 'name': 'Preserved Horror', 'hostile_type': 'undead', 'min_spawn_level': 100, 'role': 'hazard', 'rarity': 'common',
 		'base_xp': 1800, 'common_drop': 'herb_major', 'rare_drop': None, 'money_range': (600, 1200),
-		'basic_attack': 'pristine pain', 'strong_attack': 'perfect preservation', 'player_abilities': ['dark_faith_lv1_shade_whisper'],
+		'basic_attack': 'pristine pain', 'strong_attack': 'perfect preservation', 'player_abilities': ['dark_spirit_lv1_shade_whisper'],
 		'base_str': 38, 'base_dex': 45, 'base_con': 40, 'base_int': 65, 'base_hp': 3500, 'base_ap': 150,
 		'str_per_level': 4, 'dex_per_level': 5, 'con_per_level': 4, 'int_per_level': 8,
 		'resistances': ['dark', 'ice'], 'immunities': ['sleep'], 'weaknesses': ['light', 'fire']

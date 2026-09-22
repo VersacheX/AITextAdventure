@@ -29,7 +29,7 @@ RANDOM_HOSTILE_SEEDS = [
     {"id": "forest_shared_sapling_dryad", "name": "Sapling Dryad", "hostile_type": "elemental", "role": "support", "min_spawn_level": 5, "rarity": "rare", "base_xp": 75,
      "common_drop": "herb_minor", "rare_drop": "herb_med", "money_range": (12, 55),
      "basic_attack": "thorn flick", "strong_attack": "binding root",
-     "player_abilities": ["earth_magic_lv1_tremor", "light_faith_lv1_minor_heal"],
+     "player_abilities": ["earth_magic_lv1_tremor", "light_spirit_lv1_minor_heal"],
      "base_str": 4, "base_dex": 6, "base_con": 6, "base_int": 8, "base_hp": 50, "base_ap": 7,
      "str_per_level": 1, "dex_per_level": 1, "con_per_level": 1, "int_per_level": 1},
     {"id": "forest_shared_gloomling_horror", "name": "Gloomling Horror", "hostile_type": "eldritch", "role": "hazard", "min_spawn_level": 5, "rarity": "superrare", "base_xp": 90,

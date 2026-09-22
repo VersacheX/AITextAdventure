@@ -50,7 +50,7 @@ _IMG_MAX_ROWS = 20
 
 # The five player-character npc_ids that pending_character resolves to at runtime
 _PENDING_CHARACTER_IDS: Tuple[str, ...] = (
-    "technique", "magic", "tech", "skill", "faith",
+    "technique", "magic", "tech", "skill", "spirit",
 )
 
 

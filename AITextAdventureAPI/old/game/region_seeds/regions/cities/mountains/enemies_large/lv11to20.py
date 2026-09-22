@@ -116,7 +116,7 @@ RANDOM_HOSTILE_SEEDS = [
  # level20 (rare + superrare)
  {"id": "sunder_priest", "name": "Sunder Priest", "hostile_type": "humanoid", "role": "hazard", "min_spawn_level":20, "rarity": "rare", "base_xp":600,
  "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (120,420),
- "basic_attack": "searing invocation", "strong_attack": "forge purge", "player_abilities": ["lv2_hostile_ability_dark_dark_faith_void_veil", "lv2_hostile_ability_dark_air_skill_nightmare_wave"],
+ "basic_attack": "searing invocation", "strong_attack": "forge purge", "player_abilities": ["lv2_hostile_ability_dark_dark_spirit_void_veil", "lv2_hostile_ability_dark_air_skill_nightmare_wave"],
  "base_str":6, "base_dex":5, "base_con":8, "base_int":12, "base_hp":300, "base_ap":10,
  "str_per_level":2, "dex_per_level":1, "con_per_level":2, "int_per_level":4},
 
