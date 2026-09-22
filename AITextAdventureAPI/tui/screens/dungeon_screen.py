@@ -24,7 +24,7 @@ and ConfirmScreen so the caller (OverworldScreen) can react cleanly.
 """
 from __future__ import annotations
 
-from typing import Any, List, Optional
+from typing import Any, Callable, List, Optional
 
 from textual import on
 from textual.app import ComposeResult
@@ -258,12 +258,13 @@ class DungeonScreen(BaseScreen):
                     any_interacted = True
 
         if any_interacted:
-            self._check_dialogs_and_refresh()
             # An interaction (meeting a boss NPC) can complete a task whose
-            # events set a pending fight via begin_combat. Movement triggers
-            # this through _handle_move, but interacting in place does not move,
-            # so check encounters here too or the boss battle never starts.
-            self._check_encounters(after_action=False)
+            # events set a pending fight via begin_combat. We must wait for the
+            # dialog chain to be dismissed before starting combat so the player
+            # can read it first, so defer the encounter check until dialogs clear.
+            self._check_dialogs_and_refresh(
+                on_cleared=lambda: self._check_encounters(after_action=False)
+            )
         else:
             self.notify("Nothing to interact with here.", timeout=2)
 
@@ -321,9 +322,16 @@ class DungeonScreen(BaseScreen):
                 return
         self._refresh_all()
 
-    def _show_dialog(self, messages: List[str], title: str = "Message") -> None:
+    def _show_dialog(
+        self,
+        messages: List[str],
+        title: str = "Message",
+        on_cleared: Optional[Callable[[], None]] = None,
+    ) -> None:
         if not messages:
             self._refresh_all()
+            if on_cleared is not None:
+                on_cleared()
             return
 
         self._remove_dialog()
@@ -331,15 +339,19 @@ class DungeonScreen(BaseScreen):
             map_panel = self.query_one("#map-panel")
             dialog = MessageDialog(messages, title)
             map_panel.mount(dialog)
-            self._schedule_dialog_check()
+            self._schedule_dialog_check(on_cleared=on_cleared)
         except Exception as e:
             self.notify(f"Could not show dialog: {e}", severity="error")
             self._refresh_all()
+            if on_cleared is not None:
+                on_cleared()
 
-    def _schedule_dialog_check(self) -> None:
+    def _schedule_dialog_check(self, on_cleared: Optional[Callable[[], None]] = None) -> None:
         def _check() -> None:
             if not self._dialog_visible():
                 self._refresh_all()
+                if on_cleared is not None:
+                    on_cleared()
             else:
                 self.set_timer(0.2, _check)
 
