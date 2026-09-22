@@ -259,6 +259,11 @@ class DungeonScreen(BaseScreen):
 
         if any_interacted:
             self._check_dialogs_and_refresh()
+            # An interaction (meeting a boss NPC) can complete a task whose
+            # events set a pending fight via begin_combat. Movement triggers
+            # this through _handle_move, but interacting in place does not move,
+            # so check encounters here too or the boss battle never starts.
+            self._check_encounters(after_action=False)
         else:
             self.notify("Nothing to interact with here.", timeout=2)
 
