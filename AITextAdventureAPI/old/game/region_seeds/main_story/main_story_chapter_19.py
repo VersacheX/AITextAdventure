@@ -126,7 +126,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch19_memory_soul',
 		'dialog': [
 			"(gently) Memory is the foundation of who we are. If this city is losing its true past, then it is losing its soul. We will help you restore it."
@@ -190,7 +190,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch19_true_care',
 		'dialog': [
 			"(warm) Your willingness to sacrifice for this city's future speaks of true care. We will not let your effort be in vain."
@@ -233,7 +233,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch19_worth_remembering',
 		'dialog': [
 			"(softly) Some memories are worth remembering, even the painful ones. False ones only steal from the truth."
@@ -282,7 +282,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch19_more_than_past',
 		'dialog': [
 			"No. We are more than our past. We are the choices we make now."
@@ -296,7 +296,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch19_reclaimed',
 		'dialog': [
 			"(breathing out) The weight... it feels lighter already. Like we've reclaimed a piece of ourselves."
@@ -345,7 +345,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch19_choose_carry_forward',
 		'dialog': [
 			"(gentle) Memory is not just what happened. It is what we choose to carry forward. May this city choose wisely now."
@@ -388,7 +388,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch19_terrible_price',
 		'dialog': [
 			"You're carrying the weight of an entire community alone. That kind of harmony demands a terrible price."
@@ -410,7 +410,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch19_true_harmony',
 		'dialog': [
 			"True harmony isn't the absence of pain. It makes space for it."
@@ -446,7 +446,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch19_sing_with_us',
 		'dialog': [
 			"Then sing with us. Not to preserve the past, but to build what's next."
@@ -554,7 +554,7 @@ TASKS = [
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'soren', 'dialog_id': 'soren_ch19_rot_mission' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch19_memory_soul' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch19_memory_soul' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch19_cut_it_out' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch19_looping_memories' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_ch19_false_memory' }},
@@ -574,7 +574,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'astra_wynn', 'dialog_id': 'astra_wynn_ch19_heavy_memories' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch19_temporal_stabilizer' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch19_clear_the_rot' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch19_true_care' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch19_true_care' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch19_professionals' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'astra_wynn', 'dialog_id': 'astra_wynn_ch19_then_go' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'astra_wynn', 'standing_text': ["Then go. And try not to get lost in your own echoes."]}},
@@ -591,7 +591,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'jinn', 'dialog_id': 'jinn_ch19_trinkets' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch19_polished_lies' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch19_no_souvenirs' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch19_worth_remembering' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch19_worth_remembering' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_ch19_degradation' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'jinn', 'dialog_id': 'jinn_ch19_no_fun' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'jinn', 'standing_text': ["You lot are no fun at all."]}},
@@ -617,7 +617,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch19_same_street' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch19_focus' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'twisted_darkwood', 'dialog_id': 'twisted_darkwoo_ch19_intro' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch19_more_than_past' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch19_more_than_past' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'twisted_darkwood', 'standing_text': ["You are nothing but your mistakes. You will repeat them forever."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch19_destroy_twisted_darkwoo' }}
 		]
@@ -633,7 +633,7 @@ TASKS = [
 		'task_complete_events': [
 			{ 'event_type': 'hide_npc', 'params': { 'npc_id': 'twisted_darkwood' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch19_darkwood_shatter' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch19_reclaimed' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch19_reclaimed' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch19_no_more_mud' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch19_headfuck' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_ch19_not_sure' }},
@@ -650,7 +650,7 @@ TASKS = [
 		'task_acquire_events': [],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'soren', 'dialog_id': 'soren_ch19_rot_receding' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch19_choose_carry_forward' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch19_choose_carry_forward' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch19_strong_foundation' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'soren', 'dialog_id': 'soren_ch19_see_astra_wynn' }},
 			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'seraphine', 'location': 'region_city_inn' }},
@@ -672,7 +672,7 @@ TASKS = [
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seraphine', 'dialog_id': 'seraphine_ch19_intro' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch19_too_perfect' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch19_terrible_price' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch19_terrible_price' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seraphine', 'dialog_id': 'seraphine_ch19_no_choice' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'seraphine', 'standing_text': ["Please... help me strengthen the song before it collapses."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch19_deliver_harmony_echo_to_seraphine' }}
@@ -693,7 +693,7 @@ TASKS = [
 		'task_complete_events': [
 			{ 'event_type': 'remove_item', 'params': { 'item_id': 'harmony_echo' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seraphine', 'dialog_id': 'seraphine_ch19_first_echo' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch19_true_harmony' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch19_true_harmony' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch19_feels_honest' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch19_pain_real' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seraphine', 'dialog_id': 'seraphine_ch19_one_more' }},
@@ -711,7 +711,7 @@ TASKS = [
 		'task_complete_events': [
 			{ 'event_type': 'remove_item', 'params': { 'item_id': 'harmony_echo' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seraphine', 'dialog_id': 'seraphine_ch19_second_echo' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch19_sing_with_us' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch19_sing_with_us' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch19_broken_songs' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seraphine', 'dialog_id': 'seraphine_ch19_wants_to_try' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'seraphine', 'standing_text': ["I will try. With all of you."]}},

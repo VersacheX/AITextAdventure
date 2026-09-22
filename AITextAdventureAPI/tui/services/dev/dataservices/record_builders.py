@@ -783,7 +783,7 @@ _EFFECT_LABELS: dict[str, str] = {
 
 _ABILITY_TYPE_LABELS: dict[str, str] = {
     "technique": "Technique",
-    "faith":     "Faith",
+    "spirit":     "Faith",
     "magic":     "Magic",
     "tech":      "Tech",
     "skill":     "Skill",

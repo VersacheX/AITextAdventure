@@ -184,7 +184,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'kaera_grimnaw_join_reaction',
         'dialog': [
             "He's carrying something he doesn't have words for yet.",
@@ -464,7 +464,7 @@ TASKS = [
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
-                    'npc_id': 'faith',
+                    'npc_id': 'spirit',
                     'dialog_id': 'kaera_grimnaw_join_reaction'
                 }
             },

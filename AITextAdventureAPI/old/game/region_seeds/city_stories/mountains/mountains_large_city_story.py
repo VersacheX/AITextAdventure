@@ -363,7 +363,7 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_mountains_large_e_investigate_echo',
         'dialog': [
             "Something that old doesn't stay buried by accident. The mountain has been keeping it."
@@ -432,7 +432,7 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_mountains_large_e_return_to_gorvak',
         'dialog': [
             "It doesn't belong in an archive. It belongs with someone who will use it."
@@ -543,7 +543,7 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_mountains_large_d_defeat_conduit_echo',
         'dialog': [
             "The Maw is quiet now. The catalog finally has something new worth logging."
@@ -587,7 +587,7 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_mountains_large_e_collect_core',
         'dialog': [
             "Gallows Rift has a cavity in its deep stone that's been waiting for something like this."
@@ -820,7 +820,7 @@ TASKS += [
             },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'tech_mountains_large_e_investigate_echo'    } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grinmaw_mountains_large_e_investigate_echo' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',   'dialog_id': 'faith_mountains_large_e_investigate_echo'   } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',   'dialog_id': 'faith_mountains_large_e_investigate_echo'   } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rustscribe_gorvak', 'standing_text': ["I found a reference in the oldest catalog — predates the city's founding.", "The original forge architects built a resonance core into the mountain's deepest chamber.", "It was never meant to be extracted. They called it the Echo Core — the forge's memory made solid."] } },
             {
                 'event_type': 'award_task',
@@ -978,7 +978,7 @@ TASKS += [
                 }
             },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_mountains_large_e_return_to_gorvak'  } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_mountains_large_e_return_to_gorvak' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_mountains_large_e_return_to_gorvak' } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rustscribe_gorvak', 'standing_text': ["You found it. I can hear it from here.", "Come — I need to see it with my own eyes."] } }
         ]
     },
@@ -1158,7 +1158,7 @@ TASKS += [
 			},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_large_d_defeat_conduit_echo' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_mountains_large_d_defeat_conduit_echo'      } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_mountains_large_d_defeat_conduit_echo'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',     'dialog_id': 'faith_mountains_large_d_defeat_conduit_echo'     } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -1248,7 +1248,7 @@ TASKS += [
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'forge_seer_brannoc', 'dialog_id': 'brannoc_e_echo_core' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'tech_mountains_large_e_collect_core'   } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_mountains_large_e_collect_core'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',  'dialog_id': 'faith_mountains_large_e_collect_core'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_mountains_large_e_collect_core'  } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'forge_seer_brannoc', 'standing_text': [ "The Echo Core is not dangerous on its own.", "It absorbs the resonance of everything forged above it — centuries of metalwork compressed into one object.", "The Gearghost will be drawn to it. They always guard what the mountain values most." ] }},
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'mountains_large_city_e_forge_echo_core' }},

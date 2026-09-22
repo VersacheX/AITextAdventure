@@ -168,7 +168,7 @@ NPC_DIALOG += [
 
     # Type A – Meet Saphrin
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_forest_large_a_meet_saphrin',
         'dialog': [
             "Promises rotting at the edges… something is rewriting the weight of every oath."
@@ -214,7 +214,7 @@ NPC_DIALOG += [
 
     # Type A – Find Myrn
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_forest_large_a_find_myrn',
         'dialog': [
             "Spores drifting toward the Hollows… the root-mind is already calling."
@@ -242,7 +242,7 @@ NPC_DIALOG += [
 
     # Type D – Deliver Veil Leaf
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_forest_large_d_deliver_veil_leaf',
         'dialog': [
             "A leaf that still hums with old promises. The forest hasn't forgotten them."
@@ -265,7 +265,7 @@ NPC_DIALOG += [
 
     # Type D – Consult Loryn
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_forest_large_d_consult_loryn',
         'dialog': [
             "The old promises are still alive inside the leaf."
@@ -295,7 +295,7 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_forest_large_d_meet_verdant_cradle',
         'dialog': [
             "The forest remembers every oath sworn on that edge. Carry it carefully."
@@ -323,7 +323,7 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_forest_large_a_ch18_find_anchor',
         'dialog': [
             "The wood grew around it to keep it safe. The forest trusts us with this."
@@ -374,7 +374,7 @@ NPC_DIALOG += [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_forest_large_b_defeat_marrowroot',
 		'dialog': [
 			"The forest isn't his to save. It just needs to be left alone. We did that."
@@ -449,7 +449,7 @@ TASKS = [
 					'dialog_id': 'saphrin_intro'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_large_a_meet_saphrin'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',  'dialog_id': 'faith_forest_large_a_meet_saphrin'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_forest_large_a_meet_saphrin' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn',  'dialog_id': 'thorn_forest_large_a_meet_saphrin'  } },
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'elder_saphrin', 'standing_text': [ "The Exchange trembles. Something roots beneath our bargains.", "Sit, traveler — the wood has warnings to whisper." ] } },
@@ -518,7 +518,7 @@ TASKS = [
 					'dialog_id': 'myrn_intro'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_large_a_find_myrn'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',  'dialog_id': 'faith_forest_large_a_find_myrn'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_forest_large_a_find_myrn' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_forest_large_a_find_myrn' } },
 			{
@@ -559,7 +559,7 @@ TASKS = [
 					'dialog_id': 'saphrin_veil_leaf'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_large_d_deliver_veil_leaf'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',  'dialog_id': 'faith_forest_large_d_deliver_veil_leaf'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_forest_large_d_deliver_veil_leaf'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn',  'dialog_id': 'thorn_forest_large_d_deliver_veil_leaf'  } },
 			{
@@ -601,7 +601,7 @@ TASKS = [
 					'dialog_id': 'loryn_veil_ritual'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_large_d_consult_loryn'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',  'dialog_id': 'faith_forest_large_d_consult_loryn'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'tech_forest_large_d_consult_loryn'   } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn',  'dialog_id': 'thorn_forest_large_d_consult_loryn'  } },
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'twigwhisper_loryn', 'standing_text': [ "The Cradle waits. If it accepts the leaf, the Canopy Sovereign is yours." ] } },
@@ -636,7 +636,7 @@ TASKS = [
 				}
 			},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_forest_large_d_meet_verdant_cradle' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_forest_large_d_meet_verdant_cradle'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',     'dialog_id': 'faith_forest_large_d_meet_verdant_cradle'     } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn',     'dialog_id': 'thorn_forest_large_d_meet_verdant_cradle'     } },
 			{
 				'event_type': 'award_item',
@@ -658,7 +658,7 @@ TASKS = [
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'elder_saphrin', 'dialog_id': 'saphrin_a_ch18_memory_anchor' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',   'dialog_id': 'tech_forest_large_a_ch18_find_anchor'   } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',  'dialog_id': 'faith_forest_large_a_ch18_find_anchor'  } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',  'dialog_id': 'faith_forest_large_a_ch18_find_anchor'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_forest_large_a_ch18_find_anchor' } },
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'elder_saphrin', 'standing_text': [ "The forest trusts you with this. Do not waste it." ] } },
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'living_memory_anchor' }},
@@ -790,7 +790,7 @@ TASKS += [
 			{ 'event_type': 'initiate_dialog',          'params': { 'npc_id': 'marrowroot', 'dialog_id': 'marrowroot_b_defeated'                         }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn',      'dialog_id': 'thorn_b_victory'                               }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_forest_large_b_defeat_marrowroot' } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_forest_large_b_defeat_marrowroot'     } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',     'dialog_id': 'faith_forest_large_b_defeat_marrowroot'     } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'forest' }},
 		]
 	},

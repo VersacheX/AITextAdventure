@@ -285,7 +285,7 @@ NPC_DIALOG += [
 
 	# Type E – Defeat Dominion Hollow
 	{ 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_e_defeat_dominion_hollow', 'dialog': [ "It's broken. The resonance is quiet." ] },
-	{ 'npc_id': 'faith', 'dialog_id': 'kaera_mountains_small_e_defeat_dominion_hollow', 'dialog': [ "Whatever hold that shard had on the tunnels is gone. The hollow can breathe again." ] },
+	{ 'npc_id': 'spirit', 'dialog_id': 'kaera_mountains_small_e_defeat_dominion_hollow', 'dialog': [ "Whatever hold that shard had on the tunnels is gone. The hollow can breathe again." ] },
 	{ 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_e_defeat_dominion_hollow',  'dialog': [ "Hold onto it. Something that strong doesn't stop being useful just because the lock is broken." ] },
 
 ]
@@ -330,7 +330,7 @@ NPC_DIALOG += [
 
 	# Type D – Defeat Dominion Guardian
 	{ 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_d_defeat_dominion_guardian', 'dialog': [ "It's done. The Dominion Edge chose us." ] },
-	{ 'npc_id': 'faith', 'dialog_id': 'kaera_mountains_small_d_defeat_dominion_guardian', 'dialog': [ "The forge-heat steadied the moment we returned. Carry it with the weight it deserves." ] },
+	{ 'npc_id': 'spirit', 'dialog_id': 'kaera_mountains_small_d_defeat_dominion_guardian', 'dialog': [ "The forge-heat steadied the moment we returned. Carry it with the weight it deserves." ] },
 	{ 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_d_defeat_dominion_guardian',  'dialog': [ "Belkan felt it from the anvil. The claim is finally dissolved." ] },
 
 ]
@@ -549,7 +549,7 @@ TASKS += [
 				}
 			},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_e_defeat_dominion_hollow' } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_mountains_small_e_defeat_dominion_hollow' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_mountains_small_e_defeat_dominion_hollow' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_e_defeat_dominion_hollow'  } },
 			# Gate D chain — E artifact is the trigger for the same-city D slot
 			{
@@ -870,7 +870,7 @@ TASKS += [
 				}
 			},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_mountains_small_d_defeat_dominion_guardian' } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_mountains_small_d_defeat_dominion_guardian' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_mountains_small_d_defeat_dominion_guardian' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_mountains_small_d_defeat_dominion_guardian'  } },
 		]
 	},

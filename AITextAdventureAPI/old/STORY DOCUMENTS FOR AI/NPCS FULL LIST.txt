@@ -31,7 +31,7 @@ PLAYER_NPCS = [
         }
     },
     {
-        "npc_id": "faith",
+        "npc_id": "spirit",
         "name": "Kaera",
         "description": "A devout cleric with a deep connection to the divine. Kaera serves as the steadfast protector and emotional anchor of the group. Her compassion and healing abilities make her a quiet beacon of hope, and she possesses a calm, reliable presence.",
 		"theme_song": "Lofticries, Purity Ring AND Never Ending Circles, CHVRCHES",

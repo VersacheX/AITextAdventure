@@ -473,7 +473,7 @@ def get_role_based_abilities(seed, sorted_cands, desired_count):
     choose from the strongest matches that meet stat requirements.
     ABILITY_TYPE_REQUIREMENTS = [
         {"ability_type": "technique", "required_stats_per_ability_level": [{"strength": 13, "constitution": 9}]},
-        {"ability_type": "faith", "required_stats_per_ability_level": [{"intelligence": 13}, {"constitution": 9}]},
+        {"ability_type": "spirit", "required_stats_per_ability_level": [{"intelligence": 13}, {"constitution": 9}]},
         {"ability_type": "magic", "required_stats_per_ability_level": [{"intelligence": 18}]},
         {"ability_type": "tech", "required_stats_per_ability_level": [{"intelligence": 13}, {"dexterity": 9}]},
         {"ability_type": "skill", "required_stats_per_ability_level": [{"dexterity": 18}]},

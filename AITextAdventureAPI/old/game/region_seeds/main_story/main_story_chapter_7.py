@@ -90,7 +90,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_ch7_to_lyren_1',
         'dialog': [
             "You speak as if the world itself is alive. As if it is suffering."
@@ -149,7 +149,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_ch7_after_hibiscus',
         'dialog': [
             "(gently) Then this one still carries her hope."
@@ -206,7 +206,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_ch7_after_relic',
         'dialog': [
             "Then that is what we will do."
@@ -262,7 +262,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_ch7_airship_ready',
         'dialog': [
             "May the winds guide us safely."
@@ -308,7 +308,7 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_meet_lyren' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch7_to_lyren_1' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch7_to_lyren_1' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_explains_1' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch7_to_lyren_1' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch7_to_lyren_1' }},
@@ -330,7 +330,7 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_receives_hibiscus' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch7_after_hibiscus' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch7_after_hibiscus' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_response_to_faith' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch7_after_hibiscus' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_response_to_magic' }},
@@ -350,7 +350,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_receives_vale_pendant' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch7_after_relic' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lyren', 'dialog_id': 'lyren_ch7_joins_1' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch7_after_relic' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch7_after_relic' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch7_after_relic' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch7_after_relic' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch7_after_relic' }},
@@ -371,7 +371,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch7_airship_ready' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch7_airship_ready' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch7_airship_ready' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch7_airship_ready' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch7_airship_ready' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch7_airship_ready' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch7_airship_ready' }},
             { 'event_type': 'remove_task', 'params': { 'task_id': 'meet_astra_wynn_go_back' }},

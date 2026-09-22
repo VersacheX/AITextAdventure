@@ -176,7 +176,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'kaera_kor_in_join_reaction',
         'dialog': [
             "'No one knew what to do with a grief this cold.'",
@@ -287,7 +287,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'kaera_post_defeat',
         'dialog': [
             "He stood there until the ice finished melting.",
@@ -438,7 +438,7 @@ TASKS = [
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
-                    'npc_id': 'faith',
+                    'npc_id': 'spirit',
                     'dialog_id': 'kaera_kor_in_join_reaction'
                 }
             },
@@ -589,7 +589,7 @@ TASKS = [
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
-                    'npc_id': 'faith',
+                    'npc_id': 'spirit',
                     'dialog_id': 'kaera_post_defeat'
                 }
             },

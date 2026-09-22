@@ -177,7 +177,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_ch4_after_velka',
         'dialog': [
             "A disturbance like this… it feels alive.",
@@ -297,7 +297,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'final_character_ch4_intro',
         'dialog': [
             "This rift… it’s pulling at something deep inside me.",
@@ -306,7 +306,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'final_character_ch4_join',
         'dialog': [
             "I can feel the rift’s pull, but I won’t let it consume me. Not while we stand together."
@@ -441,7 +441,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_ch4_after_rift',
         'dialog': [ #spiritual kind
             "I can feel something different now.  The world HAS changed... It feels ... bigger!"
@@ -680,7 +680,7 @@ TASKS = [
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'velka', 'dialog_id': 'velka_ch4_intro' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch4_after_velka' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch4_after_velka' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch4_after_velka' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch4_after_velka' } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'velka', 'standing_text': [
                 "Drin felt the distortion first.",
@@ -835,7 +835,7 @@ TASKS = [
             { 'event_type': 'complete_intro_story' },
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'catalyst_defeated_world_shaking_event' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch4_after_rift' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch4_after_rift' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch4_after_rift' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch4_after_rift' } }
         ]
     },

@@ -236,7 +236,7 @@ _DYNAMIC_NPC_IDS: FrozenSet[str] = frozenset({
 # A dialog_id is considered "covered" for a dynamic slot when ALL five
 # archetypes carry that dialog_id.
 _PLAYER_CHARACTER_TYPES: FrozenSet[str] = frozenset({
-    "technique", "tech", "magic", "faith", "skill",
+    "technique", "tech", "magic", "spirit", "skill",
 })
 
 # Condition types → required param keys

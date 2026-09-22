@@ -145,7 +145,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_ch5_after_velka',
         'dialog': [
             "Then we must find someone who can cross storms without crossing the sea."
@@ -325,7 +325,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_ch5_after_astra',
         'dialog': [
             "We trust your guidance."
@@ -397,7 +397,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_ch5_after_riftcall',
         'dialog': [
             "Stay close. This place feels… wrong."
@@ -439,7 +439,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_ch5_after_dorian_2',
         'dialog': [
             "Please be gentle with him. He's clearly been through something."
@@ -468,7 +468,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_ch5_after_dorian_3',
         'dialog': [
             "The land cries out. Something is deeply wrong here."
@@ -543,7 +543,7 @@ TASKS = [
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'velka', 'dialog_id': 'velka_ch5_map_signal' }},
             { 'event_type': 'award_item', 'params': { 'item_id': 'tracking_map' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch5_after_velka' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch5_after_velka' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'kirn', 'dialog_id': 'kirn_ch5_suggests_sylvi' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch5_after_velka' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'velka', 'standing_text': ["The signal is across the Riftwaters. You'll need more than a map to get there. Find Sylvi Emberlane."]}},
@@ -634,7 +634,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'sylvi', 'dialog_id': 'sylvi_ch5_request_riftcall' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'astra_wynn', 'dialog_id': 'astra_ch5_agrees' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch5_after_astra' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch5_after_astra' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch5_after_astra' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'astra_wynn', 'dialog_id': 'astra_ch5_warning' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch5_before_riftcall' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch5_before_riftcall' }},
@@ -644,7 +644,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch5_after_riftcall' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch5_after_riftcall' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch5_after_riftcall' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch5_after_riftcall' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch5_after_riftcall' }},
             { 'event_type': 'show_npc', 'params': { 'npc_id': 'astra_wynn', 'location': 'city_number_5_region_city_shopitems' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'astra_wynn', 'standing_text': ["The reflections are restless tonight."]} },
             { 'event_type': 'award_task', 'params': { 'task_id': 'meet_astra_wynn_go_back' }},
@@ -695,11 +695,11 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'dorian_pikefall', 'dialog_id': 'dorian_ch5_explains_1' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch5_after_dorian' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch5_after_dorian' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch5_after_dorian_2' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch5_after_dorian_2' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'dorian_pikefall', 'dialog_id': 'dorian_ch5_explains_2' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch5_after_dorian' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'dorian_pikefall', 'dialog_id': 'dorian_ch5_outro_1' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch5_after_dorian_3' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch5_after_dorian_3' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch5_after_dorian_2' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch5_after_dorian_2' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch5_after_dorian_2' }},

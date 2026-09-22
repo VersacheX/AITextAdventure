@@ -144,7 +144,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_ch10_to_serin',
         'dialog': [
             "You're exhausted. Your body is breaking."
@@ -188,7 +188,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_ch10_to_ember',
         'dialog': [
             "Please stay with us. This place will consume you."
@@ -216,7 +216,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_ch10_observes_nara',
         'dialog': [
             "She's on the verge of collapse..."
@@ -365,7 +365,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_ch10_to_ember_departs',
         'dialog': [
             "Be careful, Ember. We'll meet you there when we can."
@@ -401,7 +401,7 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_ch10_to_vek_end',
         'dialog': [
             "Thank you, Vek. We won't forget this."
@@ -472,7 +472,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'serin', 'dialog_id': 'serin_ch10_intro' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch10_to_serin' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch10_to_serin' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch10_to_serin' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch10_to_serin' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'serin', 'dialog_id': 'serin_ch10_response' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'serin', 'standing_text': ["Dance! Laugh! Never stop! The crash is worse than the high!"]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch10_meet_pox' }}
@@ -500,11 +500,11 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'ember', 'dialog_id': 'ember_ch10_intro' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch10_to_ember' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch10_to_ember' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'ember', 'dialog_id': 'ember_ch10_response' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'nara', 'dialog_id': 'nara_ch10_manic' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch10_narrator_nara_collapse' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch10_observes_nara' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch10_observes_nara' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch10_observes_nara' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch10_narrator_riot_starts' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch10_rioter1_dialog' }},
@@ -551,7 +551,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch10_riot2_end' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_ch10_riot2_end' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'ember', 'dialog_id': 'ember_ch10_departs' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch10_to_ember_departs' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch10_to_ember_departs' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch10_to_ember_departs' }},
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'ember' }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch10_defeat_rioters_3' }}
@@ -569,7 +569,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch10_riot3_end' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch10_to_vek_end' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch10_response_end' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch10_to_vek_end' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch10_to_vek_end' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch10_end' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_ch10_end' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_ch10_end' }},

@@ -151,7 +151,7 @@ class LearnOverlay(Static):
         self._on_close = on_close
 
         # Ability type filters
-        self._filters = ["all", "magic", "tech", "skill", "faith", "technique"]
+        self._filters = ["all", "magic", "tech", "skill", "spirit", "technique"]
         self._current_filter = "all"
 
         # Cached ability list

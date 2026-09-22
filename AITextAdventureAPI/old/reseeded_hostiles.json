@@ -19220,7 +19220,7 @@
       "seed": {
         "id": "meadow_priest",
         "name": "Meadow Priest",
-        "hostile_type": "faith",
+        "hostile_type": "spirit",
         "min_spawn_level": 6,
         "rarity": "rare",
         "base_xp": 120,
@@ -37875,7 +37875,7 @@
       "seed": {
         "id": "pilgrim_of_tide",
         "name": "Pilgrim of Tide",
-        "hostile_type": "faith",
+        "hostile_type": "spirit",
         "min_spawn_level": 18,
         "rarity": "superrare",
         "base_xp": 880,
@@ -58359,7 +58359,7 @@
       "seed": {
         "id": "swamp_priest",
         "name": "Swamp Priest",
-        "hostile_type": "faith",
+        "hostile_type": "spirit",
         "min_spawn_level": 6,
         "rarity": "rare",
         "base_xp": 120,

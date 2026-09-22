@@ -303,7 +303,7 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_mountains_mid_c_find_korina',
         'dialog': [
             "Trust is the only currency that holds value on the Rift passes. She wants a local warden to vouch first."
@@ -319,7 +319,7 @@ NPC_DIALOG += [
 
     # Type C – Consult Harrock
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_mountains_mid_c_consult_harrock',
         'dialog': [
             "She kept three separate camps from falling apart last season. She didn't use rank — she used belief."
@@ -349,7 +349,7 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_mountains_mid_c_earn_korina',
         'dialog': [
             "Fair warning — she will push everyone on this team to be better. Including us."
@@ -453,7 +453,7 @@ NPC_DIALOG += [
         ]
     },
     {
-        'npc_id': 'faith',
+        'npc_id': 'spirit',
         'dialog_id': 'faith_mountains_mid_d_defeat_emberwake_spirit',
         'dialog': [
             "The fall-lines are clear. Ryla's fires burn in the right colors again."
@@ -504,7 +504,7 @@ NPC_DIALOG += [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_mountains_mid_b_defeat_rokhuld',
 		'dialog': [
 			"Some callings are just fear wearing a better name. This one is finished."
@@ -539,7 +539,7 @@ TASKS += [
 				}
 			},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_mid_c_find_korina' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_mountains_mid_c_find_korina'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',     'dialog_id': 'faith_mountains_mid_c_find_korina'     } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg',     'dialog_id': 'bragg_mountains_mid_c_find_korina'     } },
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'alden_brightvein', 'standing_text': [ "Harrock sent you back.", "The Rift paths are safer when you walk them.", "That's all I needed to hear." ] } },
 			{
@@ -566,7 +566,7 @@ TASKS += [
 					'dialog_id': 'harrock_c_vouch'
 				}
 			},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_mountains_mid_c_consult_harrock' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_mountains_mid_c_consult_harrock' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_mountains_mid_c_consult_harrock'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_mountains_mid_c_consult_harrock' } },
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'warden_harrock', 'standing_text': [ "Alden kept three separate survivor camps from falling apart last season.", "She didn't use authority — she used belief.", "Tell her I said the Rift paths are safer when your party walks them.", "She'll know what that means." ] } },
@@ -596,7 +596,7 @@ TASKS += [
 				}
 			},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_mid_c_earn_korina' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_mountains_mid_c_earn_korina'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',     'dialog_id': 'faith_mountains_mid_c_earn_korina'     } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg',     'dialog_id': 'bragg_mountains_mid_c_earn_korina'     } },
 			{
 				'event_type': 'character_join',
@@ -807,7 +807,7 @@ TASKS += [
 			},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_mid_d_defeat_emberwake_spirit' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',      'dialog_id': 'tech_mountains_mid_d_defeat_emberwake_spirit'      } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_mountains_mid_d_defeat_emberwake_spirit'     } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',     'dialog_id': 'faith_mountains_mid_d_defeat_emberwake_spirit'     } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -957,7 +957,7 @@ TASKS += [
 			{ 'event_type': 'initiate_dialog',           'params': { 'npc_id': 'rokhuld',    'dialog_id': 'rokhuld_b_defeated'                            }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg',      'dialog_id': 'bragg_b_victory'                               }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_mountains_mid_b_defeat_rokhuld' } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',     'dialog_id': 'faith_mountains_mid_b_defeat_rokhuld'     } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',     'dialog_id': 'faith_mountains_mid_b_defeat_rokhuld'     } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'mountains' }},
 		]
 	},

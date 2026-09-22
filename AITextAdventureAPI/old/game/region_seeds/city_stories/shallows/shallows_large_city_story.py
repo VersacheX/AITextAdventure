@@ -299,7 +299,7 @@ NPC_DIALOG += [
     # Type E – Defeat Stormtide Echo / Return to Syrin
     { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_large_e_return_to_syrin', 'dialog': [ "It's done. The needle settled the moment we stepped back in." ] },
     { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_e_return_to_syrin',  'dialog': [ "It's pointing at us now. It decided it belongs with whoever carries it next." ] },
-    { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_large_e_return_to_syrin', 'dialog': [ "Syrin stopped arguing with relics years ago. Smart policy." ] },
+    { 'npc_id': 'spirit', 'dialog_id': 'kaera_shallows_large_e_return_to_syrin', 'dialog': [ "Syrin stopped arguing with relics years ago. Smart policy." ] },
 
 ]
 
@@ -362,7 +362,7 @@ NPC_DIALOG += [
     # Type D – Defeat Undertow Voice
     { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_large_d_defeat_undertow_voice', 'dialog': [ "Quiet. Take the crystallized brine." ] },
     { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_d_defeat_undertow_voice',  'dialog': [ "A blade that cuts clean through anything the tide would carry. It knows where it's going before you do." ] },
-    { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_large_d_defeat_undertow_voice', 'dialog': [ "The bearings those sailors carried can finally rest." ] },
+    { 'npc_id': 'spirit', 'dialog_id': 'kaera_shallows_large_d_defeat_undertow_voice', 'dialog': [ "The bearings those sailors carried can finally rest." ] },
 
 ]
 
@@ -624,7 +624,7 @@ TASKS += [
             },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_large_e_return_to_syrin' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_e_return_to_syrin'  } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_large_e_return_to_syrin' } },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_shallows_large_e_return_to_syrin' } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'vaultkeeper_syrin', 'standing_text': [ "The needle's settled. It's pointing at you now." ] } },
         ]
     },
@@ -925,7 +925,7 @@ TASKS += [
 			},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_shallows_large_d_defeat_undertow_voice' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_shallows_large_d_defeat_undertow_voice'  } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_shallows_large_d_defeat_undertow_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_shallows_large_d_defeat_undertow_voice' } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {

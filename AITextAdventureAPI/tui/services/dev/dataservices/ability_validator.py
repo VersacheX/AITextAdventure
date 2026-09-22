@@ -75,7 +75,7 @@ from tui.services.dev.dataservices.ability_value_calculator import (
     total_value as _total_value,
 )
 
-_KNOWN_TYPES   = {"technique", "faith", "magic", "tech", "skill"}
+_KNOWN_TYPES   = {"technique", "spirit", "magic", "tech", "skill"}
 _KNOWN_EFFECTS = {"damage", "heal", "status", "revive", "cure"}
 
 # Cure abilities accept special "meta" status keys that are *not* real

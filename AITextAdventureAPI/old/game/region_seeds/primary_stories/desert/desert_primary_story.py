@@ -199,7 +199,7 @@ NPC_DIALOG = [
 	},	
 	# Sable joins — scene with Kaera and Kade responding
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'kaera_sable_join_reaction',
 		'dialog': [
 			"It’s good to meet you, Sable. Truly.",
@@ -240,7 +240,7 @@ NPC_DIALOG = [
 	},
 	# Kaera and Poise react to Mara's directions
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'kaera_mara_reaction',
 		'dialog': [
 			"Wind… memory… silence. She's not just giving directions, is she.",
@@ -282,7 +282,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'kaera_oren_intro_desert_primary',
 		'dialog': [
 			"He’s testing whether we’re listening. We should answer carefully."
@@ -467,7 +467,7 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
+					'npc_id': 'spirit',
 					'dialog_id': 'kaera_mara_reaction'
 				}
 			},
@@ -541,7 +541,7 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
+					'npc_id': 'spirit',
 					'dialog_id': 'kaera_oren_intro_desert_primary'
 				}
 			},
@@ -818,7 +818,7 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'faith',
+					'npc_id': 'spirit',
 					'dialog_id': 'kaera_sable_join_reaction'
 				}
 			},

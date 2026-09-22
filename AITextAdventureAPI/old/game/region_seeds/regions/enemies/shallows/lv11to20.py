@@ -50,7 +50,7 @@ SEEDS_LV11TO20 = [
  {"id": "silt_guard", "name": "Silt Guard", "hostile_type": "construct", "role": "damage", "min_spawn_level":17, "rarity": "common", "base_xp":200, "common_drop": "herb_med", "rare_drop": None, "money_range": (40,180),
  "basic_attack": "plank bash", "strong_attack": "column crush", "player_abilities": [], "base_str":10, "base_dex":3, "base_con":10, "base_int":2, "base_hp":360, "base_ap":8, "str_per_level":3, "dex_per_level":0, "con_per_level":3, "int_per_level":0},
 
- {"id": "pilgrim_of_tide", "name": "Pilgrim of Tide", "hostile_type": "faith", "role": "support", "min_spawn_level":18, "rarity": "uncommon", "base_xp":300, "common_drop": "stimulant_large", "rare_drop": "tome_con", "money_range": (60,280),
+ {"id": "pilgrim_of_tide", "name": "Pilgrim of Tide", "hostile_type": "spirit", "role": "support", "min_spawn_level":18, "rarity": "uncommon", "base_xp":300, "common_drop": "stimulant_large", "rare_drop": "tome_con", "money_range": (60,280),
  "basic_attack": "prayer strike", "strong_attack": "consecrate wave", "player_abilities": ["light_faith_lv5_ardent_inspire", "water_faith_lv1_mending_streams"], "base_str":10, "base_dex":8, "base_con":12, "base_int":16, "base_hp":380, "base_ap":10, "str_per_level":3, "dex_per_level":2, "con_per_level":3, "int_per_level":3},
 
  {"id": "skyscale_serpent", "name": "Skyscale Serpent", "hostile_type": "creature", "role": "hazard", "min_spawn_level":18, "rarity": "common", "base_xp":340, "common_drop": "stimulant_large", "rare_drop": None, "money_range": (40,180),

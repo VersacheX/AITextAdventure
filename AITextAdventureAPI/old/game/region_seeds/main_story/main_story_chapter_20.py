@@ -115,7 +115,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch20_not_yours_to_write',
 		'dialog': [
 			"No. Our story is not for you to write or to keep. It is ours."
@@ -164,7 +164,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch20_memory_nourish',
 		'dialog': [
 			"(quietly) They wanted to freeze us in what was. But memory should nourish us, not imprison us."
@@ -193,7 +193,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch20_story_worth_telling',
 		'dialog': [
 			"Then let's write a story worth telling. One where we choose our own path, even if it's uncertain."
@@ -236,7 +236,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch20_help_remember',
 		'dialog': [
 			"You've given so much of yourself to preserving the past. Let us help you remember who you truly are."
@@ -257,7 +257,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch20_kess_thornwrite',
 		'dialog': [
 			"Kess Thornwrite might be able to brew something strong enough again."
@@ -272,7 +272,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch20_will_find_them',
 		'dialog': [
 			"Those sound like echoes of everything we've fought through. We'll find them."
@@ -300,7 +300,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch20_echoes_who_we_were',
 		'dialog': [
 			"The echoes carry pieces of who we were... and who we might become."
@@ -322,7 +322,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch20_exactly_needs',
 		'dialog': [
 			"That's exactly what she needs."
@@ -379,7 +379,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch20_remind_again',
 		'dialog': [
 			"(steadfast) Then we'll remind you again."
@@ -407,7 +407,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch20_prison_or_comfort',
 		'dialog': [
 			"The past can be a comfort, but it can also be a prison. The future may be uncertain, but it's also where we have the power to change things."
@@ -436,7 +436,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch20_fall_of_time_over',
 		'dialog': [
 			"(softly, almost reverent) The Fall of Time is over. All that is left... is to face what comes after."
@@ -485,7 +485,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch20_preparation',
 		'dialog': [
 			"We restored Lysa. We faced the keepers of time itself. This wasn't coincidence - it was preparation."
@@ -500,7 +500,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch20_story_worth_telling_2',
 		'dialog': [
 			"Then let's write a story worth telling."
@@ -543,7 +543,7 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'faith',
+		'npc_id': 'spirit',
 		'dialog_id': 'faith_ch20_help_remember_2',
 		'dialog': [
 			"You've given so much of yourself to preserving the past. Let us help you remember who you truly are."
@@ -641,7 +641,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch20_party_materializes' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'oracle', 'dialog_id': 'oracle_ch20_story_ends' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'reliquary', 'dialog_id': 'reliquary_ch20_pain_preserved' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_not_yours_to_write' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch20_not_yours_to_write' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch20_ending_coming' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch20_intro' }},
 			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'oracle_reliquary_1', 'combat_type': 'boss_battle' }}
@@ -652,7 +652,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch20_dissolve_first' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch20_fireworks' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch20_elegant_brittle' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_memory_nourish' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch20_memory_nourish' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch20_punched_past' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch20_possibility_returned' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_meet_marlo_finch' }}
@@ -666,7 +666,7 @@ TASKS = [
 		'task_acquire_events': [],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'marlo_finch', 'dialog_id': 'marlo_finch_ch20_cant_believe_first' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_story_worth_telling' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch20_story_worth_telling' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch20_fight_for_future' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch20_crazy_adventures' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch20_system_broken' }},
@@ -693,10 +693,10 @@ TASKS = [
 		'task_acquire_events': [],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'curator_lysa', 'dialog_id': 'curator_lysa_ch20_pieces_missing' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_help_remember' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch20_help_remember' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch20_memory_tonic_good' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch20_degradation_loop' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_kess_thornwrite' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch20_kess_thornwrite' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'curator_lysa', 'standing_text': ["I feel like I'm losing myself. I can't remember who I am or what I was doing."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_complete_regional_quest_2_lock' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_meet_kess_for_memory_tonic' }}
@@ -710,7 +710,7 @@ TASKS = [
 		'task_acquire_events': [],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'kess_thornwrite', 'dialog_id': 'kess_ch20_spicy_tonic' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_will_find_them' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch20_will_find_them' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch20_rare_ingredients' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_ch20_alchemical_synergy' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'temporal_echoes', 'item_id': 'dream_essence', 'location': 'final_chamber' }},
@@ -728,7 +728,7 @@ TASKS = [
 		'task_acquire_events': [],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'kess_thornwrite', 'dialog_id': 'kess_ch20_dream_essence' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_echoes_who_we_were' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch20_echoes_who_we_were' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch20_little_piece_future' }},
 			{ 'event_type': 'remove_item', 'params': { 'item_id': 'dream_essence' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'kess_thornwrite', 'standing_text': ["The Dream Essence is still humming with energy. This will anchor the tonic nicely."]}},
@@ -744,7 +744,7 @@ TASKS = [
 		'task_acquire_events': [],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'kess_thornwrite', 'dialog_id': 'kess_ch20_forgotten_promises' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_exactly_needs' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch20_exactly_needs' }},
 			{ 'event_type': 'remove_item', 'params': { 'item_id': 'forgotten_promises' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'kess_thornwrite', 'standing_text': ["The forgotten promises... bittersweet. Exactly what we need to reconnect emotion to memory."]}},
 			{ 'event_type': 'award_item', 'params': { 'item_id': 'memory_tonic_ch20' }}
@@ -778,7 +778,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'reliquary', 'dialog_id': 'reliquary_ch20_past_returns' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch20_deja_vu' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch20_not_again' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_remind_again' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch20_remind_again' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'curator_lysa', 'standing_text': ["The past is a comfort, a warm blanket. Why would anyone choose the cold, uncertain future?"]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_defeat_oracle_and_reliquary_again' }}
 		]
@@ -792,21 +792,21 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'oracle', 'dialog_id': 'oracle_ch20_questions' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'reliquary', 'dialog_id': 'reliquary_ch20_treasure_trove' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch20_museum_mess' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_prison_or_comfort' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch20_prison_or_comfort' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch20_shake_things_up' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch20_patterns_matter' }},
 			{ 'event_type': 'begin_combat', 'params': { 'boss_mob_id': 'oracle_reliquary_2', 'combat_type': 'boss_battle' }}
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch20_victory_moment' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_fall_of_time_over' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch20_fall_of_time_over' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch20_intentional_victory' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch20_patterns_reconstructing' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch20_timeline_weirdos' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch20_tired_of_ghosts' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch20_loop_broken' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_ch20_one_cage_down' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_preparation' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch20_preparation' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_meet_lysa_again' }},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch20_meet_marlo_finch_for_bracelet' }}
 		]
@@ -819,7 +819,7 @@ TASKS = [
 		'task_acquire_events': [],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'marlo_finch', 'dialog_id': 'marlo_finch_ch20_dazed' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_story_worth_telling_2' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch20_story_worth_telling_2' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch20_fight_for_it' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch20_deja_vu_blank' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'marlo_finch', 'dialog_id': 'marlo_finch_ch20_bracelet_second' }},
@@ -837,7 +837,7 @@ TASKS = [
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'curator_lysa', 'dialog_id': 'curator_lysa_ch20_pieces_missing_2' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch20_lysa_trapped' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'faith_ch20_help_remember_2' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'faith_ch20_help_remember_2' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch20_deja_vu_old' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch20_sands_not_right' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch20_oracle_speak' }},

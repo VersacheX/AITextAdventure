@@ -48,7 +48,7 @@ SEEDS_LV1TO10 = [
  "basic_attack": "rending bite", "strong_attack": "gust maul", "player_abilities": [], "base_str":6, "base_dex":6, "base_con":5, "base_int":2, "base_hp":64, "base_ap":6, "str_per_level":2, "dex_per_level":2, "con_per_level":1, "int_per_level":0},
 
  # Level6
- {"id": "meadow_priest", "name": "Meadow Priest", "hostile_type": "faith", "role": "support", "min_spawn_level":6, "rarity": "rare", "base_xp":120, "common_drop": "herb_major", "rare_drop": "tome_con", "money_range": (20,100),
+ {"id": "meadow_priest", "name": "Meadow Priest", "hostile_type": "spirit", "role": "support", "min_spawn_level":6, "rarity": "rare", "base_xp":120, "common_drop": "herb_major", "rare_drop": "tome_con", "money_range": (20,100),
  "basic_attack": "blessed palm", "strong_attack": "lumen flare", "player_abilities": ["level_1_hostile_ability_light_faith_prism_burst", "light_faith_lv1_glimmer"], "base_str":3, "base_dex":3, "base_con":6, "base_int":10, "base_hp":96, "base_ap":8, "str_per_level":1, "dex_per_level":0, "con_per_level":2, "int_per_level":2},
 
  {"id": "field_reaver", "name": "Field Reaver", "hostile_type": "humanoid", "role": "damage", "min_spawn_level":6, "rarity": "rare", "base_xp":140, "common_drop": "stimulant_large", "rare_drop": "herb_major", "money_range": (18,80),

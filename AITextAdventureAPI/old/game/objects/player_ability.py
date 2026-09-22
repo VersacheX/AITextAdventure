@@ -8,7 +8,7 @@ import game.status_utils as status_utils
 from game.region_seeds.player_abilities.ability_requirements import ABILITY_TYPE_REQUIREMENTS
 # ABILITY_TYPE_REQUIREMENTS = [
 #     {"ability_type": "technique", "required_stats_per_ability_level": [{"strength": 13, "constitution": 9}]},
-#     {"ability_type": "faith", "required_stats_per_ability_level": [{"intelligence": 13}, {"constitution": 9}]},
+#     {"ability_type": "spirit", "required_stats_per_ability_level": [{"intelligence": 13}, {"constitution": 9}]},
 #     {"ability_type": "magic", "required_stats_per_ability_level": [{"intelligence": 18}]},
 #     {"ability_type": "tech", "required_stats_per_ability_level": [{"intelligence": 13}, {"dexterity": 9}]},
 #     {"ability_type": "skill", "required_stats_per_ability_level": [{"dexterity": 18}]},
@@ -18,7 +18,7 @@ class AbilityType(Enum):
 	MAGIC = "magic"
 	TECH = "tech"
 	SKILL = "skill"
-	FAITH = "faith"
+	FAITH = "spirit"
 	TECHNIQUE = "technique"
 
 class AbilityStatType:
@@ -28,7 +28,7 @@ class AbilityStatType:
 	MAGIC = ("magic", [req for req in ABILITY_TYPE_REQUIREMENTS if req.get('ability_type') == 'magic'])
 	TECH = ("tech", [req for req in ABILITY_TYPE_REQUIREMENTS if req.get('ability_type') == 'tech'])
 	SKILL = ("skill", [req for req in ABILITY_TYPE_REQUIREMENTS if req.get('ability_type') == 'skill'])
-	FAITH = ("faith", [req for req in ABILITY_TYPE_REQUIREMENTS if req.get('ability_type') == 'faith'])
+	FAITH = ("spirit", [req for req in ABILITY_TYPE_REQUIREMENTS if req.get('ability_type') == 'spirit'])
 	TECHNIQUE = ("technique", [req for req in ABILITY_TYPE_REQUIREMENTS if req.get('ability_type') == 'technique'])
 
 

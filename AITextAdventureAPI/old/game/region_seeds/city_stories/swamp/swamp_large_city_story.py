@@ -229,7 +229,7 @@ NPC_DIALOG += [
 	# Type D – Defeat Relicmire Voice
 	{ 'npc_id': 'technique', 'dialog_id': 'chock_swamp_large_d_defeat_relicmire_voice', 'dialog': [ "Quiet. Take the drowned Necropolis metal." ] },
 	{ 'npc_id': 'tech',  'dialog_id': 'kade_swamp_large_d_defeat_relicmire_voice',  'dialog': [ "Dense, cold, impossibly sharp. It remembers every wound it's ever dealt." ] },
-	{ 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_large_d_defeat_relicmire_voice', 'dialog': [ "The bone tides have settled. The relics stopped murmuring warnings." ] },
+	{ 'npc_id': 'spirit', 'dialog_id': 'kaera_swamp_large_d_defeat_relicmire_voice', 'dialog': [ "The bone tides have settled. The relics stopped murmuring warnings." ] },
 
 ]
 
@@ -666,7 +666,7 @@ TASKS += [
 			},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_swamp_large_d_defeat_relicmire_voice' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_swamp_large_d_defeat_relicmire_voice'  } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith', 'dialog_id': 'kaera_swamp_large_d_defeat_relicmire_voice' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_swamp_large_d_defeat_relicmire_voice' } },
 			{
 				'event_type': 'set_npc_standing_text',
 				'params': {
@@ -777,7 +777,7 @@ NPC_DIALOG += [
 
 	# B – Defeat Miregloom
 	{ 'npc_id': 'technique', 'dialog_id': 'chock_swamp_large_b_defeat_miregloom', 'dialog': [ "Stay down. Decay is not a destination." ] },
-	{ 'npc_id': 'faith',     'dialog_id': 'kaera_swamp_large_b_defeat_miregloom', 'dialog': [ "The frequency is gone. The Necropolis can stop humming in that particular key." ] },
+	{ 'npc_id': 'spirit',     'dialog_id': 'kaera_swamp_large_b_defeat_miregloom', 'dialog': [ "The frequency is gone. The Necropolis can stop humming in that particular key." ] },
 
 ]
 
@@ -832,7 +832,7 @@ TASKS += [
 			{ 'event_type': 'initiate_dialog',           'params': { 'npc_id': 'miregloom',  'dialog_id': 'miregloom_b_defeated' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique',  'dialog_id': 'chock_swamp_large_b_defeat_miregloom'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',    'dialog_id': 'grimnaw_b_victory'                     } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'faith',      'dialog_id': 'kaera_swamp_large_b_defeat_miregloom'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',      'dialog_id': 'kaera_swamp_large_b_defeat_miregloom'  } },
 			{ 'event_type': 'complete_regional_quest_2', 'params': { 'region_id': 'swamp' }},
 		]
 	},
