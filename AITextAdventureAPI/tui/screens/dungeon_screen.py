@@ -116,6 +116,9 @@ class DungeonScreen(BaseScreen):
         super().__init__()
         self._dungeon = dungeon
         self._pg = pg
+        # True while a CombatScreen is on-screen; prevents stacking a second
+        # combat push if an encounter re-check fires before the first resolves.
+        self._combat_active = False
 
     # ── lifecycle ─────────────────────────────────────────────────────────
 
@@ -295,7 +298,14 @@ class DungeonScreen(BaseScreen):
         """Push the combat screen with the prepared hostile list."""
         pg = self._pg
 
+        # Guard against stacking a second CombatScreen if an encounter re-check
+        # fires while a battle is already on-screen.
+        if self._combat_active:
+            return
+        self._combat_active = True
+
         def _on_combat_done(players_won: bool | None) -> None:
+            self._combat_active = False
             if not players_won:
                 self._show_dialog(["You have been defeated..."], "Game Over")
                 self.set_timer(2.0, lambda: self.dismiss(False))
