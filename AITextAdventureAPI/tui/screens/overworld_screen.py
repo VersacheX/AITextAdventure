@@ -73,6 +73,9 @@ class OverworldScreen(BaseScreen):
         # True while a background tile-generation pass is running; keeps the
         # busy watcher polling for the whole duration.
         self._generation_active = False
+        # Monotonic id of the current tile-generation pass. A stale (cancelled)
+        # worker uses its captured token to avoid stopping a newer pass's watcher.
+        self._generation_token = 0
         # True while combat is on-screen; suppresses the tile worker's
         # combat callback so we can't stack two CombatScreens.
         self._combat_active = False
@@ -488,7 +491,6 @@ class OverworldScreen(BaseScreen):
         """
         self._show_loading(message)
 
-        @work(thread=True, exclusive=False, group="blocking_task")
         def _runner() -> None:
             try:
                 fn()
@@ -499,7 +501,10 @@ class OverworldScreen(BaseScreen):
                         on_done()
                 self.app.call_from_thread(_finish)
 
-        _runner()
+        # Use the screen's worker API directly. A locally-defined @work function
+        # is a plain callable, not a bound method, so the decorator's expected
+        # `self` widget argument would be missing — run_worker sidesteps that.
+        self.run_worker(_runner, thread=True, group="blocking_task", exclusive=False)
 
     def _busy(self) -> bool:
         """True while a long-running task event (dungeon build, etc.) runs."""
@@ -544,17 +549,26 @@ class OverworldScreen(BaseScreen):
         if getattr(pg, "pending_fight_mob_id", None):
             self._trigger_combat(pg, get_active_area(pg))
 
-    def _start_busy_watch(self) -> None:
+    def _start_busy_watch(self) -> int:
         """Poll pg.is_busy for the whole generation pass; mirror the overlay.
 
         The watcher must stay alive until `_stop_busy_watch` is called by the
         generation worker — it can't stop on the first `is_busy == False` read
         because a long-running event (create_dungeon, complete_intro_story,
         remove_ocean) may not have flipped the flag yet when generation starts.
+
+        Returns a token identifying this watch pass; the caller must pass it
+        back to `_stop_busy_watch` so a stale/cancelled worker can't stop a
+        newer pass's watcher.
         """
+        self._generation_token += 1
+        token = self._generation_token
         self._generation_active = True
 
         def _tick() -> None:
+            # A newer pass superseded this one — stop ticking silently.
+            if self._generation_token != token:
+                return
             pg = self._player_game()
             if getattr(pg, "is_busy", False):
                 self._show_loading()
@@ -568,8 +582,13 @@ class OverworldScreen(BaseScreen):
                 self.set_timer(0.1, _tick)
 
         _tick()
+        return token
 
-    def _stop_busy_watch(self) -> None:
+    def _stop_busy_watch(self, token: int | None = None) -> None:
+        # Only the pass that owns the current token may stop the watcher; a
+        # stale worker finishing after a newer pass started must be ignored.
+        if token is not None and token != self._generation_token:
+            return
         self._generation_active = False
         self._hide_loading()
 
@@ -648,8 +667,10 @@ class OverworldScreen(BaseScreen):
         """
         if getattr(pg, "pending_fight_mob_id", None):
             hostiles = get_boss_encounter_hostiles(pg)
+            is_boss = True
         else:
             hostiles = get_random_encounter_hostiles(pg, active_area)
+            is_boss = False
 
         if not hostiles:
             self._refresh_all()
@@ -662,6 +683,10 @@ class OverworldScreen(BaseScreen):
         if self._combat_active:
             return
         self._combat_active = True
+        # Snapshot the boss id now — get_boss_encounter_hostiles leaves
+        # pending_fight_mob_id set, so we must clear it via check_complete_boss_mob
+        # after the win instead of assuming it changed.
+        boss_mob_id = getattr(pg, "pending_fight_mob_id", None) if is_boss else None
 
         def _on_combat_done(players_won: bool | None) -> None:
             self._combat_active = False
@@ -669,21 +694,30 @@ class OverworldScreen(BaseScreen):
                 # Player lost → return to main menu
                 self._show_dialog(["You have been defeated..."], "Game Over")
                 self.set_timer(2.0, lambda: self.action_go_back())
-            else:
-                # Player won → a post-fight task completion can queue dialogs
-                # and/or award a fresh pending fight (back-to-back battles).
-                # Surface any dialogs first, then re-check pending combat once
-                # they clear so the next fight only starts after the player
-                # reads the outcome. Tile generation (deferred from the move
-                # that started this fight) runs only once no further combat is
-                # pending, so it can't stack another CombatScreen.
-                def _after_combat_dialogs() -> None:
-                    if getattr(pg, "pending_fight_mob_id", None):
-                        self._check_pending_combat()
-                    else:
-                        self._ensure_tiles_worker(pg)
+                return
 
+            # Player won → complete the boss mob first (its completion events
+            # can be long-running, so route through the loading worker), then
+            # surface any queued dialogs and only afterwards re-check for a
+            # freshly-awarded pending fight. Tile generation (deferred from the
+            # move that started this fight) runs only once no further combat is
+            # pending, so it can't stack another CombatScreen.
+            def _after_combat_dialogs() -> None:
+                if getattr(pg, "pending_fight_mob_id", None):
+                    self._check_pending_combat()
+                else:
+                    self._ensure_tiles_worker(pg)
+
+            def _surface() -> None:
                 self._check_dialogs_and_refresh(on_cleared=_after_combat_dialogs)
+
+            if boss_mob_id:
+                self.run_blocking_with_loading(
+                    lambda: pg.check_complete_boss_mob(boss_mob_id),
+                    on_done=_surface,
+                )
+            else:
+                _surface()
 
         self.app.push_screen(CombatScreen(pg, hostiles), _on_combat_done)
 
@@ -775,8 +809,9 @@ class OverworldScreen(BaseScreen):
         # Region generation can fire long-running task events (create_dungeon,
         # complete_intro_story, remove_ocean) that flip pg.is_busy. Start the
         # busy watcher on the UI thread so the LoadingDialog overlay appears
-        # and input stays blocked for their duration.
-        self.app.call_from_thread(self._start_busy_watch)
+        # and input stays blocked for their duration. Capture the token so this
+        # (possibly-cancelled) pass only stops the watcher it actually started.
+        token = self.app.call_from_thread(self._start_busy_watch)
 
         ensure_tiles_around_sync(pg, check_rad=4)
 
@@ -785,8 +820,10 @@ class OverworldScreen(BaseScreen):
         )
         has_fight_after = bool(getattr(pg, "pending_fight_mob_id", None))
 
-        # Always clear the overlay once generation completes.
-        self.app.call_from_thread(self._stop_busy_watch)
+        # Clear the overlay once generation completes — but only if a newer
+        # pass hasn't superseded this one (rapid movement cancels older passes;
+        # ensure_tiles_around_sync is synchronous and can't check cancellation).
+        self.app.call_from_thread(lambda: self._stop_busy_watch(token))
 
         new_dialogs = has_dialogs_after and not had_dialogs_before
         new_fight = has_fight_after and not had_fight_before
