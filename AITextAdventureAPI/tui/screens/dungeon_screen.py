@@ -165,7 +165,7 @@ class DungeonScreen(BaseScreen):
 
     def action_interact(self) -> None:
         """Space: interact with entities on or adjacent to the player's tile."""
-        if self._dialog_visible():
+        if self._blocked():
             return
         self._interact()
 
@@ -181,7 +181,7 @@ class DungeonScreen(BaseScreen):
     # ── movement ──────────────────────────────────────────────────────────
 
     def _handle_move(self, dx: int, dy: int, dz: int) -> None:
-        if self._dialog_visible():
+        if self._blocked():
             return
 
         dungeon = self._dungeon
@@ -213,11 +213,12 @@ class DungeonScreen(BaseScreen):
             self.dismiss(True)
             return
 
-        # check for pending dialogs from the move
-        self._check_dialogs_and_refresh()
-
-        # encounter checks (boss first, then random countdown)
-        self._check_encounters(after_action=True)
+        # Wait for any pending dialogs from the move to be dismissed before
+        # checking encounters, so a boss ambush on a tile can't start combat
+        # while the message dialog is still open/being read.
+        self._check_dialogs_and_refresh(
+            on_cleared=lambda: self._check_encounters(after_action=True)
+        )
 
     # ── interaction ───────────────────────────────────────────────────────
 
@@ -305,22 +306,30 @@ class DungeonScreen(BaseScreen):
                 if mob_id:
                     pg.check_complete_boss_mob(mob_id)
 
-            self._check_dialogs_and_refresh()
+            # A post-fight task completion can award another defeat task whose
+            # acquire events set a fresh pending_fight_mob_id (back-to-back
+            # fights). Re-check encounters once these dialogs are dismissed so
+            # the next fight starts only after the player reads the dialog.
+            self._check_dialogs_and_refresh(
+                on_cleared=lambda: self._check_encounters(after_action=False)
+            )
 
         self.app.push_screen(CombatScreen(pg, hostiles), _on_combat_done)
 
     # ── dialog helpers ────────────────────────────────────────────────────
 
-    def _check_dialogs_and_refresh(self) -> None:
+    def _check_dialogs_and_refresh(self, on_cleared: Optional[Callable[[], None]] = None) -> None:
         pg = self._pg
         if hasattr(pg, "info_dialogs") and pg.info_dialogs:
             messages: List[str] = []
             while pg.info_dialogs:
                 messages.append(pg.pop_dialog())
             if messages:
-                self._show_dialog(messages, "Message")
+                self._show_dialog(messages, "Message", on_cleared=on_cleared)
                 return
         self._refresh_all()
+        if on_cleared is not None:
+            on_cleared()
 
     def _show_dialog(
         self,
@@ -363,6 +372,11 @@ class DungeonScreen(BaseScreen):
             return True
         except Exception:
             return False
+
+    def _blocked(self) -> bool:
+        """Single guard for input handlers: a dialog is open OR a long-running
+        task event (dungeon build, etc.) is mutating shared state."""
+        return self._dialog_visible() or bool(getattr(self._pg, "is_busy", False))
 
     def _remove_dialog(self) -> None:
         try:

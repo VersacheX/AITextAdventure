@@ -61,6 +61,10 @@ class PlayerGame:
 		# cleared by the TUI after the player picks an option (which awards the chosen task).
 		self.option_dialog: Optional["OptionDialog"] = None
 		self.pending_fight_mob_id: str = None # If set, indicates a pending fight with the given mob id
+		# Set True while a long-running task event (dungeon build, intro-story
+		# completion, ocean removal) runs so the TUI can show a loading overlay
+		# and block input until the shared-state mutation finishes.
+		self.is_busy: bool = False
 		self.chapter_task_waiting: bool = False
 		self.pending_character: str = None # npc/character id of a pending character to be added to the party
 		self.twisted_character: str = None # npc/character id of a twisted character which was changed when joingin from pending_character state

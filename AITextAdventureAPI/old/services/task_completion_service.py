@@ -3,6 +3,15 @@
 from game.objects.npc import NPC
 import game.constants as const
 
+# Event types known (or suspected) to take non-trivial time to execute.
+# The TUI uses this to show a "Loading..." overlay (and block input) for the
+# duration of these events only.
+LONG_RUNNING_EVENT_TYPES = frozenset({
+	'create_dungeon',
+	'complete_intro_story',
+	'remove_ocean',
+})
+
 # NPCS = [
 #     {
 #         'npc_id': 'nia',
@@ -65,6 +74,23 @@ def handle_task_event(event, player_game, parent_task):
 		if not evaluate_condition(condition, player_game):
 			return None
 	# ─────────────────────────────────────────────────────────────────────
+
+	# ── busy flag ─────────────────────────────────────────────────────────
+	# Long-running events flip player_game.is_busy so the TUI can show a
+	# "Loading..." overlay and block input for their duration only. Cleared in
+	# a finally so an exception mid-event can't leave the UI stuck.
+	is_long_running = ev_name in LONG_RUNNING_EVENT_TYPES
+	if is_long_running:
+		player_game.is_busy = True
+	try:
+		return _dispatch_task_event(ev_name, params, player_game, parent_task)
+	finally:
+		if is_long_running:
+			player_game.is_busy = False
+
+
+def _dispatch_task_event(ev_name, params, player_game, parent_task):
+	from game.objects.task import TaskEventType
 
 	# AWARD_TASK: find seed in const.TASKS and build a Task then give to player_game
 	if ev_name == TaskEventType.AWARD_TASK.value:
