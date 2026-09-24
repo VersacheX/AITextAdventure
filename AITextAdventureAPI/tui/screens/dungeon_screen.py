@@ -467,12 +467,18 @@ class DungeonScreen(BaseScreen):
         self._show_loading(message)
 
         def _runner() -> None:
+            succeeded = False
             try:
                 fn()
+                succeeded = True
             finally:
-                def _finish() -> None:
+                def _finish(ok: bool = succeeded) -> None:
+                    # Always clear the loading overlay, but only continue into
+                    # encounter/dialog handling when fn() actually succeeded — a
+                    # failed task completion must not advance with partially-
+                    # mutated state.
                     self._hide_loading()
-                    if on_done is not None:
+                    if ok and on_done is not None:
                         on_done()
                 self.app.call_from_thread(_finish)
 
