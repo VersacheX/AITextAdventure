@@ -165,6 +165,8 @@ class DungeonScreen(BaseScreen):
         self._handle_move(0, 0, 1)
 
     def action_open_inventory(self) -> None:
+        if self._blocked():
+            return
         self.app.push_screen("inventory")
 
     def action_interact(self) -> None:
@@ -180,6 +182,12 @@ class DungeonScreen(BaseScreen):
 
     def action_go_back(self) -> None:
         """Escape: leave the dungeon and return to the overworld."""
+        # Block navigation while a dialog or a long-running task worker (NPC
+        # meet / boss completion via run_blocking_with_loading) is active — its
+        # on_done would otherwise call _check_encounters / push combat onto this
+        # now-inactive screen.
+        if self._blocked():
+            return
         self.dismiss(True)
 
     # ── movement ──────────────────────────────────────────────────────────
