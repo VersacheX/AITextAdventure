@@ -270,6 +270,12 @@ class OverworldScreen(BaseScreen):
             self._update_overlay(pg, get_active_area(pg))
 
     def action_go_back(self) -> None:
+        # Block navigation while a generation/task worker or dialog is active —
+        # its deferred call_from_thread/on_done callbacks would otherwise refresh
+        # or push combat onto an inactive screen after we've navigated away.
+        if self._blocked():
+            return
+
         def _handle(confirmed: bool | None) -> None:
             if confirmed:
                 from tui.services.game_state import set_active_game
@@ -529,10 +535,31 @@ class OverworldScreen(BaseScreen):
             self.query_one("#map-panel").mount(LoadingDialog(message))
         except Exception:
             pass
+        # Mounting the LoadingDialog inside #map-panel does NOT make the screen
+        # modal — the screen-level LocationOverlay (and any shop/travel overlay)
+        # stay interactive and their Enter/click handlers could mutate the same
+        # PlayerGame while the worker runs. Disable every interactive overlay
+        # for the loading lifetime so no second action can race the worker.
+        self._set_overlays_disabled(True)
 
     def _hide_loading(self) -> None:
         try:
             self.query_one("#map-panel").query_one(LoadingDialog).remove()
+        except Exception:
+            pass
+        self._set_overlays_disabled(False)
+
+    def _set_overlays_disabled(self, disabled: bool) -> None:
+        """Disable/enable all interactive overlays (location menu, shop, travel)
+        so they can't process input while a loading overlay is up."""
+        try:
+            for overlay in self.query(LocationOverlay):
+                overlay.disabled = disabled
+        except Exception:
+            pass
+        try:
+            for overlay in self.query(".ow-overlay"):
+                overlay.disabled = disabled
         except Exception:
             pass
 
@@ -798,6 +825,14 @@ class OverworldScreen(BaseScreen):
         Marked exclusive + grouped so rapid movement can't spawn two concurrent
         generation passes racing on world_tiles / regions.
         """
+        # Never run generation while a fight is on-screen. pending_fight_mob_id
+        # is a single shared slot; if generation set it to mob B while boss A is
+        # being fought, A's win path (check_complete_boss_mob) would clear B and
+        # lose it. Deferring until combat resolves keeps the slot stable — the
+        # move/combat flow re-invokes this worker once the fight ends.
+        if self._combat_active:
+            return
+
         # Snapshot queue state so we only force a dialog check when generation
         # actually produced new dialogs (avoids needless refresh churn on the
         # common no-op path where all nearby tiles already exist).
