@@ -569,7 +569,20 @@ class OverworldScreen(BaseScreen):
             self.query_one("#map-panel").query_one(LoadingDialog).remove()
         except Exception:
             pass
-        self._set_overlays_disabled(False)
+        self._refresh_overlays_disabled()
+
+    def _refresh_overlays_disabled(self) -> None:
+        """Re-evaluate whether interactive overlays should stay disabled.
+
+        Overlays must remain disabled while ANY generation pass is in flight
+        (`_generation_refcount > 0`) even when the LoadingDialog widget is
+        momentarily hidden (an ordinary/no-op pass hides it before pg.is_busy
+        ever flips). Otherwise a location/shop/travel handler could mutate the
+        shared PlayerGame concurrently with tile generation. Only re-enable
+        once no pass is still running and no loading widget is up.
+        """
+        still_busy = self._generation_refcount > 0 or self._loading_visible()
+        self._set_overlays_disabled(still_busy)
 
     def _set_overlays_disabled(self, disabled: bool) -> None:
         """Disable/enable all interactive overlays (location menu, shop, travel)
@@ -608,6 +621,10 @@ class OverworldScreen(BaseScreen):
         own registration without tearing down a still-running older pass's watch.
         """
         self._generation_refcount += 1
+        # Disable interactive overlays for the whole generation lifetime, even
+        # before pg.is_busy flips / the LoadingDialog appears, so a no-op pass
+        # can't leave overlays interactive while a worker still runs.
+        self._set_overlays_disabled(True)
         if self._generation_active:
             return
         self._generation_active = True
