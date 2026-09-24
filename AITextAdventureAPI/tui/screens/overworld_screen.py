@@ -528,7 +528,16 @@ class OverworldScreen(BaseScreen):
     def _busy(self) -> bool:
         """True while a long-running task event (dungeon build, etc.) runs."""
         pg = self._player_game()
-        return bool(getattr(pg, "is_busy", False)) or self._loading_visible()
+        # _generation_refcount > 0 covers ordinary/no-op tile-generation passes
+        # too: _start_busy_watch hides the loading widget when pg.is_busy is
+        # false, so without the refcount _blocked() could go false while an
+        # ensure worker is still in flight, letting Esc/another action navigate
+        # away or mutate the same PlayerGame before its deferred callbacks run.
+        return (
+            bool(getattr(pg, "is_busy", False))
+            or self._loading_visible()
+            or self._generation_refcount > 0
+        )
 
     def _blocked(self) -> bool:
         """Single guard for all input handlers: dialogs OR busy overlay."""
