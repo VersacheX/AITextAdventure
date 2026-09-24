@@ -287,6 +287,18 @@ class OverworldScreen(BaseScreen):
             _handle,
         )
 
+    def _leave_to_main_menu(self) -> None:
+        """Unconditionally return to the main menu (no confirm, no busy guard).
+
+        Used by game-over paths: they mount a "Game Over" MessageDialog and then
+        navigate after a short delay, so the general `_blocked()` dialog guard in
+        `action_go_back` must NOT apply here — otherwise the still-mounted dialog
+        would suppress the navigation and strand the player on the overworld.
+        """
+        from tui.services.game_state import set_active_game  # noqa: PLC0415
+        set_active_game(None)
+        self.app.goto_screen("main_menu")
+
     # ── dialog and message handling ───────────────────────────────────────
 
     def _check_dialogs_and_refresh(self, on_cleared: "Callable[[], None] | None" = None) -> None:
@@ -656,7 +668,7 @@ class OverworldScreen(BaseScreen):
             if getattr(pg, "pending_fight_mob_id", None) or encounter_messages:
                 self._trigger_combat(pg, active_area)
             else:
-                self._ensure_tiles_worker(pg)
+                self._begin_tile_generation(pg)
 
         self._check_dialogs_and_refresh(on_cleared=_after_move_dialogs_cleared)
 
@@ -674,7 +686,7 @@ class OverworldScreen(BaseScreen):
             # Player either walked out or was defeated
             if not exited_normally:
                 self._show_dialog(["Your party was defeated in the dungeon..."], "Game Over")
-                self.set_timer(2.0, lambda: self.action_go_back())
+                self.set_timer(2.0, self._leave_to_main_menu)
             else:
                 self._check_dialogs_and_refresh()
 
@@ -720,7 +732,7 @@ class OverworldScreen(BaseScreen):
             if not players_won:
                 # Player lost → return to main menu
                 self._show_dialog(["You have been defeated..."], "Game Over")
-                self.set_timer(2.0, lambda: self.action_go_back())
+                self.set_timer(2.0, self._leave_to_main_menu)
                 return
 
             # Player won → complete the boss mob first (its completion events
@@ -733,7 +745,7 @@ class OverworldScreen(BaseScreen):
                 if getattr(pg, "pending_fight_mob_id", None):
                     self._check_pending_combat()
                 else:
-                    self._ensure_tiles_worker(pg)
+                    self._begin_tile_generation(pg)
 
             def _surface() -> None:
                 self._check_dialogs_and_refresh(on_cleared=_after_combat_dialogs)
@@ -811,8 +823,24 @@ class OverworldScreen(BaseScreen):
 
     # ── rendering ─────────────────────────────────────────────────────────
 
+    def _begin_tile_generation(self, pg: Any) -> None:
+        """Kick off a tile-generation pass from the UI thread.
+
+        The busy-watch token MUST be allocated here (on the compositor thread,
+        synchronously) rather than inside the worker: `@work(exclusive=True)`
+        can cancel a previous worker when this one is scheduled, but a cancelled
+        worker still runs through its synchronous body. If the token were
+        allocated inside the worker, a cancelled pass could grab the newest
+        token *after* the replacement pass and later stop the replacement's
+        watcher. Allocating before scheduling binds each pass to its own token.
+        """
+        if self._combat_active:
+            return
+        token = self._start_busy_watch()
+        self._ensure_tiles_worker(pg, token)
+
     @work(thread=True, exclusive=True, group="ensure_tiles")
-    def _ensure_tiles_worker(self, pg: Any) -> None:
+    def _ensure_tiles_worker(self, pg: Any, token: int) -> None:
         """Background worker to ensure tiles around the player exist.
 
         Region generation runs here, and `create_region_at` → `acquire_task`
@@ -824,6 +852,10 @@ class OverworldScreen(BaseScreen):
 
         Marked exclusive + grouped so rapid movement can't spawn two concurrent
         generation passes racing on world_tiles / regions.
+
+        `token` identifies this pass's busy-watch (allocated by
+        `_begin_tile_generation` before scheduling); it's passed to
+        `_stop_busy_watch` so a cancelled pass can't stop a newer one's watcher.
         """
         # Never run generation while a fight is on-screen. pending_fight_mob_id
         # is a single shared slot; if generation set it to mob B while boss A is
@@ -831,6 +863,7 @@ class OverworldScreen(BaseScreen):
         # lose it. Deferring until combat resolves keeps the slot stable — the
         # move/combat flow re-invokes this worker once the fight ends.
         if self._combat_active:
+            self.app.call_from_thread(lambda: self._stop_busy_watch(token))
             return
 
         # Snapshot queue state so we only force a dialog check when generation
@@ -840,13 +873,6 @@ class OverworldScreen(BaseScreen):
             getattr(pg, "option_dialog", None)
         )
         had_fight_before = bool(getattr(pg, "pending_fight_mob_id", None))
-
-        # Region generation can fire long-running task events (create_dungeon,
-        # complete_intro_story, remove_ocean) that flip pg.is_busy. Start the
-        # busy watcher on the UI thread so the LoadingDialog overlay appears
-        # and input stays blocked for their duration. Capture the token so this
-        # (possibly-cancelled) pass only stops the watcher it actually started.
-        token = self.app.call_from_thread(self._start_busy_watch)
 
         ensure_tiles_around_sync(pg, check_rad=4)
 
@@ -927,7 +953,7 @@ class OverworldScreen(BaseScreen):
         pg = self._player_game()
         if pg is None:
             return
-        self._ensure_tiles_worker(pg)
+        self._begin_tile_generation(pg)
         # Use _check_dialogs_and_refresh so any info_dialogs or option_dialog
         # set by task acquire events during world setup are shown immediately
         # rather than being silently skipped on the first render.
