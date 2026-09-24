@@ -70,12 +70,13 @@ class OverworldScreen(BaseScreen):
         # _check_dialogs_and_refresh) so deferred pending-combat checks are
         # never dropped.
         self._deferred_on_cleared: list = []
-        # True while a background tile-generation pass is running; keeps the
-        # busy watcher polling for the whole duration.
+        # Reference count of in-flight tile-generation passes. The busy watcher
+        # runs while this is > 0 and only tears down at 0, so a skipped/cancelled
+        # pass's balanced start/stop can't hide loading state that a still-running
+        # older pass owns.
+        self._generation_refcount = 0
+        # True while the busy watcher's poll loop is active.
         self._generation_active = False
-        # Monotonic id of the current tile-generation pass. A stale (cancelled)
-        # worker uses its captured token to avoid stopping a newer pass's watcher.
-        self._generation_token = 0
         # True while combat is on-screen; suppresses the tile worker's
         # combat callback so we can't stack two CombatScreens.
         self._combat_active = False
@@ -588,48 +589,46 @@ class OverworldScreen(BaseScreen):
         if getattr(pg, "pending_fight_mob_id", None):
             self._trigger_combat(pg, get_active_area(pg))
 
-    def _start_busy_watch(self) -> int:
-        """Poll pg.is_busy for the whole generation pass; mirror the overlay.
+    def _start_busy_watch(self) -> None:
+        """Register an in-flight generation pass and (re)start the poll loop.
 
-        The watcher must stay alive until `_stop_busy_watch` is called by the
-        generation worker — it can't stop on the first `is_busy == False` read
-        because a long-running event (create_dungeon, complete_intro_story,
-        remove_ocean) may not have flipped the flag yet when generation starts.
-
-        Returns a token identifying this watch pass; the caller must pass it
-        back to `_stop_busy_watch` so a stale/cancelled worker can't stop a
-        newer pass's watcher.
+        Uses a reference count: every `_begin_tile_generation` call registers a
+        pass here and the matching worker retires it via `_stop_busy_watch`. The
+        overlay/poll loop stays alive while the count is > 0, so a pass that was
+        skipped (module lock held by another) or cancelled can safely retire its
+        own registration without tearing down a still-running older pass's watch.
         """
-        self._generation_token += 1
-        token = self._generation_token
+        self._generation_refcount += 1
+        if self._generation_active:
+            return
         self._generation_active = True
 
         def _tick() -> None:
-            # A newer pass superseded this one — stop ticking silently.
-            if self._generation_token != token:
+            if self._generation_refcount <= 0:
+                self._generation_active = False
+                self._hide_loading()
                 return
             pg = self._player_game()
             if getattr(pg, "is_busy", False):
                 self._show_loading()
             else:
                 # Busy flag not (yet) set — hide the overlay but keep polling
-                # until generation completes so a later long-running event is
+                # until all passes complete so a later long-running event is
                 # still reflected. Do NOT run dialog checks here; the worker's
                 # completion handler surfaces combat/dialogs exactly once.
                 self._hide_loading()
-            if getattr(self, "_generation_active", False):
-                self.set_timer(0.1, _tick)
+            self.set_timer(0.1, _tick)
 
         _tick()
-        return token
 
-    def _stop_busy_watch(self, token: int | None = None) -> None:
-        # Only the pass that owns the current token may stop the watcher; a
-        # stale worker finishing after a newer pass started must be ignored.
-        if token is not None and token != self._generation_token:
-            return
-        self._generation_active = False
-        self._hide_loading()
+    def _stop_busy_watch(self) -> None:
+        # Retire one in-flight pass. The poll loop tears down the overlay once
+        # the count reaches zero (no pass is still generating).
+        if self._generation_refcount > 0:
+            self._generation_refcount -= 1
+        if self._generation_refcount <= 0:
+            self._generation_active = False
+            self._hide_loading()
 
     # ── movement handling ─────────────────────────────────────────────────
 
@@ -826,21 +825,20 @@ class OverworldScreen(BaseScreen):
     def _begin_tile_generation(self, pg: Any) -> None:
         """Kick off a tile-generation pass from the UI thread.
 
-        The busy-watch token MUST be allocated here (on the compositor thread,
-        synchronously) rather than inside the worker: `@work(exclusive=True)`
-        can cancel a previous worker when this one is scheduled, but a cancelled
-        worker still runs through its synchronous body. If the token were
-        allocated inside the worker, a cancelled pass could grab the newest
-        token *after* the replacement pass and later stop the replacement's
-        watcher. Allocating before scheduling binds each pass to its own token.
+        Registers the pass with the busy watcher (reference-counted) on the
+        compositor thread *before* scheduling the worker. Every registration is
+        balanced by exactly one `_stop_busy_watch` from the worker, so the
+        overlay is only torn down when no pass is still generating — regardless
+        of how `@work(exclusive=True)` cancellation and the module-level tile
+        lock interleave concurrent passes.
         """
         if self._combat_active:
             return
-        token = self._start_busy_watch()
-        self._ensure_tiles_worker(pg, token)
+        self._start_busy_watch()
+        self._ensure_tiles_worker(pg)
 
     @work(thread=True, exclusive=True, group="ensure_tiles")
-    def _ensure_tiles_worker(self, pg: Any, token: int) -> None:
+    def _ensure_tiles_worker(self, pg: Any) -> None:
         """Background worker to ensure tiles around the player exist.
 
         Region generation runs here, and `create_region_at` → `acquire_task`
@@ -853,9 +851,11 @@ class OverworldScreen(BaseScreen):
         Marked exclusive + grouped so rapid movement can't spawn two concurrent
         generation passes racing on world_tiles / regions.
 
-        `token` identifies this pass's busy-watch (allocated by
-        `_begin_tile_generation` before scheduling); it's passed to
-        `_stop_busy_watch` so a cancelled pass can't stop a newer one's watcher.
+        This worker always retires exactly one busy-watch registration (via
+        `_stop_busy_watch`) on every exit path, balancing the `_start_busy_watch`
+        from `_begin_tile_generation`. The watcher's reference count guarantees a
+        skipped (module lock held) or cancelled pass can't tear down loading
+        state owned by an older, still-running pass.
         """
         # Never run generation while a fight is on-screen. pending_fight_mob_id
         # is a single shared slot; if generation set it to mob B while boss A is
@@ -863,7 +863,7 @@ class OverworldScreen(BaseScreen):
         # lose it. Deferring until combat resolves keeps the slot stable — the
         # move/combat flow re-invokes this worker once the fight ends.
         if self._combat_active:
-            self.app.call_from_thread(lambda: self._stop_busy_watch(token))
+            self.app.call_from_thread(self._stop_busy_watch)
             return
 
         # Snapshot queue state so we only force a dialog check when generation
@@ -881,10 +881,11 @@ class OverworldScreen(BaseScreen):
         )
         has_fight_after = bool(getattr(pg, "pending_fight_mob_id", None))
 
-        # Clear the overlay once generation completes — but only if a newer
-        # pass hasn't superseded this one (rapid movement cancels older passes;
-        # ensure_tiles_around_sync is synchronous and can't check cancellation).
-        self.app.call_from_thread(lambda: self._stop_busy_watch(token))
+        # Retire this pass's busy-watch registration. The reference-counted
+        # watcher keeps loading state up while any other pass is still running,
+        # so a pass that was skipped (module tile lock held elsewhere) or
+        # cancelled won't hide an older pass's overlay prematurely.
+        self.app.call_from_thread(self._stop_busy_watch)
 
         new_dialogs = has_dialogs_after and not had_dialogs_before
         new_fight = has_fight_after and not had_fight_before
