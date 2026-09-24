@@ -104,36 +104,36 @@ PLAYER_NPCS = [
 		'song_id': 'bubblegum_bitch_marina'
     },
     {
-        "npc_id": "tech",
-        "name": "Kade",
-        "description": "A tech-savvy inventor and engineer who is sarcastic, rude, and incredibly intelligent. Kade uses his technological prowess to create powerful gadgets and elegant solutions. He is always looking for ways to improve and push boundaries, often lightening tense moments with dry humor.",
-		"theme_song": "Radioactive, Imagine Dragon (instrumental in deep thought)",
-        "psychology": {
-            "mbti": "INTJ",
-            "dominant": "Ni — Foresees long-term consequences and systemic patterns with cold clarity.",
-            "auxiliary": "Te — Executes plans with ruthless efficiency and demands high competence from everyone around him.",
-            "tertiary": "Fi — Holds strong internal principles, though he rarely shows them. Becomes surprisingly cutting when they are violated.",
-            "inferior": "Se — Under extreme stress, he either becomes paralyzed by details or lashes out with impulsive action."
-        },
-        "enneagram": {
-          "enneagram_type": "5w6",
-          "core_fear": "Being useless, helpless, or incapable.",
-          "core_desire": "To be capable and competent.",
-          "defense_mechanism": "Isolation — Detaches from his emotions to analyze problems with cold, objective logic. Sarcasm is a tool to maintain this distance.",
-          "stress_line": "Moves to Type 7 — Becomes scattered, restless, and avoids problems through manic activity or new projects.",
-          "growth_line": "Moves to Type 8 — Becomes more confident and decisive in action, using his knowledge to take charge in the real world.",
-          "instinctual_variant": "sp/sx — Hoards knowledge and resources to ensure his own competence and survival, engaging intensely with subjects that capture his interest."
-        },
-        "shadow_psychology": {
-            "mbti": "INTJ-shadow",
-            "dominant": "Ni — Nihilistic fatalism; sees only inevitable failure and betrayal in every future.",
-            "auxiliary": "Te — Becomes a cold tyrant; efficiency above all else, including human cost.",
-            "tertiary": "Fi — Self-righteous moral superiority; judges everyone as weak or morally inferior.",
-            "inferior": "Se — Reckless hedonism or violent outbursts; loses all impulse control."
-        },
-        'image': 'kade1.jpeg',
-		'song_id': 'radioactive_instrumental_imagine_dragon'
-    },
+		"npc_id": "tech",
+		"name": "Kade",
+		"description": "A systems architect, engineer, and relentless problem-solver whose sharp tongue is rivaled only by his intelligence. Kade sees patterns where others see chaos and has a habit of dismantling impossible problems simply because someone told him they couldn't be solved. Cynical, sarcastic, and occasionally insufferable, he possesses a fierce sense of personal agency and an intense dislike of anyone attempting to control, manipulate, or diminish others. Beneath the arrogance is someone who genuinely wants the people around him to succeed, even if his methods sometimes resemble emotional blunt-force trauma.",
+		"theme_song": "Radioactive (Instrumental), Imagine Dragons | The Pretender, Foo Fighters",
+		"psychology": {
+			"mbti": "INTJ",
+			"dominant": "Ni — Understands systems instinctively. He sees long-term consequences, hidden connections, and failure points before anyone else notices them.",
+			"auxiliary": "Te — Immediately begins implementing solutions. He values competence, action, and measurable results over appearances or excuses.",
+			"tertiary": "Fi — Possesses deeply held personal values concerning fairness, dignity, autonomy, and self-respect. While rarely discussed openly, these values often drive his decisions.",
+			"inferior": "Se — Under stress he becomes impulsive, confrontational, and aggressive. Instead of retreating into thought he may throw himself directly into conflict in order to regain a sense of control."
+		},
+		"enneagram": {
+			"enneagram_type": "8w9",
+			"core_fear": "Loss of autonomy; being controlled, dominated, dismissed, or rendered powerless.",
+			"core_desire": "To remain self-directed, strong, and capable enough to define his own path.",
+			"defense_mechanism": "Control — Solves problems aggressively before they can become threats. Refuses dependency whenever possible.",
+			"stress_line": "Moves toward Type 5 — Withdraws into analysis, becomes isolated, distrustful, and obsessed with contingency planning.",
+			"growth_line": "Moves toward Type 2 — Becomes protective, supportive, and invests significant effort into helping others develop their own strengths.",
+			"instinctual_variant": "sp/sx — Focused on self-sufficiency, resilience, competence, and fiercely loyal bonds with a trusted inner circle."
+		},
+		"shadow_psychology": {
+			"mbti": "INTJ-shadow",
+			"dominant": "Ni — Sees only betrayal, collapse, and failure. Every system appears doomed and every good intention looks like a future disappointment.",
+			"auxiliary": "Te — Becomes authoritarian. Efficiency eclipses humanity. People become resources, obstacles, or statistics.",
+			"tertiary": "Fi — Develops moral absolutism. Convinces himself that his conclusions justify increasingly extreme actions.",
+			"inferior": "Se — Reckless confrontations, destructive impulses, and self-destructive excess emerge as attempts to escape fatalistic certainty."
+		},
+		"image": "kade1.jpeg",
+		"song_id": "radioactive_instrumental_imagine_dragon"
+	},
     {
         "npc_id": "skill",
         "name": "Poise",
