@@ -603,13 +603,24 @@ class OverworldScreen(BaseScreen):
 
         Mirrors DungeonScreen._check_encounters but overworld-flavored: only
         the priority boss fight is checked (random encounters here are driven
-        by movement, not location actions).
+        by movement, not location actions). The boss encounter narrative lines
+        returned by check_and_handle_encounters are displayed first, and combat
+        starts only once the player dismisses them.
         """
         pg = self._player_game()
         if pg is None:
             return
-        if getattr(pg, "pending_fight_mob_id", None):
-            self._trigger_combat(pg, get_active_area(pg))
+        if not getattr(pg, "pending_fight_mob_id", None):
+            return
+        active_area = get_active_area(pg)
+        messages = check_and_handle_encounters(pg, active_area)
+        if messages:
+            self._show_dialog(
+                messages, "Encounter",
+                on_cleared=lambda: self._trigger_combat(pg, active_area),
+            )
+        else:
+            self._trigger_combat(pg, active_area)
 
     def _start_busy_watch(self) -> None:
         """Register an in-flight generation pass and (re)start the poll loop.
@@ -683,17 +694,29 @@ class OverworldScreen(BaseScreen):
         active_area = get_active_area(pg)
         encounter_messages = check_and_handle_encounters(pg, active_area)
 
-        # Wait for any encounter/narrative dialogs to be dismissed before
-        # starting combat so the player can read them first. A pending boss
-        # fight (set via begin_combat during a task completion) or a random
-        # encounter both defer to this point. Tile generation is deferred until
-        # after any combat resolves so its own combat callback can't stack a
-        # second CombatScreen on top of the active one.
-        def _after_move_dialogs_cleared() -> None:
+        # Wait for any narrative dialogs to be dismissed before starting combat
+        # so the player can read them first. A pending boss fight (set via
+        # begin_combat during a task completion) or a random encounter both
+        # defer to this point. Tile generation is deferred until after any
+        # combat resolves so its own combat callback can't stack a second
+        # CombatScreen on top of the active one.
+        def _start_combat_or_generate() -> None:
             if getattr(pg, "pending_fight_mob_id", None) or encounter_messages:
                 self._trigger_combat(pg, active_area)
             else:
                 self._begin_tile_generation(pg)
+
+        def _after_move_dialogs_cleared() -> None:
+            # check_and_handle_encounters returns the encounter narrative lines
+            # ("You sense danger...", "An enemy appears!") for the caller to
+            # display — they are NOT queued in pg.info_dialogs, so show them
+            # here and only start combat once the player dismisses them.
+            if encounter_messages:
+                self._show_dialog(
+                    encounter_messages, "Encounter", on_cleared=_start_combat_or_generate
+                )
+            else:
+                _start_combat_or_generate()
 
         self._check_dialogs_and_refresh(on_cleared=_after_move_dialogs_cleared)
 
