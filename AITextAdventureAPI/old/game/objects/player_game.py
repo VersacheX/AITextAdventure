@@ -65,6 +65,7 @@ class PlayerGame:
 		# completion, ocean removal) runs so the TUI can show a loading overlay
 		# and block input until the shared-state mutation finishes.
 		self.is_busy: bool = False
+		self._busy_depth: int = 0
 		self.chapter_task_waiting: bool = False
 		self.pending_character: str = None # npc/character id of a pending character to be added to the party
 		self.twisted_character: str = None # npc/character id of a twisted character which was changed when joingin from pending_character state
@@ -1409,6 +1410,7 @@ class PlayerGame:
 		"""
 		state = dict(self.__dict__)
 		state.pop('is_busy', None)
+		state.pop('_busy_depth', None)
 		return state
 
 	def __setstate__(self, state: dict) -> None:
@@ -1472,6 +1474,8 @@ class PlayerGame:
 		# otherwise a copy saved mid-event would load with no worker left to
 		# clear it, permanently blocking input. Always force it False on load.
 		self.is_busy = False
+		# Nested long-running-event depth counter — also transient.
+		self._busy_depth = 0
 
 	def get_active_dungeon(self) -> Optional["Dungeon"]:
 		"""Return the dungeon the player is currently inside, or None.

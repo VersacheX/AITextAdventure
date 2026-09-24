@@ -195,7 +195,9 @@ class OverworldScreen(BaseScreen):
 
     def on_screen_resume(self) -> None:
         """Called when returning from inventory/tasks/dungeon screens."""
-        self._check_dialogs_and_refresh()
+        # A resumed screen can already carry a pending fight (e.g. from a load
+        # or a task completed on another screen); start it once dialogs clear.
+        self._check_dialogs_and_refresh(on_cleared=self._check_pending_combat)
         self._update_overlay()
 
     def on_resize(self, event: events.Resize) -> None:
@@ -863,11 +865,19 @@ class OverworldScreen(BaseScreen):
         try:
             existing = self.query_one(LocationOverlay)
             existing.refresh_actions(pg, active_area, actions, _on_action_complete)
+            self._refresh_overlays_disabled()
             return
         except Exception:
             pass
 
         self.mount(LocationOverlay(pg, active_area, actions, _on_action_complete))
+        # A generation pass may already be in flight (e.g. the initial render
+        # starts the busy watch before this overlay is mounted). _start_busy_watch
+        # can only disable overlays that already exist, so re-apply the disabled
+        # state after the mount settles — otherwise the freshly-mounted menu
+        # would stay interactive and could mutate the shared PlayerGame during
+        # generation.
+        self.call_after_refresh(self._refresh_overlays_disabled)
 
     # ── rendering ─────────────────────────────────────────────────────────
 
@@ -901,54 +911,58 @@ class OverworldScreen(BaseScreen):
         generation passes racing on world_tiles / regions.
 
         This worker always retires exactly one busy-watch registration (via
-        `_stop_busy_watch`) on every exit path, balancing the `_start_busy_watch`
-        from `_begin_tile_generation`. The watcher's reference count guarantees a
-        skipped (module lock held) or cancelled pass can't tear down loading
-        state owned by an older, still-running pass.
+        `_stop_busy_watch`) on every exit path — the retirement is wrapped in a
+        try/finally so even a cancelled pass (this worker is `exclusive=True`,
+        so scheduling a newer pass cancels this one) can't leak its registration
+        and leave `_generation_refcount` permanently positive (which would block
+        all input and keep overlays disabled forever).
         """
-        # Never run generation while a fight is on-screen. pending_fight_mob_id
-        # is a single shared slot; if generation set it to mob B while boss A is
-        # being fought, A's win path (check_complete_boss_mob) would clear B and
-        # lose it. Deferring until combat resolves keeps the slot stable — the
-        # move/combat flow re-invokes this worker once the fight ends.
-        if self._combat_active:
-            self.app.call_from_thread(self._stop_busy_watch)
-            return
+        worker = get_current_worker()
+        try:
+            # Never run generation while a fight is on-screen. pending_fight_mob_id
+            # is a single shared slot; if generation set it to mob B while boss A
+            # is being fought, A's win path (check_complete_boss_mob) would clear
+            # B and lose it. Deferring until combat resolves keeps the slot stable
+            # — the move/combat flow re-invokes this worker once the fight ends.
+            if self._combat_active or worker.is_cancelled:
+                return
 
-        # Snapshot queue state so we only force a dialog check when generation
-        # actually produced new dialogs (avoids needless refresh churn on the
-        # common no-op path where all nearby tiles already exist).
-        had_dialogs_before = bool(getattr(pg, "info_dialogs", None)) or bool(
-            getattr(pg, "option_dialog", None)
-        )
-        had_fight_before = bool(getattr(pg, "pending_fight_mob_id", None))
-
-        ensure_tiles_around_sync(pg, check_rad=4)
-
-        has_dialogs_after = bool(getattr(pg, "info_dialogs", None)) or bool(
-            getattr(pg, "option_dialog", None)
-        )
-        has_fight_after = bool(getattr(pg, "pending_fight_mob_id", None))
-
-        # Retire this pass's busy-watch registration. The reference-counted
-        # watcher keeps loading state up while any other pass is still running,
-        # so a pass that was skipped (module tile lock held elsewhere) or
-        # cancelled won't hide an older pass's overlay prematurely.
-        self.app.call_from_thread(self._stop_busy_watch)
-
-        new_dialogs = has_dialogs_after and not had_dialogs_before
-        new_fight = has_fight_after and not had_fight_before
-
-        if new_dialogs or new_fight:
-            # New dialogs and/or a pending fight were queued during generation —
-            # surface them on the compositor thread (widget access must not
-            # happen off-thread). Defer any combat until the dialog chain
-            # clears so the player can read narrative first.
-            self.app.call_from_thread(
-                lambda: self._check_dialogs_and_refresh(
-                    on_cleared=self._check_pending_combat
-                )
+            # Snapshot queue state so we only force a dialog check when generation
+            # actually produced new dialogs (avoids needless refresh churn on the
+            # common no-op path where all nearby tiles already exist).
+            had_dialogs_before = bool(getattr(pg, "info_dialogs", None)) or bool(
+                getattr(pg, "option_dialog", None)
             )
+            had_fight_before = bool(getattr(pg, "pending_fight_mob_id", None))
+
+            ensure_tiles_around_sync(pg, check_rad=4)
+
+            has_dialogs_after = bool(getattr(pg, "info_dialogs", None)) or bool(
+                getattr(pg, "option_dialog", None)
+            )
+            has_fight_after = bool(getattr(pg, "pending_fight_mob_id", None))
+
+            new_dialogs = has_dialogs_after and not had_dialogs_before
+            new_fight = has_fight_after and not had_fight_before
+
+            # Suppress completion callbacks for a cancelled pass — a newer pass
+            # will surface any queued dialogs/combat.
+            if not worker.is_cancelled and (new_dialogs or new_fight):
+                # New dialogs and/or a pending fight were queued during
+                # generation — surface them on the compositor thread (widget
+                # access must not happen off-thread). Defer any combat until the
+                # dialog chain clears so the player can read narrative first.
+                self.app.call_from_thread(
+                    lambda: self._check_dialogs_and_refresh(
+                        on_cleared=self._check_pending_combat
+                    )
+                )
+        finally:
+            # Retire this pass's busy-watch registration unconditionally. The
+            # reference-counted watcher keeps loading state up while any other
+            # pass is still running, so a skipped/cancelled pass retiring its own
+            # registration won't hide an older pass's overlay prematurely.
+            self.app.call_from_thread(self._stop_busy_watch)
 
     @work(thread=True, exclusive=True)
     def _refresh_all(self) -> None:
@@ -1006,8 +1020,11 @@ class OverworldScreen(BaseScreen):
         self._begin_tile_generation(pg)
         # Use _check_dialogs_and_refresh so any info_dialogs or option_dialog
         # set by task acquire events during world setup are shown immediately
-        # rather than being silently skipped on the first render.
-        self._check_dialogs_and_refresh()
+        # rather than being silently skipped on the first render. A save/resume
+        # can already carry pending_fight_mob_id (generation won't flag it as a
+        # *new* fight), so wire the pending-combat check into the initial dialog
+        # drain to start that fight once any dialogs clear.
+        self._check_dialogs_and_refresh(on_cleared=self._check_pending_combat)
         self._update_overlay()
 
     def _player_game(self) -> Any:
