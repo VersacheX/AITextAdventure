@@ -935,7 +935,10 @@ class OverworldScreen(BaseScreen):
             )
             had_fight_before = bool(getattr(pg, "pending_fight_mob_id", None))
 
-            ensure_tiles_around_sync(pg, check_rad=4)
+            # ensure_tiles_around_sync returns True only if THIS pass acquired
+            # the module lock and actually ran generation (False if it skipped
+            # because another pass held the lock).
+            ran_generation = ensure_tiles_around_sync(pg, check_rad=4)
 
             has_dialogs_after = bool(getattr(pg, "info_dialogs", None)) or bool(
                 getattr(pg, "option_dialog", None)
@@ -945,9 +948,16 @@ class OverworldScreen(BaseScreen):
             new_dialogs = has_dialogs_after and not had_dialogs_before
             new_fight = has_fight_after and not had_fight_before
 
-            # Suppress completion callbacks for a cancelled pass — a newer pass
-            # will surface any queued dialogs/combat.
-            if not worker.is_cancelled and (new_dialogs or new_fight):
+            # Surface newly-queued dialogs/combat when this pass produced them.
+            # Normally a cancelled pass suppresses its callback (a newer pass
+            # will surface state). But if THIS pass owned the lock and actually
+            # created the state, we must surface it even when cancelled — the
+            # replacement pass will skip on the lock and emit nothing, so the
+            # dialogs/fight would otherwise stay queued indefinitely.
+            should_surface = (new_dialogs or new_fight) and (
+                not worker.is_cancelled or ran_generation
+            )
+            if should_surface:
                 # New dialogs and/or a pending fight were queued during
                 # generation — surface them on the compositor thread (widget
                 # access must not happen off-thread). Defer any combat until the
@@ -1017,15 +1027,26 @@ class OverworldScreen(BaseScreen):
         pg = self._player_game()
         if pg is None:
             return
-        self._begin_tile_generation(pg)
+
+        self._update_overlay()
+
+        # A save/resume can already carry pending_fight_mob_id. Resolve that
+        # fight BEFORE starting tile generation: otherwise generation could run
+        # concurrently with the boss-win cleanup and mutate/clear the shared
+        # pending-fight slot. Only kick off generation once the startup dialog
+        # chain (and any saved fight) has been fully handled.
+        def _after_startup_dialogs() -> None:
+            if getattr(pg, "pending_fight_mob_id", None):
+                # _check_pending_combat starts the fight; tile generation is
+                # resumed from the combat-done flow, keeping the slot stable.
+                self._check_pending_combat()
+            else:
+                self._begin_tile_generation(pg)
+
         # Use _check_dialogs_and_refresh so any info_dialogs or option_dialog
         # set by task acquire events during world setup are shown immediately
-        # rather than being silently skipped on the first render. A save/resume
-        # can already carry pending_fight_mob_id (generation won't flag it as a
-        # *new* fight), so wire the pending-combat check into the initial dialog
-        # drain to start that fight once any dialogs clear.
-        self._check_dialogs_and_refresh(on_cleared=self._check_pending_combat)
-        self._update_overlay()
+        # rather than being silently skipped on the first render.
+        self._check_dialogs_and_refresh(on_cleared=_after_startup_dialogs)
 
     def _player_game(self) -> Any:
         from tui.services.game_state import get_active_game  # noqa: PLC0415
