@@ -2,6 +2,41 @@
 
 from game.objects.npc import NPC
 import game.constants as const
+import threading
+
+# Event types known (or suspected) to take non-trivial time to execute.
+# The TUI uses this to show a "Loading..." overlay (and block input) for the
+# duration of these events only.
+LONG_RUNNING_EVENT_TYPES = frozenset({
+	'create_dungeon',
+	'complete_intro_story',
+	'remove_ocean',
+})
+
+# Guards the nested long-running-event depth counter tracked on each
+# PlayerGame (_busy_depth). Task events can nest (an outer long-running event
+# executes another event via event.execute), so a plain boolean would let the
+# inner finally clear is_busy while the outer mutation is still running. A
+# lock-protected counter clears is_busy only when the outermost event exits.
+_BUSY_DEPTH_LOCK = threading.Lock()
+
+
+def _enter_busy(player_game) -> None:
+	"""Increment the long-running-event depth; set is_busy on first entry."""
+	with _BUSY_DEPTH_LOCK:
+		depth = getattr(player_game, '_busy_depth', 0) + 1
+		player_game._busy_depth = depth
+		player_game.is_busy = True
+
+
+def _exit_busy(player_game) -> None:
+	"""Decrement the depth; clear is_busy only when the outermost event exits."""
+	with _BUSY_DEPTH_LOCK:
+		depth = getattr(player_game, '_busy_depth', 1) - 1
+		if depth <= 0:
+			depth = 0
+			player_game.is_busy = False
+		player_game._busy_depth = depth
 
 # NPCS = [
 #     {
@@ -65,6 +100,25 @@ def handle_task_event(event, player_game, parent_task):
 		if not evaluate_condition(condition, player_game):
 			return None
 	# ─────────────────────────────────────────────────────────────────────
+
+	# ── busy flag ─────────────────────────────────────────────────────────
+	# Long-running events flip player_game.is_busy so the TUI can show a
+	# "Loading..." overlay and block input for their duration only. A depth
+	# counter (not a plain bool) handles nested long-running events: is_busy is
+	# only cleared when the outermost event exits. Cleared in a finally so an
+	# exception mid-event can't leave the UI stuck.
+	is_long_running = ev_name in LONG_RUNNING_EVENT_TYPES
+	if is_long_running:
+		_enter_busy(player_game)
+	try:
+		return _dispatch_task_event(ev_name, params, player_game, parent_task)
+	finally:
+		if is_long_running:
+			_exit_busy(player_game)
+
+
+def _dispatch_task_event(ev_name, params, player_game, parent_task):
+	from game.objects.task import TaskEventType
 
 	# AWARD_TASK: find seed in const.TASKS and build a Task then give to player_game
 	if ev_name == TaskEventType.AWARD_TASK.value:

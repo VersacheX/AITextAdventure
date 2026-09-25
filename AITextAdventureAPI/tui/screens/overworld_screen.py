@@ -40,6 +40,7 @@ from tui.screens.confirm_screen import ConfirmScreen
 from tui.screens.dungeon_screen import DungeonScreen
 from tui.screens.location_menu_screen import LocationOverlay
 from tui.screens.message_dialog import MessageDialog
+from tui.screens.loading_dialog import LoadingDialog
 from tui.services.encounter_service import (
     check_and_handle_encounters,
     get_boss_encounter_hostiles,
@@ -62,6 +63,23 @@ from tui.services.overworld_renderer import (
 
 class OverworldScreen(BaseScreen):
     """Main overworld / world-map screen."""
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        # Callbacks queued while a dialog chain is already active (see
+        # _check_dialogs_and_refresh) so deferred pending-combat checks are
+        # never dropped.
+        self._deferred_on_cleared: list = []
+        # Reference count of in-flight tile-generation passes. The busy watcher
+        # runs while this is > 0 and only tears down at 0, so a skipped/cancelled
+        # pass's balanced start/stop can't hide loading state that a still-running
+        # older pass owns.
+        self._generation_refcount = 0
+        # True while the busy watcher's poll loop is active.
+        self._generation_active = False
+        # True while combat is on-screen; suppresses the tile worker's
+        # combat callback so we can't stack two CombatScreens.
+        self._combat_active = False
 
     LAYERS = ("default", "overlay")
 
@@ -177,7 +195,9 @@ class OverworldScreen(BaseScreen):
 
     def on_screen_resume(self) -> None:
         """Called when returning from inventory/tasks/dungeon screens."""
-        self._check_dialogs_and_refresh()
+        # A resumed screen can already carry a pending fight (e.g. from a load
+        # or a task completed on another screen); start it once dialogs clear.
+        self._check_dialogs_and_refresh(on_cleared=self._check_pending_combat)
         self._update_overlay()
 
     def on_resize(self, event: events.Resize) -> None:
@@ -213,6 +233,8 @@ class OverworldScreen(BaseScreen):
         """'a' key: focus the location overlay if visible, otherwise move west."""
         if self._overlay_list_focused():
             return
+        if self._blocked():
+            return
         try:
             overlay = self.query_one(LocationOverlay)
             overlay.focus_list()
@@ -228,14 +250,20 @@ class OverworldScreen(BaseScreen):
 
     def action_open_inventory(self) -> None:
         """I key: open inventory screen."""
+        if self._blocked():
+            return
         self.app.push_screen("inventory")
 
     def action_open_tasks(self) -> None:
         """T key: open tasks screen."""
+        if self._blocked():
+            return
         self.app.push_screen("tasks")
 
     def action_interact(self) -> None:
         """E key: toggle the location overlay."""
+        if self._blocked():
+            return
         if self._overlay_visible():
             self._remove_overlay()
         else:
@@ -245,6 +273,12 @@ class OverworldScreen(BaseScreen):
             self._update_overlay(pg, get_active_area(pg))
 
     def action_go_back(self) -> None:
+        # Block navigation while a generation/task worker or dialog is active —
+        # its deferred call_from_thread/on_done callbacks would otherwise refresh
+        # or push combat onto an inactive screen after we've navigated away.
+        if self._blocked():
+            return
+
         def _handle(confirmed: bool | None) -> None:
             if confirmed:
                 from tui.services.game_state import set_active_game
@@ -256,18 +290,42 @@ class OverworldScreen(BaseScreen):
             _handle,
         )
 
+    def _leave_to_main_menu(self) -> None:
+        """Unconditionally return to the main menu (no confirm, no busy guard).
+
+        Used by game-over paths: they mount a "Game Over" MessageDialog and then
+        navigate after a short delay, so the general `_blocked()` dialog guard in
+        `action_go_back` must NOT apply here — otherwise the still-mounted dialog
+        would suppress the navigation and strand the player on the overworld.
+        """
+        from tui.services.game_state import set_active_game  # noqa: PLC0415
+        set_active_game(None)
+        self.app.goto_screen("main_menu")
+
     # ── dialog and message handling ───────────────────────────────────────
 
-    def _check_dialogs_and_refresh(self) -> None:
-        """Check for pending dialogs and display them, then refresh the view."""
+    def _check_dialogs_and_refresh(self, on_cleared: "Callable[[], None] | None" = None) -> None:
+        """Check for pending dialogs and display them, then refresh the view.
+
+        If `on_cleared` is given it runs once the *entire* dialog chain (all
+        info dialogs and any pending option dialog) has been resolved — used to
+        defer combat/encounter checks until the player has read everything.
+        """
         pg = self._player_game()
         if pg is None:
             self._refresh_all()
+            if on_cleared is not None:
+                on_cleared()
             return
 
         # Block re-entrancy — if a dialog or option dialog is already visible,
-        # do nothing; _schedule_dialog_check will re-enter when it clears.
+        # don't start a second chain. We must NOT drop `on_cleared` though: a
+        # worker/combat completion arriving mid-dialog would otherwise lose its
+        # deferred pending-combat check. Queue it so it runs when the active
+        # chain resolves and re-enters this method.
         if self._dialog_visible():
+            if on_cleared is not None:
+                self._deferred_on_cleared.append(on_cleared)
             return
 
         # Info dialogs drain first — conversation lines before the choice appears
@@ -276,20 +334,55 @@ class OverworldScreen(BaseScreen):
             while pg.info_dialogs:
                 messages.append(pg.pop_dialog())
             if messages:
-                self._show_dialog(messages, "Story")
+                self._show_dialog(messages, "Story", on_cleared=on_cleared)
                 return
 
         # Option dialog follows once all preceding lines have been acknowledged
         if getattr(pg, "option_dialog", None):
-            self._show_option_dialog(pg.option_dialog)
+            self._show_option_dialog(pg.option_dialog, on_cleared=on_cleared)
             return
 
         self._refresh_all()
+        if on_cleared is not None:
+            on_cleared()
+        self._run_deferred_on_cleared()
 
-    def _show_option_dialog(self, option_dialog: dict) -> None:
-        """Mount an OptionDialogWidget for the pending choice prompt."""
+    def _run_deferred_on_cleared(self) -> None:
+        """Fire callbacks queued while a dialog chain was already active.
+
+        A callback can itself mount a new dialog (e.g. _check_pending_combat
+        shows the encounter dialog). If it does, we must STOP draining and keep
+        the remaining callbacks queued — otherwise a following callback would
+        remove/replace the just-mounted dialog before its own on_cleared runs,
+        stranding the pending fight or losing the first callback. The retained
+        callbacks re-run when the active dialog clears and re-enters
+        _check_dialogs_and_refresh → _run_deferred_on_cleared.
+        """
+        queued = self._deferred_on_cleared
+        if not queued:
+            return
+        # Reset the queue; process one at a time so a callback that mounts a
+        # dialog can pause draining with the rest preserved.
+        self._deferred_on_cleared = []
+        while queued:
+            cb = queued.pop(0)
+            cb()
+            if self._dialog_visible():
+                # This callback opened a dialog — preserve the not-yet-run
+                # callbacks (prepended) for the next dialog-chain re-entry.
+                self._deferred_on_cleared = queued + self._deferred_on_cleared
+                return
+
+    def _show_option_dialog(self, option_dialog: dict, on_cleared: "Callable[[], None] | None" = None) -> None:
+        """Mount an OptionDialogWidget for the pending choice prompt.
+
+        `on_cleared` is stashed and re-invoked after the player picks an option
+        (and any resulting info dialogs drain), so a combat task awarded by a
+        chosen option is still picked up.
+        """
         from tui.screens.option_dialog import OptionDialogWidget  # noqa: PLC0415
         self._remove_option_dialog()
+        self._pending_on_cleared = on_cleared
         try:
             map_panel = self.query_one("#map-panel")
             widget = OptionDialogWidget(option_dialog)
@@ -297,6 +390,9 @@ class OverworldScreen(BaseScreen):
         except Exception as e:
             self.notify(f"Could not show option dialog: {e}", severity="error")
             self._refresh_all()
+            self._pending_on_cleared = None
+            if on_cleared is not None:
+                on_cleared()
 
     def _remove_option_dialog(self) -> None:
         from tui.screens.option_dialog import OptionDialogWidget  # noqa: PLC0415
@@ -312,26 +408,46 @@ class OverworldScreen(BaseScreen):
         from tui.screens.option_dialog import OptionDialogWidget  # noqa: PLC0415
         from services.task_completion_service import award_task_to_player_game  # noqa: PLC0415
         pg = self._player_game()
+        self._remove_option_dialog()
+        # Preserve any deferred callback across the option resolution so a
+        # combat task awarded by the chosen option is still handled.
+        on_cleared = getattr(self, "_pending_on_cleared", None)
+        self._pending_on_cleared = None
+
+        def _continue() -> None:
+            # Defer until after Textual has processed the widget removal so that
+            # _dialog_visible() returns False and the acquire info_dialogs surface.
+            self.call_after_refresh(
+                lambda: self._check_dialogs_and_refresh(on_cleared=on_cleared)
+            )
+
         if pg is not None:
             pg.option_dialog = None
-            award_task_to_player_game(event.target_task_id, pg, None)
-        self._remove_option_dialog()
-        # Defer until after Textual has processed the widget removal so that
-        # _dialog_visible() returns False and the acquire info_dialogs surface.
-        self.call_after_refresh(self._check_dialogs_and_refresh)
+            # Awarding a task can fire long-running acquire events (e.g. an
+            # option that starts the next chapter → world generation). Run it
+            # off the compositor thread behind a loading overlay so the UI
+            # stays responsive, then continue the dialog chain.
+            self.run_blocking_with_loading(
+                lambda: award_task_to_player_game(event.target_task_id, pg, None),
+                on_done=_continue,
+            )
+        else:
+            _continue()
         event.stop()
 
-    def _show_dialog(self, messages: list[str], title: str = "Message") -> None:
+    def _show_dialog(self, messages: list[str], title: str = "Message", on_cleared: "Callable[[], None] | None" = None) -> None:
         """Display a centered message dialog with the given messages.
-        
+
         The dialog will cycle through all messages sequentially and
         auto-remove when the queue is exhausted, then refresh the screen.
-        
+
         Dialog is mounted inside the map panel so it centers over the map
         area without covering the legend/stats sidebar.
         """
         if not messages:
             self._refresh_all()
+            if on_cleared is not None:
+                on_cleared()
             return
 
         # Remove any existing dialog first
@@ -342,21 +458,25 @@ class OverworldScreen(BaseScreen):
             map_panel = self.query_one("#map-panel")
             dialog = MessageDialog(messages, title)
             map_panel.mount(dialog)
-            
+
             # Schedule periodic checks to refresh when dialog is removed
-            self._schedule_dialog_check()
+            self._schedule_dialog_check(on_cleared=on_cleared)
         except Exception as e:
             # Fallback: if mounting fails, just refresh
             self.notify(f"Could not show dialog: {e}", severity="error")
             self._refresh_all()
+            if on_cleared is not None:
+                on_cleared()
 
-    def _schedule_dialog_check(self) -> None:
+    def _schedule_dialog_check(self, on_cleared: "Callable[[], None] | None" = None) -> None:
         """Schedule a check to see if the dialog has been dismissed."""
         def _check_and_refresh() -> None:
             if not self._dialog_visible():
                 # Re-enter the full dialog/option check so any queued
                 # option_dialog surfaces immediately after info lines drain.
-                self._check_dialogs_and_refresh()
+                # on_cleared is forwarded so it fires only once the entire
+                # chain (including a following option dialog) is resolved.
+                self._check_dialogs_and_refresh(on_cleared=on_cleared)
             else:
                 self.set_timer(0.2, _check_and_refresh)
 
@@ -390,6 +510,188 @@ class OverworldScreen(BaseScreen):
         except Exception:
             pass
 
+    # ── busy / loading overlay ────────────────────────────────────────────
+
+    def run_blocking_with_loading(
+        self,
+        fn: "Callable[[], None]",
+        on_done: "Callable[[], None] | None" = None,
+        message: str = "Loading...",
+    ) -> None:
+        """Run a blocking task chain off the compositor thread with a loading
+        overlay so long-running task events (world generation, dungeon build,
+        intro-story completion) can't freeze the UI.
+
+        `fn` runs on a worker thread; `on_done` runs back on the compositor
+        thread once it finishes. Callers that mutate shared game state through
+        `handle_task_event` (NPC interactions, awarded option tasks) route
+        through here so `pg.is_busy` has somewhere to surface a loading state.
+        """
+        self._show_loading(message)
+
+        def _runner() -> None:
+            succeeded = False
+            try:
+                fn()
+                succeeded = True
+            finally:
+                def _finish(ok: bool = succeeded) -> None:
+                    # Always clear the loading overlay, but only continue into
+                    # dialog/combat handling when fn() actually succeeded — a
+                    # failed task completion must not be treated as successful
+                    # (it would advance with partially-mutated state).
+                    self._hide_loading()
+                    if ok and on_done is not None:
+                        on_done()
+                self.app.call_from_thread(_finish)
+
+        # Use the screen's worker API directly. A locally-defined @work function
+        # is a plain callable, not a bound method, so the decorator's expected
+        # `self` widget argument would be missing — run_worker sidesteps that.
+        self.run_worker(_runner, thread=True, group="blocking_task", exclusive=False)
+
+    def _busy(self) -> bool:
+        """True while a long-running task event (dungeon build, etc.) runs."""
+        pg = self._player_game()
+        # _generation_refcount > 0 covers ordinary/no-op tile-generation passes
+        # too: _start_busy_watch hides the loading widget when pg.is_busy is
+        # false, so without the refcount _blocked() could go false while an
+        # ensure worker is still in flight, letting Esc/another action navigate
+        # away or mutate the same PlayerGame before its deferred callbacks run.
+        return (
+            bool(getattr(pg, "is_busy", False))
+            or self._loading_visible()
+            or self._generation_refcount > 0
+        )
+
+    def _blocked(self) -> bool:
+        """Single guard for all input handlers: dialogs OR busy overlay."""
+        return self._dialog_visible() or self._busy()
+
+    def _loading_visible(self) -> bool:
+        try:
+            self.query_one("#map-panel").query_one(LoadingDialog)
+            return True
+        except Exception:
+            return False
+
+    def _show_loading(self, message: str = "Loading...") -> None:
+        if self._loading_visible():
+            return
+        try:
+            self.query_one("#map-panel").mount(LoadingDialog(message))
+        except Exception:
+            pass
+        # Mounting the LoadingDialog inside #map-panel does NOT make the screen
+        # modal — the screen-level LocationOverlay (and any shop/travel overlay)
+        # stay interactive and their Enter/click handlers could mutate the same
+        # PlayerGame while the worker runs. Disable every interactive overlay
+        # for the loading lifetime so no second action can race the worker.
+        self._set_overlays_disabled(True)
+
+    def _hide_loading(self) -> None:
+        try:
+            self.query_one("#map-panel").query_one(LoadingDialog).remove()
+        except Exception:
+            pass
+        self._refresh_overlays_disabled()
+
+    def _refresh_overlays_disabled(self) -> None:
+        """Re-evaluate whether interactive overlays should stay disabled.
+
+        Overlays must remain disabled while ANY generation pass is in flight
+        (`_generation_refcount > 0`) even when the LoadingDialog widget is
+        momentarily hidden (an ordinary/no-op pass hides it before pg.is_busy
+        ever flips). Otherwise a location/shop/travel handler could mutate the
+        shared PlayerGame concurrently with tile generation. Only re-enable
+        once no pass is still running and no loading widget is up.
+        """
+        still_busy = self._generation_refcount > 0 or self._loading_visible()
+        self._set_overlays_disabled(still_busy)
+
+    def _set_overlays_disabled(self, disabled: bool) -> None:
+        """Disable/enable all interactive overlays (location menu, shop, travel)
+        so they can't process input while a loading overlay is up."""
+        try:
+            for overlay in self.query(LocationOverlay):
+                overlay.disabled = disabled
+        except Exception:
+            pass
+        try:
+            for overlay in self.query(".ow-overlay"):
+                overlay.disabled = disabled
+        except Exception:
+            pass
+
+    def _check_pending_combat(self) -> None:
+        """Trigger combat if a task event set a pending boss fight.
+
+        Mirrors DungeonScreen._check_encounters but overworld-flavored: only
+        the priority boss fight is checked (random encounters here are driven
+        by movement, not location actions). The boss encounter narrative lines
+        returned by check_and_handle_encounters are displayed first, and combat
+        starts only once the player dismisses them.
+        """
+        pg = self._player_game()
+        if pg is None:
+            return
+        if not getattr(pg, "pending_fight_mob_id", None):
+            return
+        active_area = get_active_area(pg)
+        messages = check_and_handle_encounters(pg, active_area)
+        if messages:
+            self._show_dialog(
+                messages, "Encounter",
+                on_cleared=lambda: self._trigger_combat(pg, active_area),
+            )
+        else:
+            self._trigger_combat(pg, active_area)
+
+    def _start_busy_watch(self) -> None:
+        """Register an in-flight generation pass and (re)start the poll loop.
+
+        Uses a reference count: every `_begin_tile_generation` call registers a
+        pass here and the matching worker retires it via `_stop_busy_watch`. The
+        overlay/poll loop stays alive while the count is > 0, so a pass that was
+        skipped (module lock held by another) or cancelled can safely retire its
+        own registration without tearing down a still-running older pass's watch.
+        """
+        self._generation_refcount += 1
+        # Disable interactive overlays for the whole generation lifetime, even
+        # before pg.is_busy flips / the LoadingDialog appears, so a no-op pass
+        # can't leave overlays interactive while a worker still runs.
+        self._set_overlays_disabled(True)
+        if self._generation_active:
+            return
+        self._generation_active = True
+
+        def _tick() -> None:
+            if self._generation_refcount <= 0:
+                self._generation_active = False
+                self._hide_loading()
+                return
+            pg = self._player_game()
+            if getattr(pg, "is_busy", False):
+                self._show_loading()
+            else:
+                # Busy flag not (yet) set — hide the overlay but keep polling
+                # until all passes complete so a later long-running event is
+                # still reflected. Do NOT run dialog checks here; the worker's
+                # completion handler surfaces combat/dialogs exactly once.
+                self._hide_loading()
+            self.set_timer(0.1, _tick)
+
+        _tick()
+
+    def _stop_busy_watch(self) -> None:
+        # Retire one in-flight pass. The poll loop tears down the overlay once
+        # the count reaches zero (no pass is still generating).
+        if self._generation_refcount > 0:
+            self._generation_refcount -= 1
+        if self._generation_refcount <= 0:
+            self._generation_active = False
+            self._hide_loading()
+
     # ── movement handling ─────────────────────────────────────────────────
 
     def _handle_move(self, key: str) -> None:
@@ -397,7 +699,7 @@ class OverworldScreen(BaseScreen):
         if pg is None:
             return
 
-        if self._dialog_visible():
+        if self._blocked():
             return
 
         moved, reason = try_move(key, pg)
@@ -417,10 +719,31 @@ class OverworldScreen(BaseScreen):
         active_area = get_active_area(pg)
         encounter_messages = check_and_handle_encounters(pg, active_area)
 
-        if encounter_messages:
-            self._trigger_combat(pg, active_area)
+        # Wait for any narrative dialogs to be dismissed before starting combat
+        # so the player can read them first. A pending boss fight (set via
+        # begin_combat during a task completion) or a random encounter both
+        # defer to this point. Tile generation is deferred until after any
+        # combat resolves so its own combat callback can't stack a second
+        # CombatScreen on top of the active one.
+        def _start_combat_or_generate() -> None:
+            if getattr(pg, "pending_fight_mob_id", None) or encounter_messages:
+                self._trigger_combat(pg, active_area)
+            else:
+                self._begin_tile_generation(pg)
 
-        self._ensure_tiles_worker(pg)
+        def _after_move_dialogs_cleared() -> None:
+            # check_and_handle_encounters returns the encounter narrative lines
+            # ("You sense danger...", "An enemy appears!") for the caller to
+            # display — they are NOT queued in pg.info_dialogs, so show them
+            # here and only start combat once the player dismisses them.
+            if encounter_messages:
+                self._show_dialog(
+                    encounter_messages, "Encounter", on_cleared=_start_combat_or_generate
+                )
+            else:
+                _start_combat_or_generate()
+
+        self._check_dialogs_and_refresh(on_cleared=_after_move_dialogs_cleared)
 
     # ── dungeon entry ─────────────────────────────────────────────────────
 
@@ -436,7 +759,7 @@ class OverworldScreen(BaseScreen):
             # Player either walked out or was defeated
             if not exited_normally:
                 self._show_dialog(["Your party was defeated in the dungeon..."], "Game Over")
-                self.set_timer(2.0, lambda: self.action_go_back())
+                self.set_timer(2.0, self._leave_to_main_menu)
             else:
                 self._check_dialogs_and_refresh()
 
@@ -456,21 +779,57 @@ class OverworldScreen(BaseScreen):
         """
         if getattr(pg, "pending_fight_mob_id", None):
             hostiles = get_boss_encounter_hostiles(pg)
+            is_boss = True
         else:
             hostiles = get_random_encounter_hostiles(pg, active_area)
+            is_boss = False
 
         if not hostiles:
             self._refresh_all()
             return
 
+        # Guard against stacking a second CombatScreen. The tile-generation
+        # worker can independently queue a pending fight and call
+        # _check_pending_combat while a battle is already on-screen; ignore
+        # that until the current fight resolves.
+        if self._combat_active:
+            return
+        self._combat_active = True
+        # Snapshot the boss id now — get_boss_encounter_hostiles leaves
+        # pending_fight_mob_id set, so we must clear it via check_complete_boss_mob
+        # after the win instead of assuming it changed.
+        boss_mob_id = getattr(pg, "pending_fight_mob_id", None) if is_boss else None
+
         def _on_combat_done(players_won: bool | None) -> None:
+            self._combat_active = False
             if not players_won:
                 # Player lost → return to main menu
                 self._show_dialog(["You have been defeated..."], "Game Over")
-                self.set_timer(2.0, lambda: self.action_go_back())
+                self.set_timer(2.0, self._leave_to_main_menu)
+                return
+
+            # Player won → complete the boss mob first (its completion events
+            # can be long-running, so route through the loading worker), then
+            # surface any queued dialogs and only afterwards re-check for a
+            # freshly-awarded pending fight. Tile generation (deferred from the
+            # move that started this fight) runs only once no further combat is
+            # pending, so it can't stack another CombatScreen.
+            def _after_combat_dialogs() -> None:
+                if getattr(pg, "pending_fight_mob_id", None):
+                    self._check_pending_combat()
+                else:
+                    self._begin_tile_generation(pg)
+
+            def _surface() -> None:
+                self._check_dialogs_and_refresh(on_cleared=_after_combat_dialogs)
+
+            if boss_mob_id:
+                self.run_blocking_with_loading(
+                    lambda: pg.check_complete_boss_mob(boss_mob_id),
+                    on_done=_surface,
+                )
             else:
-                # Player won → refresh screen
-                self._refresh_all()
+                _surface()
 
         self.app.push_screen(CombatScreen(pg, hostiles), _on_combat_done)
 
@@ -514,7 +873,11 @@ class OverworldScreen(BaseScreen):
 
         def _on_action_complete(took_action: bool) -> None:
             if took_action:
-                self._check_dialogs_and_refresh()
+                # A location action (e.g. talking to an NPC) can complete a
+                # task that queues dialogs and sets a pending fight. Defer the
+                # combat check until the dialog chain clears so the player can
+                # read the narrative before battle begins.
+                self._check_dialogs_and_refresh(on_cleared=self._check_pending_combat)
             else:
                 self._refresh_all()
             # Refresh the overlay in-place for the (possibly updated) tile
@@ -525,13 +888,36 @@ class OverworldScreen(BaseScreen):
         try:
             existing = self.query_one(LocationOverlay)
             existing.refresh_actions(pg, active_area, actions, _on_action_complete)
+            self._refresh_overlays_disabled()
             return
         except Exception:
             pass
 
         self.mount(LocationOverlay(pg, active_area, actions, _on_action_complete))
+        # A generation pass may already be in flight (e.g. the initial render
+        # starts the busy watch before this overlay is mounted). _start_busy_watch
+        # can only disable overlays that already exist, so re-apply the disabled
+        # state after the mount settles — otherwise the freshly-mounted menu
+        # would stay interactive and could mutate the shared PlayerGame during
+        # generation.
+        self.call_after_refresh(self._refresh_overlays_disabled)
 
     # ── rendering ─────────────────────────────────────────────────────────
+
+    def _begin_tile_generation(self, pg: Any) -> None:
+        """Kick off a tile-generation pass from the UI thread.
+
+        Registers the pass with the busy watcher (reference-counted) on the
+        compositor thread *before* scheduling the worker. Every registration is
+        balanced by exactly one `_stop_busy_watch` from the worker, so the
+        overlay is only torn down when no pass is still generating — regardless
+        of how `@work(exclusive=True)` cancellation and the module-level tile
+        lock interleave concurrent passes.
+        """
+        if self._combat_active:
+            return
+        self._start_busy_watch()
+        self._ensure_tiles_worker(pg)
 
     @work(thread=True, exclusive=True, group="ensure_tiles")
     def _ensure_tiles_worker(self, pg: Any) -> None:
@@ -546,24 +932,70 @@ class OverworldScreen(BaseScreen):
 
         Marked exclusive + grouped so rapid movement can't spawn two concurrent
         generation passes racing on world_tiles / regions.
+
+        This worker always retires exactly one busy-watch registration (via
+        `_stop_busy_watch`) on every exit path — the retirement is wrapped in a
+        try/finally so even a cancelled pass (this worker is `exclusive=True`,
+        so scheduling a newer pass cancels this one) can't leak its registration
+        and leave `_generation_refcount` permanently positive (which would block
+        all input and keep overlays disabled forever).
         """
-        # Snapshot queue state so we only force a dialog check when generation
-        # actually produced new dialogs (avoids needless refresh churn on the
-        # common no-op path where all nearby tiles already exist).
-        had_dialogs_before = bool(getattr(pg, "info_dialogs", None)) or bool(
-            getattr(pg, "option_dialog", None)
-        )
+        worker = get_current_worker()
+        try:
+            # Never run generation while a fight is on-screen. pending_fight_mob_id
+            # is a single shared slot; if generation set it to mob B while boss A
+            # is being fought, A's win path (check_complete_boss_mob) would clear
+            # B and lose it. Deferring until combat resolves keeps the slot stable
+            # — the move/combat flow re-invokes this worker once the fight ends.
+            if self._combat_active or worker.is_cancelled:
+                return
 
-        ensure_tiles_around_sync(pg, check_rad=4)
+            # Snapshot queue state so we only force a dialog check when generation
+            # actually produced new dialogs (avoids needless refresh churn on the
+            # common no-op path where all nearby tiles already exist).
+            had_dialogs_before = bool(getattr(pg, "info_dialogs", None)) or bool(
+                getattr(pg, "option_dialog", None)
+            )
+            had_fight_before = bool(getattr(pg, "pending_fight_mob_id", None))
 
-        has_dialogs_after = bool(getattr(pg, "info_dialogs", None)) or bool(
-            getattr(pg, "option_dialog", None)
-        )
+            # ensure_tiles_around_sync returns True only if THIS pass acquired
+            # the module lock and actually ran generation (False if it skipped
+            # because another pass held the lock).
+            ran_generation = ensure_tiles_around_sync(pg, check_rad=4)
 
-        if has_dialogs_after and not had_dialogs_before:
-            # New dialogs were queued during generation — surface them on the
-            # compositor thread (widget access must not happen off-thread).
-            self.app.call_from_thread(self._check_dialogs_and_refresh)
+            has_dialogs_after = bool(getattr(pg, "info_dialogs", None)) or bool(
+                getattr(pg, "option_dialog", None)
+            )
+            has_fight_after = bool(getattr(pg, "pending_fight_mob_id", None))
+
+            new_dialogs = has_dialogs_after and not had_dialogs_before
+            new_fight = has_fight_after and not had_fight_before
+
+            # Surface newly-queued dialogs/combat when this pass produced them.
+            # Normally a cancelled pass suppresses its callback (a newer pass
+            # will surface state). But if THIS pass owned the lock and actually
+            # created the state, we must surface it even when cancelled — the
+            # replacement pass will skip on the lock and emit nothing, so the
+            # dialogs/fight would otherwise stay queued indefinitely.
+            should_surface = (new_dialogs or new_fight) and (
+                not worker.is_cancelled or ran_generation
+            )
+            if should_surface:
+                # New dialogs and/or a pending fight were queued during
+                # generation — surface them on the compositor thread (widget
+                # access must not happen off-thread). Defer any combat until the
+                # dialog chain clears so the player can read narrative first.
+                self.app.call_from_thread(
+                    lambda: self._check_dialogs_and_refresh(
+                        on_cleared=self._check_pending_combat
+                    )
+                )
+        finally:
+            # Retire this pass's busy-watch registration unconditionally. The
+            # reference-counted watcher keeps loading state up while any other
+            # pass is still running, so a skipped/cancelled pass retiring its own
+            # registration won't hide an older pass's overlay prematurely.
+            self.app.call_from_thread(self._stop_busy_watch)
 
     @work(thread=True, exclusive=True)
     def _refresh_all(self) -> None:
@@ -618,12 +1050,26 @@ class OverworldScreen(BaseScreen):
         pg = self._player_game()
         if pg is None:
             return
-        self._ensure_tiles_worker(pg)
+
+        self._update_overlay()
+
+        # A save/resume can already carry pending_fight_mob_id. Resolve that
+        # fight BEFORE starting tile generation: otherwise generation could run
+        # concurrently with the boss-win cleanup and mutate/clear the shared
+        # pending-fight slot. Only kick off generation once the startup dialog
+        # chain (and any saved fight) has been fully handled.
+        def _after_startup_dialogs() -> None:
+            if getattr(pg, "pending_fight_mob_id", None):
+                # _check_pending_combat starts the fight; tile generation is
+                # resumed from the combat-done flow, keeping the slot stable.
+                self._check_pending_combat()
+            else:
+                self._begin_tile_generation(pg)
+
         # Use _check_dialogs_and_refresh so any info_dialogs or option_dialog
         # set by task acquire events during world setup are shown immediately
         # rather than being silently skipped on the first render.
-        self._check_dialogs_and_refresh()
-        self._update_overlay()
+        self._check_dialogs_and_refresh(on_cleared=_after_startup_dialogs)
 
     def _player_game(self) -> Any:
         from tui.services.game_state import get_active_game  # noqa: PLC0415

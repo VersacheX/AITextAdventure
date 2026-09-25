@@ -101,7 +101,7 @@ def try_move(key: str, pg: Any) -> Tuple[bool, str]:
     return moved, "" if moved else "move was blocked"
 
 
-def ensure_tiles_around_sync(pg: Any, check_rad: int = 4) -> None:
+def ensure_tiles_around_sync(pg: Any, check_rad: int = 4) -> bool:
     """Synchronously ensure tiles within `check_rad` of the player exist.
 
     Call this from a `@work(thread=True)` worker — it may generate a new
@@ -110,19 +110,24 @@ def ensure_tiles_around_sync(pg: Any, check_rad: int = 4) -> None:
     Serialized with a module-level lock: only one generation pass runs at a
     time even if the UI dispatches several in quick succession, preventing
     concurrent mutation of pg.world_tiles / pg.regions.
+
+    Returns True if this call actually owned the lock and ran generation, or
+    False if it was skipped because another pass already held the lock. Callers
+    use this to avoid tearing down loading state that a still-running pass owns.
     """
     # If another pass is already generating, skip this one — the running pass
     # already covers (or will re-run for) the current radius. Using a
     # non-blocking acquire avoids piling up queued passes behind a slow region
     # build.
     if not _ENSURE_TILES_LOCK.acquire(blocking=False):
-        return
+        return False
     try:
         pg.ensure_tiles_around(check_rad=check_rad, max_attempts=1)
     except Exception:
         pass  # never crash the worker; the map will just show '?' tiles
     finally:
         _ENSURE_TILES_LOCK.release()
+    return True
 def check_random_encounter(pg: Any, active_area: Any) -> bool:
     """Count down the encounter timer and return True if a random encounter
     should fire.  Mirrors the legacy game-loop check:

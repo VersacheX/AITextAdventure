@@ -61,6 +61,11 @@ class PlayerGame:
 		# cleared by the TUI after the player picks an option (which awards the chosen task).
 		self.option_dialog: Optional["OptionDialog"] = None
 		self.pending_fight_mob_id: str = None # If set, indicates a pending fight with the given mob id
+		# Set True while a long-running task event (dungeon build, intro-story
+		# completion, ocean removal) runs so the TUI can show a loading overlay
+		# and block input until the shared-state mutation finishes.
+		self.is_busy: bool = False
+		self._busy_depth: int = 0
 		self.chapter_task_waiting: bool = False
 		self.pending_character: str = None # npc/character id of a pending character to be added to the party
 		self.twisted_character: str = None # npc/character id of a twisted character which was changed when joingin from pending_character state
@@ -1396,6 +1401,18 @@ class PlayerGame:
 				return (region, region)
 		return (None, None)
 
+	def __getstate__(self) -> dict:
+		"""Exclude transient runtime flags from the pickled save.
+
+		`is_busy` only makes sense while a live worker is running a
+		long-running task event; persisting it risks loading a save that
+		permanently blocks input (no worker exists to clear it).
+		"""
+		state = dict(self.__dict__)
+		state.pop('is_busy', None)
+		state.pop('_busy_depth', None)
+		return state
+
 	def __setstate__(self, state: dict) -> None:
 		"""Ensure instances unpickled from older saves get new attributes.
 
@@ -1451,6 +1468,14 @@ class PlayerGame:
 		for k, v in defaults.items():
 			if not hasattr(self, k):
 				setattr(self, k, v)
+
+		# is_busy is a transient execution flag (set only while a live worker
+		# runs a long-running task event). It must never survive a save/load —
+		# otherwise a copy saved mid-event would load with no worker left to
+		# clear it, permanently blocking input. Always force it False on load.
+		self.is_busy = False
+		# Nested long-running-event depth counter — also transient.
+		self._busy_depth = 0
 
 	def get_active_dungeon(self) -> Optional["Dungeon"]:
 		"""Return the dungeon the player is currently inside, or None.

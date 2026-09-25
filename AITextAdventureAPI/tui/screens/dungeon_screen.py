@@ -35,6 +35,7 @@ from textual.widgets import Button, Footer, Static
 from tui.screens.base_screen import BaseScreen
 from tui.screens.combat_screen import CombatScreen
 from tui.screens.message_dialog import MessageDialog
+from tui.screens.loading_dialog import LoadingDialog
 from tui.services.dungeon_renderer import build_header, build_minimap_lines, build_stats_lines
 from tui.services.dungeon_encounter_service import (
     get_boss_encounter_hostiles,
@@ -116,6 +117,9 @@ class DungeonScreen(BaseScreen):
         super().__init__()
         self._dungeon = dungeon
         self._pg = pg
+        # True while a CombatScreen is on-screen; prevents stacking a second
+        # combat push if an encounter re-check fires before the first resolves.
+        self._combat_active = False
 
     # ── lifecycle ─────────────────────────────────────────────────────────
 
@@ -161,11 +165,13 @@ class DungeonScreen(BaseScreen):
         self._handle_move(0, 0, 1)
 
     def action_open_inventory(self) -> None:
+        if self._blocked():
+            return
         self.app.push_screen("inventory")
 
     def action_interact(self) -> None:
         """Space: interact with entities on or adjacent to the player's tile."""
-        if self._dialog_visible():
+        if self._blocked():
             return
         self._interact()
 
@@ -176,12 +182,18 @@ class DungeonScreen(BaseScreen):
 
     def action_go_back(self) -> None:
         """Escape: leave the dungeon and return to the overworld."""
+        # Block navigation while a dialog or a long-running task worker (NPC
+        # meet / boss completion via run_blocking_with_loading) is active — its
+        # on_done would otherwise call _check_encounters / push combat onto this
+        # now-inactive screen.
+        if self._blocked():
+            return
         self.dismiss(True)
 
     # ── movement ──────────────────────────────────────────────────────────
 
     def _handle_move(self, dx: int, dy: int, dz: int) -> None:
-        if self._dialog_visible():
+        if self._blocked():
             return
 
         dungeon = self._dungeon
@@ -213,11 +225,12 @@ class DungeonScreen(BaseScreen):
             self.dismiss(True)
             return
 
-        # check for pending dialogs from the move
-        self._check_dialogs_and_refresh()
-
-        # encounter checks (boss first, then random countdown)
-        self._check_encounters(after_action=True)
+        # Wait for any pending dialogs from the move to be dismissed before
+        # checking encounters, so a boss ambush on a tile can't start combat
+        # while the message dialog is still open/being read.
+        self._check_dialogs_and_refresh(
+            on_cleared=lambda: self._check_encounters(after_action=True)
+        )
 
     # ── interaction ───────────────────────────────────────────────────────
 
@@ -232,6 +245,7 @@ class DungeonScreen(BaseScreen):
 
         px, py, pz = player_pos
         any_interacted = False
+        met_npc_ids: List[str] = []
 
         for ddx, ddy in ((0, 0), (1, 0), (-1, 0), (0, 1), (0, -1)):
             tx, ty, tz = px + ddx, py + ddy, pz
@@ -243,7 +257,7 @@ class DungeonScreen(BaseScreen):
                 if isinstance(ent, dict) and ent.get("type") == "npc":
                     npc_id = ent.get("npc_id")
                     if npc_id:
-                        self._pg.check_meet_npc_dungeon(npc_id)
+                        met_npc_ids.append(npc_id)
                     any_interacted = True
 
                 elif isinstance(ent, ItemType):
@@ -262,9 +276,23 @@ class DungeonScreen(BaseScreen):
             # events set a pending fight via begin_combat. We must wait for the
             # dialog chain to be dismissed before starting combat so the player
             # can read it first, so defer the encounter check until dialogs clear.
-            self._check_dialogs_and_refresh(
-                on_cleared=lambda: self._check_encounters(after_action=False)
-            )
+            def _after_meet() -> None:
+                self._check_dialogs_and_refresh(
+                    on_cleared=lambda: self._check_encounters(after_action=False)
+                )
+
+            if met_npc_ids:
+                # check_meet_npc_dungeon → task completion executes events inline
+                # and can fire long-running events (create_dungeon, etc.). Run it
+                # through the loading worker so the dungeon compositor stays
+                # responsive and input is blocked during the mutation.
+                def _meet() -> None:
+                    for npc_id in met_npc_ids:
+                        self._pg.check_meet_npc_dungeon(npc_id)
+
+                self.run_blocking_with_loading(_meet, on_done=_after_meet)
+            else:
+                _after_meet()
         else:
             self.notify("Nothing to interact with here.", timeout=2)
 
@@ -294,33 +322,61 @@ class DungeonScreen(BaseScreen):
         """Push the combat screen with the prepared hostile list."""
         pg = self._pg
 
+        # Guard against stacking a second CombatScreen if an encounter re-check
+        # fires while a battle is already on-screen.
+        if self._combat_active:
+            return
+        self._combat_active = True
+
         def _on_combat_done(players_won: bool | None) -> None:
+            self._combat_active = False
             if not players_won:
                 self._show_dialog(["You have been defeated..."], "Game Over")
                 self.set_timer(2.0, lambda: self.dismiss(False))
                 return
 
+            # A post-fight task completion can award another defeat task whose
+            # acquire events set a fresh pending_fight_mob_id (back-to-back
+            # fights). Re-check encounters once these dialogs are dismissed so
+            # the next fight starts only after the player reads the dialog.
+            def _after_completion() -> None:
+                self._check_dialogs_and_refresh(
+                    on_cleared=lambda: self._check_encounters(after_action=False)
+                )
+
             if is_boss:
                 mob_id = getattr(pg, "pending_fight_mob_id", None)
                 if mob_id:
-                    pg.check_complete_boss_mob(mob_id)
+                    # check_complete_boss_mob → complete_task executes every
+                    # completion event inline; a boss whose completion fires
+                    # create_dungeon/complete_intro_story/remove_ocean would
+                    # freeze the dungeon compositor. Run it through the loading
+                    # worker so a LoadingDialog shows and input is blocked for
+                    # its duration, then surface dialogs/encounters afterward.
+                    self.run_blocking_with_loading(
+                        lambda: pg.check_complete_boss_mob(mob_id),
+                        on_done=_after_completion,
+                    )
+                    return
 
-            self._check_dialogs_and_refresh()
+            _after_completion()
 
         self.app.push_screen(CombatScreen(pg, hostiles), _on_combat_done)
 
     # ── dialog helpers ────────────────────────────────────────────────────
 
-    def _check_dialogs_and_refresh(self) -> None:
+    def _check_dialogs_and_refresh(self, on_cleared: Optional[Callable[[], None]] = None) -> None:
         pg = self._pg
         if hasattr(pg, "info_dialogs") and pg.info_dialogs:
             messages: List[str] = []
             while pg.info_dialogs:
                 messages.append(pg.pop_dialog())
             if messages:
-                self._show_dialog(messages, "Message")
+                self._show_dialog(messages, "Message", on_cleared=on_cleared)
                 return
         self._refresh_all()
+        if on_cleared is not None:
+            on_cleared()
 
     def _show_dialog(
         self,
@@ -363,6 +419,70 @@ class DungeonScreen(BaseScreen):
             return True
         except Exception:
             return False
+
+    def _blocked(self) -> bool:
+        """Single guard for input handlers: a dialog is open OR a long-running
+        task event (dungeon build, etc.) is mutating shared state."""
+        return (
+            self._dialog_visible()
+            or self._loading_visible()
+            or bool(getattr(self._pg, "is_busy", False))
+        )
+
+    # ── loading overlay ───────────────────────────────────────────────────
+
+    def _loading_visible(self) -> bool:
+        try:
+            self.query_one("#map-panel").query_one(LoadingDialog)
+            return True
+        except Exception:
+            return False
+
+    def _show_loading(self, message: str = "Loading...") -> None:
+        if self._loading_visible():
+            return
+        try:
+            self.query_one("#map-panel").mount(LoadingDialog(message))
+        except Exception:
+            pass
+
+    def _hide_loading(self) -> None:
+        try:
+            self.query_one("#map-panel").query_one(LoadingDialog).remove()
+        except Exception:
+            pass
+
+    def run_blocking_with_loading(
+        self,
+        fn: Callable[[], None],
+        on_done: Optional[Callable[[], None]] = None,
+        message: str = "Loading...",
+    ) -> None:
+        """Run a blocking task chain off the compositor thread with a loading
+        overlay so long-running task events (dungeon build, intro-story
+        completion, ocean removal) fired by e.g. boss completion can't freeze
+        the dungeon compositor. `fn` runs on a worker thread; `on_done` runs
+        back on the compositor thread once it finishes.
+        """
+        self._show_loading(message)
+
+        def _runner() -> None:
+            succeeded = False
+            try:
+                fn()
+                succeeded = True
+            finally:
+                def _finish(ok: bool = succeeded) -> None:
+                    # Always clear the loading overlay, but only continue into
+                    # encounter/dialog handling when fn() actually succeeded — a
+                    # failed task completion must not advance with partially-
+                    # mutated state.
+                    self._hide_loading()
+                    if ok and on_done is not None:
+                        on_done()
+                self.app.call_from_thread(_finish)
+
+        self.run_worker(_runner, thread=True, group="dungeon_blocking", exclusive=False)
 
     def _remove_dialog(self) -> None:
         try:

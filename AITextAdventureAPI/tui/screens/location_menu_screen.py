@@ -255,11 +255,25 @@ class LocationOverlay(Widget):
 
     def _do_npc(self, action: LocationAction) -> None:
         npc_id = (action.data or {}).get("npc_id")
-        try:
-            self._pg.handle_npc_interaction_at_player_location(npc_id)
-        except Exception:
-            pass
-        self._on_action(True)
+
+        def _interact() -> None:
+            try:
+                self._pg.handle_npc_interaction_at_player_location(npc_id)
+            except Exception:
+                pass
+
+        # handle_npc_interaction_at_player_location can fire long-running task
+        # events (create_dungeon, complete_intro_story, remove_ocean) that would
+        # freeze Textual's compositor if run inline. Route it through the parent
+        # screen's loading worker so a LoadingDialog shows and input is blocked
+        # for its duration, then continue on the compositor thread.
+        screen = self.screen
+        runner = getattr(screen, "run_blocking_with_loading", None)
+        if callable(runner):
+            runner(_interact, on_done=lambda: self._on_action(True))
+        else:
+            _interact()
+            self._on_action(True)
 
     def _do_shop(self, action: LocationAction) -> None:
         from tui.screens.shop_overlay import ShopOverlay  # noqa: PLC0415
