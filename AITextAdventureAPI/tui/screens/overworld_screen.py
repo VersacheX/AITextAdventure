@@ -348,13 +348,30 @@ class OverworldScreen(BaseScreen):
         self._run_deferred_on_cleared()
 
     def _run_deferred_on_cleared(self) -> None:
-        """Fire any callbacks queued while a dialog chain was already active."""
+        """Fire callbacks queued while a dialog chain was already active.
+
+        A callback can itself mount a new dialog (e.g. _check_pending_combat
+        shows the encounter dialog). If it does, we must STOP draining and keep
+        the remaining callbacks queued — otherwise a following callback would
+        remove/replace the just-mounted dialog before its own on_cleared runs,
+        stranding the pending fight or losing the first callback. The retained
+        callbacks re-run when the active dialog clears and re-enters
+        _check_dialogs_and_refresh → _run_deferred_on_cleared.
+        """
         queued = self._deferred_on_cleared
         if not queued:
             return
+        # Reset the queue; process one at a time so a callback that mounts a
+        # dialog can pause draining with the rest preserved.
         self._deferred_on_cleared = []
-        for cb in queued:
+        while queued:
+            cb = queued.pop(0)
             cb()
+            if self._dialog_visible():
+                # This callback opened a dialog — preserve the not-yet-run
+                # callbacks (prepended) for the next dialog-chain re-entry.
+                self._deferred_on_cleared = queued + self._deferred_on_cleared
+                return
 
     def _show_option_dialog(self, option_dialog: dict, on_cleared: "Callable[[], None] | None" = None) -> None:
         """Mount an OptionDialogWidget for the pending choice prompt.
