@@ -606,6 +606,57 @@ NPC_DIALOG = [
 			"The threads of fate are weaving a complex tapestry.",
 			"Perhaps it is another of our friends from our own universe."
 		]
+	},
+	{
+		'npc_id': 'diego',
+		'dialog_id': 'diego_ch2_monster_hunter',
+		'dialog': [
+			"So the rumors are true. You went toe to toe with one of those things crawling out of the ruins and walked away.",
+			"I've seen a lot of hardened killers in my time. Most of them don't come back from a hunt like that.",
+			"Word travels fast in my circles. People are already asking who put that beast in the ground.",
+			"Take this. Consider it a mark of the trade — you're a Monster Hunter now, whether you asked for it or not.",
+			"Keep your ears open. Things are only going to get uglier from here, and I know how to find the work that pays."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_ch2_monster_hunter',
+		'dialog': [
+			"A title! Oh, I do love a good title. Moxie the Monster Hunter — no, no, all of us, obviously.",
+			"Ooooh, does this mean more delicious beasties to poke and prod? Yes please!"
+		]
+	},
+	{
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch2_monster_hunter',
+		'dialog': [
+			"To hunt these creatures is a heavy burden, not a trophy.",
+			"Still... if it protects the innocent from what festers in those ruins, then it is a duty I will bear gladly."
+		]
+	},
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch2_monster_hunter',
+		'dialog': [
+			"Monster Hunter, huh? Now that's a title I can respect.",
+			"Point me at the next one, Diego. I'm just getting warmed up."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch2_monster_hunter',
+		'dialog': [
+			"A hunter earns the name in the field, not from a stranger's hand.",
+			"But the work is honest. I'll take it."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch2_monster_hunter',
+		'dialog': [
+			"So we kill something horrifying and get a shiny badge for it. Efficient.",
+			"Fine. If there's a broker keeping tabs on the payouts, I want to see the numbers."
+		]
 	}
 ]
 
@@ -805,12 +856,6 @@ TASKS = [
 		'to_id': 'leera',
 		'task_acquire_events': [],
 		'task_complete_events': [
-			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'monster_hunter'
-				}
-			},
 			{
 				'event_type': 'initiate_dialog',
 				'params': {
@@ -1490,10 +1535,74 @@ TASKS = [
 				'params': {
 					'task_id': 'main_story_ch_2_return_to_tess_with_grift_stone'
 				}
+			},
+			{
+				'event_type': 'award_task',
+				'params': {
+					'task_id': 'monster_hunter'
+				}
 			}
 		]
 	},
-    # Task 9 - return to tess
+	# Monster Hunter - meet Diego
+	{
+		'task_id': 'monster_hunter',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'diego',
+		'task_acquire_events': [],
+		'task_complete_events': [
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'monster_hunter'
+				}
+			},
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': 'diego',
+					'dialog_id': 'diego_ch2_monster_hunter'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch2_monster_hunter'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch2_monster_hunter'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch2_monster_hunter'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch2_monster_hunter'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch2_monster_hunter'
+				}
+			}
+		]
+	},
+	# Task 9 - return to tess
 	{
 		'task_id': 'main_story_ch_2_return_to_tess_with_grift_stone',
 		'type': 'deliver',
