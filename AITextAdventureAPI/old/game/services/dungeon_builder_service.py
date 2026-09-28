@@ -60,16 +60,6 @@ class DungeonBuilder:
         # global unique room id counter
         self.room_id_counter: int =0
 
-        # Persistent cache of positions that are known to be illegal impassable
-        # placements. Because converting tiles to impassable only ever *removes*
-        # connectivity, a position that cuts off a required target (a room or an
-        # NPC) under the current wall layout will remain blocking after any
-        # further walls are added. So once we prove a position is illegal we can
-        # skip its expensive connectivity BFS on every subsequent evaluation.
-        # A dict is used (rather than a set) so callers that care *why* a spot is
-        # invalid — e.g. object placement that varies by room type — can store a
-        # reason/context instead of a bare bool.
-        self.invalid_impassable_positions: Dict[Tuple[int, int, int], Any] = {}
 
 
     # ---------------------------
@@ -124,18 +114,24 @@ class DungeonBuilder:
                     neighbor = self._get_room_by_id(neighbor_id)
                     self._carve_corridor(dungeon, room, neighbor, z)
 
-            # Mark entrance tile for floor0 (center of first room)
+            # Mark entrance for floor0: label the entire first room as the
+            # ENTRANCE (mirrors how FINAL_CHAMBER / TREASURE_ROOM cover a whole
+            # room), and put the player on the room center. The single center
+            # tile at origin is reserved for the player, so entities placed at
+            # the 'entrance' location have the rest of the room to occupy.
             if z ==0 and self.rooms:
                 start_room = self.rooms[0]
                 sx = start_room['x'] + start_room['w'] //2
                 sy = start_room['y'] + start_room['h'] //2
-                start_tile = dungeon.get_tile(sx, sy, z)
-                if start_tile:
-                    start_tile.tile_type = DungeonTileType.ENTRANCE
-                    try:
-                        dungeon.set_player_pos(sx, sy, z)
-                    except Exception:
-                        pass
+                for yy in range(start_room['y'], start_room['y'] + start_room['h']):
+                    for xx in range(start_room['x'], start_room['x'] + start_room['w']):
+                        t = dungeon.get_tile(xx, yy, z)
+                        if t and t.passable:
+                            t.tile_type = DungeonTileType.ENTRANCE
+                try:
+                    dungeon.set_player_pos(sx, sy, z)
+                except Exception:
+                    pass
             
             # After carving rooms and corridors for this floor, choose an exit stair location
             # pick the room farthest from this floor's start (self.rooms[0]) and mark its center as stair up
@@ -244,29 +240,28 @@ class DungeonBuilder:
         # (8) loot � hook for later
 
         #9. replace passable tiles with impassable tiles to "add rocks"
+        # Collect the connectivity targets a single time across the whole
+        # dungeon (all floors' rooms + all placed entities) so obstacle
+        # placement can never disconnect an earlier floor's room or entrance.
+        required_targets = self._collect_required_targets(dungeon)
         for z in range(self.floor_count):
-            self._add_impassables(dungeon,z)
+            self._add_impassables(dungeon, z, required_targets)
 
         return dungeon
 
-    def _add_impassables(self, dungeon: Dungeon, z: int) -> None:
+    def _add_impassables(self, dungeon: Dungeon, z: int, required_targets: List[Tuple[int, int, int]]) -> None:
         """
         Randomly replaces some passable tiles with impassable tiles to add obstacles.
         """
         impassable_count =0
         not_passable =0
-        # Precompute the connectivity targets (room goal tiles + npc tiles) a
-        # single time for this floor instead of rebuilding them inside every
-        # per-tile check. These only shrink in reachability as walls are added,
-        # so they are safe to reuse across all candidates on this floor.
-        required_targets = self._collect_required_targets(dungeon)
         for (x, y, tz), tile in dungeon.tiles.items():
             if tz != z:
                 #print(f'Skipping tile at z={tz}, looking for z={z}')
                 continue
             if tile.passable:
-                # Roll the impassable chance FIRST. The blocking-path checks below
-                # each run a full BFS sweep over the dungeon, so we must only pay
+                # Roll the impassable chance FIRST. The blocking-path check below
+                # runs a full BFS sweep over the dungeon, so we must only pay
                 # that cost for the small fraction of tiles we actually intend to
                 # convert — otherwise build time explodes on large dungeons.
                 if self.rng.random() >= dungeon.impassable_chance:
@@ -275,15 +270,9 @@ class DungeonBuilder:
                 # ensure impassable tile placement is not on origin
                 if not self.not_origin(pos):
                     continue
-                # Skip positions already proven to block a required path. Adding
-                # more walls can never *restore* connectivity, so a previously
-                # invalid spot stays invalid — no need to re-run its BFS.
-                if pos in self.invalid_impassable_positions:
-                    continue
                 # Single BFS from origin with this tile blocked; verify every
                 # required target (room + npc) is still reachable.
                 if not self._not_blocking_required_targets(pos, dungeon, required_targets):
-                    self.invalid_impassable_positions[pos] = 'blocks_required_path'
                     continue
                 #print(f'Converting tile at ({x},{y},{z}) to impassable')
                 tile.passable = False
@@ -294,13 +283,13 @@ class DungeonBuilder:
 
     def _collect_required_targets(self, dungeon: Dungeon) -> List[Tuple[int, int, int]]:
         """Collect the set of tile coordinates that must remain reachable from
-        origin: one representative passable tile per room plus every tile that
-        currently holds an entity (NPC/item). Computed once per floor sweep.
+        origin: one representative passable tile per room (across every floor)
+        plus every tile that currently holds an entity (NPC/item).
         """
         targets: List[Tuple[int, int, int]] = []
         seen: set = set()
 
-        for room in self.rooms:
+        for room in self.all_rooms:
             cx = room['x'] + room.get('w', 1) // 2
             cy = room['y'] + room.get('h', 1) // 2
             cz = room.get('z', 0)
@@ -785,15 +774,17 @@ class DungeonBuilder:
             #input (f'Placing item spec: {item}')
             loc = item.get("location")
             item_id = item.get("id")
+            depth = item.get("depth")  # optional 0-100 depth percentage
             item = instantiate_item_from_id(item_id)
-            dungeon.place_entity_at_location(item, DungeonTileType(loc))
+            dungeon.place_entity_at_location(item, DungeonTileType(loc), depth=depth)
 
         #npcs can block items... but may not be placed on the same tile
         for npc in self.npcs_spec:
             loc = npc.get("location")
             npc_id = npc.get("id")
+            depth = npc.get("depth")  # optional 0-100 depth percentage
             entity = {'type': 'npc', 'npc_id': npc_id}
-            dungeon.place_entity_at_location(entity, DungeonTileType(loc))
+            dungeon.place_entity_at_location(entity, DungeonTileType(loc), depth=depth)
 
 # ---------------------------
 # Convenience entrypoint

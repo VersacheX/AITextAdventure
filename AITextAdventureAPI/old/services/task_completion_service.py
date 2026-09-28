@@ -381,6 +381,12 @@ def create_dungeon(params: Dict[str, Any], player_game, parent_task):
 	from game.services.dungeon_builder_service import build_dungeon
 	dungeon = build_dungeon(dungeon_seed)
 
+	# Surface any non-fatal generation warnings (e.g. an NPC/item that could not
+	# be placed) to the in-game debug dialog instead of blocking on stdin.
+	if dungeon is not None and getattr(dungeon, 'build_warnings', None):
+		for warning in dungeon.build_warnings:
+			_report_event_error(player_game, f'{dungeon_id}: {warning}')
+
 	task_region = _get_location_region_area_from_params(params, parent_task, player_game)
 
 	if player_game is not None and dungeon is not None:
