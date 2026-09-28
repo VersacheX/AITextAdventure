@@ -274,8 +274,11 @@ class PlayerGame:
 
 	def add_dungeon_standing_text(self, dungeon):
 		"""" add dungeon standing text to info dialogs"""
-		if dungeon.locked_text and len(dungeon.locked_text) > 0:
-			for line in dungeon.locked_text:
+		locked_text = dungeon.locked_text
+		if isinstance(locked_text, str):
+			locked_text = [locked_text]
+		if locked_text:
+			for line in locked_text:
 				self.add_info_dialog_line(dungeon.display_name, line)
 
 	def acquire_task(self, task: Task) -> None:
