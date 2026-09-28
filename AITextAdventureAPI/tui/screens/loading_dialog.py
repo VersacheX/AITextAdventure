@@ -11,11 +11,11 @@ Unlike MessageDialog, this widget:
 from __future__ import annotations
 
 from textual.app import ComposeResult
-from textual.containers import Center
+from textual.containers import Container
 from textual.widgets import Static
 
 
-class LoadingDialog(Static):
+class LoadingDialog(Container):
     """Centered "Loading..." indicator mounted inside #map-panel."""
 
     DEFAULT_CSS = """
@@ -26,23 +26,22 @@ class LoadingDialog(Static):
         align: center middle;
         background: $background 60%;
     }
-    LoadingDialog > Center {
+    LoadingDialog .loading-box {
         width: auto;
         height: auto;
-    }
-    LoadingDialog .loading-box {
         background: $panel;
         border: round $accent;
         padding: 1 3;
         color: $text;
         text-style: bold;
+        text-align: center;
     }
     """
 
     def __init__(self, message: str = "Loading...") -> None:
         super().__init__()
-        self._message = message
+        self._message = message or "Loading..."
 
     def compose(self) -> ComposeResult:
-        with Center():
-            yield Static(self._message, classes="loading-box")
+        yield Static(self._message, classes="loading-box")
+

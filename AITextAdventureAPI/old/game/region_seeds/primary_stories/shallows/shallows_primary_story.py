@@ -536,9 +536,7 @@ TASKS = [
                     'npc_id': 'ripple',
                     'location': 'region_bar'
                 }
-            }
-        ],
-        'task_complete_events': [            
+            },                    
             {
                 'event_type': 'set_npc_standing_text',
                 'params': {
@@ -549,7 +547,9 @@ TASKS = [
                         "If you seek guidance, I am here."
                     ]
                 }
-            },
+            }
+        ],
+        'task_complete_events': [    
             {
                 'event_type': 'award_task',
                 'params': {

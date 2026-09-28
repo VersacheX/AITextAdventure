@@ -267,15 +267,18 @@ class PlayerGame:
 		if dungeon:
 			dungeon.set_locked(False)
 
-	def set_dungeon_locked_text_by_id(self, dungeon_id: str, locked_text: str):
+	def set_dungeon_locked_text_by_id(self, dungeon_id: str, locked_text) -> None:
 		dungeon = next((d for d in self.dungeons if d.id == dungeon_id), None)
 		if dungeon:
-			dungeon.locked_text = locked_text
+			dungeon.set_locked_text(locked_text)
 
 	def add_dungeon_standing_text(self, dungeon):
 		"""" add dungeon standing text to info dialogs"""
-		if dungeon.standing_text and len(dungeon.standing_text) > 0:
-			for line in dungeon.standing_text:
+		locked_text = dungeon.locked_text
+		if isinstance(locked_text, str):
+			locked_text = [locked_text]
+		if locked_text:
+			for line in locked_text:
 				self.add_info_dialog_line(dungeon.display_name, line)
 
 	def acquire_task(self, task: Task) -> None:

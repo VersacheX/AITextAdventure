@@ -90,8 +90,12 @@ class Dungeon:
     def is_locked(self) -> bool:
         return self.locked if hasattr( self, 'locked') else False
 
-    def set_locked_text(self, text_lines: List[str]) -> None:
-        self.locked_text = text_lines
+    def set_locked_text(self, text_lines) -> None:
+        # Normalize a scalar string into a one-element list so consumers can
+        # always iterate lines without accidentally iterating characters.
+        if isinstance(text_lines, str):
+            text_lines = [text_lines]
+        self.locked_text = list(text_lines) if text_lines else []
         
     def set_locked(self, locked: bool) -> None:
         self.locked = locked
