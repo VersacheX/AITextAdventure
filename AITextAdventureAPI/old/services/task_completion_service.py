@@ -38,6 +38,22 @@ def _exit_busy(player_game) -> None:
 			player_game.is_busy = False
 		player_game._busy_depth = depth
 
+
+def _report_event_error(player_game, message: str) -> None:
+	"""Surface a task-event error to the player instead of blocking on stdin.
+
+	These were previously `input(...)` calls that froze the background worker
+	thread (and its loading overlay) waiting for a keypress on a UI with no
+	console. Route the message to the in-game info dialog queue so it shows on
+	screen, and always print for logs.
+	"""
+	print(f'[task-event error] {message}')
+	try:
+		if player_game is not None:
+			player_game.add_info_dialog_line(None, f'[debug] {message}')
+	except Exception:
+		pass
+
 # NPCS = [
 #     {
 #         'npc_id': 'nia',
@@ -276,7 +292,7 @@ def _dispatch_task_event(ev_name, params, player_game, parent_task):
 		task_id = params.get('task_id')
 		return complete_task_in_player_game(task_id, player_game)
 
-	input( f'Unhandled task event type: {ev_name} with params: {params}' )
+	_report_event_error(player_game, f'Unhandled task event type: {ev_name} with params: {params}')
 
 	return None
 
@@ -373,7 +389,7 @@ def create_dungeon(params: Dict[str, Any], player_game, parent_task):
 		#input (f'Created dungeon: {dungeon.display_name} at position {dungeon.position}')
 		player_game.add_dungeon(dungeon)
 		return
-	input (f'is dungeon none? {dungeon is None}')
+	_report_event_error(player_game, f'create_dungeon failed (dungeon is None? {dungeon is None}) for id={dungeon_id}')
 
 def _get_location_region_area_from_params(params: Dict[str, Any], parent_task, player_game):
 	if params.get('location') is not None:
@@ -440,7 +456,7 @@ def add_npc_to_dungeon(params: Dict[str, Any], player_game, parent_task):
 	"""
 	dungeon_id = params.get('dungeon_id')
 	if not dungeon_id:
-		input(f'Dungeon ID not provided in params: {params}')
+		_report_event_error(player_game, f'Dungeon ID not provided in params: {params}')
 		return None
 	dungeon = None
 	for d in player_game.dungeons:
@@ -448,7 +464,7 @@ def add_npc_to_dungeon(params: Dict[str, Any], player_game, parent_task):
 			dungeon = d
 			break
 	if dungeon is None:
-		input (f'Dungeon to add npc not found: {dungeon_id}')
+		_report_event_error(player_game, f'Dungeon to add npc not found: {dungeon_id}')
 		return None
 	npc_id = params.get('npc_id')
 	if not npc_id:
@@ -495,24 +511,24 @@ def add_treasure_to_dungeon(params: Dict[str, Any], player_game, parent_task):
 			dungeon = d
 			break
 	if dungeon is None:
-		input (f'Dungeon to add treasure not found: {dungeon_id}')
+		_report_event_error(player_game, f'Dungeon to add treasure not found: {dungeon_id}')
 		return None
 	item_id = params.get('item_id')
 	if not item_id:
-		input ('Item ID not provided in params')
+		_report_event_error(player_game, 'Item ID not provided in params')
 		return None
 	# instantiate item
 	from game.objects.item import instantiate_item_from_id
 
 	item = instantiate_item_from_id(item_id)
 	if item is None:
-		input (f'Item to add to dungeon not found: {item_id}')
+		_report_event_error(player_game, f'Item to add to dungeon not found: {item_id}')
 		return None
 
 	location_type = params.get('location')  # e.g. 'final_chamber'
 	depth = params.get('depth')
 	if not location_type:
-		input(f'Location type not provided in params')
+		_report_event_error(player_game, 'Location type not provided in params')
 		return None
 	from game.objects.dungeon import DungeonTileType
 	dungeon.place_entity_at_location(item, DungeonTileType(location_type), depth=depth)
@@ -614,7 +630,7 @@ def show_npc_in_player_game(params, player_game, parent_task):
 				n.position = pos
 				return n
 	# not found
-	input (f'NPC to show not found: {npc_id}')
+	_report_event_error(player_game, f'NPC to show not found: {npc_id}')
 	return None
 
 def set_npc_standing_text(params, player_game):
@@ -663,7 +679,7 @@ def initiate_character_dialog_to_player_game(params, player_game):
 			player_game.add_character_dialog_lines(npc_id, lines)
 			return lines
 	# not found -> return None
-	input (f'Dialog not found for npc_id={npc_id}, dialog_id={dialog_id}')
+	_report_event_error(player_game, f'Dialog not found for npc_id={npc_id}, dialog_id={dialog_id}')
 	return None
 
 def initiate_option_dialog_to_player_game(params, player_game):
@@ -695,12 +711,11 @@ def initiate_option_dialog_to_player_game(params, player_game):
 			options.append((str(opt.get('text', '')), str(opt.get('task_id', ''))))
 
 	if not message or not options:
-		input(f'initiate_option_dialog: missing message or options in params: {params}')
+		_report_event_error(player_game, f'initiate_option_dialog: missing message or options in params: {params}')
 		return None
 
 	player_game.option_dialog = {'message': message, 'options': options}
 	return player_game.option_dialog
-6
 
 def initiate_dialog_to_player_game(params, player_game):
 	#print (f'Initiating dialog with params: {params}')
@@ -732,7 +747,7 @@ def initiate_dialog_to_player_game(params, player_game):
 
 			return lines
 	# not found -> return None
-	input (f'Dialog not found for npc_id={npc_id}, dialog_id={dialog_id}')
+	_report_event_error(player_game, f'Dialog not found for npc_id={npc_id}, dialog_id={dialog_id}')
 	return None
 
 def remove_money_from_player_game(amount: int, player_game):

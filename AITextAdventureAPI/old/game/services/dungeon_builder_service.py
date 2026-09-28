@@ -248,21 +248,30 @@ class DungeonBuilder:
                 #print(f'Skipping tile at z={tz}, looking for z={z}')
                 continue
             if tile.passable:
+                # Roll the impassable chance FIRST. The blocking-path checks below
+                # (not_blocking_connections / not_blocking_npc_paths) each run one
+                # or more full BFS sweeps over the dungeon, so we must only pay
+                # that cost for the small fraction of tiles we actually intend to
+                # convert — otherwise build time explodes on large dungeons.
+                if self.rng.random() >= dungeon.impassable_chance:
+                    continue
                 # ensure impassable tile placement is not on origin
                 # ensure not blocking all connections between rooms
                 # ensure not blocking origin to npc paths
                 not_orig = self.not_origin((x, y, z))
+                if not not_orig:
+                    continue
                 not_block_conn = self.not_blocking_connections((x, y, z), dungeon)
+                if not not_block_conn:
+                    continue
                 not_block_npc = self.not_blocking_npc_paths((x, y, z), dungeon)
-                #print(f'Checking tile at ({x},{y},{z}): not_orig={not_orig}, not_block_conn={not_block_conn}, not_block_npc={not_block_npc}')
-                if not_orig and not_block_conn and not_block_npc:
-                    #print(f'Considering tile at ({x},{y},{z}) for impassable conversion')
-                    if self.rng.random() < dungeon.impassable_chance: 
-                        #print(f'Converting tile at ({x},{y},{z}) to impassable')
-                        tile.passable = False
-                        impassable_count += 1
+                if not not_block_npc:
+                    continue
+                #print(f'Converting tile at ({x},{y},{z}) to impassable')
+                tile.passable = False
+                impassable_count += 1
             else:
-                not_passable += 1
+                not_passable +=1
         #input(f"Added {impassable_count} impassable tiles to dungeon {dungeon.id}... already not passable: {not_passable}")
 
     def not_origin(self, origin) -> bool:
@@ -271,12 +280,61 @@ class DungeonBuilder:
 
     def not_blocking_npc_paths(self, position: Tuple[int, int, int], dungeon: Dungeon) -> bool:
         # use dungeon_tile.entities for dungeon_tile in dungeon.tiles.items to find npc locations
-        # use path_exists_if_location_blocked
         npc_positions = [(tile.x, tile.y, tile.z) for tile in dungeon.tiles.values() if tile.entities and len(tile.entities) > 0]
-        for npc_x, npc_y, npc_z in npc_positions:
-            if not self.path_exists_if_location_blocked((npc_x, npc_y, npc_z), position, dungeon):
-                return False
-        return True
+        if not npc_positions:
+            return True
+        # Single BFS from origin (with `position` blocked) instead of one BFS
+        # per NPC: if every NPC tile is in the reachable set, none are cut off.
+        reachable = self._reachable_from_origin(position, dungeon)
+        return all(npc_pos in reachable for npc_pos in npc_positions)
+
+    def _reachable_from_origin(self, block_position: Optional[Tuple[int, int, int]], dungeon: Dungeon) -> set:
+        """Single BFS from origin (0,0,0) returning the set of reachable tile
+        coordinates when the tile at `block_position` is treated as impassable.
+
+        Movement is 4-directional on the same z-level plus stairs. The blocked
+        tile's passable flag is restored before returning so the dungeon is not
+        permanently mutated. Callers test target membership against the result,
+        which is far cheaper than running an independent BFS per target.
+        """
+        from collections import deque
+
+        origin = (0, 0, 0)
+        blocked_tile = dungeon.get_tile(*block_position) if block_position else None
+        orig_blocked_state = None
+        visited: set = set()
+        try:
+            if blocked_tile:
+                orig_blocked_state = blocked_tile.passable
+                blocked_tile.passable = False
+
+            start_tile = dungeon.get_tile(*origin)
+            if not start_tile or not start_tile.passable:
+                return visited
+
+            q = deque([origin])
+            visited.add(origin)
+            while q:
+                x, y, z = q.popleft()
+                neighbors = [(x + 1, y, z), (x - 1, y, z), (x, y + 1, z), (x, y - 1, z)]
+                cur_tile = dungeon.get_tile(x, y, z)
+                if cur_tile:
+                    if cur_tile.has_stairs_up:
+                        neighbors.append((x, y, z + 1))
+                    if cur_tile.has_stairs_down:
+                        neighbors.append((x, y, z - 1))
+                for npos in neighbors:
+                    if npos in visited:
+                        continue
+                    nt = dungeon.get_tile(*npos)
+                    if not nt or not nt.passable:
+                        continue
+                    visited.add(npos)
+                    q.append(npos)
+            return visited
+        finally:
+            if blocked_tile and orig_blocked_state is not None:
+                blocked_tile.passable = orig_blocked_state
 
     #start is always origin (0,0,0)
     def path_exists_if_location_blocked(self, goal: Tuple[int, int, int], block_position: Tuple[int, int, int], dungeon: Dungeon) -> bool:
@@ -298,7 +356,7 @@ class DungeonBuilder:
 
         goal_tile = dungeon.get_tile(*goal)
         if not goal_tile or not goal_tile.passable:
-            input(f'Goal tile at {goal} is not passable or does not exist: {goal_tile}')
+            #print(f'Goal tile at {goal} is not passable or does not exist: {goal_tile}')
             return False
 
         # Save original passable state for block_position (if any)
@@ -363,38 +421,33 @@ class DungeonBuilder:
                 blocked_tile.passable = orig_blocked_state
 
     def not_blocking_connections(self, position: Tuple[int, int, int], dungeon: Dungeon) -> bool:
-     # Use rooms which includes rooms across all floors
-     for room in self.rooms:
-         # pick a representative passable tile inside the room:
-         # prefer the center; if center isn't passable, fall back to any passable tile in the room.
-         room_goal = None
-         cx = room['x'] + room.get('w',1) //2
-         cy = room['y'] + room.get('h',1) //2
-         cz = room.get('z',0)
-         center_tile = dungeon.get_tile(cx, cy, cz)
-         if center_tile and center_tile.passable:
-             room_goal = (cx, cy, cz)
-         else:
-             # search for any passable tile inside room bounds
-             for yy in range(room['y'], room['y'] + room.get('h',1)):
-                 found = False
-                 for xx in range(room['x'], room['x'] + room.get('w',1)):
-                     t = dungeon.get_tile(xx, yy, cz)
-                     if t and t.passable:
-                         room_goal = (xx, yy, cz)
-                         found = True
-                         break
-                 if found:
-                     break
-
-         # if we couldn't find any floor tile for this room, treat it as not blocking (skip)
-         if room_goal is None:
-             # no passable tile inside room -> nothing to verify for this room
-             continue
-
-         if not self.path_exists_if_location_blocked(room_goal, position, dungeon):
-             return False
-     return True
+        # Single BFS from origin (with `position` blocked); then verify every
+        # room still has at least one reachable passable tile. This replaces the
+        # previous one-BFS-per-room approach.
+        reachable = self._reachable_from_origin(position, dungeon)
+        for room in self.rooms:
+            cx = room['x'] + room.get('w', 1) // 2
+            cy = room['y'] + room.get('h', 1) // 2
+            cz = room.get('z', 0)
+            center_tile = dungeon.get_tile(cx, cy, cz)
+            if center_tile and center_tile.passable:
+                room_goal = (cx, cy, cz)
+            else:
+                room_goal = None
+                for yy in range(room['y'], room['y'] + room.get('h', 1)):
+                    for xx in range(room['x'], room['x'] + room.get('w', 1)):
+                        t = dungeon.get_tile(xx, yy, cz)
+                        if t and t.passable:
+                            room_goal = (xx, yy, cz)
+                            break
+                    if room_goal is not None:
+                        break
+            # if we couldn't find any floor tile for this room, nothing to verify
+            if room_goal is None:
+                continue
+            if room_goal not in reachable:
+                return False
+        return True
 
 
 
