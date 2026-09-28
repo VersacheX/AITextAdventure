@@ -60,6 +60,18 @@ class DungeonBuilder:
         # global unique room id counter
         self.room_id_counter: int =0
 
+        # Persistent cache of positions that are known to be illegal impassable
+        # placements. Because converting tiles to impassable only ever *removes*
+        # connectivity, a position that cuts off a required target (a room or an
+        # NPC) under the current wall layout will remain blocking after any
+        # further walls are added. So once we prove a position is illegal we can
+        # skip its expensive connectivity BFS on every subsequent evaluation.
+        # A dict is used (rather than a set) so callers that care *why* a spot is
+        # invalid — e.g. object placement that varies by room type — can store a
+        # reason/context instead of a bare bool.
+        self.invalid_impassable_positions: Dict[Tuple[int, int, int], Any] = {}
+
+
     # ---------------------------
     # Public entrypoint
     # ---------------------------
@@ -243,29 +255,35 @@ class DungeonBuilder:
         """
         impassable_count =0
         not_passable =0
+        # Precompute the connectivity targets (room goal tiles + npc tiles) a
+        # single time for this floor instead of rebuilding them inside every
+        # per-tile check. These only shrink in reachability as walls are added,
+        # so they are safe to reuse across all candidates on this floor.
+        required_targets = self._collect_required_targets(dungeon)
         for (x, y, tz), tile in dungeon.tiles.items():
             if tz != z:
                 #print(f'Skipping tile at z={tz}, looking for z={z}')
                 continue
             if tile.passable:
                 # Roll the impassable chance FIRST. The blocking-path checks below
-                # (not_blocking_connections / not_blocking_npc_paths) each run one
-                # or more full BFS sweeps over the dungeon, so we must only pay
+                # each run a full BFS sweep over the dungeon, so we must only pay
                 # that cost for the small fraction of tiles we actually intend to
                 # convert — otherwise build time explodes on large dungeons.
                 if self.rng.random() >= dungeon.impassable_chance:
                     continue
+                pos = (x, y, z)
                 # ensure impassable tile placement is not on origin
-                # ensure not blocking all connections between rooms
-                # ensure not blocking origin to npc paths
-                not_orig = self.not_origin((x, y, z))
-                if not not_orig:
+                if not self.not_origin(pos):
                     continue
-                not_block_conn = self.not_blocking_connections((x, y, z), dungeon)
-                if not not_block_conn:
+                # Skip positions already proven to block a required path. Adding
+                # more walls can never *restore* connectivity, so a previously
+                # invalid spot stays invalid — no need to re-run its BFS.
+                if pos in self.invalid_impassable_positions:
                     continue
-                not_block_npc = self.not_blocking_npc_paths((x, y, z), dungeon)
-                if not not_block_npc:
+                # Single BFS from origin with this tile blocked; verify every
+                # required target (room + npc) is still reachable.
+                if not self._not_blocking_required_targets(pos, dungeon, required_targets):
+                    self.invalid_impassable_positions[pos] = 'blocks_required_path'
                     continue
                 #print(f'Converting tile at ({x},{y},{z}) to impassable')
                 tile.passable = False
@@ -273,6 +291,52 @@ class DungeonBuilder:
             else:
                 not_passable +=1
         #input(f"Added {impassable_count} impassable tiles to dungeon {dungeon.id}... already not passable: {not_passable}")
+
+    def _collect_required_targets(self, dungeon: Dungeon) -> List[Tuple[int, int, int]]:
+        """Collect the set of tile coordinates that must remain reachable from
+        origin: one representative passable tile per room plus every tile that
+        currently holds an entity (NPC/item). Computed once per floor sweep.
+        """
+        targets: List[Tuple[int, int, int]] = []
+        seen: set = set()
+
+        for room in self.rooms:
+            cx = room['x'] + room.get('w', 1) // 2
+            cy = room['y'] + room.get('h', 1) // 2
+            cz = room.get('z', 0)
+            center_tile = dungeon.get_tile(cx, cy, cz)
+            if center_tile and center_tile.passable:
+                room_goal = (cx, cy, cz)
+            else:
+                room_goal = None
+                for yy in range(room['y'], room['y'] + room.get('h', 1)):
+                    for xx in range(room['x'], room['x'] + room.get('w', 1)):
+                        t = dungeon.get_tile(xx, yy, cz)
+                        if t and t.passable:
+                            room_goal = (xx, yy, cz)
+                            break
+                    if room_goal is not None:
+                        break
+            if room_goal is not None and room_goal not in seen:
+                seen.add(room_goal)
+                targets.append(room_goal)
+
+        for tile in dungeon.tiles.values():
+            if tile.entities and len(tile.entities) > 0:
+                npc_pos = (tile.x, tile.y, tile.z)
+                if npc_pos not in seen:
+                    seen.add(npc_pos)
+                    targets.append(npc_pos)
+
+        return targets
+
+    def _not_blocking_required_targets(self, position: Tuple[int, int, int], dungeon: Dungeon, required_targets: List[Tuple[int, int, int]]) -> bool:
+        """Return True if blocking `position` still leaves every required target
+        reachable from origin. Runs a single BFS instead of one per target."""
+        if not required_targets:
+            return True
+        reachable = self._reachable_from_origin(position, dungeon)
+        return all(target in reachable for target in required_targets)
 
     def not_origin(self, origin) -> bool:
         x, y, z = origin
