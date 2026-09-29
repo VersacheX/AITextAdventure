@@ -70,6 +70,14 @@ class DungeonBuilder:
         dungeon = Dungeon(levels=self.floor_count,
                           dungeon_id=self.dungeon_id)
 
+        # Reset per-build state so a reused builder never carries impassable
+        # coordinates from a previously generated dungeon: those coordinates
+        # describe a different tile layout and would wrongly skip valid
+        # placements (or hit stale "blocks_required_path" entries).
+        self.invalid_impassable_positions = {}
+        self.all_rooms = []
+        self.room_id_counter = 0
+
         dungeon.display_name = self.display_name
         dungeon.open_area_tile = self.open_area_tile
         dungeon.impassable_tile = self.impassable_tile

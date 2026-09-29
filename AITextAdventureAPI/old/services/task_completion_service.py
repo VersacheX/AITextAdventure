@@ -482,7 +482,10 @@ def add_npc_to_dungeon(params: Dict[str, Any], player_game, parent_task):
 	depth = params.get('depth')           # optional 0-100 depth percentage
 	entity = {'type': 'npc', 'npc_id': npc_id}
 	from game.objects.dungeon import DungeonTileType
-	dungeon.place_entity_at_location(entity, DungeonTileType(location), depth=depth)
+	placed = dungeon.place_entity_at_location(entity, DungeonTileType(location), depth=depth)
+	if not placed:
+		_report_event_error(player_game, f'Failed to place npc {npc_id} at location {location} in dungeon {dungeon_id}')
+		return None
 
 
 
@@ -537,7 +540,10 @@ def add_treasure_to_dungeon(params: Dict[str, Any], player_game, parent_task):
 		_report_event_error(player_game, 'Location type not provided in params')
 		return None
 	from game.objects.dungeon import DungeonTileType
-	dungeon.place_entity_at_location(item, DungeonTileType(location_type), depth=depth)
+	placed = dungeon.place_entity_at_location(item, DungeonTileType(location_type), depth=depth)
+	if not placed:
+		_report_event_error(player_game, f'Failed to place treasure {item_id} at location {location_type} in dungeon {dungeon_id}')
+		return None
 	return item
 
 def create_combat_scenario(params: Dict[str, Any], player_game, parent_task):

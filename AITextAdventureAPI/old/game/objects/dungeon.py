@@ -91,6 +91,15 @@ class Dungeon:
         # blocking the worker thread on stdin.
         self.build_warnings: List[str] = []
 
+    def __setstate__(self, state: Dict[str, Any]) -> None:
+        # Dungeons pickled before ``build_warnings`` existed never ran __init__,
+        # so restore the instance dict as-is and backfill any fields that older
+        # saves are missing. Without this the placement helpers would raise
+        # AttributeError on ``build_warnings.append`` instead of returning False.
+        self.__dict__.update(state)
+        if not hasattr(self, 'build_warnings') or self.build_warnings is None:
+            self.build_warnings = []
+
     def is_locked(self) -> bool:
         return self.locked if hasattr( self, 'locked') else False
 
@@ -243,6 +252,19 @@ class Dungeon:
         depth: Optional[int] = None,
     ):
         lt = location_type
+
+        # Deduplicate NPCs by npc_id: a story event can request the same greeter
+        # that a dungeon seed already placed (e.g. Seth at the entrance). Placing
+        # again would spawn a second identical entity on another tile, so bail out
+        # if this npc_id is already present anywhere in the dungeon.
+        if isinstance(entity, dict) and entity.get('type') == 'npc':
+            npc_id = entity.get('npc_id')
+            if npc_id is not None:
+                for existing_tile in self.tiles.values():
+                    for existing in existing_tile.entities:
+                        if isinstance(existing, dict) and existing.get('npc_id') == npc_id:
+                            print(f'Skipping duplicate npc placement for {npc_id}; already present in dungeon.')
+                            return True
 
         # debug: list all tiles with matching tile_type
         all_tiles = [t for t in self.tiles.values() if t.tile_type == lt]
