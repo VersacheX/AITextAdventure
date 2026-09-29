@@ -115,10 +115,9 @@ R15 CONDITION_PAYLOAD_INVALID
     - is_npc_met / is_npc_not_met → npc_id must be a known static or dynamic
       NPC id (pending_character / final_character / twisted_character are
       always exempted as they resolve at runtime).
-    Note: has_item is intentionally not cross-referenced here because the item
-    set, although loaded for ITEM_ID_UNKNOWN checks (see R26), is validated at
-    the event level (award_item / remove_item / dungeon_add_treasure / deliver)
-    rather than inside condition blocks.
+    - has_item → item_id must match a seed in one of the const item catalogs
+      (see R26).  A misspelled id silently evaluates false — or true under
+      operator 'is_not' — and takes the wrong story branch.
 
 R16 OPTION_DIALOG_OPTION_TARGET_MISSING
     Each option in an initiate_option_dialog params.options list is a
@@ -855,6 +854,21 @@ def validate_timeline_integrity(
                                     f"Condition '{ctype}' references unknown npc_id '{ref_id}'.",
                                     event_type=raw_type,
                                     related_entity_id=ref_id,
+                            ))
+
+                    elif ctype == "has_item":
+                        ref_id = str(cparams.get("item_id") or "")
+                        if ref_id and known_item_ids and ref_id not in known_item_ids:
+                            errors_map[task_id].append(_err(
+                                "CONDITION_REF_INVALID",
+                                f"Condition 'has_item' references unknown item_id "
+                                f"'{ref_id}' — no matching weapon, armor, utility, "
+                                f"special, or accessory seed exists in const. A "
+                                f"misspelled id always evaluates false (or true "
+                                f"under operator 'is_not'), silently taking the "
+                                f"wrong story branch.",
+                                event_type=raw_type,
+                                related_entity_id=ref_id,
                             ))
 
                     elif ctype == "has_money":
