@@ -8,7 +8,7 @@ but implemented as a non-blocking Textual screen:
   - Space interacts with adjacent/current-tile entities (NPC meet, item pickup).
   - I opens the inventory screen.
   - U/D move up/down a floor via stairs (dz ±1).
-  - Escape dismisses the dungeon and returns to the overworld.
+  - Walking onto the exit tile returns to the overworld (unless locked).
 
 Layout mirrors OverworldScreen:
   ┌── header (dungeon name – floor) ─────────────────────┐
@@ -59,7 +59,6 @@ class DungeonScreen(BaseScreen):
         Binding("j",      "floor_down", "Down",  show=True),
         Binding("space",  "interact",   "Interact", show=True),
         Binding("i",      "open_inventory", "Inventory", show=True),
-        Binding("escape", "go_back",    "Exit",  show=True),
     ]
 
     DEFAULT_CSS = """
@@ -180,15 +179,21 @@ class DungeonScreen(BaseScreen):
         regardless of which code path triggered the dismiss."""
         self.app._active_dungeon = None
 
-    def action_go_back(self) -> None:
-        """Escape: leave the dungeon and return to the overworld."""
-        # Block navigation while a dialog or a long-running task worker (NPC
-        # meet / boss completion via run_blocking_with_loading) is active — its
-        # on_done would otherwise call _check_encounters / push combat onto this
-        # now-inactive screen.
-        if self._blocked():
-            return
+    def _try_leave_dungeon(self) -> bool:
+        """Attempt to leave the dungeon. A locked dungeon traps the player:
+        surface its locked_text (or a generic line) through the message feed
+        instead of dismissing. Returns True if the dungeon was left."""
+        dungeon = self._dungeon
+        if dungeon is not None and dungeon.is_locked():
+            pg = self._pg
+            if getattr(dungeon, "locked_text", None):
+                pg.add_dungeon_standing_text(dungeon)
+            else:
+                pg.add_info_dialog_line(dungeon.display_name, "You can't get out!")
+            self._check_dialogs_and_refresh()
+            return False
         self.dismiss(True)
+        return True
 
     # ── movement ──────────────────────────────────────────────────────────
 
@@ -222,18 +227,9 @@ class DungeonScreen(BaseScreen):
 
         # check exit
         if dungeon.is_player_at_exit():
-            # A locked dungeon traps the player: don't leave. Surface the
-            # dungeon's locked_text through the normal message feed (falling
-            # back to a generic line if the dungeon has none).
-            if dungeon.is_locked():
-                pg = self._pg
-                if getattr(dungeon, "locked_text", None):
-                    pg.add_dungeon_standing_text(dungeon)
-                else:
-                    pg.add_info_dialog_line(dungeon.display_name, "You can't get out!")
-                self._check_dialogs_and_refresh()
-                return
-            self.dismiss(True)
+            # A locked dungeon traps the player: don't leave (the shared helper
+            # surfaces the locked_text message); otherwise dismiss the screen.
+            self._try_leave_dungeon()
             return
 
         # Wait for any pending dialogs from the move to be dismissed before
