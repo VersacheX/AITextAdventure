@@ -724,6 +724,18 @@ class PlayerGame:
 				if task.type == TaskType.Deliver and not task.completed:
 					task_to_id = self.translate_npc_ref_to_id( task.to_id)
 					if task.to_type == SpecialTaskToType.NPC and task_to_id == npc_id:
+						# Only complete the delivery if the player actually carries
+						# the required item. Without this guard, walking up to the
+						# target NPC completes the task even with an empty (or
+						# wrong) inventory. If the item is missing, fall through to
+						# the NPC's standing text instead of completing.
+						required_item_id = getattr(task, 'special_item_id', None)
+						has_required_item = any(
+							getattr(i, 'id', None) == required_item_id and getattr(i, 'quantity', 0) > 0
+							for i in self.inventory
+						)
+						if required_item_id and not has_required_item:
+							continue
 						self.complete_task(task)
 						return
 			npc = next((n for n in self.npcs if n.id == npc_id), None)

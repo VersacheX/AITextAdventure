@@ -202,9 +202,12 @@ R26 ITEM_ID_UNKNOWN
     An item-referencing event or task uses an item_id that has no matching seed
     in any const catalog (WEAPON_SEEDS, ARMOR_SEEDS, UTILITY_ITEM_SEEDS,
     SPECIAL_ITEM_SEEDS, ACCESSORY_SEEDS).  Emitted for award_item,
-    dungeon_add_treasure, remove_item, and the item_id of a deliver task.  Such
-    an id can never resolve via instantiate_item_from_id at runtime, so the
-    award/removal/treasure/delivery silently does nothing.
+    dungeon_add_treasure, remove_item, and the item_id of a deliver task.
+    For award_item / dungeon_add_treasure / remove_item the id can never resolve
+    via instantiate_item_from_id at runtime, so the award/removal/treasure
+    silently does nothing.  For a deliver task the id is invalid task metadata:
+    the player can never obtain an item that no catalog defines, so the delivery
+    can never be satisfied (completion now requires the item to be in inventory).
 """
 from __future__ import annotations
 
