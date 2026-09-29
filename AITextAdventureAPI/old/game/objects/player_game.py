@@ -728,13 +728,15 @@ class PlayerGame:
 						# the required item. Without this guard, walking up to the
 						# target NPC completes the task even with an empty (or
 						# wrong) inventory. If the item is missing, fall through to
-						# the NPC's standing text instead of completing.
+						# the NPC's standing text instead of completing. A deliver
+						# task with a missing/empty item_id is malformed and can
+						# never match an inventory item, so it also falls through.
 						required_item_id = getattr(task, 'special_item_id', None)
 						has_required_item = any(
 							getattr(i, 'id', None) == required_item_id and getattr(i, 'quantity', 0) > 0
 							for i in self.inventory
 						)
-						if required_item_id and not has_required_item:
+						if not has_required_item:
 							continue
 						self.complete_task(task)
 						return
