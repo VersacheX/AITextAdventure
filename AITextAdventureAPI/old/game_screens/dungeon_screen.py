@@ -371,4 +371,15 @@ def run_dungeon_screen(dungeon: Dungeon, pg, player_pos: tuple) -> None:
             took_action = True
 
             if dungeon.is_player_at_exit():
+                # A locked dungeon traps the player: surface the locked_text and
+                # keep them inside instead of leaving.
+                if dungeon.is_locked():
+                    pg.add_dungeon_standing_text(dungeon)
+                    while len(pg.info_dialogs) > 0:
+                        print(pg.pop_dialog())
+                    continue
+                # Clear the authoritative presence flag on a real exit so the
+                # overworld loop doesn't immediately re-enter this dungeon.
+                if getattr(pg, "active_dungeon", None) is dungeon:
+                    pg.active_dungeon = None
                 break

@@ -435,9 +435,9 @@ def _get_location_region_area_from_params(params: Dict[str, Any], parent_task, p
 
 
 def set_player_in_dungeon_by_id(player_game, dungeon_id: str, location: str):
-	"""
-		player_game.set_player_in_dungeon(dungeon, location)
-	"""
+	"""Place the player at `location` inside the dungeon identified by
+	`dungeon_id` and mark it as the player's active dungeon. The UI opens the
+	dungeon screen on its next resume based on that active-dungeon flag."""
 	from game.objects. dungeon import DungeonTileType
 	player_game.place_player_in_dungeon_at_location(dungeon_id, DungeonTileType(location))
 

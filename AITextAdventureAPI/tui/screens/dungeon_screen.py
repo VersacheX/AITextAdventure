@@ -59,6 +59,7 @@ class DungeonScreen(BaseScreen):
         Binding("j",      "floor_down", "Down",  show=True),
         Binding("space",  "interact",   "Interact", show=True),
         Binding("i",      "open_inventory", "Inventory", show=True),
+        Binding("escape", "noop", "", show=False),  # disable base-class go_back in dungeon
     ]
 
     DEFAULT_CSS = """
@@ -178,6 +179,16 @@ class DungeonScreen(BaseScreen):
         """Clear the active dungeon reference whenever this screen is removed,
         regardless of which code path triggered the dismiss."""
         self.app._active_dungeon = None
+        # Clear the authoritative presence flag so the overworld doesn't
+        # immediately re-open this dungeon on resume. Only reached on a real
+        # dismiss (exit tile or defeat) — pushing the inventory screen pauses
+        # this screen without dismissing it.
+        if getattr(self._pg, "active_dungeon", None) is self._dungeon:
+            self._pg.active_dungeon = None
+
+    def action_noop(self) -> None:
+        """Intentional no-op — swallows escape so the dungeon can't be exited
+        via the inherited base-class go_back binding."""
 
     def _try_leave_dungeon(self) -> bool:
         """Attempt to leave the dungeon. A locked dungeon traps the player:
