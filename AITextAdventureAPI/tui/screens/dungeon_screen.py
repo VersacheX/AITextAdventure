@@ -161,6 +161,10 @@ class DungeonScreen(BaseScreen):
         gameplay_actions = {
             "move_north", "move_south", "move_west", "move_east",
             "floor_up", "floor_down", "interact", "open_inventory",
+            # Escape is bound to noop; disable it while blocked so the dismiss
+            # key falls through to the focused MessageDialog instead of being
+            # swallowed by the screen binding.
+            "noop",
         }
         if action in gameplay_actions and self._blocked():
             return False

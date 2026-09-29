@@ -228,6 +228,10 @@ class OverworldScreen(BaseScreen):
         gameplay_actions = {
             "move_north", "move_south", "move_west", "move_east",
             "move_or_focus", "open_inventory", "open_tasks", "interact",
+            # Escape is bound to go_back; disable it while blocked so the dismiss
+            # key falls through to the focused MessageDialog instead of being
+            # swallowed by the screen binding.
+            "go_back",
         }
         if action in gameplay_actions and self._blocked():
             return False
