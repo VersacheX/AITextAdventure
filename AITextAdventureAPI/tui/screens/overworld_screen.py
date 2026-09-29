@@ -216,6 +216,27 @@ class OverworldScreen(BaseScreen):
 
     # ── movement actions ──────────────────────────────────────────────────
 
+    def check_action(self, action: str, parameters: tuple) -> bool | None:
+        """Disable gameplay bindings while a dialog or loading overlay is open.
+
+        A key press that dismisses a MessageDialog (e.g. an encounter's
+        "something approaches" prompt) must not also fire the screen-level
+        binding for the same key — otherwise the dismiss press leaks through as
+        a movement/interaction. Returning False makes Textual treat these
+        actions as unavailable so the key is consumed only by the dialog.
+        """
+        gameplay_actions = {
+            "move_north", "move_south", "move_west", "move_east",
+            "move_or_focus", "open_inventory", "open_tasks", "interact",
+            # Escape is bound to go_back; disable it while blocked so the dismiss
+            # key falls through to the focused MessageDialog instead of being
+            # swallowed by the screen binding.
+            "go_back",
+        }
+        if action in gameplay_actions and self._blocked():
+            return False
+        return True
+
     def _overlay_list_focused(self) -> bool:
         """Return True if the LocationOverlay's list currently has focus."""
         try:

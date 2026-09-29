@@ -147,6 +147,29 @@ class DungeonScreen(BaseScreen):
 
     # ── movement bindings ─────────────────────────────────────────────────
 
+    def check_action(self, action: str, parameters: tuple) -> bool | None:
+        """Disable gameplay bindings while a dialog or loading overlay is open.
+
+        A key press that dismisses a MessageDialog must not also fire the
+        screen-level binding for the same key (e.g. space -> interact would
+        re-trigger the NPC and append their standing text after their story;
+        arrows -> move would step the player). Returning False here makes
+        Textual treat these actions as unavailable so the dismiss key is
+        consumed only by the dialog. Navigation actions stay enabled so the
+        dialog's own dismissal is never blocked.
+        """
+        gameplay_actions = {
+            "move_north", "move_south", "move_west", "move_east",
+            "floor_up", "floor_down", "interact", "open_inventory",
+            # Escape is bound to noop; disable it while blocked so the dismiss
+            # key falls through to the focused MessageDialog instead of being
+            # swallowed by the screen binding.
+            "noop",
+        }
+        if action in gameplay_actions and self._blocked():
+            return False
+        return True
+
     def action_move_north(self) -> None:
         self._handle_move(0, -1, 0)
 
