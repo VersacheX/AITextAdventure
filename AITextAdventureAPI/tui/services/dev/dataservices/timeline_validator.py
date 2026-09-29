@@ -204,11 +204,16 @@ R26 ITEM_ID_UNKNOWN
     SPECIAL_ITEM_SEEDS, ACCESSORY_SEEDS).  Emitted for award_item,
     dungeon_add_treasure, remove_item, the item_id of a deliver task, and the
     item_id (or legacy to_id fallback) of a fetch task.
-    For award_item / dungeon_add_treasure / remove_item the id can never resolve
-    via instantiate_item_from_id at runtime, so the award/removal/treasure
-    silently does nothing.  For a deliver or fetch task the id is invalid task
-    metadata: the player can never obtain an item that no catalog defines, so
-    the task can never be satisfied (completion requires the item in inventory).
+    For award_item / dungeon_add_treasure the id can never resolve via
+    instantiate_item_from_id at runtime, so the award/treasure silently does
+    nothing.  remove_item takes a different path — it matches inventory entries
+    by id directly (remove_single_item_unit_by_id) and never instantiates a
+    seed — so an uncatalogued id is still flagged as a likely authoring typo,
+    though it could technically strip a legacy or dynamically restored
+    inventory entry that shares that id.  For a deliver or fetch task the id is
+    invalid task metadata: the player can never obtain an item that no catalog
+    defines, so the task can never be satisfied (completion requires the item
+    in inventory).
 """
 from __future__ import annotations
 
