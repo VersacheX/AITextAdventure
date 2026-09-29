@@ -515,9 +515,10 @@ class PlayerGame:
 			# the background worker thread on stdin (there is no console on the TUI).
 			self.add_info_dialog_line(None, f'[debug] Dungeon to set player in not found: {dungeon_id}')
 			return None
+		if not dungeon.place_player_at_location(location_type):
+			return None
 		self.set_position(dungeon.position[0], dungeon.position[1], 0)
 		self.inside = False
-		dungeon.place_player_at_location(location_type)
 		# Mark the player as being inside this dungeon.
 		# presence flag the overworld/console loops read to open the dungeon
 		# screen (the task placement itself only moves the player to the dungeon
@@ -530,9 +531,10 @@ class PlayerGame:
 		simply moved to the requested location within it."""
 		if dungeon is None:
 			return None
+		if not dungeon.place_player_at_location(location_type):
+			return None
 		self.set_position(dungeon.position[0], dungeon.position[1], 0)
 		self.inside = False
-		dungeon.place_player_at_location(location_type)
 		self.active_dungeon = dungeon
 
 	def remove_player_from_dungeon(self, dungeon_id):
@@ -1523,6 +1525,7 @@ class PlayerGame:
 		for dungeon in self.dungeons:
 			pos = getattr(dungeon, "player_pos", None)
 			if pos is not None and pos != (0, 0, 0):
+              self.active_dungeon = dungeon
 				return dungeon
 		return None
 

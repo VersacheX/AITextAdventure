@@ -139,6 +139,9 @@ class DungeonScreen(BaseScreen):
 
     def on_screen_resume(self) -> None:
         """Called when returning from inventory screen."""
+        if self._presence_cleared():
+            self.dismiss(True)
+            return
         self.app._active_dungeon = self._dungeon
         self._check_dialogs_and_refresh()
 
@@ -187,8 +190,15 @@ class DungeonScreen(BaseScreen):
             self._pg.active_dungeon = None
 
     def action_noop(self) -> None:
-        """Intentional no-op — swallows escape so the dungeon can't be exited
-        via the inherited base-class go_back binding."""
+        """Swallow Escape while the player is still inside this dungeon."""
+        if self._presence_cleared():
+            self.dismiss(True)
+
+    def _presence_cleared(self) -> bool:
+        return (
+            getattr(self._pg, "active_dungeon", None) is not self._dungeon
+            or self._dungeon.get_player_pos() is None
+        )
 
     def _try_leave_dungeon(self) -> bool:
         """Attempt to leave the dungeon. A locked dungeon traps the player:
@@ -215,6 +225,7 @@ class DungeonScreen(BaseScreen):
         dungeon = self._dungeon
         player_pos = dungeon.get_player_pos()
         if player_pos is None:
+            self.dismiss(True)
             return
 
         px, py, pz = player_pos
@@ -385,6 +396,9 @@ class DungeonScreen(BaseScreen):
 
     def _check_dialogs_and_refresh(self, on_cleared: Optional[Callable[[], None]] = None) -> None:
         pg = self._pg
+        if self._presence_cleared():
+            self.dismiss(True)
+            return
         if hasattr(pg, "info_dialogs") and pg.info_dialogs:
             messages: List[str] = []
             while pg.info_dialogs:

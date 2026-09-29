@@ -59,6 +59,7 @@ class DungeonBuilder:
         self.all_rooms: List[Dict[str, Any]] = []
         # global unique room id counter
         self.room_id_counter: int =0
+        self.invalid_impassable_positions: Dict[Tuple[int, int, int], Any] = {}
 
 
 
@@ -270,9 +271,12 @@ class DungeonBuilder:
                 # ensure impassable tile placement is not on origin
                 if not self.not_origin(pos):
                     continue
+                if pos in self.invalid_impassable_positions:
+                    continue
                 # Single BFS from origin with this tile blocked; verify every
                 # required target (room + npc) is still reachable.
                 if not self._not_blocking_required_targets(pos, dungeon, required_targets):
+                    self.invalid_impassable_positions[pos] = 'blocks_required_path'
                     continue
                 #print(f'Converting tile at ({x},{y},{z}) to impassable')
                 tile.passable = False

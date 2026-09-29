@@ -82,7 +82,11 @@ def run_game_loop(pg: PlayerGame, viewport: tuple, api: Any):
             if pg.get_active_dungeon() is not None:
                 dungeon = pg.get_active_dungeon()
                 prev_ow_x, prev_ow_y = pg.x, pg.y
-                player_pos = dungeon.get_player_pos() or (0, 0, 0)
+                player_pos = dungeon.get_player_pos()
+                if player_pos is None:
+                    pg.active_dungeon = None
+                    took_action = False
+                    continue
                 run_dungeon_screen(dungeon, pg, player_pos)
                 if pg.is_alive() == False:
                     break
