@@ -59,7 +59,6 @@ class DungeonBuilder:
         self.all_rooms: List[Dict[str, Any]] = []
         # global unique room id counter
         self.room_id_counter: int =0
-        self.invalid_impassable_positions: Dict[Tuple[int, int, int], Any] = {}
 
 
 
@@ -70,11 +69,8 @@ class DungeonBuilder:
         dungeon = Dungeon(levels=self.floor_count,
                           dungeon_id=self.dungeon_id)
 
-        # Reset per-build state so a reused builder never carries impassable
-        # coordinates from a previously generated dungeon: those coordinates
-        # describe a different tile layout and would wrongly skip valid
-        # placements (or hit stale "blocks_required_path" entries).
-        self.invalid_impassable_positions = {}
+        # Reset per-build state so a reused builder never carries room data from
+        # a previously generated dungeon.
         self.all_rooms = []
         self.room_id_counter = 0
 
@@ -279,12 +275,9 @@ class DungeonBuilder:
                 # ensure impassable tile placement is not on origin
                 if not self.not_origin(pos):
                     continue
-                if pos in self.invalid_impassable_positions:
-                    continue
                 # Single BFS from origin with this tile blocked; verify every
                 # required target (room + npc) is still reachable.
                 if not self._not_blocking_required_targets(pos, dungeon, required_targets):
-                    self.invalid_impassable_positions[pos] = 'blocks_required_path'
                     continue
                 #print(f'Converting tile at ({x},{y},{z}) to impassable')
                 tile.passable = False
