@@ -686,6 +686,20 @@ class PlayerGame:
 				npcs_at_location.append(npc)
 		return npcs_at_location
 
+	def _player_has_deliver_item(self, task) -> bool:
+		"""Return True if the player carries the item a deliver task requires.
+
+		Shared by the overworld and dungeon NPC interaction paths so a delivery
+		can only be completed when its required item is actually in inventory.
+		A deliver task with a missing/empty item_id is malformed and can never
+		match an inventory item, so this returns False for it too.
+		"""
+		required_item_id = getattr(task, 'special_item_id', None)
+		return any(
+			getattr(i, 'id', None) == required_item_id and getattr(i, 'quantity', 0) > 0
+			for i in self.inventory
+		)
+
 	def handle_npc_interaction_at_player_location(self, npc_id: str = None):
 		"""Check for NPC interaction at the player's location.
 		If an NPC is present, return their name; otherwise return None.
@@ -724,6 +738,15 @@ class PlayerGame:
 				if task.type == TaskType.Deliver and not task.completed:
 					task_to_id = self.translate_npc_ref_to_id( task.to_id)
 					if task.to_type == SpecialTaskToType.NPC and task_to_id == npc_id:
+						# Only complete the delivery if the player actually carries
+						# the required item. Without this guard, walking up to the
+						# target NPC completes the task even with an empty (or
+						# wrong) inventory. If the item is missing, fall through to
+						# the NPC's standing text instead of completing. A deliver
+						# task with a missing/empty item_id is malformed and can
+						# never match an inventory item, so it also falls through.
+						if not self._player_has_deliver_item(task):
+							continue
 						self.complete_task(task)
 						return
 			npc = next((n for n in self.npcs if n.id == npc_id), None)
@@ -861,6 +884,12 @@ class PlayerGame:
 									#print (f'Checking deliver task {task.task_id} for npc {npc_id} in dungeon {dungeon.display_name}')
 									task_to_id = self.translate_npc_ref_to_id(task.to_id)
 									if task.to_type == SpecialTaskToType.NPC and task_to_id == npc_id:
+										# Only complete the delivery if the player
+										# actually carries the required item — same
+										# gate as the overworld interaction path.
+										# A missing item falls through to standing text.
+										if not self._player_has_deliver_item(task):
+											continue
 										npc = next((n for n in self.npcs if n.id == npc_id), None)
 										if npc:
 											npc.met = True

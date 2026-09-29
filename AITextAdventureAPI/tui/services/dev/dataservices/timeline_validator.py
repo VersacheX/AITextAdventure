@@ -115,8 +115,9 @@ R15 CONDITION_PAYLOAD_INVALID
     - is_npc_met / is_npc_not_met → npc_id must be a known static or dynamic
       NPC id (pending_character / final_character / twisted_character are
       always exempted as they resolve at runtime).
-    Note: has_item is intentionally not cross-referenced here because the item
-    set is not loaded into the validator's const context.
+    - has_item → item_id must match a seed in one of the const item catalogs
+      (see R26).  A misspelled id silently evaluates false — or true under
+      operator 'is_not' — and takes the wrong story branch.
 
 R16 OPTION_DIALOG_OPTION_TARGET_MISSING
     Each option in an initiate_option_dialog params.options list is a
@@ -196,6 +197,23 @@ R25 NPC placement location validity (delegated to npc_placement_validator)
     Unplaced ('(no location)'), center, and open-area forms are always safe.
     Runtime-resolved locations (city_number_N / named city) still have their
     trailing building token validated against all known buildings.
+
+R26 ITEM_ID_UNKNOWN
+    An item-referencing event or task uses an item_id that has no matching seed
+    in any const catalog (WEAPON_SEEDS, ARMOR_SEEDS, UTILITY_ITEM_SEEDS,
+    SPECIAL_ITEM_SEEDS, ACCESSORY_SEEDS).  Emitted for award_item,
+    dungeon_add_treasure, remove_item, the item_id of a deliver task, and the
+    item_id (or legacy to_id fallback) of a fetch task.
+    For award_item / dungeon_add_treasure the id can never resolve via
+    instantiate_item_from_id at runtime, so the award/treasure silently does
+    nothing.  remove_item takes a different path — it matches inventory entries
+    by id directly (remove_single_item_unit_by_id) and never instantiates a
+    seed — so an uncatalogued id is still flagged as a likely authoring typo,
+    though it could technically strip a legacy or dynamically restored
+    inventory entry that shares that id.  For a deliver or fetch task the id is
+    invalid task metadata: the player can never obtain an item that no catalog
+    defines, so the task can never be satisfied (completion requires the item
+    in inventory).
 """
 from __future__ import annotations
 
@@ -618,6 +636,28 @@ def validate_timeline_integrity(
             if did:
                 known_dungeon_ids.add(str(did))
 
+    # ── Known item ids from every seed catalog in const ───────────────────
+    # Items can be defined as weapons, armor (a slot→list map), utility,
+    # special, or accessory seeds. Mirror instantiate_item_from_id's lookup
+    # order so an id resolvable at runtime is always considered known here.
+    known_item_ids: Set[str] = set()
+    for _seed_list in (
+        getattr(const, "WEAPON_SEEDS", None),
+        getattr(const, "UTILITY_ITEM_SEEDS", None),
+        getattr(const, "SPECIAL_ITEM_SEEDS", None),
+        getattr(const, "ACCESSORY_SEEDS", None),
+    ):
+        for _s in _seed_list or []:
+            if isinstance(_s, dict) and _s.get("id"):
+                known_item_ids.add(str(_s["id"]))
+    # ARMOR_SEEDS is a dict of slot -> list of seed dicts.
+    _armor_seeds = getattr(const, "ARMOR_SEEDS", None)
+    if isinstance(_armor_seeds, dict):
+        for _group in _armor_seeds.values():
+            for _s in _group or []:
+                if isinstance(_s, dict) and _s.get("id"):
+                    known_item_ids.add(str(_s["id"]))
+
     # Snapshot of dungeons that have an actual seed definition in const.
     # create_dungeon events add to known_dungeon_ids at runtime, but a dungeon
     # that is wired via create_dungeon with no matching DUNGEON_SETTINGS entry
@@ -700,6 +740,36 @@ def validate_timeline_integrity(
                 errors_map[task_id].append(_err(
                     "TASK_SCHEMA_INVALID",
                     f"'deliver' task missing required field(s): {', '.join(missing)}",
+                ))
+            else:
+                deliver_item_id = str(task.get("item_id") or "")
+                if known_item_ids and deliver_item_id not in known_item_ids:
+                    errors_map[task_id].append(_err(
+                        "ITEM_ID_UNKNOWN",
+                        f"'deliver' task '{task_id}' requires unknown item_id "
+                        f"'{deliver_item_id}' — no matching weapon, armor, "
+                        f"utility, special, or accessory seed exists in const.",
+                        related_entity_id=deliver_item_id,
+                    ))
+        elif task_type == "fetch":
+            # Runtime resolves the fetched item as item_id with a legacy to_id
+            # fallback (build_task_from_seed: item_id or to_id). Mirror that so
+            # the validated id matches the FetchTask the game actually builds.
+            fetch_item_id = str(task.get("item_id") or task.get("to_id") or "")
+            if not fetch_item_id:
+                errors_map[task_id].append(_err(
+                    "TASK_SCHEMA_INVALID",
+                    f"'fetch' task '{task_id}' missing required item_id (or "
+                    f"legacy to_id) field.",
+                ))
+            elif known_item_ids and fetch_item_id not in known_item_ids:
+                errors_map[task_id].append(_err(
+                    "ITEM_ID_UNKNOWN",
+                    f"'fetch' task '{task_id}' requires unknown item_id "
+                    f"'{fetch_item_id}' — no matching weapon, armor, utility, "
+                    f"special, or accessory seed exists in const. The task can "
+                    f"never complete because the item can never be obtained.",
+                    related_entity_id=fetch_item_id,
                 ))
         elif task_type == "defeat":
             if str(task.get("to_type", "")).lower() != "mob" or not task.get("to_id"):
@@ -815,6 +885,21 @@ def validate_timeline_integrity(
                                     related_entity_id=ref_id,
                             ))
 
+                    elif ctype == "has_item":
+                        ref_id = str(cparams.get("item_id") or "")
+                        if ref_id and known_item_ids and ref_id not in known_item_ids:
+                            errors_map[task_id].append(_err(
+                                "CONDITION_REF_INVALID",
+                                f"Condition 'has_item' references unknown item_id "
+                                f"'{ref_id}' — no matching weapon, armor, utility, "
+                                f"special, or accessory seed exists in const. A "
+                                f"misspelled id always evaluates false (or true "
+                                f"under operator 'is_not'), silently taking the "
+                                f"wrong story branch.",
+                                event_type=raw_type,
+                                related_entity_id=ref_id,
+                            ))
+
                     elif ctype == "has_money":
                         amount = cparams.get("amount")
                         if amount is not None:
@@ -855,11 +940,29 @@ def validate_timeline_integrity(
                 if item_id:
                     item_source_counts[item_id] += 1
                     award_origins[item_id].append(task_id)
+                    if known_item_ids and item_id not in known_item_ids:
+                        errors_map[task_id].append(_err(
+                            "ITEM_ID_UNKNOWN",
+                            f"award_item references unknown item_id '{item_id}' — "
+                            f"no matching weapon, armor, utility, special, or "
+                            f"accessory seed exists in const.",
+                            event_type=raw_type,
+                            related_entity_id=item_id,
+                        ))
 
             elif raw_type == "dungeon_add_treasure":
                 item_id = str(params.get("item_id") or params.get("id") or "")
                 if item_id:
                     item_source_counts[item_id] += 1
+                    if known_item_ids and item_id not in known_item_ids:
+                        errors_map[task_id].append(_err(
+                            "ITEM_ID_UNKNOWN",
+                            f"dungeon_add_treasure references unknown item_id "
+                            f"'{item_id}' — no matching weapon, armor, utility, "
+                            f"special, or accessory seed exists in const.",
+                            event_type=raw_type,
+                            related_entity_id=item_id,
+                        ))
 
             elif raw_type == "remove_item":
                 item_id = str(params.get("item_id") or params.get("id") or "")
@@ -870,6 +973,15 @@ def validate_timeline_integrity(
                         event_type=raw_type,
                     ))
                 else:
+                    if known_item_ids and item_id not in known_item_ids:
+                        errors_map[task_id].append(_err(
+                            "ITEM_ID_UNKNOWN",
+                            f"remove_item references unknown item_id '{item_id}' — "
+                            f"no matching weapon, armor, utility, special, or "
+                            f"accessory seed exists in const.",
+                            event_type=raw_type,
+                            related_entity_id=item_id,
+                        ))
                     if item_source_counts[item_id] == 0:
                         errors_map[task_id].append(_err(
                             "ITEM_REMOVE_WITHOUT_SOURCE",
