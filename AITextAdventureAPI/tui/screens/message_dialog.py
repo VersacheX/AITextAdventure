@@ -27,7 +27,6 @@ from typing import List, Optional
 
 from textual import on
 from textual.app import ComposeResult
-from textual.binding import Binding
 from textual.containers import Vertical
 from textual.reactive import reactive
 from textual.widget import Widget
@@ -41,12 +40,12 @@ class MessageDialog(Widget):
     can_focus = True
     can_focus_children = False
 
-    BINDINGS = [
-        # Any key advances to the next message
-        Binding("space", "advance", "Continue", show=False),
-        Binding("enter", "advance", "Continue", show=False),
-        Binding("escape", "advance", "Continue", show=False),
-    ]
+    # NOTE: intentionally no BINDINGS. All key handling goes through on_key so
+    # there is a single input path that always calls event.stop(). Declaring
+    # screen-shared keys (space/enter) as bindings here risked the same press
+    # also resolving against the underlying screen's binding (e.g. space ->
+    # interact, arrows -> move), which re-triggered NPC interactions and moved
+    # the player when the player only meant to dismiss the dialog.
 
     DEFAULT_CSS = """
     MessageDialog {
