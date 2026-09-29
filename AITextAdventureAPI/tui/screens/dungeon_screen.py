@@ -222,6 +222,17 @@ class DungeonScreen(BaseScreen):
 
         # check exit
         if dungeon.is_player_at_exit():
+            # A locked dungeon traps the player: don't leave. Surface the
+            # dungeon's locked_text through the normal message feed (falling
+            # back to a generic line if the dungeon has none).
+            if dungeon.is_locked():
+                pg = self._pg
+                if getattr(dungeon, "locked_text", None):
+                    pg.add_dungeon_standing_text(dungeon)
+                else:
+                    pg.add_info_dialog_line(dungeon.display_name, "You can't get out!")
+                self._check_dialogs_and_refresh()
+                return
             self.dismiss(True)
             return
 
