@@ -1454,6 +1454,8 @@ class PlayerGame:
 		so new attributes added after a save won't exist on the unpickled
 		object. Merge saved state then ensure defaults for any missing keys.
 		"""
+		has_active_dungeon_state = 'active_dungeon' in (state or {})
+
 		# restore saved state
 		self.__dict__.update(state or {})
 
@@ -1504,6 +1506,9 @@ class PlayerGame:
 			if not hasattr(self, k):
 				setattr(self, k, v)
 
+		if not has_active_dungeon_state:
+			self.active_dungeon = self._find_legacy_active_dungeon()
+
 		# is_busy is a transient execution flag (set only while a live worker
 		# runs a long-running task event). It must never survive a save/load —
 		# otherwise a copy saved mid-event would load with no worker left to
@@ -1512,22 +1517,46 @@ class PlayerGame:
 		# Nested long-running-event depth counter — also transient.
 		self._busy_depth = 0
 
+	def _find_legacy_active_dungeon(self) -> Optional["Dungeon"]:
+		"""Infer dungeon presence only while migrating saves from before the
+		active_dungeon field existed."""
+		for dungeon in self.dungeons:
+			if getattr(dungeon, "position", None) != (self.x, self.y):
+				continue
+			pos = getattr(dungeon, "player_pos", None)
+			if pos is None or pos == (0, 0, 0):
+				continue
+
+			entrance_tiles = [
+				tile for tile in getattr(dungeon, "tiles", {}).values()
+				if getattr(getattr(tile, "tile_type", None), "value", None) == "entrance"
+				and tile.z == 0
+			]
+			if entrance_tiles:
+				min_x = min(tile.x for tile in entrance_tiles)
+				max_x = max(tile.x for tile in entrance_tiles)
+				min_y = min(tile.y for tile in entrance_tiles)
+				max_y = max(tile.y for tile in entrance_tiles)
+				initial_pos = (
+					(min_x + max_x + 1) // 2,
+					(min_y + max_y + 1) // 2,
+					0,
+				)
+				if pos == initial_pos:
+					continue
+
+			return dungeon
+		return None
+
 	def get_active_dungeon(self) -> Optional["Dungeon"]:
 		"""Return the dungeon the player is currently inside, or None.
 
 		`active_dungeon` is the authoritative presence flag: it is set when the
 		player enters a dungeon (manually or via a set_player_in_dungeon task)
-		and cleared on exit / remove_player_from_dungeon. Falls back to the
-		legacy player_pos scan for saves written before the flag existed.
+		and cleared on exit / remove_player_from_dungeon. Legacy saves that lack
+		the flag are migrated during unpickling.
 		"""
-		if getattr(self, "active_dungeon", None) is not None:
-			return self.active_dungeon
-		for dungeon in self.dungeons:
-			pos = getattr(dungeon, "player_pos", None)
-			if pos is not None and pos != (0, 0, 0):
-				self.active_dungeon = dungeon
-				return dungeon
-		return None
+		return getattr(self, "active_dungeon", None)
 
 	def has_monster_hunter_active(self) -> bool:
 		"""Return True if any active-party member has an accessory equipped whose

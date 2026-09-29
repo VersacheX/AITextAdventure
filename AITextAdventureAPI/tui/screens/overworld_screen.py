@@ -202,8 +202,9 @@ class OverworldScreen(BaseScreen):
         # against re-opening the one we just exited (its own dismiss clears the
         # flag before this resumes).
         pg = self._player_game()
-        if pg is not None and getattr(pg, "active_dungeon", None) is not None:
-            self._enter_dungeon(pg, pg.active_dungeon)
+        active_dungeon = pg.get_active_dungeon() if pg is not None else None
+        if active_dungeon is not None:
+            self._enter_dungeon(pg, active_dungeon)
             return
         # A resumed screen can already carry a pending fight (e.g. from a load
         # or a task completed on another screen); start it once dialogs clear.
@@ -1064,6 +1065,10 @@ class OverworldScreen(BaseScreen):
         """Ensure tiles exist around player and render initial view."""
         pg = self._player_game()
         if pg is None:
+            return
+        active_dungeon = pg.get_active_dungeon()
+        if active_dungeon is not None:
+            self._enter_dungeon(pg, active_dungeon)
             return
 
         self._update_overlay()

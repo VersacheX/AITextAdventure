@@ -178,7 +178,7 @@ class DungeonScreen(BaseScreen):
             return
         self._interact()
 
-    def on_dismiss(self, result: bool | None = None) -> None:
+    def dismiss(self, result: bool | None = None) -> None:
         """Clear the active dungeon reference whenever this screen is removed,
         regardless of which code path triggered the dismiss."""
         self.app._active_dungeon = None
@@ -188,6 +188,7 @@ class DungeonScreen(BaseScreen):
         # this screen without dismissing it.
         if getattr(self._pg, "active_dungeon", None) is self._dungeon:
             self._pg.active_dungeon = None
+        super().dismiss(result)
 
     def action_noop(self) -> None:
         """Swallow Escape while the player is still inside this dungeon."""
