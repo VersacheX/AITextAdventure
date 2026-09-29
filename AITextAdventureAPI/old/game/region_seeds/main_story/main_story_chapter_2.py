@@ -1553,16 +1553,16 @@ TASKS = [
 		'task_acquire_events': [],
 		'task_complete_events': [
 			{
-				'event_type': 'award_item',
-				'params': {
-					'item_id': 'monster_hunter'
-				}
-			},
-			{
 				'event_type': 'initiate_dialog',
 				'params': {
 					'npc_id': 'diego',
 					'dialog_id': 'diego_ch2_monster_hunter'
+				}
+			},
+			{
+				'event_type': 'award_item',
+				'params': {
+					'item_id': 'monster_hunter'
 				}
 			},
 			{
