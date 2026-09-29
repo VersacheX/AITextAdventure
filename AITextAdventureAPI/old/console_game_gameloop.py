@@ -74,6 +74,25 @@ def run_game_loop(pg: PlayerGame, viewport: tuple, api: Any):
                 took_action = False
                 continue
 
+            # A task can seal the player inside a dungeon (pg.active_dungeon set
+            # by set_player_in_dungeon). Enter it here regardless of took_action
+            # or its lock state — the lock blocks *exit*, not this already-placed
+            # entry. run_dungeon_screen surfaces the locked_text when the player
+            # tries to leave and only returns once they actually get out.
+            if pg.get_active_dungeon() is not None:
+                dungeon = pg.get_active_dungeon()
+                prev_ow_x, prev_ow_y = pg.x, pg.y
+                player_pos = dungeon.get_player_pos()
+                if player_pos is None:
+                    pg.active_dungeon = None
+                    took_action = False
+                    continue
+                run_dungeon_screen(dungeon, pg, player_pos)
+                if pg.is_alive() == False:
+                    break
+                took_action = False
+                continue
+
             if took_action:
                 dungeon = pg.get_dungeon_at_position()
                 if dungeon:
@@ -82,6 +101,10 @@ def run_game_loop(pg: PlayerGame, viewport: tuple, api: Any):
                     else:
                         # preserve overworld coords so we can restore the overworld view after leaving
                         prev_ow_x, prev_ow_y = pg.x, pg.y
+                        # Mark as active before entering so exit handling and the
+                        # authoritative presence flag stay consistent with the
+                        # task-placement path.
+                        pg.active_dungeon = dungeon
                         # use the dungeon's internal player position if set, otherwise default origin
                         player_pos = dungeon.get_player_pos() or (0, 0, 0)
                         run_dungeon_screen(dungeon, pg, player_pos)

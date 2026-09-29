@@ -760,6 +760,14 @@ TASKS = [
             { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rift_dungeon_ch4', 'item_id': 'necropolis_marrow_shard', 'location': 'treasure_room'}},
             { 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'rift_dungeon_ch4', 'location': 'entrance' } },
 
+            # The rift seals shut behind the player — trap them in the void until
+            # Catalyst is defeated (unlocked in main_story_ch4_defeat_catalyst).
+            { 'event_type': 'lock_dungeon', 'params': { 'dungeon_id': 'rift_dungeon_ch4' } },
+            { 'event_type': 'set_dungeon_locked_text', 'params': { 'dungeon_id': 'rift_dungeon_ch4', 'locked_text': [
+                "The rift has sealed shut behind you. There is no way back.",
+                "The void coils tighter — the only way out is through the fracture's heart."
+            ] } },
+
             # Final Character appears inside rift
             { 'event_type': 'dungeon_add_npc', 'params': {
                 'dungeon_id': 'rift_dungeon_ch4',
@@ -830,6 +838,7 @@ TASKS = [
         ],
         'task_complete_events': [                        
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'catalyst'} },
+            { 'event_type': 'unlock_dungeon', 'params': { 'dungeon_id': 'rift_dungeon_ch4' } },
             { 'event_type': 'remove_player_from_dungeon', 'params': { 'dungeon_id': 'rift_dungeon_ch4' } },
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch4_meet_marlo_finch_after_rift' } },
             { 'event_type': 'complete_intro_story' },

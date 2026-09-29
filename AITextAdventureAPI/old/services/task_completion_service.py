@@ -381,6 +381,12 @@ def create_dungeon(params: Dict[str, Any], player_game, parent_task):
 	from game.services.dungeon_builder_service import build_dungeon
 	dungeon = build_dungeon(dungeon_seed)
 
+	# Surface any non-fatal generation warnings (e.g. an NPC/item that could not
+	# be placed) to the in-game debug dialog instead of blocking on stdin.
+	if dungeon is not None and getattr(dungeon, 'build_warnings', None):
+		for warning in dungeon.build_warnings:
+			_report_event_error(player_game, f'{dungeon_id}: {warning}')
+
 	task_region = _get_location_region_area_from_params(params, parent_task, player_game)
 
 	if player_game is not None and dungeon is not None:
@@ -429,9 +435,9 @@ def _get_location_region_area_from_params(params: Dict[str, Any], parent_task, p
 
 
 def set_player_in_dungeon_by_id(player_game, dungeon_id: str, location: str):
-	"""
-		player_game.set_player_in_dungeon(dungeon, location)
-	"""
+	"""Place the player at `location` inside the dungeon identified by
+	`dungeon_id` and mark it as the player's active dungeon. The UI opens the
+	dungeon screen on its next resume based on that active-dungeon flag."""
 	from game.objects. dungeon import DungeonTileType
 	player_game.place_player_in_dungeon_at_location(dungeon_id, DungeonTileType(location))
 
@@ -476,7 +482,10 @@ def add_npc_to_dungeon(params: Dict[str, Any], player_game, parent_task):
 	depth = params.get('depth')           # optional 0-100 depth percentage
 	entity = {'type': 'npc', 'npc_id': npc_id}
 	from game.objects.dungeon import DungeonTileType
-	dungeon.place_entity_at_location(entity, DungeonTileType(location), depth=depth)
+	placed = dungeon.place_entity_at_location(entity, DungeonTileType(location), depth=depth)
+	if not placed:
+		_report_event_error(player_game, f'Failed to place npc {npc_id} at location {location} in dungeon {dungeon_id}')
+		return None
 
 
 
@@ -531,7 +540,10 @@ def add_treasure_to_dungeon(params: Dict[str, Any], player_game, parent_task):
 		_report_event_error(player_game, 'Location type not provided in params')
 		return None
 	from game.objects.dungeon import DungeonTileType
-	dungeon.place_entity_at_location(item, DungeonTileType(location_type), depth=depth)
+	placed = dungeon.place_entity_at_location(item, DungeonTileType(location_type), depth=depth)
+	if not placed:
+		_report_event_error(player_game, f'Failed to place treasure {item_id} at location {location_type} in dungeon {dungeon_id}')
+		return None
 	return item
 
 def create_combat_scenario(params: Dict[str, Any], player_game, parent_task):

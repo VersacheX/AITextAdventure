@@ -195,6 +195,17 @@ class OverworldScreen(BaseScreen):
 
     def on_screen_resume(self) -> None:
         """Called when returning from inventory/tasks/dungeon screens."""
+        # A task (e.g. a story beat that seals the player into a rift) can place
+        # the player inside a dungeon while the overworld was the active screen.
+        # The authoritative pg.active_dungeon flag is set by that placement; open
+        # the dungeon screen here so the player is actually taken inside. Guard
+        # against re-opening the one we just exited (its own dismiss clears the
+        # flag before this resumes).
+        pg = self._player_game()
+        active_dungeon = pg.get_active_dungeon() if pg is not None else None
+        if active_dungeon is not None:
+            self._enter_dungeon(pg, active_dungeon)
+            return
         # A resumed screen can already carry a pending fight (e.g. from a load
         # or a task completed on another screen); start it once dialogs clear.
         self._check_dialogs_and_refresh(on_cleared=self._check_pending_combat)
@@ -753,7 +764,20 @@ class OverworldScreen(BaseScreen):
         from game.objects.dungeon import DungeonTileType  # noqa: PLC0415
 
         if dungeon.player_pos is None:
-            dungeon.place_player_at_location(DungeonTileType.ENTRANCE)
+            # place_player_at_location() returns False when no valid entrance
+            # tile exists. Don't mark the dungeon active or open an inert screen
+            # with no player position — surface the failure and bail instead.
+            if not dungeon.place_player_at_location(DungeonTileType.ENTRANCE):
+                self._show_dialog(
+                    ["You cannot find a way into the dungeon."], "Dungeon"
+                )
+                return
+
+        # Mark this as the active dungeon (authoritative presence flag). A task
+        # placement sets this already; setting it here covers manual walk-in
+        # entry so both paths converge on the same state. Only reached once the
+        # player has a valid placement.
+        pg.active_dungeon = dungeon
 
         def _on_dungeon_done(exited_normally: bool | None) -> None:
             # Player either walked out or was defeated
@@ -1049,6 +1073,10 @@ class OverworldScreen(BaseScreen):
         """Ensure tiles exist around player and render initial view."""
         pg = self._player_game()
         if pg is None:
+            return
+        active_dungeon = pg.get_active_dungeon()
+        if active_dungeon is not None:
+            self._enter_dungeon(pg, active_dungeon)
             return
 
         self._update_overlay()

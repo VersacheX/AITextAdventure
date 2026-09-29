@@ -54,6 +54,11 @@ class PlayerGame:
 
 		self.tasks: List[Task] = [] # List of active tasks for the player
 		self.dungeons: List[Dungeon] = [] # List of dungeons created in the world
+		# Authoritative "am I inside a dungeon" flag. When None the player is in
+		# the overworld and self.x/self.y are the live position. When set, the
+		# player is inside this dungeon (its player_pos holds the in-dungeon
+		# coordinates) and the overworld position is preserved unchanged.
+		self.active_dungeon: Optional["Dungeon"] = None
 		self.npcs: List[NPC] = []
 
 		self.info_dialogs: List[str] = [] # List of info dialogs shown to the player
@@ -506,11 +511,31 @@ class PlayerGame:
 				dungeon = d
 				break
 		if dungeon is None:
-			input (f'Dungeon to set player in not found: {dungeon_id}')
+			# Surface the failure through the info dialog queue instead of blocking
+			# the background worker thread on stdin (there is no console on the TUI).
+			self.add_info_dialog_line(None, f'[debug] Dungeon to set player in not found: {dungeon_id}')
+			return None
+		if not dungeon.place_player_at_location(location_type):
 			return None
 		self.set_position(dungeon.position[0], dungeon.position[1], 0)
 		self.inside = False
-		dungeon.place_player_at_location(location_type)
+		# Mark the player as being inside this dungeon.
+		# presence flag the overworld/console loops read to open the dungeon
+		# screen (the task placement itself only moves the player to the dungeon
+		# entrance in-code; entry is surfaced on the next UI resume).
+		self.active_dungeon = dungeon
+
+	def set_player_in_dungeon(self, dungeon, location_type):
+		"""Set the player inside `dungeon` at the given location, marking it as
+		the active dungeon. If an active dungeon is already set, the player is
+		simply moved to the requested location within it."""
+		if dungeon is None:
+			return None
+		if not dungeon.place_player_at_location(location_type):
+			return None
+		self.set_position(dungeon.position[0], dungeon.position[1], 0)
+		self.inside = False
+		self.active_dungeon = dungeon
 
 	def remove_player_from_dungeon(self, dungeon_id):
 		if not dungeon_id or self is None:
@@ -521,9 +546,15 @@ class PlayerGame:
 				dungeon = d
 				break
 		if dungeon is None:
-			input (f'Dungeon to remove player from not found: {dungeon_id}')
+			# Surface the failure through the info dialog queue instead of blocking
+			# the background worker thread on stdin (there is no console on the TUI).
+			self.add_info_dialog_line(None, f'[debug] Dungeon to remove player from not found: {dungeon_id}')
 			return None
 		dungeon.remove_player_from_dungeon()
+		# Clear the authoritative presence flag if the player was inside this
+		# dungeon, returning them to the overworld (self.x/self.y are unchanged).
+		if self.active_dungeon is dungeon:
+			self.active_dungeon = None
 
 	def add_final_character(self, dialog_id):
 		if self.final_character:
@@ -1423,6 +1454,8 @@ class PlayerGame:
 		so new attributes added after a save won't exist on the unpickled
 		object. Merge saved state then ensure defaults for any missing keys.
 		"""
+		has_active_dungeon_state = 'active_dungeon' in (state or {})
+
 		# restore saved state
 		self.__dict__.update(state or {})
 
@@ -1445,6 +1478,7 @@ class PlayerGame:
 			'max_party_count': 5,
 			'tasks': [],
 			'dungeons': [],
+			'active_dungeon': None,
 			'npcs': [],
 			'info_dialogs': [],
 			'pending_fight_mob_id': None,
@@ -1472,6 +1506,9 @@ class PlayerGame:
 			if not hasattr(self, k):
 				setattr(self, k, v)
 
+		if not has_active_dungeon_state:
+			self.active_dungeon = self._find_legacy_active_dungeon()
+
 		# is_busy is a transient execution flag (set only while a live worker
 		# runs a long-running task event). It must never survive a save/load —
 		# otherwise a copy saved mid-event would load with no worker left to
@@ -1480,16 +1517,46 @@ class PlayerGame:
 		# Nested long-running-event depth counter — also transient.
 		self._busy_depth = 0
 
+	def _find_legacy_active_dungeon(self) -> Optional["Dungeon"]:
+		"""Infer dungeon presence only while migrating saves from before the
+		active_dungeon field existed."""
+		for dungeon in self.dungeons:
+			if getattr(dungeon, "position", None) != (self.x, self.y):
+				continue
+			pos = getattr(dungeon, "player_pos", None)
+			if pos is None or pos == (0, 0, 0):
+				continue
+
+			entrance_tiles = [
+				tile for tile in getattr(dungeon, "tiles", {}).values()
+				if getattr(getattr(tile, "tile_type", None), "value", None) == "entrance"
+				and tile.z == 0
+			]
+			if entrance_tiles:
+				min_x = min(tile.x for tile in entrance_tiles)
+				max_x = max(tile.x for tile in entrance_tiles)
+				min_y = min(tile.y for tile in entrance_tiles)
+				max_y = max(tile.y for tile in entrance_tiles)
+				initial_pos = (
+					(min_x + max_x + 1) // 2,
+					(min_y + max_y + 1) // 2,
+					0,
+				)
+				if pos == initial_pos:
+					continue
+
+			return dungeon
+		return None
+
 	def get_active_dungeon(self) -> Optional["Dungeon"]:
 		"""Return the dungeon the player is currently inside, or None.
-        Uses dungeon.player_pos as the authoritative presence flag.
-        Guards against stale (0,0,0) values written by older saves.
+
+		`active_dungeon` is the authoritative presence flag: it is set when the
+		player enters a dungeon (manually or via a set_player_in_dungeon task)
+		and cleared on exit / remove_player_from_dungeon. Legacy saves that lack
+		the flag are migrated during unpickling.
 		"""
-		for dungeon in self.dungeons:
-			pos = getattr(dungeon, "player_pos", None)
-			if pos is not None and pos != (0, 0, 0):
-				return dungeon
-		return None
+		return getattr(self, "active_dungeon", None)
 
 	def has_monster_hunter_active(self) -> bool:
 		"""Return True if any active-party member has an accessory equipped whose

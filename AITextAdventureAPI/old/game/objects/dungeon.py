@@ -86,6 +86,19 @@ class Dungeon:
         self.stairs: List[Tuple[int, int, int, str]] = [] # (x,y,z,dir) dir 'up' or 'down'
         self.locked: bool = False
         self.locked_text: List[str] = []
+        # Non-fatal messages accumulated during generation (e.g. an entity that
+        # could not be placed). Surfaced to the game UI by the caller instead of
+        # blocking the worker thread on stdin.
+        self.build_warnings: List[str] = []
+
+    def __setstate__(self, state: Dict[str, Any]) -> None:
+        # Dungeons pickled before ``build_warnings`` existed never ran __init__,
+        # so restore the instance dict as-is and backfill any fields that older
+        # saves are missing. Without this the placement helpers would raise
+        # AttributeError on ``build_warnings.append`` instead of returning False.
+        self.__dict__.update(state)
+        if not hasattr(self, 'build_warnings') or self.build_warnings is None:
+            self.build_warnings = []
 
     def is_locked(self) -> bool:
         return self.locked if hasattr( self, 'locked') else False
@@ -240,6 +253,19 @@ class Dungeon:
     ):
         lt = location_type
 
+        # Deduplicate NPCs by npc_id: a story event can request the same greeter
+        # that a dungeon seed already placed (e.g. Seth at the entrance). Placing
+        # again would spawn a second identical entity on another tile, so bail out
+        # if this npc_id is already present anywhere in the dungeon.
+        if isinstance(entity, dict) and entity.get('type') == 'npc':
+            npc_id = entity.get('npc_id')
+            if npc_id is not None:
+                for existing_tile in self.tiles.values():
+                    for existing in existing_tile.entities:
+                        if isinstance(existing, dict) and existing.get('npc_id') == npc_id:
+                            print(f'Skipping duplicate npc placement for {npc_id}; already present in dungeon.')
+                            return True
+
         # debug: list all tiles with matching tile_type
         all_tiles = [t for t in self.tiles.values() if t.tile_type == lt]
 
@@ -247,6 +273,11 @@ class Dungeon:
         candidates = []
         for tile in all_tiles:
             if not tile.passable:
+                continue
+            # Never place an NPC/item on the origin/entrance tile (0,0,0): path
+            # reachability is measured from origin, so occupying it would cut off
+            # the rest of the dungeon (and no entity should block the entrance).
+            if (tile.x, tile.y, tile.z) == (0, 0, 0):
                 continue
             # Do not place NPCs/items directly on stairs — this prevents blocking vertical movement.
             if tile.has_stairs_up or tile.has_stairs_down:
@@ -258,15 +289,25 @@ class Dungeon:
             if path_ok:
                 candidates.append(tile)
 
+        # Entrance NPCs greet the player at the door, but the only ENTRANCE tile
+        # is the origin (0,0,0) which we never occupy (it would block reachability
+        # and the entrance itself). Fall back to a passable, unoccupied tile
+        # adjacent to origin so the greeter still spawns right by the entrance.
+        if not candidates and location_type == DungeonTileType.ENTRANCE:
+            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                neighbor = self.get_tile(dx, dy, 0)
+                if not neighbor or not neighbor.passable:
+                    continue
+                if neighbor.has_stairs_up or neighbor.has_stairs_down:
+                    continue
+                if neighbor.entities:
+                    continue
+                candidates.append(neighbor)
+
         if not candidates:
-            print(f'No candidates found to place entity {entity} at location type {location_type}, ltvalue = {lt}')
-            for t in all_tiles:
-                px = (t.x, t.y, t.z)
-                print(f' diag tile {px}: passable={t.passable} entities={t.entities} -- path_exists={self.path_exists(px)}')
-            try:
-                input('DEBUG: no placement candidates found - press Enter to continue')
-            except Exception:
-                pass
+            msg = f'No candidates found to place entity {entity} at location type {location_type} (ltvalue={lt}); skipping placement.'
+            print(f'WARNING: {msg}')
+            self.build_warnings.append(msg)
             return False
 
         # narrow candidates to the requested depth band (0–100 %)
@@ -307,16 +348,9 @@ class Dungeon:
                 candidates.append(tile)
 
         if not candidates:
-            print (f'No candidates found to place player at location type {location_type}, ltvalue = {lt}')
-            # extra diagnostics: show nearby tiles and why blocked
-            for t in all_tiles:
-                px = (t.x, t.y, t.z)
-                print(f' diag tile {px}: passable={t.passable} entities={t.entities} -- path_exists={self.path_exists(px)}')
-            # pause for debugging so you can inspect logs when running interactively
-            try:
-                input('DEBUG: no placement candidates found - press Enter to continue')
-            except Exception:
-                pass
+            msg = f'No candidates found to place player at location type {location_type} (ltvalue={lt}); skipping placement.'
+            print(f'WARNING: {msg}')
+            self.build_warnings.append(msg)
             return False
 
         # choose candidate deterministically from dungeon and entity to keep placement stable

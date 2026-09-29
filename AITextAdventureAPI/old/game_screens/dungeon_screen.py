@@ -236,7 +236,13 @@ def run_dungeon_screen(dungeon: Dungeon, pg, player_pos: tuple) -> None:
 
     
     took_action = False
-    while True:        
+    while True:
+        # Task completion can remove the player while this loop is still active.
+        # Return before rendering or destructuring the now-missing position.
+        if (getattr(pg, "active_dungeon", None) not in (None, dungeon)
+                or dungeon.get_player_pos() is None):
+            return
+
         if pg.info_dialogs and len(pg.info_dialogs) > 0:
             while len(pg.info_dialogs) > 0:
                 display_dialog_text = pg.pop_dialog()
@@ -371,4 +377,16 @@ def run_dungeon_screen(dungeon: Dungeon, pg, player_pos: tuple) -> None:
             took_action = True
 
             if dungeon.is_player_at_exit():
+                # A locked dungeon traps the player: surface the locked_text and
+                # keep them inside instead of leaving. Leave the queued dialogs
+                # intact so the dialog loop at the top of this while renders each
+                # line and waits for readkey() — printing them here would clear
+                # them on the next _render_minimap().
+                if dungeon.is_locked():
+                    pg.add_dungeon_standing_text(dungeon)
+                    continue
+                # Clear the authoritative presence flag on a real exit so the
+                # overworld loop doesn't immediately re-enter this dungeon.
+                if getattr(pg, "active_dungeon", None) is dungeon:
+                    pg.active_dungeon = None
                 break
