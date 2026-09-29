@@ -378,11 +378,12 @@ def run_dungeon_screen(dungeon: Dungeon, pg, player_pos: tuple) -> None:
 
             if dungeon.is_player_at_exit():
                 # A locked dungeon traps the player: surface the locked_text and
-                # keep them inside instead of leaving.
+                # keep them inside instead of leaving. Leave the queued dialogs
+                # intact so the dialog loop at the top of this while renders each
+                # line and waits for readkey() — printing them here would clear
+                # them on the next _render_minimap().
                 if dungeon.is_locked():
                     pg.add_dungeon_standing_text(dungeon)
-                    while len(pg.info_dialogs) > 0:
-                        print(pg.pop_dialog())
                     continue
                 # Clear the authoritative presence flag on a real exit so the
                 # overworld loop doesn't immediately re-enter this dungeon.
