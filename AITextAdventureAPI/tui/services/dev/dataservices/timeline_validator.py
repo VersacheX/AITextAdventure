@@ -202,12 +202,13 @@ R26 ITEM_ID_UNKNOWN
     An item-referencing event or task uses an item_id that has no matching seed
     in any const catalog (WEAPON_SEEDS, ARMOR_SEEDS, UTILITY_ITEM_SEEDS,
     SPECIAL_ITEM_SEEDS, ACCESSORY_SEEDS).  Emitted for award_item,
-    dungeon_add_treasure, remove_item, and the item_id of a deliver task.
+    dungeon_add_treasure, remove_item, the item_id of a deliver task, and the
+    item_id (or legacy to_id fallback) of a fetch task.
     For award_item / dungeon_add_treasure / remove_item the id can never resolve
     via instantiate_item_from_id at runtime, so the award/removal/treasure
-    silently does nothing.  For a deliver task the id is invalid task metadata:
-    the player can never obtain an item that no catalog defines, so the delivery
-    can never be satisfied (completion now requires the item to be in inventory).
+    silently does nothing.  For a deliver or fetch task the id is invalid task
+    metadata: the player can never obtain an item that no catalog defines, so
+    the task can never be satisfied (completion requires the item in inventory).
 """
 from __future__ import annotations
 
@@ -745,6 +746,26 @@ def validate_timeline_integrity(
                         f"utility, special, or accessory seed exists in const.",
                         related_entity_id=deliver_item_id,
                     ))
+        elif task_type == "fetch":
+            # Runtime resolves the fetched item as item_id with a legacy to_id
+            # fallback (build_task_from_seed: item_id or to_id). Mirror that so
+            # the validated id matches the FetchTask the game actually builds.
+            fetch_item_id = str(task.get("item_id") or task.get("to_id") or "")
+            if not fetch_item_id:
+                errors_map[task_id].append(_err(
+                    "TASK_SCHEMA_INVALID",
+                    f"'fetch' task '{task_id}' missing required item_id (or "
+                    f"legacy to_id) field.",
+                ))
+            elif known_item_ids and fetch_item_id not in known_item_ids:
+                errors_map[task_id].append(_err(
+                    "ITEM_ID_UNKNOWN",
+                    f"'fetch' task '{task_id}' requires unknown item_id "
+                    f"'{fetch_item_id}' — no matching weapon, armor, utility, "
+                    f"special, or accessory seed exists in const. The task can "
+                    f"never complete because the item can never be obtained.",
+                    related_entity_id=fetch_item_id,
+                ))
         elif task_type == "defeat":
             if str(task.get("to_type", "")).lower() != "mob" or not task.get("to_id"):
                 errors_map[task_id].append(_err(
