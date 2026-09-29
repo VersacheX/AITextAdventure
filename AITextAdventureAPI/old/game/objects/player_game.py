@@ -1525,7 +1525,7 @@ class PlayerGame:
 		for dungeon in self.dungeons:
 			pos = getattr(dungeon, "player_pos", None)
 			if pos is not None and pos != (0, 0, 0):
-              self.active_dungeon = dungeon
+				self.active_dungeon = dungeon
 				return dungeon
 		return None
 

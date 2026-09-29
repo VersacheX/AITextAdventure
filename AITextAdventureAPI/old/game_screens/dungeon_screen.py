@@ -239,7 +239,7 @@ def run_dungeon_screen(dungeon: Dungeon, pg, player_pos: tuple) -> None:
     while True:
         # Task completion can remove the player while this loop is still active.
         # Return before rendering or destructuring the now-missing position.
-        if (getattr(pg, "active_dungeon", None) is not dungeon
+        if (getattr(pg, "active_dungeon", None) not in (None, dungeon)
                 or dungeon.get_player_pos() is None):
             return
 
