@@ -956,9 +956,14 @@ class OverworldScreen(BaseScreen):
         """
         if not self._pending_overlay_refocus:
             return
-        self._pending_overlay_refocus = False
+        # Keep the request pending while another encounter dialog or chained
+        # combat is still active (e.g. a boss win that immediately starts the
+        # next pending fight). Clearing the flag here would leave that fight's
+        # completion with nothing to consume, stranding the location list
+        # unfocused after back-to-back fights.
         if self._dialog_visible() or self._combat_active:
             return
+        self._pending_overlay_refocus = False
 
         def _refocus() -> None:
             try:
