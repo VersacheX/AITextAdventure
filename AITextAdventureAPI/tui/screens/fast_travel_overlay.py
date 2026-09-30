@@ -174,6 +174,18 @@ class FastTravelOverlay(Widget):
                 self.remove_class("ow-overlay")
                 self.remove()
                 self._on_done(True)
+                return
+            # Cancelled: ConfirmScreen returned focus to the app, not this
+            # overlay. Refocus the station list so arrow/Enter navigation keeps
+            # working (the overworld's structural .ow-overlay guard otherwise
+            # swallows those keys, stranding the overlay until Escape/reopen).
+            try:
+                self.query_one("#ft-list", ListView).focus()
+            except Exception:
+                try:
+                    self.focus()
+                except Exception:
+                    pass
 
         from tui.screens.confirm_screen import ConfirmScreen  # noqa: PLC0415
         self.app.push_screen(

@@ -80,6 +80,11 @@ class OverworldScreen(BaseScreen):
         # True while combat is on-screen; suppresses the tile worker's
         # combat callback so we can't stack two CombatScreens.
         self._combat_active = False
+        # Set when a location action's overlay refocus must be deferred because
+        # _check_pending_combat opened an encounter dialog / started combat. The
+        # combat completion path consumes it and refocuses the location list
+        # once the dialog/battle is fully cleaned up.
+        self._pending_overlay_refocus = False
 
     LAYERS = ("default", "overlay")
 
@@ -235,6 +240,21 @@ class OverworldScreen(BaseScreen):
         }
         if action in gameplay_actions and self._blocked():
             return False
+        # Structural guard: a blocking overlay (shop / fast-travel — anything on
+        # the .ow-overlay layer) must swallow gameplay keys even if it has lost
+        # ambient focus (e.g. after a ListView rebuild dropped focus). Without
+        # this the screen's own WASD bindings would fire and move the player
+        # "behind" the open overlay. Movement/focus keys stay handled by the
+        # overlay itself while it has focus; this only closes the focus-loss hole.
+        #
+        # Escape (go_back) is deliberately exempt: in the same focus-loss state
+        # the overlay never receives its own Escape handler, so blocking the
+        # screen action too would strand the overlay with no keyboard close
+        # path. action_go_back detects the open overlay and closes it instead.
+        if action == "go_back" and self.query(".ow-overlay"):
+            return True
+        if action in gameplay_actions and self.query(".ow-overlay"):
+            return False
         return True
 
     def _overlay_list_focused(self) -> bool:
@@ -311,6 +331,13 @@ class OverworldScreen(BaseScreen):
         if self._blocked():
             return
 
+        # A blocking overlay (shop / fast-travel) may have lost ambient focus so
+        # its own Escape handler never fires. Route Escape to it here so it can
+        # still be closed from the keyboard instead of opening the main-menu
+        # confirm behind it.
+        if self._close_active_overlay():
+            return
+
         def _handle(confirmed: bool | None) -> None:
             if confirmed:
                 from tui.services.game_state import set_active_game
@@ -333,6 +360,28 @@ class OverworldScreen(BaseScreen):
         from tui.services.game_state import set_active_game  # noqa: PLC0415
         set_active_game(None)
         self.app.goto_screen("main_menu")
+
+    def _close_active_overlay(self) -> bool:
+        """Close an open .ow-overlay from the keyboard.
+
+        Overlays normally handle Escape in their own on_key, but if the overlay
+        has lost ambient focus (e.g. a ListView rebuild dropped focus) that key
+        never reaches it. Called from action_go_back to guarantee a keyboard
+        close path. Returns True if an overlay was found and closed.
+        """
+        overlays = self.query(".ow-overlay")
+        if not overlays:
+            return False
+        overlay = overlays.last()
+        closer = getattr(overlay, "action_close", None)
+        try:
+            if callable(closer):
+                closer()
+            else:
+                overlay.remove()
+        except Exception:
+            return False
+        return True
 
     # ── dialog and message handling ───────────────────────────────────────
 
@@ -640,6 +689,10 @@ class OverworldScreen(BaseScreen):
         """
         still_busy = self._generation_refcount > 0 or self._loading_visible()
         self._set_overlays_disabled(still_busy)
+        # Overlays just re-enabled — retry any refocus request that was held
+        # pending while generation ran so the location list regains focus.
+        if not still_busy and self._pending_overlay_refocus:
+            self._consume_pending_overlay_refocus()
 
     def _set_overlays_disabled(self, disabled: bool) -> None:
         """Disable/enable all interactive overlays (location menu, shop, travel)
@@ -789,6 +842,12 @@ class OverworldScreen(BaseScreen):
             # tile exists. Don't mark the dungeon active or open an inert screen
             # with no player position — surface the failure and bail instead.
             if not dungeon.place_player_at_location(DungeonTileType.ENTRANCE):
+                # A task placement may have already marked this dungeon active
+                # before we got here. Clear it so on_screen_resume /
+                # _ensure_and_render don't immediately re-enter this broken
+                # dungeon on every resume and soft-lock the player.
+                if getattr(pg, "active_dungeon", None) is dungeon:
+                    pg.active_dungeon = None
                 self._show_dialog(
                     ["You cannot find a way into the dungeon."], "Dungeon"
                 )
@@ -800,9 +859,19 @@ class OverworldScreen(BaseScreen):
         # player has a valid placement.
         pg.active_dungeon = dungeon
 
-        def _on_dungeon_done(exited_normally: bool | None) -> None:
+        def _on_dungeon_done(exited_normally: DungeonResult) -> None:
             # Player either walked out or was defeated
-            if not exited_normally:
+            from tui.screens.dungeon_screen import (  # noqa: PLC0415
+                DUNGEON_DEFEAT_HANDLED,
+                DungeonResult,
+            )
+
+            if exited_normally == DUNGEON_DEFEAT_HANDLED:
+                # DungeonScreen already showed its own defeat dialog and ran the
+                # post-defeat delay; go straight to the main menu without
+                # showing a second overlapping message or a second timer.
+                self._leave_to_main_menu()
+            elif not exited_normally:
                 self._show_dialog(["Your party was defeated in the dungeon..."], "Game Over")
                 self.set_timer(2.0, self._leave_to_main_menu)
             else:
@@ -830,7 +899,11 @@ class OverworldScreen(BaseScreen):
             is_boss = False
 
         if not hostiles:
+            # An unresolvable boss id can be cleared by get_boss_encounter_hostiles
+            # so no combat starts. No combat completion will fire, so consume any
+            # pending overlay refocus here to avoid stranding the location list.
             self._refresh_all()
+            self._consume_pending_overlay_refocus()
             return
 
         # Guard against stacking a second CombatScreen. The tile-generation
@@ -864,6 +937,7 @@ class OverworldScreen(BaseScreen):
                     self._check_pending_combat()
                 else:
                     self._begin_tile_generation(pg)
+                self._consume_pending_overlay_refocus()
 
             def _surface() -> None:
                 self._check_dialogs_and_refresh(on_cleared=_after_combat_dialogs)
@@ -877,6 +951,41 @@ class OverworldScreen(BaseScreen):
                 _surface()
 
         self.app.push_screen(CombatScreen(pg, hostiles), _on_combat_done)
+
+    def _consume_pending_overlay_refocus(self) -> None:
+        """Refocus the location list after a pending combat/dialog opened by an
+        NPC action has fully cleaned up.
+
+        A location action can queue a fight; _after_pending_combat sets
+        `_pending_overlay_refocus` instead of stealing focus from the encounter
+        prompt. Once the fight/dialog resolves this restores the overlay's list
+        focus so keyboard nav works again, but only if nothing new opened and
+        the overlay is still present.
+        """
+        if not self._pending_overlay_refocus:
+            return
+        # Keep the request pending while another encounter dialog or chained
+        # combat is still active (e.g. a boss win that immediately starts the
+        # next pending fight). Clearing the flag here would leave that fight's
+        # completion with nothing to consume, stranding the location list
+        # unfocused after back-to-back fights.
+        if self._dialog_visible() or self._combat_active:
+            return
+        # Also keep it pending while a tile-generation pass is in flight: the
+        # LocationOverlay is disabled for the generation lifetime, so focusing
+        # its list now would be a no-op. _refresh_overlays_disabled retries this
+        # consume once overlays are re-enabled.
+        if self._generation_refcount > 0 or self._loading_visible():
+            return
+        self._pending_overlay_refocus = False
+
+        def _refocus() -> None:
+            try:
+                self.query_one(LocationOverlay).focus_list()
+            except Exception:
+                pass
+
+        self.call_after_refresh(_refocus)
 
     # ── location overlay handling ─────────────────────────────────────────
 
@@ -922,7 +1031,33 @@ class OverworldScreen(BaseScreen):
                 # task that queues dialogs and sets a pending fight. Defer the
                 # combat check until the dialog chain clears so the player can
                 # read the narrative before battle begins.
-                self._check_dialogs_and_refresh(on_cleared=self._check_pending_combat)
+                def _refocus_overlay() -> None:
+                    # The NPC/action dialog steals focus; once it clears Textual
+                    # drops focus to whatever's next in the DOM (often nothing),
+                    # leaving the overlay looking disabled (arrow keys/Enter do
+                    # nothing). Re-focus its list so keyboard nav works again.
+                    try:
+                        self.query_one(LocationOverlay).focus_list()
+                    except Exception:
+                        pass
+
+                def _after_pending_combat() -> None:
+                    # _check_pending_combat may mount an encounter MessageDialog
+                    # (or start combat) that owns focus. Only restore list focus
+                    # when nothing was opened — otherwise we'd steal focus from
+                    # the encounter prompt and let list input run behind it.
+                    # If a dialog/combat did open, carry the refocus through the
+                    # combat completion path so the overlay isn't left looking
+                    # disabled once the fight/dialog is dismissed.
+                    self._check_pending_combat()
+                    if self._dialog_visible() or self._combat_active:
+                        self._pending_overlay_refocus = True
+                        return
+                    # Refocus after the overlay refresh below has settled so the
+                    # list widget still exists and keeps focus.
+                    self.call_after_refresh(_refocus_overlay)
+
+                self._check_dialogs_and_refresh(on_cleared=_after_pending_combat)
             else:
                 self._refresh_all()
             # Refresh the overlay in-place for the (possibly updated) tile
