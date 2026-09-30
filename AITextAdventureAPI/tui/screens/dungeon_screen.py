@@ -18,13 +18,15 @@ Layout mirrors OverworldScreen:
   │  └─────────────────────────────┘     │                │
   └───────────────────────────────────────────────────────┘
 
-The screen dismisses with True (player exited normally) or False (player
-died / gave up), matching the modal-result pattern used by CombatScreen
-and ConfirmScreen so the caller (OverworldScreen) can react cleanly.
+The screen dismisses with True (player exited normally), False (player
+died / gave up), None (no explicit outcome), or the DUNGEON_DEFEAT_HANDLED
+sentinel (defeat already handled here) — see the DungeonResult type. This
+matches the modal-result pattern used by CombatScreen and ConfirmScreen so
+the caller (OverworldScreen) can react cleanly.
 """
 from __future__ import annotations
 
-from typing import Any, Callable, List, Optional
+from typing import Any, Callable, List, Literal, Optional, Union
 
 from textual import on
 from textual.app import ComposeResult
@@ -49,6 +51,13 @@ from tui.services.combat_service import build_simulation
 # caller (OverworldScreen) must NOT show a second defeat dialog — it should
 # route straight to the main menu. Distinct from False/None (unhandled defeat).
 DUNGEON_DEFEAT_HANDLED = "dungeon_defeat_handled"
+
+# All valid results the DungeonScreen can dismiss with:
+#   - True  → player exited the dungeon normally
+#   - False → player died / gave up (caller handles the defeat flow)
+#   - None  → dismissed without an explicit outcome
+#   - DUNGEON_DEFEAT_HANDLED → defeat already handled by this screen
+DungeonResult = Union[bool, None, Literal["dungeon_defeat_handled"]]
 
 
 class DungeonScreen(BaseScreen):
@@ -219,7 +228,7 @@ class DungeonScreen(BaseScreen):
             return
         self._interact()
 
-    def dismiss(self, result: bool | None = None) -> None:
+    def dismiss(self, result: DungeonResult = None) -> None:
         """Clear the active dungeon reference whenever this screen is removed,
         regardless of which code path triggered the dismiss."""
         self.app._active_dungeon = None

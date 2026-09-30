@@ -814,10 +814,11 @@ class OverworldScreen(BaseScreen):
         # player has a valid placement.
         pg.active_dungeon = dungeon
 
-        def _on_dungeon_done(exited_normally: bool | None) -> None:
+        def _on_dungeon_done(exited_normally: DungeonResult) -> None:
             # Player either walked out or was defeated
             from tui.screens.dungeon_screen import (  # noqa: PLC0415
                 DUNGEON_DEFEAT_HANDLED,
+                DungeonResult,
             )
 
             if exited_normally == DUNGEON_DEFEAT_HANDLED:
