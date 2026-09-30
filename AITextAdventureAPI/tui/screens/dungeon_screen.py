@@ -139,7 +139,10 @@ class DungeonScreen(BaseScreen):
         # True once defeat is terminal: the Game Over dialog is (about to be)
         # mounted and dismissal is the only valid continuation. Deferred
         # callbacks are discarded and the drain is suppressed so a stale queued
-        # callback can't start another encounter while the party is dead.
+        # callback can't start another encounter while the party is dead. It also
+        # feeds _blocked() so input stays disabled while the one-line Game Over
+        # dialog's 2s dismissal timer is still pending (the dialog can be
+        # dismissed immediately, which would otherwise re-enable movement).
         self._defeat_pending = False
         # Callbacks queued while a dialog chain is already active (see
         # _check_dialogs_and_refresh). Multiple independent async triggers
@@ -626,6 +629,7 @@ class DungeonScreen(BaseScreen):
         return (
             self._dialog_visible()
             or self._loading_visible()
+            or self._defeat_pending
             or bool(getattr(self._pg, "is_busy", False))
         )
 
