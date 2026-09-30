@@ -241,6 +241,13 @@ class OverworldScreen(BaseScreen):
         # this the screen's own WASD bindings would fire and move the player
         # "behind" the open overlay. Movement/focus keys stay handled by the
         # overlay itself while it has focus; this only closes the focus-loss hole.
+        #
+        # Escape (go_back) is deliberately exempt: in the same focus-loss state
+        # the overlay never receives its own Escape handler, so blocking the
+        # screen action too would strand the overlay with no keyboard close
+        # path. action_go_back detects the open overlay and closes it instead.
+        if action == "go_back" and self.query(".ow-overlay"):
+            return True
         if action in gameplay_actions and self.query(".ow-overlay"):
             return False
         return True
@@ -319,6 +326,13 @@ class OverworldScreen(BaseScreen):
         if self._blocked():
             return
 
+        # A blocking overlay (shop / fast-travel) may have lost ambient focus so
+        # its own Escape handler never fires. Route Escape to it here so it can
+        # still be closed from the keyboard instead of opening the main-menu
+        # confirm behind it.
+        if self._close_active_overlay():
+            return
+
         def _handle(confirmed: bool | None) -> None:
             if confirmed:
                 from tui.services.game_state import set_active_game
@@ -341,6 +355,28 @@ class OverworldScreen(BaseScreen):
         from tui.services.game_state import set_active_game  # noqa: PLC0415
         set_active_game(None)
         self.app.goto_screen("main_menu")
+
+    def _close_active_overlay(self) -> bool:
+        """Close an open .ow-overlay from the keyboard.
+
+        Overlays normally handle Escape in their own on_key, but if the overlay
+        has lost ambient focus (e.g. a ListView rebuild dropped focus) that key
+        never reaches it. Called from action_go_back to guarantee a keyboard
+        close path. Returns True if an overlay was found and closed.
+        """
+        overlays = self.query(".ow-overlay")
+        if not overlays:
+            return False
+        overlay = overlays.last()
+        closer = getattr(overlay, "action_close", None)
+        try:
+            if callable(closer):
+                closer()
+            else:
+                overlay.remove()
+        except Exception:
+            return False
+        return True
 
     # ── dialog and message handling ───────────────────────────────────────
 
