@@ -539,14 +539,17 @@ class DungeonScreen(BaseScreen):
         # A dialog may have been mounted by an earlier step (e.g. _show_defeat
         # via on_cleared) before we started draining. If one is already active,
         # leave the queue intact so the dialog's scheduled completion re-enters
-        # and drains it safely, preserving the intended ordering.
-        if self._dialog_visible():
+        # and drains it safely, preserving the intended ordering. Active combat
+        # counts too: _check_encounters can push a CombatScreen (not a map-panel
+        # MessageDialog), so _dialog_visible() alone wouldn't notice and the
+        # drain would consume the remaining encounter callbacks behind the fight.
+        if self._dialog_visible() or self._combat_active:
             return
         self._deferred_on_cleared = []
         while queued:
             cb = queued.pop(0)
             cb()
-            if self._dialog_visible():
+            if self._dialog_visible() or self._combat_active:
                 self._deferred_on_cleared = queued + self._deferred_on_cleared
                 return
 

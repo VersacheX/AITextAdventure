@@ -992,12 +992,19 @@ class OverworldScreen(BaseScreen):
                     except Exception:
                         pass
 
-                self._check_dialogs_and_refresh(
-                    on_cleared=lambda: (
-                        self._check_pending_combat(),
-                        _refocus_overlay(),
-                    )
-                )
+                def _after_pending_combat() -> None:
+                    # _check_pending_combat may mount an encounter MessageDialog
+                    # (or start combat) that owns focus. Only restore list focus
+                    # when nothing was opened — otherwise we'd steal focus from
+                    # the encounter prompt and let list input run behind it.
+                    self._check_pending_combat()
+                    if self._dialog_visible() or self._combat_active:
+                        return
+                    # Refocus after the overlay refresh below has settled so the
+                    # list widget still exists and keeps focus.
+                    self.call_after_refresh(_refocus_overlay)
+
+                self._check_dialogs_and_refresh(on_cleared=_after_pending_combat)
             else:
                 self._refresh_all()
             # Refresh the overlay in-place for the (possibly updated) tile
