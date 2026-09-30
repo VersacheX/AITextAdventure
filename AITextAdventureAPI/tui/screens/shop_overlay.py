@@ -855,11 +855,15 @@ class ShopOverlay(Widget):
                 # ConfirmScreen returns focus to the app, not guaranteed to land
                 # back on this overlay — reassert it on every path (confirm AND
                 # cancel) so overworld movement keys don't leak past to
-                # OverworldScreen's WASD bindings.
+                # OverworldScreen's WASD bindings. Refocus the sell list itself so
+                # keyboard users can keep selecting items with the arrow keys.
                 try:
-                    self.focus()
+                    self.query_one("#sell-list", ListView).focus()
                 except Exception:
-                    pass
+                    try:
+                        self.focus()
+                    except Exception:
+                        pass
 
         from tui.screens.confirm_screen import ConfirmScreen  # noqa: PLC0415
         self.app.push_screen(
