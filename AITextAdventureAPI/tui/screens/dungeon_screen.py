@@ -136,6 +136,11 @@ class DungeonScreen(BaseScreen):
         # True while a CombatScreen is on-screen; prevents stacking a second
         # combat push if an encounter re-check fires before the first resolves.
         self._combat_active = False
+        # True once defeat is terminal: the Game Over dialog is (about to be)
+        # mounted and dismissal is the only valid continuation. Deferred
+        # callbacks are discarded and the drain is suppressed so a stale queued
+        # callback can't start another encounter while the party is dead.
+        self._defeat_pending = False
         # Callbacks queued while a dialog chain is already active (see
         # _check_dialogs_and_refresh). Multiple independent async triggers
         # (move → encounter check, _meet completion, boss completion,
@@ -272,6 +277,12 @@ class DungeonScreen(BaseScreen):
         route to game over from the drain's completion callback so queued
         messages are read before the dungeon is dismissed."""
         def _show_defeat() -> None:
+            # Make defeat terminal before mounting Game Over: discard any
+            # callbacks queued during the drained narrative chain so dismissing
+            # the dialog (even before its 2s timer) can't re-enter the deferred
+            # drain and start another encounter while the party is dead.
+            self._defeat_pending = True
+            self._deferred_on_cleared = []
             self._show_dialog(["You have been defeated..."], "Game Over")
             self.set_timer(2.0, lambda: self.dismiss(DUNGEON_DEFEAT_HANDLED))
 
@@ -503,6 +514,10 @@ class DungeonScreen(BaseScreen):
         if self._presence_cleared():
             self.dismiss(True)
             return
+        # Once defeat is terminal, ignore new continuations entirely — the Game
+        # Over dialog owns the flow and dismissal routes to game over.
+        if self._defeat_pending:
+            return
         # Block re-entrancy — if a dialog is already visible, don't yank it out
         # from under a still-running chain (which would drop its on_cleared).
         # Queue the callback so it runs when the active chain resolves and
@@ -535,6 +550,12 @@ class DungeonScreen(BaseScreen):
         """
         queued = self._deferred_on_cleared
         if not queued:
+            return
+        # Defeat is terminal: never run queued callbacks once Game Over is up —
+        # dismissal is the only valid continuation. Drop them so a re-entry from
+        # the dialog poll can't start another encounter while the party is dead.
+        if self._defeat_pending:
+            self._deferred_on_cleared = []
             return
         # A dialog may have been mounted by an earlier step (e.g. _show_defeat
         # via on_cleared) before we started draining. If one is already active,
