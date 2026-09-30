@@ -536,6 +536,12 @@ class DungeonScreen(BaseScreen):
         queued = self._deferred_on_cleared
         if not queued:
             return
+        # A dialog may have been mounted by an earlier step (e.g. _show_defeat
+        # via on_cleared) before we started draining. If one is already active,
+        # leave the queue intact so the dialog's scheduled completion re-enters
+        # and drains it safely, preserving the intended ordering.
+        if self._dialog_visible():
+            return
         self._deferred_on_cleared = []
         while queued:
             cb = queued.pop(0)
