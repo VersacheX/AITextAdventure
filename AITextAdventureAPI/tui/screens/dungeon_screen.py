@@ -571,14 +571,13 @@ class DungeonScreen(BaseScreen):
     def _schedule_dialog_check(self, on_cleared: Optional[Callable[[], None]] = None) -> None:
         def _check() -> None:
             if not self._dialog_visible():
-                self._refresh_all()
-                if on_cleared is not None:
-                    on_cleared()
-                # Drain any callbacks queued while this dialog was up so a
-                # pending fight/task callback is never lost. Skipped if
-                # on_cleared itself mounted a new dialog.
-                if not self._dialog_visible():
-                    self._run_deferred_on_cleared()
+                # Re-enter the full dialog check so any messages queued while
+                # this dialog was up (e.g. an event appending pg.info_dialogs)
+                # surface before on_cleared and the deferred callbacks run —
+                # otherwise an encounter callback could start combat before the
+                # new narrative is displayed. on_cleared is forwarded so it fires
+                # only once the entire chain is drained.
+                self._check_dialogs_and_refresh(on_cleared=on_cleared)
             else:
                 self.set_timer(0.2, _check)
 
