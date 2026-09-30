@@ -813,51 +813,53 @@ class ShopOverlay(Widget):
         qty_str    = f"{qty}× " if qty > 1 else ""
 
         def _on_confirmed(confirmed: bool | None) -> None:
-            if not confirmed:
-                return
-            success_count = 0
-            for _ in range(qty):
-                try:
-                    if self._shop_type == "shopweapons":
-                        from services.weapon_shop_service import sell  # noqa: PLC0415
-                        result = sell(self._pg, item)
-                    elif self._shop_type == "shoparmor":
-                        from services.armor_shop_service import sell  # noqa: PLC0415
-                        result = sell(self._pg, item)
-                    else:
-                        from services.utility_shop_service import sell  # noqa: PLC0415
-                        result = sell(self._pg, item)
-                    if result.get("success"):
-                        success_count += 1
-                    else:
-                        break
-                except Exception:
-                    break
-
-            if success_count > 0:
-                self._acted = True
-                earned = unit_price * success_count
-                self.app.notify(
-                    f"Sold {qty_str}{name} for {earned}g.",
-                    title="Sold",
-                    timeout=2,
-                )
-                self._sell_stock = _load_sell_stock(self._shop_type, self._pg)
-                self._sell_item  = None
-                self._sell_qty   = 1
-                self._rebuild_sell_list()
-                self._refresh_sell_panel()
-                self._refresh_gold()
-            else:
-                self.app.notify("Could not sell that item.", severity="warning")
-
-            # ConfirmScreen returns focus to the app, not guaranteed to land
-            # back on this overlay — reassert it so overworld movement keys
-            # don't leak past to OverworldScreen's WASD bindings.
             try:
-                self.focus()
-            except Exception:
-                pass
+                if not confirmed:
+                    return
+                success_count = 0
+                for _ in range(qty):
+                    try:
+                        if self._shop_type == "shopweapons":
+                            from services.weapon_shop_service import sell  # noqa: PLC0415
+                            result = sell(self._pg, item)
+                        elif self._shop_type == "shoparmor":
+                            from services.armor_shop_service import sell  # noqa: PLC0415
+                            result = sell(self._pg, item)
+                        else:
+                            from services.utility_shop_service import sell  # noqa: PLC0415
+                            result = sell(self._pg, item)
+                        if result.get("success"):
+                            success_count += 1
+                        else:
+                            break
+                    except Exception:
+                        break
+
+                if success_count > 0:
+                    self._acted = True
+                    earned = unit_price * success_count
+                    self.app.notify(
+                        f"Sold {qty_str}{name} for {earned}g.",
+                        title="Sold",
+                        timeout=2,
+                    )
+                    self._sell_stock = _load_sell_stock(self._shop_type, self._pg)
+                    self._sell_item  = None
+                    self._sell_qty   = 1
+                    self._rebuild_sell_list()
+                    self._refresh_sell_panel()
+                    self._refresh_gold()
+                else:
+                    self.app.notify("Could not sell that item.", severity="warning")
+            finally:
+                # ConfirmScreen returns focus to the app, not guaranteed to land
+                # back on this overlay — reassert it on every path (confirm AND
+                # cancel) so overworld movement keys don't leak past to
+                # OverworldScreen's WASD bindings.
+                try:
+                    self.focus()
+                except Exception:
+                    pass
 
         from tui.screens.confirm_screen import ConfirmScreen  # noqa: PLC0415
         self.app.push_screen(
@@ -896,49 +898,51 @@ class ShopOverlay(Widget):
             return
 
         def _on_confirmed(confirmed: bool | None) -> None:
-            if not confirmed:
-                return
-            success_count = 0
-            for _ in range(qty):
-                try:
-                    result = self._execute_buy(item)
-                except Exception as exc:
-                    self.app.notify(str(exc), title="Purchase Error", severity="error")
-                    break
-                if result.get("success"):
-                    success_count += 1
-                else:
-                    err = result.get("error", "unknown_error")
-                    if err == "insufficient_funds":
-                        self.app.notify("Ran out of gold mid-purchase.", severity="warning")
-                    elif err == "inventory_full":
-                        self.app.notify("Inventory full.", severity="warning")
-                    else:
-                        self.app.notify(f"Purchase failed: {err}", severity="error")
-                    break
-
-            if success_count > 0:
-                self._acted    = True
-                self._buy_item = None
-                self._buy_qty  = 1
-                self.app.notify(
-                    f"Bought {qty_str}{rich_escape(str(name))} for {price * success_count}g!",
-                    title="Purchased",
-                    timeout=2,
-                )
-                self._refresh_gold()
-                self._refresh_buy_panel()
-                if _shop_has_sell(self._shop_type):
-                    self._sell_stock = _load_sell_stock(self._shop_type, self._pg)
-                    self._rebuild_sell_list()
-
-            # ConfirmScreen returns focus to the app, not guaranteed to land
-            # back on this overlay — reassert it so overworld movement keys
-            # don't leak past to OverworldScreen's WASD bindings.
             try:
-                self.focus()
-            except Exception:
-                pass
+                if not confirmed:
+                    return
+                success_count = 0
+                for _ in range(qty):
+                    try:
+                        result = self._execute_buy(item)
+                    except Exception as exc:
+                        self.app.notify(str(exc), title="Purchase Error", severity="error")
+                        break
+                    if result.get("success"):
+                        success_count += 1
+                    else:
+                        err = result.get("error", "unknown_error")
+                        if err == "insufficient_funds":
+                            self.app.notify("Ran out of gold mid-purchase.", severity="warning")
+                        elif err == "inventory_full":
+                            self.app.notify("Inventory full.", severity="warning")
+                        else:
+                            self.app.notify(f"Purchase failed: {err}", severity="error")
+                        break
+
+                if success_count > 0:
+                    self._acted    = True
+                    self._buy_item = None
+                    self._buy_qty  = 1
+                    self.app.notify(
+                        f"Bought {qty_str}{rich_escape(str(name))} for {price * success_count}g!",
+                        title="Purchased",
+                        timeout=2,
+                    )
+                    self._refresh_gold()
+                    self._refresh_buy_panel()
+                    if _shop_has_sell(self._shop_type):
+                        self._sell_stock = _load_sell_stock(self._shop_type, self._pg)
+                        self._rebuild_sell_list()
+            finally:
+                # ConfirmScreen returns focus to the app, not guaranteed to land
+                # back on this overlay — reassert it on every path (confirm AND
+                # cancel) so overworld movement keys don't leak past to
+                # OverworldScreen's WASD bindings.
+                try:
+                    self.focus()
+                except Exception:
+                    pass
 
         from tui.screens.confirm_screen import ConfirmScreen  # noqa: PLC0415
         self.app.push_screen(
