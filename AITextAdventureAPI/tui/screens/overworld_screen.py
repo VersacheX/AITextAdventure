@@ -235,6 +235,14 @@ class OverworldScreen(BaseScreen):
         }
         if action in gameplay_actions and self._blocked():
             return False
+        # Structural guard: a blocking overlay (shop / fast-travel — anything on
+        # the .ow-overlay layer) must swallow gameplay keys even if it has lost
+        # ambient focus (e.g. after a ListView rebuild dropped focus). Without
+        # this the screen's own WASD bindings would fire and move the player
+        # "behind" the open overlay. Movement/focus keys stay handled by the
+        # overlay itself while it has focus; this only closes the focus-loss hole.
+        if action in gameplay_actions and self.query(".ow-overlay"):
+            return False
         return True
 
     def _overlay_list_focused(self) -> bool:
@@ -789,6 +797,12 @@ class OverworldScreen(BaseScreen):
             # tile exists. Don't mark the dungeon active or open an inert screen
             # with no player position — surface the failure and bail instead.
             if not dungeon.place_player_at_location(DungeonTileType.ENTRANCE):
+                # A task placement may have already marked this dungeon active
+                # before we got here. Clear it so on_screen_resume /
+                # _ensure_and_render don't immediately re-enter this broken
+                # dungeon on every resume and soft-lock the player.
+                if getattr(pg, "active_dungeon", None) is dungeon:
+                    pg.active_dungeon = None
                 self._show_dialog(
                     ["You cannot find a way into the dungeon."], "Dungeon"
                 )
@@ -802,7 +816,16 @@ class OverworldScreen(BaseScreen):
 
         def _on_dungeon_done(exited_normally: bool | None) -> None:
             # Player either walked out or was defeated
-            if not exited_normally:
+            from tui.screens.dungeon_screen import (  # noqa: PLC0415
+                DUNGEON_DEFEAT_HANDLED,
+            )
+
+            if exited_normally == DUNGEON_DEFEAT_HANDLED:
+                # DungeonScreen already showed its own defeat dialog and ran the
+                # post-defeat delay; go straight to the main menu without
+                # showing a second overlapping message or a second timer.
+                self._leave_to_main_menu()
+            elif not exited_normally:
                 self._show_dialog(["Your party was defeated in the dungeon..."], "Game Over")
                 self.set_timer(2.0, self._leave_to_main_menu)
             else:
@@ -922,7 +945,22 @@ class OverworldScreen(BaseScreen):
                 # task that queues dialogs and sets a pending fight. Defer the
                 # combat check until the dialog chain clears so the player can
                 # read the narrative before battle begins.
-                self._check_dialogs_and_refresh(on_cleared=self._check_pending_combat)
+                def _refocus_overlay() -> None:
+                    # The NPC/action dialog steals focus; once it clears Textual
+                    # drops focus to whatever's next in the DOM (often nothing),
+                    # leaving the overlay looking disabled (arrow keys/Enter do
+                    # nothing). Re-focus its list so keyboard nav works again.
+                    try:
+                        self.query_one(LocationOverlay).focus_list()
+                    except Exception:
+                        pass
+
+                self._check_dialogs_and_refresh(
+                    on_cleared=lambda: (
+                        self._check_pending_combat(),
+                        _refocus_overlay(),
+                    )
+                )
             else:
                 self._refresh_all()
             # Refresh the overlay in-place for the (possibly updated) tile

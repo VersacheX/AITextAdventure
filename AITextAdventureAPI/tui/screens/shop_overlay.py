@@ -572,6 +572,14 @@ class ShopOverlay(Widget):
                 lv.append(_ShopItem(item, selling=False))
         except Exception:
             pass
+        finally:
+            # ListView.clear() can drop focus off the widget entirely — reassert
+            # focus so overworld movement keys don't leak past this overlay to
+            # OverworldScreen's WASD bindings.
+            try:
+                self.focus()
+            except Exception:
+                pass
 
     def _rebuild_sell_list(self) -> None:
         try:
@@ -581,6 +589,13 @@ class ShopOverlay(Widget):
                 lv.append(_ShopItem(item, selling=True))
         except Exception:
             pass
+        finally:
+            # ListView.clear() can drop focus off the widget entirely — reassert
+            # focus so overworld movement keys don't leak past this overlay.
+            try:
+                self.focus()
+            except Exception:
+                pass
 
     # ── gold display ──────────────────────────────────────────────────────────
 
@@ -836,6 +851,14 @@ class ShopOverlay(Widget):
             else:
                 self.app.notify("Could not sell that item.", severity="warning")
 
+            # ConfirmScreen returns focus to the app, not guaranteed to land
+            # back on this overlay — reassert it so overworld movement keys
+            # don't leak past to OverworldScreen's WASD bindings.
+            try:
+                self.focus()
+            except Exception:
+                pass
+
         from tui.screens.confirm_screen import ConfirmScreen  # noqa: PLC0415
         self.app.push_screen(
             ConfirmScreen(
@@ -908,6 +931,14 @@ class ShopOverlay(Widget):
                 if _shop_has_sell(self._shop_type):
                     self._sell_stock = _load_sell_stock(self._shop_type, self._pg)
                     self._rebuild_sell_list()
+
+            # ConfirmScreen returns focus to the app, not guaranteed to land
+            # back on this overlay — reassert it so overworld movement keys
+            # don't leak past to OverworldScreen's WASD bindings.
+            try:
+                self.focus()
+            except Exception:
+                pass
 
         from tui.screens.confirm_screen import ConfirmScreen  # noqa: PLC0415
         self.app.push_screen(

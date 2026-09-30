@@ -44,6 +44,13 @@ from tui.services.dungeon_encounter_service import (
 from tui.services.combat_service import build_simulation
 
 
+# Dismiss result sentinel: the dungeon screen already displayed its own
+# "You have been defeated..." dialog and ran the post-defeat delay, so the
+# caller (OverworldScreen) must NOT show a second defeat dialog — it should
+# route straight to the main menu. Distinct from False/None (unhandled defeat).
+DUNGEON_DEFEAT_HANDLED = "dungeon_defeat_handled"
+
+
 class DungeonScreen(BaseScreen):
     """In-dungeon exploration and combat screen."""
 
@@ -120,6 +127,17 @@ class DungeonScreen(BaseScreen):
         # True while a CombatScreen is on-screen; prevents stacking a second
         # combat push if an encounter re-check fires before the first resolves.
         self._combat_active = False
+        # Callbacks queued while a dialog chain is already active (see
+        # _check_dialogs_and_refresh). Multiple independent async triggers
+        # (move → encounter check, _meet completion, boss completion,
+        # on_screen_resume) can each call _check_dialogs_and_refresh; without
+        # this a second call would yank the mounted dialog and silently drop
+        # its on_cleared callback (a pending fight/task callback lost forever).
+        self._deferred_on_cleared: List[Callable[[], None]] = []
+        # True once the locked-exit message has been surfaced; reset when the
+        # player moves off the exit tile so mashing into a locked exit doesn't
+        # flood the dialog queue with duplicate standing text.
+        self._locked_exit_notified = False
 
     # ── lifecycle ─────────────────────────────────────────────────────────
 
@@ -224,6 +242,18 @@ class DungeonScreen(BaseScreen):
             or self._dungeon.get_player_pos() is None
         )
 
+    def _route_if_dead(self) -> bool:
+        """If the whole party is dead, show the defeat dialog and route to game
+        over, returning True. Used after task events (NPC meet / boss
+        completion) that can kill the party outside the CombatScreen flow."""
+        pg = self._pg
+        is_alive = getattr(pg, "is_alive", None)
+        if callable(is_alive) and not is_alive():
+            self._show_dialog(["You have been defeated..."], "Game Over")
+            self.set_timer(2.0, lambda: self.dismiss(DUNGEON_DEFEAT_HANDLED))
+            return True
+        return False
+
     def _try_leave_dungeon(self) -> bool:
         """Attempt to leave the dungeon. A locked dungeon traps the player:
         surface its locked_text (or a generic line) through the message feed
@@ -231,6 +261,13 @@ class DungeonScreen(BaseScreen):
         dungeon = self._dungeon
         if dungeon is not None and dungeon.is_locked():
             pg = self._pg
+            # De-dupe: mashing the movement key against a locked exit would
+            # otherwise flood the dialog queue with the same standing text every
+            # frame. Only surface the locked message once until the player steps
+            # away from the exit (reset in _handle_move on a successful move).
+            if self._locked_exit_notified:
+                return False
+            self._locked_exit_notified = True
             if getattr(dungeon, "locked_text", None):
                 pg.add_dungeon_standing_text(dungeon)
             else:
@@ -275,9 +312,18 @@ class DungeonScreen(BaseScreen):
         if dungeon.is_player_at_exit():
             # A locked dungeon traps the player: don't leave (the shared helper
             # surfaces the locked_text message); otherwise dismiss the screen.
-            self._try_leave_dungeon()
+            # When trapped, still tick the random-encounter countdown for the
+            # step so the "trapped" beat isn't encounter-free — but only once
+            # any locked-text dialog has been read.
+            if not self._try_leave_dungeon():
+                self._check_dialogs_and_refresh(
+                    on_cleared=lambda: self._check_encounters(after_action=True)
+                )
             return
 
+        # Moved onto a non-exit tile — allow the locked-exit message to show
+        # again next time the player bumps the exit.
+        self._locked_exit_notified = False
         # Wait for any pending dialogs from the move to be dismissed before
         # checking encounters, so a boss ambush on a tile can't start combat
         # while the message dialog is still open/being read.
@@ -330,9 +376,14 @@ class DungeonScreen(BaseScreen):
             # dialog chain to be dismissed before starting combat so the player
             # can read it first, so defer the encounter check until dialogs clear.
             def _after_meet() -> None:
-                self._check_dialogs_and_refresh(
-                    on_cleared=lambda: self._check_encounters(after_action=False)
-                )
+                # A task-completion event (trap, curse, etc.) can damage/kill
+                # the party outside the CombatScreen flow. Catch that here and
+                # route to game over instead of letting the player walk around
+                # dead, mirroring the old console loop's post-interaction check.
+                if not self._route_if_dead():
+                    self._check_dialogs_and_refresh(
+                        on_cleared=lambda: self._check_encounters(after_action=False)
+                    )
 
             if met_npc_ids:
                 # check_meet_npc_dungeon → task completion executes events inline
@@ -385,7 +436,9 @@ class DungeonScreen(BaseScreen):
             self._combat_active = False
             if not players_won:
                 self._show_dialog(["You have been defeated..."], "Game Over")
-                self.set_timer(2.0, lambda: self.dismiss(False))
+                # Dismiss with the "already handled" sentinel so OverworldScreen
+                # doesn't show a second defeat dialog and stack another 2s delay.
+                self.set_timer(2.0, lambda: self.dismiss(DUNGEON_DEFEAT_HANDLED))
                 return
 
             # A post-fight task completion can award another defeat task whose
@@ -393,9 +446,13 @@ class DungeonScreen(BaseScreen):
             # fights). Re-check encounters once these dialogs are dismissed so
             # the next fight starts only after the player reads the dialog.
             def _after_completion() -> None:
-                self._check_dialogs_and_refresh(
-                    on_cleared=lambda: self._check_encounters(after_action=False)
-                )
+                # A boss-completion event can damage/kill the party outside the
+                # CombatScreen flow (trap/curse effect); catch that and route to
+                # game over rather than continuing to explore while dead.
+                if not self._route_if_dead():
+                    self._check_dialogs_and_refresh(
+                        on_cleared=lambda: self._check_encounters(after_action=False)
+                    )
 
             if is_boss:
                 mob_id = getattr(pg, "pending_fight_mob_id", None)
@@ -423,6 +480,14 @@ class DungeonScreen(BaseScreen):
         if self._presence_cleared():
             self.dismiss(True)
             return
+        # Block re-entrancy — if a dialog is already visible, don't yank it out
+        # from under a still-running chain (which would drop its on_cleared).
+        # Queue the callback so it runs when the active chain resolves and
+        # re-enters this method.
+        if self._dialog_visible():
+            if on_cleared is not None:
+                self._deferred_on_cleared.append(on_cleared)
+            return
         if hasattr(pg, "info_dialogs") and pg.info_dialogs:
             messages: List[str] = []
             while pg.info_dialogs:
@@ -433,6 +498,28 @@ class DungeonScreen(BaseScreen):
         self._refresh_all()
         if on_cleared is not None:
             on_cleared()
+        self._run_deferred_on_cleared()
+
+    def _run_deferred_on_cleared(self) -> None:
+        """Fire callbacks queued while a dialog chain was already active.
+
+        A callback can itself mount a new dialog (e.g. an encounter check shows
+        the combat dialog). If it does, stop draining and keep the remaining
+        callbacks queued so a following callback can't remove/replace the
+        just-mounted dialog before its on_cleared runs. The retained callbacks
+        re-run when the active dialog clears and re-enters
+        _check_dialogs_and_refresh → _run_deferred_on_cleared.
+        """
+        queued = self._deferred_on_cleared
+        if not queued:
+            return
+        self._deferred_on_cleared = []
+        while queued:
+            cb = queued.pop(0)
+            cb()
+            if self._dialog_visible():
+                self._deferred_on_cleared = queued + self._deferred_on_cleared
+                return
 
     def _show_dialog(
         self,
@@ -464,6 +551,11 @@ class DungeonScreen(BaseScreen):
                 self._refresh_all()
                 if on_cleared is not None:
                     on_cleared()
+                # Drain any callbacks queued while this dialog was up so a
+                # pending fight/task callback is never lost. Skipped if
+                # on_cleared itself mounted a new dialog.
+                if not self._dialog_visible():
+                    self._run_deferred_on_cleared()
             else:
                 self.set_timer(0.2, _check)
 
