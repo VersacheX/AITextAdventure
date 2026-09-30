@@ -573,8 +573,13 @@ class DungeonScreen(BaseScreen):
         while queued:
             cb = queued.pop(0)
             cb()
-            if self._dialog_visible() or self._combat_active:
-                self._deferred_on_cleared = queued + self._deferred_on_cleared
+            # Stop if the callback opened a dialog / started combat, OR marked
+            # defeat terminal — even when mounting the Game Over dialog failed
+            # (the handled-exception path in _show_dialog), the remaining
+            # callbacks must not run and start an encounter while the party is
+            # dead.
+            if self._dialog_visible() or self._combat_active or self._defeat_pending:
+                self._deferred_on_cleared = [] if self._defeat_pending else queued + self._deferred_on_cleared
                 return
 
     def _show_dialog(

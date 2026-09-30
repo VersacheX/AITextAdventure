@@ -689,6 +689,10 @@ class OverworldScreen(BaseScreen):
         """
         still_busy = self._generation_refcount > 0 or self._loading_visible()
         self._set_overlays_disabled(still_busy)
+        # Overlays just re-enabled — retry any refocus request that was held
+        # pending while generation ran so the location list regains focus.
+        if not still_busy and self._pending_overlay_refocus:
+            self._consume_pending_overlay_refocus()
 
     def _set_overlays_disabled(self, disabled: bool) -> None:
         """Disable/enable all interactive overlays (location menu, shop, travel)
@@ -895,7 +899,11 @@ class OverworldScreen(BaseScreen):
             is_boss = False
 
         if not hostiles:
+            # An unresolvable boss id can be cleared by get_boss_encounter_hostiles
+            # so no combat starts. No combat completion will fire, so consume any
+            # pending overlay refocus here to avoid stranding the location list.
             self._refresh_all()
+            self._consume_pending_overlay_refocus()
             return
 
         # Guard against stacking a second CombatScreen. The tile-generation
@@ -962,6 +970,12 @@ class OverworldScreen(BaseScreen):
         # completion with nothing to consume, stranding the location list
         # unfocused after back-to-back fights.
         if self._dialog_visible() or self._combat_active:
+            return
+        # Also keep it pending while a tile-generation pass is in flight: the
+        # LocationOverlay is disabled for the generation lifetime, so focusing
+        # its list now would be a no-op. _refresh_overlays_disabled retries this
+        # consume once overlays are re-enabled.
+        if self._generation_refcount > 0 or self._loading_visible():
             return
         self._pending_overlay_refocus = False
 
