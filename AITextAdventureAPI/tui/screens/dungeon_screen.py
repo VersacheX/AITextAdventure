@@ -275,10 +275,15 @@ class DungeonScreen(BaseScreen):
             return True
         return False
 
-    def _show_defeat_and_dismiss(self) -> None:
+    def _show_defeat_and_dismiss(self, show_message: bool = True) -> None:
         """Drain any pending narrative dialogs, then show the defeat dialog and
         route to game over from the drain's completion callback so queued
-        messages are read before the dungeon is dismissed."""
+        messages are read before the dungeon is dismissed.
+
+        `show_message=False` is used when the defeat message has already been
+        rendered elsewhere (CombatScreen shows "You have been defeated..." before
+        it dismisses with False), so this path only drains narrative and performs
+        the terminal delay/dismiss without displaying a duplicate message."""
         def _show_defeat() -> None:
             # Make defeat terminal before mounting Game Over: discard any
             # callbacks queued during the drained narrative chain so dismissing
@@ -286,7 +291,8 @@ class DungeonScreen(BaseScreen):
             # drain and start another encounter while the party is dead.
             self._defeat_pending = True
             self._deferred_on_cleared = []
-            self._show_dialog(["You have been defeated..."], "Game Over")
+            if show_message:
+                self._show_dialog(["You have been defeated..."], "Game Over")
             self.set_timer(2.0, lambda: self.dismiss(DUNGEON_DEFEAT_HANDLED))
 
         self._check_dialogs_and_refresh(on_cleared=_show_defeat)
@@ -474,8 +480,10 @@ class DungeonScreen(BaseScreen):
             if not players_won:
                 # Dismiss with the "already handled" sentinel so OverworldScreen
                 # doesn't show a second defeat dialog and stack another 2s delay.
-                # Drain any narrative queued by the loss before the defeat shows.
-                self._show_defeat_and_dismiss()
+                # CombatScreen already rendered "You have been defeated..." before
+                # dismissing, so don't display it again — just drain any narrative
+                # queued by the loss and perform the terminal delay/dismiss.
+                self._show_defeat_and_dismiss(show_message=False)
                 return
 
             # A post-fight task completion can award another defeat task whose
