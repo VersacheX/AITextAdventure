@@ -245,14 +245,28 @@ class DungeonScreen(BaseScreen):
     def _route_if_dead(self) -> bool:
         """If the whole party is dead, show the defeat dialog and route to game
         over, returning True. Used after task events (NPC meet / boss
-        completion) that can kill the party outside the CombatScreen flow."""
+        completion) that can kill the party outside the CombatScreen flow.
+
+        The killing task event may have just queued narrative in
+        pg.info_dialogs; drain that chain first and only surface the defeat
+        dialog from the drain's completion callback so those messages aren't
+        skipped before the dungeon is dismissed."""
         pg = self._pg
         is_alive = getattr(pg, "is_alive", None)
         if callable(is_alive) and not is_alive():
-            self._show_dialog(["You have been defeated..."], "Game Over")
-            self.set_timer(2.0, lambda: self.dismiss(DUNGEON_DEFEAT_HANDLED))
+            self._show_defeat_and_dismiss()
             return True
         return False
+
+    def _show_defeat_and_dismiss(self) -> None:
+        """Drain any pending narrative dialogs, then show the defeat dialog and
+        route to game over from the drain's completion callback so queued
+        messages are read before the dungeon is dismissed."""
+        def _show_defeat() -> None:
+            self._show_dialog(["You have been defeated..."], "Game Over")
+            self.set_timer(2.0, lambda: self.dismiss(DUNGEON_DEFEAT_HANDLED))
+
+        self._check_dialogs_and_refresh(on_cleared=_show_defeat)
 
     def _try_leave_dungeon(self) -> bool:
         """Attempt to leave the dungeon. A locked dungeon traps the player:
@@ -435,10 +449,10 @@ class DungeonScreen(BaseScreen):
         def _on_combat_done(players_won: bool | None) -> None:
             self._combat_active = False
             if not players_won:
-                self._show_dialog(["You have been defeated..."], "Game Over")
                 # Dismiss with the "already handled" sentinel so OverworldScreen
                 # doesn't show a second defeat dialog and stack another 2s delay.
-                self.set_timer(2.0, lambda: self.dismiss(DUNGEON_DEFEAT_HANDLED))
+                # Drain any narrative queued by the loss before the defeat shows.
+                self._show_defeat_and_dismiss()
                 return
 
             # A post-fight task completion can award another defeat task whose
