@@ -512,6 +512,7 @@ class EquipOverlay(Widget):
         dock: bottom;
         width: 100%;
         height: 26;
+        max-height: 100%;
         background: $surface;
         border-top: solid $accent;
         layout: vertical;
@@ -554,21 +555,21 @@ class EquipOverlay(Widget):
 
     #eq-detail-cols {
         height: 1fr;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
     #eq-item-col {
         width: 1fr;
-        height: 100%;
+        height: auto;
         padding: 0 1;
-        overflow-y: auto;
         border-right: solid $accent 20%;
     }
 
     #eq-char-col {
         width: 1fr;
-        height: 100%;
+        height: auto;
         padding: 0 1;
-        overflow-y: auto;
     }
 
     #eq-action-row {
