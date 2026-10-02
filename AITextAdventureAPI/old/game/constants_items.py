@@ -196,6 +196,25 @@ SPECIAL_ITEM_SEEDS = [
     {"id": "forge_dominion_shard", "name": "Forge Dominion Shard", "description": "A fragment of dominion-ore extracted from the mountain's primary vein during a controlled collapse. It carries the compressed heat of a sealed forge chamber.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
     {"id": "swamp_small_city_e_gnashwater_memory_vessel", "name": "Gnashwater Memory Vessel", "description": "A sealed clay vessel recovered from the swamp floor. The contents are unknown — something inside shifts when the vessel is tilted. It has never been opened.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
 
+    # ── Quest consumables / crafting ingredients (delivered or brewed in stories) ──
+    {"id": "veil_memory_leaf", "name": "Veil Memory Leaf", "description": "A translucent leaf that hums faintly with preserved promises. It belongs to the Verdant Cradle and still remembers the oaths spoken beneath its canopy.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "fragrant_hibiscus", "name": "Fragrant Hibiscus", "description": "A hibiscus bloom said to flower only where hope once refused to die. Even wilted, it keeps its defiant fragrance.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "harmony_echo", "name": "Harmony Echo", "description": "A shimmering fragment of captured song. It carries not only joy but sorrow and loss — a memory of real, living feeling.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "fracture_logs", "name": "Fracture Logs", "description": "Recovered records of the first fracture event. The entries contradict and loop, refusing to settle into a single truth.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "ink_resonance_vial", "name": "Ink Resonance Vial", "description": "A vial of ink that crawls against the glass on its own. An identity anchor — it rewrites whatever it touches, and must never be opened.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "dream_essence", "name": "Dream Essence", "description": "A humming vial of raw possibility drawn from the Temporal Echoes. It holds the weight of futures that never settled.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "forgotten_promises", "name": "Forgotten Promises", "description": "A bittersweet residue gathered from the Rotwood. It carries the weight of what was once meant to be, now left unfulfilled.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "lunar_resonance_catalyst", "name": "Lunar Resonance Catalyst", "description": "Stabilized lunar essence bound in an alchemical shell, used as a resonance anchor for moonlit brews.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "forest_mid_city_e_mycelia_memory_spore", "name": "Mycelia Memory Spore", "description": "A faintly glowing spore from the forest's mycelium network. It holds a compressed memory older than the city itself — the forest's first winter.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "corsair_tide_fragment", "name": "Corsair Tide Fragment", "description": "A shard of metal with an actual ocean current locked inside its grain. It carries the tide-frequency of a drowned corsair tunnel.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+
+    # ── Gate / key items passed between cities ──
+    {"id": "mountains_large_city_armor_key", "name": "Forge Resonance Key", "description": "A resonance key recovered from a rift. The forge-frequency still live in its metal matches the Conduit Maw's deepest armoring chamber.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+
+    # ── Reforged endgame bracelets (Ch.21 finale) ──
+    {"id": "bracelet_of_existence_reforged", "name": "Bracelet of Existence (Reforged)", "description": "The Bracelet of Existence reformed from the void, glowing with pure potential. Being, made whole again.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+    {"id": "bracelet_of_void_reforged", "name": "Bracelet of Void (Reforged)", "description": "The Bracelet of Void reformed from the void, pulsing with absence and possibility. Nothing, given shape once more.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
+
     # EXTRAS
     {"id": "arc_core", "name": "Arc Core", "description": "A core of condensed arcane energy, humming with latent power.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
     {"id": "polar_amplifier", "name": "Polar Amplifier", "description": "A device that amplifies polar energy, used in advanced alchemical experiments.", "effect_description": None, "value":0, "min_spawn_level":1, "rarity": "notfound"},
