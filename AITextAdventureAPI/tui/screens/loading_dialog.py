@@ -45,3 +45,11 @@ class LoadingDialog(Container):
     def compose(self) -> ComposeResult:
         yield Static(self._message, classes="loading-box")
 
+    def update_message(self, message: str) -> None:
+        """Replace the displayed text (e.g. live world-generation progress)."""
+        self._message = message or "Loading..."
+        try:
+            self.query_one(Static).update(self._message)
+        except Exception:
+            pass
+

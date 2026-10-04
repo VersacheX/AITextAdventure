@@ -613,12 +613,42 @@ class OverworldScreen(BaseScreen):
         """
         self._show_loading(message)
 
+        # Stream world-generation / long-task progress into the loading overlay
+        # so the player can see what it's currently doing instead of a frozen
+        # "Loading..." box. Lines are emitted on the worker thread, so marshal
+        # each onto the compositor thread before touching the widget.
+        try:
+            from game.services import world_gen_progress as _progress  # noqa: PLC0415
+        except Exception:  # noqa: BLE001
+            _progress = None
+
+        progress_token = None
+        if _progress is not None:
+            def _on_progress(line: str) -> None:
+                def _apply(text: str = line) -> None:
+                    self._update_loading_message(text)
+                try:
+                    self.app.call_from_thread(_apply)
+                except Exception:  # noqa: BLE001
+                    pass
+
+            try:
+                progress_token = _progress.subscribe(_on_progress)
+            except Exception:  # noqa: BLE001
+                progress_token = None
+
         def _runner() -> None:
             succeeded = False
             try:
                 fn()
                 succeeded = True
             finally:
+                if progress_token is not None and _progress is not None:
+                    try:
+                        _progress.unsubscribe(progress_token)
+                    except Exception:  # noqa: BLE001
+                        pass
+
                 def _finish(ok: bool = succeeded) -> None:
                     # Always clear the loading overlay, but only continue into
                     # dialog/combat handling when fn() actually succeeded — a
@@ -679,6 +709,13 @@ class OverworldScreen(BaseScreen):
         except Exception:
             pass
         self._refresh_overlays_disabled()
+
+    def _update_loading_message(self, message: str) -> None:
+        """Push a live progress line into the loading overlay, if shown."""
+        try:
+            self.query_one("#map-panel").query_one(LoadingDialog).update_message(message)
+        except Exception:
+            pass
 
     def _refresh_overlays_disabled(self) -> None:
         """Re-evaluate whether interactive overlays should stay disabled.

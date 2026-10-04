@@ -63,6 +63,7 @@ CATEGORIES: Tuple[str, ...] = (
     "ability",
     "hostile",
     "simulation",
+    "load_save",
 )
 
 CATEGORY_LABELS: Dict[str, str] = {
@@ -78,6 +79,7 @@ CATEGORY_LABELS: Dict[str, str] = {
     "ability":          "Abilities",
     "hostile":          "Hostiles",
     "simulation":       "Simulation",
+    "load_save":        "Load Save",
 }
 
 _CACHE: Dict[str, List[DevRecord]] = {}
@@ -199,6 +201,7 @@ def _load_all() -> None:
     _CACHE["ability"]          = []   # tree category; use get_ability_tree()
     _CACHE["hostile"]          = []   # tree category; use get_hostile_tree()
     _CACHE["simulation"]       = []
+    _CACHE["load_save"]        = []
 
     _DIALOG_TREE.clear()
     _DIALOG_TREE.extend(_build_dialogue_tree(const))

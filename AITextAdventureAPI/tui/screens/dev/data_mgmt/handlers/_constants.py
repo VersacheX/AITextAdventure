@@ -18,6 +18,7 @@ CITY_CATEGORY         = "city"
 CHARACTER_CATEGORY    = "character"
 SIMULATION_CATEGORY   = "simulation"
 SPECIAL_ITEM_CATEGORY = "special_item"
+LOAD_SAVE_CATEGORY    = "load_save"
 
 # ── Shared row styles ──────────────────────────────────────────────────────────
 

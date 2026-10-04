@@ -203,14 +203,14 @@ def handle_floor_action(cmd: str, region, pg) -> bool:
 	c = cmd[0]
 	if c == 'u':
 		if not (pg.inside and region.get_tile(pg.x, pg.y).type == 'building'):
-			input (f"Cannot go up here: inside={pg.inside}, tile type={region.get_tile(pg.x, pg.y).type}")
+			pg.add_info_dialog_line(None, f"Cannot go up here: inside={pg.inside}, tile type={region.get_tile(pg.x, pg.y).type}")
 			return False
 		current_tile = region.get_tile(pg.x, pg.y)
 		floors = current_tile.floors
-		
+
 		# cannot go above top floor
 		if ( pg.z + 1) >= floors:
-			input(f"Current floor: {pg.z + 1}: floors {floors}")
+			pg.add_info_dialog_line(None, f"Current floor: {pg.z + 1}: floors {floors}")
 			return False
 		# go up one display floor -> increment z
 		pg.z += 1

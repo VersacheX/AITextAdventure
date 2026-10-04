@@ -100,7 +100,13 @@ class PlayerGame:
 
 	def get_max_cities(self):
 		if self.intro_complete:
-			return const.AVAILABLE_CITIES
+			# Post-intro the world is capped at the total number of chapter
+			# cities. Historically this returned ``const.AVAILABLE_CITIES``
+			# (a *list* of city-size names), so the guard
+			# ``get_city_count() == get_max_cities()`` compared ``int == list``
+			# and was ALWAYS False -- the region builder never stopped and ran
+			# the full ``num_regions`` (10000) loop. Return the integer cap.
+			return len(const.CHAPTER_CITY_ORDER)
 		return self.intro_max_cities
 
 	def set_aircraft_flyable(self, can_fly: bool):
@@ -293,7 +299,7 @@ class PlayerGame:
 			#print (f'Acquiring task {task.task_id} of type {task.type}')
 			self.tasks.append(task)
 		else:
-			input (f'Task {task.task_id} of type {task.type} already acquired')
+			self.add_info_dialog_line(None, f'Task {task.task_id} of type {task.type} already acquired')
 
 		if task.task_acquire_events:
 			for event in task.task_acquire_events:
@@ -1110,7 +1116,7 @@ class PlayerGame:
 		to obtain `REGION_SETTINGS`, calls `build_region_map`, merges the result and
 		returns the created region city.
 		"""
-		if self.get_city_count() == self.get_max_cities():
+		if self.get_city_count() >= self.get_max_cities():
 			return None
 
 		# decide region name
@@ -1118,8 +1124,17 @@ class PlayerGame:
 		if not possible_regions or len(possible_regions) == 0:
 			return None
 
+		# How many more cities can the world still hold? When the remaining city
+		# budget is small (<=1), stop gambling with RNG: the final city MUST be
+		# placed or world generation stalls forever rolling "no city" (the old
+		# 0.8 chance). In that case force a city and pick its region
+		# deterministically from the chapter order / remaining buildable types.
+		cities_remaining = self.get_max_cities() - self.get_city_count()
+
 		has_city: bool = False
-		if self.previous_region and self.previous_region.child_city is not None:
+		if cities_remaining <= 1:
+			has_city = True
+		elif self.previous_region and self.previous_region.child_city is not None:
 			main_city = False
 		elif self.previous_region and random.random() < 0.8:
 			has_city = True
@@ -1128,6 +1143,11 @@ class PlayerGame:
 
 		if has_city:
 			region_name = self.get_region_of_chapter_city()
+			# The chapter city region may already be fully built (or unmapped);
+			# fall back to a deterministic remaining buildable region so the
+			# final city always has a valid home instead of returning None.
+			if region_name is None or region_name not in possible_regions:
+				region_name = sorted(possible_regions)[0]
 		else:
 			neigh = const.REGIONAL_NEIGHBORS.get(self.last_region_name, possible_regions)
 
@@ -1266,7 +1286,7 @@ class PlayerGame:
 	def initiate_city_story_task_chain(self, region_name: str, child_city) -> Optional[Task]:
 		# get the first task from the city story for this region
 		if child_city.city_name is None:
-			input (f'Error: child city for region {region_name} has no city_name. Cannot initiate city story task chain. {child_city.region_name} {child_city.display_name}')
+			self.add_info_dialog_line(None, f'Error: child city for region {region_name} has no city_name. Cannot initiate city story task chain. {child_city.region_name} {child_city.display_name}')
 		story_id = f"{region_name}_{child_city.city_name}_story"
 		#input (f'Initiating city story task chain for story id {story_id}')
 		for city_story in const.CITY_STORIES:
@@ -1277,7 +1297,7 @@ class PlayerGame:
 				task = build_task_from_seed(first_task_seed, child_city)
 				#input (f'Acquired city story task {task.task_id} for city {child_city.city_name}.')
 				return task
-		input (f'No city story found for story id {story_id}')
+		self.add_info_dialog_line(None, f'No city story found for story id {story_id}')
 
 	def get_max_character_level(self) -> int:
 		"""Return the highest level among all player characters."""

@@ -63,6 +63,7 @@ from tui.screens.dev.data_mgmt.handlers._constants import (
     CHARACTER_CATEGORY,
     SIMULATION_CATEGORY,
     SPECIAL_ITEM_CATEGORY,
+    LOAD_SAVE_CATEGORY,
 )
 
 # Lazy imports of per-category handlers (avoids circular imports at module level)
@@ -82,6 +83,7 @@ _CITY_CATEGORY        = CITY_CATEGORY
 _CHARACTER_CATEGORY   = CHARACTER_CATEGORY
 _SIMULATION_CATEGORY  = SIMULATION_CATEGORY
 _SPECIAL_ITEM_CATEGORY = SPECIAL_ITEM_CATEGORY
+_LOAD_SAVE_CATEGORY   = LOAD_SAVE_CATEGORY
 
 
 # ── Toolbar active-tree helper ────────────────────────────────────────────────
@@ -106,6 +108,7 @@ def _active_tree_id(screen: "DataMgmtScreen") -> str:
 
 def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
     from tui.screens.dev.data_mgmt.simulation_panel import SimulationPanel  # noqa: PLC0415
+    from tui.screens.dev.data_mgmt.load_save_panel import LoadSavePanel  # noqa: PLC0415
 
     is_dialog      = category == _DIALOG_CATEGORY
     is_equipment   = category == _EQUIPMENT_CATEGORY
@@ -116,16 +119,19 @@ def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
     is_dungeon     = category == _DUNGEON_CATEGORY
     is_city        = category == _CITY_CATEGORY
     is_simulation  = category == _SIMULATION_CATEGORY
+    is_load_save   = category == _LOAD_SAVE_CATEGORY
     is_character   = category == _CHARACTER_CATEGORY
     is_special_item = category == _SPECIAL_ITEM_CATEGORY
     is_tree        = is_dialog or is_timeline or is_npc or is_dungeon
 
-    screen.query_one("#dm-filter", Input).display                   = not (is_dialog or is_equipment or is_ability or is_hostile or is_simulation)
+    is_panel = is_simulation or is_load_save
+
+    screen.query_one("#dm-filter", Input).display                   = not (is_dialog or is_equipment or is_ability or is_hostile or is_panel)
     screen.query_one("#dm-dialog-filter-row").display               = is_dialog
     screen.query_one("#dm-equipment-filter-row", Vertical).display  = is_equipment
     screen.query_one("#dm-hostile-filter-row",   Vertical).display  = is_hostile
     screen.query_one("#dm-ability-filter-row",   Vertical).display  = is_ability
-    screen.query_one("#dm-list", ListView).display                  = not is_tree and not is_equipment and not is_hostile and not is_ability and not is_simulation and not is_special_item
+    screen.query_one("#dm-list", ListView).display                  = not is_tree and not is_equipment and not is_hostile and not is_ability and not is_panel and not is_special_item
     screen.query_one("#dm-equipment-table",    DataTable).display   = is_equipment
     screen.query_one("#dm-hostile-table",      DataTable).display   = is_hostile
     screen.query_one("#dm-ability-table",      DataTable).display   = is_ability
@@ -155,12 +161,23 @@ def set_filter_mode(screen: "DataMgmtScreen", category: str) -> None:
 
     detail_panel = screen.query_one("#dm-detail-panel")
     existing_sim = list(detail_panel.query(SimulationPanel))
+    existing_load = list(detail_panel.query(LoadSavePanel))
     if is_simulation:
+        for w in existing_load:
+            w.remove()
         if not existing_sim:
             detail_panel.remove_children()
             detail_panel.mount(SimulationPanel())
+    elif is_load_save:
+        for w in existing_sim:
+            w.remove()
+        if not existing_load:
+            detail_panel.remove_children()
+            detail_panel.mount(LoadSavePanel())
     else:
         for w in existing_sim:
+            w.remove()
+        for w in existing_load:
             w.remove()
 
 
@@ -197,6 +214,8 @@ def handle_tab_activated(screen: "DataMgmtScreen", event: Tabs.TabActivated) -> 
             elif category == _DUNGEON_CATEGORY:
                 rebuild_dungeon_tree_for_screen(screen)
             elif category == _SIMULATION_CATEGORY:
+                pass
+            elif category == _LOAD_SAVE_CATEGORY:
                 pass
             else:
                 rebuild_list_for_screen(screen)
