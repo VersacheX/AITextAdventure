@@ -245,12 +245,13 @@ def _build_item_info(item: Any | None) -> str:
             imm = list(getattr(item, "immunities",  []) or [])
             res = list(getattr(item, "resistances", []) or [])
             wk  = list(getattr(item, "weaknesses",  []) or [])
+            from game.constants import fmt_element_glyphs, fmt_status_glyphs
             if imm:
-                lines.append(f"Immune      : [bold green]{', '.join(rich_escape(s) for s in imm)}[/bold green]")
+                lines.append(f"Immune      : [bold green]{rich_escape(fmt_status_glyphs(imm))}[/bold green]")
             if res:
-                lines.append(f"Resist      : [cyan]{', '.join(rich_escape(s) for s in res)}[/cyan]")
+                lines.append(f"Resist      : [cyan]{rich_escape(fmt_element_glyphs(res))}[/cyan]")
             if wk:
-                lines.append(f"Weakness    : [red]{', '.join(rich_escape(s) for s in wk)}[/red]")
+                lines.append(f"Weakness    : [red]{rich_escape(fmt_element_glyphs(wk))}[/red]")
     except Exception:
         pass
 

@@ -218,10 +218,10 @@ class PlayerGame:
 					self.complete_task(task)
 
 	def check_regional_quests_complete(self):
-		return len(self.completed_regional_quests) >= len(const.REGIONAL_QUEST_REGIONS)
+		return len(self.completed_regional_quests) >= len(const.AVAILABLE_REGIONS)
 
 	def check_regional_quests_2_complete(self):
-		return len(self.completed_regional_quests_2) >= len(const.REGIONAL_QUEST_REGIONS)
+		return len(self.completed_regional_quests_2) >= len(const.AVAILABLE_REGIONS)
 
 	def complete_intro_story(self):
 		# check all tasks for task type CompleteIntroStory

@@ -1103,6 +1103,21 @@ class OverworldScreen(BaseScreen):
                 # combat check until the dialog chain clears so the player can
                 # read the narrative before battle begins.
                 def _after_pending_combat() -> None:
+                    # An NPC interaction can run a task event (e.g. Kirn's
+                    # create_dungeon in Ch4) that builds a dungeon and places the
+                    # player inside it. That path sets pg.active_dungeon but does
+                    # NOT push DungeonScreen — only on_screen_resume / movement /
+                    # _ensure_and_render do. Since none of those fire after an
+                    # in-overworld NPC dialog, check here first so the player is
+                    # actually taken inside rather than left standing on the
+                    # dungeon's overworld tile.
+                    pg_now = self._player_game()
+                    active_dungeon = (
+                        pg_now.get_active_dungeon() if pg_now is not None else None
+                    )
+                    if active_dungeon is not None:
+                        self._enter_dungeon(pg_now, active_dungeon)
+                        return
                     # _check_pending_combat may mount an encounter MessageDialog
                     # (or start combat) that owns focus. The feed watcher below
                     # already waits for any such dialog/combat to drain before
