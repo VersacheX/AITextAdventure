@@ -1083,26 +1083,49 @@ class PlayerGame:
 		if not available_cities:
 			return None
 
-		#get chapter city
-		if self.current_chapter < len(const.CHAPTER_CITY_ORDER):
-			city_order_entry = const.CHAPTER_CITY_ORDER[self.current_chapter]
+		# Target the next chapter city that has not yet been built (rather than
+		# ``self.current_chapter``, which is frozen during bulk post-intro world
+		# generation and would otherwise keep pointing at an already-built city,
+		# preventing any further cities from ever being placed).
+		next_entry = self.get_next_unbuilt_chapter_city()
+		if next_entry:
 			# The format is "region_size_city", so we extract the city size.
-			parts = city_order_entry.split('_')
+			parts = next_entry.split('_')
 			if len(parts) == 3 and parts[0] == region_name:
 				city_type = f"{parts[1]}_{parts[2]}"
 				if city_type in available_cities:
 					return city_type
-		
+
+		return None
+
+	def get_next_unbuilt_chapter_city(self) -> Optional[str]:
+		"""Return the first ``CHAPTER_CITY_ORDER`` entry whose region+city has not
+		yet been built, or ``None`` once every chapter city exists.
+
+		City generation is driven off this (not ``current_chapter``) so it keeps
+		advancing through the chapter order as cities are placed, both during the
+		intro (cities are built in order anyway) and during the post-intro bulk
+		world generation (where ``current_chapter`` no longer advances).
+		"""
+		built = {
+			f"{r.region_name}_{r.child_city.city_name}"
+			for r in self.regions
+			if r.child_city is not None and r.child_city.city_name
+		}
+		for entry in const.CHAPTER_CITY_ORDER:
+			if entry not in built:
+				return entry
 		return None
 
 	def get_region_of_chapter_city(self) -> Optional[str]:
 		"""
-		Determines the region name for the city corresponding to the current chapter.
+		Determines the region name for the next chapter city that still needs to
+		be built.
 		"""
-		if self.current_chapter < len(const.CHAPTER_CITY_ORDER):
-			city_order_entry = const.CHAPTER_CITY_ORDER[self.current_chapter]
+		next_entry = self.get_next_unbuilt_chapter_city()
+		if next_entry:
 			# The format is "region_size_city", so we split by '_' and take the first part.
-			region_name = city_order_entry.split('_')[0]
+			region_name = next_entry.split('_')[0]
 			if region_name in const.AVAILABLE_REGIONS:
 				return region_name
 		return None
@@ -1131,14 +1154,23 @@ class PlayerGame:
 		# deterministically from the chapter order / remaining buildable types.
 		cities_remaining = self.get_max_cities() - self.get_city_count()
 
+		# Decide whether this region carries a city. This is the single
+		# authoritative decision (build_region_map honors it rather than
+		# re-rolling its own). Rules:
+		#  - If only one city budget remains, force a city so generation can't
+		#    stall forever rolling "no city".
+		#  - If the previous region already placed a city, bias this one to be
+		#    a cityless connector region.
+		#  - The very first region always starts with a city.
+		#  - Otherwise place a city with an 80% chance.
 		has_city: bool = False
 		if cities_remaining <= 1:
 			has_city = True
-		elif self.previous_region and self.previous_region.child_city is not None:
-			main_city = False
-		elif self.previous_region and random.random() < 0.8:
+		elif self.previous_region is None:
 			has_city = True
-		elif self.previous_region is	None:
+		elif self.previous_region.child_city is not None:
+			has_city = False
+		elif random.random() < 0.8:
 			has_city = True
 
 		if has_city:
