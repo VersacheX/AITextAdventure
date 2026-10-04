@@ -156,10 +156,11 @@ def generate_world(pg: Any, num_regions: int, seed_base: int, min_size: int, ver
     stalls_without_city = 0
     last_city_count = pg.get_city_count()
 
-    progress.emit(
-        f"Generating world: target {max_cities} cities "
-        f"(have {last_city_count}), up to {num_regions} region attempts."
-    )
+    if verbose:
+        progress.emit(
+            f"Generating world: target {max_cities} cities "
+            f"(have {last_city_count}), up to {num_regions} region attempts."
+        )
 
     for i in range(num_regions):
         # Bail the instant we've placed every city.

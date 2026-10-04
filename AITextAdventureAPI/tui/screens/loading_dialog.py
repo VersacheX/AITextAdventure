@@ -47,9 +47,11 @@ class LoadingDialog(Container):
 
     def update_message(self, message: str) -> None:
         """Replace the displayed text (e.g. live world-generation progress)."""
+        from rich.markup import escape as rich_escape
+
         self._message = message or "Loading..."
         try:
-            self.query_one(Static).update(self._message)
+            self.query_one(Static).update(rich_escape(self._message))
         except Exception:
             pass
 

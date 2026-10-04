@@ -462,19 +462,19 @@ class LoadSavePanel(Vertical):
         self._update_detail()
 
     def _do_attempt_complete(self) -> None:
-        from tui.services.dev import dev_game_inspector as insp  # noqa: PLC0415
-
         task = self._require_task()
         if task is None:
             return
         pg = self._active_pg()
-        (done, msg), report = insp.run_with_report(
-            pg, lambda: insp.attempt_complete(pg, task)
-        )
-        self._log_action("Attempt Complete", msg, report)
-        self.app.notify(msg, title="Attempt Complete",
-                        severity="information" if done else "warning")
-        self._refresh_selected_task_row()
+        if pg is None:
+            self.app.notify("No game loaded.", title="Attempt Complete", severity="warning")
+            return
+        # attempt_complete() runs the game's real completion flow, whose events
+        # execute synchronously and may generate a world/dungeon. Route it
+        # through the same guarded background worker as Force Complete so a long
+        # chain can't freeze the UI and no second action can race it.
+        self._begin_worker_action("Attempt Complete")
+        self._run_task_worker(task, "Attempt Complete", force=False)
 
     def _do_force_complete(self) -> None:
         task = self._require_task()
@@ -487,15 +487,27 @@ class LoadSavePanel(Vertical):
         # Force completion can trigger intro-story world generation, which is a
         # long-running loop. Run it on a background worker and stream its output
         # into the report panel so the UI stays responsive instead of freezing.
-        self.query_one("#ls-force", Button).disabled = True
-        self._report_lines.append("[b]\u2023 Force Complete[/b]: running...")
+        self._begin_worker_action("Force Complete")
+        self._run_task_worker(task, "Force Complete", force=True)
+
+    # ?? guarded task worker ????????????????????????????????????????????????
+
+    def _begin_worker_action(self, action: str) -> None:
+        """Lock every panel control for a worker's lifetime and start streaming.
+
+        Disabling only one button would leave Back, Play, Fulfill, the other
+        complete actions and category controls live while the worker mutates the
+        shared PlayerGame -- a user could enter the overworld or start another
+        exclusive worker mid-generation. Lock them all; they are restored in the
+        done callback (both success and failure).
+        """
+        self._set_actions_disabled(True)
+        self._report_lines.append(f"[b]\u2023 {rich_escape(action)}[/b]: running...")
         self._render_report()
-        # Start draining streamed lines on the UI thread at a steady cadence.
         self._drain_timer.resume()
-        self._run_force_complete(task)
 
     @work(thread=True, exclusive=True)
-    def _run_force_complete(self, task: Any) -> None:
+    def _run_task_worker(self, task: Any, action: str, force: bool) -> None:
         from tui.services.dev import dev_game_inspector as insp  # noqa: PLC0415
 
         pg = self._active_pg()
@@ -504,11 +516,14 @@ class LoadSavePanel(Vertical):
             # Non-blocking hand-off: never block the generation loop on the UI.
             self._report_queue.put(str(line))
 
-        (result, report) = insp.run_with_report(
-            pg, lambda: insp.force_complete(pg, task), on_line=stream_line
-        )
+        if force:
+            op = lambda: insp.force_complete(pg, task)  # noqa: E731
+        else:
+            op = lambda: insp.attempt_complete(pg, task)  # noqa: E731
+
+        (result, _report) = insp.run_with_report(pg, op, on_line=stream_line)
         done, msg = result
-        self.app.call_from_thread(self._on_force_complete_done, done, msg)
+        self.app.call_from_thread(self._on_task_worker_done, action, done, msg)
 
     def _drain_report_queue(self) -> None:
         """Pull any queued streamed lines and render them in one batch."""
@@ -526,28 +541,35 @@ class LoadSavePanel(Vertical):
             self._report_lines = self._report_lines[-2000:]
         self._render_report()
 
-    def _append_report_line(self, line: str) -> None:
-        self._report_lines.append(f"    {rich_escape(str(line))}")
-        if len(self._report_lines) > 2000:
-            self._report_lines = self._report_lines[-2000:]
-        self._render_report()
-
-    def _on_force_complete_done(self, done: bool, msg: str) -> None:
+    def _on_task_worker_done(self, action: str, done: bool, msg: str) -> None:
         # Flush any lines still queued, then stop the drain timer.
         self._drain_report_queue()
         try:
             self._drain_timer.pause()
         except Exception:
             pass
-        self._report_lines.append(f"[b]\u2023 Force Complete done[/b]: {rich_escape(msg)}")
+        self._report_lines.append(f"[b]\u2023 {rich_escape(action)} done[/b]: {rich_escape(msg)}")
         self._render_report()
-        try:
-            self.query_one("#ls-force", Button).disabled = False
-        except Exception:
-            pass
-        self.app.notify(msg, title="Force Complete",
+        self._set_actions_disabled(False)
+        self.app.notify(msg, title=action,
                         severity="information" if done else "warning")
         self._refresh_selected_task_row()
+
+    def _set_actions_disabled(self, disabled: bool) -> None:
+        """Enable/disable every interactive control in the inspect panel."""
+        for bid in (
+            "ls-refresh", "ls-back", "ls-play", "ls-collect-treasure",
+            "ls-fulfill", "ls-attempt", "ls-force",
+            "ls-cat-tasks", "ls-cat-items", "ls-cat-characters", "ls-cat-npcs",
+        ):
+            try:
+                self.query_one(f"#{bid}", Button).disabled = disabled
+            except Exception:
+                pass
+        try:
+            self.query_one("#ls-list", ListView).disabled = disabled
+        except Exception:
+            pass
 
     def _refresh_selected_task_row(self) -> None:
         # Rebuild the list so completion state / new tasks are reflected, then

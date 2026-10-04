@@ -15,8 +15,6 @@ PlayerGame; there is no I/O, so it is safe to call directly from UI handlers.
 """
 from __future__ import annotations
 
-import contextlib
-import io
 from typing import Any, Dict, List, Optional, Tuple
 
 
@@ -25,11 +23,11 @@ from typing import Any, Dict, List, Optional, Tuple
 class ActionReport:
     """Collects human-readable output produced while a game action runs.
 
-    Task/world mutations in this codebase surface progress two ways: plain
-    ``print()`` calls and ``PlayerGame.add_info_dialog_line()`` entries. Both
-    are invisible in the dev TUI unless captured. ``run_with_report`` wraps a
-    callable so everything it prints *and* every info-dialog line it appends is
-    gathered into one report the panel can render.
+    Task/world mutations in this codebase surface progress two ways: the
+    ``world_gen_progress`` broadcaster and ``PlayerGame.add_info_dialog_line()``
+    entries. Both are invisible in the dev TUI unless captured. ``run_with_report``
+    subscribes to the broadcaster and drains new info-dialog lines so everything
+    an action produces is gathered into one report the panel can render.
     """
 
     def __init__(self) -> None:
@@ -52,81 +50,58 @@ class ActionReport:
         return not self.lines
 
 
-class _StreamingWriter(io.TextIOBase):
-    """A stdout replacement that forwards each completed line to a callback.
-
-    Long-running world generation ``print()``s progress line-by-line. Buffering
-    everything until the action finishes (as ``io.StringIO`` does) makes the dev
-    panel look frozen. This writer flushes on every newline so the UI can stream
-    progress as it happens while still collecting the full text.
-    """
-
-    def __init__(self, on_line, sink: ActionReport) -> None:
-        super().__init__()
-        self._on_line = on_line
-        self._sink = sink
-        self._partial = ""
-
-    def write(self, s: str) -> int:
-        if not s:
-            return 0
-        self._partial += s
-        while "\n" in self._partial:
-            line, self._partial = self._partial.split("\n", 1)
-            self._emit(line)
-        return len(s)
-
-    def flush(self) -> None:  # noqa: D401 - stdlib signature
-        if self._partial:
-            self._emit(self._partial)
-            self._partial = ""
-
-    def _emit(self, line: str) -> None:
-        self._sink.add(line)
-        if self._on_line is not None:
-            try:
-                self._on_line(line)
-            except Exception:  # noqa: BLE001 - never let UI callback break capture
-                pass
-
-
 def run_with_report(pg: Any, fn, on_line=None) -> Tuple[Any, "ActionReport"]:
-    """Run ``fn()`` capturing stdout and any new ``pg.info_dialogs`` lines.
+    """Run ``fn()`` capturing world-gen progress and new ``pg.info_dialogs``.
 
     Returns ``(result, report)``. Newly appended info-dialog lines are drained
     from ``pg.info_dialogs`` so they don't re-show later in normal play.
 
-    If ``on_line`` is provided it is invoked with each completed stdout line as
-    it is produced, enabling live streaming of long-running actions (e.g. world
-    generation) into the UI instead of only reporting once the action finishes.
+    Progress is captured by *subscribing to the world-gen progress broadcaster*
+    rather than redirecting process-global ``sys.stdout``. A global redirect in
+    a background worker would steal output from Textual and other workers and
+    race on shared buffers, so it is deliberately avoided here. If ``on_line``
+    is provided it is invoked with each progress/info line as it is produced,
+    enabling live streaming of long-running actions (e.g. world generation).
     """
     report = ActionReport()
 
     info_dialogs = getattr(pg, "info_dialogs", None)
     start_len = len(info_dialogs) if isinstance(info_dialogs, list) else 0
 
-    # NOTE: world generation routes progress through both stdout *and* the
-    # world_gen_progress broadcaster. The stdout redirect below already captures
-    # those lines, so we deliberately do NOT also subscribe to the broadcaster
-    # here (that would double every line in the report).
-    writer = _StreamingWriter(on_line, report)
+    def _emit_line(line: str) -> None:
+        report.add(line)
+        if on_line is not None:
+            try:
+                on_line(line)
+            except Exception:  # noqa: BLE001 - never let a UI callback break capture
+                pass
+
+    # Subscribe to the world-gen progress broadcaster so region-generation
+    # progress streams line-by-line without touching global stdout.
+    progress_token = None
+    progress_mod = None
+    try:
+        from game.services import world_gen_progress as progress_mod  # noqa: PLC0415
+
+        progress_token = progress_mod.subscribe(_emit_line)
+    except Exception:  # noqa: BLE001
+        progress_mod = None
+
     result = None
     try:
-        with contextlib.redirect_stdout(writer):
-            result = fn()
+        result = fn()
     finally:
-        writer.flush()
+        if progress_token is not None and progress_mod is not None:
+            try:
+                progress_mod.unsubscribe(progress_token)
+            except Exception:  # noqa: BLE001
+                pass
 
         # Drain and record any info-dialog lines the action produced.
         if isinstance(info_dialogs, list) and len(info_dialogs) > start_len:
             new_lines = info_dialogs[start_len:]
             for ln in new_lines:
-                report.add(str(ln))
-                if on_line is not None:
-                    try:
-                        on_line(str(ln))
-                    except Exception:  # noqa: BLE001
-                        pass
+                _emit_line(str(ln))
             del info_dialogs[start_len:]
 
     return result, report
