@@ -339,7 +339,7 @@ class LoadSavePanel(Vertical):
     def _on_load_error(self, message: str) -> None:
         self._busy = False
         self.app.notify(
-            f"Could not load save: {message}",
+            f"Could not load save: {rich_escape(message)}",
             title="Load Save",
             severity="error",
         )
@@ -457,7 +457,7 @@ class LoadSavePanel(Vertical):
             pg, lambda: insp.fulfill_conditions(pg, task)
         )
         self._log_action("Fulfill", msg, report)
-        self.app.notify(msg, title="Fulfill",
+        self.app.notify(rich_escape(msg), title="Fulfill",
                         severity="information" if changed else "warning")
         self._update_detail()
 
@@ -551,7 +551,7 @@ class LoadSavePanel(Vertical):
         self._report_lines.append(f"[b]\u2023 {rich_escape(action)} done[/b]: {rich_escape(msg)}")
         self._render_report()
         self._set_actions_disabled(False)
-        self.app.notify(msg, title=action,
+        self.app.notify(rich_escape(msg), title=action,
                         severity="information" if done else "warning")
         self._refresh_selected_task_row()
 
@@ -600,7 +600,7 @@ class LoadSavePanel(Vertical):
         )
         collected, _skipped, msg = result
         self._log_action("Collect Treasure", msg, report)
-        self.app.notify(msg, title="Collect Treasure",
+        self.app.notify(rich_escape(msg), title="Collect Treasure",
                         severity="information" if collected else "warning")
         # Items category may now show the new loot.
         if self._category == "items":
