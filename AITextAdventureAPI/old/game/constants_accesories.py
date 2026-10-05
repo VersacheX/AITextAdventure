@@ -529,6 +529,24 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
         'strength': 14, 'dexterity': 18, 'intelligence': 22, 'constitution': 16,
         'crit_bonus': 2.0, 'damage_bonus': 8, 'special_effect': '',
     },
+    {
+        'id': 'mythic_desert_mid_veilscript_sigil',
+        'name': 'Veilscript Sigil',
+        'description': 'A sigil crystallized from identity-ink drawn out of the Ink Specter. Whoever wears it cannot be erased — not by magic, not by time, not by the Vaults.',
+        'min_level': 1, 'rarity': 'notfound', 'value': 26000,
+        'immunities': ['charm'], 'resistances': ['dark', 'earth'], 'weaknesses': [],
+        'strength': 10, 'dexterity': 18, 'intelligence': 24, 'constitution': 16,
+        'crit_bonus': 2.0, 'damage_bonus': 6, 'special_effect': '',
+    },
+    {
+        'id': 'mythic_forest_mid_moonbriar_lantern',
+        'name': 'Moonbriar Lantern',
+        'description': 'A lantern forged from solidified moonlight drawn out of the Lunarcask Shade. Its glow holds the forest\'s oldest grove memories — a steady light that never gutters.',
+        'min_level': 1, 'rarity': 'notfound', 'value': 24000,
+        'immunities': ['confuse'], 'resistances': ['light', 'earth'], 'weaknesses': [],
+        'strength': 8, 'dexterity': 16, 'intelligence': 24, 'constitution': 18,
+        'crit_bonus': 1.5, 'damage_bonus': 6, 'special_effect': '',
+    },
 ]
 
 # Export convenience list — mirrors SEED_WEAPON_IDS / SEED_UTILITY_IDS pattern

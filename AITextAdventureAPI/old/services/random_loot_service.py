@@ -124,7 +124,7 @@ def _create_item_from_seed(seed: Dict[str, Any]) -> Item:
 		return _instantiate_special(seed)
 
 	# fallback generic item
-	input(f'Unknown seed type "{stype}" encountered in _create_item_from_seed: {seed}')
+	print(f'Unknown seed type "{stype}" encountered in _create_item_from_seed: {seed}')
 	return None
 
 def generate_loot_for_sublocation(subloc: Dict[str, Any], player_level: int =1, rng: Optional[random.Random] = None) -> Optional[Item]:

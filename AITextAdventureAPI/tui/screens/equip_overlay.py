@@ -245,12 +245,13 @@ def _build_item_info(item: Any | None) -> str:
             imm = list(getattr(item, "immunities",  []) or [])
             res = list(getattr(item, "resistances", []) or [])
             wk  = list(getattr(item, "weaknesses",  []) or [])
+            from game.constants import fmt_element_glyphs, fmt_status_glyphs
             if imm:
-                lines.append(f"Immune      : [bold green]{', '.join(rich_escape(s) for s in imm)}[/bold green]")
+                lines.append(f"Immune      : [bold green]{rich_escape(fmt_status_glyphs(imm))}[/bold green]")
             if res:
-                lines.append(f"Resist      : [cyan]{', '.join(rich_escape(s) for s in res)}[/cyan]")
+                lines.append(f"Resist      : [cyan]{rich_escape(fmt_element_glyphs(res))}[/cyan]")
             if wk:
-                lines.append(f"Weakness    : [red]{', '.join(rich_escape(s) for s in wk)}[/red]")
+                lines.append(f"Weakness    : [red]{rich_escape(fmt_element_glyphs(wk))}[/red]")
     except Exception:
         pass
 
@@ -512,6 +513,7 @@ class EquipOverlay(Widget):
         dock: bottom;
         width: 100%;
         height: 26;
+        max-height: 100%;
         background: $surface;
         border-top: solid $accent;
         layout: vertical;
@@ -554,21 +556,21 @@ class EquipOverlay(Widget):
 
     #eq-detail-cols {
         height: 1fr;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
 
     #eq-item-col {
         width: 1fr;
-        height: 100%;
+        height: auto;
         padding: 0 1;
-        overflow-y: auto;
         border-right: solid $accent 20%;
     }
 
     #eq-char-col {
         width: 1fr;
-        height: 100%;
+        height: auto;
         padding: 0 1;
-        overflow-y: auto;
     }
 
     #eq-action-row {

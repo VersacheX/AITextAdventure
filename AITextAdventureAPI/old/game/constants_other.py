@@ -321,3 +321,60 @@ GENERIC_STATUS_EFFECT = {
  "duration":1,
  "magnitude":1,
 }
+
+# ── Compact status / element glyphs ─────────────────────────────────────────
+# Single canonical source for the unicode glyphs used to render status effects
+# (buffs/debuffs/afflictions) and elemental affinities in compact columns such
+# as the ability-handler "Statuses" column and the monster-log detail panel.
+STATUS_SYMBOLS = {
+    "all":                    "☯",
+    "petrify":                "⬡",
+    "stun":                   "✦",
+    "sleep":                  "☽",
+    "confuse":                "⁈",
+    "silence":                "⊘",
+    "continuous_damage":      "♾",
+    "regen":                  "♻",
+    "elemental_debuff":       "◆",
+    "attack_debuff":          "↓A",
+    "defense_debuff":         "↓D",
+    "strength_debuff":        "↓S",
+    "dexterity_debuff":       "↓X",
+    "intelligence_debuff":    "↓I",
+    "constitution_debuff":    "↓C",
+    "attack_buff":            "↑A",
+    "defense_buff":           "↑D",
+    "strength_buff":          "↑S",
+    "dexterity_buff":         "↑X",
+    "intelligence_buff":      "↑I",
+    "constitution_buff":      "↑C",
+    "elemental_attack_buff":  "↑EA",
+    "elemental_defense_buff": "↑ED",
+    "scanned":                "👁",
+}
+
+
+def fmt_element_glyphs(elems) -> str:
+    """Format a list of element names as compact glyphs (e.g. '(D)(L)').
+
+    Uses ELEMENTAL_CHAR_KEYS as the canonical element glyph map; unknown
+    elements fall back to a parenthesized first letter. Returns '—' when empty.
+    """
+    if not elems:
+        return "—"
+    return "".join(
+        ELEMENTAL_CHAR_KEYS.get(e, f"({e[:1].upper()})") for e in elems
+    )
+
+
+def fmt_status_glyphs(statuses) -> str:
+    """Format a list of status ids as compact unicode glyphs separated by spaces.
+
+    Unknown ids fall back to a bracketed two-letter abbreviation. Returns '—'
+    when empty.
+    """
+    if not statuses:
+        return "—"
+    return " ".join(
+        STATUS_SYMBOLS.get(s, f"[{s[:2]}]") for s in statuses
+    )

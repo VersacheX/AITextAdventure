@@ -9,6 +9,7 @@ import random
 import time
 
 from game.objects.city import City
+from game.services import world_gen_progress as progress
 from game_screens.inventory_screen import InventoryScreen
 
 
@@ -132,23 +133,62 @@ def build_regions(num_regions: int, seed_base: int = 12345, min_size: int = 1000
     return pg
 
 def generate_world(pg: Any, num_regions: int, seed_base: int, min_size: int, verbose: bool) -> Any:
-    """Generate regions in the given Any instance."""
+    """Generate regions in the given Any instance.
+
+    Terminates as soon as the world reaches its city cap (``pg.get_max_cities()``)
+    or when progress stalls -- i.e. too many consecutive iterations produce no
+    new city. Without the stall guard a bad chapter/region selection could spin
+    the full ``num_regions`` loop (historically 10000), flooding the console and
+    never finishing.
+    """
     created = 0
     start = time.time()
+
+    try:
+        max_cities = int(pg.get_max_cities())
+    except Exception:
+        max_cities = 21
+
+    # If we go this many iterations without the city count increasing, assume
+    # the world can't place any more cities and stop. Scaled to the cap so we
+    # still give generous room to find valid origins for the final cities.
+    stall_limit = max(60, max_cities * 12)
+    stalls_without_city = 0
+    last_city_count = pg.get_city_count()
+
+    if verbose:
+        progress.emit(
+            f"Generating world: target {max_cities} cities "
+            f"(have {last_city_count}), up to {num_regions} region attempts."
+        )
+
     for i in range(num_regions):
+        # Bail the instant we've placed every city.
+        if pg.get_city_count() >= max_cities:
+            if verbose:
+                progress.emit(f"Reached city cap ({max_cities}) at iteration {i}. Stopping region creation.")
+            break
+
         seed = seed_base * (i + 1)
         rng = random.Random(seed)
         origin = choose_origin(pg, rng, min_size=min_size, attempts=600)
         if origin is None:
             if verbose:
-                print(f"[{i+1}/{num_regions}] Failed to find valid origin after retries. Skipping.")
+                progress.emit(f"[{i+1}/{num_regions}] Failed to find valid origin after retries. Skipping.")
+            stalls_without_city += 1
+            if stalls_without_city >= stall_limit:
+                if verbose:
+                    progress.emit(f"No progress toward new cities in {stalls_without_city} iterations. Stopping.")
+                break
             continue
+
         rc = pg.create_region_at(origin)
         if not rc:
             if verbose:
-                print(f"[{i+1}/{num_regions}] create_region_at failed at origin {origin}. Skipping.")
-            if pg.get_city_count() == 21:  # if we hit the city limit, stop trying to create more regions
-                print(f"Reached city limit at iteration {i+1}. Stopping region creation.")
+                progress.emit(f"[{i+1}/{num_regions}] create_region_at failed at origin {origin}. Skipping.")
+            if pg.get_city_count() >= max_cities:
+                if verbose:
+                    progress.emit(f"Reached city cap ({max_cities}) at iteration {i+1}. Stopping region creation.")
                 break
         else:
             created += 1
@@ -157,8 +197,32 @@ def generate_world(pg: Any, num_regions: int, seed_base: int, min_size: int, ver
                 child = getattr(rc, "child_city", None)
                 child_name = getattr(child, "city_name", None) if child else None
                 center = getattr(rc, "get_center_position", lambda: origin)()
-                print(f"[{i+1}/{num_regions}] Seed={seed} Origin={origin} Created region='{region_name}' center={center} child_city={child_name}")
+                progress.emit(
+                    f"[{i+1}/{num_regions}] cities {pg.get_city_count()}/{max_cities} "
+                    f"Seed={seed} Origin={origin} Created region='{region_name}' "
+                    f"center={center} child_city={child_name}"
+                )
+
+        # Track city-count progress for the stall guard.
+        current_city_count = pg.get_city_count()
+        if current_city_count > last_city_count:
+            last_city_count = current_city_count
+            stalls_without_city = 0
+        else:
+            stalls_without_city += 1
+            if stalls_without_city >= stall_limit:
+                if verbose:
+                    progress.emit(
+                        f"No new city in {stalls_without_city} iterations "
+                        f"(have {current_city_count}/{max_cities}). Stopping region creation."
+                    )
+                break
+
     elapsed = time.time() - start
     if verbose:
-        print(f"Requested {num_regions}, created {created} regions in {elapsed:.2f}s. World tiles count={len(pg.world_tiles)}")
+        progress.emit(
+            f"World generation done: requested {num_regions}, created {created} regions, "
+            f"{pg.get_city_count()}/{max_cities} cities in {elapsed:.2f}s. "
+            f"World tiles count={len(pg.world_tiles)}"
+        )
     return pg

@@ -361,6 +361,52 @@ ARMOR_LV36_50 = {
             "strength": 52, "dexterity": 2, "intelligence": 6, "constitution": 30,
             "elements": ["light", "fire"]
         },
+        # ── Mythic Chain Armor (D-chain rewards) ───────────────────────────
+        {
+            "id": "mythic_mountains_large_ironveil_warplate",
+            "name": "Ironveil Warplate",
+            "description": "Full plate forged from ironveil ore drawn out of the Conduit Echo. Each layer was quenched in the mountain's own cold — it carries the weight of the peak and refuses to yield it.",
+            "defense": 54, "durability": 700, "max_durability": 700, "value": 30000,
+            "min_spawn_level": 40, "rarity": "notfound",
+            "strength": 48, "dexterity": 0, "intelligence": 8, "constitution": 34,
+            "elements": ["earth", "light"]
+        },
+        {
+            "id": "mythic_mountains_mid_shatterpeak_warplate",
+            "name": "Shatterpeak Warplate",
+            "description": "Plate reforged from a Shatterpeak core shard after the Emberwake Spirit fell. The metal still remembers the avalanche — struck hard enough, it answers with the same roar.",
+            "defense": 50, "durability": 660, "max_durability": 660, "value": 26000,
+            "min_spawn_level": 38, "rarity": "notfound",
+            "strength": 44, "dexterity": 2, "intelligence": 10, "constitution": 30,
+            "elements": ["earth", "fire"]
+        },
+        {
+            "id": "mythic_snow_large_frostgate_sovereign",
+            "name": "Frostgate Sovereign",
+            "description": "A towering set of plate forged in the spires of Frostgate itself — frost-steel layered over frost-steel until the cold became part of the alloy. It never warms, and neither does its wearer's resolve.",
+            "defense": 54, "durability": 700, "max_durability": 700, "value": 30000,
+            "min_spawn_level": 40, "rarity": "notfound",
+            "strength": 46, "dexterity": 0, "intelligence": 10, "constitution": 36,
+            "elements": ["water", "light"]
+        },
+        {
+            "id": "mythic_snow_mid_blueforge_warplate",
+            "name": "Blueforge Warplate",
+            "description": "Plate quenched in moltenblue flame drawn out of the Blueforge Spirit. The blue never fades from the steel — a cold fire sealed into every seam.",
+            "defense": 50, "durability": 660, "max_durability": 660, "value": 26000,
+            "min_spawn_level": 38, "rarity": "notfound",
+            "strength": 42, "dexterity": 2, "intelligence": 14, "constitution": 30,
+            "elements": ["water", "fire"]
+        },
+        {
+            "id": "mythic_snow_small_bleakwatch_warden_plate",
+            "name": "Bleakwatch Warden Plate",
+            "description": "A warden's plate recovered from the bleakwatch outpost, forged for those who stood the longest watch in the coldest dark. It holds the line when nothing else will.",
+            "defense": 48, "durability": 640, "max_durability": 640, "value": 22000,
+            "min_spawn_level": 36, "rarity": "notfound",
+            "strength": 40, "dexterity": 4, "intelligence": 8, "constitution": 32,
+            "elements": ["water", "dark"]
+        },
         # ── world-drop ────────────────────────────────────────────────────
         # superrare / skill — lv48
         {

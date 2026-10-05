@@ -24,7 +24,7 @@ from rich.markup import escape as rich_escape
 from textual import on
 from textual.app import ComposeResult
 from textual.binding import Binding
-from textual.containers import Horizontal, Vertical
+from textual.containers import Horizontal, Vertical, VerticalScroll
 from textual.widget import Widget
 from textual.widgets import Label, ListItem, ListView, Static
 
@@ -37,26 +37,108 @@ def _hostile_row_label(hostile: Any, count: int) -> str:
     return f"{name}  [dim](lvl {lvl})[/dim]  [yellow]x{count}[/yellow]"
 
 
+def _safe(value: Any, default: str = "—") -> str:
+    if value is None:
+        return default
+    text = str(value)
+    return text if text.strip() else default
+
+
+def _drop_name(drop: Any) -> str:
+    if drop is None:
+        return "None"
+    return _safe(getattr(drop, "name", drop), "None")
+
+
 def _build_hostile_detail(hostile: Any | None) -> str:
     if hostile is None:
         return "[dim]No hostiles slain yet.[/dim]"
 
-    from combat_balancing_simulation.hostile_details_screen import format_hostile_summary_full
+    from game.constants import fmt_element_glyphs, fmt_status_glyphs
 
-    # Reuse the legacy '*'-framed formatter and strip its border characters —
-    # the Textual panel already has its own border, so plain text reads cleaner.
-    try:
-        raw_lines = format_hostile_summary_full(hostile, width=44)
-    except Exception:
-        raw_lines = []
+    def esc(value: Any, default: str = "—") -> str:
+        return rich_escape(_safe(value, default))
+
+    name = esc(getattr(hostile, "name", "?"), "?")
+    level = esc(getattr(hostile, "level", "?"), "?")
+
+    # ── abilities: resolve PlayerAbility display names ──────────────────────
+    ability_names: list[str] = []
+    for ab in getattr(hostile, "abilities", []) or []:
+        ab_name = getattr(ab, "name", None) or getattr(ab, "id", None)
+        ab_lvl = getattr(ab, "level", None)
+        if ab_name:
+            label = str(ab_name)
+            if ab_lvl:
+                label += f" (lvl {ab_lvl})"
+            ability_names.append(rich_escape(label))
+
+    # ── affinities rendered with shared compact glyphs ──────────────────────
+    weaknesses  = fmt_element_glyphs(getattr(hostile, "weaknesses", []) or [])
+    resistances = fmt_element_glyphs(getattr(hostile, "resistances", []) or [])
+    immunities  = fmt_status_glyphs(getattr(hostile, "immunities", []) or [])
+
+    money_range = getattr(hostile, "money_range", None)
 
     lines: list[str] = []
-    for ln in raw_lines:
-        stripped = ln.strip("*").strip()
-        if not stripped or set(stripped) == {"*"}:
-            continue
-        lines.append(rich_escape(stripped))
-    return "\n".join(lines) if lines else "[dim]No details available.[/dim]"
+    lines.append(f"[b]{name}[/b]  [dim]lvl {level}[/dim]")
+    lines.append(f"[dim]{esc(getattr(hostile, 'hostile_type', None))}[/dim]")
+    lines.append("")
+
+    # Core
+    lines.append("[u]Core[/u]")
+    lines.append(f"Rarity:  {esc(getattr(hostile, 'rarity', None))}")
+    lines.append(
+        f"HP:  {esc(getattr(hostile, 'current_hp', None))}/{esc(getattr(hostile, 'max_hp', None))}"
+    )
+    lines.append(
+        f"AP:  {esc(getattr(hostile, 'current_ap', None))}/{esc(getattr(hostile, 'max_ap', None))}"
+    )
+    lines.append(f"Defense:  {esc(getattr(hostile, 'defense', None))}")
+    lines.append(f"Base XP:  {esc(getattr(hostile, 'base_xp', None))}")
+    lines.append("")
+
+    # Stats
+    lines.append("[u]Stats[/u]")
+    lines.append(
+        f"STR {esc(getattr(hostile, 'strength', None))}   "
+        f"DEX {esc(getattr(hostile, 'dexterity', None))}"
+    )
+    lines.append(
+        f"INT {esc(getattr(hostile, 'intelligence', None))}   "
+        f"CON {esc(getattr(hostile, 'constitution', None))}"
+    )
+    lines.append("")
+
+    # Attacks
+    lines.append("[u]Attacks[/u]")
+    lines.append(f"Basic:   {esc(getattr(hostile, 'basic_attack', None))}")
+    lines.append(f"Strong:  {esc(getattr(hostile, 'strong_attack', None))}")
+    lines.append("")
+
+    # Abilities
+    lines.append("[u]Abilities[/u]")
+    if ability_names:
+        lines.extend(f"- {a}" for a in ability_names)
+    else:
+        lines.append("[dim]None[/dim]")
+    lines.append("")
+
+    # Affinities (compact glyphs matching the ability-handler status column)
+    lines.append("[u]Affinities[/u]")
+    lines.append(f"Weakness:    {rich_escape(weaknesses)}")
+    lines.append(f"Resistance:  {rich_escape(resistances)}")
+    lines.append(f"Immunity:    {rich_escape(immunities)}")
+    lines.append("")
+
+    # Loot — each drop on its own line
+    lines.append("[u]Loot[/u]")
+    lines.append(f"Common Drop:  {rich_escape(_drop_name(getattr(hostile, 'common_drop', None)))}")
+    lines.append(f"Rare Drop:    {rich_escape(_drop_name(getattr(hostile, 'rare_drop', None)))}")
+    money_txt = f"{money_range[0]} - {money_range[1]}" if money_range else "—"
+    lines.append(f"Money:        {rich_escape(money_txt)}")
+
+    return "\n".join(lines)
 
 
 class _HostileRow(ListItem):
@@ -120,7 +202,13 @@ class MonsterLogOverlay(Widget):
         height: 100%;
         padding: 0 1;
         overflow-y: auto;
+        scrollbar-size-vertical: 1;
         border-left: solid $accent 30%;
+    }
+
+    #ml-detail-text {
+        width: 100%;
+        height: auto;
     }
 
     #ml-hint {
@@ -146,7 +234,8 @@ class MonsterLogOverlay(Widget):
         with Horizontal(id="ml-main-row"):
             with Vertical(id="ml-list-panel"):
                 yield ListView(id="ml-list")
-            yield Static("", id="ml-detail-panel")
+            with VerticalScroll(id="ml-detail-panel"):
+                yield Static("", id="ml-detail-text")
         yield Static(
             "[dim]▲▼:navigate  Esc:close[/dim]",
             id="ml-hint",
@@ -177,7 +266,7 @@ class MonsterLogOverlay(Widget):
         return child.hostile if isinstance(child, _HostileRow) else None
 
     def _update_detail(self, hostile: Any | None) -> None:
-        self.query_one("#ml-detail-panel", Static).update(_build_hostile_detail(hostile))
+        self.query_one("#ml-detail-text", Static).update(_build_hostile_detail(hostile))
 
     # ── events ────────────────────────────────────────────────────────────
 

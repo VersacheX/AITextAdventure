@@ -349,15 +349,16 @@ def build_region_map (player_game, region_settings: dict, origin: Tuple[int,int]
 	rng_perc = random.random()
 	ignored_set = set(ignored_locations) if ignored_locations else set()
 
-	# Not implemented select City type at random or from region cities... have not decided on how to develop this
-	# build_city_map needs a city object in order to determine max_size... which is currently using the default on City
+	# build_city_map needs a city object in order to determine max_size... which is currently using the default on City.
+	# The decision of WHETHER this region gets a city (and which chapter region
+	# it is) is made authoritatively by the caller (PlayerGame.create_region_at)
+	# and passed in via ``hasCity``. Do NOT re-roll that decision here with an
+	# independent RNG: a second, unsynchronized roll was discarding cities the
+	# caller had already committed to, which stalled world generation after only
+	# a handful of cities. Simply honor ``hasCity``.
 	main_city = None
 	center = origin
-	if player_game.previous_region and player_game.previous_region.child_city is not None:
-		main_city = None
-	elif player_game.previous_region and random.random() < 0.8 and hasCity:
-		main_city, _ = build_city_map(random.SystemRandom().randint(0,2**32 -1)) # need to pass 
-	elif player_game.previous_region is	None:
+	if hasCity:
 		main_city, _ = build_city_map(random.SystemRandom().randint(0,2**32 -1))
 
 	#SET hasCity to false if no main_city was built

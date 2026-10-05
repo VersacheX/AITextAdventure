@@ -103,7 +103,7 @@ def _check_condition(condition: "TaskEventCondition", player_game) -> bool:
         return getattr(player_game, "current_chapter", 0) <= chapter
 
     # ── unhandled ─────────────────────────────────────────────────────────
-    input(f"evaluate_condition: unhandled condition type '{ct}' with params {p}")
+    player_game.add_info_dialog_line(None, f"evaluate_condition: unhandled condition type '{ct}' with params {p}")
     return False
 
 class TaskEventCondition:

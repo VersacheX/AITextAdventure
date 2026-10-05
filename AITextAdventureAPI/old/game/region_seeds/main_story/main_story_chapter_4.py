@@ -675,6 +675,10 @@ TASKS = [
                         "I keep track of all the weird happenings around here.  If something’s going on, I probably know about it."
                     ]
                 }
+            },
+            {
+                'event_type': 'initiate_dialog',
+                'params': { 'npc_id': None, 'dialog_id': 'narrator_intro_chapter_4' }
             }
         ],
         'task_complete_events': [

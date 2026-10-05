@@ -85,6 +85,9 @@ class OverworldScreen(BaseScreen):
         # combat completion path consumes it and refocuses the location list
         # once the dialog/battle is fully cleaned up.
         self._pending_overlay_refocus = False
+        # True while the overlay-refocus watcher poll loop is running, so a
+        # second location action can't stack a duplicate watcher.
+        self._refocus_watch_active = False
 
     LAYERS = ("default", "overlay")
 
@@ -610,12 +613,42 @@ class OverworldScreen(BaseScreen):
         """
         self._show_loading(message)
 
+        # Stream world-generation / long-task progress into the loading overlay
+        # so the player can see what it's currently doing instead of a frozen
+        # "Loading..." box. Lines are emitted on the worker thread, so marshal
+        # each onto the compositor thread before touching the widget.
+        try:
+            from game.services import world_gen_progress as _progress  # noqa: PLC0415
+        except Exception:  # noqa: BLE001
+            _progress = None
+
+        progress_token = None
+        if _progress is not None:
+            def _on_progress(line: str) -> None:
+                def _apply(text: str = line) -> None:
+                    self._update_loading_message(text)
+                try:
+                    self.app.call_from_thread(_apply)
+                except Exception:  # noqa: BLE001
+                    pass
+
+            try:
+                progress_token = _progress.subscribe(_on_progress)
+            except Exception:  # noqa: BLE001
+                progress_token = None
+
         def _runner() -> None:
             succeeded = False
             try:
                 fn()
                 succeeded = True
             finally:
+                if progress_token is not None and _progress is not None:
+                    try:
+                        _progress.unsubscribe(progress_token)
+                    except Exception:  # noqa: BLE001
+                        pass
+
                 def _finish(ok: bool = succeeded) -> None:
                     # Always clear the loading overlay, but only continue into
                     # dialog/combat handling when fn() actually succeeded — a
@@ -676,6 +709,13 @@ class OverworldScreen(BaseScreen):
         except Exception:
             pass
         self._refresh_overlays_disabled()
+
+    def _update_loading_message(self, message: str) -> None:
+        """Push a live progress line into the loading overlay, if shown."""
+        try:
+            self.query_one("#map-panel").query_one(LoadingDialog).update_message(message)
+        except Exception:
+            pass
 
     def _refresh_overlays_disabled(self) -> None:
         """Re-evaluate whether interactive overlays should stay disabled.
@@ -978,14 +1018,82 @@ class OverworldScreen(BaseScreen):
         if self._generation_refcount > 0 or self._loading_visible():
             return
         self._pending_overlay_refocus = False
+        # Hand off to the feed watcher instead of a one-shot refocus: a trailing
+        # info-dialog chain surfaced after combat can otherwise steal focus back
+        # when Textual removes the last MessageDialog.
+        self._start_overlay_refocus_watch()
 
-        def _refocus() -> None:
-            try:
-                self.query_one(LocationOverlay).focus_list()
-            except Exception:
-                pass
+    def _start_overlay_refocus_watch(self) -> None:
+        """Poll the dialog/loading feed and refocus the location list once the
+        player regains control.
 
-        self.call_after_refresh(_refocus)
+        A single NPC interaction can throw up several info dialogs in a row.
+        Firing a one-shot refocus the moment the chain *appears* cleared is
+        unreliable: Textual reassigns focus after it removes the last focused
+        MessageDialog, stealing focus back from the overlay. Instead we watch
+        the two things that actually hold up player control — a loading overlay
+        (long-running task events) and the player's `info_dialogs`/option feed —
+        and only refocus once BOTH have fully drained and no combat is running.
+        """
+        if self._refocus_watch_active:
+            return
+        self._refocus_watch_active = True
+
+        def _still_blocked() -> bool:
+            pg = self._player_game()
+            if pg is None:
+                return False
+            if self._dialog_visible() or self._combat_active:
+                return True
+            # Long-running task event (dungeon build, transport, world mutation)
+            # still running — the overlay is disabled for its lifetime.
+            if self._generation_refcount > 0 or self._loading_visible():
+                return True
+            # The feed itself: queued narrator lines or a pending choice prompt
+            # that haven't been surfaced as a visible dialog yet.
+            if getattr(pg, "info_dialogs", None):
+                return True
+            if getattr(pg, "option_dialog", None):
+                return True
+            # A queued boss fight that hasn't opened its encounter dialog /
+            # CombatScreen yet — refocusing now would hand control back right
+            # before the battle starts.
+            if getattr(pg, "pending_fight_mob_id", None):
+                return True
+            return False
+
+        def _tick() -> None:
+            # The overlay may have been torn down (player transported / no
+            # actions at the new tile) — stop watching rather than spin forever.
+            if not self._overlay_visible():
+                self._refocus_watch_active = False
+                return
+            if _still_blocked():
+                self.set_timer(0.15, _tick)
+                return
+            self._refocus_watch_active = False
+
+            def _refocus() -> None:
+                try:
+                    overlay = self.query_one(LocationOverlay)
+                except Exception:
+                    return
+                # Nothing is blocking anymore (checked above), but the overlay
+                # can be left in a stale disabled state if an NPC interaction
+                # chained a loading pass plus tile generation — the disable/
+                # enable bookkeeping races and never flips it back. Focusing a
+                # *disabled* ListView is a silent no-op in Textual, which is why
+                # the menu stayed greyed until the player moved (rebuilding it
+                # fresh). Force it enabled before focusing so control returns.
+                try:
+                    overlay.disabled = False
+                except Exception:
+                    pass
+                overlay.focus_list()
+
+            self.call_after_refresh(_refocus)
+
+        self.set_timer(0.15, _tick)
 
     # ── location overlay handling ─────────────────────────────────────────
 
@@ -1031,33 +1139,38 @@ class OverworldScreen(BaseScreen):
                 # task that queues dialogs and sets a pending fight. Defer the
                 # combat check until the dialog chain clears so the player can
                 # read the narrative before battle begins.
-                def _refocus_overlay() -> None:
-                    # The NPC/action dialog steals focus; once it clears Textual
-                    # drops focus to whatever's next in the DOM (often nothing),
-                    # leaving the overlay looking disabled (arrow keys/Enter do
-                    # nothing). Re-focus its list so keyboard nav works again.
-                    try:
-                        self.query_one(LocationOverlay).focus_list()
-                    except Exception:
-                        pass
-
                 def _after_pending_combat() -> None:
-                    # _check_pending_combat may mount an encounter MessageDialog
-                    # (or start combat) that owns focus. Only restore list focus
-                    # when nothing was opened — otherwise we'd steal focus from
-                    # the encounter prompt and let list input run behind it.
-                    # If a dialog/combat did open, carry the refocus through the
-                    # combat completion path so the overlay isn't left looking
-                    # disabled once the fight/dialog is dismissed.
-                    self._check_pending_combat()
-                    if self._dialog_visible() or self._combat_active:
-                        self._pending_overlay_refocus = True
+                    # An NPC interaction can run a task event (e.g. Kirn's
+                    # create_dungeon in Ch4) that builds a dungeon and places the
+                    # player inside it. That path sets pg.active_dungeon but does
+                    # NOT push DungeonScreen — only on_screen_resume / movement /
+                    # _ensure_and_render do. Since none of those fire after an
+                    # in-overworld NPC dialog, check here first so the player is
+                    # actually taken inside rather than left standing on the
+                    # dungeon's overworld tile.
+                    pg_now = self._player_game()
+                    active_dungeon = (
+                        pg_now.get_active_dungeon() if pg_now is not None else None
+                    )
+                    if active_dungeon is not None:
+                        self._enter_dungeon(pg_now, active_dungeon)
                         return
-                    # Refocus after the overlay refresh below has settled so the
-                    # list widget still exists and keeps focus.
-                    self.call_after_refresh(_refocus_overlay)
+                    # _check_pending_combat may mount an encounter MessageDialog
+                    # (or start combat) that owns focus. The feed watcher below
+                    # already waits for any such dialog/combat to drain before
+                    # refocusing, so just run the combat check here.
+                    self._check_pending_combat()
 
                 self._check_dialogs_and_refresh(on_cleared=_after_pending_combat)
+                # Start the refocus watcher unconditionally — NOT only inside
+                # on_cleared. _check_dialogs_and_refresh may defer (or, under
+                # re-entrancy, drop) on_cleared when a dialog is already visible,
+                # which previously meant the watcher never started and the menu
+                # stayed greyed. The watcher polls the whole feed (visible
+                # dialogs, loading overlay, pending generation, and the player's
+                # info_dialogs/option queue) and only refocuses once everything
+                # has fully drained, so starting it now is always safe.
+                self._start_overlay_refocus_watch()
             else:
                 self._refresh_all()
             # Refresh the overlay in-place for the (possibly updated) tile

@@ -18,19 +18,62 @@ from tui.services.combat_service import is_unit_player
 
 
 def _status_text(entity: Any) -> str:
+    from game.constants import fmt_status_glyphs
+
     statuses = getattr(entity, "statuses", None) or []
-    parts = [
-        rich_escape(str(s.get("name") or s.get("id") or ""))
+    ids = [
+        str(s.get("id") or s.get("name"))
         for s in statuses
-        if isinstance(s, dict) and (s.get("name") or s.get("id"))
+        if isinstance(s, dict) and (s.get("id") or s.get("name"))
     ]
-    if not parts:
+    if not ids:
         return ""
-    return f"[yellow]{', '.join(parts)}[/yellow]"
+    return f"[yellow]{rich_escape(fmt_status_glyphs(ids))}[/yellow]"
 
 
 def _active_marker(*, is_active: bool) -> str:
     return "[bold green]>[/bold green] " if is_active else ""
+
+
+def _is_scanned(entity: Any) -> bool:
+    statuses = getattr(entity, "statuses", None) or []
+    return any(
+        isinstance(s, dict) and str(s.get("id") or s.get("name")) == "scanned"
+        for s in statuses
+    )
+
+
+def _drop_name(drop: Any) -> str:
+    if drop is None:
+        return "None"
+    return rich_escape(str(getattr(drop, "name", drop) or "None"))
+
+
+def _scanned_detail_lines(entity: Any) -> List[str]:
+    """Return extra Rich-markup lines revealed when a hostile is 'scanned'."""
+    from game.constants import fmt_element_glyphs, fmt_status_glyphs
+
+    lines: List[str] = []
+    lines.append(
+        "STR {s}  DEX {d}  INT {i}  CON {c}".format(
+            s=getattr(entity, "strength", 0),
+            d=getattr(entity, "dexterity", 0),
+            i=getattr(entity, "intelligence", 0),
+            c=getattr(entity, "constitution", 0),
+        )
+    )
+    weaknesses  = fmt_element_glyphs(getattr(entity, "weaknesses", []) or [])
+    resistances = fmt_element_glyphs(getattr(entity, "resistances", []) or [])
+    immunities  = fmt_status_glyphs(getattr(entity, "immunities", []) or [])
+    lines.append(f"Weak {rich_escape(weaknesses)}")
+    lines.append(f"Res  {rich_escape(resistances)}")
+    lines.append(f"Imm  {rich_escape(immunities)}")
+    lines.append(
+        f"Drop {_drop_name(getattr(entity, 'common_drop', None))} / "
+        f"{_drop_name(getattr(entity, 'rare_drop', None))}"
+    )
+    lines.append(f"XP   {getattr(entity, 'base_xp', 0)}")
+    return lines
 
 
 def build_player_card_text(unit: Any, *, is_active: bool) -> str:
@@ -72,6 +115,10 @@ def build_hostile_card_text(unit: Any, *, is_active: bool) -> str:
     status = _status_text(h)
     if status:
         lines.append(status)
+
+    if _is_scanned(h):
+        lines.append("[dim]── Scanned ──[/dim]")
+        lines.extend(_scanned_detail_lines(h))
 
     return "\n".join(lines)
 

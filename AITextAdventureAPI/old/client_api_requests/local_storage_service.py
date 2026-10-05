@@ -165,6 +165,37 @@ class LocalStorageAdapter:
         finally:
             conn.close()
 
+    def list_all_saves(self) -> List[Dict[str, Any]]:
+        """Account-agnostic listing of every save in the DB.
+
+        Unlike `list_saves()`, this ignores `current_user_id` so developer
+        tooling can surface all saved games for loading as test fixtures
+        without needing to know (or be logged in as) the owning account.
+        """
+        conn = self._connect()
+        try:
+            cur = conn.cursor()
+            cur.execute(
+                "SELECT id, user_id, name, main_character, level, money, updated_at FROM saves ORDER BY updated_at DESC",
+            )
+            rows = cur.fetchall()
+            out: List[Dict[str, Any]] = []
+            for r in rows:
+                out.append(
+                    {
+                        "id": r["id"],
+                        "user_id": r["user_id"],
+                        "name": r["name"],
+                        "main_character": r["main_character"],
+                        "level": r["level"],
+                        "money": r["money"],
+                        "updated_at": r["updated_at"],
+                    }
+                )
+            return out
+        finally:
+            conn.close()
+
     def get_save(self, save_id: int) -> Dict[str, Any]:
         conn = self._connect()
         try:
