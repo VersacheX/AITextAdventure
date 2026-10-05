@@ -543,7 +543,7 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
         'name': 'Moonbriar Lantern',
         'description': 'A lantern forged from solidified moonlight drawn out of the Lunarcask Shade. Its glow holds the forest\'s oldest grove memories — a steady light that never gutters.',
         'min_level': 1, 'rarity': 'notfound', 'value': 24000,
-        'immunities': ['blind'], 'resistances': ['light', 'earth'], 'weaknesses': [],
+        'immunities': ['confuse'], 'resistances': ['light', 'earth'], 'weaknesses': [],
         'strength': 8, 'dexterity': 16, 'intelligence': 24, 'constitution': 18,
         'crit_bonus': 1.5, 'damage_bonus': 6, 'special_effect': '',
     },

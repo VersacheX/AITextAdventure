@@ -577,6 +577,16 @@ class LoadSavePanel(Vertical):
             self.query_one("#ls-list", ListView).disabled = disabled
         except Exception:
             pass
+        # Also lock the parent category tabs. They live on DataMgmtScreen (not in
+        # this panel), so a developer could otherwise switch categories mid-work;
+        # set_filter_mode() would unmount this panel while the background worker
+        # is still mutating the shared PlayerGame, and its completion callback
+        # would then target an unmounted widget. Disable the tabs for the
+        # worker's lifetime so the panel can't be swapped out from under it.
+        try:
+            self.screen.query_one("#dm-tabs").disabled = disabled
+        except Exception:
+            pass
 
     def _refresh_selected_task_row(self) -> None:
         # Rebuild the list so completion state / new tasks are reflected, then

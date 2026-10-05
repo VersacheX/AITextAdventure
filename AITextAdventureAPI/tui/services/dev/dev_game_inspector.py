@@ -366,11 +366,14 @@ def attempt_complete(pg: Any, task: Any) -> Tuple[bool, str]:
 
 
 def _attempt_complete_deliver(pg: Any, task: Any) -> Tuple[bool, str]:
-    """Complete a deliver task if the player carries its special item.
+    """Complete a deliver task if the player carries its special item AND is
+    standing with the delivery's target NPC.
 
-    Matches the gate used by PlayerGame's NPC-interaction paths
-    (`_player_has_deliver_item`): the delivery can only complete when the
-    required item is in inventory.
+    This mirrors the real delivery gate (PlayerGame.handle_npc_interaction_at_
+    player_location): a delivery only completes when the player carries the item
+    *and* is at the translated target NPC's location. Checking possession alone
+    would let "Attempt Complete" finish malformed or unreachable deliveries from
+    anywhere, making it indistinguishable from the separate Force action.
     """
     item_id = getattr(task, "special_item_id", None)
     has_item = False
@@ -390,9 +393,52 @@ def _attempt_complete_deliver(pg: Any, task: Any) -> Tuple[bool, str]:
         return False, (
             f"Missing deliver item '{item_id}'. Use Fulfill to grant it first."
         )
+
+    # Validate the target NPC is reachable at the player's current location,
+    # exactly like the real interaction path. Only NPC-targeted deliveries have
+    # a location gate; other to_types fall through to the shared complete path.
+    ok, reason = _deliver_target_reachable(pg, task)
+    if not ok:
+        return False, reason
+
     return _run_complete_task(
         pg, task, f"Delivered - completed task '{getattr(task, 'task_id', '?')}'."
     )
+
+
+def _deliver_target_reachable(pg: Any, task: Any) -> Tuple[bool, str]:
+    """Return (ok, reason) for whether a deliver task's target NPC is at the
+    player's current location, mirroring PlayerGame's real delivery gate."""
+    try:
+        from game.objects.task import SpecialTaskToType  # noqa: PLC0415
+    except Exception:  # noqa: BLE001 - if task types can't load, don't block
+        return True, ""
+
+    to_type = getattr(task, "to_type", None)
+    if to_type != SpecialTaskToType.NPC:
+        # Non-NPC deliveries have no location gate in the real path.
+        return True, ""
+
+    # Resolve the real target id through the same ref translation the game uses
+    # (pending_character / final_character / twisted_character indirection).
+    raw_to_id = getattr(task, "to_id", None)
+    translator = getattr(pg, "translate_npc_ref_to_id", None)
+    target_id = translator(raw_to_id) if callable(translator) else raw_to_id
+    if not target_id:
+        return False, "Delivery target NPC is undefined (malformed task)."
+
+    px, py, pz = getattr(pg, "x", None), getattr(pg, "y", None), getattr(pg, "z", None)
+    for npc in getattr(pg, "npcs", []) or []:
+        if getattr(npc, "id", None) != target_id:
+            continue
+        if getattr(npc, "position", None) == (px, py) and pz == 0:
+            return True, ""
+        return False, (
+            f"Target NPC '{target_id}' is not at your location "
+            f"({px},{py}). Move to the NPC or use Force Complete."
+        )
+
+    return False, f"Target NPC '{target_id}' is not present in the world."
 
 
 def force_complete(pg: Any, task: Any) -> Tuple[bool, str]:
