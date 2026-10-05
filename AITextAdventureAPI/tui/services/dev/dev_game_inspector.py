@@ -310,6 +310,36 @@ def _fulfill_deliver(pg: Any, task: Any) -> Tuple[bool, str]:
 
 # ?? Completion ?????????????????????????????????????????????????????????????????
 
+def _run_complete_task(pg: Any, task: Any, success_msg: str) -> Tuple[bool, str]:
+    """Invoke pg.complete_task() and report honestly when it partially completes.
+
+    PlayerGame.complete_task() sets ``task.completed = True`` *before* running
+    the task's completion events. If one of those events raises, the task is
+    left flagged completed with only some side effects applied. Returning a flat
+    "not completed" would be a lie -- and the next attempt would be rejected as
+    "already completed", stranding the half-finished task with no recovery path.
+
+    So on failure we inspect ``task.completed``:
+      - If it is set, the task IS completed (events partially ran). Report
+        success=True but surface the partial-completion warning so the dev can
+        decide how to recover (e.g. inspect/replay the remaining side effects).
+      - If it is not set, the failure happened before completion; report a
+        clean failure so a retry is valid.
+    """
+    try:
+        pg.complete_task(task)
+    except Exception as exc:  # noqa: BLE001
+        task_id = getattr(task, "task_id", "?")
+        if getattr(task, "completed", False):
+            return True, (
+                f"Task '{task_id}' is marked completed but a completion event "
+                f"raised: {exc}. Side effects are partial -- recover manually "
+                f"(it will not re-run as it is now flagged completed)."
+            )
+        return False, f"complete_task raised before completion: {exc}"
+    return True, success_msg
+
+
 def attempt_complete(pg: Any, task: Any) -> Tuple[bool, str]:
     """Run the game's real completion check; complete the task if met.
 
@@ -330,11 +360,9 @@ def attempt_complete(pg: Any, task: Any) -> Tuple[bool, str]:
         return False, f"Completion check failed: {exc}"
     if not ready:
         return False, "Conditions not met - cannot complete yet."
-    try:
-        pg.complete_task(task)
-    except Exception as exc:  # noqa: BLE001
-        return False, f"complete_task raised: {exc}"
-    return True, f"Completed task '{getattr(task, 'task_id', '?')}'."
+    return _run_complete_task(
+        pg, task, f"Completed task '{getattr(task, 'task_id', '?')}'."
+    )
 
 
 def _attempt_complete_deliver(pg: Any, task: Any) -> Tuple[bool, str]:
@@ -362,22 +390,18 @@ def _attempt_complete_deliver(pg: Any, task: Any) -> Tuple[bool, str]:
         return False, (
             f"Missing deliver item '{item_id}'. Use Fulfill to grant it first."
         )
-    try:
-        pg.complete_task(task)
-    except Exception as exc:  # noqa: BLE001
-        return False, f"complete_task raised: {exc}"
-    return True, f"Delivered - completed task '{getattr(task, 'task_id', '?')}'."
+    return _run_complete_task(
+        pg, task, f"Delivered - completed task '{getattr(task, 'task_id', '?')}'."
+    )
 
 
 def force_complete(pg: Any, task: Any) -> Tuple[bool, str]:
     """Complete the task's events regardless of conditions (dev override)."""
     if getattr(task, "completed", False):
         return False, "Task already completed."
-    try:
-        pg.complete_task(task)
-    except Exception as exc:  # noqa: BLE001
-        return False, f"complete_task raised: {exc}"
-    return True, f"Force-completed task '{getattr(task, 'task_id', '?')}'."
+    return _run_complete_task(
+        pg, task, f"Force-completed task '{getattr(task, 'task_id', '?')}'."
+    )
 
 
 # ?? Dungeon treasure ???????????????????????????????????????????????????????????
