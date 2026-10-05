@@ -521,8 +521,15 @@ class LoadSavePanel(Vertical):
         else:
             op = lambda: insp.attempt_complete(pg, task)  # noqa: E731
 
-        (result, _report) = insp.run_with_report(pg, op, on_line=stream_line)
-        done, msg = result
+        # Always marshal a result through the completion callback -- even on
+        # failure. If run_with_report() or the unpacking raises (e.g. a task
+        # completion event blows up), skipping _on_task_worker_done would leave
+        # the drain timer running and every inspect control disabled forever.
+        try:
+            result, _report = insp.run_with_report(pg, op, on_line=stream_line)
+            done, msg = result
+        except Exception as exc:  # noqa: BLE001 - restore controls on worker failure
+            done, msg = False, f"{action} failed: {exc}"
         self.app.call_from_thread(self._on_task_worker_done, action, done, msg)
 
     def _drain_report_queue(self) -> None:
