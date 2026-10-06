@@ -321,7 +321,11 @@ def compact_region_onto_mass(
     region_tiles = _region_all_tiles(region)
     if not region or not region.tiles or not mass:
         return region_tiles
-    if _tiles_touch(region_tiles, mass):
+    # Only short-circuit when the region is already seated: disjoint from the mass
+    # AND 4-adjacent to it. _tiles_touch() is also true for OVERLAP, so an
+    # overlapping region must still fall through to the edge snap — otherwise the
+    # later world_tiles rebuild would silently overwrite one owner's tiles.
+    if region_tiles.isdisjoint(mass) and _tiles_touch(region_tiles, mass):
         return region_tiles
 
     _, (rcx, rcy) = bbox_and_center_from_tiles(region_tiles)
@@ -605,37 +609,46 @@ def _push_in(moved_boundary: Set[Tuple[int, int]],
     the dilated world, nestling the blob snugly against the coastline (and into
     concavities on that side).
 
-    The boundary is tested first as a cheap broad-phase reject, but ALL moved
-    tiles are then validated: if the blob wraps around an existing world tile its
-    boundary can stay disjoint while an interior tile overlaps, and the later
-    world rebuild would silently overwrite one owner. Interior tiles must be
-    checked too.
+    The boundary is used for the per-step sweep (cheap broad-phase): it is the
+    part of the blob that makes first contact as it slides in. The expensive
+    full-interior overlap test is done only ONCE, at the final resting offset,
+    rather than on every step — this catches the enclosure case (blob wrapping an
+    existing tile, boundary disjoint but an interior tile overlapping) without
+    rescanning every continent tile at every step/jitter/direction.
     """
-    def disjoint_at(t: int) -> bool:
+    def boundary_disjoint_at(t: int) -> bool:
         ox = base_off[0] - d[0] * t
         oy = base_off[1] - d[1] * t
-        # Broad-phase: boundary is the most likely to collide first.
         for (x, y) in moved_boundary:
             if (x + ox, y + oy) in world_dilated:
                 return False
-        # Narrow-phase: ensure no interior tile overlaps an enclosed world tile.
+        return True
+
+    def interior_disjoint_at(t: int) -> bool:
+        ox = base_off[0] - d[0] * t
+        oy = base_off[1] - d[1] * t
         for (x, y) in moved_all:
             if (x + ox, y + oy) in world_dilated:
                 return False
         return True
 
-    if not disjoint_at(0):
+    if not boundary_disjoint_at(0):
         return None
     # Collision along a translation is NOT monotonic: a blob can be clear,
     # intersect an obstacle, then become clear again after passing it. A binary
     # search would happily "jump" past an obstacle. Instead scan inward one step
-    # at a time from the clear start and stop at the first contact, guaranteeing
-    # the blob never crosses an existing tile.
+    # at a time from the clear start and stop at the first boundary contact,
+    # guaranteeing the blob never crosses an existing tile.
     t = 0
     while t < far:
-        if not disjoint_at(t + 1):
+        if not boundary_disjoint_at(t + 1):
             break
         t += 1
+    # Final interior validation at the resting offset (single full-tile scan).
+    # If an interior tile overlaps an enclosed world tile here, this candidate is
+    # invalid — reject rather than silently overwriting ownership on rebuild.
+    if not interior_disjoint_at(t):
+        return None
     return (base_off[0] - d[0] * t, base_off[1] - d[1] * t)
 
 def _find_continent_placement(moved_all: Set[Tuple[int, int]],
@@ -951,8 +964,17 @@ def build_continents_and_ocean(player_game: PlayerGame,
     if not verified:
         _emit(
             "[continents] ERROR: continents still invalid after repair attempts; "
-            "world layout is NOT contiguous."
+            "world layout is NOT contiguous. Aborting ocean build; caller must "
+            "reject this layout."
         )
+        # Do not build the ocean around (and thereby commit) a broken layout.
+        # Return early with verification_passed=False so the caller can reject.
+        return {
+            "continents": continent_bboxes,
+            "ocean_bbox": None,
+            "ocean_region": None,
+            "verification_passed": False,
+        }
 
     # 5) recompute world bounds and create ocean bbox
     all_tiles = set(player_game.world_tiles.keys())

@@ -255,6 +255,17 @@ class PlayerGame:
 										spread_radius=30,
 										ocean_padding=15)
 
+		# Never accept a malformed world. If continent verification failed (cities
+		# on the wrong continent or a non-contiguous landmass), the layout is
+		# invalid and must not be committed/reported as complete. Raise so the
+		# caller's completion flow surfaces the failure instead of silently
+		# proceeding with a broken map.
+		if not result.get("verification_passed", False):
+			raise RuntimeError(
+				"World generation produced an invalid continent layout "
+				"(verification failed); aborting so a broken world is not committed."
+			)
+
 		# ocean_bbox = result.get("ocean_bbox")
 		# ocean_region = result.get("ocean_region")
 		# continent_count = len(result.get("continents", []))
