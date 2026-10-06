@@ -57,13 +57,18 @@ def ensure_4_connected(tiles: Set[Tuple[int, int]], ignored_set: Set[Tuple[int, 
 
 	def _bridge_between(source: Set[Tuple[int, int]],
 						targets: Set[Tuple[int, int]],
-						blocked: Set[Tuple[int, int]]) -> list:
+						blocked: Set[Tuple[int, int]],
+						bounds: Tuple[int, int, int, int]) -> list:
 		"""Shortest free-cell path from `source` to any `targets` tile.
 
 		BFS outward from every `source` tile across free cells only (never through
-		`blocked`/occupied cells). Returns the list of intermediate free cells to
-		fill, or None if no occupied-free route exists.
+		`blocked`/occupied cells). The search is confined to `bounds`
+		(min_x, max_x, min_y, max_y) so it can never radiate across the unbounded
+		grid — without this an enclosed target would make the BFS expand forever
+		and exhaust memory. Returns the list of intermediate free cells to fill, or
+		None if no occupied-free route exists inside the bounds.
 		"""
+		min_x, max_x, min_y, max_y = bounds
 		frontier = deque()
 		came_from: dict = {}
 		for cell in source:
@@ -84,6 +89,10 @@ def ensure_4_connected(tiles: Set[Tuple[int, int]], ignored_set: Set[Tuple[int, 
 						node = came_from[node]
 					path.reverse()
 					return path
+				nx, ny = nxt
+				# Confine the search to the padded footprint bounds.
+				if nx < min_x or nx > max_x or ny < min_y or ny > max_y:
+					continue
 				if nxt in blocked:
 					continue
 				came_from[nxt] = cur
@@ -96,6 +105,13 @@ def ensure_4_connected(tiles: Set[Tuple[int, int]], ignored_set: Set[Tuple[int, 
 	comps = _components(working)
 	# Occupied cells that bridges must route around: foreign tiles not owned here.
 	blocked = set(ignored_set) - working
+	# Confine bridge BFS to the footprint's bounding box plus a small margin so a
+	# detour has room to route around obstacles, but the search can never radiate
+	# across the unbounded grid (which would exhaust memory on an enclosed target).
+	xs = [x for (x, _) in working]
+	ys = [y for (_, y) in working]
+	margin = 4
+	bounds = (min(xs) - margin, max(xs) + margin, min(ys) - margin, max(ys) + margin)
 	max_iterations = len(comps) + 1
 	iterations = 0
 	while len(comps) > 1 and iterations < max_iterations:
@@ -104,7 +120,7 @@ def ensure_4_connected(tiles: Set[Tuple[int, int]], ignored_set: Set[Tuple[int, 
 		# that avoids occupied cells entirely.
 		source = comps[0]
 		targets = set().union(*comps[1:])
-		path = _bridge_between(source, targets, blocked)
+		path = _bridge_between(source, targets, blocked, bounds)
 		if path is None:
 			# No occupied-free route to any other component; leave remaining
 			# components rather than carving through another region's tiles.

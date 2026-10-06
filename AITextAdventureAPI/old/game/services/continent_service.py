@@ -249,9 +249,12 @@ def normalize_region_internal_connectivity(region: City, player_game: PlayerGame
     if _count_components(blob) <= 1:
         return 0
 
-    # Bridge against only this region's tiles; other continents' tiles are off
-    # limits so we don't carve across them (they are isolated in space here).
-    bridged = ensure_4_connected(set(blob), ignored_set=set())
+    # Bridge within this region only. Every world tile owned by another region
+    # (i.e. not part of this region/child blob) is off limits, so a bridge can
+    # never carve through — and silently steal ownership of — another region's
+    # tile when the world is rebuilt.
+    blocked = set(player_game.world_tiles) - blob
+    bridged = ensure_4_connected(set(blob), ignored_set=blocked)
     added = bridged - blob
     for (x, y) in added:
         if (x, y) not in region.tiles:
@@ -623,14 +626,16 @@ def _push_in(moved_boundary: Set[Tuple[int, int]],
 
     if not disjoint_at(0):
         return None
-    lo, hi = 0, far
-    while lo < hi:
-        mid = (lo + hi + 1) // 2
-        if disjoint_at(mid):
-            lo = mid
-        else:
-            hi = mid - 1
-    t = lo
+    # Collision along a translation is NOT monotonic: a blob can be clear,
+    # intersect an obstacle, then become clear again after passing it. A binary
+    # search would happily "jump" past an obstacle. Instead scan inward one step
+    # at a time from the clear start and stop at the first contact, guaranteeing
+    # the blob never crosses an existing tile.
+    t = 0
+    while t < far:
+        if not disjoint_at(t + 1):
+            break
+        t += 1
     return (base_off[0] - d[0] * t, base_off[1] - d[1] * t)
 
 def _find_continent_placement(moved_all: Set[Tuple[int, int]],
@@ -926,13 +931,38 @@ def build_continents_and_ocean(player_game: PlayerGame,
 
     # 4.c) verify each continent holds exactly the cities it should per the
     # canonical chapter-city map, and that its landmass is contiguous enough to
-    # connect those cities. Surfaces mismatches to the dev TUI report.
-    verify_continent_city_containment(player_game, continents, requested_counts)
+    # connect those cities. If verification fails we must NOT silently accept the
+    # layout — retry compaction + placement, re-verifying each time, before
+    # giving up. The final status is propagated to the caller so an invalid world
+    # can be rejected/rolled back rather than reported as complete.
+    verified = verify_continent_city_containment(player_game, continents, requested_counts)
+    max_repair_attempts = 2
+    attempt = 0
+    while not verified and attempt < max_repair_attempts:
+        attempt += 1
+        _emit(
+            f"[continents] Verification failed -- repair attempt "
+            f"{attempt}/{max_repair_attempts}: recompacting and replacing."
+        )
+        compact_continents_to_contiguous(player_game, continents)
+        place_continents_linearly(player_game, continents, anchor_index=0, gap=3)
+        verified = verify_continent_city_containment(player_game, continents, requested_counts)
+
+    if not verified:
+        _emit(
+            "[continents] ERROR: continents still invalid after repair attempts; "
+            "world layout is NOT contiguous."
+        )
 
     # 5) recompute world bounds and create ocean bbox
     all_tiles = set(player_game.world_tiles.keys())
     if not all_tiles:
-        return {"continents": continent_bboxes, "ocean_bbox": None, "ocean_region": None}
+        return {
+            "continents": continent_bboxes,
+            "ocean_bbox": None,
+            "ocean_region": None,
+            "verification_passed": verified,
+        }
 
     xs = [x for (x,y) in all_tiles]
     ys = [y for (x,y) in all_tiles]
@@ -954,6 +984,7 @@ def build_continents_and_ocean(player_game: PlayerGame,
         "ocean_bbox": ocean_bbox,
         "ocean_region": ocean_region,
         "continent_compositions": continent_cities,
+        "verification_passed": verified,
         #"continent_groups": continents
     }
 
