@@ -1,4 +1,4 @@
-"""
+﻿"""
 Continent detection / spreading and ocean-rect builder.
 
 Modified to:
@@ -10,7 +10,7 @@ Modified to:
  - Assign remaining (citiless) regions to the nearest continent after city assignment.
  - Spread continents but skip moving the first continent.
 """
-from typing import List, Tuple, Dict, Set, Optional
+from typing import List, Tuple, Dict, Set, Optional, Any
 import math
 import random
 
@@ -18,6 +18,33 @@ from game.objects.city import City, Tile
 from game.objects.player_game import PlayerGame
 import game.constants as const
 from game.services.city_builder_service import translate_city
+from game.services import world_gen_progress as progress
+
+
+def _emit(line: str) -> None:
+    """Surface a continent-building progress line to the dev TUI / overlay.
+
+    Mirrors the world-generation loop so continent assignment, spreading and
+    verification are observable in the same report stream.
+    """
+    progress.emit(line)
+
+
+def _city_key(region: City) -> Optional[str]:
+    """Canonical chapter-city key for a city-bearing region: ``region_name_city_name``.
+
+    This matches the keys used by CHAPTER_CITY_ORDER and PlayerGame.get_continents(),
+    so a region can be mapped to the continent it is *supposed* to belong to.
+    """
+    child = getattr(region, 'child_city', None)
+    if region is None or child is None:
+        return None
+    region_name = getattr(region, 'region_name', None)
+    city_name = getattr(child, 'city_name', None)
+    if not region_name or not city_name:
+        return None
+    return f"{region_name}_{city_name}"
+
 
 # A small helper to compute bbox and center for a set of tiles
 def bbox_and_center_from_tiles(tiles: Set[Tuple[int,int]]) -> Tuple[Tuple[int,int,int,int], Tuple[float,float]]:
@@ -62,24 +89,83 @@ def ordered_city_regions(player_game: PlayerGame, start_region: Optional[City]) 
     return city_regions[start_idx:] + city_regions[:start_idx]
 
 def assign_city_regions_to_continents(player_game: PlayerGame, continent_city_counts: List[int]) -> List[List[City]]:
-    """Partition city-bearing regions into continents according to continent_city_counts sequentially.
+    """Partition city-bearing regions into continents.
 
-    Returns continents list of lists (initially containing only the city-bearing regions).
+    Cities are assigned to the continent they *canonically* belong to, as defined
+    by CONTINENT_COMPOSITION + CHAPTER_CITY_ORDER (exposed via
+    ``PlayerGame.get_continents()``), keyed by ``region_name_city_name``. This
+    guarantees each continent ends up holding exactly the cities it should,
+    instead of relying on arbitrary region-creation order (which previously
+    scattered cities onto the wrong continents).
+
+    Any city-bearing region whose key isn't found in the canonical map (e.g. a
+    duplicate/unexpected city) falls back to sequential fill so it is never
+    dropped. Returns a continents list of lists (city-bearing regions only).
     """
-    start_region = find_region_for_player(player_game)
-    city_regions = ordered_city_regions(player_game, start_region)
-    continents: List[List[City]] = []
-    idx = 0
-    for count in continent_city_counts:
-        group = city_regions[idx: idx + count]
-        continents.append(group)
-        idx += count
-        if idx >= len(city_regions):
-            # remaining continents empty
-            break
-    # ensure we have entry for every requested continent count
-    while len(continents) < len(continent_city_counts):
-        continents.append([])
+    num_continents = len(continent_city_counts)
+    continents: List[List[City]] = [[] for _ in continent_city_counts]
+
+    # Build key -> continent-index map from the canonical composition.
+    # get_continents() returns {continent_number(1-based): [chapter_city_key, ...]}.
+    key_to_continent: Dict[str, int] = {}
+    try:
+        canonical = player_game.get_continents()
+        for cont_num, keys in canonical.items():
+            idx = int(cont_num) - 1
+            if 0 <= idx < num_continents:
+                for key in keys:
+                    key_to_continent[key] = idx
+    except Exception as exc:  # noqa: BLE001 - never let mapping errors abort gen
+        _emit(f"[continents] WARNING: could not read canonical city map: {exc}")
+
+    city_regions = [r for r in player_game.regions if r and r.child_city is not None]
+    _emit(
+        f"[continents] Assigning {len(city_regions)} city regions into "
+        f"{num_continents} continents by canonical chapter-city map."
+    )
+
+    unmatched: List[City] = []
+    for region in city_regions:
+        key = _city_key(region)
+        target = key_to_continent.get(key) if key else None
+        if target is None:
+            unmatched.append(region)
+            _emit(
+                f"[continents]   city '{key}' not in canonical map -- deferring "
+                f"to sequential fill."
+            )
+            continue
+        continents[target].append(region)
+        _emit(f"[continents]   city '{key}' -> continent {target + 1}")
+
+    # Place any unmatched cities into continents that are still under their
+    # target count, preserving determinism by continent order.
+    for region in unmatched:
+        placed = False
+        for idx, count in enumerate(continent_city_counts):
+            if len(continents[idx]) < count:
+                continents[idx].append(region)
+                _emit(
+                    f"[continents]   fallback city '{_city_key(region)}' -> "
+                    f"continent {idx + 1}"
+                )
+                placed = True
+                break
+        if not placed:
+            # Last resort: smallest continent so nothing is lost.
+            idx = min(range(num_continents), key=lambda i: len(continents[i]))
+            continents[idx].append(region)
+            _emit(
+                f"[continents]   overflow city '{_city_key(region)}' -> "
+                f"continent {idx + 1}"
+            )
+
+    # Log final city counts vs. requested so mismatches are obvious.
+    for idx, count in enumerate(continent_city_counts):
+        have = len(continents[idx])
+        flag = "" if have == count else "  <-- MISMATCH"
+        _emit(f"[continents] Continent {idx + 1}: {have}/{count} cities{flag}")
+
     return continents
 
 def continent_center_from_regions(regions: List[City]) -> Tuple[float,float]:
@@ -95,25 +181,244 @@ def continent_center_from_regions(regions: List[City]) -> Tuple[float,float]:
     return center
 
 def assign_citiless_regions_to_continents(player_game: PlayerGame, continents: List[List[City]]) -> None:
-    """Assign regions without child_city to the nearest continent (in-place mutate continents)."""
+    """Assign regions without child_city to their continent (in-place mutate continents).
+
+    Citiless regions are the connective landmass that binds each continent's
+    cities together. Each connector now carries a baked ``continent`` attribute
+    (stamped at creation in ``create_region_at`` and backfilled on load), so we
+    attach it to that continent directly. This keeps every continent's connectors
+    with the cities they were grown to link — critical for contiguity.
+
+    Only connectors with a missing/out-of-range continent (legacy data) fall back
+    to nearest-centroid assignment so nothing is ever dropped.
+    """
     citiless = [r for r in player_game.regions if r and r.child_city is None]
-    # precompute continent centers
-    centers = [continent_center_from_regions(cont) for cont in continents]
+    _emit(
+        f"[continents] Attaching {len(citiless)} citiless (connector) regions "
+        f"to their baked continents."
+    )
+    num = len(continents)
+    attached_counts = [0] * num
+    fallback = 0
+    # centroids only needed for the legacy fallback path; computed lazily.
+    centers: Optional[List[Tuple[float, float]]] = None
     for region in citiless:
-        # region center
-        _, rc = bbox_and_center_from_tiles(set(region.tiles.keys()))
-        # find nearest non-empty continent center; if all centers are (0,0), pick first
-        best = min(range(len(centers)), key=lambda i: (rc[0] - centers[i][0])**2 + (rc[1] - centers[i][1])**2)
-        continents[best].append(region)
-        # update center for that continent for subsequent assignments
-        centers[best] = continent_center_from_regions(continents[best])
+        cont_num = getattr(region, "continent", None)
+        idx = (cont_num - 1) if isinstance(cont_num, int) else None
+        if idx is None or not (0 <= idx < num):
+            # Legacy / unstamped connector: fall back to nearest continent centroid.
+            if centers is None:
+                centers = [continent_center_from_regions(cont) for cont in continents]
+            _, rc = bbox_and_center_from_tiles(set(region.tiles.keys()))
+            idx = min(range(num), key=lambda i: (rc[0] - centers[i][0]) ** 2 + (rc[1] - centers[i][1]) ** 2)
+            fallback += 1
+        continents[idx].append(region)
+        attached_counts[idx] += 1
+
+    if fallback:
+        _emit(f"[continents]   {fallback} connector(s) had no baked continent -> nearest-centroid fallback")
+    for idx, n in enumerate(attached_counts):
+        _emit(f"[continents] Continent {idx + 1}: +{n} connector regions")
+
+# ------------------------------------------------------------------
+# Continent compaction (pack a continent's scattered regions into one mass)
+# ------------------------------------------------------------------
+def _region_all_tiles(region: City) -> Set[Tuple[int, int]]:
+    """All world tiles owned by a region, including its child city."""
+    tiles: Set[Tuple[int, int]] = set(region.tiles.keys())
+    if getattr(region, "child_city", None):
+        tiles.update(region.child_city.tiles.keys())
+    return tiles
+
+def _tiles_touch(a: Set[Tuple[int, int]], b: Set[Tuple[int, int]]) -> bool:
+    """True if any tile in `a` is 4-adjacent to (or overlaps) a tile in `b`."""
+    for x, y in a:
+        if ((x, y) in b
+                or (x + 1, y) in b or (x - 1, y) in b
+                or (x, y + 1) in b or (x, y - 1) in b):
+            return True
+    return False
+
+def _select_seed_region_index(cont: List[City], player_game: PlayerGame) -> int:
+    """Pick the anchor region a continent is packed around.
+
+    Prefer the region the player currently stands on (so the player is never
+    displaced); otherwise prefer the largest city-bearing region; otherwise the
+    largest region. Returns an index into `cont`.
+    """
+    player_pos = (player_game.x, player_game.y)
+    for i, r in enumerate(cont):
+        if r and player_pos in r.tiles:
+            return i
+        if r and getattr(r, "child_city", None) and player_pos in r.child_city.tiles:
+            return i
+    # Fall back to the largest city-bearing region, then largest region overall.
+    city_regions = [(i, r) for i, r in enumerate(cont) if r and getattr(r, "child_city", None)]
+    pool = city_regions if city_regions else [(i, r) for i, r in enumerate(cont) if r]
+    if not pool:
+        return 0
+    return max(pool, key=lambda ir: len(_region_all_tiles(ir[1])))[0]
+
+def compact_region_onto_mass(
+    region: City,
+    mass: Set[Tuple[int, int]],
+    player_game: PlayerGame,
+) -> Set[Tuple[int, int]]:
+    """Snap `region` flush against one side of `mass`, guaranteed contiguous.
+
+    Rather than sliding toward a centroid (which can miss for irregular shapes),
+    this uses an edge-snap that is mathematically guaranteed to produce 4-contact
+    with zero overlap for ANY rigid blob shapes:
+
+    - Choose a side (E/W/N/S) based on where the region currently lies relative
+      to the mass centroid, so the region moves the natural (short) way.
+    - For an EAST snap: take the mass's max-x tile `m` and the region's min-x
+      tile `r`, then translate the region so `r` lands at `(m.x + 1, m.y)`.
+      Afterwards every region tile has x >= m.x+1 while every mass tile has
+      x <= m.x, so the two sets cannot overlap; and `r` sits directly east of
+      `m`, so they are 4-adjacent. The other three sides are symmetric.
+
+    A single net offset is computed and applied with one translate call (so
+    entities move exactly once). Returns the shifted region tile set for the
+    caller to fold into the growing mass. `mass` is not mutated here.
+    """
+    region_tiles = _region_all_tiles(region)
+    if not region or not region.tiles or not mass:
+        return region_tiles
+    if _tiles_touch(region_tiles, mass):
+        return region_tiles
+
+    _, (rcx, rcy) = bbox_and_center_from_tiles(region_tiles)
+    _, (mcx, mcy) = bbox_and_center_from_tiles(mass)
+
+    # Pick the snap side from the dominant axis of the region->mass offset.
+    if abs(rcx - mcx) >= abs(rcy - mcy):
+        side = "E" if rcx >= mcx else "W"
+    else:
+        side = "N" if rcy >= mcy else "S"
+
+    if side == "E":
+        # Region is east of mass: place region's leftmost (min-x) column one tile
+        # east of the mass's rightmost (max-x) column, matching y of that anchor.
+        m = max(mass, key=lambda p: (p[0], p[1]))
+        r = min(region_tiles, key=lambda p: (p[0], p[1]))
+        off_x = (m[0] + 1) - r[0]
+        off_y = m[1] - r[1]
+    elif side == "W":
+        m = min(mass, key=lambda p: (p[0], p[1]))
+        r = max(region_tiles, key=lambda p: (p[0], p[1]))
+        off_x = (m[0] - 1) - r[0]
+        off_y = m[1] - r[1]
+    elif side == "N":
+        m = max(mass, key=lambda p: (p[1], p[0]))
+        r = min(region_tiles, key=lambda p: (p[1], p[0]))
+        off_y = (m[1] + 1) - r[1]
+        off_x = m[0] - r[0]
+    else:  # "S"
+        m = min(mass, key=lambda p: (p[1], p[0]))
+        r = max(region_tiles, key=lambda p: (p[1], p[0]))
+        off_y = (m[1] - 1) - r[1]
+        off_x = m[0] - r[0]
+
+    cur = {(x + off_x, y + off_y) for (x, y) in region_tiles}
+    if off_x or off_y:
+        translate_region_tiles(region, off_x, off_y, player_game)
+    return cur
+
+def compact_continents_to_contiguous(player_game: PlayerGame, continents: List[List[City]]) -> None:
+    """Pack each continent's regions into a single contiguous landmass in-place.
+
+    City->continent membership is canonical and fixed, but the member regions
+    were generated at scattered positions, leaving a continent as disconnected
+    islands. For each continent we keep a seed region anchored and accrete every
+    other region onto the growing mass by sliding it inward until it makes
+    edge-contact, guaranteeing 4-connectivity.
+
+    IMPORTANT: this must run AFTER the continents have been spread apart, so each
+    continent occupies its own isolated region of space. Packing then only ever
+    tests/moves against the continent's own tiles and can never slide a region
+    across (and overwrite) another continent's tiles.
+    """
+    _emit("[continents] Compacting continents into contiguous landmasses...")
+    for idx, cont in enumerate(continents):
+        regions = [r for r in cont if r and r.tiles]
+        if len(regions) <= 1:
+            _emit(f"[continents]   continent {idx + 1}: <=1 region, nothing to compact")
+            continue
+
+        seed_local = _select_seed_region_index(regions, player_game)
+        seed = regions[seed_local]
+        mass: Set[Tuple[int, int]] = _region_all_tiles(seed)
+        _, seed_center = bbox_and_center_from_tiles(mass)
+
+        # Accrete remaining regions nearest-to-seed first so the mass grows
+        # compactly rather than leaving a straggler stranded.
+        remaining = [r for i, r in enumerate(regions) if i != seed_local]
+
+        def _dist_to_seed(region: City, center=seed_center) -> float:
+            _, (cx, cy) = bbox_and_center_from_tiles(_region_all_tiles(region))
+            return (cx - center[0]) ** 2 + (cy - center[1]) ** 2
+
+        remaining.sort(key=_dist_to_seed)
+
+        for region in remaining:
+            placed = compact_region_onto_mass(region, mass, player_game)
+            mass |= placed
+
+        # Rebuild world tiles so later bbox/centroid reads see the packed layout.
+        update_player_game_world_tiles_after_translation(player_game)
+        contiguous = _continent_is_contiguous(cont)
+        if not contiguous:
+            # Diagnose WHY: count connected components of the whole continent, and
+            # check whether any individual region blob is itself disconnected
+            # (e.g. a child_city whose tiles aren't adjacent to its region).
+            # NOTE: avoid '[' / ']' in emitted text — the dev report renders via
+            # Rich markup and square brackets would be parsed as markup tags.
+            comp = _count_components(continent_tiles(cont))
+            bad_regions = []
+            for r in regions:
+                rt = _region_all_tiles(r)
+                blob_parts = _count_components(rt)
+                if blob_parts > 1:
+                    cname = getattr(getattr(r, "child_city", None), "display_name", None)
+                    region_parts = _count_components(set(r.tiles.keys()))
+                    city_parts = (
+                        _count_components(set(r.child_city.tiles.keys()))
+                        if getattr(r, "child_city", None) else 0
+                    )
+                    bad_regions.append(
+                        f"{{{getattr(r, 'region_name', '?')}"
+                        f"{'/' + str(cname) if cname else ''}: "
+                        f"blob={blob_parts} region={region_parts} city={city_parts}}}"
+                    )
+            _emit(
+                f"[continents]   continent {idx + 1}: components={comp}; "
+                f"internally-split regions: {' '.join(bad_regions) or 'none'}"
+            )
+        _emit(
+            f"[continents]   continent {idx + 1}: packed {len(regions)} regions "
+            f"(seed kept fixed), contiguous={contiguous}"
+        )
+
+    # Clear the per-pass entity-move guard that translate_region_tiles set, so
+    # any later translation pass starts with a fresh tracking set.
+    if hasattr(player_game, "_continent_translate_moved_entities"):
+        delattr(player_game, "_continent_translate_moved_entities")
 
 # ------------------------------------------------------------------
 # Translation and spread (modified to allow skipping first continent)
 # ------------------------------------------------------------------
 def translate_region_tiles(region: City, dx: int, dy: int, player_game: PlayerGame) -> None:
-    """Translate region City tiles in-place by (dx,dy)."""
+    """Translate region City tiles in-place by (dx,dy).
+
+    Moves both the tile grid AND the sublocation map so the continent moves as a
+    rigid unit. ``subloc_map`` is keyed by (x, y, z); only x/y shift (floor z is
+    preserved). If sublocs were not re-keyed here they would be stranded at the
+    continent's pre-move coordinates and ``get_sublocation_at`` would miss them.
+    """
     if not region or not region.tiles:
+        return
+    if not dx and not dy:
         return
     new_tiles: Dict[Tuple[int,int], Tile] = {}
     for (x,y), t in list(region.tiles.items()):
@@ -122,6 +427,7 @@ def translate_region_tiles(region: City, dx: int, dy: int, player_game: PlayerGa
         translate_entities_at_location(x, y, dx, dy, player_game)  # translate any entities at this tile
         new_tiles[(x+dx, y+dy)] = t
     region.tiles = new_tiles
+    _translate_subloc_map(region, dx, dy)
     # child_city if present
     if getattr(region, 'child_city', None):
         child = region.child_city
@@ -132,6 +438,19 @@ def translate_region_tiles(region: City, dx: int, dy: int, player_game: PlayerGa
             translate_entities_at_location(x, y, dx, dy, player_game)  # translate any entities at this tile
             new_child_tiles[(x+dx, y+dy)] = t
         child.tiles = new_child_tiles
+        _translate_subloc_map(child, dx, dy)
+
+
+def _translate_subloc_map(city: City, dx: int, dy: int) -> None:
+    """Re-key a City's subloc_map by (dx,dy), preserving floor (z)."""
+    subloc_map = getattr(city, 'subloc_map', None)
+    if not subloc_map:
+        return
+    new_subloc_map: Dict[Tuple[int,int,int], Any] = {}
+    for key, sublocs in subloc_map.items():
+        x, y, z = key
+        new_subloc_map[(x + dx, y + dy, z)] = sublocs
+    city.subloc_map = new_subloc_map
 
 def translate_entities_at_location(x: int, y: int, dx: int, dy: int, player_game: PlayerGame) -> None:
     """Translate any entities (NPCs, dungeons) at the given world (x,y) by (dx,dy).
@@ -206,6 +525,191 @@ def update_player_game_world_tiles_after_translation(player_game: PlayerGame) ->
             for (x,y), t in region.child_city.tiles.items():
                 player_game.world_tiles[(x,y)] = t
 
+# ------------------------------------------------------------------
+# Intelligent linear continent placement (8-directional, bbox-aware fit)
+# ------------------------------------------------------------------
+def _dilate(tiles: Set[Tuple[int, int]], gap: int) -> Set[Tuple[int, int]]:
+    """Return `tiles` grown by (gap-1) in Chebyshev distance.
+
+    A continent offset is valid when its tiles are disjoint from the world's
+    dilated set: gap=1 forbids only overlap, gap=2 enforces a one-tile channel,
+    and so on. The dilation is computed once per placement.
+    """
+    if gap <= 1:
+        return set(tiles)
+    r = gap - 1
+    out: Set[Tuple[int, int]] = set()
+    for (x, y) in tiles:
+        for dx in range(-r, r + 1):
+            for dy in range(-r, r + 1):
+                out.add((x + dx, y + dy))
+    return out
+
+def _push_in(moved_boundary: Set[Tuple[int, int]],
+             world_dilated: Set[Tuple[int, int]],
+             base_off: Tuple[int, int],
+             d: Tuple[int, int],
+             far: int) -> Optional[Tuple[int, int]]:
+    """Slide a continent from a far, collision-free start inward along -d until
+    just before it would violate the gap, returning the tightest valid offset.
+
+    `base_off` places the continent `far` tiles out along +d (guaranteed clear).
+    We binary-search the largest inward push `t` whose boundary stays disjoint
+    from the dilated world, nestling the blob snugly against the coastline (and
+    into concavities on that side).
+    """
+    def disjoint_at(t: int) -> bool:
+        ox = base_off[0] - d[0] * t
+        oy = base_off[1] - d[1] * t
+        for (x, y) in moved_boundary:
+            if (x + ox, y + oy) in world_dilated:
+                return False
+        return True
+
+    if not disjoint_at(0):
+        return None
+    lo, hi = 0, far
+    while lo < hi:
+        mid = (lo + hi + 1) // 2
+        if disjoint_at(mid):
+            lo = mid
+        else:
+            hi = mid - 1
+    t = lo
+    return (base_off[0] - d[0] * t, base_off[1] - d[1] * t)
+
+def _find_continent_placement(moved_all: Set[Tuple[int, int]],
+                              moved_boundary: Set[Tuple[int, int]],
+                              world_set: Set[Tuple[int, int]],
+                              gap: int) -> Tuple[int, int]:
+    """Choose the offset that seats a continent blob against the current world
+    mass with the smallest resulting world bbox (compact objective).
+
+    Tries all 8 directions (cardinals + diagonals). For each, the blob starts
+    far out along that bearing and is pushed inward to first contact, with
+    perpendicular jitter so it can slide along the coast into pockets. Candidates
+    are scored by the area of the combined bbox; the tightest fit wins. Because
+    every side is probed, a continent that can't nestle beside its predecessor
+    still finds a valid perimeter edge somewhere (ordering is a preference, not a
+    hard constraint). If nothing fits (degenerate), a guaranteed east placement
+    outside the bbox is returned so generation always terminates.
+    """
+    if not world_set:
+        return (0, 0)
+
+    (wminx, wmaxx, wminy, wmaxy), (wcx, wcy) = bbox_and_center_from_tiles(world_set)
+    (cminx, cmaxx, cminy, cmaxy), (ccx, ccy) = bbox_and_center_from_tiles(moved_all)
+    world_dilated = _dilate(world_set, gap)
+
+    w_span = max(wmaxx - wminx, wmaxy - wminy)
+    c_span = max(cmaxx - cminx, cmaxy - cminy)
+    far = w_span + c_span + gap + 6
+
+    directions = [
+        (1, 0), (0, 1), (-1, 0), (0, -1),
+        (1, 1), (1, -1), (-1, 1), (-1, -1),
+    ]
+
+    jitter_half = (w_span + c_span) // 2
+    jitter_step = max(1, (w_span + c_span) // 12)
+
+    best_off: Optional[Tuple[int, int]] = None
+    best_score: Optional[Tuple[int, float]] = None
+
+    for d in directions:
+        px, py = -d[1], d[0]  # perpendicular axis for jitter
+        for j in range(-jitter_half, jitter_half + 1, jitter_step):
+            fcx = wcx + d[0] * far + px * j
+            fcy = wcy + d[1] * far + py * j
+            base_off = (int(round(fcx - ccx)), int(round(fcy - ccy)))
+            off = _push_in(moved_boundary, world_dilated, base_off, d, far)
+            if off is None:
+                continue
+            nminx = min(wminx, cminx + off[0])
+            nmaxx = max(wmaxx, cmaxx + off[0])
+            nminy = min(wminy, cminy + off[1])
+            nmaxy = max(wmaxy, cmaxy + off[1])
+            area = (nmaxx - nminx) * (nmaxy - nminy)
+            # tie-break: keep the new continent's centre near the world centre
+            dcx = (ccx + off[0]) - wcx
+            dcy = (ccy + off[1]) - wcy
+            closeness = dcx * dcx + dcy * dcy
+            score = (area, closeness)
+            if best_score is None or score < best_score:
+                best_score = score
+                best_off = off
+
+    if best_off is None:
+        # Degenerate fallback: drop it just east of the bbox, centre-aligned.
+        return (wmaxx + gap + 1 - cminx, int(round(wcy - ccy)))
+    return best_off
+
+def place_continents_linearly(player_game: PlayerGame,
+                              continents: List[List[City]],
+                              *,
+                              anchor_index: int = 0,
+                              gap: int = 3) -> None:
+    """Position continents one at a time around a fixed anchor using intelligent,
+    bbox-aware fitting (replaces blind radial spread).
+
+    The anchor continent (the player's) never moves. Each remaining continent is
+    treated as a rigid blob and seated against the accumulated world mass via
+    `_find_continent_placement`: it is offset to the best-fitting coastline and
+    folded in, so the next continent fits against the growing landmass. This
+    keeps the world compact and contiguous-friendly while preserving continent
+    ordering as a placement preference.
+
+    Requires each continent to already be a single contiguous mass (run
+    `compact_continents_to_contiguous` first) and to be isolated in space so the
+    initial per-continent tile sets don't interleave.
+    """
+    if not continents:
+        return
+
+    order = [anchor_index] + [i for i in range(len(continents)) if i != anchor_index]
+
+    anchor = continents[anchor_index] if 0 <= anchor_index < len(continents) else None
+    world_set: Set[Tuple[int, int]] = continent_tiles(anchor) if anchor else set()
+
+    _emit(
+        f"[continents] Placing {len(continents)} continents linearly "
+        f"(anchor={anchor_index + 1}, gap={gap})."
+    )
+
+    for i in order:
+        if i == anchor_index:
+            continue
+        cont = continents[i]
+        if not cont:
+            _emit(f"[continents]   continent {i + 1}: empty, skipped")
+            continue
+        moved_all = continent_tiles(cont)
+        if not moved_all:
+            continue
+
+        if not world_set:
+            # No anchor mass yet (e.g. empty anchor): this becomes the seed.
+            world_set = set(moved_all)
+            _emit(f"[continents]   continent {i + 1}: seeded as initial mass")
+            continue
+
+        moved_boundary = boundary_tiles(moved_all)
+        off = _find_continent_placement(moved_all, moved_boundary, world_set, gap)
+        dx, dy = off
+        if dx or dy:
+            for r in cont:
+                translate_region_tiles(r, dx, dy, player_game)
+        world_set |= {(x + dx, y + dy) for (x, y) in moved_all}
+        _emit(
+            f"[continents]   continent {i + 1}: placed by ({dx},{dy}) "
+            f"({len(cont)} regions)"
+        )
+
+    if hasattr(player_game, "_continent_translate_moved_entities"):
+        delattr(player_game, "_continent_translate_moved_entities")
+
+    update_player_game_world_tiles_after_translation(player_game)
+
 def spread_continents_radial(player_game: PlayerGame, continents: List[List[City]], rng: random.Random, radius: int = 80, skip_first: bool = True) -> None:
     """Place continent clusters on distinct radial angles around world center.
 
@@ -229,10 +733,17 @@ def spread_continents_radial(player_game: PlayerGame, continents: List[List[City
     angle_step = 2 * math.pi / max(1, len(continents))
     base_angle = rng.random() * 2 * math.pi
 
+    _emit(
+        f"[continents] Spreading {len(continents)} continents radially "
+        f"(radius={radius}, skip_first={skip_first})."
+    )
+
     for i, cont in enumerate(continents):
         if not cont:
+            _emit(f"[continents]   continent {i + 1}: empty, skipped")
             continue
         if skip_first and i == 0:
+            _emit(f"[continents]   continent {i + 1}: anchored (player start), not moved")
             continue
 
         cur_center = cont_centers[i]
@@ -244,6 +755,11 @@ def spread_continents_radial(player_game: PlayerGame, continents: List[List[City
 
         for r in cont:
             translate_region_tiles(r, dx, dy, player_game)
+
+        _emit(
+            f"[continents]   continent {i + 1}: moved by ({dx},{dy}) to "
+            f"angle {math.degrees(angle):.0f}deg ({len(cont)} regions)"
+        )
 
     if hasattr(player_game, "_continent_translate_moved_entities"):
         #print (f'total npc + dungeon + aircraft = {len(player_game.dungeons) + len(player_game.npcs) + (1 if player_game.aircraft_location else 0)} entities moved during continent translation')
@@ -299,6 +815,11 @@ def build_continents_and_ocean(player_game: PlayerGame,
     # explicit city counts requested by user
     requested_counts = const.CONTINENT_COMPOSITION
 
+    _emit(
+        f"[continents] Building continents: composition={list(requested_counts)} "
+        f"(total {sum(requested_counts)} cities)."
+    )
+
 
     if num_continents != len(requested_counts):
         # if caller passed different num_continents, adjust counts proportionally or truncate/extend.
@@ -324,19 +845,34 @@ def build_continents_and_ocean(player_game: PlayerGame,
         else:
             continent_bboxes.append((0,0,0,0))
 
-    # 4) spread continents radially but skip first (player) continent
+    # 4) spread continents radially but skip first (player) continent. This moves
+    # each continent (as a rigid body) onto its own distinct angle around the
+    # world center, so the continents no longer spatially interleave — each now
+    # occupies an isolated region of space.
     spread_continents_radial(player_game, continents, rng, radius=spread_radius, skip_first=True)
 
-    # 4.b) pull continents tighter if any are still too far after radial spread (but skip first continent as anchor)
-    pull_continents_closer_by_tiles(
-		player_game,
-		continents,
-		anchor_index=0,
-		min_gap=30,
-		max_gap=70,
-		max_iters=30,
-		step_cap=12,
-	)
+    # 4.a) compact each continent's regions into a single contiguous landmass.
+    # City->continent membership is canonical/fixed, but the member regions were
+    # created at scattered world positions, so a continent's own regions form
+    # islands. Now that the continents are isolated in space (post-spread), pack
+    # each one's regions edge-to-edge around a seed region (the player's region
+    # for the player's continent, so the player is never displaced). Because each
+    # continent is isolated, sliding a region toward its own seed can never cross
+    # into — and overwrite — another continent's tiles.
+    compact_continents_to_contiguous(player_game, continents)
+
+    # 4.b) position continents around the anchor using intelligent, bbox-aware
+    # fitting. Each continent is now a rigid contiguous blob isolated in space,
+    # so the packer can seat it against the growing world mass at the tightest
+    # fitting coastline (8-directional, interior-pocket aware), keeping the world
+    # compact. This replaces the old radial pull, which only shrank distances
+    # without regard to how blobs actually nest together.
+    place_continents_linearly(player_game, continents, anchor_index=0, gap=3)
+
+    # 4.c) verify each continent holds exactly the cities it should per the
+    # canonical chapter-city map, and that its landmass is contiguous enough to
+    # connect those cities. Surfaces mismatches to the dev TUI report.
+    verify_continent_city_containment(player_game, continents, requested_counts)
 
     # 5) recompute world bounds and create ocean bbox
     all_tiles = set(player_game.world_tiles.keys())
@@ -366,6 +902,110 @@ def build_continents_and_ocean(player_game: PlayerGame,
         #"continent_groups": continents
     }
 
+def verify_continent_city_containment(
+    player_game: PlayerGame,
+    continents: List[List[City]],
+    requested_counts: List[int],
+) -> bool:
+    """Verify each continent holds exactly the cities it should and that those
+    cities sit on a single contiguous landmass. Logs results to the dev TUI.
+
+    Returns True if every continent matches its canonical city set and is
+    contiguous; False otherwise. This is a diagnostic -- it does not mutate the
+    world, it only surfaces problems so bad splits are visible.
+    """
+    _emit("[continents] Verifying city containment + contiguity...")
+
+    # Canonical expected key set per continent index.
+    expected: Dict[int, Set[str]] = {}
+    try:
+        canonical = player_game.get_continents()
+        for cont_num, keys in canonical.items():
+            idx = int(cont_num) - 1
+            expected[idx] = set(keys)
+    except Exception as exc:  # noqa: BLE001
+        _emit(f"[continents] WARNING: cannot read canonical map for verify: {exc}")
+        expected = {}
+
+    all_ok = True
+    for idx, cont in enumerate(continents):
+        actual_keys = {_city_key(r) for r in cont if r.child_city is not None}
+        actual_keys.discard(None)
+        want = expected.get(idx, set())
+
+        missing = want - actual_keys
+        extra = actual_keys - want
+
+        count_ok = (idx >= len(requested_counts)) or (len(actual_keys) == requested_counts[idx])
+        set_ok = (not want) or (not missing and not extra)
+        contiguous = _continent_is_contiguous(cont)
+
+        if not (count_ok and set_ok and contiguous):
+            all_ok = False
+
+        status = "OK" if (count_ok and set_ok and contiguous) else "PROBLEM"
+        _emit(
+            f"[continents] Continent {idx + 1} [{status}]: "
+            f"cities={sorted(k for k in actual_keys if k)} "
+            f"contiguous={contiguous}"
+        )
+        if missing:
+            _emit(f"[continents]   MISSING expected cities: {sorted(missing)}")
+        if extra:
+            _emit(f"[continents]   UNEXPECTED cities present: {sorted(extra)}")
+        if not contiguous:
+            _emit(
+                f"[continents]   NOT CONTIGUOUS: cities are not all connected by "
+                f"this continent's regions (need more connector regions)."
+            )
+
+    _emit(f"[continents] Verification {'passed' if all_ok else 'found problems'}.")
+    return all_ok
+
+
+def _continent_is_contiguous(cont: List[City]) -> bool:
+    """Return True if all tiles of a continent's regions form one 4-connected mass.
+
+    Used to confirm that the citiless connector regions actually bridge the
+    continent's cities into a single landmass rather than leaving islands.
+    """
+    tiles = continent_tiles(cont)
+    if not tiles:
+        return True  # vacuously contiguous
+
+    start = next(iter(tiles))
+    seen: Set[Tuple[int, int]] = {start}
+    stack = [start]
+    while stack:
+        x, y = stack.pop()
+        for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+            if (nx, ny) in tiles and (nx, ny) not in seen:
+                seen.add((nx, ny))
+                stack.append((nx, ny))
+
+    return len(seen) == len(tiles)
+
+
+def _count_components(tiles: Set[Tuple[int, int]]) -> int:
+    """Number of 4-connected components in a tile set (0 for empty)."""
+    if not tiles:
+        return 0
+    remaining = set(tiles)
+    components = 0
+    while remaining:
+        start = next(iter(remaining))
+        stack = [start]
+        remaining.discard(start)
+        while stack:
+            x, y = stack.pop()
+            for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+                if (nx, ny) in remaining:
+                    remaining.discard((nx, ny))
+                    stack.append((nx, ny))
+        components += 1
+    return components
+
+
 def continent_extent_radius(cont: List[City]) -> float:
     """Return an approximate radius for a continent based on its bbox diagonal/2."""
     tiles = set()
@@ -382,185 +1022,185 @@ def continent_extent_radius(cont: List[City]) -> float:
     return math.sqrt(w * w + h * h) / 2.0
 
 def continent_tiles(cont: List[City]) -> Set[Tuple[int, int]]:
-	tiles: Set[Tuple[int, int]] = set()
-	for r in cont:
-		if not r:
-			continue
-		tiles.update(r.tiles.keys())
-		if getattr(r, "child_city", None):
-			tiles.update(r.child_city.tiles.keys())
-	return tiles
+    tiles: Set[Tuple[int, int]] = set()
+    for r in cont:
+        if not r:
+            continue
+        tiles.update(r.tiles.keys())
+        if getattr(r, "child_city", None):
+            tiles.update(r.child_city.tiles.keys())
+    return tiles
 
 
 def boundary_tiles(tiles: Set[Tuple[int, int]]) -> Set[Tuple[int, int]]:
-	"""Return tiles on the perimeter (has at least one 4-neighbor missing)."""
-	if not tiles:
-		return set()
-	out: Set[Tuple[int, int]] = set()
-	for x, y in tiles:
-		if ((x - 1, y) not in tiles) or ((x + 1, y) not in tiles) or ((x, y - 1) not in tiles) or ((x, y + 1) not in tiles):
-			out.add((x, y))
-	return out
+    """Return tiles on the perimeter (has at least one 4-neighbor missing)."""
+    if not tiles:
+        return set()
+    out: Set[Tuple[int, int]] = set()
+    for x, y in tiles:
+        if ((x - 1, y) not in tiles) or ((x + 1, y) not in tiles) or ((x, y - 1) not in tiles) or ((x, y + 1) not in tiles):
+            out.add((x, y))
+    return out
 
 
 def _spatial_hash(points: Set[Tuple[int, int]], cell_size: int) -> Dict[Tuple[int, int], List[Tuple[int, int]]]:
-	grid: Dict[Tuple[int, int], List[Tuple[int, int]]] = {}
-	if cell_size <= 0:
-		cell_size = 1
-	for x, y in points:
-		key = (x // cell_size, y // cell_size)
-		grid.setdefault(key, []).append((x, y))
-	return grid
+    grid: Dict[Tuple[int, int], List[Tuple[int, int]]] = {}
+    if cell_size <= 0:
+        cell_size = 1
+    for x, y in points:
+        key = (x // cell_size, y // cell_size)
+        grid.setdefault(key, []).append((x, y))
+    return grid
 
 
 def _bbox_from_tiles(tiles: Set[Tuple[int, int]]) -> Optional[Tuple[int, int, int, int]]:
-	if not tiles:
-		return None
-	xs = [x for x, _ in tiles]
-	ys = [y for _, y in tiles]
-	return (min(xs), max(xs), min(ys), max(ys))
+    if not tiles:
+        return None
+    xs = [x for x, _ in tiles]
+    ys = [y for _, y in tiles]
+    return (min(xs), max(xs), min(ys), max(ys))
 
 
 def _bbox_gap(a: Tuple[int, int, int, int], b: Tuple[int, int, int, int]) -> float:
-	"""Minimum Euclidean distance between two axis-aligned bboxes (0 if overlap/touch)."""
-	a_min_x, a_max_x, a_min_y, a_max_y = a
-	b_min_x, b_max_x, b_min_y, b_max_y = b
+    """Minimum Euclidean distance between two axis-aligned bboxes (0 if overlap/touch)."""
+    a_min_x, a_max_x, a_min_y, a_max_y = a
+    b_min_x, b_max_x, b_min_y, b_max_y = b
 
-	if a_max_x < b_min_x:
-		dx = b_min_x - a_max_x
-	elif b_max_x < a_min_x:
-		dx = a_min_x - b_max_x
-	else:
-		dx = 0
+    if a_max_x < b_min_x:
+        dx = b_min_x - a_max_x
+    elif b_max_x < a_min_x:
+        dx = a_min_x - b_max_x
+    else:
+        dx = 0
 
-	if a_max_y < b_min_y:
-		dy = b_min_y - a_max_y
-	elif b_max_y < a_min_y:
-		dy = a_min_y - b_max_y
-	else:
-		dy = 0
+    if a_max_y < b_min_y:
+        dy = b_min_y - a_max_y
+    elif b_max_y < a_min_y:
+        dy = a_min_y - b_max_y
+    else:
+        dy = 0
 
-	return math.sqrt(dx * dx + dy * dy)
+    return math.sqrt(dx * dx + dy * dy)
 
 
 def min_distance_between_tile_sets(a: Set[Tuple[int, int]], b: Set[Tuple[int, int]], *, search_radius_cells: int = 2) -> float:
-	"""
-	Min Euclidean distance between two point sets using a spatial hash.
-	If neighbor search finds nothing (too far apart), fall back to bbox distance
-	so we always return a finite value.
-	"""
-	if not a or not b:
-		return float("inf")
+    """
+    Min Euclidean distance between two point sets using a spatial hash.
+    If neighbor search finds nothing (too far apart), fall back to bbox distance
+    so we always return a finite value.
+    """
+    if not a or not b:
+        return float("inf")
 
-	cell_size = 16
-	b_grid = _spatial_hash(b, cell_size)
+    cell_size = 16
+    b_grid = _spatial_hash(b, cell_size)
 
-	best_sq = None
+    best_sq = None
 
-	for ax, ay in a:
-		cx, cy = (ax // cell_size, ay // cell_size)
+    for ax, ay in a:
+        cx, cy = (ax // cell_size, ay // cell_size)
 
-		for gx in range(cx - search_radius_cells, cx + search_radius_cells + 1):
-			for gy in range(cy - search_radius_cells, cy + search_radius_cells + 1):
-				pts = b_grid.get((gx, gy))
-				if not pts:
-					continue
-				for bx, by in pts:
-					dx = ax - bx
-					dy = ay - by
-					ds = (dx * dx) + (dy * dy)
-					if best_sq is None or ds < best_sq:
-						best_sq = ds
-						if best_sq == 0:
-							return 0.0
+        for gx in range(cx - search_radius_cells, cx + search_radius_cells + 1):
+            for gy in range(cy - search_radius_cells, cy + search_radius_cells + 1):
+                pts = b_grid.get((gx, gy))
+                if not pts:
+                    continue
+                for bx, by in pts:
+                    dx = ax - bx
+                    dy = ay - by
+                    ds = (dx * dx) + (dy * dy)
+                    if best_sq is None or ds < best_sq:
+                        best_sq = ds
+                        if best_sq == 0:
+                            return 0.0
 
-	# If nothing was close enough to be found via local cell search, fall back to bbox gap.
-	if best_sq is None:
-		a_bb = _bbox_from_tiles(a)
-		b_bb = _bbox_from_tiles(b)
-		if a_bb is None or b_bb is None:
-			return float("inf")
-		return _bbox_gap(a_bb, b_bb)
+    # If nothing was close enough to be found via local cell search, fall back to bbox gap.
+    if best_sq is None:
+        a_bb = _bbox_from_tiles(a)
+        b_bb = _bbox_from_tiles(b)
+        if a_bb is None or b_bb is None:
+            return float("inf")
+        return _bbox_gap(a_bb, b_bb)
 
-	return math.sqrt(best_sq)
+    return math.sqrt(best_sq)
 
 
 def pull_continents_closer_by_tiles(
-	player_game: PlayerGame,
-	continents: List[List[City]],
-	*,
-	anchor_index: int = 0,
-	min_gap: int = 30,
-	max_gap: int = 70,
-	max_iters: int = 30,
-	step_cap: int = 12,
+    player_game: PlayerGame,
+    continents: List[List[City]],
+    *,
+    anchor_index: int = 0,
+    min_gap: int = 30,
+    max_gap: int = 70,
+    max_iters: int = 30,
+    step_cap: int = 12,
 ) -> None:
-	"""
-	Pull each continent toward the anchor so the closest boundary-tile distance
-	ends up <= max_gap (and not forced below min_gap).
+    """
+    Pull each continent toward the anchor so the closest boundary-tile distance
+    ends up <= max_gap (and not forced below min_gap).
 
-	This only tightens; it won't push continents apart.
-	"""
-	if not continents or anchor_index < 0 or anchor_index >= len(continents):
-		return
+    This only tightens; it won't push continents apart.
+    """
+    if not continents or anchor_index < 0 or anchor_index >= len(continents):
+        return
 
-	anchor_cont = continents[anchor_index]
-	if not anchor_cont:
-		return
+    anchor_cont = continents[anchor_index]
+    if not anchor_cont:
+        return
 
-	# Precompute anchor boundary once per outer iteration (it changes only if anchor moves; it doesn't)
-	anchor_all = continent_tiles(anchor_cont)
-	anchor_boundary = boundary_tiles(anchor_all)
+    # Precompute anchor boundary once per outer iteration (it changes only if anchor moves; it doesn't)
+    anchor_all = continent_tiles(anchor_cont)
+    anchor_boundary = boundary_tiles(anchor_all)
 
-	for _ in range(max_iters):
-		moved_any = False
+    for _ in range(max_iters):
+        moved_any = False
 
-		# anchor boundary stays constant since anchor isn't moved
-		for i, cont in enumerate(continents):
-			if i == anchor_index or not cont:
-				continue
+        # anchor boundary stays constant since anchor isn't moved
+        for i, cont in enumerate(continents):
+            if i == anchor_index or not cont:
+                continue
 
-			cont_all = continent_tiles(cont)
-			cont_boundary = boundary_tiles(cont_all)
-			if not cont_boundary:
-				continue
+            cont_all = continent_tiles(cont)
+            cont_boundary = boundary_tiles(cont_all)
+            if not cont_boundary:
+                continue
 
-			gap = min_distance_between_tile_sets(anchor_boundary, cont_boundary, search_radius_cells=3)
+            gap = min_distance_between_tile_sets(anchor_boundary, cont_boundary, search_radius_cells=3)
 
-			if not math.isfinite(gap):
-				continue
+            if not math.isfinite(gap):
+                continue
 
-			if gap <= max_gap:
-				continue
+            if gap <= max_gap:
+                continue
 
-			# Pull toward anchor center
-			ax, ay = continent_center_from_regions(anchor_cont)
-			cx, cy = continent_center_from_regions(cont)
+            # Pull toward anchor center
+            ax, ay = continent_center_from_regions(anchor_cont)
+            cx, cy = continent_center_from_regions(cont)
 
-			vx = ax - cx
-			vy = ay - cy
-			vlen = math.sqrt(vx * vx + vy * vy)
-			if vlen <= 0.0001:
-				continue
+            vx = ax - cx
+            vy = ay - cy
+            vlen = math.sqrt(vx * vx + vy * vy)
+            if vlen <= 0.0001:
+                continue
 
-			# distance to reduce: bring gap down near middle of [min_gap, max_gap]
-			target = (min_gap + max_gap) / 2.0
-			need = max(0.0, gap - target)
+            # distance to reduce: bring gap down near middle of [min_gap, max_gap]
+            target = (min_gap + max_gap) / 2.0
+            need = max(0.0, gap - target)
 
-			# cap per-iteration movement to avoid overshoot / jitter
-			move = int(min(step_cap, max(1, round(need))))
-			dx = int(round((vx / vlen) * move))
-			dy = int(round((vy / vlen) * move))
-			if dx == 0 and dy == 0:
-				# ensure progress if rounding killed movement
-				dx = 1 if vx > 0 else -1
+            # cap per-iteration movement to avoid overshoot / jitter
+            move = int(min(step_cap, max(1, round(need))))
+            dx = int(round((vx / vlen) * move))
+            dy = int(round((vy / vlen) * move))
+            if dx == 0 and dy == 0:
+                # ensure progress if rounding killed movement
+                dx = 1 if vx > 0 else -1
 
-			for r in cont:
-				translate_region_tiles(r, dx, dy, player_game)
+            for r in cont:
+                translate_region_tiles(r, dx, dy, player_game)
 
-			moved_any = True
+            moved_any = True
 
-		if not moved_any:
-			break
+        if not moved_any:
+            break
 
-	update_player_game_world_tiles_after_translation(player_game)
+    update_player_game_world_tiles_after_translation(player_game)

@@ -1198,6 +1198,18 @@ class PlayerGame:
 
 		setattr(rc, 'region_name', region_name)
 
+		# Stamp continent association. City-bearing regions derive their continent
+		# from CITY_CONTINENT_MAP (chapter-city key -> continent). Cityless connector
+		# regions inherit the continent of the region they grew from (the current
+		# build continent), defaulting to 1.
+		if rc.child_city is not None and rc.child_city.city_name:
+			city_key = f"{region_name}_{rc.child_city.city_name}"
+			rc.continent = const.CITY_CONTINENT_MAP.get(city_key, getattr(self.previous_region, 'continent', 1))
+		else:
+			rc.continent = getattr(self.previous_region, 'continent', 1)
+		if rc.child_city is not None:
+			rc.child_city.continent = rc.continent
+
 		add_main_story = False
 		if not self.regions or len(self.regions) == 0:
 			add_main_story = True
@@ -1589,6 +1601,17 @@ class PlayerGame:
 
 		if not has_active_dungeon_state:
 			self.active_dungeon = self._find_legacy_active_dungeon()
+
+		# Backfill continent association for regions/cities saved before the
+		# `continent` field existed. Older worlds are treated as a single
+		# continent (1). Pickle restores __dict__ directly and skips City.__init__,
+		# so the attribute may be missing on these nested objects.
+		for region in self.regions:
+			if getattr(region, 'continent', None) is None:
+				region.continent = 1
+			child = getattr(region, 'child_city', None)
+			if child is not None and getattr(child, 'continent', None) is None:
+				child.continent = getattr(region, 'continent', 1)
 
 		# is_busy is a transient execution flag (set only while a live worker
 		# runs a long-running task event). It must never survive a save/load —

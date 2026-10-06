@@ -12,6 +12,46 @@ from collections import deque
 
 from game.objects.city import City
 from game.objects.player import Player
+
+
+def ensure_4_connected(tiles: Set[Tuple[int, int]], ignored_set: Set[Tuple[int, int]]) -> Set[Tuple[int, int]]:
+	"""Bridge diagonal-only links so `tiles` form a single 4-connected mass.
+
+	Region growth uses 8-directional neighbours, so a footprint can be joined only
+	diagonally (e.g. tiles at (0,0) and (1,1) with (1,0)/(0,1) empty). The player,
+	however, moves orthogonally (w/s/a/d), and continent contiguity is validated
+	with 4-connectivity. A footprint that is merely 8-connected therefore reads as
+	several disjoint blobs and can never verify contiguous.
+
+	This fills the minimal set of orthogonal "elbow" tiles needed to turn every
+	diagonal adjacency into a 4-connected path, skipping any cell already claimed
+	by another region (``ignored_set``). Newly added tiles are returned folded into
+	the input set.
+	"""
+	if not tiles:
+		return tiles
+	diagonals = ((1, 1), (1, -1), (-1, 1), (-1, -1))
+	added: Set[Tuple[int, int]] = set()
+	for (x, y) in list(tiles):
+		for dx, dy in diagonals:
+			diag = (x + dx, y + dy)
+			if diag not in tiles and diag not in added:
+				continue
+			# diag is a diagonal neighbour owned by this region; make sure at
+			# least one of the two shared orthogonal cells links them.
+			a = (x + dx, y)
+			b = (x, y + dy)
+			a_ok = a in tiles or a in added
+			b_ok = b in tiles or b in added
+			if a_ok or b_ok:
+				continue
+			# Prefer the elbow cell that isn't owned by another region.
+			if a not in ignored_set:
+				added.add(a)
+			elif b not in ignored_set:
+				added.add(b)
+	tiles |= added
+	return tiles
 from game.services.region_frontier_service import (
 	randomized_frontier_perimeter_pathing,
 	perimeter_driven_growth
@@ -108,6 +148,11 @@ def create_region(
 	frontier_path = perimeter_driven_growth( current_tiles, ignored_set, neighbor_offsets, max_size )
 
 	frontier.update(frontier_path)
+
+	# Region growth joins tiles 8-directionally, but the player moves orthogonally
+	# and continent contiguity is checked with 4-connectivity. Close any
+	# diagonal-only gaps so the footprint is a single 4-connected mass.
+	ensure_4_connected(frontier, ignored_set)
 
 	rc.child_city = {}
 	rc.ensure_required_buildings(player_game, frontier)
