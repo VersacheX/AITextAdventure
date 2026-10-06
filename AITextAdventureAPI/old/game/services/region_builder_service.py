@@ -23,11 +23,13 @@ def ensure_4_connected(tiles: Set[Tuple[int, int]], ignored_set: Set[Tuple[int, 
 	with 4-connectivity. A footprint that is merely 8-connected therefore reads as
 	several disjoint blobs and can never verify contiguous.
 
-	This repeatedly finds the 4-connected components of the footprint and routes a
-	bridge between the two nearest components, preferring cells not already claimed
-	by another region (``ignored_set``) but falling back to claimed cells when no
-	free elbow exists, so the result is *always* a single 4-connected mass. Newly
-	added tiles are returned folded into the input set.
+	This repeatedly finds the 4-connected components of the footprint and carves a
+	shortest orthogonal bridge from one component to another using a BFS that
+	treats cells already claimed by another region (``ignored_set``) as walls, so a
+	bridge NEVER crosses occupied cells (which would create overlapping region
+	ownership). Only free cells are added. If two components cannot be joined
+	without crossing occupied cells, they are left as-is rather than corrupting the
+	map. Newly added tiles are returned folded into the input set.
 	"""
 	if not tiles:
 		return tiles
@@ -53,62 +55,63 @@ def ensure_4_connected(tiles: Set[Tuple[int, int]], ignored_set: Set[Tuple[int, 
 			comps.append(comp)
 		return comps
 
-	# Iteratively merge the two closest components by carving an orthogonal path
-	# between their nearest tiles until only one component remains.
+	def _bridge_between(source: Set[Tuple[int, int]],
+						targets: Set[Tuple[int, int]],
+						blocked: Set[Tuple[int, int]]) -> list:
+		"""Shortest free-cell path from `source` to any `targets` tile.
+
+		BFS outward from every `source` tile across free cells only (never through
+		`blocked`/occupied cells). Returns the list of intermediate free cells to
+		fill, or None if no occupied-free route exists.
+		"""
+		frontier = deque()
+		came_from: dict = {}
+		for cell in source:
+			frontier.append(cell)
+			came_from[cell] = None
+		while frontier:
+			cur = frontier.popleft()
+			cx, cy = cur
+			for nxt in ((cx + 1, cy), (cx - 1, cy), (cx, cy + 1), (cx, cy - 1)):
+				if nxt in came_from:
+					continue
+				if nxt in targets:
+					# Reconstruct the intermediate cells (exclude both endpoints).
+					path = []
+					node = cur
+					while node is not None and node not in source:
+						path.append(node)
+						node = came_from[node]
+					path.reverse()
+					return path
+				if nxt in blocked:
+					continue
+				came_from[nxt] = cur
+				frontier.append(nxt)
+		return None
+
+	# Iteratively merge components by carving a shortest free-cell bridge between
+	# the closest reachable pair until a single component remains (or no further
+	# bridge can be made without crossing occupied cells).
 	comps = _components(working)
-	# Guard against pathological inputs by bounding the number of bridges.
-	max_iterations = len(working) + len(ignored_set) + 1
+	# Occupied cells that bridges must route around: foreign tiles not owned here.
+	blocked = set(ignored_set) - working
+	max_iterations = len(comps) + 1
 	iterations = 0
 	while len(comps) > 1 and iterations < max_iterations:
 		iterations += 1
-		# Find the closest pair of tiles across two distinct components.
-		best = None  # (dist, (ax, ay), (bx, by))
-		for i in range(len(comps)):
-			for j in range(i + 1, len(comps)):
-				for ax, ay in comps[i]:
-					for bx, by in comps[j]:
-						d = abs(ax - bx) + abs(ay - by)
-						if best is None or d < best[0]:
-							best = (d, (ax, ay), (bx, by))
-		if best is None:
+		# Connect the first component to the nearest other component via a route
+		# that avoids occupied cells entirely.
+		source = comps[0]
+		targets = set().union(*comps[1:])
+		path = _bridge_between(source, targets, blocked)
+		if path is None:
+			# No occupied-free route to any other component; leave remaining
+			# components rather than carving through another region's tiles.
 			break
-		_, (ax, ay), (bx, by) = best
-		# Carve an L-shaped orthogonal path from a to b, filling the intermediate
-		# cells (the endpoints already belong to the footprint). Prefer routing so
-		# the elbow avoids already-claimed cells when possible.
-		# Build both candidate L paths (horizontal-first and vertical-first) and
-		# pick the one adding the fewest already-claimed cells.
-		def _l_path(horizontal_first: bool) -> list:
-			cells = []
-			cx, cy = ax, ay
-			if horizontal_first:
-				while cx != bx:
-					cx += 1 if bx > cx else -1
-					cells.append((cx, cy))
-				while cy != by:
-					cy += 1 if by > cy else -1
-					cells.append((cx, cy))
-			else:
-				while cy != by:
-					cy += 1 if by > cy else -1
-					cells.append((cx, cy))
-				while cx != bx:
-					cx += 1 if bx > cx else -1
-					cells.append((cx, cy))
-			# Drop the final cell (it's the target tile b, already owned).
-			if cells and cells[-1] == (bx, by):
-				cells.pop()
-			return cells
-
-		candidates = [_l_path(True), _l_path(False)]
-		best_path = min(
-			candidates,
-			key=lambda cells: sum(1 for c in cells if c in ignored_set),
-		)
-		for cell in best_path:
-			if cell not in working:
-				added.add(cell)
-				working.add(cell)
+		for cell in path:
+			added.add(cell)
+			working.add(cell)
 		comps = _components(working)
 
 	tiles |= added

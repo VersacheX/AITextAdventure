@@ -256,8 +256,10 @@ def normalize_region_internal_connectivity(region: City, player_game: PlayerGame
     for (x, y) in added:
         if (x, y) not in region.tiles:
             region.create_tile(player_game, x, y)
-    if added:
-        region.populate_tiles(player_game)
+            # Populate ONLY the newly created bridge tile. Calling populate_tiles()
+            # would re-roll every existing tile's subloc_map and could restore
+            # already-looted items/money on explored regions.
+            region.populate_tile(player_game, region.tiles[(x, y)], x, y)
     return len(added)
 
 
@@ -587,6 +589,7 @@ def _dilate(tiles: Set[Tuple[int, int]], gap: int) -> Set[Tuple[int, int]]:
     return out
 
 def _push_in(moved_boundary: Set[Tuple[int, int]],
+             moved_all: Set[Tuple[int, int]],
              world_dilated: Set[Tuple[int, int]],
              base_off: Tuple[int, int],
              d: Tuple[int, int],
@@ -595,14 +598,25 @@ def _push_in(moved_boundary: Set[Tuple[int, int]],
     just before it would violate the gap, returning the tightest valid offset.
 
     `base_off` places the continent `far` tiles out along +d (guaranteed clear).
-    We binary-search the largest inward push `t` whose boundary stays disjoint
-    from the dilated world, nestling the blob snugly against the coastline (and
-    into concavities on that side).
+    We binary-search the largest inward push `t` whose tiles stay disjoint from
+    the dilated world, nestling the blob snugly against the coastline (and into
+    concavities on that side).
+
+    The boundary is tested first as a cheap broad-phase reject, but ALL moved
+    tiles are then validated: if the blob wraps around an existing world tile its
+    boundary can stay disjoint while an interior tile overlaps, and the later
+    world rebuild would silently overwrite one owner. Interior tiles must be
+    checked too.
     """
     def disjoint_at(t: int) -> bool:
         ox = base_off[0] - d[0] * t
         oy = base_off[1] - d[1] * t
+        # Broad-phase: boundary is the most likely to collide first.
         for (x, y) in moved_boundary:
+            if (x + ox, y + oy) in world_dilated:
+                return False
+        # Narrow-phase: ensure no interior tile overlaps an enclosed world tile.
+        for (x, y) in moved_all:
             if (x + ox, y + oy) in world_dilated:
                 return False
         return True
@@ -663,7 +677,7 @@ def _find_continent_placement(moved_all: Set[Tuple[int, int]],
             fcx = wcx + d[0] * far + px * j
             fcy = wcy + d[1] * far + py * j
             base_off = (int(round(fcx - ccx)), int(round(fcy - ccy)))
-            off = _push_in(moved_boundary, world_dilated, base_off, d, far)
+            off = _push_in(moved_boundary, moved_all, world_dilated, base_off, d, far)
             if off is None:
                 continue
             nminx = min(wminx, cminx + off[0])
