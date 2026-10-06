@@ -595,34 +595,82 @@ def _dilate(tiles: Set[Tuple[int, int]], gap: int) -> Set[Tuple[int, int]]:
                 out.add((x + dx, y + dy))
     return out
 
-def _push_in(moved_boundary: Set[Tuple[int, int]],
-             moved_all: Set[Tuple[int, int]],
-             world_dilated: Set[Tuple[int, int]],
-             base_off: Tuple[int, int],
-             d: Tuple[int, int],
-             far: int) -> Optional[Tuple[int, int]]:
-    """Slide a continent from a far, collision-free start inward along -d until
-    just before it would violate the gap, returning the tightest valid offset.
+def _lane_key_and_norm(d: Tuple[int, int]) -> Tuple[str, int]:
+    """Return (lane_key_kind, squared-norm) for a slide direction.
 
-    `base_off` places the continent `far` tiles out along +d (guaranteed clear).
-    We binary-search the largest inward push `t` whose tiles stay disjoint from
-    the dilated world, nestling the blob snugly against the coastline (and into
-    concavities on that side).
-
-    The boundary is used for the per-step sweep (cheap broad-phase): it is the
-    part of the blob that makes first contact as it slides in. The expensive
-    full-interior overlap test is done only ONCE, at the final resting offset,
-    rather than on every step — this catches the enclosure case (blob wrapping an
-    existing tile, boundary disjoint but an interior tile overlapping) without
-    rescanning every continent tile at every step/jitter/direction.
+    A continent slides along ``-d``. Every cell a given point can ever hit while
+    sliding shares one invariant ("lane"); grouping occupied cells by that
+    invariant lets us binary-search the first collision instead of stepping. The
+    invariant per direction:
+      - horizontal (±1, 0): constant y
+      - vertical   (0, ±1): constant x
+      - main diag  (1,1)/(-1,-1): constant x - y
+      - anti diag  (1,-1)/(-1,1): constant x + y
     """
-    def boundary_disjoint_at(t: int) -> bool:
-        ox = base_off[0] - d[0] * t
-        oy = base_off[1] - d[1] * t
-        for (x, y) in moved_boundary:
-            if (x + ox, y + oy) in world_dilated:
-                return False
-        return True
+    dx, dy = d
+    if dy == 0:
+        return "y", 1
+    if dx == 0:
+        return "x", 1
+    if dx == dy:
+        return "x-y", 2
+    return "x+y", 2
+
+
+def _lane_key(cell: Tuple[int, int], kind: str) -> int:
+    x, y = cell
+    if kind == "y":
+        return y
+    if kind == "x":
+        return x
+    if kind == "x-y":
+        return x - y
+    return x + y  # "x+y"
+
+
+def _build_lane_index(world_dilated: Set[Tuple[int, int]],
+                      d: Tuple[int, int]) -> Dict[int, List[int]]:
+    """Group occupied cells into lanes for direction ``d``.
+
+    Maps lane_key -> sorted list of each cell's scalar progress ``s = x*dx+y*dy``.
+    Built once per direction and reused across every jitter candidate.
+    """
+    import bisect  # local import keeps module import light
+    kind, _ = _lane_key_and_norm(d)
+    dx, dy = d
+    lanes: Dict[int, List[int]] = {}
+    for (x, y) in world_dilated:
+        key = _lane_key((x, y), kind)
+        lanes.setdefault(key, []).append(x * dx + y * dy)
+    for vals in lanes.values():
+        vals.sort()
+    return lanes
+
+
+def _push_in_swept(moved_boundary: Set[Tuple[int, int]],
+                   moved_all: Set[Tuple[int, int]],
+                   world_dilated: Set[Tuple[int, int]],
+                   lanes: Dict[int, List[int]],
+                   base_off: Tuple[int, int],
+                   d: Tuple[int, int],
+                   far: int) -> Optional[Tuple[int, int]]:
+    """Slide a continent inward along ``-d`` from a far, clear start and return
+    the tightest valid offset — computed by swept projection, not stepping.
+
+    For each boundary tile at its far start we binary-search its lane for the
+    nearest occupied cell ahead of it along the slide, giving that tile's
+    first-collision step directly. The global minimum over all boundary tiles is
+    the first step ANY tile touches the world, so the last fully-clear step is
+    ``min_collision - 1`` — exactly the original "stop at first contact" rule but
+    O(boundary·log) per candidate instead of O(boundary·far).
+
+    A single full-interior overlap test is then done once at the resting offset
+    to catch the enclosure case (blob wrapping a world tile: boundary disjoint
+    while an interior tile overlaps).
+    """
+    import bisect
+    kind, norm = _lane_key_and_norm(d)
+    dx, dy = d
 
     def interior_disjoint_at(t: int) -> bool:
         ox = base_off[0] - d[0] * t
@@ -632,21 +680,37 @@ def _push_in(moved_boundary: Set[Tuple[int, int]],
                 return False
         return True
 
-    if not boundary_disjoint_at(0):
+    # Reject immediately if the blob already collides at its far start (t=0).
+    ox0, oy0 = base_off
+    for (x, y) in moved_boundary:
+        if (x + ox0, y + oy0) in world_dilated:
+            return None
+
+    min_collision = far + 1
+    for (bx, by) in moved_boundary:
+        # Start position of this boundary tile at t=0.
+        sx, sy = bx + base_off[0], by + base_off[1]
+        key = _lane_key((sx, sy), kind)
+        vals = lanes.get(key)
+        if not vals:
+            continue
+        s0 = sx * dx + sy * dy
+        # Sliding inward decreases s by `norm` per step, so we want the largest
+        # occupied s strictly less than s0 (the first obstacle ahead).
+        idx = bisect.bisect_left(vals, s0) - 1
+        if idx < 0:
+            continue
+        s_hit = vals[idx]
+        t_hit = (s0 - s_hit) // norm  # exact: both on the same lane/line
+        if 1 <= t_hit < min_collision:
+            min_collision = t_hit
+            if min_collision == 1:
+                break  # cannot get tighter
+
+    t = min(far, min_collision - 1)
+    if t < 0:
         return None
-    # Collision along a translation is NOT monotonic: a blob can be clear,
-    # intersect an obstacle, then become clear again after passing it. A binary
-    # search would happily "jump" past an obstacle. Instead scan inward one step
-    # at a time from the clear start and stop at the first boundary contact,
-    # guaranteeing the blob never crosses an existing tile.
-    t = 0
-    while t < far:
-        if not boundary_disjoint_at(t + 1):
-            break
-        t += 1
     # Final interior validation at the resting offset (single full-tile scan).
-    # If an interior tile overlaps an enclosed world tile here, this candidate is
-    # invalid — reject rather than silently overwriting ownership on rebuild.
     if not interior_disjoint_at(t):
         return None
     return (base_off[0] - d[0] * t, base_off[1] - d[1] * t)
@@ -691,11 +755,14 @@ def _find_continent_placement(moved_all: Set[Tuple[int, int]],
 
     for d in directions:
         px, py = -d[1], d[0]  # perpendicular axis for jitter
+        # Build the lane index for this direction ONCE and reuse it across every
+        # jitter candidate — this is what makes placement near-linear in tiles.
+        lanes = _build_lane_index(world_dilated, d)
         for j in range(-jitter_half, jitter_half + 1, jitter_step):
             fcx = wcx + d[0] * far + px * j
             fcy = wcy + d[1] * far + py * j
             base_off = (int(round(fcx - ccx)), int(round(fcy - ccy)))
-            off = _push_in(moved_boundary, moved_all, world_dilated, base_off, d, far)
+            off = _push_in_swept(moved_boundary, moved_all, world_dilated, lanes, base_off, d, far)
             if off is None:
                 continue
             nminx = min(wminx, cminx + off[0])

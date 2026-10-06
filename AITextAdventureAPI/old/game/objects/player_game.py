@@ -237,11 +237,45 @@ class PlayerGame:
 			if task.type == TaskType.CompleteIntroStory and not task.completed:
 				self.complete_task(task)
 
-		
+
 		print('Generating world regions...')
-		seed = abs(hash(self.characters[0].name)) % (10 ** 8) 
-		self = generate_world(self, num_regions=10000, seed_base=seed, min_size=500, verbose=True)
-		self._create_donut()
+		seed = abs(hash(self.characters[0].name)) % (10 ** 8)
+
+		# World generation mutates a LOT of live state (regions, world_tiles, NPC /
+		# dungeon positions, sublocation maps, bridge tiles, etc.). If the resulting
+		# continent layout fails verification we must not leave the game half-built.
+		# Snapshot the state generation touches up front, and restore it verbatim on
+		# any failure so the broken layout is fully rolled back rather than committed.
+		import pickle
+		snapshot = pickle.dumps(self._world_gen_snapshot_state())
+		try:
+			self = generate_world(self, num_regions=10000, seed_base=seed, min_size=500, verbose=True)
+			self._create_donut()
+		except Exception:
+			self._restore_world_gen_snapshot_state(pickle.loads(snapshot))
+			raise
+
+	def _world_gen_snapshot_state(self) -> dict:
+		"""Capture the mutable fields world generation touches, for rollback.
+
+		Returned as a plain dict of (shallow-listed) references; the caller pickles
+		it so restore is a true deep copy unaffected by later in-place mutation.
+		"""
+		fields = (
+			"regions", "world_tiles", "npcs", "dungeons", "tasks",
+			"aircraft_location", "previous_region", "last_region_name",
+			"intro_complete",
+		)
+		return {name: getattr(self, name) for name in fields if hasattr(self, name)}
+
+	def _restore_world_gen_snapshot_state(self, snapshot: dict) -> None:
+		"""Restore fields captured by _world_gen_snapshot_state after a failure."""
+		for name, value in snapshot.items():
+			setattr(self, name, value)
+		# The translation pass stashes a transient entity-move guard; drop it so a
+		# later retry starts clean.
+		if hasattr(self, "_continent_translate_moved_entities"):
+			delattr(self, "_continent_translate_moved_entities")
 
 	def _create_donut(self):
 		"""
@@ -257,9 +291,8 @@ class PlayerGame:
 
 		# Never accept a malformed world. If continent verification failed (cities
 		# on the wrong continent or a non-contiguous landmass), the layout is
-		# invalid and must not be committed/reported as complete. Raise so the
-		# caller's completion flow surfaces the failure instead of silently
-		# proceeding with a broken map.
+		# invalid. Raise so complete_intro_story() rolls back the partial mutation
+		# rather than committing/reporting a broken map as complete.
 		if not result.get("verification_passed", False):
 			raise RuntimeError(
 				"World generation produced an invalid continent layout "
