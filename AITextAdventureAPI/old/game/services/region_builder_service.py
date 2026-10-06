@@ -15,7 +15,7 @@ from game.objects.player import Player
 
 
 def ensure_4_connected(tiles: Set[Tuple[int, int]], ignored_set: Set[Tuple[int, int]]) -> Set[Tuple[int, int]]:
-	"""Bridge diagonal-only links so `tiles` form a single 4-connected mass.
+	"""Bridge gaps so `tiles` form a single 4-connected mass.
 
 	Region growth uses 8-directional neighbours, so a footprint can be joined only
 	diagonally (e.g. tiles at (0,0) and (1,1) with (1,0)/(0,1) empty). The player,
@@ -23,33 +23,94 @@ def ensure_4_connected(tiles: Set[Tuple[int, int]], ignored_set: Set[Tuple[int, 
 	with 4-connectivity. A footprint that is merely 8-connected therefore reads as
 	several disjoint blobs and can never verify contiguous.
 
-	This fills the minimal set of orthogonal "elbow" tiles needed to turn every
-	diagonal adjacency into a 4-connected path, skipping any cell already claimed
-	by another region (``ignored_set``). Newly added tiles are returned folded into
-	the input set.
+	This repeatedly finds the 4-connected components of the footprint and routes a
+	bridge between the two nearest components, preferring cells not already claimed
+	by another region (``ignored_set``) but falling back to claimed cells when no
+	free elbow exists, so the result is *always* a single 4-connected mass. Newly
+	added tiles are returned folded into the input set.
 	"""
 	if not tiles:
 		return tiles
-	diagonals = ((1, 1), (1, -1), (-1, 1), (-1, -1))
 	added: Set[Tuple[int, int]] = set()
-	for (x, y) in list(tiles):
-		for dx, dy in diagonals:
-			diag = (x + dx, y + dy)
-			if diag not in tiles and diag not in added:
+	working = set(tiles)
+
+	def _components(cells: Set[Tuple[int, int]]) -> list:
+		seen: Set[Tuple[int, int]] = set()
+		comps = []
+		for start in cells:
+			if start in seen:
 				continue
-			# diag is a diagonal neighbour owned by this region; make sure at
-			# least one of the two shared orthogonal cells links them.
-			a = (x + dx, y)
-			b = (x, y + dy)
-			a_ok = a in tiles or a in added
-			b_ok = b in tiles or b in added
-			if a_ok or b_ok:
-				continue
-			# Prefer the elbow cell that isn't owned by another region.
-			if a not in ignored_set:
-				added.add(a)
-			elif b not in ignored_set:
-				added.add(b)
+			comp: Set[Tuple[int, int]] = set()
+			dq = deque([start])
+			seen.add(start)
+			while dq:
+				cx, cy = dq.popleft()
+				comp.add((cx, cy))
+				for nx, ny in ((cx + 1, cy), (cx - 1, cy), (cx, cy + 1), (cx, cy - 1)):
+					if (nx, ny) in cells and (nx, ny) not in seen:
+						seen.add((nx, ny))
+						dq.append((nx, ny))
+			comps.append(comp)
+		return comps
+
+	# Iteratively merge the two closest components by carving an orthogonal path
+	# between their nearest tiles until only one component remains.
+	comps = _components(working)
+	# Guard against pathological inputs by bounding the number of bridges.
+	max_iterations = len(working) + len(ignored_set) + 1
+	iterations = 0
+	while len(comps) > 1 and iterations < max_iterations:
+		iterations += 1
+		# Find the closest pair of tiles across two distinct components.
+		best = None  # (dist, (ax, ay), (bx, by))
+		for i in range(len(comps)):
+			for j in range(i + 1, len(comps)):
+				for ax, ay in comps[i]:
+					for bx, by in comps[j]:
+						d = abs(ax - bx) + abs(ay - by)
+						if best is None or d < best[0]:
+							best = (d, (ax, ay), (bx, by))
+		if best is None:
+			break
+		_, (ax, ay), (bx, by) = best
+		# Carve an L-shaped orthogonal path from a to b, filling the intermediate
+		# cells (the endpoints already belong to the footprint). Prefer routing so
+		# the elbow avoids already-claimed cells when possible.
+		# Build both candidate L paths (horizontal-first and vertical-first) and
+		# pick the one adding the fewest already-claimed cells.
+		def _l_path(horizontal_first: bool) -> list:
+			cells = []
+			cx, cy = ax, ay
+			if horizontal_first:
+				while cx != bx:
+					cx += 1 if bx > cx else -1
+					cells.append((cx, cy))
+				while cy != by:
+					cy += 1 if by > cy else -1
+					cells.append((cx, cy))
+			else:
+				while cy != by:
+					cy += 1 if by > cy else -1
+					cells.append((cx, cy))
+				while cx != bx:
+					cx += 1 if bx > cx else -1
+					cells.append((cx, cy))
+			# Drop the final cell (it's the target tile b, already owned).
+			if cells and cells[-1] == (bx, by):
+				cells.pop()
+			return cells
+
+		candidates = [_l_path(True), _l_path(False)]
+		best_path = min(
+			candidates,
+			key=lambda cells: sum(1 for c in cells if c in ignored_set),
+		)
+		for cell in best_path:
+			if cell not in working:
+				added.add(cell)
+				working.add(cell)
+		comps = _components(working)
+
 	tiles |= added
 	return tiles
 from game.services.region_frontier_service import (

@@ -19,6 +19,7 @@ from game.objects.player_game import PlayerGame
 import game.constants as const
 from game.services.city_builder_service import translate_city
 from game.services import world_gen_progress as progress
+from game.services.region_builder_service import ensure_4_connected
 
 
 def _emit(line: str) -> None:
@@ -230,6 +231,36 @@ def _region_all_tiles(region: City) -> Set[Tuple[int, int]]:
         tiles.update(region.child_city.tiles.keys())
     return tiles
 
+def normalize_region_internal_connectivity(region: City, player_game: PlayerGame) -> int:
+    """Bridge a single region's internal gaps so its own tiles form one blob.
+
+    Rigid packing (``compact_region_onto_mass``) applies a single offset to every
+    tile of a region, so an internally-disconnected region (e.g. a child city
+    whose tiles aren't adjacent to its parent region, or a legacy region saved as
+    several blobs) stays disconnected after being unioned into the mass. Repair it
+    *before* packing by carving orthogonal bridges between the region's own
+    4-connected components, materialising the bridge cells as real region tiles.
+
+    Returns the number of bridge tiles created.
+    """
+    if not region or not region.tiles:
+        return 0
+    blob = _region_all_tiles(region)
+    if _count_components(blob) <= 1:
+        return 0
+
+    # Bridge against only this region's tiles; other continents' tiles are off
+    # limits so we don't carve across them (they are isolated in space here).
+    bridged = ensure_4_connected(set(blob), ignored_set=set())
+    added = bridged - blob
+    for (x, y) in added:
+        if (x, y) not in region.tiles:
+            region.create_tile(player_game, x, y)
+    if added:
+        region.populate_tiles(player_game)
+    return len(added)
+
+
 def _tiles_touch(a: Set[Tuple[int, int]], b: Set[Tuple[int, int]]) -> bool:
     """True if any tile in `a` is 4-adjacent to (or overlaps) a tile in `b`."""
     for x, y in a:
@@ -348,6 +379,16 @@ def compact_continents_to_contiguous(player_game: PlayerGame, continents: List[L
 
         seed_local = _select_seed_region_index(regions, player_game)
         seed = regions[seed_local]
+        # Repair any internally-disconnected region BEFORE rigid packing. A single
+        # offset can't reconnect a region's own split blobs, so bridge them first.
+        for region in regions:
+            bridged = normalize_region_internal_connectivity(region, player_game)
+            if bridged:
+                _emit(
+                    f"[continents]   continent {idx + 1}: bridged "
+                    f"{bridged} internal tile(s) in region "
+                    f"'{getattr(region, 'region_name', '?')}'"
+                )
         mass: Set[Tuple[int, int]] = _region_all_tiles(seed)
         _, seed_center = bbox_and_center_from_tiles(mass)
 
