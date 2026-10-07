@@ -647,38 +647,45 @@ def _build_lane_index(world_dilated: Set[Tuple[int, int]],
     return lanes
 
 
+def _interior_disjoint(moved_all: Set[Tuple[int, int]],
+                       world_dilated: Set[Tuple[int, int]],
+                       off: Tuple[int, int]) -> bool:
+    """True if no tile of the offset blob overlaps the dilated world.
+
+    Catches the enclosure case (blob wrapping a world tile: boundary disjoint
+    while an interior tile overlaps). This is the expensive full-blob scan, so
+    callers run it only on the chosen candidate, not every jitter.
+    """
+    ox, oy = off
+    for (x, y) in moved_all:
+        if (x + ox, y + oy) in world_dilated:
+            return False
+    return True
+
+
 def _push_in_swept(moved_boundary: Set[Tuple[int, int]],
-                   moved_all: Set[Tuple[int, int]],
                    world_dilated: Set[Tuple[int, int]],
                    lanes: Dict[int, List[int]],
                    base_off: Tuple[int, int],
                    d: Tuple[int, int],
                    far: int) -> Optional[Tuple[int, int]]:
     """Slide a continent inward along ``-d`` from a far, clear start and return
-    the tightest valid offset — computed by swept projection, not stepping.
+    the tightest boundary-valid offset — computed by swept projection.
 
     For each boundary tile at its far start we binary-search its lane for the
     nearest occupied cell ahead of it along the slide, giving that tile's
     first-collision step directly. The global minimum over all boundary tiles is
-    the first step ANY tile touches the world, so the last fully-clear step is
-    ``min_collision - 1`` — exactly the original "stop at first contact" rule but
+    the first step ANY boundary tile touches the world, so the last fully-clear
+    step is ``min_collision - 1`` — the original "stop at first contact" rule but
     O(boundary·log) per candidate instead of O(boundary·far).
 
-    A single full-interior overlap test is then done once at the resting offset
-    to catch the enclosure case (blob wrapping a world tile: boundary disjoint
-    while an interior tile overlaps).
+    NOTE: this validates only the boundary (cheap). The caller must run
+    `_interior_disjoint` on the WINNING offset to reject the enclosure case; we
+    deliberately skip the full-blob scan here so it isn't paid per jitter.
     """
     import bisect
     kind, norm = _lane_key_and_norm(d)
     dx, dy = d
-
-    def interior_disjoint_at(t: int) -> bool:
-        ox = base_off[0] - d[0] * t
-        oy = base_off[1] - d[1] * t
-        for (x, y) in moved_all:
-            if (x + ox, y + oy) in world_dilated:
-                return False
-        return True
 
     # Reject immediately if the blob already collides at its far start (t=0).
     ox0, oy0 = base_off
@@ -709,9 +716,6 @@ def _push_in_swept(moved_boundary: Set[Tuple[int, int]],
 
     t = min(far, min_collision - 1)
     if t < 0:
-        return None
-    # Final interior validation at the resting offset (single full-tile scan).
-    if not interior_disjoint_at(t):
         return None
     return (base_off[0] - d[0] * t, base_off[1] - d[1] * t)
 
@@ -752,6 +756,10 @@ def _find_continent_placement(moved_all: Set[Tuple[int, int]],
 
     best_off: Optional[Tuple[int, int]] = None
     best_score: Optional[Tuple[int, float]] = None
+    # Collect every boundary-valid candidate with its score, then run the
+    # expensive interior (enclosure) scan only in best-score order until one
+    # passes. This caps full-blob scans at ~1 (not ~100) in the common case.
+    candidates: List[Tuple[Tuple[int, float], Tuple[int, int]]] = []
 
     for d in directions:
         px, py = -d[1], d[0]  # perpendicular axis for jitter
@@ -762,7 +770,7 @@ def _find_continent_placement(moved_all: Set[Tuple[int, int]],
             fcx = wcx + d[0] * far + px * j
             fcy = wcy + d[1] * far + py * j
             base_off = (int(round(fcx - ccx)), int(round(fcy - ccy)))
-            off = _push_in_swept(moved_boundary, moved_all, world_dilated, lanes, base_off, d, far)
+            off = _push_in_swept(moved_boundary, world_dilated, lanes, base_off, d, far)
             if off is None:
                 continue
             nminx = min(wminx, cminx + off[0])
@@ -775,9 +783,16 @@ def _find_continent_placement(moved_all: Set[Tuple[int, int]],
             dcy = (ccy + off[1]) - wcy
             closeness = dcx * dcx + dcy * dcy
             score = (area, closeness)
-            if best_score is None or score < best_score:
-                best_score = score
-                best_off = off
+            candidates.append((score, off))
+
+    # Validate interiors in ascending score order; first that is enclosure-free
+    # wins. Only here do we pay the full-blob scan, and usually just once.
+    candidates.sort(key=lambda c: c[0])
+    for score, off in candidates:
+        if _interior_disjoint(moved_all, world_dilated, off):
+            best_score = score
+            best_off = off
+            break
 
     if best_off is None:
         # Degenerate fallback: drop it just east of the bbox, centre-aligned.

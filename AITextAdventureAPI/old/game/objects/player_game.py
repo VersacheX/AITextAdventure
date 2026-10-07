@@ -230,50 +230,42 @@ class PlayerGame:
 		return len(self.completed_regional_quests_2) >= len(const.AVAILABLE_REGIONS)
 
 	def complete_intro_story(self):
-		# check all tasks for task type CompleteIntroStory
-		self.intro_complete = True
-
-		for task in self.tasks:
-			if task.type == TaskType.CompleteIntroStory and not task.completed:
-				self.complete_task(task)
-
-
-		print('Generating world regions...')
-		seed = abs(hash(self.characters[0].name)) % (10 ** 8)
-
-		# World generation mutates a LOT of live state (regions, world_tiles, NPC /
-		# dungeon positions, sublocation maps, bridge tiles, etc.). If the resulting
-		# continent layout fails verification we must not leave the game half-built.
-		# Snapshot the state generation touches up front, and restore it verbatim on
-		# any failure so the broken layout is fully rolled back rather than committed.
+		# Capture a COMPLETE rollback snapshot BEFORE any progression mutates.
+		# Everything below (setting intro_complete, running CompleteIntroStory task
+		# events, and world generation) mutates live state. World gen can also
+		# advance progression via create_region_at (current_chapter,
+		# chapter_task_waiting, etc.). If generation ultimately produces an invalid
+		# layout we must restore the exact pre-call state so the rejected world
+		# leaves no progression committed and a clean retry is possible. Snapshot
+		# the whole __dict__ (PlayerGame is fully picklable -- it is saved via
+		# pickle) rather than a hand-picked subset that could miss fields.
 		import pickle
-		snapshot = pickle.dumps(self._world_gen_snapshot_state())
+		snapshot = pickle.dumps(self.__dict__)
 		try:
+			self.intro_complete = True
+
+			for task in self.tasks:
+				if task.type == TaskType.CompleteIntroStory and not task.completed:
+					self.complete_task(task)
+
+			print('Generating world regions...')
+			seed = abs(hash(self.characters[0].name)) % (10 ** 8)
+
 			self = generate_world(self, num_regions=10000, seed_base=seed, min_size=500, verbose=True)
 			self._create_donut()
 		except Exception:
 			self._restore_world_gen_snapshot_state(pickle.loads(snapshot))
 			raise
 
-	def _world_gen_snapshot_state(self) -> dict:
-		"""Capture the mutable fields world generation touches, for rollback.
-
-		Returned as a plain dict of (shallow-listed) references; the caller pickles
-		it so restore is a true deep copy unaffected by later in-place mutation.
-		"""
-		fields = (
-			"regions", "world_tiles", "npcs", "dungeons", "tasks",
-			"aircraft_location", "previous_region", "last_region_name",
-			"intro_complete",
-		)
-		return {name: getattr(self, name) for name in fields if hasattr(self, name)}
-
 	def _restore_world_gen_snapshot_state(self, snapshot: dict) -> None:
-		"""Restore fields captured by _world_gen_snapshot_state after a failure."""
-		for name, value in snapshot.items():
-			setattr(self, name, value)
-		# The translation pass stashes a transient entity-move guard; drop it so a
-		# later retry starts clean.
+		"""Restore the full __dict__ captured before intro progression / world gen.
+
+		Replaces every attribute wholesale so partial mutations from task events
+		and world generation are rolled back, then drops the transient
+		entity-move guard so a later retry starts clean.
+		"""
+		self.__dict__.clear()
+		self.__dict__.update(snapshot)
 		if hasattr(self, "_continent_translate_moved_entities"):
 			delattr(self, "_continent_translate_moved_entities")
 
