@@ -230,44 +230,23 @@ class PlayerGame:
 		return len(self.completed_regional_quests_2) >= len(const.AVAILABLE_REGIONS)
 
 	def complete_intro_story(self):
-		# Capture a COMPLETE rollback snapshot BEFORE any progression mutates.
-		# Everything below (setting intro_complete, running CompleteIntroStory task
-		# events, and world generation) mutates live state. World gen can also
-		# advance progression via create_region_at (current_chapter,
-		# chapter_task_waiting, etc.). If generation ultimately produces an invalid
-		# layout we must restore the exact pre-call state so the rejected world
-		# leaves no progression committed and a clean retry is possible. Snapshot
-		# the whole __dict__ (PlayerGame is fully picklable -- it is saved via
-		# pickle) rather than a hand-picked subset that could miss fields.
-		import pickle
-		snapshot = pickle.dumps(self.__dict__)
-		try:
-			self.intro_complete = True
+		# NOTE: this runs as a completion event of the parent story task, whose
+		# complete_task() wraps everything in a snapshot/rollback transaction. If
+		# world generation raises (e.g. an invalid continent layout), that outer
+		# transaction restores the full pre-completion state -- including the
+		# parent task's completed flag and all prior event side effects -- so we
+		# only need to let the exception propagate here.
+		self.intro_complete = True
 
-			for task in self.tasks:
-				if task.type == TaskType.CompleteIntroStory and not task.completed:
-					self.complete_task(task)
+		for task in self.tasks:
+			if task.type == TaskType.CompleteIntroStory and not task.completed:
+				self.complete_task(task)
 
-			print('Generating world regions...')
-			seed = abs(hash(self.characters[0].name)) % (10 ** 8)
+		print('Generating world regions...')
+		seed = abs(hash(self.characters[0].name)) % (10 ** 8)
 
-			self = generate_world(self, num_regions=10000, seed_base=seed, min_size=500, verbose=True)
-			self._create_donut()
-		except Exception:
-			self._restore_world_gen_snapshot_state(pickle.loads(snapshot))
-			raise
-
-	def _restore_world_gen_snapshot_state(self, snapshot: dict) -> None:
-		"""Restore the full __dict__ captured before intro progression / world gen.
-
-		Replaces every attribute wholesale so partial mutations from task events
-		and world generation are rolled back, then drops the transient
-		entity-move guard so a later retry starts clean.
-		"""
-		self.__dict__.clear()
-		self.__dict__.update(snapshot)
-		if hasattr(self, "_continent_translate_moved_entities"):
-			delattr(self, "_continent_translate_moved_entities")
+		self = generate_world(self, num_regions=10000, seed_base=seed, min_size=500, verbose=True)
+		self._create_donut()
 
 	def _create_donut(self):
 		"""
@@ -353,12 +332,45 @@ class PlayerGame:
 				self.complete_task(task)
 
 	def complete_task(self, task) -> None:
-		"""Mark the given task as completed and run its completion events."""
+		"""Mark the given task as completed and run its completion events.
+
+		Completion is TRANSACTIONAL: setting ``completed=True`` and running every
+		completion event (including nested task awards and world generation) either
+		fully commits, or on any exception is rolled back to the exact
+		pre-completion state. Without this, ``task.completed`` is set before the
+		events run, so a failure (e.g. world generation producing an invalid
+		layout) would leave the parent task flagged completed with only partial
+		side effects applied -- the event could never be triggered normally again
+		and the remaining completion events would never run.
+
+		Only the OUTERMOST completion owns the transaction; nested completions
+		triggered by award_task / acquire events ride within it, so a single
+		rollback restores everything.
+		"""
 		#print (f'Completing task {task.task_id} of type {task.type}')
-		task.completed = True
-		if task.task_complete_events:
-			for event in task.task_complete_events:
-				event.execute(self, task)
+		is_outermost = not getattr(self, "_task_txn_active", False)
+		snapshot = None
+		if is_outermost:
+			import pickle
+			# Snapshot BEFORE task.completed is set and before the first event
+			# runs, so rollback undoes the completion flag and every side effect.
+			snapshot = pickle.dumps(self.__dict__)
+			self._task_txn_active = True
+		try:
+			task.completed = True
+			if task.task_complete_events:
+				for event in task.task_complete_events:
+					event.execute(self, task)
+		except Exception:
+			if is_outermost and snapshot is not None:
+				self.__dict__.clear()
+				self.__dict__.update(pickle.loads(snapshot))
+			raise
+		finally:
+			if is_outermost:
+				# On the restore path the flag is gone (snapshot predates it); on
+				# the commit path clear it so the next completion starts fresh.
+				self._task_txn_active = False
 
 	def cancel_task(self, task) -> None:
 		"""SET THE TASK TO COMPLETED WITHOUT TRIGGERING IT'S EVENTS"""

@@ -311,20 +311,17 @@ def _fulfill_deliver(pg: Any, task: Any) -> Tuple[bool, str]:
 # ?? Completion ?????????????????????????????????????????????????????????????????
 
 def _run_complete_task(pg: Any, task: Any, success_msg: str) -> Tuple[bool, str]:
-    """Invoke pg.complete_task() and report honestly when it partially completes.
+    """Invoke pg.complete_task() and report honestly when it fails.
 
-    PlayerGame.complete_task() sets ``task.completed = True`` *before* running
-    the task's completion events. If one of those events raises, the task is
-    left flagged completed with only some side effects applied. Returning a flat
-    "not completed" would be a lie -- and the next attempt would be rejected as
-    "already completed", stranding the half-finished task with no recovery path.
-
-    So on failure we inspect ``task.completed``:
-      - If it is set, the task IS completed (events partially ran). Report
-        success=True but surface the partial-completion warning so the dev can
-        decide how to recover (e.g. inspect/replay the remaining side effects).
-      - If it is not set, the failure happened before completion; report a
-        clean failure so a retry is valid.
+    PlayerGame.complete_task() is now TRANSACTIONAL: it snapshots state before
+    setting ``task.completed`` and running completion events, and rolls the whole
+    thing back on any exception -- so a failed completion leaves
+    ``task.completed`` False and no partial side effects. We still inspect the
+    flag defensively:
+      - If it is somehow set after an exception (e.g. a non-outermost/legacy
+        path), surface the partial-completion warning so the dev can recover.
+      - Normally it is False after a failure; report a clean failure so a retry
+        is valid.
     """
     try:
         pg.complete_task(task)
