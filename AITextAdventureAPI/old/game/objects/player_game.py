@@ -331,30 +331,52 @@ class PlayerGame:
 			if task.check_completion_terms(self):
 				self.complete_task(task)
 
+	def _completion_needs_world_rollback(self, task) -> bool:
+		"""True if completing `task` runs heavy, world-mutating generation that
+		must be rolled back atomically on failure.
+
+		Currently only the ``complete_intro_story`` completion event triggers full
+		world generation. Ordinary task completions don't need (and must not pay
+		for) a whole-world snapshot, so we gate the expensive transaction on the
+		presence of that event in the task's direct completion events.
+		"""
+		for event in getattr(task, "task_complete_events", None) or []:
+			et = getattr(event, "event_type", None)
+			name = getattr(et, "value", et)
+			if name == "complete_intro_story":
+				return True
+		return False
+
 	def complete_task(self, task) -> None:
 		"""Mark the given task as completed and run its completion events.
 
-		Completion is TRANSACTIONAL: setting ``completed=True`` and running every
-		completion event (including nested task awards and world generation) either
-		fully commits, or on any exception is rolled back to the exact
-		pre-completion state. Without this, ``task.completed`` is set before the
-		events run, so a failure (e.g. world generation producing an invalid
-		layout) would leave the parent task flagged completed with only partial
-		side effects applied -- the event could never be triggered normally again
-		and the remaining completion events would never run.
+		Completion events can trigger heavy, world-mutating work (world generation
+		via ``complete_intro_story``). Because ``task.completed`` is set before the
+		events run, a mid-event failure would otherwise strand the task flagged
+		completed with only partial side effects -- it could never be triggered
+		normally again. For those chains ONLY, completion is transactional: on any
+		exception the full pre-completion state is restored.
 
-		Only the OUTERMOST completion owns the transaction; nested completions
-		triggered by award_task / acquire events ride within it, so a single
-		rollback restores everything.
+		Cost control: the expensive whole-world snapshot is taken only when the
+		chain actually needs it (``_completion_needs_world_rollback``); normal task
+		completions run with no snapshot overhead.
+
+		Identity: the snapshot restore replaces nested internal state with clones,
+		so on rollback we explicitly reset the EXTERNALLY-held ``task`` object in
+		place and keep that same instance in ``self.tasks``. This preserves object
+		identity for callers (e.g. dev Force Complete) so they observe the
+		rolled-back ``completed`` flag and a retry updates the live task.
 		"""
 		#print (f'Completing task {task.task_id} of type {task.type}')
 		is_outermost = not getattr(self, "_task_txn_active", False)
+		needs_rollback = is_outermost and self._completion_needs_world_rollback(task)
 		snapshot = None
-		if is_outermost:
+		if needs_rollback:
 			import pickle
 			# Snapshot BEFORE task.completed is set and before the first event
 			# runs, so rollback undoes the completion flag and every side effect.
 			snapshot = pickle.dumps(self.__dict__)
+		if is_outermost:
 			self._task_txn_active = True
 		try:
 			task.completed = True
@@ -362,14 +384,23 @@ class PlayerGame:
 				for event in task.task_complete_events:
 					event.execute(self, task)
 		except Exception:
-			if is_outermost and snapshot is not None:
+			if snapshot is not None:
+				import pickle
+				restored = pickle.loads(snapshot)
 				self.__dict__.clear()
-				self.__dict__.update(pickle.loads(snapshot))
+				self.__dict__.update(restored)
+				# Preserve identity of the caller's task reference: reset the
+				# original object and make it the instance stored in self.tasks so
+				# a retry mutates the live task rather than an orphaned clone.
+				task.completed = False
+				task_id = getattr(task, "task_id", None)
+				self.tasks = [
+					task if getattr(t, "task_id", None) == task_id else t
+					for t in self.tasks
+				]
 			raise
 		finally:
 			if is_outermost:
-				# On the restore path the flag is gone (snapshot predates it); on
-				# the commit path clear it so the next completion starts fresh.
 				self._task_txn_active = False
 
 	def cancel_task(self, task) -> None:
