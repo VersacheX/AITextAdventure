@@ -259,6 +259,12 @@ def normalize_region_internal_connectivity(region: City, player_game: PlayerGame
     for (x, y) in added:
         if (x, y) not in region.tiles:
             region.create_tile(player_game, x, y)
+            # Register the new bridge tile in the global world map IMMEDIATELY.
+            # Subsequent regions compute their blocked set from world_tiles; if we
+            # waited for the end-of-pass rebuild, a later region could carve a
+            # bridge through this just-claimed coordinate, giving two regions the
+            # same tile (the rebuild would then silently drop one owner).
+            player_game.world_tiles[(x, y)] = region.tiles[(x, y)]
             # Populate ONLY the newly created bridge tile. Calling populate_tiles()
             # would re-roll every existing tile's subloc_map and could restore
             # already-looted items/money on explored regions.
@@ -628,23 +634,67 @@ def _lane_key(cell: Tuple[int, int], kind: str) -> int:
     return x + y  # "x+y"
 
 
-def _build_lane_index(world_dilated: Set[Tuple[int, int]],
-                      d: Tuple[int, int]) -> Dict[int, List[int]]:
-    """Group occupied cells into lanes for direction ``d``.
+# The 8 slide directions collapse to 4 lane invariants ("kinds"). Opposite
+# directions share a kind and differ only by the SIGN of the scalar progress, so
+# we build one reference index per kind (4 total, in a single pass over the
+# world) and handle the opposite bearing by signing at query time rather than
+# rebuilding a separate index for it.
+#   d -> (kind, norm, sign)  where sign=+1 is the kind's reference bearing.
+_DIR_META: Dict[Tuple[int, int], Tuple[str, int, int]] = {
+    (1, 0):  ("y",   1,  1),
+    (-1, 0): ("y",   1, -1),
+    (0, 1):  ("x",   1,  1),
+    (0, -1): ("x",   1, -1),
+    (1, 1):  ("x-y", 2,  1),
+    (-1, -1):("x-y", 2, -1),
+    (1, -1): ("x+y", 2,  1),
+    (-1, 1): ("x+y", 2, -1),
+}
 
-    Maps lane_key -> sorted list of each cell's scalar progress ``s = x*dx+y*dy``.
-    Built once per direction and reused across every jitter candidate.
+
+def _s_ref(kind: str, x: int, y: int) -> int:
+    """Scalar progress of a cell along the kind's reference (sign=+1) bearing."""
+    if kind == "y":
+        return x          # reference bearing (1,0)
+    if kind == "x":
+        return y          # reference bearing (0,1)
+    if kind == "x-y":
+        return x + y      # reference bearing (1,1)
+    return x - y          # "x+y" kind, reference bearing (1,-1)
+
+
+def _lane_key_ref(kind: str, x: int, y: int) -> int:
+    """Invariant that stays constant while sliding along the kind's bearing."""
+    if kind == "y":
+        return y
+    if kind == "x":
+        return x
+    if kind == "x-y":
+        return x - y
+    return x + y          # "x+y" kind
+
+
+def _build_reference_indexes(
+    world_dilated: Set[Tuple[int, int]],
+) -> Dict[str, Dict[int, List[int]]]:
+    """Build the four lane indexes (one per invariant) in a SINGLE pass.
+
+    Returns ``{kind: {lane_key: sorted list of reference scalar s_ref}}``. Each
+    occupied cell contributes one entry to every kind, so all four indexes are
+    produced from one iteration over the dilated world. Opposite directions reuse
+    the same kind index via sign handling in ``_push_in_swept`` -- so this
+    replaces the old eight-rebuild-per-continent cost with four, built once.
     """
-    import bisect  # local import keeps module import light
-    kind, _ = _lane_key_and_norm(d)
-    dx, dy = d
-    lanes: Dict[int, List[int]] = {}
+    idx: Dict[str, Dict[int, List[int]]] = {"y": {}, "x": {}, "x-y": {}, "x+y": {}}
     for (x, y) in world_dilated:
-        key = _lane_key((x, y), kind)
-        lanes.setdefault(key, []).append(x * dx + y * dy)
-    for vals in lanes.values():
-        vals.sort()
-    return lanes
+        idx["y"].setdefault(y, []).append(x)            # lane=y,    s_ref=x
+        idx["x"].setdefault(x, []).append(y)            # lane=x,    s_ref=y
+        idx["x-y"].setdefault(x - y, []).append(x + y)  # lane=x-y,  s_ref=x+y
+        idx["x+y"].setdefault(x + y, []).append(x - y)  # lane=x+y,  s_ref=x-y
+    for kind_dict in idx.values():
+        for vals in kind_dict.values():
+            vals.sort()
+    return idx
 
 
 def _interior_disjoint(moved_all: Set[Tuple[int, int]],
@@ -665,7 +715,7 @@ def _interior_disjoint(moved_all: Set[Tuple[int, int]],
 
 def _push_in_swept(moved_boundary: Set[Tuple[int, int]],
                    world_dilated: Set[Tuple[int, int]],
-                   lanes: Dict[int, List[int]],
+                   ref_indexes: Dict[str, Dict[int, List[int]]],
                    base_off: Tuple[int, int],
                    d: Tuple[int, int],
                    far: int) -> Optional[Tuple[int, int]]:
@@ -679,13 +729,18 @@ def _push_in_swept(moved_boundary: Set[Tuple[int, int]],
     step is ``min_collision - 1`` — the original "stop at first contact" rule but
     O(boundary·log) per candidate instead of O(boundary·far).
 
+    Uses the shared per-kind reference indexes (built once for all 8 directions).
+    The scalar progress along ``d`` equals the reference scalar times ``sign``;
+    sliding inward decreases progress, so after signing we again seek the largest
+    occupied scalar strictly below the tile's start scalar.
+
     NOTE: this validates only the boundary (cheap). The caller must run
     `_interior_disjoint` on the WINNING offset to reject the enclosure case; we
     deliberately skip the full-blob scan here so it isn't paid per jitter.
     """
     import bisect
-    kind, norm = _lane_key_and_norm(d)
-    dx, dy = d
+    kind, norm, sign = _DIR_META[d]
+    lanes = ref_indexes[kind]
 
     # Reject immediately if the blob already collides at its far start (t=0).
     ox0, oy0 = base_off
@@ -697,17 +752,29 @@ def _push_in_swept(moved_boundary: Set[Tuple[int, int]],
     for (bx, by) in moved_boundary:
         # Start position of this boundary tile at t=0.
         sx, sy = bx + base_off[0], by + base_off[1]
-        key = _lane_key((sx, sy), kind)
+        key = _lane_key_ref(kind, sx, sy)
         vals = lanes.get(key)
         if not vals:
             continue
-        s0 = sx * dx + sy * dy
-        # Sliding inward decreases s by `norm` per step, so we want the largest
-        # occupied s strictly less than s0 (the first obstacle ahead).
-        idx = bisect.bisect_left(vals, s0) - 1
-        if idx < 0:
-            continue
-        s_hit = vals[idx]
+        # Signed scalar progress along the actual bearing d. Sliding inward
+        # (-d) decreases it by `norm` per step, so we want the largest occupied
+        # signed scalar strictly less than this tile's start scalar.
+        s0 = sign * _s_ref(kind, sx, sy)
+        if sign == 1:
+            # vals holds ascending s_ref == ascending signed scalar.
+            idx = bisect.bisect_left(vals, s0) - 1
+            if idx < 0:
+                continue
+            s_hit = vals[idx]
+        else:
+            # Signed scalar = -s_ref, so ascending signed order is DESCENDING
+            # s_ref. The largest signed value strictly below s0 corresponds to
+            # the smallest s_ref strictly greater than (-s0).
+            target_ref = -s0  # since s0 = -s_ref_start => s_ref_start = -s0
+            pos = bisect.bisect_right(vals, target_ref)
+            if pos >= len(vals):
+                continue
+            s_hit = -vals[pos]
         t_hit = (s0 - s_hit) // norm  # exact: both on the same lane/line
         if 1 <= t_hit < min_collision:
             min_collision = t_hit
@@ -761,16 +828,18 @@ def _find_continent_placement(moved_all: Set[Tuple[int, int]],
     # passes. This caps full-blob scans at ~1 (not ~100) in the common case.
     candidates: List[Tuple[Tuple[int, float], Tuple[int, int]]] = []
 
+    # Build the four lane invariants' indexes ONCE per placement (single pass
+    # over the dilated world). All 8 directions reuse these via sign handling, so
+    # we no longer rebuild/sort a full index per direction per continent.
+    ref_indexes = _build_reference_indexes(world_dilated)
+
     for d in directions:
         px, py = -d[1], d[0]  # perpendicular axis for jitter
-        # Build the lane index for this direction ONCE and reuse it across every
-        # jitter candidate — this is what makes placement near-linear in tiles.
-        lanes = _build_lane_index(world_dilated, d)
         for j in range(-jitter_half, jitter_half + 1, jitter_step):
             fcx = wcx + d[0] * far + px * j
             fcy = wcy + d[1] * far + py * j
             base_off = (int(round(fcx - ccx)), int(round(fcy - ccy)))
-            off = _push_in_swept(moved_boundary, world_dilated, lanes, base_off, d, far)
+            off = _push_in_swept(moved_boundary, world_dilated, ref_indexes, base_off, d, far)
             if off is None:
                 continue
             nminx = min(wminx, cminx + off[0])
@@ -957,13 +1026,24 @@ def build_continents_and_ocean(player_game: PlayerGame,
                                rng_seed: int = 123456,
                                spread_radius: int = 140,
                                ocean_padding: int = 10) -> Dict[str, any]:
-    """High-level procedure adapted to user rules:
-      - Explicit city counts per continent: [5,3,6,2,4,1] (sum=21)
-      - First continent is where the player starts and is not moved.
-      - City-bearing regions assigned sequentially and partitioned accordingly (city order preserved).
-      - Citiless regions assigned to nearest continent.
-      - Spread continents but skip the first.
-    Returns a dictionary with info (continent groups, ocean bbox, ocean_region)
+    """High-level continent + ocean build.
+
+    Pipeline (counts come from ``const.CONTINENT_COMPOSITION``, currently
+    [4, 3, 6, 2, 5, 1], sum=21):
+      - City-bearing regions are assigned to continents by CANONICAL, baked
+        membership (CITY_CONTINENT_MAP / chapter-city map), not creation order.
+      - Citiless connector regions attach to their baked continent; only legacy
+        unstamped connectors fall back to nearest-centroid.
+      - Continents are spread apart, then each is COMPACTED into a single
+        contiguous landmass (with internal-connectivity bridging).
+      - Continents are seated via intelligent LINEAR placement (bbox-aware
+        swept-collision fitting), with the player's continent as a fixed anchor.
+      - The layout is VERIFIED (correct city set per continent + contiguity);
+        verification failure retries repair and ultimately aborts (returns
+        ``verification_passed=False`` without building the ocean) so a malformed
+        world is never committed.
+    Returns a dict with continent bbox metadata, ocean bbox/region, composition
+    summaries, and ``verification_passed``.
     """
     rng = random.Random(rng_seed)
 

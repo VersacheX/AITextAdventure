@@ -313,15 +313,20 @@ def _fulfill_deliver(pg: Any, task: Any) -> Tuple[bool, str]:
 def _run_complete_task(pg: Any, task: Any, success_msg: str) -> Tuple[bool, str]:
     """Invoke pg.complete_task() and report honestly when it fails.
 
-    PlayerGame.complete_task() is now TRANSACTIONAL: it snapshots state before
-    setting ``task.completed`` and running completion events, and rolls the whole
-    thing back on any exception -- so a failed completion leaves
-    ``task.completed`` False and no partial side effects. We still inspect the
-    flag defensively:
-      - If it is somehow set after an exception (e.g. a non-outermost/legacy
-        path), surface the partial-completion warning so the dev can recover.
-      - Normally it is False after a failure; report a clean failure so a retry
-        is valid.
+    PlayerGame.complete_task() is transactional ONLY for completion chains that
+    trigger world generation (an outermost task whose completion events directly
+    contain ``complete_intro_story``). For those, a failure rolls the whole thing
+    back, leaving ``task.completed`` False with no partial side effects, so a
+    retry is clean. For ALL OTHER tasks the legacy behavior still applies:
+    ``task.completed`` is set before events run, so a mid-event failure can leave
+    the task flagged completed with partial side effects.
+
+    We therefore inspect the flag after a failure:
+      - If it is still set, this was a non-transactional task that partially
+        completed. Report success=True but surface the partial-completion warning
+        so the dev can recover manually (it will not re-run).
+      - If it is False (the transactional/rolled-back path), report a clean
+        failure so a retry is valid.
     """
     try:
         pg.complete_task(task)
