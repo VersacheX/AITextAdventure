@@ -253,13 +253,14 @@ def _is_walkable_tile(tile: Any) -> bool:
 
 
 def _carve_walkable(region: City, x: int, y: int) -> None:
-    """Force the tile at (x,y) in `region` to a walkable open-ground corridor.
+    """Force a NEWLY CREATED bridge tile at (x,y) in `region` to open ground.
 
-    Bridge/join cells must be crossable on foot. ``_generate_tile`` can roll an
-    ``impassable`` tile or a ``building`` without a facing entrance, either of
-    which movement rejects -- so after a bridge cell is materialised we rewrite
-    it to plain open ground (clearing any building payload) to guarantee a
-    walkable corridor actually exists where the geometry says the regions join.
+    This is only called on cells that this module itself just materialised as
+    connective bridge tiles (never on pre-existing region content), so there is
+    no building payload to preserve. ``_generate_tile`` can roll an ``impassable``
+    tile or an entrance-less ``building`` for such a cell, either of which
+    movement rejects -- so we rewrite it to plain open ground to guarantee a
+    walkable corridor exists where the geometry says the regions join.
     """
     tile = region.tiles.get((x, y))
     if tile is None:
@@ -414,50 +415,14 @@ def compact_region_onto_mass(
     cur = {(x + off_x, y + off_y) for (x, y) in region_tiles}
     if off_x or off_y:
         translate_region_tiles(region, off_x, off_y, player_game)
-
-    # Edge-snapping only guarantees GEOMETRIC 4-contact between the anchor tile
-    # `m` (on the existing mass) and the region's contact tile `r`. Either of
-    # those tiles may be impassable or an entrance-less building, in which case a
-    # player cannot actually cross the join even though the blobs touch. Carve
-    # both sides of the contact pair into walkable open ground so a real foot
-    # corridor exists wherever we claim regions connect.
-    anchor_world = (m[0], m[1])
-    region_contact = (r[0] + off_x, r[1] + off_y)
-    _carve_walkable_world(player_game, anchor_world)
-    _carve_walkable_at(region, region_contact)
+    # NOTE: edge-snapping only guarantees GEOMETRIC 4-contact at the seam; the
+    # contact tiles may be impassable or buildings and thus not crossable on
+    # foot. We deliberately do NOT carve here: `world_tiles` is still stale during
+    # packing (translated regions' global keys are only rebuilt afterwards) and
+    # blindly rewriting an extreme contact tile could destroy a required
+    # building. Walkability across joins is repaired once, non-destructively, by
+    # `repair_continent_walkable_joins` after the world map is rebuilt.
     return cur
-
-def _carve_walkable_at(region: City, coord: Tuple[int, int]) -> None:
-    """Carve a tile walkable in `region` or its child city, whichever owns it."""
-    x, y = coord
-    if (x, y) in region.tiles:
-        _carve_walkable(region, x, y)
-        return
-    child = getattr(region, "child_city", None)
-    if child and (x, y) in child.tiles:
-        tile = child.tiles.get((x, y))
-        if tile is not None:
-            tile.type = "open_area"
-            tile.building = None
-            tile.entrances = ()
-            tile.floors = 0
-            tile.has_basement = False
-
-def _carve_walkable_world(player_game: PlayerGame, coord: Tuple[int, int]) -> None:
-    """Carve the world tile at `coord` walkable regardless of owning region.
-
-    The continent mass is owned by many regions; after an edge-snap the anchor
-    contact tile may belong to any of them. Rewriting the globally-registered
-    tile guarantees the join is crossable without having to locate its owner.
-    """
-    tile = player_game.world_tiles.get(coord) if player_game.world_tiles else None
-    if tile is None:
-        return
-    tile.type = "open_area"
-    tile.building = None
-    tile.entrances = ()
-    tile.floors = 0
-    tile.has_basement = False
 
 def compact_continents_to_contiguous(player_game: PlayerGame, continents: List[List[City]]) -> None:
     """Pack each continent's regions into a single contiguous landmass in-place.
@@ -511,6 +476,10 @@ def compact_continents_to_contiguous(player_game: PlayerGame, continents: List[L
 
         # Rebuild world tiles so later bbox/centroid reads see the packed layout.
         update_player_game_world_tiles_after_translation(player_game)
+        # With the world map now fresh (no stale keys), repair any join whose
+        # geometric contact is not actually walkable, carving impassable seam
+        # tiles into corridors without touching buildings.
+        repair_continent_walkable_joins(player_game, [cont])
         contiguous = _continent_is_contiguous(cont)
         if not contiguous:
             # Diagnose WHY: count connected components of the whole continent, and
@@ -548,6 +517,131 @@ def compact_continents_to_contiguous(player_game: PlayerGame, continents: List[L
     # any later translation pass starts with a fresh tracking set.
     if hasattr(player_game, "_continent_translate_moved_entities"):
         delattr(player_game, "_continent_translate_moved_entities")
+
+
+def repair_continent_walkable_joins(
+    player_game: PlayerGame, continents: List[List[City]]
+) -> None:
+    """Make each continent's WALKABLE tiles a single 4-connected mass, in place.
+
+    Edge-snap packing guarantees only geometric contact between regions; the
+    seam tiles can be ``impassable`` (or buildings) so a player cannot actually
+    cross. This runs AFTER ``update_player_game_world_tiles_after_translation``
+    so ``player_game.world_tiles`` is the fresh, authoritative map (no stale
+    keys). For every continent whose walkable tiles split into multiple
+    components, it carves the shortest corridor between components by flipping
+    ONLY ``impassable`` owned tiles to open ground -- never a building -- so no
+    required/story building data is destroyed. If the only available route would
+    cross a building, that pair is left for the verifier to report rather than
+    silently clobbering the building.
+    """
+    world = player_game.world_tiles or {}
+    for idx, cont in enumerate(continents):
+        cont_tiles = continent_tiles(cont)
+        if not cont_tiles:
+            continue
+
+        walkable = {c for c in cont_tiles if _is_walkable_tile(world.get(c))}
+        if not walkable:
+            continue
+
+        comps = _components_4(walkable)
+        if len(comps) <= 1:
+            continue
+
+        carved_total = 0
+        # Greedily merge the first component into the rest by carving a shortest
+        # impassable-only corridor, re-evaluating components after each join.
+        guard = len(comps) + 1
+        while len(comps) > 1 and guard > 0:
+            guard -= 1
+            source = comps[0]
+            targets: Set[Tuple[int, int]] = set().union(*comps[1:])
+            path = _shortest_impassable_corridor(source, targets, cont_tiles, world)
+            if path is None:
+                # No impassable-only route between these components; do not
+                # destroy buildings to force a join. Leave it for verification.
+                break
+            for (cx, cy) in path:
+                tile = world.get((cx, cy))
+                if tile is not None and getattr(tile, "type", None) == "impassable":
+                    tile.type = "open_area"
+                    carved_total += 1
+                walkable.add((cx, cy))
+            comps = _components_4(walkable)
+
+        if carved_total:
+            _emit(
+                f"[continents]   continent {idx + 1}: carved {carved_total} "
+                f"impassable tile(s) into walkable corridors at region joins"
+            )
+
+
+def _components_4(tiles: Set[Tuple[int, int]]) -> List[Set[Tuple[int, int]]]:
+    """Return the 4-connected components of `tiles` as a list of sets."""
+    remaining = set(tiles)
+    comps: List[Set[Tuple[int, int]]] = []
+    while remaining:
+        start = next(iter(remaining))
+        stack = [start]
+        remaining.discard(start)
+        comp: Set[Tuple[int, int]] = {start}
+        while stack:
+            x, y = stack.pop()
+            for nx, ny in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+                if (nx, ny) in remaining:
+                    remaining.discard((nx, ny))
+                    comp.add((nx, ny))
+                    stack.append((nx, ny))
+        comps.append(comp)
+    return comps
+
+
+def _shortest_impassable_corridor(
+    source: Set[Tuple[int, int]],
+    targets: Set[Tuple[int, int]],
+    cont_tiles: Set[Tuple[int, int]],
+    world: Dict[Tuple[int, int], Any],
+) -> Optional[List[Tuple[int, int]]]:
+    """BFS a shortest corridor of IMPASSABLE continent tiles from source->targets.
+
+    Expands only across cells owned by this continent whose world tile is
+    ``impassable`` (walkable cells are the endpoints; buildings are walls so a
+    corridor never crosses — and therefore never destroys — a building). Returns
+    the list of impassable cells to flip (excluding endpoints), or None if no
+    impassable-only route exists.
+    """
+    from collections import deque
+
+    frontier = deque()
+    came_from: Dict[Tuple[int, int], Optional[Tuple[int, int]]] = {}
+    for cell in source:
+        frontier.append(cell)
+        came_from[cell] = None
+    while frontier:
+        cur = frontier.popleft()
+        cx, cy = cur
+        for nxt in ((cx + 1, cy), (cx - 1, cy), (cx, cy + 1), (cx, cy - 1)):
+            if nxt in came_from:
+                continue
+            if nxt in targets:
+                # Reconstruct the intermediate (impassable) cells to carve.
+                path: List[Tuple[int, int]] = []
+                node = cur
+                while node is not None and node not in source:
+                    path.append(node)
+                    node = came_from[node]
+                path.reverse()
+                return path
+            if nxt not in cont_tiles:
+                continue
+            tile = world.get(nxt)
+            if getattr(tile, "type", None) != "impassable":
+                # Only route through impassable owned tiles (never buildings).
+                continue
+            came_from[nxt] = cur
+            frontier.append(nxt)
+    return None
 
 # ------------------------------------------------------------------
 # Translation and spread (modified to allow skipping first continent)

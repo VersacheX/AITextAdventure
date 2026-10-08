@@ -128,10 +128,14 @@ def ensure_4_connected(tiles: Set[Tuple[int, int]], ignored_set: Set[Tuple[int, 
 		# finite but is generous enough to route around sizeable obstacles.
 		margin_cap = max(16, footprint_span * 2 + 8)
 		path = None
-		while path is None and margin <= margin_cap:
+		while path is None:
+			# Never exceed the cap, but ALWAYS try the cap itself: doubling could
+			# otherwise jump past a non-power-of-two cap and skip valid detours
+			# whose required margin lies between the last power of two and the cap.
+			margin = min(margin, margin_cap)
 			bounds = (fminx - margin, fmaxx + margin, fminy - margin, fmaxy + margin)
 			path = _bridge_between(source, targets, blocked, bounds)
-			if path is not None:
+			if path is not None or margin == margin_cap:
 				break
 			margin *= 2
 		if path is None:
@@ -245,11 +249,20 @@ def create_region(
 
 	# Region growth joins tiles 8-directionally, but the player moves orthogonally
 	# and continent contiguity is checked with 4-connectivity. Close any
-	# diagonal-only gaps so the footprint is a single 4-connected mass.
+	# diagonal-only gaps so the footprint is a single 4-connected mass. Capture
+	# the newly added bridge cells so we can (a) keep them out of required-building
+	# placement and (b) force them to walkable open ground after materialization --
+	# create_tile may otherwise roll them impassable or as entrance-less buildings,
+	# which would leave the footprint geometrically joined but impassable on foot.
+	before_bridge = set(frontier)
 	ensure_4_connected(frontier, ignored_set)
+	bridge_cells = set(frontier) - before_bridge
 
 	rc.child_city = {}
-	rc.ensure_required_buildings(player_game, frontier)
+	# Required buildings must not land on a connective corridor cell (that would
+	# re-block the join), so offer only non-bridge locations for placement.
+	building_locations = frontier - bridge_cells
+	rc.ensure_required_buildings(player_game, building_locations)
 	#self.tiles: Dict[Tuple[int, int], Tile] = {}
 	for x, y in frontier:
 		if not (x,y) in rc.tiles.keys():  #self.tiles: Dict[Tuple[int, int], Tile] = {}
@@ -257,6 +270,17 @@ def create_region(
 			rc.create_tile(player_game, x, y)
 		# else:
 		# 	input (f'Tile at ({x},{y}) already exists for region city "{rc.region_name}", skipping creation.')
+
+	# Guarantee every bridge cell is a walkable corridor (open ground), overriding
+	# any impassable/building tile create_tile may have generated for it.
+	for (bx, by) in bridge_cells:
+		tile = rc.tiles.get((bx, by))
+		if tile is not None:
+			tile.type = 'open_area'
+			tile.building = None
+			tile.entrances = ()
+			tile.floors = 0
+			tile.has_basement = False
 
 	#input (f'Filled region city "{rc.region_name}" with {len(frontier)} tiles before filling bound uncreated space.')
 	rc.populate_tiles(player_game)
