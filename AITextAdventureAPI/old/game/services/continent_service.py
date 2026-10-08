@@ -13,6 +13,7 @@ Modified to:
 from typing import List, Tuple, Dict, Set, Optional, Any
 import math
 import random
+import bisect
 
 from game.objects.city import City, Tile
 from game.objects.player_game import PlayerGame
@@ -697,6 +698,44 @@ def _build_reference_indexes(
     return idx
 
 
+def _extend_reference_indexes(
+    world_dilated: Set[Tuple[int, int]],
+    ref_indexes: Dict[str, Dict[int, List[int]]],
+    new_tiles: Set[Tuple[int, int]],
+    gap: int,
+) -> None:
+    """Incrementally grow ``world_dilated`` and the four lane indexes by the
+    dilation of ``new_tiles`` ONLY.
+
+    The world mass only ever grows as continents are seated, so instead of
+    materializing the full dilation and rebuilding all four sorted indexes on
+    every placement (which multiplies the whole world footprint by ~``gap^2``
+    each time), we dilate just the freshly-added tiles and splice any genuinely
+    new dilated cells into the existing structures. Cells already present are
+    skipped, so repeated calls never double-count, and each world tile is
+    dilated/indexed exactly once across an entire placement run rather than once
+    per remaining continent.
+    """
+    r = max(0, gap - 1)
+    yi = ref_indexes["y"]
+    xi = ref_indexes["x"]
+    xmy = ref_indexes["x-y"]
+    xpy = ref_indexes["x+y"]
+    for (tx, ty) in new_tiles:
+        for dx in range(-r, r + 1):
+            x = tx + dx
+            for dy in range(-r, r + 1):
+                y = ty + dy
+                cell = (x, y)
+                if cell in world_dilated:
+                    continue
+                world_dilated.add(cell)
+                bisect.insort(yi.setdefault(y, []), x)            # lane=y,   s_ref=x
+                bisect.insort(xi.setdefault(x, []), y)            # lane=x,   s_ref=y
+                bisect.insort(xmy.setdefault(x - y, []), x + y)   # lane=x-y, s_ref=x+y
+                bisect.insort(xpy.setdefault(x + y, []), x - y)   # lane=x+y, s_ref=x-y
+
+
 def _interior_disjoint(moved_all: Set[Tuple[int, int]],
                        world_dilated: Set[Tuple[int, int]],
                        off: Tuple[int, int]) -> bool:
@@ -738,7 +777,6 @@ def _push_in_swept(moved_boundary: Set[Tuple[int, int]],
     `_interior_disjoint` on the WINNING offset to reject the enclosure case; we
     deliberately skip the full-blob scan here so it isn't paid per jitter.
     """
-    import bisect
     kind, norm, sign = _DIR_META[d]
     lanes = ref_indexes[kind]
 
@@ -789,6 +827,8 @@ def _push_in_swept(moved_boundary: Set[Tuple[int, int]],
 def _find_continent_placement(moved_all: Set[Tuple[int, int]],
                               moved_boundary: Set[Tuple[int, int]],
                               world_set: Set[Tuple[int, int]],
+                              world_dilated: Set[Tuple[int, int]],
+                              ref_indexes: Dict[str, Dict[int, List[int]]],
                               gap: int) -> Tuple[int, int]:
     """Choose the offset that seats a continent blob against the current world
     mass with the smallest resulting world bbox (compact objective).
@@ -801,13 +841,16 @@ def _find_continent_placement(moved_all: Set[Tuple[int, int]],
     still finds a valid perimeter edge somewhere (ordering is a preference, not a
     hard constraint). If nothing fits (degenerate), a guaranteed east placement
     outside the bbox is returned so generation always terminates.
+
+    ``world_dilated`` and ``ref_indexes`` describe the accumulated world mass and
+    are maintained incrementally by the caller, so no full dilation/index is
+    materialized here.
     """
     if not world_set:
         return (0, 0)
 
     (wminx, wmaxx, wminy, wmaxy), (wcx, wcy) = bbox_and_center_from_tiles(world_set)
     (cminx, cmaxx, cminy, cmaxy), (ccx, ccy) = bbox_and_center_from_tiles(moved_all)
-    world_dilated = _dilate(world_set, gap)
 
     w_span = max(wmaxx - wminx, wmaxy - wminy)
     c_span = max(cmaxx - cminx, cmaxy - cminy)
@@ -827,11 +870,6 @@ def _find_continent_placement(moved_all: Set[Tuple[int, int]],
     # expensive interior (enclosure) scan only in best-score order until one
     # passes. This caps full-blob scans at ~1 (not ~100) in the common case.
     candidates: List[Tuple[Tuple[int, float], Tuple[int, int]]] = []
-
-    # Build the four lane invariants' indexes ONCE per placement (single pass
-    # over the dilated world). All 8 directions reuse these via sign handling, so
-    # we no longer rebuild/sort a full index per direction per continent.
-    ref_indexes = _build_reference_indexes(world_dilated)
 
     for d in directions:
         px, py = -d[1], d[0]  # perpendicular axis for jitter
@@ -895,6 +933,15 @@ def place_continents_linearly(player_game: PlayerGame,
     anchor = continents[anchor_index] if 0 <= anchor_index < len(continents) else None
     world_set: Set[Tuple[int, int]] = continent_tiles(anchor) if anchor else set()
 
+    # Maintain the dilated world mass and its four lane indexes incrementally.
+    # The world only grows as continents are seated, so rather than re-dilating
+    # and re-indexing the entire footprint on every placement (which multiplies
+    # the whole world by ~gap^2 each time), we dilate/index only the tiles added
+    # by each placement. Each world tile is therefore dilated and indexed exactly
+    # once across the whole run.
+    world_dilated: Set[Tuple[int, int]] = _dilate(world_set, gap)
+    ref_indexes = _build_reference_indexes(world_dilated)
+
     _emit(
         f"[continents] Placing {len(continents)} continents linearly "
         f"(anchor={anchor_index + 1}, gap={gap})."
@@ -914,16 +961,21 @@ def place_continents_linearly(player_game: PlayerGame,
         if not world_set:
             # No anchor mass yet (e.g. empty anchor): this becomes the seed.
             world_set = set(moved_all)
+            _extend_reference_indexes(world_dilated, ref_indexes, moved_all, gap)
             _emit(f"[continents]   continent {i + 1}: seeded as initial mass")
             continue
 
         moved_boundary = boundary_tiles(moved_all)
-        off = _find_continent_placement(moved_all, moved_boundary, world_set, gap)
+        off = _find_continent_placement(
+            moved_all, moved_boundary, world_set, world_dilated, ref_indexes, gap
+        )
         dx, dy = off
         if dx or dy:
             for r in cont:
                 translate_region_tiles(r, dx, dy, player_game)
-        world_set |= {(x + dx, y + dy) for (x, y) in moved_all}
+        placed_tiles = {(x + dx, y + dy) for (x, y) in moved_all}
+        world_set |= placed_tiles
+        _extend_reference_indexes(world_dilated, ref_indexes, placed_tiles, gap)
         _emit(
             f"[continents]   continent {i + 1}: placed by ({dx},{dy}) "
             f"({len(cont)} regions)"
@@ -1118,6 +1170,19 @@ def build_continents_and_ocean(player_game: PlayerGame,
         _emit(
             f"[continents] Verification failed -- repair attempt "
             f"{attempt}/{max_repair_attempts}: recompacting and replacing."
+        )
+        # Re-isolate the continents before recompaction, exactly as the initial
+        # pipeline does. After placement the continents are seated together, so
+        # their masses are adjacent; compact_region_onto_mass only avoids the
+        # current continent's own mass, meaning a recompaction performed in this
+        # seated state can slide a region over a neighboring continent. The
+        # world-map rebuild would then silently keep a single owner while
+        # per-continent contiguity verification never detects the cross-continent
+        # overlap. Spreading each continent back onto its own isolated angle
+        # restores the invariant that compaction can never cross into another
+        # continent's tiles.
+        spread_continents_radial(
+            player_game, continents, rng, radius=spread_radius, skip_first=True
         )
         compact_continents_to_contiguous(player_game, continents)
         place_continents_linearly(player_game, continents, anchor_index=0, gap=3)
