@@ -721,6 +721,15 @@ def _extend_reference_indexes(
     xi = ref_indexes["x"]
     xmy = ref_indexes["x-y"]
     xpy = ref_indexes["x+y"]
+    # Append into each lane while tracking which lanes were touched, then sort
+    # each touched lane exactly once. Using bisect.insort per cell would shift
+    # the tail of the list on every insertion (O(n) each), making the extension
+    # quadratic for large worlds; a single batched sort per touched lane keeps it
+    # near-linear.
+    touched_y: Set[int] = set()
+    touched_x: Set[int] = set()
+    touched_xmy: Set[int] = set()
+    touched_xpy: Set[int] = set()
     for (tx, ty) in new_tiles:
         for dx in range(-r, r + 1):
             x = tx + dx
@@ -730,10 +739,22 @@ def _extend_reference_indexes(
                 if cell in world_dilated:
                     continue
                 world_dilated.add(cell)
-                bisect.insort(yi.setdefault(y, []), x)            # lane=y,   s_ref=x
-                bisect.insort(xi.setdefault(x, []), y)            # lane=x,   s_ref=y
-                bisect.insort(xmy.setdefault(x - y, []), x + y)   # lane=x-y, s_ref=x+y
-                bisect.insort(xpy.setdefault(x + y, []), x - y)   # lane=x+y, s_ref=x-y
+                yi.setdefault(y, []).append(x)            # lane=y,   s_ref=x
+                xi.setdefault(x, []).append(y)            # lane=x,   s_ref=y
+                xmy.setdefault(x - y, []).append(x + y)   # lane=x-y, s_ref=x+y
+                xpy.setdefault(x + y, []).append(x - y)   # lane=x+y, s_ref=x-y
+                touched_y.add(y)
+                touched_x.add(x)
+                touched_xmy.add(x - y)
+                touched_xpy.add(x + y)
+    for key in touched_y:
+        yi[key].sort()
+    for key in touched_x:
+        xi[key].sort()
+    for key in touched_xmy:
+        xmy[key].sort()
+    for key in touched_xpy:
+        xpy[key].sort()
 
 
 def _interior_disjoint(moved_all: Set[Tuple[int, int]],
@@ -1187,6 +1208,23 @@ def build_continents_and_ocean(player_game: PlayerGame,
         compact_continents_to_contiguous(player_game, continents)
         place_continents_linearly(player_game, continents, anchor_index=0, gap=3)
         verified = verify_continent_city_containment(player_game, continents, requested_counts)
+
+    # Recompute each continent's bbox from the FINAL tile positions. The bboxes
+    # captured earlier (pre-spread) are stale: compaction and placement (and any
+    # repair attempts) move regions within each continent, so the previously
+    # captured bounds no longer describe the committed layout. Rebuild them here
+    # so result["continents"] reflects the actual final geometry.
+    continent_bboxes = []
+    for cont in continents:
+        tiles = set()
+        for r in cont:
+            tiles.update(collect_region_tiles(r))
+            if r.child_city:
+                tiles.update(collect_region_tiles(r.child_city))
+        if tiles:
+            continent_bboxes.append(bbox_and_center_from_tiles(tiles)[0])
+        else:
+            continent_bboxes.append((0, 0, 0, 0))
 
     if not verified:
         _emit(
