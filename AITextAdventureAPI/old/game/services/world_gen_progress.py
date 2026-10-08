@@ -41,6 +41,15 @@ _lock = threading.RLock()
 _listeners: Dict[int, Listener] = {}
 _next_token = 0
 
+# Separate channel for short, PLAYER-FACING status lines (e.g. "Shaping
+# continents...", "Connecting the lands (pass 3)..."). The detailed `emit`
+# stream above is developer-oriented (timestamps, tile counts, bbox math); the
+# loading overlay prefers these friendly lines so the player sees reassuring,
+# human-readable progress instead of raw diagnostics.
+_status_listeners: Dict[int, Listener] = {}
+_next_status_token = 0
+_last_status: str | None = None
+
 # Monotonic clock anchor so every emitted line can show elapsed seconds since the
 # first emit of a run -- makes bottleneck points obvious in the log stream.
 _start_monotonic: float | None = None
@@ -54,6 +63,54 @@ def subscribe(listener: Listener) -> int:
         _next_token += 1
         _listeners[token] = listener
     return token
+
+
+def subscribe_status(listener: Listener) -> int:
+    """Register a PLAYER-FACING status listener; returns an unsubscribe token.
+
+    On subscribe the most recent status line (if any) is replayed immediately so
+    a freshly-shown overlay isn't blank until the next ``status`` call.
+    """
+    global _next_status_token
+    with _lock:
+        token = _next_status_token
+        _next_status_token += 1
+        _status_listeners[token] = listener
+        last = _last_status
+    if last is not None:
+        try:
+            listener(last)
+        except Exception:  # noqa: BLE001
+            pass
+    return token
+
+
+def unsubscribe_status(token: int) -> None:
+    """Remove a previously subscribed status listener. Safe to call twice."""
+    with _lock:
+        _status_listeners.pop(token, None)
+
+
+def status(line: str) -> None:
+    """Broadcast a short, PLAYER-FACING status line (no timestamps/diagnostics).
+
+    Also mirrored into the detailed ``emit`` stream (prefixed) so the dev log
+    keeps a record of phase transitions. A failing listener is ignored so it can
+    never interrupt generation.
+    """
+    global _last_status
+    text = str(line)
+    with _lock:
+        _last_status = text
+        listeners = list(_status_listeners.values())
+    for fn in listeners:
+        try:
+            fn(text)
+        except Exception:  # noqa: BLE001 - never let a UI listener break gen
+            pass
+    # Keep a breadcrumb in the detailed developer stream too.
+    emit(f"[status] {text}")
+
 
 
 def unsubscribe(token: int) -> None:
@@ -103,3 +160,7 @@ def reset_clock() -> None:
     global _start_monotonic
     with _lock:
         _start_monotonic = None
+        # Also clear the last player-facing status so a new run doesn't replay a
+        # stale "done" line to a freshly-subscribed overlay.
+        global _last_status
+        _last_status = None

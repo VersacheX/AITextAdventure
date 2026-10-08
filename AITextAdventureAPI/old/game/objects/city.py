@@ -19,6 +19,9 @@ class Tile:
 	entrances: Tuple[str, ...] = ()
 	floors: int =0
 	has_basement: bool = False
+	# True only for story/quest-required buildings placed by ensure_required_buildings.
+	# Connectivity repair must never carve a corridor through these.
+	required_building: bool = False
 
 	def populate_from_json(self, data: dict) -> None:
 		"""Populate tile fields from JSON data."""
@@ -29,6 +32,7 @@ class Tile:
 		self.entrances = tuple(data.get("entrances", self.entrances))
 		self.floors = data.get("floors", self.floors)
 		self.has_basement = data.get("has_basement", self.has_basement)
+		self.required_building = data.get("required_building", self.required_building)
 
 @dataclass
 class Sublocation:
@@ -1026,7 +1030,12 @@ class City:
 					entrances.append(name)
 
 			# place building by replacing/creating the tile
-			self.tiles[(tx, ty)] = Tile(tx, ty, BUILDING, bdef, tuple(entrances), floors, False)
+			req_tile = Tile(tx, ty, BUILDING, bdef, tuple(entrances), floors, False)
+			# Mark this as a REQUIRED building so later connectivity repair never
+			# carves a corridor through it (which would destroy story/quest
+			# location data). Non-required filler buildings carry no such mark.
+			req_tile.required_building = True
+			self.tiles[(tx, ty)] = req_tile
 			existing.add(bname)
 			# continue to next building
 		# end for

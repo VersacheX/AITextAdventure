@@ -637,6 +637,25 @@ class OverworldScreen(BaseScreen):
             except Exception:  # noqa: BLE001
                 progress_token = None
 
+        # Prefer the short, PLAYER-FACING status channel for the overlay headline
+        # when it's available (e.g. world generation phases / connectivity
+        # passes). These are reassuring, human-readable lines rather than the raw
+        # diagnostic stream above.
+        status_token = None
+        if _progress is not None and hasattr(_progress, "subscribe_status"):
+            def _on_status(line: str) -> None:
+                def _apply(text: str = line) -> None:
+                    self._update_loading_message(text)
+                try:
+                    self.app.call_from_thread(_apply)
+                except Exception:  # noqa: BLE001
+                    pass
+
+            try:
+                status_token = _progress.subscribe_status(_on_status)
+            except Exception:  # noqa: BLE001
+                status_token = None
+
         def _runner() -> None:
             succeeded = False
             try:
@@ -646,6 +665,11 @@ class OverworldScreen(BaseScreen):
                 if progress_token is not None and _progress is not None:
                     try:
                         _progress.unsubscribe(progress_token)
+                    except Exception:  # noqa: BLE001
+                        pass
+                if status_token is not None and _progress is not None:
+                    try:
+                        _progress.unsubscribe_status(status_token)
                     except Exception:  # noqa: BLE001
                         pass
 
