@@ -1297,8 +1297,16 @@ def verify_continent_city_containment(
             idx = int(cont_num) - 1
             expected[idx] = set(keys)
     except Exception as exc:  # noqa: BLE001
-        _emit(f"[continents] WARNING: cannot read canonical map for verify: {exc}")
-        expected = {}
+        # Fail closed: without the canonical membership map we cannot confirm
+        # that each continent holds the cities it should. Returning False here
+        # forces the caller to reject/repair the layout rather than committing a
+        # world whose canonical membership was never verified (a world with the
+        # right city counts but wrong membership would otherwise pass).
+        _emit(
+            f"[continents] ERROR: cannot read canonical map for verify: {exc}. "
+            f"Failing verification closed."
+        )
+        return False
 
     all_ok = True
     for idx, cont in enumerate(continents):
