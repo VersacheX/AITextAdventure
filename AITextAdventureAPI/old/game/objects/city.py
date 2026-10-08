@@ -91,6 +91,9 @@ class City:
 		self.display_name: str = "Uknow"
 		self.parent_region_city_id: int
 		self.parent_region_name: str = None	
+		# which continent this region/city belongs to (1-based). Defaults to 1;
+		# backfilled for older saves that predate continent association.
+		self.continent: int = 1
 		self.child_city: City = None # for cities in regions (not used in old game mode)
 		self.tiles: Dict[Tuple[int, int], Tile] = {}
 		# storage for generated sublocations per tile coordinate+floor
@@ -891,6 +894,7 @@ class City:
 		self.city_name = data.get('city_name', 'UnknownCity')
 		self.region_name = data.get('region_name', None)
 		self.parent_region_name = data.get('parent_region_name', None)
+		self.continent = data.get('continent', 1)
 		self.seed = data.get('seed', 0)
 		self.population_density = data.get('population_density', 1.0)
 		self.road_spacing = data.get('road_spacing', 5)

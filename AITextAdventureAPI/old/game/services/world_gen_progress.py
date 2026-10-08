@@ -32,6 +32,7 @@ can't break generation or sibling listeners.
 from __future__ import annotations
 
 import threading
+import time
 from typing import Callable, Dict
 
 Listener = Callable[[str], None]
@@ -39,6 +40,10 @@ Listener = Callable[[str], None]
 _lock = threading.RLock()
 _listeners: Dict[int, Listener] = {}
 _next_token = 0
+
+# Monotonic clock anchor so every emitted line can show elapsed seconds since the
+# first emit of a run -- makes bottleneck points obvious in the log stream.
+_start_monotonic: float | None = None
 
 
 def subscribe(listener: Listener) -> int:
@@ -65,10 +70,20 @@ def has_listeners() -> bool:
 def emit(line: str) -> None:
     """Broadcast a single progress line to every subscribed listener.
 
-    Still prints to stdout so existing console/log capture keeps working. A
-    failing listener is ignored so it can't interrupt generation.
+    Each line is prefixed with a wall-clock time and the elapsed seconds since
+    the first emit of this run, e.g. ``[14:32:07 +12.4s] ...`` so slow phases
+    (bottlenecks) are obvious when scanning the log. Still prints to stdout so
+    existing console/log capture keeps working. A failing listener is ignored so
+    it can't interrupt generation.
     """
-    text = str(line)
+    global _start_monotonic
+    now_mono = time.monotonic()
+    with _lock:
+        if _start_monotonic is None:
+            _start_monotonic = now_mono
+        elapsed = now_mono - _start_monotonic
+    stamp = f"[{time.strftime('%H:%M:%S')} +{elapsed:6.2f}s] "
+    text = stamp + str(line)
     print(text)
     with _lock:
         listeners = list(_listeners.values())
@@ -77,3 +92,14 @@ def emit(line: str) -> None:
             fn(text)
         except Exception:  # noqa: BLE001 - never let a UI listener break gen
             pass
+
+
+def reset_clock() -> None:
+    """Reset the elapsed-time anchor so the next emit starts a fresh ``+0.00s``.
+
+    Call at the start of a long-running run (e.g. world generation) so elapsed
+    timings are relative to that run rather than the process lifetime.
+    """
+    global _start_monotonic
+    with _lock:
+        _start_monotonic = None

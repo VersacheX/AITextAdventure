@@ -149,6 +149,10 @@ def generate_world(pg: Any, num_regions: int, seed_base: int, min_size: int, ver
     except Exception:
         max_cities = 21
 
+    # Anchor the progress elapsed-time clock to the start of this run so emitted
+    # timestamps read as +0.00s at the first line and reveal bottleneck phases.
+    progress.reset_clock()
+
     # If we go this many iterations without the city count increasing, assume
     # the world can't place any more cities and stop. Scaled to the cap so we
     # still give generous room to find valid origins for the final cities.

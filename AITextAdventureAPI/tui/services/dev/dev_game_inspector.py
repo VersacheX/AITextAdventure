@@ -311,20 +311,22 @@ def _fulfill_deliver(pg: Any, task: Any) -> Tuple[bool, str]:
 # ?? Completion ?????????????????????????????????????????????????????????????????
 
 def _run_complete_task(pg: Any, task: Any, success_msg: str) -> Tuple[bool, str]:
-    """Invoke pg.complete_task() and report honestly when it partially completes.
+    """Invoke pg.complete_task() and report honestly when it fails.
 
-    PlayerGame.complete_task() sets ``task.completed = True`` *before* running
-    the task's completion events. If one of those events raises, the task is
-    left flagged completed with only some side effects applied. Returning a flat
-    "not completed" would be a lie -- and the next attempt would be rejected as
-    "already completed", stranding the half-finished task with no recovery path.
+    PlayerGame.complete_task() is transactional ONLY for completion chains that
+    trigger world generation (an outermost task whose completion events directly
+    contain ``complete_intro_story``). For those, a failure rolls the whole thing
+    back, leaving ``task.completed`` False with no partial side effects, so a
+    retry is clean. For ALL OTHER tasks the legacy behavior still applies:
+    ``task.completed`` is set before events run, so a mid-event failure can leave
+    the task flagged completed with partial side effects.
 
-    So on failure we inspect ``task.completed``:
-      - If it is set, the task IS completed (events partially ran). Report
-        success=True but surface the partial-completion warning so the dev can
-        decide how to recover (e.g. inspect/replay the remaining side effects).
-      - If it is not set, the failure happened before completion; report a
-        clean failure so a retry is valid.
+    We therefore inspect the flag after a failure:
+      - If it is still set, this was a non-transactional task that partially
+        completed. Report success=True but surface the partial-completion warning
+        so the dev can recover manually (it will not re-run).
+      - If it is False (the transactional/rolled-back path), report a clean
+        failure so a retry is valid.
     """
     try:
         pg.complete_task(task)

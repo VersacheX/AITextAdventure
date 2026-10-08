@@ -29,6 +29,21 @@ CHAPTER_CITY_ORDER = [
 
 CONTINENT_COMPOSITION = [4, 3, 6, 2, 5, 1]
 
+# Derived lookup: maps each CHAPTER_CITY_ORDER entry ("region_size_city") to its
+# 1-based continent number by splitting the chapter order into CONTINENT_COMPOSITION
+# sized groups (continent 1 = first 4 chapter cities, continent 2 = next 3, ...).
+def _build_city_continent_map():
+    mapping = {}
+    index = 0
+    for continent_number, count in enumerate(CONTINENT_COMPOSITION, start=1):
+        for _ in range(count):
+            if index < len(CHAPTER_CITY_ORDER):
+                mapping[CHAPTER_CITY_ORDER[index]] = continent_number
+                index += 1
+    return mapping
+
+CITY_CONTINENT_MAP = _build_city_continent_map()
+
 REGIONAL_NEIGHBORS = {
     "desert": ["grassland", "mountains", "desert","grassland", "mountains", "desert", "desert"],
     "forest": ["grassland", "swamp", "snow", "forest", "forest","grassland", "swamp", "snow", "forest"],

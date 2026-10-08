@@ -230,16 +230,21 @@ class PlayerGame:
 		return len(self.completed_regional_quests_2) >= len(const.AVAILABLE_REGIONS)
 
 	def complete_intro_story(self):
-		# check all tasks for task type CompleteIntroStory
+		# NOTE: this runs as a completion event of the parent story task, whose
+		# complete_task() wraps everything in a snapshot/rollback transaction. If
+		# world generation raises (e.g. an invalid continent layout), that outer
+		# transaction restores the full pre-completion state -- including the
+		# parent task's completed flag and all prior event side effects -- so we
+		# only need to let the exception propagate here.
 		self.intro_complete = True
 
 		for task in self.tasks:
 			if task.type == TaskType.CompleteIntroStory and not task.completed:
 				self.complete_task(task)
 
-		
 		print('Generating world regions...')
-		seed = abs(hash(self.characters[0].name)) % (10 ** 8) 
+		seed = abs(hash(self.characters[0].name)) % (10 ** 8)
+
 		self = generate_world(self, num_regions=10000, seed_base=seed, min_size=500, verbose=True)
 		self._create_donut()
 
@@ -254,6 +259,16 @@ class PlayerGame:
 										rng_seed=seed,
 										spread_radius=30,
 										ocean_padding=15)
+
+		# Never accept a malformed world. If continent verification failed (cities
+		# on the wrong continent or a non-contiguous landmass), the layout is
+		# invalid. Raise so complete_intro_story() rolls back the partial mutation
+		# rather than committing/reporting a broken map as complete.
+		if not result.get("verification_passed", False):
+			raise RuntimeError(
+				"World generation produced an invalid continent layout "
+				"(verification failed); aborting so a broken world is not committed."
+			)
 
 		# ocean_bbox = result.get("ocean_bbox")
 		# ocean_region = result.get("ocean_region")
@@ -316,13 +331,77 @@ class PlayerGame:
 			if task.check_completion_terms(self):
 				self.complete_task(task)
 
+	def _completion_needs_world_rollback(self, task) -> bool:
+		"""True if completing `task` runs heavy, world-mutating generation that
+		must be rolled back atomically on failure.
+
+		Currently only the ``complete_intro_story`` completion event triggers full
+		world generation. Ordinary task completions don't need (and must not pay
+		for) a whole-world snapshot, so we gate the expensive transaction on the
+		presence of that event in the task's direct completion events.
+		"""
+		for event in getattr(task, "task_complete_events", None) or []:
+			et = getattr(event, "event_type", None)
+			name = getattr(et, "value", et)
+			if name == "complete_intro_story":
+				return True
+		return False
+
 	def complete_task(self, task) -> None:
-		"""Mark the given task as completed and run its completion events."""
+		"""Mark the given task as completed and run its completion events.
+
+		Completion events can trigger heavy, world-mutating work (world generation
+		via ``complete_intro_story``). Because ``task.completed`` is set before the
+		events run, a mid-event failure would otherwise strand the task flagged
+		completed with only partial side effects -- it could never be triggered
+		normally again. For those chains ONLY, completion is transactional: on any
+		exception the full pre-completion state is restored.
+
+		Cost control: the expensive whole-world snapshot is taken only when the
+		chain actually needs it (``_completion_needs_world_rollback``); normal task
+		completions run with no snapshot overhead.
+
+		Identity: the snapshot restore replaces nested internal state with clones,
+		so on rollback we explicitly reset the EXTERNALLY-held ``task`` object in
+		place and keep that same instance in ``self.tasks``. This preserves object
+		identity for callers (e.g. dev Force Complete) so they observe the
+		rolled-back ``completed`` flag and a retry updates the live task.
+		"""
 		#print (f'Completing task {task.task_id} of type {task.type}')
-		task.completed = True
-		if task.task_complete_events:
-			for event in task.task_complete_events:
-				event.execute(self, task)
+		is_outermost = not getattr(self, "_task_txn_active", False)
+		needs_rollback = is_outermost and self._completion_needs_world_rollback(task)
+		snapshot = None
+		if needs_rollback:
+			import pickle
+			# Snapshot BEFORE task.completed is set and before the first event
+			# runs, so rollback undoes the completion flag and every side effect.
+			snapshot = pickle.dumps(self.__dict__)
+		if is_outermost:
+			self._task_txn_active = True
+		try:
+			task.completed = True
+			if task.task_complete_events:
+				for event in task.task_complete_events:
+					event.execute(self, task)
+		except Exception:
+			if snapshot is not None:
+				import pickle
+				restored = pickle.loads(snapshot)
+				self.__dict__.clear()
+				self.__dict__.update(restored)
+				# Preserve identity of the caller's task reference: reset the
+				# original object and make it the instance stored in self.tasks so
+				# a retry mutates the live task rather than an orphaned clone.
+				task.completed = False
+				task_id = getattr(task, "task_id", None)
+				self.tasks = [
+					task if getattr(t, "task_id", None) == task_id else t
+					for t in self.tasks
+				]
+			raise
+		finally:
+			if is_outermost:
+				self._task_txn_active = False
 
 	def cancel_task(self, task) -> None:
 		"""SET THE TASK TO COMPLETED WITHOUT TRIGGERING IT'S EVENTS"""
@@ -1198,6 +1277,18 @@ class PlayerGame:
 
 		setattr(rc, 'region_name', region_name)
 
+		# Stamp continent association. City-bearing regions derive their continent
+		# from CITY_CONTINENT_MAP (chapter-city key -> continent). Cityless connector
+		# regions inherit the continent of the region they grew from (the current
+		# build continent), defaulting to 1.
+		if rc.child_city is not None and rc.child_city.city_name:
+			city_key = f"{region_name}_{rc.child_city.city_name}"
+			rc.continent = const.CITY_CONTINENT_MAP.get(city_key, getattr(self.previous_region, 'continent', 1))
+		else:
+			rc.continent = getattr(self.previous_region, 'continent', 1)
+		if rc.child_city is not None:
+			rc.child_city.continent = rc.continent
+
 		add_main_story = False
 		if not self.regions or len(self.regions) == 0:
 			add_main_story = True
@@ -1589,6 +1680,30 @@ class PlayerGame:
 
 		if not has_active_dungeon_state:
 			self.active_dungeon = self._find_legacy_active_dungeon()
+
+		# Backfill continent association for regions/cities saved before the
+		# `continent` field existed. Pickle restores __dict__ directly and skips
+		# City.__init__, so the attribute may be missing on these nested objects.
+		#
+		# City-bearing regions have a canonical continent (keyed by
+		# region_name_city_name) so derive it from CITY_CONTINENT_MAP. Citiless
+		# connector regions have no canonical membership; leave them unstamped so
+		# assign_citiless_regions_to_continents() can place them by nearest
+		# centroid instead of collapsing every legacy connector onto continent 1.
+		city_continent_map = getattr(const, 'CITY_CONTINENT_MAP', {}) or {}
+		for region in self.regions:
+			child = getattr(region, 'child_city', None)
+			if getattr(region, 'continent', None) is None:
+				if child is not None:
+					region_name = getattr(region, 'region_name', None)
+					city_name = getattr(child, 'city_name', None)
+					key = (
+						f"{region_name}_{city_name}"
+						if region_name and city_name else None
+					)
+					region.continent = city_continent_map.get(key)
+			if child is not None and getattr(child, 'continent', None) is None:
+				child.continent = getattr(region, 'continent', None)
 
 		# is_busy is a transient execution flag (set only while a live worker
 		# runs a long-running task event). It must never survive a save/load —
