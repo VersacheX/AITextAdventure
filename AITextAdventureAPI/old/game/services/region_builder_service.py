@@ -105,13 +105,11 @@ def ensure_4_connected(tiles: Set[Tuple[int, int]], ignored_set: Set[Tuple[int, 
 	comps = _components(working)
 	# Occupied cells that bridges must route around: foreign tiles not owned here.
 	blocked = set(ignored_set) - working
-	# Confine bridge BFS to the footprint's bounding box plus a small margin so a
-	# detour has room to route around obstacles, but the search can never radiate
-	# across the unbounded grid (which would exhaust memory on an enclosed target).
 	xs = [x for (x, _) in working]
 	ys = [y for (_, y) in working]
-	margin = 4
-	bounds = (min(xs) - margin, max(xs) + margin, min(ys) - margin, max(ys) + margin)
+	fminx, fmaxx = min(xs), max(xs)
+	fminy, fmaxy = min(ys), max(ys)
+	footprint_span = max(fmaxx - fminx, fmaxy - fminy)
 	max_iterations = len(comps) + 1
 	iterations = 0
 	while len(comps) > 1 and iterations < max_iterations:
@@ -120,10 +118,26 @@ def ensure_4_connected(tiles: Set[Tuple[int, int]], ignored_set: Set[Tuple[int, 
 		# that avoids occupied cells entirely.
 		source = comps[0]
 		targets = set().union(*comps[1:])
-		path = _bridge_between(source, targets, blocked, bounds)
+		# A fixed margin can wrongly report "no route" when a valid detour exists
+		# just outside it, failing an otherwise repairable world. Instead widen
+		# the bridge-search bounds adaptively: start snug and grow the margin
+		# (doubling) until a route is found or an explicit cap is hit, so the BFS
+		# still can't radiate across the unbounded grid and exhaust memory.
+		margin = 4
+		# Cap the margin relative to the footprint so the bounded area stays
+		# finite but is generous enough to route around sizeable obstacles.
+		margin_cap = max(16, footprint_span * 2 + 8)
+		path = None
+		while path is None and margin <= margin_cap:
+			bounds = (fminx - margin, fmaxx + margin, fminy - margin, fmaxy + margin)
+			path = _bridge_between(source, targets, blocked, bounds)
+			if path is not None:
+				break
+			margin *= 2
 		if path is None:
-			# No occupied-free route to any other component; leave remaining
-			# components rather than carving through another region's tiles.
+			# No occupied-free route to any other component even within the
+			# expanded (capped) bounds; leave remaining components rather than
+			# carving through another region's tiles.
 			break
 		for cell in path:
 			added.add(cell)

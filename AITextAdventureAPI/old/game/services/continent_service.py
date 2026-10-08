@@ -227,10 +227,48 @@ def assign_citiless_regions_to_continents(player_game: PlayerGame, continents: L
 # ------------------------------------------------------------------
 def _region_all_tiles(region: City) -> Set[Tuple[int, int]]:
     """All world tiles owned by a region, including its child city."""
-    tiles: Set[Tuple[int, int]] = set(region.tiles.keys())
+    tiles: Set[Tuple[int, int]] = set()
+    tiles.update(region.tiles.keys())
     if getattr(region, "child_city", None):
         tiles.update(region.child_city.tiles.keys())
     return tiles
+
+
+def _is_walkable_tile(tile: Any) -> bool:
+    """True if overworld movement can traverse `tile` on foot.
+
+    Mirrors the rejection rules in ``player_movement_service.compute_allowed_moves``:
+    ``impassable`` tiles block movement, and ``building`` tiles block unless the
+    player enters via a facing entrance (so a building is NOT a reliable
+    pass-through corridor). Roads, alleys and open ground are freely walkable.
+    This is used so continent contiguity is validated over tiles a player can
+    actually cross, not merely over geometric tile ownership.
+    """
+    if tile is None:
+        return False
+    ttype = getattr(tile, "type", None)
+    if ttype == "impassable" or ttype == const.BUILDING:
+        return False
+    return True
+
+
+def _carve_walkable(region: City, x: int, y: int) -> None:
+    """Force the tile at (x,y) in `region` to a walkable open-ground corridor.
+
+    Bridge/join cells must be crossable on foot. ``_generate_tile`` can roll an
+    ``impassable`` tile or a ``building`` without a facing entrance, either of
+    which movement rejects -- so after a bridge cell is materialised we rewrite
+    it to plain open ground (clearing any building payload) to guarantee a
+    walkable corridor actually exists where the geometry says the regions join.
+    """
+    tile = region.tiles.get((x, y))
+    if tile is None:
+        return
+    tile.type = "open_area"
+    tile.building = None
+    tile.entrances = ()
+    tile.floors = 0
+    tile.has_basement = False
 
 def normalize_region_internal_connectivity(region: City, player_game: PlayerGame) -> int:
     """Bridge a single region's internal gaps so its own tiles form one blob.
@@ -260,6 +298,12 @@ def normalize_region_internal_connectivity(region: City, player_game: PlayerGame
     for (x, y) in added:
         if (x, y) not in region.tiles:
             region.create_tile(player_game, x, y)
+            # Bridge cells MUST be crossable on foot. create_tile may roll an
+            # impassable tile or an entrance-less building, either of which
+            # movement rejects -- which would leave the continent geometrically
+            # joined but impassable. Rewrite the cell to open ground so a real
+            # walkable corridor exists wherever we claim regions connect.
+            _carve_walkable(region, x, y)
             # Register the new bridge tile in the global world map IMMEDIATELY.
             # Subsequent regions compute their blocked set from world_tiles; if we
             # waited for the end-of-pass rebuild, a later region could carve a
@@ -370,7 +414,50 @@ def compact_region_onto_mass(
     cur = {(x + off_x, y + off_y) for (x, y) in region_tiles}
     if off_x or off_y:
         translate_region_tiles(region, off_x, off_y, player_game)
+
+    # Edge-snapping only guarantees GEOMETRIC 4-contact between the anchor tile
+    # `m` (on the existing mass) and the region's contact tile `r`. Either of
+    # those tiles may be impassable or an entrance-less building, in which case a
+    # player cannot actually cross the join even though the blobs touch. Carve
+    # both sides of the contact pair into walkable open ground so a real foot
+    # corridor exists wherever we claim regions connect.
+    anchor_world = (m[0], m[1])
+    region_contact = (r[0] + off_x, r[1] + off_y)
+    _carve_walkable_world(player_game, anchor_world)
+    _carve_walkable_at(region, region_contact)
     return cur
+
+def _carve_walkable_at(region: City, coord: Tuple[int, int]) -> None:
+    """Carve a tile walkable in `region` or its child city, whichever owns it."""
+    x, y = coord
+    if (x, y) in region.tiles:
+        _carve_walkable(region, x, y)
+        return
+    child = getattr(region, "child_city", None)
+    if child and (x, y) in child.tiles:
+        tile = child.tiles.get((x, y))
+        if tile is not None:
+            tile.type = "open_area"
+            tile.building = None
+            tile.entrances = ()
+            tile.floors = 0
+            tile.has_basement = False
+
+def _carve_walkable_world(player_game: PlayerGame, coord: Tuple[int, int]) -> None:
+    """Carve the world tile at `coord` walkable regardless of owning region.
+
+    The continent mass is owned by many regions; after an edge-snap the anchor
+    contact tile may belong to any of them. Rewriting the globally-registered
+    tile guarantees the join is crossable without having to locate its owner.
+    """
+    tile = player_game.world_tiles.get(coord) if player_game.world_tiles else None
+    if tile is None:
+        return
+    tile.type = "open_area"
+    tile.building = None
+    tile.entrances = ()
+    tile.floors = 0
+    tile.has_basement = False
 
 def compact_continents_to_contiguous(player_game: PlayerGame, continents: List[List[City]]) -> None:
     """Pack each continent's regions into a single contiguous landmass in-place.
@@ -1344,13 +1431,41 @@ def verify_continent_city_containment(
     return all_ok
 
 
+def _continent_walkable_tiles(cont: List[City]) -> Set[Tuple[int, int]]:
+    """Coordinates of a continent's tiles a player can actually stand on/cross.
+
+    Overworld movement rejects ``impassable`` tiles and buildings entered from a
+    non-facing side, so those cells cannot serve as connective corridors.
+    Contiguity must therefore be judged over this walkable subset, not over raw
+    tile ownership.
+    """
+    walkable: Set[Tuple[int, int]] = set()
+    for r in cont:
+        if not r:
+            continue
+        for (x, y), tile in r.tiles.items():
+            if _is_walkable_tile(tile):
+                walkable.add((x, y))
+        child = getattr(r, "child_city", None)
+        if child:
+            for (x, y), tile in child.tiles.items():
+                if _is_walkable_tile(tile):
+                    walkable.add((x, y))
+    return walkable
+
+
 def _continent_is_contiguous(cont: List[City]) -> bool:
-    """Return True if all tiles of a continent's regions form one 4-connected mass.
+    """Return True if a continent's WALKABLE tiles form one 4-connected mass.
 
     Used to confirm that the citiless connector regions actually bridge the
     continent's cities into a single landmass rather than leaving islands.
+    Connectivity is evaluated over tiles a player can traverse on foot (see
+    ``_is_walkable_tile``): two regions whose only contact is through impassable
+    ground or a wall-facing building are NOT genuinely connected, so judging
+    contiguity over raw ownership would report success for a landmass a player
+    can never cross.
     """
-    tiles = continent_tiles(cont)
+    tiles = _continent_walkable_tiles(cont)
     if not tiles:
         return True  # vacuously contiguous
 
