@@ -68,21 +68,29 @@ def subscribe(listener: Listener) -> int:
 def subscribe_status(listener: Listener) -> int:
     """Register a PLAYER-FACING status listener; returns an unsubscribe token.
 
-    On subscribe the most recent status line (if any) is replayed immediately so
-    a freshly-shown overlay isn't blank until the next ``status`` call.
+    Unlike the previous implementation this does NOT synchronously replay the
+    last line to the subscriber: callers (e.g. a Textual screen subscribing from
+    the UI/compositor thread) may not legally invoke their thread-marshalling API
+    from the subscribing thread. Use :func:`get_last_status` to seed the initial
+    value directly on the caller's own thread instead.
     """
     global _next_status_token
     with _lock:
         token = _next_status_token
         _next_status_token += 1
         _status_listeners[token] = listener
-        last = _last_status
-    if last is not None:
-        try:
-            listener(last)
-        except Exception:  # noqa: BLE001
-            pass
     return token
+
+
+def get_last_status() -> str | None:
+    """Return the most recent player-facing status line, or None if none yet.
+
+    Lets a freshly-shown overlay seed its headline from the current status on its
+    own thread, avoiding cross-thread replay during subscription.
+    """
+    with _lock:
+        return _last_status
+
 
 
 def unsubscribe_status(token: int) -> None:
@@ -108,8 +116,11 @@ def status(line: str) -> None:
             fn(text)
         except Exception:  # noqa: BLE001 - never let a UI listener break gen
             pass
-    # Keep a breadcrumb in the detailed developer stream too.
-    emit(f"[status] {text}")
+    # Keep a breadcrumb in the console/dev log, but do NOT route it through
+    # ``emit`` -- that would notify the detailed diagnostic listeners and let a
+    # timestamped ``[status]`` line immediately overwrite the friendly headline
+    # on any UI that also listens to the diagnostic stream.
+    print(f"[status] {text}")
 
 
 

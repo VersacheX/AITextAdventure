@@ -656,18 +656,23 @@ def _shortest_walkable_corridor(
 
     Expands across cells owned by this continent, treating:
       - ``impassable`` cells as cheap to carve (cost 1),
-      - NON-REQUIRED ``building`` cells as expensive but allowed (cost 50), so a
-        building is only carved when no impassable-only detour exists,
+      - NON-REQUIRED ``building`` cells as prohibitively expensive but allowed, so
+        a building is only carved when NO impassable-only route exists at all,
       - REQUIRED buildings and non-continent cells as impermeable walls.
     Endpoints are existing walkable cells in ``source``/``targets``. Returns the
     list of intermediate cells to carve (cheapest total cost), or None if no
-    carvable route exists. A Dijkstra search is used so impassable routes are
-    always preferred over destroying filler buildings.
+    carvable route exists. A Dijkstra search is used so the result minimizes the
+    number of buildings destroyed FIRST, then corridor length.
     """
     import heapq
 
     IMPASSABLE_COST = 1
-    BUILDING_COST = 50
+    # Make a single building cost more than the longest possible impassable-only
+    # detour (every continent cell carved at cost 1). This guarantees Dijkstra
+    # lexicographically minimizes buildings-destroyed first, then length: any
+    # route through one building is strictly worse than ANY building-free route,
+    # no matter how long. +1 keeps it strictly greater than the worst case.
+    BUILDING_COST = len(cont_tiles) + 1
 
     # Priority queue of (cost, tiebreak, cell). dist tracks best known cost.
     dist: Dict[Tuple[int, int], int] = {}
@@ -1435,19 +1440,23 @@ def build_continents_and_ocean(player_game: PlayerGame,
 
     # 4.c) verify each continent holds exactly the cities it should per the
     # canonical chapter-city map, and that its landmass is contiguous enough to
-    # connect those cities. If verification fails we must NOT silently accept the
-    # layout — re-shuffle (fresh angles) and repack, re-verifying each time. The
-    # world MUST end up contiguous, so we keep making passes until it does; the
-    # loop is only bounded by a high safety cap to avoid a true infinite loop on
-    # a pathological (should-never-happen) layout.
+    # connect those cities. Two distinct failure kinds exist:
+    #   - INVARIANT failures (wrong canonical membership, city-count mismatch, or
+    #     an unreadable canonical map) can NEVER be fixed by moving continents
+    #     around, so we abort immediately rather than spinning the pipeline.
+    #   - CONTIGUITY failures are geometry-dependent, so we re-shuffle (fresh
+    #     angles) and repack, re-verifying each pass until the world connects.
     _status("Checking that every land connects...")
-    verified = verify_continent_city_containment(player_game, continents, requested_counts)
-    # High safety cap: effectively "as many passes as it takes" while still
-    # guaranteeing eventual termination. Each pass re-randomizes continent angles
-    # (via the shared rng) so a bad seating is unlikely to repeat identically.
-    max_repair_attempts = 1000
+    verified, invariant_failure = verify_continent_city_containment_detailed(
+        player_game, continents, requested_counts
+    )
+    # Bound only the GEOMETRY retries. This is generous (contiguity almost always
+    # resolves within a handful of reshuffles) but finite, so a truly pathological
+    # layout surfaces as a failure instead of hanging. Invariant failures bypass
+    # the loop entirely via the guard below.
+    max_repair_attempts = 50
     attempt = 0
-    while not verified and attempt < max_repair_attempts:
+    while not verified and not invariant_failure and attempt < max_repair_attempts:
         attempt += 1
         _emit(
             f"[continents] Verification failed -- repair attempt "
@@ -1469,7 +1478,15 @@ def build_continents_and_ocean(player_game: PlayerGame,
         )
         compact_continents_to_contiguous(player_game, continents)
         place_continents_linearly(player_game, continents, anchor_index=0, gap=3)
-        verified = verify_continent_city_containment(player_game, continents, requested_counts)
+        verified, invariant_failure = verify_continent_city_containment_detailed(
+            player_game, continents, requested_counts
+        )
+
+    if invariant_failure:
+        _emit(
+            "[continents] ERROR: structural (invariant) verification failure that "
+            "reshuffling cannot repair; aborting immediately."
+        )
 
     if verified:
         _status("The world is whole — finishing up...")
@@ -1545,12 +1562,34 @@ def verify_continent_city_containment(
     continents: List[List[City]],
     requested_counts: List[int],
 ) -> bool:
-    """Verify each continent holds exactly the cities it should and that those
-    cities sit on a single contiguous landmass. Logs results to the dev TUI.
+    """Boolean wrapper around :func:`verify_continent_city_containment_detailed`.
 
-    Returns True if every continent matches its canonical city set and is
-    contiguous; False otherwise. This is a diagnostic -- it does not mutate the
-    world, it only surfaces problems so bad splits are visible.
+    Returns True only if every continent matches its canonical city set and is
+    contiguous. Kept for callers that only need the pass/fail result.
+    """
+    ok, _invariant_failure = verify_continent_city_containment_detailed(
+        player_game, continents, requested_counts
+    )
+    return ok
+
+
+def verify_continent_city_containment_detailed(
+    player_game: PlayerGame,
+    continents: List[List[City]],
+    requested_counts: List[int],
+) -> Tuple[bool, bool]:
+    """Verify continent city membership + contiguity, distinguishing failure kind.
+
+    Returns ``(all_ok, invariant_failure)``:
+      - ``all_ok``: True if every continent matches its canonical city set and
+        forms a single walkable mass.
+      - ``invariant_failure``: True if ANY failure is of a kind that reshuffling
+        continent geometry can NEVER fix -- i.e. wrong canonical membership, a
+        city-count mismatch, or an unreadable canonical map. These are structural
+        and must abort immediately rather than being retried. Contiguity-only
+        failures leave this False so the caller may retry with fresh geometry.
+
+    This is a diagnostic -- it does not mutate the world, only surfaces problems.
     """
     _emit("[continents] Verifying city containment + contiguity...")
 
@@ -1562,18 +1601,17 @@ def verify_continent_city_containment(
             idx = int(cont_num) - 1
             expected[idx] = set(keys)
     except Exception as exc:  # noqa: BLE001
-        # Fail closed: without the canonical membership map we cannot confirm
-        # that each continent holds the cities it should. Returning False here
-        # forces the caller to reject/repair the layout rather than committing a
-        # world whose canonical membership was never verified (a world with the
-        # right city counts but wrong membership would otherwise pass).
+        # Fail closed AND treat as invariant: without the canonical membership
+        # map we cannot confirm membership, and no amount of reshuffling makes
+        # the map readable. Abort rather than committing an unverified world.
         _emit(
             f"[continents] ERROR: cannot read canonical map for verify: {exc}. "
-            f"Failing verification closed."
+            f"Failing verification closed (invariant failure)."
         )
-        return False
+        return False, True
 
     all_ok = True
+    invariant_failure = False
     for idx, cont in enumerate(continents):
         actual_keys = {_city_key(r) for r in cont if r.child_city is not None}
         actual_keys.discard(None)
@@ -1588,6 +1626,11 @@ def verify_continent_city_containment(
 
         if not (count_ok and set_ok and contiguous):
             all_ok = False
+        # Membership/count problems are structural: the canonical city->continent
+        # assignment is fixed, so moving continents around cannot add/remove a
+        # city from a continent. Only contiguity is geometry-dependent (retryable).
+        if not count_ok or not set_ok:
+            invariant_failure = True
 
         status = "OK" if (count_ok and set_ok and contiguous) else "PROBLEM"
         _emit(
@@ -1606,7 +1649,8 @@ def verify_continent_city_containment(
             )
 
     _emit(f"[continents] Verification {'passed' if all_ok else 'found problems'}.")
-    return all_ok
+    return all_ok, invariant_failure
+
 
 
 def _continent_walkable_tiles(cont: List[City]) -> Set[Tuple[int, int]]:

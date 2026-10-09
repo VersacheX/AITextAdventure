@@ -920,6 +920,7 @@ class City:
 			tile.entrances = tuple(tile_data.get('entrances', ()))
 			tile.floors = tile_data.get('floors', 0)
 			tile.has_basement = tile_data.get('has_basement', False)
+			tile.required_building = tile_data.get('required_building', False)
 			self.tiles[(x, y)] = tile
 		# Load sublocation map
 		subloc_map_data = data.get('subloc_map', {})
