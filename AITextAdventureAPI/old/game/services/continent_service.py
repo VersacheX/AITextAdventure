@@ -1744,45 +1744,78 @@ def _continent_is_contiguous(cont: List[City]) -> bool:
     return len(seen) == len(tiles)
 
 
+def _is_required_building_tile(tile: Any) -> bool:
+    """True if `tile` is an impermeable REQUIRED/story building wall.
+
+    Mirrors the carve guard in ``_shortest_walkable_corridor``: a BUILDING tile
+    is required (never carvable) when its instance-level ``required_building``
+    marker is True OR absent -- legacy pickle-based saves predate the field and
+    never ran the dataclass initializer, so a missing marker is treated as
+    protected rather than carvable.
+    """
+    if tile is None:
+        return False
+    if getattr(tile, "type", None) != const.BUILDING:
+        return False
+    d = getattr(tile, "__dict__", {})
+    if "required_building" not in d:
+        return True  # legacy tile with no marker: protected
+    return bool(tile.required_building)
+
+
 def _continent_has_unrepairable_internal_split(cont: List[City], world: Dict[Tuple[int, int], Any]) -> bool:
     """Deterministically detect a contiguity failure that no reshuffling can fix.
 
-    Spreading and placement translate each region RIGIDLY, so a region's own
-    internal tile relationships are invariant across every reseating. If a single
-    region's walkable tiles split into multiple components AND no carvable
-    corridor exists between them WITHIN that region's own tiles (because a
-    REQUIRED/story building is the only thing separating them), then repacking the
-    continent 1000 more times can never join them -- the barrier moves with the
-    region. Detect that case so the caller can abort immediately instead of
-    burning the full retry budget on a provably hopeless layout.
+    Spreading and placement translate each region (together with its
+    ``child_city`` -- they form ONE rigid unit, see ``_region_all_tiles`` /
+    ``translate_region_tiles``) RIGIDLY, so the unit's internal tile layout and
+    the required buildings sealing it are invariant across every reseating.
 
-    A split that could be bridged by non-required buildings/impassables is NOT
-    reported here: ``repair_continent_walkable_joins`` can carve those, so it
-    remains a geometry-dependent (retryable) failure.
+    The ONLY translation-invariant isolation is a walkable component whose entire
+    4-neighbour boundary is this same unit's own REQUIRED buildings. Those are
+    impermeable and move rigidly with the unit, so:
+      - carving can never breach them (``repair_continent_walkable_joins`` treats
+        required buildings as walls), and
+      - no OTHER region can ever become adjacent to the component on a later
+        seating, because every bordering cell is permanently occupied by this
+        unit's own required-building tile (tiles cannot overlap).
+    Such a component can therefore never join the rest of the landmass, so the
+    layout is provably hopeless and we abort instead of retrying 1000 times.
+
+    Any boundary cell that is empty, impassable, non-required building, or owned
+    by a different region is NOT reported: an external region could be seated
+    there on a later retry, or carving could open it, so the failure stays
+    geometry-dependent (retryable).
     """
     for r in cont:
         if not r:
             continue
-        for area in (r, getattr(r, "child_city", None)):
-            if area is None:
-                continue
-            region_tiles = set(area.tiles.keys())
-            if not region_tiles:
-                continue
-            walkable = {c for c in region_tiles if _is_walkable_tile(world.get(c))}
-            comps = _components_4(walkable)
-            if len(comps) <= 1:
-                continue
-            # The region's own walkable tiles are split. It is only UNREPAIRABLE
-            # if even carving every non-required building / impassable confined to
-            # this region cannot reconnect the components -- i.e. a required
-            # building is the sole barrier. ``_shortest_walkable_corridor`` treats
-            # required buildings as impermeable walls, so a None result here means
-            # the barrier is a required building that rigid translation can never
-            # remove.
-            source = comps[0]
-            targets: Set[Tuple[int, int]] = set().union(*comps[1:])
-            if _shortest_walkable_corridor(source, targets, region_tiles, world) is None:
+        unit_tiles = _region_all_tiles(r)
+        if not unit_tiles:
+            continue
+        walkable = {c for c in unit_tiles if _is_walkable_tile(world.get(c))}
+        comps = _components_4(walkable)
+        if len(comps) <= 1:
+            continue
+        # Examine each component: it is invariantly isolated only if every
+        # boundary neighbour outside the component is one of THIS unit's own
+        # required-building tiles.
+        for comp in comps:
+            sealed = True
+            for (x, y) in comp:
+                for nbr in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+                    if nbr in comp:
+                        continue
+                    # A neighbour the component could grow into / be bridged
+                    # across on some seating breaks the invariant seal: it is
+                    # sealed ONLY by this unit's own required buildings.
+                    if nbr in unit_tiles and _is_required_building_tile(world.get(nbr)):
+                        continue
+                    sealed = False
+                    break
+                if not sealed:
+                    break
+            if sealed:
                 return True
     return False
 
