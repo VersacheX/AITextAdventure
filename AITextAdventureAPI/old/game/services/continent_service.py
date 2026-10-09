@@ -1461,14 +1461,30 @@ def build_continents_and_ocean(player_game: PlayerGame,
     )
     # Bound only the GEOMETRY retries. This is generous (contiguity almost always
     # resolves within a handful of reshuffles) but finite, so a truly pathological
-    # layout surfaces as a failure instead of hanging. The hard cap is the sole
-    # stop condition: a constant count of still-disconnected continents is NOT
-    # proof of unrepairable topology -- randomized seatings can fail with the same
-    # count repeatedly and still succeed on a later pass (especially when only one
-    # continent is disconnected) -- so we keep retrying until success or the cap
-    # rather than bailing on an unreliable no-progress heuristic. Invariant
-    # failures bypass the loop entirely via the guard below.
+    # layout surfaces as a failure instead of hanging. In addition to the hard
+    # cap we DETERMINISTICALLY detect the one unrepairable contiguity case:
+    # ``repair_continent_walkable_joins`` intentionally leaves a region split when
+    # a REQUIRED building is the only route between its own walkable components.
+    # Spreading/placement translate each region rigidly, so that internal barrier
+    # survives every reseating -- retrying 1000 times can never fix it. When
+    # detected we promote the failure to ``invariant_failure`` so the loop aborts
+    # at once instead of freezing generation. A merely count-based "no progress"
+    # heuristic is NOT used: randomized seatings can fail with the same count and
+    # still succeed later, so we keep retrying otherwise. Invariant failures
+    # bypass the loop entirely via the guard below.
     max_repair_attempts = 1000
+
+    def _unrepairable_internal_split() -> bool:
+        world = player_game.world_tiles or {}
+        return any(
+            not _continent_is_contiguous(cont)
+            and _continent_has_unrepairable_internal_split(cont, world)
+            for cont in continents
+        )
+
+    if not verified and not invariant_failure and _unrepairable_internal_split():
+        invariant_failure = True
+
     attempt = 0
     while not verified and not invariant_failure and attempt < max_repair_attempts:
         attempt += 1
@@ -1495,6 +1511,16 @@ def build_continents_and_ocean(player_game: PlayerGame,
         verified, invariant_failure = verify_continent_city_containment_detailed(
             player_game, continents, requested_counts
         )
+        # After the fresh seating, re-check for a provably unrepairable internal
+        # split so a required-building barrier that only becomes the sole route
+        # post-repack still aborts promptly rather than spinning to the cap.
+        if not verified and not invariant_failure and _unrepairable_internal_split():
+            _emit(
+                "[continents] Detected a required-building barrier that splits a "
+                "region's own walkable tiles; rigid reshuffling can never repair "
+                "this. Treating as an invariant failure and aborting retries."
+            )
+            invariant_failure = True
 
     if invariant_failure:
         _emit(
@@ -1716,6 +1742,49 @@ def _continent_is_contiguous(cont: List[City]) -> bool:
                 stack.append((nx, ny))
 
     return len(seen) == len(tiles)
+
+
+def _continent_has_unrepairable_internal_split(cont: List[City], world: Dict[Tuple[int, int], Any]) -> bool:
+    """Deterministically detect a contiguity failure that no reshuffling can fix.
+
+    Spreading and placement translate each region RIGIDLY, so a region's own
+    internal tile relationships are invariant across every reseating. If a single
+    region's walkable tiles split into multiple components AND no carvable
+    corridor exists between them WITHIN that region's own tiles (because a
+    REQUIRED/story building is the only thing separating them), then repacking the
+    continent 1000 more times can never join them -- the barrier moves with the
+    region. Detect that case so the caller can abort immediately instead of
+    burning the full retry budget on a provably hopeless layout.
+
+    A split that could be bridged by non-required buildings/impassables is NOT
+    reported here: ``repair_continent_walkable_joins`` can carve those, so it
+    remains a geometry-dependent (retryable) failure.
+    """
+    for r in cont:
+        if not r:
+            continue
+        for area in (r, getattr(r, "child_city", None)):
+            if area is None:
+                continue
+            region_tiles = set(area.tiles.keys())
+            if not region_tiles:
+                continue
+            walkable = {c for c in region_tiles if _is_walkable_tile(world.get(c))}
+            comps = _components_4(walkable)
+            if len(comps) <= 1:
+                continue
+            # The region's own walkable tiles are split. It is only UNREPAIRABLE
+            # if even carving every non-required building / impassable confined to
+            # this region cannot reconnect the components -- i.e. a required
+            # building is the sole barrier. ``_shortest_walkable_corridor`` treats
+            # required buildings as impermeable walls, so a None result here means
+            # the barrier is a required building that rigid translation can never
+            # remove.
+            source = comps[0]
+            targets: Set[Tuple[int, int]] = set().union(*comps[1:])
+            if _shortest_walkable_corridor(source, targets, region_tiles, world) is None:
+                return True
+    return False
 
 
 def _count_components(tiles: Set[Tuple[int, int]]) -> int:
