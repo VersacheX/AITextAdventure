@@ -455,7 +455,28 @@ def compact_continents_to_contiguous(player_game: PlayerGame, continents: List[L
     for idx, cont in enumerate(continents):
         regions = [r for r in cont if r and r.tiles]
         if len(regions) <= 1:
-            _emit(f"[continents]   continent {idx + 1}: <=1 region, nothing to compact")
+            # Nothing to ACCRETE (no second region to snap on), but a lone region
+            # can still be internally split -- e.g. a child_city whose tiles sit
+            # apart from its parent, or a legacy multi-blob region. Rigid packing
+            # is skipped here, so without this repair such a split would survive
+            # every reseating and make `_continent_has_unrepairable_internal_split`
+            # loop 1000 identical retries. Bridge the lone region's own blobs and
+            # repair walkable joins so the single-region continent is normalised.
+            if regions:
+                region = regions[0]
+                bridged = normalize_region_internal_connectivity(region, player_game)
+                if bridged:
+                    _emit(
+                        f"[continents]   continent {idx + 1}: <=1 region, bridged "
+                        f"{bridged} internal tile(s) in region "
+                        f"'{getattr(region, 'region_name', '?')}'"
+                    )
+                    update_player_game_world_tiles_after_translation(player_game)
+                    repair_continent_walkable_joins(player_game, [cont])
+                else:
+                    _emit(f"[continents]   continent {idx + 1}: <=1 region, nothing to compact")
+            else:
+                _emit(f"[continents]   continent {idx + 1}: <=1 region, nothing to compact")
             continue
 
         seed_local = _select_seed_region_index(regions, player_game)
