@@ -622,8 +622,43 @@ class OverworldScreen(BaseScreen):
         except Exception:  # noqa: BLE001
             _progress = None
 
+        # Prefer the short, PLAYER-FACING status channel for the overlay headline
+        # when it's available (e.g. world generation phases / connectivity
+        # passes). These are reassuring, human-readable lines. The detailed
+        # diagnostic stream is used ONLY as a fallback when the status channel is
+        # unavailable, so friendly headlines are never overwritten by timestamped
+        # diagnostics.
+        status_available = _progress is not None and hasattr(_progress, "subscribe_status")
+
+        status_token = None
+        if status_available:
+            def _on_status(line: str) -> None:
+                def _apply(text: str = line) -> None:
+                    self._update_loading_message(text)
+                try:
+                    self.app.call_from_thread(_apply)
+                except Exception:  # noqa: BLE001
+                    pass
+
+            # Seed the overlay with the current status directly on THIS (UI)
+            # thread before subscribing. The status API intentionally does not
+            # replay synchronously on subscribe because that would run here on
+            # the compositor thread, where call_from_thread is illegal.
+            if hasattr(_progress, "get_last_status"):
+                try:
+                    _seed = _progress.get_last_status()
+                    if _seed:
+                        self._update_loading_message(_seed)
+                except Exception:  # noqa: BLE001
+                    pass
+
+            try:
+                status_token = _progress.subscribe_status(_on_status)
+            except Exception:  # noqa: BLE001
+                status_token = None
+
         progress_token = None
-        if _progress is not None:
+        if _progress is not None and not status_available:
             def _on_progress(line: str) -> None:
                 def _apply(text: str = line) -> None:
                     self._update_loading_message(text)
@@ -646,6 +681,19 @@ class OverworldScreen(BaseScreen):
                 if progress_token is not None and _progress is not None:
                     try:
                         _progress.unsubscribe(progress_token)
+                    except Exception:  # noqa: BLE001
+                        pass
+                if status_token is not None and _progress is not None:
+                    try:
+                        _progress.unsubscribe_status(status_token)
+                    except Exception:  # noqa: BLE001
+                        pass
+                # Clear the process-global last status so a later, unrelated
+                # loading overlay doesn't replay this run's stale headline (e.g.
+                # "The world is whole") via get_last_status on its own thread.
+                if _progress is not None and hasattr(_progress, "reset_status"):
+                    try:
+                        _progress.reset_status()
                     except Exception:  # noqa: BLE001
                         pass
 

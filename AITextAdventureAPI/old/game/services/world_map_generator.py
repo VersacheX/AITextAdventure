@@ -165,6 +165,11 @@ def generate_world(pg: Any, num_regions: int, seed_base: int, min_size: int, ver
             f"Generating world: target {max_cities} cities "
             f"(have {last_city_count}), up to {num_regions} region attempts."
         )
+    # Player-facing headline for the loading overlay.
+    try:
+        progress.status("Generating your world...")
+    except Exception:  # noqa: BLE001
+        pass
 
     for i in range(num_regions):
         # Bail the instant we've placed every city.
@@ -212,6 +217,13 @@ def generate_world(pg: Any, num_regions: int, seed_base: int, min_size: int, ver
         if current_city_count > last_city_count:
             last_city_count = current_city_count
             stalls_without_city = 0
+            # Friendly, coarse progress for the loading overlay.
+            try:
+                progress.status(
+                    f"Building the world's cities ({current_city_count}/{max_cities})..."
+                )
+            except Exception:  # noqa: BLE001
+                pass
         else:
             stalls_without_city += 1
             if stalls_without_city >= stall_limit:

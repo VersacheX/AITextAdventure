@@ -41,6 +41,15 @@ _lock = threading.RLock()
 _listeners: Dict[int, Listener] = {}
 _next_token = 0
 
+# Separate channel for short, PLAYER-FACING status lines (e.g. "Shaping
+# continents...", "Connecting the lands (pass 3)..."). The detailed `emit`
+# stream above is developer-oriented (timestamps, tile counts, bbox math); the
+# loading overlay prefers these friendly lines so the player sees reassuring,
+# human-readable progress instead of raw diagnostics.
+_status_listeners: Dict[int, Listener] = {}
+_next_status_token = 0
+_last_status: str | None = None
+
 # Monotonic clock anchor so every emitted line can show elapsed seconds since the
 # first emit of a run -- makes bottleneck points obvious in the log stream.
 _start_monotonic: float | None = None
@@ -54,6 +63,80 @@ def subscribe(listener: Listener) -> int:
         _next_token += 1
         _listeners[token] = listener
     return token
+
+
+def subscribe_status(listener: Listener) -> int:
+    """Register a PLAYER-FACING status listener; returns an unsubscribe token.
+
+    Unlike the previous implementation this does NOT synchronously replay the
+    last line to the subscriber: callers (e.g. a Textual screen subscribing from
+    the UI/compositor thread) may not legally invoke their thread-marshalling API
+    from the subscribing thread. Use :func:`get_last_status` to seed the initial
+    value directly on the caller's own thread instead.
+    """
+    global _next_status_token
+    with _lock:
+        token = _next_status_token
+        _next_status_token += 1
+        _status_listeners[token] = listener
+    return token
+
+
+def get_last_status() -> str | None:
+    """Return the most recent player-facing status line, or None if none yet.
+
+    Lets a freshly-shown overlay seed its headline from the current status on its
+    own thread, avoiding cross-thread replay during subscription.
+    """
+    with _lock:
+        return _last_status
+
+
+def reset_status() -> None:
+    """Forget the last player-facing status line.
+
+    ``_last_status`` is process-global, so a status emitted by one long-running
+    worker (e.g. "The world is whole") would otherwise linger and be replayed by
+    a later, unrelated loading overlay via :func:`get_last_status`. Workers call
+    this when they finish so the next overlay keeps its own caller-provided
+    message until a fresh status is emitted for it.
+    """
+    global _last_status
+    with _lock:
+        _last_status = None
+
+
+
+def unsubscribe_status(token: int) -> None:
+    """Remove a previously subscribed status listener. Safe to call twice."""
+    with _lock:
+        _status_listeners.pop(token, None)
+
+
+def status(line: str) -> None:
+    """Broadcast a short, PLAYER-FACING status line (no timestamps/diagnostics).
+
+    Also mirrored into the detailed ``emit`` stream (prefixed) so the dev log
+    keeps a record of phase transitions. A failing listener is ignored so it can
+    never interrupt generation.
+    """
+    global _last_status
+    text = str(line)
+    with _lock:
+        _last_status = text
+        listeners = list(_status_listeners.values())
+    for fn in listeners:
+        try:
+            fn(text)
+        except Exception:  # noqa: BLE001 - never let a UI listener break gen
+            pass
+    # Mirror the breadcrumb into the detailed ``emit`` stream so dev tooling
+    # (``dev_game_inspector.run_with_report``, which captures ``subscribe``
+    # notifications rather than stdout) records the phase transitions. The
+    # loading overlay no longer subscribes to the diagnostic stream when status
+    # support is available, so this won't overwrite the friendly headline.
+    emit(f"[status] {text}")
+
 
 
 def unsubscribe(token: int) -> None:
@@ -103,3 +186,7 @@ def reset_clock() -> None:
     global _start_monotonic
     with _lock:
         _start_monotonic = None
+        # Also clear the last player-facing status so a new run doesn't replay a
+        # stale "done" line to a freshly-subscribed overlay.
+        global _last_status
+        _last_status = None

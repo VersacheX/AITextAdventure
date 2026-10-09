@@ -32,6 +32,19 @@ def _emit(line: str) -> None:
     progress.emit(line)
 
 
+def _status(line: str) -> None:
+    """Surface a short, PLAYER-FACING status line to the loading overlay.
+
+    Unlike ``_emit`` (developer diagnostics), these are reassuring, human-
+    readable messages shown as the loading headline, e.g. "Shaping the
+    continents..." or "Connecting the lands (pass 3)...".
+    """
+    try:
+        progress.status(line)
+    except Exception:  # noqa: BLE001 - status must never break generation
+        pass
+
+
 def _city_key(region: City) -> Optional[str]:
     """Canonical chapter-city key for a city-bearing region: ``region_name_city_name``.
 
@@ -525,15 +538,19 @@ def repair_continent_walkable_joins(
     """Make each continent's WALKABLE tiles a single 4-connected mass, in place.
 
     Edge-snap packing guarantees only geometric contact between regions; the
-    seam tiles can be ``impassable`` (or buildings) so a player cannot actually
-    cross. This runs AFTER ``update_player_game_world_tiles_after_translation``
-    so ``player_game.world_tiles`` is the fresh, authoritative map (no stale
-    keys). For every continent whose walkable tiles split into multiple
-    components, it carves the shortest corridor between components by flipping
-    ONLY ``impassable`` owned tiles to open ground -- never a building -- so no
-    required/story building data is destroyed. If the only available route would
-    cross a building, that pair is left for the verifier to report rather than
-    silently clobbering the building.
+    seam tiles can be ``impassable`` or ``building`` tiles, so a player cannot
+    actually cross. This runs AFTER
+    ``update_player_game_world_tiles_after_translation`` so
+    ``player_game.world_tiles`` is the fresh, authoritative map (no stale keys).
+
+    For every continent whose walkable tiles split into multiple components, it
+    carves the shortest corridor between components, routing preferentially
+    through ``impassable`` cells and, only when unavoidable, through
+    NON-REQUIRED filler buildings (whose payload/sublocations are then cleared).
+    REQUIRED/story buildings (``tile.required_building``) are treated as walls
+    and never carved, so no quest/location data is destroyed. If the only route
+    would cross a required building, that pair is left for the verifier to report
+    rather than clobbering the building.
     """
     world = player_game.world_tiles or {}
     for idx, cont in enumerate(continents):
@@ -549,32 +566,64 @@ def repair_continent_walkable_joins(
         if len(comps) <= 1:
             continue
 
-        carved_total = 0
+        carved_impassable = 0
+        carved_buildings = 0
         # Greedily merge the first component into the rest by carving a shortest
-        # impassable-only corridor, re-evaluating components after each join.
+        # corridor, re-evaluating components after each join.
         guard = len(comps) + 1
         while len(comps) > 1 and guard > 0:
             guard -= 1
             source = comps[0]
             targets: Set[Tuple[int, int]] = set().union(*comps[1:])
-            path = _shortest_impassable_corridor(source, targets, cont_tiles, world)
+            path = _shortest_walkable_corridor(source, targets, cont_tiles, world)
             if path is None:
-                # No impassable-only route between these components; do not
-                # destroy buildings to force a join. Leave it for verification.
+                # No carvable route (only required buildings block the way); do
+                # not destroy required buildings. Leave it for verification.
                 break
             for (cx, cy) in path:
                 tile = world.get((cx, cy))
-                if tile is not None and getattr(tile, "type", None) == "impassable":
+                if tile is not None:
+                    ttype = getattr(tile, "type", None)
+                    if ttype == "impassable":
+                        carved_impassable += 1
+                    elif ttype == const.BUILDING:
+                        carved_buildings += 1
+                        _clear_building_sublocs(cont, (cx, cy))
                     tile.type = "open_area"
-                    carved_total += 1
+                    tile.building = None
+                    tile.entrances = ()
+                    tile.floors = 0
+                    tile.has_basement = False
                 walkable.add((cx, cy))
             comps = _components_4(walkable)
 
-        if carved_total:
+        if carved_impassable or carved_buildings:
             _emit(
-                f"[continents]   continent {idx + 1}: carved {carved_total} "
-                f"impassable tile(s) into walkable corridors at region joins"
+                f"[continents]   continent {idx + 1}: carved corridors at region "
+                f"joins (impassable={carved_impassable}, "
+                f"filler-buildings={carved_buildings})"
             )
+
+
+def _clear_building_sublocs(cont: List[City], coord: Tuple[int, int]) -> None:
+    """Remove any sublocation entries at `coord` from the continent's cities.
+
+    When a filler building is carved into a walkable corridor its interior
+    content must not linger, otherwise stale sublocations would reference a tile
+    that is no longer a building.
+    """
+    x, y = coord
+    for r in cont:
+        if not r:
+            continue
+        for area in (r, getattr(r, "child_city", None)):
+            if area is None:
+                continue
+            subloc_map = getattr(area, "subloc_map", None)
+            if not subloc_map:
+                continue
+            for key in [k for k in subloc_map if k[0] == x and k[1] == y]:
+                del subloc_map[key]
 
 
 def _components_4(tiles: Set[Tuple[int, int]]) -> List[Set[Tuple[int, int]]]:
@@ -597,35 +646,53 @@ def _components_4(tiles: Set[Tuple[int, int]]) -> List[Set[Tuple[int, int]]]:
     return comps
 
 
-def _shortest_impassable_corridor(
+def _shortest_walkable_corridor(
     source: Set[Tuple[int, int]],
     targets: Set[Tuple[int, int]],
     cont_tiles: Set[Tuple[int, int]],
     world: Dict[Tuple[int, int], Any],
 ) -> Optional[List[Tuple[int, int]]]:
-    """BFS a shortest corridor of IMPASSABLE continent tiles from source->targets.
+    """Least-cost corridor of carvable continent tiles from source -> targets.
 
-    Expands only across cells owned by this continent whose world tile is
-    ``impassable`` (walkable cells are the endpoints; buildings are walls so a
-    corridor never crosses — and therefore never destroys — a building). Returns
-    the list of impassable cells to flip (excluding endpoints), or None if no
-    impassable-only route exists.
+    Expands across cells owned by this continent, treating:
+      - ``impassable`` cells as cheap to carve (cost 1),
+      - NON-REQUIRED ``building`` cells as prohibitively expensive but allowed, so
+        a building is only carved when NO impassable-only route exists at all,
+      - REQUIRED buildings and non-continent cells as impermeable walls.
+    Endpoints are existing walkable cells in ``source``/``targets``. Returns the
+    list of intermediate cells to carve (cheapest total cost), or None if no
+    carvable route exists. A Dijkstra search is used so the result minimizes the
+    number of buildings destroyed FIRST, then corridor length.
     """
-    from collections import deque
+    import heapq
 
-    frontier = deque()
+    IMPASSABLE_COST = 1
+    # Make a single building cost more than the longest possible impassable-only
+    # detour (every continent cell carved at cost 1). This guarantees Dijkstra
+    # lexicographically minimizes buildings-destroyed first, then length: any
+    # route through one building is strictly worse than ANY building-free route,
+    # no matter how long. +1 keeps it strictly greater than the worst case.
+    BUILDING_COST = len(cont_tiles) + 1
+
+    # Priority queue of (cost, tiebreak, cell). dist tracks best known cost.
+    dist: Dict[Tuple[int, int], int] = {}
     came_from: Dict[Tuple[int, int], Optional[Tuple[int, int]]] = {}
+    heap: List[Tuple[int, int, Tuple[int, int]]] = []
+    counter = 0
     for cell in source:
-        frontier.append(cell)
+        dist[cell] = 0
         came_from[cell] = None
-    while frontier:
-        cur = frontier.popleft()
+        heapq.heappush(heap, (0, counter, cell))
+        counter += 1
+
+    while heap:
+        cost, _, cur = heapq.heappop(heap)
+        if cost > dist.get(cur, cost):
+            continue
         cx, cy = cur
         for nxt in ((cx + 1, cy), (cx - 1, cy), (cx, cy + 1), (cx, cy - 1)):
-            if nxt in came_from:
-                continue
-            if nxt in targets:
-                # Reconstruct the intermediate (impassable) cells to carve.
+            if nxt in targets and nxt not in source:
+                # Reconstruct intermediate carvable cells (exclude endpoints).
                 path: List[Tuple[int, int]] = []
                 node = cur
                 while node is not None and node not in source:
@@ -636,11 +703,30 @@ def _shortest_impassable_corridor(
             if nxt not in cont_tiles:
                 continue
             tile = world.get(nxt)
-            if getattr(tile, "type", None) != "impassable":
-                # Only route through impassable owned tiles (never buildings).
+            ttype = getattr(tile, "type", None)
+            if ttype == "impassable":
+                step = IMPASSABLE_COST
+            elif (
+                ttype == const.BUILDING
+                and "required_building" in getattr(tile, "__dict__", {})
+                and not tile.required_building
+            ):
+                step = BUILDING_COST
+            else:
+                # Required building or already-walkable interior: not a carve
+                # candidate (walkable interiors are reached as endpoints only).
+                # A BUILDING tile with NO instance-level ``required_building``
+                # marker (legacy pickle-based saves predate the field and never
+                # ran the dataclass initializer) is treated as protected rather
+                # than carvable, so loading an old save can't delete a required
+                # story building during intro completion.
                 continue
-            came_from[nxt] = cur
-            frontier.append(nxt)
+            new_cost = cost + step
+            if new_cost < dist.get(nxt, float("inf")):
+                dist[nxt] = new_cost
+                came_from[nxt] = cur
+                heapq.heappush(heap, (new_cost, counter, nxt))
+                counter += 1
     return None
 
 # ------------------------------------------------------------------
@@ -1338,6 +1424,7 @@ def build_continents_and_ocean(player_game: PlayerGame,
     # each continent (as a rigid body) onto its own distinct angle around the
     # world center, so the continents no longer spatially interleave — each now
     # occupies an isolated region of space.
+    _status("Shaping the continents...")
     spread_continents_radial(player_game, continents, rng, radius=spread_radius, skip_first=True)
 
     # 4.a) compact each continent's regions into a single contiguous landmass.
@@ -1348,6 +1435,7 @@ def build_continents_and_ocean(player_game: PlayerGame,
     # for the player's continent, so the player is never displaced). Because each
     # continent is isolated, sliding a region toward its own seed can never cross
     # into — and overwrite — another continent's tiles.
+    _status("Gathering each continent's lands together...")
     compact_continents_to_contiguous(player_game, continents)
 
     # 4.b) position continents around the anchor using intelligent, bbox-aware
@@ -1356,23 +1444,39 @@ def build_continents_and_ocean(player_game: PlayerGame,
     # fitting coastline (8-directional, interior-pocket aware), keeping the world
     # compact. This replaces the old radial pull, which only shrank distances
     # without regard to how blobs actually nest together.
+    _status("Arranging the continents across the world...")
     place_continents_linearly(player_game, continents, anchor_index=0, gap=3)
 
     # 4.c) verify each continent holds exactly the cities it should per the
     # canonical chapter-city map, and that its landmass is contiguous enough to
-    # connect those cities. If verification fails we must NOT silently accept the
-    # layout — retry compaction + placement, re-verifying each time, before
-    # giving up. The final status is propagated to the caller so an invalid world
-    # can be rejected/rolled back rather than reported as complete.
-    verified = verify_continent_city_containment(player_game, continents, requested_counts)
-    max_repair_attempts = 2
+    # connect those cities. Two distinct failure kinds exist:
+    #   - INVARIANT failures (wrong canonical membership, city-count mismatch, or
+    #     an unreadable canonical map) can NEVER be fixed by moving continents
+    #     around, so we abort immediately rather than spinning the pipeline.
+    #   - CONTIGUITY failures are geometry-dependent, so we re-shuffle (fresh
+    #     angles) and repack, re-verifying each pass until the world connects.
+    _status("Checking that every land connects...")
+    verified, invariant_failure = verify_continent_city_containment_detailed(
+        player_game, continents, requested_counts
+    )
+    # Bound only the GEOMETRY retries. This is generous (contiguity almost always
+    # resolves within a handful of reshuffles) but finite, so a truly pathological
+    # layout surfaces as a failure instead of hanging. The hard cap is the sole
+    # stop condition: a constant count of still-disconnected continents is NOT
+    # proof of unrepairable topology -- randomized seatings can fail with the same
+    # count repeatedly and still succeed on a later pass (especially when only one
+    # continent is disconnected) -- so we keep retrying until success or the cap
+    # rather than bailing on an unreliable no-progress heuristic. Invariant
+    # failures bypass the loop entirely via the guard below.
+    max_repair_attempts = 1000
     attempt = 0
-    while not verified and attempt < max_repair_attempts:
+    while not verified and not invariant_failure and attempt < max_repair_attempts:
         attempt += 1
         _emit(
             f"[continents] Verification failed -- repair attempt "
             f"{attempt}/{max_repair_attempts}: recompacting and replacing."
         )
+        _status(f"Connecting the lands (pass {attempt})...")
         # Re-isolate the continents before recompaction, exactly as the initial
         # pipeline does. After placement the continents are seated together, so
         # their masses are adjacent; compact_region_onto_mass only avoids the
@@ -1388,7 +1492,18 @@ def build_continents_and_ocean(player_game: PlayerGame,
         )
         compact_continents_to_contiguous(player_game, continents)
         place_continents_linearly(player_game, continents, anchor_index=0, gap=3)
-        verified = verify_continent_city_containment(player_game, continents, requested_counts)
+        verified, invariant_failure = verify_continent_city_containment_detailed(
+            player_game, continents, requested_counts
+        )
+
+    if invariant_failure:
+        _emit(
+            "[continents] ERROR: structural (invariant) verification failure that "
+            "reshuffling cannot repair; aborting immediately."
+        )
+
+    if verified:
+        _status("The world is whole — finishing up...")
 
     # Recompute each continent's bbox from the FINAL tile positions. The bboxes
     # captured earlier (pre-spread) are stale: compaction and placement (and any
@@ -1461,12 +1576,34 @@ def verify_continent_city_containment(
     continents: List[List[City]],
     requested_counts: List[int],
 ) -> bool:
-    """Verify each continent holds exactly the cities it should and that those
-    cities sit on a single contiguous landmass. Logs results to the dev TUI.
+    """Boolean wrapper around :func:`verify_continent_city_containment_detailed`.
 
-    Returns True if every continent matches its canonical city set and is
-    contiguous; False otherwise. This is a diagnostic -- it does not mutate the
-    world, it only surfaces problems so bad splits are visible.
+    Returns True only if every continent matches its canonical city set and is
+    contiguous. Kept for callers that only need the pass/fail result.
+    """
+    ok, _invariant_failure = verify_continent_city_containment_detailed(
+        player_game, continents, requested_counts
+    )
+    return ok
+
+
+def verify_continent_city_containment_detailed(
+    player_game: PlayerGame,
+    continents: List[List[City]],
+    requested_counts: List[int],
+) -> Tuple[bool, bool]:
+    """Verify continent city membership + contiguity, distinguishing failure kind.
+
+    Returns ``(all_ok, invariant_failure)``:
+      - ``all_ok``: True if every continent matches its canonical city set and
+        forms a single walkable mass.
+      - ``invariant_failure``: True if ANY failure is of a kind that reshuffling
+        continent geometry can NEVER fix -- i.e. wrong canonical membership, a
+        city-count mismatch, or an unreadable canonical map. These are structural
+        and must abort immediately rather than being retried. Contiguity-only
+        failures leave this False so the caller may retry with fresh geometry.
+
+    This is a diagnostic -- it does not mutate the world, only surfaces problems.
     """
     _emit("[continents] Verifying city containment + contiguity...")
 
@@ -1478,18 +1615,17 @@ def verify_continent_city_containment(
             idx = int(cont_num) - 1
             expected[idx] = set(keys)
     except Exception as exc:  # noqa: BLE001
-        # Fail closed: without the canonical membership map we cannot confirm
-        # that each continent holds the cities it should. Returning False here
-        # forces the caller to reject/repair the layout rather than committing a
-        # world whose canonical membership was never verified (a world with the
-        # right city counts but wrong membership would otherwise pass).
+        # Fail closed AND treat as invariant: without the canonical membership
+        # map we cannot confirm membership, and no amount of reshuffling makes
+        # the map readable. Abort rather than committing an unverified world.
         _emit(
             f"[continents] ERROR: cannot read canonical map for verify: {exc}. "
-            f"Failing verification closed."
+            f"Failing verification closed (invariant failure)."
         )
-        return False
+        return False, True
 
     all_ok = True
+    invariant_failure = False
     for idx, cont in enumerate(continents):
         actual_keys = {_city_key(r) for r in cont if r.child_city is not None}
         actual_keys.discard(None)
@@ -1504,6 +1640,11 @@ def verify_continent_city_containment(
 
         if not (count_ok and set_ok and contiguous):
             all_ok = False
+        # Membership/count problems are structural: the canonical city->continent
+        # assignment is fixed, so moving continents around cannot add/remove a
+        # city from a continent. Only contiguity is geometry-dependent (retryable).
+        if not count_ok or not set_ok:
+            invariant_failure = True
 
         status = "OK" if (count_ok and set_ok and contiguous) else "PROBLEM"
         _emit(
@@ -1522,7 +1663,8 @@ def verify_continent_city_containment(
             )
 
     _emit(f"[continents] Verification {'passed' if all_ok else 'found problems'}.")
-    return all_ok
+    return all_ok, invariant_failure
+
 
 
 def _continent_walkable_tiles(cont: List[City]) -> Set[Tuple[int, int]]:
