@@ -688,6 +688,14 @@ class OverworldScreen(BaseScreen):
                         _progress.unsubscribe_status(status_token)
                     except Exception:  # noqa: BLE001
                         pass
+                # Clear the process-global last status so a later, unrelated
+                # loading overlay doesn't replay this run's stale headline (e.g.
+                # "The world is whole") via get_last_status on its own thread.
+                if _progress is not None and hasattr(_progress, "reset_status"):
+                    try:
+                        _progress.reset_status()
+                    except Exception:  # noqa: BLE001
+                        pass
 
                 def _finish(ok: bool = succeeded) -> None:
                     # Always clear the loading overlay, but only continue into

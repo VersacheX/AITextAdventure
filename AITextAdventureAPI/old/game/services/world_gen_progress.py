@@ -92,6 +92,20 @@ def get_last_status() -> str | None:
         return _last_status
 
 
+def reset_status() -> None:
+    """Forget the last player-facing status line.
+
+    ``_last_status`` is process-global, so a status emitted by one long-running
+    worker (e.g. "The world is whole") would otherwise linger and be replayed by
+    a later, unrelated loading overlay via :func:`get_last_status`. Workers call
+    this when they finish so the next overlay keeps its own caller-provided
+    message until a fresh status is emitted for it.
+    """
+    global _last_status
+    with _lock:
+        _last_status = None
+
+
 
 def unsubscribe_status(token: int) -> None:
     """Remove a previously subscribed status listener. Safe to call twice."""
@@ -116,11 +130,12 @@ def status(line: str) -> None:
             fn(text)
         except Exception:  # noqa: BLE001 - never let a UI listener break gen
             pass
-    # Keep a breadcrumb in the console/dev log, but do NOT route it through
-    # ``emit`` -- that would notify the detailed diagnostic listeners and let a
-    # timestamped ``[status]`` line immediately overwrite the friendly headline
-    # on any UI that also listens to the diagnostic stream.
-    print(f"[status] {text}")
+    # Mirror the breadcrumb into the detailed ``emit`` stream so dev tooling
+    # (``dev_game_inspector.run_with_report``, which captures ``subscribe``
+    # notifications rather than stdout) records the phase transitions. The
+    # loading overlay no longer subscribes to the diagnostic stream when status
+    # support is available, so this won't overwrite the friendly headline.
+    emit(f"[status] {text}")
 
 
 

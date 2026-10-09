@@ -1454,7 +1454,7 @@ def build_continents_and_ocean(player_game: PlayerGame,
     # resolves within a handful of reshuffles) but finite, so a truly pathological
     # layout surfaces as a failure instead of hanging. Invariant failures bypass
     # the loop entirely via the guard below.
-    max_repair_attempts = 50
+    max_repair_attempts = 1000
     attempt = 0
     while not verified and not invariant_failure and attempt < max_repair_attempts:
         attempt += 1
@@ -1462,7 +1462,7 @@ def build_continents_and_ocean(player_game: PlayerGame,
             f"[continents] Verification failed -- repair attempt "
             f"{attempt}/{max_repair_attempts}: recompacting and replacing."
         )
-        _status(f"Connecting the lands (pass {attempt + 1})...")
+        _status(f"Connecting the lands (pass {attempt})...")
         # Re-isolate the continents before recompaction, exactly as the initial
         # pipeline does. After placement the continents are seated together, so
         # their masses are adjacent; compact_region_onto_mass only avoids the
