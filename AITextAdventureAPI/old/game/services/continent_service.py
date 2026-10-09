@@ -455,7 +455,28 @@ def compact_continents_to_contiguous(player_game: PlayerGame, continents: List[L
     for idx, cont in enumerate(continents):
         regions = [r for r in cont if r and r.tiles]
         if len(regions) <= 1:
-            _emit(f"[continents]   continent {idx + 1}: <=1 region, nothing to compact")
+            # Nothing to ACCRETE (no second region to snap on), but a lone region
+            # can still be internally split -- e.g. a child_city whose tiles sit
+            # apart from its parent, or a legacy multi-blob region. Rigid packing
+            # is skipped here, so without this repair such a split would survive
+            # every reseating and make `_continent_has_unrepairable_internal_split`
+            # loop 1000 identical retries. Bridge the lone region's own blobs and
+            # repair walkable joins so the single-region continent is normalised.
+            if regions:
+                region = regions[0]
+                bridged = normalize_region_internal_connectivity(region, player_game)
+                if bridged:
+                    _emit(
+                        f"[continents]   continent {idx + 1}: <=1 region, bridged "
+                        f"{bridged} internal tile(s) in region "
+                        f"'{getattr(region, 'region_name', '?')}'"
+                    )
+                    update_player_game_world_tiles_after_translation(player_game)
+                    repair_continent_walkable_joins(player_game, [cont])
+                else:
+                    _emit(f"[continents]   continent {idx + 1}: <=1 region, nothing to compact")
+            else:
+                _emit(f"[continents]   continent {idx + 1}: <=1 region, nothing to compact")
             continue
 
         seed_local = _select_seed_region_index(regions, player_game)
@@ -1461,14 +1482,30 @@ def build_continents_and_ocean(player_game: PlayerGame,
     )
     # Bound only the GEOMETRY retries. This is generous (contiguity almost always
     # resolves within a handful of reshuffles) but finite, so a truly pathological
-    # layout surfaces as a failure instead of hanging. The hard cap is the sole
-    # stop condition: a constant count of still-disconnected continents is NOT
-    # proof of unrepairable topology -- randomized seatings can fail with the same
-    # count repeatedly and still succeed on a later pass (especially when only one
-    # continent is disconnected) -- so we keep retrying until success or the cap
-    # rather than bailing on an unreliable no-progress heuristic. Invariant
-    # failures bypass the loop entirely via the guard below.
+    # layout surfaces as a failure instead of hanging. In addition to the hard
+    # cap we DETERMINISTICALLY detect the one unrepairable contiguity case:
+    # ``repair_continent_walkable_joins`` intentionally leaves a region split when
+    # a REQUIRED building is the only route between its own walkable components.
+    # Spreading/placement translate each region rigidly, so that internal barrier
+    # survives every reseating -- retrying 1000 times can never fix it. When
+    # detected we promote the failure to ``invariant_failure`` so the loop aborts
+    # at once instead of freezing generation. A merely count-based "no progress"
+    # heuristic is NOT used: randomized seatings can fail with the same count and
+    # still succeed later, so we keep retrying otherwise. Invariant failures
+    # bypass the loop entirely via the guard below.
     max_repair_attempts = 1000
+
+    def _unrepairable_internal_split() -> bool:
+        world = player_game.world_tiles or {}
+        return any(
+            not _continent_is_contiguous(cont)
+            and _continent_has_unrepairable_internal_split(cont, world)
+            for cont in continents
+        )
+
+    if not verified and not invariant_failure and _unrepairable_internal_split():
+        invariant_failure = True
+
     attempt = 0
     while not verified and not invariant_failure and attempt < max_repair_attempts:
         attempt += 1
@@ -1495,6 +1532,16 @@ def build_continents_and_ocean(player_game: PlayerGame,
         verified, invariant_failure = verify_continent_city_containment_detailed(
             player_game, continents, requested_counts
         )
+        # After the fresh seating, re-check for a provably unrepairable internal
+        # split so a required-building barrier that only becomes the sole route
+        # post-repack still aborts promptly rather than spinning to the cap.
+        if not verified and not invariant_failure and _unrepairable_internal_split():
+            _emit(
+                "[continents] Detected a required-building barrier that splits a "
+                "region's own walkable tiles; rigid reshuffling can never repair "
+                "this. Treating as an invariant failure and aborting retries."
+            )
+            invariant_failure = True
 
     if invariant_failure:
         _emit(
@@ -1716,6 +1763,82 @@ def _continent_is_contiguous(cont: List[City]) -> bool:
                 stack.append((nx, ny))
 
     return len(seen) == len(tiles)
+
+
+def _is_required_building_tile(tile: Any) -> bool:
+    """True if `tile` is an impermeable REQUIRED/story building wall.
+
+    Mirrors the carve guard in ``_shortest_walkable_corridor``: a BUILDING tile
+    is required (never carvable) when its instance-level ``required_building``
+    marker is True OR absent -- legacy pickle-based saves predate the field and
+    never ran the dataclass initializer, so a missing marker is treated as
+    protected rather than carvable.
+    """
+    if tile is None:
+        return False
+    if getattr(tile, "type", None) != const.BUILDING:
+        return False
+    d = getattr(tile, "__dict__", {})
+    if "required_building" not in d:
+        return True  # legacy tile with no marker: protected
+    return bool(tile.required_building)
+
+
+def _continent_has_unrepairable_internal_split(cont: List[City], world: Dict[Tuple[int, int], Any]) -> bool:
+    """Deterministically detect a contiguity failure that no reshuffling can fix.
+
+    Spreading and placement translate each region (together with its
+    ``child_city`` -- they form ONE rigid unit, see ``_region_all_tiles`` /
+    ``translate_region_tiles``) RIGIDLY, so the unit's internal tile layout and
+    the required buildings sealing it are invariant across every reseating.
+
+    The ONLY translation-invariant isolation is a walkable component whose entire
+    4-neighbour boundary is this same unit's own REQUIRED buildings. Those are
+    impermeable and move rigidly with the unit, so:
+      - carving can never breach them (``repair_continent_walkable_joins`` treats
+        required buildings as walls), and
+      - no OTHER region can ever become adjacent to the component on a later
+        seating, because every bordering cell is permanently occupied by this
+        unit's own required-building tile (tiles cannot overlap).
+    Such a component can therefore never join the rest of the landmass, so the
+    layout is provably hopeless and we abort instead of retrying 1000 times.
+
+    Any boundary cell that is empty, impassable, non-required building, or owned
+    by a different region is NOT reported: an external region could be seated
+    there on a later retry, or carving could open it, so the failure stays
+    geometry-dependent (retryable).
+    """
+    for r in cont:
+        if not r:
+            continue
+        unit_tiles = _region_all_tiles(r)
+        if not unit_tiles:
+            continue
+        walkable = {c for c in unit_tiles if _is_walkable_tile(world.get(c))}
+        comps = _components_4(walkable)
+        if len(comps) <= 1:
+            continue
+        # Examine each component: it is invariantly isolated only if every
+        # boundary neighbour outside the component is one of THIS unit's own
+        # required-building tiles.
+        for comp in comps:
+            sealed = True
+            for (x, y) in comp:
+                for nbr in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+                    if nbr in comp:
+                        continue
+                    # A neighbour the component could grow into / be bridged
+                    # across on some seating breaks the invariant seal: it is
+                    # sealed ONLY by this unit's own required buildings.
+                    if nbr in unit_tiles and _is_required_building_tile(world.get(nbr)):
+                        continue
+                    sealed = False
+                    break
+                if not sealed:
+                    break
+            if sealed:
+                return True
+    return False
 
 
 def _count_components(tiles: Set[Tuple[int, int]]) -> int:
