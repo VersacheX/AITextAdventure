@@ -706,11 +706,20 @@ def _shortest_walkable_corridor(
             ttype = getattr(tile, "type", None)
             if ttype == "impassable":
                 step = IMPASSABLE_COST
-            elif ttype == const.BUILDING and not getattr(tile, "required_building", False):
+            elif (
+                ttype == const.BUILDING
+                and "required_building" in getattr(tile, "__dict__", {})
+                and not tile.required_building
+            ):
                 step = BUILDING_COST
             else:
                 # Required building or already-walkable interior: not a carve
                 # candidate (walkable interiors are reached as endpoints only).
+                # A BUILDING tile with NO instance-level ``required_building``
+                # marker (legacy pickle-based saves predate the field and never
+                # ran the dataclass initializer) is treated as protected rather
+                # than carvable, so loading an old save can't delete a required
+                # story building during intro completion.
                 continue
             new_cost = cost + step
             if new_cost < dist.get(nxt, float("inf")):
@@ -1450,24 +1459,16 @@ def build_continents_and_ocean(player_game: PlayerGame,
     verified, invariant_failure = verify_continent_city_containment_detailed(
         player_game, continents, requested_counts
     )
-    # Bound only the GEOMETRY retries. The hard cap is generous (contiguity almost
-    # always resolves within a handful of reshuffles) so a legitimately difficult
-    # layout still gets ample passes, but it is NOT the primary stop condition: a
-    # truly unrepairable topology (e.g. an impermeable required-building barrier
-    # that survives every randomized seating, since spreading/placement move each
-    # region rigidly) would otherwise burn all 1000 passes as a long blocking
-    # no-op. We therefore also stop as soon as repair makes no progress for
-    # ``no_progress_patience`` consecutive passes, detected by tracking the best
-    # (lowest) count of still-disconnected continents seen so far. Invariant
+    # Bound only the GEOMETRY retries. This is generous (contiguity almost always
+    # resolves within a handful of reshuffles) but finite, so a truly pathological
+    # layout surfaces as a failure instead of hanging. The hard cap is the sole
+    # stop condition: a constant count of still-disconnected continents is NOT
+    # proof of unrepairable topology -- randomized seatings can fail with the same
+    # count repeatedly and still succeed on a later pass (especially when only one
+    # continent is disconnected) -- so we keep retrying until success or the cap
+    # rather than bailing on an unreliable no-progress heuristic. Invariant
     # failures bypass the loop entirely via the guard below.
     max_repair_attempts = 1000
-    no_progress_patience = 8
-
-    def _disconnected_count() -> int:
-        return sum(1 for cont in continents if not _continent_is_contiguous(cont))
-
-    best_disconnected = _disconnected_count()
-    stalled_passes = 0
     attempt = 0
     while not verified and not invariant_failure and attempt < max_repair_attempts:
         attempt += 1
@@ -1494,30 +1495,6 @@ def build_continents_and_ocean(player_game: PlayerGame,
         verified, invariant_failure = verify_continent_city_containment_detailed(
             player_game, continents, requested_counts
         )
-
-        if verified or invariant_failure:
-            break
-
-        # No-progress guard: reshuffling randomizes seating angles, so a repairable
-        # layout trends toward fewer disconnected continents across passes. If the
-        # best count hasn't improved for a whole patience window the remaining
-        # failures are topology the pipeline cannot move (rigid required-building
-        # barriers), so stop rather than rerunning the full compaction/placement
-        # pipeline hundreds more times to no effect.
-        current_disconnected = _disconnected_count()
-        if current_disconnected < best_disconnected:
-            best_disconnected = current_disconnected
-            stalled_passes = 0
-        else:
-            stalled_passes += 1
-            if stalled_passes >= no_progress_patience:
-                _emit(
-                    f"[continents] Repair made no progress for "
-                    f"{no_progress_patience} consecutive passes "
-                    f"({current_disconnected} continent(s) still disconnected); "
-                    f"treating the remaining topology as unrepairable and aborting."
-                )
-                break
 
     if invariant_failure:
         _emit(
