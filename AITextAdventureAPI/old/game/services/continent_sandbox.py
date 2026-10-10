@@ -33,7 +33,8 @@ class ContinentSandbox(PlayerGame):
     """Isolated PlayerGame for generating one continent's regions independently."""
 
     def __init__(self, continent_id: int, target_city_keys: List[str],
-                 connector_budget: int = 8):
+                 connector_budget: int = 8, live_pg: Optional[PlayerGame] = None,
+                 global_city_offset: int = 0):
         """
         Args:
             continent_id: 1-based continent number (2-6; continent 1 is never
@@ -42,8 +43,17 @@ class ContinentSandbox(PlayerGame):
                 continent, e.g. ``["shallows_large_city", "snow_small_city",
                 "swamp_small_city"]``. Order is preserved; it drives which city
                 is built next.
-            connector_budget: Soft cap on cityless connector regions grown
-                between cities.
+            connector_budget: Cap on cityless connector regions grown between
+                cities. Once spent, the sandbox FORCES the remaining cities so a
+                stalled placement can't keep spawning filler.
+            live_pg: The live game whose progression (characters/chapter) loot
+                scaling must follow. Without it a fresh sandbox has no characters
+                and only its own local city count, which would reset loot levels
+                for every continent.
+            global_city_offset: Number of chapter cities that precede this
+                continent in ``CHAPTER_CITY_ORDER``. Added to the sandbox's local
+                city count so loot scaling matches the city's true global chapter
+                position rather than its 1-based position within the sandbox.
         """
         super().__init__()
         self.continent_id = continent_id
@@ -51,9 +61,36 @@ class ContinentSandbox(PlayerGame):
         self.connector_budget = connector_budget
         self.connectors_built = 0
         self.cities_built = 0
+        self._live_pg = live_pg
+        self._global_city_offset = global_city_offset
         # Post-intro cap semantics: the sandbox is "complete" so get_max_cities()
         # returns a city cap (our target count) rather than the intro cap.
         self.intro_complete = True
+
+    # ------------------------------------------------------------------
+    # Progression passthrough (keep loot scaling anchored to the live game)
+    # ------------------------------------------------------------------
+    def get_max_character_level(self) -> int:
+        """Defer to the live game's party level so loot doesn't reset to 1.
+
+        City loot scaling (``City.populate_tiles`` ->
+        ``get_max_city_loot_level_level``) reads the max character level. A fresh
+        sandbox has no characters, so without this it would always see level 1.
+        """
+        if self._live_pg is not None:
+            return self._live_pg.get_max_character_level()
+        return super().get_max_character_level()
+
+    def get_max_city_loot_level_level(self) -> int:
+        """Scale loot by this city's TRUE global chapter position.
+
+        The base implementation uses the sandbox-local city count, which restarts
+        at 0 for every continent and would flatten loot levels. Offset the local
+        count by the number of chapter cities that precede this continent so a
+        chapter-10 city scales as chapter 10, not as the sandbox's 3rd city.
+        """
+        num_cities = self._global_city_offset + self.get_city_count()
+        return max(num_cities, self.get_max_character_level()) + 1
 
     # ------------------------------------------------------------------
     # City budgeting overrides (Constraint 2: per-sandbox cursor)
@@ -81,6 +118,23 @@ class ContinentSandbox(PlayerGame):
         return None  # All target cities built.
 
     # ------------------------------------------------------------------
+    # Connector budget (Constraint: bounded filler, no open-ended growth)
+    # ------------------------------------------------------------------
+    def _region_should_have_city(self, cities_remaining: int) -> bool:
+        """Force cities once the connector budget is spent.
+
+        The base policy biases a region to be a cityless connector whenever the
+        previous region had a city. On its own that lets filler accumulate until
+        ``generate_world`` hits its stall limit. Here, once we've already grown
+        ``connector_budget`` connectors, we FORCE every remaining region to carry
+        a city so the sandbox converges on exactly its target set promptly.
+        """
+        citiless = sum(1 for r in self.regions if r.child_city is None)
+        if citiless >= self.connector_budget:
+            return True
+        return super()._region_should_have_city(cities_remaining)
+
+    # ------------------------------------------------------------------
     # Story suppression (Constraint 3: no task acquisition during generation)
     # ------------------------------------------------------------------
     def acquire_task(self, task) -> None:  # noqa: D401 - intentional no-op
@@ -102,25 +156,18 @@ class ContinentSandbox(PlayerGame):
         return None
 
     # ------------------------------------------------------------------
-    # Region creation with budget + continent stamping
+    # Region creation with continent stamping
     # ------------------------------------------------------------------
     def create_region_at(self, origin: Tuple[int, int]) -> Optional[City]:
-        """Grow one region, enforcing this sandbox's city/connector budgets.
+        """Grow one region and stamp it with this sandbox's continent id.
 
         Reuses the full parent ``create_region_at`` (weighted neighbour policy
-        from ``REGIONAL_NEIGHBORS`` is untouched -- Constraint 5), then stamps the
-        resulting region with this sandbox's continent id.
+        from ``REGIONAL_NEIGHBORS`` is untouched -- Constraint 5). The city vs
+        connector decision is governed by ``_region_should_have_city`` above.
         """
         # Stop once every target city is built.
         if self.cities_built >= len(self.target_city_keys):
             return None
-
-        # If the connector budget is spent and no more cities remain to anchor a
-        # new region, stop rather than growing endless filler.
-        citiless = [r for r in self.regions if r.child_city is None]
-        if len(citiless) >= self.connector_budget:
-            if self.get_next_unbuilt_chapter_city() is None:
-                return None
 
         region = super().create_region_at(origin)
         if region is None:
@@ -139,19 +186,57 @@ class ContinentSandbox(PlayerGame):
         return region
 
 
+def _ensure_sandbox_contiguous(sandbox: "ContinentSandbox", cont_id: int) -> None:
+    """Repair + verify the sandbox continent's WALKABLE contiguity, failing closed.
+
+    City count alone does not prove a usable continent: edge-grown regions can
+    touch only through impassable/building seam tiles, leaving cities unreachable
+    on foot. The old monolithic pipeline repaired and verified this
+    (``repair_continent_walkable_joins`` / walkable-contiguity check); we must do
+    the same before accepting a sandbox, otherwise we'd seat a continent whose
+    cities can't be walked between.
+
+    Reuses the shared continent_service helpers, treating the sandbox's entire
+    region list as a single continent.
+    """
+    from game.services.continent_service import (
+        normalize_region_internal_connectivity,
+        update_player_game_world_tiles_after_translation,
+        repair_continent_walkable_joins,
+        _continent_is_contiguous,
+    )
+
+    continent = list(sandbox.regions)
+
+    # Bridge each region's own internal gaps first (child-city vs parent splits).
+    for region in continent:
+        normalize_region_internal_connectivity(region, sandbox)
+    update_player_game_world_tiles_after_translation(sandbox)
+
+    # Carve non-destructive walkable corridors between region seams.
+    repair_continent_walkable_joins(sandbox, [continent])
+
+    if not _continent_is_contiguous(continent):
+        raise RuntimeError(
+            f"Continent {cont_id}: generated cities are not walkably connected "
+            f"after repair; refusing to seat a disconnected continent."
+        )
+
+
 def generate_continent_sandboxes(live_pg: PlayerGame, seed: int) -> Dict[int, ContinentSandbox]:
     """Generate continents 2-6 in isolated sandboxes.
 
     Args:
-        live_pg: The live PlayerGame (continent 1 already built). Only used for
-            logging context; the sandboxes are fully independent.
+        live_pg: The live PlayerGame (continent 1 already built). Its party-level
+            progression anchors loot scaling inside each sandbox.
         seed: Base RNG seed for determinism.
 
     Returns:
         Dict mapping ``continent_id`` -> completed ``ContinentSandbox``.
 
     Raises:
-        RuntimeError: If any sandbox fails to generate its target city set.
+        RuntimeError: If any sandbox fails to generate its target city set or
+            produces a walkably-disconnected continent.
     """
     sandboxes: Dict[int, ContinentSandbox] = {}
     index = 0
@@ -164,6 +249,7 @@ def generate_continent_sandboxes(live_pg: PlayerGame, seed: int) -> Dict[int, Co
             continue
 
         target_cities = const.CHAPTER_CITY_ORDER[index: index + city_count]
+        global_city_offset = index
         index += city_count
 
         print(f"Generating continent {cont_id} ({city_count} cities): {target_cities}")
@@ -172,6 +258,8 @@ def generate_continent_sandboxes(live_pg: PlayerGame, seed: int) -> Dict[int, Co
             continent_id=cont_id,
             target_city_keys=target_cities,
             connector_budget=max(2, city_count // 2),
+            live_pg=live_pg,
+            global_city_offset=global_city_offset,
         )
 
         seed_base = (seed * (cont_id + 1)) % (10 ** 8) or (cont_id + 1)
@@ -193,6 +281,9 @@ def generate_continent_sandboxes(live_pg: PlayerGame, seed: int) -> Dict[int, Co
                 f"Continent {cont_id}: generated {built_cities} cities, "
                 f"expected {city_count} ({target_cities})."
             )
+
+        # Validate the continent is walkably contiguous before accepting it.
+        _ensure_sandbox_contiguous(sandbox, cont_id)
 
         sandboxes[cont_id] = sandbox
         print(

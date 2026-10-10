@@ -285,12 +285,27 @@ class PlayerGame:
 		"""Verify continent 1 (chapters 1-4) cities are present and correct.
 
 		Chapters 1-4 are already built in ``self.regions`` by the intro. We must
-		NOT regenerate them -- only confirm each city-bearing region's canonical
-		continent (from ``CITY_CONTINENT_MAP``) is 1, and stamp the ``continent``
-		attribute if a legacy save lacks it. Any city that canonically belongs to
-		a later continent appearing here means the intro world is inconsistent, so
-		we abort with diagnostics (the outer complete_task transaction rolls back).
+		NOT regenerate them -- only confirm the intro world is internally
+		consistent before the sandbox pipeline (which starts at chapter 5) runs:
+
+		  - Every city-bearing region whose canonical continent is 1 is stamped
+			``continent = 1``.
+		  - No city that canonically belongs to a LATER continent is present yet
+			(that would mean the intro over-generated).
+		  - ALL FOUR canonical continent-1 cities are present EXACTLY ONCE. A
+			missing city would otherwise pass silently while the sandbox cursor
+			(which only covers chapters 5+) permanently skips it, committing an
+			incomplete world. A duplicate signals a corrupt intro.
+
+		Any inconsistency raises; the outer complete_task transaction rolls back.
 		"""
+		# Canonical set the intro is expected to have produced.
+		expected_keys = [
+			key for key, cont in const.CITY_CONTINENT_MAP.items() if cont == 1
+		]
+		expected_set = set(expected_keys)
+
+		seen_keys: List[str] = []
 		for region in self.regions:
 			if region.child_city is None:
 				continue  # connectors carry no canonical membership
@@ -302,9 +317,27 @@ class PlayerGame:
 					f"continent {expected_cont}, not 1. The intro world is "
 					f"inconsistent; aborting world generation."
 				)
+			seen_keys.append(city_key)
 			region.continent = 1
-			if region.child_city is not None:
-				region.child_city.continent = 1
+			region.child_city.continent = 1
+
+		seen_set = set(seen_keys)
+
+		missing = expected_set - seen_set
+		if missing:
+			raise RuntimeError(
+				f"Continent 1 validation failed: missing expected chapter cities "
+				f"{sorted(missing)}. The intro world is incomplete; aborting world "
+				f"generation (the sandbox pipeline would otherwise skip them)."
+			)
+
+		duplicates = [k for k in expected_set if seen_keys.count(k) > 1]
+		if duplicates:
+			raise RuntimeError(
+				f"Continent 1 validation failed: duplicate chapter cities "
+				f"{sorted(duplicates)} present in the intro world; aborting."
+			)
+
 
 	def _register_and_initialize_continents(self, sandboxes: Dict[int, object]) -> None:
 		"""Seat each sandbox continent into the live world, then init its stories.
@@ -1385,6 +1418,28 @@ class PlayerGame:
 				return region_name
 		return None
 
+	def _region_should_have_city(self, cities_remaining: int) -> bool:
+		"""Decide whether the next region carries a city (overridable hook).
+
+		Base rules:
+		  - If only one city budget remains, force a city so generation can't
+			stall forever rolling "no city".
+		  - The very first region always starts with a city.
+		  - If the previous region already placed a city, bias this one to be a
+			cityless connector region.
+		  - Otherwise place a city with an 80% chance.
+
+		Subclasses (e.g. ``ContinentSandbox``) override this to enforce a connector
+		budget -- once the budget is spent they force the remaining cities.
+		"""
+		if cities_remaining <= 1:
+			return True
+		if self.previous_region is None:
+			return True
+		if self.previous_region.child_city is not None:
+			return False
+		return random.random() < 0.8
+
 	def create_region_at(self, origin: Tuple[int,int]) -> object:
 		"""Create a new region centered at `origin`.
 
@@ -1411,22 +1466,9 @@ class PlayerGame:
 
 		# Decide whether this region carries a city. This is the single
 		# authoritative decision (build_region_map honors it rather than
-		# re-rolling its own). Rules:
-		#  - If only one city budget remains, force a city so generation can't
-		#    stall forever rolling "no city".
-		#  - If the previous region already placed a city, bias this one to be
-		#    a cityless connector region.
-		#  - The very first region always starts with a city.
-		#  - Otherwise place a city with an 80% chance.
-		has_city: bool = False
-		if cities_remaining <= 1:
-			has_city = True
-		elif self.previous_region is None:
-			has_city = True
-		elif self.previous_region.child_city is not None:
-			has_city = False
-		elif random.random() < 0.8:
-			has_city = True
+		# re-rolling its own). Factored into an overridable hook so subclasses
+		# (e.g. ContinentSandbox) can impose their own city/connector budget.
+		has_city: bool = self._region_should_have_city(cities_remaining)
 
 		if has_city:
 			region_name = self.get_region_of_chapter_city()
