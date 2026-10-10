@@ -264,7 +264,7 @@ class PlayerGame:
 			 now-placed regions (so events resolve final locations/NPCs).
 		  5. Build the ocean around the finished landmass.
 		"""
-		seed = abs(hash(self.characters[0].name)) % (10 ** 8)
+		seed = self._stable_world_seed()
 
 		# 1) Preserve + validate continent 1.
 		self._validate_continent_1_membership()
@@ -280,6 +280,20 @@ class PlayerGame:
 		self._create_ocean_around_world(seed)
 
 		print("World generation complete.")
+
+	def _stable_world_seed(self) -> int:
+		"""Derive a reproducible, CASE-SENSITIVE world seed from the 1st character.
+
+		``hash()`` on a str is salted per-process (``PYTHONHASHSEED``), so the same
+		character name produced a DIFFERENT seed on every run -- which defeated the
+		deterministic-generation contract. Use a stable cryptographic digest of the
+		UTF-8 name bytes instead: identical names (matching case) always yield the
+		same seed; names differing only in case yield different seeds.
+		"""
+		import hashlib
+		name = self.characters[0].name if self.characters else ""
+		digest = hashlib.sha256(name.encode("utf-8")).hexdigest()
+		return int(digest, 16) % (10 ** 8)
 
 	def _validate_continent_1_membership(self) -> None:
 		"""Verify continent 1 (chapters 1-4) cities are present and correct.

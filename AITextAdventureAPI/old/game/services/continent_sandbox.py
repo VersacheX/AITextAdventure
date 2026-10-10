@@ -264,6 +264,13 @@ def generate_continent_sandboxes(live_pg: PlayerGame, seed: int) -> Dict[int, Co
 
         seed_base = (seed * (cont_id + 1)) % (10 ** 8) or (cont_id + 1)
 
+        # Seed the module-global RNG deterministically before generation. The
+        # region-growth path (create_region_at / _region_should_have_city /
+        # REGIONAL_NEIGHBORS selection, and build_region_map's city seed) all draw
+        # from the global ``random`` stream, so pinning it here is what actually
+        # makes a given world seed reproduce the same continents each run.
+        random.seed(seed_base)
+
         try:
             world_map_generator.generate_world(
                 sandbox,

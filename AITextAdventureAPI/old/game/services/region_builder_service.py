@@ -161,7 +161,11 @@ logger = logging.getLogger(__name__)
 
 def create_region_city(region_settings: dict) -> City:
 	"""Create and configure an empty region City from settings."""
-	rseed = (random.SystemRandom().randint(0, 2**32 - 1) ^ 0xA5A5A5) + 1
+	# Draw the region seed from the (caller-seeded) global RNG stream rather than
+	# SystemRandom: injecting process entropy here made region tiles/buildings/loot
+	# non-reproducible even for a fixed world seed. Deriving it from the seeded
+	# stream keeps identical world seeds producing identical regions.
+	rseed = (random.randint(0, 2**32 - 1) ^ 0xA5A5A5) + 1
 	rc = City(
 		rseed,
 		road_spacing=region_settings.get("road_spacing", 0),
