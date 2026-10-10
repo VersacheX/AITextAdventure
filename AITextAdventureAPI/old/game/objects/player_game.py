@@ -1,4 +1,4 @@
-﻿from typing import Any, Dict, List, Tuple, Optional
+﻿from typing import Any, Dict, List, Set, Tuple, Optional
 import random
 import importlib
 
@@ -242,46 +242,269 @@ class PlayerGame:
 			if task.type == TaskType.CompleteIntroStory and not task.completed:
 				self.complete_task(task)
 
-		print('Generating world regions...')
-		seed = abs(hash(self.characters[0].name)) % (10 ** 8)
+		print('Generating world by continents...')
+		self._build_world_by_continents()
 
-		self = generate_world(self, num_regions=10000, seed_base=seed, min_size=500, verbose=True)
-		self._create_donut()
+	def _build_world_by_continents(self):
+		"""Generate continents 2-6 in isolated sandboxes, then place + initialize.
 
-	def _create_donut(self):
+		This replaces the old monolithic generate-everything-then-partition
+		(``_create_donut``) pipeline, which grew all 21 chapter cities in one
+		shared space and then tried to carve + relocate them into continents --
+		a process whose placement step frequently failed contiguity verification
+		and spun a 1000-attempt repair loop.
+
+		New flow (continents are self-contained AT GENERATION TIME):
+		  1. Validate continent 1 (chapters 1-4) is already present + correctly
+			 stamped; never regenerate it.
+		  2. Generate continents 2-6 each in its own ``ContinentSandbox``.
+		  3. Seat each completed continent at a single rigid, non-overlapping
+			 offset into the live world.
+		  4. Initialize story tasks in canonical chapter-city order against the
+			 now-placed regions (so events resolve final locations/NPCs).
+		  5. Build the ocean around the finished landmass.
 		"""
-		A donut is a flat map world that allows the player to wrap E-W and N-S. effectively not a globe. A donut.
+		seed = self._stable_world_seed()
+
+		# 1) Preserve + validate continent 1.
+		self._validate_continent_1_membership()
+
+		# 2) Generate continents 2-6 in isolation.
+		from game.services.continent_sandbox import generate_continent_sandboxes
+		sandboxes = generate_continent_sandboxes(self, seed)
+
+		# 3) Seat each continent at a rigid, non-overlapping offset.
+		self._register_and_initialize_continents(sandboxes)
+
+		# 4) Build the ocean around the whole, finished world.
+		self._create_ocean_around_world(seed)
+
+		print("World generation complete.")
+
+	def _stable_world_seed(self) -> int:
+		"""Derive a reproducible, CASE-SENSITIVE world seed from the 1st character.
+
+		``hash()`` on a str is salted per-process (``PYTHONHASHSEED``), so the same
+		character name produced a DIFFERENT seed on every run -- which defeated the
+		deterministic-generation contract. Use a stable cryptographic digest of the
+		UTF-8 name bytes instead: identical names (matching case) always yield the
+		same seed; names differing only in case yield different seeds.
 		"""
-		seed = abs(hash(self.characters[0].name)) % (10 ** 8) 
+		import hashlib
+		name = self.characters[0].name if self.characters else ""
+		digest = hashlib.sha256(name.encode("utf-8")).hexdigest()
+		return int(digest, 16) % (10 ** 8)
 
-		from game.services.continent_service import build_continents_and_ocean
-		result = build_continents_and_ocean(self,
-										rng_seed=seed,
-										spread_radius=30,
-										ocean_padding=15)
+	def _validate_continent_1_membership(self) -> None:
+		"""Verify continent 1 (chapters 1-4) cities are present and correct.
 
-		# Never accept a malformed world. If continent verification failed (cities
-		# on the wrong continent or a non-contiguous landmass), the layout is
-		# invalid. Raise so complete_intro_story() rolls back the partial mutation
-		# rather than committing/reporting a broken map as complete.
-		if not result.get("verification_passed", False):
+		Chapters 1-4 are already built in ``self.regions`` by the intro. We must
+		NOT regenerate them -- only confirm the intro world is internally
+		consistent before the sandbox pipeline (which starts at chapter 5) runs:
+
+		  - Every city-bearing region whose canonical continent is 1 is stamped
+			``continent = 1``.
+		  - No city that canonically belongs to a LATER continent is present yet
+			(that would mean the intro over-generated).
+		  - ALL FOUR canonical continent-1 cities are present EXACTLY ONCE. A
+			missing city would otherwise pass silently while the sandbox cursor
+			(which only covers chapters 5+) permanently skips it, committing an
+			incomplete world. A duplicate signals a corrupt intro.
+
+		Any inconsistency raises; the outer complete_task transaction rolls back.
+		"""
+		# Canonical set the intro is expected to have produced.
+		expected_keys = [
+			key for key, cont in const.CITY_CONTINENT_MAP.items() if cont == 1
+		]
+		expected_set = set(expected_keys)
+
+		seen_keys: List[str] = []
+		for region in self.regions:
+			if region.child_city is None:
+				continue  # connectors carry no canonical membership
+			city_key = f"{region.region_name}_{region.child_city.city_name}"
+			expected_cont = const.CITY_CONTINENT_MAP.get(city_key)
+			if expected_cont != 1:
+				raise RuntimeError(
+					f"Continent 1 validation failed: city '{city_key}' maps to "
+					f"continent {expected_cont}, not 1. The intro world is "
+					f"inconsistent; aborting world generation."
+				)
+			seen_keys.append(city_key)
+			region.continent = 1
+			region.child_city.continent = 1
+
+		seen_set = set(seen_keys)
+
+		missing = expected_set - seen_set
+		if missing:
 			raise RuntimeError(
-				"World generation produced an invalid continent layout "
-				"(verification failed); aborting so a broken world is not committed."
+				f"Continent 1 validation failed: missing expected chapter cities "
+				f"{sorted(missing)}. The intro world is incomplete; aborting world "
+				f"generation (the sandbox pipeline would otherwise skip them)."
 			)
 
-		# ocean_bbox = result.get("ocean_bbox")
-		# ocean_region = result.get("ocean_region")
-		# continent_count = len(result.get("continents", []))
-		# ocean_tiles = len(ocean_region.tiles) if ocean_region else 0
-   
-		# print(f"Continents grouped: {continent_count}, ocean_bbox={ocean_bbox}, ocean_tiles={ocean_tiles}")
-		# for comp in result.get("continent_compositions", []):
-		# 	cont_num = comp.get("continent_number", "?")
-		# 	city_names = comp.get("city_names", [])
-		# 	print(f" Continent {cont_num} cities: {city_names}")
-		# input("Press Enter to continue...")
-		#self.continents = {comp.get("continent_number", "?"): comp.get("city_names", []) for comp in result.get("continent_compositions", [])}
+		duplicates = [k for k in expected_set if seen_keys.count(k) > 1]
+		if duplicates:
+			raise RuntimeError(
+				f"Continent 1 validation failed: duplicate chapter cities "
+				f"{sorted(duplicates)} present in the intro world; aborting."
+			)
+
+
+	def _register_and_initialize_continents(self, sandboxes: Dict[int, object]) -> None:
+		"""Seat each sandbox continent into the live world, then init its stories.
+
+		For each continent (in id order):
+		  - Compute a rigid offset that keeps its tiles clear of everything placed
+			so far (continent 1 is the anchor at its existing coordinates).
+		  - Translate the sandbox's regions/cities/dungeons/NPCs rigidly by that
+			offset using the shared continent_service translation helper, so the
+			continent moves as one unit with all entities intact.
+		  - Append the translated regions to ``self.regions`` and merge their tiles.
+
+		Story tasks are initialized AFTER every continent is seated (Constraint 3)
+		so event handlers resolve references against the final world.
+		"""
+		from game.services.continent_service import translate_region_tiles
+
+		occupied: Set[Tuple[int, int]] = set(self.world_tiles.keys())
+
+		for cont_id in sorted(sandboxes.keys()):
+			sandbox = sandboxes[cont_id]
+			cont_tiles: Set[Tuple[int, int]] = set(sandbox.world_tiles.keys())
+			if not cont_tiles:
+				continue
+
+			dx, dy = self._place_continent_no_overlap(cont_tiles, occupied)
+
+			# Move the whole continent rigidly (tiles, subloc maps, dungeons, NPCs)
+			# by translating each of the sandbox's regions. The sandbox owns the
+			# dungeons/NPCs it created, so entity translation runs against it.
+			if hasattr(sandbox, "_continent_translate_moved_entities"):
+				delattr(sandbox, "_continent_translate_moved_entities")
+			for region in sandbox.regions:
+				translate_region_tiles(region, dx, dy, sandbox)
+			if hasattr(sandbox, "_continent_translate_moved_entities"):
+				delattr(sandbox, "_continent_translate_moved_entities")
+
+			# Fold the continent into the live world.
+			for region in sandbox.regions:
+				region.continent = cont_id
+				if region.child_city is not None:
+					region.child_city.continent = cont_id
+				self.merge_region(region)
+				self.regions.append(region)
+
+			# Carry over dungeons + NPCs the sandbox created for this continent.
+			if getattr(sandbox, "dungeons", None):
+				self.dungeons.extend(sandbox.dungeons)
+			if getattr(sandbox, "npcs", None):
+				self.npcs.extend(sandbox.npcs)
+
+			# Track the newly seated tiles so the next continent avoids them.
+			occupied |= {(x + dx, y + dy) for (x, y) in cont_tiles}
+
+		# Initialize story tasks against the final, placed world.
+		self._initialize_continent_stories()
+
+	def _place_continent_no_overlap(self, continent_tiles: Set[Tuple[int, int]],
+									 occupied: Set[Tuple[int, int]]) -> Tuple[int, int]:
+		"""Return a rigid (dx, dy) that seats ``continent_tiles`` clear of ``occupied``.
+
+		Continent 1 anchors the world at its existing coordinates. Each subsequent
+		continent is seated just east of the current world mass with a fixed gap,
+		which is a single deterministic placement -- no retry/repair loop. Because
+		each continent was generated in isolation it is already contiguous, so a
+		rigid offset preserves its internal connectivity.
+		"""
+		if not continent_tiles:
+			return (0, 0)
+		if not occupied:
+			return (0, 0)
+
+		gap = 5
+		occ_max_x = max(x for (x, y) in occupied)
+		occ_min_y = min(y for (x, y) in occupied)
+		cont_min_x = min(x for (x, y) in continent_tiles)
+		cont_min_y = min(y for (x, y) in continent_tiles)
+
+		dx = (occ_max_x + gap) - cont_min_x
+		dy = occ_min_y - cont_min_y
+		return (dx, dy)
+
+	def _initialize_continent_stories(self) -> None:
+		"""Acquire story tasks for every chapter city, in canonical order.
+
+		Walks ``CHAPTER_CITY_ORDER`` and, for each region that has now been placed
+		into the live world, acquires its primary (regional) story and its
+		city-specific story -- mirroring what ``create_region_at`` normally does
+		inline during intro generation, but deferred so events resolve against the
+		final placed world.
+
+		Regional story roots are initialized once per biome (Constraint 4): the
+		primary story for e.g. "desert" is only acquired for the FIRST desert city
+		placed; later desert cities (on other continents) only initialize their
+		own city-specific story.
+		"""
+		regions_with_primary: Set[str] = set()
+
+		for city_key in const.CHAPTER_CITY_ORDER:
+			region = next(
+				(r for r in self.regions
+				 if r.child_city is not None
+				 and f"{r.region_name}_{r.child_city.city_name}" == city_key),
+				None,
+			)
+			if region is None:
+				continue
+
+			# Continent 1 cities were already initialized during the intro; don't
+			# re-acquire their stories.
+			if getattr(region, "continent", 1) == 1:
+				regions_with_primary.add(region.region_name)
+				continue
+
+			# Regional (primary) story: once per biome.
+			if region.region_name not in regions_with_primary:
+				primary_task = self.create_primary_story_task_for_region(region)
+				if primary_task:
+					self.acquire_task(primary_task)
+				regions_with_primary.add(region.region_name)
+
+			# City-specific story: always.
+			city_task = self.initiate_city_story_task_chain(
+				region.region_name, region.child_city
+			)
+			if city_task:
+				self.acquire_task(city_task)
+
+	def _create_ocean_around_world(self, seed: int) -> None:
+		"""Build the ocean rectangle around the fully-placed world.
+
+		Runs only after every continent is seated and merged so the ocean's
+		bounding box reflects the final landmass (Constraint: ocean queries
+		``world_tiles``). Reuses the existing ocean builder from continent_service.
+		"""
+		from game.services.continent_service import build_ocean_region_from_bbox
+
+		all_tiles = set(self.world_tiles.keys())
+		if not all_tiles:
+			return
+
+		ocean_padding = 15
+		xs = [x for (x, y) in all_tiles]
+		ys = [y for (x, y) in all_tiles]
+		min_x, max_x = min(xs), max(xs)
+		min_y, max_y = min(ys), max(ys)
+		ocean_bbox = (
+			min_x - ocean_padding,
+			max_x + ocean_padding,
+			min_y - ocean_padding,
+			max_y + ocean_padding,
+		)
+		build_ocean_region_from_bbox(self, ocean_bbox, seed=seed)
 
 	def lock_dungeon_by_id(self, dungeon_id: str):
 		dungeon = next((d for d in self.dungeons if d.id == dungeon_id), None)
@@ -1209,6 +1432,28 @@ class PlayerGame:
 				return region_name
 		return None
 
+	def _region_should_have_city(self, cities_remaining: int) -> bool:
+		"""Decide whether the next region carries a city (overridable hook).
+
+		Base rules:
+		  - If only one city budget remains, force a city so generation can't
+			stall forever rolling "no city".
+		  - The very first region always starts with a city.
+		  - If the previous region already placed a city, bias this one to be a
+			cityless connector region.
+		  - Otherwise place a city with an 80% chance.
+
+		Subclasses (e.g. ``ContinentSandbox``) override this to enforce a connector
+		budget -- once the budget is spent they force the remaining cities.
+		"""
+		if cities_remaining <= 1:
+			return True
+		if self.previous_region is None:
+			return True
+		if self.previous_region.child_city is not None:
+			return False
+		return random.random() < 0.8
+
 	def create_region_at(self, origin: Tuple[int,int]) -> object:
 		"""Create a new region centered at `origin`.
 
@@ -1235,22 +1480,9 @@ class PlayerGame:
 
 		# Decide whether this region carries a city. This is the single
 		# authoritative decision (build_region_map honors it rather than
-		# re-rolling its own). Rules:
-		#  - If only one city budget remains, force a city so generation can't
-		#    stall forever rolling "no city".
-		#  - If the previous region already placed a city, bias this one to be
-		#    a cityless connector region.
-		#  - The very first region always starts with a city.
-		#  - Otherwise place a city with an 80% chance.
-		has_city: bool = False
-		if cities_remaining <= 1:
-			has_city = True
-		elif self.previous_region is None:
-			has_city = True
-		elif self.previous_region.child_city is not None:
-			has_city = False
-		elif random.random() < 0.8:
-			has_city = True
+		# re-rolling its own). Factored into an overridable hook so subclasses
+		# (e.g. ContinentSandbox) can impose their own city/connector budget.
+		has_city: bool = self._region_should_have_city(cities_remaining)
 
 		if has_city:
 			region_name = self.get_region_of_chapter_city()

@@ -10,7 +10,6 @@ import time
 
 from game.objects.city import City
 from game.services import world_gen_progress as progress
-from game_screens.inventory_screen import InventoryScreen
 
 
 def _bbox_from_world_tiles(pg: Any) -> Optional[Tuple[int, int, int, int]]:

@@ -345,8 +345,11 @@ def build_region_around(main_city: City, region_settings: dict, origin: Tuple[in
 
 def build_region_map (player_game, region_settings: dict, origin: Tuple[int,int], hasCity: bool = False, ignored_locations: Tuple[int, int] = None):
 	#print(f'Building region map for region "{region_settings["region_name"]}" at origin {origin}, hasCity={hasCity}')
-	random.seed(random.SystemRandom().randint(0,2**32 -1))
-	rng_perc = random.random()
+	# Do NOT reseed from SystemRandom here: that injected process-entropy into the
+	# middle of an otherwise seeded generation stream, so a fixed world seed could
+	# still yield different layouts/cities/loot every run. Leave the caller's
+	# deterministic global RNG stream intact and derive any city seed FROM it, so
+	# identical world seeds reproduce identical regions.
 	ignored_set = set(ignored_locations) if ignored_locations else set()
 
 	# build_city_map needs a city object in order to determine max_size... which is currently using the default on City.
@@ -359,7 +362,7 @@ def build_region_map (player_game, region_settings: dict, origin: Tuple[int,int]
 	main_city = None
 	center = origin
 	if hasCity:
-		main_city, _ = build_city_map(random.SystemRandom().randint(0,2**32 -1))
+		main_city, _ = build_city_map(random.randint(0, 2**32 - 1))
 
 	#SET hasCity to false if no main_city was built
 	if main_city is None:
