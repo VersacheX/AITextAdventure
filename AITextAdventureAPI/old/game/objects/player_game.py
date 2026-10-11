@@ -368,13 +368,20 @@ class PlayerGame:
 		so event handlers resolve references against the final world.
 		"""
 		from game.services.continent_service import translate_region_tiles
+		from game.services import world_gen_progress as progress
 
 		occupied: Set[Tuple[int, int]] = set(self.world_tiles.keys())
 
+		total = len([c for c in sandboxes.values() if getattr(c, "world_tiles", None)])
+		progress.status("Placing the continents...")
+		progress.emit(f"[placement] Seating {total} sandbox continent(s) into the live world.")
+
+		seated = 0
 		for cont_id in sorted(sandboxes.keys()):
 			sandbox = sandboxes[cont_id]
 			cont_tiles: Set[Tuple[int, int]] = set(sandbox.world_tiles.keys())
 			if not cont_tiles:
+				progress.emit(f"[placement] continent {cont_id}: no tiles generated; skipping.")
 				continue
 
 			dx, dy = self._place_continent_no_overlap(cont_tiles, occupied)
@@ -406,7 +413,21 @@ class PlayerGame:
 			# Track the newly seated tiles so the next continent avoids them.
 			occupied |= {(x + dx, y + dy) for (x, y) in cont_tiles}
 
+			seated += 1
+			city_names = [
+				f"{r.region_name}_{r.child_city.city_name}"
+				for r in sandbox.regions
+				if getattr(r, "child_city", None) is not None
+			]
+			progress.status(f"Placing the continents ({seated}/{total})...")
+			progress.emit(
+				f"[placement] continent {cont_id} seated ({seated}/{total}): "
+				f"offset=({dx}, {dy}) regions={len(sandbox.regions)} "
+				f"tiles={len(cont_tiles)} cities={city_names}"
+			)
+
 		# Initialize story tasks against the final, placed world.
+		progress.emit(f"[placement] All {seated} continent(s) seated. Initializing story tasks.")
 		self._initialize_continent_stories()
 
 	def _place_continent_no_overlap(self, continent_tiles: Set[Tuple[int, int]],
@@ -450,6 +471,10 @@ class PlayerGame:
 		"""
 		regions_with_primary: Set[str] = set()
 
+		from game.services import world_gen_progress as progress
+		progress.status("Weaving the world's stories...")
+		progress.emit("[stories] Initializing story tasks in canonical chapter-city order.")
+
 		for city_key in const.CHAPTER_CITY_ORDER:
 			region = next(
 				(r for r in self.regions
@@ -464,6 +489,7 @@ class PlayerGame:
 			# re-acquire their stories.
 			if getattr(region, "continent", 1) == 1:
 				regions_with_primary.add(region.region_name)
+				progress.emit(f"[stories] {city_key}: continent 1 (intro) -- already initialized, skipped.")
 				continue
 
 			# Regional (primary) story: once per biome.
@@ -472,6 +498,10 @@ class PlayerGame:
 				if primary_task:
 					self.acquire_task(primary_task)
 				regions_with_primary.add(region.region_name)
+				progress.emit(
+					f"[stories] {city_key}: acquired primary (regional) story for "
+					f"biome '{region.region_name}'."
+				)
 
 			# City-specific story: always.
 			city_task = self.initiate_city_story_task_chain(
@@ -479,6 +509,10 @@ class PlayerGame:
 			)
 			if city_task:
 				self.acquire_task(city_task)
+			progress.emit(
+				f"[stories] {city_key}: acquired city story "
+				f"(continent {getattr(region, 'continent', '?')})."
+			)
 
 	def _create_ocean_around_world(self, seed: int) -> None:
 		"""Build the ocean rectangle around the fully-placed world.

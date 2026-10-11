@@ -214,7 +214,7 @@ def _ensure_sandbox_contiguous(sandbox: "ContinentSandbox", cont_id: int) -> Non
     update_player_game_world_tiles_after_translation(sandbox)
 
     # Carve non-destructive walkable corridors between region seams.
-    repair_continent_walkable_joins(sandbox, [continent])
+    repair_continent_walkable_joins(sandbox, [continent], labels=[cont_id])
 
     if not _continent_is_contiguous(continent):
         raise RuntimeError(

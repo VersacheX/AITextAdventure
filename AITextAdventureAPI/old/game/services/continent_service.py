@@ -554,7 +554,8 @@ def compact_continents_to_contiguous(player_game: PlayerGame, continents: List[L
 
 
 def repair_continent_walkable_joins(
-    player_game: PlayerGame, continents: List[List[City]]
+    player_game: PlayerGame, continents: List[List[City]],
+    labels: Optional[List[int]] = None
 ) -> None:
     """Make each continent's WALKABLE tiles a single 4-connected mass, in place.
 
@@ -619,8 +620,9 @@ def repair_continent_walkable_joins(
             comps = _components_4(walkable)
 
         if carved_impassable or carved_buildings:
+            label = labels[idx] if labels is not None and idx < len(labels) else idx + 1
             _emit(
-                f"[continents]   continent {idx + 1}: carved corridors at region "
+                f"[continents]   continent {label}: carved corridors at region "
                 f"joins (impassable={carved_impassable}, "
                 f"filler-buildings={carved_buildings})"
             )
