@@ -461,6 +461,16 @@ NPC_DIALOG = [
     ###############################################
     {
         'npc_id': 'marlo_finch',
+        'dialog_id': 'marlo_finch_ch4_you_appeared_out_of_nowhere',
+        'dialog': [
+            "You appeared out of nowhere!  I was just auditing the city for rift damage when you fell from the sky.",
+            "I’m Marlo Finch, Arcane Auditor to the Grand Council.  I need to take that bracelet off your hands and examine it before it causes any more damage.",
+            "This little thing has opened rifts in nearby wilds surrounding many cities.",
+            "Kirn said she got it from Mira.  Go back to Mira and find out what you can about it. There will be a reward if you manage to track it down."
+        ]
+    },
+    {
+        'npc_id': 'marlo_finch',
         'dialog_id': 'marlo_finch_ch4_after_rift',
         'dialog': [
 	        "Hey hold up a second there, I'm Marlo Finch.  Arcane Auditor to the Grand Council.",
@@ -849,20 +859,9 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'catalyst_defeated_world_shaking_event' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch4_after_rift' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch4_after_rift' } },
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch4_after_rift' } }
-        ]
-    },
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch4_after_rift' } },
+            { 'event_type': 'set_player_location', 'params': { 'location': 'region_city_other1' } },
 
-    ###############################################################
-    # TASK 7 — POST‑RIFT: MEET MARLO FINCH
-    ###############################################################
-    {
-        'task_id': 'main_story_ch4_meet_marlo_finch_after_rift',
-        'type': 'meet',
-        'to_type': 'npc',
-        'to_id': 'marlo_finch',
-        'task_acquire_events': [],
-        'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'marlo_finch', 'dialog_id': 'marlo_finch_ch4_after_rift' } },
             { 'event_type': 'remove_item', 'params': { 'item_id': 'bracelet_of_void' } },
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'marlo_finch', 'dialog_id': 'marlo_finch_ch4_after_rift_2' } },
