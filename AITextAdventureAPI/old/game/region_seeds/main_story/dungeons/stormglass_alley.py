@@ -110,7 +110,7 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'impassable_chance': IMPASSABLE_CHANCE,
     'floor_hostiles': FLOOR_HOSTILES,
     'hostile_seeds': HOSTILE_SEEDS,
-    'npcs': [{'id': 'static_wraith_mob', 'location': 'final_chamber'}],
+    'npcs': [{'id': 'static_wraith', 'location': 'final_chamber'}],
     'items': [
         {'id': 'stimulant_med', 'location': 'treasure_room'},
         {'id': 'tome_dex', 'location': 'treasure_room'}

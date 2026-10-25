@@ -20,7 +20,6 @@ BORDER_COLOR     = '#1c3048'
 
 DUNGEON_NPCS: List[Dict] = [
     {'id': 'coveveil_voice',   'location': 'final_chamber'},
-    {'id': 'coveveil_voice_1', 'location': 'final_chamber'},
 ]
 
 DUNGEON_ITEMS: List[Dict] = [

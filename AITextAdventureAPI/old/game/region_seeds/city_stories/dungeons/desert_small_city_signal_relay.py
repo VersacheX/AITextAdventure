@@ -19,8 +19,7 @@ BORDER_TILE      = '·'
 BORDER_COLOR     = '#384838'
 
 DUNGEON_NPCS: List[Dict] = [
-    {'id': 'signal_wraith',   'location': 'final_chamber'},
-    {'id': 'signal_wraith_2', 'location': 'final_chamber'},
+    {'id': 'signal_wraith',   'location': 'final_chamber'}
 ]
 
 DUNGEON_ITEMS: List[Dict] = [

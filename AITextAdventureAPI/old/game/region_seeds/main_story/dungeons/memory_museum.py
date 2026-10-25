@@ -104,7 +104,7 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
 	'impassable_chance': IMPASSABLE_CHANCE,
 	'floor_hostiles': FLOOR_HOSTILES,
 	'hostile_seeds': HOSTILE_SEEDS,
-	'npcs': [{'id': 'oracle_reliquary_1', 'location': 'final_chamber'}],
+	'npcs': [],
 	'items': [
 		{'id': 'panacea', 'location': 'treasure_room'},
 		{'id': 'panacea', 'location': 'treasure_room'},

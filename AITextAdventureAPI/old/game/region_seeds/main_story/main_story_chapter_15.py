@@ -1109,7 +1109,6 @@ TASKS = [
         'to_type': 'npc',
         'to_id': 'edict',
         'task_acquire_events': [
-            {'event_type': 'create_npc', 'params': {'npc_id': 'edict', 'location': 'the_sanctimony'}},
         ],
         'task_complete_events': [
             {'event_type': 'initiate_dialog', 'params': {'npc_id': None, 'dialog_id': 'narrator_ch15_edict_intro'}},
