@@ -549,11 +549,11 @@ TASKS = [
         'task_acquire_events': [],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_still_waiting' },
-              'condition': { 'type': 'is_task_not_active', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
+              'condition': { 'type': 'is_task_active', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
             { 'event_type': 'remove_task', 'params': { 'task_id': 'main_story_ch6_check_back_with_seth' },
-              'condition': { 'type': 'is_task_not_active', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
+              'condition': { 'type': 'is_task_active', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch6_check_back_with_seth' },
-              'condition': { 'type': 'is_task_not_active', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
+              'condition': { 'type': 'is_task_active', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},
 
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_karrek_done' },
               'condition': { 'type': 'is_task_completed', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}},

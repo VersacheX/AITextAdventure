@@ -98,8 +98,8 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'rooms_per_floor': 2, # A single, large breach area
     'max_neighbors_per_room': 2,
     'additional_connection_chance': 0.0,
-    'min_max_distance_between_rooms': (0, 0),
-    'min_max_corridor_width': (1, 1),
+    'min_max_distance_between_rooms': (1, 3),
+    'min_max_corridor_width': (6, 8),
     'display_name': "Riftland Breach Site",
     'open_area_tile': OPEN_AREA_TILE,
     'impassable_tile': IMPASSABLE_TILE,
