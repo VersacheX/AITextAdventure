@@ -102,6 +102,9 @@ def pick_abilities_for_player(
     for a in all_abils:
         if not a or not isinstance(a, dict):
             continue
+        # never assign hostile/non-player abilities to a generated character
+        if a.get("non_player_ability"):
+            continue
         # strict filtering: if a focus is provided, skip abilities that do not match
         if ability_type_focus:
             

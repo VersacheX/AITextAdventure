@@ -405,7 +405,13 @@ def _get_location_region_area_from_params(params: Dict[str, Any], parent_task, p
 			city_number = int(parts[2])
 			if city_number <= len(player_game.get_cities()):
 				used_region = player_game.get_city_by_number(city_number)
-				if '_region' in params['location']:
+				# Only climb to the parent region for a true region reference.
+				# `region_city_<building>` keeps the CITY as the target; the bare
+				# `_region` token (e.g. city_number_3_region_open_area) means the
+				# parent region. Guard against the `_region` substring inside
+				# `region_city_` falsely promoting a city building lookup to the
+				# region (which has no city buildings -> location resolves None).
+				if '_region' in params['location'] and 'region_city' not in params['location']:
 					used_region = used_region.get_parent(player_game)
 
 				return used_region
@@ -605,20 +611,14 @@ def hide_npc_in_player_game(params, player_game):
 def set_aircraft(params, player_game, parent_task):
 	""" Show aircraft at location as show_npc_in_player_game to find pos, then call set_aircraft_location(pos) on player_game.
 	"""
-	used_region = _get_location_region_area_from_params(params, parent_task, player_game)
-	if used_region:
-		location_name = params['location'].replace('region_city_', '').replace('region_', '')
-		pos = used_region.find_coords_of_random_tile_of_type(player_game, location_name)
-		player_game.set_aircraft_location(pos)
+	pos = _get_npc_seed_location(params, parent_task, player_game)
+	player_game.set_aircraft_location(pos)
 
 def set_player_location(params, player_game, parent_task):
 	""" Show player at location as show_npc_in_player_game to find pos, then call set_player_location(pos) on player_game.
 	"""
-	used_region = _get_location_region_area_from_params(params, parent_task, player_game)
-	if used_region:
-		location_name = params['location'].replace('region_city_', '').replace('region_', '')
-		pos = used_region.find_coords_of_random_tile_of_type(player_game, location_name)
-		player_game.set_player_location(pos)
+	pos = _get_npc_seed_location(params, parent_task, player_game)
+	player_game.set_player_location(pos)
 
 def show_npc_in_player_game(params, player_game, parent_task):
 	""" unlike hide_npoc which simply sets the npc position to None, so it's effectively nowhere.
@@ -635,12 +635,9 @@ def show_npc_in_player_game(params, player_game, parent_task):
 		if n.id == npc_id:
 			# npc found
 			# now set position based on params['location']
-			used_region = _get_location_region_area_from_params(params, parent_task, player_game)
-			if used_region:
-				location_name = params['location'].replace('region_city_', '').replace('region_', '')
-				pos = used_region.find_coords_of_random_tile_of_type(player_game, location_name)
-				n.position = pos
-				return n
+			pos = _get_npc_seed_location(params, parent_task, player_game)
+			n.position = pos
+			return n
 	# not found
 	_report_event_error(player_game, f'NPC to show not found: {npc_id}')
 	return None
