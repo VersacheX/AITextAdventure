@@ -8,7 +8,7 @@ from typing import Dict, Any
 # Tiles
 OPEN_AREA_TILE = "░"
 IMPASSABLE_TILE = "¤"
-IMPASSABLE_CHANCE = 0.30
+IMPASSABLE_CHANCE = 0.12
 OPEN_AREA_COLOR  = "#4a7a5a"
 IMPASSABLE_COLOR = "#1a3a28"
 BORDER_TILE      = "·"
@@ -112,8 +112,8 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'hostile_seeds': HOSTILE_SEEDS,
     'npcs': [{'id': 'riftspawn_aberrant', 'location': 'final_chamber'}],
     'items': [
-        {'id': 'stimulant_large', 'location': 'treasure_room'},
-        {'id': 'panacea', 'location': 'treasure_room'}
+        {'id': 'stimulant_large', 'location': 'final_chamber'},
+        {'id': 'panacea', 'location': 'final_chamber'}
     ],
     'boss_mob': BOSS_MOB,
     'boss_hostiles': BOSS_HOSTILES,

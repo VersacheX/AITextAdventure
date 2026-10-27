@@ -538,6 +538,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch6_local_errand' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'seth', 'standing_text': ["Talk to Karrek at the storm post first. Then I'll send you to my contact."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch6_check_back_with_seth' }},
+            { 'event_type': 'award_task', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }}
         ]
     },
     # ── New task: check back with Seth after Karrek ─────────────────
