@@ -565,13 +565,27 @@ class PlayerGame:
 				self.add_info_dialog_line(dungeon.display_name, line)
 
 	def acquire_task(self, task: Task) -> None:
-		"""Add a new task to the player's active tasks."""
-		exists = any(t.task_id == task.task_id for t in self.tasks)
-		if not exists:
+		"""Add a new task to the player's active tasks.
+
+		If a task with the same id already exists we normally treat the award as
+		a no-op (a task can't be acquired twice). The exception is a task that was
+		previously COMPLETED: re-awarding it (e.g. mutually-exclusive toggle tasks
+		like the Astra Wynn go-back/go-forward teleport pair, which repeatedly
+		re-award one another) must re-activate it. Leaving the stale completed copy
+		in place would skip the append and strand the player with a completed task
+		and no active one, breaking the toggle. In that case we drop every existing
+		same-id instance and append the fresh, active task.
+		"""
+		existing = [t for t in self.tasks if t.task_id == task.task_id]
+		active_exists = any(not getattr(t, 'completed', False) for t in existing)
+		if active_exists:
+			self.add_info_dialog_line(None, f'Task {task.task_id} of type {task.type} already acquired')
+		else:
+			# No active copy: remove any stale completed copies and (re)activate.
+			if existing:
+				self.tasks = [t for t in self.tasks if t.task_id != task.task_id]
 			#print (f'Acquiring task {task.task_id} of type {task.type}')
 			self.tasks.append(task)
-		else:
-			self.add_info_dialog_line(None, f'Task {task.task_id} of type {task.type} already acquired')
 
 		if task.task_acquire_events:
 			for event in task.task_acquire_events:
@@ -660,15 +674,34 @@ class PlayerGame:
 			if is_outermost:
 				self._task_txn_active = False
 
+	def get_task_by_id(self, task_id: str):
+		"""Return the active task matching task_id, or None."""
+		return next((t for t in self.tasks if t.task_id == task_id), None)
+
 	def cancel_task(self, task) -> None:
-		"""SET THE TASK TO COMPLETED WITHOUT TRIGGERING IT'S EVENTS"""
+		"""SET THE TASK TO COMPLETED WITHOUT TRIGGERING IT'S EVENTS.
+
+		Accepts either a Task object or a task_id string (task events dispatch a
+		raw task_id). A string is resolved against the player's active tasks.
+		"""
+		if isinstance(task, str):
+			task = self.get_task_by_id(task)
+		if task is None:
+			return
 		#print (f'Cancelling task {task.task_id} of type {task.type}')
 		task.completed = True
 
 	def remove_task(self, task) -> None:
-		"""REMOVE THE TASK FROM THE PLAYER GAME WITHOUT TRIGGERING IT'S EVENTS"""
-		#print (f'Removing task {task.task_id} of type {task.type}')
-		self.tasks = [t for t in self.tasks if t.task_id != task.task_id]
+		"""REMOVE THE TASK FROM THE PLAYER GAME WITHOUT TRIGGERING IT'S EVENTS.
+
+		Accepts either a Task object or a task_id string (task events dispatch a
+		raw task_id).
+		"""
+		task_id = task if isinstance(task, str) else getattr(task, 'task_id', None)
+		if task_id is None:
+			return
+		#print (f'Removing task {task_id}')
+		self.tasks = [t for t in self.tasks if t.task_id != task_id]
 
 	def check_complete_boss_mob(self, mob_id: str) -> None:
 		"""Check for dungeon boss mob completion tasks for the given mob_id.

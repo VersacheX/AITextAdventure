@@ -351,7 +351,6 @@ TASKS = [
 			},
 		],
 		'task_complete_events': [
-            { 'event_type': 'award_task', 'params': { 'task_id': 'snow_small_city_type_a_ch6_meet_karrek' }},
 			{
 				'event_type': 'award_task',
 				'params': {

@@ -84,7 +84,7 @@ BOSS_HOSTILES = [
         'strong_attack': 'energy surge',
         'player_abilities': [],
         'base_str': 8, 'base_dex': 18, 'base_con': 10, 'base_int': 14,
-        'base_hp': 350, 'base_ap': 30,
+        'base_hp': 1500, 'base_ap': 30,
         'str_per_level': 1, 'dex_per_level': 2, 'con_per_level': 1, 'int_per_level': 2,
         'resistances': ['electric'], 'immunities': [], 'weaknesses': ['earth']
     }
@@ -110,7 +110,7 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'impassable_chance': IMPASSABLE_CHANCE,
     'floor_hostiles': FLOOR_HOSTILES,
     'hostile_seeds': HOSTILE_SEEDS,
-    'npcs': [{'id': 'static_wraith_mob', 'location': 'final_chamber'}],
+    'npcs': [{'id': 'static_wraith', 'location': 'final_chamber'}],
     'items': [
         {'id': 'stimulant_med', 'location': 'treasure_room'},
         {'id': 'tome_dex', 'location': 'treasure_room'}

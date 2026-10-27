@@ -103,7 +103,7 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
 	'impassable_chance': IMPASSABLE_CHANCE,
 	'floor_hostiles': FLOOR_HOSTILES,
 	'hostile_seeds': HOSTILE_SEEDS,
-	'npcs': [{'id': 'paradox_crux_1', 'location': 'final_chamber'}],
+	'npcs': [{'id': 'paradox', 'location': 'final_chamber'}],
 	'items': [
 		{'id': 'panacea', 'location': 'treasure_room'},
 		{'id': 'panacea', 'location': 'treasure_room'},

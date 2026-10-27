@@ -24,6 +24,7 @@ from textual import on
 from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal, Vertical
+from textual.message import Message
 from textual.widget import Widget
 from textual.widgets import Button, Label, ListItem, ListView, Static, TabbedContent, TabPane
 from textual import events
@@ -159,6 +160,71 @@ def _item_detail(item: Any) -> str:
     if slot:
         lines.append(f"Slot: {slot.name if hasattr(slot, 'name') else slot}")
     return "\n".join(lines)
+
+
+# ── buy-list filtering ────────────────────────────────────────────────────────
+#
+# Weapon shops filter by the weapon's highest primary stat (STR / DEX / INT);
+# armor shops filter by armor piece (Head / Body / Arms / Legs). Utility / inn /
+# bar shops have no meaningful filter, so the bar is hidden there.
+
+_WEAPON_FILTERS: tuple[str, ...] = ("all", "str", "dex", "int")
+_WEAPON_FILTER_LABEL: dict[str, str] = {
+    "all": "All", "str": "STR", "dex": "DEX", "int": "INT",
+}
+
+_ARMOR_FILTERS: tuple[str, ...] = ("all", "head", "body", "arms", "legs")
+_ARMOR_FILTER_LABEL: dict[str, str] = {
+    "all": "All", "head": "Head", "body": "Body", "arms": "Arms", "legs": "Legs",
+}
+
+
+def _shop_filters(shop_type: str) -> tuple[tuple[str, ...], dict[str, str]]:
+    """Return (filter keys, labels) for a shop type, or empty when not filterable."""
+    if shop_type == "shopweapons":
+        return _WEAPON_FILTERS, _WEAPON_FILTER_LABEL
+    if shop_type == "shoparmor":
+        return _ARMOR_FILTERS, _ARMOR_FILTER_LABEL
+    return (), {}
+
+
+def _weapon_primary_stat(item: Any) -> str | None:
+    """Return 'str' / 'dex' / 'int' for the weapon's highest primary stat.
+
+    Ties resolve in STR → DEX → INT order. Returns None when the weapon grants
+    no primary stat so it only ever appears under the 'all' filter.
+    """
+    stats = {
+        "str": int(getattr(item, "strength", 0) or 0),
+        "dex": int(getattr(item, "dexterity", 0) or 0),
+        "int": int(getattr(item, "intelligence", 0) or 0),
+    }
+    best = max(stats.values())
+    if best <= 0:
+        return None
+    for key in ("str", "dex", "int"):
+        if stats[key] == best:
+            return key
+    return None
+
+
+def _armor_slot_key(item: Any) -> str | None:
+    """Return the armor piece key ('head'/'body'/'arms'/'legs') for an item."""
+    slot = getattr(item, "slot", None)
+    if slot is None:
+        return None
+    name = slot.name if hasattr(slot, "name") else str(slot)
+    return str(name).lower()
+
+
+def _apply_shop_filter(stock: List[Any], shop_type: str, filter_key: str) -> List[Any]:
+    if filter_key == "all":
+        return list(stock)
+    if shop_type == "shopweapons":
+        return [w for w in stock if _weapon_primary_stat(w) == filter_key]
+    if shop_type == "shoparmor":
+        return [a for a in stock if _armor_slot_key(a) == filter_key]
+    return list(stock)
 
 
 # ── party stat comparison ─────────────────────────────────────────────────────
@@ -315,6 +381,37 @@ class _ShopItem(ListItem):
         self.selling = selling
 
 
+class _FilterOption(Static):
+    """A single clickable filter word in the buy-tab filter bar.
+
+    Clicking it activates that filter; the active option is highlighted. Kept as
+    plain clickable text (not a Button) per the compact in-game styling.
+    """
+
+    class Clicked(Message):
+        def __init__(self, key: str) -> None:
+            super().__init__()
+            self.key = key
+
+    def __init__(self, key: str, label: str, *, active: bool) -> None:
+        self.key = key
+        self._label = label
+        super().__init__(self._render(active))
+        self.add_class("shop-filter-opt")
+
+    def _render(self, active: bool) -> str:
+        if active:
+            return f"[bold reverse] {rich_escape(self._label)} [/bold reverse]"
+        return f"[dim] {rich_escape(self._label)} [/dim]"
+
+    def set_active(self, active: bool) -> None:
+        self.update(self._render(active))
+
+    def on_click(self, event: events.Click) -> None:
+        event.stop()
+        self.post_message(self.Clicked(self.key))
+
+
 # ── overlay ───────────────────────────────────────────────────────────────────
 
 class ShopOverlay(Widget):
@@ -324,6 +421,7 @@ class ShopOverlay(Widget):
 
     BINDINGS = [
         Binding("escape", "close", "Close", show=True),
+        Binding("grave_accent", "cycle_filter", "Filter", show=True),
     ]
 
     DEFAULT_CSS = """
@@ -388,6 +486,17 @@ class ShopOverlay(Widget):
     #buy-list, #sell-list {
         height: auto;
         max-height: 18;
+    }
+
+    #buy-filter-bar {
+        height: 1;
+        width: 100%;
+        padding: 0 1;
+    }
+
+    .shop-filter-opt {
+        width: auto;
+        height: 1;
     }
 
     #buy-detail-col, #sell-detail-col {
@@ -491,6 +600,8 @@ class ShopOverlay(Widget):
         self._sell_qty:    int = 1
         self._buy_item:    Any | None = None
         self._buy_qty:     int = 1
+        self._filter_keys, self._filter_labels = _shop_filters(self._shop_type)
+        self._filter_idx:  int = 0
 
     # ── compose ───────────────────────────────────────────────────────────────
 
@@ -507,6 +618,15 @@ class ShopOverlay(Widget):
                 with TabPane("Buy", id="tab-buy"):
                     with Horizontal(id="shop-buy-row"):
                         with Vertical(id="buy-list-col"):
+                            if self._filter_keys:
+                                with Horizontal(id="buy-filter-bar"):
+                                    yield Static("[dim]`:[/dim] ", classes="shop-filter-opt")
+                                    for i, key in enumerate(self._filter_keys):
+                                        yield _FilterOption(
+                                            key,
+                                            self._filter_labels[key],
+                                            active=(i == self._filter_idx),
+                                        )
                             yield ListView(id="buy-list")
                         with Vertical(id="buy-detail-col"):
                             yield Static("[dim]Select an item.[/dim]", id="buy-detail")
@@ -568,7 +688,7 @@ class ShopOverlay(Widget):
         try:
             lv = self.query_one("#buy-list", ListView)
             lv.clear()
-            for item in self._stock:
+            for item in self._filtered_stock():
                 lv.append(_ShopItem(item, selling=False))
         except Exception:
             pass
@@ -580,6 +700,47 @@ class ShopOverlay(Widget):
                 self.focus()
             except Exception:
                 pass
+
+    # ── buy-list filtering ────────────────────────────────────────────────────
+
+    def _current_filter_key(self) -> str:
+        if not self._filter_keys:
+            return "all"
+        return self._filter_keys[self._filter_idx]
+
+    def _filtered_stock(self) -> List[Any]:
+        return _apply_shop_filter(self._stock, self._shop_type, self._current_filter_key())
+
+    def _refresh_filter_bar(self) -> None:
+        if not self._filter_keys:
+            return
+        try:
+            for opt in self.query(_FilterOption):
+                opt.set_active(opt.key == self._current_filter_key())
+        except Exception:
+            pass
+
+    def action_cycle_filter(self) -> None:
+        if not self._filter_keys:
+            return
+        self._filter_idx = (self._filter_idx + 1) % len(self._filter_keys)
+        self._buy_item = None
+        self._buy_qty = 1
+        self._refresh_filter_bar()
+        self._rebuild_buy_list()
+        self._refresh_buy_panel()
+
+    @on(_FilterOption.Clicked)
+    def _on_filter_clicked(self, event: _FilterOption.Clicked) -> None:
+        event.stop()
+        if event.key not in self._filter_keys:
+            return
+        self._filter_idx = self._filter_keys.index(event.key)
+        self._buy_item = None
+        self._buy_qty = 1
+        self._refresh_filter_bar()
+        self._rebuild_buy_list()
+        self._refresh_buy_panel()
 
     def _rebuild_sell_list(self) -> None:
         try:

@@ -8,7 +8,7 @@ from typing import Dict, Any
 # Tiles
 OPEN_AREA_TILE = "░"
 IMPASSABLE_TILE = "¤"
-IMPASSABLE_CHANCE = 0.30
+IMPASSABLE_CHANCE = 0.12
 OPEN_AREA_COLOR  = "#4a7a5a"
 IMPASSABLE_COLOR = "#1a3a28"
 BORDER_TILE      = "·"
@@ -98,8 +98,8 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'rooms_per_floor': 2, # A single, large breach area
     'max_neighbors_per_room': 2,
     'additional_connection_chance': 0.0,
-    'min_max_distance_between_rooms': (0, 0),
-    'min_max_corridor_width': (1, 1),
+    'min_max_distance_between_rooms': (1, 3),
+    'min_max_corridor_width': (6, 8),
     'display_name': "Riftland Breach Site",
     'open_area_tile': OPEN_AREA_TILE,
     'impassable_tile': IMPASSABLE_TILE,
@@ -112,8 +112,8 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'hostile_seeds': HOSTILE_SEEDS,
     'npcs': [{'id': 'riftspawn_aberrant', 'location': 'final_chamber'}],
     'items': [
-        {'id': 'stimulant_large', 'location': 'treasure_room'},
-        {'id': 'panacea', 'location': 'treasure_room'}
+        {'id': 'stimulant_large', 'location': 'final_chamber'},
+        {'id': 'panacea', 'location': 'final_chamber'}
     ],
     'boss_mob': BOSS_MOB,
     'boss_hostiles': BOSS_HOSTILES,

@@ -25,6 +25,9 @@ D9  DUNGEON_NPC_NO_LOCATION          an NPC in the 'npcs' list has location
 D10 DUNGEON_NO_CREATE_EVENT          no create_dungeon event for this dungeon_id
                                      exists in any timeline task, or more than
                                      one such event exists (error)
+D11 DUNGEON_NPC_UNDEFINED            an NPC in the 'npcs' list has an id that is
+                                     not registered in the game's NPC data store
+                                     (const.NPCS) — it can never be placed (error)
 """
 from __future__ import annotations
 
@@ -67,6 +70,18 @@ def _build_known_item_ids(const: Any) -> Set[str]:
     return ids
 
 
+def _build_known_npc_ids(const: Any) -> Set[str]:
+    """Collect every valid NPC id from the game's NPC data store (const.NPCS)."""
+    ids: Set[str] = set()
+    for seed in getattr(const, "NPCS", None) or []:
+        if not isinstance(seed, dict):
+            continue
+        nid = seed.get("npc_id") or seed.get("id")
+        if nid:
+            ids.add(str(nid))
+    return ids
+
+
 def validate_dungeon_tree(
     tree: List["DungeonGroupNode"],  # type: ignore[name-defined]
     const: Any,
@@ -78,6 +93,7 @@ def validate_dungeon_tree(
          "by_code": {code: count}}
     """
     known_item_ids = _build_known_item_ids(const)
+    known_npc_ids = _build_known_npc_ids(const)
     by_code: Dict[str, int] = defaultdict(int)
 
     # ── Pre-build create_dungeon event counts across all timeline tasks ───
@@ -234,6 +250,17 @@ def validate_dungeon_tree(
                     severity="notice",
                 ))
                 by_code["DUNGEON_NPC_NO_LOCATION"] += 1
+
+            # ── D11 DUNGEON_NPC_UNDEFINED ─────────────────────────────────
+            nid = str(npc.get("id", "") or "")
+            if nid and nid not in known_npc_ids:
+                node.errors.append(_err(
+                    "DUNGEON_NPC_UNDEFINED",
+                    f"NPC '{nid}' is not registered in the NPC data store "
+                    "(const.NPCS) — it can never be placed. (A common cause is "
+                    "referencing a boss/mob id instead of the NPC id.)",
+                ))
+                by_code["DUNGEON_NPC_UNDEFINED"] += 1
 
         # ── D10 DUNGEON_NO_CREATE_EVENT ───────────────────────────────────
         count = create_dungeon_counts.get(node.dungeon_id, 0)

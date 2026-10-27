@@ -88,11 +88,11 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'seed': abs(hash('rift_dungeon_outskirts')),
     'floor_count': 1,
     'room_size_min_max': (100, 150),
-    'rooms_per_floor': 6, # Only one "room" or area to land in
+    'rooms_per_floor': 6, 
     'max_neighbors_per_room': 2,
     'additional_connection_chance': 0.0,
-    'min_max_distance_between_rooms': (0, 0),
-    'min_max_corridor_width': (1, 1),
+    'min_max_distance_between_rooms': (1, 3),
+    'min_max_corridor_width': (3, 5),
     'display_name': "Rift Dungeon Outskirts",
     'open_area_tile': OPEN_AREA_TILE,
     'impassable_tile': IMPASSABLE_TILE,
@@ -100,7 +100,7 @@ DUNGEON_SETTINGS: Dict[str, Any] = {
     'impassable_color': IMPASSABLE_COLOR,
     'border_tile':      BORDER_TILE,
     'border_color':     BORDER_COLOR,
-    'impassable_chance': 0.25, # More chaotic than the main dungeon
+    'impassable_chance': 0.05,
     'floor_hostiles': FLOOR_HOSTILES,
     'hostile_seeds': HOSTILE_SEEDS,
     'npcs': [],
