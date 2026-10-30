@@ -376,6 +376,15 @@ class AbilitiesOverlay(Widget):
             else "[dim]No character.[/dim]"
         )
         self.query_one("#ab-detail", Static).update(text)
+        self._update_use_button(player)
+
+    def _update_use_button(self, player: Optional[Any]) -> None:
+        """Disable the Use button when the selected character is dead."""
+        try:
+            btn = self.query_one("#ab-btn-use", Button)
+        except Exception:
+            return
+        btn.disabled = player is None or not player.is_alive()
 
     # ── events ────────────────────────────────────────────────────────────
 
@@ -442,6 +451,13 @@ class AbilitiesOverlay(Widget):
             return
         if player is None:
             self.app.notify("No character selected.", title="Abilities")
+            return
+        if not player.is_alive():
+            self.app.notify(
+                f"{getattr(player, 'name', 'This character')} is dead and cannot use abilities.",
+                title="Abilities",
+                severity="warning",
+            )
             return
 
         ap_cost = getattr(ability, "ap_cost", 0) or 0

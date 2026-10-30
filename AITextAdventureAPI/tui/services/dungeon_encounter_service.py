@@ -74,9 +74,34 @@ def get_boss_encounter_hostiles(dungeon: Any, pg: Any) -> List[Any]:
     try:
         hostiles = dungeon.get_boss_mob(pg, mob_id)
         if hostiles:
+            from game.dev_diagnostics import dev_log  # noqa: PLC0415
+            names = ', '.join(getattr(h, 'name', '?') for h in hostiles)
+            dev_log(
+                f'boss fight starting for {mob_id} with {len(hostiles)} '
+                f'hostile(s): {names}',
+                source='dungeon_encounter_service',
+            )
             return hostiles
-    except Exception:
-        pass
+    except Exception as exc:  # noqa: BLE001
+        # Surface the failure to the dev-only diagnostic channel instead of
+        # silently clearing the pending fight (which looks like the boss fight
+        # just never happened). Never touches the player's info-dialog queue.
+        import traceback  # noqa: PLC0415
+        from game.dev_diagnostics import dev_log  # noqa: PLC0415
+        dev_log(
+            f'get_boss_mob({mob_id}) raised: {exc}\n{traceback.format_exc()}',
+            source='dungeon_encounter_service',
+        )
+
+    # Reaching here means get_boss_mob returned falsy (None/[]) or raised. The
+    # per-step reasons were already emitted inside get_boss_mob; add one more so
+    # the clear-and-skip is visible rather than silent.
+    from game.dev_diagnostics import dev_log  # noqa: PLC0415
+    dev_log(
+        f'No boss hostiles resolved for pending fight {mob_id}; '
+        'clearing pending fight (no combat will start).',
+        source='dungeon_encounter_service',
+    )
 
     pg.pending_fight_mob_id = None
     return []

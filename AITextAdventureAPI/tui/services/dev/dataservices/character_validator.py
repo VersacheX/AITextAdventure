@@ -20,6 +20,13 @@ C4  CHARACTER_UNKNOWN_ABILITY
 C5  CHARACTER_SHORT_DESCRIPTION  (warning)
     The NPC seed's description field is shorter than the minimum acceptable
     length, benchmarked against Lyren Vale's reference description.
+
+C6  CHARACTER_NO_NPC_COUNTERPART
+    The attainable character's id has no matching npc_id in NPCS/PLAYER_NPCS.
+    character_join binds the joined character's npc_id from this id, which is
+    what initiate_character_dialog / add_character_dialog_lines routes on. A
+    missing counterpart means the character's story dialog would be silently
+    skipped after they join.
 """
 from __future__ import annotations
 
@@ -225,6 +232,18 @@ def validate_characters(records: List[DevRecord], const: Any) -> Dict[str, Any]:
             ))
             by_code["CHARACTER_SHORT_DESCRIPTION"] = (
                 by_code.get("CHARACTER_SHORT_DESCRIPTION", 0) + 1
+            )
+
+        # C6 — NPC counterpart (npc_id routing for joined-character dialog)
+        if record.id not in npc_lookup:
+            errors.append(_err(
+                "CHARACTER_NO_NPC_COUNTERPART",
+                f"id '{record.id}' has no matching npc_id in NPCS/PLAYER_NPCS. "
+                "character_join sets the joined character's npc_id from this id, "
+                "so initiate_character_dialog for them would be silently skipped.",
+            ))
+            by_code["CHARACTER_NO_NPC_COUNTERPART"] = (
+                by_code.get("CHARACTER_NO_NPC_COUNTERPART", 0) + 1
             )
 
         hard_errors   = [e for e in errors if e.severity == "error"]
