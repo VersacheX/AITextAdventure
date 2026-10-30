@@ -77,7 +77,33 @@ class FractureApp(App):
     start_screen: str = "title"
 
     def on_mount(self) -> None:
+        self._install_dev_log_bridge()
         self.goto_screen(self.start_screen)
+
+    def _install_dev_log_bridge(self) -> None:
+        """Route the "fracture.dev" diagnostic logger into Textual's log.
+
+        ``game.dev_diagnostics.dev_log`` emits on the ``fracture.dev`` logger.
+        Forwarding those records to ``self.log`` makes them visible in the
+        Textual dev log console (``textual console``) without ever touching the
+        player's in-game info-dialog queue or corrupting the compositor.
+        """
+        import logging  # noqa: PLC0415
+
+        app = self
+
+        class _TextualLogHandler(logging.Handler):
+            def emit(self, record: logging.LogRecord) -> None:
+                try:
+                    app.log(self.format(record))
+                except Exception:
+                    pass
+
+        logger = logging.getLogger("fracture.dev")
+        if not any(isinstance(h, _TextualLogHandler) for h in logger.handlers):
+            logger.addHandler(_TextualLogHandler())
+            logger.setLevel(logging.DEBUG)
+            logger.propagate = False
 
     def goto_screen(self, name: str) -> bool:
         """Push the named screen onto the stack.

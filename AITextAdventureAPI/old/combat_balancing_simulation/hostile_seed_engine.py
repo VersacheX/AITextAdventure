@@ -136,14 +136,14 @@ def region_key_to_region_name(region_key: str) -> str:
 
 
 ########### RESEED EXISTING HOSTILES ##############
-def reseed_existing_hostile(e, retain_abilities = False) -> None: 
-    generate_derived_stats(e)  
+def reseed_existing_hostile(e, retain_abilities = False, retain_stats = False) -> None: 
+    generate_derived_stats(e, retain_stats = retain_stats)  
     reseed_hostile(e, retain_abilities = retain_abilities) 
     apply_rarity_boost_and_awards(e)
 
-def generate_derived_stats(e) -> None:
+def generate_derived_stats(e, retain_stats = False) -> None:
     level = int(e.get('min_spawn_level',1) or 1)
-    derived = estimate_stats_from_seed(e["seed"], level)  # Corrected to use 'e["seed"]'
+    derived = estimate_stats_from_seed(e["seed"], level, retain_stats = retain_stats)  # Corrected to use 'e["seed"]'
     e['derived'] = derived
 
 def reseed_hostile(e, retain_abilities = False) -> None:
@@ -287,12 +287,91 @@ def apply_rarity_boost_and_awards(e) -> None:
 #     "notfound": {"start": 15, "per_level_distribution_amount": 10},
 # }
 ########### ESTIMATE DERIVED STATS ##############
-def estimate_stats_from_seed(seed: Dict[str, Any], level: int) -> Dict[str, float]:
+def estimate_stats_from_seed(seed: Dict[str, Any], level: int, retain_stats: bool = False) -> Dict[str, float]:
     """Estimate derived numeric stats for a hostile seed at given level.
     Returns dict with hp, dps, defense, ap_pool, ability_power.
+
+    When ``retain_stats`` is True the hand-authored base stats on the seed
+    (``base_str``/``base_dex``/``base_con``/``base_int``, the ``*_per_level``
+    growth values, and ``base_hp``/``base_ap``) are honored verbatim instead of
+    being regenerated from the rarity stat pools. This mirrors the
+    ``retain_abilities`` principle used by the reseed pipeline: hand-tuned
+    hostiles (e.g. authored bosses) keep the designer's intended numbers.
     """
     #print (f'seed name: {seed.get("name")}, level: {level}')
     rarity = seed.get("rarity")
+    min_level = int(seed.get("min_spawn_level", 1) or 1)
+
+    if retain_stats:
+        # Honor authored base stats + growth; only fall back to rarity pools for
+        # any value the author omitted so partial seeds still work.
+        pool_start = RARITY_STAT_POOLS[rarity]["start"]
+        base_str = seed.get("base_str")
+        base_dex = seed.get("base_dex")
+        base_con = seed.get("base_con")
+        base_int = seed.get("base_int")
+        base_str = pool_start if base_str is None else int(base_str)
+        base_dex = pool_start if base_dex is None else int(base_dex)
+        base_con = pool_start if base_con is None else int(base_con)
+        base_int = pool_start if base_int is None else int(base_int)
+
+        str_per = float(seed.get("str_per_level", 0) or 0)
+        dex_per = float(seed.get("dex_per_level", 0) or 0)
+        con_per = float(seed.get("con_per_level", 0) or 0)
+        int_per = float(seed.get("int_per_level", 0) or 0)
+
+        # Authored base_* values are treated as the stat total at min_spawn_level,
+        # growing by *_per_level for each level above it.
+        growth = max(0, level - min_level)
+        strength = int(base_str + str_per * growth)
+        dexterity = int(base_dex + dex_per * growth)
+        constitution = int(base_con + con_per * growth)
+        intelligence = int(base_int + int_per * growth)
+
+        pp_per_level = RARITY_STAT_POOLS[rarity]["power_points_per_level"]
+        abil_count = max(len(seed.get("player_abilities") or []), RARITY_ABILITY_COUNTS.get(rarity, 0))
+        hp_dist = 1.0 - (abil_count * 0.05)
+        hp_per_level = pp_per_level * (hp_dist)
+        ap_per_level = pp_per_level * (1.0 - hp_dist)
+
+        calculate_base_pp = pool_start * 2
+        base_hp = seed.get("base_hp")
+        base_ap = seed.get("base_ap")
+        base_hp = (calculate_base_pp + int(hp_per_level * min_level)) if base_hp is None else int(base_hp)
+        base_ap = (calculate_base_pp + int(ap_per_level * min_level)) if base_ap is None else int(base_ap)
+
+        hp = max(3, base_hp + constitution * 2 + int(growth * hp_per_level))
+        ap_pool = max(0, base_ap + (growth * ap_per_level))
+
+        dps = max(1.0, float(strength) * 0.5 + float(dexterity) * 0.3 + float(level) * 0.2)
+        defense = max(0.0, float(constitution * 0.5))
+
+        ab_pot = 0.0
+        abilities = seed.get("player_abilities") or []
+        if abilities and isinstance(abilities, list):
+            all_abils = const.PLAYER_ABILITY_SEEDS
+            lookup = {a.get("id"): a for a in all_abils if a and isinstance(a, dict) and a.get("id")}
+            for aid in abilities:
+                s = lookup.get(aid)
+                if s:
+                    lv = int(s.get("level", 1) or 1)
+                    bp = float(s.get("base_power", 10) or 10)
+                    ab_pot += bp * (1.0 + 0.2 * (lv - 1))
+        dps = max(dps, ab_pot * 0.3)
+
+        scale = float(PLAYER_EQUIPMENT_STAT_SCALE or 1.0)
+        return {
+            "strength": float(strength) * scale,
+            "dexterity": float(dexterity) * scale,
+            "constitution": float(constitution) * scale,
+            "intelligence": float(intelligence) * scale,
+            "hp": float(hp) * scale,
+            "dps": float(dps) * scale,
+            "defense": float(defense) * scale,
+            "ap_pool": float(ap_pool) * scale,
+            "ability_pot": float(ab_pot) * scale,
+        }
+
     # base stats from seed or defaults
     base_str = RARITY_STAT_POOLS[rarity]["start"]
     base_dex = RARITY_STAT_POOLS[rarity]["start"]
@@ -317,7 +396,7 @@ def estimate_stats_from_seed(seed: Dict[str, Any], level: int) -> Dict[str, floa
     seed["base_dex"] = int(base_dex + seed["dex_per_level"] * level)
     seed["base_con"] = int(base_con + seed["con_per_level"] * level)
     seed["base_int"] = int(base_int + seed["int_per_level"] * level)    
-    
+
     #print (f'base stats set in seed: {base_str}, {base_dex}, {base_con}, {base_int}')
 
     strength = int(base_str + (seed["str_per_level"] * level))
@@ -1003,9 +1082,9 @@ def instantiate_random_hostiles(count: int, level: int, selected_region: str = N
     return hostiles
 
 #possibly used for monster log.... not used for combat
-def generate_hostile_from_legacy_seed(seed, level, retain_abilities = False):
+def generate_hostile_from_legacy_seed(seed, level, retain_abilities = False, retain_stats = False):
     lvl = int(seed.get("min_spawn_level",1) or 1)
-    derived = estimate_stats_from_seed(seed, lvl)
+    derived = estimate_stats_from_seed(seed, lvl, retain_stats = retain_stats)
     score = compute_combat_score(derived, lvl)
     entry = {
         #"region_key": selected_region,
@@ -1018,8 +1097,8 @@ def generate_hostile_from_legacy_seed(seed, level, retain_abilities = False):
         "assigned_rarity": seed.get("rarity", "common"),
         }
 
-        
-    reseed_existing_hostile(entry, retain_abilities = retain_abilities)
+
+    reseed_existing_hostile(entry, retain_abilities = retain_abilities, retain_stats = retain_stats)
     rh = _instantiate_random_hostile_from_seed(entry, entry['min_spawn_level'])
     return rh
 

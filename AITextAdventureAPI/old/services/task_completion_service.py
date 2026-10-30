@@ -40,19 +40,16 @@ def _exit_busy(player_game) -> None:
 
 
 def _report_event_error(player_game, message: str) -> None:
-	"""Surface a task-event error to the player instead of blocking on stdin.
+	"""Surface a task-event error to the dev-only diagnostic channel.
 
 	These were previously `input(...)` calls that froze the background worker
 	thread (and its loading overlay) waiting for a keypress on a UI with no
-	console. Route the message to the in-game info dialog queue so it shows on
-	screen, and always print for logs.
+	console. Route the message to the developer-only diagnostic channel
+	(logs / dev TUI console) so it never pollutes the player's in-game info
+	dialog queue, and never blocks on stdin.
 	"""
-	print(f'[task-event error] {message}')
-	try:
-		if player_game is not None:
-			player_game.add_info_dialog_line(None, f'[debug] {message}')
-	except Exception:
-		pass
+	from game.dev_diagnostics import dev_log
+	dev_log(message, source='task-event error')
 
 # NPCS = [
 #     {
@@ -107,6 +104,14 @@ def handle_task_event(event, player_game, parent_task):
 
 	ev_name = ev_type.value
 
+	from game.dev_diagnostics import dev_log
+	task_id = getattr(parent_task, 'task_id', None) or getattr(parent_task, 'id', None)
+	task_suffix = f" (task={task_id})" if task_id else ""
+	dev_log(
+		f"event '{ev_name}' params={params}{task_suffix}",
+		source='task-event',
+	)
+
 	# ── conditional guard ─────────────────────────────────────────────────
 	# If the event carries a condition, evaluate it first.  A False result
 	# silently skips the event; the rest of the task chain continues normally.
@@ -114,6 +119,10 @@ def handle_task_event(event, player_game, parent_task):
 	if condition is not None:
 		from services.event_condition_service import evaluate_condition  # noqa: PLC0415
 		if not evaluate_condition(condition, player_game):
+			dev_log(
+				f"event '{ev_name}' skipped: condition not met{task_suffix}",
+				source='task-event',
+			)
 			return None
 	# ─────────────────────────────────────────────────────────────────────
 
@@ -127,7 +136,18 @@ def handle_task_event(event, player_game, parent_task):
 	if is_long_running:
 		_enter_busy(player_game)
 	try:
-		return _dispatch_task_event(ev_name, params, player_game, parent_task)
+		result = _dispatch_task_event(ev_name, params, player_game, parent_task)
+		dev_log(
+			f"event '{ev_name}' done{task_suffix}",
+			source='task-event',
+		)
+		return result
+	except Exception as exc:
+		dev_log(
+			f"event '{ev_name}' raised: {exc}{task_suffix}",
+			source='task-event',
+		)
+		raise
 	finally:
 		if is_long_running:
 			_exit_busy(player_game)
@@ -569,6 +589,34 @@ def create_combat_scenario(params: Dict[str, Any], player_game, parent_task):
 	#input(f'Beginning combat scenario with boss mob id: {boss_mob_id}')
 	player_game.set_pending_fight_mob(boss_mob_id)
 
+	# Eagerly validate that the boss id actually resolves to hostiles NOW, at
+	# acquire time, rather than only when the player next steps on an encounter
+	# tile. This makes seeding/resolution fall-throughs visible in the dev TUI
+	# immediately (e.g. after a Force Complete) instead of looking like the
+	# fight silently never happened. get_boss_mob doesn't use dungeon state, so
+	# any available dungeon instance can drive the lookup + its diagnostics.
+	try:
+		dungeon = next((d for d in getattr(player_game, 'dungeons', []) or []), None)
+		if dungeon is not None:
+			hostiles = dungeon.get_boss_mob(player_game, boss_mob_id)
+			if not hostiles:
+				_report_event_error(
+					player_game,
+					f"begin_combat: boss '{boss_mob_id}' did not resolve to any "
+					"hostiles (see messages above). The fight will not start.",
+				)
+		else:
+			_report_event_error(
+				player_game,
+				f"begin_combat: no dungeon available to validate boss "
+				f"'{boss_mob_id}' resolution at acquire time.",
+			)
+	except Exception as exc:  # noqa: BLE001
+		_report_event_error(
+			player_game,
+			f"begin_combat: validating boss '{boss_mob_id}' raised: {exc}",
+		)
+
 def player_character_join(params, player_game):
 	if 'is_final_character' in params and params['is_final_character']:
 		player_game.add_final_character(params.get('dialog_id'))
@@ -585,8 +633,16 @@ def character_join(params, player_game):
 			# local import to avoid cycle
 			from game.objects.player import Player, generate_player_from_attainable_character_seed
 			p = generate_player_from_attainable_character_seed(seed)
+			# Bind the joined character to its npc_id so later
+			# initiate_character_dialog events (which match on character.npc_id)
+			# can route dialog lines to them. Mirrors add_pending_character /
+			# add_final_character, which also set npc_id after generation.
+			# Without this the character joins with npc_id=None and its story
+			# dialog is silently skipped.
+			if not getattr(p, 'npc_id', None):
+				p.npc_id = seed.get('npc_id') or char_id
 			player_game.add_character(p)
-				
+
 			return p
 
 	return None

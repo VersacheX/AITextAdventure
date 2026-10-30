@@ -113,7 +113,12 @@ def generate_boss_encounter_hostiles(pg: Any) -> Optional[List[Any]]:
 
     boss_setting = next((b for b in const.WORLD_BOSS_MOBS if b.get("id") == mob_id), None)
     if not boss_setting:
-        return None
+        # Not a world boss — fall back to dungeon boss resolution. A dungeon
+        # boss (e.g. uulthar_1) can become the pending fight while the player is
+        # standing in the overworld when its Meet NPC was placed there as well
+        # as in the dungeon. Without this fallback the id resolves to nothing,
+        # the pending fight is silently cleared, and combat never starts.
+        return _generate_dungeon_boss_hostiles(pg, mob_id)
 
     hostiles = []
     for hostile_id in boss_setting.get("hostiles", []):
@@ -130,6 +135,36 @@ def generate_boss_encounter_hostiles(pg: Any) -> Optional[List[Any]]:
         )
 
     return hostiles
+
+
+def _generate_dungeon_boss_hostiles(pg: Any, mob_id: str) -> Optional[List[Any]]:
+    """Resolve a dungeon boss id into a hostile list from const.DUNGEON_SETTINGS.
+
+    Mirrors the dungeon-settings branch of `dungeon.get_boss_mob`, giving the
+    overworld encounter path parity with the dungeon screen so a dungeon boss
+    set as the pending fight outside the dungeon still starts combat.
+    """
+    import game.constants as const  # noqa: PLC0415
+    from combat_balancing_simulation.hostile_seed_engine import generate_hostile_from_legacy_seed  # noqa: PLC0415
+
+    for dungeon_settings in const.DUNGEON_SETTINGS:
+        boss_mob = dungeon_settings.get("boss_mob", {})
+        if boss_mob.get("id") != mob_id:
+            continue
+        boss_hostiles = dungeon_settings.get("boss_hostiles", [])
+        hostiles = []
+        for hostile_id in boss_mob.get("hostiles", []):
+            seed = next((bh for bh in boss_hostiles if bh.get("id") == hostile_id), None)
+            if seed is None:
+                continue
+            hostiles.append(
+                generate_hostile_from_legacy_seed(
+                    seed, pg.get_max_character_level(), retain_abilities=True, retain_stats=True
+                )
+            )
+        return hostiles
+
+    return None
 
 
 # ── simulation state queries ──────────────────────────────────────────────────

@@ -495,38 +495,90 @@ class Dungeon:
         Return list of hostiles for the given boss_mob_id, leveled to the player's max level.
 
         """
+        def _emit(msg):
+            # Surface logic-breaking fall-throughs to the dev-only diagnostic
+            # channel instead of failing silently (which looks like an auto-win
+            # / no-op fight). Developer-only: never touches the player's
+            # in-game info-dialog queue and never blocks on stdin.
+            from game.dev_diagnostics import dev_log  # noqa: PLC0415
+            dev_log(msg, source='dungeon.get_boss_mob')
+
         for dungeon_settings in const.DUNGEON_SETTINGS:
-            boss_mob = dungeon_settings.get('boss_mob', {})
+            if not isinstance(dungeon_settings, dict):
+                _emit(
+                    "const.DUNGEON_SETTINGS contains a non-dict/None entry "
+                    f"({dungeon_settings!r}); skipping. This usually means a "
+                    "dungeon seed module exported DUNGEON_SETTINGS as None or "
+                    "failed to import."
+                )
+                continue
+            boss_mob = dungeon_settings.get('boss_mob', {}) or {}
             #print (F'Looking for boss mob ID: {boss_mob_id} in dungeon: {dungeon_settings.get("dungeon_id")}')
             if boss_mob.get('id') == boss_mob_id:
                 hostiles = []
-                for hostile_id in boss_mob.get('hostiles'):
-                    boss_hostiles = dungeon_settings.get('boss_hostiles', [])
+                for hostile_id in (boss_mob.get('hostiles') or []):
+                    boss_hostiles = dungeon_settings.get('boss_hostiles', []) or []
                     seed = None
                     for bh in boss_hostiles:
+                        if not isinstance(bh, dict):
+                            _emit(
+                                f"boss_hostiles of dungeon "
+                                f"'{dungeon_settings.get('dungeon_id')}' contains a "
+                                f"non-dict/None entry ({bh!r}); skipping."
+                            )
+                            continue
                         if bh.get('id') == hostile_id:
                             seed = bh
                             break
 
                     if seed is None:
-                        print   (f'Hostile ID not found in boss hostiles: {hostile_id}')
+                        _emit(
+                            f"Hostile '{hostile_id}' referenced by boss_mob "
+                            f"'{boss_mob_id}' not found in boss_hostiles of dungeon "
+                            f"'{dungeon_settings.get('dungeon_id')}'."
+                        )
                         continue
-                    
-                    hostile = generate_hostile_from_legacy_seed(seed, pg.get_max_character_level(), retain_abilities = True)
+
+                    try:
+                        hostile = generate_hostile_from_legacy_seed(seed, pg.get_max_character_level(), retain_abilities = True, retain_stats = True)
+                    except Exception as exc:
+                        _emit(
+                            f"Failed to generate boss hostile '{hostile_id}' for "
+                            f"'{boss_mob_id}': {exc}"
+                        )
+                        continue
+                    if hostile is None:
+                        _emit(
+                            f"generate_hostile_from_legacy_seed returned None for "
+                            f"boss hostile '{hostile_id}' ('{boss_mob_id}')."
+                        )
+                        continue
                     hostiles.append(hostile)
                     #print(f'Generated hostile for boss mob: {hostile_id} at level {pg.get_max_character_level()}')
 
                 #input (f'Returning boss mob hostiles for boss mob ID: {boss_mob_id}')
+                if not hostiles:
+                    _emit(
+                        f"Boss mob '{boss_mob_id}' resolved to ZERO hostiles — the "
+                        "fight cannot start and will be treated as an auto-win. "
+                        "Check the boss_hostiles seeds above."
+                    )
                 return hostiles
 
         #if boss mob nt found in dungeon settings, check world boss mobs
         for boss_mob in const.WORLD_BOSS_MOBS:
+            if not isinstance(boss_mob, dict):
+                _emit(
+                    "const.WORLD_BOSS_MOBS contains a non-dict/None entry "
+                    f"({boss_mob!r}); skipping."
+                )
+                continue
             if boss_mob.get('id') == boss_mob_id:
                 boss_setting = boss_mob
-                
+
                 hostiles = []
-                for hostile_id in boss_setting.get('hostiles', []):
-        
+                for hostile_id in (boss_setting.get('hostiles', []) or []):
+
                     #const.WORLD_HOSTILES
                     src_name = const.HOSTILE_SEED_PATHS.get(hostile_id)
                     seed = None
@@ -537,14 +589,39 @@ class Dungeon:
                             seed = next((s for s in src_list if s.get('id') == hostile_id), None)
 
                     if seed is None:
-                        # skip missing seed entry
+                        _emit(
+                            f"World boss hostile '{hostile_id}' for '{boss_mob_id}' "
+                            f"could not be resolved (seed source '{src_name}')."
+                        )
                         continue
-                    hostile = generate_hostile_from_legacy_seed(seed, pg.get_max_character_level(), retain_abilities=True)
+                    try:
+                        hostile = generate_hostile_from_legacy_seed(seed, pg.get_max_character_level(), retain_abilities=True, retain_stats=True)
+                    except Exception as exc:
+                        _emit(
+                            f"Failed to generate world boss hostile '{hostile_id}' "
+                            f"for '{boss_mob_id}': {exc}"
+                        )
+                        continue
+                    if hostile is None:
+                        _emit(
+                            f"generate_hostile_from_legacy_seed returned None for "
+                            f"world boss hostile '{hostile_id}' ('{boss_mob_id}')."
+                        )
+                        continue
                     hostiles.append(hostile)
+                if not hostiles:
+                    _emit(
+                        f"World boss '{boss_mob_id}' resolved to ZERO hostiles — "
+                        "the fight cannot start."
+                    )
                 return hostiles
 
 
-        input ("Boss mob ID not found: {}".format(boss_mob_id))
+        # Boss id couldn't be resolved in either DUNGEON_SETTINGS or
+        # WORLD_BOSS_MOBS. Never block on stdin here — this runs on a background
+        # worker behind a loading overlay on a UI with no console, so an
+        # input(...) would freeze the game. Emit for TUI dev/logs and soft-fail.
+        _emit(f'Boss mob ID not found: {boss_mob_id}')
         return None
 
     def can_save(self) -> bool:
