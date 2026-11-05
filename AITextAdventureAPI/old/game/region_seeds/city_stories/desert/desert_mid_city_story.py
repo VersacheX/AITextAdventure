@@ -924,7 +924,7 @@ TASKS += [
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'velra_the_indexer', 'dialog_id': 'velra_intro' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_b_shadow_returns' }},
-			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'zaruuns_sanctum', 'location': 'region_open_area' }},
+			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'zaruuns_sanctum', 'location': 'desert_mid_city_region_open_area' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'zaruuns_sanctum', 'item_id': 'voidborn_seal', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'zaruuns_sanctum', 'item_id': 'codex_blade', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'zaruuns_sanctum', 'item_id': 'cipher_hood', 'location': 'treasure_room' }},

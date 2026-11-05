@@ -1038,7 +1038,7 @@ TASKS += [
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'trail_reader_vexa', 'dialog_id': 'vexa_intro' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_b_echo_resonance' }},
-			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'serenes_wind_vault', 'location': 'region_open_area' }},
+			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'serenes_wind_vault', 'location': 'grassland_large_city_region_open_area' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'serenes_wind_vault', 'item_id': 'sash_of_vitality', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'serenes_wind_vault', 'item_id': 'convergence_rod', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'serenes_wind_vault', 'item_id': 'epochthread_robe', 'location': 'treasure_room' }},

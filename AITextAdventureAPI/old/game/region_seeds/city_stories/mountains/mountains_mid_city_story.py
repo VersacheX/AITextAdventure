@@ -928,7 +928,7 @@ TASKS += [
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'avalanche_seer_korrin', 'dialog_id': 'korrin_intro' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_b_fracture_echo' }},
-			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'rokhulls_fracture_core', 'location': 'region_open_area' }},
+			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'rokhulls_fracture_core', 'location': 'mountains_mid_city_region_open_area' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rokhulls_fracture_core', 'item_id': 'fracture_core', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rokhulls_fracture_core', 'item_id': 'cryptseal_blade', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rokhulls_fracture_core', 'item_id': 'stormrider_helm', 'location': 'treasure_room' }},

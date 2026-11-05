@@ -853,7 +853,7 @@ TASKS += [
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'glacier_seer_thryna', 'dialog_id': 'thryna_intro' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_b_frost_wrong' }},
-			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'aeriolass_frozen_sanctum', 'location': 'region_open_area' }},
+			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'aeriolass_frozen_sanctum', 'location': 'snow_large_city_region_open_area' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'aeriolass_frozen_sanctum', 'item_id': 'eternal_flame_crest', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'aeriolass_frozen_sanctum', 'item_id': 'aurora_staff', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'aeriolass_frozen_sanctum', 'item_id': 'reckless_bandana', 'location': 'treasure_room' }},

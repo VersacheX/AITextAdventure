@@ -801,7 +801,7 @@ TASKS += [
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'bonechanter_velis', 'dialog_id': 'velis_intro' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_b_miregloom_stirs' }},
-			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'miregloom_resurrection_pit', 'location': 'region_open_area' }},
+			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'miregloom_resurrection_pit', 'location': 'swamp_large_city_region_open_area' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'miregloom_resurrection_pit', 'item_id': 'rotwood_heartstone', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'miregloom_resurrection_pit', 'item_id': 'mending_staff', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'miregloom_resurrection_pit', 'item_id': 'caretaker_hood', 'location': 'treasure_room' }},

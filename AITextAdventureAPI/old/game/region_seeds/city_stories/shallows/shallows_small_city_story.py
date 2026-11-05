@@ -780,7 +780,7 @@ TASKS += [
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'mist_seer_loryth', 'dialog_id': 'loryth_intro' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_b_tide_wrong' }},
-			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'uulthars_tidal_maw', 'location': 'region_open_area' }},
+			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'uulthars_tidal_maw', 'location': 'shallows_small_city_region_open_area' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'uulthars_tidal_maw', 'item_id': 'memory_shard', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'uulthars_tidal_maw', 'item_id': 'tiderunner_blades', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'uulthars_tidal_maw', 'item_id': 'hourglass_veil', 'location': 'treasure_room' }},

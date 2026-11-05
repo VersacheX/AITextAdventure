@@ -759,7 +759,7 @@ TASKS += [
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'spore_seer_myrn', 'dialog_id': 'myrn_intro' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_b_roots_move' }},
-			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'marrowroots_deep_grove', 'location': 'region_open_area' }},
+			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'marrowroots_deep_grove', 'location': 'forest_large_city_region_open_area' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'marrowroots_deep_grove', 'item_id': 'earrings_of_insight', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'marrowroots_deep_grove', 'item_id': 'hurricane_blade', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'marrowroots_deep_grove', 'item_id': 'archivists_hood', 'location': 'treasure_room' }},
