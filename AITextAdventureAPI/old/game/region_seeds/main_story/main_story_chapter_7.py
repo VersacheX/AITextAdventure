@@ -114,15 +114,15 @@ NPC_DIALOG = [
         'npc_id': 'technique',
         'dialog_id': 'technique_ch7_to_lyren_1',
         'dialog': [
-            "Skip the poetry. What do you need?"
+            "Skip the poetry. What do you mean?"
         ]
     },
     {
         'npc_id': 'lyren',
         'dialog_id': 'lyren_ch7_explains_2',
         'dialog': [
-            "(small, gentle smile) A Fragrant Hibiscus... said to bloom only where hope once refused to die. And an Ancient Relic from the old ruin -- something that still remembers what the world was before the fractures.",
-            "Bring them to me. They may help us stabilize the region long enough for Seth to prepare the Rustwing."
+            "(small, gentle smile) Bring me a Fragrant Hibiscus... said to bloom only where hope once refused to die...",
+            "And I will explain."
         ]
     },
     {

@@ -849,7 +849,8 @@ class PlayerGame:
 				description = player_npc.get('description', '')
 				npc = NPC(id=npc_id, name=name, description=description, position=pos)
 				self.add_npc(npc)
-				self.pending_character = npc_id
+				self.pending_character = npc_id				
+				self.add_info_dialog_line(None, f'{npc.name} has joined your party!')
 				break
 
 	def add_pending_character(self):
@@ -874,7 +875,6 @@ class PlayerGame:
 			}
 			initiate_dialog_to_player_game(params, self)
 
-			#### NEED TO ADD THEIR INTRO TEXT IN THE DUNGEON OR SITUATION NOT HERE
 			self.add_info_dialog_line(None, f'{p.name} has joined your party!')
 
 	def place_player_in_dungeon_at_location(self, dungeon_id, location_type):

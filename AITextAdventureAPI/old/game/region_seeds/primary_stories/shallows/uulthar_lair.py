@@ -242,7 +242,7 @@ BOSS_HOSTILES = [
         "basic_attack": "tidal lash", "strong_attack": "gravity swell",
         "player_abilities": ["water_tech_lv1_tide_entangler", "dark_magic_lv1_shadow_tendril"],
         "base_str": 6, "base_dex": 8, "base_con": 10, "base_int": 14,
-        "base_hp": 320, "base_ap": 90,
+        "base_hp": 1000, "base_ap": 90,
         "str_per_level": 1, "dex_per_level": 1, "con_per_level": 2, "int_per_level": 3
     },
     {

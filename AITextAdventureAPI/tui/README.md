@@ -33,6 +33,22 @@ textual run --dev AITextAdventureAPI/run_tui.py
 
 Or use `self.log(...)` from within any widget/screen.
 
+### Reserved method names on widgets (don't shadow Textual internals)
+
+When subclassing a Textual widget (`Static`, `Widget`, `ListItem`, etc.), **do
+not define methods named `_render` or `render`** unless you are deliberately
+overriding Textual's rendering contract. Textual calls `self._render()` with
+**no arguments** during layout to measure/produce a widget's visual. A custom
+`_render(self, active)` (or any other signature) shadows that internal and
+crashes the compositor the moment the widget is measured, e.g.:
+
+    TypeError: _FilterOption._render() missing 1 required positional argument: 'active'
+
+Name your own helpers something non-reserved instead (e.g. `_format_label`).
+The same caution applies to other Textual-reserved hooks like `render_line`,
+`get_content_width`, `on_mount`, and `compose` — only define them when you mean
+to override Textual's behavior.
+
 ---
 
 ## Architecture

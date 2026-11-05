@@ -83,6 +83,14 @@ class UtilityItem(Item):
 				res['note'] = f'increasing {stat} by {amount}'
 				return res
 			elif stat in ('strength', 'dexterity', 'intelligence', 'constitution'):
+				# Only entities with the stat-allocation mechanism (Player) can
+				# receive permanent stat gains. Hostiles have no such mechanism,
+				# so using the item on one wastes it with no effect rather than
+				# crashing on the missing method.
+				if not hasattr(user, 'allocate_stats'):
+					res['note'] = f'{stat} increase has no effect on {getattr(user, "name", "the target")}'
+					res['no_effect'] = True
+					return res
 				#def allocate_stats(self, str_inc: int =0, dex_inc: int =0, con_inc: int =0, int_inc: int =0) -> None:
 				str_inc = amount if stat == 'strength' else 0
 				dex_inc = amount if stat == 'dexterity' else 0

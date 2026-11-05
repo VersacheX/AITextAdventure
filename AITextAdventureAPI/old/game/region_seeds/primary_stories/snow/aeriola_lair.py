@@ -234,7 +234,7 @@ BOSS_HOSTILES = [
         "basic_attack": "frost lash", "strong_attack": "stillness burst",
         "player_abilities": ["ice_air_magic_lv2_chill_drift", "ice_ice_magic_lv2_glacier_burst"],
         "base_str": 6, "base_dex": 6, "base_con": 8, "base_int": 14,
-        "base_hp": 1500, "base_ap": 10,
+        "base_hp": 1500, "base_ap": 25,
         "str_per_level": 1, "dex_per_level": 1, "con_per_level": 2, "int_per_level": 3
     },
     {
@@ -244,7 +244,7 @@ BOSS_HOSTILES = [
         "basic_attack": "frozen grasp", "strong_attack": "absolute zero",
         "player_abilities": ["ice_dark_magic_lv2_shadowfrost_bolt", "ice_water_magic_lv2_glacier_spike", 'lv2_hostile_ability_ice_light_magic_frost_nova'],
         "base_str": 10, "base_dex": 8, "base_con": 12, "base_int": 16,
-        "base_hp": 2200, "base_ap": 12,
+        "base_hp": 2200, "base_ap": 30,
         "str_per_level": 2, "dex_per_level": 1, "con_per_level": 2, "int_per_level": 3
     }
 ]

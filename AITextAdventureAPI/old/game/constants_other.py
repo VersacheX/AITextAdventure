@@ -45,7 +45,8 @@ HARMFUL_STATUS_EFFECTS = {"elemental_debuff",
 BENEFICIAL_ITEM_EFFECTS = [
     "heal_*",
     "restore_ap_*",
-    "cure_*"
+    "cure_*",
+    "stat_increase",
 ]
 
 ABILTITY_EFFECT_DISPLAY_NAME = {
@@ -307,7 +308,7 @@ STATUS_EFFECTS = {
         "display": "Regen",
         "name": "Regeneration",
         "type": "status",
-        "duration_per_level":-1,
+        "duration_per_level":2,
         "magnitude_per_level":0.5,
         "min_heal_per_turn":1,
     },

@@ -242,7 +242,7 @@ BOSS_HOSTILES = [
         "basic_attack": "whisper slash", "strong_attack": "future echo burst",
         "player_abilities": ["air_magic_lv1_shredding_gust", "air_light_magic_lv2_starbreeze"],
         "base_str": 6, "base_dex": 10, "base_con": 8, "base_int": 12,
-        "base_hp": 1500, "base_ap": 10,
+        "base_hp": 1500, "base_ap": 25,
         "str_per_level": 1, "dex_per_level": 3, "con_per_level": 1, "int_per_level": 2
     },
     {
@@ -252,7 +252,7 @@ BOSS_HOSTILES = [
         "basic_attack": "voice snatch", "strong_attack": "stolen tomorrow",
         "player_abilities": ["air_dark_skill_lv2_gale_of_doubt", "air_air_air_skill_lv3_gale_slash","air_electric_fire_skill_lv3_silencing_gale"],
         "base_str": 8, "base_dex": 16, "base_con": 10, "base_int": 14,
-        "base_hp": 2100, "base_ap": 12,
+        "base_hp": 2100, "base_ap": 30,
         "str_per_level": 1, "dex_per_level": 3, "con_per_level": 2, "int_per_level": 2
     }
 ]

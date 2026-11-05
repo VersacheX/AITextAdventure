@@ -783,34 +783,41 @@ NPC_DIALOG += [
 
 TASKS += [
 
-	# B-0 — Void Gauntlet entry (self-completing gated task)
+	# B-0 — Void Gauntlet trigger (gated behind talking to an area NPC)
+	# Talking to Velis is what surfaces the threat; Grimnaw chimes in and the
+	# resurrection pit appears in the open area for the party to travel to.
 	{
 		'task_id': 'swamp_large_city_b_void_gauntlet',
-		'type': 'gated',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'bonechanter_velis',
 		'task_acquire_events': [
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'bonechanter_velis', 'standing_text': [
+				"The bones shift in their patterns.",
+				"Their memories stir with unease.",
+				"Something rises from the drowned past."
+			]}},
+		],
+		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'bonechanter_velis', 'dialog_id': 'velis_intro' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_b_miregloom_stirs' }},
 			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'miregloom_resurrection_pit', 'location': 'region_open_area' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'miregloom_resurrection_pit', 'item_id': 'rotwood_heartstone', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'miregloom_resurrection_pit', 'item_id': 'mending_staff', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'miregloom_resurrection_pit', 'item_id': 'caretaker_hood', 'location': 'treasure_room' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_b_miregloom_stirs' }},
-			{ 'event_type': 'complete_task', 'params': { 'task_id': 'swamp_large_city_b_void_gauntlet' }},
-		],
-		'task_complete_events': [
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'swamp_large_city_b_meet_miregloom' }},
 		]
 	},
 
-	# B-1 — Meet Miregloom (boss intro)
+	# B-1 — Meet Miregloom (reached by travelling into the pit; no teleport)
 	{
 		'task_id': 'swamp_large_city_b_meet_miregloom',
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'miregloom',
-		'task_acquire_events': [
-			{ 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'miregloom_resurrection_pit', 'location': 'final_chamber' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_b_entering_pit' }},
-		],
+		'task_acquire_events': [],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_b_entering_pit' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'miregloom', 'dialog_id': 'miregloom_b_risen' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'chock_swamp_large_b_meet_miregloom'   } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw',   'dialog_id': 'grimnaw_swamp_large_b_meet_miregloom' } },

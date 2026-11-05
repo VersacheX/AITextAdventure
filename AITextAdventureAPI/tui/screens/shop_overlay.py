@@ -396,16 +396,16 @@ class _FilterOption(Static):
     def __init__(self, key: str, label: str, *, active: bool) -> None:
         self.key = key
         self._label = label
-        super().__init__(self._render(active))
+        super().__init__(self._format_label(active))
         self.add_class("shop-filter-opt")
 
-    def _render(self, active: bool) -> str:
+    def _format_label(self, active: bool) -> str:
         if active:
             return f"[bold reverse] {rich_escape(self._label)} [/bold reverse]"
         return f"[dim] {rich_escape(self._label)} [/dim]"
 
     def set_active(self, active: bool) -> None:
-        self.update(self._render(active))
+        self.update(self._format_label(active))
 
     def on_click(self, event: events.Click) -> None:
         event.stop()

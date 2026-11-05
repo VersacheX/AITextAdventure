@@ -1,4 +1,4 @@
-﻿#SNOW
+#SNOW
 # local characters:
 #  Kor-in - an ice trapper who lost his family (technique) — INFP 4w5
 #
@@ -272,7 +272,7 @@ NPC_DIALOG = [
     # ── Post-defeat scene ─────────────────────────────────────────────────────
     {
         'npc_id': 'kor_in',
-        'dialog_id': 'kor_in_post_defeat',
+        'dialog_id': 'snow_kor_in_post_defeat',
         'dialog': [
             "(staring at the melting ice, very still)",
             "She's gone.",
@@ -288,7 +288,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'spirit',
-        'dialog_id': 'kaera_post_defeat',
+        'dialog_id': 'snow_kaera_post_defeat',
         'dialog': [
             "He stood there until the ice finished melting.",
             "Then he turned around.",
@@ -298,7 +298,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'magic',
-        'dialog_id': 'moxie_post_defeat',
+        'dialog_id': 'snow_moxie_post_defeat',
         'dialog': [
             "She said stillness was mercy.",
             "He's been moving through grief for years to prove her wrong.",
@@ -307,7 +307,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'technique',
-        'dialog_id': 'chock_post_defeat',
+        'dialog_id': 'snow_chock_post_defeat',
         'dialog': [
             "'There's more of this world worth keeping.'",
             "That's the first thing he's said that wasn't about her.",
@@ -316,7 +316,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'tech',
-        'dialog_id': 'kade_post_defeat',
+        'dialog_id': 'snow_kade_post_defeat',
         'dialog': [
             "Aeriola called motion corruption.",
             "He kept moving anyway.",
@@ -326,7 +326,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'skill',
-        'dialog_id': 'poise_post_defeat',
+        'dialog_id': 'snow_poise_post_defeat',
         'dialog': [
             "Kor-in held.",
             "Even in the cold.",
@@ -583,42 +583,42 @@ TASKS = [
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'kor_in',
-                    'dialog_id': 'kor_in_post_defeat'
+                    'dialog_id': 'snow_kor_in_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'spirit',
-                    'dialog_id': 'kaera_post_defeat'
+                    'dialog_id': 'snow_kaera_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'magic',
-                    'dialog_id': 'moxie_post_defeat'
+                    'dialog_id': 'snow_moxie_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'technique',
-                    'dialog_id': 'chock_post_defeat'
+                    'dialog_id': 'snow_chock_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'tech',
-                    'dialog_id': 'kade_post_defeat'
+                    'dialog_id': 'snow_kade_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'skill',
-                    'dialog_id': 'poise_post_defeat'
+                    'dialog_id': 'snow_poise_post_defeat'
                 }
             },
             {

@@ -906,24 +906,33 @@ NPC_DIALOG += [
 
 TASKS += [
 
-	# B-0 — Void Gauntlet entry (self-completing gated task)
+	# B-0 — Void Gauntlet trigger (gated behind talking to an area NPC)
+	# Talking to Velra is what surfaces the threat; Sable chimes in and the
+	# sanctum appears in the open area for the party to travel to.
 	{
 		'task_id': 'desert_mid_city_b_void_gauntlet',
-		'type': 'gated',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'velra_the_indexer',
 		'task_acquire_events': [
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'velra_the_indexer', 'standing_text': [
+				"Entries are being rewritten again.",
+				"A cipher moves through the records, erasing names.",
+				"Something that should have stayed buried is indexing the world."
+			]}},
+		],
+		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'velra_the_indexer', 'dialog_id': 'velra_intro' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_b_shadow_returns' }},
 			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'zaruuns_sanctum', 'location': 'region_open_area' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'zaruuns_sanctum', 'item_id': 'voidborn_seal', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'zaruuns_sanctum', 'item_id': 'codex_blade', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'zaruuns_sanctum', 'item_id': 'cipher_hood', 'location': 'treasure_room' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_b_shadow_returns' }},
-			{ 'event_type': 'complete_task', 'params': { 'task_id': 'desert_mid_city_b_void_gauntlet' }},
-		],
-		'task_complete_events': [
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'desert_mid_city_b_meet_zaruun' }},
 		]
 	},
 
-	# B-1 — Meet Zaruun (boss intro)
+	# B-1 — Meet Zaruun (reached by travelling into the sanctum; no teleport)
 	{
 		'task_id': 'desert_mid_city_b_meet_zaruun',
 		'type': 'meet',

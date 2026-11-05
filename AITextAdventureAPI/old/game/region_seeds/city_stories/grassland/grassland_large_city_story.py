@@ -1018,39 +1018,43 @@ TASKS += [
 
 	# =========================================================
 	# TYPE B — Nia / Serene the Whisper-Thief (regional character quest, slot 3)
-	# Gated by Ch.20 Void Gauntlet — awarded from main_story_chapter_20.py externally.
-	# grassland_large_city_b_void_gauntlet is the entry task; TASK_UNREACHABLE is expected
-	# until Ch.20 is updated to award it.
+	# Gated behind talking to an area NPC. Talking to Vexa surfaces the threat;
+	# Nia chimes in and the wind vault appears in the open area to travel to.
 	# =========================================================
 
-	# B-0 — Void Gauntlet entry (awarded by Ch.20 externally)
+	# B-0 — Void Gauntlet trigger (gated behind talking to an area NPC)
 	{
 		'task_id': 'grassland_large_city_b_void_gauntlet',
-		'type': 'gated',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'trail_reader_vexa',
 		'task_acquire_events': [
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'trail_reader_vexa', 'standing_text': [
+				"The wind scars loop back on themselves now.",
+				"Echoes that should have scattered are being gathered.",
+				"Something is hoarding the voices the wind once carried."
+			]}},
+		],
+		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'trail_reader_vexa', 'dialog_id': 'vexa_intro' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_b_echo_resonance' }},
 			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'serenes_wind_vault', 'location': 'region_open_area' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'serenes_wind_vault', 'item_id': 'sash_of_vitality', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'serenes_wind_vault', 'item_id': 'convergence_rod', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'serenes_wind_vault', 'item_id': 'epochthread_robe', 'location': 'treasure_room' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_b_echo_resonance' }},
-			{ 'event_type': 'complete_task', 'params': { 'task_id': 'grassland_large_city_b_void_gauntlet' }},
-		],
-		'task_complete_events': [
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'grassland_large_city_b_meet_serene' }},
 		]
 	},
 
-	# B-1 — Meet Serene (boss intro)
+	# B-1 — Meet Serene (reached by travelling into the vault; no teleport)
 	{
 		'task_id': 'grassland_large_city_b_meet_serene',
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'serene',
-		'task_acquire_events': [
-			{ 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'serenes_wind_vault', 'location': 'final_chamber' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_b_entering_vault' }},
-		],
+		'task_acquire_events': [],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia', 'dialog_id': 'nia_b_entering_vault' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'serene', 'dialog_id': 'serene_b_risen' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_grassland_large_b_meet_serene' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',       'dialog_id': 'nia_grassland_large_b_meet_serene'       } },

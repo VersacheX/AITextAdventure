@@ -1,4 +1,4 @@
-﻿#FOREST
+#FOREST
 # local characters:
 #  Thorn - gruff half-feral forest guardian (technique)
 #
@@ -165,7 +165,6 @@ NPC_DIALOG = [
         'dialog_id': 'juno_gamble_win',
         'dialog': [
             "...Well. You actually got it.",
-            "Not many do on the first try.",
             "Here. The catalyst. Mirlo'll be pleased.",
             "Come back when you want to lose money on something more interesting."
         ]
@@ -326,7 +325,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'thorn',
-        'dialog_id': 'thorn_post_defeat',
+        'dialog_id': 'forest_thorn_post_defeat',
         'dialog': [
             "(quiet) He was a guardian.",
             "Same corruption that took him… took something I raised once.",
@@ -336,7 +335,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'magic',
-        'dialog_id': 'moxie_post_defeat',
+        'dialog_id': 'forest_moxie_post_defeat',
         'dialog': [
             "He said 'the void doesn't wait for permission.'",
             "That's the part that's going to bother me.",
@@ -345,7 +344,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'technique',
-        'dialog_id': 'chock_post_defeat',
+        'dialog_id': 'forest_chock_post_defeat',
         'dialog': [
             "One less monster wearing a martyr's face.",
             "Forest's calmer already. Let's not give whatever he was listening to time to find a new host."
@@ -901,15 +900,15 @@ TASKS = [
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'marrowroot' } },
             {
                 'event_type': 'initiate_character_dialog',
-                'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_post_defeat' }
+                'params': { 'npc_id': 'thorn', 'dialog_id': 'forest_thorn_post_defeat' }
             },
             {
                 'event_type': 'initiate_character_dialog',
-                'params': { 'npc_id': 'magic', 'dialog_id': 'moxie_post_defeat' }
+                'params': { 'npc_id': 'magic', 'dialog_id': 'forest_moxie_post_defeat' }
             },
             {
                 'event_type': 'initiate_character_dialog',
-                'params': { 'npc_id': 'technique', 'dialog_id': 'chock_post_defeat' }
+                'params': { 'npc_id': 'technique', 'dialog_id': 'forest_chock_post_defeat' }
             },
             {
                 'event_type': 'complete_region_quest',

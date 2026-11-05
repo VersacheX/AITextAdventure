@@ -762,34 +762,41 @@ NPC_DIALOG += [
 
 TASKS += [
 
-	# B-0 — Void Gauntlet entry (self-completing gated task)
+	# B-0 — Void Gauntlet trigger (gated behind talking to an area NPC)
+	# Talking to Loryth is what surfaces the threat; Ripple chimes in and the
+	# tidal maw appears in the open area for the party to travel to.
 	{
 		'task_id': 'shallows_small_city_b_void_gauntlet',
-		'type': 'gated',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'mist_seer_loryth',
 		'task_acquire_events': [
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'mist_seer_loryth', 'standing_text': [
+				"The mist glyphs bend toward the deep coves.",
+				"A drowned warning is repeating itself.",
+				"Something beneath the tide is finishing a calculation."
+			]}},
+		],
+		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'mist_seer_loryth', 'dialog_id': 'loryth_intro' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_b_tide_wrong' }},
 			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'uulthars_tidal_maw', 'location': 'region_open_area' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'uulthars_tidal_maw', 'item_id': 'memory_shard', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'uulthars_tidal_maw', 'item_id': 'tiderunner_blades', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'uulthars_tidal_maw', 'item_id': 'hourglass_veil', 'location': 'treasure_room' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_b_tide_wrong' }},
-			{ 'event_type': 'complete_task', 'params': { 'task_id': 'shallows_small_city_b_void_gauntlet' }},
-		],
-		'task_complete_events': [
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'shallows_small_city_b_meet_uulthar' }},
 		]
 	},
 
-	# B-1 — Meet Uul'thar (boss intro)
+	# B-1 — Meet Uul'thar (reached by travelling into the maw; no teleport)
 	{
 		'task_id': 'shallows_small_city_b_meet_uulthar',
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'uulthar',
-		'task_acquire_events': [
-			{ 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'uulthars_tidal_maw', 'location': 'final_chamber' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_b_entering_maw' }},
-		],
+		'task_acquire_events': [],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_b_entering_maw' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'uulthar', 'dialog_id': 'uulthar_b_risen' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique',  'dialog_id': 'chock_shallows_small_b_meet_uulthar'  } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_shallows_small_b_meet_uulthar' } },

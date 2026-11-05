@@ -835,34 +835,41 @@ NPC_DIALOG += [
 
 TASKS += [
 
-	# B-0 — Void Gauntlet entry (self-completing gated task)
+	# B-0 — Void Gauntlet trigger (gated behind talking to an area NPC)
+	# Talking to Thryna is what surfaces the threat; Kor-in chimes in and the
+	# frozen sanctum appears in the open area for the party to travel to.
 	{
 		'task_id': 'snow_large_city_b_void_gauntlet',
-		'type': 'gated',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'glacier_seer_thryna',
 		'task_acquire_events': [
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'glacier_seer_thryna', 'standing_text': [
+				"The glacier's harmonics have shifted.",
+				"Frozen moments are stacking in the deep ice.",
+				"Something held in the cold is beginning to thaw."
+			]}},
+		],
+		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'glacier_seer_thryna', 'dialog_id': 'thryna_intro' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_b_frost_wrong' }},
 			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'aeriolass_frozen_sanctum', 'location': 'region_open_area' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'aeriolass_frozen_sanctum', 'item_id': 'eternal_flame_crest', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'aeriolass_frozen_sanctum', 'item_id': 'aurora_staff', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'aeriolass_frozen_sanctum', 'item_id': 'reckless_bandana', 'location': 'treasure_room' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_b_frost_wrong' }},
-			{ 'event_type': 'complete_task', 'params': { 'task_id': 'snow_large_city_b_void_gauntlet' }},
-		],
-		'task_complete_events': [
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'snow_large_city_b_meet_aeriola' }},
 		]
 	},
 
-	# B-1 — Meet Aeriola (boss intro)
+	# B-1 — Meet Aeriola (reached by travelling into the sanctum; no teleport)
 	{
 		'task_id': 'snow_large_city_b_meet_aeriola',
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'aeriola',
-		'task_acquire_events': [
-			{ 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'aeriolass_frozen_sanctum', 'location': 'final_chamber' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_b_entering_sanctum' }},
-		],
+		'task_acquire_events': [],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in', 'dialog_id': 'kor_in_b_entering_sanctum' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'aeriola', 'dialog_id': 'aeriola_b_risen' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique',   'dialog_id': 'chock_snow_large_b_meet_aeriola'   } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'kor_in',  'dialog_id': 'kor_in_snow_large_b_meet_aeriola'  } },
