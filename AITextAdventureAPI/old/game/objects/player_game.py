@@ -2012,6 +2012,43 @@ class PlayerGame:
 		# Nested long-running-event depth counter — also transient.
 		self._busy_depth = 0
 
+		# Re-sync active task event lists from their current seeds so saves made
+		# before an event-definition change (e.g. the regional boss-defeat dialog
+		# IDs renamed to region-prefixed variants) pick up the new events. Each
+		# task is matched by task_id, so shared companion dialog IDs resolve to
+		# the correct region-scoped variant. Progress fields are preserved.
+		self._refresh_task_events_from_seeds()
+
+	def _refresh_task_events_from_seeds(self) -> None:
+		"""Rebuild acquire/complete event lists on active (uncompleted) tasks from
+		the current const.TASKS seeds, keyed by task_id.
+
+		Completed tasks are left untouched (their events have already fired).
+		Only the event lists are replaced; task identity and progress remain.
+		"""
+		tasks = getattr(self, 'tasks', None)
+		if not tasks:
+			return
+		try:
+			from game.objects.task import TaskAcquireEvent, TaskCompleteEvent
+		except Exception:
+			return
+		seeds_by_id = {}
+		for seed in getattr(const, 'TASKS', []) or []:
+			sid = seed.get('task_id') or seed.get('id')
+			if sid is not None:
+				seeds_by_id[sid] = seed
+		for task in tasks:
+			if getattr(task, 'completed', False):
+				continue
+			seed = seeds_by_id.get(getattr(task, 'task_id', None))
+			if seed is None:
+				continue
+			acquire = seed.get('task_acquire_events') or seed.get('acquire_events') or []
+			complete = seed.get('task_complete_events') or seed.get('complete_events') or []
+			task.task_acquire_events = [TaskAcquireEvent.from_dict(d) for d in acquire]
+			task.task_complete_events = [TaskCompleteEvent.from_dict(d) for d in complete]
+
 	def _find_legacy_active_dungeon(self) -> Optional["Dungeon"]:
 		"""Infer dungeon presence only while migrating saves from before the
 		active_dungeon field existed."""

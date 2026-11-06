@@ -844,6 +844,10 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'glacier_seer_thryna',
 		'task_acquire_events': [
+			# Thryna may only exist via the earlier find_thryna city chain. Guarantee
+			# she exists here so the required frozen-sanctum dungeon is never blocked;
+			# add_npc preserves an existing NPC with the same ID.
+			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'glacier_seer_thryna', 'location': 'snow_large_city_other1' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'glacier_seer_thryna', 'standing_text': [
 				"The glacier's harmonics have shifted.",
 				"Frozen moments are stacking in the deep ice.",

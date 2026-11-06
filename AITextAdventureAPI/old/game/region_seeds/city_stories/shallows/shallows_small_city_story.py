@@ -771,6 +771,10 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'mist_seer_loryth',
 		'task_acquire_events': [
+			# Loryth may only exist via the earlier find_loryth city chain. Guarantee
+			# she exists here so the required tidal-maw dungeon is never blocked;
+			# add_npc preserves an existing NPC with the same ID.
+			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'mist_seer_loryth', 'location': 'shallows_small_city_other1' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'mist_seer_loryth', 'standing_text': [
 				"The mist glyphs bend toward the deep coves.",
 				"A drowned warning is repeating itself.",

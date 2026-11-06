@@ -750,6 +750,10 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'spore_seer_myrn',
 		'task_acquire_events': [
+			# Myrn may only exist via the optional Type A city chain. Guarantee he
+			# exists here so the required deep-grove dungeon is never blocked;
+			# add_npc preserves an existing NPC with the same ID.
+			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'spore_seer_myrn', 'location': 'forest_large_city_other1' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'spore_seer_myrn', 'standing_text': [
 				"The spores drift toward a single point now.",
 				"Something beneath the roots is reaching again.",
