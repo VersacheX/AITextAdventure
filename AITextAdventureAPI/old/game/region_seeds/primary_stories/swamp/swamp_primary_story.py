@@ -1,4 +1,4 @@
-﻿#SWAMP
+#SWAMP
 # local characters:
 #  Grimnaw - Cursed Gadget dealer/collector (tech) — INTP 5w6
 #
@@ -292,7 +292,7 @@ NPC_DIALOG = [
     # ── Post-defeat scene ─────────────────────────────────────────────────────
     {
         'npc_id': 'grimnaw',
-        'dialog_id': 'grimnaw_post_defeat',
+        'dialog_id': 'swamp_grimnaw_post_defeat',
         'dialog': [
             "Hah! You did it!",
             "Swamp smells better already.",
@@ -315,7 +315,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'magic',
-        'dialog_id': 'moxie_post_defeat',
+        'dialog_id': 'swamp_moxie_post_defeat',
         'dialog': [
             "He was taking notes before Miregloom finished falling.",
             "That is either the most unhinged thing I've ever seen or the most focused.",
@@ -324,7 +324,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'tech',
-        'dialog_id': 'kade_post_defeat',
+        'dialog_id': 'swamp_kade_post_defeat',
         'dialog': [
             "The whisper has memory.",
             "He said it like a discovery.",
@@ -334,7 +334,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'technique',
-        'dialog_id': 'chock_post_defeat',
+        'dialog_id': 'swamp_chock_post_defeat',
         'dialog': [
             "One less lich.",
             "One more question Grimnaw won't be able to leave alone.",
@@ -343,7 +343,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'skill',
-        'dialog_id': 'poise_post_defeat',
+        'dialog_id': 'swamp_poise_post_defeat',
         'dialog': [
             "He called it new data.",
             "He meant 'I'm scared and I need to understand this before it destroys me.'",
@@ -609,35 +609,35 @@ TASKS = [
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'grimnaw',
-                    'dialog_id': 'grimnaw_post_defeat'
+                    'dialog_id': 'swamp_grimnaw_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'magic',
-                    'dialog_id': 'moxie_post_defeat'
+                    'dialog_id': 'swamp_moxie_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'tech',
-                    'dialog_id': 'kade_post_defeat'
+                    'dialog_id': 'swamp_kade_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'technique',
-                    'dialog_id': 'chock_post_defeat'
+                    'dialog_id': 'swamp_chock_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'skill',
-                    'dialog_id': 'poise_post_defeat'
+                    'dialog_id': 'swamp_poise_post_defeat'
                 }
             },
             {

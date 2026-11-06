@@ -1,4 +1,4 @@
-﻿# #DESERT
+# #DESERT
 # local characters:
 #  Sable - Sand witch that sells miracles (magic)
 # local bad-guys:
@@ -381,7 +381,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'sable',
-		'dialog_id': 'sable_post_defeat',
+		'dialog_id': 'desert_sable_post_defeat',
 		'dialog': [
 			"(quiet, to herself) Something older…",
 			"I've heard that before. The dunes used to make that sound — right before the first sinkholes opened.",
@@ -390,7 +390,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'magic',
-		'dialog_id': 'moxie_post_defeat',
+		'dialog_id': 'desert_moxie_post_defeat',
 		'dialog': [
 			"Okay, the dying villain monologue was a little on the nose.",
 			"But… the part about something older. That felt real."
@@ -398,7 +398,7 @@ NPC_DIALOG = [
 	},
 	{
 		'npc_id': 'technique',
-		'dialog_id': 'chock_post_defeat',
+		'dialog_id': 'desert_chock_post_defeat',
 		'dialog': [
 			"Then we deal with it when it shows its face.",
 			"Right now — we breathe. Then we move."
@@ -968,21 +968,21 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'sable',
-					'dialog_id': 'sable_post_defeat'
+					'dialog_id': 'desert_sable_post_defeat'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'magic',
-					'dialog_id': 'moxie_post_defeat'
+					'dialog_id': 'desert_moxie_post_defeat'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'technique',
-					'dialog_id': 'chock_post_defeat'
+					'dialog_id': 'desert_chock_post_defeat'
 				}
 			},
 			{

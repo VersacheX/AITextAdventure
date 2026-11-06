@@ -910,24 +910,37 @@ NPC_DIALOG += [
 
 TASKS += [
 
-	# B-0 — Void Gauntlet entry (self-completing gated task)
+	# B-0 — Void Gauntlet trigger (gated behind talking to an area NPC)
+	# Talking to Korrin is what surfaces the threat; Bragg chimes in and the
+	# fracture core appears in the open area for the party to travel to.
 	{
 		'task_id': 'mountains_mid_city_b_void_gauntlet',
-		'type': 'gated',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'avalanche_seer_korrin',
 		'task_acquire_events': [
-			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'rokhulls_fracture_core', 'location': 'region_open_area' }},
+			# Korrin may only exist via the optional Type D delivery. Guarantee he
+			# exists here so the required fracture-core dungeon is never blocked;
+			# add_npc preserves an existing NPC with the same ID.
+			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'avalanche_seer_korrin', 'location': 'mountains_mid_city_bar' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'avalanche_seer_korrin', 'standing_text': [
+				"The fall-lines are converging on a single point again.",
+				"Pressure is building where we sealed the last fracture.",
+				"Something beneath the stone is drilling back toward the surface."
+			]}},
+		],
+		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'avalanche_seer_korrin', 'dialog_id': 'korrin_intro' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_b_fracture_echo' }},
+			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'rokhulls_fracture_core', 'location': 'mountains_mid_city_region_open_area' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rokhulls_fracture_core', 'item_id': 'fracture_core', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rokhulls_fracture_core', 'item_id': 'cryptseal_blade', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'rokhulls_fracture_core', 'item_id': 'stormrider_helm', 'location': 'treasure_room' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_b_fracture_echo' }},
-			{ 'event_type': 'complete_task', 'params': { 'task_id': 'mountains_mid_city_b_void_gauntlet' }},
-		],
-		'task_complete_events': [
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'mountains_mid_city_b_meet_rokhuld' }},
 		]
 	},
 
-	# B-1 — Meet Rokhuld (boss intro)
+	# B-1 — Meet Rokhuld (reached by travelling into the core; no teleport)
 	{
 		'task_id': 'mountains_mid_city_b_meet_rokhuld',
 		'type': 'meet',

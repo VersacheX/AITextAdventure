@@ -1,4 +1,4 @@
-﻿#MOUNTAIN
+#MOUNTAIN
 # local characters:
 #  Bragg - a rock tech-smith who builds golems (tech)
 #
@@ -392,7 +392,7 @@ NPC_DIALOG = [
     # ── Post-defeat scene ─────────────────────────────────────────────────────
     {
         'npc_id': 'bragg',
-        'dialog_id': 'bragg_post_defeat',
+        'dialog_id': 'mountains_bragg_post_defeat',
         'dialog': [
             "(quiet for a beat) 'Something below is still hungry.'",
             "Yeah.",
@@ -403,7 +403,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'magic',
-        'dialog_id': 'moxie_post_defeat',
+        'dialog_id': 'mountains_moxie_post_defeat',
         'dialog': [
             "He said 'sealed the surface.'",
             "Not 'stopped it.'",
@@ -412,7 +412,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'tech',
-        'dialog_id': 'kade_post_defeat',
+        'dialog_id': 'mountains_kade_post_defeat',
         'dialog': [
             "The mountain is stable for now.",
             "For now is doing a lot of work in that sentence."
@@ -420,7 +420,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'skill',
-        'dialog_id': 'poise_post_defeat',
+        'dialog_id': 'mountains_poise_post_defeat',
         'dialog': [
             "Bragg held.",
             "That's what matters right now."
@@ -895,28 +895,28 @@ TASKS = [
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'bragg',
-                    'dialog_id': 'bragg_post_defeat'
+                    'dialog_id': 'mountains_bragg_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'magic',
-                    'dialog_id': 'moxie_post_defeat'
+                    'dialog_id': 'mountains_moxie_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'tech',
-                    'dialog_id': 'kade_post_defeat'
+                    'dialog_id': 'mountains_kade_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'skill',
-                    'dialog_id': 'poise_post_defeat'
+                    'dialog_id': 'mountains_poise_post_defeat'
                 }
             },
             {

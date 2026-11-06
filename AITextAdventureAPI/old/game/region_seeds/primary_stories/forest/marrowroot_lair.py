@@ -5,10 +5,10 @@ from typing import Dict, Any
 # Tile constants for dungeon rendering and builder decisions
 OPEN_AREA_TILE   = "░"       # soft forest floor
 IMPASSABLE_TILE  = "♣"      # dense root walls
-IMPASSABLE_CHANCE = 0.04
+IMPASSABLE_CHANCE = 0.09
 OPEN_AREA_COLOR  = "#4a6830"
 IMPASSABLE_COLOR = "#1e3010"
-BORDER_TILE      = "·"
+BORDER_TILE      = "♣"
 BORDER_COLOR     = "#385028"
 
 FLOOR_HOSTILES = {

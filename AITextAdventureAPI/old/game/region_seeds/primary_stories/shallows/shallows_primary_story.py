@@ -1,4 +1,4 @@
-﻿#SHALLOWS
+#SHALLOWS
 # local characters:
 #  Ripple - Well respected and known Tide Oracle (spirit) — INFJ 9w1
 #    She drowned during the first Fracture wave and returned changed.
@@ -469,7 +469,7 @@ NPC_DIALOG = [
     # ── Post-defeat scene ─────────────────────────────────────────────────────
     {
         'npc_id': 'ripple',
-        'dialog_id': 'ripple_post_defeat',
+        'dialog_id': 'shallows_ripple_post_defeat',
         'dialog': [
             "(breathing shakily, eyes distant)",
             "The tides breathe again.",
@@ -486,7 +486,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'magic',
-        'dialog_id': 'moxie_post_defeat',
+        'dialog_id': 'shallows_moxie_post_defeat',
         'dialog': [
             "She said 'the same pull' and kept moving.",
             "I don't think she's ever said that out loud before."
@@ -494,7 +494,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'skill',
-        'dialog_id': 'poise_post_defeat',
+        'dialog_id': 'shallows_poise_post_defeat',
         'dialog': [
             "She held.",
             "Whatever the cold was — she held."
@@ -502,7 +502,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'technique',
-        'dialog_id': 'chock_post_defeat',
+        'dialog_id': 'shallows_chock_post_defeat',
         'dialog': [
             "It said the sea remembers everything.",
             "She said the same thing about herself.",
@@ -511,7 +511,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'tech',
-        'dialog_id': 'kade_post_defeat',
+        'dialog_id': 'shallows_kade_post_defeat',
         'dialog': [
             "Uul'thar called the after inevitable.",
             "She showed up anyway.",
@@ -1026,35 +1026,35 @@ TASKS = [
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'ripple',
-                    'dialog_id': 'ripple_post_defeat'
+                    'dialog_id': 'shallows_ripple_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'magic',
-                    'dialog_id': 'moxie_post_defeat'
+                    'dialog_id': 'shallows_moxie_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'skill',
-                    'dialog_id': 'poise_post_defeat'
+                    'dialog_id': 'shallows_poise_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'technique',
-                    'dialog_id': 'chock_post_defeat'
+                    'dialog_id': 'shallows_chock_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'tech',
-                    'dialog_id': 'kade_post_defeat'
+                    'dialog_id': 'shallows_kade_post_defeat'
                 }
             },
             {

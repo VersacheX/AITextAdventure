@@ -243,7 +243,7 @@ BOSS_HOSTILES = [
         "basic_attack": "pickaxe swing", "strong_attack": "faultline crack",
         "player_abilities": ["fire_earth_technique_lv2_blaze_hammer", "earth_light_technique_lv2_rally_up"],
         "base_str": 12, "base_dex": 6, "base_con": 10, "base_int": 4,
-        "base_hp": 1360, "base_ap": 10,
+        "base_hp": 1360, "base_ap": 25,
         "str_per_level": 2, "dex_per_level": 1, "con_per_level": 2, "int_per_level": 1
     },
     {
@@ -253,7 +253,7 @@ BOSS_HOSTILES = [
         "basic_attack": "core smash", "strong_attack": "seismic hammer",
         "player_abilities": ["fire_earth_technique_lv2_blaze_hammer", "fire_fire_technique_lv2_inferno_breach", 'dark_earth_fire_technique_lv3_oblivion_burn_strike'],
         "base_str": 18, "base_dex": 8, "base_con": 14, "base_int": 6,
-        "base_hp": 2200, "base_ap": 12,
+        "base_hp": 2200, "base_ap": 30,
         "str_per_level": 3, "dex_per_level": 1, "con_per_level": 2, "int_per_level": 1
     }
 ]

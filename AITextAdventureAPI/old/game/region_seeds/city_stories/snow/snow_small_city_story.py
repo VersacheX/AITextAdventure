@@ -29,8 +29,8 @@ NPCS = [
 		}
 	},
 	{
-		'npc_id': 'survivor_mira',
-		'name': 'Mira Frostline',
+		'npc_id': 'survivor_mira',# unfortunately this must remain the same id for continuity on the test game
+		'name': 'Mina Frostline',
 		'description': (
 			'A resourceful trader who deals in survival gear and hard‑earned wisdom.'
 			' Mira\'s smile is rare but genuine, like sunlight on fresh snow.'
@@ -240,12 +240,12 @@ NPC_DIALOG += [
 	# Meet Karrek
 	{ 'npc_id': 'tech',    'dialog_id': 'kade_snow_small_meet_karrek',    'dialog': [ "Wind patterns he's never recorded. Something moves through the storm that shouldn't be there." ] },
 	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_small_meet_karrek', 'dialog': [ "Bleakwatch has survived worse — but not without knowing what's coming." ] },
-	{ 'npc_id': 'skill',   'dialog_id': 'poise_snow_small_meet_karrek',   'dialog': [ "Mira will know what the quiet supply routes mean." ] },
+	{ 'npc_id': 'skill',   'dialog_id': 'poise_snow_small_meet_karrek',   'dialog': [ "Mina Frostline will know what the quiet supply routes mean." ] },
 
 	# Meet Survivor Mira
-	{ 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_small_meet_survivor_mira', 'dialog': [ "Supply routes gone quiet. The cold coming from the wrong direction." ] },
-	{ 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_meet_survivor_mira',  'dialog': [ "If the outpost loses its watch, the whole frontier falls dark." ] },
-	{ 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_meet_survivor_mira', 'dialog': [ "Find Orlena. The storm-patterns near the hollow are fracturing." ] },
+	{ 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_small_meet_survivor_mina', 'dialog': [ "Supply routes gone quiet. The cold coming from the wrong direction." ] },
+	{ 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_meet_survivor_mina',  'dialog': [ "If the outpost loses its watch, the whole frontier falls dark." ] },
+	{ 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_meet_survivor_mina', 'dialog': [ "Find Orlena. The storm-patterns near the hollow are fracturing." ] },
 
 	# Find Orlena
 	{ 'npc_id': 'tech',    'dialog_id': 'kade_snow_small_find_orlena',    'dialog': [ "A Stormhollow Voice — spirit of trapped battle-wind. If it breaks free, no signal will carry across the snow line." ] },
@@ -393,13 +393,13 @@ TASKS = [
 			{
 				'event_type': 'award_task',
 				'params': {
-					'task_id': 'snow_small_city_meet_survivor_mira'
+					'task_id': 'snow_small_city_meet_survivor_mina'
 				}
 			}
 		]
 	},
 	{
-		'task_id': 'snow_small_city_meet_survivor_mira',
+		'task_id': 'snow_small_city_meet_survivor_mina',
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'survivor_mira',
@@ -412,9 +412,9 @@ TASKS = [
 					'dialog_id': 'mira_intro'
 				}
 			},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_small_meet_survivor_mira' } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_meet_survivor_mira'  } },
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_meet_survivor_mira' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_small_meet_survivor_mina' } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_meet_survivor_mina'  } },
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_meet_survivor_mina' } },
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'survivor_mira', 'standing_text': [ "Supply routes have gone quiet.", "The cold comes from the wrong direction.", "If the outpost loses its watch, the whole frontier falls dark." ] } },
 			{
 				'event_type': 'award_task',
@@ -449,13 +449,13 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',    'dialog_id': 'kade_snow_small_find_orlena'    } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_small_find_orlena' } },
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique',   'dialog_id': 'chock_snow_small_find_orlena'   } },
-			{
-				'event_type': 'initiate_dialog',
-				'params': {
-					'npc_id': 'vigilant_karrek',
-					'dialog_id': 'karrek_closing'
-				}
-			},
+			# {
+			# 	'event_type': 'initiate_dialog',
+			# 	'params': {
+			# 		'npc_id': 'vigilant_karrek',
+			# 		'dialog_id': 'karrek_closing'
+			# 	}
+			# },
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'gale_seer_orlena', 'standing_text': [ "The storm-patterns fracture near the hollow. A Stormhollow Voice stirs — a spirit of trapped battle-wind. If it breaks free, no signal will carry across the snow line." ] } }
 		]
 	},

@@ -741,34 +741,45 @@ NPC_DIALOG += [
 
 TASKS += [
 
-	# B-0 — Void Gauntlet entry (self-completing gated task)
+	# B-0 — Void Gauntlet trigger (gated behind talking to an area NPC)
+	# Talking to Myrn is what surfaces the threat; Thorn chimes in and the
+	# deep grove appears in the open area for the party to travel to.
 	{
 		'task_id': 'forest_large_city_b_void_gauntlet',
-		'type': 'gated',
+		'type': 'meet',
+		'to_type': 'npc',
+		'to_id': 'spore_seer_myrn',
 		'task_acquire_events': [
-			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'marrowroots_deep_grove', 'location': 'region_open_area' }},
+			# Myrn may only exist via the optional Type A city chain. Guarantee he
+			# exists here so the required deep-grove dungeon is never blocked;
+			# add_npc preserves an existing NPC with the same ID.
+			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'spore_seer_myrn', 'location': 'forest_large_city_other1' }},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'spore_seer_myrn', 'standing_text': [
+				"The spores drift toward a single point now.",
+				"Something beneath the roots is reaching again.",
+				"The grove remembers what we cut from the tree."
+			]}},
+		],
+		'task_complete_events': [
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'spore_seer_myrn', 'dialog_id': 'myrn_intro' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_b_roots_move' }},
+			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'marrowroots_deep_grove', 'location': 'forest_large_city_region_open_area' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'marrowroots_deep_grove', 'item_id': 'earrings_of_insight', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'marrowroots_deep_grove', 'item_id': 'hurricane_blade', 'location': 'treasure_room' }},
 			{ 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'marrowroots_deep_grove', 'item_id': 'archivists_hood', 'location': 'treasure_room' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_b_roots_move' }},
-			{ 'event_type': 'complete_task', 'params': { 'task_id': 'forest_large_city_b_void_gauntlet' }},
-		],
-		'task_complete_events': [
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'forest_large_city_b_meet_marrowroot' }},
 		]
 	},
 
-	# B-1 — Meet Marrowroot (boss intro)
+	# B-1 — Meet Marrowroot (reached by travelling into the grove; no teleport)
 	{
 		'task_id': 'forest_large_city_b_meet_marrowroot',
 		'type': 'meet',
 		'to_type': 'npc',
 		'to_id': 'marrowroot',
-		'task_acquire_events': [
-			{ 'event_type': 'set_player_in_dungeon', 'params': { 'dungeon_id': 'marrowroots_deep_grove', 'location': 'final_chamber' }},
-			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_b_entering_grove' }},
-		],
+		'task_acquire_events': [],
 		'task_complete_events': [
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_b_entering_grove' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'marrowroot', 'dialog_id': 'marrowroot_b_risen' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_forest_large_b_meet_marrowroot' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn',     'dialog_id': 'thorn_forest_large_b_meet_marrowroot'     } },

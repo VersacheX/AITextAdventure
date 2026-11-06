@@ -148,13 +148,18 @@ def _generate_dungeon_boss_hostiles(pg: Any, mob_id: str) -> Optional[List[Any]]
     from combat_balancing_simulation.hostile_seed_engine import generate_hostile_from_legacy_seed  # noqa: PLC0415
 
     for dungeon_settings in const.DUNGEON_SETTINGS:
-        boss_mob = dungeon_settings.get("boss_mob", {})
+        if not isinstance(dungeon_settings, dict):
+            continue
+        boss_mob = dungeon_settings.get("boss_mob", {}) or {}
         if boss_mob.get("id") != mob_id:
             continue
-        boss_hostiles = dungeon_settings.get("boss_hostiles", [])
+        boss_hostiles = dungeon_settings.get("boss_hostiles", []) or []
         hostiles = []
-        for hostile_id in boss_mob.get("hostiles", []):
-            seed = next((bh for bh in boss_hostiles if bh.get("id") == hostile_id), None)
+        for hostile_id in (boss_mob.get("hostiles") or []):
+            seed = next(
+                (bh for bh in boss_hostiles if isinstance(bh, dict) and bh.get("id") == hostile_id),
+                None,
+            )
             if seed is None:
                 continue
             hostiles.append(

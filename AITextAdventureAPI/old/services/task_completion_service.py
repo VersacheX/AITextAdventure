@@ -875,6 +875,24 @@ def award_task_to_player_game(task_id: str, player_game, parent_task):
 		player_game.acquire_task(new_task)
 	return new_task
 
+def complete_task_in_player_game(task_id: str, player_game):
+	"""Complete an active task by task_id, running its completion events.
+
+	Dispatched by the COMPLETE_TASK event (e.g. Desert's Oren riddles, Forest's
+	Juno card games, the city-story Void Gauntlet entries). Resolves the task_id
+	against the player's active tasks and runs the game's real ``complete_task``
+	so the completion-event chain fires exactly as in normal play. A missing or
+	already-completed task is a no-op rather than an error so a re-dispatch can't
+	crash the chain.
+	"""
+	if player_game is None or not task_id:
+		return None
+	task = player_game.get_task_by_id(task_id)
+	if task is None or getattr(task, 'completed', False):
+		return None
+	player_game.complete_task(task)
+	return task
+
 def advance_chapter_in_player_game(player_game):
 	player_game.advance_chapter()
 	#input (f'Advanced to chapter {player_game.current_chapter}')

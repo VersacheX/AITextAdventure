@@ -1,4 +1,4 @@
-﻿#GRASSLAND
+#GRASSLAND
 # local characters:
 #  Nia - A rebellious wind-dancer (skill) — ENFP 7w6
 #    She lives on the wind, meaning she lives on gossip, people, word-of-mouth.
@@ -429,7 +429,7 @@ NPC_DIALOG = [
     # ── Post-defeat scene ─────────────────────────────────────────────────────
     {
         'npc_id': 'nia',
-        'dialog_id': 'nia_post_defeat',
+        'dialog_id': 'grassland_nia_post_defeat',
         'dialog': [
             "(very quiet) She had it.",
             "My echo. She actually had it.",
@@ -441,7 +441,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'magic',
-        'dialog_id': 'moxie_post_defeat',
+        'dialog_id': 'grassland_moxie_post_defeat',
         'dialog': [
             "She said the wind doesn't belong to anyone.",
             "Even at the end she was more interested in being right than in winning.",
@@ -450,7 +450,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'skill',
-        'dialog_id': 'poise_post_defeat',
+        'dialog_id': 'grassland_poise_post_defeat',
         'dialog': [
             "Nia held.",
             "Whatever she heard in the wind — she didn't let it stop her today."
@@ -458,7 +458,7 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'technique',
-        'dialog_id': 'chock_post_defeat',
+        'dialog_id': 'grassland_chock_post_defeat',
         'dialog': [
             "The echo is gone. Tomorrow's open again.",
             "Let's keep moving before something else decides to steal it."
@@ -955,28 +955,28 @@ TASKS = [
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'nia',
-                    'dialog_id': 'nia_post_defeat'
+                    'dialog_id': 'grassland_nia_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'magic',
-                    'dialog_id': 'moxie_post_defeat'
+                    'dialog_id': 'grassland_moxie_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'skill',
-                    'dialog_id': 'poise_post_defeat'
+                    'dialog_id': 'grassland_poise_post_defeat'
                 }
             },
             {
                 'event_type': 'initiate_character_dialog',
                 'params': {
                     'npc_id': 'technique',
-                    'dialog_id': 'chock_post_defeat'
+                    'dialog_id': 'grassland_chock_post_defeat'
                 }
             },
             {

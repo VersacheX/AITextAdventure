@@ -153,7 +153,7 @@ class TaskEventType(str, Enum):
     SET_PLAYER_IN_DUNGEON = "set_player_in_dungeon"
     REMOVE_PLAYER_FROM_DUNGEON = "remove_player_from_dungeon"
     COMPLETE_REGION_QUEST = "complete_region_quest"
-    COMPLETE_REGION_QUEST_2 = "complete_region_quest_2"
+    COMPLETE_REGION_QUEST_2 = "complete_regional_quest_2"
     SET_NPC_MET = "set_npc_met"
     SET_AIRCRAFT = "set_aircraft"
     ALLOW_OCEAN_FLIGHT = 'allow_ocean_flight'

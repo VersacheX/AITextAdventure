@@ -317,7 +317,16 @@ class Dungeon:
         # choose candidate deterministically from dungeon and entity to keep placement stable
         import random
         key_hash = abs(hash(self.id))
-        ent_hash = abs(hash(entity.name if isinstance(entity, Item) else entity.get('npc_id')))
+        # NPC entities are plain dicts (hash by npc_id); every other entity is an
+        # item-like object (Item, Accessory, Weapon, Armor, ...) that carries a
+        # `.name`. Branch on dict vs. object rather than a specific class so
+        # non-Item equipment (e.g. an awarded Accessory) doesn't fall through to
+        # the dict-only `.get('npc_id')` path and raise AttributeError.
+        if isinstance(entity, dict):
+            ent_key = entity.get('npc_id')
+        else:
+            ent_key = getattr(entity, 'name', None) or getattr(entity, 'id', None)
+        ent_hash = abs(hash(ent_key))
         rng = random.Random((key_hash * ent_hash * max(1, len(self.get_all_entity_locations()))) % (10 ** 8))
         chosen_tile = rng.choice(candidates)
         chosen_tile.entities.append(entity)
