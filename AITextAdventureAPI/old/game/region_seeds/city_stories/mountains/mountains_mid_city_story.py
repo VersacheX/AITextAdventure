@@ -919,6 +919,10 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'avalanche_seer_korrin',
 		'task_acquire_events': [
+			# Korrin may only exist via the optional Type D delivery. Guarantee he
+			# exists here so the required fracture-core dungeon is never blocked;
+			# add_npc preserves an existing NPC with the same ID.
+			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'avalanche_seer_korrin', 'location': 'mountains_mid_city_bar' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'avalanche_seer_korrin', 'standing_text': [
 				"The fall-lines are converging on a single point again.",
 				"Pressure is building where we sealed the last fracture.",

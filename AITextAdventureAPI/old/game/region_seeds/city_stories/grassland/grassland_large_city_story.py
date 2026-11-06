@@ -1029,6 +1029,10 @@ TASKS += [
 		'to_type': 'npc',
 		'to_id': 'trail_reader_vexa',
 		'task_acquire_events': [
+			# Vexa may only exist via the optional Type D delivery. Guarantee she
+			# exists here so Serene's required dungeon is never blocked; add_npc
+			# preserves an existing NPC with the same ID.
+			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'trail_reader_vexa', 'location': 'grassland_large_city_bar' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'trail_reader_vexa', 'standing_text': [
 				"The wind scars loop back on themselves now.",
 				"Echoes that should have scattered are being gathered.",
