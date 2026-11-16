@@ -704,7 +704,7 @@ TASKS = [
 		'to_id': 'crux',
 		'task_acquire_events': [
 			{ 'event_type': 'create_npc', 'params': { 'npc_id': 'crux', 'location': None }},
-			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'origin_spire', 'location': 'region_city_district' }}
+			{ 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'origin_spire', 'location': 'region_city_open_area' }}
 		],
 		'task_complete_events': [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'crux', 'dialog_id': 'crux_ch16_intro' }},

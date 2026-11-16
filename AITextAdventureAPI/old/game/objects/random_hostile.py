@@ -274,7 +274,7 @@ class RandomHostile:
 		# collect elements and apply outgoing modifiers
 		base_elements = None
 		elems = status_utils.collect_attack_elements(self, base_elements)
-		damage = status_utils.compute_outgoing_damage(self, damage, elems if elems else None)
+		damage = status_utils.compute_outgoing_damage(self, damage, elems if elems else None, is_basic_attack=True)
 
 		# crit
 		if crit_chance and (random.random() *100) < crit_chance:

@@ -444,7 +444,7 @@ class Player:
 
 		damage = max(0, int(random.normalvariate(base_damage, max(1, base_damage * 0.2))))
 		elems = status_utils.collect_attack_elements(self)
-		damage = status_utils.compute_outgoing_damage(self, damage, elems)
+		damage = status_utils.compute_outgoing_damage(self, damage, elems, is_basic_attack=True)
 
 		if crit_chance and (random.random() * 100) < crit_chance:
 			damage *= 2

@@ -446,7 +446,7 @@ Locations use a hierarchical naming convention:
 'region_city_shopweapons'   # Weapon shop
 'region_city_shoparmor'     # Armor shop
 'region_city_open_area'     # Open area near city
-'region_city_district'      # City district (for dungeons)
+'region_city_open_area'      # City district (for dungeons)
 'region_open_area'          # Region wilderness
 ```
 

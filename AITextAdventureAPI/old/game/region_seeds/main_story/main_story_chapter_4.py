@@ -854,7 +854,6 @@ TASKS = [
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'catalyst'} },
             { 'event_type': 'unlock_dungeon', 'params': { 'dungeon_id': 'rift_dungeon_ch4' } },
             { 'event_type': 'remove_player_from_dungeon', 'params': { 'dungeon_id': 'rift_dungeon_ch4' } },
-            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch4_meet_marlo_finch_after_rift' } },
             { 'event_type': 'complete_intro_story' },
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'catalyst_defeated_world_shaking_event' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch4_after_rift' } },

@@ -112,8 +112,8 @@ class PlayerGame:
 	def set_aircraft_flyable(self, can_fly: bool):
 		self.can_aircraft_fly = can_fly
 
-	def allow_ocean_flight(self):
-		self.allow_ocean_flight = True
+	def set_allow_ocean_flight(self, allow: bool = True):
+		self.allow_ocean_flight = allow
 
 	def set_player_location(self, pos: Tuple[int, int]):
 		"""Set the player's location and update inside status."""

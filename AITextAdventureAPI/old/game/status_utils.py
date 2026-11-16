@@ -43,12 +43,21 @@ def _status_elements(s: Dict[str, Any]) -> List[str]:
 	return []
 
 
-def compute_outgoing_damage(attacker: Optional[object], base_damage: int, elements: Optional[List[str]] = None) -> int:
+def compute_outgoing_damage(attacker: Optional[object], base_damage: int, elements: Optional[List[str]] = None, is_basic_attack: bool = False) -> int:
 	"""Apply attack-side modifiers (attack_buff/attack_debuff/elemental_attack_buff) to base_damage.
 	Returns adjusted damage as int.
-	
-	This function now considers multiplicity: both attack elements and status elements may
-	contain duplicates. The elemental attack buff scales with (attack_element_count * status_element_count).
+
+	``attack_buff`` and ``attack_debuff`` only modify *basic attacks* (physical
+	weapon strikes). They must NOT hinder ability damage, so callers applying
+	ability damage leave ``is_basic_attack`` False. ``elemental_attack_buff``
+	still applies to both basic attacks and abilities.
+
+	This function considers multiplicity: both attack elements and status elements
+	may contain duplicates. The elemental attack buff scales with
+	(attack_element_count * status_element_count).
+
+	When an attack lands (base_damage > 0) the adjusted damage is floored at 1 so
+	a strong ``attack_debuff`` can only reduce a basic attack down to 1, never to 0.
 	"""
 	if attacker is None or base_damage <=0:
 		return base_damage
@@ -59,11 +68,13 @@ def compute_outgoing_damage(attacker: Optional[object], base_damage: int, elemen
 	for s in statuses:
 		sid = s.get('id')
 		mag = float(s.get('magnitude',0) or 0.0)
-		# attack buff increases outgoing damage
+		# attack buff/debuff only affect basic attacks, not abilities
 		if sid == 'attack_buff':
-			percent += mag *0.25
+			if is_basic_attack:
+				percent += mag *0.25
 		elif sid == 'attack_debuff':
-			percent -= mag *0.25
+			if is_basic_attack:
+				percent -= mag *0.25
 		elif sid == 'elemental_attack_buff' and elements:
 			# support both legacy single-element and new 'elements' list on statuses
 			status_elems = _status_elements(s)
@@ -77,9 +88,11 @@ def compute_outgoing_damage(attacker: Optional[object], base_damage: int, elemen
 					# small base factor retained (0.01) but multiplied by the product of counts
 					percent += mag *0.01 * (attack_count * status_count)
 	# apply percent
-	if percent !=0.0:
+	if percent !=1.0:
 		adj = int(dmg * percent)
-		return max(0, adj)
+		# a landed attack always deals at least 1 damage; attack_debuff can only
+		# reduce down to 1, never zero the hit out.
+		return max(1, adj)
 	return dmg
 
 

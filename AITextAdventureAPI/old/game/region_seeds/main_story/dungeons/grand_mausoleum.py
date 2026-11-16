@@ -7,7 +7,7 @@ from typing import Dict, Any
 # Tiles
 OPEN_AREA_TILE = "░"
 IMPASSABLE_TILE = "█"
-IMPASSABLE_CHANCE = 0.20
+IMPASSABLE_CHANCE = 0.08
 OPEN_AREA_COLOR  = "#6a7a8a"
 IMPASSABLE_COLOR = "#2a3040"
 BORDER_TILE      = "·"
