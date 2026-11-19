@@ -194,7 +194,7 @@ NPC_DIALOG = [
         'npc_id': 'rell',
         'dialog_id': 'rell_ch12_resolve',
         'dialog': [
-            "(wiping his eyes, voice hardened) ...If my sister died trying to fight this, then I won't sit here singing pretty lies anymore. Tell me what you need. I'll help however I can."
+            "(wiping his eyes, voice hardened) ...If my sister died trying to fight this, then I won't sit here singing pretty lies anymore."
         ]
     },
     {
@@ -387,10 +387,47 @@ NPC_DIALOG = [
         ]
     },
     {
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch12_resolve_renn_pressed_flower',
+        'dialog': [
+            "We should find that pressed flower for Rell before we leave, he needs something right now to hold onto close to Ember."
+        ]
+    },
+    {
         'npc_id': 'rell',
         'dialog_id': 'rell_ch12_final_request',
         'dialog': [
             "(looking up as the party returns) You're back already... Did you find anything?"
+        ]
+    },
+    {
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch12_to_rell_pressed_flower',
+        'dialog': [
+            "We found it. In the meadow she first performed in.",
+            "She kept this close for a reason. I think… she would want you to have something that still remembers the color of that day."
+        ]
+    },
+    {
+        'npc_id': 'ripple',
+        'dialog_id': 'ripple_ch12_to_rell_pressed_flower',
+        'dialog': [
+            "(quiet, almost to herself at first)",
+            "The tide doesn’t erase what it carries. It only changes how the light falls on it.",
+            "This flower still holds the shape of the first song. That is enough for the water to remember her by."
+        ]
+    },
+    {
+        'npc_id': 'rell',
+        'dialog_id': 'rell_ch12_receives_keepsake',
+        'dialog': [
+            "(stares at the flower for a long moment)",
+            "This is it.",
+            "(his hands shake slightly as he takes it)",
+            "She pressed it herself. Told me the petals kept their colour because the meadow wanted to be remembered.",
+            "(quietly) She was right about a lot of things.",
+            "Thank you for finding it.",
+            "(steadies himself) Now. You have to go. Don't let her sacrifice mean nothing."
         ]
     },
     {
@@ -449,19 +486,6 @@ NPC_DIALOG = [
             "I know it's a small thing. But right now small things are all I have left of her."
         ]
     },
-    {
-        'npc_id': 'rell',
-        'dialog_id': 'rell_ch12_receives_keepsake',
-        'dialog': [
-            "(stares at the flower for a long moment)",
-            "This is it.",
-            "(his hands shake slightly as he takes it)",
-            "She pressed it herself. Told me the petals kept their colour because the meadow wanted to be remembered.",
-            "(quietly) She was right about a lot of things.",
-            "Thank you for finding it.",
-            "(steadies himself) Now. You have to go. Don't let her sacrifice mean nothing."
-        ]
-    },
 ]
 
 TASKS = [
@@ -495,6 +519,7 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'lament', 'dialog_id': 'lament_ch12_response' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch12_narrator_lament_departs' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_resolve' }},
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_ember_keepsake_request' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rell', 'standing_text': ["Ember's gone... but her fight isn't over. What do you need from me?"]}},
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'archivist_fragment', 'location': 'region_city_inn' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'archivist_fragment', 'standing_text': ["I remember you dying. Twice. Time loops here. Lament's influence breaks causality. The village mourns someone called Ember. The grief never ends. It loops."]}},
@@ -558,6 +583,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch12_to_lament_final_taunt' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch12_resolve' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'serin', 'standing_text': ["I... I should be happy, right? We won. The music stopped. Why does everything feel so heavy now? Ember used to sing real songs... but now when I try to remember them, there's just this... emptiness. Like something is pulling on my chest."]}},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch12_resolve_renn_pressed_flower' }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch12_meet_rell_again' }}
         ]
     },
@@ -575,16 +601,17 @@ TASKS = [
             ]}}
         ],
         'task_complete_events': [
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_receives_keepsake' }},
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_farewell' }},
-            { 'event_type': 'remove_item', 'params': { 'item_id': 'embers_pressed_flower' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_final_request' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch12_to_rell_pressed_flower' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'ripple', 'dialog_id': 'ripple_ch12_to_rell_pressed_flower' }},
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_receives_keepsake' }},
+            { 'event_type': 'remove_item', 'params': { 'item_id': 'embers_pressed_flower' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch12_to_rell_final' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_final_response' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch12_to_rell_final' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch12_to_rell_final' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch12_to_rell_final' }},
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_ember_keepsake_request' }},
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_farewell' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rell', 'standing_text': ["Ember's gone... but her fight isn't over. What do you need from me?"]}},
             { 'event_type': 'advance_chapter' }
         ]

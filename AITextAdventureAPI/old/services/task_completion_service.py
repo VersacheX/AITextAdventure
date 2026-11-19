@@ -209,7 +209,8 @@ def _dispatch_task_event(ev_name, params, player_game, parent_task):
 		return set_aircraft(params, player_game, parent_task)
 	
 	if ev_name == TaskEventType.ALLOW_OCEAN_FLIGHT.value:
-		return player_game.allow_ocean_flight()
+		allow = params.get('allow') if params.get('allow') is not None else True
+		return player_game.set_allow_ocean_flight(allow)
 	
 	if ev_name == TaskEventType.CAN_AIRCRAFT_FLY.value:
 		can_fly = params.get('can_fly') if params.get('can_fly') else False
@@ -362,6 +363,18 @@ def create_npc(params: Dict[str, Any], player_game, parent_task) -> NPC:
 	if npc_id == 'final_character':
 		npc_id = player_game.get_available_character_npc_id()
 		player_game.final_character = npc_id
+
+	# Idempotent create: some side-quest NPCs can be reached via multiple
+	# quest paths (e.g. the side-quest chain or the void-gauntlet chain), so
+	# create_npc may run more than once for the same npc_id. If the NPC
+	# already exists in the player's game, behave like show_npc and simply
+	# reposition the existing NPC instead of creating a duplicate that would
+	# overwrite it.
+	if player_game is not None:
+		for existing in player_game.npcs:
+			if existing.id == npc_id:
+				existing.position = _get_npc_seed_location(params, parent_task, player_game)
+				return existing
 
 	# find npc seed in const.NPCS
 	for npc_seed in const.NPCS:

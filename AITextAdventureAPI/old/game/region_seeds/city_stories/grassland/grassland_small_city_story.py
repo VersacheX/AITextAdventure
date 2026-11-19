@@ -805,12 +805,12 @@ TASKS += [
 		'task_id': 'grassland_small_city_type_d_defeat_charmroot_voice',
 		'type': 'defeat',
 		'to_type': 'mob',
-		'to_id': 'charmroot_voice_1',
+		'to_id': 'charmroot_voice_boss',
 		'task_acquire_events': [
 			{
 				'event_type': 'begin_combat',
 				'params': {
-					'boss_mob_id': 'charmroot_voice_1',
+					'boss_mob_id': 'charmroot_voice_boss',
 					'combat_type': 'boss_battle'
 				}
 			}

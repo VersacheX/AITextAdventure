@@ -6,11 +6,11 @@ from typing import Dict, Any
 
 # Tiles
 OPEN_AREA_TILE = "▒"
-IMPASSABLE_TILE = "▓"
+IMPASSABLE_TILE = "☻"
 IMPASSABLE_CHANCE = 0.15
 OPEN_AREA_COLOR  = "#9a6a80"
 IMPASSABLE_COLOR = "#3a1a2a"
-BORDER_TILE      = "·"
+BORDER_TILE      = "▚"
 BORDER_COLOR     = "#6a3a50"
 
 # Hostiles

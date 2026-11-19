@@ -240,8 +240,14 @@ class City:
 		candidates = []
 		if tile_type in {ROAD, ALLEY, 'open_area'}:
 			for (tx, ty), tile in self.tiles.items():
-				if tile.type == tile_type:
-					candidates.append((tx, ty))
+				if tile.type != tile_type:
+					continue
+				# Never place on a tile occupied by a dungeon — otherwise an
+				# entity placed at an open_area tile (e.g. the airship award in
+				# ch13) can land on top of a dungeon.
+				if player_game is not None and player_game.get_dungeon_at_position((tx, ty)):
+					continue
+				candidates.append((tx, ty))
 			rng = random.Random(self.seed)
 			if candidates:
 				coords = rng.choice(candidates)  # use rng instead of random.choice

@@ -141,9 +141,19 @@ R18 NPC_OPEN_AREA_PLACEMENT  (warning)
     reminder to confirm the placement is intentional and not a placeholder.
 
 R19 NPC_DUPLICATE_CREATE
-    The same npc_id has create_npc events in more than one task anywhere
-    across all stories.  An NPC may only be created once — duplicate
-    create_npc calls will overwrite each other at runtime.
+    The same npc_id has create_npc events in more than one task AND those
+    tasks lie on the same award path — i.e. one create task is reachable
+    from another via award_task / option edges.  In that case the second
+    create is redundant: the NPC was already created earlier on the same
+    timeline and the duplicate call simply overwrites it at runtime.
+
+    Duplicate create_npc events on mutually-exclusive branches (e.g. a
+    side-quest chain and a void-gauntlet chain the player reaches via
+    different paths) are NOT flagged as errors — the NPC must be creatable
+    on either path, and create_npc is idempotent at runtime (an existing
+    NPC is repositioned rather than recreated).  These branch duplicates
+    are instead surfaced as cyan ``info`` notes so the author can still
+    identify every NPC with multiple create_npc origins.
 
 R20 ITEM_AWARD_DUPLICATE
     The same item_id is awarded by more than one task anywhere across all stories.
@@ -214,6 +224,20 @@ R26 ITEM_ID_UNKNOWN
     invalid task metadata: the player can never obtain an item that no catalog
     defines, so the task can never be satisfied (completion requires the item
     in inventory).
+
+R27 DEFEAT_TASK_COMBAT validation
+    A 'defeat' task must trigger a boss fight and its target mob must match the
+    fight that is started, otherwise the pending fight never clears and the
+    dungeon loops the same encounter forever.  Three codes are emitted:
+    - DEFEAT_TASK_NO_BEGIN_COMBAT (error) — the defeat task has no begin_combat
+      event in its task_acquire_events, so no fight is ever started for it.
+    - DEFEAT_TASK_BEGIN_COMBAT_PARAMS_INVALID (error) — a begin_combat event has
+      a non-dict params payload (e.g. list/string), so boss_mob_id cannot be
+      read safely.
+    - DEFEAT_TASK_COMBAT_MOB_MISMATCH (error) — the defeat task's to_id does not
+      match the begin_combat event's boss_mob_id.  check_complete_boss_mob only
+      completes a defeat task whose to_id equals the pending boss_mob_id, so a
+      mismatch means the task never completes and the fight repeats endlessly.
 """
 from __future__ import annotations
 
@@ -1227,17 +1251,63 @@ def validate_timeline_integrity(
                             related_entity_id=npc_id,
                         ))
 
-    # ── R19: Duplicate create_npc across all tasks ────────────────────────
+    # ── R19: Duplicate create_npc on the SAME award path ─────────────────
+    # Only flag when one create task is reachable from another via award
+    # edges (award_task / option targets).  Duplicate creates that live on
+    # mutually-exclusive branches (e.g. a side-quest chain vs. a
+    # void-gauntlet chain) are intentional — the NPC must be creatable on
+    # whichever path the player takes, and create_npc is idempotent at
+    # runtime.  Only same-path duplicates are genuinely redundant.
+    def _reachable_from(start_id):
+        seen = set()
+        stack = [start_id]
+        while stack:
+            cur = stack.pop()
+            for nxt in award_edges.get(cur, ()):  # outbound award targets
+                if nxt not in seen:
+                    seen.add(nxt)
+                    stack.append(nxt)
+        return seen
+
     for npc_id, origin_task_ids in npc_create_origins.items():
-        if len(origin_task_ids) > 1:
-            for origin_task_id in origin_task_ids:
+        if len(origin_task_ids) <= 1:
+            continue
+        # Find origin tasks that are redundant because they are reachable
+        # from (i.e. descend from) another create origin for the same NPC.
+        redundant_task_ids = set()
+        for src in origin_task_ids:
+            descendants = _reachable_from(src)
+            for other in origin_task_ids:
+                if other != src and other in descendants:
+                    # 'other' is created after 'src' on the same path.
+                    redundant_task_ids.add(other)
+        for origin_task_id in sorted(redundant_task_ids):
+            errors_map[origin_task_id].append(_err(
+                "NPC_DUPLICATE_CREATE",
+                f"NPC '{npc_id}' is created again by create_npc in task "
+                f"'{origin_task_id}' after already being created earlier on the "
+                f"same award path. The duplicate create overwrites the existing "
+                f"NPC — remove it or use show_npc instead.",
+                event_type="create_npc",
+                related_entity_id=npc_id,
+            ))
+        # Non-redundant duplicates live on mutually-exclusive branches — the
+        # NPC must be creatable on whichever path the player takes. These are
+        # intentional (create_npc is idempotent at runtime) but surfaced as
+        # cyan info so the author can still identify every multi-create NPC.
+        branch_task_ids = [t for t in origin_task_ids if t not in redundant_task_ids]
+        if len(branch_task_ids) > 1:
+            for origin_task_id in sorted(branch_task_ids):
                 errors_map[origin_task_id].append(_err(
                     "NPC_DUPLICATE_CREATE",
-                    f"NPC '{npc_id}' is created by create_npc in {len(origin_task_ids)} "
-                    f"tasks: {', '.join(origin_task_ids)}. "
-                    f"An NPC may only be created once — duplicate calls overwrite each other.",
+                    f"NPC '{npc_id}' is created by create_npc in "
+                    f"{len(branch_task_ids)} tasks on separate branches: "
+                    f"{', '.join(sorted(branch_task_ids))}. These are not on the "
+                    f"same award path, so the NPC is creatable on either route "
+                    f"(create_npc is idempotent at runtime).",
                     event_type="create_npc",
                     related_entity_id=npc_id,
+                    severity="info",
                 ))
 
     # ── R23: create_npc without set_npc_standing_text in the same task ───────────
@@ -1348,6 +1418,70 @@ def validate_timeline_integrity(
             related_entity_id=target_npc_id,
             severity="warning",
         ))
+
+    # ── R27: Defeat tasks must begin combat against their target mob ───────
+    # A 'defeat' task is completed by check_complete_boss_mob, which only fires
+    # for a task whose to_id equals the pending boss_mob_id set by begin_combat.
+    # If begin_combat is missing, no fight ever starts; if the boss_mob_id does
+    # not match the task's to_id, the task never completes and the dungeon loops
+    # the same encounter forever.
+    for tn in all_tasks:
+        task_type = str(tn.task.get("type", "")).lower()
+        if task_type != "defeat":
+            continue
+        target_mob_id = str(tn.task.get("to_id") or "")
+        begin_combat_events = [
+            ev for ev in _events(tn.task, "task_acquire_events")
+            if ev.get("event_type") == "begin_combat"
+        ]
+        if not begin_combat_events:
+            errors_map[tn.task_id].append(_err(
+                "DEFEAT_TASK_NO_BEGIN_COMBAT",
+                f"'defeat' task '{tn.task_id}' has no begin_combat event in "
+                f"task_acquire_events — no boss fight is ever started, so the "
+                f"task can never be completed.",
+                event_type="begin_combat",
+                related_entity_id=target_mob_id or None,
+            ))
+            continue
+        if not target_mob_id:
+            continue
+        for ev in begin_combat_events:
+            params_raw = ev.get("params")
+            if params_raw is None:
+                params = {}
+            elif isinstance(params_raw, dict):
+                params = params_raw
+            else:
+                errors_map[tn.task_id].append(_err(
+                    "DEFEAT_TASK_BEGIN_COMBAT_PARAMS_INVALID",
+                    f"'defeat' task '{tn.task_id}' has begin_combat params of "
+                    f"type '{type(params_raw).__name__}' (expected object/dict).",
+                    event_type="begin_combat",
+                    related_entity_id=target_mob_id or None,
+                ))
+                params = {}
+
+            boss_mob_id = str(params.get("boss_mob_id") or params.get("id") or "")
+            if not boss_mob_id:
+                errors_map[tn.task_id].append(_err(
+                    "DEFEAT_TASK_NO_BEGIN_COMBAT",
+                    f"'defeat' task '{tn.task_id}' has a begin_combat event "
+                    f"without boss_mob_id (or id), so no fight is started.",
+                    event_type="begin_combat",
+                    related_entity_id=target_mob_id or None,
+                ))
+            elif boss_mob_id != target_mob_id:
+                errors_map[tn.task_id].append(_err(
+                    "DEFEAT_TASK_COMBAT_MOB_MISMATCH",
+                    f"'defeat' task '{tn.task_id}' targets mob '{target_mob_id}' "
+                    f"but its begin_combat starts boss_mob_id '{boss_mob_id}'. "
+                    f"check_complete_boss_mob only completes a defeat task whose "
+                    f"to_id matches the pending boss_mob_id — this mismatch leaves "
+                    f"the fight unclearable and loops the encounter.",
+                    event_type="begin_combat",
+                    related_entity_id=boss_mob_id,
+                ))
 
     # ── R4: Unreachable tasks (no inbound award) ──────────────────────────
     for tn in all_tasks:
