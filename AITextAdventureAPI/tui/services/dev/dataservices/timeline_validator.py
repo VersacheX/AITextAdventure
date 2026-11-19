@@ -1446,7 +1446,15 @@ def validate_timeline_integrity(
         for ev in begin_combat_events:
             params = ev.get("params") or {}
             boss_mob_id = str(params.get("boss_mob_id") or params.get("id") or "")
-            if boss_mob_id and boss_mob_id != target_mob_id:
+            if not boss_mob_id:
+                errors_map[tn.task_id].append(_err(
+                    "DEFEAT_TASK_NO_BEGIN_COMBAT",
+                    f"'defeat' task '{tn.task_id}' has a begin_combat event "
+                    f"without boss_mob_id (or id), so no fight is started.",
+                    event_type="begin_combat",
+                    related_entity_id=target_mob_id or None,
+                ))
+            elif boss_mob_id != target_mob_id:
                 errors_map[tn.task_id].append(_err(
                     "DEFEAT_TASK_COMBAT_MOB_MISMATCH",
                     f"'defeat' task '{tn.task_id}' targets mob '{target_mob_id}' "
