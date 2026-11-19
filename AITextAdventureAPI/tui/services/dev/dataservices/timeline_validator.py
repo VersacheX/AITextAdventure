@@ -228,9 +228,12 @@ R26 ITEM_ID_UNKNOWN
 R27 DEFEAT_TASK_COMBAT validation
     A 'defeat' task must trigger a boss fight and its target mob must match the
     fight that is started, otherwise the pending fight never clears and the
-    dungeon loops the same encounter forever.  Two codes are emitted:
+    dungeon loops the same encounter forever.  Three codes are emitted:
     - DEFEAT_TASK_NO_BEGIN_COMBAT (error) — the defeat task has no begin_combat
       event in its task_acquire_events, so no fight is ever started for it.
+    - DEFEAT_TASK_BEGIN_COMBAT_PARAMS_INVALID (error) — a begin_combat event has
+      a non-dict params payload (e.g. list/string), so boss_mob_id cannot be
+      read safely.
     - DEFEAT_TASK_COMBAT_MOB_MISMATCH (error) — the defeat task's to_id does not
       match the begin_combat event's boss_mob_id.  check_complete_boss_mob only
       completes a defeat task whose to_id equals the pending boss_mob_id, so a
@@ -1444,7 +1447,21 @@ def validate_timeline_integrity(
         if not target_mob_id:
             continue
         for ev in begin_combat_events:
-            params = ev.get("params") or {}
+            params_raw = ev.get("params")
+            if params_raw is None:
+                params = {}
+            elif isinstance(params_raw, dict):
+                params = params_raw
+            else:
+                errors_map[tn.task_id].append(_err(
+                    "DEFEAT_TASK_BEGIN_COMBAT_PARAMS_INVALID",
+                    f"'defeat' task '{tn.task_id}' has begin_combat params of "
+                    f"type '{type(params_raw).__name__}' (expected object/dict).",
+                    event_type="begin_combat",
+                    related_entity_id=target_mob_id or None,
+                ))
+                params = {}
+
             boss_mob_id = str(params.get("boss_mob_id") or params.get("id") or "")
             if not boss_mob_id:
                 errors_map[tn.task_id].append(_err(
