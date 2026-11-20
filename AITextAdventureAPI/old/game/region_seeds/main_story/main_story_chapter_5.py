@@ -572,7 +572,7 @@ TASKS = [
         'to_id': 'static_wraith',
         'task_acquire_events': [
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'static_wraith', 'location': None }},
-            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'stormglass_alley', 'location': 'city_number_3_region_open_area' }},
+            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'stormglass_alley', 'location': 'grassland_mid_city_region_open_area' }},
             { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'stormglass_alley', 'item_id': 'corsair_tide_fragment', 'location': 'final_chamber' }}
         ],
         'task_complete_events': [
@@ -627,7 +627,7 @@ TASKS = [
         'to_type': 'npc',
         'to_id': 'astra_wynn',
         'task_acquire_events': [
-            { 'event_type': 'create_npc', 'params': { 'npc_id': 'astra_wynn', 'location': 'city_number_3_region_city_shopitems' }}
+            { 'event_type': 'create_npc', 'params': { 'npc_id': 'astra_wynn', 'location': 'grassland_mid_city_region_city_shopitems' }}
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'astra_wynn', 'dialog_id': 'astra_ch5_intro' }},
@@ -645,7 +645,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch5_after_riftcall' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch5_after_riftcall' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch5_after_riftcall' }},
-            { 'event_type': 'show_npc', 'params': { 'npc_id': 'astra_wynn', 'location': 'city_number_5_region_city_shopitems' }},
+            { 'event_type': 'show_npc', 'params': { 'npc_id': 'astra_wynn', 'location': 'shallows_large_city_region_city_shopitems' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'astra_wynn', 'standing_text': ["The reflections are restless tonight."]} },
             { 'event_type': 'award_task', 'params': { 'task_id': 'meet_astra_wynn_go_back' }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch5_meet_dorian_pikefall' }}
@@ -661,8 +661,8 @@ TASKS = [
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'astra_wynn', 'dialog_id': 'astra_ch5_teleporting_to_highsteeple_crossing' }},
-            { 'event_type': 'show_npc', 'params': { 'npc_id': 'astra_wynn', 'location': 'city_number_3_region_city_shopitems' }},
-            { 'event_type': 'set_player_location', 'params': { 'location': 'city_number_3_region_city_shopitems' }},
+            { 'event_type': 'show_npc', 'params': { 'npc_id': 'astra_wynn', 'location': 'grassland_mid_city_region_city_shopitems' }},
+            { 'event_type': 'set_player_location', 'params': { 'location': 'grassland_mid_city_region_city_shopitems' }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'meet_astra_wynn_go_forward' }}
         ]
     },
@@ -676,8 +676,8 @@ TASKS = [
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'astra_wynn', 'dialog_id': 'astra_ch5_teleporting_to_brinewood_harbor' }},
-            { 'event_type': 'show_npc', 'params': { 'npc_id': 'astra_wynn', 'location': 'city_number_5_region_city_shopitems' }},
-            { 'event_type': 'set_player_location', 'params': { 'location': 'city_number_5_region_city_shopitems' }},
+            { 'event_type': 'show_npc', 'params': { 'npc_id': 'astra_wynn', 'location': 'shallows_large_city_region_city_shopitems' }},
+            { 'event_type': 'set_player_location', 'params': { 'location': 'shallows_large_city_region_city_shopitems' }},
             { 'event_type': 'award_task', 'params': { 'task_id': 'meet_astra_wynn_go_back' }}
         ]
     },

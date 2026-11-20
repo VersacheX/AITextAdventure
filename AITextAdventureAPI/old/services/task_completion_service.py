@@ -207,7 +207,10 @@ def _dispatch_task_event(ev_name, params, player_game, parent_task):
 
 	if ev_name == TaskEventType.SET_AIRCRAFT.value:
 		return set_aircraft(params, player_game, parent_task)
-	
+
+	if ev_name == TaskEventType.SET_AIRCRAFT_STANDING_LOCK_TEXT.value:
+		return set_aircraft_standing_lock_text(params, player_game)
+
 	if ev_name == TaskEventType.ALLOW_OCEAN_FLIGHT.value:
 		allow = params.get('allow') if params.get('allow') is not None else True
 		return player_game.set_allow_ocean_flight(allow)
@@ -455,7 +458,10 @@ def _get_location_region_area_from_params(params: Dict[str, Any], parent_task, p
 				for city_type in const.CITY_TYPES:
 					if city_type in params['location']:
 						used_region = player_game.get_city_by_region_city_name(f"{region_type}_{city_type}")						
-						if '_region' in params['location']:
+						if used_region is None:
+							_report_event_error(player_game, f"Location '{params['location']}' could not be resolved to a known city")
+							return None
+						if '_region' in params['location'] and 'region_city' not in params['location']:
 							used_region = used_region.get_parent(player_game)
 
 						return used_region
@@ -682,6 +688,16 @@ def set_aircraft(params, player_game, parent_task):
 	"""
 	pos = _get_npc_seed_location(params, parent_task, player_game)
 	player_game.set_aircraft_location(pos)
+
+
+def set_aircraft_standing_lock_text(params, player_game):
+	if player_game is None:
+		return None
+	text = None
+	if params:
+		text = params.get('text') if isinstance(params, dict) else None
+	player_game.set_aircraft_standing_lock_text(text)
+	return text
 
 def set_player_location(params, player_game, parent_task):
 	""" Show player at location as show_npc_in_player_game to find pos, then call set_player_location(pos) on player_game.

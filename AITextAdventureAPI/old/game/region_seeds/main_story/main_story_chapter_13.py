@@ -562,114 +562,88 @@ NPC_DIALOG = [
         'npc_id': 'seth',
         'dialog_id': 'seth_ch13_returns',
         'dialog': [
-            "OI! You lot look like death warmed over!"
+            "OI! You lot look like absolute death."
         ]
     },
     {
         'npc_id': 'technique',
         'dialog_id': 'technique_ch13_to_seth',
         'dialog': [
-            "SETH!"
+            "Well look who finally crawled out of the scrap pile."
         ]
     },
     {
         'npc_id': 'seth',
         'dialog_id': 'seth_ch13_banter_1',
         'dialog': [
-            "The one and only. Missed me?"
+            "Yeah, yeah. Still kicking. Missed me that much?"
         ]
     },
     {
         'npc_id': 'magic',
         'dialog_id': 'magic_ch13_to_seth',
         'dialog': [
-            "How did you fix the ship?"
+            "How the hell did you get her flying again?"
         ]
     },
     {
         'npc_id': 'seth',
         'dialog_id': 'seth_ch13_banter_2',
         'dialog': [
-            "Blood, sweat, and a lot of stolen parts. She's not pretty, but she flies."
+            "Blood, sweat, three near-death experiences, and a lot of parts that definitely weren’t mine.",
+            "She’s ugly as sin, but she holds."
         ]
     },
     {
-        'npc_id': 'tech',
-        'dialog_id': 'tech_ch13_to_seth',
+        'npc_id': 'skill',
+        'dialog_id': 'skill_ch13_to_seth',
         'dialog': [
-            "You came back."
+            "To be honest, I'm surprised you got that thing fixed."
         ]
     },
     {
         'npc_id': 'seth',
         'dialog_id': 'seth_ch13_banter_3',
         'dialog': [
-            "Course I did. Someone's gotta keep you idiots alive."
-        ]
-    },
-    {
-        'npc_id': 'spirit',
-        'dialog_id': 'spirit_ch13_to_seth',
-        'dialog': [
-            "We thought you'd abandoned us."
+            "Course I did. Someone’s gotta keep you idiots from getting yourselves killed properly."
         ]
     },
     {
         'npc_id': 'seth',
         'dialog_id': 'seth_ch13_banter_4',
         'dialog': [
-            "Nah. Just had to make sure the ship could actually carry your sorry arses. Look. I know things are rough.",
-            "The world's falling apart. You're falling apart. So here's the deal. The ship's yours."
-        ]
-    },
-    {
-        'npc_id': 'tess',
-        'dialog_id': 'tess_ch13_to_seth',
-        'dialog': [
-            "What?"
+            "I’ve been watching from the edges. Saw what you did to Lament and that walking pile of self-hate.",
+            "You didn’t just win. You refused to become what they wanted. That’s rarer than you think."
         ]
     },
     {
         'npc_id': 'seth',
         'dialog_id': 'seth_ch13_gives_ship',
         'dialog': [
-            "You heard me. The Rustwing. She's yours now. I'm tired of flying her anyway. Too much responsibility."
-        ]
-    },
-    {
-        'npc_id': 'sam',
-        'dialog_id': 'sam_ch13_to_seth',
-        'dialog': [
-            "You're... giving us the airship?"
+            "(scratches the back of his neck)",
+            "I'm gonna let you take the stick on this one. Go where this mess is pulling you next."
         ]
     },
     {
         'npc_id': 'seth',
         'dialog_id': 'seth_ch13_clarifies',
         'dialog': [
-            "On loan. With interest. Emotional interest. You've got work to do. The world's not gonna save itself.",
-            "And I figure... if anyone's gonna stop this collapse, it's you."
+            "I’m coming with. Got my own reasons… and someone’s gotta make sure you don’t fly her into a mountain."
         ]
     },
     {
         'npc_id': 'magic',
         'dialog_id': 'magic_ch13_to_seth_gift',
         'dialog': [
-            "That's surprisingly touching."
+            "…That’s actually kind of beautiful, coming from you."
         ]
     },
     {
         'npc_id': 'seth',
         'dialog_id': 'seth_ch13_final_words',
         'dialog': [
-            "Don't get used to it. Now get in before I change my mind."
-        ]
-    },
-    {
-        'npc_id': None,
-        'dialog_id': 'ch13_narrator_new_freedom',
-        'dialog': [
-            "The Rustwing hums with possibility. Freedom. Choice."
+            "Shut up. Don’t make it weird.",
+            "I parked her nearby. Let’s move before I change my mind."
         ]
     },
     {
@@ -691,34 +665,6 @@ NPC_DIALOG = [
         'dialog_id': 'skill_ch13_new_freedom',
         'dialog': [
             "And liberating."
-        ]
-    },
-    {
-        'npc_id': 'technique',
-        'dialog_id': 'technique_ch13_new_freedom',
-        'dialog': [
-            "So where to?"
-        ]
-    },
-    {
-        'npc_id': 'seth',
-        'dialog_id': 'seth_ch13_departs',
-        'dialog': [
-            "Anywhere but here. Trust me. The world's wide open. Find meaning. Find purpose. Find whatever keeps you going."
-        ]
-    },
-    {
-        'npc_id': 'magic',
-        'dialog_id': 'magic_ch13_what_about_you',
-        'dialog': [
-            "What about you?"
-        ]
-    },
-    {
-        'npc_id': 'seth',
-        'dialog_id': 'seth_ch13_farewell',
-        'dialog': [
-            "Me? I'm gonna find a bar and pretend the world isn't ending. Don't crash her! She's temperamental!"
         ]
     },
     {
@@ -903,30 +849,22 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_banter_1' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch13_to_seth' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_banter_2' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch13_to_seth' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch13_to_seth' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_banter_3' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch13_to_seth' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_banter_4' }},
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'tess', 'dialog_id': 'tess_ch13_to_seth' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_gives_ship' }},
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'sam', 'dialog_id': 'sam_ch13_to_seth' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_clarifies' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch13_to_seth_gift' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_final_words' }},
             { 'event_type': 'set_aircraft', 'params': { 'location': 'region_city_open_area' }},
             { 'event_type': 'can_aircraft_fly', 'params': { 'can_fly': True }},
             { 'event_type': 'allow_ocean_flight', 'params': { 'allow': True }},
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch13_narrator_new_freedom' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch13_new_freedom' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch13_new_freedom' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch13_new_freedom' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch13_new_freedom' }},
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_departs' }},
-            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch13_what_about_you' }},
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_farewell' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch13_act_end' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch13_act_end' }},
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'seth', 'standing_text': ["The Rustwing is yours now. Use it wisely."]}},
+            { 'event_type': 'hide_npc', 'params': { 'npc_id': 'seth' }},
             { 'event_type': 'advance_chapter' }
         ]
     }
