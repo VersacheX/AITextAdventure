@@ -164,10 +164,10 @@ EXTENDED_CHARACTERS_NPCS = [
         "song_id": "immigrant_song_instrumental_led_zeppelin",
         "image": "extended_characters:lira_emberforge1",
         "psychology": {
-            "mbti": "INFP",
+            "mbti": "ISFP",
             "dominant": "Fi — Guided by deep personal values and authentic expression.",
-            "auxiliary": "Ne — Sees symbolic meaning and creative possibility in every piece she forges.",
-            "tertiary": "Si — Draws on remembered craft traditions and personal experience.",
+            "auxiliary": "Se — Lives through the physical act of forging. Attuned to the heat, weight, texture, and immediate feedback of the metal under her hands.",
+            "tertiary": "Ni — Quietly senses the deeper character or destiny of a piece as she works. Feels what a blade will become long before it is finished.",
             "inferior": "Te — Struggles with structure, planning, and external organization under pressure."
         },
         "enneagram": {

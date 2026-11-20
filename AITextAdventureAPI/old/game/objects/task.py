@@ -156,6 +156,7 @@ class TaskEventType(str, Enum):
     COMPLETE_REGION_QUEST_2 = "complete_regional_quest_2"
     SET_NPC_MET = "set_npc_met"
     SET_AIRCRAFT = "set_aircraft"
+    SET_AIRCRAFT_STANDING_LOCK_TEXT = "set_aircraft_standing_lock_text"
     ALLOW_OCEAN_FLIGHT = 'allow_ocean_flight'
     CAN_AIRCRAFT_FLY = 'can_aircraft_fly'
     UNLOCK_NPC_LOG = 'unlock_npc_log'

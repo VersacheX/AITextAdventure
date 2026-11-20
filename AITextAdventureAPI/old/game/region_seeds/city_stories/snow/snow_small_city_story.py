@@ -33,7 +33,7 @@ NPCS = [
 		'name': 'Mina Frostline',
 		'description': (
 			'A resourceful trader who deals in survival gear and hard‑earned wisdom.'
-			' Mira\'s smile is rare but genuine, like sunlight on fresh snow.'
+			' Mina\'s smile is rare but genuine, like sunlight on fresh snow.'
 			' She has a story for every scar she carries.'
 		),
 		"image": "snow_small:survivor_mira1",
@@ -242,7 +242,7 @@ NPC_DIALOG += [
 	{ 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_snow_small_meet_karrek', 'dialog': [ "Bleakwatch has survived worse — but not without knowing what's coming." ] },
 	{ 'npc_id': 'skill',   'dialog_id': 'poise_snow_small_meet_karrek',   'dialog': [ "Mina Frostline will know what the quiet supply routes mean." ] },
 
-	# Meet Survivor Mira
+	# Meet Survivor Mina
 	{ 'npc_id': 'spirit', 'dialog_id': 'kaera_snow_small_meet_survivor_mina', 'dialog': [ "Supply routes gone quiet. The cold coming from the wrong direction." ] },
 	{ 'npc_id': 'tech',  'dialog_id': 'kade_snow_small_meet_survivor_mina',  'dialog': [ "If the outpost loses its watch, the whole frontier falls dark." ] },
 	{ 'npc_id': 'skill', 'dialog_id': 'poise_snow_small_meet_survivor_mina', 'dialog': [ "Find Orlena. The storm-patterns near the hollow are fracturing." ] },

@@ -21,8 +21,8 @@ CHAPTER_CITY_ORDER = [
     "snow_mid_city",            # Chapter 15: Hailward Hold
     "forest_small_city",        # Chapter 16: Thornshade Hamlet
     "mountains_mid_city",     # Chapter 17: Gallows Rift
-    "forest_large_city",        # Chapter 18: Aurelion Veil
-    "snow_large_city",          # Chapter 19: Frostgate Spire
+    "snow_large_city",          # Chapter 18: Frostgate Spire
+    "forest_large_city",        # Chapter 19: Aurelion Veil
     "swamp_mid_city",         # Chapter 20: Bayou Nocturne
     "mountains_small_city",     # Chapter 21: Hollerforge Hollow
 ]

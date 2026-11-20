@@ -266,6 +266,21 @@ NPC_DIALOG = [
         ]
     },
     {
+        'npc_id': 'seth',
+        'dialog_id': 'seth_ch8_rustwing_grounded',
+        'dialog': [
+            "Rustwing took a bad hit in that drop. She's grounded until I patch her with proper parts.",
+            "I'll track down what we need. Don't try to force a takeoff — you'll tear the frame apart."
+        ]
+    },
+    {
+        'npc_id': 'seth',
+        'dialog_id': 'seth_ch8_rustwing_parts',
+        'dialog': [
+            "I'll comb this district for salvage and meet you later. Keep moving — I'll find you when she's flight-ready."
+        ]
+    },
+    {
         'npc_id': None,
         'dialog_id': 'ch8_narrator_intro',
         'dialog': [
@@ -638,7 +653,12 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch8_narrator_crash' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch8_crash' }},
             { 'event_type': 'set_player_location', 'params': { 'location': 'region_open_area' }},
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch8_narrator_intro' }}
+            { 'event_type': 'set_aircraft', 'params': { 'location': 'region_open_area' }},
+            { 'event_type': 'can_aircraft_fly', 'params': { 'can_fly': False }},
+            { 'event_type': 'set_aircraft_standing_lock_text', 'params': { 'text': "The Rustwing is grounded." }},
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch8_rustwing_grounded' }},
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch8_rustwing_parts' }},
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch8_narrator_intro' }},
         ],
         'task_complete_events': [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'veyla', 'dialog_id': 'veyla_ch8_intro_1' }},

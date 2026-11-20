@@ -846,7 +846,7 @@ TASKS = [
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'oracle', 'dialog_id': 'oracle_ch20_cannot_avoid' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch20_void_power' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'curator_lysa', 'standing_text': ["The past is a comfort, a warm blanket. Why would anyone choose the cold, uncertain future?"]}},
-			{ 'event_type': 'set_player_location', 'params': { 'location': 'city_number_21_region_city_bar' }},
+			{ 'event_type': 'set_player_location', 'params': { 'location': 'mountains_small_city_region_city_bar' }},
 			{ 'event_type': 'advance_chapter' }
 		]
 	}

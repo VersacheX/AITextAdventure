@@ -82,6 +82,7 @@ class PlayerGame:
 		self.inside_aircraft: bool = False # whether the player is currently inside the aircraft
 		self.phased: bool = False # whether the player is currently phased (e.g. introduced later in the game allowing the player overworld movement without encounters)
 		self.aircraft_location: Optional[Tuple[int, int]] = None # location of the aircraft on the world map
+		self.aircraft_standing_lock_text: Optional[str] = None # message shown when the Rustwing is grounded and cannot be boarded
 		self.continents: Dict[int, List[str]] = {} # mapping of continent number to list of city names on that continent
 		self.allow_ocean_flight: bool = False # whether the player has unlocked the ability to fly over ocean regions with the aircraft
 		self.can_aircraft_fly: bool = True # whether the aircraft can currently fly (unlocked through story progression, separate from allow_ocean_flight which is a prerequisite for this but not sufficient on its own)
@@ -150,11 +151,22 @@ class PlayerGame:
 		print(f"Ocean removed. {len(tiles_to_remove)} tiles and {len(ocean_regions)} regions removed.")
 
 	def enter_aircraft(self):
-		if (self.x, self.y) == self.aircraft_location:
-			self.inside_aircraft = True
-			self.add_info_dialog_line(None, 'To the skies again.')
-		else:
-			self.add_info_dialog_line(None, 'The aircraft is not here.')
+		if (self.x, self.y) != self.aircraft_location:
+			#self.add_info_dialog_line(None, 'Something is broken.')
+			#just kidding, ignore return. user should not be able to get here if they are not at the aircraft location. front end probably needs that mechanic baked in
+			return
+
+		# Rustwing can be present but grounded (chapter/event gated).
+		if not getattr(self, 'can_aircraft_fly', True):
+			lock_text = getattr(self, 'aircraft_standing_lock_text', None)
+			if lock_text:
+				self.add_info_dialog_line(None, lock_text)
+			else:
+				self.add_info_dialog_line(None, 'The Rustwing is grounded and cannot take off yet.')
+			return
+
+		self.inside_aircraft = True
+		self.add_info_dialog_line(None, 'To the skies again.')
 
 	def get_city_by_number(self, index: int) -> Optional[City]:
 		"""Get city by 1-based index (useful for story/chapter progression)."""
@@ -203,6 +215,13 @@ class PlayerGame:
 
 	def set_aircraft_location (self, location: Tuple[int, int]):
 		self.aircraft_location = location
+
+	def set_aircraft_standing_lock_text(self, text: Optional[str]):
+		if text is None:
+			self.aircraft_standing_lock_text = None
+			return
+		value = str(text).strip()
+		self.aircraft_standing_lock_text = value if value else None
 
 	def complete_region_quest(self, region_id: str):
 		if region_id not in self.completed_regional_quests:
@@ -1962,6 +1981,7 @@ class PlayerGame:
 			'inside_aircraft': False,
 			'phased': False,
 			'aircraft_location': None,
+			'aircraft_standing_lock_text': None,
 			'continents': {},
 			'allow_ocean_flight': False,
 			'can_aircraft_fly': True,
