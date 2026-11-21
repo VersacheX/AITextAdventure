@@ -83,6 +83,72 @@ NPC_DIALOG = [
         ]
     },
     {
+        'npc_id': None,
+        'dialog_id': 'ch7_narrator_memory_echo_1',
+        'dialog': [
+            "As the region stabilizes, a sharp pressure snaps behind your eyes. A memory surfaces - jagged, loud, and unfinished."
+        ]
+    },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'twisted_memory_1',
+        'dialog': [
+            "The thing was screaming. Light leaking out the seams. Kaera's yelling 'It's destabilizing!' and nobody's doing anything.",
+            "So I did. I grabbed it to throw it clear. Too late. The air split like a cheap shield.",
+            "I had my hands on it. I could've thrown it. Half a second. That's all I needed."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'twisted_memory_1',
+        'dialog': [
+            "Readings were nominal until they weren't. Kaera says 'It's destabilizing!' because Moxie dumped a storm into a precision instrument.",
+            "Then Chock grabs it with his whole fist like it's a hammer. Light. Tear. Data gone.",
+            "Calibrated to four decimals. Four. And they used it like a toy."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'twisted_memory_1',
+        'dialog': [
+            "Kaera's glowing, all serious spirit-face, and she yells 'It's destabilizing!' Yeah, because she's wrapping it in a holy burrito.",
+            "Then Chock grabs it and boom, hole in everything.",
+            "I'm not saying it was her fault. I'm saying the glowing started when she started glowing."
+        ]
+    },
+    {
+        'npc_id': 'spirit',
+        'dialog_id': 'twisted_memory_1',
+        'dialog': [
+            "I felt it shift under my hands. My spirit wasn't calming it. It was feeding it.",
+            "I said, 'It's destabilizing!' but I was the one destabilizing it. Chock reached in to pull it away from me. To protect me.",
+            "And the light tore through the room."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'twisted_memory_1',
+        'dialog': [
+            "Kaera was already shouting. 'It's destabilizing!' The device was lit up like a forge.",
+            "Chock grabbed it, because of course he did. Then the room came apart.",
+            "Every one of them had a hand in it. Literally."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_ch7_memory_echo_1_response',
+        'dialog': [
+            "That wasn't just a flashback. That was blame, dressed up as certainty."
+        ]
+    },
+    {
+        'npc_id': 'spirit',
+        'dialog_id': 'spirit_ch7_memory_echo_1_response',
+        'dialog': [
+            "Easy. Breathe. We don't need perfect recall yet, only honesty about what we don't know."
+        ]
+    },
+    {
         'npc_id': 'lyren',
         'dialog_id': 'lyren_ch7_meet_lyren',
         'dialog': [
@@ -295,6 +361,20 @@ TASKS = [
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'lyren', 'standing_text': ["The land is breaking down faster than we can fix it. Help stabilize the region before Seth can prepare the airship for departure."]}},
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch7_meet_lyren' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch7_narrator_intro' }}
+        ],
+        'task_complete_events': [
+            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch7_memory_echo_1' }}
+        ]
+    },
+    {
+        'task_id': 'main_story_ch7_memory_echo_1',
+        'type': 'gated',
+        'task_acquire_events': [
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch7_narrator_memory_echo_1' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'twisted_character', 'dialog_id': 'twisted_memory_1' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech', 'dialog_id': 'tech_ch7_memory_echo_1_response' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch7_memory_echo_1_response' }},
+            { 'event_type': 'complete_task', 'params': { 'task_id': 'main_story_ch7_memory_echo_1' }}
         ],
         'task_complete_events': [
             { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch7_meet_seth_to_prepare_airship' }}

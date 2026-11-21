@@ -218,6 +218,7 @@ NPC_DIALOG = [
 		'dialog': [
 			"Whoa! that was crazy! You appeared out of nowhere...",
 			"Hey Look, these streets aren't safe, be careful who you trust.",
+          "And if Tess and Sam ask, you didn't see me. I am not paying that tab today.",
 			"Gotta run... It's tuff out here!"
 		]
 	},
@@ -360,7 +361,8 @@ NPC_DIALOG = [
 		'npc_id': 'sam',
 		'dialog_id': 'sam_intro_s1',
 		'dialog': [
-			"Heard they went and busted up Seth pretty good for Rook. They could be useful."
+            "Heard they went and busted up Seth pretty good for Rook. They could be useful.",
+			"Seth knows us too. Small world, messy debts."
 		]
 	},
 	{

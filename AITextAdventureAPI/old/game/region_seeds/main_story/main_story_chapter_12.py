@@ -486,6 +486,72 @@ NPC_DIALOG = [
             "I know it's a small thing. But right now small things are all I have left of her."
         ]
     },
+    {
+        'npc_id': None,
+        'dialog_id': 'ch12_narrator_memory_echo_2',
+        'dialog': [
+            "On the walk back through Quantford, another shard of that night tears loose and slams into focus."
+        ]
+    },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'twisted_memory_2',
+        'dialog': [
+            "Kade drops this brass thing on the table like it's a medal. 'Check this new invention I made out, guys. It measures fractures in reality.'",
+            "Moxie's already halfway across the table: 'Oh Coooool!' I remember thinking: nobody touch that.",
+            "I said nobody touch it. Pretty sure I said it out loud."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'twisted_memory_2',
+        'dialog': [
+            "'Check this new invention I made out, guys. It measures fractures in reality.' Measures. Not makes. Passive instrument.",
+            "Moxie says, 'Oh Cooool!' I should've put it back in my coat right there.",
+            "It was a thermometer. Nobody blames the thermometer for the fever."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'twisted_memory_2',
+        'dialog': [
+            "Kade pulls out this adorable little brass gizmo. 'Check this new invention I made out, guys, it measures fractures in reality.'",
+            "And I go, 'Oh Cooooooooool!' Which is valid. Look at it. It had dials!",
+            "Anyone would've said cool. Poise would've said cool. Okay, not Poise."
+        ]
+    },
+    {
+        'npc_id': 'spirit',
+        'dialog_id': 'twisted_memory_2',
+        'dialog': [
+            "Kade was so proud. 'Check this new invention I made out, guys. It measures fractures in reality.'",
+            "Moxie said 'Oh Cooool!' and laughed, and everyone was happy. We'd won that day.",
+            "I remember thinking I should keep my hands in my lap."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'twisted_memory_2',
+        'dialog': [
+            "I come back from the bar with a water and Moxie's holding some brass thing over her head. 'Oh Cooooool!'",
+            "Kade's babbling about fractures in reality. I assumed she found it in a bin. She finds everything in a bin.",
+            "Moxie brought the toy. Kade explained the toy. That's what I walked into."
+        ]
+    },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'technique_ch12_memory_echo_2_response',
+        'dialog': [
+            "Yeah... that sounds right and wrong at the same time."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'skill_ch12_memory_echo_2_response',
+        'dialog': [
+            "We're remembering angles, not the whole room. Keep collecting them."
+        ]
+    },
 ]
 
 TASKS = [
@@ -612,6 +678,10 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch12_to_rell_final' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch12_to_rell_final' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rell', 'dialog_id': 'rell_ch12_farewell' }},
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch12_narrator_memory_echo_2' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'twisted_character', 'dialog_id': 'twisted_memory_2' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch12_memory_echo_2_response' }},
+            { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'skill', 'dialog_id': 'skill_ch12_memory_echo_2_response' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rell', 'standing_text': ["Ember's gone... but her fight isn't over. What do you need from me?"]}},
             { 'event_type': 'advance_chapter' }
         ]

@@ -178,6 +178,7 @@ NPC_DIALOG = [
         'npc_id': 'tess',
         'dialog_id': 'tess_ch14_intro',
         'dialog': [
+            "Before you start: yes, we were in the cargo hold. Yes, Seth threatened to throw us overboard. No, he didn't.",
             "Look at this. A whole city built on a binary choice. Memory or Reputation.",
             "It's the oldest con in the book - limit the options to control the outcome."
         ]
@@ -186,8 +187,75 @@ NPC_DIALOG = [
         'npc_id': 'sam',
         'dialog_id': 'sam_ch14_intro',
         'dialog': [
+            "We're still following the Grift Stone trail. This city is another choke point where power changes hands.",
             "The system is designed to enforce self-policing. They're not just choosing a mask; they're choosing a cage.",
             "The real power isn't in the masks, but in the act of choosing one."
+        ]
+    },
+    {
+        'npc_id': None,
+        'dialog_id': 'narrator_ch14_memory_echo_3',
+        'dialog': [
+            "The aftermath shivers. Another fragment of the bar night surfaces - faster this time, sharper."
+        ]
+    },
+    {
+        'npc_id': 'technique',
+        'dialog_id': 'twisted_memory_3',
+        'dialog': [
+            "Tankard goes over. Foam's running for the edge.",
+            "The thing in Kade's hands is shaking itself apart and I'm reaching for it, and the light comes first. Then I touch it.",
+            "Light first. I know what I saw. Poise, behind me: 'Shit!'"
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'twisted_memory_3',
+        'dialog': [
+            "Tankard tips. Foam on my schematics.",
+            "Chock's hand closes on the casing, and the hum climbs past anything I built it to make. Light everywhere. Poise: 'Shit!'",
+            "That note it made? That wasn't my design. That was her magic singing through it."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'twisted_memory_3',
+        'dialog': [
+            "Tankard falls over, foam everywhere, Chock's big hand on the gizmo, and the light comes out of Kaera's ward - I swear - pouring out the cracks.",
+            "Poise goes 'Shit!' and that's the last thing.",
+            "It came out the ward. Like a lid popping off a pot."
+        ]
+    },
+    {
+        'npc_id': 'spirit',
+        'dialog_id': 'twisted_memory_3',
+        'dialog': [
+            "The tankard tipped. I watched the foam run and thought, I should catch that. Such a foolish thought.",
+            "Chock's hand on the device, my spirit still threaded through it, the note rising. Poise said 'Shit!' and I knew she was right.",
+            "I could feel the note. It was my resonance. I'd know it anywhere."
+        ]
+    },
+    {
+        'npc_id': 'skill',
+        'dialog_id': 'twisted_memory_3',
+        'dialog': [
+            "Tankard goes over. I watch the foam because it's the only thing in that room moving at a sane speed.",
+            "Chock's hand closes, the hum climbs, and I already know exactly how this ends. 'Shit.'",
+            "I wasn't scared. I was bracing. There's a difference."
+        ]
+    },
+    {
+        'npc_id': 'magic',
+        'dialog_id': 'magic_ch14_memory_echo_3_response',
+        'dialog': [
+            "Ugh. Same scene, different villains every time. My head hates this puzzle."
+        ]
+    },
+    {
+        'npc_id': 'tech',
+        'dialog_id': 'tech_ch14_memory_echo_3_response',
+        'dialog': [
+            "Sequence consistency is improving. Attribution consistency is not."
         ]
     },
     {
@@ -704,6 +772,7 @@ TASKS = [
             {'event_type': 'create_npc', 'params': {'npc_id': 'hask', 'location': 'region_city_shoparmor'}},
             {'event_type': 'show_npc', 'params': {'npc_id': 'tess', 'location': 'region_city_bar'}},
             {'event_type': 'show_npc', 'params': {'npc_id': 'sam', 'location': 'region_city_bar'}},
+            {'event_type': 'show_npc', 'params': {'npc_id': 'seth', 'location': 'region_city_bar'}},
             {'event_type': 'create_npc', 'params': {'npc_id': 'caius', 'location': 'snow_mid_city_region_city_inn'}},
             {'event_type': 'create_npc', 'params': {'npc_id': 'jett', 'location': 'snow_mid_city_region_city_shopitems'}},
             {'event_type': 'create_npc', 'params': {'npc_id': 'elian', 'location': 'snow_mid_city_region_city_bar'}},            
@@ -715,6 +784,7 @@ TASKS = [
             {'event_type': 'lock_dungeon', 'params': {'dungeon_id': 'the_citadel'}},
             {'event_type': 'set_dungeon_locked_text', 'params': {'dungeon_id': 'the_citadel', 'locked_text': "The Citadel is locked tight. Only one who conforms may enter."}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'sam', 'standing_text': ["You don't have to choose a side, Tess. Just be yourself."]}},
+            {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'seth', 'standing_text': ["I'm hanging out here with Tess and Sam for now, playing the odds while you lot stir up the city."]}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'caius', 'standing_text': ["The city is divided. Choose your side, or be left out."]}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'jett', 'standing_text': ["The red side is for those who embrace their past. The blue side is for those who reject it. Which will you choose?"]}},
             {'event_type': 'set_npc_standing_text', 'params': {'npc_id': 'elian', 'standing_text': ["The city is a stage. The red side plays the role of memory, the blue side plays the role of reputation. Which will you perform?"]}},
@@ -873,6 +943,10 @@ TASKS = [
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'lyren', 'dialog_id': 'lyren_ch14_stigma_aftermath'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'thorn', 'dialog_id': 'thorn_ch14_stigma_aftermath'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'nia', 'dialog_id': 'nia_ch14_stigma_aftermath'}},
+            {'event_type': 'initiate_dialog', 'params': {'npc_id': None, 'dialog_id': 'narrator_ch14_memory_echo_3'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'twisted_character', 'dialog_id': 'twisted_memory_3'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch14_memory_echo_3_response'}},
+            {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch14_memory_echo_3_response'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch14_face_edict'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'technique', 'dialog_id': 'technique_ch14_face_edict'}},
             {'event_type': 'hide_npc', 'params': {'npc_id': 'stigma'}},

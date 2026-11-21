@@ -562,7 +562,9 @@ NPC_DIALOG = [
 		'dialog': [
 			"You’re back! And you actually got the Grift Stone?",
 			"Damn… you guys are full of surprises.",
+            "Sam and I are hearing the same whispers you are - weird arrivals, old relic routes, too much money moving too fast.",
 			"Listen, word’s been spreading.  Someone in Highsteeple Crossing showed up out of nowhere... like you did.",
+			"We’re going to keep pulling threads on our side. If a real score is hiding in this mess, we’ll find it.",
 			"If you’re looking for answers, that’s your next lead."
 		]
 	},
