@@ -275,6 +275,28 @@ NPC_DIALOG = [
     },
     {
         'npc_id': 'seth',
+        'dialog_id': 'seth_ch8_stowaways',
+        'dialog': [
+            "Also, before I bolt — your favorite grifters were in my cargo net when we went down.",
+            "Tess. Sam. Apparently they stowed away when we lifted off. Again."
+        ]
+    },
+    {
+        'npc_id': 'tess',
+        'dialog_id': 'tess_ch8_stowaway_cover',
+        'dialog': [
+            "In our defense, your cargo hold had terrible security and incredible timing."
+        ]
+    },
+    {
+        'npc_id': 'sam',
+        'dialog_id': 'sam_ch8_stowaway_cover',
+        'dialog': [
+            "We followed the same trail. You had the fastest route. We improvised transport."
+        ]
+    },
+    {
+        'npc_id': 'seth',
         'dialog_id': 'seth_ch8_rustwing_parts',
         'dialog': [
             "I'll comb this district for salvage and meet you later. Keep moving — I'll find you when she's flight-ready."
@@ -657,6 +679,9 @@ TASKS = [
             { 'event_type': 'can_aircraft_fly', 'params': { 'can_fly': False }},
             { 'event_type': 'set_aircraft_standing_lock_text', 'params': { 'text': "The Rustwing is grounded." }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch8_rustwing_grounded' }},
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch8_stowaways' }},
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'tess', 'dialog_id': 'tess_ch8_stowaway_cover' }},
+            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'sam', 'dialog_id': 'sam_ch8_stowaway_cover' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch8_rustwing_parts' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch8_narrator_intro' }},
         ],

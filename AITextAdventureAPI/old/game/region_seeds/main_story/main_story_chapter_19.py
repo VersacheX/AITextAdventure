@@ -537,6 +537,72 @@ NPC_DIALOG = [
 		'dialog': [
 			"Astra Wynn raises her hands, weaving threads of light and shadow. Reality ripples violently around the party as they are pulled through a tear in space."
 		]
+   },
+	{
+		'npc_id': None,
+		'dialog_id': 'narrator_ch19_memory_echo_4',
+		'dialog': [
+			"Mid-translation, the world goes white again. The last fragment hits - complete, cruel, undeniable."
+		]
+	},
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'twisted_memory_4',
+		'dialog': [
+			"Moxie's eyes go wide as gobstoppers. 'Ohhhh, that thing is Cooooool. I want to see what it can really do.'",
+			"Purple crawls up her arms into the device. Kaera jumps in to stop it, and that's when it starts to howl.",
+			"Two of them poking a bomb. I was the only one trying to defuse it."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'twisted_memory_4',
+		'dialog': [
+			"Moxie, gobstopper eyes: 'Ohhhhh that thing is Cooooooool! I want to see what it can really do.'",
+			"She doesn't ask. She just casts. Raw, unshaped, all of it. Every gauge pins at once.",
+			"I've rebuilt the sequence forty times in my head. Every version starts with her hands."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'twisted_memory_4',
+		'dialog': [
+			"'Ohhhh that thing is Cool! I want to see what it can really do.' One tiny sparkle. Tiny. Like, a birthday-candle cantrip.",
+			"It barely even hummed. Then Kaera puts her hands on it and it starts screaming.",
+			"Birthday candle. You can't tear the universe with a birthday candle... can you? No. No, you can't."
+		]
+	},
+	{
+		'npc_id': 'spirit',
+		'dialog_id': 'twisted_memory_4',
+		'dialog': [
+			"Moxie's eyes lit up. 'Ohhhh that thing is Coooool! I want to see what it can really do.'",
+			"Just a little playful spell, the kind she does a hundred times a day. It was fine... until I tried to help.",
+			"Please stop blaming Moxie. She was only playing. I'm the one who didn't know when to leave something alone."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'twisted_memory_4',
+		'dialog': [
+			"Moxie: 'Ohhhhhh that thing is Coooooool! I want to see what it can really do.' Spell's out of her before anyone can say no.",
+			"Kaera piles on. Kade's yelling numbers. Four morons, one fuse.",
+			"You want the truth? Nobody stopped. Including me. I just said 'shit' a little faster."
+		]
+	},
+	{
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch19_memory_echo_4_response',
+		'dialog': [
+			"Whatever the order was, we face it together. No one carries this alone anymore."
+		]
+	},
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch19_memory_echo_4_response',
+		'dialog': [
+			"Good. That's the whole wound. Now we stop picking at it and use it."
+		]
 	}
 ]
 
@@ -736,6 +802,10 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch19_high_praise' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'astra_wynn', 'dialog_id': 'astra_wynn_ch19_flattery' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch19_teleport' }},
+          { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch19_memory_echo_4' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'twisted_character', 'dialog_id': 'twisted_memory_4' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch19_memory_echo_4_response' }},
+			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch19_memory_echo_4_response' }},
 			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'astra_wynn', 'standing_text': ["Good timing. Marlo Finch has been asking for you specifically. He's holed up in Bayou Nocturn, digging through old memories and artifacts that might help with... whatever this reconstruction mess is. I promised I'd send you his way if you showed up. Ready for another jump?"]}},
 			{ 'event_type': 'advance_chapter' }
 		]
