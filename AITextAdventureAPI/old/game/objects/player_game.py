@@ -2071,7 +2071,7 @@ class PlayerGame:
 			inferred = class_map.get(cid)
 			if not inferred and cid in getattr(const, 'CHARACTER_CLASS_MAP', {}):
 				inferred = cid
-            if not inferred and cid:
+			if not inferred and cid:
 				for ab in (getattr(ch, 'abilities', None) or []):
 					atype = getattr(getattr(ab, 'ability_type', None), 'value', None)
 					if atype:
