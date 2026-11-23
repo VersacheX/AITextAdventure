@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'perfect smile', 'strong_attack': 'final performance', 'player_abilities': ['mask_of_expectation', 'crushing_reputation', 'obligation_chain', 'performance_is_mandatory'],
         'base_str': 40, 'base_dex': 60, 'base_con': 45, 'base_int': 55, 'base_hp': 60000, 'base_ap': 800,
         'str_per_level': 5, 'dex_per_level': 8, 'con_per_level': 5, 'int_per_level': 7,
-        'resistances': ['light', 'air'], 'immunities': ['confuse', 'stun'], 'weaknesses': ['dark', 'earth']
+        'resistances': ['light', 'air'], 'immunities': ['confuse', 'stun', 'petrify', 'sleep', 'silence'], 'weaknesses': ['dark', 'earth']
     }
 ]
 

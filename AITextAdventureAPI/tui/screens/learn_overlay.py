@@ -500,7 +500,10 @@ class LearnOverlay(Static):
 
         # Learn the ability
         try:
-            self._player.learn_ability(self._selected_ability)
+            learned = self._player.learn_ability(self._selected_ability)
+            if not learned:
+                self.notify("This character cannot learn that ability tree.", severity="warning")
+                return
             ability_name = str(getattr(self._selected_ability, "name", "Ability"))
 
             # Check remaining slots

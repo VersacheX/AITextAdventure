@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'endless sorrow', 'strong_attack': 'grief wave', 'player_abilities': ['endless_tragedy', 'collapse_of_self', 'singularity_of_grief', 'weight_of_memory'],
         'base_str': 35, 'base_dex': 45, 'base_con': 40, 'base_int': 50, 'base_hp': 40000, 'base_ap': 600,
         'str_per_level': 4, 'dex_per_level': 5, 'con_per_level': 4, 'int_per_level': 7,
-        'resistances': ['dark', 'ice'], 'immunities': ['sleep'], 'weaknesses': ['light', 'fire']
+        'resistances': ['dark', 'ice'], 'immunities': ['confuse', 'continuous_damage', 'sleep', 'petrify', 'stun', 'silence'], 'weaknesses': ['light', 'fire']
     },
     {
         'id': 'garbage_boss', 'name': 'Garbage', 'hostile_type': 'aberration', 'min_spawn_level': 67, 'role': 'damage', 'rarity': 'notfound',
@@ -79,7 +79,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'worthless strike', 'strong_attack': 'corrosive self-doubt', 'player_abilities': ['absolute_disgust', 'distortion_of_reality', 'the_epic_you_never_were', 'rot_of_potential'],
         'base_str': 48, 'base_dex': 40, 'base_con': 45, 'base_int': 30, 'base_hp': 45000, 'base_ap': 500,
         'str_per_level': 6, 'dex_per_level': 4, 'con_per_level': 5, 'int_per_level': 3,
-        'resistances': ['dark', 'physical'], 'immunities': ['confuse', 'poison'], 'weaknesses': ['light']
+        'resistances': ['dark', 'physical'], 'immunities': ['confuse', 'continuous_damage', 'sleep', 'petrify', 'stun', 'silence'], 'weaknesses': ['light']
  }
 ]
 

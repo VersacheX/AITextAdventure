@@ -59,32 +59,34 @@ def get_location_actions(pg: Any, active_area: Any) -> List[LocationAction]:
     # (x, y, z) are stored in data so loot_sublocation can find the right
     # subloc even if the player moves before confirming the loot dialog.
     try:
-        sublocs = active_area.get_sublocation_at((pg.x, pg.y, pg.z)) or []
-        for sl in sublocs:
-            name = sl.get("name", "Unknown")
-            mode = sl.get("mode", "searchable")
-            prompt = sl.get("prompt") or f"Examine the {name}"
-            has_loot = (
-                sl.get("loot") is not None
-                or int(sl.get("money", 0) or 0) > 0
-            )
-            if mode == "searchable":
-                label = f"Search: {name}"
-            else:
-                label = prompt
-            actions.append(LocationAction(
-                id=f"subloc_{name}",
-                label=label,
-                kind="sublocation",
-                data={
-                    "subloc": sl,
-                    "name": name,
-                    "has_loot": has_loot,
-                    "x": pg.x,
-                    "y": pg.y,
-                    "z": pg.z,
-                },
-            ))
+        # While airborne, sublocations should not be visible/selectable.
+        if not getattr(pg, "inside_aircraft", False):
+            sublocs = active_area.get_sublocation_at((pg.x, pg.y, pg.z)) or []
+            for sl in sublocs:
+                name = sl.get("name", "Unknown")
+                mode = sl.get("mode", "searchable")
+                prompt = sl.get("prompt") or f"Examine the {name}"
+                has_loot = (
+                    sl.get("loot") is not None
+                    or int(sl.get("money", 0) or 0) > 0
+                )
+                if mode == "searchable":
+                    label = f"Search: {name}"
+                else:
+                    label = prompt
+                actions.append(LocationAction(
+                    id=f"subloc_{name}",
+                    label=label,
+                    kind="sublocation",
+                    data={
+                        "subloc": sl,
+                        "name": name,
+                        "has_loot": has_loot,
+                        "x": pg.x,
+                        "y": pg.y,
+                        "z": pg.z,
+                    },
+                ))
     except Exception:
         pass
 
@@ -113,7 +115,26 @@ def get_location_actions(pg: Any, active_area: Any) -> List[LocationAction]:
         if at_aircraft and not inside_aircraft:
             actions.append(LocationAction(id="aircraft_enter", label="Enter aircraft", kind="aircraft_enter"))
         if inside_aircraft:
-            actions.append(LocationAction(id="aircraft_land", label="Land aircraft", kind="aircraft_land"))
+            # Mirror landing validity checks so invalid tiles do not even show
+            # "Land aircraft" as an option.
+            can_land = True
+            region_area, resolved_area = pg.get_region_and_active_area_for_position((pg.x, pg.y))
+            if resolved_area and str(getattr(resolved_area, "display_name", "") or "").strip().lower() == "ocean":
+                can_land = False
+            if can_land and pg.get_dungeon_at_position((pg.x, pg.y)):
+                can_land = False
+            if can_land:
+                tile = pg.get_tile(pg.x, pg.y)
+                if tile is None:
+                    can_land = False
+                else:
+                    tile_type = str(getattr(tile, "type", "") or "").strip().lower()
+                    has_building = bool(getattr(tile, "building", None))
+                    if has_building or tile_type in {"building", "impassable"}:
+                        can_land = False
+
+            if can_land:
+                actions.append(LocationAction(id="aircraft_land", label="Land aircraft", kind="aircraft_land"))
     except Exception:
         pass
 

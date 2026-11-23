@@ -657,9 +657,11 @@ def character_join(params, player_game):
 			# can route dialog lines to them. Mirrors add_pending_character /
 			# add_final_character, which also set npc_id after generation.
 			# Without this the character joins with npc_id=None and its story
-			# dialog is silently skipped.
+           # dialog is silently skipped.
 			if not getattr(p, 'npc_id', None):
 				p.npc_id = seed.get('npc_id') or char_id
+			if not getattr(p, 'character_class', None):
+				p.character_class = (getattr(const, 'CHARACTER_NPC_CLASS_MAP', {}) or {}).get(p.npc_id) or (getattr(const, 'CHARACTER_NPC_CLASS_MAP', {}) or {}).get(char_id)
 			player_game.add_character(p)
 
 			return p

@@ -236,23 +236,40 @@ def compute_modified_stat(entity: Optional[object], stat_name: str, base_value: 
 	dexterity affects accuracy, evasion, and combat speed
 	constitution affects HP and status resistance.
 
-	Returns the adjusted stat as an int. If no applicable statuses are present, returns base_value.
+    Returns the adjusted stat as an int. If no applicable statuses are present, returns base_value.
 	"""
 	# Safely obtain statuses; allow entity to be None or missing attribute
 	statuses = entity.statuses or []
-	
+
 	modified = int(base_value)
+
+	def _signed_pow(value: float, power: float) -> float:
+		"""Real-valued exponent that preserves sign for negative inputs.
+
+		Using ``value ** power`` directly with a negative value and fractional
+		exponent creates a complex number in Python, which later crashes when
+		cast to int.
+		"""
+		if value == 0:
+			return 0.0
+		sign = -1.0 if value < 0 else 1.0
+		return sign * (abs(value) ** power)
+
 	for s in statuses:
 		sid = s.get('id')
 
 		# read magnitude as float to support fractional scaling
-		mag = float(s.get('magnitude',0) or 0.0)
+		try:
+			mag = float(s.get('magnitude', 0) or 0.0)
+		except (TypeError, ValueError):
+			mag = 0.0
+
+		delta = int(_signed_pow(mag, 1.2))
 
 		# apply buffs/debuffs matching the requested stat
 		if sid == f'{stat_name}_buff':
-			# use exponentiation instead of bitwise XOR; keep integer result
-			modified += int(mag **1.2)
+			modified += delta
 		elif sid == f'{stat_name}_debuff':
-			modified -= int(mag **1.2)
+			modified -= delta
 
 	return int(modified)
