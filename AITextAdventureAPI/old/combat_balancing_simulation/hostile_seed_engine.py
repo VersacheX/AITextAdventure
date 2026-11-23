@@ -555,7 +555,7 @@ def get_role_based_abilities(seed, sorted_cands, desired_count):
         {"ability_type": "spirit", "required_stats_per_ability_level": [{"intelligence": 13}, {"constitution": 9}]},
         {"ability_type": "magic", "required_stats_per_ability_level": [{"intelligence": 18}]},
         {"ability_type": "tech", "required_stats_per_ability_level": [{"intelligence": 13}, {"dexterity": 9}]},
-        {"ability_type": "skill", "required_stats_per_ability_level": [{"dexterity": 18}]},
+        {"ability_type": "skill", "required_stats_per_ability_level": [{"dexterity": 13, "strength": 9  }]},
     ]
     """
     from game.region_seeds.player_abilities.ability_requirements import ABILITY_TYPE_REQUIREMENTS

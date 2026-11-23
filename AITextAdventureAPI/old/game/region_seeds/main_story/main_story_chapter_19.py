@@ -802,7 +802,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'sable', 'dialog_id': 'sable_ch19_high_praise' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'astra_wynn', 'dialog_id': 'astra_wynn_ch19_flattery' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch19_teleport' }},
-          { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch19_memory_echo_4' }},
+			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'narrator_ch19_memory_echo_4' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'twisted_character', 'dialog_id': 'twisted_memory_4' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch19_memory_echo_4_response' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'technique', 'dialog_id': 'technique_ch19_memory_echo_4_response' }},

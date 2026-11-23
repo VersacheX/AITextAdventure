@@ -22,7 +22,7 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         "body_armor": "vigil_robe",
         "leg_armor": "guardian_greaves",
         "equipped_weapon": "ledgerbrand_mace",
-        "max_hp": 20000,
+        "max_hp": 2000,
         "current_hp": 2000,
         "max_ap": 500,
         "current_ap": 500,

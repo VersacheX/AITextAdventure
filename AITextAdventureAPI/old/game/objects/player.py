@@ -75,6 +75,7 @@ class Player:
 
 	id: Optional[str] = None
 	npc_id: Optional[str] = None
+	character_class: Optional[str] = None
 	last_broken_armor: List[str] = field(default_factory=list)
 	last_broken_weapon_dropped: Optional[str] = None
 	statuses: List[dict] = field(default_factory=list)
@@ -585,9 +586,64 @@ class Player:
 		self.max_hp += self.max_hp_per_lvl
 		self.unused_stat_points += self.per_level_stat_distribution_amount
 		self.unused_power_points += self.power_points_per_level
+		# Class-assigned characters auto-distribute all gained points so they
+		# follow their predefined growth profile without manual upgrades.
+		if getattr(self, 'character_class', None):
+			self.auto_allocate_level_points()
 		self.heal(self.max_hp)
 		self.restore_ap(self.max_ap)
 		return has_new_ability, self.per_level_stat_distribution_amount, self.power_points_per_level
+
+	def auto_allocate_level_points(self) -> None:
+		"""Spend all unused stat/power points using class-based distributions.
+
+		This keeps roster characters leveling under their intended archetype and
+		prevents point stockpiling on auto-leveled companions.
+		"""
+		char_class = str(getattr(self, 'character_class', '') or '').lower()
+		# priorities are round-robin weighted by order.
+		stat_priority = {
+			'technique': ('strength', 'constitution', 'dexterity', 'intelligence'),
+			'spirit': ('intelligence', 'constitution', 'dexterity', 'strength'),
+			'magic': ('intelligence', 'dexterity', 'constitution', 'strength'),
+			'tech': ('intelligence', 'dexterity', 'constitution', 'strength'),
+			'skill': ('dexterity', 'strength', 'constitution', 'intelligence'),
+		}
+		# hp_ratio controls power-point split; remainder goes to AP.
+		hp_ratio = {
+			'technique': 0.80,
+			'spirit': 0.50,
+			'magic': 0.35,
+			'tech': 0.45,
+			'skill': 0.60,
+		}
+
+		order = stat_priority.get(char_class)
+		if not order:
+			return
+
+		pts = int(getattr(self, 'unused_stat_points', 0) or 0)
+		if pts > 0:
+			inc = {'strength': 0, 'dexterity': 0, 'constitution': 0, 'intelligence': 0}
+			idx = 0
+			while pts > 0:
+				inc[order[idx % len(order)]] += 1
+				idx += 1
+				pts -= 1
+			self.allocate_stats(
+				inc['strength'],
+				inc['dexterity'],
+				inc['constitution'],
+				inc['intelligence'],
+				use_stat_points=True,
+			)
+
+		ppts = int(getattr(self, 'unused_power_points', 0) or 0)
+		if ppts > 0:
+			ratio = hp_ratio.get(char_class, 0.50)
+			hp_pts = max(0, min(ppts, int(round(ppts * ratio))))
+			ap_pts = max(0, ppts - hp_pts)
+			self.apply_power_point_allocation(hp_pts, ap_pts)
 
 	def upgrade_stats(self, str_inc: int = 0, dex_inc: int = 0, con_inc: int = 0, int_inc: int = 0, hp_points: int = 0, ap_points: int = 0) -> None:
 		self.allocate_stats(str_inc, dex_inc, con_inc, int_inc)
@@ -622,9 +678,20 @@ class Player:
 			return False
 		if ability in self.abilities:
 			return False
+
+		# Enforce class-bound learn trees when a class assignment exists.
+		ability_type = getattr(getattr(ability, 'ability_type', None), 'value', None) or str(getattr(ability, 'ability_type', '') or '').lower()
+		char_class = getattr(self, 'character_class', None)
+		if not char_class:
+			cid = getattr(self, 'npc_id', None) or getattr(self, 'id', None)
+			char_class = (getattr(const, 'CHARACTER_NPC_CLASS_MAP', {}) or {}).get(cid)
+		if char_class and ability_type and str(ability_type).lower() != str(char_class).lower():
+			return False
+
+		self.unused_ability_slots = max(0, self.unused_ability_slots - 1)
 		self.unused_ability_slots = max(0, self.unused_ability_slots - 1)
 		self.abilities.append(ability)
-		return
+		return True
 
 	def populate_from_json(self, data: dict) -> None:
 		if not data or not isinstance(data, dict):
@@ -655,6 +722,11 @@ def generate_player_from_attainable_character_seed(seed) -> Player:
 	name = seed.get('name') or seed.get('id') or 'Unnamed'
 	p = Player(name)
 	p.populate_from_json(seed)
+	char_id = seed.get('npc_id') or seed.get('id')
+	if not getattr(p, 'character_class', None):
+		p.character_class = (getattr(const, 'CHARACTER_NPC_CLASS_MAP', {}) or {}).get(char_id)
+	if not getattr(p, 'npc_id', None) and seed.get('npc_id'):
+		p.npc_id = seed.get('npc_id')
 	from game.objects.item import instantiate_item_from_id
 	armor_keys = ['arm_armor', 'head_armor', 'body_armor', 'leg_armor']
 	for key in armor_keys:

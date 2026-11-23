@@ -655,37 +655,6 @@ NPC_DIALOG = [
         ]
     },
     {
-        'npc_id': None,
-        'dialog_id': 'ch13_narrator_hold_noise',
-        'dialog': [
-            "As the engines warm, something thuds inside the Rustwing's cargo hold. Then another thud."
-        ]
-    },
-    {
-        'npc_id': 'seth',
-        'dialog_id': 'seth_ch13_hold_reveal',
-        'dialog': [
-            "You've got to be kidding me. Not again.",
-            "Tess. Sam. Out of the hold before I vent it."
-        ]
-    },
-    {
-        'npc_id': 'tess',
-        'dialog_id': 'tess_ch13_hold_reveal',
-        'dialog': [
-            "Relax, captain. We packed light and stole only *one* ration crate.",
-            "We're following the Grift Stone trail. You lot keep finding where the real money is."
-        ]
-    },
-    {
-        'npc_id': 'sam',
-        'dialog_id': 'sam_ch13_hold_reveal',
-        'dialog': [
-            "Call it shared logistics. You needed a clean departure. We needed passage.",
-            "No theatrics this time. We stay out of your way and take our cut when the dust settles."
-        ]
-    },
-    {
         'npc_id': 'spirit',
         'dialog_id': 'spirit_ch13_new_freedom',
         'dialog': [
@@ -896,10 +865,6 @@ TASKS = [
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_clarifies' }},
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch13_to_seth_gift' }},
             { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_final_words' }},
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': None, 'dialog_id': 'ch13_narrator_hold_noise' }},
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'seth', 'dialog_id': 'seth_ch13_hold_reveal' }},
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'tess', 'dialog_id': 'tess_ch13_hold_reveal' }},
-            { 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'sam', 'dialog_id': 'sam_ch13_hold_reveal' }},
             { 'event_type': 'set_aircraft', 'params': { 'location': 'region_city_open_area' }},
             { 'event_type': 'can_aircraft_fly', 'params': { 'can_fly': True }},
             { 'event_type': 'allow_ocean_flight', 'params': { 'allow': True }},

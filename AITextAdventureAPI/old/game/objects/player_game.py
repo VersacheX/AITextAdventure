@@ -1,4 +1,4 @@
-﻿from typing import Any, Dict, List, Set, Tuple, Optional
+from typing import Any, Dict, List, Set, Tuple, Optional
 import random
 import importlib
 
@@ -192,20 +192,30 @@ class PlayerGame:
 			self.add_info_dialog_line(None, "You are not inside the aircraft.")
 			return
 
+		# Never allow landing on ocean tiles/areas.
+		_region, active_area = self.get_region_and_active_area_for_position((self.x, self.y))
+		if active_area and str(getattr(active_area, 'display_name', '') or '').strip().lower() == 'ocean':
+			self.add_info_dialog_line(None, "You cannot land on open ocean.")
+			return
+
 		# Do not allow landing while inside a dungeon or if a dungeon occupies this position
 		if self.get_dungeon_at_position((self.x, self.y)):
 			self.add_info_dialog_line(None, "You cannot land here, a dungeon occupies this location.")
 			return
 
-		# Check tile validity
+        # Check tile validity
 		tile = self.get_tile(self.x, self.y)
 		if tile is None:
 			self.add_info_dialog_line(None, "You cannot land here, the terrain is unknown.")
 			return
 
-		# Reject buildings or impassable terrain
-		if tile.type == 'building' or tile.type == 'impassable':
-			self.add_info_dialog_line(None, "You cannot land here, the terrain is unsuitable (building or impassable).")
+        # Reject occupied or unsafe terrain.
+		# Some seeds encode occupancy via tile.type, others via tile.building payload.
+		tile_type = str(getattr(tile, 'type', '') or '').strip().lower()
+		has_building = bool(getattr(tile, 'building', None))
+		is_blocked_type = tile_type in {'building', 'impassable'}
+		if has_building or is_blocked_type:
+			self.add_info_dialog_line(None, "You cannot land here, the terrain is occupied or unsuitable.")
 			return
 
 		# Successful landing: record aircraft location and mark player not inside aircraft
@@ -881,6 +891,7 @@ class PlayerGame:
 			npc_id = self.pending_character
 			p = self.generate_player_character(seed=seed, level=self.get_max_character_level(), character_npc_id=npc_id)
 			p.npc_id = npc_id		
+			p.character_class = npc_id
 
 			self.add_character(p)
 			self.twisted_character = self.pending_character
@@ -1014,6 +1025,7 @@ class PlayerGame:
 
 		from combat_balancing_simulation.player_generator import generate_player
 		player = generate_player(name=display_name, focus=atype, target_level=level, seed=seed, player_game=self)
+		player.character_class = atype
 
 		return player
 
@@ -1052,6 +1064,24 @@ class PlayerGame:
 	def add_character(self, character: Player):
 		# if len(self.active_party) < self.max_party_count:
 		# 	self.active_party.append(character))
+		if character is not None and not getattr(character, 'character_class', None):
+			cid = getattr(character, 'npc_id', None) or getattr(character, 'id', None)
+			class_map = getattr(const, 'CHARACTER_NPC_CLASS_MAP', {}) or {}
+			inferred = class_map.get(cid)
+			if not inferred:
+				# main five fallback by npc_id (technique/spirit/magic/tech/skill)
+				if cid in getattr(const, 'CHARACTER_CLASS_MAP', {}):
+					inferred = cid
+			if not inferred:
+				# final fallback: infer from first known ability type
+				for ab in (getattr(character, 'abilities', None) or []):
+					atype = getattr(getattr(ab, 'ability_type', None), 'value', None)
+					if atype:
+						inferred = str(atype).lower()
+						break
+			if inferred:
+				character.character_class = inferred
+
 		self.characters.append(character)
 		if len(self.active_party) < self.max_party_count:
 			self.active_party.append(character._uuid)
@@ -1279,7 +1309,7 @@ class PlayerGame:
 									task_to_id = self.translate_npc_ref_to_id(task.to_id)
 									if task.to_type == SpecialTaskToType.NPC and task_to_id == npc_id:
 										# Only complete the delivery if the player
-										# actually carries the required item — same
+										# actually carries the required item � same
 										# gate as the overworld interaction path.
 										# A missing item falls through to standing text.
 										if not self._player_has_deliver_item(task):
@@ -2025,12 +2055,30 @@ class PlayerGame:
 				child.continent = getattr(region, 'continent', None)
 
 		# is_busy is a transient execution flag (set only while a live worker
-		# runs a long-running task event). It must never survive a save/load —
+		# runs a long-running task event). It must never survive a save/load �
 		# otherwise a copy saved mid-event would load with no worker left to
 		# clear it, permanently blocking input. Always force it False on load.
 		self.is_busy = False
-		# Nested long-running-event depth counter — also transient.
+		# Nested long-running-event depth counter � also transient.
 		self._busy_depth = 0
+
+		# Backfill class assignments on legacy character objects from older saves.
+		class_map = getattr(const, 'CHARACTER_NPC_CLASS_MAP', {}) or {}
+		for ch in (getattr(self, 'characters', None) or []):
+			if getattr(ch, 'character_class', None):
+				continue
+			cid = getattr(ch, 'npc_id', None) or getattr(ch, 'id', None)
+			inferred = class_map.get(cid)
+			if not inferred and cid in getattr(const, 'CHARACTER_CLASS_MAP', {}):
+				inferred = cid
+			if not inferred:
+				for ab in (getattr(ch, 'abilities', None) or []):
+					atype = getattr(getattr(ab, 'ability_type', None), 'value', None)
+					if atype:
+						inferred = str(atype).lower()
+						break
+			if inferred:
+				ch.character_class = inferred
 
 		# Re-sync active task event lists from their current seeds so saves made
 		# before an event-definition change (e.g. the regional boss-defeat dialog

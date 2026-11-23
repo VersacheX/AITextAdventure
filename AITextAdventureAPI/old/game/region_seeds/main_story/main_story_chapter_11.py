@@ -952,7 +952,7 @@ TASKS = [
         'to_id': 'nihilist_leader',
         'task_acquire_events': [
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'nihilist_leader', 'location': None }},
-            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'nihilist_camp', 'location': 'region_open_area' }}
+            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'nihilist_camp', 'location': 'shallows_mid_city_open_area' }}
         ],
         'task_complete_events': [
             { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'nihilist_camp', 'item_id': 'ring_of_eternal_flame', 'location': 'treasure_room' }},

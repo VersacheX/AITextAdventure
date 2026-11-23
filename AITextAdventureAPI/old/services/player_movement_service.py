@@ -56,6 +56,9 @@ def select_sublocation(cmd: str, sl: List[Dict], player_game: Optional[object] =
 	"""
 	if not cmd.isdigit():
 		return False, None, None, None, None
+  # While airborne, sublocations are not interactable.
+	if player_game and getattr(player_game, 'inside_aircraft', False):
+		return False, None, None, None, None
 	sel = int(cmd)
 	if not (1 <= sel <= len(sl)):
 		return False, None, None, None, None

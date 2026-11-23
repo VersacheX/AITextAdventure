@@ -6,6 +6,50 @@
     'skill': 'Poise',
 }
 
+# Canonical class/focus assignment for all playable roster characters.
+# key: npc/character id, value: ability type focus tree
+CHARACTER_NPC_CLASS_MAP = {
+	# core 5
+	'technique': 'technique',
+	'spirit': 'spirit',
+	'magic': 'magic',
+	'tech': 'tech',
+	'skill': 'skill',
+
+	# main-story attainable
+	'lyren': 'spirit',
+	'vek': 'technique',
+	'warden_hale': 'technique',
+	'seraphine': 'spirit',
+
+	# regional primary-story attainable
+	'nia': 'skill',
+	'sable': 'magic',
+	'thorn': 'technique',
+	'bragg': 'tech',
+	'ripple': 'spirit',
+	'kor_in': 'technique',
+	'grimnaw': 'tech',
+
+	# extended characters
+	'voss_caldera': 'tech',
+	'rynn': 'spirit',
+	'eldon_dawnseer': 'spirit',
+	'regent_sylvara': 'magic',
+	'ghost': 'skill',
+	'lira_emberforge': 'technique',
+	'osten_dreamweaver': 'magic',
+	'lyric': 'tech',
+	'dare': 'skill',
+	'andrea_starveil': 'skill',
+	'veyr_ashcant': 'magic',
+	'spark_maddox': 'tech',
+	'anita': 'magic',
+	'talon': 'spirit',
+	'alden_brightvein': 'spirit',
+	'commander_drax': 'technique',
+}
+
 PLAYER_NPCS = [
     {
         "npc_id": "technique",

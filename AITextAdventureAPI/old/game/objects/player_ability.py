@@ -503,6 +503,13 @@ def get_potential_player_abilities(player: Optional[object] = None) -> List[Dict
 		reqs = entry.get('required_stats_per_ability_level') or []
 		req_lookup[type_name] = reqs
 
+	player_class = None
+	if player is not None:
+		player_class = getattr(player, 'character_class', None)
+		if not player_class:
+			cid = getattr(player, 'npc_id', None) or getattr(player, 'id', None)
+			player_class = (getattr(const, 'CHARACTER_NPC_CLASS_MAP', {}) or {}).get(cid)
+
 	for a in abilities:
 		# skip seeds explicitly marked as non-player abilities (support both key names)
 		if a.get('non_player_ability'):
@@ -515,6 +522,9 @@ def get_potential_player_abilities(player: Optional[object] = None) -> List[Dict
 		# If player provided, filter by stat-based requirements
 		if player is not None:
 			atype = a.get('ability_type')
+           # class tree gate: only show abilities from this character's assigned tree
+			if player_class and str(atype).lower() != str(player_class).lower():
+				continue
 			level = int(a.get('level',1))
 			# find requirements for this ability type
 			reqs = req_lookup.get(atype) if atype is not None else None
