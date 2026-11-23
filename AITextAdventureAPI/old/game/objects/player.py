@@ -125,6 +125,7 @@ class Player:
 			'ability_acquirement_level_amount': 4,
 			'id':                               None,
 			'npc_id':                           None,
+         'character_class':                  None,
 			'last_broken_armor':                [],
 			'last_broken_weapon_dropped':       None,
 			'statuses':                         [],
@@ -688,7 +689,6 @@ class Player:
 		if char_class and ability_type and str(ability_type).lower() != str(char_class).lower():
 			return False
 
-		self.unused_ability_slots = max(0, self.unused_ability_slots - 1)
 		self.unused_ability_slots = max(0, self.unused_ability_slots - 1)
 		self.abilities.append(ability)
 		return True
