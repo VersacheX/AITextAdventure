@@ -46,7 +46,7 @@ def find_nearest_shop(x: int, y: int, player_game: PlayerGame, shop_type: str):
 
 
 
-def get_tile(area: City, x: int, y: int, player_game: Any = None, create: bool = False) -> Optional[Tile]
+def get_tile(area: City, x: int, y: int, player_game: Any = None, create: bool = False) -> Optional[Tile]:
 	"""Return a Tile from `area` at (x,y).
 
 	- If `create` is True, uses area's `get_or_create_tile` which may create/generate the tile.

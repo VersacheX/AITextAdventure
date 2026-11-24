@@ -270,12 +270,15 @@ class PlayerAbility:
 
 			# Check for status immunities, resistances, and weaknesses on the target
 			status_id = desc.get('id')
-			if status_id and hasattr(target, 'immunities') and status_id in target.immunities:
-				hit_chance = 0.0  # Immune
-			elif status_id and hasattr(target, 'resistances') and status_id in target.resistances:
-				hit_chance *= 0.5  # 50% chance to resist
-			elif status_id and hasattr(target, 'weaknesses') and status_id in target.weaknesses:
-				hit_chance = min(1.0, hit_chance * 1.5)  # 50% higher chance to land
+			if status_id:
+				imm, res, weak = status_utils.status_defense_lists(target)
+				sid = str(status_id).lower()
+				if sid in imm:
+					hit_chance = 0.0  # Immune
+				elif sid in res:
+					hit_chance *= 0.5  # 50% chance to resist
+				elif sid in weak:
+					hit_chance = min(1.0, hit_chance * 1.5)  # 50% higher chance to land
 
 			# set hit chance to 100% if is beneficial or above 1
 			if self._is_beneficial_ability() or hit_chance > 1.0:
