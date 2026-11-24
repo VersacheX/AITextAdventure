@@ -358,7 +358,7 @@ class Player:
 		Used to exclude a party member from combat reward distribution: an
 		incapacitated player neither counts toward the XP split nor receives a
 		share of it. Mirrors the petrify check used by the combat simulator's
-		annihilation logic.
+     annihilation logic.
 		"""
 		if not self.is_alive():
 			return True
@@ -378,32 +378,22 @@ class Player:
 		last_broken_weapon_dropped: Optional[str] = None
 		if amount <= 0:
 			return 0
-		# simple armor reduction: sum defense of worn armor
+
 		armor_block = 0
-		pieces = [self.head_armor, self.body_armor, self.arm_armor, self.leg_armor]
-		for a in pieces:
-			if a is not None and not a.is_broken:
-				armor_block += a.defense
+		if physical:
+			pieces = [self.head_armor, self.body_armor, self.arm_armor, self.leg_armor]
+			for a in pieces:
+				if a is not None and not a.is_broken():
+					armor_block += a.defense
 		net = max(0, amount - armor_block)
 
 		if elements:
-			# Accessory immunities: any matching element nullifies the hit
-			acc_imm = self.get_accessory_immunities()
-			if any(e in acc_imm for e in elements):
-				net = 0
-			else:
-				# Accessory weaknesses: +25% per matching element (capped at 2×)
-				acc_weak = self.get_accessory_weaknesses()
-				weak_matches = sum(1 for e in elements if e in acc_weak)
-				if weak_matches > 0:
-					amp = min(2.0, 1.0 + 0.25 * weak_matches)
-					net = int(net * amp)
-				# Accessory resistances: -20% per matching element (capped at -60%)
-				acc_res = self.get_accessory_resistances()
-				res_matches = sum(1 for e in elements if e in acc_res)
-				if res_matches > 0:
-					reduction = min(0.6, 0.2 * res_matches)
-					net = int(net * (1.0 - reduction))
+			net = int(net * status_utils.elemental_multiplier(
+				elements,
+				self.get_accessory_immunities(),
+				self.get_accessory_weaknesses(),
+				self.get_accessory_resistances(),
+			))
 
 		net = status_utils.compute_incoming_damage(self, net, elements, is_physical=physical)
 		if physical and 'sleep' in [s.get('id') for s in self.statuses]:
@@ -426,11 +416,7 @@ class Player:
 			base_damage += getattr(acc, 'damage_bonus', 0) or 0
 			crit_chance += getattr(acc, 'crit_bonus', 0) or 0
 
-		attacker_acc = 50 + (self.level * 2) + (self.get_modified_dexterity() * 2)
-		target_evasion = 10
-		if target is not None:
-			target_evasion = 10 + (target.get_modified_dexterity() * 2)
-		hit_chance = max(5, min(95, 50 + (attacker_acc - target_evasion)))
+		hit_chance = status_utils.physical_hit_chance(self, target)
 		hit_roll = random.random() * 100
 
 		result = {

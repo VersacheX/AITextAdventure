@@ -1,9 +1,73 @@
 from typing import Optional, List, Dict, Any
+from typing import Optional, Dict, Any, List, Tuple, Set
 
 # Utility helpers to compute damage modifiers from statuses.
 # These are intentionally simple and can be adjusted later.
 
 BLOCKING_STATUS_IDS = {"petrify", "stun", "sleep"}
+
+BASE_HIT_CHANCE = 95
+MAX_DODGE = 50
+
+WEAKNESS_MULT = 1.5
+RESISTANCE_MULT = 0.5
+
+
+def physical_hit_chance(attacker: Optional[object], target: Optional[object]) -> float:
+	"""Percent chance (5..95) for a basic attack to hit. Spells never call this."""
+	if attacker is None or target is None:
+		return float(BASE_HIT_CHANCE)
+
+	a = max(1, int(attacker.get_modified_dexterity()))
+	t = max(1, int(target.get_modified_dexterity()))
+	lvl = max(1, int(getattr(attacker, 'level', 1) or 1))
+
+	if t <= a:
+		return float(BASE_HIT_CHANCE)
+
+	hit = BASE_HIT_CHANCE - MAX_DODGE * (t - a) / (t + a + (2 * lvl))
+	return max(5.0, min(95.0, float(hit)))
+
+
+def elemental_multiplier(elements, immunities=None, weaknesses=None, resistances=None) -> float:
+	"""Damage multiplier for a hit with these element slots (duplicates count separately)."""
+	els = [str(getattr(e, 'value', e)).lower() for e in (elements or [])]
+	if not els:
+		return 1.0
+
+	imm = {str(e).lower() for e in (immunities or [])}
+	weak = {str(e).lower() for e in (weaknesses or [])}
+	res = {str(e).lower() for e in (resistances or [])}
+
+	total = 0.0
+	for e in els:
+		if e in imm:
+			continue
+		m = 1.0
+		if e in weak:
+			m *= WEAKNESS_MULT
+		if e in res:
+			m *= RESISTANCE_MULT
+		total += m
+
+	return total / len(els)
+
+
+def status_defense_lists(target: Optional[object]) -> Tuple[Set[str], Set[str], Set[str]]:
+	"""Return (immunities, resistances, weaknesses) for status checks."""
+	if target is None:
+		return set(), set(), set()
+
+	if hasattr(target, 'get_accessory_immunities'):
+		imm = target.get_accessory_immunities() or set()
+		res = target.get_accessory_resistances() or set()
+		weak = target.get_accessory_weaknesses() or set()
+		return ({str(v).lower() for v in imm}, {str(v).lower() for v in res}, {str(v).lower() for v in weak})
+
+	imm = set(getattr(target, 'immunities', []) or [])
+	res = set(getattr(target, 'resistances', []) or [])
+	weak = set(getattr(target, 'weaknesses', []) or [])
+	return ({str(v).lower() for v in imm}, {str(v).lower() for v in res}, {str(v).lower() for v in weak})
 
 
 def get_blocking_status(entity: Optional[object]) -> Optional[Dict[str, Any]]:

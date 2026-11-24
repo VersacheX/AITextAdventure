@@ -119,43 +119,27 @@ class RandomHostile:
 		"""
 		if amount <=0:
 			return 0
-		# incorporate inherent defense into absorption (hostile-specific)
-		inherent_def = self.defense
-
-		# compute armor absorption and reduce durability proportionally
-		# reset transient
 		self.last_broken_armor = []
 		armor_block = 0
-		# add inherent defense into block
-		armor_block += inherent_def
-		for a in self.armor:
-			if a and not a.is_broken():
-				armor_block += a.defense
+		if physical:
+			armor_block = int(self.defense or 0)
+			for a in self.armor:
+				if a and not a.is_broken():
+					armor_block += a.defense
 		net = max(0, amount - armor_block)
-		# apply incoming status modifiers (defense buffs/debuffs, elemental debuffs)
+
 		if elements:
-			# immunities: if any element matches an immunity, damage is nullified
-			imms = self.immunities or []
-			if any(e in imms for e in elements):
-				net =0
-			else:
-				# weaknesses: amplify damage per matching element (e.g. +25% per match, capped)
-				weaks = self.weaknesses or []
-				weak_matches = sum(1 for e in elements if e in weaks)
-				if weak_matches >0:
-					amp = min(2.0,1.0 +0.25 * weak_matches)
-					net = int(net * amp)
-				# resistances: reduce damage per matching element (each -20% up to -60%)
-				res = self.resistances or []
-				matches = sum(1 for e in elements if e in res)
-				if matches >0:
-					reduction = min(0.6,0.2 * matches)
-					net = int(net * (1.0 - reduction))
-			# allow status_utils to further modify net
-			net = status_utils.compute_incoming_damage(self, net, elements, is_physical = physical)
+			net = int(net * status_utils.elemental_multiplier(
+				elements,
+				self.immunities,
+				self.weaknesses,
+				self.resistances,
+			))
+
+		net = status_utils.compute_incoming_damage(self, net, elements, is_physical=physical)
 
 		# apply durability loss to pieces that contributed
-		if armor_block >0:
+		if physical and armor_block >0:
 			dmg_share = max(1, net //2)
 			for a in self.armor:
 				if a and not a.is_broken() and not getattr(a, 'unbreakable', False):
@@ -256,11 +240,7 @@ class RandomHostile:
 		result['weapon'] = weapon_name
 
 		# compute accuracy / evasion
-		attacker_acc =50 + (self.level *2) + (self.get_modified_dexterity() *2)
-		target_evasion =10
-		if target is not None:
-			target_evasion =10 + target.get_modified_dexterity() *2
-		hit_chance = max(5, min(95,50 + (attacker_acc - target_evasion)))
+		hit_chance = status_utils.physical_hit_chance(self, target)
 		hit_roll = random.random() *100
 
 		if hit_roll > hit_chance:

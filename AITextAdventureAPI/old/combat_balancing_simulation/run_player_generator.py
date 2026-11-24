@@ -31,7 +31,7 @@ PLAYER_GAME = PlayerGame()
 # 	return 'strength'
 
 
-def add_player(count: int =4, level: int =15, ability_type_focus: Optional[str] = None, seed: Optional[int] = None, base_name: str = 'NPC', player_game: PlayerGame) -> List[Player]:
+def add_player(count: int =4, level: int =15, ability_type_focus: Optional[str] = None, seed: Optional[int] = None, base_name: str = 'NPC', player_game: Optional[PlayerGame] = None) -> List[Player]:
 	"""Create `count` players. If `ability_type_focus` is provided, use it for
 	all players; otherwise pick a random ability type per character from
 	`CHARACTER_CLASS_MAP` keys. The display name is taken from the map value and
