@@ -21,7 +21,7 @@ FLOOR_HOSTILES = {
 HOSTILE_SEEDS = [
     {
         'id': 'compliance_officer', 'name': 'Compliance Officer', 'hostile_type': 'humanoid', 'min_spawn_level': 70, 'role': 'damage', 'rarity': 'common',
-        'base_xp': 1300, 'common_drop': 'stimulant_large', 'rare_drop': None, 'money_range': (250, 500),
+        'base_xp': 1300, 'common_drop': 'stimulant_large', 'rare_drop': 'warlord_signet', 'money_range': (250, 500),
         'basic_attack': 'baton strike', 'strong_attack': 'suppression burst', 'player_abilities': [],
         'base_str': 45, 'base_dex': 40, 'base_con': 45, 'base_int': 20, 'base_hp': 4000, 'base_ap': 90,
         'str_per_level': 6, 'dex_per_level': 5, 'con_per_level': 6, 'int_per_level': 2,
@@ -29,7 +29,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 're-education_drone', 'name': 'Re-Education Drone', 'hostile_type': 'construct', 'min_spawn_level': 70, 'role': 'hazard', 'rarity': 'uncommon',
-        'base_xp': 1400, 'common_drop': 'herb_med', 'rare_drop': None, 'money_range': (280, 560),
+        'base_xp': 1400, 'common_drop': 'herb_med', 'rare_drop': 'ghost_core_pendant', 'money_range': (280, 560),
         'basic_attack': 'psionic pulse', 'strong_attack': 'conformity beam', 'player_abilities': ['light_spirit_lv1_convert'],
         'base_str': 25, 'base_dex': 45, 'base_con': 40, 'base_int': 50, 'base_hp': 3800, 'base_ap': 110,
         'str_per_level': 3, 'dex_per_level': 6, 'con_per_level': 5, 'int_per_level': 7,

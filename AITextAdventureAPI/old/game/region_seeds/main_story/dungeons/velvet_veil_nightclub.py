@@ -15,38 +15,38 @@ BORDER_COLOR     = "#4a1a4a"
 
 # Hostiles
 FLOOR_HOSTILES = {
-    1: ['veil_bouncer', 'mirror_dancer', 'ecstasy_addict', 'elite_enforcer'],
+    1: ['veil_bouncer', 'mirror_dancer', 'masquerader', 'cockeyed_bouncer'],
 }
 
 HOSTILE_SEEDS = [
     {
         'id': 'veil_bouncer', 'name': 'Veil Bouncer', 'hostile_type': 'construct', 'min_spawn_level': 75, 'role': 'damage', 'rarity': 'common',
-        'base_xp': 1500, 'common_drop': 'stimulant_large', 'rare_drop': None, 'money_range': (300, 600),
-        'basic_attack': 'heavy blow', 'strong_attack': 'crowd control', 'player_abilities': [],
+        'base_xp': 1500, 'common_drop': 'stimulant_large', 'rare_drop': 'earrings_of_insight', 'money_range': (300, 600),
+        'basic_attack': 'heavy blow', 'strong_attack': 'crowd control', 'player_abilities': ['physical_earth_electric_dark_technique_lv4_compliance_slam'],
         'base_str': 50, 'base_dex': 30, 'base_con': 50, 'base_int': 10, 'base_hp': 5000, 'base_ap': 100,
         'str_per_level': 7, 'dex_per_level': 3, 'con_per_level': 7, 'int_per_level': 1,
         'resistances': ['physical'], 'immunities': ['stun'], 'weaknesses': ['electric']
     },
     {
         'id': 'mirror_dancer', 'name': 'Mirror Dancer', 'hostile_type': 'spirit', 'min_spawn_level': 75, 'role': 'hazard', 'rarity': 'uncommon',
-        'base_xp': 1600, 'common_drop': 'herb_major', 'rare_drop': None, 'money_range': (350, 700),
-        'basic_attack': 'shattered reflection', 'strong_attack': 'dazzling pirouette', 'player_abilities': ['light_spirit_lv1_convert'],
+        'base_xp': 1600, 'common_drop': 'herb_major', 'rare_drop': 'sash_of_vitality', 'money_range': (350, 700),
+        'basic_attack': 'shattered reflection', 'strong_attack': 'dazzling pirouette', 'player_abilities': ['light_spirit_lv1_convert', 'light_air_skill_lv2_dazzling_pirouette_flourish', 'light_dark_skill_lv2_shattered_reflection_pose'],
         'base_str': 35, 'base_dex': 50, 'base_con': 35, 'base_int': 45, 'base_hp': 4500, 'base_ap': 120,
         'str_per_level': 4, 'dex_per_level': 7, 'con_per_level': 4, 'int_per_level': 6,
         'resistances': ['light', 'air'], 'immunities': ['confuse'], 'weaknesses': ['dark']
     },
     {
-        'id': 'ecstasy_addict', 'name': 'Ecstasy Addict', 'hostile_type': 'humanoid', 'min_spawn_level': 76, 'role': 'damage', 'rarity': 'rare',
+        'id': 'masquerader', 'name': 'Masquerader', 'hostile_type': 'humanoid', 'min_spawn_level': 76, 'role': 'damage', 'rarity': 'rare',
         'base_xp': 1800, 'common_drop': 'panacea', 'rare_drop': 'tome_dex_superrare', 'money_range': (400, 800),
-        'basic_attack': 'frenzied strike', 'strong_attack': 'uncontrolled rage', 'player_abilities': [],
+        'basic_attack': 'frenzied strike', 'strong_attack': 'uncontrolled rage', 'player_abilities': ['light_dark_air_spirit_lv3_hush_of_the_crowd', 'dark_fire_air_spirit_lv3_encore_of_ruin'],
         'base_str': 48, 'base_dex': 45, 'base_con': 40, 'base_int': 15, 'base_hp': 4800, 'base_ap': 110,
         'str_per_level': 6, 'dex_per_level': 6, 'con_per_level': 5, 'int_per_level': 2,
         'resistances': [], 'immunities': ['stun'], 'weaknesses': ['ice']
     },
     {
-        'id': 'elite_enforcer', 'name': 'Elite Enforcer', 'hostile_type': 'humanoid', 'min_spawn_level': 77, 'role': 'damage', 'rarity': 'superrare',
+        'id': 'cockeyed_bouncer', 'name': 'Cockeyed Bouncer', 'hostile_type': 'humanoid', 'min_spawn_level': 77, 'role': 'damage', 'rarity': 'superrare',
         'base_xp': 2200, 'common_drop': 'stimulant_full', 'rare_drop': 'tome_str_superrare', 'money_range': (500, 1000),
-        'basic_attack': 'compliance baton', 'strong_attack': 'suppression field', 'player_abilities': [],
+        'basic_attack': 'compliance baton', 'strong_attack': 'suppression field', 'player_abilities': ['physical_electric_dark_earth_technique_lv4_baton_discipline', 'physical_electric_dark_dark_technique_lv4_suppression_field'],
         'base_str': 55, 'base_dex': 40, 'base_con': 55, 'base_int': 25, 'base_hp': 6000, 'base_ap': 130,
         'str_per_level': 8, 'dex_per_level': 5, 'con_per_level': 8, 'int_per_level': 3,
         'resistances': ['physical'], 'immunities': ['stun', 'confuse'], 'weaknesses': ['electric']

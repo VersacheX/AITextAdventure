@@ -7,6 +7,7 @@ from __future__ import annotations
 from typing import Any, Dict, List, Tuple
 
 from tui.services.dev.dataservices.models import DevRecord
+from game.constants_other import ELEMENT_SYMBOLS as _ELEMENTAL_CHARS
 
 _CITY_FIELDS: Tuple[str, ...] = ("CITY_NAME", "CITY_DESCRIPTION", "BUILDINGS")
 
@@ -35,11 +36,6 @@ _TYPE_ABBR: dict[str, str] = {
     "armor · arms": "A-AR",
     "armor · legs": "A-LG",
     "accessory":    "ACC ",
-}
-
-_ELEMENTAL_CHARS: dict[str, str] = {
-    "dark": "(D)", "light": "(L)", "earth": "(Ë)", "fire": "(F)",
-    "water": "(W)", "air": "(A)", "ice": "(I)", "electric": "(É)",
 }
 
 

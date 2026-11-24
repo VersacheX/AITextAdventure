@@ -74,7 +74,10 @@ LEVEL_2_SKILL_ABILITY_SEEDS = [
  {"id": "earth_dark_skill_lv2_petrify_dart", "name": "Petrify Dart", "description": "A dark mineral dart that petrifies.", "ability_type": "skill", "level":2, "elements": ["earth", "dark"], "base_power":0, "ap_cost":50, "effect": "status", "status_keys": ["petrify"], "can_aoe": False},
 
  
-   ##NON-PLAYER ABILITIES
- {"id": "lv2_hostile_ability_dark_air_skill_nightmare_wave", "name": "Nightmare Wave", "description": "A dark gust that terrifies.", "ability_type": "skill", "level":2, "elements": ["dark", "air"], "base_power":0, "ap_cost":30, "effect": "status", "status_keys": ["confuse"], "can_aoe": False, "non_player_ability": True},
- {"id": "lv2_hostile_ability_dark_ice_skill_void_spike", "name": "Void Spike", "description": "A chilling spike that saps will.", "ability_type": "skill", "level":2, "elements": ["dark", "ice"], "base_power":20, "ap_cost":15, "effect": "damage", "can_aoe": False, "non_player_ability": True},
-]
+    ##NON-PLAYER ABILITIES
+    {"id": "lv2_hostile_ability_dark_air_skill_nightmare_wave", "name": "Nightmare Wave", "description": "A dark gust that terrifies.", "ability_type": "skill", "level":2, "elements": ["dark", "air"], "base_power":0, "ap_cost":30, "effect": "status", "status_keys": ["confuse"], "can_aoe": False, "non_player_ability": True},
+    {"id": "lv2_hostile_ability_dark_ice_skill_void_spike", "name": "Void Spike", "description": "A chilling spike that saps will.", "ability_type": "skill", "level":2, "elements": ["dark", "ice"], "base_power":20, "ap_cost":15, "effect": "damage", "can_aoe": False, "non_player_ability": True},
+    # mirror_dancer — cheap, performative flourishes; mirrors the posturing of the veil_enforcers and cockeyed_bouncer it dances alongside
+    {"id": "light_air_skill_lv2_dazzling_pirouette_flourish", "name": "Dazzling Pirouette", "description": "A showy spin of refracted light meant to dazzle and unnerve, more spectacle than substance but effective all the same.", "ability_type": "skill", "level":2, "elements": ["light", "air"], "base_power":0, "ap_cost":8, "effect": "status", "status_keys": ["attack_debuff"], "can_aoe": False, "non_player_ability": True},
+    {"id": "light_dark_skill_lv2_shattered_reflection_pose", "name": "Shattered Reflection", "description": "The Mirror Dancer strikes a theatrical pose, splintering its image into mocking copies that quicken its own steps while the display unsettles the target's footing.", "ability_type": "skill", "level":2, "elements": ["light", "dark"], "base_power":0, "ap_cost":20, "effect": "status", "status_keys": ["dexterity_buff", "dexterity_debuff"], "can_aoe": False, "non_player_ability": True},
+   ]

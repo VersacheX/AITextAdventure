@@ -129,17 +129,17 @@ def _build_ability_detail(ability: Any, player: Any, beneficial: bool) -> str:
     if can_aoe:
         lines.append("[bold yellow]AOE — can target the whole party[/bold yellow]")
     if elements:
-        from game.constants import fmt_element_glyphs
+        from game.constants_other import fmt_element_glyphs_rich
         elem_names = [
             (e.value if hasattr(e, "value") else str(e)) for e in elements
         ]
-        lines.append("Elements: " + rich_escape(fmt_element_glyphs(elem_names)))
+        lines.append("Elements: " + fmt_element_glyphs_rich(elem_names))
     if status_keys:
-        from game.constants import fmt_status_glyphs
+        from game.constants_other import fmt_status_glyphs_rich
         status_names = [
             (k.value if hasattr(k, "value") else str(k)) for k in status_keys
         ]
-        lines.append("Status  : " + rich_escape(fmt_status_glyphs(status_names)))
+        lines.append("Status  : " + fmt_status_glyphs_rich(status_names))
 
     lines.append("")
     if not beneficial:

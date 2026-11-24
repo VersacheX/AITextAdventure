@@ -21,7 +21,7 @@ FLOOR_HOSTILES = {
 HOSTILE_SEEDS = [
     {
         'id': 'arena_gladiator', 'name': 'Arena Gladiator', 'hostile_type': 'humanoid', 'min_spawn_level': 45, 'role': 'damage', 'rarity': 'common',
-        'base_xp': 500, 'common_drop': 'stimulant_large', 'rare_drop': None, 'money_range': (80, 160),
+        'base_xp': 500, 'common_drop': 'stimulant_large', 'rare_drop': 'ring_of_resilience', 'money_range': (80, 160),
         'basic_attack': 'brutal slash', 'strong_attack': 'reckless charge', 'player_abilities': [],
         'base_str': 30, 'base_dex': 20, 'base_con': 25, 'base_int': 10, 'base_hp': 1400, 'base_ap': 55,
         'str_per_level': 4, 'dex_per_level': 2, 'con_per_level': 3, 'int_per_level': 1,
@@ -29,7 +29,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'rage_hound', 'name': 'Rage Hound', 'hostile_type': 'beast', 'min_spawn_level': 45, 'role': 'damage', 'rarity': 'uncommon',
-        'base_xp': 550, 'common_drop': 'herb_major', 'rare_drop': None, 'money_range': (90, 180),
+        'base_xp': 550, 'common_drop': 'herb_major', 'rare_drop': 'bracelet_of_vitality', 'money_range': (90, 180),
         'basic_attack': 'frenzied bite', 'strong_attack': 'savage pounce', 'player_abilities': [],
         'base_str': 28, 'base_dex': 26, 'base_con': 22, 'base_int': 8, 'base_hp': 1300, 'base_ap': 60,
         'str_per_level': 3, 'dex_per_level': 3, 'con_per_level': 2, 'int_per_level': 1,

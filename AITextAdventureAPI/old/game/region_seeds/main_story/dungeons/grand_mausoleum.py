@@ -21,7 +21,7 @@ FLOOR_HOSTILES = {
 HOSTILE_SEEDS = [
     {
         'id': 'grief_wraith', 'name': 'Grief Wraith', 'hostile_type': 'undead', 'min_spawn_level': 65, 'role': 'hazard', 'rarity': 'common',
-        'base_xp': 800, 'common_drop': 'herb_major', 'rare_drop': None, 'money_range': (150, 300),
+        'base_xp': 800, 'common_drop': 'herb_major', 'rare_drop': 'apex_hunter_band', 'money_range': (150, 300),
         'basic_attack': 'sorrowful touch', 'strong_attack': 'weeping wail', 'player_abilities': ['dark_spirit_lv1_shade_whisper'],
         'base_str': 30, 'base_dex': 35, 'base_con': 32, 'base_int': 40, 'base_hp': 2500, 'base_ap': 100,
         'str_per_level': 3, 'dex_per_level': 4, 'con_per_level': 3, 'int_per_level': 5,
@@ -29,7 +29,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'self-loathing_specter', 'name': 'Self-Loathing Specter', 'hostile_type': 'undead', 'min_spawn_level': 65, 'role': 'hazard', 'rarity': 'uncommon',
-        'base_xp': 850, 'common_drop': 'stimulant_large', 'rare_drop': None, 'money_range': (160, 320),
+        'base_xp': 850, 'common_drop': 'stimulant_large', 'rare_drop': 'monster_hunter', 'money_range': (160, 320),
         'basic_attack': 'bitter strike', 'strong_attack': 'spiral of despair', 'player_abilities': ['dark_skill_lv1_creeping_strike'],
         'base_str': 38, 'base_dex': 32, 'base_con': 30, 'base_int': 35, 'base_hp': 2400, 'base_ap': 90,
         'str_per_level': 4, 'dex_per_level': 3, 'con_per_level': 3, 'int_per_level': 4,

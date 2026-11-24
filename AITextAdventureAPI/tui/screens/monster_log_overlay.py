@@ -54,7 +54,7 @@ def _build_hostile_detail(hostile: Any | None) -> str:
     if hostile is None:
         return "[dim]No hostiles slain yet.[/dim]"
 
-    from game.constants import fmt_element_glyphs, fmt_status_glyphs
+    from game.constants_other import fmt_element_glyphs_rich, fmt_status_glyphs_rich
 
     def esc(value: Any, default: str = "—") -> str:
         return rich_escape(_safe(value, default))
@@ -74,9 +74,9 @@ def _build_hostile_detail(hostile: Any | None) -> str:
             ability_names.append(rich_escape(label))
 
     # ── affinities rendered with shared compact glyphs ──────────────────────
-    weaknesses  = fmt_element_glyphs(getattr(hostile, "weaknesses", []) or [])
-    resistances = fmt_element_glyphs(getattr(hostile, "resistances", []) or [])
-    immunities  = fmt_status_glyphs(getattr(hostile, "immunities", []) or [])
+    weaknesses  = fmt_element_glyphs_rich(getattr(hostile, "weaknesses", []) or [])
+    resistances = fmt_element_glyphs_rich(getattr(hostile, "resistances", []) or [])
+    immunities  = fmt_status_glyphs_rich(getattr(hostile, "immunities", []) or [])
 
     money_range = getattr(hostile, "money_range", None)
 
@@ -126,9 +126,9 @@ def _build_hostile_detail(hostile: Any | None) -> str:
 
     # Affinities (compact glyphs matching the ability-handler status column)
     lines.append("[u]Affinities[/u]")
-    lines.append(f"Weakness:    {rich_escape(weaknesses)}")
-    lines.append(f"Resistance:  {rich_escape(resistances)}")
-    lines.append(f"Immunity:    {rich_escape(immunities)}")
+    lines.append(f"Weakness:    {weaknesses}")
+    lines.append(f"Resistance:  {resistances}")
+    lines.append(f"Immunity:    {immunities}")
     lines.append("")
 
     # Loot — each drop on its own line

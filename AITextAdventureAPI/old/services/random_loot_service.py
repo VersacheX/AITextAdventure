@@ -7,11 +7,13 @@ from game.objects.weapon import Weapon
 from game.objects.armor import Armor, ArmorType
 from game.objects.utility_item import UtilityItem
 from game.objects.special_item import SpecialItem
+from game.objects.accessory import Accessory
 
 from game.objects.armor import _instantiate_armor
 from game.objects.weapon import _instantiate_weapon
 from game.objects.utility_item import _instantiate_utility
 from game.objects.special_item import _instantiate_special
+from game.objects.accessory import instantiate_accessory
 
 
 def _armor_slot_from_string(slot: str) -> ArmorType:
@@ -92,6 +94,24 @@ def _flatten_all_seeds(player_level: int) -> List[Dict[str, Any]]:
 			item = dict(s)
 			item['_seed_type'] = 'special'
 			out.append(item)
+
+	# accessories — any non-'notfound' rarity is eligible for the generic
+	# random loot pool (weighted the same way as other item types via
+	# RarityDefaultWeights/_seed_weight). 'notfound' accessories are placed
+	# deliberately only: dungeon-specific hostile common_drop/rare_drop, or
+	# guaranteed dungeon treasure — never reachable from this pool.
+	poolable_accessories = [a for a in constants.ACCESSORY_SEEDS if a.get('rarity') != 'notfound']
+	if poolable_accessories:
+		acc_min, acc_max = get_min_max_lvl(player_level, max(a.get('min_level',1) for a in poolable_accessories))
+		for a in poolable_accessories:
+			# accessory seeds key their spawn gate as 'min_level'; normalize to
+			# 'min_spawn_level' so downstream weighting/metadata code is uniform
+			# with the other item types.
+			if acc_min <= a.get('min_level',1) <= acc_max:
+				item = dict(a)
+				item['_seed_type'] = 'accessory'
+				item['min_spawn_level'] = a.get('min_level',1)
+				out.append(item)
 	return out
 
 
@@ -122,6 +142,8 @@ def _create_item_from_seed(seed: Dict[str, Any]) -> Item:
 		return _instantiate_utility(seed)
 	if stype == 'special':
 		return _instantiate_special(seed)
+	if stype == 'accessory':
+		return instantiate_accessory(seed)
 
 	# fallback generic item
 	print(f'Unknown seed type "{stype}" encountered in _create_item_from_seed: {seed}')

@@ -61,15 +61,15 @@ def build_ability_detail(ability: Any, current_ap: int) -> str:
     if can_aoe:
         lines.append("[bold yellow]AOE — hits all targets[/bold yellow]")
     if elements:
-        lines.append(
-            "Elements: "
-            + ", ".join(
-                rich_escape(e.value if hasattr(e, "value") else str(e))
-                for e in elements
-            )
-        )
+        from game.constants_other import fmt_element_glyphs_rich
+        elem_names = [
+            (e.value if hasattr(e, "value") else str(e)) for e in elements
+        ]
+        lines.append("Elements: " + fmt_element_glyphs_rich(elem_names))
     if status_keys:
-        lines.append("Status  : " + ", ".join(rich_escape(str(k)) for k in status_keys))
+        from game.constants_other import fmt_status_glyphs_rich
+        status_names = [str(k.value if hasattr(k, "value") else k) for k in status_keys]
+        lines.append("Status  : " + fmt_status_glyphs_rich(status_names))
 
     if current_ap < ap_cost:
         lines.append("")
