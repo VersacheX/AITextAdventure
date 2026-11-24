@@ -8,6 +8,7 @@ from rich.style import Style
 from game.constants_other import (
     ELEMENT_SYMBOLS,
     ELEMENTAL_COLORS,
+    STATUS_SYMBOLS,
     STATUS_COLORS,
     fmt_status_glyphs,
 )
