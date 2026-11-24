@@ -28,7 +28,7 @@ def _status_text(entity: Any) -> str:
     ]
     if not ids:
         return ""
-    return fmt_status_glyphs_rich(ids, symbol_only=True)
+    return fmt_status_glyphs_rich(ids)
 
 
 def _active_marker(*, is_active: bool) -> str:

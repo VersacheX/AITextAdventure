@@ -515,12 +515,13 @@ def fmt_element_glyphs_rich(elems, symbol_only: bool = False) -> str:
     """
     if not elems:
         return "—"
+    from rich.markup import escape as rich_escape
     out = []
     for e in elems:
         key   = str(e).lower()
         glyph = _element_glyph(key, symbol_only)
         color = ELEMENTAL_COLORS.get(key, "white")
-        out.append(f"[{color}]{glyph}[/]")
+        out.append(f"[{color}]{rich_escape(glyph)}[/]")
     return "".join(out)
 
 
@@ -533,10 +534,11 @@ def fmt_status_glyphs_rich(statuses, symbol_only: bool = False) -> str:
     """
     if not statuses:
         return "—"
+    from rich.markup import escape as rich_escape
     out = []
     for s in statuses:
         key   = str(s).lower()
         glyph = _status_glyph(key, symbol_only)
         color = STATUS_COLORS.get(key, "white")
-        out.append(f"[{color}]{glyph}[/]")
+        out.append(f"[{color}]{rich_escape(glyph)}[/]")
     return " ".join(out)

@@ -8,8 +8,8 @@ from rich.style import Style
 from game.constants_other import (
     ELEMENT_SYMBOLS,
     ELEMENTAL_COLORS,
-    STATUS_SYMBOLS,
     STATUS_COLORS,
+    fmt_status_glyphs,
 )
 
 # ── Category name constants ────────────────────────────────────────────────────
@@ -51,7 +51,12 @@ def fmt_elem_list(elems: list[str]) -> str:
 
 
 def fmt_status_list(statuses: list[str]) -> str:
-    """Format a list of status ids as compact unicode glyphs."""
+    """Format a list of status ids as symbol+3-letter-id, e.g. '↑ATK ↓DEF'.
+
+    Retains the full fmt_status_glyphs() id suffix (rather than a bare icon)
+    so the dev ability table can distinguish stat buffs/debuffs that would
+    otherwise share the same arrow symbol.
+    """
     if not statuses:
         return "—"
-    return " ".join(STATUS_SYMBOLS.get(s, f"[{s[:2]}]") for s in statuses)
+    return fmt_status_glyphs(statuses)
