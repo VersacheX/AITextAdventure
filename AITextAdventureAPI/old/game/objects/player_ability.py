@@ -378,7 +378,7 @@ class PlayerAbility:
 						# Build element list and apply outgoing modifiers
 						elems = status_utils.collect_attack_elements(owner, [e.value if hasattr(e, 'value') else str(e) for e in self.elements] if self.elements else None)
 						is_physical_hit = self._is_physical_hit(elems)
-						power = status_utils.compute_outgoing_damage(owner, power, elems)
+						power = status_utils.compute_outgoing_damage(owner, power, elems, is_basic_attack=is_physical_hit)
 
 						applied = target.take_damage(power, attacker=owner, elements=elems if elems else None, physical=is_physical_hit)
 

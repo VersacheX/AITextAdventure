@@ -132,15 +132,14 @@ def _accessory_detail_markup(player: Any, item: Any) -> str:
     imm = list(getattr(item, "immunities",  []) or [])
     res = list(getattr(item, "resistances", []) or [])
     wk  = list(getattr(item, "weaknesses",  []) or [])
-    if imm:
-        from game.constants_other import fmt_status_glyphs_rich
-        lines.append(f"  Immune : {fmt_status_glyphs_rich(imm)}")
-    if res:
-        from game.constants_other import fmt_element_glyphs_rich
-        lines.append(f"  Resist : {fmt_element_glyphs_rich(res)}")
-    if wk:
-        from game.constants_other import fmt_element_glyphs_rich
-        lines.append(f"  Weak   : {fmt_element_glyphs_rich(wk)}")
+    if imm or res or wk:
+        from game.constants_other import fmt_status_glyphs_rich, fmt_element_glyphs_rich
+        if imm:
+            lines.append(f"  Immune : {fmt_status_glyphs_rich(imm)}")
+        if res:
+            lines.append(f"  Resist : {fmt_element_glyphs_rich(res)}")
+        if wk:
+            lines.append(f"  Weak   : {fmt_element_glyphs_rich(wk)}")
 
     return "\n".join(lines)
 

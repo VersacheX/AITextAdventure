@@ -90,12 +90,12 @@ ELEMENT_SYMBOLS: dict[str, str] = {
     "dark":     "☾",
     "light":    "☀",
     "earth":    "⛰",
-    "fire":     "🔥",
-    "water":    "💧",
-    "air":      "💨",
+    "fire":     "♨",
+    "water":    "≈",
+    "air":      "≋",
     "ice":      "❄",
     "electric": "⚡",
-    "physical": "✊",
+    "physical": "●",
 }
 
 # ── Element 3-letter ids ─────────────────────────────────────────────────────
@@ -395,7 +395,7 @@ STATUS_SYMBOLS: dict[str, str] = {
     "constitution_buff":      "↑",
     "elemental_attack_buff":  "↑",
     "elemental_defense_buff": "↑",
-    "scanned":                "👁",
+    "scanned":                "◎",
 }
 
 # ── Status 3-letter ids ──────────────────────────────────────────────────────
@@ -475,6 +475,15 @@ def _status_glyph(key: str, symbol_only: bool) -> str:
     return f"{symbol}{sid}"
 
 
+def _normalize_key(x) -> str:
+    """Resolve an Enum member, raw string, or dict-like id to a lowercase key.
+
+    Enums commonly used for elements/status keys stringify as e.g.
+    'Element.FIRE' rather than 'fire', so prefer `.value` when present.
+    """
+    return str(getattr(x, "value", x)).lower()
+
+
 def fmt_element_glyphs(elems, symbol_only: bool = False) -> str:
     """Format a list of element names as compact glyphs.
 
@@ -486,7 +495,7 @@ def fmt_element_glyphs(elems, symbol_only: bool = False) -> str:
     if not elems:
         return "—"
     return "".join(
-        _element_glyph(str(e).lower(), symbol_only) for e in elems
+        _element_glyph(_normalize_key(e), symbol_only) for e in elems
     )
 
 
@@ -501,7 +510,7 @@ def fmt_status_glyphs(statuses, symbol_only: bool = False) -> str:
     if not statuses:
         return "—"
     return " ".join(
-        _status_glyph(str(s).lower(), symbol_only) for s in statuses
+        _status_glyph(_normalize_key(s), symbol_only) for s in statuses
     )
 
 
@@ -518,7 +527,7 @@ def fmt_element_glyphs_rich(elems, symbol_only: bool = False) -> str:
     from rich.markup import escape as rich_escape
     out = []
     for e in elems:
-        key   = str(e).lower()
+        key   = _normalize_key(e)
         glyph = _element_glyph(key, symbol_only)
         color = ELEMENTAL_COLORS.get(key, "white")
         out.append(f"[{color}]{rich_escape(glyph)}[/]")
@@ -537,7 +546,7 @@ def fmt_status_glyphs_rich(statuses, symbol_only: bool = False) -> str:
     from rich.markup import escape as rich_escape
     out = []
     for s in statuses:
-        key   = str(s).lower()
+        key   = _normalize_key(s)
         glyph = _status_glyph(key, symbol_only)
         color = STATUS_COLORS.get(key, "white")
         out.append(f"[{color}]{rich_escape(glyph)}[/]")
