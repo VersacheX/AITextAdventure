@@ -1028,11 +1028,18 @@ def _gather_hostile_seed_sources(seed_paths):
 
 
 		]
+	seed_entries = {}
 	for source, source_name in sources:
 		for entry in source:
-			if seed_paths.get(entry.get("id")) is not None:
-				print(f"WARNING: Duplicate hostile seed ID detected: {entry.get('id')} in source {source_name}. Overwriting previous entry.")
-			seed_paths[entry.get("id")] = source_name
+			entry_id = entry.get("id")
+			existing_entry = seed_entries.get(entry_id)
+			if existing_entry is not None and existing_entry is not entry:
+				# Same id but a genuinely different entry object: a real
+				# cross-source collision (not just a shared roster being
+				# reused by multiple sibling sources), so warn.
+				print(f"WARNING: Duplicate hostile seed ID detected: {entry_id} in source {source_name}. Overwriting previous entry.")
+			seed_entries[entry_id] = entry
+			seed_paths[entry_id] = source_name
 
 _gather_hostile_seed_sources(HOSTILE_SEED_PATHS)
 

@@ -29,7 +29,7 @@ HOSTILE_SEEDS = [
         'rarity': 'common',
         'base_xp': 220,
         'common_drop': 'stimulant_med',
-        'rare_drop': None,
+        'rare_drop': 'spellthread_loop',
         'money_range': (25, 50),
         'basic_attack': 'pincer snap',
         'strong_attack': 'phase lunge',

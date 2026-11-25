@@ -21,7 +21,7 @@ FLOOR_HOSTILES = {
 HOSTILE_SEEDS = [
     {
         'id': 'despair_cultist', 'name': 'Despair Cultist', 'hostile_type': 'humanoid', 'min_spawn_level': 60, 'role': 'hazard', 'rarity': 'common',
-        'base_xp': 700, 'common_drop': 'stimulant_med', 'rare_drop': None, 'money_range': (120, 240),
+        'base_xp': 700, 'common_drop': 'stimulant_med', 'rare_drop': 'amulet_of_protection', 'money_range': (120, 240),
         'basic_attack': 'empty gaze', 'strong_attack': 'draining touch', 'player_abilities': ['dark_spirit_lv1_shade_whisper'],
         'base_str': 30, 'base_dex': 30, 'base_con': 30, 'base_int': 30, 'base_hp': 2000, 'base_ap': 80,
         'str_per_level': 3, 'dex_per_level': 3, 'con_per_level': 3, 'int_per_level': 3,
@@ -29,7 +29,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'hollow_zealot', 'name': 'Hollow Zealot', 'hostile_type': 'humanoid', 'min_spawn_level': 60, 'role': 'damage', 'rarity': 'uncommon',
-        'base_xp': 750, 'common_drop': 'herb_med', 'rare_drop': None, 'money_range': (140, 280),
+        'base_xp': 750, 'common_drop': 'herb_med', 'rare_drop': 'ring_of_endurance', 'money_range': (140, 280),
         'basic_attack': 'void strike', 'strong_attack': 'nothingness wave', 'player_abilities': ['dark_magic_lv1_shadow_tendril'],
         'base_str': 35, 'base_dex': 25, 'base_con': 32, 'base_int': 20, 'base_hp': 2200, 'base_ap': 70,
         'str_per_level': 4, 'dex_per_level': 3, 'con_per_level': 4, 'int_per_level': 2,
@@ -58,7 +58,7 @@ BOSS_HOSTILES = [
     },
     {
         'id': 'anarchist', 'name': 'Anarchist', 'hostile_type': 'humanoid', 'min_spawn_level': 55, 'role': 'damage', 'rarity': 'uncommon',
-        'base_xp': 8000, 'common_drop': 'herb_med', 'rare_drop': None, 'money_range': (1400, 2800),
+        'base_xp': 8000, 'common_drop': 'herb_med', 'rare_drop': 'voidborn_seal', 'money_range': (1400, 2800),
         'basic_attack': 'chaotic strike', 'strong_attack': 'anarchy wave', 'player_abilities': ['dark_magic_lv1_shadow_tendril'],
         'base_str': 35, 'base_dex': 25, 'base_con': 32, 'base_int': 20, 'base_hp': 2200, 'base_ap': 70,
         'str_per_level': 4, 'dex_per_level': 3, 'con_per_level': 4, 'int_per_level': 2,

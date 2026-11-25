@@ -21,7 +21,7 @@ FLOOR_HOSTILES = {
 HOSTILE_SEEDS = [
     {
         'id': 'manic_reveler', 'name': 'Manic Reveler', 'hostile_type': 'humanoid', 'min_spawn_level': 55, 'role': 'hazard', 'rarity': 'common',
-        'base_xp': 600, 'common_drop': 'stimulant_large', 'rare_drop': None, 'money_range': (100, 200),
+        'base_xp': 600, 'common_drop': 'stimulant_large', 'rare_drop': 'iron_will_talisman', 'money_range': (100, 200),
         'basic_attack': 'wild swing', 'strong_attack': 'frenzied dance', 'player_abilities': [],
         'base_str': 35, 'base_dex': 30, 'base_con': 28, 'base_int': 10, 'base_hp': 1800, 'base_ap': 70,
         'str_per_level': 4, 'dex_per_level': 3, 'con_per_level': 3, 'int_per_level': 1,
@@ -29,7 +29,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'joyful_zealot', 'name': 'Joyful Zealot', 'hostile_type': 'humanoid', 'min_spawn_level': 55, 'role': 'hazard', 'rarity': 'uncommon',
-        'base_xp': 650, 'common_drop': 'herb_major', 'rare_drop': None, 'money_range': (120, 240),
+        'base_xp': 650, 'common_drop': 'herb_major', 'rare_drop': 'awakened_eye', 'money_range': (120, 240),
         'basic_attack': 'ecstatic strike', 'strong_attack': 'blinding joy', 'player_abilities': ['light_spirit_lv1_convert'],
         'base_str': 30, 'base_dex': 28, 'base_con': 26, 'base_int': 25, 'base_hp': 1700, 'base_ap': 80,
         'str_per_level': 3, 'dex_per_level': 3, 'con_per_level': 3, 'int_per_level': 3,

@@ -33,6 +33,7 @@ class AbilityStatType:
 
 
 class Element(Enum):
+	PHYSICAL = "physical"
 	LIGHT = "light"
 	DARK = "dark"
 	EARTH = "earth"
@@ -289,6 +290,14 @@ class PlayerAbility:
 
 		return effects
 
+	def _is_physical_hit(self, elements: Optional[List[str]] = None) -> bool:
+		"""Return True when this hit should be treated as physical damage."""
+		for e in (elements or []):
+			ev = str(getattr(e, 'value', e)).lower()
+			if ev == Element.PHYSICAL.value:
+				return True
+		return False
+
 	def apply(self, target: Optional[object] = None, owner: Optional[object] = None, percent_reduction: float = 0.0) -> Dict[str, Any]:
 		"""Return a description of what applying this ability would do.
 
@@ -306,11 +315,14 @@ class PlayerAbility:
 			# apply immediately if a target is provided
 			# Build element list from ability elements + attacker statuses
 			elems = status_utils.collect_attack_elements(owner, [e.value if e.value else str(e) for e in self.elements] if self.elements else None)
+			is_physical_hit = self._is_physical_hit(elems)
 			# Apply outgoing modifiers from attacker statuses (elemental_attack_buff, attack_buff, etc.)
-			power = status_utils.compute_outgoing_damage(owner, power, elems)
+			# attack_buff/attack_debuff only apply to physical hits (basic attacks and
+			# abilities carrying a PHYSICAL element slot); elemental_attack_buff applies regardless.
+			power = status_utils.compute_outgoing_damage(owner, power, elems, is_basic_attack=is_physical_hit)
 			# If target is a RandomHostile it supports the extended signature
 
-			applied = target.take_damage(power, attacker=owner, elements=elems if elems else None, physical=False)
+			applied = target.take_damage(power, attacker=owner, elements=elems if elems else None, physical=is_physical_hit)
 			if applied is not None:
 				summary['dealt'] = applied
 
@@ -365,9 +377,10 @@ class PlayerAbility:
 					else:
 						# Build element list and apply outgoing modifiers
 						elems = status_utils.collect_attack_elements(owner, [e.value if hasattr(e, 'value') else str(e) for e in self.elements] if self.elements else None)
-						power = status_utils.compute_outgoing_damage(owner, power, elems)
+						is_physical_hit = self._is_physical_hit(elems)
+						power = status_utils.compute_outgoing_damage(owner, power, elems, is_basic_attack=is_physical_hit)
 
-						applied = target.take_damage(power, attacker=owner, elements=elems if elems else None, physical=False)
+						applied = target.take_damage(power, attacker=owner, elements=elems if elems else None, physical=is_physical_hit)
 
 						if applied is not None:
 							summary['status_damage'] = applied
@@ -525,7 +538,7 @@ def get_potential_player_abilities(player: Optional[object] = None) -> List[Dict
 		# If player provided, filter by stat-based requirements
 		if player is not None:
 			atype = a.get('ability_type')
-           # class tree gate: only show abilities from this character's assigned tree
+			# class tree gate: only show abilities from this character's assigned tree
 			if player_class and str(atype).lower() != str(player_class).lower():
 				continue
 			level = int(a.get('level',1))

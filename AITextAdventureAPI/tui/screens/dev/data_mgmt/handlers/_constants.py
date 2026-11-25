@@ -5,6 +5,14 @@ from __future__ import annotations
 
 from rich.style import Style
 
+from game.constants_other import (
+    ELEMENT_SYMBOLS,
+    ELEMENTAL_COLORS,
+    STATUS_SYMBOLS,
+    STATUS_COLORS,
+    fmt_status_glyphs,
+)
+
 # ── Category name constants ────────────────────────────────────────────────────
 
 DIALOG_CATEGORY       = "character_dialog"
@@ -31,44 +39,9 @@ ROW_OK_STYLE      = Style(color="green", dim=True)
 ROW_DEFAULT_STYLE = Style()
 
 # ── Shared symbol maps ────────────────────────────────────────────────────────
-
-ELEMENT_SYMBOLS: dict[str, str] = {
-    "dark":     "(D)",
-    "light":    "(L)",
-    "earth":    "(Ë)",
-    "fire":     "(F)",
-    "water":    "(W)",
-    "air":      "(A)",
-    "ice":      "(I)",
-    "electric": "(É)",
-}
-
-STATUS_SYMBOLS: dict[str, str] = {
-    "all":                   "☯",
-    "petrify":               "⬡",
-    "stun":                  "✦",
-    "sleep":                 "☽",
-    "confuse":               "⁈",
-    "silence":               "⊘",
-    "continuous_damage":     "♾",
-    "regen":                 "♻",
-    "elemental_debuff":      "◆",
-    "attack_debuff":         "↓A",
-    "defense_debuff":        "↓D",
-    "strength_debuff":       "↓S",
-    "dexterity_debuff":      "↓X",
-    "intelligence_debuff":   "↓I",
-    "constitution_debuff":   "↓C",
-    "attack_buff":           "↑A",
-    "defense_buff":          "↑D",
-    "strength_buff":         "↑S",
-    "dexterity_buff":        "↑X",
-    "intelligence_buff":     "↑I",
-    "constitution_buff":     "↑C",
-    "elemental_attack_buff": "↑EA",
-    "elemental_defense_buff":"↑ED",
-    "scanned":               "👁",
-}
+# ELEMENT_SYMBOLS / STATUS_SYMBOLS (and their *_COLORS counterparts) are
+# imported from game.constants_other, the single canonical source, so glyphs
+# never drift out of sync across the dev tools, equip overlay, and shop menu.
 
 
 def fmt_elem_list(elems: list[str]) -> str:
@@ -79,7 +52,12 @@ def fmt_elem_list(elems: list[str]) -> str:
 
 
 def fmt_status_list(statuses: list[str]) -> str:
-    """Format a list of status ids as compact unicode glyphs."""
+    """Format a list of status ids as symbol+3-letter-id, e.g. '↑ATK ↓DEF'.
+
+    Retains the full fmt_status_glyphs() id suffix (rather than a bare icon)
+    so the dev ability table can distinguish stat buffs/debuffs that would
+    otherwise share the same arrow symbol.
+    """
     if not statuses:
         return "—"
-    return " ".join(STATUS_SYMBOLS.get(s, f"[{s[:2]}]") for s in statuses)
+    return fmt_status_glyphs(statuses)

@@ -78,16 +78,13 @@ def _item_sort_key(item: Any) -> tuple:
 
 # ── element formatting (mirrors legacy shop_menu_screen._format_elements) ─────
 
-def _format_elements(elems: Any) -> str:
-    try:
-        from game.constants_other import ELEMENTAL_CHAR_KEYS
-    except ImportError:
-        ELEMENTAL_CHAR_KEYS = {}
+def _format_elements(elems: Any, symbol_only: bool = False) -> str:
+    from game.constants_other import fmt_element_glyphs_rich
     if not elems:
         return ""
     if not isinstance(elems, (list, tuple)):
         elems = [elems]
-    out = ""
+    keys = []
     for e in elems:
         if isinstance(e, dict):
             key = e.get("id") or e.get("name") or ""
@@ -95,8 +92,8 @@ def _format_elements(elems: Any) -> str:
             key = e
         else:
             key = str(getattr(e, "id", getattr(e, "value", "")))
-        out += ELEMENTAL_CHAR_KEYS.get(str(key).lower(), f"({key})")
-    return out
+        keys.append(key)
+    return fmt_element_glyphs_rich(keys, symbol_only=symbol_only)
 
 
 # ── filter + sort ─────────────────────────────────────────────────────────────
@@ -136,7 +133,7 @@ def _equip_item_label(item: Any) -> str:
     rarity     = str(getattr(item, "rarity", "") or "")
     rarity_val = rarity.value if hasattr(rarity, "value") else str(rarity)
     elems      = getattr(item, "elements", None)
-    elem_s     = _format_elements(elems)
+    elem_s     = _format_elements(elems, symbol_only=True)
     tsp        = _total_stat_power(item)
 
     stats: list[str] = []
@@ -175,7 +172,7 @@ def _equip_item_label(item: Any) -> str:
 
     lv_s   = f"[dim]Lv.{level}[/dim]" if level else ""
     stat_s = f"[dim]  {'  '.join(stats)}[/dim]" if stats else ""
-    elem_m = f"  [yellow]{rich_escape(elem_s)}[/yellow]" if elem_s else ""
+    elem_m = f"  {elem_s}" if elem_s else ""
 
     rarity_colors = {
         "common": "", "uncommon": "cyan", "rare": "blue",
@@ -245,13 +242,13 @@ def _build_item_info(item: Any | None) -> str:
             imm = list(getattr(item, "immunities",  []) or [])
             res = list(getattr(item, "resistances", []) or [])
             wk  = list(getattr(item, "weaknesses",  []) or [])
-            from game.constants import fmt_element_glyphs, fmt_status_glyphs
+            from game.constants_other import fmt_element_glyphs_rich, fmt_status_glyphs_rich
             if imm:
-                lines.append(f"Immune      : [bold green]{rich_escape(fmt_status_glyphs(imm))}[/bold green]")
+                lines.append(f"Immune      : {fmt_status_glyphs_rich(imm)}")
             if res:
-                lines.append(f"Resist      : [cyan]{rich_escape(fmt_element_glyphs(res))}[/cyan]")
+                lines.append(f"Resist      : {fmt_element_glyphs_rich(res)}")
             if wk:
-                lines.append(f"Weakness    : [red]{rich_escape(fmt_element_glyphs(wk))}[/red]")
+                lines.append(f"Weakness    : {fmt_element_glyphs_rich(wk)}")
     except Exception:
         pass
 
@@ -263,7 +260,7 @@ def _build_item_info(item: Any | None) -> str:
     elems  = getattr(item, "elements", None)
     elem_s = _format_elements(elems)
     if elem_s:
-        lines.append(f"Elements    : [yellow]{rich_escape(elem_s)}[/yellow]")
+        lines.append(f"Elements    : {elem_s}")
 
     # ── stat bonuses + TSP ──
     strength  = int(getattr(item, "strength",     0) or 0)

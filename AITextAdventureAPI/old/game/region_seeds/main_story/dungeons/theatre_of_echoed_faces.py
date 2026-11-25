@@ -21,7 +21,7 @@ FLOOR_HOSTILES = {
 HOSTILE_SEEDS = [
     {
         'id': 'echoing_phantom', 'name': 'Echoing Phantom', 'hostile_type': 'spirit', 'min_spawn_level': 40, 'role': 'hazard', 'rarity': 'common',
-        'base_xp': 400, 'common_drop': 'stimulant_med', 'rare_drop': None, 'money_range': (50, 100),
+        'base_xp': 400, 'common_drop': 'stimulant_med', 'rare_drop': 'bandana_of_focus', 'money_range': (50, 100),
         'basic_attack': 'fading touch', 'strong_attack': 'dissonant scream', 'player_abilities': [],
         'base_str': 15, 'base_dex': 25, 'base_con': 18, 'base_int': 22, 'base_hp': 900, 'base_ap': 60,
         'str_per_level': 2, 'dex_per_level': 3, 'con_per_level': 2, 'int_per_level': 3,
@@ -29,7 +29,7 @@ HOSTILE_SEEDS = [
     },
     {
         'id': 'distortion_hound', 'name': 'Distortion Hound', 'hostile_type': 'beast', 'min_spawn_level': 40, 'role': 'damage', 'rarity': 'uncommon',
-        'base_xp': 450, 'common_drop': 'herb_major', 'rare_drop': None, 'money_range': (60, 120),
+        'base_xp': 450, 'common_drop': 'herb_major', 'rare_drop': 'amulet_of_clarity', 'money_range': (60, 120),
         'basic_attack': 'phase bite', 'strong_attack': 'reality warp', 'player_abilities': [],
         'base_str': 24, 'base_dex': 22, 'base_con': 20, 'base_int': 10, 'base_hp': 1200, 'base_ap': 50,
         'str_per_level': 3, 'dex_per_level': 3, 'con_per_level': 2, 'int_per_level': 1,

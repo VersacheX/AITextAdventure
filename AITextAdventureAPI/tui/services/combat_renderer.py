@@ -18,7 +18,7 @@ from tui.services.combat_service import is_unit_player
 
 
 def _status_text(entity: Any) -> str:
-    from game.constants import fmt_status_glyphs
+    from game.constants_other import fmt_status_glyphs_rich
 
     statuses = getattr(entity, "statuses", None) or []
     ids = [
@@ -28,7 +28,7 @@ def _status_text(entity: Any) -> str:
     ]
     if not ids:
         return ""
-    return f"[yellow]{rich_escape(fmt_status_glyphs(ids))}[/yellow]"
+    return fmt_status_glyphs_rich(ids)
 
 
 def _active_marker(*, is_active: bool) -> str:
@@ -51,7 +51,7 @@ def _drop_name(drop: Any) -> str:
 
 def _scanned_detail_lines(entity: Any) -> List[str]:
     """Return extra Rich-markup lines revealed when a hostile is 'scanned'."""
-    from game.constants import fmt_element_glyphs, fmt_status_glyphs
+    from game.constants_other import fmt_element_glyphs_rich, fmt_status_glyphs_rich
 
     lines: List[str] = []
     lines.append(
@@ -62,12 +62,12 @@ def _scanned_detail_lines(entity: Any) -> List[str]:
             c=getattr(entity, "constitution", 0),
         )
     )
-    weaknesses  = fmt_element_glyphs(getattr(entity, "weaknesses", []) or [])
-    resistances = fmt_element_glyphs(getattr(entity, "resistances", []) or [])
-    immunities  = fmt_status_glyphs(getattr(entity, "immunities", []) or [])
-    lines.append(f"Weak {rich_escape(weaknesses)}")
-    lines.append(f"Res  {rich_escape(resistances)}")
-    lines.append(f"Imm  {rich_escape(immunities)}")
+    weaknesses  = fmt_element_glyphs_rich(getattr(entity, "weaknesses", []) or [])
+    resistances = fmt_element_glyphs_rich(getattr(entity, "resistances", []) or [])
+    immunities  = fmt_status_glyphs_rich(getattr(entity, "immunities", []) or [])
+    lines.append(f"Weak {weaknesses}")
+    lines.append(f"Res  {resistances}")
+    lines.append(f"Imm  {immunities}")
     lines.append(
         f"Drop {_drop_name(getattr(entity, 'common_drop', None))} / "
         f"{_drop_name(getattr(entity, 'rare_drop', None))}"

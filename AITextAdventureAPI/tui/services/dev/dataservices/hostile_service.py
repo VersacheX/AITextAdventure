@@ -15,6 +15,7 @@ from tui.services.dev.dataservices.models import (
     HostileNode,
     HostileRarityNode,
 )
+from game.constants_other import ELEMENTAL_CHAR_KEYS as _ELEMENT_CHARS
 
 # ── Module-level tree cache (mutated by catalog._load_all) ────────────────
 _HOSTILE_TREE: List[HostileRarityNode] = []
@@ -26,10 +27,6 @@ _RARITY_LABELS: Dict[str, str] = {
     "rare":      "Rare",
     "superrare": "Super Rare",
     "notfound":  "Unknown Rarity",
-}
-_ELEMENT_CHARS: Dict[str, str] = {
-    "dark": "(D)", "light": "(L)", "earth": "(Ë)", "fire": "(F)",
-    "water": "(W)", "air": "(A)", "ice": "(I)", "electric": "(É)",
 }
 _BUCKET_SIZE = 5  # levels per bucket
 

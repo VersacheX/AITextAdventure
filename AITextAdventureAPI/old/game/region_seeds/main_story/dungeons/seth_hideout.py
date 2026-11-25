@@ -35,7 +35,7 @@ HOSTILE_SEEDS = [
         'rarity': 'common',
         'base_xp': 6,
         'common_drop': 'stimulant_small',
-        'rare_drop': None,
+        'rare_drop': 'refractor_lenses',
         'money_range': (1, 4),
         'basic_attack': 'wing slash',
         'strong_attack': 'sonic screech',

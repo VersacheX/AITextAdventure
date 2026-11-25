@@ -83,15 +83,59 @@ ABILITY_STATUS_KEY_DISPLAY_NAMES = {
     "regen": "Regen"
 }
 
-ELEMENTAL_CHAR_KEYS = {
-    "dark": "(D)",
-    "light": "(L)",
-    "earth": "(Ë)",
-    "fire": "(F)",
-    "water": "(W)",
-    "air": "(A)",
-    "ice": "(I)",
-    "electric": "(É)",
+# ── Element symbols (pure glyph, no letters) ────────────────────────────────
+# Use these directly wherever space is tight (list rows, fixed-width columns)
+# or when a plain icon is desired without the accompanying 3-letter id.
+ELEMENT_SYMBOLS: dict[str, str] = {
+    "dark":     "☾",
+    "light":    "☀",
+    "earth":    "⛰",
+    "fire":     "♨",
+    "water":    "≈",
+    "air":      "≋",
+    "ice":      "❄",
+    "electric": "⚡",
+    "physical": "●",
+}
+
+# ── Element 3-letter ids ─────────────────────────────────────────────────────
+# Paired with ELEMENT_SYMBOLS to build the longer "symbol+id" glyph used in
+# detail panels where disambiguation matters more than compactness.
+ELEMENTAL_IDS: dict[str, str] = {
+    "dark":     "DRK",
+    "light":    "LGT",
+    "earth":    "EAR",
+    "fire":     "FIR",
+    "water":    "WTR",
+    "air":      "AIR",
+    "ice":      "ICE",
+    "electric": "ELC",
+    "physical": "PHY",
+}
+
+# Back-compat combined map (symbol+id) — still used by a couple of dev-tool
+# builders that do direct dict lookups rather than calling the formatter
+# helpers below. New code should prefer fmt_element_glyphs()/fmt_element_glyphs_rich()
+# with the `symbol_only` flag instead of reading this map directly.
+ELEMENTAL_CHAR_KEYS: dict[str, str] = {
+    key: f"{ELEMENT_SYMBOLS[key]}{ELEMENTAL_IDS[key]}" for key in ELEMENT_SYMBOLS
+}
+
+# ── Canonical element colors ─────────────────────────────────────────────────
+# Single source of truth for the color associated with each element, used
+# anywhere glyphs are rendered with Rich styling (dev tools, equip overlay,
+# etc). Kept alongside ELEMENTAL_CHAR_KEYS so both glyph and color stay in
+# sync when a new element is added.
+ELEMENTAL_COLORS: dict[str, str] = {
+    "dark":     "#7c4dff",
+    "light":    "#ffee58",
+    "earth":    "#8d6e63",
+    "fire":     "#ff5252",
+    "water":    "#29b6f6",
+    "air":      "#b2ebf2",
+    "ice":      "#80deea",
+    "electric": "#fff176",
+    "physical": "#bdbdbd",
 }
 
 ELEMENTAL_ADVANTAGE = { # defines the element (value) which is weak to the key
@@ -324,10 +368,10 @@ GENERIC_STATUS_EFFECT = {
 }
 
 # ── Compact status / element glyphs ─────────────────────────────────────────
-# Single canonical source for the unicode glyphs used to render status effects
-# (buffs/debuffs/afflictions) and elemental affinities in compact columns such
-# as the ability-handler "Statuses" column and the monster-log detail panel.
-STATUS_SYMBOLS = {
+# Pure glyph (no letters) used wherever space is tight (fixed-width columns,
+# list rows). Paired with STATUS_IDS below to build the longer "symbol+id"
+# form used in detail panels.
+STATUS_SYMBOLS: dict[str, str] = {
     "all":                    "☯",
     "petrify":                "⬡",
     "stun":                   "✦",
@@ -337,45 +381,173 @@ STATUS_SYMBOLS = {
     "continuous_damage":      "♾",
     "regen":                  "♻",
     "elemental_debuff":       "◆",
-    "attack_debuff":          "↓A",
-    "defense_debuff":         "↓D",
-    "strength_debuff":        "↓S",
-    "dexterity_debuff":       "↓X",
-    "intelligence_debuff":    "↓I",
-    "constitution_debuff":    "↓C",
-    "attack_buff":            "↑A",
-    "defense_buff":           "↑D",
-    "strength_buff":          "↑S",
-    "dexterity_buff":         "↑X",
-    "intelligence_buff":      "↑I",
-    "constitution_buff":      "↑C",
-    "elemental_attack_buff":  "↑EA",
-    "elemental_defense_buff": "↑ED",
-    "scanned":                "👁",
+    "attack_debuff":          "↓",
+    "defense_debuff":         "↓",
+    "strength_debuff":        "↓",
+    "dexterity_debuff":       "↓",
+    "intelligence_debuff":    "↓",
+    "constitution_debuff":    "↓",
+    "attack_buff":            "↑",
+    "defense_buff":           "↑",
+    "strength_buff":          "↑",
+    "dexterity_buff":         "↑",
+    "intelligence_buff":      "↑",
+    "constitution_buff":      "↑",
+    "elemental_attack_buff":  "↑",
+    "elemental_defense_buff": "↑",
+    "scanned":                "◎",
+}
+
+# ── Status 3-letter ids ──────────────────────────────────────────────────────
+# Distinguishes which stat/effect a shared symbol (e.g. "↑"/"↓") refers to.
+STATUS_IDS: dict[str, str] = {
+    "all":                    "ALL",
+    "petrify":                "PET",
+    "stun":                   "STN",
+    "sleep":                  "SLP",
+    "confuse":                "CNF",
+    "silence":                "SIL",
+    "continuous_damage":      "DOT",
+    "regen":                  "REG",
+    "elemental_debuff":       "ELE",
+    "attack_debuff":          "ATK",
+    "defense_debuff":         "DEF",
+    "strength_debuff":        "STR",
+    "dexterity_debuff":       "DEX",
+    "intelligence_debuff":    "INT",
+    "constitution_debuff":    "CON",
+    "attack_buff":            "ATK",
+    "defense_buff":           "DEF",
+    "strength_buff":          "STR",
+    "dexterity_buff":         "DEX",
+    "intelligence_buff":      "INT",
+    "constitution_buff":      "CON",
+    "elemental_attack_buff":  "EAT",
+    "elemental_defense_buff": "EDF",
+    "scanned":                "SCN",
+}
+
+# ── Canonical status colors ──────────────────────────────────────────────────
+# Buffs are green-leaning, debuffs/harmful statuses are red/orange-leaning,
+# and neutral/utility statuses (scanned) use a cool accent. Single source of
+# truth for any Rich-styled status glyph rendering.
+STATUS_COLORS: dict[str, str] = {
+    "all":                    "#b0bec5",
+    "petrify":                "#8d6e63",
+    "stun":                   "#ffca28",
+    "sleep":                  "#7986cb",
+    "confuse":                "#ab47bc",
+    "silence":                "#78909c",
+    "continuous_damage":      "#e53935",
+    "regen":                  "#66bb6a",
+    "elemental_debuff":       "#ef5350",
+    "attack_debuff":          "#ef5350",
+    "defense_debuff":         "#ef5350",
+    "strength_debuff":        "#ef5350",
+    "dexterity_debuff":       "#ef5350",
+    "intelligence_debuff":    "#ef5350",
+    "constitution_debuff":    "#ef5350",
+    "attack_buff":            "#66bb6a",
+    "defense_buff":           "#66bb6a",
+    "strength_buff":          "#66bb6a",
+    "dexterity_buff":         "#66bb6a",
+    "intelligence_buff":      "#66bb6a",
+    "constitution_buff":      "#66bb6a",
+    "elemental_attack_buff":  "#66bb6a",
+    "elemental_defense_buff": "#66bb6a",
+    "scanned":                "#29b6f6",
 }
 
 
-def fmt_element_glyphs(elems) -> str:
-    """Format a list of element names as compact glyphs (e.g. '(D)(L)').
+def _element_glyph(key: str, symbol_only: bool) -> str:
+    symbol = ELEMENT_SYMBOLS.get(key, f"({key[:1].upper()})" if key else "?")
+    if symbol_only:
+        return symbol
+    eid = ELEMENTAL_IDS.get(key, key[:3].upper())
+    return f"{symbol}{eid}"
 
-    Uses ELEMENTAL_CHAR_KEYS as the canonical element glyph map; unknown
-    elements fall back to a parenthesized first letter. Returns '—' when empty.
+
+def _status_glyph(key: str, symbol_only: bool) -> str:
+    symbol = STATUS_SYMBOLS.get(key, f"[{key[:2]}]" if key else "?")
+    if symbol_only:
+        return symbol
+    sid = STATUS_IDS.get(key, key[:3].upper())
+    return f"{symbol}{sid}"
+
+
+def _normalize_key(x) -> str:
+    """Resolve an Enum member, raw string, or dict-like id to a lowercase key.
+
+    Enums commonly used for elements/status keys stringify as e.g.
+    'Element.FIRE' rather than 'fire', so prefer `.value` when present.
+    """
+    return str(getattr(x, "value", x)).lower()
+
+
+def fmt_element_glyphs(elems, symbol_only: bool = False) -> str:
+    """Format a list of element names as compact glyphs.
+
+    By default each element is rendered as "symbol+3-letter-id" (e.g. '🔥FIR').
+    Pass symbol_only=True to render just the bare icon (e.g. '🔥') for tight
+    spaces such as fixed-width list columns. Unknown elements fall back to a
+    parenthesized first letter. Returns '—' when empty.
     """
     if not elems:
         return "—"
     return "".join(
-        ELEMENTAL_CHAR_KEYS.get(e, f"({e[:1].upper()})") for e in elems
+        _element_glyph(_normalize_key(e), symbol_only) for e in elems
     )
 
 
-def fmt_status_glyphs(statuses) -> str:
+def fmt_status_glyphs(statuses, symbol_only: bool = False) -> str:
     """Format a list of status ids as compact unicode glyphs separated by spaces.
 
-    Unknown ids fall back to a bracketed two-letter abbreviation. Returns '—'
-    when empty.
+    By default each status is rendered as "symbol+3-letter-id" (e.g. '↑ATK').
+    Pass symbol_only=True to render just the bare icon (e.g. '↑') for tight
+    spaces. Unknown ids fall back to a bracketed two-letter abbreviation.
+    Returns '—' when empty.
     """
     if not statuses:
         return "—"
     return " ".join(
-        STATUS_SYMBOLS.get(s, f"[{s[:2]}]") for s in statuses
+        _status_glyph(_normalize_key(s), symbol_only) for s in statuses
     )
+
+
+def fmt_element_glyphs_rich(elems, symbol_only: bool = False) -> str:
+    """Format a list of element names as Rich-markup colored glyphs.
+
+    Each glyph is wrapped in its canonical color from ELEMENTAL_COLORS, e.g.
+    '[#ff5252]🔥FIR[/]'. Pass symbol_only=True to render just the bare colored
+    icon (e.g. '[#ff5252]🔥[/]'). Unknown elements fall back to white. Returns
+    '—' when empty.
+    """
+    if not elems:
+        return "—"
+    from rich.markup import escape as rich_escape
+    out = []
+    for e in elems:
+        key   = _normalize_key(e)
+        glyph = _element_glyph(key, symbol_only)
+        color = ELEMENTAL_COLORS.get(key, "white")
+        out.append(f"[{color}]{rich_escape(glyph)}[/]")
+    return "".join(out)
+
+
+def fmt_status_glyphs_rich(statuses, symbol_only: bool = False) -> str:
+    """Format a list of status ids as Rich-markup colored glyphs, space separated.
+
+    Each glyph is wrapped in its canonical color from STATUS_COLORS. Pass
+    symbol_only=True to render just the bare colored icon. Unknown ids fall
+    back to white. Returns '—' when empty.
+    """
+    if not statuses:
+        return "—"
+    from rich.markup import escape as rich_escape
+    out = []
+    for s in statuses:
+        key   = _normalize_key(s)
+        glyph = _status_glyph(key, symbol_only)
+        color = STATUS_COLORS.get(key, "white")
+        out.append(f"[{color}]{rich_escape(glyph)}[/]")
+    return " ".join(out)

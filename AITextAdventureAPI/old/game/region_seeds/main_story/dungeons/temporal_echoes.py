@@ -22,7 +22,7 @@ FLOOR_HOSTILES = {
 HOSTILE_SEEDS = [
 	{
 		'id': 'void_echo', 'name': 'Void Echo', 'hostile_type': 'aberration', 'min_spawn_level': 80, 'role': 'hazard', 'rarity': 'common',
-		'base_xp': 1200, 'common_drop': 'stimulant_large', 'rare_drop': None, 'money_range': (450, 900),
+		'base_xp': 1200, 'common_drop': 'stimulant_large', 'rare_drop': 'memory_shard', 'money_range': (450, 900),
 		'basic_attack': 'hollow resonance', 'strong_attack': 'emptiness wave', 'player_abilities': ['dark_spirit_lv1_shade_whisper'],
 		'base_str': 35, 'base_dex': 40, 'base_con': 35, 'base_int': 45, 'base_hp': 3000, 'base_ap': 110,
 		'str_per_level': 4, 'dex_per_level': 5, 'con_per_level': 4, 'int_per_level': 6,
@@ -30,7 +30,7 @@ HOSTILE_SEEDS = [
 	},
 	{
 		'id': 'temporal_rift', 'name': 'Temporal Rift', 'hostile_type': 'aberration', 'min_spawn_level': 80, 'role': 'damage', 'rarity': 'uncommon',
-		'base_xp': 1350, 'common_drop': 'herb_major', 'rare_drop': None, 'money_range': (500, 1000),
+		'base_xp': 1350, 'common_drop': 'herb_major', 'rare_drop': 'watch_of_perpetuation', 'money_range': (500, 1000),
 		'basic_attack': 'time fracture', 'strong_attack': 'causality tear', 'player_abilities': [],
 		'base_str': 40, 'base_dex': 35, 'base_con': 38, 'base_int': 50, 'base_hp': 3200, 'base_ap': 120,
 		'str_per_level': 5, 'dex_per_level': 4, 'con_per_level': 4, 'int_per_level': 7,
