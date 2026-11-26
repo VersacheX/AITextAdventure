@@ -662,6 +662,8 @@ def character_join(params, player_game):
 				p.npc_id = seed.get('npc_id') or char_id
 			if not getattr(p, 'character_class', None):
 				p.character_class = (getattr(const, 'CHARACTER_NPC_CLASS_MAP', {}) or {}).get(p.npc_id) or (getattr(const, 'CHARACTER_NPC_CLASS_MAP', {}) or {}).get(char_id)
+			from game.objects.player import assign_character_elements
+			assign_character_elements(p, char_id=char_id)
 			player_game.add_character(p)
 
 			return p

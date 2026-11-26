@@ -47,7 +47,7 @@ ARMOR_LV36_50 = {
         {
             "id": "flamecrest_circlet",
             "name": "Flamecrest Circlet",
-            "description": "A circlet crowned with a single raised flame-crest that pulses brighter with each emotion Veyr lets through. She lets through a lot.",
+            "description": "A circlet crowned with a single raised flame-crest that pulses brighter with every surge of emotion it senses.",
             "defense": 28, "durability": 460, "max_durability": 460, "value": 7200,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 4, "dexterity": 6, "intelligence": 28, "constitution": 14,
@@ -66,7 +66,7 @@ ARMOR_LV36_50 = {
         {
             "id": "sovereignty_circlet",
             "name": "Sovereignty Circlet",
-            "description": "An unadorned band of cold alloy whose weight is distributed to sit level without adjustment. Sylvara had it made that way — she refuses to carry anything that requires maintenance.",
+            "description": "An unadorned band of cold alloy, weighted to sit perfectly level without adjustment. It requires no maintenance and offers no ornament.",
             "defense": 26, "durability": 460, "max_durability": 460, "value": 7200,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 4, "dexterity": 4, "intelligence": 30, "constitution": 12,
@@ -85,7 +85,7 @@ ARMOR_LV36_50 = {
         {
             "id": "juryrig_goggles",
             "name": "Juryrig Goggles",
-            "description": "Goggles assembled from four different models — the magnification is wrong, the tint is inconsistent, and the strap is electrical tape. Maddox insists they work better this way.",
+            "description": "Goggles assembled from four different models. The magnification is wrong, the tint is inconsistent and the strap is electrical tape, yet they somehow work better this way.",
             "defense": 24, "durability": 440, "max_durability": 440, "value": 6800,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 6, "dexterity": 26, "intelligence": 14, "constitution": 4,
@@ -95,7 +95,7 @@ ARMOR_LV36_50 = {
         {
             "id": "ironfront_helm",
             "name": "Ironfront Helm",
-            "description": "A full-face war helm scored with campaign tallies. The visor slot is narrow — Drax doesn't need a wide view, only a forward one.",
+            "description": "A full-face war helm scored with campaign tallies. The visor slot is narrow, built for a forward view and nothing else.",
             "defense": 32, "durability": 480, "max_durability": 480, "value": 7400,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 30, "dexterity": 2, "intelligence": 6, "constitution": 16,
@@ -104,7 +104,7 @@ ARMOR_LV36_50 = {
         {
             "id": "ironwill_helm",
             "name": "Ironwill Helm",
-            "description": "A command helmet reinforced at the brow ridge — field modification, done after Drax took a blow he didn't see coming. He saw the next one.",
+            "description": "A command helmet reinforced at the brow ridge, a field modification added after a blow that came from nowhere.",
             "defense": 32, "durability": 480, "max_durability": 480, "value": 7400,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 30, "dexterity": 2, "intelligence": 6, "constitution": 16,
@@ -123,7 +123,7 @@ ARMOR_LV36_50 = {
         {
             "id": "shroud_wrap",
             "name": "Shroud Wrap",
-            "description": "A head wrap treated with light-absorbing compound. Ghost applies it in exactly the same order every time.",
+            "description": "A head wrap treated with a light-absorbing compound that must be applied in exactly the right order to hold.",
             "defense": 26, "durability": 440, "max_durability": 440, "value": 6800,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 22, "dexterity": 16, "intelligence": 8, "constitution": 8,
@@ -133,7 +133,7 @@ ARMOR_LV36_50 = {
         {
             "id": "seer_veil",
             "name": "Seer's Veil",
-            "description": "A translucent veil that softens physical vision and sharpens prophetic sight. Eldon wears it loose.",
+            "description": "A translucent veil that softens physical vision and sharpens prophetic sight. It is meant to be worn loose.",
             "defense": 24, "durability": 440, "max_durability": 440, "value": 7000,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 2, "dexterity": 8, "intelligence": 32, "constitution": 16,
@@ -142,7 +142,7 @@ ARMOR_LV36_50 = {
         {
             "id": "omen_hood",
             "name": "Omen Hood",
-            "description": "A deep hood stitched with sigils Eldon drew before she understood what they meant. She understands them now.",
+            "description": "A deep hood stitched with sigils whose meaning reveals itself only to those who wear it long enough.",
             "defense": 24, "durability": 440, "max_durability": 440, "value": 7000,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 2, "dexterity": 8, "intelligence": 32, "constitution": 16,
@@ -152,7 +152,7 @@ ARMOR_LV36_50 = {
         {
             "id": "executive_helm",
             "name": "Executive Helm",
-            "description": "A reinforced helmet with a brushed-alloy finish — Voss had it made to match his boardroom aesthetic. It is not decorative.",
+            "description": "A reinforced helmet with a brushed-alloy finish and the clean lines of a boardroom. It is not decorative.",
             "defense": 36, "durability": 540, "max_durability": 540, "value": 11200,
             "min_spawn_level": 50, "rarity": "notfound",
             "strength": 38, "dexterity": 4, "intelligence": 8, "constitution": 20,
@@ -161,7 +161,7 @@ ARMOR_LV36_50 = {
         {
             "id": "acquisition_visor",
             "name": "Acquisition Visor",
-            "description": "A tactical visor fitted with threat-assessment overlays. It was commissioned for a corporate security team. Voss kept it.",
+            "description": "A tactical visor fitted with threat-assessment overlays, originally commissioned for a corporate security team.",
             "defense": 36, "durability": 540, "max_durability": 540, "value": 11200,
             "min_spawn_level": 50, "rarity": "notfound",
             "strength": 38, "dexterity": 4, "intelligence": 8, "constitution": 20,
@@ -213,7 +213,7 @@ ARMOR_LV36_50 = {
         {
             "id": "vigil_robe",
             "name": "Vigil Robe",
-            "description": "A robe worn through night vigils for those who could not wake themselves. It carries the weight of every one Brimholt kept.",
+            "description": "A robe worn through night vigils for those who could not wake themselves. It carries the weight of every one it kept.",
             "defense": 42, "durability": 660, "max_durability": 660, "value": 14000,
             "min_spawn_level": 50, "rarity": "notfound",
             "strength": 10, "dexterity": 10, "intelligence": 52, "constitution": 44,
@@ -222,7 +222,7 @@ ARMOR_LV36_50 = {
         {
             "id": "warden_surcoat",
             "name": "Warden's Surcoat",
-            "description": "A surcoat layered with protective weave beneath the ceremonial outer face. Brimholt stopped maintaining the ceremony. He never stopped maintaining the weave.",
+            "description": "A surcoat layered with protective weave beneath a ceremonial outer face. The ceremony has faded; the weave never has.",
             "defense": 42, "durability": 660, "max_durability": 660, "value": 14000,
             "min_spawn_level": 50, "rarity": "notfound",
             "strength": 10, "dexterity": 10, "intelligence": 52, "constitution": 44,
@@ -241,7 +241,7 @@ ARMOR_LV36_50 = {
         {
             "id": "emberstitch_coat",
             "name": "Emberstitch Coat",
-            "description": "A long coat embroidered with heat-reactive thread that glows brighter the more emotional Veyr becomes.",
+            "description": "A long coat embroidered with heat-reactive thread that glows brighter as its wearer's emotions run hotter.",
             "defense": 32, "durability": 540, "max_durability": 540, "value": 9000,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 6, "dexterity": 8, "intelligence": 38, "constitution": 18,
@@ -260,7 +260,7 @@ ARMOR_LV36_50 = {
         {
             "id": "dominion_mantle",
             "name": "Dominion Mantle",
-            "description": "A mantle with a collar high enough to obscure the jaw. Sylvara finds this useful.",
+            "description": "A mantle with a collar high enough to hide the jaw, leaving the wearer's expression unreadable.",
             "defense": 30, "durability": 540, "max_durability": 540, "value": 9000,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 4, "dexterity": 6, "intelligence": 42, "constitution": 16,
@@ -298,7 +298,7 @@ ARMOR_LV36_50 = {
         {
             "id": "vanguard_breastplate",
             "name": "Vanguard Breastplate",
-            "description": "A breastplate scored from thirty-one known engagements. Drax stopped counting at thirty. He counts again now.",
+            "description": "A breastplate scored by thirty-one known engagements, each dent left in place as a record.",
             "defense": 44, "durability": 620, "max_durability": 620, "value": 9600,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 44, "dexterity": -2, "intelligence": 4, "constitution": 20,
@@ -308,7 +308,7 @@ ARMOR_LV36_50 = {
         {
             "id": "shadow_weave_coat",
             "name": "Shadow-Weave Coat",
-            "description": "A long coat woven with light-absorbing composite — it doesn't make Ghost invisible. It makes the eye slide past him.",
+            "description": "A long coat woven with light-absorbing composite. It doesn't make anyone invisible; it makes the eye slide past.",
             "defense": 30, "durability": 540, "max_durability": 540, "value": 8800,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 26, "dexterity": 24, "intelligence": 10, "constitution": 10,
@@ -317,7 +317,7 @@ ARMOR_LV36_50 = {
         {
             "id": "null_jacket",
             "name": "Null Jacket",
-            "description": "A reinforced jacket treated to suppress heat signature and sound resonance. Ghost had it made to specification. He didn't explain the specification.",
+            "description": "A reinforced jacket treated to suppress heat signature and sound resonance, built to a specification no one has explained.",
             "defense": 30, "durability": 540, "max_durability": 540, "value": 8800,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 26, "dexterity": 24, "intelligence": 10, "constitution": 10,
@@ -336,7 +336,7 @@ ARMOR_LV36_50 = {
         {
             "id": "oracle_mantle",
             "name": "Oracle's Mantle",
-            "description": "A mantle Eldon wears when she knows the vision will be difficult. The weave dampens the physical shock of seeing too far ahead.",
+            "description": "A mantle whose weave dampens the physical shock of seeing too far ahead, made for visions that are going to be difficult.",
             "defense": 28, "durability": 520, "max_durability": 520, "value": 8800,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 2, "dexterity": 10, "intelligence": 38, "constitution": 20,
@@ -346,7 +346,7 @@ ARMOR_LV36_50 = {
         {
             "id": "acquisition_plate",
             "name": "Acquisition Plate",
-            "description": "A reinforced plate commissioned for hostile-environment negotiations. Voss wears it to meetings he expects to go badly.",
+            "description": "A reinforced plate commissioned for hostile-environment negotiations, the kind expected to go badly.",
             "defense": 52, "durability": 680, "max_durability": 680, "value": 14400,
             "min_spawn_level": 50, "rarity": "notfound",
             "strength": 52, "dexterity": 2, "intelligence": 6, "constitution": 30,
@@ -355,7 +355,7 @@ ARMOR_LV36_50 = {
         {
             "id": "leverage_harness",
             "name": "Leverage Harness",
-            "description": "A heavy tactical harness Voss had designed to hold field equipment and stop bullets. Both functions are intended.",
+            "description": "A heavy tactical harness designed to carry field equipment and stop bullets. Both functions are intended.",
             "defense": 52, "durability": 680, "max_durability": 680, "value": 14400,
             "min_spawn_level": 50, "rarity": "notfound",
             "strength": 52, "dexterity": 2, "intelligence": 6, "constitution": 30,
@@ -424,7 +424,7 @@ ARMOR_LV36_50 = {
         {
             "id": "currentflow_bracers",
             "name": "Currentflow Bracers",
-            "description": "Bracers that guide healing energy along the forearms with a current that Lyren says feels like standing in a slow river.",
+            "description": "Bracers that guide healing energy along the forearms with a current like standing in a slow river.",
             "defense": 18, "durability": 420, "max_durability": 420, "value": 4800,
             "min_spawn_level": 35, "rarity": "notfound",
             "strength": 2, "dexterity": 14, "intelligence": 30, "constitution": 22,
@@ -453,7 +453,7 @@ ARMOR_LV36_50 = {
         {
             "id": "shelter_bracers",
             "name": "Shelter Bracers",
-            "description": "Bracers etched with names — not enemies, but the people behind him. Brimholt looks at them before every engagement.",
+            "description": "Bracers etched with names: not enemies, but the people the wearer stands in front of.",
             "defense": 26, "durability": 500, "max_durability": 500, "value": 8800,
             "min_spawn_level": 50, "rarity": "notfound",
             "strength": 8, "dexterity": 10, "intelligence": 38, "constitution": 32,
@@ -462,7 +462,7 @@ ARMOR_LV36_50 = {
         {
             "id": "covenant_bracers",
             "name": "Covenant Bracers",
-            "description": "Bracers woven with a single faith-binding — a promise made before he took the post and never revisited.",
+            "description": "Bracers woven with a single faith-binding, a promise made once and never revisited.",
             "defense": 26, "durability": 500, "max_durability": 500, "value": 8800,
             "min_spawn_level": 50, "rarity": "notfound",
             "strength": 8, "dexterity": 10, "intelligence": 38, "constitution": 32,
@@ -481,7 +481,7 @@ ARMOR_LV36_50 = {
         {
             "id": "current_gloves",
             "name": "Current Gloves",
-            "description": "Thin gloves woven with conductive thread — Maddox built them to test charge paths without getting burned. They work about sixty percent of the time.",
+            "description": "Thin gloves woven with conductive thread, built to test charge paths without burning the hands. They work about sixty percent of the time.",
             "defense": 20, "durability": 440, "max_durability": 440, "value": 5400,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 4, "dexterity": 28, "intelligence": 16, "constitution": 4,
@@ -490,7 +490,7 @@ ARMOR_LV36_50 = {
         {
             "id": "ironveil_vambraces",
             "name": "Ironveil Vambraces",
-            "description": "Slim black-alloy vambraces etched with the same dimming micro-runes as Sylvara's circlet. They channel dark current along the forearm without a flicker of warmth.",
+            "description": "Slim black-alloy vambraces etched with dimming micro-runes. They channel dark current along the forearm without a flicker of warmth.",
             "defense": 22, "durability": 460, "max_durability": 460, "value": 5800,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 4, "dexterity": 6, "intelligence": 26, "constitution": 12,
@@ -508,7 +508,7 @@ ARMOR_LV36_50 = {
         {
             "id": "traceless_gloves",
             "name": "Traceless Gloves",
-            "description": "Thin leather gloves with grip-coat inner palms. Ghost has worn out six pairs. He keeps a seventh unused.",
+            "description": "Thin leather gloves with grip-coated palms. They wear out fast, so they are rarely found as a single pair.",
             "defense": 20, "durability": 440, "max_durability": 440, "value": 5600,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 18, "dexterity": 18, "intelligence": 6, "constitution": 6,
@@ -517,7 +517,7 @@ ARMOR_LV36_50 = {
         {
             "id": "dawnseer_gloves",
             "name": "Dawnseer Gloves",
-            "description": "Soft gloves Eldon wears during readings — the fingertips are left bare so she can maintain contact with the vision-surfaces.",
+            "description": "Soft gloves with bare fingertips, made for keeping contact with vision-surfaces during a reading.",
             "defense": 20, "durability": 440, "max_durability": 440, "value": 5600,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 2, "dexterity": 8, "intelligence": 28, "constitution": 14,
@@ -526,7 +526,7 @@ ARMOR_LV36_50 = {
         {
             "id": "boardroom_gauntlets",
             "name": "Boardroom Gauntlets",
-            "description": "Armored gloves with a polished finish — Voss wears them to signal that the meeting is already over.",
+            "description": "Armored gloves with a polished finish that signal the meeting is already over.",
             "defense": 26, "durability": 500, "max_durability": 500, "value": 9200,
             "min_spawn_level": 50, "rarity": "notfound",
             "strength": 40, "dexterity": 2, "intelligence": 6, "constitution": 18,
@@ -549,7 +549,7 @@ ARMOR_LV36_50 = {
         {
             "id": "meadowstep_greaves",
             "name": "Meadowstep Greaves",
-            "description": "Greaves grown from living fibre that flex without resistance — they move with Lyren rather than behind him.",
+            "description": "Greaves grown from living fibre that flex without resistance, moving with the wearer rather than behind them.",
             "defense": 22, "durability": 460, "max_durability": 460, "value": 5200,
             "min_spawn_level": 35, "rarity": "notfound",
             "strength": 2, "dexterity": 16, "intelligence": 24, "constitution": 20,
@@ -578,7 +578,7 @@ ARMOR_LV36_50 = {
         {
             "id": "guardian_greaves",
             "name": "Guardian Greaves",
-            "description": "Greaves built wide at the shin to shield the stance — Brimholt doesn't advance in battle, he holds ground.",
+            "description": "Greaves built wide at the shin to shield the stance, made for holding ground rather than advancing.",
             "defense": 30, "durability": 540, "max_durability": 540, "value": 9600,
             "min_spawn_level": 50, "rarity": "notfound",
             "strength": 10, "dexterity": 8, "intelligence": 32, "constitution": 38,
@@ -587,7 +587,7 @@ ARMOR_LV36_50 = {
         {
             "id": "keeper_greaves",
             "name": "Keeper Greaves",
-            "description": "Greaves etched with a repeating keep-glyph down the shin. Each repetition was added after a vigil Brimholt didn't expect to survive.",
+            "description": "Greaves etched with a repeating keep-glyph down the shin, one repetition for each vigil that should not have been survived.",
             "defense": 30, "durability": 540, "max_durability": 540, "value": 9600,
             "min_spawn_level": 50, "rarity": "notfound",
             "strength": 10, "dexterity": 8, "intelligence": 32, "constitution": 38,
@@ -597,7 +597,7 @@ ARMOR_LV36_50 = {
         {
             "id": "cinder_greaves",
             "name": "Cinder Greaves",
-            "description": "Greaves baked in forge-heat until the alloy fused with the fire-coating. They run warm. Veyr prefers it.",
+            "description": "Greaves baked in forge-heat until the alloy fused with the fire-coating. They always run warm.",
             "defense": 24, "durability": 480, "max_durability": 480, "value": 6200,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 6, "dexterity": 6, "intelligence": 20, "constitution": 14,
@@ -606,7 +606,7 @@ ARMOR_LV36_50 = {
         {
             "id": "coldmarch_greaves",
             "name": "Coldmarch Greaves",
-            "description": "Greaves of matte obsidian plate that make no sound on any surface. Sylvara had them balanced so her approach never announces itself.",
+            "description": "Greaves of matte obsidian plate, balanced to make no sound on any surface.",
             "defense": 24, "durability": 480, "max_durability": 480, "value": 6200,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 4, "dexterity": 6, "intelligence": 24, "constitution": 12,
@@ -615,7 +615,7 @@ ARMOR_LV36_50 = {
         {
             "id": "circuit_greaves",
             "name": "Circuit Greaves",
-            "description": "Greaves with exposed charge-routing along the outer shin. Maddox added the routing after the third time his legs overloaded.",
+            "description": "Greaves with exposed charge-routing along the outer shin, added to stop the legs from overloading.",
             "defense": 22, "durability": 460, "max_durability": 460, "value": 6000,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 6, "dexterity": 26, "intelligence": 14, "constitution": 6,
@@ -624,7 +624,7 @@ ARMOR_LV36_50 = {
         {
             "id": "siege_sabatons",
             "name": "Siege Sabatons",
-            "description": "Heavy sabatons with reinforced toe-caps for sustained pushing engagement. Drax uses the toe-cap more than the rest.",
+            "description": "Heavy sabatons with reinforced toe-caps for sustained pushing engagements. The toe-caps take most of the wear.",
             "defense": 30, "durability": 500, "max_durability": 500, "value": 6800,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 36, "dexterity": 0, "intelligence": 4, "constitution": 18,
@@ -633,7 +633,7 @@ ARMOR_LV36_50 = {
         {
             "id": "silent_step_boots",
             "name": "Silent-Step Boots",
-            "description": "Boots with sound-dampening sole compound applied in three layers. Ghost applies each layer himself.",
+            "description": "Boots with a sound-dampening sole compound applied in three careful layers.",
             "defense": 22, "durability": 460, "max_durability": 460, "value": 6200,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 16, "dexterity": 20, "intelligence": 6, "constitution": 6,
@@ -642,7 +642,7 @@ ARMOR_LV36_50 = {
         {
             "id": "seer_boots",
             "name": "Seer's Boots",
-            "description": "Soft boots Eldon wears when a vision requires movement — she has learned that standing still during prophecy is a choice, not a necessity.",
+            "description": "Soft boots made for moving through a vision, proof that standing still during prophecy is a choice, not a necessity.",
             "defense": 20, "durability": 440, "max_durability": 440, "value": 5800,
             "min_spawn_level": 40, "rarity": "notfound",
             "strength": 2, "dexterity": 10, "intelligence": 24, "constitution": 14,
@@ -651,7 +651,7 @@ ARMOR_LV36_50 = {
         {
             "id": "takeover_sabatons",
             "name": "Takeover Sabatons",
-            "description": "Heavy sabatons Voss had fitted with pressure-monitoring soles — he wanted to know exactly how hard he was landing every step.",
+            "description": "Heavy sabatons fitted with pressure-monitoring soles that measure exactly how hard each step lands.",
             "defense": 32, "durability": 540, "max_durability": 540, "value": 10400,
             "min_spawn_level": 50, "rarity": "notfound",
             "strength": 44, "dexterity": 2, "intelligence": 4, "constitution": 24,

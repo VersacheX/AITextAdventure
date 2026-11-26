@@ -20,6 +20,8 @@ def _choose_ability_for_player(p: Player) -> Optional[str]:
 	for a in getattr(p, 'abilities', []) or []:
 		known.add(getattr(a, 'id', a) if a is not None else a)
 	candidates = [s for s in candidates if s.get('id') not in known]
+	from game.objects.player_ability import can_learn
+	candidates = [s for s in candidates if can_learn(p, s)]
 	if not candidates:
 		return None
 	# prefer higher-level abilities (more interesting)

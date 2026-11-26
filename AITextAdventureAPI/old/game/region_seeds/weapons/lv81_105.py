@@ -25,7 +25,7 @@ WEAPONS_LV81_105 = [
     {
         "id": "voice_of_valor_staff",
         "name": "Voice of Valor Staff",
-        "description": "A staff that resonates at the frequency of collective will — when Alden speaks through it, people remember why they started. She has ended more fights with it than she has started.",
+        "description": "A staff that resonates at the frequency of collective will. Words spoken through it remind people why they started. It has ended more fights than it has begun.",
         "damage": 114,
         "damage_type": "energy",
         "ap_cost": 3,
@@ -46,7 +46,7 @@ WEAPONS_LV81_105 = [
     {
         "id": "collapse_staff",
         "name": "Collapse Staff",
-        "description": "A staff built from the structural core of an institution that collapsed under its own contradictions. Lyric recovered it from the rubble. He finds the symbolism acceptable.",
+        "description": "A staff built from the structural core of an institution that collapsed under its own contradictions, recovered from the rubble.",
         "damage": 128,
         "damage_type": "energy",
         "ap_cost": 3,
@@ -66,7 +66,7 @@ WEAPONS_LV81_105 = [
     {
         "id": "axiom_focus_rod",
         "name": "Axiom Focus Rod",
-        "description": "A rod machined to Lyric's own dimensional specifications — the tolerances are tighter than anything commercially available. He measured the resonance chamber himself. Three times.",
+        "description": "A rod machined to exacting dimensional specifications, with tolerances tighter than anything commercially available. The resonance chamber was measured three times.",
         "damage": 128,
         "damage_type": "energy",
         "ap_cost": 3,
@@ -87,7 +87,7 @@ WEAPONS_LV81_105 = [
     {
         "id": "dreamer_staff",
         "name": "Dreamer's Staff",
-        "description": "A staff carved from driftwood that floated into Osten's camp one morning with no shore in reach. He's been telling its story ever since. He hasn't finished it.",
+        "description": "A staff carved from driftwood that floated into a camp one morning with no shore in reach. Its story is still being told.",
         "damage": 136,
         "damage_type": "energy",
         "ap_cost": 3,
@@ -107,7 +107,7 @@ WEAPONS_LV81_105 = [
     {
         "id": "storyteller_staff",
         "name": "Storyteller's Staff",
-        "description": "The staff Osten uses when the story needs witnesses. It hums at a frequency that makes people lean in. He doesn't cast when he uses it. He narrates.",
+        "description": "A staff for when a story needs witnesses. It hums at a frequency that makes people lean in, and spells cast through it sound like narration.",
         "damage": 136,
         "damage_type": "energy",
         "ap_cost": 3,
@@ -128,7 +128,7 @@ WEAPONS_LV81_105 = [
     {
         "id": "masterwork_blade",
         "name": "Masterwork Blade",
-        "description": "The blade Lira made when she finally understood what she was doing. She has never explained what changed. Everyone who has held it agrees something did.",
+        "description": "A blade made at the moment a smith finally understood the craft. Everyone who has held it agrees something changed.",
         "damage": 144,
         "damage_type": "slashing",
         "ap_cost": 2,
@@ -148,7 +148,7 @@ WEAPONS_LV81_105 = [
     {
         "id": "prima_blade",
         "name": "Prima Blade",
-        "description": "The first blade Lira made that she kept. She has made hundreds since. None of them are this one.",
+        "description": "The first blade a master smith chose to keep. Hundreds have been made since. None of them are this one.",
         "damage": 144,
         "damage_type": "slashing",
         "ap_cost": 2,

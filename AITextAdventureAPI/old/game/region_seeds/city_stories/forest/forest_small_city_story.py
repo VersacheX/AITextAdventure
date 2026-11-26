@@ -682,7 +682,7 @@ TASKS = [
 					]
 				}
 			},
-			# Place Talon so she is ready when the C chain meet task fires
+			# Place Talon so he is ready when the C chain meet task fires
 			{
 				'event_type': 'create_npc',
 				'params': {
@@ -950,7 +950,7 @@ TASKS += [
 	# Talon placed in initialize complete events.
 	# =========================================================
 
-	# C-1 — Talon introduces herself and asks Lyss to speak for the party
+	# C-1 — Talon introduces himself and asks Lyss to speak for the party
 	{
 		'task_id': 'forest_small_city_type_c_find_talia',
 		'type': 'meet',
@@ -996,7 +996,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit',  'dialog_id': 'spirit_forest_small_c_consult_lyss'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic',  'dialog_id': 'magic_forest_small_c_consult_lyss'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'nia',    'dialog_id': 'nia_forest_small_c_consult_lyss'    } },
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'scout_lyss', 'standing_text': [ "Talon has been hoping for someone who actually listens. She'll come with you if you ask." ] } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'scout_lyss', 'standing_text': [ "Talon has been hoping for someone who actually listens. He'll come with you if you ask." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {

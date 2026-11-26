@@ -67,6 +67,7 @@ WORLD_NPCS = [
   {
     "npc_id": "the_void",
     "name": "Void",
+    "sex": "M",
     "description": "The horizon-sized absence at the end of all stories. Not darkness — the erasure of the concept of 'something.'",
     "theme_song": "Symphony of Destruction, Megadeth",
     "psychology": {
@@ -80,10 +81,10 @@ WORLD_NPCS = [
       "enneagram_type": "8w9",
       "core_fear": "Being controlled or limited by existence.",
       "core_desire": "To have absolute control over reality by unmaking it.",
-      "defense_mechanism": "Denial — Denies the validity of existence itself, asserting its own power by erasing it.",
-      "stress_line": "Moves to Type 5 — Withdraws into pure, inactive potential when confronted with a force it cannot erase.",
-      "growth_line": "Moves to Type 2 — (Hypothetically) Would use its absolute power to create and protect, rather than destroy.",
-      "instinctual_variant": "sp/so — The ultimate self-preservationist, ensuring its own supremacy by eliminating all other things."
+      "defense_mechanism": "Denial — Denies the validity of existence itself, asserting his own power by erasing it.",
+      "stress_line": "Moves to Type 5 — Withdraws into pure, inactive potential when confronted with a force he cannot erase.",
+      "growth_line": "Moves to Type 2 — (Hypothetically) Would use his absolute power to create and protect, rather than destroy.",
+      "instinctual_variant": "sp/so — The ultimate self-preservationist, ensuring his own supremacy by eliminating all other things."
     },
     'image': 'voidwalkers:the_void1.jpeg',
     'song_id': 'symphony_of_destruction_instrumental_mega_death'
@@ -91,6 +92,7 @@ WORLD_NPCS = [
   {
     "npc_id": "dominion",
     "name": "Dominion",
+    "sex": "M",
     "description": "The architect of metaphysical imprisonment — the structure that ensures all things end as they must.",
     "theme_song": "The Becoming, Nine Inch Nails",
     "psychology": {
@@ -104,8 +106,8 @@ WORLD_NPCS = [
       "enneagram_type": "1w9",
       "core_fear": "Disorder, chaos, and imperfection.",
       "core_desire": "To have a perfect, ordered, and balanced universe (through total control).",
-      "defense_mechanism": "Reaction Formation — Believes its tyrannical control and enforcement of rules is a righteous act of creating 'perfect' order.",
-      "stress_line": "Moves to Type 4 — Becomes melancholic and withdrawn when its perfect system is flawed or broken.",
+      "defense_mechanism": "Reaction Formation — Believes his tyrannical control and enforcement of rules is a righteous act of creating 'perfect' order.",
+      "stress_line": "Moves to Type 4 — Becomes melancholic and withdrawn when his perfect system is flawed or broken.",
       "growth_line": "Moves to Type 7 — Learns to accept and find value in a flexible, imperfect reality.",
       "instinctual_variant": "so/sp — Obsessed with imposing a perfect order on the entire social and physical fabric of reality."
     },

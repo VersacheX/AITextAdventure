@@ -12,7 +12,9 @@ from game.objects.player_ability import _instantiate_from_seed as _instantiate_a
 
 from game.region_seeds.player_abilities.ability_requirements import (
     ABILITY_TYPE_REQUIREMENTS,
+    PLAYER_REQUIREMENT_SCALE,
 )
+from game.objects.player_ability import ability_stat_requirement
 
 
 def _resolve_stat_weights(ability_type_focus: Optional[str]) -> dict:
@@ -99,6 +101,8 @@ def pick_abilities_for_player(
     all_abils = getattr(const_other, "PLAYER_ABILITY_SEEDS", []) or []
     candidates = []
 
+    from game.objects.player_ability import can_learn
+
     for a in all_abils:
         if not a or not isinstance(a, dict):
             continue
@@ -107,11 +111,10 @@ def pick_abilities_for_player(
             continue
         # strict filtering: if a focus is provided, skip abilities that do not match
         if ability_type_focus:
-            
+
             if str(a.get('ability_type', '')).lower() != str(ability_type_focus).lower():
                 continue
-        elems = [str(x).lower() for x in (a.get("elements") or [])]
-        if allowed_elements and not any(e in allowed_elements for e in elems):
+        if not can_learn(player, a, check_stats=False):
             continue
         if not meets_ability_requirements(
             a,
@@ -179,7 +182,7 @@ def meets_ability_requirements(ability_seed: dict, player_stats: dict) -> bool:
     for rdict in reqs:
         ok = True
         for stat_name, stat_val in (rdict or {}).items():
-            required = int(stat_val) + int((int(stat_val) * ((alv - 1)* 1.5)) **1.25)
+            required = ability_stat_requirement(stat_val, alv)
             if int(player_stats.get(stat_name,0)) < required:
                 ok = False
                 break

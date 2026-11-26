@@ -51,17 +51,17 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         'arm_armor': 'currentweaver_bracers',
         'leg_armor': 'tidebound_greaves',
         'equipped_weapon': 'moontide_staff',
-        'max_hp': 1019,
-        'current_hp': 1019,
-        'max_ap': 400,
-        'current_ap': 400,
+        'max_hp': 1979,
+        'current_hp': 1979,
+        'max_ap': 360,
+        'current_ap': 360,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 38,
-        'dexterity': 38,
-        'intelligence': 158,
-        'constitution': 102,
+        'strength': 37,
+        'dexterity': 37,
+        'intelligence': 159,
+        'constitution': 99,
         'level': 30,
         'abilities': [
             'lv2_unique_ability_spirit_ripple_tidal_mend',
@@ -76,6 +76,7 @@ NPCS = [
     {
         'npc_id': 'ripple',
         'name': 'Ripple',
+        'sex': 'F',
         'description': (
             'A tide oracle who drowned during the first Fracture wave—'
             'and returned changed. She now fears deep water even as she channels its power.'

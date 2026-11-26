@@ -5,7 +5,10 @@ import game.constants as const
 import random
 import fnmatch
 import game.status_utils as status_utils
-from game.region_seeds.player_abilities.ability_requirements import ABILITY_TYPE_REQUIREMENTS
+from game.region_seeds.player_abilities.ability_requirements import (
+	ABILITY_TYPE_REQUIREMENTS,
+	PLAYER_REQUIREMENT_SCALE,
+)
 # ABILITY_TYPE_REQUIREMENTS = [
 #     {"ability_type": "technique", "required_stats_per_ability_level": [{"strength": 13, "constitution": 9}]},
 #     {"ability_type": "spirit", "required_stats_per_ability_level": [{"intelligence": 13}, {"constitution": 9}]},
@@ -13,6 +16,48 @@ from game.region_seeds.player_abilities.ability_requirements import ABILITY_TYPE
 #     {"ability_type": "tech", "required_stats_per_ability_level": [{"intelligence": 13}, {"dexterity": 9}]},
 #     {"ability_type": "skill", "required_stats_per_ability_level": [{"dexterity": 18}]},
 # ]
+
+ABILITY_REQ_SCALE = PLAYER_REQUIREMENT_SCALE   # players: 2.1 (class growth spec); hostiles keep 1.5 separately
+
+
+def ability_stat_requirement(per_level: int, level: int) -> int:
+	per_level = int(per_level)
+	return per_level + int((per_level * (level - 1) * ABILITY_REQ_SCALE) ** 1.25)
+
+
+def _val(x) -> str:
+	return str(getattr(x, 'value', x) or '').lower()
+
+
+def player_class_of(player):
+	cls = getattr(player, 'character_class', None)
+	if not cls:
+		cid = getattr(player, 'npc_id', None) or getattr(player, 'id', None)
+		cls = (getattr(const, 'CHARACTER_NPC_CLASS_MAP', {}) or {}).get(cid)
+	return _val(cls) if cls else ''
+
+
+def can_learn(player, ability, check_stats: bool = True) -> bool:
+	"""Class tree + element set (+ stat requirements). Works for seed dicts and PlayerAbility objects."""
+	get = (lambda k: ability.get(k)) if isinstance(ability, dict) else (lambda k: getattr(ability, k, None))
+	if get('non_player_ability'):
+		return False
+	atype = _val(get('ability_type'))
+	cls = player_class_of(player)
+	if cls and atype != cls:
+		return False
+	base = {_val(e) for e in (getattr(player, 'elements_base', None) or [])}
+	if base and not base & {_val(e) for e in (get('elements') or [])}:
+		return False                       # needs at least ONE matching element slot
+	if check_stats:
+		level = int(get('level') or 1)
+		reqs = {e.get('ability_type'): e.get('required_stats_per_ability_level') or []
+				for e in ABILITY_TYPE_REQUIREMENTS}
+		for req in reqs.get(atype, []):
+			for stat, per_level in req.items():
+				if int(getattr(player, stat, 0) or 0) < ability_stat_requirement(per_level, level):
+					return False
+	return True
 
 class AbilityType(Enum):
 	MAGIC = "magic"
@@ -313,13 +358,15 @@ class PlayerAbility:
 
 			target_name = target.name
 			# apply immediately if a target is provided
-			# Build element list from ability elements + attacker statuses
-			elems = status_utils.collect_attack_elements(owner, [e.value if e.value else str(e) for e in self.elements] if self.elements else None)
-			is_physical_hit = self._is_physical_hit(elems)
+			# Decide physical-ness from the ability's own elements only; never from buffs.
+			own = [str(getattr(e, 'value', e)).lower() for e in (self.elements or [])]
+			is_physical_hit = self._is_physical_hit(own)
+			elems = (status_utils.collect_attack_elements(owner, own)  # imbue only physical hits
+					 if is_physical_hit else own)
 			# Apply outgoing modifiers from attacker statuses (elemental_attack_buff, attack_buff, etc.)
 			# attack_buff/attack_debuff only apply to physical hits (basic attacks and
-			# abilities carrying a PHYSICAL element slot); elemental_attack_buff applies regardless.
-			power = status_utils.compute_outgoing_damage(owner, power, elems, is_basic_attack=is_physical_hit)
+			# abilities carrying a PHYSICAL element slot); elemental_attack_buff only applies to physical hits too.
+			power = status_utils.compute_outgoing_damage(owner, power, elems, is_physical=is_physical_hit)
 			# If target is a RandomHostile it supports the extended signature
 
 			applied = target.take_damage(power, attacker=owner, elements=elems if elems else None, physical=is_physical_hit)
@@ -376,9 +423,11 @@ class PlayerAbility:
 							summary['status_heal'] = restored
 					else:
 						# Build element list and apply outgoing modifiers
-						elems = status_utils.collect_attack_elements(owner, [e.value if hasattr(e, 'value') else str(e) for e in self.elements] if self.elements else None)
-						is_physical_hit = self._is_physical_hit(elems)
-						power = status_utils.compute_outgoing_damage(owner, power, elems, is_basic_attack=is_physical_hit)
+						own = [str(getattr(e, 'value', e)).lower() for e in (self.elements or [])]
+						is_physical_hit = self._is_physical_hit(own)
+						elems = (status_utils.collect_attack_elements(owner, own)
+								 if is_physical_hit else own)
+						power = status_utils.compute_outgoing_damage(owner, power, elems, is_physical=is_physical_hit)
 
 						applied = target.take_damage(power, attacker=owner, elements=elems if elems else None, physical=is_physical_hit)
 
@@ -461,15 +510,13 @@ class PlayerAbility:
         
 		patterns = const.BENEFICIAL_PLAYER_ABILITY_EFFECTS
 
-		# Special-case: 'status' effects are ambiguous only consider them
-		# beneficial when the specific status key matches a buff pattern (e.g. '*_buff').
+		# Special-case: 'status' effects are ambiguous. An ability is only
+		# beneficial when EVERY status key is a buff or regen -- abilities
+		# never mix beneficial and harmful keys (locked rule, pr39-41 spec).
 		if eff == EffectType.STATUS:
-			for status_key in (self.status_keys or []):
-				# collect patterns that indicate buffs
-				buff_patterns = [p for p in patterns if '_buff' in str(p)]
-				if bool(buff_patterns) and self._matches_patterns(status_key, buff_patterns):
-					return True
-			return False
+			keys = [str(getattr(k, 'value', k)).lower() for k in (self.status_keys or [])]
+			buff_patterns = [p for p in patterns if '_buff' in str(p)] + ['regen']
+			return bool(keys) and all(self._matches_patterns(k, buff_patterns) for k in keys)
 
 		# Otherwise, match the effect string against the configured patterns
 		# excluding the generic 'status' marker.
@@ -512,52 +559,13 @@ def get_potential_player_abilities(player: Optional[object] = None) -> List[Dict
 	# prefer lower-level (entry-level) abilities first so players see level-1 abilities
 	abilities = sorted(abilities, key=lambda x: int(x.get('level',1)))
 
-	# build quick lookup from ability_type -> list of per-level requirement dicts
-	req_lookup = {}
-	for entry in ABILITY_TYPE_REQUIREMENTS:
-		type_name = entry.get('ability_type')
-		reqs = entry.get('required_stats_per_ability_level') or []
-		req_lookup[type_name] = reqs
-
-	player_class = None
-	if player is not None:
-		player_class = getattr(player, 'character_class', None)
-		if not player_class:
-			cid = getattr(player, 'npc_id', None) or getattr(player, 'id', None)
-			player_class = (getattr(const, 'CHARACTER_NPC_CLASS_MAP', {}) or {}).get(cid)
-
 	for a in abilities:
-		# skip seeds explicitly marked as non-player abilities (support both key names)
-		if a.get('non_player_ability'):
-			continue
-
 		# skip abilities already owned
 		if any(owned_ability.id == a.get('id') for owned_ability in owned):
 			continue
 
-		# If player provided, filter by stat-based requirements
-		if player is not None:
-			atype = a.get('ability_type')
-			# class tree gate: only show abilities from this character's assigned tree
-			if player_class and str(atype).lower() != str(player_class).lower():
-				continue
-			level = int(a.get('level',1))
-			# find requirements for this ability type
-			reqs = req_lookup.get(atype) if atype is not None else None
-			meets = True
-			if reqs:
-				# each dict in reqs represents a stat requirement; multiply by ability level
-				for req in reqs:
-					for stat_name, per_level_val in req.items():
-						required = int(per_level_val) + int((int(per_level_val) * ((level - 1)* 1.5)) **1.25)
-						player_val = int(getattr(player, stat_name,0) or 0)
-						if player_val < required:
-							meets = False
-							break
-					if not meets:
-						break
-			if not meets:
-				continue
+		if player is not None and not can_learn(player, a):
+			continue
 
 		entry = {
 			'id': a.get('id'),

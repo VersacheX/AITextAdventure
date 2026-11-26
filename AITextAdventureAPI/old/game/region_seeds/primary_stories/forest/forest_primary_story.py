@@ -24,17 +24,17 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         'body_armor': 'heartwood_carapace',
         'leg_armor': 'rootwalker_greaves',
         'equipped_weapon': 'wildroot_fangblade',
-        'max_hp': 1169,
-        'current_hp': 1169,
-        'max_ap': 250,
-        'current_ap': 250,
+        'max_hp': 2099,
+        'current_hp': 2099,
+        'max_ap': 240,
+        'current_ap': 240,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 158,
-        'dexterity': 38,        
-        'intelligence': 38,
-        'constitution': 102,
+        'strength': 159,
+        'dexterity': 37,        
+        'intelligence': 37,
+        'constitution': 99,
         'level': 30,
         'abilities': [
             'lv2_unique_ability_technique_thorn_root_snap',
@@ -49,6 +49,7 @@ NPCS = [
     {
         'npc_id': 'thorn',
         'name': 'Thorn',
+        'sex': 'M',
         'description': (
             'A half-feral forest guardian who once raised a great beast from a cub—'
             'only to be forced to mercy-kill it when corruption overtook the woods.'

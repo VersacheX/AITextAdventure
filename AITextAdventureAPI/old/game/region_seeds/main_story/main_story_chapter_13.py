@@ -26,23 +26,24 @@ NPCS = [
     {
         "npc_id": "garbage",
         "name": "Garbage",
-        "description": "A Voidwalker that embodies self-loathing, fraudulence, and the feeling of worthlessness. It manifests as a rotting, many-mouthed shadow, whispering insecurities and lies to break its victims' spirits.",
+        "sex": "F",
+        "description": "A Voidwalker that embodies self-loathing, fraudulence, and the feeling of worthlessness. She manifests as a rotting, many-mouthed shadow, whispering insecurities and lies to break her victims' spirits.",
         "theme_song": "Creep, Radiohead",
         "psychology": {
             "mbti": "ISFP-Shadow",
-            "dominant": "Fi - Absorbs the self-loathing of others, making it the core of its being.",
-            "auxiliary": "Se - Observes the world with a keen eye for the failures and insecurities of others, using them to feed its own sense of worthlessness.",
-            "tertiary": "Ni - Has an intuitive understanding of the cyclical nature of grief and self-loathing, using this knowledge to manipulate and trap its victims.",
-            "inferior": "Te - Struggles to implement effective strategies or achieve tangible results, often sabotaging its own efforts through self-doubt and indecision."
+            "dominant": "Fi - Absorbs the self-loathing of others, making it the core of her being.",
+            "auxiliary": "Se - Observes the world with a keen eye for the failures and insecurities of others, using them to feed her own sense of worthlessness.",
+            "tertiary": "Ni - Has an intuitive understanding of the cyclical nature of grief and self-loathing, using this knowledge to manipulate and trap her victims.",
+            "inferior": "Te - Struggles to implement effective strategies or achieve tangible results, often sabotaging her own efforts through self-doubt and indecision."
         },
         "enneagram": {
           "enneagram_type": "4w5",
           "core_fear": "Having no identity or significance.",
           "core_desire": "To have an identity, even if it is one of pure worthlessness.",
-          "defense_mechanism": "Introjection — Has absorbed all feelings of self-loathing and failure, making it the entirety of its being.",
-          "stress_line": "Moves to Type 2 — Lashes out, trying to make others feel as worthless as it does.",
+          "defense_mechanism": "Introjection — Has absorbed all feelings of self-loathing and failure, making it the entirety of her being.",
+          "stress_line": "Moves to Type 2 — Lashes out, trying to make others feel as worthless as she does.",
           "growth_line": "Moves to Type 1 — Would learn to find inherent value and create a principled identity.",
-          "instinctual_variant": "sp/sx — Utterly consumed by its own internal state of worthlessness, it only interacts with the world to pull it down into the rot."
+          "instinctual_variant": "sp/sx — Utterly consumed by her own internal state of worthlessness, she only interacts with the world to pull it down into the rot."
         },
         'image': 'voidwalkers:garbage1.jpeg',
         'song_id': 'creep_radiohead'

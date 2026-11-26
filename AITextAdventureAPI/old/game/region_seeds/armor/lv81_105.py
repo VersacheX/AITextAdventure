@@ -15,7 +15,7 @@ ARMOR_LV81_105 = {
         {
             "id": "rallying_crown",
             "name": "Rallying Crown",
-            "description": "A crown of interlocked light-bands — each band was added after Alden pulled a different group back from the edge. She doesn't remember how many there are now.",
+            "description": "A crown of interlocked light-bands, each band added for a group pulled back from the edge. No one has counted them in years.",
             "defense": 56, "durability": 680, "max_durability": 680, "value": 30400,
             "min_spawn_level": 85, "rarity": "notfound",
             "strength": 4, "dexterity": 10, "intelligence": 58, "constitution": 32,
@@ -25,7 +25,7 @@ ARMOR_LV81_105 = {
         {
             "id": "theorem_circlet",
             "name": "Theorem Circlet",
-            "description": "A circlet engraved with seven unfinished theorems — the proofs are written in the margin of every available surface nearby whenever Lyric wears it.",
+            "description": "A circlet engraved with seven unfinished theorems. Proofs tend to appear in the margins of every surface nearby when it is worn.",
             "defense": 62, "durability": 720, "max_durability": 720, "value": 36400,
             "min_spawn_level": 95, "rarity": "notfound",
             "strength": 6, "dexterity": 12, "intelligence": 68, "constitution": 28,
@@ -34,7 +34,7 @@ ARMOR_LV81_105 = {
         {
             "id": "abstract_lens_headset",
             "name": "Abstract Lens Headset",
-            "description": "A custom headset fitted with multi-focal lenses that Lyric uses to read seven things simultaneously. Most people see one thing when they look through them. He sees the structure underneath.",
+            "description": "A custom headset with multi-focal lenses for reading seven things at once. Most people see one thing through it; the right mind sees the structure underneath.",
             "defense": 62, "durability": 720, "max_durability": 720, "value": 36400,
             "min_spawn_level": 95, "rarity": "notfound",
             "strength": 6, "dexterity": 12, "intelligence": 68, "constitution": 28,
@@ -44,7 +44,7 @@ ARMOR_LV81_105 = {
         {
             "id": "dreamveil_crown",
             "name": "Dreamveil Crown",
-            "description": "A crown woven from sleep-silk harvested from a dreamweaver spider that died mid-dream. Osten found it. He considers this significant.",
+            "description": "A crown woven from sleep-silk harvested from a dreamweaver spider that died mid-dream.",
             "defense": 66, "durability": 740, "max_durability": 740, "value": 40400,
             "min_spawn_level": 100, "rarity": "notfound",
             "strength": 8, "dexterity": 8, "intelligence": 72, "constitution": 32,
@@ -53,7 +53,7 @@ ARMOR_LV81_105 = {
         {
             "id": "reverie_hood",
             "name": "Reverie Hood",
-            "description": "A hood woven from reverie-thread — a material spun during a state between sleep and waking. Osten wears it when he tells the stories that matter most.",
+            "description": "A hood woven from reverie-thread, a material spun in the state between sleep and waking, made for the stories that matter most.",
             "defense": 66, "durability": 740, "max_durability": 740, "value": 40400,
             "min_spawn_level": 100, "rarity": "notfound",
             "strength": 8, "dexterity": 8, "intelligence": 72, "constitution": 32,
@@ -63,7 +63,7 @@ ARMOR_LV81_105 = {
         {
             "id": "smithsong_helm",
             "name": "Smithsong Helm",
-            "description": "A full-face forge helm Lira made herself on the same night she forged her first masterwork. The inside is engraved with the exact temperature at which steel sings.",
+            "description": "A full-face forge helm made on the night of a first masterwork. The inside is engraved with the exact temperature at which steel sings.",
             "defense": 70, "durability": 760, "max_durability": 760, "value": 44400,
             "min_spawn_level": 105, "rarity": "notfound",
             "strength": 36, "dexterity": 72, "intelligence": 8, "constitution": 8,
@@ -72,7 +72,7 @@ ARMOR_LV81_105 = {
         {
             "id": "artisan_helm",
             "name": "Artisan's Helm",
-            "description": "A lighter forge helm Lira built for precision work — the face-guard is adjustable and the brow ridge is cut low so she can lean into the work.",
+            "description": "A lighter forge helm built for precision work, with an adjustable face-guard and a low-cut brow ridge for leaning into the work.",
             "defense": 70, "durability": 760, "max_durability": 760, "value": 44400,
             "min_spawn_level": 105, "rarity": "notfound",
             "strength": 36, "dexterity": 72, "intelligence": 8, "constitution": 8,
@@ -118,7 +118,7 @@ ARMOR_LV81_105 = {
         {
             "id": "inspirator_robe",
             "name": "Inspirator Robe",
-            "description": "A robe with resonance chambers sewn into the chest panel — her voice carries further and her spells radiate with greater warmth when she wears it.",
+            "description": "A robe with resonance chambers sewn into the chest panel. Voices carry further and spells radiate greater warmth when it is worn.",
             "defense": 72, "durability": 840, "max_durability": 840, "value": 38400,
             "min_spawn_level": 85, "rarity": "notfound",
             "strength": 6, "dexterity": 12, "intelligence": 76, "constitution": 44,
@@ -127,7 +127,7 @@ ARMOR_LV81_105 = {
         {
             "id": "brightweave_mantle",
             "name": "Brightweave Mantle",
-            "description": "A mantle woven from brightweave — a material that radiates a faint warmth without heat. People lean toward Alden when she wears it. She says this is about presence, not magic.",
+            "description": "A mantle woven from brightweave, a material that radiates a faint warmth without heat. People lean toward whoever wears it.",
             "defense": 72, "durability": 840, "max_durability": 840, "value": 38400,
             "min_spawn_level": 85, "rarity": "notfound",
             "strength": 6, "dexterity": 12, "intelligence": 76, "constitution": 44,
@@ -137,7 +137,7 @@ ARMOR_LV81_105 = {
         {
             "id": "paradox_robe",
             "name": "Paradox Robe",
-            "description": "A robe that appears to be two overlapping garments that should cancel each other out. They don't. Lyric has a theory about why. It has eleven pages of footnotes.",
+            "description": "A robe that appears to be two overlapping garments that should cancel each other out. They don't. The theory as to why runs to eleven pages of footnotes.",
             "defense": 80, "durability": 880, "max_durability": 880, "value": 46400,
             "min_spawn_level": 95, "rarity": "notfound",
             "strength": 8, "dexterity": 16, "intelligence": 90, "constitution": 38,
@@ -146,7 +146,7 @@ ARMOR_LV81_105 = {
         {
             "id": "logic_lattice_robe",
             "name": "Logic Lattice Robe",
-            "description": "A robe whose structure follows a formal logical proof — each layer of weave is a conditional statement. Lyric assembled it from first principles. The proof is valid.",
+            "description": "A robe whose structure follows a formal logical proof, each layer of weave a conditional statement. The proof is valid.",
             "defense": 80, "durability": 880, "max_durability": 880, "value": 46400,
             "min_spawn_level": 95, "rarity": "notfound",
             "strength": 8, "dexterity": 16, "intelligence": 90, "constitution": 38,
@@ -156,7 +156,7 @@ ARMOR_LV81_105 = {
         {
             "id": "storywoven_robe",
             "name": "Storywoven Robe",
-            "description": "A robe made from cloth that carries the impressions of every story Osten has ever told. The patterns shift — slowly, over days — as his stories change.",
+            "description": "A robe made from cloth that carries the impressions of stories told while wearing it. The patterns shift slowly, over days, as the stories change.",
             "defense": 86, "durability": 900, "max_durability": 900, "value": 52400,
             "min_spawn_level": 100, "rarity": "notfound",
             "strength": 10, "dexterity": 10, "intelligence": 96, "constitution": 44,
@@ -165,7 +165,7 @@ ARMOR_LV81_105 = {
         {
             "id": "folklore_robe",
             "name": "Folklore Robe",
-            "description": "A robe embroidered with scenes from Osten's oldest stories — the ones he tells at the end of the night when the fire is low. The embroidery moves when no one is watching.",
+            "description": "A robe embroidered with scenes from old fireside stories. The embroidery moves when no one is watching.",
             "defense": 86, "durability": 900, "max_durability": 900, "value": 52400,
             "min_spawn_level": 100, "rarity": "notfound",
             "strength": 10, "dexterity": 10, "intelligence": 96, "constitution": 44,
@@ -175,7 +175,7 @@ ARMOR_LV81_105 = {
         {
             "id": "embercraft_coat",
             "name": "Embercraft Coat",
-            "description": "A thick leather work coat fused with forge-tempered metal panels along every strike zone. She made it to outlast her. It probably will.",
+            "description": "A thick leather work coat fused with forge-tempered metal panels along every strike zone. It was made to outlast its maker.",
             "defense": 90, "durability": 920, "max_durability": 920, "value": 58400,
             "min_spawn_level": 105, "rarity": "notfound",
             "strength": 48, "dexterity": 96, "intelligence": 10, "constitution": 12,
@@ -184,7 +184,7 @@ ARMOR_LV81_105 = {
         {
             "id": "masterwork_apron",
             "name": "Masterwork Apron",
-            "description": "A forge apron built from the same materials as Lira's best work — it's taken every heat, every splash, every spark. It still looks new. She doesn't know why.",
+            "description": "A forge apron built from the same materials as a masterwork blade. It has taken every heat, splash and spark and still looks new.",
             "defense": 90, "durability": 920, "max_durability": 920, "value": 58400,
             "min_spawn_level": 105, "rarity": "notfound",
             "strength": 48, "dexterity": 96, "intelligence": 10, "constitution": 12,
@@ -219,7 +219,7 @@ ARMOR_LV81_105 = {
         {
             "id": "rallying_bracers",
             "name": "Rallying Bracers",
-            "description": "Bracers engraved with a full-circle motif on the outer face — every person she's ever pulled back from the edge is represented. The circle isn't closed yet.",
+            "description": "Bracers engraved with a full-circle motif, one mark for every person pulled back from the edge. The circle isn't closed yet.",
             "defense": 40, "durability": 600, "max_durability": 600, "value": 22400,
             "min_spawn_level": 85, "rarity": "notfound",
             "strength": 4, "dexterity": 8, "intelligence": 42, "constitution": 26,
@@ -228,7 +228,7 @@ ARMOR_LV81_105 = {
         {
             "id": "goldvein_bracers",
             "name": "Goldvein Bracers",
-            "description": "Bracers threaded with compressed goldvein ore along the inner channel — a material that conducts inspiration the way copper conducts current. Alden had them made to specification.",
+            "description": "Bracers threaded with compressed goldvein ore, a material that conducts inspiration the way copper conducts current.",
             "defense": 40, "durability": 600, "max_durability": 600, "value": 22400,
             "min_spawn_level": 85, "rarity": "notfound",
             "strength": 4, "dexterity": 8, "intelligence": 42, "constitution": 26,
@@ -238,7 +238,7 @@ ARMOR_LV81_105 = {
         {
             "id": "axiom_bracers",
             "name": "Axiom Bracers",
-            "description": "Bracers inscribed with fundamental logical axioms — not for reference. Lyric memorized them years ago. They're there to remind him what's actually true.",
+            "description": "Bracers inscribed with fundamental logical axioms, not for reference but as a reminder of what is actually true.",
             "defense": 46, "durability": 640, "max_durability": 640, "value": 28400,
             "min_spawn_level": 95, "rarity": "notfound",
             "strength": 6, "dexterity": 10, "intelligence": 50, "constitution": 22,
@@ -247,7 +247,7 @@ ARMOR_LV81_105 = {
         {
             "id": "theorem_bracers",
             "name": "Theorem Bracers",
-            "description": "Bracers etched with the seven theorems from Lyric's circlet — partial, but enough. He says the bracers hold the working assumptions. The circlet holds the conclusions.",
+            "description": "Bracers etched with partial theorems: the working assumptions to a matching circlet's conclusions.",
             "defense": 46, "durability": 640, "max_durability": 640, "value": 28400,
             "min_spawn_level": 95, "rarity": "notfound",
             "strength": 6, "dexterity": 10, "intelligence": 50, "constitution": 22,
@@ -257,7 +257,7 @@ ARMOR_LV81_105 = {
         {
             "id": "reverie_bracers",
             "name": "Reverie Bracers",
-            "description": "Bracers that hum faintly with a lullaby Osten composed from a dream he had twice. He's never written it down. He doesn't need to.",
+            "description": "Bracers that hum faintly with a lullaby composed from a dream that came twice. It has never been written down.",
             "defense": 50, "durability": 660, "max_durability": 660, "value": 32400,
             "min_spawn_level": 100, "rarity": "notfound",
             "strength": 6, "dexterity": 6, "intelligence": 54, "constitution": 26,
@@ -266,7 +266,7 @@ ARMOR_LV81_105 = {
         {
             "id": "dreamthread_bracers",
             "name": "Dreamthread Bracers",
-            "description": "Bracers woven from dreamthread — material spun by Osten during an extended trance. The pattern carries the structure of a story that hasn't been told yet.",
+            "description": "Bracers woven from dreamthread spun during an extended trance. The pattern carries the structure of a story that hasn't been told yet.",
             "defense": 50, "durability": 660, "max_durability": 660, "value": 32400,
             "min_spawn_level": 100, "rarity": "notfound",
             "strength": 6, "dexterity": 6, "intelligence": 54, "constitution": 26,
@@ -297,7 +297,7 @@ ARMOR_LV81_105 = {
         {
             "id": "forgegrip_gauntlets",
             "name": "Forgegrip Gauntlets",
-            "description": "Heavy forge gauntlets Lira rebuilt four times over — each iteration slightly heavier than the last. She says the weight keeps her honest.",
+            "description": "Heavy forge gauntlets rebuilt four times over, each iteration slightly heavier than the last. The weight keeps the work honest.",
             "defense": 52, "durability": 680, "max_durability": 680, "value": 36400,
             "min_spawn_level": 105, "rarity": "notfound",
             "strength": 30, "dexterity": 54, "intelligence": 6, "constitution": 6,
@@ -306,7 +306,7 @@ ARMOR_LV81_105 = {
         {
             "id": "soulforge_gauntlets",
             "name": "Soulforge Gauntlets",
-            "description": "Gauntlets Lira forged while thinking about why she smiths. The metal remembers the answer. She keeps them for work that matters.",
+            "description": "Gauntlets forged in a single sitting of pure intent. The metal remembers why it was made, and they are kept for work that matters.",
             "defense": 52, "durability": 680, "max_durability": 680, "value": 36400,
             "min_spawn_level": 105, "rarity": "notfound",
             "strength": 30, "dexterity": 54, "intelligence": 6, "constitution": 6,
@@ -318,7 +318,7 @@ ARMOR_LV81_105 = {
         {
             "id": "brightpath_sandals",
             "name": "Brightpath Sandals",
-            "description": "Sandals whose straps glow faintly when Alden walks toward someone who needs her. She insists this is not a magical effect. The sandals disagree.",
+            "description": "Sandals whose straps glow faintly when walking toward someone in need. Officially this is not a magical effect. The sandals disagree.",
             "defense": 48, "durability": 660, "max_durability": 660, "value": 26400,
             "min_spawn_level": 85, "rarity": "notfound",
             "strength": 4, "dexterity": 8, "intelligence": 50, "constitution": 30,
@@ -327,7 +327,7 @@ ARMOR_LV81_105 = {
         {
             "id": "inspirer_greaves",
             "name": "Inspirer Greaves",
-            "description": "Greaves fitted with a resonance channel at the knee — every forward step from them carries a faint harmonic that others in her vicinity can feel but not quite name.",
+            "description": "Greaves fitted with a resonance channel at the knee. Every forward step carries a faint harmonic that others nearby can feel but not quite name.",
             "defense": 48, "durability": 660, "max_durability": 660, "value": 26400,
             "min_spawn_level": 85, "rarity": "notfound",
             "strength": 4, "dexterity": 8, "intelligence": 50, "constitution": 30,
@@ -337,7 +337,7 @@ ARMOR_LV81_105 = {
         {
             "id": "postulate_boots",
             "name": "Postulate Boots",
-            "description": "Boots reinforced with a material Lyric synthesized from first principles. The compound has no name yet. He's still writing the paper.",
+            "description": "Boots reinforced with a compound synthesized from first principles. It has no name yet; the paper is still being written.",
             "defense": 54, "durability": 700, "max_durability": 700, "value": 32400,
             "min_spawn_level": 95, "rarity": "notfound",
             "strength": 6, "dexterity": 12, "intelligence": 58, "constitution": 26,
@@ -346,7 +346,7 @@ ARMOR_LV81_105 = {
         {
             "id": "analysis_greaves",
             "name": "Analysis Greaves",
-            "description": "Greaves with sensor-thread woven into the shin panel — they map terrain pressure and feedback the data to Lyric's headset. He has never once looked where he is walking.",
+            "description": "Greaves with sensor-thread woven into the shin panel that map terrain pressure and feed it to a linked headset, so the wearer never needs to look down.",
             "defense": 54, "durability": 700, "max_durability": 700, "value": 32400,
             "min_spawn_level": 95, "rarity": "notfound",
             "strength": 6, "dexterity": 12, "intelligence": 58, "constitution": 26,
@@ -356,7 +356,7 @@ ARMOR_LV81_105 = {
         {
             "id": "wanderer_sandals",
             "name": "Wanderer's Sandals",
-            "description": "Sandals that have walked every road Osten has walked. They are repaired in a dozen places. He knows exactly where each repair came from.",
+            "description": "Sandals that have walked a great many roads, repaired in a dozen places, each repair from a different stop.",
             "defense": 58, "durability": 720, "max_durability": 720, "value": 36400,
             "min_spawn_level": 100, "rarity": "notfound",
             "strength": 8, "dexterity": 8, "intelligence": 62, "constitution": 30,
@@ -365,7 +365,7 @@ ARMOR_LV81_105 = {
         {
             "id": "wanderer_wraps",
             "name": "Wanderer's Wraps",
-            "description": "Leg wraps wound from travel-cloth — pieced together from fabrics collected at every significant stop. Osten can name where each piece came from. He usually does.",
+            "description": "Leg wraps pieced together from travel-cloth collected at every significant stop along the way.",
             "defense": 58, "durability": 720, "max_durability": 720, "value": 36400,
             "min_spawn_level": 100, "rarity": "notfound",
             "strength": 8, "dexterity": 8, "intelligence": 62, "constitution": 30,
@@ -375,7 +375,7 @@ ARMOR_LV81_105 = {
         {
             "id": "hammerfall_boots",
             "name": "Hammerfall Boots",
-            "description": "Steel-toed forge boots with anti-vibration soles designed for standing at the anvil for twelve hours straight. She also wears them everywhere else.",
+            "description": "Steel-toed forge boots with anti-vibration soles, designed for twelve straight hours at the anvil.",
             "defense": 62, "durability": 740, "max_durability": 740, "value": 40400,
             "min_spawn_level": 105, "rarity": "notfound",
             "strength": 36, "dexterity": 62, "intelligence": 8, "constitution": 8,
@@ -384,7 +384,7 @@ ARMOR_LV81_105 = {
         {
             "id": "forgestride_boots",
             "name": "Forgestride Boots",
-            "description": "A field-modified version of the Hammerfall — lighter sole, higher ankle, built for moving between stations quickly. She made them after the third time she was too slow to catch a falling casting.",
+            "description": "A field-modified Hammerfall with a lighter sole and higher ankle, built for moving between forge stations fast enough to catch a falling casting.",
             "defense": 62, "durability": 740, "max_durability": 740, "value": 40400,
             "min_spawn_level": 105, "rarity": "notfound",
             "strength": 36, "dexterity": 62, "intelligence": 8, "constitution": 8,

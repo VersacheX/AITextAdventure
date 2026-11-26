@@ -26,29 +26,30 @@ NPCS = [
 	{
 		"npc_id": "oracle",
 		"name": "Oracle",
+		"sex": "F",
 		"description": (
 			"The Voidwalker of fixed prophecy - a being that has witnessed every possible future and collapsed"
-			" them all into a single, immutable arc. Oracle does not destroy freedom; it makes freedom feel"
+			" them all into a single, immutable arc. Oracle does not destroy freedom; she makes freedom feel"
 			" pointless by demonstrating that every choice has already been seen, catalogued, and accounted for."
-			" It speaks in calm, absolute declarations, each one a verdict delivered without malice. Its horror"
+			" She speaks in calm, absolute declarations, each one a verdict delivered without malice. Her horror"
 			" is not cruelty but certainty."
 		),
 		"theme_song": "The Host of Seraphim, Dead Can Dance",
 		"psychology": {
 			"mbti": "INFJ-shadow",
-			"dominant": "Ni - Forces singular prophetic vision onto all possibilities, collapsing infinite potential into a single predetermined endpoint that it then enforces as the only truth.",
-			"auxiliary": "Fe - Uses the weight of its prophetic authority to manipulate others into compliance; it is a master of social influence and moral leverage.",
-			"tertiary": "Ti - Has developed a complex internal logic to justify its actions and maintain the coherence of its prophetic vision; it is a perfectionist of reasoning.",
-			"inferior": "Se - Cannot respond to the spontaneous, the improvised, or the real-time; actions that fall outside its foreseen parameters cause visible disruption."
+			"dominant": "Ni - Forces singular prophetic vision onto all possibilities, collapsing infinite potential into a single predetermined endpoint that she then enforces as the only truth.",
+			"auxiliary": "Fe - Uses the weight of her prophetic authority to manipulate others into compliance; she is a master of social influence and moral leverage.",
+			"tertiary": "Ti - Has developed a complex internal logic to justify her actions and maintain the coherence of her prophetic vision; she is a perfectionist of reasoning.",
+			"inferior": "Se - Cannot respond to the spontaneous, the improvised, or the real-time; actions that fall outside her foreseen parameters cause visible disruption."
 		},
 		"enneagram": {
 			"enneagram_type": "1w9",
-			"core_fear": "That the story will not end as it must; that randomness and free will will corrupt the perfect arc it has witnessed and already decided.",
-			"core_desire": "To be the final, unchallengeable authority on what must happen; to see its prophecy vindicated as the one true history.",
+			"core_fear": "That the story will not end as it must; that randomness and free will will corrupt the perfect arc she has witnessed and already decided.",
+			"core_desire": "To be the final, unchallengeable authority on what must happen; to see her prophecy vindicated as the one true history.",
 			"defense_mechanism": "Intellectualization - wraps every act of control in the language of cosmic inevitability, making domination feel like wisdom.",
-			"stress_line": "Moves to Type 4 - becomes grandiose, melodramatic, and increasingly obsessive about the perfection of its prophetic vision when challenged.",
-			"growth_line": "Moves to Type 7 - (hypothetically) would discover genuine possibility and the joy of a future it does not already know.",
-			"instinctual_variant": "so/sp - its entire identity is constructed around being the authoritative social arbiter of truth; it preserves itself by preserving the narrative."
+			"stress_line": "Moves to Type 4 - becomes grandiose, melodramatic, and increasingly obsessive about the perfection of her prophetic vision when challenged.",
+			"growth_line": "Moves to Type 7 - (hypothetically) would discover genuine possibility and the joy of a future she does not already know.",
+			"instinctual_variant": "so/sp - her entire identity is constructed around being the authoritative social arbiter of truth; she preserves herself by preserving the narrative."
 		},
         'image': 'voidwalkers:oracle1.jpeg',
 		'song_id': 'dead_can_dance_host_of_seraphim'
@@ -56,12 +57,13 @@ NPCS = [
 	{
 		"npc_id": "reliquary",
 		"name": "Reliquary",
+		"sex": "F",
 		"description": (
 			"The Voidwalker of preserved memory - a living archive that collects every instance of pain, failure,"
-			" and loss and holds them as sacred, unchangeable record. Reliquary does not destroy; it preserves."
-			" Its horror is the horror of a museum that never closes, where every wound is kept pristine under"
-			" glass and no one is permitted to heal. It speaks of preservation as an act of love and cannot"
-			" understand why its collection would not want to remain."
+			" and loss and holds them as sacred, unchangeable record. Reliquary does not destroy; she preserves."
+			" Her horror is the horror of a museum that never closes, where every wound is kept pristine under"
+			" glass and no one is permitted to heal. She speaks of preservation as an act of love and cannot"
+			" understand why her collection would not want to remain."
 		),		
 		"theme_song": "Elegia, New Order",
 		"psychology": {
@@ -75,10 +77,10 @@ NPCS = [
 			"enneagram_type": "5w6",
 			"core_fear": "That memory will be lost, distorted, made meaningless, or allowed to change into something that no longer resembles the original pain.",
 			"core_desire": "To preserve everything perfectly and permanently, creating an inescapable archive of all that has been so that nothing can ever truly end.",
-			"defense_mechanism": "Isolation of affect - experiences all memory as pure data, separating emotional content from information to handle the weight of everything it contains.",
-			"stress_line": "Moves to Type 7 - becomes desperate and scattered when its archive is threatened, generating memories faster than it can contain them.",
+			"defense_mechanism": "Isolation of affect - experiences all memory as pure data, separating emotional content from information to handle the weight of everything she contains.",
+			"stress_line": "Moves to Type 7 - becomes desperate and scattered when her archive is threatened, generating memories faster than she can contain them.",
 			"growth_line": "Moves to Type 8 - (hypothetically) would learn to let the past empower rather than imprison, wielding memory as strength rather than a cage.",
-			"instinctual_variant": "sp/so - fixates on self-preservation through the act of preserving others; its survival is inseparable from the survival of its collection."
+			"instinctual_variant": "sp/so - fixates on self-preservation through the act of preserving others; her survival is inseparable from the survival of her collection."
 		},
         'image': 'voidwalkers:reliquary1.jpeg',
 		'song_id': 'elegia_new_order'

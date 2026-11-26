@@ -451,7 +451,7 @@ NPC_DIALOG = [
         'npc_id': 'ember',
         'dialog_id': 'ember_ch9_reassurance',
         'dialog': [
-            "It was never you. Scalpel's domain pushes those thoughts into your mind. You are stronger than its lies."
+            "It was never you. Scalpel's domain pushes those thoughts into your mind. You are stronger than his lies."
         ]
     },
     {

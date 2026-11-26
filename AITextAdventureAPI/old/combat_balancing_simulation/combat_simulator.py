@@ -308,6 +308,8 @@ class CombatSimulation:
 
         if not attack_res.get('hit'):
             msgs.append(f"{actor.name} attacks with {attack_res.get('weapon')} but miss.")
+        elif getattr(hostile, 'last_damage_immune', False):
+            msgs.append(f"{hostile.name} is immune! The strike has no effect.")
         else:
             dmg = attack_res.get('applied', attack_res.get('damage', 0))
             msg = f"{actor.name} hit the {hostile.name} for {dmg} damage."
@@ -338,6 +340,11 @@ class CombatSimulation:
         res = actor.use_ability(ability, target=None, targets=target_entities)
 
         out['action_result'] = res
+
+        # surface whole-hit immunity blocks for any targets hit by this ability
+        for te in target_entities:
+            if getattr(te, 'last_damage_immune', False):
+                msgs.append(f"{te.name} is immune! The strike has no effect.")
 
         # WEIRD ERROR HANDLING SHIT I DONT UNDERSTAND YET, BUT WILL CLEAN UP
         # Strict message handling: use the actor/ability-provided human readable text.
@@ -462,7 +469,11 @@ class CombatSimulation:
                     dmg = res.get('applied', res.get('damage',0))
                     target_name = res.get('target_name')
                     weapon_name = res.get('weapon') or res.get('weapon_name')
-                    msgs.append(f"{hostile.name} hits {target_name} with {weapon_name} for {dmg} damage!")
+                    target_ent = next((p for p in player_ents if getattr(p, 'name', None) == target_name), None)
+                    if getattr(target_ent, 'last_damage_immune', False):
+                        msgs.append(f"{target_name} is immune! The strike has no effect.")
+                    else:
+                        msgs.append(f"{hostile.name} hits {target_name} with {weapon_name} for {dmg} damage!")
                     out.update({'action_result': res, 'damage': dmg, 'target_name': target_name})
         else:
             msgs.append(f"{hostile.name} spazzed out!")

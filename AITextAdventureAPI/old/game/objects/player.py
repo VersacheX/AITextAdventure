@@ -11,8 +11,20 @@ from .special_item import SpecialItem
 
 import game.status_utils as status_utils
 import game.constants as const
+from game.region_seeds.player_abilities.ability_requirements import (
+	CLASS_STAT_SPLIT,
+	CLASS_LEVEL1_STATS,
+	CLASS_HP_RATIO,
+)
 
 ItemType = Union[Item, Armor, Weapon, UtilityItem, SpecialItem]
+
+# IMPLEMENTATION_SPEC_leveling.md Part 1: flat HP per level, and HP per CON
+# depending on whether the CON was gained at creation (level 1) or by leveling.
+HP_PER_LEVEL = 35             # flat max HP per level (was 20)
+HP_PER_CON_AT_CREATION = 2    # level-1 / starting CON
+HP_PER_CON_ON_LEVEL = 8       # CON gained after level 1
+HP_FORMULA_VERSION = 2
 
 _DEFAULT_MAX_ACCESSORY_SLOTS = 3
 
@@ -49,12 +61,13 @@ class Player:
 	max_accessory_slots: int = _DEFAULT_MAX_ACCESSORY_SLOTS
 
 	power_points_per_level: int = 15
-	max_hp_per_lvl: int = 20
+	max_hp_per_lvl: int = HP_PER_LEVEL
 	max_ap_per_lvl: int = 5
 	max_hp: int = 20
 	current_hp: int = 20
 	max_ap: int = 5
 	current_ap: int = 5
+	hp_formula_version: int = HP_FORMULA_VERSION
 
 	unused_ability_slots: int = 1
 	unused_stat_points: int = 10
@@ -76,6 +89,7 @@ class Player:
 	id: Optional[str] = None
 	npc_id: Optional[str] = None
 	character_class: Optional[str] = None
+	elements_base: List[str] = field(default_factory=list)
 	last_broken_armor: List[str] = field(default_factory=list)
 	last_broken_weapon_dropped: Optional[str] = None
 	statuses: List[dict] = field(default_factory=list)
@@ -103,12 +117,13 @@ class Player:
 			'accessories':                      [],
 			'max_accessory_slots':              _DEFAULT_MAX_ACCESSORY_SLOTS,
 			'power_points_per_level':           15,
-			'max_hp_per_lvl':                   20,
+			'max_hp_per_lvl':                   20,  # old saves: pre-migration value; migrated below
 			'max_ap_per_lvl':                   5,
 			'max_hp':                           20,
 			'current_hp':                       20,
 			'max_ap':                           5,
 			'current_ap':                       5,
+			'hp_formula_version':               1,  # old saves predate the HP formula version flag
 			'unused_ability_slots':             1,
 			'unused_stat_points':               10,
 			'unused_power_points':              15,
@@ -125,13 +140,28 @@ class Player:
 			'ability_acquirement_level_amount': 4,
 			'id':                               None,
 			'npc_id':                           None,
-         'character_class':                  None,
+			'character_class':                  None,
+			'elements_base':                    [],
 			'last_broken_armor':                [],
 			'last_broken_weapon_dropped':       None,
 			'statuses':                         [],
 		}
 		for key, default in defaults.items():
 			self.__dict__[key] = state.get(key, default)
+
+		# IMPLEMENTATION_SPEC_leveling.md 1.4: migrate HP for saves made before
+		# the flat-35/CON*8 formula. Runs once per character (version flag).
+		if int(getattr(self, 'hp_formula_version', 1) or 1) < HP_FORMULA_VERSION:
+			lv = max(1, int(getattr(self, 'level', 1) or 1))
+			cls = getattr(self, 'character_class', None)
+			con_per_level = 3 if cls in ('technique', 'spirit') else 1
+			con_gained = (lv - 1) * con_per_level
+			delta = (lv - 1) * (HP_PER_LEVEL - 20) + con_gained * (HP_PER_CON_ON_LEVEL - 2)
+			self.max_hp = int(getattr(self, 'max_hp', 20) or 20) + delta
+			if int(getattr(self, 'current_hp', 0) or 0) > 0:
+				self.current_hp = min(self.max_hp, int(self.current_hp) + delta)
+			self.max_hp_per_lvl = HP_PER_LEVEL
+			self.hp_formula_version = HP_FORMULA_VERSION
 
 	# ── Accessory management ───────────────────────────────────────────────
 
@@ -376,8 +406,11 @@ class Player:
 		RandomHostile.take_damage.
 		"""
 		last_broken_weapon_dropped: Optional[str] = None
+		self.last_damage_immune = False
 		if amount <= 0:
 			return 0
+
+		elements = status_utils.with_physical_stack(elements, physical)
 
 		armor_block = 0
 		if physical:
@@ -388,12 +421,15 @@ class Player:
 		net = max(0, amount - armor_block)
 
 		if elements:
-			net = int(net * status_utils.elemental_multiplier(
+			mult = status_utils.elemental_multiplier(
 				elements,
 				self.get_accessory_immunities(),
 				self.get_accessory_weaknesses(),
 				self.get_accessory_resistances(),
-			))
+			)
+			if mult == 0.0:
+				self.last_damage_immune = True
+			net = int(net * mult)
 
 		net = status_utils.compute_incoming_damage(self, net, elements, is_physical=physical)
 		if physical and 'sleep' in [s.get('id') for s in self.statuses]:
@@ -432,7 +468,7 @@ class Player:
 
 		damage = max(0, int(random.normalvariate(base_damage, max(1, base_damage * 0.2))))
 		elems = status_utils.collect_attack_elements(self)
-		damage = status_utils.compute_outgoing_damage(self, damage, elems, is_basic_attack=True)
+		damage = status_utils.compute_outgoing_damage(self, damage, elems, is_physical=True)
 
 		if crit_chance and (random.random() * 100) < crit_chance:
 			damage *= 2
@@ -571,63 +607,50 @@ class Player:
 		self.allocate_stats(1, 1, 1, 1)
 		self.max_ap += self.max_ap_per_lvl
 		self.max_hp += self.max_hp_per_lvl
+		# Level-up now restores only what the level added (tally), not a full
+		# heal/restore. A fallen character (current_hp <= 0) stays down.
+		self.current_ap += self.max_ap_per_lvl
+		if self.current_hp > 0:
+			self.current_hp += self.max_hp_per_lvl
 		self.unused_stat_points += self.per_level_stat_distribution_amount
 		self.unused_power_points += self.power_points_per_level
 		# Class-assigned characters auto-distribute all gained points so they
 		# follow their predefined growth profile without manual upgrades.
 		if getattr(self, 'character_class', None):
 			self.auto_allocate_level_points()
-		self.heal(self.max_hp)
-		self.restore_ap(self.max_ap)
+		self.current_hp = min(self.current_hp, self.max_hp)
+		self.current_ap = min(self.current_ap, self.max_ap)
 		return has_new_ability, self.per_level_stat_distribution_amount, self.power_points_per_level
 
 	def auto_allocate_level_points(self) -> None:
-		"""Spend all unused stat/power points using class-based distributions.
-
-		This keeps roster characters leveling under their intended archetype and
-		prevents point stockpiling on auto-leveled companions.
+		"""Spend all unused stat/power points using the class curve
+		(IMPLEMENTATION_SPEC_class_growth_elements.md Part 1): the per-level
+		stat points go entirely to the class's primary/secondary stats in a
+		fixed ratio (4:2, or 6:0 for magic), not round-robin across all four.
 		"""
 		char_class = str(getattr(self, 'character_class', '') or '').lower()
-		# priorities are round-robin weighted by order.
-		stat_priority = {
-			'technique': ('strength', 'constitution', 'dexterity', 'intelligence'),
-			'spirit': ('intelligence', 'constitution', 'dexterity', 'strength'),
-			'magic': ('intelligence', 'dexterity', 'constitution', 'strength'),
-			'tech': ('intelligence', 'dexterity', 'constitution', 'strength'),
-			'skill': ('dexterity', 'strength', 'constitution', 'intelligence'),
-		}
-		# hp_ratio controls power-point split; remainder goes to AP.
-		hp_ratio = {
-			'technique': 0.80,
-			'spirit': 0.50,
-			'magic': 0.35,
-			'tech': 0.45,
-			'skill': 0.60,
-		}
-
-		order = stat_priority.get(char_class)
-		if not order:
-			return
+		split = CLASS_STAT_SPLIT.get(char_class)
+		if not split:
+			return  # classless (custom character) keeps manual allocation
 
 		pts = int(getattr(self, 'unused_stat_points', 0) or 0)
 		if pts > 0:
-			inc = {'strength': 0, 'dexterity': 0, 'constitution': 0, 'intelligence': 0}
-			idx = 0
-			while pts > 0:
-				inc[order[idx % len(order)]] += 1
-				idx += 1
-				pts -= 1
+			total = sum(split.values())
+			inc = {k: pts * v // total for k, v in split.items()}
+			# remainder goes to the primary stat (highest split value)
+			primary = max(split, key=split.get)
+			inc[primary] = inc.get(primary, 0) + (pts - sum(inc.values()))
 			self.allocate_stats(
-				inc['strength'],
-				inc['dexterity'],
-				inc['constitution'],
-				inc['intelligence'],
+				inc.get('strength', 0),
+				inc.get('dexterity', 0),
+				inc.get('constitution', 0),
+				inc.get('intelligence', 0),
 				use_stat_points=True,
 			)
 
 		ppts = int(getattr(self, 'unused_power_points', 0) or 0)
 		if ppts > 0:
-			ratio = hp_ratio.get(char_class, 0.50)
+			ratio = CLASS_HP_RATIO.get(char_class, 0.50)
 			hp_pts = max(0, min(ppts, int(round(ppts * ratio))))
 			ap_pts = max(0, ppts - hp_pts)
 			self.apply_power_point_allocation(hp_pts, ap_pts)
@@ -636,16 +659,17 @@ class Player:
 		self.allocate_stats(str_inc, dex_inc, con_inc, int_inc)
 		self.apply_power_point_allocation(hp_points, ap_points)
 
-	def allocate_stats(self, str_inc: int = 0, dex_inc: int = 0, con_inc: int = 0, int_inc: int = 0, use_stat_points: bool = True) -> None:
+	def allocate_stats(self, str_inc: int = 0, dex_inc: int = 0, con_inc: int = 0, int_inc: int = 0, use_stat_points: bool = True, hp_per_con: int = HP_PER_CON_ON_LEVEL) -> None:
 		if str_inc:
 			self.strength += int(str_inc)
 		if dex_inc:
 			self.dexterity += int(dex_inc)
 		if con_inc:
 			self.constitution += int(con_inc)
-			hp_inc = int(con_inc) * 2
+			hp_inc = int(con_inc) * int(hp_per_con)
 			self.max_hp += hp_inc
-			self.current_hp += hp_inc
+			if self.current_hp > 0:  # a level-up/stat gain is not a revive
+				self.current_hp += hp_inc
 		if int_inc:
 			self.intelligence += int(int_inc)
 		if use_stat_points:
@@ -656,7 +680,8 @@ class Player:
 			self.max_hp += int(hp_points)
 		if ap_points:
 			self.max_ap += int(ap_points)
-		self.current_hp += int(hp_points)
+		if self.current_hp > 0:  # a level-up/stat gain is not a revive
+			self.current_hp += int(hp_points)
 		self.current_ap += int(ap_points)
 		self.unused_power_points -= max(0, (hp_points + ap_points))
 
@@ -666,13 +691,9 @@ class Player:
 		if ability in self.abilities:
 			return False
 
-		# Enforce class-bound learn trees when a class assignment exists.
-		ability_type = getattr(getattr(ability, 'ability_type', None), 'value', None) or str(getattr(ability, 'ability_type', '') or '').lower()
-		char_class = getattr(self, 'character_class', None)
-		if not char_class:
-			cid = getattr(self, 'npc_id', None) or getattr(self, 'id', None)
-			char_class = (getattr(const, 'CHARACTER_NPC_CLASS_MAP', {}) or {}).get(cid)
-		if char_class and ability_type and str(ability_type).lower() != str(char_class).lower():
+		# Enforce class + element learn gate when a class assignment exists.
+		from game.objects.player_ability import can_learn
+		if not can_learn(self, ability, check_stats=False):
 			return False
 
 		self.unused_ability_slots = max(0, self.unused_ability_slots - 1)
@@ -690,16 +711,48 @@ class Player:
 
 	# ── Deprecated ────────────────────────────────────────────────────────
 
-	def level_up(self, str_inc: int = 0, dex_inc: int = 0, con_inc: int = 0, int_inc: int = 0, hp_points: int = 0, ap_points: int = 0, selected_ability: Optional[str] = None) -> None:
-		self.max_ap += int_inc * 2
-		self.max_hp += con_inc * 2
-		self.allocate_stats(str_inc, dex_inc, con_inc, int_inc)
-		self.apply_power_point_allocation(hp_points, ap_points)
-		self.heal(self.max_hp)
-		self.restore_ap(self.max_ap)
-		if selected_ability:
-			if selected_ability not in self.abilities:
-				self.abilities.append(selected_ability)
+
+def apply_class_curve(p, cls: str, target_level: int) -> None:
+	"""Reset p's stats/HP/AP to the class curve at target_level.
+
+	IMPLEMENTATION_SPEC_class_growth_elements.md Part 1c. Equipment and
+	abilities are untouched. Used by both generation and recruits so every
+	class-assigned character follows the same growth rule.
+	"""
+	cls = str(cls or '').lower()
+	if cls not in CLASS_LEVEL1_STATS:
+		return
+	p.character_class = cls
+	p.level = 1
+	p.strength, p.dexterity, p.constitution, p.intelligence = CLASS_LEVEL1_STATS[cls]
+	# Level-1 HP/AP: base 20 + creation-rate CON bonus, then the level-1
+	# power points split by the class's hp_ratio.
+	p.max_hp = 20 + (p.constitution - 8) * HP_PER_CON_AT_CREATION
+	p.max_ap = 5
+	pp = int(p.power_points_per_level)
+	hp = int(round(pp * CLASS_HP_RATIO[cls]))
+	p.max_hp += hp
+	p.max_ap += pp - hp
+	p.unused_stat_points = 0
+	p.unused_power_points = 0
+	p.unused_ability_slots = 0
+	p.current_hp, p.current_ap = p.max_hp, p.max_ap
+	for lvl in range(2, int(target_level) + 1):
+		p.level = lvl
+		p.check_level_up_awards()   # +1 all, +6 by class split, +15 power points by hp_ratio
+	p.current_hp, p.current_ap = p.max_hp, p.max_ap  # creation/recruitment joins at full, not a level-up
+
+
+def assign_character_elements(p, char_id=None, overwrite=False) -> None:
+	"""Set p.elements_base from CHARACTER_NPC_ELEMENT_MAP. Never guesses from class."""
+	if getattr(p, 'elements_base', None) and not overwrite:
+		return
+	emap = getattr(const, 'CHARACTER_NPC_ELEMENT_MAP', {}) or {}
+	for key in (char_id, getattr(p, 'npc_id', None), getattr(p, 'id', None)):
+		if key and key in emap:
+			p.elements_base = list(emap[key])
+			return
+	p.elements_base = list(getattr(p, 'elements_base', None) or [])
 
 
 def generate_player_from_attainable_character_seed(seed) -> Player:
@@ -713,6 +766,15 @@ def generate_player_from_attainable_character_seed(seed) -> Player:
 		p.character_class = (getattr(const, 'CHARACTER_NPC_CLASS_MAP', {}) or {}).get(char_id)
 	if not getattr(p, 'npc_id', None) and seed.get('npc_id'):
 		p.npc_id = seed.get('npc_id')
+	assign_character_elements(p, char_id=char_id)
+	# IMPLEMENTATION_SPEC_class_growth_elements.md 1.3e: recruits follow the
+	# class curve rather than their hand-written seed stats. This overrides
+	# strength/dexterity/constitution/intelligence/max_hp/max_ap/current_*.
+	cls = getattr(p, 'character_class', None)
+	if cls and cls in CLASS_LEVEL1_STATS:
+		seed_level = int(seed.get('level') or p.level or 1)
+		apply_class_curve(p, cls, seed_level)
+		p.unused_ability_slots = int(seed.get('unused_ability_slots') or 0)
 	from game.objects.item import instantiate_item_from_id
 	armor_keys = ['arm_armor', 'head_armor', 'body_armor', 'leg_armor']
 	for key in armor_keys:

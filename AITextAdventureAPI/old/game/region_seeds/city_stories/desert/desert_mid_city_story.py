@@ -247,8 +247,8 @@ TASKS = [
 
 # ── Type C ── Eldon Dawnseer (extended character) ─────────────────────────────
 # Gated by is_chapter_gte: 8. Eldon is drawn to Nightveil Spire by the
-# Vault Whisper's resonance — she has been receiving fragmented visions of
-# the city's erasure. Velra's recommendation earns her trust.
+# Vault Whisper's resonance — he has been receiving fragmented visions of
+# the city's erasure. Velra's recommendation earns his trust.
 
 NPC_DIALOG += [
 
@@ -269,8 +269,8 @@ NPC_DIALOG += [
 		'dialog': [
 			"Eldon appeared the morning the Vaults first whispered of the Erasure.",
 			"I don't believe in coincidence — I believe in pattern.",
-			"She reads the pattern the way I read the archive.",
-			"If she trusts you, tell her I said the index has a new entry."
+			"He reads the pattern the way I read the archive.",
+			"If he trusts you, tell him I said the index has a new entry."
 		]
 	},
 
@@ -295,14 +295,14 @@ NPC_DIALOG += [
 		'npc_id': 'spirit',
 		'dialog_id': 'spirit_desert_mid_c_find_eldon',
 		'dialog': [
-			"She's seen this city erased a hundred times and still chooses to stay. That kind of quiet endurance is rarer than most people realize."
+			"He's seen this city erased a hundred times and still chooses to stay. That kind of quiet endurance is rarer than most people realize."
 		]
     },
     {
 		'npc_id': 'ripple',
 		'dialog_id': 'ripple_desert_mid_c_find_eldon',
 		'dialog': [
-			"Visions of ink dissolving and names going dark... she's not just watching the future fail. She's trying to understand the pattern that keeps letting it survive."
+			"Visions of ink dissolving and names going dark... he's not just watching the future fail. He's trying to understand the pattern that keeps letting it survive."
 		]
     },
     {
@@ -579,7 +579,7 @@ TASKS += [
 		]
 	},
 
-	# C-3 — Return to Eldon; she joins
+	# C-3 — Return to Eldon; he joins
 	{
 		'task_id': 'desert_mid_city_type_c_earn_eldon',
 		'type': 'meet',

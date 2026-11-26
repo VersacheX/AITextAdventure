@@ -45,17 +45,17 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         'body_armor': 'galestride_vest',
         'leg_armor': 'windrunner_greaves',
         'equipped_weapon': 'whisperwind_blades',
-        'max_hp': 941,
-        'current_hp': 941,
-        'max_ap': 350,
-        'current_ap': 350,
+        'max_hp': 1537,
+        'current_hp': 1537,
+        'max_ap': 330,
+        'current_ap': 330,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 93,
-        'dexterity': 169,
-        'intelligence': 38,
-        'constitution': 38,
+        'strength': 99,
+        'dexterity': 159,
+        'intelligence': 37,
+        'constitution': 37,
         'level': 30,
         'abilities': [
             'lv2_unique_ability_skill_nia_wind_read',
@@ -70,6 +70,7 @@ NPCS = [
     {
         'npc_id': 'nia',
         'name': 'Nia',
+        'sex': 'F',
         'description': (
             'A rebellious wind-dancer who once heard a future echo of her own death—'
             'a moment that has not yet occurred. She hides her fear beneath bright energy and motion,'

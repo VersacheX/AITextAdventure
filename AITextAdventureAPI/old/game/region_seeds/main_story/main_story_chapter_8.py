@@ -112,6 +112,7 @@ NPCS = [
     {
         "npc_id": "scalpel",
         "name": "Scalpel",
+        "sex": "M",
         "description": "A blade of pure detachment — violence without emotion, purpose, or hesitation.",
         "theme_song": "Guillotine, Death Grips (instrumental) | The Perfect Drug (instrumental), Nine Inch Nails",
         "psychology": {
@@ -125,10 +126,10 @@ NPCS = [
           "enneagram_type": "5w6",
           "core_fear": "Being overwhelmed or incompetent.",
           "core_desire": "To be capable and competent.",
-          "defense_mechanism": "Isolation — Detaches completely from emotion to become a perfect, efficient tool of violence. It is pure, cold logic in action.",
-          "stress_line": "Moves to Type 7 — Its violence becomes scattered, chaotic, and unfocused.",
-          "growth_line": "Moves to Type 8 — Would learn to use its precision and skill with confidence and purpose, not just detachment.",
-          "instinctual_variant": "sp/sx — A reclusive predator, focused on perfecting its own deadly competence."
+          "defense_mechanism": "Isolation — Detaches completely from emotion to become a perfect, efficient tool of violence. He is pure, cold logic in action.",
+          "stress_line": "Moves to Type 7 — His violence becomes scattered, chaotic, and unfocused.",
+          "growth_line": "Moves to Type 8 — Would learn to use his precision and skill with confidence and purpose, not just detachment.",
+          "instinctual_variant": "sp/sx — A reclusive predator, focused on perfecting his own deadly competence."
         },
         'image': 'voidwalkers:scalpel1.jpeg',
         'song_id': 'the_perfect_drug_nine_inch_nails'
@@ -136,6 +137,7 @@ NPCS = [
       {
         "npc_id": "glamour",
         "name": "Glamour",
+        "sex": "F",
         "description": "A radiant predator — beauty weaponized into domination.",
         "theme_song": "Toxic, Britney Spears",
         "psychology": {
@@ -799,7 +801,7 @@ TASKS = [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'thorn', 'dialog_id': 'thorn_ch8_after_scalpel' }},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'veyla', 'standing_text': ["Something colder has arrived. I can feel it cutting through the air."]}},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rusk', 'standing_text': ["The chaos is gone, but now there's... precision. Cold precision."]}},
-            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'jinn', 'standing_text': ["Scalpel. That's what they call it. And it doesn't play games."]}},
+            { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'jinn', 'standing_text': ["Scalpel. That's what they call him. And he doesn't play games."]}},
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'ember', 'standing_text': ["I'm traveling to the next city. Someone needs to remind people to stay human."]}},
             { 'event_type': 'advance_chapter' }
         ]

@@ -295,7 +295,7 @@ STATUS_EFFECTS = {
         "display": "Cont Dmg",
         "name": "Continuous Damage",
         "type": "continuous damage",
-        "duration_per_level":-1,
+        "duration_per_level":2,
         "magnitude_per_level":0.5,
         "min_damage_per_turn":1,
     },

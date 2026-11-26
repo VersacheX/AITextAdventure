@@ -141,6 +141,7 @@ NPCS = [
     {
         'npc_id': 'stigma',
         'name': 'Stigma',
+        'sex': 'F',
         'description': (
             "A seductive void-siren whose presence rewrites desire, identity, and will."
         ),
@@ -178,7 +179,7 @@ NPC_DIALOG = [
         'npc_id': 'tess',
         'dialog_id': 'tess_ch14_intro',
         'dialog': [
-            "Before you start: yes, we were in the cargo hold. Yes, Seth threatened to throw us overboard. No, he didn't.",
+            "Before you ask: we got here on our own. You're not the only ones who can follow money across an ocean.",
             "Look at this. A whole city built on a binary choice. Memory or Reputation.",
             "It's the oldest con in the book - limit the options to control the outcome."
         ]

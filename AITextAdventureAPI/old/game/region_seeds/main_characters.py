@@ -50,11 +50,35 @@ CHARACTER_NPC_CLASS_MAP = {
 	'commander_drax': 'technique',
 }
 
+CHARACTER_NPC_ELEMENT_MAP = {
+	# core 5 (keyed by class id, which is their npc_id). They start with no
+	# abilities and build their whole kit from the pool, so they get 4 elements.
+	'technique': ['earth', 'fire', 'water', 'light'],     # Chock
+	'spirit':    ['light', 'water', 'fire', 'earth'],     # Kaera
+	'magic':     ['fire', 'ice', 'electric', 'dark'],     # Moxie
+	'tech':      ['electric', 'light', 'water', 'air'],   # Kade
+	'skill':     ['air', 'light', 'ice', 'earth'],        # Poise
+	# main-story
+	'lyren': ['water', 'earth'], 'vek': ['earth', 'dark'],
+	'warden_hale': ['light', 'earth'], 'seraphine': ['light', 'air'],
+	# regional
+	'nia': ['air', 'water'], 'sable': ['earth', 'air'], 'thorn': ['earth'], 'bragg': ['earth', 'fire'],
+	'ripple': ['water', 'dark'], 'kor_in': ['ice', 'air'], 'grimnaw': ['dark', 'electric'],
+	# extended
+	'voss_caldera': ['earth', 'light'], 'rynn': ['water', 'ice'], 'eldon_dawnseer': ['light'],
+	'regent_sylvara': ['dark', 'electric'], 'ghost': ['dark', 'ice'], 'lira_emberforge': ['fire', 'earth'],
+	'osten_dreamweaver': ['dark', 'water'], 'lyric': ['electric', 'ice'], 'dare': ['fire', 'electric'],
+	'andrea_starveil': ['light', 'fire'], 'veyr_ashcant': ['fire', 'light'], 'spark_maddox': ['electric', 'fire'],
+	'anita': ['dark', 'air'], 'talon': ['earth', 'light'], 'alden_brightvein': ['light', 'electric'],
+	'commander_drax': ['light', 'electric'],
+}
+
 PLAYER_NPCS = [
     {
         "npc_id": "technique",
-        "name": "Chock",
-        "description": "A skilled warrior known for his brutal force and unwavering discipline. Chock is rugged, ornery, and sometimes rude, but his heart is in the right place. He seeks to master his enemies through sheer strength and tactical prowess. He is calm under pressure and values honor above all else.",
+		"name": "Chock",
+		"sex": "M",
+		"description": "A skilled warrior known for his brutal force and unshakable discipline.",
 		"theme_song": "Hero (instrumental), skillet | Orion, Metallica",
         "psychology": {
             "mbti": "ESTJ",
@@ -83,9 +107,10 @@ PLAYER_NPCS = [
 		'song_id': 'hero_instrumental_skillet'
     },
     {
-        "npc_id": "spirit",
-        "name": "Kaera",
-        "description": (
+		"npc_id": "spirit",
+		"name": "Kaera",
+		"sex": "F",
+		"description": (
 			"A devout cleric with a deep connection to the divine. Kaera serves as the steadfast protector and emotional anchor of the group."
 			" Her compassion and healing abilities make her a quiet beacon of hope, and she possesses a calm, reliable presence."
 		),
@@ -117,9 +142,10 @@ PLAYER_NPCS = [
 		'song_id': 'never_ending_circles_chvrches'
     },
     {
-        "npc_id": "magic",
-        "name": "Moxie",
-        "description": "A brilliant sorcerer with an insatiable curiosity for the arcane and a mischievous streak. Moxie is constantly seeking new spells and magical knowledge to expand her power. Her quick wit, resourcefulness, and playful side make her both dangerous and entertaining.",
+		"npc_id": "magic",
+		"name": "Moxie",
+		"sex": "F",
+		"description": "A brilliant sorcerer with a reckless streak and a love of chaos.",
 		"theme_song": "Bubblegum Bitch, Marina",
         "psychology": {
             "mbti": "ENTP",
@@ -150,7 +176,8 @@ PLAYER_NPCS = [
     {
 		"npc_id": "tech",
 		"name": "Kade",
-		"description": "A systems architect, engineer, and relentless problem-solver whose sharp tongue is rivaled only by his intelligence. Kade sees patterns where others see chaos and has a habit of dismantling impossible problems simply because someone told him they couldn't be solved. Cynical, sarcastic, and occasionally insufferable, he possesses a fierce sense of personal agency and an intense dislike of anyone attempting to control, manipulate, or diminish others. Beneath the arrogance is someone who genuinely wants the people around him to succeed, even if his methods sometimes resemble emotional blunt-force trauma.",
+		"sex": "M",
+		"description": "A systems architect who sees the world as a set of problems to be solved.",
 		"theme_song": "Radioactive (Instrumental), Imagine Dragons | The Pretender, Foo Fighters",
 		"psychology": {
 			"mbti": "INTJ",
@@ -179,15 +206,16 @@ PLAYER_NPCS = [
 		"song_id": "radioactive_instrumental_imagine_dragon"
 	},
     {
-        "npc_id": "skill",
-        "name": "Poise",
-        "description": "A master of incredible martial arts with unparalleled agility and stealth. Poise moves with deadly skill and precision. She is wise, calm, disciplined, and highly focused. Her charm and cunning make her both a formidable fighter and a valuable companion.",
+		"npc_id": "skill",
+		"name": "Poise",
+		"sex": "F",
+		"description": "A master of incredible martial arts, graceful and lethal in equal measure.",
 		"theme_song": "Sail (instrumental), AWOLNATION | Clint Eastwood, Gorillaz",
         "psychology": {
             "mbti": "ISTP",
             "dominant": "Ti — Quietly analytical with internally precise understanding of movement, technique, and opponents.",
             "auxiliary": "Se — Hyper-attuned to the physical world. Her reflexes, agility, and combat instincts are razor sharp.",
-            "tertiary": "Ni — Occasionally senses deeper patterns or future threats, giving him a mysterious, focused calm.",
+			"tertiary": "Ni — Occasionally senses deeper patterns or future threats, giving her a mysterious, focused calm.",
             "inferior": "Fe — Avoids emotional expression. Under stress, she may lash out or completely withdraw."
         },
         "enneagram": {

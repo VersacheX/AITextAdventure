@@ -40,17 +40,17 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         'arm_armor': 'shockforge_gauntlets',
         'leg_armor': 'stonebinder_greaves',
         'equipped_weapon': 'corebreaker_hammer',
-        'max_hp': 941,
-        'current_hp': 941,
-        'max_ap': 350,
-        'current_ap': 350,
+        'max_hp': 1477,
+        'current_hp': 1477,
+        'max_ap': 390,
+        'current_ap': 390,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 38,
-        'dexterity': 102,
-        'intelligence': 158,
-        'constitution': 38,
+        'strength': 37,
+        'dexterity': 99,
+        'intelligence': 159,
+        'constitution': 37,
         'level': 30,
         'abilities': [
             'lv2_unique_ability_tech_bragg_golem_pulse',
@@ -65,6 +65,7 @@ NPCS = [
     {
         'npc_id': 'bragg',
         'name': 'Bragg',
+        'sex': 'M',
         'description': (
             'A forge-breaker who survived an explosion caused by a micro-fracture—'
             'an event that killed his entire crew. He masks his fear of losing control beneath swagger and bravado.'

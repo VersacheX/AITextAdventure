@@ -26,7 +26,7 @@ ARMOR_LV51_65 = {
         {
             "id": "reckless_bandana",
             "name": "Reckless Bandana",
-            "description": "A salt-bleached bandana Dare has worn so long it has absorbed a faint permanent static charge. He claims this is intentional.",
+            "description": "A salt-bleached bandana worn so long it has absorbed a faint, permanent static charge.",
             "defense": 34, "durability": 540, "max_durability": 540, "value": 13200,
             "min_spawn_level": 55, "rarity": "notfound",
             "strength": 20, "dexterity": 38, "intelligence": 6, "constitution": 6,
@@ -36,7 +36,7 @@ ARMOR_LV51_65 = {
         {
             "id": "caretaker_hood",
             "name": "Caretaker's Hood",
-            "description": "A soft hood worn low over the brow — not for concealment, but habit. Rynn finds it easier to tend to others when they can't see him worrying.",
+            "description": "A soft hood worn low over the brow, not for concealment but so patients can't see the worry underneath.",
             "defense": 38, "durability": 580, "max_durability": 580, "value": 15400,
             "min_spawn_level": 60, "rarity": "notfound",
             "strength": 4, "dexterity": 8, "intelligence": 40, "constitution": 22,
@@ -45,7 +45,7 @@ ARMOR_LV51_65 = {
         {
             "id": "field_medic_cap",
             "name": "Field Medic's Cap",
-            "description": "A plain soft cap with a medic cross stitched on the brow — faded from years of use. Rynn keeps it pressed flat. He irons it in the field.",
+            "description": "A plain soft cap with a medic cross stitched on the brow, faded from years of use and still pressed flat.",
             "defense": 38, "durability": 580, "max_durability": 580, "value": 15400,
             "min_spawn_level": 60, "rarity": "notfound",
             "strength": 4, "dexterity": 8, "intelligence": 40, "constitution": 22,
@@ -55,7 +55,7 @@ ARMOR_LV51_65 = {
         {
             "id": "cipher_hood",
             "name": "Cipher Hood",
-            "description": "A deep hood stitched with invisible ink ledgers — personal shorthand for every secret Anita has ever catalogued. She's the only one who can read it.",
+            "description": "A deep hood stitched with ledgers in invisible ink, a private shorthand only its author can read.",
             "defense": 42, "durability": 600, "max_durability": 600, "value": 18400,
             "min_spawn_level": 65, "rarity": "notfound",
             "strength": 24, "dexterity": 12, "intelligence": 24, "constitution": 20,
@@ -64,7 +64,7 @@ ARMOR_LV51_65 = {
         {
             "id": "archivists_hood",
             "name": "Archivist's Hood",
-            "description": "A deep hood with a reinforced brim for reading in low light — originally a scholar's article. Anita had the inside lined with classified-grade weave.",
+            "description": "A deep hood with a reinforced brim for reading in low light, its scholar's lining replaced with classified-grade weave.",
             "defense": 42, "durability": 600, "max_durability": 600, "value": 18400,
             "min_spawn_level": 65, "rarity": "notfound",
             "strength": 24, "dexterity": 12, "intelligence": 24, "constitution": 20,
@@ -108,7 +108,7 @@ ARMOR_LV51_65 = {
         {
             "id": "fieldmedic_wrap",
             "name": "Field Medic's Wrap",
-            "description": "A wrap of layered healing cloth reinforced with trauma-response panels. The pockets are organized by muscle memory — he never looks when he reaches.",
+            "description": "A wrap of layered healing cloth with trauma-response panels and pockets organized for reaching without looking.",
             "defense": 52, "durability": 740, "max_durability": 740, "value": 20400,
             "min_spawn_level": 60, "rarity": "notfound",
             "strength": 6, "dexterity": 10, "intelligence": 54, "constitution": 30,
@@ -127,7 +127,7 @@ ARMOR_LV51_65 = {
         {
             "id": "archive_coat",
             "name": "Archive Coat",
-            "description": "A long coat with internal ledger-pockets sewn into the lining. She knows exactly what's in each one. She never lets anyone else near it.",
+            "description": "A long coat with ledger-pockets sewn into the lining, each one holding something exact.",
             "defense": 56, "durability": 760, "max_durability": 760, "value": 24400,
             "min_spawn_level": 65, "rarity": "notfound",
             "strength": 32, "dexterity": 16, "intelligence": 32, "constitution": 28,
@@ -136,7 +136,7 @@ ARMOR_LV51_65 = {
         {
             "id": "crypt_recorded_coat",
             "name": "Crypt-Recorded Coat",
-            "description": "A coat whose lining is printed with the full text of every classified document Anita has ever memorized. The print is small. She reads it in her sleep.",
+            "description": "A coat whose lining is printed with the full text of a library of classified documents. The print is very small.",
             "defense": 56, "durability": 760, "max_durability": 760, "value": 24400,
             "min_spawn_level": 65, "rarity": "notfound",
             "strength": 32, "dexterity": 16, "intelligence": 32, "constitution": 28,
@@ -161,7 +161,7 @@ ARMOR_LV51_65 = {
         {
             "id": "rigging_bracers",
             "name": "Rigging Bracers",
-            "description": "Bracers threaded with ship-rigging cord wound tight enough to act as ballistic deflectors. He learned to tie them one-handed years ago.",
+            "description": "Bracers threaded with ship-rigging cord wound tight enough to deflect blows, tied with a knot that can be done one-handed.",
             "defense": 26, "durability": 500, "max_durability": 500, "value": 10800,
             "min_spawn_level": 55, "rarity": "notfound",
             "strength": 16, "dexterity": 28, "intelligence": 4, "constitution": 4,
@@ -170,7 +170,7 @@ ARMOR_LV51_65 = {
         {
             "id": "corsair_bracers",
             "name": "Corsair Bracers",
-            "description": "Bracers built from corsair-standard boarding kit — reinforced at the outer face and weighted at the wrist for close-range work. Dare added the knuckle plating himself.",
+            "description": "Bracers built from corsair-standard boarding kit, reinforced at the outer face, weighted at the wrist, with knuckle plating added later.",
             "defense": 26, "durability": 500, "max_durability": 500, "value": 10800,
             "min_spawn_level": 55, "rarity": "notfound",
             "strength": 16, "dexterity": 28, "intelligence": 4, "constitution": 4,
@@ -180,7 +180,7 @@ ARMOR_LV51_65 = {
         {
             "id": "steadyhands_bracers",
             "name": "Steadyhands Bracers",
-            "description": "Bracers fitted with micro-stabilizers designed to counter tremor under stress. Rynn had them made after losing a patient he shouldn't have.",
+            "description": "Bracers fitted with micro-stabilizers designed to counter tremor under stress.",
             "defense": 30, "durability": 520, "max_durability": 520, "value": 12400,
             "min_spawn_level": 60, "rarity": "notfound",
             "strength": 4, "dexterity": 6, "intelligence": 30, "constitution": 18,
@@ -189,7 +189,7 @@ ARMOR_LV51_65 = {
         {
             "id": "steadfast_wraps",
             "name": "Steadfast Wraps",
-            "description": "Compression wraps reinforced with stabilizer thread — worn tight enough to steady a needle hand and loose enough to flex for a carry. Rynn re-wraps them every morning.",
+            "description": "Compression wraps reinforced with stabilizer thread, tight enough to steady a needle hand and loose enough to flex for a carry.",
             "defense": 30, "durability": 520, "max_durability": 520, "value": 12400,
             "min_spawn_level": 60, "rarity": "notfound",
             "strength": 4, "dexterity": 6, "intelligence": 30, "constitution": 18,
@@ -199,7 +199,7 @@ ARMOR_LV51_65 = {
         {
             "id": "ledger_bracers",
             "name": "Ledger Bracers",
-            "description": "Bracers etched on the inside with a compressed index of everything she knows. She reads them in the dark by touch.",
+            "description": "Bracers etched on the inside with a compressed index, readable in the dark by touch.",
             "defense": 32, "durability": 540, "max_durability": 540, "value": 14400,
             "min_spawn_level": 65, "rarity": "notfound",
             "strength": 20, "dexterity": 10, "intelligence": 20, "constitution": 16,
@@ -208,7 +208,7 @@ ARMOR_LV51_65 = {
         {
             "id": "ledger_vambraces",
             "name": "Ledger Vambraces",
-            "description": "Heavier vambraces with the same indexed inner etching — worn when Anita expects the information to need protecting as much as the arm.",
+            "description": "Heavy vambraces with an indexed inner etching, made to protect the information as much as the arm.",
             "defense": 32, "durability": 540, "max_durability": 540, "value": 14400,
             "min_spawn_level": 65, "rarity": "notfound",
             "strength": 20, "dexterity": 10, "intelligence": 20, "constitution": 16,
@@ -231,7 +231,7 @@ ARMOR_LV51_65 = {
         {
             "id": "breakneck_boots",
             "name": "Breakneck Boots",
-            "description": "Boots built for sustained high-speed movement across unstable terrain. The ankle reinforcement has been extended twice. He keeps pushing them further.",
+            "description": "Boots built for sustained high-speed movement across unstable terrain. The ankle reinforcement has been extended twice.",
             "defense": 30, "durability": 540, "max_durability": 540, "value": 12400,
             "min_spawn_level": 55, "rarity": "notfound",
             "strength": 20, "dexterity": 34, "intelligence": 6, "constitution": 6,
@@ -240,7 +240,7 @@ ARMOR_LV51_65 = {
         {
             "id": "wavechaser_boots",
             "name": "Wavechaser Boots",
-            "description": "Boots designed for shoreline pursuit — grip-plated sole, sealed ankle, no heel to catch on wet rock. Dare had a second pair made. He lost them immediately.",
+            "description": "Boots designed for shoreline pursuit: grip-plated sole, sealed ankle, no heel to catch on wet rock.",
             "defense": 30, "durability": 540, "max_durability": 540, "value": 12400,
             "min_spawn_level": 55, "rarity": "notfound",
             "strength": 20, "dexterity": 34, "intelligence": 6, "constitution": 6,
@@ -250,7 +250,7 @@ ARMOR_LV51_65 = {
         {
             "id": "surefoot_sandals",
             "name": "Surefoot Sandals",
-            "description": "Simple woven sandals with pressure-spreading soles. He chose them because they're easy to remove in the field. He's worn them for twelve years.",
+            "description": "Simple woven sandals with pressure-spreading soles, easy to remove in the field and made to last for years.",
             "defense": 34, "durability": 560, "max_durability": 560, "value": 14400,
             "min_spawn_level": 60, "rarity": "notfound",
             "strength": 4, "dexterity": 6, "intelligence": 34, "constitution": 22,
@@ -259,7 +259,7 @@ ARMOR_LV51_65 = {
         {
             "id": "hearthstep_boots",
             "name": "Hearthstep Boots",
-            "description": "Soft-soled boots that carry a faint warmth at the insole regardless of temperature. Rynn has never investigated why. He's grateful for it in winter.",
+            "description": "Soft-soled boots that carry a faint warmth at the insole regardless of temperature. No one knows why.",
             "defense": 34, "durability": 560, "max_durability": 560, "value": 14400,
             "min_spawn_level": 60, "rarity": "notfound",
             "strength": 4, "dexterity": 6, "intelligence": 34, "constitution": 22,
@@ -269,7 +269,7 @@ ARMOR_LV51_65 = {
         {
             "id": "vault_boots",
             "name": "Vault Boots",
-            "description": "Heavy-soled boots with concealed document compartments in the heels. The most valuable thing she carries is never in her hands.",
+            "description": "Heavy-soled boots with concealed document compartments in the heels. The most valuable thing is never carried in the hands.",
             "defense": 36, "durability": 580, "max_durability": 580, "value": 16400,
             "min_spawn_level": 65, "rarity": "notfound",
             "strength": 22, "dexterity": 12, "intelligence": 22, "constitution": 18,
@@ -278,7 +278,7 @@ ARMOR_LV51_65 = {
         {
             "id": "vaultwalker_boots",
             "name": "Vaultwalker Boots",
-            "description": "A reinforced variant of the Vault Boots with extended heel compartments and a secondary compartment in the tongue. She carries six things in them. She will not say what.",
+            "description": "A reinforced variant of the Vault Boots with extended heel compartments and a secondary compartment in the tongue.",
             "defense": 36, "durability": 580, "max_durability": 580, "value": 16400,
             "min_spawn_level": 65, "rarity": "notfound",
             "strength": 22, "dexterity": 12, "intelligence": 22, "constitution": 18,

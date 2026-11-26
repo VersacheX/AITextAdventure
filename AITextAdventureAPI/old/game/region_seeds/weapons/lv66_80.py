@@ -5,7 +5,7 @@ WEAPONS_LV66_80 = [
     {
         "id": "morale_blade",
         "name": "Morale Blade",
-        "description": "A single-edged performance saber engraved with the names of every person she's kept moving forward. Both sides. Different lists.",
+        "description": "A single-edged performance saber engraved on both sides with names: two different lists of people kept moving forward.",
         "damage": 90,
         "damage_type": "slashing",
         "ap_cost": 2,
@@ -25,7 +25,7 @@ WEAPONS_LV66_80 = [
     {
         "id": "encore_blades",
         "name": "Encore Blades",
-        "description": "A matched pair of performance sabers Andrea had commissioned after her first successful tour — one for the show, one for what comes after. She stopped distinguishing between them.",
+        "description": "A matched pair of performance sabers, one for the show and one for what comes after. Over time the difference stopped mattering.",
         "damage": 90,
         "damage_type": "slashing",
         "ap_cost": 2,
@@ -46,7 +46,7 @@ WEAPONS_LV66_80 = [
     {
         "id": "mercy_staff",
         "name": "Mercy Staff",
-        "description": "A staff carved from a fallen healer's tree — species unknown, never catalogued. It blooms with pale flowers when near the dying. Talon has stopped being surprised by it.",
+        "description": "A staff carved from a fallen healer's tree of an uncatalogued species. It blooms with pale flowers when near the dying.",
         "damage": 106,
         "damage_type": "energy",
         "ap_cost": 3,
@@ -66,7 +66,7 @@ WEAPONS_LV66_80 = [
     {
         "id": "kindness_staff",
         "name": "Kindness Staff",
-        "description": "A staff Talon refuses to have repaired by anyone else — she re-wraps the grip herself at the start of every season. The wood has absorbed so much healing energy it glows faintly on overcast days.",
+        "description": "A staff whose grip is re-wrapped by hand every season. The wood has absorbed so much healing energy it glows faintly on overcast days.",
         "damage": 106,
         "damage_type": "energy",
         "ap_cost": 3,

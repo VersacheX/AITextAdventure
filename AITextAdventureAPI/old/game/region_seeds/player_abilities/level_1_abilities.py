@@ -23,6 +23,8 @@ LEVEL_1_PLAYER_ABILITY_SEEDS = [
  {"id": "electric_technique_lv1_stun_strike", "name": "Stun Strike", "description": "An awe inspiring strike from above, that stuns the enemy.", "ability_type": "technique", "level":1, "elements": ["electric"], "base_power":1, "ap_cost":13, "effect": "status", "status_keys": ["stun"], "can_aoe": False},
   ##BUFF lvl1 buff techniques cost 8ap, 0bp +status
  {"id": "earth_technique_lv1_armor_up", "name": "Arm Up", "description": "The strength of the earth strengthens fortitude and resolve", "ability_type": "technique", "level":1, "elements": ["earth"], "base_power":0, "ap_cost":7, "effect": "status", "status_keys": ["defense_buff", "constitution_buff"], "can_aoe": False},
+  ##NEW: IMPLEMENTATION_SPEC_class_growth_elements.md 3.2 — fills the technique L1 earth-pool gap (Thorn)
+ {"id": "earth_technique_lv1_stone_fist", "name": "Stone Fist", "description": "A rock-hard punch that hits like a falling boulder.", "ability_type": "technique", "level": 1, "elements": ["earth"], "base_power": 14, "ap_cost": 9, "effect": "damage", "can_aoe": False},
 
 
 
@@ -51,6 +53,10 @@ LEVEL_1_PLAYER_ABILITY_SEEDS = [
    ##STATUS EFFECT
  {"id": "light_spirit_lv1_convert", "name": "Convert", "description": "Words of the devout to convert their listeners.", "ability_type": "spirit", "level":1, "elements": ["light"], "base_power":0, "ap_cost":13, "effect": "status", "status_keys": ["confuse"], "can_aoe": False},
 
+   ##NEW: IMPLEMENTATION_SPEC_class_growth_elements.md 3.2 — fills spirit L1 water/ice gaps (Ripple, Rynn)
+ {"id": "water_spirit_lv1_rain_blessing", "name": "Rain Blessing", "description": "A gentle rain that slowly restores the weary.", "ability_type": "spirit", "level": 1, "elements": ["water"], "base_power": 0, "ap_cost": 9, "effect": "status", "status_keys": ["regen"], "can_aoe": False},
+ {"id": "ice_spirit_lv1_frost_salve", "name": "Frost Salve", "description": "A cooling touch that numbs pain and closes wounds.", "ability_type": "spirit", "level": 1, "elements": ["ice"], "base_power": 9, "ap_cost": 10, "effect": "heal", "can_aoe": False},
+
 
 
 
@@ -66,6 +72,8 @@ LEVEL_1_PLAYER_ABILITY_SEEDS = [
  {"id": "fire_magic_lv1_fireball", "name": "Fireball", "description": "A ball of searing flame.", "ability_type": "magic", "level":1, "elements": ["fire"], "base_power":9, "ap_cost":10, "effect": "damage", "can_aoe": True},
  {"id": "air_magic_lv1_shredding_gust", "name": "Shredding Gust", "description": "A of shredding wind.", "ability_type": "magic", "level":1, "elements": ["air"], "base_power":9, "ap_cost":10, "effect": "damage", "can_aoe": True},
  {"id": "earth_magic_lv1_tremor", "name": "Tremor", "description": "The ground quakes and tears.", "ability_type": "magic", "level":1, "elements": ["earth"], "base_power":9, "ap_cost":10, "effect": "damage", "can_aoe": True},
+  ##NEW: IMPLEMENTATION_SPEC_class_growth_elements.md 3.2 — fills the magic L1 fire gap (Veyr)
+ {"id": "fire_magic_lv1_cinder_flick", "name": "Cinder Flick", "description": "A flicked ember that bursts on contact.", "ability_type": "magic", "level": 1, "elements": ["fire"], "base_power": 10, "ap_cost": 9, "effect": "damage", "can_aoe": False},
  
 
 
@@ -102,6 +110,9 @@ LEVEL_1_PLAYER_ABILITY_SEEDS = [
  
    ##STATUS EFFECT
  {"id": "dark_skill_lv1_tranq_dart", "name": "Tranq Dart", "description": "A dart tipped with a sedative.", "ability_type": "skill", "level":1, "elements": ["dark"], "base_power":1, "ap_cost":11, "effect": "status", "status_keys": ["sleep"], "can_aoe": False},
+
+   ##NEW: IMPLEMENTATION_SPEC_class_growth_elements.md 3.2 — fills the skill L1 air gap (Nia)
+ {"id": "air_skill_lv1_wind_jab", "name": "Wind Jab", "description": "A jab so fast it carries a gust behind it.", "ability_type": "skill", "level": 1, "elements": ["air"], "base_power": 9, "ap_cost": 8, "effect": "damage", "can_aoe": False},
 
 
  # NON PLAYER ABILITIES

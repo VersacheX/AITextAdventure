@@ -5,6 +5,11 @@ LEVEL_5_SKILL_ABILITY_SEEDS = [
     {"id": "water_skill_lv5_riptide_chain", "name": "Riptide Chain", "description": "A linked rip that catches multiple foes.", "ability_type": "skill", "level":5, "elements": ["water", "water", "air", "light", "earth"], "base_power":165, "ap_cost":170, "effect": "damage", "can_aoe": True},
     {"id": "fire_skill_lv5_ember_wake", "name": "Ember Wake", "description": "A wake of embers follows your strike.", "ability_type": "skill", "level":5, "elements": ["fire", "earth", "air", "light", "dark"], "base_power":165, "ap_cost":170, "effect": "damage", "can_aoe": True},
 
+  #### NEW: IMPLEMENTATION_SPEC_class_growth_elements.md 3.2 — skill Tier 5 is thin (Ghost 2, Dare 3; minimum 4)
+    {"id": "dark_dark_ice_air_water_skill_lv5_shadow_waltz", "name": "Shadow Waltz", "description": "A dance of cold shadows that strikes from every angle at once.", "ability_type": "skill", "level": 5, "elements": ["dark", "dark", "ice", "air", "water"], "base_power": 192, "ap_cost": 178, "effect": "damage", "can_aoe": False},
+    {"id": "ice_ice_dark_electric_earth_skill_lv5_frostfang_flurry", "name": "Frostfang Flurry", "description": "A flurry of freezing strikes that leaves the target numb and exposed.", "ability_type": "skill", "level": 5, "elements": ["ice", "ice", "dark", "electric", "earth"], "base_power": 2, "ap_cost": 175, "effect": "status", "status_keys": ["dexterity_debuff", "defense_debuff", "elemental_debuff"], "can_aoe": False},
+    {"id": "electric_electric_fire_air_light_skill_lv5_storm_edge", "name": "Storm Edge", "description": "A blade-rush wrapped in crackling lightning and flame.", "ability_type": "skill", "level": 5, "elements": ["electric", "electric", "fire", "air", "light"], "base_power": 192, "ap_cost": 180, "effect": "damage", "can_aoe": False},
+
   #### NON PLAYER ABILITIES
     # rapture_trial — damage: pure adrenaline burst
     {"id": "adrenaline_surge", "name": "Adrenaline Surge", "description": "Rapture floods the body with manufactured adrenaline until every nerve is screaming forward — a burst of violence so fast and total that it doesn't feel like a choice so much as a detonation.", "ability_type": "skill", "level": 5, "elements": ["fire", "electric", "air", "fire", "electric"], "base_power": 160, "ap_cost": 126, "effect": "damage", "can_aoe": False, "non_player_ability": True},

@@ -238,17 +238,19 @@ class LearnOverlay(Static):
         """Update all UI elements with current filter and selection."""
         # Get player name for display
         player_name = rich_escape(str(getattr(self._player, "name", "Character")))
-        
+
         # Update slots info
         slots = int(getattr(self._player, "unused_ability_slots", 0) or 0)
+        elements = [str(e).title() for e in (getattr(self._player, "elements_base", None) or [])]
+        elements_str = f"  |  Elements: {' · '.join(elements)}" if elements else ""
         try:
             if slots > 0:
                 self.query_one("#slots-info", Static).update(
-                    f"[bold]{player_name}[/bold]  |  Available Ability Slots: [yellow]{slots}[/yellow]  |  [dim]Click to select, press Enter or click Learn button[/dim]"
+                    f"[bold]{player_name}[/bold]  |  Available Ability Slots: [yellow]{slots}[/yellow]{elements_str}  |  [dim]Click to select, press Enter or click Learn button[/dim]"
                 )
             else:
                 self.query_one("#slots-info", Static).update(
-                    f"[bold]{player_name}[/bold]  |  [dim]No ability slots available[/dim]"
+                    f"[bold]{player_name}[/bold]{elements_str}  |  [dim]No ability slots available[/dim]"
                 )
         except Exception:
             pass

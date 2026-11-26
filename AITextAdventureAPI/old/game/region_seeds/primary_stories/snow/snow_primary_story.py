@@ -27,17 +27,17 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         'body_armor': 'glacial_breastplate',
         'leg_armor': 'glacial_shins_mk2',
         'equipped_weapon': 'glacial_spear',
-        'max_hp': 1169,
-        'current_hp': 1169,
-        'max_ap': 250,
-        'current_ap': 250,
+        'max_hp': 2099,
+        'current_hp': 2099,
+        'max_ap': 240,
+        'current_ap': 240,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 158,
-        'dexterity': 38,
-        'intelligence': 38,
-        'constitution': 102,
+        'strength': 159,
+        'dexterity': 37,
+        'intelligence': 37,
+        'constitution': 99,
         'level': 30,
         'abilities': [
             'lv2_unique_ability_technique_korin_frost_step',
@@ -52,6 +52,7 @@ NPCS = [
     {
         'npc_id': 'kor_in',
         'name': 'Kor-in',
+        'sex': 'M',
         'description': (
             'An ice trapper whose wife was frozen alive by Lady Aeriola\'s time-stopping spell.'
             ' Kor-in shattered the ice with his bare hands, but she was already gone.'
