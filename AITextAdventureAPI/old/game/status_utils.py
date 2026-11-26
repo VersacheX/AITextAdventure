@@ -267,6 +267,8 @@ def apply_regen(entity: Optional[object]) -> Dict[str, Any]:
 			hpt = s.get('heal_per_turn')
 			if hpt is not None:
 				amt = int(hpt * LOW_DMG_STATUS_MOD * 0.10)
+				if hpt > 0:
+					amt = max(1, amt)
 				if amt >0:
 					# use heal if available
 					restored = entity.heal(amt)
