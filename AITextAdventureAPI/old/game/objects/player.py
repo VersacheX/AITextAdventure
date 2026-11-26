@@ -154,6 +154,9 @@ class Player:
 		if int(getattr(self, 'hp_formula_version', 1) or 1) < HP_FORMULA_VERSION:
 			lv = max(1, int(getattr(self, 'level', 1) or 1))
 			cls = getattr(self, 'character_class', None)
+			if not cls:
+				cid = getattr(self, 'npc_id', None) or getattr(self, 'id', None)
+				cls = (getattr(const, 'CHARACTER_NPC_CLASS_MAP', {}) or {}).get(cid)
 			con_per_level = 3 if cls in ('technique', 'spirit') else 1
 			con_gained = (lv - 1) * con_per_level
 			delta = (lv - 1) * (HP_PER_LEVEL - 20) + con_gained * (HP_PER_CON_ON_LEVEL - 2)

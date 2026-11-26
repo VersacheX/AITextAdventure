@@ -69,7 +69,7 @@ def generate_player(name: str = 'Test', focus: str = 'technique', target_level: 
         p.max_ap += pp - hp
         p.unused_stat_points = 0
         p.unused_power_points = 0
-        p.unused_ability_slots = 0
+        p.unused_ability_slots = 1
         p.current_hp, p.current_ap = p.max_hp, p.max_ap
 
         for new_level in range(2, max(2, target_level + 1)):

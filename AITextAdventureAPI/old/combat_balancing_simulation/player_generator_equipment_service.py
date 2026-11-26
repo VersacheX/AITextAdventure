@@ -114,7 +114,7 @@ def pick_abilities_for_player(
 
             if str(a.get('ability_type', '')).lower() != str(ability_type_focus).lower():
                 continue
-        if not can_learn(player, a, check_stats=False):
+        if not can_learn(player, a):
             continue
         if not meets_ability_requirements(
             a,

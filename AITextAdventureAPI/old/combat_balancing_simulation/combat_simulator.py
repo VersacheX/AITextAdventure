@@ -336,7 +336,14 @@ class CombatSimulation:
             for tu in target_units:
                 if tu is not None:
                     target_entities.append(tu.entity)
-        
+
+        # Clear stale immunity flags from a previous damage call so a
+        # non-damaging ability (heal/cure/status) on this turn doesn't
+        # misreport immunity from an earlier hit.
+        for te in target_entities:
+            if hasattr(te, 'last_damage_immune'):
+                te.last_damage_immune = False
+
         res = actor.use_ability(ability, target=None, targets=target_entities)
 
         out['action_result'] = res
