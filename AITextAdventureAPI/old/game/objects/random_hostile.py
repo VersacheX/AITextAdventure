@@ -120,6 +120,8 @@ class RandomHostile:
 		if amount <=0:
 			return 0
 		self.last_broken_armor = []
+		self.last_damage_immune = False
+		elements = status_utils.with_physical_stack(elements, physical)
 		armor_block = 0
 		if physical:
 			armor_block = int(self.defense or 0)
@@ -129,12 +131,15 @@ class RandomHostile:
 		net = max(0, amount - armor_block)
 
 		if elements:
-			net = int(net * status_utils.elemental_multiplier(
+			mult = status_utils.elemental_multiplier(
 				elements,
 				self.immunities,
 				self.weaknesses,
 				self.resistances,
-			))
+			)
+			if mult == 0.0:
+				self.last_damage_immune = True
+			net = int(net * mult)
 
 		net = status_utils.compute_incoming_damage(self, net, elements, is_physical=physical)
 
@@ -254,7 +259,7 @@ class RandomHostile:
 		# collect elements and apply outgoing modifiers
 		base_elements = None
 		elems = status_utils.collect_attack_elements(self, base_elements)
-		damage = status_utils.compute_outgoing_damage(self, damage, elems if elems else None, is_basic_attack=True)
+		damage = status_utils.compute_outgoing_damage(self, damage, elems if elems else None, is_physical=True)
 
 		# crit
 		if crit_chance and (random.random() *100) < crit_chance:

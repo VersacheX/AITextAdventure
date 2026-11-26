@@ -50,11 +50,12 @@ NPCS = [
 	{
 		"npc_id": "paradox",
 		"name": "Paradox",
+		"sex": "M",
 		"description": (
 			"The Voidwalker of contradiction — a being that does not destroy meaning directly but makes all"
 			" meaning simultaneously true and false, collapsing the difference between choice and its opposite."
-			" Where Crux deconstructs, Paradox entangles. It speaks in perfect logical contradictions that"
-			" somehow feel undeniable, and it takes a specific, predatory joy in watching coherent minds unravel."
+			" Where Crux deconstructs, Paradox entangles. He speaks in perfect logical contradictions that"
+			" somehow feel undeniable, and he takes a specific, predatory joy in watching coherent minds unravel."
 		),
 		"theme_song": "Paranoid Android, Radiohead",
 		"psychology": {
@@ -62,15 +63,15 @@ NPCS = [
 			"dominant": "Ne - Generates an endless, weaponized cascade of equally valid and equally impossible interpretations for every thought, belief, and action.",
 			"auxiliary": "Ti - Constructs each paradox with airtight internal logic, making it impossible to dismiss without first being trapped inside it.",
 			"tertiary": "Fe - Has a sophisticated, predatory read on which contradiction will hurt each specific person most deeply.",
-			"inferior": "Si - Has no stable memory or past of its own; it exists only in the present moment of contradiction."
+			"inferior": "Si - Has no stable memory or past of his own; he exists only in the present moment of contradiction."
 		},
 		"enneagram": {
 			"enneagram_type": "7w8",
 			"core_fear": "That a single, unambiguous truth might exist and be perceived as such.",
-			"core_desire": "To make every possible statement — including its own existence — simultaneously true and false.",
+			"core_desire": "To make every possible statement — including his own existence — simultaneously true and false.",
 			"defense_mechanism": "Rationalization — Every act of destruction is framed as liberation from the tyranny of singular meaning.",
-			"stress_line": "Moves to Type 1 — Becomes violently rigid and punishing when the party refuses to be trapped in its paradoxes.",
-			"growth_line": "Moves to Type 5 — (Hypothetically) Would turn its understanding of contradiction into genuine intellectual discovery.",
+			"stress_line": "Moves to Type 1 — Becomes violently rigid and punishing when the party refuses to be trapped in his paradoxes.",
+			"growth_line": "Moves to Type 5 — (Hypothetically) Would turn his understanding of contradiction into genuine intellectual discovery.",
 			"instinctual_variant": "sx/so — Forms devastating one-on-one conceptual attacks on each party member, then uses the collective disorientation to dominate."
 		},
         'image': 'voidwalkers:paradox1.jpeg',

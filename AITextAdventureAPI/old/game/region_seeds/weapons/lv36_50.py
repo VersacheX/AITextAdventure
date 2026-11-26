@@ -90,7 +90,7 @@ WEAPONS_LV36_50 = [
     {
         "id": "blazeheart_staff",
         "name": "Blazeheart Staff",
-        "description": "A twin-core variant of the Flameheart — two preserved embers wound together, their competing heat creating an unstable surge that Veyr has learned to channel.",
+        "description": "A twin-core variant of the Flameheart: two preserved embers wound together, their competing heat creating an unstable surge that takes skill to channel.",
         "damage": 44,
         "damage_type": "energy",
         "ap_cost": 3,
@@ -131,7 +131,7 @@ WEAPONS_LV36_50 = [
     {
         "id": "scepter_of_dominion",
         "name": "Scepter of Dominion",
-        "description": "A ceremonial scepter whose grip is wrapped in compressed void-thread. It was never meant to be carried openly — Sylvara carries it openly.",
+        "description": "A ceremonial scepter whose grip is wrapped in compressed void-thread. It was never meant to be carried openly.",
         "damage": 44,
         "damage_type": "energy",
         "ap_cost": 3,
@@ -152,7 +152,7 @@ WEAPONS_LV36_50 = [
     {
         "id": "voltage_wrench",
         "name": "Voltage Wrench",
-        "description": "An oversized wrench rebuilt with conductive plating and a charge accumulator in the handle. It was originally a repair tool. Maddox improved it.",
+        "description": "An oversized wrench rebuilt with conductive plating and a charge accumulator in the handle. It was a repair tool once. It has been improved.",
         "damage": 44,
         "damage_type": "bludgeoning",
         "ap_cost": 2,
@@ -172,7 +172,7 @@ WEAPONS_LV36_50 = [
     {
         "id": "shockdart_launcher",
         "name": "Shockdart Launcher",
-        "description": "A wrist-mounted launcher Maddox built from salvage — fires compressed-charge darts at range. He lost the safety toggle on the third iteration. He doesn't miss it.",
+        "description": "A wrist-mounted launcher built from salvage that fires compressed-charge darts at range. The safety toggle went missing several versions ago.",
         "damage": 44,
         "damage_type": "energy",
         "ap_cost": 2,
@@ -193,7 +193,7 @@ WEAPONS_LV36_50 = [
     {
         "id": "command_greataxe",
         "name": "Command Greataxe",
-        "description": "A two-handed greataxe forged in a forward operating base under active siege. The haft is wrapped in field-stripped uniform cord — his soldiers', not his own.",
+        "description": "A two-handed greataxe forged in a forward operating base under active siege. The haft is wrapped in field-stripped uniform cord taken from the soldiers who held the line.",
         "damage": 46,
         "damage_type": "slashing",
         "ap_cost": 3,
@@ -213,7 +213,7 @@ WEAPONS_LV36_50 = [
     {
         "id": "wardens_claymore",
         "name": "Warden's Claymore",
-        "description": "A claymore bearing the warden crest — commissioned for Drax when he was promoted. He's outgrown the rank the sword represents. He still carries it.",
+        "description": "A claymore bearing the warden crest, commissioned as a promotion gift. Its owners tend to outgrow the rank and keep the sword.",
         "damage": 46,
         "damage_type": "slashing",
         "ap_cost": 3,
@@ -254,7 +254,7 @@ WEAPONS_LV36_50 = [
     {
         "id": "phantom_edge",
         "name": "Phantom Edge",
-        "description": "A single-edge variant of the Phantom Blade — thinner profile, silent draw. Ghost had the spine shaved down. Nobody else can hold it at the right angle.",
+        "description": "A single-edge variant of the Phantom Blade with a thinner profile, a silent draw and a shaved-down spine that only the right grip can hold at the proper angle.",
         "damage": 44,
         "damage_type": "slashing",
         "ap_cost": 2,
@@ -275,7 +275,7 @@ WEAPONS_LV36_50 = [
     {
         "id": "omen_staff",
         "name": "Omen Staff",
-        "description": "A gnarled staff grown from a tree struck by lightning at the exact moment of a fracture event. Every vision Eldon has had since has passed through it first.",
+        "description": "A gnarled staff grown from a tree struck by lightning at the exact moment of a fracture event. Visions pass through it first.",
         "damage": 44,
         "damage_type": "energy",
         "ap_cost": 3,
@@ -295,7 +295,7 @@ WEAPONS_LV36_50 = [
     {
         "id": "seer_focus_wand",
         "name": "Seer's Focus Wand",
-        "description": "A short wand carved from vision-bone — a material that softens at the moment of prophecy and hardens again when the vision resolves. Eldon keeps it in constant contact with her palm.",
+        "description": "A short wand carved from vision-bone, a material that softens at the moment of prophecy and hardens again when the vision resolves. It works best kept against the palm.",
         "damage": 44,
         "damage_type": "energy",
         "ap_cost": 3,
@@ -336,7 +336,7 @@ WEAPONS_LV36_50 = [
     {
         "id": "leverage_maul",
         "name": "Leverage Maul",
-        "description": "A heavy maul commissioned from the same foundry that cast Voss's first corporate seal. Its head is shaped like a gavel. This was intentional.",
+        "description": "A heavy maul cast in the same foundry as a corporate seal. Its head is shaped like a gavel. This was intentional.",
         "damage": 60,
         "damage_type": "bludgeoning",
         "ap_cost": 3,

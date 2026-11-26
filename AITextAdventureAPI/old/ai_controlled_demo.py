@@ -17,7 +17,7 @@ import random
 from game import constants as const
 from game.constants import ROAD, BUILDING, ALLEY, DIRECTIONAL_MAPPING
 from game.objects.player_game import PlayerGame
-from game.objects.player import Player
+from game.objects.player import Player, HP_PER_CON_AT_CREATION
 
 # services
 from services.player_movement_service import (
@@ -81,7 +81,8 @@ def setup_player_stats(p: Player) -> None:
     power_pts = getattr(p, 'power_points_per_level',10)
     hp_alloc = power_pts
     ap_alloc =0
-    p.level_up(strn, dex, con, intel, hp_alloc, ap_alloc, None)
+    p.allocate_stats(strn, dex, con, intel, hp_per_con=HP_PER_CON_AT_CREATION)
+    p.apply_power_point_allocation(hp_alloc, ap_alloc)
 
 
 def _format_status_lines(entity) -> list:

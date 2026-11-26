@@ -3,6 +3,11 @@ LEVEL_5_TECHNIQUE_ABILITY_SEEDS = [
     {"id": "earth_technique_lv5_seismic_wave", "name": "Seismic Wave", "description": "A concussive wall of earth.", "ability_type": "technique", "level":5, "elements": ["earth", "earth", "air", "dark", "fire"], "base_power":194, "ap_cost":174, "effect": "damage", "can_aoe": False}, 
     {"id": "technique_lv5_ravaging_strike", "name": "Ravaging Strike", "description": "A devastating single-target brutal strike.", "ability_type": "technique", "level":5, "elements": ["earth", "fire", "dark", "air", "light"], "base_power":192, "ap_cost":180, "effect": "damage", "can_aoe": False},
 
+    #### NEW: IMPLEMENTATION_SPEC_class_growth_elements.md 3.2 — technique has only 2 Tier 5 abilities today (minimum 4)
+    {"id": "ice_ice_earth_water_air_technique_lv5_glacier_breaker", "name": "Glacier Breaker", "description": "A crushing overhead blow that splits the ground into frozen shards.", "ability_type": "technique", "level": 5, "elements": ["ice", "ice", "earth", "water", "air"], "base_power": 192, "ap_cost": 180, "effect": "damage", "can_aoe": False},
+    {"id": "electric_electric_fire_earth_light_technique_lv5_stormforged_charge", "name": "Stormforged Charge", "description": "A lightning-fast charge that ends in a molten, thunderous impact.", "ability_type": "technique", "level": 5, "elements": ["electric", "electric", "fire", "earth", "light"], "base_power": 192, "ap_cost": 180, "effect": "damage", "can_aoe": False},
+    {"id": "earth_earth_light_fire_ice_technique_lv5_titanfall", "name": "Titanfall", "description": "A leaping strike that lands with the weight of a mountain.", "ability_type": "technique", "level": 5, "elements": ["earth", "earth", "light", "fire", "ice"], "base_power": 186, "ap_cost": 176, "effect": "damage", "can_aoe": True},
+    {"id": "earth_light_water_electric_ice_technique_lv5_iron_bastion", "name": "Iron Bastion", "description": "A war cry that locks the party into an unbreakable formation.", "ability_type": "technique", "level": 5, "elements": ["earth", "light", "water", "electric", "ice"], "base_power": 0, "ap_cost": 170, "effect": "status", "status_keys": ["defense_buff", "defense_buff", "elemental_defense_buff", "constitution_buff"], "can_aoe": True},
 
     #### NON PLAYER ABILITIES
     # cataclysm — damage: apocalyptic physical annihilation, the scheduled end of things

@@ -28,17 +28,17 @@ ATTAINABLE_PLAYER_CHARACTERS = [
 		"body_armor": "epochthread_robe",
 		"leg_armor": "timelock_sandals",
 		"equipped_weapon": "aurora_staff",
-		"max_hp": 2400,
-		"current_hp": 2400,
-		"max_ap": 840,
-		"current_ap": 840,
+		"max_hp": 5664,
+		"current_hp": 5664,
+		"max_ap": 1020,
+		"current_ap": 1020,
 		"unused_ability_slots": 0,
 		"unused_stat_points": 0,
 		"unused_power_points": 0,
-		"strength": 120,
-		"dexterity": 200,
-		"intelligence": 400,
-		"constitution": 280,
+		"strength": 92,
+		"dexterity": 92,
+		"intelligence": 434,
+		"constitution": 264,
 		"abilities": [
 			"lv2_unique_ability_spirit_seraphine_hollow_hymn",
 			"lv3_unique_ability_spirit_seraphine_true_harmony",
@@ -52,6 +52,7 @@ NPCS = [
 	{
 		"npc_id": "seraphine",
 		"name": "Seraphine",
+		"sex": "F",
 		"description": (
 			"A singer who has kept her community alive in the rotting forest of Aurelion Veil by weaving a"
 			" perfect, unbroken harmony around them. Her song is real magic - it holds the rot at bay and"

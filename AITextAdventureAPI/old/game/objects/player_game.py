@@ -890,8 +890,7 @@ class PlayerGame:
 
 			npc_id = self.pending_character
 			p = self.generate_player_character(seed=seed, level=self.get_max_character_level(), character_npc_id=npc_id)
-			p.npc_id = npc_id		
-			p.character_class = npc_id
+			p.npc_id = npc_id
 
 			self.add_character(p)
 			self.twisted_character = self.pending_character
@@ -1024,8 +1023,11 @@ class PlayerGame:
 		display_name = f"{const.CHARACTER_CLASS_MAP.get(atype, atype).strip()}"
 
 		from combat_balancing_simulation.player_generator import generate_player
-		player = generate_player(name=display_name, focus=atype, target_level=level, seed=seed, player_game=self)
+		from game.objects.player import assign_character_elements
+		elements_base = (getattr(const, 'CHARACTER_NPC_ELEMENT_MAP', {}) or {}).get(atype, [])
+		player = generate_player(name=display_name, focus=atype, target_level=level, seed=seed, player_game=self, elements_base=elements_base)
 		player.character_class = atype
+		assign_character_elements(player, char_id=atype, overwrite=True)
 
 		return player
 
@@ -1081,6 +1083,10 @@ class PlayerGame:
 						break
 			if inferred:
 				character.character_class = inferred
+
+		if character is not None:
+			from game.objects.player import assign_character_elements
+			assign_character_elements(character)
 
 		self.characters.append(character)
 		if len(self.active_party) < self.max_party_count:
@@ -2064,7 +2070,9 @@ class PlayerGame:
 
 		# Backfill class assignments on legacy character objects from older saves.
 		class_map = getattr(const, 'CHARACTER_NPC_CLASS_MAP', {}) or {}
+		from game.objects.player import assign_character_elements
 		for ch in (getattr(self, 'characters', None) or []):
+			assign_character_elements(ch)
 			if getattr(ch, 'character_class', None):
 				continue
 			cid = getattr(ch, 'npc_id', None) or getattr(ch, 'id', None)

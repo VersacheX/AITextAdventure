@@ -47,7 +47,7 @@ WEAPONS_LV51_65 = [
     {
         "id": "tiderunner_blades",
         "name": "Tiderunner Blades",
-        "description": "A matched pair of short blades balanced for dual-wield at speed. The off-hand blade is weighted heavier — Dare claims it evens out the spin. He is correct.",
+        "description": "A matched pair of short blades balanced for dual-wield at speed. The off-hand blade is weighted heavier to even out the spin.",
         "damage": 65,
         "damage_type": "slashing",
         "ap_cost": 2,
@@ -68,7 +68,7 @@ WEAPONS_LV51_65 = [
     {
         "id": "mending_staff",
         "name": "Mending Staff",
-        "description": "A staff grown from a single branch of a living tree that has never stopped healing itself. Rynn keeps it wrapped in bandages between use — old habit.",
+        "description": "A staff grown from a single branch of a living tree that has never stopped healing itself. It is often kept wrapped in bandages between uses.",
         "damage": 72,
         "damage_type": "energy",
         "ap_cost": 3,
@@ -88,7 +88,7 @@ WEAPONS_LV51_65 = [
     {
         "id": "mending_scepter",
         "name": "Mending Scepter",
-        "description": "A shorter scepter variant of the Mending Staff — easier to manage in tight field conditions. The head is shaped to double as a splinting post. Rynn has used it that way.",
+        "description": "A shorter scepter variant of the Mending Staff, easier to manage in tight field conditions. The head doubles as a splinting post.",
         "damage": 72,
         "damage_type": "energy",
         "ap_cost": 3,
@@ -109,7 +109,7 @@ WEAPONS_LV51_65 = [
     {
         "id": "cryptseal_blade",
         "name": "Cryptseal Blade",
-        "description": "A short broad-blade etched with classified registry marks — some of them hers, most of them not. Each mark is a file she never returned.",
+        "description": "A short broad-blade etched with classified registry marks. Each mark is a file that was never returned.",
         "damage": 80,
         "damage_type": "slashing",
         "ap_cost": 2,
@@ -129,7 +129,7 @@ WEAPONS_LV51_65 = [
     {
         "id": "codex_blade",
         "name": "Codex Blade",
-        "description": "A blade etched with the index of Anita's personal codex — a document that no longer exists anywhere else. The blade is the only copy.",
+        "description": "A blade etched with the index of a private codex that no longer exists anywhere else. The blade is the only copy.",
         "damage": 80,
         "damage_type": "slashing",
         "ap_cost": 2,

@@ -21,7 +21,7 @@ ARMOR_LV21_35 = {
         {
             "id": "barkhide_helm",
             "name": "Barkhide Helm",
-            "description": "A helm grown from hardened bark, shaped by Thorn's own hands.",
+            "description": "A helm grown from hardened bark, its grain still following the shape of the branch it was cut from.",
             "defense": 28,
             "durability": 420,
             "max_durability": 420,
@@ -69,10 +69,10 @@ ARMOR_LV21_35 = {
     "legs": [
         { "id": "glacial_shins_mk2", "name": "Glacial Shins Mk II", "description": "Shin guards rimed in eternal frost.", "defense": 26, "durability": 440, "max_durability": 440, "value": 3400, "min_spawn_level": 30, "rarity": "notfound", "strength": 12, "dexterity": 6, "intelligence": 22, "constitution": 20, "elements": ["ice"] },
         { "id": "oasis_walker_greaves", "name": "Oasis‑Walker Greaves", "description": "Light greaves that cool the feet and steady the stride across burning dunes.", "defense": 20, "durability": 440, "max_durability": 440, "value": 3400, "min_spawn_level": 30, "rarity": "notfound", "strength": 4, "dexterity": 16, "intelligence": 20, "constitution": 24, "elements": ["water", "earth"] },
-        { "id": "rootwalker_greaves", "name": "Rootwalker Greaves", "description": "Greaves that grip the ground like roots, steadying Thorn's feral stance.", "defense": 30, "durability": 480, "max_durability": 480, "value": 3600, "min_spawn_level": 30, "rarity": "notfound", "strength": 16, "dexterity": 10, "intelligence": 2, "constitution": 26, "elements": ["earth", "water"] },
+        { "id": "rootwalker_greaves", "name": "Rootwalker Greaves", "description": "Greaves that grip the ground like roots, anchoring a low, feral stance against any push.", "defense": 24, "durability": 440, "max_durability": 440, "value": 3400, "min_spawn_level": 30, "rarity": "notfound", "strength": 14, "dexterity": 4, "intelligence": 8, "constitution": 26, "elements": ["earth"] },
         { "id": "windrunner_greaves", "name": "Windrunner Greaves", "description": "Greaves that leave faint trails of wind with every step.", "defense": 22, "durability": 400, "max_durability": 400, "value": 3400, "min_spawn_level": 30, "rarity": "notfound", "strength": 4, "dexterity": 30, "intelligence": 8, "constitution": 18, "elements": ["air", "light"] },
         { "id": "stonebinder_greaves", "name": "Stonebinder Greaves", "description": "Greaves reinforced with deep‑stone alloys, etched with void‑scar warnings.", "defense": 28, "durability": 460, "max_durability": 460, "value": 3600, "min_spawn_level": 30, "rarity": "notfound", "strength": 6, "dexterity": 20, "intelligence": 22, "constitution": 18, "elements": ["earth", "dark"] },
         { "id": "tidebound_greaves", "name": "Tidebound Greaves", "description": "Greaves that lighten the step, as if walking on the sea's surface.", "defense": 22, "durability": 420, "max_durability": 420, "value": 3400, "min_spawn_level": 30, "rarity": "notfound", "strength": 2, "dexterity": 14, "intelligence": 22, "constitution": 20, "elements": ["water", "air"] },
-        { "id": "bogwalker_greaves", "name": "Bogwalker Greaves", "description": "Greaves coated in slick mire‑resin, letting Grimnaw stride through rot without sinking.", "defense": 24, "durability": 420, "max_durability": 420, "value": 3400, "min_spawn_level": 30, "rarity": "notfound", "strength": 4, "dexterity": 20, "intelligence": 22, "constitution": 18, "elements": ["water", "dark"] },
+        { "id": "bogwalker_greaves", "name": "Mireweave Greaves", "description": "Greaves coated in slick mire‑resin that lets the wearer stride through rot and sludge without sinking.", "defense": 22, "durability": 420, "max_durability": 420, "value": 3400, "min_spawn_level": 30, "rarity": "notfound", "strength": 4, "dexterity": 12, "intelligence": 20, "constitution": 24, "elements": ["dark", "water"] },
     ],
 }

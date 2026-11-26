@@ -148,7 +148,7 @@ ACCESSORY_SEEDS: List[Dict[str, Any]] = [
     {
         'id': 'brute_knuckle',
         'name': 'Brute Knuckle',
-        'description': 'A weighted knuckle guard that adds raw force to every swing. Resists physical, weak to electric.',
+        'description': 'A weighted knuckle guard that adds raw force to every swing. Resists earth, weak to electric.',
         'min_level': 9, 'rarity': 'notfound', 'value': 520,
         'immunities': [], 'resistances': ['earth'], 'weaknesses': ['electric'],
         'strength': 4, 'dexterity': 0, 'intelligence': 0, 'constitution': 2,

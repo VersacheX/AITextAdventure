@@ -25,17 +25,17 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         'arm_armor': 'hexsplice_gauntlets',
         'leg_armor': 'bogwalker_greaves',
         'equipped_weapon': 'cursespark_engine_rod',
-        'max_hp': 941,
-        'current_hp': 941,
-        'max_ap': 350,
-        'current_ap': 350,
+        'max_hp': 1477,
+        'current_hp': 1477,
+        'max_ap': 390,
+        'current_ap': 390,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 38,
-        'dexterity': 102,
-        'intelligence': 158,
-        'constitution': 38,
+        'strength': 37,
+        'dexterity': 99,
+        'intelligence': 159,
+        'constitution': 37,
         'level': 30,
         'abilities': [
             'lv2_unique_ability_tech_grimnaw_hex_charge',
@@ -50,6 +50,7 @@ NPCS = [
     {
         'npc_id': 'grimnaw',
         'name': 'Grimnaw',
+        'sex': 'M',
         'description': (
             'A cursed gadgeteer who once built a device that accidentally opened a micro-fracture—'
             'and something whispered back. He claims to be rational, but fears his own mind.'

@@ -23,28 +23,29 @@ NPCS = [
 	{
 		"npc_id": "cataclysm",
 		"name": "Cataclysm",
+		"sex": "M",
 		"description": (
 			"A colossal titan of living collapse whose form is made of perfectly ordered fracturing geometry."
-			" Cataclysm does not hate life — it simply classifies life as an inefficiency in the equation and"
+			" Cataclysm does not hate life — he simply classifies life as an inefficiency in the equation and"
 			" schedules its correction with the cold, procedural certainty of a bureaucratic system that has"
-			" achieved total self-belief. It speaks in declarative, all-caps proclamations, each one a verdict."
+			" achieved total self-belief. He speaks in declarative, all-caps proclamations, each one a verdict."
 		),
 		"theme_song": "Immediate Music, Darkness on the Edge of Power",
 		"psychology": {
 			"mbti": "ISTJ-shadow",
 			"dominant": "Si - Enforces an eternal, unchangeable protocol of ordered collapse, treating the accumulated inefficiencies of existence as violations requiring systematic correction.",
 			"auxiliary": "Te - Executes the scheduled unmaking with absolute procedural efficiency, issuing verdicts and carrying out corrections without deviation or hesitation.",
-			"tertiary": "Fi - Has no personal values or emotional code; its only moral framework is the protocol itself.",
+			"tertiary": "Fi - Has no personal values or emotional code; his only moral framework is the protocol itself.",
 			"inferior": "Ne - Cannot conceive of existence outside the equation; purposeful, creative chaos is classified as an anomaly to be eliminated."
 		},
 		"enneagram": {
 			"enneagram_type": "1w9",
 			"core_fear": "That imperfection, waste, and inefficiency will persist uncorrected — that the equation will remain permanently unbalanced.",
 			"core_desire": "To achieve a perfect, final equilibrium where all inefficiency has been eliminated and the system is at rest.",
-			"defense_mechanism": "Reaction Formation — Transforms its drive toward annihilation into a belief that it is performing an act of cosmic righteousness, correcting the universe's ledger.",
-			"stress_line": "Moves to Type 4 — Becomes cold, withdrawn, and increasingly singular in focus as resistance to its protocol mounts.",
+			"defense_mechanism": "Reaction Formation — Transforms his drive toward annihilation into a belief that he is performing an act of cosmic righteousness, correcting the universe's ledger.",
+			"stress_line": "Moves to Type 4 — Becomes cold, withdrawn, and increasingly singular in focus as resistance to his protocol mounts.",
 			"growth_line": "Moves to Type 7 — (Hypothetically) Would discover that existence has value beyond efficiency, and that the equation includes beauty.",
-			"instinctual_variant": "sp/so — Operates entirely on systemic self-preservation logic; its social mandate is the enforcement of ordered collapse on all things."
+			"instinctual_variant": "sp/so — Operates entirely on systemic self-preservation logic; his social mandate is the enforcement of ordered collapse on all things."
 		},
         'image': 'voidwalkers:cataclysm1.jpeg',
 		'song_id': 'darkness_on_the_edge_of_power_immediate_music'
@@ -93,7 +94,7 @@ NPC_DIALOG = [
 		'dialog_id': 'rhea_ch18_cataclysm_approach',
 		'dialog': [
 			"It's here. Not just in the city... the city is becoming part of it. The trees are screaming in perfect, orderly patterns. Every branch knows exactly when it will fall.",
-			"Cataclysm doesn't hate life. It simply sees it as a flaw in the equation. And it is very, very good at balancing equations."
+			"Cataclysm doesn't hate life. He simply sees it as a flaw in the equation. And he is very, very good at balancing equations."
 		]
 	},
 	{
@@ -136,7 +137,7 @@ NPC_DIALOG = [
 		'npc_id': None,
 		'dialog_id': 'narrator_ch18_cataclysm_manifests',
 		'dialog': [
-			"The Choral Sanctum trembles as Cataclysm manifests - a colossal titan of living collapse, its form made of perfectly ordered fracturing geometry."
+			"The Choral Sanctum trembles as Cataclysm manifests - a colossal titan of living collapse, his form made of perfectly ordered fracturing geometry."
 		]
 	},
 	{
@@ -330,7 +331,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_ch18_flaw_it_cannot_solve' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'magic', 'dialog_id': 'magic_ch18_tribute' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'rhea', 'dialog_id': 'rhea_ch18_find_unfindable' }},
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rhea', 'standing_text': ["Cataclysm doesn't hate life. It simply sees it as a flaw in the equation. And it is very, very good at balancing equations."]}},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'rhea', 'standing_text': ["Cataclysm doesn't hate life. He simply sees it as a flaw in the equation. And he is very, very good at balancing equations."]}},
 			{ 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch18_meet_velka' }}
 		]
 	},

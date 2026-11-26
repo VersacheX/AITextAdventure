@@ -247,7 +247,7 @@ TASKS = [
 
 # ── Type C ── Alden Brightvein (extended character) ──────────────────────────
 # Gated by is_chapter_gte: 17. Alden has been rallying demoralized survivors
-# along the Gallows Rift passes. Harrock's word opens her trust — she won't
+# along the Gallows Rift passes. Harrock's word opens his trust — he won't
 # follow anyone who doesn't have a local warden's confidence.
 
 NPC_DIALOG += [
@@ -270,9 +270,9 @@ NPC_DIALOG += [
 		'dialog_id': 'harrock_c_vouch',
 		'dialog': [
 			"Alden kept three separate survivor camps from falling apart last season.",
-			"She didn't use authority — she used belief.",
-			"Tell her I said the Rift paths are safer when your party walks them.",
-			"She'll know what that means."
+			"He didn't use authority — he used belief.",
+			"Tell him I said the Rift paths are safer when your party walks them.",
+			"He'll know what that means."
 		]
 	},
 
@@ -299,14 +299,14 @@ NPC_DIALOG += [
         'npc_id': 'technique',
         'dialog_id': 'technique_mountains_mid_c_find_korina',
         'dialog': [
-            "She's been pulling survivor camps back together with belief instead of authority. Rare skill up here."
+			"He's been pulling survivor camps back together with belief instead of authority. Rare skill up here."
         ]
     },
     {
         'npc_id': 'spirit',
         'dialog_id': 'spirit_mountains_mid_c_find_korina',
         'dialog': [
-            "Trust is the only currency that holds value on the Rift passes. She wants a local warden to vouch first."
+			"Trust is the only currency that holds value on the Rift passes. He wants a local warden to vouch first."
         ]
     },
     {
@@ -322,21 +322,21 @@ NPC_DIALOG += [
         'npc_id': 'spirit',
         'dialog_id': 'spirit_mountains_mid_c_consult_harrock',
         'dialog': [
-            "She kept three separate camps from falling apart last season. She didn't use rank — she used belief."
+			"He kept three separate camps from falling apart last season. He didn't use rank — he used belief."
         ]
     },
     {
         'npc_id': 'tech',
         'dialog_id': 'tech_mountains_mid_c_consult_harrock',
         'dialog': [
-            "Tell her the Rift paths are safer when we walk them. She'll know what that means."
+			"Tell him the Rift paths are safer when we walk them. He'll know what that means."
         ]
     },
     {
         'npc_id': 'bragg',
         'dialog_id': 'bragg_mountains_mid_c_consult_harrock',
         'dialog': [
-            "Harrock doesn't say that about just anyone. That's the endorsement she needs."
+			"Harrock doesn't say that about just anyone. That's the endorsement he needs."
         ]
     },
 
@@ -345,7 +345,7 @@ NPC_DIALOG += [
         'npc_id': 'technique',
         'dialog_id': 'technique_mountains_mid_c_earn_korina',
         'dialog': [
-            "He's never said that about anyone. She's in."
+			"He's never said that about anyone. He's in."
         ]
     },
     {
@@ -569,7 +569,7 @@ TASKS += [
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'spirit', 'dialog_id': 'spirit_mountains_mid_c_consult_harrock' } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'tech',  'dialog_id': 'tech_mountains_mid_c_consult_harrock'  } },
             { 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'bragg', 'dialog_id': 'bragg_mountains_mid_c_consult_harrock' } },
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'warden_harrock', 'standing_text': [ "Alden kept three separate survivor camps from falling apart last season.", "She didn't use authority — she used belief.", "Tell her I said the Rift paths are safer when your party walks them.", "She'll know what that means." ] } },
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'warden_harrock', 'standing_text': [ "Alden kept three separate survivor camps from falling apart last season.", "He didn't use authority — he used belief.", "Tell him I said the Rift paths are safer when your party walks them.", "He'll know what that means." ] } },
 			{
 				'event_type': 'award_task',
 				'params': {
@@ -579,7 +579,7 @@ TASKS += [
 		]
 	},
 
-	# C-3 — Return to Korina; she joins
+	# C-3 — Return to Korina; he joins
 	{
 		'task_id': 'mountains_mid_city_type_c_earn_korina',
 		'type': 'meet',

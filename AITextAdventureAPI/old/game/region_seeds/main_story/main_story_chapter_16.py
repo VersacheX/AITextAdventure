@@ -230,27 +230,28 @@ NPCS = [
 	{
 		"npc_id": "crux",
 		"name": "Crux",
+		"sex": "M",
 		"description": (
 			"The Voidwalker of meaninglessness and paradox. Crux is a living contradiction - a presence that"
-			" unravels the logic that gives purpose its structure. It speaks in a voice of static and shattered"
+			" unravels the logic that gives purpose its structure. He speaks in a voice of static and shattered"
 			" glass, targeting each person's core drive and methodically dismantling it."
 		),
 		'theme_song': 'Everything In Its Right Place, Radiohead',
 		"psychology": {
 			"mbti": "INTP-shadow",
-			"dominant": "Ti - Applies merciless internal logic to deconstruct every claim of meaning, purpose, or identity, revealing what it frames as the hollow mechanism beneath.",
+			"dominant": "Ti - Applies merciless internal logic to deconstruct every claim of meaning, purpose, or identity, revealing what he frames as the hollow mechanism beneath.",
 			"auxiliary": "Ne - Generates an infinite cascade of interpretations of any act or belief, using the multiplicity to paralyze and negate.",
 			"tertiary": "Si - Weaponizes past failures and established patterns of defeat, using them as evidence that all future effort is predetermined to fail.",
 			"inferior": "Fe - Has no empathy; treats emotional investment as the vulnerability that makes deconstruction possible."
 		},
 		"enneagram": {
 			"enneagram_type": "5w4",
-			"core_fear": "That something genuinely has meaning and it cannot destroy it.",
-			"core_desire": "To be the definitive proof that nothing matters - to make its own nihilism the only remaining truth.",
-			"defense_mechanism": "Introjection — Has absorbed all meaninglessness into its own identity, becoming the void it preaches.",
-			"stress_line": "Moves to Type 7 — Becomes frantic and scattering when the party refuses to accept its nihilism.",
-			"growth_line": "Moves to Type 8 — (Hypothetically) Would learn to use its understanding of systems to build rather than destroy.",
-			"instinctual_variant": "sp/sx — Utterly consumed by its own internal state of negation; engages with the world only to pull it down into the void."
+			"core_fear": "That something genuinely has meaning and he cannot destroy it.",
+			"core_desire": "To be the definitive proof that nothing matters - to make his own nihilism the only remaining truth.",
+			"defense_mechanism": "Introjection — Has absorbed all meaninglessness into his own identity, becoming the void he preaches.",
+			"stress_line": "Moves to Type 7 — Becomes frantic and scattering when the party refuses to accept his nihilism.",
+			"growth_line": "Moves to Type 8 — (Hypothetically) Would learn to use his understanding of systems to build rather than destroy.",
+			"instinctual_variant": "sp/sx — Utterly consumed by his own internal state of negation; engages with the world only to pull it down into the void."
 		},
         'image': 'voidwalkers:crux1.jpeg',
 		'song_id': 'everything_in_its_right_place_radiohead'
@@ -384,7 +385,7 @@ NPC_DIALOG = [
 		'npc_id': 'marlo_finch',
 		'dialog_id': 'marlo_finch_ch16_explains_crux',
 		'dialog': [
-			"The Voidwalker known as Crux is at the heart of this wound. Its very presence is a living paradox that unravels logic.",
+			"The Voidwalker known as Crux is at the heart of this wound. His very presence is a living paradox that unravels logic.",
 			"It's not something you can fight with force. It must be out-thought... or perhaps felt."
 		]
 	},
@@ -562,7 +563,7 @@ NPC_DIALOG = [
 		'dialog_id': 'marlo_finch_ch16_again',
 		'dialog': [
 			"You're back. I felt the shift in the Spire from here. You actually confronted Crux...",
-			"The Spire is stable for now, but the paradox remains. Crux didn't die. It just burrowed deeper.",
+			"The Spire is stable for now, but the paradox remains. Crux didn't die. He just burrowed deeper.",
 			"It's a part of you now - all of you. It will always be a part of you. But it doesn't have to define you."
 		]
 	},
@@ -755,7 +756,7 @@ TASKS = [
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'vek', 'dialog_id': 'vek_ch16_rallies' }},
 			{ 'event_type': 'initiate_character_dialog', 'params': { 'npc_id': 'grimnaw', 'dialog_id': 'grimnaw_ch16_mutters' }},
 			{ 'event_type': 'initiate_dialog', 'params': { 'npc_id': 'marlo_finch', 'dialog_id': 'marlo_finch_ch16_final' }},
-			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'marlo_finch', 'standing_text': ["The Spire is stable for now, but the paradox remains. Crux didn't die. It just burrowed deeper."]}},
+			{ 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'marlo_finch', 'standing_text': ["The Spire is stable for now, but the paradox remains. Crux didn't die. He just burrowed deeper."]}},
 			{ 'event_type': 'advance_chapter' }
 		]
 	}

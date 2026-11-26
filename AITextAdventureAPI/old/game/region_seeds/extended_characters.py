@@ -4,6 +4,7 @@ EXTENDED_CHARACTERS_NPCS = [
     {
         'npc_id': 'voss_caldera',
         'name': 'Voss Caldera',
+        'sex': 'F',
         'description': (
             'A sharp, high-profile corporate executive who rose through cutthroat boardrooms.'
             ' She treats life like a hostile takeover — decisive, commanding, and always three steps ahead.'
@@ -34,6 +35,7 @@ EXTENDED_CHARACTERS_NPCS = [
     {
         'npc_id': 'rynn',
         'name': 'Rynn',
+        'sex': 'M',
         'description': (
             'A quiet, steadfast field medic and community anchor.'
             ' He remembers every wound, every promise, and every person he couldn\'t save.'
@@ -64,6 +66,7 @@ EXTENDED_CHARACTERS_NPCS = [
     {
         'npc_id': 'eldon_dawnseer',
         'name': 'Eldon Dawnseer',
+        'sex': 'M',
         'description': (
             'A serene but intense prophet who receives fragmented visions of possible futures.'
             ' Each one arrives unbidden and leaves a residue he cannot wash off.'
@@ -94,6 +97,7 @@ EXTENDED_CHARACTERS_NPCS = [
     {
         'npc_id': 'regent_sylvara',
         'name': 'Regent Sylvara',
+        'sex': 'F',
         'description': (
             'A cold, visionary strategist who pulls strings from behind thrones and corporations.'
             ' Sylvara does not lead; she arranges the conditions under which others believe they are leading.'
@@ -124,6 +128,7 @@ EXTENDED_CHARACTERS_NPCS = [
     {
         'npc_id': 'ghost',
         'name': 'Ghost',
+        'sex': 'M',
         'description': (
             'A silent, hyper-competent lone operative who moves like a shadow and strikes with surgical precision.'
             ' Ghost does not explain decisions, does not debrief, and does not stay.'
@@ -154,6 +159,7 @@ EXTENDED_CHARACTERS_NPCS = [
     {
         'npc_id': 'lira_emberforge',
         'name': 'Lira Emberforge',
+        'sex': 'F',
         'description': (
             'A gifted artisan and weaponsmith who pours her soul into every creation.'
             ' Lira does not separate herself from her work — each blade carries a piece of what she believed when she forged it.'
@@ -164,10 +170,10 @@ EXTENDED_CHARACTERS_NPCS = [
         "song_id": "immigrant_song_instrumental_led_zeppelin",
         "image": "extended_characters:lira_emberforge1",
         "psychology": {
-            "mbti": "ISFP",
+            "mbti": "INFP",
             "dominant": "Fi — Guided by deep personal values and authentic expression.",
-            "auxiliary": "Se — Lives through the physical act of forging. Attuned to the heat, weight, texture, and immediate feedback of the metal under her hands.",
-            "tertiary": "Ni — Quietly senses the deeper character or destiny of a piece as she works. Feels what a blade will become long before it is finished.",
+            "auxiliary": "Ne — Sees every unworked bar of metal as a field of possibilities; she imagines a dozen futures for a blade before choosing the one worth forging.",
+            "tertiary": "Si — Anchors her craft in remembered technique: the exact feel of every successful forging and the lesson of every failed one.",
             "inferior": "Te — Struggles with structure, planning, and external organization under pressure."
         },
         "enneagram": {
@@ -184,6 +190,7 @@ EXTENDED_CHARACTERS_NPCS = [
     {
         'npc_id': 'osten_dreamweaver',
         'name': 'Osten Dreamweaver',
+        'sex': 'M',
         'description': (
             'A wandering storyteller and dream interpreter who blurs the line between reality and fantasy.'
             ' Osten has lived so many borrowed narratives that the original self underneath is genuinely unclear — possibly to him most of all.'
@@ -193,17 +200,17 @@ EXTENDED_CHARACTERS_NPCS = [
         "song_id": "the_chain_instrumental_fleetwood_mac",
         "image": "extended_characters:osten_dreamweaver1",
         "psychology": {
-            "mbti": "INFP",
+            "mbti": "ISFP",
             "dominant": "Fi — Lives by a rich inner moral and emotional compass.",
-            "auxiliary": "Ne — Explores endless possibilities and metaphors.",
-            "tertiary": "Si — Draws on personal memories and vivid sensory details from past experiences.",
+            "auxiliary": "Se — Lives each story in the moment of telling it, reading the firelight and the listener's face and reshaping the tale as it happens.",
+            "tertiary": "Ni — Senses the hidden shape beneath a dream or a life, and the ending a story is reaching for before anyone else does.",
             "inferior": "Te — Struggles with structure, deadlines, and external organization."
         },
         "enneagram": {
             "enneagram_type": "4w5",
             "core_fear": "Being insignificant or without identity.",
-            "core_desire": "To understand and express their unique self.",
-            "defense_mechanism": "Introjection — Absorbs stories and dreams into their identity.",
+            "core_desire": "To understand and express his unique self.",
+            "defense_mechanism": "Introjection — Absorbs stories and dreams into his identity.",
             "stress_line": "Moves to Type 2 — Becomes overly dependent on others.",
             "growth_line": "Moves to Type 1 — Becomes more disciplined and action-oriented.",
             "instinctual_variant": "sx/sp — Deeply romantic and introspective."
@@ -213,6 +220,7 @@ EXTENDED_CHARACTERS_NPCS = [
     {
         'npc_id': 'lyric',
         'name': 'Lyric',
+        'sex': 'F',
         'description': (
             'A brilliant but eccentric theorist who spends days lost in abstract systems and possibilities.'
             ' Lyric speaks in layers — the surface answer is almost never the point.'
@@ -243,6 +251,7 @@ EXTENDED_CHARACTERS_NPCS = [
     {
         'npc_id': 'dare',
         'name': 'Dare',
+        'sex': 'F',
         'description': (
             'A fearless thrill-seeker and elite scout who lives for danger and adrenaline.'
             ' Dare operates in a permanent present tense — the next ten seconds, the next obstacle, the next drop.'
@@ -273,6 +282,7 @@ EXTENDED_CHARACTERS_NPCS = [
     {
         'npc_id': 'andrea_starveil',
         'name': 'Andrea Starveil',
+        'sex': 'F',
         'description': (
             'A charismatic performer and morale officer who lifts spirits even in the darkest times.'
             ' Andrea reads a room the way a compass reads north — instinctively and without error.'
@@ -303,6 +313,7 @@ EXTENDED_CHARACTERS_NPCS = [
     {
         'npc_id': 'veyr_ashcant',
         'name': 'Veyr Ashcant',
+        'sex': 'M',
         'description': (
             'A theatrical fire mage who treats every spell like a stage performance and every emotion like fuel he is legally required to overuse.'
             ' Veyr does not simply cast fire—he stages it.'
@@ -334,6 +345,7 @@ EXTENDED_CHARACTERS_NPCS = [
     {
         'npc_id': 'spark_maddox',
         'name': 'Maddox "Spark" Quill',
+        'sex': 'M',
         'description': (
             'A wildly brilliant and unpredictable inventor who treats reality as his personal playground.'
             ' Spark does not iterate — he detonates and observes. Most of his best discoveries were accidents.'
@@ -364,6 +376,7 @@ EXTENDED_CHARACTERS_NPCS = [
     {
         'npc_id': 'anita',
         'name': 'Anita',
+        'sex': 'F',
         'description': (
             'A meticulous archivist and information broker who collects secrets like currency.'
             ' Anita knows more about most people than they would find comfortable, and she has organised it all.'
@@ -394,8 +407,9 @@ EXTENDED_CHARACTERS_NPCS = [
     {
         'npc_id': 'talon',
         'name': 'Talon',
+        'sex': 'M',
         'description': (
-            'A deeply compassionate healer who feels the pain of others as her own.'
+            'A deeply compassionate healer who feels the pain of others as his own.'
             ' Talon absorbs suffering the way cloth absorbs water — completely, and without choosing to.'
             ' He has never learned to ask for help with the same ease he offers it.'
             ' His presence steadies rooms and people alike, though the cost of that steadiness never shows on his face, and he prefers it that way.'
@@ -417,13 +431,14 @@ EXTENDED_CHARACTERS_NPCS = [
             "defense_mechanism": "Repression — Suppresses his own needs to help others.",
             "stress_line": "Moves to Type 8 — Becomes demanding when unappreciated.",
             "growth_line": "Moves to Type 4 — Becomes more self-aware.",
-            "instinctual_variant": "so/sp — Focuses on being central to her community."
+            "instinctual_variant": "so/sp — Focuses on being central to his community."
         },
 
     },
     {
         'npc_id': 'alden_brightvein',
         'name': 'Alden Brightvein',
+        'sex': 'M',
         'description': (
             'A charismatic leader and motivator who inspires others to reach their highest potential.'
             ' Alden has an almost involuntary awareness of what each person in a room needs to hear.'
@@ -454,6 +469,7 @@ EXTENDED_CHARACTERS_NPCS = [
     {
         'npc_id': 'commander_drax',
         'name': 'Commander Drax',
+        'sex': 'M',
         'description': (
             'A battle-hardened commander who leads from the front and demands excellence.'
             ' Drax does not issue orders from safety — he is already at the breach when the order reaches the others.'
@@ -513,17 +529,17 @@ EXTENDED_CHARACTERS = [
         'body_armor': 'cinder_robe',
         'leg_armor': 'cinder_greaves',
         'equipped_weapon': 'blazeheart_staff',
-        'max_hp': 440,
-        'current_hp': 440,
-        'max_ap': 305,
-        'current_ap': 305,
+        'max_hp': 1897,
+        'current_hp': 1897,
+        'max_ap': 600,
+        'current_ap': 600,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 22,
-        'dexterity': 24,
-        'constitution': 68,
-        'intelligence': 138,
+        'strength': 47,
+        'dexterity': 47,
+        'constitution': 47,
+        'intelligence': 291,
         'level': 40,
         'abilities': [
             'lv2_unique_ability_magic_veyr_ashcant_passionate_spark',
@@ -543,17 +559,17 @@ EXTENDED_CHARACTERS = [
         'body_armor': 'void_court_robe',
         'leg_armor': 'coldmarch_greaves',
         'equipped_weapon': 'scepter_of_dominion',
-        'max_hp': 432,
-        'current_hp': 432,
-        'max_ap': 305,
-        'current_ap': 305,
+        'max_hp': 1897,
+        'current_hp': 1897,
+        'max_ap': 600,
+        'current_ap': 600,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 20,
-        'dexterity': 20,
-        'constitution': 64,
-        'intelligence': 142,
+        'strength': 47,
+        'dexterity': 47,
+        'constitution': 47,
+        'intelligence': 291,
         'level': 40,
         'abilities': [
             'lv2_unique_ability_magic_regent_sylvara_cold_analysis',
@@ -573,17 +589,17 @@ EXTENDED_CHARACTERS = [
         'body_armor': 'charge_rig_vest',
         'leg_armor': 'circuit_greaves',
         'equipped_weapon': 'shockdart_launcher',
-        'max_hp': 502,
-        'current_hp': 502,
-        'max_ap': 155,
-        'current_ap': 155,
+        'max_hp': 1977,
+        'current_hp': 1977,
+        'max_ap': 520,
+        'current_ap': 520,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 30,
-        'dexterity': 130,
-        'constitution': 24,
-        'intelligence': 68,
+        'strength': 47,
+        'dexterity': 129,
+        'constitution': 47,
+        'intelligence': 209,
         'level': 40,
         'abilities': [
             'lv2_unique_ability_tech_spark_maddox_shock_gadget',
@@ -603,17 +619,17 @@ EXTENDED_CHARACTERS = [
         'body_armor': 'command_plate',
         'leg_armor': 'siege_sabatons',
         'equipped_weapon': 'wardens_claymore',
-        'max_hp': 748,
-        'current_hp': 748,
-        'max_ap': 150,
-        'current_ap': 150,
+        'max_hp': 2809,
+        'current_hp': 2809,
+        'max_ap': 320,
+        'current_ap': 320,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 148,
-        'dexterity': 14,
-        'constitution': 72,
-        'intelligence': 18,
+        'strength': 209,
+        'dexterity': 47,
+        'constitution': 129,
+        'intelligence': 47,
         'level': 40,
         'abilities': [
             'lv2_unique_ability_technique_commander_drax_field_order',
@@ -624,7 +640,7 @@ EXTENDED_CHARACTERS = [
     },
 
     # ── Ghost
-    # ISTP · 9w8 · silent operative — STR primary, DEX secondary, balanced
+    # ISTP · 9w8 · silent operative — DEX primary, STR secondary, skill
     {
         'id': 'ghost',
         'name': 'Ghost',
@@ -633,17 +649,17 @@ EXTENDED_CHARACTERS = [
         'body_armor': 'shadow_weave_coat',
         'leg_armor': 'silent_step_boots',
         'equipped_weapon': 'phantom_edge',
-        'max_hp': 424,
-        'current_hp': 424,
-        'max_ap': 245,
-        'current_ap': 245,
+        'max_hp': 2057,
+        'current_hp': 2057,
+        'max_ap': 440,
+        'current_ap': 440,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 80,
-        'dexterity': 110,
-        'constitution': 30,
-        'intelligence': 32,
+        'strength': 129,
+        'dexterity': 209,
+        'constitution': 47,
+        'intelligence': 47,
         'level': 40,
         'abilities': [
             'lv2_unique_ability_skill_ghost_shadow_mark',
@@ -663,17 +679,17 @@ EXTENDED_CHARACTERS = [
         'body_armor': 'vision_robe',
         'leg_armor': 'seer_boots',
         'equipped_weapon': 'seer_focus_wand',
-        'max_hp': 436,
-        'current_hp': 436,
-        'max_ap': 305,
-        'current_ap': 305,
+        'max_hp': 2649,
+        'current_hp': 2649,
+        'max_ap': 480,
+        'current_ap': 480,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 20,
-        'dexterity': 26,
-        'constitution': 86,
-        'intelligence': 120,
+        'strength': 47,
+        'dexterity': 47,
+        'constitution': 129,
+        'intelligence': 209,
         'level': 40,
         'abilities': [
             'lv2_unique_ability_spirit_eldon_dawnseer_seer_shield',
@@ -684,7 +700,7 @@ EXTENDED_CHARACTERS = [
     },
 
     # ── Voss Caldera  (Ch.10 · Crosswind Bazaar · level 50) ──────────────
-    # ESTJ · 3w4 · corporate brawler — STR primary, CON secondary, brawler
+    # ESTJ · 3w4 · corporate operator — INT primary, DEX secondary, tech
     {
         'id': 'voss_caldera',
         'name': 'Voss Caldera',
@@ -693,17 +709,17 @@ EXTENDED_CHARACTERS = [
         'body_armor': 'acquisition_plate',
         'leg_armor': 'takeover_sabatons',
         'equipped_weapon': 'leverage_maul',
-        'max_hp': 934,
-        'current_hp': 934,
-        'max_ap': 5,
-        'current_ap': 5,
+        'max_hp': 2477,
+        'current_hp': 2477,
+        'max_ap': 650,
+        'current_ap': 650,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 52,
-        'dexterity': 130,
-        'constitution': 52,
-        'intelligence': 186,
+        'strength': 57,
+        'dexterity': 159,
+        'constitution': 57,
+        'intelligence': 259,
         'level': 50,
         'abilities': [
             'lv2_unique_ability_tech_voss_caldera_leverage',
@@ -723,17 +739,17 @@ EXTENDED_CHARACTERS = [
         'body_armor': 'dominion_mantle',
         'leg_armor': 'coldmarch_greaves',
         'equipped_weapon': 'scepter_of_dominion',
-        'max_hp': 675,
-        'current_hp': 675,
-        'max_ap': 211,
-        'current_ap': 211,
+        'max_hp': 2837,
+        'current_hp': 2837,
+        'max_ap': 605,
+        'current_ap': 605,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 100,
-        'dexterity': 188,
-        'constitution': 56,
-        'intelligence': 56,
+        'strength': 174,
+        'dexterity': 284,
+        'constitution': 62,
+        'intelligence': 62,
         'level': 55,
         'abilities': [
             'lv2_unique_ability_skill_dare_reckless_opening',
@@ -753,17 +769,17 @@ EXTENDED_CHARACTERS = [
         'body_armor': 'compassweave_robe',
         'leg_armor': 'hearthstep_boots',
         'equipped_weapon': 'mending_scepter',
-        'max_hp': 674,
-        'current_hp': 674,
-        'max_ap': 455,
-        'current_ap': 455,
+        'max_hp': 3989,
+        'current_hp': 3989,
+        'max_ap': 720,
+        'current_ap': 720,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 28,
-        'dexterity': 34,
-        'constitution': 110,
-        'intelligence': 200,
+        'strength': 67,
+        'dexterity': 67,
+        'constitution': 189,
+        'intelligence': 309,
         'level': 60,
         'abilities': [
             'lv2_unique_ability_spirit_rynn_field_dressing',
@@ -783,17 +799,17 @@ EXTENDED_CHARACTERS = [
         'body_armor': 'crypt_recorded_coat',
         'leg_armor': 'vaultwalker_boots',
         'equipped_weapon': 'codex_blade',
-        'max_hp': 789,
-        'current_hp': 789,
-        'max_ap': 395,
-        'current_ap': 395,
+        'max_hp': 3097,
+        'current_hp': 3097,
+        'max_ap': 975,
+        'current_ap': 975,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 66,
-        'dexterity': 66,
-        'constitution': 66,
-        'intelligence': 210,
+        'strength': 72,
+        'dexterity': 72,
+        'constitution': 72,
+        'intelligence': 466,
         'level': 65,
         'abilities': [
             'lv2_unique_ability_magic_anita_catalogued_flaw',
@@ -813,17 +829,17 @@ EXTENDED_CHARACTERS = [
         'body_armor': 'ovation_leathers',
         'leg_armor': 'starchasers_boots',
         'equipped_weapon': 'encore_blades',
-        'max_hp': 860,
-        'current_hp': 860,
-        'max_ap': 267,
-        'current_ap': 267,
+        'max_hp': 3617,
+        'current_hp': 3617,
+        'max_ap': 770,
+        'current_ap': 770,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 120,
-        'dexterity': 240,
-        'constitution': 70,
-        'intelligence': 70,
+        'strength': 219,
+        'dexterity': 359,
+        'constitution': 77,
+        'intelligence': 77,
         'level': 70,
         'abilities': [
             'lv2_unique_ability_skill_andrea_starveil_crowd_read',
@@ -843,17 +859,17 @@ EXTENDED_CHARACTERS = [
         'body_armor': 'hearthroot_robe',
         'leg_armor': 'softpath_sandals',
         'equipped_weapon': 'kindness_staff',
-        'max_hp': 900,
-        'current_hp': 900,
-        'max_ap': 605,
-        'current_ap': 605,
+        'max_hp': 5329,
+        'current_hp': 5329,
+        'max_ap': 960,
+        'current_ap': 960,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 30,
-        'dexterity': 44,
-        'constitution': 148,
-        'intelligence': 270,
+        'strength': 87,
+        'dexterity': 87,
+        'constitution': 249,
+        'intelligence': 409,
         'level': 80,
         'abilities': [
             'lv2_unique_ability_spirit_talon_tender_mend',
@@ -873,17 +889,17 @@ EXTENDED_CHARACTERS = [
         'body_armor': 'brightweave_mantle',
         'leg_armor': 'inspirer_greaves',
         'equipped_weapon': 'voice_of_valor_staff',
-        'max_hp': 958,
-        'current_hp': 958,
-        'max_ap': 642,
-        'current_ap': 642,
+        'max_hp': 5664,
+        'current_hp': 5664,
+        'max_ap': 1020,
+        'current_ap': 1020,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 32,
-        'dexterity': 46,
-        'constitution': 158,
-        'intelligence': 286,
+        'strength': 92,
+        'dexterity': 92,
+        'constitution': 264,
+        'intelligence': 434,
         'level': 85,
         'abilities': [
             'lv2_unique_ability_spirit_alden_brightvein_rally_call',
@@ -903,17 +919,17 @@ EXTENDED_CHARACTERS = [
         'body_armor': 'logic_lattice_robe',
         'leg_armor': 'analysis_greaves',
         'equipped_weapon': 'axiom_focus_rod',
-        'max_hp': 997,
-        'current_hp': 997,
-        'max_ap': 717,
-        'current_ap': 717,
+        'max_hp': 4727,
+        'current_hp': 4727,
+        'max_ap': 1235,
+        'current_ap': 1235,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 95,
-        'dexterity': 140,
-        'constitution': 95,
-        'intelligence': 340,
+        'strength': 102,
+        'dexterity': 294,
+        'constitution': 102,
+        'intelligence': 484,
         'level': 95,
         'abilities': [
             'lv2_unique_ability_tech_lyric_axiom_probe',
@@ -933,17 +949,17 @@ EXTENDED_CHARACTERS = [
         'body_armor': 'folklore_robe',
         'leg_armor': 'wanderer_wraps',
         'equipped_weapon': 'storyteller_staff',
-        'max_hp': 1074,
-        'current_hp': 1074,
-        'max_ap': 755,
-        'current_ap': 755,
+        'max_hp': 4777,
+        'current_hp': 4777,
+        'max_ap': 1500,
+        'current_ap': 1500,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 100,
-        'dexterity': 100,
-        'constitution': 100,
-        'intelligence': 600,
+        'strength': 107,
+        'dexterity': 107,
+        'constitution': 107,
+        'intelligence': 711,
         'level': 100,
         'abilities': [
             'lv2_unique_ability_magic_osten_dreamweaver_waking_shadow',
@@ -953,8 +969,8 @@ EXTENDED_CHARACTERS = [
         ]
     },
 
-    # ── Lira Emberforge  (Ch.21 · Hollerforge Hollow · level 105) ────────
-    # ISFP · 4w5 · artisan smith — DEX primary, STR secondary, agile
+    # ── Lira Emberforge  (Ch.21 · Hollerforge Hollow · level 95) ────────
+    # ISFP · 4w5 · artisan smith — STR primary, CON secondary, technique
     {
         'id': 'lira_emberforge',
         'name': 'Lira Emberforge',
@@ -963,17 +979,17 @@ EXTENDED_CHARACTERS = [
         'body_armor': 'masterwork_apron',
         'leg_armor': 'forgestride_boots',
         'equipped_weapon': 'prima_blade',
-        'max_hp': 1289,
-        'current_hp': 1289,
-        'max_ap': 399,
-        'current_ap': 399,
+        'max_hp': 6714,
+        'current_hp': 6714,
+        'max_ap': 760,
+        'current_ap': 760,
         'unused_ability_slots': 0,
         'unused_stat_points': 0,
         'unused_power_points': 0,
-        'strength': 460,
-        'dexterity': 95,
-        'constitution': 300,
-        'intelligence': 95,
+        'strength': 484,
+        'dexterity': 102,
+        'constitution': 294,
+        'intelligence': 102,
         'level': 95,
         'abilities': [
             'lv2_unique_ability_technique_lira_emberforge_smiths_edge',

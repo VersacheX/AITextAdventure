@@ -22,17 +22,17 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         "body_armor": "vigil_robe",
         "leg_armor": "guardian_greaves",
         "equipped_weapon": "ledgerbrand_mace",
-        "max_hp": 2000,
-        "current_hp": 2000,
-        "max_ap": 500,
-        "current_ap": 500,
+        "max_hp": 4584,
+        "current_hp": 4584,
+        "max_ap": 520,
+        "current_ap": 520,
         "unused_ability_slots": 0,
         "unused_stat_points": 0,
         "unused_power_points": 0,
-        "strength": 225,
-        "dexterity": 100,
-        "intelligence": 90,
-        "constitution": 200,
+        "strength": 334,
+        "dexterity": 72,
+        "intelligence": 72,
+        "constitution": 204,
 		"abilities": [
 			"lv2_unique_ability_technique_warden_hale_ledger_guard",
 			"lv3_unique_ability_technique_warden_hale_rite_of_record",
@@ -46,6 +46,7 @@ NPCS = [
     {
         "npc_id": "warden_hale",
         "name": "Warden Hale Brimholt",
+        "sex": "M",
         "description": (
             "A stoic keeper of the Sinking District's last sanctuaries. Hale records every loss, every fracture, every name swallowed by the Heap."
             " He believes duty is the only anchor left in a collapsing world, and he performs sacred rites with the precision of a bookkeeper balancing the dead."
@@ -74,6 +75,7 @@ NPCS = [
     {
         "npc_id": "pageant",
         "name": "Pageant",
+        "sex": "F",
         "description": "A suffocating spectacle of expectations — the tyranny of reputation made divine.",        
         "theme_song": "You Should See Me In A Crown, Billie Eilish",
         "psychology": {
@@ -98,6 +100,7 @@ NPCS = [
     {
         "npc_id": "edict",
         "name": "Edict",
+        "sex": "M",
         "description": "A bureaucratic warden of cosmic rules — tradition calcified into oppression.",
         "theme_song": "The Hand That Feeds, Nine Inch Nails",
         "psychology": {

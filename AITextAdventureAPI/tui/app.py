@@ -78,7 +78,22 @@ class FractureApp(App):
 
     def on_mount(self) -> None:
         self._install_dev_log_bridge()
+        self._run_element_map_validator()
         self.goto_screen(self.start_screen)
+
+    def _run_element_map_validator(self) -> None:
+        """One-time startup check of CHARACTER_NPC_ELEMENT_MAP integrity.
+
+        Logs WARNINGs via the standard logging module; never raises or
+        blocks startup (see IMPLEMENTATION_SPEC_character_elements.md, section 7).
+        """
+        try:
+            import game.constants as const  # noqa: PLC0415
+            from tui.services.dev.dataservices.element_map_validator import validate_element_map  # noqa: PLC0415
+
+            validate_element_map(const)
+        except Exception:
+            pass
 
     def _install_dev_log_bridge(self) -> None:
         """Route the "fracture.dev" diagnostic logger into Textual's log.

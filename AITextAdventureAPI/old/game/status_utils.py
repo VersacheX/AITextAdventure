@@ -12,6 +12,21 @@ MAX_DODGE = 50
 WEAKNESS_MULT = 1.5
 RESISTANCE_MULT = 0.5
 
+PHYSICAL_ELEMENT = 'physical'
+
+
+def with_physical_stack(elements, physical: bool) -> list:
+	"""Normalize a hit's elements; a physical hit always carries >= 1 'physical' stack.
+
+	Basic attacks arrive with no 'physical' element (only imbues, if any), so
+	they gain exactly one stack here. Abilities with physical slots already
+	carry their own stacks and are left as they are.
+	"""
+	els = [str(getattr(e, 'value', e)).lower() for e in (elements or [])]
+	if physical and PHYSICAL_ELEMENT not in els:
+		els.insert(0, PHYSICAL_ELEMENT)
+	return els
+
 
 def physical_hit_chance(attacker: Optional[object], target: Optional[object]) -> float:
 	"""Percent chance (5..95) for a basic attack to hit. Spells never call this."""
@@ -30,19 +45,23 @@ def physical_hit_chance(attacker: Optional[object], target: Optional[object]) ->
 
 
 def elemental_multiplier(elements, immunities=None, weaknesses=None, resistances=None) -> float:
-	"""Damage multiplier for a hit with these element slots (duplicates count separately)."""
+	"""Damage multiplier for a hit with these element slots (duplicates count separately).
+
+	If any element slot of the hit is immune, the whole hit deals 0 damage.
+	"""
 	els = [str(getattr(e, 'value', e)).lower() for e in (elements or [])]
 	if not els:
 		return 1.0
 
 	imm = {str(e).lower() for e in (immunities or [])}
+	if any(e in imm for e in els):
+		return 0.0  # any immune slot blocks the whole hit
+
 	weak = {str(e).lower() for e in (weaknesses or [])}
 	res = {str(e).lower() for e in (resistances or [])}
 
 	total = 0.0
 	for e in els:
-		if e in imm:
-			continue
 		m = 1.0
 		if e in weak:
 			m *= WEAKNESS_MULT
@@ -50,7 +69,7 @@ def elemental_multiplier(elements, immunities=None, weaknesses=None, resistances
 			m *= RESISTANCE_MULT
 		total += m
 
-	return total / len(els)
+	return total / len(els)  # weak/resist stay share-based
 
 
 def status_defense_lists(target: Optional[object]) -> Tuple[Set[str], Set[str], Set[str]]:
@@ -107,14 +126,14 @@ def _status_elements(s: Dict[str, Any]) -> List[str]:
 	return []
 
 
-def compute_outgoing_damage(attacker: Optional[object], base_damage: int, elements: Optional[List[str]] = None, is_basic_attack: bool = False) -> int:
+def compute_outgoing_damage(attacker: Optional[object], base_damage: int, elements: Optional[List[str]] = None, is_physical: bool = False) -> int:
 	"""Apply attack-side modifiers (attack_buff/attack_debuff/elemental_attack_buff) to base_damage.
 	Returns adjusted damage as int.
 
-	``attack_buff`` and ``attack_debuff`` only modify *basic attacks* (physical
-	weapon strikes). They must NOT hinder ability damage, so callers applying
-	ability damage leave ``is_basic_attack`` False. ``elemental_attack_buff``
-	still applies to both basic attacks and abilities.
+	``attack_buff``, ``attack_debuff`` and the ``elemental_attack_buff`` bonus only
+	modify *physical hits* (basic attacks, or abilities carrying a ``physical``
+	element slot). They must NOT affect non-physical ability damage, so callers
+	applying non-physical ability damage leave ``is_physical`` False.
 
 	This function considers multiplicity: both attack elements and status elements
 	may contain duplicates. The elemental attack buff scales with
@@ -132,14 +151,14 @@ def compute_outgoing_damage(attacker: Optional[object], base_damage: int, elemen
 	for s in statuses:
 		sid = s.get('id')
 		mag = float(s.get('magnitude',0) or 0.0)
-		# attack buff/debuff only affect basic attacks, not abilities
+		# attack buff/debuff only affect physical hits
 		if sid == 'attack_buff':
-			if is_basic_attack:
+			if is_physical:
 				percent += mag *0.25
 		elif sid == 'attack_debuff':
-			if is_basic_attack:
+			if is_physical:
 				percent -= mag *0.25
-		elif sid == 'elemental_attack_buff' and elements:
+		elif sid == 'elemental_attack_buff' and elements and is_physical:
 			# support both legacy single-element and new 'elements' list on statuses
 			status_elems = _status_elements(s)
 			if not status_elems:
@@ -248,6 +267,8 @@ def apply_regen(entity: Optional[object]) -> Dict[str, Any]:
 			hpt = s.get('heal_per_turn')
 			if hpt is not None:
 				amt = int(hpt * LOW_DMG_STATUS_MOD * 0.10)
+				if hpt > 0:
+					amt = max(1, amt)
 				if amt >0:
 					# use heal if available
 					restored = entity.heal(amt)
@@ -263,6 +284,9 @@ def collect_attack_elements(attacker: Optional[object], base_elements: Optional[
 	This aggregates any explicit elements provided (e.g. from an ability or weapon)
 	and any elemental-attack statuses present on the attacker (e.g. 'elemental_attack_buff').
 	The result now preserves multiplicity (duplicates) so callers can rely on counts.
+
+	Only call this for physical hits; non-physical abilities use their own elements
+	and must not have buff elements imbued into them.
 	"""
 	out: List[str] = []
 	# add base elements preserving duplicates

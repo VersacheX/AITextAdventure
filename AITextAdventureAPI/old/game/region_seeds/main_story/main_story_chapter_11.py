@@ -27,17 +27,17 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         "body_armor": "warfront_plate",
         "leg_armor": "warfront_greaves",
         "equipped_weapon": "dominion_halberd",
-        "max_hp": 1800,
-        "current_hp": 1800,
-        "max_ap": 450,
-        "current_ap": 450,
+        "max_hp": 3519,
+        "current_hp": 3519,
+        "max_ap": 400,
+        "current_ap": 400,
         "unused_ability_slots": 0,
         "unused_stat_points": 0,
         "unused_power_points": 0,
-        "strength": 200,
-        "dexterity": 95,
-        "intelligence": 95,
-        "constitution": 180,
+        "strength": 259,
+        "dexterity": 57,
+        "intelligence": 57,
+        "constitution": 159,
 		"abilities": [
 			"lv2_unique_ability_technique_vek_command_strike",
 			"lv2_unique_ability_technique_vek_rally_line",
@@ -117,6 +117,7 @@ NPCS = [
     {
         "npc_id": "rapture",
         "name": "Rapture",
+        "sex": "M",
         "description": "A predator of sensation — violence as ecstasy, destruction as sport.",
         "theme_song": "Smells Like Teen Spirit, Nirvana or Zero, Smashing Pumpkins",
         "psychology": {
@@ -129,11 +130,11 @@ NPCS = [
         "enneagram": {
           "enneagram_type": "8w7",
           "core_fear": "Being controlled or limited.",
-          "core_desire": "To be in control of its environment through physical dominance.",
-          "defense_mechanism": "Denial — Denies any form of weakness or restraint, asserting its power through constant, escalating violence.",
-          "stress_line": "Moves to Type 5 — Becomes withdrawn and paranoid when confronted by a force it cannot dominate.",
-          "growth_line": "Moves to Type 2 — Would use its strength to protect rather than to harm.",
-          "instinctual_variant": "sx/sp — Seeks intense, one-on-one confrontations and physical challenges to assert its dominance."
+          "core_desire": "To be in control of his environment through physical dominance.",
+          "defense_mechanism": "Denial — Denies any form of weakness or restraint, asserting his power through constant, escalating violence.",
+          "stress_line": "Moves to Type 5 — Becomes withdrawn and paranoid when confronted by a force he cannot dominate.",
+          "growth_line": "Moves to Type 2 — Would use his strength to protect rather than to harm.",
+          "instinctual_variant": "sx/sp — Seeks intense, one-on-one confrontations and physical challenges to assert his dominance."
         },
         'image': 'voidwalkers:rapture1.jpeg',
         'song_id': 'zero_instrumental_smashing_pumpkins'
@@ -141,6 +142,7 @@ NPCS = [
     {
         "npc_id": "revelry",
         "name": "Revelry",
+        "sex": "F",
         "description": "A manic prophet of freedom — a cult of joy that ends in ruin.",
         "theme_song": "Heads Will Roll (A‑Trak Remix), Yeah Yeah Yeahs AND Dance Till We Die, Zola Jesus",
         "psychology": {
@@ -154,8 +156,8 @@ NPCS = [
           "enneagram_type": "7w6",
           "core_fear": "Being trapped in pain, boredom, or negative emotion.",
           "core_desire": "To be stimulated and happy at all times.",
-          "defense_mechanism": "Rationalization — Frames its destructive chaos as 'freedom' and 'joy', avoiding the reality of the suffering it causes.",
-          "stress_line": "Moves to Type 1 — Becomes rigid and moralistic, insisting its way is the only 'true' way to be free.",
+          "defense_mechanism": "Rationalization — Frames her destructive chaos as 'freedom' and 'joy', avoiding the reality of the suffering she causes.",
+          "stress_line": "Moves to Type 1 — Becomes rigid and moralistic, insisting her way is the only 'true' way to be free.",
           "growth_line": "Moves to Type 5 — Would learn to find joy in peace and contemplation, not just manic energy.",
           "instinctual_variant": "so/sx — A social catalyst for chaos, drawing energy from the group's manic excitement."
         },
@@ -952,7 +954,7 @@ TASKS = [
         'to_id': 'nihilist_leader',
         'task_acquire_events': [
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'nihilist_leader', 'location': None }},
-            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'nihilist_camp', 'location': 'shallows_mid_city_open_area' }}
+            { 'event_type': 'create_dungeon', 'params': { 'dungeon_id': 'nihilist_camp', 'location': 'shallows_mid_city_region_open_area' }}
         ],
         'task_complete_events': [
             { 'event_type': 'dungeon_add_treasure', 'params': { 'dungeon_id': 'nihilist_camp', 'item_id': 'ring_of_eternal_flame', 'location': 'treasure_room' }},

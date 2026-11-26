@@ -58,17 +58,17 @@ ATTAINABLE_PLAYER_CHARACTERS = [
         'body_armor': 'duneweave_mantle',
         'leg_armor': 'oasis_walker_greaves',
         'equipped_weapon': 'sandglass_staff',
-        'max_hp': 891, # 20 + 20 * 29 = 600            + 365
-        'current_hp': 891,
-        'max_ap': 400, # 5 + 5 * 29 = 150              + 100
-        'current_ap': 400,
-        'unused_ability_slots': 0,
-        'unused_stat_points': 0,
-        'unused_power_points': 0,
-        'strength': 38,
-        'dexterity': 38,        
-        'intelligence': 224,                            # + 184
-        'constitution': 38,
+		'max_hp': 1417,
+		'current_hp': 1417,
+		'max_ap': 450,
+		'current_ap': 450,
+		'unused_ability_slots': 0,
+		'unused_stat_points': 0,
+		'unused_power_points': 0,
+		'strength': 37,
+		'dexterity': 37,        
+		'intelligence': 221,
+		'constitution': 37,
         'level': 30,
 		'abilities': [
 			'lv2_unique_ability_magic_sable_desert_read',
@@ -111,6 +111,7 @@ NPCS = [
 	{
 		'npc_id': 'sable',
 		'name': 'Sable',
+		'sex': 'F',
 		"theme_song": "Salt — Daughter or skin, Grimes",
 		'description': (
 			'A desert witch who sells miracles to travelers, though she no longer believes in them herself.'

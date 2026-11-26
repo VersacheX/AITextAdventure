@@ -1,7 +1,7 @@
 import random
 from typing import Optional, List
 
-from game.objects.player import Player
+from game.objects.player import Player, apply_class_curve
 from game.objects.player_game import PlayerGame
 import game.constants_items as const_items
 import game.constants_other as const_other
@@ -9,7 +9,10 @@ import game.constants_other as const_other
 from game.objects.weapon import Weapon, _instantiate_weapon
 from game.objects.armor import Armor, _instantiate_armor
 
-from game.region_seeds.player_abilities.ability_requirements import ABILITY_TYPE_REQUIREMENTS
+from game.region_seeds.player_abilities.ability_requirements import (
+    ABILITY_TYPE_REQUIREMENTS,
+    CLASS_LEVEL1_STATS,
+)
 
 # Import equipment & ability selection helpers directly
 from combat_balancing_simulation.player_generator_equipment_service import (
@@ -34,7 +37,7 @@ def equip_player_character(player: Player, player_game = PlayerGame, focus: str 
     equip_player_gear(player, player_game, ability_type_focus)
 
 
-def generate_player(name: str = 'Test', focus: str = 'technique', target_level: int =15, seed: Optional[int] = None, player_game = PlayerGame) -> Player:
+def generate_player(name: str = 'Test', focus: str = 'technique', target_level: int =15, seed: Optional[int] = None, player_game = PlayerGame, elements_base: Optional[List[str]] = None) -> Player:
     """Generate a test Player focused on `focus`.
 
     `focus` IS  an ability_type (e.g. 'technique','magic'). When an
@@ -43,10 +46,45 @@ def generate_player(name: str = 'Test', focus: str = 'technique', target_level: 
     """
     rng = random.Random(seed)
     p = Player(name)
-    p.level =1
+    p.level = 1
+    # Set elements_base before any ability picks so pick_abilities_for_player
+    # -> can_learn sees it on every level (class_growth_elements.md 5.1).
+    p.elements_base = list(elements_base or [])
 
-    # determine whether focus refers to an ability type
     ability_type_focus = focus
+
+    if ability_type_focus in CLASS_LEVEL1_STATS:
+        # Known class: follow the class curve exactly (class_growth_elements.md
+        # Part 1). Walk level by level so abilities are picked with the stats
+        # the character has *at that level*, same as a recruit joining live.
+        p.character_class = ability_type_focus
+        p.level = 1
+        p.strength, p.dexterity, p.constitution, p.intelligence = CLASS_LEVEL1_STATS[ability_type_focus]
+        from game.region_seeds.player_abilities.ability_requirements import CLASS_HP_RATIO
+        p.max_hp = 20 + (p.constitution - 8) * 2
+        p.max_ap = 5
+        pp = int(p.power_points_per_level)
+        hp = int(round(pp * CLASS_HP_RATIO[ability_type_focus]))
+        p.max_hp += hp
+        p.max_ap += pp - hp
+        p.unused_stat_points = 0
+        p.unused_power_points = 0
+        p.unused_ability_slots = 1
+        p.current_hp, p.current_ap = p.max_hp, p.max_ap
+
+        for new_level in range(2, max(2, target_level + 1)):
+            p.gain_experience(p.get_required_experience_to_level())
+            has_new_ability, _stat_points, _power_points = p.check_level_up_awards()
+            if has_new_ability:
+                picks = pick_abilities_for_player(p, 1, None, ability_type_focus, rng)
+                if picks:
+                    p.learn_ability(picks[0])
+
+        p.current_hp, p.current_ap = p.max_hp, p.max_ap  # generation joins full, not a level-up
+        equip_player_gear(p, player_game, ability_type_focus)
+        return p
+
+    # Unknown/classless focus: keep the legacy weighted-random allocation.
     stat_fallback = None
 
     # derive stat weights (function returns a dict mapping stat -> weight)
@@ -177,8 +215,7 @@ def generate_player(name: str = 'Test', focus: str = 'technique', target_level: 
 
         # now if an ability is granted this level, pick one and learn it
         if has_new_ability:
-            allowed_elements = set(['fire', 'water', 'earth', 'air', 'light', 'dark'])
-            picks = pick_abilities_for_player(p,1, allowed_elements, ability_type_focus, rng)
+            picks = pick_abilities_for_player(p,1, None, ability_type_focus, rng)
             if picks:
                 chosen = picks[0]
                 p.learn_ability(chosen)

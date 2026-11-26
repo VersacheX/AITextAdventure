@@ -24,17 +24,17 @@ ATTAINABLE_PLAYER_CHARACTERS = [
     "body_armor": "riverwarden_vestment",
     "leg_armor": "meadowstep_greaves",
     "equipped_weapon": "gentlecurrent_staff",
-    "max_hp": 1120,
-    "current_hp": 1120,
-    "max_ap": 360,
-    "current_ap": 360,
+    "max_hp": 2314,
+    "current_hp": 2314,
+    "max_ap": 420,
+    "current_ap": 420,
     "unused_ability_slots": 0,
     "unused_stat_points": 0,
     "unused_power_points": 0,
-    "strength": 40,
-    "dexterity": 40,
-    "intelligence": 180,
-    "constitution": 140,
+    "strength": 42,
+    "dexterity": 42,
+    "intelligence": 184,
+    "constitution": 114,
 	"abilities": [
 		"lv2_unique_ability_spirit_lyren_riftwater_balm",
 		"lv2_unique_ability_spirit_lyren_gentle_warding",
@@ -48,6 +48,7 @@ NPCS = [
     {
         "npc_id": "lyren",
         "name": "Lyren Vale",
+        "sex": "F",
         "description": (
             "A gentle wayfarer attuned to the emotional undercurrents of the world. Lyren feels the Riftwaters long before she sees them."
             "The way light bends, the way people's hearts tighten. She speaks softly, moves quietly, and heals instinctively, as if guided by something older than memory."

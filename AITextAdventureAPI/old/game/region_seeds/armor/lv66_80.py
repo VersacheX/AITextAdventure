@@ -15,7 +15,7 @@ ARMOR_LV66_80 = {
         {
             "id": "spotlight_wreath",
             "name": "Spotlight Wreath",
-            "description": "A wreath of compressed light-wire fashioned to look celebratory. When Andrea enters a room wearing it, attention is drawn to her and away from everything else. She relies on this.",
+            "description": "A wreath of compressed light-wire made to look celebratory. It draws every eye in a room toward its wearer and away from everything else.",
             "defense": 46, "durability": 620, "max_durability": 620, "value": 21400,
             "min_spawn_level": 70, "rarity": "notfound",
             "strength": 24, "dexterity": 48, "intelligence": 8, "constitution": 6,
@@ -25,7 +25,7 @@ ARMOR_LV66_80 = {
         {
             "id": "compassion_circlet",
             "name": "Compassion Circlet",
-            "description": "A circlet of pale silver set with a soft-glow healing stone at the brow. Talia's patients often reach for it before they reach for her hand.",
+            "description": "A circlet of pale silver set with a soft-glow healing stone at the brow. Patients often reach for it before they reach for a hand.",
             "defense": 52, "durability": 660, "max_durability": 660, "value": 26400,
             "min_spawn_level": 80, "rarity": "notfound",
             "strength": 4, "dexterity": 10, "intelligence": 54, "constitution": 30,
@@ -34,7 +34,7 @@ ARMOR_LV66_80 = {
         {
             "id": "warmth_cowl",
             "name": "Warmth Cowl",
-            "description": "A deep cowl woven from sun-linen that holds ambient heat and releases it slowly — Talon uses it to warm cold patients before any other treatment.",
+            "description": "A deep cowl woven from sun-linen that holds ambient heat and releases it slowly, warm enough to bring a cold patient back before treatment.",
             "defense": 52, "durability": 660, "max_durability": 660, "value": 26400,
             "min_spawn_level": 80, "rarity": "notfound",
             "strength": 4, "dexterity": 10, "intelligence": 54, "constitution": 30,
@@ -57,7 +57,7 @@ ARMOR_LV66_80 = {
         {
             "id": "ovation_leathers",
             "name": "Ovation Leathers",
-            "description": "Performance leathers built to take applause and impact in equal measure. Andrea had the collar raised so the crowd can always see her face.",
+            "description": "Performance leathers built to take applause and impact in equal measure, with a raised collar that keeps the face visible to the crowd.",
             "defense": 60, "durability": 780, "max_durability": 780, "value": 28400,
             "min_spawn_level": 70, "rarity": "notfound",
             "strength": 32, "dexterity": 64, "intelligence": 10, "constitution": 8,
@@ -109,7 +109,7 @@ ARMOR_LV66_80 = {
         {
             "id": "gentlehand_bracers",
             "name": "Gentlehand Bracers",
-            "description": "Slim bracers padded on the inner face for patient handling — built to steady a trauma wound without adding pressure. She never takes them off.",
+            "description": "Slim bracers padded on the inner face for patient handling, built to steady a trauma wound without adding pressure.",
             "defense": 38, "durability": 580, "max_durability": 580, "value": 20400,
             "min_spawn_level": 80, "rarity": "notfound",
             "strength": 4, "dexterity": 8, "intelligence": 40, "constitution": 24,
@@ -139,7 +139,7 @@ ARMOR_LV66_80 = {
         {
             "id": "starchasers_boots",
             "name": "Starchasers' Boots",
-            "description": "Boots commissioned by Andrea after her first sold-out run — the soles are inlaid with compressed starfall crystal. She says they make every exit feel like an arrival.",
+            "description": "Boots with soles inlaid with compressed starfall crystal. Every exit in them feels like an arrival.",
             "defense": 38, "durability": 600, "max_durability": 600, "value": 18400,
             "min_spawn_level": 70, "rarity": "notfound",
             "strength": 24, "dexterity": 42, "intelligence": 8, "constitution": 6,
@@ -149,7 +149,7 @@ ARMOR_LV66_80 = {
         {
             "id": "softstep_sandals",
             "name": "Softstep Sandals",
-            "description": "Sandals soled with healing-foam derived from compress material. They are the quietest footwear in any room she enters. That is on purpose.",
+            "description": "Sandals soled with healing-foam derived from compress material, the quietest footwear in any room. That is on purpose.",
             "defense": 44, "durability": 640, "max_durability": 640, "value": 24400,
             "min_spawn_level": 80, "rarity": "notfound",
             "strength": 4, "dexterity": 8, "intelligence": 46, "constitution": 28,
@@ -158,7 +158,7 @@ ARMOR_LV66_80 = {
         {
             "id": "softpath_sandals",
             "name": "Softpath Sandals",
-            "description": "Sandals woven to carry no sound and leave no impression — Talon had them made after a patient startled at her approach. She never startles anyone now.",
+            "description": "Sandals woven to carry no sound and leave no impression, so a patient is never startled by an approach.",
             "defense": 44, "durability": 640, "max_durability": 640, "value": 24400,
             "min_spawn_level": 80, "rarity": "notfound",
             "strength": 4, "dexterity": 8, "intelligence": 46, "constitution": 28,
