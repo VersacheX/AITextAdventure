@@ -348,10 +348,12 @@ class CombatSimulation:
 
         out['action_result'] = res
 
-        # surface whole-hit immunity blocks for any targets hit by this ability
+        # surface damage-immunity blocks for any targets hit by this ability.
+        # Note: statuses are applied before take_damage, so an immune target
+        # can still be debuffed even though its damage component was blocked.
         for te in target_entities:
             if getattr(te, 'last_damage_immune', False):
-                msgs.append(f"{te.name} is immune! The strike has no effect.")
+                msgs.append(f"{te.name} is immune! The damage has no effect.")
 
         # WEIRD ERROR HANDLING SHIT I DONT UNDERSTAND YET, BUT WILL CLEAN UP
         # Strict message handling: use the actor/ability-provided human readable text.
