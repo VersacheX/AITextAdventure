@@ -68,7 +68,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'dazzling burst', 'strong_attack': 'overwhelming presence', 'player_abilities': ['radiant_lie', 'beauty_as_weapon', 'suffocating_allure'],
         'base_str': 20, 'base_dex': 30, 'base_con': 25, 'base_int': 38, 'base_hp': 15000, 'base_ap': 300,
         'str_per_level': 2, 'dex_per_level': 4, 'con_per_level': 3, 'int_per_level': 5,
-        'resistances': ['light', 'air'], 'immunities': ['confuse', 'silence'], 'weaknesses': ['dark']
+        'resistances': ['light', 'air'], 'immunities': ['sleep', 'silence', 'petrify', 'stun'], 'weaknesses': ['dark']
     },
     {
         'id': 'scalpel_boss', 'name': 'Scalpel', 'hostile_type': 'construct', 'min_spawn_level': 47, 'role': 'damage', 'rarity': 'notfound',
@@ -76,7 +76,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'anatomical strike', 'strong_attack': 'vivisection', 'player_abilities': ['cold_execution', 'perfect_cut', 'detached_slaughter'],
         'base_str': 32, 'base_dex': 40, 'base_con': 28, 'base_int': 20, 'base_hp': 18000, 'base_ap': 280,
         'str_per_level': 4, 'dex_per_level': 6, 'con_per_level': 3, 'int_per_level': 2,
-        'resistances': ['ice', 'physical'], 'immunities': ['stun', 'petrify'], 'weaknesses': ['fire', 'electric']
+        'resistances': ['ice', 'physical'], 'immunities': ['stun', 'petrify', 'sleep', 'confuse'], 'weaknesses': ['fire', 'electric']
     }
 ]
 

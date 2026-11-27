@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'intoxicating rush', 'strong_attack': 'crescendo', 'player_abilities': ['euphoric_cascade', 'sensory_overload', 'the_rush'],
         'base_str': 58, 'base_dex': 68, 'base_con': 52, 'base_int': 48, 'base_hp': 330000, 'base_ap': 600,
         'str_per_level': 7, 'dex_per_level': 9, 'con_per_level': 6, 'int_per_level': 5,
-        'resistances': ['fire', 'air'], 'immunities': ['sleep', 'confuse'], 'weaknesses': ['ice', 'light']
+        'resistances': ['fire', 'air'], 'immunities': ['confuse', 'petrify', 'stun', 'silence'], 'weaknesses': ['ice', 'light']
     },
     {
         'id': 'lament_trial', 'name': 'Lament', 'hostile_type': 'void_entity', 'min_spawn_level': 100, 'role': 'hazard', 'rarity': 'notfound',
@@ -79,7 +79,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'melancholic drain', 'strong_attack': 'the quiet after', 'player_abilities': ['crushing_despair', 'hollow_silence', 'the_emptiness'],
         'base_str': 42, 'base_dex': 45, 'base_con': 55, 'base_int': 72, 'base_hp': 310000, 'base_ap': 680,
         'str_per_level': 5, 'dex_per_level': 5, 'con_per_level': 6, 'int_per_level': 9,
-        'resistances': ['dark', 'ice'], 'immunities': ['sleep', 'silence', 'petrify'], 'weaknesses': ['light', 'fire']
+        'resistances': ['dark', 'ice'], 'immunities': ['sleep', 'petrify', 'stun', 'confuse'], 'weaknesses': ['light', 'fire']
     },
     {
         'id': 'paradox_trial', 'name': 'Paradox', 'hostile_type': 'void_entity', 'min_spawn_level': 100, 'role': 'hazard', 'rarity': 'notfound',
@@ -87,7 +87,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'contradictory force', 'strong_attack': 'both and neither', 'player_abilities': ['contradiction_loop', 'impossible_truth', 'paradox_embrace'],
         'base_str': 55, 'base_dex': 55, 'base_con': 60, 'base_int': 60, 'base_hp': 340000, 'base_ap': 620,
         'str_per_level': 6, 'dex_per_level': 6, 'con_per_level': 7, 'int_per_level': 7,
-        'resistances': ['dark', 'light', 'physical'], 'immunities': ['confuse', 'stun'], 'weaknesses': []
+        'resistances': ['dark', 'light', 'physical'], 'immunities': ['stun', 'sleep', 'silence', 'petrify'], 'weaknesses': []
     }
 ]
 

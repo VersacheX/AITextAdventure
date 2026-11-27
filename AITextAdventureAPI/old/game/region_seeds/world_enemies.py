@@ -371,7 +371,7 @@ WORLD_HOSTILES = [
         'basic_attack': 'immutable future', 'strong_attack': 'the only ending', 'player_abilities': ['inescapable_prophecy', 'vision_of_ruin', 'fate_lock'],
         'base_str': 60, 'base_dex': 70, 'base_con': 62, 'base_int': 110, 'base_hp': 180000, 'base_ap': 1800,
         'str_per_level': 7, 'dex_per_level': 9, 'con_per_level': 8, 'int_per_level': 14,
-        'resistances': ['dark', 'ice', 'electric', 'air'], 'immunities': ['confuse', 'sleep', 'stun'], 'weaknesses': ['light']
+        'resistances': ['dark', 'ice', 'electric', 'air'], 'immunities': ['confuse', 'sleep', 'stun', 'petrify', 'silence'], 'weaknesses': ['light']
     },
     {
         'id': 'reliquary_boss_2', 'name': 'Reliquary - Reset', 'hostile_type': 'aberration', 'min_spawn_level': 97, 'role': 'damage', 'rarity': 'notfound',
@@ -379,7 +379,7 @@ WORLD_HOSTILES = [
         'basic_attack': 'the past always returns', 'strong_attack': 'inescapable record', 'player_abilities': ['eternal_wound', 'memory_of_suffering', 'burden_of_the_lost'],
         'base_str': 65, 'base_dex': 60, 'base_con': 80, 'base_int': 92, 'base_hp': 200000, 'base_ap': 1600,
         'str_per_level': 8, 'dex_per_level': 7, 'con_per_level': 10, 'int_per_level': 11,
-        'resistances': ['dark', 'physical', 'ice', 'earth'], 'immunities': ['stun', 'petrify', 'confuse'], 'weaknesses': ['light', 'fire']
+        'resistances': ['dark', 'physical', 'ice', 'earth'], 'immunities': ['stun', 'petrify', 'confuse', 'sleep', 'silence'], 'weaknesses': ['light', 'fire']
     },
     # -------------------------------------------------------------------
     # Mountains primary story — Sindra's nightmare constructs.

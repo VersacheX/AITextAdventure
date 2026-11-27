@@ -500,6 +500,14 @@ class CombatSimulation:
         messages: List[str] = []
         # collect player objects
         players: List[Player] = list(self.player_game.get_active_party())
+
+        # End-of-combat cleanup: all statuses are cleared from every party
+        # member once combat ends, except petrify (must be cured explicitly)
+        # and continuous_damage (retains its remaining duration/stacks).
+        for p in players:
+            if hasattr(p, 'clear_statuses_end_of_combat'):
+                p.clear_statuses_end_of_combat()
+
         # Dead/petrified players do not share in combat rewards: they neither
         # count toward the XP division nor receive a portion of it.
         players = [p for p in players if not p.is_incapacitated()]

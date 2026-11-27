@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
 		'player_abilities': ['demonic_fury', 'infuriating_revelation', 'they_arent_who_you_are', 'paradox_touch'],
 		'base_str': 55, 'base_dex': 60, 'base_con': 55, 'base_int': 90, 'base_hp': 110000, 'base_ap': 1300,
 		'str_per_level': 7, 'dex_per_level': 7, 'con_per_level': 7, 'int_per_level': 11,
-		'resistances': ['dark', 'electric', 'ice'], 'immunities': ['confuse', 'sleep'], 'weaknesses': ['light']
+		'resistances': ['dark', 'electric', 'ice'], 'immunities': ['confuse', 'sleep', 'stun', 'petrify', 'silence'], 'weaknesses': ['light']
 	},
 	{
 		'id': 'crux_boss', 'name': 'Crux', 'hostile_type': 'aberration', 'min_spawn_level': 87, 'role': 'damage', 'rarity': 'notfound',
@@ -79,7 +79,7 @@ BOSS_HOSTILES = [
 		'basic_attack': 'logic erasure', 'strong_attack': 'structural collapse', 'player_abilities': ['impossibility_storm', 'debuff_the_wicked', 'structural_paradox', 'logic_collapse'],
 		'base_str': 65, 'base_dex': 55, 'base_con': 65, 'base_int': 75, 'base_hp': 130000, 'base_ap': 1100,
 		'str_per_level': 8, 'dex_per_level': 7, 'con_per_level': 8, 'int_per_level': 9,
-		'resistances': ['dark', 'physical', 'ice'], 'immunities': ['stun', 'petrify', 'confuse'], 'weaknesses': ['light', 'fire']
+		'resistances': ['dark', 'physical', 'ice'], 'immunities': ['stun', 'petrify', 'confuse', 'sleep', 'silence'], 'weaknesses': ['light', 'fire']
 	}
 ]
 

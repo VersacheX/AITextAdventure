@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'defining judgment', 'strong_attack': 'identity collapse', 'player_abilities': ['void_refraction', 'the_darkness_consuming', 'you_can_be_me'],
         'base_str': 48, 'base_dex': 52, 'base_con': 55, 'base_int': 75, 'base_hp': 320000, 'base_ap': 650,
         'str_per_level': 5, 'dex_per_level': 6, 'con_per_level': 6, 'int_per_level': 9,
-        'resistances': ['dark', 'ice'], 'immunities': ['confuse', 'sleep'], 'weaknesses': ['light']
+        'resistances': ['dark', 'ice'], 'immunities': ['confuse', 'sleep', 'silence', 'petrify'], 'weaknesses': ['light']
     },
     {
         'id': 'rapture_trial', 'name': 'Rapture', 'hostile_type': 'void_entity', 'min_spawn_level': 99, 'role': 'damage', 'rarity': 'notfound',
@@ -79,7 +79,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'euphoric rush', 'strong_attack': 'breaking point', 'player_abilities': ['adrenaline_surge', 'reckless_abandon', 'thrill_addiction'],
         'base_str': 65, 'base_dex': 60, 'base_con': 50, 'base_int': 45, 'base_hp': 340000, 'base_ap': 520,
         'str_per_level': 8, 'dex_per_level': 7, 'con_per_level': 5, 'int_per_level': 5,
-        'resistances': ['fire', 'physical'], 'immunities': ['sleep', 'stun'], 'weaknesses': ['ice', 'light']
+        'resistances': ['fire', 'physical'], 'immunities': ['sleep', 'stun', 'confuse', 'petrify'], 'weaknesses': ['ice', 'light']
     },
     {
         'id': 'scalpel_trial', 'name': 'Scalpel', 'hostile_type': 'void_entity', 'min_spawn_level': 99, 'role': 'damage', 'rarity': 'notfound',
@@ -87,7 +87,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'surgical cut', 'strong_attack': 'pressure test', 'player_abilities': ['cold_execution', 'perfect_cut', 'detached_slaughter'],
         'base_str': 52, 'base_dex': 70, 'base_con': 48, 'base_int': 55, 'base_hp': 300000, 'base_ap': 580,
         'str_per_level': 6, 'dex_per_level': 9, 'con_per_level': 5, 'int_per_level': 6,
-        'resistances': ['ice', 'physical'], 'immunities': ['confuse', 'petrify'], 'weaknesses': ['fire', 'light']
+        'resistances': ['ice', 'physical'], 'immunities': ['confuse', 'petrify', 'stun', 'silence'], 'weaknesses': ['fire', 'light']
     }
 ]
 

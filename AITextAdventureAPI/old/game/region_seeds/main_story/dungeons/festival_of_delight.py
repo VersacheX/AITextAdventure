@@ -70,7 +70,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'painful truth', 'strong_attack': 'agony spike', 'player_abilities': ['blood_spectacle', 'thrill_of_ruin', 'seizing_the_moment', 'predator_rush'],
         'base_str': 40, 'base_dex': 35, 'base_con': 30, 'base_int': 25, 'base_hp': 25000, 'base_ap': 350,
         'str_per_level': 5, 'dex_per_level': 4, 'con_per_level': 3, 'int_per_level': 3,
-        'resistances': ['dark', 'physical'], 'immunities': ['stun'], 'weaknesses': ['light']
+        'resistances': ['dark', 'physical'], 'immunities': ['stun', 'petrify', 'confuse', 'sleep', 'silence'], 'weaknesses': ['light']
     },
     {
         'id': 'revelry_boss', 'name': 'Revelry', 'hostile_type': 'aberration', 'min_spawn_level': 57, 'role': 'hazard', 'rarity': 'notfound',
@@ -78,7 +78,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'manic burst', 'strong_attack': 'endless party', 'player_abilities': ['manic_freedom', 'collapse_of_joy', 'wild_possibility', 'entropic_spiral'],
         'base_str': 30, 'base_dex': 40, 'base_con': 25, 'base_int': 35, 'base_hp': 22000, 'base_ap': 400,
         'str_per_level': 3, 'dex_per_level': 5, 'con_per_level': 3, 'int_per_level': 4,
-        'resistances': ['air', 'light'], 'immunities': ['confuse', 'sleep'], 'weaknesses': ['earth']
+        'resistances': ['air', 'light'], 'immunities': ['confuse', 'sleep', 'stun', 'petrify', 'silence'], 'weaknesses': ['earth']
     }
 ]
 

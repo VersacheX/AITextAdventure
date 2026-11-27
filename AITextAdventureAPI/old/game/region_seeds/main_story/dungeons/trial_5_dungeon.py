@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'optimized failure', 'strong_attack': 'efficient collapse', 'player_abilities': ['systematic_destruction', 'refinement_loop', 'inevitable_failure'],
         'base_str': 70, 'base_dex': 62, 'base_con': 68, 'base_int': 65, 'base_hp': 380000, 'base_ap': 600,
         'str_per_level': 9, 'dex_per_level': 8, 'con_per_level': 9, 'int_per_level': 8,
-        'resistances': ['physical', 'dark', 'fire'], 'immunities': ['stun', 'petrify'], 'weaknesses': ['light']
+        'resistances': ['physical', 'dark', 'fire'], 'immunities': ['stun', 'silence', 'petrify', 'confuse', 'sleep'], 'weaknesses': ['light']
     },
     {
         'id': 'reliquary_trial', 'name': 'Reliquary', 'hostile_type': 'void_entity', 'min_spawn_level': 102, 'role': 'hazard', 'rarity': 'notfound',
@@ -79,7 +79,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'archived trauma', 'strong_attack': 'structural memory', 'player_abilities': ['eternal_wound', 'memory_of_suffering', 'burden_of_the_lost'],
         'base_str': 55, 'base_dex': 58, 'base_con': 75, 'base_int': 78, 'base_hp': 400000, 'base_ap': 680,
         'str_per_level': 6, 'dex_per_level': 7, 'con_per_level': 9, 'int_per_level': 10,
-        'resistances': ['dark', 'ice', 'physical'], 'immunities': ['sleep', 'petrify', 'confuse'], 'weaknesses': ['light', 'fire']
+        'resistances': ['dark', 'ice', 'physical'], 'immunities': ['stun', 'silence', 'petrify', 'confuse', 'sleep'], 'weaknesses': ['light', 'fire']
     }
 ]
 

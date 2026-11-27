@@ -43,9 +43,11 @@ from tui.screens.base_screen import BaseScreen
 from tui.screens.combat_menu_overlay import CombatMenuOverlay, build_ability_detail, build_item_detail
 from tui.screens.combat_target_overlay import CombatTargetOverlay
 from tui.services.combat_renderer import (
+    build_ability_menu_label,
     build_hostile_card_text,
     build_player_card_text,
     build_timeline_rows,
+    sort_abilities,
 )
 from tui.services.combat_service import (
     build_simulation,
@@ -147,11 +149,16 @@ class CombatScreen(BaseScreen):
     }
 
     #hostiles-col {
-        width: 26;
+        width: 50;
         height: 100%;
         border-left: solid $accent 40%;
         padding: 1;
         overflow-y: auto;
+        layout: grid;
+        grid-size: 2;
+        grid-columns: 1fr 1fr;
+        grid-rows: auto;
+        grid-gutter: 1;
     }
 
     #center-col {
@@ -181,6 +188,10 @@ class CombatScreen(BaseScreen):
         border: solid $primary;
         padding: 0 1;
         margin-bottom: 1;
+    }
+
+    #hostiles-col .combat-card {
+        margin-bottom: 0;
     }
 
     .combat-card.active-card {
@@ -451,8 +462,9 @@ class CombatScreen(BaseScreen):
         if not abilities:
             self.notify("No usable abilities (check AP).", severity="warning")
             return
+        abilities = sort_abilities(abilities)
         cur_ap  = getattr(unit.entity, "current_ap", 0)
-        entries = [(a.name, a) for a in abilities]
+        entries = [(build_ability_menu_label(a), a) for a in abilities]
 
         def _on_menu_result(ability: Optional[Any]) -> None:
             if ability is None:
