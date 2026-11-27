@@ -72,7 +72,7 @@ BOSS_HOSTILES = [
 		'basic_attack': 'written verdict', 'strong_attack': 'prophetic collapse', 'player_abilities': ['inescapable_prophecy', 'vision_of_ruin', 'fate_lock'],
 		'base_str': 55, 'base_dex': 65, 'base_con': 58, 'base_int': 100, 'base_hp': 150000, 'base_ap': 1500,
 		'str_per_level': 6, 'dex_per_level': 8, 'con_per_level': 7, 'int_per_level': 12,
-		'resistances': ['dark', 'ice', 'electric'], 'immunities': ['confuse', 'sleep'], 'weaknesses': ['light', 'fire']
+		'resistances': ['dark', 'ice', 'electric'], 'immunities': ['confuse', 'sleep', 'stun', 'petrify', 'silence'], 'weaknesses': ['light', 'fire']
 	},
 	{
 		'id': 'reliquary_boss_1', 'name': 'Reliquary', 'hostile_type': 'aberration', 'min_spawn_level': 95, 'role': 'hazard', 'rarity': 'notfound',
@@ -80,7 +80,7 @@ BOSS_HOSTILES = [
 		'basic_attack': 'preserved anguish', 'strong_attack': 'permanent collection', 'player_abilities': ['eternal_wound', 'memory_of_suffering', 'burden_of_the_lost'],
 		'base_str': 58, 'base_dex': 55, 'base_con': 72, 'base_int': 85, 'base_hp': 160000, 'base_ap': 1300,
 		'str_per_level': 7, 'dex_per_level': 6, 'con_per_level': 9, 'int_per_level': 10,
-		'resistances': ['dark', 'physical', 'ice'], 'immunities': ['stun', 'petrify', 'confuse'], 'weaknesses': ['light', 'fire']
+		'resistances': ['dark', 'physical', 'ice'], 'immunities': ['stun', 'petrify', 'confuse', 'sleep', 'silence'], 'weaknesses': ['light', 'fire']
 	}
 ]
 

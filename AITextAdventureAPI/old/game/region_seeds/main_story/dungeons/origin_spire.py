@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
 		'player_abilities': ['impossibility_storm', 'debuff_the_wicked', 'glitch_cascade', 'static_erasure'],
 		'base_str': 55, 'base_dex': 55, 'base_con': 60, 'base_int': 80, 'base_hp': 120000, 'base_ap': 1200,
 		'str_per_level': 7, 'dex_per_level': 7, 'con_per_level': 8, 'int_per_level': 10,
-		'resistances': ['dark', 'ice', 'electric'], 'immunities': ['confuse', 'sleep', 'stun'], 'weaknesses': ['light']
+		'resistances': ['dark', 'ice', 'electric'], 'immunities': ['confuse', 'sleep', 'stun', 'petrify', 'silence'], 'weaknesses': ['light']
 	}
 ]
 

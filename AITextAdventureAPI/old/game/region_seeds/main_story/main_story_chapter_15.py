@@ -824,8 +824,8 @@ NPC_DIALOG = [
         'npc_id': None,
         'dialog_id': 'narrator_ch15_ocean_boils',
         'dialog': [
-            "A catastrophic event cascade begins. The oceans of the world boil away in an instant, leaving behind a dry, barren seabed.",
-            "The Rustwing, once docked, is now beached and broken miles from any remaining settlement."
+            "A catastrophic event cascade begins. The oceans of the world dissipate in an instant, consumed by the void.",
+            "The continents remain, floating in the void."
         ]
     },
     {
@@ -1156,6 +1156,7 @@ TASKS = [
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch15_teleport'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'tech', 'dialog_id': 'tech_ch15_teleport'}},
             {'event_type': 'initiate_dialog', 'params': {'npc_id': None, 'dialog_id': 'narrator_ch15_arrival'}},
+            {'event_type': 'remove_player_from_dungeon', 'params': { 'dungeon_id': 'the_citadel' } },
             {'event_type': 'set_player_location', 'params': {'location': 'forest_small_city_region_open_area'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'skill', 'dialog_id': 'skill_ch15_shelter'}},
             {'event_type': 'initiate_character_dialog', 'params': {'npc_id': 'magic', 'dialog_id': 'magic_ch15_sad_forest'}},

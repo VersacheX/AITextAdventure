@@ -95,11 +95,11 @@ def _flatten_all_seeds(player_level: int) -> List[Dict[str, Any]]:
 			item['_seed_type'] = 'special'
 			out.append(item)
 
-	# accessories - any non-'notfound' rarity is eligible for the generic
+	# accessories � any non-'notfound' rarity is eligible for the generic
 	# random loot pool (weighted the same way as other item types via
 	# RarityDefaultWeights/_seed_weight). 'notfound' accessories are placed
 	# deliberately only: dungeon-specific hostile common_drop/rare_drop, or
-	# guaranteed dungeon treasure - never reachable from this pool.
+	# guaranteed dungeon treasure � never reachable from this pool.
 	poolable_accessories = [a for a in constants.ACCESSORY_SEEDS if a.get('rarity') != 'notfound']
 	if poolable_accessories:
 		acc_min, acc_max = get_min_max_lvl(player_level, max(a.get('min_level',1) for a in poolable_accessories))

@@ -54,7 +54,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'final word', 'strong_attack': 'entropic cascade', 'player_abilities': ['dark_dark_technique_lv2_void_crush'],
         'base_str': 38, 'base_dex': 38, 'base_con': 35, 'base_int': 40, 'base_hp': 30000, 'base_ap': 500,
         'str_per_level': 4, 'dex_per_level': 4, 'con_per_level': 4, 'int_per_level': 5,
-        'resistances': ['dark', 'ice'], 'immunities': ['sleep', 'confuse'], 'weaknesses': ['light']
+        'resistances': ['dark', 'ice'], 'immunities': ['sleep', 'confuse', 'petrify'], 'weaknesses': ['light']
     },
     {
         'id': 'anarchist', 'name': 'Anarchist', 'hostile_type': 'humanoid', 'min_spawn_level': 55, 'role': 'damage', 'rarity': 'uncommon',
@@ -62,7 +62,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'chaotic strike', 'strong_attack': 'anarchy wave', 'player_abilities': ['dark_magic_lv1_shadow_tendril'],
         'base_str': 35, 'base_dex': 25, 'base_con': 32, 'base_int': 20, 'base_hp': 2200, 'base_ap': 70,
         'str_per_level': 4, 'dex_per_level': 3, 'con_per_level': 4, 'int_per_level': 2,
-        'resistances': ['dark'], 'immunities': ['confuse'], 'weaknesses': ['light']
+        'resistances': ['dark'], 'immunities': ['confuse', 'petrify'], 'weaknesses': ['light']
     }
 ]
 

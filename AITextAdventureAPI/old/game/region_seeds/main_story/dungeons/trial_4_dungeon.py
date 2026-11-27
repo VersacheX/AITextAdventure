@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'perfect composure', 'strong_attack': 'audience judgment', 'player_abilities': ['mask_of_expectation', 'crushing_reputation', 'obligation_chain'],
         'base_str': 50, 'base_dex': 70, 'base_con': 55, 'base_int': 62, 'base_hp': 340000, 'base_ap': 640,
         'str_per_level': 6, 'dex_per_level': 9, 'con_per_level': 6, 'int_per_level': 8,
-        'resistances': ['air', 'light'], 'immunities': ['confuse', 'stun'], 'weaknesses': ['dark', 'earth']
+        'resistances': ['air', 'light'], 'immunities': ['confuse', 'stun', 'petrify', 'silence'], 'weaknesses': ['dark', 'earth']
     },
     {
         'id': 'oracle_trial', 'name': 'Oracle', 'hostile_type': 'void_entity', 'min_spawn_level': 101, 'role': 'hazard', 'rarity': 'notfound',
@@ -79,7 +79,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'immutable future', 'strong_attack': 'the only ending', 'player_abilities': ['inescapable_prophecy', 'vision_of_ruin', 'fate_lock'],
         'base_str': 48, 'base_dex': 52, 'base_con': 60, 'base_int': 80, 'base_hp': 320000, 'base_ap': 720,
         'str_per_level': 5, 'dex_per_level': 6, 'con_per_level': 7, 'int_per_level': 10,
-        'resistances': ['dark', 'ice'], 'immunities': ['sleep', 'stun', 'petrify'], 'weaknesses': ['light', 'fire']
+        'resistances': ['dark', 'ice'], 'immunities': ['sleep', 'petrify', 'confuse', 'silence'], 'weaknesses': ['light', 'fire']
     },
     {
         'id': 'garbage_trial', 'name': 'Garbage', 'hostile_type': 'void_entity', 'min_spawn_level': 101, 'role': 'hazard', 'rarity': 'notfound',
@@ -87,7 +87,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'whispered doubt', 'strong_attack': 'belief collapse', 'player_abilities': ['intrusive_truth', 'self_sabotage', 'unwanted_knowing'],
         'base_str': 45, 'base_dex': 55, 'base_con': 58, 'base_int': 75, 'base_hp': 330000, 'base_ap': 680,
         'str_per_level': 5, 'dex_per_level': 6, 'con_per_level': 7, 'int_per_level': 9,
-        'resistances': ['dark', 'poison'], 'immunities': ['confuse', 'silence', 'stun'], 'weaknesses': ['light']
+        'resistances': ['dark', 'poison'], 'immunities': ['confuse', 'stun', 'sleep', 'petrify', 'continuous_damage'], 'weaknesses': ['light']
     }
 ]
 

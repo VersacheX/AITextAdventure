@@ -71,7 +71,7 @@ BOSS_HOSTILES = [
 		'basic_attack': 'looping shame', 'strong_attack': 'false history', 'player_abilities': ['dark_spirit_lv1_shade_whisper', 'dark_magic_lv1_shadow_tendril'],
 		'base_str': 65, 'base_dex': 55, 'base_con': 80, 'base_int': 70, 'base_hp': 200000, 'base_ap': 1200,
 		'str_per_level': 8, 'dex_per_level': 7, 'con_per_level': 10, 'int_per_level': 9,
-		'resistances': ['dark', 'earth', 'physical'], 'immunities': ['poison', 'sleep', 'confuse'], 'weaknesses': ['fire', 'light']
+		'resistances': ['dark', 'earth', 'physical'], 'immunities': ['continuous_damage', 'petrify', 'sleep', 'confuse'], 'weaknesses': ['fire', 'light']
 	}
 ]
 

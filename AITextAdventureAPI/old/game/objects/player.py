@@ -358,6 +358,19 @@ class Player:
 		self.statuses = [st for st in self.statuses if 'debuff' not in st.get('id')]
 		return before - len(self.statuses)
 
+	def clear_statuses_end_of_combat(self) -> int:
+		"""Remove all statuses at the end of combat except petrify and
+		continuous_damage. Petrify must be cured explicitly, and
+		continuous_damage retains its remaining duration/stacks across
+		combats rather than being wiped.
+		"""
+		before = len(self.statuses)
+		self.statuses = [
+			st for st in self.statuses
+			if st.get('id') in ('petrify', 'continuous_damage')
+		]
+		return before - len(self.statuses)
+
 	def tick_statuses(self) -> None:
 		"""Decrement turns_remaining and drop expired statuses.
 		Permanent statuses have turns_remaining == -1 and are preserved until explicitly removed.

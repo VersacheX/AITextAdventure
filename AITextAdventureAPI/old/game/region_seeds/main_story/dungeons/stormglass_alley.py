@@ -86,7 +86,7 @@ BOSS_HOSTILES = [
         'base_str': 8, 'base_dex': 18, 'base_con': 10, 'base_int': 14,
         'base_hp': 1500, 'base_ap': 30,
         'str_per_level': 1, 'dex_per_level': 2, 'con_per_level': 1, 'int_per_level': 2,
-        'resistances': ['electric'], 'immunities': [], 'weaknesses': ['earth']
+        'resistances': ['electric'], 'immunities': ['continuous_damage', 'petrify', 'sleep', 'silence'], 'weaknesses': ['earth']
     }
 ]
 

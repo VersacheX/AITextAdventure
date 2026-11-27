@@ -142,7 +142,7 @@ NPC_DIALOG = [
 		'dialog_id': 'vex_ch17_reads_legend',
 		'dialog': [
 			"Halden finally cracked, huh? Let me see that legend.",
-			"Whoa! The text on it shifts while I read it. I'm gonna need som time with this, but from what I get...",
+			"Whoa! The text on it shifts while I read it. I'm gonna need some time with this, but from what I get...",
 			"This is a true paradox lock. It only opens if two mutually exclusive things are both real. I can solve it... but I need the actual Puzzle Box.",
 			"There's a black market dealer in town. You should go talk to her and see if she knows anything about it."
 		]

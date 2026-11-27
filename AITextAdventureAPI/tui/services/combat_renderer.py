@@ -10,11 +10,93 @@ objects for Textual.
 """
 from __future__ import annotations
 
-from typing import Any, List
+from typing import Any, List, Tuple
 
 from rich.markup import escape as rich_escape
 
 from tui.services.combat_service import is_unit_player
+
+
+# ── ability list sorting / coloring (used by the combat ability menu) ───────
+
+# Effect ordering: damage, heal, cure, revive, then status (beneficial
+# statuses before detrimental ones). Within each bucket, sort by level.
+_EFFECT_ORDER = {
+    "damage": 0,
+    "heal": 1,
+    "cure": 2,
+    "revive": 3,
+    "status": 4,
+}
+
+# Color used for each ability_type/effect row in the ability menu list.
+ABILITY_EFFECT_COLORS = {
+    "damage": "red",
+    "heal": "green",
+    "cure": "cyan",
+    "revive": "bright_magenta",
+    "status": "yellow",
+}
+
+# Status abilities get one of two colors depending on whether they help or
+# hurt the target, rather than the single generic "status" color above.
+STATUS_BENEFICIAL_COLOR = "yellow"
+STATUS_DETRIMENTAL_COLOR = "orange3"
+
+
+def _ability_effect_value(ability: Any) -> str:
+    effect = getattr(ability, "effect", None)
+    return str(effect.value if hasattr(effect, "value") else effect or "").lower()
+
+
+def ability_sort_key(ability: Any) -> Tuple[int, int, int]:
+    """Sort key for the combat ability menu: effect bucket, beneficial/harmful
+    status ordering, then ability level (low to high)."""
+    from tui.services.combat_service import is_beneficial_ability
+
+    effect = _ability_effect_value(ability)
+    bucket = _EFFECT_ORDER.get(effect, len(_EFFECT_ORDER))
+    # Within the 'status' bucket, beneficial statuses sort before harmful ones.
+    status_rank = 0
+    if effect == "status":
+        try:
+            status_rank = 0 if is_beneficial_ability(ability) else 1
+        except Exception:
+            status_rank = 0
+    level = int(getattr(ability, "level", 1) or 1)
+    return (bucket, status_rank, level)
+
+
+def sort_abilities(abilities: List[Any]) -> List[Any]:
+    """Return `abilities` sorted by damage/heal/cure/revive/status (beneficial
+    before detrimental within status), each bucket ordered by level ascending."""
+    return sorted(abilities, key=ability_sort_key)
+
+
+def build_ability_menu_label(ability: Any) -> str:
+    """Return a Rich-markup label for one row in the combat ability menu.
+
+    Colors the row by effect type (red=damage, green=heal, cyan=cure,
+    magenta=revive); status abilities are colored by beneficial (yellow) vs
+    detrimental (orange) instead of a single status color. Appends a gold
+    diamond marker when the ability can hit all targets (AOE).
+    """
+    from tui.services.combat_service import is_beneficial_ability
+
+    name = rich_escape(str(getattr(ability, "name", "?")))
+    effect = _ability_effect_value(ability)
+    if effect == "status":
+        try:
+            beneficial = is_beneficial_ability(ability)
+        except Exception:
+            beneficial = True
+        color = STATUS_BENEFICIAL_COLOR if beneficial else STATUS_DETRIMENTAL_COLOR
+    else:
+        color = ABILITY_EFFECT_COLORS.get(effect, "white")
+    label = f"[{color}]{name}[/{color}]"
+    if getattr(ability, "can_aoe", False):
+        label += " [gold3]◆[/gold3]"
+    return label
 
 
 def _status_text(entity: Any) -> str:

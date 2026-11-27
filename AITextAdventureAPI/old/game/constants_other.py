@@ -88,13 +88,16 @@ ABILITY_STATUS_KEY_DISPLAY_NAMES = {
 # or when a plain icon is desired without the accompanying 3-letter id.
 ELEMENT_SYMBOLS: dict[str, str] = {
     "dark":     "☾",
-    "light":    "☀",
-    "earth":    "⛰",
-    "fire":     "♨",
+    # Plain "white sun with rays" (U+263C) instead of U+2600 -- renders as a
+    # single-width text glyph in virtually every terminal/font (no emoji
+    # presentation fallback), so Rich color markup actually applies to it.
+    "light":    "☼",
+    "earth":    "⛰\uFE0E",
+    "fire":     "♨\uFE0E",
     "water":    "≈",
     "air":      "≋",
-    "ice":      "❄",
-    "electric": "⚡",
+    "ice":      "❄\uFE0E",
+    "electric": "⚡\uFE0E",
     "physical": "●",
 }
 
@@ -378,8 +381,11 @@ STATUS_SYMBOLS: dict[str, str] = {
     "sleep":                  "☽",
     "confuse":                "⁈",
     "silence":                "⊘",
-    "continuous_damage":      "♾",
-    "regen":                  "♻",
+    # \uFE0E forces "text presentation" instead of the colorful emoji
+    # presentation some terminals/fonts default to (which ignores Rich
+    # color markup and renders double-width).
+    "continuous_damage":      "♾\uFE0E",
+    "regen":                  "♻\uFE0E",
     "elemental_debuff":       "◆",
     "attack_debuff":          "↓",
     "defense_debuff":         "↓",
@@ -459,17 +465,43 @@ STATUS_COLORS: dict[str, str] = {
 }
 
 
+# ── Wide glyph compensation ─────────────────────────────────────────────────
+# Some unicode glyphs render as double-width in certain terminal/font combos,
+# causing the following character (an abbreviation letter, or the next glyph
+# in a list) to visually collide with it. We append a single spacer character
+# after these specific glyphs to compensate.
+WIDE_SYMBOL_KEYS: set[str] = {
+    "fire", "ice", "earth", "continuous_damage", "regen",
+}
+
+# ── Statuses that still need their 3-letter id ──────────────────────────────
+# Only buffs/debuffs need the abbreviation so the player can tell which stat
+# is affected (e.g. "↑STR" vs "↑DEX"). Everything else (crowd control,
+# dots, scanned, elemental debuff, etc.) is unambiguous from the symbol alone
+# and should render as just the bare glyph.
+STATUS_ABBREVIATED_KEYS: set[str] = {
+    "attack_buff", "defense_buff", "strength_buff", "dexterity_buff",
+    "intelligence_buff", "constitution_buff",
+    "attack_debuff", "defense_debuff", "strength_debuff", "dexterity_debuff",
+    "intelligence_debuff", "constitution_debuff",
+    "elemental_attack_buff", "elemental_defense_buff",
+}
+
+
 def _element_glyph(key: str, symbol_only: bool) -> str:
     symbol = ELEMENT_SYMBOLS.get(key, f"({key[:1].upper()})" if key else "?")
-    if symbol_only:
-        return symbol
-    eid = ELEMENTAL_IDS.get(key, key[:3].upper())
-    return f"{symbol}{eid}"
+    if key in WIDE_SYMBOL_KEYS:
+        symbol += " "
+    # Elements are always unambiguous from the icon alone; never show the
+    # 3-letter id regardless of symbol_only.
+    return symbol
 
 
 def _status_glyph(key: str, symbol_only: bool) -> str:
     symbol = STATUS_SYMBOLS.get(key, f"[{key[:2]}]" if key else "?")
-    if symbol_only:
+    if key in WIDE_SYMBOL_KEYS:
+        symbol += " "
+    if symbol_only or key not in STATUS_ABBREVIATED_KEYS:
         return symbol
     sid = STATUS_IDS.get(key, key[:3].upper())
     return f"{symbol}{sid}"

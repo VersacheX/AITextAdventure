@@ -1,15 +1,17 @@
 ﻿"""
 AbilitiesOverlay: floating ability-use panel for InventoryScreen.
 
-Shows ALL abilities known by the selected character. Beneficial abilities
-(heal / revive / cure / *_buff status) are fully selectable. Non-beneficial
-abilities are shown dimmed and cannot be used.
+Shows ALL abilities known by the selected character, sorted heal → cure →
+revive → damage → status (beneficial statuses before detrimental ones).
+Only heal / cure / revive abilities can actually be used here — damage and
+status abilities (including beneficial buffs) require an active combat
+encounter and are shown dimmed/disabled.
 
 Interaction:
   - Up / Down or mouse navigate; highlight updates the right detail panel.
   - Click a new row → highlight/preview only.
   - Enter on an already-highlighted row, or the Use button → push
-    AbilityTargetScreen to pick a target (beneficial only).
+    AbilityTargetScreen to pick a target (usable abilities only).
   - InventoryScreen's own ◄/► propagates via on_player_changed().
   - Escape or ✕ closes.
 
@@ -18,7 +20,7 @@ query and remove any open overlay generically.
 """
 from __future__ import annotations
 
-from typing import Any, Callable, List, Optional
+from typing import Any, Callable, List, Optional, Tuple
 
 from rich.markup import escape as rich_escape
 from textual import events, on
@@ -65,7 +67,48 @@ def _is_beneficial(ability: Any) -> bool:
         return False
 
 
-def _ability_row_markup(ability: Any, player: Any, beneficial: bool) -> str:
+# Effect bucket ordering for the ability list: heal, cure, revive, damage,
+# then status (beneficial statuses before detrimental ones).
+_EFFECT_ORDER = {
+    "heal": 0,
+    "cure": 1,
+    "revive": 2,
+    "damage": 3,
+    "status": 4,
+}
+
+# Only these effects can actually be cast outside of combat. Status abilities
+# (buffs included) require an active encounter, same as damage abilities.
+_USABLE_OUTSIDE_COMBAT_EFFECTS = {"heal", "cure", "revive"}
+
+
+def _effect_value(ability: Any) -> str:
+    effect = getattr(ability, "effect", None)
+    return str(effect.value if hasattr(effect, "value") else effect or "").lower()
+
+
+def _is_usable(ability: Any) -> bool:
+    """Return True if `ability` can be cast from this overlay (outside combat)."""
+    return _effect_value(ability) in _USABLE_OUTSIDE_COMBAT_EFFECTS
+
+
+def _ability_sort_key(ability: Any) -> Tuple[int, int, int]:
+    """Sort key: effect bucket (heal/cure/revive/damage/status), beneficial
+    statuses before detrimental ones, then ability level ascending."""
+    effect = _effect_value(ability)
+    bucket = _EFFECT_ORDER.get(effect, len(_EFFECT_ORDER))
+    status_rank = 0
+    if effect == "status":
+        status_rank = 0 if _is_beneficial(ability) else 1
+    level = int(getattr(ability, "level", 1) or 1)
+    return (bucket, status_rank, level)
+
+
+def _sort_abilities(abilities: List[Any]) -> List[Any]:
+    return sorted(abilities, key=_ability_sort_key)
+
+
+def _ability_row_markup(ability: Any, player: Any, usable: bool) -> str:
     name    = rich_escape(str(getattr(ability, "name", "?")))
     ap_cost = getattr(ability, "ap_cost", 0) or 0
     cur_ap  = getattr(player,  "current_ap", 0) or 0
@@ -76,8 +119,8 @@ def _ability_row_markup(ability: Any, player: Any, beneficial: bool) -> str:
 
     aoe_str = "  [bold yellow]AOE[/bold yellow]" if can_aoe else ""
 
-    if not beneficial:
-        # Non-beneficial: render entirely dim — not usable
+    if not usable:
+        # Not usable outside of combat: render entirely dim
         return f"[dim]{name}  Lv.{level}  {eff_val}  AP:{ap_cost}{aoe_str}[/dim]"
 
     ap_str  = f"[dim]AP:{ap_cost}[/dim]"
@@ -85,13 +128,13 @@ def _ability_row_markup(ability: Any, player: Any, beneficial: bool) -> str:
     eff_str = f"[dim]{eff_val}[/dim]"
 
     if cur_ap < ap_cost:
-        # Beneficial but can't afford: name dim, rest normal
+        # Usable but can't afford: name dim, rest normal
         return f"[dim]{name}[/dim]  {lv_str}  {eff_str}  {ap_str}{aoe_str}"
 
     return f"{name}  {lv_str}  {eff_str}  {ap_str}{aoe_str}"
 
 
-def _build_ability_detail(ability: Any, player: Any, beneficial: bool) -> str:
+def _build_ability_detail(ability: Any, player: Any, usable: bool) -> str:
     if ability is None:
         return "[dim]Select an ability to see details.[/dim]"
 
@@ -142,7 +185,7 @@ def _build_ability_detail(ability: Any, player: Any, beneficial: bool) -> str:
         lines.append("Status  : " + fmt_status_glyphs_rich(status_names))
 
     lines.append("")
-    if not beneficial:
+    if not usable:
         lines.append("[bold red]This ability cannot be used outside of combat.[/bold red]")
     elif cur_ap < ap_cost:
         lines.append(f"[bold red]Insufficient AP ({cur_ap}/{ap_cost})[/bold red]")
@@ -153,14 +196,14 @@ def _build_ability_detail(ability: Any, player: Any, beneficial: bool) -> str:
 # ── row widget ────────────────────────────────────────────────────────────────
 
 class _AbilityRow(ListItem):
-    def __init__(self, ability: Any, player: Any, beneficial: bool) -> None:
-        super().__init__(Label(_ability_row_markup(ability, player, beneficial)))
-        self.ability    = ability
-        self.beneficial = beneficial
+    def __init__(self, ability: Any, player: Any, usable: bool) -> None:
+        super().__init__(Label(_ability_row_markup(ability, player, usable)))
+        self.ability = ability
+        self.usable  = usable
 
     def _on_click(self, *args: Any, **kwargs: Any) -> None:
-        """Clicks on non-beneficial rows are swallowed — no selection event."""
-        if not self.beneficial:
+        """Clicks on rows that can't be used outside combat are swallowed."""
+        if not self.usable:
             return
         super()._on_click(*args, **kwargs)
 
@@ -168,7 +211,7 @@ class _AbilityRow(ListItem):
 # ── overlay widget ────────────────────────────────────────────────────────────
 
 class AbilitiesOverlay(Widget):
-    """Floating ability panel — all known abilities, beneficial ones usable."""
+    """Floating ability panel — all known abilities; only heal/cure/revive usable."""
 
     can_focus = True
 
@@ -268,7 +311,7 @@ class AbilitiesOverlay(Widget):
         self._on_close            = on_close
         self._member_index        = selected_index
         self._highlighted_ability: Optional[Any] = None
-        self._highlighted_beneficial: bool       = False
+        self._highlighted_usable: bool           = False
 
     # ── compose ───────────────────────────────────────────────────────────
 
@@ -313,8 +356,8 @@ class AbilitiesOverlay(Widget):
             self._member_index = players.index(player)
         except ValueError:
             pass
-        self._highlighted_ability    = None
-        self._highlighted_beneficial = False
+        self._highlighted_ability = None
+        self._highlighted_usable  = False
         self._rebuild_list()
 
     # ── internal helpers ──────────────────────────────────────────────────
@@ -329,26 +372,26 @@ class AbilitiesOverlay(Widget):
         player = self._current_player()
         lv     = self.query_one("#ab-list", ListView)
         lv.clear()
-        self._highlighted_ability    = None
-        self._highlighted_beneficial = False
+        self._highlighted_ability = None
+        self._highlighted_usable  = False
 
         if player is None:
             self._update_header(0)
             self._update_detail(None, None, False)
             return
 
-        abilities = _resolve_ability_instances(player)
+        abilities = _sort_abilities(_resolve_ability_instances(player))
         for ab in abilities:
-            lv.append(_AbilityRow(ab, player, _is_beneficial(ab)))
+            lv.append(_AbilityRow(ab, player, _is_usable(ab)))
 
         self._update_header(len(abilities))
 
         if abilities:
-            first_beneficial = next((a for a in abilities if _is_beneficial(a)), None)
-            first            = first_beneficial or abilities[0]
-            self._highlighted_ability    = first
-            self._highlighted_beneficial = _is_beneficial(first)
-            self._update_detail(first, player, self._highlighted_beneficial)
+            first_usable = next((a for a in abilities if _is_usable(a)), None)
+            first        = first_usable or abilities[0]
+            self._highlighted_ability = first
+            self._highlighted_usable  = _is_usable(first)
+            self._update_detail(first, player, self._highlighted_usable)
             self.call_after_refresh(self._highlight_first_row)
         else:
             self._update_detail(None, player, False)
@@ -368,10 +411,10 @@ class AbilitiesOverlay(Widget):
         )
 
     def _update_detail(
-        self, ability: Optional[Any], player: Optional[Any], beneficial: bool
+        self, ability: Optional[Any], player: Optional[Any], usable: bool
     ) -> None:
         text = (
-            _build_ability_detail(ability, player, beneficial)
+            _build_ability_detail(ability, player, usable)
             if player
             else "[dim]No character.[/dim]"
         )
@@ -395,12 +438,12 @@ class AbilitiesOverlay(Widget):
         player = self._current_player()
         child  = event.item
         if isinstance(child, _AbilityRow):
-            self._highlighted_ability    = child.ability
-            self._highlighted_beneficial = child.beneficial
-            self._update_detail(child.ability, player, child.beneficial)
+            self._highlighted_ability = child.ability
+            self._highlighted_usable  = child.usable
+            self._update_detail(child.ability, player, child.usable)
         else:
-            self._highlighted_ability    = None
-            self._highlighted_beneficial = False
+            self._highlighted_ability = None
+            self._highlighted_usable  = False
             self._update_detail(None, player, False)
 
     @on(ListView.Selected, "#ab-list")
@@ -413,9 +456,9 @@ class AbilitiesOverlay(Widget):
         player = self._current_player()
         child  = event.item
         if isinstance(child, _AbilityRow):
-            self._highlighted_ability    = child.ability
-            self._highlighted_beneficial = child.beneficial
-            self._update_detail(child.ability, player, child.beneficial)
+            self._highlighted_ability = child.ability
+            self._highlighted_usable  = child.usable
+            self._update_detail(child.ability, player, child.usable)
         self.query_one("#ab-list", ListView).focus()
 
     @on(Button.Pressed, "#ab-close-x")
@@ -436,14 +479,14 @@ class AbilitiesOverlay(Widget):
         self.query_one("#ab-list", ListView).action_cursor_down()
 
     def action_use_ability(self) -> None:
-        ability     = self._highlighted_ability
-        beneficial  = self._highlighted_beneficial
-        player      = self._current_player()
+        ability = self._highlighted_ability
+        usable  = self._highlighted_usable
+        player  = self._current_player()
 
         if ability is None:
             self.app.notify("Highlight an ability first.", title="Abilities")
             return
-        if not beneficial:
+        if not usable:
             self.app.notify(
                 "That ability cannot be used outside of combat.", title="Abilities",
                 severity="warning",

@@ -426,8 +426,8 @@ def _build_char_detail(player: Any, item: Any | None) -> str:
         new_e = _format_elements(getattr(item,    "elements", None))
         old_e = _format_elements(getattr(current, "elements", None) if current else None)
         if new_e or old_e:
-            lines.append(f"  Elem: [yellow]{rich_escape(new_e or '—')}[/yellow]"
-                         f"  (was [dim]{rich_escape(old_e or '—')}[/dim])")
+            lines.append(f"  Elem: {new_e or '[dim]—[/dim]'}"
+                         f"  (was [dim]{old_e or '—'}[/dim])")
 
     elif isinstance(item, Armor):
         slot      = getattr(item, "slot", None)
@@ -451,8 +451,8 @@ def _build_char_detail(player: Any, item: Any | None) -> str:
         new_e = _format_elements(getattr(item,    "elements", None))
         old_e = _format_elements(getattr(current, "elements", None) if current else None)
         if new_e or old_e:
-            lines.append(f"  Elem: [yellow]{rich_escape(new_e or '—')}[/yellow]"
-                         f"  (was [dim]{rich_escape(old_e or '—')}[/dim])")
+            lines.append(f"  Elem: {new_e or '[dim]—[/dim]'}"
+                         f"  (was [dim]{old_e or '—'}[/dim])")
 
     elif isinstance(item, Accessory):
         slots_used = len(accessories)
