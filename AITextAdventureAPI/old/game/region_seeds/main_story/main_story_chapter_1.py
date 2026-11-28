@@ -295,7 +295,7 @@ NPC_DIALOG = [
 		'dialog_id': 'spirit_ch1_oren',
 		'dialog': [
 			"He's lost, but he isn't afraid. I envy that a little.",
-			"We should gather supplies before we go anywhere. The item shop, perhaps."
+			"We should gather supplies before we go anywhere."
 		]
 	},
 	{
@@ -303,7 +303,7 @@ NPC_DIALOG = [
 		'dialog_id': 'magic_ch1_oren',
 		'dialog': [
 			"I like him! He's a fortune cookie that forgot the fortune.",
-			"Ooh, also: shopping. Item shop. Go go go."
+			"Ooh, also: shopping. Go go go."
 		]
 	},
 	{
@@ -311,7 +311,7 @@ NPC_DIALOG = [
 		'dialog_id': 'tech_ch1_oren',
 		'dialog': [
 			"Somehow I think we're there.",
-			"Logistics first. We have no supplies. The item shop."
+			"Logistics first. We have no supplies."
 		]
 	},
 	{
@@ -337,7 +337,7 @@ NPC_DIALOG = [
 		'dialog_id': 'technique_ch1_rook_deal',
 		'dialog': [
 			"Seth? The guy with the face?",
-			"Oh, I'm in. Outskirts. Let's go."
+			"Oh, I'm in."
 		]
 	},
 	{
@@ -345,7 +345,7 @@ NPC_DIALOG = [
 		'dialog_id': 'spirit_ch1_rook_deal',
 		'dialog': [
 			"Bounty or not, we bring him back alive. Agreed?",
-			"Supplies first, then the outskirts."
+			"Supplies first."
 		]
 	},
 	{
@@ -353,7 +353,7 @@ NPC_DIALOG = [
 		'dialog_id': 'magic_ch1_rook_deal',
 		'dialog': [
 			"Caffeine Shots? He had me at caffeine.",
-			"Shop, caffeine, bandit. Best errand list ever."
+			"Best errand list ever."
 		]
 	},
 	{
@@ -361,7 +361,7 @@ NPC_DIALOG = [
 		'dialog_id': 'tech_ch1_rook_deal',
 		'dialog': [
 			"Paid work and a read on the local economy. Efficient.",
-			"Stock up, then the hideout on the outskirts."
+			"Stock up."
 		]
 	},
 	{
@@ -439,7 +439,7 @@ NPC_DIALOG = [
 		'dialog_id': 'spirit_ch1_seth_escape',
 		'dialog': [
 			"He's hurt, but he'll live. I'm glad of that.",
-			"Let's tell Rook what happened."
+			"Rook should hear what happened."
 		]
 	},
 	{
@@ -447,14 +447,14 @@ NPC_DIALOG = [
 		'dialog_id': 'magic_ch1_seth_escape',
 		'dialog': [
 			"Hahaha! Look at him run!",
-			"Rook is going to love this. Or hate it. Let's go find out."
+			"Rook is going to love this. Or hate it."
 		]
 	},
 	{
 		'npc_id': 'tech',
 		'dialog_id': 'tech_ch1_seth_escape',
 		'dialog': [
-			"We didn't catch him, but we proved we could. That's worth something to Rook."
+			"We didn't catch him, but we proved we could. That's worth something."
 		]
 	},
 	{
@@ -462,7 +462,7 @@ NPC_DIALOG = [
 		'dialog_id': 'skill_ch1_seth_escape',
 		'dialog': [
 			"That guy was fast.",
-			"Report to Rook."
+			"Report."
 		]
 	},
 	{
@@ -479,7 +479,7 @@ NPC_DIALOG = [
 		'npc_id': 'technique',
 		'dialog_id': 'technique_ch1_rook_report',
 		'dialog': [
-			"Free money and a bar. You know, I'm starting to like this place."
+			"Free money and a bar. It's about time, I need a fucking drink."
 		]
 	},
 	{
@@ -495,7 +495,7 @@ NPC_DIALOG = [
 		'dialog_id': 'magic_ch1_rook_report',
 		'dialog': [
 			"Last time we had drinks, we got teleported to another world.",
-			"Let's see what happens this time! Bar!"
+			"Let's see what happens this time!"
 		]
 	},
 	{
@@ -580,7 +580,7 @@ NPC_DIALOG = [
 		'dialog_id': 'technique_ch1_tess_deal',
 		'dialog': [
 			"Deal. And if Seth shows up again, he's mine.",
-			"Diego. The Æ. Let's move."
+			"Diego. Let's move."
 		]
 	},
 	{
@@ -588,7 +588,7 @@ NPC_DIALOG = [
 		'dialog_id': 'spirit_ch1_tess_deal',
 		'dialog': [
 			"Thank you. Truly. Any word of them would mean everything.",
-			"Let's find Diego at the Æ."
+			"Let's find Diego."
 		]
 	},
 	{
@@ -686,7 +686,7 @@ NPC_DIALOG = [
 		'dialog_id': 'spirit_ch1_diego',
 		'dialog': [
 			"He'll listen for them. That's something.",
-			"Mira sounds dangerous. Let's be prepared. Brawn at the Armory first."
+			"Mira sounds dangerous. Let's be prepared."
 		]
 	},
 	{
