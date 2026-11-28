@@ -49,7 +49,7 @@ HOSTILE_SEEDS = [
 		'basic_attack': 'boulder crush', 'strong_attack': 'seismic collapse', 'player_abilities': ['earth_technique_lv1_armor_up'],
 		'base_str': 72, 'base_dex': 22, 'base_con': 72, 'base_int': 10, 'base_hp': 8000, 'base_ap': 110,
 		'str_per_level': 10, 'dex_per_level': 2, 'con_per_level': 10, 'int_per_level': 1,
-		'resistances': ['physical', 'earth', 'fire'], 'immunities': ['stun', 'petrify', 'knockback'], 'weaknesses': ['electric']
+		'resistances': ['physical', 'earth', 'fire'], 'immunities': ['stun', 'petrify'], 'weaknesses': ['electric']
 	}
 ]
 

@@ -4,10 +4,10 @@ MainMenuScreen: New Game / Load Game / Logout / Exit.
 Mirrors `old/console_game.py`'s `main_menu()` choices, rebuilt as a
 `BaseScreen` with real buttons instead of a blocking `input()` loop.
 "New Game" links to `tui/screens/new_game_screen.py`, which mirrors
-`old/console_game_gameloop.py`'s `new_game()` (full Character Creation
-with class/focus selection is later on the roadmap); "Load Game" is fully
-implemented in `tui/screens/load_game_screen.py` with a live, scrollable
-save list.
+`old/console_game_gameloop.py`'s `new_game()`, including the character
+class picker (IMPLEMENTATION_SPEC_custom_character_class.md); "Load Game"
+is fully implemented in `tui/screens/load_game_screen.py` with a live,
+scrollable save list.
 """
 from __future__ import annotations
 

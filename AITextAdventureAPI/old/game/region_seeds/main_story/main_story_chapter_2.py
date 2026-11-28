@@ -112,7 +112,7 @@ NPCS = [
 	},
 	{
 		'npc_id': 'the_demigorgon',
-		'name': 'The Demigorgons',
+		'name': 'The Demigorgon',
 		'description': (
 			#otherworldy being
 			'An otherworldly being of immense power and mystery.'
@@ -147,86 +147,109 @@ NPC_DIALOG = [
 		'dialog_id': 'ch2_narrator_contradiction',
 		'dialog': [
 			"Chapter 2",
-			"Contradiction is the root of all movement and life. - Hegel"
+			"Contradiction is the root of all movement and vitality. - Hegel"
 		]
 	},
 	{
 		'npc_id': 'mira',
 		'dialog_id': 'mira_ch2_intro',
 		'dialog': [
-			"Well now… you actually brought it.",
-			"This cursed couplet is older than half the ruins in this region.",
-			"Bound and sealed in this cursed form as it has been for so long.",
-			"If you want this Grift Stone for Tess, you’ll need to do a little something extra for me first.",
-            "Sweetheart, nothing rare comes cheap. And nothing powerful comes without a favor attached.",
-            "Tess wants this stone? Fine. But if you want me to part with it, you’re going to earn it."
+			"Well now... you actually brought it.",
+			"This couplet is older than half the ruins in this region. Two things, bound into one, and cursed to stay that way.",
+			"You want the Grift Stone. Sweetheart, nothing rare comes cheap, and nothing powerful comes without a favor attached.",
+			"Get this curse read. Leera, the lorekeeper at the @inn, knows the old bindings.",
+			"Bring me what she tells you, and we'll talk.",
+			"...And you've lost someone. Everyone who comes to me has. Do my favor, and maybe I'll hear something."
 		]
 	},
 	{
 		'npc_id': 'technique',
-		'dialog_id': 'technique_ch2_deliver_couplet',
+		'dialog_id': 'technique_ch2_mira_couplet',
 		'dialog': [
-			"A riddle? Great. I came here to fight, not to think."
+			"A curse? Great. I came here to fight, not to read.",
+			"Fine. Lorekeeper. Inn. Let's go."
 		]
 	},
 	{
 		'npc_id': 'tech',
-		'dialog_id': 'tech_ch2_deliver_couplet',
+		'dialog_id': 'tech_ch2_mira_couplet',
 		'dialog': [
-			"Fantastic. We’re running errands for smugglers now."
+			"Fantastic. We're running errands for smugglers now.",
+			"Leera, at the inn. She has the information."
 		]
 	},
 	{
 		'npc_id': 'magic',
-		'dialog_id': 'magic_ch2_deliver_couplet',
+		'dialog_id': 'magic_ch2_mira_couplet',
 		'dialog': [
-			"Riddles? Delicious. Let’s go shake the universe for a clue."
+			"A cursed antique and a mysterious lorekeeper? This is the best errand yet.",
+			"Inn! Leera! Go!"
 		]
 	},
 	{
 		'npc_id': 'skill',
-		'dialog_id': 'skill_ch2_deliver_couplet',
+		'dialog_id': 'skill_ch2_mira_couplet',
 		'dialog': [
-			"If this is the price, we pay it. Keep moving."
+			"Leera. Inn."
 		]
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'spirit_ch2_deliver_couplet',
+		'dialog_id': 'spirit_ch2_mira_couplet',
 		'dialog': [
-			"Knowledge is never wasted. Even when it comes from smugglers."
+			"Something bound against its will... I felt it when we carried it.",
+			"Let's find Leera at the inn."
 		]
 	},
 	{
 		'npc_id': 'leera',
 		'dialog_id': 'leera_ch2_couplet_lore',
 		'dialog': [
-                "Ah… you seek a riddle for Mira. Then listen carefully.",
-                "Void and Existence. Absence and Presence. Chaos and order.",
-                "What exists before it is understood… yet changes once it is named?",
-                "Apparant in absence, but never there in presence. Some truths hum even when buried.",
-            	"Return to Mira with this truth."
+				"Ah... you carry Mira's couplet. Then listen carefully.",
+				"Void and Existence. Absence and Presence. Chaos and order.",
+				"What exists before it is understood... yet changes once it is named?",
+				"Apparent in absence, never there in presence. Some truths hum even when buried.",
+				"Two things bound this long forget they were ever two. They must be reminded.",
+				"Return to Mira with this truth."
 		]
 	},
 	{
-		'npc_id': 'magic',
-		'dialog_id': 'magic_ch2_after_leera',
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch2_leera',
 		'dialog': [
-			"Ohhh, metaphysics. My favorite flavor of nonsense."
+			"I understood about half of that.",
+			"Mira can have the other half. Back to the bar."
 		]
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'spirit_ch2_after_leera',
+		'dialog_id': 'spirit_ch2_leera',
 		'dialog': [
-			"Void and Existence... These are deep questions..."
+			"Void and Existence... two halves that forgot each other.",
+			"Mira will know what it means. Let's return to her."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_ch2_leera',
+		'dialog': [
+			"Ohhh, metaphysics. My favorite flavor of nonsense.",
+			"Back to Mira, before I start answering the riddle out loud."
 		]
 	},
 	{
 		'npc_id': 'tech',
-		'dialog_id': 'tech_ch2_after_leera',
+		'dialog_id': 'tech_ch2_leera',
 		'dialog': [			
-			"Riddles and philosophy. Wonderful."
+			"A riddle about something that hums. That's a frequency.",
+			"Report back to Mira."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch2_leera',
+		'dialog': [
+			"Riddle's for Mira. Back to the bar."
 		]
 	},
 	{
@@ -234,45 +257,49 @@ NPC_DIALOG = [
 		'dialog_id': 'mira_ch2_after_leera',
 		'dialog': [
 			"So Leera whispered her riddles at you.",
-			"Void and Existence… Nature toward each other... Yes, that tracks.",
-			"They've been dormant so long they must be reminded.",
-			"You’ll need someone who deals in risks and rare odds, Juno",
-			"Word is she recently acquired something interesting... Which I now share an interest in, the Resonance Shard"
+			"Void and Existence, bound so long they've forgotten they were ever two. Yes, that tracks.",
+			"Something that hums can remind them. A Resonance Shard.",
+			"Juno has one. She deals in risk and rare odds, and she just won it.",
+			"Find her at the item shop. And don't let her talk you into a game."
 		]
 	},
 	{
 		'npc_id': 'technique',
-		'dialog_id': 'technique_ch2_after_leera',
+		'dialog_id': 'technique_ch2_mira_riddle',
 		'dialog': [
-			"Resonance Shard? Sounds like a job for us. Let's go find Juno."
+			"A gambler. Great. I hate cards.",
+			"Item shop. Let's get this shard."
 		]
 	},
 	{
 		'npc_id': 'skill',
-		'dialog_id': 'skill_ch2_after_leera',
+		'dialog_id': 'skill_ch2_mira_riddle',
 		'dialog': [
-			"Resonance Shard. We need to find Juno and get it."
+			"Juno. Item shop. Don't gamble."
 		]
 	},
 	{
 		'npc_id': 'tech',
-		'dialog_id': 'tech_ch2_after_leera',
+		'dialog_id': 'tech_ch2_mira_riddle',
 		'dialog': [
-			"Resonance Shard? Sounds like a job for us. Let's go find Juno."
+			"Dependency chain: Juno's shard, Mira's curse, Tess's stone.",
+			"Item shop."
 		]
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'spirit_ch2_after_leera',
+		'dialog_id': 'spirit_ch2_mira_riddle',
 		'dialog': [
-			"Resonance Shard. We must find Juno and retrieve it."
+			"A shard to remind them what they were. There's something gentle in that.",
+			"Let's find Juno at the item shop."
 		]
 	},
 	{
 		'npc_id': 'magic',
-		'dialog_id': 'moxie_ch2_after_leera',
+		'dialog_id': 'magic_ch2_mira_riddle',
 		'dialog': [
-			"Resonance Shard? Sounds like a job for us. Let's go find Juno."
+			"A gambler with a magic rock? I am absolutely playing her game.",
+			"...Fine. Item shop."
 		]
 	},
 	{
@@ -286,148 +313,169 @@ NPC_DIALOG = [
 		]
 	},
 	{
-		'npc_id': 'tech',
-		'dialog_id': 'tech_ch2_after_juno',
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch2_juno',
 		'dialog': [
-			"A shard for a concoction? Classic black market barter. This should be entertaining."
+			"We do a favor so we can do a favor so we can do a favor.",
+			"Kess. Weapon shop. Whatever."
+		]
+	},
+	{
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch2_juno',
+		'dialog': [
+			"Contraband... I don't love it. But we need that shard.",
+			"Let's find Kess."
 		]
 	},
 	{
 		'npc_id': 'magic',
-		'dialog_id': 'magic_ch2_after_juno',
+		'dialog_id': 'magic_ch2_juno',
 		'dialog': [
-			"A resonance shard! Oh my, oh my — the possibilities..."
+			"A volatile, contraband concoction? Now we're talking.",
+			"Weapon shop! Kess!"
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch2_juno',
+		'dialog': [
+			"A shard for a concoction. Classic black market barter.",
+			"Kess Thornwrite, at the weapon shop."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch2_juno',
+		'dialog': [
+			"Kess. Weapon shop."
 		]
 	},
 	{
 		'npc_id': 'kess_thornwrite',
 		'dialog_id': 'kess_ch2_request',
 		'dialog': [
-			"Juno wants *that* concoction? Oh stars… she’s bold.",
-			"I can brew it, sure, but I’m missing a key ingredient.",
-			"I sent someone to fetch it from a nearby ruin… but they never came back.",
-			"If you bring me the item, I’ll finish the brew.",
-			"Try not to die on me.  I don't want that on my head."
+			"Juno wants *that* concoction? Oh stars... she's bold.",
+			"I can brew it, sure, but I'm missing a key ingredient.",
+			"I sent a courier to fetch it from a ruin outside the city. New in town, said they needed the coin, didn't ask questions.",
+			"They never came back.",
+			"Bring me the ingredient, and bring them back too if you can. Try not to die on me. I don't want that on my head."
 		]
 	},
 	{
 		'npc_id': 'technique',
 		'dialog_id': 'technique_ch2_after_kess',
 		'dialog': [
-			"Someone went into a ruin and never came back. Sounds like our kind of job."
+			"New in town, needs coin, doesn't ask questions? ...That sounds like one of us.",
+			"Ruin outside the city. Let's go."
 		]
 	},
 	{
 		'npc_id': 'magic',
 		'dialog_id': 'magic_ch2_after_kess',
 		'dialog': [
-			"A volatile, contraband concoction? I already like her."
+			"A volatile brew, a spooky ruin and a missing courier? I already like him.",
+			"To the ruin!"
 		]
 	},
 	{
 		'npc_id': 'tech',
 		'dialog_id': 'tech_ch2_after_kess',
 		'dialog': [
-			"Classic. Send the amateurs, then hire professionals when they disappear."
+			"A stranger with no history taking odd jobs. We fit the same profile.",
+			"The ruin outside the city. Move."
 		]
 	},
 	{
 		'npc_id': 'spirit',
 		'dialog_id': 'spirit_ch2_after_kess',
 		'dialog': [
-			"We will recover what was lost. And pray the previous seekers found peace."
+			"Someone new to this world, alone in a ruin... we have to hurry.",
+			"The ruin outside the city."
 		]
 	},
 	{
 		'npc_id': 'skill',
 		'dialog_id': 'skill_ch2_after_kess',
 		'dialog': [
-			"Ruin. Missing ingredient. We go."
+			"Courier's new here. Like us.",
+			"Ruin. Now."
 		]
 	},
 	{
-		'npc_id': 'technique',
-		'dialog_id': 'technique_ch2_meet_demigorgon',
-		'dialog': [
-			"Oooooh! Looks like we bit off more than we can chew."
+		"npc_id": "technique",
+		"dialog_id": "technique_ch2_demigorgon_meet",
+		"dialog": [
+			"Oooooh. Looks like we bit off more than we can chew.",
+			"Good. I'm hungry."
 		]
 	},
-    {
-      "npc_id": "technique",
-      "dialog_id": "technique_ch2_post_demigorgon",
-      "dialog": [
-        "That thing hit like a freight. Keep your guard up — there might be more where it came from.",
-        "I don't like how it bent the air around it. Feels... not natural."
-      ]
-    },
-    {
-      "npc_id": "magic",
-      "dialog_id": "magic_ch2_post_demigorgon",
-      "dialog": [
-        "Strange hum, teeth like carved stone — deliciously alien.",
-        "Kess Thornwrite would want a sample of that residue. Dangerous, yes, but informative."
-      ]
-    },
-    {
-      "npc_id": "tech",
-      "dialog_id": "tech_ch2_post_demigorgon",
-      "dialog": [
-        "Saw scorch marks and odd sigils. Someone's been experimenting with things they don't understand.",
-        "Don't touch the residue. Bag it and report it to someone who can handle it safely."
-      ]
-    },
+	{
+		"npc_id": "spirit",
+		"dialog_id": "spirit_ch2_demigorgon_meet",
+		"dialog": [
+			"Stay close to me. All of us. I won't lose anyone again."
+		]
+	},
+	{
+		"npc_id": "magic",
+		"dialog_id": "magic_ch2_demigorgon_meet",
+		"dialog": [
+			"It's big, it's ugly, and it's between us and a reunion. Light it up!"
+		]
+	},
+	{
+		"npc_id": "tech",
+		"dialog_id": "tech_ch2_demigorgon_meet",
+		"dialog": [
+			"Unknown entity. High threat. Focus fire."
+		]
+	},
+	{
+		"npc_id": "skill",
+		"dialog_id": "skill_ch2_demigorgon_meet",
+		"dialog": [
+			"Together. Now."
+		]
+	},
+	{
+	  "npc_id": "technique",
+	  "dialog_id": "technique_ch2_post_demigorgon",
+	  "dialog": [
+		"That thing hit like a freight train. And it bent the air. Not natural.",
+		"But we're four now. One down, two to go. Let's get the weed back to Kess."
+	  ]
+	},
+	{
+	  "npc_id": "magic",
+	  "dialog_id": "magic_ch2_post_demigorgon",
+	  "dialog": [
+		"Strange hum, teeth like carved stone. Deliciously alien.",
+		"And look at us! Half a reunion! The other two are out there somewhere. To Kess!"
+	  ]
+	},
+	{
+	  "npc_id": "tech",
+	  "dialog_id": "tech_ch2_post_demigorgon",
+	  "dialog": [
+		"Scorch marks, odd sigils. Someone has been experimenting with things they don't understand.",
+		"Data point: we all landed in this world, alive. That makes the other two likely. Back to Kess."
+	  ]
+	},
 	{
 		"npc_id": "spirit",
 		"dialog_id": "spirit_ch2_post_demigorgon",
 		"dialog": [
-			"That creature radiated a dark energy unlike anything I've seen.",
-			"We must be cautious. Such forces can corrupt even the purest of hearts."
+			"That creature radiated something dark. Such forces can corrupt even the purest hearts.",
+			"But we found each other. If we survived this, the others can too. Let's return to Kess."
 		]
 	},
 	{
 		"npc_id": "skill",
 		"dialog_id": "skill_ch2_post_demigorgon",
 		"dialog": [
-			"The way it moved... unnatural. Like it was part shadow, part solid.",
-			"We need to stay vigilant. There could be more lurking in the darkness."
-		]
-	},
-	{
-		"npc_id": "technique",
-		"dialog_id": "technique_ch2_random_appearance",
-		"dialog": [
-			"I still can't wrap my head around how we ended up here. One moment we were in our world celebrating, the next... this.",
-			"This place has its own rules. We need to learn them fast if we're going to survive."
-		]
-	},
-	{
-		"npc_id": "magic",
-		"dialog_id": "magic_ch2_random_appearance",
-		"dialog": [
-			"This place is falling apart, maybe our other friends are around too.",
-			"Reality here is unstable. We need to find a way back before we get trapped."
-		]
-	},
-	{
-		"npc_id": "tech",
-		"dialog_id": "tech_ch2_random_appearance",
-		"dialog": [
-			"This place is chaos... fights breaking out everywhere. We need to stay sharp.",
-			"These ruptures in reality... they might be our ticket home, if we can figure them out."
-		]
-	},
-	{
-		"npc_id": "spirit",
-		"dialog_id": "spirit_ch2_random_appearance",
-		"dialog": [
-			"Know that the gods are here with us, even in this strange land."
-		]
-	},
-	{
-		"npc_id": "skill",
-		"dialog_id": "skill_ch2_random_appearance",
-		"dialog": [
-			"This world is unlike any I've seen. We need to adapt quickly."
+			"It moved like shadow pretending to be solid.",
+			"We found one. We'll find the rest. Kess first."
 		]
 	},
 
@@ -435,34 +483,53 @@ NPC_DIALOG = [
 		'npc_id': 'kess_thornwrite',
 		'dialog_id': 'kess_ch2_after_dungeon',
 		'dialog': [
-			"You found it!",
-			"Perfect. Give me a moment...",
+			"You found it! And my courier, alive! Oh, stars, that's a weight off.",
+			"Keep the advance, I'm not asking for it back.",
+			"Give me a moment...",
 			"...",
 			"...",
 			"There. One dangerously potent concoction for Juno.",
-			"Try not to inhale it. Or do. I’m not your mother."
+			"Try not to inhale it. Or do. I'm not your mother."
 		]
 	},
 
 	{
 		'npc_id': 'technique',
-		'dialog_id': 'technique_ch2_after_dungeon',
+		'dialog_id': 'technique_ch2_after_ruin',
 		'dialog': [
-			"That ruin had teeth. Good fight. Good pay if anyone's counting."
+			"That ruin had teeth. Good fight.",
+			"Now let's get this stuff to Juno before it explodes."
 		]
 	},
 	{
-		'npc_id': 'skill',
-		'dialog_id': 'skill_ch2_after_dungeon',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch2_after_ruin',
 		'dialog': [
-			"The shadows there were wrong. I don't miss them."
+			"Thank you, Kess, for worrying about them.",
+			"Let's bring this to Juno."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_ch2_after_ruin',
+		'dialog': [
+			"He said 'try not to inhale it' like it's a suggestion.",
+			"Juno! Quickly! Before I get curious."
 		]
 	},
 	{
 		'npc_id': 'tech',
-		'dialog_id': 'tech_ch2_after_dungeon',
+		'dialog_id': 'tech_ch2_after_ruin',
 		'dialog': [
-			"Found something useful. Also, something that made me itch in a new way."
+			"Volatile compound, unlabeled, carried by hand. Excellent safety culture.",
+			"To Juno."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch2_after_ruin',
+		'dialog': [
+			"Concoction. Juno. Careful."
 		]
 	},
 
@@ -471,7 +538,7 @@ NPC_DIALOG = [
 		'dialog_id': 'juno_ch2_after_kess',
 		'dialog': [
 			"Ahh… Kess actually delivered. Miracles do happen.",
-			"Here. The resonance shard Leera spoke of.  Handle it carefully.",
+			"Here. The Resonance Shard Mira's been after. Handle it carefully.",
 			"Take it back to Mira. She’ll know how to use it."
 		]
 	},
@@ -516,9 +583,10 @@ NPC_DIALOG = [
 		'dialog': [
 			"You brought the shard. Good.",
 			"...",
-			"...",
-			"This is exactly what I needed. you came for the Grift Stone, and I keep my deals.",
-			"As promised, here is the Grift Stone.  You can take the hyperway back to Tess for a small fee."
+			"(The shard hums. The couplet shudders, and splits in two.)",
+			"Void... and Existence. Two bracelets, reminded of what they were.",
+			"These stay with me. You came for the Grift Stone, and I keep my deals.",
+			"Take the Ṣ hyperway back to Tess. It's a small fee. Cheaper than walking."
 		]
 	},
 	{
@@ -532,14 +600,16 @@ NPC_DIALOG = [
 		'npc_id': 'magic',
 		'dialog_id': 'magic_ch2_decoupling',
 		'dialog': [
-			"Shards, smugglers, secrets… delicious chaos."
+			"Two magic bracelets out of one curse, and she keeps both? Rude.",
+			"...Hyperway! Back to Tess!"
 		]
 	},
 	{
 		'npc_id': 'technique',
 		'dialog_id': 'technique_ch2_decoupling',
 		'dialog': [
-			"About time we got something solid out of this."
+			"About time we got something solid out of this.",
+			"Hyperway. Tess. Let's go."
 		]
 	},
 	{
@@ -560,53 +630,53 @@ NPC_DIALOG = [
 		'npc_id': 'tess',
 		'dialog_id': 'tess_ch2_return',
 		'dialog': [
-			"You’re back! And you actually got the Grift Stone?",
-			"Damn… you guys are full of surprises.",
-            "Sam and I are hearing the same whispers you are - weird arrivals, old relic routes, too much money moving too fast.",
-			"Listen, word’s been spreading.  Someone in Highsteeple Crossing showed up out of nowhere... like you did.",
-			"We’re going to keep pulling threads on our side. If a real score is hiding in this mess, we’ll find it.",
-			"If you’re looking for answers, that’s your next lead."
+			"You're back! And you actually got the Grift Stone?",
+			"Damn... you guys are full of surprises.",
+			"...And you found one of your strays! Told you this city talks.",
+			"We promised to keep our ears open, and we did. Someone in Highsteeple Crossing showed up out of nowhere... like you did.",
+			"Sam and I are hearing other whispers too: weird arrivals, old relic routes, too much money moving too fast.",
+			"We'll keep pulling threads on our side. If you're looking for answers, Highsteeple is your next lead."
 		]
 	},
 
 	{
 		'npc_id': 'technique',
-		'dialog_id': 'technique_ch2_after_tess',
+		'dialog_id': 'technique_ch2_tess_lead',
 		'dialog': [ 
-			"Another stranger showing up out of nowhere? Maybe we know them, Hahah!",
-			"Hey if you ever need me again Tess, just holler."
+			"Another one fell out of the sky? Two left. Could be one of ours.",
+			"Highsteeple Crossing. Let's go. And Tess, if you ever need me, just holler."
 		]
 	},
 	{
 		'npc_id': 'magic',
-		'dialog_id': 'magic_ch2_after_tess',
+		'dialog_id': 'magic_ch2_tess_lead',
 		'dialog': [
-			"Someone materialized 'like you did'? How fascinating.",
-			"Let's stay sharp though. We never know who we're chasing... or from where? ooowoooooo."
+			"Someone materialized 'like you did'? Oooh, a mystery guest!",
+			"Highsteeple Crossing! Ooowoooooo!"
 		]
 	},
 	{
 		'npc_id': 'tech',
-		'dialog_id': 'tech_ch2_after_tess',
+		'dialog_id': 'tech_ch2_tess_lead',
 		'dialog': [
-			"It's highly likely that all 6 of us ended up here.",
-			"This is deeply curious. We must investigate further."
+			"Six of us were in that bar. Four are accounted for. The probability that this is one of ours is high.",
+			"Highsteeple Crossing."
 		]
 	},
 	{
 		'npc_id': 'spirit',
-		'dialog_id': 'spirit_ch2_after_tess',
+		'dialog_id': 'spirit_ch2_tess_lead',
 		'dialog': [
-			"This is no coincidence. We must seek out this newcomer.",
-			"Tess seems to think they are important. We should trust her judgment."
+			"Someone alone and confused in Highsteeple... I know how that feels.",
+			"We have to go to them."
 		]
 	},
 	{
 		'npc_id': 'skill',
-		'dialog_id': 'skill_ch2_after_tess',
+		'dialog_id': 'skill_ch2_tess_lead',
 		'dialog': [
-			"The threads of fate are weaving a complex tapestry.",
-			"Perhaps it is another of our friends from our own universe."
+			"Two still missing.",
+			"Highsteeple. Now."
 		]
 	},
 	{
@@ -704,7 +774,7 @@ TASKS = [
 				'params': {
 					'npc_id': 'diego',
 					'standing_text': [
-						"You're better off avoiding trouble. Stay out of the black market dealings."
+						"Mira's a shark. Smile, trade, and count your fingers after."
 					]
 				}
 			},
@@ -803,7 +873,7 @@ TASKS = [
 				'params': {
 					'npc_id': 'mira',
 					'standing_text': [
-						"words to the effect of k come back when the couplet is uncoupled"
+						"Leera at the @inn can read the couplet's curse. Come back when you know what it needs."
 					]
 				}
 			},
@@ -811,35 +881,35 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'technique',
-					'dialog_id': 'technique_ch2_deliver_couplet'
-				}
-			},
-			{
-				'event_type': 'initiate_character_dialog',
-				'params': {
-					'npc_id': 'tech',
-					'dialog_id': 'tech_ch2_deliver_couplet'
-				}
-			},
-			{
-				'event_type': 'initiate_character_dialog',
-				'params': {
-					'npc_id': 'magic',
-					'dialog_id': 'magic_ch2_deliver_couplet'
-				}
-			},
-			{
-				'event_type': 'initiate_character_dialog',
-				'params': {
-					'npc_id': 'skill',
-					'dialog_id': 'skill_ch2_deliver_couplet'
+					'dialog_id': 'technique_ch2_mira_couplet'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'spirit',
-					'dialog_id': 'spirit_ch2_deliver_couplet'
+					'dialog_id': 'spirit_ch2_mira_couplet'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch2_mira_couplet'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch2_mira_couplet'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch2_mira_couplet'
 				}
 			},
 			{
@@ -877,31 +947,36 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'magic',
-					'dialog_id': 'magic_ch2_after_leera'
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch2_leera'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'spirit',
-					'dialog_id': 'spirit_ch2_after_leera'
+					'dialog_id': 'spirit_ch2_leera'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch2_leera'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'tech',
-					'dialog_id': 'tech_ch2_after_leera'
+					'dialog_id': 'tech_ch2_leera'
 				}
 			},
 			{
-				'event_type': 'set_npc_standing_text',
+				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'leera',
-					'standing_text': [
-						"Return to Mira with this truth. She will know what must come next."
-					]
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch2_leera'
 				}
 			},
 			{
@@ -931,35 +1006,35 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'technique',
-					'dialog_id': 'technique_ch2_after_leera'
+					'dialog_id': 'technique_ch2_mira_riddle'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'tech',
-					'dialog_id': 'tech_ch2_after_leera'
+					'dialog_id': 'tech_ch2_mira_riddle'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'magic',
-					'dialog_id': 'magic_ch2_after_leera'
+					'dialog_id': 'magic_ch2_mira_riddle'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'skill',
-					'dialog_id': 'skill_ch2_after_leera'
+					'dialog_id': 'skill_ch2_mira_riddle'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'spirit',
-					'dialog_id': 'spirit_ch2_after_leera'
+					'dialog_id': 'spirit_ch2_mira_riddle'
 				}
 			},
 			{
@@ -1016,15 +1091,36 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch2_juno'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch2_juno'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
 					'npc_id': 'tech',
-					'dialog_id': 'tech_ch2_after_juno'
+					'dialog_id': 'tech_ch2_juno'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'magic',
-					'dialog_id': 'magic_ch2_after_juno'
+					'dialog_id': 'magic_ch2_juno'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch2_juno'
 				}
 			},
 			{
@@ -1145,7 +1241,35 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'technique',
-					'dialog_id': 'technique_ch2_meet_demigorgon'
+					'dialog_id': 'technique_ch2_demigorgon_meet'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch2_demigorgon_meet'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch2_demigorgon_meet'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch2_demigorgon_meet'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch2_demigorgon_meet'
 				}
 			},
 			{
@@ -1223,41 +1347,6 @@ TASKS = [
 				}
 			},
 			{
-				'event_type': 'initiate_character_dialog',
-				'params': {
-					'npc_id': 'technique',
-					'dialog_id': 'technique_ch2_random_appearance'
-				}
-			},
-			{
-				'event_type': 'initiate_character_dialog',
-				'params': {
-					'npc_id': 'magic',
-					'dialog_id': 'magic_ch2_random_appearance'
-				}
-			},
-			{
-				'event_type': 'initiate_character_dialog',
-				'params': {
-					'npc_id': 'tech',
-					'dialog_id': 'tech_ch2_random_appearance'
-				}
-			},
-			{
-				'event_type': 'initiate_character_dialog',
-				'params': {
-					'npc_id': 'spirit',
-					'dialog_id': 'spirit_ch2_random_appearance'
-				}
-			},
-			{
-				'event_type': 'initiate_character_dialog',
-				'params': {
-					'npc_id': 'skill',
-					'dialog_id': 'skill_ch2_random_appearance'
-				}
-			},
-			{
 				'event_type': 'award_item',
 				'params': {
 					'item_id': 'demigorgon_tooth'
@@ -1313,21 +1402,35 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'technique',
-					'dialog_id': 'technique_ch2_after_dungeon'
+					'dialog_id': 'technique_ch2_after_ruin'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'skill',
-					'dialog_id': 'skill_ch2_after_dungeon'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch2_after_ruin'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch2_after_ruin'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'tech',
-					'dialog_id': 'tech_ch2_after_dungeon'
+					'dialog_id': 'tech_ch2_after_ruin'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch2_after_ruin'
 				}
 			},
 			{
@@ -1640,35 +1743,35 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'technique',
-					'dialog_id': 'technique_ch2_after_tess'
+					'dialog_id': 'technique_ch2_tess_lead'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'magic',
-					'dialog_id': 'magic_ch2_after_tess'
+					'dialog_id': 'magic_ch2_tess_lead'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'tech',
-					'dialog_id': 'tech_ch2_after_tess'
+					'dialog_id': 'tech_ch2_tess_lead'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'spirit',
-					'dialog_id': 'spirit_ch2_after_tess'
+					'dialog_id': 'spirit_ch2_tess_lead'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'skill',
-					'dialog_id': 'skill_ch2_after_tess'
+					'dialog_id': 'skill_ch2_tess_lead'
 				}
 			},
 			{

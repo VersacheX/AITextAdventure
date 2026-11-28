@@ -24,7 +24,6 @@ ItemType = Union[Item, Armor, Weapon, UtilityItem, SpecialItem]
 HP_PER_LEVEL = 35             # flat max HP per level (was 20)
 HP_PER_CON_AT_CREATION = 2    # level-1 / starting CON
 HP_PER_CON_ON_LEVEL = 8       # CON gained after level 1
-HP_FORMULA_VERSION = 2
 
 _DEFAULT_MAX_ACCESSORY_SLOTS = 3
 
@@ -67,7 +66,6 @@ class Player:
 	current_hp: int = 20
 	max_ap: int = 5
 	current_ap: int = 5
-	hp_formula_version: int = HP_FORMULA_VERSION
 
 	unused_ability_slots: int = 1
 	unused_stat_points: int = 10
@@ -117,13 +115,12 @@ class Player:
 			'accessories':                      [],
 			'max_accessory_slots':              _DEFAULT_MAX_ACCESSORY_SLOTS,
 			'power_points_per_level':           15,
-			'max_hp_per_lvl':                   20,  # old saves: pre-migration value; migrated below
+			'max_hp_per_lvl':                   20,  # old saves: pre-HP_PER_LEVEL value
 			'max_ap_per_lvl':                   5,
 			'max_hp':                           20,
 			'current_hp':                       20,
 			'max_ap':                           5,
 			'current_ap':                       5,
-			'hp_formula_version':               1,  # old saves predate the HP formula version flag
 			'unused_ability_slots':             1,
 			'unused_stat_points':               10,
 			'unused_power_points':              15,
@@ -148,23 +145,6 @@ class Player:
 		}
 		for key, default in defaults.items():
 			self.__dict__[key] = state.get(key, default)
-
-		# IMPLEMENTATION_SPEC_leveling.md 1.4: migrate HP for saves made before
-		# the flat-35/CON*8 formula. Runs once per character (version flag).
-		if int(getattr(self, 'hp_formula_version', 1) or 1) < HP_FORMULA_VERSION:
-			lv = max(1, int(getattr(self, 'level', 1) or 1))
-			cls = getattr(self, 'character_class', None)
-			if not cls:
-				cid = getattr(self, 'npc_id', None) or getattr(self, 'id', None)
-				cls = (getattr(const, 'CHARACTER_NPC_CLASS_MAP', {}) or {}).get(cid)
-			con_per_level = 3 if cls in ('technique', 'spirit') else 1
-			con_gained = (lv - 1) * con_per_level
-			delta = (lv - 1) * (HP_PER_LEVEL - 20) + con_gained * (HP_PER_CON_ON_LEVEL - 2)
-			self.max_hp = int(getattr(self, 'max_hp', 20) or 20) + delta
-			if int(getattr(self, 'current_hp', 0) or 0) > 0:
-				self.current_hp = min(self.max_hp, int(self.current_hp) + delta)
-			self.max_hp_per_lvl = HP_PER_LEVEL
-			self.hp_formula_version = HP_FORMULA_VERSION
 
 	# ── Accessory management ───────────────────────────────────────────────
 
@@ -760,7 +740,11 @@ def apply_class_curve(p, cls: str, target_level: int) -> None:
 
 
 def assign_character_elements(p, char_id=None, overwrite=False) -> None:
-	"""Set p.elements_base from CHARACTER_NPC_ELEMENT_MAP. Never guesses from class."""
+	"""Set p.elements_base from CHARACTER_NPC_ELEMENT_MAP. Never guesses from class.
+
+	A character with no npc_id/id (the player-named hero) keeps an empty
+	element list = every element.
+	"""
 	if getattr(p, 'elements_base', None) and not overwrite:
 		return
 	emap = getattr(const, 'CHARACTER_NPC_ELEMENT_MAP', {}) or {}

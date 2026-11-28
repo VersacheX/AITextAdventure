@@ -42,7 +42,7 @@ HOSTILE_SEEDS = [
 		'basic_attack': 'rot lash', 'strong_attack': 'memory drain', 'player_abilities': ['dark_magic_lv1_shadow_tendril'],
 		'base_str': 42, 'base_dex': 38, 'base_con': 55, 'base_int': 55, 'base_hp': 4500, 'base_ap': 135,
 		'str_per_level': 5, 'dex_per_level': 4, 'con_per_level': 7, 'int_per_level': 7,
-		'resistances': ['earth', 'dark'], 'immunities': ['poison'], 'weaknesses': ['fire', 'light']
+		'resistances': ['earth', 'dark'], 'immunities': ['continuous_damage'], 'weaknesses': ['fire', 'light']
 	},
 	{
 		'id': 'echo_guardian', 'name': 'Echo Guardian', 'hostile_type': 'spirit', 'min_spawn_level': 97, 'role': 'damage', 'rarity': 'superrare',

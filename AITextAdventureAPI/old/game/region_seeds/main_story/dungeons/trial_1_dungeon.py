@@ -41,7 +41,7 @@ HOSTILE_SEEDS = [
         'basic_attack': 'meaningless motion', 'strong_attack': 'emptiness cascade', 'player_abilities': [],
         'base_str': 40, 'base_dex': 35, 'base_con': 45, 'base_int': 55, 'base_hp': 42000, 'base_ap': 400,
         'str_per_level': 4, 'dex_per_level': 4, 'con_per_level': 5, 'int_per_level': 7,
-        'resistances': ['dark', 'poison'], 'immunities': ['sleep', 'petrify'], 'weaknesses': ['light']
+        'resistances': ['dark', 'continuous_damage'], 'immunities': ['sleep', 'petrify'], 'weaknesses': ['light']
     },
     {
         'id': 'efficiency_construct', 'name': 'Efficiency Construct', 'hostile_type': 'construct', 'min_spawn_level': 98, 'role': 'damage', 'rarity': 'superrare',

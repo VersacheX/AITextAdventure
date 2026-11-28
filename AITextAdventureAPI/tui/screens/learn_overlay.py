@@ -242,7 +242,9 @@ class LearnOverlay(Static):
         # Update slots info
         slots = int(getattr(self._player, "unused_ability_slots", 0) or 0)
         elements = [str(e).title() for e in (getattr(self._player, "elements_base", None) or [])]
-        elements_str = f"  |  Elements: {' · '.join(elements)}" if elements else ""
+        # An empty elements_base means the custom hero, who keeps every
+        # element rather than being locked to a mapped subset.
+        elements_str = f"  |  Elements: {' · '.join(elements) if elements else 'All'}"
         try:
             if slots > 0:
                 self.query_one("#slots-info", Static).update(

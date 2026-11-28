@@ -52,7 +52,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'base_hp': 1400, 'base_ap': 20,
         'str_per_level': 7, 'dex_per_level': 5, 'con_per_level': 4, 'int_per_level': 2,
         'resistances': ['dark', 'earth', 'water'],
-        'immunities': ['poison', 'sleep', 'slow'],
+        'immunities': ['continuous_damage', 'sleep'],
         'weaknesses': ['fire', 'light'],
     },
     {
@@ -73,7 +73,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'base_hp': 1415, 'base_ap': 20,
         'str_per_level': 1, 'dex_per_level': 7, 'con_per_level': 3, 'int_per_level': 5,
         'resistances': ['dark', 'water'],
-        'immunities': ['sleep', 'confuse', 'poison'],
+        'immunities': ['sleep', 'confuse', 'continuous_damage'],
         'weaknesses': ['light', 'fire'],
     },
     {
@@ -94,7 +94,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'base_hp': 1880, 'base_ap': 20,
         'str_per_level': 1, 'dex_per_level': 1, 'con_per_level': 8, 'int_per_level': 2,
         'resistances': ['dark', 'earth', 'water', 'physical'],
-        'immunities': ['stun', 'slow', 'poison', 'confuse'],
+        'immunities': ['stun', 'continuous_damage', 'confuse'],
         'weaknesses': ['fire', 'electric'],
     },
     {
@@ -115,7 +115,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'base_hp': 1780, 'base_ap': 22,
         'str_per_level': 6, 'dex_per_level': 6, 'con_per_level': 5, 'int_per_level': 6,
         'resistances': ['dark', 'earth', 'water'],
-        'immunities': ['sleep', 'confuse', 'poison'],
+        'immunities': ['sleep', 'confuse', 'continuous_damage'],
         'weaknesses': ['fire', 'light'],
     },
 ]
@@ -145,7 +145,7 @@ BOSS_HOSTILES: List[Dict] = [
         'base_hp': 74000, 'base_ap': 940,
         'str_per_level': 8, 'dex_per_level': 7, 'con_per_level': 7, 'int_per_level': 8,
         'resistances': ['dark', 'earth', 'water', 'physical'],
-        'immunities': ['sleep', 'confuse', 'stun', 'slow', 'poison'],
+        'immunities': ['sleep', 'confuse', 'stun', 'continuous_damage'],
         'weaknesses': ['fire', 'light'],
     },
 ]

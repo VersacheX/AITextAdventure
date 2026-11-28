@@ -133,7 +133,7 @@ HOSTILE_SEEDS = [
         'dex_per_level':1,
         'con_per_level':2,
         'int_per_level':1,
-        'resistances': ['poison'],
+        'resistances': ['continuous_damage'],
         'immunities': ['continuous_damage'],
         'weaknesses': ['fire']
     }

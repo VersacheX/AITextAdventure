@@ -190,18 +190,18 @@ NPC_DIALOG = [
 		'dialog_id': 'chapter_1_start',
 		'dialog': [
 			"You don't know how you got here.",
-			"In one moment you and your compadres were in a bar knocking back a few µ.",
-			"And the next, blinding lights crashed through the dim establishment.",
-			"Reality shifted around you, and you found yourself here with three of your friends missing.",
-			"This place looks like chaos.  The streets are littered, buildings look looted, and people can be seen breaking out in fights."
+			"One moment you and your friends were in a bar, knocking back a few µ.",
+			"The next, blinding light tore through the room.",
+			"Reality folded. When it opened again, three of your friends were gone.",
+			"This place looks like chaos. The streets are littered, buildings stand looted, and fights break out on every corner."
 		]
 	},
-    {
+	{
 		'npc_id': None,
 		'dialog_id': 'ch1_narrator_we_do_not_begin',
 		'dialog': [
 			"Chapter 1",
-			"We do not begin by knowing where we are.  We begin by finding ourselves already there. - Heidegger"
+			"We do not begin by knowing where we are. We begin by finding ourselves already there. - after Heidegger"
 		]
 	},
 	{
@@ -216,69 +216,160 @@ NPC_DIALOG = [
 		'npc_id': 'seth',
 		'dialog_id': 'seth_preface',
 		'dialog': [
-			"Whoa! that was crazy! You appeared out of nowhere...",
-			"Hey Look, these streets aren't safe, be careful who you trust.",
-          "And if Tess and Sam ask, you didn't see me. I am not paying that tab today.",
+			"Whoa! That was crazy! You just appeared out of nowhere...",
+			"Hey, look, these streets aren't safe. Be careful who you trust.",
+			"And if Tess and Sam ask, you didn't see me. I am not paying that tab today.",
 			"Gotta run... It's tuff out here!"
+		]
+	},
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch1_seth_preface',
+		'dialog': [
+			"I don't like that guy.",
+			"Don't know why. It's his face. I want to hit his face."
+		]
+	},
+	{
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch1_seth_preface',
+		'dialog': [
+			"He warned us, then ran like something was chasing him.",
+			"I hope whoever he owes is kinder than this city looks."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_ch1_seth_preface',
+		'dialog': [
+			"A total stranger tells us to trust no one, then sprints off? I love him.",
+			"I don't trust him. But I love him."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch1_seth_preface',
+		'dialog': [
+			"Tess and Sam. He owes them money, which means they have leverage here.",
+			"Names worth remembering."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch1_seth_preface',
+		'dialog': [
+			"He looked at our hands before our faces.",
+			"Thief."
 		]
 	},
 	{
 		'npc_id': None,
 		'dialog_id': 'chapter_1_our_stuff_is_missing',
 		'dialog': [
-			"You should open your inventory (i) and set you character abilities. Check frequently if characters have stats or abilities to distribute.",
-			"Most buildings are safe, except for the bars and the subways.",
 			"Find a residence or business (î Î ï Ï), then press (i) to manage your party.",
-			"Make sure to spend any power points you have to upgrade your stats and ensure your characters learn any abilities",
-			"If you get low head to the @inn."
-		]
-	},
-	{
-		'npc_id': 'technique',
-		'dialog_id': 'technique_got_jacked',
-		'dialog': [
-			"Trust Issues?!? Hahahaha",
-			"They usually only fool me once."
+			"Check in often. When a character has a free ability slot, teach them something new.",
+			"Most buildings are safe. The bars and the subways are not.",
+			"If you get low, head to the @inn."
 		]
 	},
 	{
 		'npc_id': 'oren',
 		'dialog_id': 'oren_intro',
 		'dialog': [
-			"Oh!, Hey there.  You look like you're not from here like me.  I'm Oren, just wandering and exploring.",
+			"Oh! Hey there. You look like you're not from here either. Like me. I'm Oren, just wandering and exploring.",
 			"Not sure if it's reality wandering me, or if I'm wandering reality.",
-			"I seem to always find a way to the @inn.  Every city has an @inn.",
-			"If you ever intend to find the other side in another one, head to the ₨ to get you there."
+			"I always seem to find my way to the @inn. Every city has an @inn.",
+			"If you ever want to find the other side of another one, head to the ₨. It'll get you there."
+		]
+	},
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch1_oren',
+		'dialog': [
+			"Guy's not all there.",
+			"Forget the riddles. We've got nothing on us. Item shop, now."
+		]
+	},
+	{
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch1_oren',
+		'dialog': [
+			"He's lost, but he isn't afraid. I envy that a little.",
+			"We should gather supplies before we go anywhere."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_ch1_oren',
+		'dialog': [
+			"I like him! He's a fortune cookie that forgot the fortune.",
+			"Ooh, also: shopping. Go go go."
 		]
 	},
 	{
 		'npc_id': 'tech',
-		'dialog_id': 'tech_says_somehow_i_think_were_there',
+		'dialog_id': 'tech_ch1_oren',
 		'dialog': [
-			"Somehow I think we're there."
+			"Somehow I think we're there.",
+			"Logistics first. We have no supplies."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch1_oren',
+		'dialog': [
+			"He said the ₨.",
+			"Supplies next. Item shop."
 		]
 	},
 	{
 		'npc_id': 'rook',
 		'dialog_id': 'rook_intro',
 		'dialog': [
-			"You're looking short on funds there my guy.  I'm Rook, the bounty hunter. I'll tell ya what, I'll cut ya a deal.",
-			"I have a bounty for a nearby bandit Seth.  He's camped up in the outskirts nearby.  Bring him back to me and I'll give ya some cash.",
-			"Tell you what, I'll give you a little up front so you can get started.  I recommend buying some Caffeine Shots and Pocket Salves."
+			"You're new. And broke. I can tell from here.",
+			"Name's Rook. I collect bounties. There's one on a bandit called Seth. He's holed up in a hideout on the outskirts.",
+			"He's slipped me four times. Bring him to me and you'll be paid.",
+			"Here's something up front. Buy Caffeine Shots and Pocket Salves. You'll need both."
 		]
 	},
 	{
-		'npc_id': 'skill', # skill(Poise) loves energy drinks
-		'dialog_id': 'skill_loves_caffeine_shots',
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch1_rook_deal',
 		'dialog': [
-			"Oh I am down on that.  Nobody can ever get enough caffeine. Let's Go!"
+			"Seth? The guy with the face?",
+			"Oh, I'm in."
 		]
 	},
 	{
-		'npc_id': 'technique', # technique(Chock) is ready to bust some bounty
-		'dialog_id': 'technique_ready_to_bust_bounty',
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch1_rook_deal',
 		'dialog': [
-			"I knew it when I looked at that guy.  I can't wait to go bust him up for you."
+			"Bounty or not, we bring him back alive. Agreed?",
+			"Supplies first."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_ch1_rook_deal',
+		'dialog': [
+			"Caffeine Shots? He had me at caffeine.",
+			"Best errand list ever."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch1_rook_deal',
+		'dialog': [
+			"Paid work and a read on the local economy. Efficient.",
+			"Stock up."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch1_rook_deal',
+		'dialog': [
+			"Fast target. Hideout. Outskirts.",
+			"Stock up first."
 		]
 	},
 	{
@@ -286,107 +377,241 @@ NPC_DIALOG = [
 		'dialog_id': 'seth_intro',
 		'dialog': [
 			"So Rook sent you to run me down?",
-			"That guy's got it bad for me.  This personal vendetta of his is really getting old.",
-			"Well, you're here now.  Let's see what you've got!"
+			"That guy's got it bad for me. This personal vendetta of his is really getting old.",
+			"Well, you're here now. Let's see what you've got!"
 		]
 	},
 	{
-		'npc_id': 'technique', # technique(Chock) is ready to bust some bounty
-		'dialog_id': 'technique_you_got_it_coming',
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch1_seth_fight',
 		'dialog': [
-			"You got it coming, Seth!",
-			"We're taking you down!"
+			"You've got it coming, Seth.",
+			"Mostly for the face."
+		]
+	},
+	{
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch1_seth_fight',
+		'dialog': [
+			"We don't have to do this the hard way, Seth.",
+			"...But we will if we must."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_ch1_seth_fight',
+		'dialog': [
+			"Ooh, a boss fight! Somebody hold my drink."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch1_seth_fight',
+		'dialog': [
+			"He keeps the exits behind him. Pressure him and he'll make mistakes."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch1_seth_fight',
+		'dialog': [
+			"He's fast.",
+			"I'm faster."
 		]
 	},
 	{
 		'npc_id': 'seth',		
 		'dialog_id': 'seth_ch1_defeat',
 		'dialog': [
-			"Ha!Ha! You guys are good. I don't intend to hang around for you to finish the job. See you later!"
+			"Ha! Ha! You guys are good. I'm not sticking around for the finale, though. See ya!"
 		]
 	},
 	{
-		'npc_id': 'skill', # skill(Poise) that guy was fast
-		'dialog_id': 'skill_that_guy_was_fast',
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch1_seth_escape',
 		'dialog': [
-			"That guy was fast!"
+			"Get back here!",
+			"...I wasn't done with his face. Fine. Let's go tell Rook."
+		]
+	},
+	{
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch1_seth_escape',
+		'dialog': [
+			"He's hurt, but he'll live. I'm glad of that.",
+			"Rook should hear what happened."
 		]
 	},
 	{
 		'npc_id': 'magic', 
-		'dialog_id': 'magic_haha_he_cant_wait_to_get_away',
+		'dialog_id': 'magic_ch1_seth_escape',
 		'dialog': [
-			"Hahaha! Look at him run!"
+			"Hahaha! Look at him run!",
+			"Rook is going to love this. Or hate it."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch1_seth_escape',
+		'dialog': [
+			"We didn't catch him, but we proved we could. That's worth something."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch1_seth_escape',
+		'dialog': [
+			"That guy was fast.",
+			"Report."
 		]
 	},
 	{
 		'npc_id': 'rook',
 		'dialog_id': 'rook_ch1_closing',
 		'dialog': [
-			"So ya managed to find him.  He's pretty crafty, it's no doubt he got away.",
-			"Still funny to hear he got his ass kicked.",
-			"Tell you what, I'll give you half of what I intended.",
-			"With all that cash you should head to the bar and get a µ."
+			"So you found him. And he got away.",
+			"...He always does. Still, I hear you left a mark. That's more than most manage.",
+			"Half the bounty. Fair is fair.",
+			"You look like you need a drink. The bar's that way. Get yourself a µ."
+		]
+	},
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch1_rook_report',
+		'dialog': [
+			"Free money and a bar. It's about time, I need a fucking drink."
+		]
+	},
+	{
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch1_rook_report',
+		'dialog': [
+			"A bar... that's where all of this started.",
+			"Maybe someone there has heard something about the others."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_ch1_rook_report',
+		'dialog': [
+			"Last time we had drinks, we got teleported to another world.",
+			"Let's see what happens this time!"
 		]
 	},
 	{
 		'npc_id': 'tech', 
-		'dialog_id': 'tech_knocking_back_a_few',
+		'dialog_id': 'tech_ch1_rook_report',
 		'dialog': [
-			"I wouldn't mind knocking back a few drinks!"
+			"Bars are where information leaks. We go for the gossip, not the drinks.",
+			"...Mostly the gossip."
 		]
 	},
 	{
-		'npc_id': 'technique', 
-		'dialog_id': 'technique_good_idea_after_good_idea',
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch1_rook_report',
 		'dialog': [
-			"You know I'm beginning to like this place!"
+			"Bar. Listen more than we drink."
 		]
 	},
 	{
 		'npc_id': 'tess',
 		'dialog_id': 'tess_intro_s1',
 		'dialog': [
-			"Oooh! Here they are Sam. The ones Sylvi was talking about."
+			"Oooh! Here they are, Sam. The ones who fell out of the sky and roughed up Seth for Rook.",
+			"...And then let him run off. Charming."
+		]
+	},
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch1_tess_meet',
+		'dialog': [
+			"He had it coming.",
+			"Something about his face."
+		]
+	},
+	{
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch1_tess_meet',
+		'dialog': [
+			"We didn't want to hurt him. He didn't leave us much choice."
 		]
 	},
 	{
 		'npc_id': 'magic', 
-		'dialog_id': 'magic_to_sam_1',
+		'dialog_id': 'magic_ch1_tess_meet',
 		'dialog': [
-			"Hahaha! My reputation always preceeding me."
+			"Hahaha! My reputation precedes me. Already!"
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch1_tess_meet',
+		'dialog': [
+			"Word travels fast here. Noted."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch1_tess_meet',
+		'dialog': [
+			"He ran. He'll be back."
 		]
 	},
 	{
 		'npc_id': 'sam',
 		'dialog_id': 'sam_intro_s1',
 		'dialog': [
-            "Heard they went and busted up Seth pretty good for Rook. They could be useful.",
+			"Rook doesn't share his bounties. You must have impressed him.",
 			"Seth knows us too. Small world, messy debts."
-		]
-	},
-	{
-		'npc_id': 'technique', 
-		'dialog_id': 'technique_to_sam_1',
-		'dialog': [
-			"That guy had it coming. I knew the moment I saw him I wanted to punch him in the face."
 		]
 	},
 	{
 		'npc_id': 'tess',
 		'dialog_id': 'tess_intro_s2',
 		'dialog': [
-			"They definitely look like they can handle themselves.",
-			"Tell you what guys, you help us out and we'll help you out.",
-			"Head over and speak to Diego at the Æ.",
-			"Tell him Tess and Sam sent you. He'll tell you what you need to know from there."
+			"Did that weasel say anything about our tab? ...Of course he didn't.",
+			"So. You're new, you're nearly broke, and you're missing people. Don't look so surprised, it's all over your faces.",
+			"Here's the deal. You help us out, and we'll keep our ears open for anyone else who fell out of the sky.",
+			"Head over to the Æ and talk to Diego. Tell him Tess and Sam sent you."
+		]
+	},
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch1_tess_deal',
+		'dialog': [
+			"Deal. And if Seth shows up again, he's mine.",
+			"Diego. Let's move."
+		]
+	},
+	{
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch1_tess_deal',
+		'dialog': [
+			"Thank you. Truly. Any word of them would mean everything.",
+			"Let's find Diego."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_ch1_tess_deal',
+		'dialog': [
+			"A secret errand from two mysterious sisters? Say less.",
+			"To the Æ!"
 		]
 	},
 	{
 		'npc_id': 'tech', 
-		'dialog_id': 'tech_interested_in_gear',
+		'dialog_id': 'tech_ch1_tess_deal',
 		'dialog': [
-			"I'm interested to find out what kind of cool gear this world has."
+			"Their network for our labor. A fair trade.",
+			"Diego, at the Æ."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch1_tess_deal',
+		'dialog': [
+			"Diego. Æ. Go."
 		]
 	},
 	
@@ -438,53 +663,98 @@ NPC_DIALOG = [
 		'npc_id': 'diego',
 		'dialog_id': 'diego_intro',
 		'dialog': [
-			"Hmmmmm!  I can't say I've seen your faces before, and I've seen a lot of ugly faces.",
-			"Those trouble makers Tess and Sam sent you?  Interesting.",
+			"Hmmmmm! Can't say I've seen your faces before, and I've seen a lot of ugly faces.",
+			"Those troublemakers Tess and Sam sent you? Interesting.",
 			"I'm Diego. Ex-merc, glorified information salesman.",
-			"Those girls asked me to track down a relic for them called The Grift Stone.",
-			"I managed to track it to a black market dealer named Mira.",
-			"She stays in a nearby city and likes to frequent the µ unloading shady shit to shady people.",
-			"She won't give it up easy though.  Talk to Brawn at the Armory and maybe pick up some ¥ while you're there.",
-			"He's a real armor officionado, he'll most likely have something she'd be interested in."		
+			"The girls asked me to track down a relic for them called the Grift Stone.",
+			"I traced it to a black market dealer named Mira.",
+			"She stays in a nearby city and likes to frequent the µ, unloading shady shit to shady people.",
+			"She won't give it up easy, though. Talk to Brawn at the Armory, and maybe pick up some ¥ while you're there.",
+			"He's a real armor aficionado. He'll most likely have something she'd be interested in.",
+			"And yes, Tess told me you've misplaced some friends. I'll keep an ear out. No charge... this time."
 		]
 	},
-	{ #response to diego
-		'npc_id': 'technique', #also a, soldier, technique or Chock respects diegos scars and wonders what kind of hostiles this world offers
-		'dialog_id': 'technique_diego_intro',
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch1_diego',
 		'dialog': [
-			"Wouldn't mind a peek at some armor, I could do with a little upgrade."
+			"Armory? Finally. I could do with an upgrade."
 		]
-		
+	},
+	{
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch1_diego',
+		'dialog': [
+			"He'll listen for them. That's something.",
+			"Mira sounds dangerous. Let's be prepared."
+		]
 	},
 	{
 		'npc_id': 'magic', 
-		'dialog_id': 'magic_interested_in_mira',
+		'dialog_id': 'magic_ch1_diego',
 		'dialog': [
-			"Oooh hoo hoooo!!! I wonder what interesting items Mira has for sale!"
+			"Oooh hoo hoooo!!! A black market dealer!",
+			"I wonder what Mira has for sale! Armory first, I guess. Boo."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch1_diego',
+		'dialog': [
+			"A trade chain. Brawn's goods for Mira's stone.",
+			"Start at the Armory."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch1_diego',
+		'dialog': [
+			"Brawn. Armory."
 		]
 	},
 	{
 		'npc_id': 'brawn',
 		'dialog_id': 'brawn_intro',
 		'dialog': [
-			"Ho there! ... So Diego sent you?",
-			"Ha! He said I have something for you to trade with Mira?",
-			"As a matter of fact I have something she would love.",
-			"You're going to have to do something for me first though.",
-			"I'm pretty sure Seth jacked a pair of my ornate bracers.",
-			"Head back to his hideout and see if you can find them in there."
+			"Ho there! So Diego sent you, eh?",
+			"He reckons I've got something Mira would want. He's right. I do.",
+			"But I need a favour first. Seth swiped a pair of my ornate bracers. I'd bet my pension on it.",
+			"Bracers like those were worn by honor guards three wars back. They don't belong in a bandit's sack.",
+			"Search his hideout and bring them home."
 		]
 	},
 	{
 		'npc_id': 'technique',
-		'dialog_id': 'technique_brawn_intro',
+		'dialog_id': 'technique_ch1_brawn',
 		'dialog': [
-			"Seth again? Good. I wasn't done with him the first time."
+			"Seth again? Good.",
+			"I wasn't done with his face."
+		]
+	},
+	{
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch1_brawn',
+		'dialog': [
+			"They clearly mean a great deal to him. We'll bring them back."
+		]
+	},
+	{
+		'npc_id': 'magic',
+		'dialog_id': 'magic_ch1_brawn',
+		'dialog': [
+			"Breaking back into the bandit's hideout? Yes. I love a sequel."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch1_brawn',
+		'dialog': [
+			"We know the hideout's layout now. If he's stashing loot, it's in the final chamber."
 		]
 	},
 	{
 		'npc_id': 'skill',
-		'dialog_id': 'skill_brawn_intro',
+		'dialog_id': 'skill_ch1_brawn',
 		'dialog': [
 			"Stolen gear. Simple job. We move."
 		]
@@ -500,24 +770,57 @@ NPC_DIALOG = [
 		'npc_id': 'brawn',
 		'dialog_id': 'brawn_ch1_closing',
 		'dialog': [
-			"Aha! you found them!!! Aren't they beautiful.",
-			"Ok Mira will be interested in this cursed couplet I came across.",
-			"She's in Boiling Bubble at the moment and loves to hang out at the bar.",
-			"If you run into her give her the couplet for the Grift Stone..."
+			"Aha! You found them! Aren't they beautiful?",
+			"Don't let their looks fool you. These were never made for hitting. They were made to be remembered.",
+			"Now, Mira. Take her this cursed couplet I came across. She'll want it.",
+			"She's in Boiling Bubble at the moment, and she loves the bar there.",
+			"Trade it to her for the Grift Stone."
 		]
 	},
 	{
 		'npc_id': 'brawn',
 		'dialog_id': 'brawn_ch1_closing_no_logger',
 		'dialog': [
-			"You should speak to Sam before you go, she has something for you to help you out."
+			"And speak to Sam before you go. She has something that'll help you out."
+		]
+	},
+	{
+		'npc_id': 'technique',
+		'dialog_id': 'technique_ch1_couplet',
+		'dialog': [
+			"Cursed? Great. You're carrying it.",
+			"Boiling Bubble. Let's get rid of it."
+		]
+	},
+	{
+		'npc_id': 'spirit',
+		'dialog_id': 'spirit_ch1_couplet',
+		'dialog': [
+			"There's something sorrowful bound up in it.",
+			"Let's get it to Mira quickly. Boiling Bubble."
 		]
 	},
 	{
 		'npc_id': 'magic',
-		'dialog_id': 'magic_likes_cursed_couplet',
+		'dialog_id': 'magic_ch1_couplet',
 		'dialog': [
-			"I might be interested in it too?!? That thing looks powerful."
+			"I might be interested in it too?!? That thing looks powerful.",
+			"...Fine. Boiling Bubble. But I'm holding it on the way."
+		]
+	},
+	{
+		'npc_id': 'tech',
+		'dialog_id': 'tech_ch1_couplet',
+		'dialog': [
+			"A cursed object as currency. This economy is fascinating.",
+			"Next stop, Boiling Bubble."
+		]
+	},
+	{
+		'npc_id': 'skill',
+		'dialog_id': 'skill_ch1_couplet',
+		'dialog': [
+			"Boiling Bubble. Bar. Mira."
 		]
 	}
 
@@ -571,17 +874,26 @@ TASKS = [
 					'npc_id': None,
 					'dialog_id': 'chapter_1_start'
 				}
-			},			
+			},
+			{
+				'event_type': 'initiate_dialog',
+				'params': {
+					'npc_id': None,
+					'dialog_id': 'ch1_narrator_we_do_not_begin'
+				}
+			},
 			{
 				'event_type': 'player_character_join',
 				'params': {
-					'dialog_id': 'begin_game_add_pc'
+					'dialog_id': 'begin_game_add_pc',
+					'exclude_custom_class': True,
 				}
 			},		
 			{
 				'event_type': 'player_character_join',
 				'params': {
-					'dialog_id': 'begin_game_add_pc'
+					'dialog_id': 'begin_game_add_pc',
+					'exclude_custom_class': True,
 				}
 			},
 			{
@@ -605,7 +917,35 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'technique',
-					'dialog_id': 'technique_got_jacked'
+					'dialog_id': 'technique_ch1_seth_preface'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch1_seth_preface'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch1_seth_preface'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch1_seth_preface'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch1_seth_preface'
 				}
 			},
 			{
@@ -613,7 +953,7 @@ TASKS = [
 				'params': {
 					'npc_id': 'seth',
 					'standing_text': [
-						"You look good for a few."
+						"Still here? Like I said, trust nobody. Especially not me."
 					]
 				}
 			},
@@ -664,13 +1004,6 @@ TASKS = [
 						"Don't skimp on your protection."
 					]
 				}
-			},
-            {
-				'event_type': 'initiate_dialog',
-				'params': {
-					'npc_id': None,
-					'dialog_id': 'ch1_narrator_we_do_not_begin'
-				}
 			}
 			# ,
 			# #INITIATE OPTION DIALOG WITH 3 OPTIONS. HAVE THE TASKS DO NOTHING EXCEPT CALL NARRATOR DIALOG [initiate_dialog npc_id=None] STATING THE CHOICE THEY MADE
@@ -712,8 +1045,36 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch1_oren'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch1_oren'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch1_oren'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
 					'npc_id': 'tech',
-					'dialog_id': 'tech_says_somehow_i_think_were_there'
+					'dialog_id': 'tech_ch1_oren'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch1_oren'
 				}
 			},
 			{
@@ -893,15 +1254,36 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'skill',
-					'dialog_id': 'skill_loves_caffeine_shots'
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch1_rook_deal'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'technique',
-					'dialog_id': 'technique_ready_to_bust_bounty'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch1_rook_deal'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch1_rook_deal'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch1_rook_deal'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch1_rook_deal'
 				}
 			},
 			{
@@ -915,7 +1297,7 @@ TASKS = [
 				'params': {
 					'npc_id': 'rook',
 					'standing_text': [
-						"Bring him to me and I'll give you half the bounty. He's camped up in a hideout somewhere in the outskirts."
+						"Seth's hideout is on the outskirts. He's slippery. Don't let him talk his way out."
 					]
 				}
 			},
@@ -954,7 +1336,35 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'technique',
-					'dialog_id': 'technique_you_got_it_coming'
+					'dialog_id': 'technique_ch1_seth_fight'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch1_seth_fight'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch1_seth_fight'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch1_seth_fight'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch1_seth_fight'
 				}
 			},
 			{
@@ -962,7 +1372,7 @@ TASKS = [
 				'params': {
 					'npc_id': 'seth',
 					'standing_text': [
-						"Ha!Ha! You guys are good. I don't intend to hang around for you to finish the job. See you later!"
+						"Ha! Ha! You guys are good. I'm not sticking around for the finale, though. See ya!"
 					]
 				}
 			},
@@ -1000,15 +1410,36 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'skill',
-					'dialog_id': 'skill_that_guy_was_fast'
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch1_seth_escape'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch1_seth_escape'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'magic',
-					'dialog_id': 'magic_haha_he_cant_wait_to_get_away'
+					'dialog_id': 'magic_ch1_seth_escape'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch1_seth_escape'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch1_seth_escape'
 				}
 			},
 			{
@@ -1043,15 +1474,36 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'tech',
-					'dialog_id': 'tech_knocking_back_a_few'
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch1_rook_report'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
-					'npc_id': 'technique',
-					'dialog_id': 'technique_good_idea_after_good_idea'
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch1_rook_report'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch1_rook_report'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch1_rook_report'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch1_rook_report'
 				}
 			},
 			{
@@ -1065,7 +1517,7 @@ TASKS = [
 				'params': {
 					'npc_id': 'rook',
 					'standing_text': [
-						"Bring him to me and I'll give you half the bounty. He's camped up in a hideout somewhere in the outskirts."
+						"Seth will turn up again. He always does."
 					]
 				}
 			},
@@ -1117,8 +1569,36 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch1_tess_meet'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch1_tess_meet'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
 					'npc_id': 'magic',
-					'dialog_id': 'magic_to_sam_1'
+					'dialog_id': 'magic_ch1_tess_meet'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch1_tess_meet'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch1_tess_meet'
 				}
 			},
 			{
@@ -1126,13 +1606,6 @@ TASKS = [
 				'params': {
 					'npc_id': 'sam',
 					'dialog_id': 'sam_intro_s1'
-				}
-			},
-			{
-				'event_type': 'initiate_character_dialog',
-				'params': {
-					'npc_id': 'technique',
-					'dialog_id': 'technique_to_sam_1'
 				}
 			},
 			{
@@ -1145,8 +1618,36 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch1_tess_deal'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch1_tess_deal'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch1_tess_deal'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
 					'npc_id': 'tech',
-					'dialog_id': 'tech_interested_in_gear'
+					'dialog_id': 'tech_ch1_tess_deal'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch1_tess_deal'
 				}
 			},
 			{
@@ -1270,14 +1771,35 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'technique',
-					'dialog_id': 'technique_diego_intro'
+					'dialog_id': 'technique_ch1_diego'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch1_diego'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'magic',
-					'dialog_id': 'magic_interested_in_mira'
+					'dialog_id': 'magic_ch1_diego'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch1_diego'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch1_diego'
 				}
 			},
 			{
@@ -1335,14 +1857,35 @@ TASKS = [
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'technique',
-					'dialog_id': 'technique_brawn_intro'
+					'dialog_id': 'technique_ch1_brawn'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch1_brawn'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'magic',
+					'dialog_id': 'magic_ch1_brawn'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch1_brawn'
 				}
 			},
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
 					'npc_id': 'skill',
-					'dialog_id': 'skill_brawn_intro'
+					'dialog_id': 'skill_ch1_brawn'
 				}
 			},
 			{
@@ -1437,8 +1980,36 @@ TASKS = [
 			{
 				'event_type': 'initiate_character_dialog',
 				'params': {
+					'npc_id': 'technique',
+					'dialog_id': 'technique_ch1_couplet'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'spirit',
+					'dialog_id': 'spirit_ch1_couplet'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
 					'npc_id': 'magic',
-					'dialog_id': 'magic_likes_cursed_couplet'
+					'dialog_id': 'magic_ch1_couplet'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'tech',
+					'dialog_id': 'tech_ch1_couplet'
+				}
+			},
+			{
+				'event_type': 'initiate_character_dialog',
+				'params': {
+					'npc_id': 'skill',
+					'dialog_id': 'skill_ch1_couplet'
 				}
 			},
 			{

@@ -72,7 +72,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'base_hp': 55, 'base_ap': 3,
         'str_per_level': 0, 'dex_per_level': 1, 'con_per_level': 2, 'int_per_level': 1,
         'resistances': ['earth'],
-        'immunities': ['poison'],
+        'immunities': ['continuous_damage'],
         'weaknesses': ['fire'],
     },
     {
@@ -92,8 +92,8 @@ HOSTILE_SEEDS: List[Dict] = [
         'base_str': 4, 'base_dex': 2, 'base_con': 9, 'base_int': 1,
         'base_hp': 80, 'base_ap': 3,
         'str_per_level': 1, 'dex_per_level': 0, 'con_per_level': 3, 'int_per_level': 0,
-        'resistances': ['earth', 'poison'],
-        'immunities': ['slow'],
+        'resistances': ['earth', 'continuous_damage'],
+        'immunities': [],
         'weaknesses': ['fire'],
     },
     {

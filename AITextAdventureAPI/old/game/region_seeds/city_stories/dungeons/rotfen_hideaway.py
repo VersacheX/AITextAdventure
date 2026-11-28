@@ -51,7 +51,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'base_hp': 380, 'base_ap': 9,
         'str_per_level': 3, 'dex_per_level': 2, 'con_per_level': 2, 'int_per_level': 0,
         'resistances': ['water', 'earth'],
-        'immunities': ['slow'],
+        'immunities': [],
         'weaknesses': ['fire', 'light'],
     },
     {
@@ -72,7 +72,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'base_hp': 400, 'base_ap': 9,
         'str_per_level': 1, 'dex_per_level': 2, 'con_per_level': 2, 'int_per_level': 1,
         'resistances': ['dark', 'earth'],
-        'immunities': ['poison', 'sleep'],
+        'immunities': ['continuous_damage', 'sleep'],
         'weaknesses': ['fire', 'light'],
     },
     {
@@ -93,7 +93,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'base_hp': 560, 'base_ap': 9,
         'str_per_level': 1, 'dex_per_level': 0, 'con_per_level': 5, 'int_per_level': 0,
         'resistances': ['earth', 'water', 'physical'],
-        'immunities': ['stun', 'slow'],
+        'immunities': ['stun'],
         'weaknesses': ['fire'],
     },
     {
@@ -144,7 +144,7 @@ BOSS_HOSTILES: List[Dict] = [
         'base_hp': 9200, 'base_ap': 168,
         'str_per_level': 3, 'dex_per_level': 3, 'con_per_level': 3, 'int_per_level': 2,
         'resistances': ['dark', 'earth', 'water'],
-        'immunities': ['poison', 'sleep', 'slow', 'confuse'],
+        'immunities': ['continuous_damage', 'sleep', 'confuse'],
         'weaknesses': ['light', 'fire'],
     },
 ]
