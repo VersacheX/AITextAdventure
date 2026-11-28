@@ -755,6 +755,37 @@ def assign_character_elements(p, char_id=None, overwrite=False) -> None:
 	p.elements_base = list(getattr(p, 'elements_base', None) or [])
 
 
+def backfill_player_abilities(player, rng=None, ability_type_focus=None) -> None:
+	"""Ensure `player` knows as many abilities as its level has unlocked.
+
+	Ability slots unlock every `ability_acquirement_level_amount` levels
+	(IMPLEMENTATION_SPEC_leveling.md). Pre-assigned abilities (e.g. a named
+	character's hand-written signature/unique moves) already occupy some of
+	those unlocked slots -- this only fills whatever slots remain empty,
+	picking from the shared ability pool via `pick_abilities_for_player`.
+	Safe to call on any Player; no-ops if there's nothing left to fill.
+	"""
+	import random as _random
+	acquire_every = int(getattr(player, 'ability_acquirement_level_amount', 4) or 4)
+	total_slots = 1 + int(getattr(player, 'level', 1) or 1) // acquire_every
+	needed = total_slots - len(player.abilities)
+	if needed <= 0:
+		player.unused_ability_slots = max(0, total_slots - len(player.abilities))
+		return
+
+	rng = rng or _random.Random()
+	focus = ability_type_focus or getattr(player, 'character_class', None)
+
+	# local import to avoid a circular import at module load time
+	from combat_balancing_simulation.player_generator_equipment_service import pick_abilities_for_player
+
+	picks = pick_abilities_for_player(player, needed, None, focus, rng)
+	for pk in picks:
+		player.learn_ability(pk)
+
+	player.unused_ability_slots = max(0, total_slots - len(player.abilities))
+
+
 def generate_player_from_attainable_character_seed(seed) -> Player:
 	if not isinstance(seed, dict):
 		return None
@@ -800,6 +831,13 @@ def generate_player_from_attainable_character_seed(seed) -> Player:
 			if aseed:
 				ability_obj = _instantiate_from_seed(aseed)
 				p.abilities.append(ability_obj)
+	# The hand-written unique abilities above only fill a handful of fixed
+	# slots (IMPLEMENTATION_SPEC tiers: always 4 total). Backfill any
+	# remaining ability slots the character's level has actually unlocked
+	# with shared-pool abilities, same as a player character join.
+	import random as _random
+	seed_val = seed.get('id') or seed.get('npc_id') or p.name
+	backfill_player_abilities(p, rng=_random.Random(abs(hash(seed_val))), ability_type_focus=cls)
 	return p
 
 
