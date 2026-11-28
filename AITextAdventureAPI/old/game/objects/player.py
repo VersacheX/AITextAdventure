@@ -767,7 +767,7 @@ def backfill_player_abilities(player, rng=None, ability_type_focus=None) -> None
 	"""
 	import random as _random
 	acquire_every = int(getattr(player, 'ability_acquirement_level_amount', 4) or 4)
-	total_slots = int(getattr(player, 'level', 1) or 1) // acquire_every
+	total_slots = 1 + int(getattr(player, 'level', 1) or 1) // acquire_every
 	needed = total_slots - len(player.abilities)
 	if needed <= 0:
 		player.unused_ability_slots = max(0, total_slots - len(player.abilities))
