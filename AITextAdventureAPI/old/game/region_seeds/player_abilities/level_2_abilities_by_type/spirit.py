@@ -84,6 +84,9 @@ LEVEL_2_SPIRIT_ABILITY_SEEDS = [
  ## STATUS EFFECT (special)
  {"id": "light_dark_spirit_lv2_dusk_confessional", "name": "Dusk Confessional", "description": "A twilight rite that confuses foes.", "ability_type": "spirit", "level":2, "elements": ["light", "dark"], "base_power":0, "ap_cost":50, "effect": "status", "status_keys": ["confuse"], "can_aoe": True},
 
+    # --- Element fill (IMPLEMENTATION_SPEC_ability_fill.md) ---
+    {"id": "ice_dark_spirit_lv2_cold_comfort", "name": "Cold Comfort", "description": "Quiet comfort from the long night that soothes the party's wounds and wards them.", "ability_type": "spirit", "level": 2, "elements": ["ice", "dark"], "base_power": 0, "ap_cost": 44, "effect": "status", "status_keys": ["regen", "elemental_defense_buff"], "can_aoe": True},
+
 
  ##NON-PLAYER ABILITIES
  {"id": "lv2_hostile_ability_dark_dark_spirit_void_veil", "name": "Void Veil", "description": "A dark shroud that confuses enemies.", "ability_type": "spirit", "level":2, "elements": ["dark", "dark"], "base_power":1, "ap_cost":18, "effect": "status", "status_keys": ["elemental_debuff"], "can_aoe": True, "non_player_ability": True},

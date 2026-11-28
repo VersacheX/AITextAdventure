@@ -300,6 +300,299 @@ def _equip_subtitle(seed: dict, type_label: str) -> str:
     return "  ·  ".join(parts)
 
 
+# ── Ability sorting (mirrors tui.services.combat_renderer.ability_sort_key) ──
+# Effect ordering: damage, heal, cure, revive, then status (beneficial
+# statuses before detrimental ones). Within each bucket, sort by level.
+_ABILITY_EFFECT_ORDER: dict[str, int] = {
+    "damage": 0,
+    "heal": 1,
+    "cure": 2,
+    "revive": 3,
+    "status": 4,
+}
+
+
+def _ability_is_beneficial(seed: dict) -> bool:
+    """Mirror PlayerAbility._is_beneficial_ability() for a raw seed dict."""
+    import fnmatch
+    from game.constants_other import BENEFICIAL_PLAYER_ABILITY_EFFECTS
+
+    effect = str(seed.get("effect", "") or "").lower()
+    if effect != "status":
+        non_status_patterns = [
+            p for p in BENEFICIAL_PLAYER_ABILITY_EFFECTS if str(p).lower() != "status"
+        ]
+        return any(fnmatch.fnmatch(effect, str(p).lower()) for p in non_status_patterns)
+    keys = [str(k).lower() for k in (seed.get("status_keys") or [])]
+    buff_patterns = [p for p in BENEFICIAL_PLAYER_ABILITY_EFFECTS if "_buff" in str(p)] + ["regen"]
+    return bool(keys) and all(
+        any(fnmatch.fnmatch(k, str(p).lower()) for p in buff_patterns) for k in keys
+    )
+
+
+def _ability_sort_key(seed: dict) -> Tuple[int, int, int, int]:
+    """Sort key: ability level first (low to high), then ability type
+    (technique/spirit/magic/tech/skill order), then effect bucket, then
+    beneficial/harmful status ordering."""
+    from tui.services.dev.dataservices.ability_service import _TYPE_ORDER
+
+    level = int(seed.get("level", 1) or 1)
+    atype = str(seed.get("ability_type", "") or "").lower()
+    type_rank = _TYPE_ORDER.index(atype) if atype in _TYPE_ORDER else len(_TYPE_ORDER)
+    effect = str(seed.get("effect", "") or "").lower()
+    bucket = _ABILITY_EFFECT_ORDER.get(effect, len(_ABILITY_EFFECT_ORDER))
+    status_rank = 0
+    if effect == "status":
+        status_rank = 0 if _ability_is_beneficial(seed) else 1
+    return (level, type_rank, bucket, status_rank)
+
+
+# ── Effect label colors ──────────────────────────────────────────────────────
+# damage=red, heal=green, cure=teal, revive=white, status buff=vibrant
+# magenta, status debuff=dim orange. Hex values used directly (Rich supports
+# "#rrggbb" markup) so colors render consistently regardless of named-color
+# availability/ambiguity across terminals.
+_EFFECT_COLORS: dict[str, str] = {
+    "damage": "#ff5252",
+    "heal":   "#66bb6a",
+    "cure":   "#26c6da",
+    "revive": "#eeeeee",
+}
+_STATUS_BUFF_COLOR   = "#e040fb"
+_STATUS_DEBUFF_COLOR = "#ff9e4d"
+
+
+def _effect_color(seed: dict) -> str:
+    """Resolve the hex color for an ability's effect label."""
+    effect = str(seed.get("effect", "") or "").lower()
+    if effect == "status":
+        return _STATUS_BUFF_COLOR if _ability_is_beneficial(seed) else _STATUS_DEBUFF_COLOR
+    return _EFFECT_COLORS.get(effect, "#ffffff")
+
+
+# ── Per-level count breakdown ────────────────────────────────────────────────
+_COUNT_BREAKDOWN_LABELS: dict[str, str] = {
+    "damage":        "DMG",
+    "heal":          "HL",
+    "cure":          "CUR",
+    "revive":        "REV",
+    "status_buff":   "BUF",
+    "status_debuff": "DEB",
+}
+_COUNT_BREAKDOWN_ORDER: tuple[str, ...] = (
+    "damage", "heal", "cure", "revive", "status_buff", "status_debuff",
+)
+
+
+def _ability_effect_bucket(seed: dict) -> str:
+    """Resolve the count-breakdown bucket key (splits status into buff/debuff)."""
+    effect = str(seed.get("effect", "") or "").lower()
+    if effect == "status":
+        return "status_buff" if _ability_is_beneficial(seed) else "status_debuff"
+    return effect
+
+
+def _ability_count_breakdown(seeds: List[dict]) -> str:
+    """Colored, space-separated count-by-effect-type summary (e.g. '5 DMG  2 BUF'),
+    in fixed damage/heal/cure/revive/buff/debuff order, color-coded to match
+    `_ability_line`'s effect-label colors. Empty buckets are omitted."""
+    counts: dict[str, int] = {}
+    for s in seeds:
+        key = _ability_effect_bucket(s)
+        counts[key] = counts.get(key, 0) + 1
+
+    colors = {
+        "damage": _EFFECT_COLORS["damage"],
+        "heal": _EFFECT_COLORS["heal"],
+        "cure": _EFFECT_COLORS["cure"],
+        "revive": _EFFECT_COLORS["revive"],
+        "status_buff": _STATUS_BUFF_COLOR,
+        "status_debuff": _STATUS_DEBUFF_COLOR,
+    }
+    parts: list[str] = []
+    for key in _COUNT_BREAKDOWN_ORDER:
+        n = counts.get(key, 0)
+        if not n:
+            continue
+        color = colors[key]
+        label = _COUNT_BREAKDOWN_LABELS[key]
+        parts.append(f"[{color}]{n} {label}[/{color}]")
+    return "  ".join(parts)
+
+
+def _build_ability_tier_lines(tier_label: str, seeds: List[dict]) -> List[str]:
+    """Build the header + per-level sub-sections for one ability tier
+    ('Signature', 'Learnable Now', 'Learnable Later'). Seeds must already be
+    sorted by `_ability_sort_key` (level first). Each level sub-section gets
+    its own count and a colored effect-type count breakdown."""
+    from itertools import groupby
+
+    lines: List[str] = [f"Abilities — {tier_label} ({len(seeds)}):"]
+    for level, group in groupby(seeds, key=lambda s: int(s.get("level", 1) or 1)):
+        group_seeds = list(group)
+        breakdown = _ability_count_breakdown(group_seeds)
+        header = f"  Level {level} ({len(group_seeds)}):"
+        if breakdown:
+            header = f"{header}  {breakdown}"
+        lines.append(header)
+        lines.extend(f"    {_ability_line(s)}" for s in group_seeds)
+    return lines
+
+
+def _build_ability_total_lines(all_tier_seeds: List[dict]) -> List[str]:
+    """Build the 'Total Abilities' summary block from every seed across all
+    tiers (Signature + Learnable Now + Learnable Later): a grand total, then
+    a Lv.1–5 per-level total line, used right under Theme Song so pool size
+    is visible without expanding the full ability breakdown."""
+    if not all_tier_seeds:
+        return []
+
+    level_counts: dict[int, int] = {}
+    for s in all_tier_seeds:
+        level = int(s.get("level", 1) or 1)
+        level_counts[level] = level_counts.get(level, 0) + 1
+
+    lines: List[str] = [f"Total Abilities: {len(all_tier_seeds)}"]
+    level_parts = [
+        f"Lv.{lvl}: {level_counts[lvl]}"
+        for lvl in sorted(level_counts.keys())
+    ]
+    lines.append("  " + "  ".join(level_parts))
+    return lines
+
+
+def _ability_line(seed: dict) -> str:
+    """One-line summary for an ability seed, with the effect label wrapped
+    in Rich markup colored by effect type (damage/heal/cure/revive/status
+    buff/status debuff). Callers that render this through plain-text paths
+    must NOT re-escape it — see `_render_character_detail`'s ability-section
+    handling, which renders these lines unescaped.
+
+    Elements and statuses are rendered via the canonical `fmt_element_glyphs`/
+    `fmt_status_glyphs` helpers so wide-rendering glyphs (fire, ice, earth,
+    continuous_damage, regen, …) get the same spacer compensation used
+    everywhere else in the game (WIDE_SYMBOL_KEYS), instead of raw lookups
+    that would visually collide with the next character.
+    """
+    from tui.services.dev.dataservices.ability_service import _TYPE_LABELS, _EFFECT_LABELS
+    from game.constants_other import fmt_element_glyphs, fmt_status_glyphs
+
+    name    = str(seed.get("name", seed.get("id", "?")))
+    level   = int(seed.get("level", 1) or 1)
+    atype   = str(seed.get("ability_type", "") or "")
+    effect  = str(seed.get("effect", "") or "")
+    ap_cost = seed.get("ap_cost", 0)
+    elements = seed.get("elements") or []
+    status_keys = seed.get("status_keys") or []
+    elem_str = fmt_element_glyphs(elements) if elements else ""
+    status_str = fmt_status_glyphs(status_keys) if status_keys else ""
+    type_label   = _TYPE_LABELS.get(atype, atype.title())
+    effect_label = _EFFECT_LABELS.get(effect, effect.title())
+    color = _effect_color(seed)
+    effect_markup = f"[{color}]{effect_label}[/{color}]"
+    aoe = "  ◆AOE" if seed.get("can_aoe") else ""
+    glyphs = elem_str
+    if status_str:
+        glyphs = f"{glyphs}  {status_str}" if glyphs else status_str
+    return f"{name}  Lv.{level}  {type_label}  {effect_markup}  AP{ap_cost}  {glyphs}{aoe}"
+
+
+def _build_character_ability_lines(
+    cid: str,
+    const: Any,
+    hardcoded_ids: List[str] | None = None,
+    stats: Dict[str, int] | None = None,
+) -> Tuple[List[str], List[str]]:
+    """Build the 'Abilities' detail block for any character id (core-five
+    PLAYER_NPCS or ATTAINABLE_PLAYER_CHARACTERS alike).
+
+    Hand-written/signature ability ids (if any) are listed first (sorted
+    combat-style). Beneath them, every other ability this character could
+    ever learn from the shared pool — filtered only by class + element
+    (ignoring stat requirements, so the full tree is visible regardless of
+    current level) — is listed in two tiers, both sorted combat-style:
+
+      "Learnable Now"   — also passes the real stat requirements at the
+                          character's current/starting stats.
+      "Learnable Later" — class/element-eligible but needs higher stats
+                          (i.e. more levels) than the character has now.
+
+    `stats` lets callers supply known strength/dexterity/constitution/
+    intelligence (e.g. from an ATTAINABLE_PLAYER_CHARACTERS entry); when
+    omitted (core-five PLAYER_NPCS carry no stat block), the class's
+    level-1 curve stats are used.
+
+    Returns a ``(total_lines, ability_lines)`` tuple: ``total_lines`` is the
+    short 'Total Abilities: N' + per-level breakdown summary (meant to sit
+    right under Theme Song), and ``ability_lines`` is the full Signature/
+    Learnable Now/Learnable Later breakdown.
+    """
+    from game.objects.player_ability import can_learn
+    from game.region_seeds.player_abilities.ability_requirements import CLASS_LEVEL1_STATS
+
+    all_seeds = getattr(const, "PLAYER_ABILITY_SEEDS", []) or []
+    seed_map = {s.get("id"): s for s in all_seeds if isinstance(s, dict)}
+
+    hardcoded_ids = list(hardcoded_ids or [])
+
+    class _StubPlayer:
+        pass
+
+    stub = _StubPlayer()
+    char_class = (getattr(const, "CHARACTER_NPC_CLASS_MAP", {}) or {}).get(cid)
+    stub.character_class = char_class
+    stub.npc_id = cid
+    stub.id = cid
+    stub.elements_base = list(
+        (getattr(const, "CHARACTER_NPC_ELEMENT_MAP", {}) or {}).get(cid, []) or []
+    )
+
+    if stats:
+        stub.strength = int(stats.get("strength", 0) or 0)
+        stub.dexterity = int(stats.get("dexterity", 0) or 0)
+        stub.constitution = int(stats.get("constitution", 0) or 0)
+        stub.intelligence = int(stats.get("intelligence", 0) or 0)
+    else:
+        base = CLASS_LEVEL1_STATS.get(str(char_class or "").lower(), (8, 8, 8, 8))
+        stub.strength, stub.dexterity, stub.constitution, stub.intelligence = base
+
+    hardcoded_seeds = [seed_map[aid] for aid in hardcoded_ids if aid in seed_map]
+    hardcoded_seeds.sort(key=_ability_sort_key)
+
+    # Full class/element-eligible universe, ignoring stat requirements
+    # entirely (check_stats=False) so the whole learnable tree is visible
+    # regardless of the character's current level.
+    universe_seeds = [
+        s for s in all_seeds
+        if isinstance(s, dict)
+        and s.get("id") not in hardcoded_ids
+        and not s.get("non_player_ability")
+        and can_learn(stub, s, check_stats=False)
+    ]
+
+    now_seeds = [s for s in universe_seeds if can_learn(stub, s, check_stats=True)]
+    now_ids = {s.get("id") for s in now_seeds}
+    later_seeds = [s for s in universe_seeds if s.get("id") not in now_ids]
+
+    now_seeds.sort(key=_ability_sort_key)
+    later_seeds.sort(key=_ability_sort_key)
+
+    lines: List[str] = []
+    if hardcoded_seeds:
+        lines.extend(_build_ability_tier_lines("Signature", hardcoded_seeds))
+    if now_seeds:
+        if lines:
+            lines.append("")
+        lines.extend(_build_ability_tier_lines("Learnable Now", now_seeds))
+    if later_seeds:
+        if lines:
+            lines.append("")
+        lines.extend(_build_ability_tier_lines("Learnable Later", later_seeds))
+
+    total_lines = _build_ability_total_lines(hardcoded_seeds + now_seeds + later_seeds)
+    return total_lines, lines
+
+
 def _build_npc_profile_lines(npc: dict) -> list[str]:
     """Render the full character profile block from an NPC seed dict.
 
@@ -369,14 +662,34 @@ def _build_characters(const: Any) -> List[DevRecord]:
         if nid:
             npc_lookup[nid] = npc
 
+    class_map   = getattr(const, "CHARACTER_NPC_CLASS_MAP", {}) or {}
+    element_map = getattr(const, "CHARACTER_NPC_ELEMENT_MAP", {}) or {}
+
+    def _class_elements_suffix(cid: str) -> str:
+        parts: list[str] = []
+        cls = class_map.get(cid)
+        if cls:
+            parts.append(str(cls).title())
+        elements = element_map.get(cid) or []
+        if elements:
+            parts.append("/".join(str(e).title() for e in elements))
+        return " · ".join(parts)
+
     for npc in getattr(const, "PLAYER_NPCS", []) or []:
         cid   = str(npc.get("npc_id", "?"))
         name  = str(npc.get("name", cid))
         psych = npc.get("psychology") or {}
         lines = _build_npc_profile_lines(npc)
+        total_lines, ability_lines = _build_character_ability_lines(cid, const)
+        if total_lines:
+            lines.extend(total_lines)
+            lines.append("")
+        if ability_lines:
+            lines.extend(ability_lines)
+        subtitle_parts = [p for p in (psych.get("mbti", ""), _class_elements_suffix(cid)) if p]
         records.append(DevRecord(
             category="character", id=cid, name=name,
-            subtitle=psych.get("mbti", ""),
+            subtitle=" · ".join(subtitle_parts),
             detail="\n".join(lines),
             image=str(npc.get("image", "") or ""),
         ))
@@ -385,7 +698,6 @@ def _build_characters(const: Any) -> List[DevRecord]:
         cid      = str(pc.get("id", "?"))
         name     = str(pc.get("name", cid))
         level    = pc.get("level", "?")
-        abilities = pc.get("abilities", []) or []
 
         # Profile block from the matching NPC seed (cross-referenced by id)
         npc_seed = npc_lookup.get(cid, {})
@@ -407,18 +719,37 @@ def _build_characters(const: Any) -> List[DevRecord]:
             f"Arms   : {pc.get('arm_armor', 'None')}",
             f"Legs   : {pc.get('leg_armor', 'None')}",
         ]
-        if abilities:
+        total_lines, ability_lines = _build_character_ability_lines(
+            cid,
+            const,
+            hardcoded_ids=pc.get("abilities") or [],
+            stats={
+                "strength": pc.get("strength", 0),
+                "dexterity": pc.get("dexterity", 0),
+                "constitution": pc.get("constitution", 0),
+                "intelligence": pc.get("intelligence", 0),
+            },
+        )
+        if total_lines:
+            profile_lines.extend(total_lines)
+        if ability_lines:
             stat_lines.append("")
-            stat_lines.append("Abilities:")
-            stat_lines.extend(f"  {a}" for a in abilities)
+            stat_lines.extend(ability_lines)
 
         all_lines = profile_lines + ([""] if profile_lines else []) + stat_lines
+
+        subtitle_parts = [f"Unlockable · Lv.{level}"]
+        if psych.get("mbti"):
+            subtitle_parts.append(psych.get("mbti", ""))
+        class_elements = _class_elements_suffix(cid)
+        if class_elements:
+            subtitle_parts.append(class_elements)
 
         records.append(DevRecord(
             category="character",
             id=cid,
             name=name,
-            subtitle=f"Unlockable · Lv.{level}" + (f" · {psych.get('mbti', '')}" if psych.get("mbti") else ""),
+            subtitle=" · ".join(subtitle_parts),
             detail="\n".join(all_lines),
             image=str(npc_seed.get("image", "") or ""),
         ))

@@ -90,6 +90,8 @@ LEVEL_2_TECH_ABILITY_SEEDS = [
    ##STATUS EFFECT
  {"id": "dark_air_lv2_echo_displacer", "name": "Echo Displacer", "description": "A device that disrupts sound resonance nearby.", "ability_type": "tech", "level":2, "elements": ["dark", "air"], "base_power":0, "ap_cost":30, "effect": "status", "status_keys": ["silence"], "can_aoe": True},
 
+    # --- Element fill (IMPLEMENTATION_SPEC_ability_fill.md) ---
+    {"id": "ice_electric_tech_lv2_superconductor_spike", "name": "Superconductor Spike", "description": "A supercooled spike that turns the target into a perfect conductor, then discharges.", "ability_type": "tech", "level": 2, "elements": ["ice", "electric"], "base_power": 29, "ap_cost": 24, "effect": "damage", "can_aoe": False},
 
 
    ##NON-PLAYER ABILITIES
