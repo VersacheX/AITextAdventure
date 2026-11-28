@@ -90,7 +90,8 @@ LEVEL_2_TECHNIQUE_ABILITY_SEEDS = [
    #THIS ISN'T TECHNIQUE WE CHANGE IT .... big slam into ground whammo sonic slam
  {"id": "air_dark_technique_lv2_hush_now", "name": "Sonic Slam", "description": "An effective technique involving slamming a weapon into the ground to create sonic waves.", "ability_type": "technique", "level":2, "elements": ["air", "dark"], "base_power":1, "ap_cost":40, "effect": "status", "status_keys": ["silence"], "can_aoe": True},
 
-
+    # --- Element fill (IMPLEMENTATION_SPEC_ability_fill.md) ---
+    {"id": "ice_electric_technique_lv2_thundersnow_maul", "name": "Thundersnow Maul", "description": "A maul swung through a sleet storm, landing with frost and thunder.", "ability_type": "technique", "level": 2, "elements": ["ice", "electric"], "base_power": 35, "ap_cost": 29, "effect": "damage", "can_aoe": False},
 
 
   #### NON PLAYER ABILITIES

@@ -41,14 +41,14 @@ CHARACTER_NPC_ELEMENT_MAP = {
     'tech':      ['electric', 'light', 'water', 'air'],   # Kade
     'skill':     ['air', 'light', 'ice', 'earth'],        # Poise
     # main-story
-    'lyren': ['water', 'earth'], 'vek': ['earth', 'dark'],
+    'lyren': ['water', 'earth'], 'vek': ['fire', 'dark'],
     'warden_hale': ['light', 'earth'], 'seraphine': ['light', 'air'],
     # regional
-    'nia': ['air', 'water'], 'sable': ['earth', 'air'], 'thorn': ['earth'], 'bragg': ['earth', 'fire'],
+    'nia': ['air', 'light'], 'sable': ['earth', 'air'], 'thorn': ['earth', 'dark'], 'bragg': ['earth', 'fire'],
     'ripple': ['water', 'dark'], 'kor_in': ['ice', 'air'], 'grimnaw': ['dark', 'electric'],
     # extended
-    'voss_caldera': ['earth', 'light'], 'rynn': ['water', 'ice'], 'eldon_dawnseer': ['light'],
-    'regent_sylvara': ['dark', 'electric'], 'ghost': ['dark', 'ice'], 'lira_emberforge': ['fire', 'earth'],
+    'voss_caldera': ['earth', 'light'], 'rynn': ['water', 'ice'], 'eldon_dawnseer': ['light', 'dark'],
+    'regent_sylvara': ['dark', 'electric'], 'ghost': ['dark', 'water'], 'lira_emberforge': ['fire', 'earth'],
     'osten_dreamweaver': ['dark', 'water'], 'lyric': ['electric', 'ice'], 'dare': ['fire', 'electric'],
     'andrea_starveil': ['light', 'fire'], 'veyr_ashcant': ['fire', 'light'], 'spark_maddox': ['electric', 'fire'],
     'anita': ['dark', 'air'], 'talon': ['earth', 'light'], 'alden_brightvein': ['light', 'electric'],
@@ -61,7 +61,7 @@ CHARACTER_NPC_ELEMENT_MAP = {
 CHARACTER_NPC_ELEMENT_MAP = main_characters.CHARACTER_NPC_ELEMENT_MAP
 ```
 
-Single-element characters are intentional: Thorn and Eldon. Recruits have 1–2 elements; only the core five have 4.
+Every recruit has exactly 2 elements; the core five have 4.
 
 ### 2.1 Design decisions behind the map
 

@@ -195,6 +195,8 @@ HP/AP depend on the exact level-1 setup. If your level-1 HP/AP differs by a few 
 
 ## Part 2: Character elements and learn restrictions
 
+**Superseded by `IMPLEMENTATION_SPEC_character_elements.md` and `IMPLEMENTATION_SPEC_elements_and_cleanup.md`.** Its element map is out of date.
+
 ### 2.1 Data
 
 Add to `game/region_seeds/main_characters.py`, next to `CHARACTER_NPC_CLASS_MAP` (export it through `game.constants` the same way). The core five are keyed by their class id, because that is their `npc_id`.

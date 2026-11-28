@@ -803,16 +803,50 @@ def _render_character_detail(detail_panel: Any, record: "DevRecord") -> None:
         lines.append("[green]Integrity: OK[/green]")
         lines.append("")
 
-    # Detail body — walk line-by-line, highlight invalid ids inline
+    # Detail body — walk line-by-line, highlight invalid ids inline.
+    # Ability section headers toggle dimming: everything under "Learnable
+    # Later" renders light grey (not yet reachable at current stats/level);
+    # "Signature"/"Learnable Now" lines render at normal brightness.
+    # Ability summary lines (built by record_builders._ability_line) already
+    # carry their own Rich markup (effect-colored label) — these must NOT be
+    # re-escaped, or the markup tags would render literally.
+    in_dim_section = False
+    in_ability_section = False
     for raw_line in record.detail.splitlines():
-        if not (invalid_equip or invalid_abilities):
-            # Nothing to highlight — fast path
+        stripped = raw_line.strip()
+
+        if stripped.startswith("Abilities — Learnable Later"):
+            in_dim_section = True
+            in_ability_section = True
+            lines.append(f"[grey50]{rich_escape(raw_line)}[/grey50]")
+            continue
+        if stripped.startswith("Abilities — "):
+            in_dim_section = False
+            in_ability_section = True
             lines.append(rich_escape(raw_line))
+            continue
+
+        if in_ability_section and stripped:
+            # Ability summary line — pre-formatted markup, pass through as-is.
+            if in_dim_section:
+                lines.append(f"[grey50]{raw_line}[/grey50]")
+            else:
+                lines.append(raw_line)
+            continue
+        if in_ability_section and not stripped:
+            # Blank line ends the abilities block.
+            in_ability_section = False
+
+        if not (invalid_equip or invalid_abilities):
+            # Nothing to highlight — fast path (still respects dimming)
+            if in_dim_section and stripped:
+                lines.append(f"[grey50]{rich_escape(raw_line)}[/grey50]")
+            else:
+                lines.append(rich_escape(raw_line))
             continue
 
         # Equipment lines: "Weapon : some_id"  /  "Head   : some_id"  etc.
         # The id is the token after the last colon, stripped.
-        stripped = raw_line.strip()
         if ":" in stripped and any(
             stripped.startswith(prefix)
             for prefix in ("Weapon", "Head", "Body", "Arms", "Legs", "Accessory")
@@ -825,13 +859,29 @@ def _render_character_detail(detail_panel: Any, record: "DevRecord") -> None:
                 )
                 continue
 
-        # Ability lines: the line is indented and contains only the ability id
-        if stripped and stripped in invalid_abilities:
-            indent = raw_line[: len(raw_line) - len(raw_line.lstrip())]
-            lines.append(f"{indent}[red]{rich_escape(stripped)}[/red]")
-            continue
+        # Ability lines: the line is indented and either contains only the
+        # ability id (legacy format) or a "Name  Lv.N  Type  ..." summary
+        # whose matching ability id can't be recovered from the text alone.
+        # Highlight the whole ability name token if we can match it to an
+        # invalid id by name lookup; otherwise fall back to exact-id match.
+        if stripped and invalid_abilities:
+            if stripped in invalid_abilities:
+                indent = raw_line[: len(raw_line) - len(raw_line.lstrip())]
+                lines.append(f"{indent}[red]{rich_escape(stripped)}[/red]")
+                continue
+            matched_id = next((aid for aid in invalid_abilities if aid and aid in stripped), None)
+            if matched_id:
+                indent = raw_line[: len(raw_line) - len(raw_line.lstrip())]
+                before, _, after = stripped.partition(matched_id)
+                lines.append(
+                    f"{indent}{rich_escape(before)}[red]{rich_escape(matched_id)}[/red]{rich_escape(after)}"
+                )
+                continue
 
-        lines.append(rich_escape(raw_line))
+        if in_dim_section and stripped:
+            lines.append(f"[grey50]{rich_escape(raw_line)}[/grey50]")
+        else:
+            lines.append(rich_escape(raw_line))
 
     static.update("\n".join(lines))
 

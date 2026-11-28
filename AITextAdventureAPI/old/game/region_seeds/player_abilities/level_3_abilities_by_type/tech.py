@@ -61,6 +61,9 @@ LEVEL_3_TECH_SEEDS = [
     {"id": "dark_earth_electric_tech_lv3_petrifying_shock", "name": "Petrifying Shock", "description": "A petrifying shock that turns enemies to stone.", "ability_type": "tech", "level":3, "elements": ["dark", "earth", "electric"], "base_power": 0, "ap_cost":85, "effect": "status", "status_keys": ["petrify"], "can_aoe": False},
     {"id": "dark_electric_water_tech_lv3_abyssal_current", "name": "Abyssal Current", "description": "An abyssal current that confuses enemies and short-circuits their focus.", "ability_type": "tech", "level":3, "elements": ["dark", "electric", "water"], "base_power": 0, "ap_cost":85, "effect": "status", "status_keys": ["confuse", "intelligence_debuff"], "can_aoe": False},
 
+    # --- Element fill (IMPLEMENTATION_SPEC_ability_fill.md) ---
+    {"id": "dark_light_electric_tech_lv3_eclipse_emitter", "name": "Eclipse Emitter", "description": "Alternating pulses of light and dark that scramble the target's senses.", "ability_type": "tech", "level": 3, "elements": ["dark", "light", "electric"], "base_power": 3, "ap_cost": 99, "effect": "status", "status_keys": ["confuse", "elemental_debuff"], "can_aoe": False},
+
     ## NON PLAYER ABILITIES
     # crux origin — lv3 filler: a cold diagnostic that silences
     {"id": "static_erasure", "name": "Static Erasure", "description": "Crux runs an immediate purge of the target's communication channels — all signals are replaced with white noise, the target is cut off from every ability to call out or respond, and their coordination collapses.", "ability_type": "tech", "level": 3, "elements": ["dark", "electric", "ice"], "base_power": 0, "ap_cost": 82, "effect": "status", "status_keys": ["silence", "dexterity_debuff"], "can_aoe": False, "non_player_ability": True},

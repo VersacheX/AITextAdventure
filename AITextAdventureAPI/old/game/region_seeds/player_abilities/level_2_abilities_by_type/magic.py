@@ -67,6 +67,9 @@ LEVEL_2_MAGIC_ABILITY_SEEDS = [
  {"id": "air_dark_magic_lv2_gloom_vortex", "name": "Gloom Vortex", "description": "A voided gust that saps vigor.", "ability_type": "magic", "level":2, "elements": ["air", "dark"], "base_power":4, "ap_cost":45, "effect": "status", "status_keys": ["continuous_damage"], "can_aoe": True},
  {"id": "electric_air_magic_lv2_storm_caltrops", "name": "Storm Caltrops", "description": "Electrified caltrops that shock a field.", "ability_type": "magic", "level":2, "elements": ["electric", "air"], "base_power":4, "ap_cost":45, "effect": "status", "status_keys": ["continuous_damage"], "can_aoe": True},
 
+    # --- Element fill (IMPLEMENTATION_SPEC_ability_fill.md) ---
+    {"id": "light_ice_magic_lv2_diamond_dust", "name": "Diamond Dust", "description": "Glittering ice crystals hang in the light, then slice through every foe.", "ability_type": "magic", "level": 2, "elements": ["light", "ice"], "base_power": 29, "ap_cost": 33, "effect": "damage", "can_aoe": True},
+
 
  ##NON-PLAYER ABILITIES
  {"id": "lv2_hostile_ability_fire_earth_magic_pyroclasm", "name": "Pyroclasm", "description": "A volcanic eruption of molten rock.", "ability_type": "magic", "level":2, "elements": ["fire", "earth"], "base_power":0, "ap_cost":35, "effect": "status", "status_keys": ["continuous_damage", "defense_debuff"], "can_aoe": True, "non_player_ability": True},
