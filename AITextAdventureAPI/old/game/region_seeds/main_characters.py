@@ -53,20 +53,21 @@ CHARACTER_NPC_CLASS_MAP = {
 CHARACTER_NPC_ELEMENT_MAP = {
 	# core 5 (keyed by class id, which is their npc_id). They start with no
 	# abilities and build their whole kit from the pool, so they get 4 elements.
+	# Every recruit below has exactly 2 elements; the core five have 4.
 	'technique': ['earth', 'fire', 'water', 'light'],     # Chock
 	'spirit':    ['light', 'water', 'fire', 'earth'],     # Kaera
 	'magic':     ['fire', 'ice', 'electric', 'dark'],     # Moxie
 	'tech':      ['electric', 'light', 'water', 'air'],   # Kade
 	'skill':     ['air', 'light', 'ice', 'earth'],        # Poise
 	# main-story
-	'lyren': ['water', 'earth'], 'vek': ['earth', 'dark'],
+	'lyren': ['water', 'earth'], 'vek': ['fire', 'dark'],
 	'warden_hale': ['light', 'earth'], 'seraphine': ['light', 'air'],
 	# regional
-	'nia': ['air', 'water'], 'sable': ['earth', 'air'], 'thorn': ['earth'], 'bragg': ['earth', 'fire'],
+	'nia': ['air', 'light'], 'sable': ['earth', 'air'], 'thorn': ['earth', 'dark'], 'bragg': ['earth', 'fire'],
 	'ripple': ['water', 'dark'], 'kor_in': ['ice', 'air'], 'grimnaw': ['dark', 'electric'],
 	# extended
-	'voss_caldera': ['earth', 'light'], 'rynn': ['water', 'ice'], 'eldon_dawnseer': ['light'],
-	'regent_sylvara': ['dark', 'electric'], 'ghost': ['dark', 'ice'], 'lira_emberforge': ['fire', 'earth'],
+	'voss_caldera': ['earth', 'light'], 'rynn': ['water', 'ice'], 'eldon_dawnseer': ['light', 'dark'],
+	'regent_sylvara': ['dark', 'electric'], 'ghost': ['dark', 'water'], 'lira_emberforge': ['fire', 'earth'],
 	'osten_dreamweaver': ['dark', 'water'], 'lyric': ['electric', 'ice'], 'dare': ['fire', 'electric'],
 	'andrea_starveil': ['light', 'fire'], 'veyr_ashcant': ['fire', 'light'], 'spark_maddox': ['electric', 'fire'],
 	'anita': ['dark', 'air'], 'talon': ['earth', 'light'], 'alden_brightvein': ['light', 'electric'],
@@ -245,41 +246,41 @@ PLAYER_NPC_JOIN_DIALOGS = [
 		'npc_id': 'technique', 
 		'dialog_id': 'begin_game_add_pc', 
 		'dialog': [
-			"Whoa... where are we? This place looks... ancient.",
-			"I don't know how we got here, but we need to stick together if we're going to figure this out.",
-			"Let's find some shelter and gather our thoughts."
+			"My head's killing me. Last thing I remember is ordering another round.",
+			"Where's everybody else? ...Fine. We find them. Then we find whoever did this and break something.",
+			"First, a roof. An inn. Somewhere I can sit down and think."
 	]},
 	{
 		'npc_id': 'spirit', 
 		'dialog_id': 'begin_game_add_pc', 
 		'dialog': [
-			"This land feels... different. Like it's alive in a way I've never felt before.",
-			"We must be cautious. There could be dangers lurking around every corner.",
-			"But I sense a purpose here. We were brought for a reason."
+			"Are you hurt? Let me look at you... you're alright. Thank the light.",
+			"But the others... I can't feel them anywhere near. We have to find them.",
+			"Let's find shelter first. An inn, somewhere safe to gather ourselves."
 	]},
 	{
 		'npc_id': 'magic', 
 		'dialog_id': 'begin_game_add_pc', 
 		'dialog': [
-			"Fascinating! The ambient magic here is unlike anything I've studied.",
-			"We should explore and see what secrets this place holds.",
-			"But first, let's ensure we're safe and have a plan."
+			"Okay. Okay! Who spiked the drinks? Because I want the recipe.",
+			"Wait. Where are the other three? Nobody leaves the party early. We're finding them.",
+			"Step one: an inn. Step two: a drink. Step three: answers. Probably in that order."
 	]},
 	{
 		'npc_id': 'tech', 
 		'dialog_id': 'begin_game_add_pc', 
 		'dialog': [
-			"Hmm, the technology here seems primitive, yet there's something intriguing about it.",
-			"We need to assess our surroundings and figure out how to adapt.",
-			"Survival is our first priority; everything else can wait."
+			"Flash, pressure drop, then here. That wasn't a hallucination. That was a transfer.",
+			"Six of us were in that bar. If three of us landed here, the other three landed somewhere. Not nowhere.",
+			"We need a base of operations. An inn is the logical start."
 	]},
 	{
 		'npc_id': 'skill', 
 		'dialog_id': 'begin_game_add_pc', 
 		'dialog': [
-			"This environment is unfamiliar, but I can feel its challenges ahead.",
-			"We must rely on our skills and instincts to navigate this place.",
-			"Let's stay alert and work together to overcome whatever lies ahead."
+			"Not our bar. Not our city.",
+			"Three missing. No blood, no bodies. They're alive.",
+			"Shelter first. The inn. Then we hunt."
 	]},
 	### CHAPTER 2 JOINS ... "this world is crazy... Everywhere is chaos... took a job to get ingredients.  need help with gorgon ... basic concept
 	### WE are actually coming to see the newly added character in a fight, so they urgently need help
@@ -287,40 +288,45 @@ PLAYER_NPC_JOIN_DIALOGS = [
 		'npc_id': 'technique',
 		'dialog_id': 'ch2_add_pc',
 		'dialog': [
-			"This world is in chaos. I took a job to gather ingredients, but it was more dangerous than I expected.",
-			"Care to give me a hand here?"
+			"...You. YOU! Took you long enough!",
+			"Some chemist paid me to fetch a weed out of this hole. Then THAT showed up.",
+			"Hug later. Hit that thing now."
 		]
 	},
 	{
 		'npc_id': 'spirit',
 		'dialog_id': 'ch2_add_pc',
 		'dialog': [
-			"The turmoil in this world is overwhelming. I was gathering ingredients for a ritual when things went awry.",
-			"I don't think I can handle this monster."
+			"It's you... it's really you. I prayed someone would find me.",
+			"I took a job gathering herbs here so I could eat. I didn't know this thing was guarding them.",
+			"Please... I can't hold it back alone."
 		]
 	},
 	{
 		   'npc_id': 'magic',
 		   'dialog_id': 'ch2_add_pc',
 		   'dialog': [
-			   "The magical disturbances here are unlike anything I've seen. I was collecting rare components when I was ambushed.",
-			   "I could use some assistance against this creature."
+			   "Oh, thank everything, familiar faces! I was about to start naming it.",
+			   "Courier job, they said. Easy money, they said.",
+			   "Okay, reunion later, monster now!"
 		   ]
 	},
 	{
 		   'npc_id': 'tech',
 		   'dialog_id': 'ch2_add_pc',
 		   'dialog': [
-			   "This world's technology is wild. I was scavenging for parts when I ran into trouble.",
-			   "I need backup to deal with this threat."
+			   "You're here. Good. My odds just improved considerably.",
+			   "I took a supply run to fund the search for you. The ingredient is behind that.",
+			   "Discuss later. Engage now."
 		   ]
 	},
 	{
 		   'npc_id': 'skill',
 		   'dialog_id': 'ch2_add_pc',
 		   'dialog': [
-			   "The chaos in this place is intense. I was on a job to acquire some items when I got caught off guard.",
-			   "I could use some help taking down this beast."
+			   "You found me.",
+			   "Courier job. Ingredient's behind it.",
+			   "Fight. Talk after."
 		   ]
 	},
 	{

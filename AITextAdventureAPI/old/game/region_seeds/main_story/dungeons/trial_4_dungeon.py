@@ -41,7 +41,7 @@ HOSTILE_SEEDS = [
         'basic_attack': 'intrusive thought', 'strong_attack': 'belief erosion', 'player_abilities': ['dark_spirit_lv1_shade_whisper'],
         'base_str': 40, 'base_dex': 50, 'base_con': 45, 'base_int': 70, 'base_hp': 42000, 'base_ap': 450,
         'str_per_level': 4, 'dex_per_level': 6, 'con_per_level': 5, 'int_per_level': 9,
-        'resistances': ['dark', 'poison'], 'immunities': ['confuse', 'silence'], 'weaknesses': ['light', 'fire']
+        'resistances': ['dark', 'continuous_damage'], 'immunities': ['confuse', 'silence'], 'weaknesses': ['light', 'fire']
     },
     {
         'id': 'determinism_construct', 'name': 'Determinism Construct', 'hostile_type': 'construct', 'min_spawn_level': 101, 'role': 'damage', 'rarity': 'superrare',
@@ -87,7 +87,7 @@ BOSS_HOSTILES = [
         'basic_attack': 'whispered doubt', 'strong_attack': 'belief collapse', 'player_abilities': ['intrusive_truth', 'self_sabotage', 'unwanted_knowing'],
         'base_str': 45, 'base_dex': 55, 'base_con': 58, 'base_int': 75, 'base_hp': 330000, 'base_ap': 680,
         'str_per_level': 5, 'dex_per_level': 6, 'con_per_level': 7, 'int_per_level': 9,
-        'resistances': ['dark', 'poison'], 'immunities': ['confuse', 'stun', 'sleep', 'petrify', 'continuous_damage'], 'weaknesses': ['light']
+        'resistances': ['dark', 'continuous_damage'], 'immunities': ['confuse', 'stun', 'sleep', 'petrify', 'continuous_damage'], 'weaknesses': ['light']
     }
 ]
 

@@ -414,13 +414,29 @@ def new_game(api):
         print("Name cannot be empty. Returning to main menu.")
         return
 
+    from game.region_seeds.player_abilities.ability_requirements import CLASS_LEVEL1_STATS
+    from game.objects.player import apply_class_curve
+
+    class_order = [c for c in ("technique", "spirit", "magic", "tech", "skill") if c in CLASS_LEVEL1_STATS]
+    print("Choose a class:")
+    for i, cls in enumerate(class_order, 1):
+        print(f"  {i}) {cls.capitalize()}")
+    cls = class_order[0]
+    choice = input(f"Select an option (1-{len(class_order)}): ").strip()
+    if choice.isdigit() and 1 <= int(choice) <= len(class_order):
+        cls = class_order[int(choice) - 1]
+
     player = Player(name,0,0,0, False)
     #setup_player_stats(player)
+
+    apply_class_curve(player, cls, 1)
+    player.unused_ability_slots = 1  # apply_class_curve zeroes slots; a new character starts with 1
+    player.elements_base = []        # custom hero: every element (for now)
 
     # world state container
     pg = PlayerGame()
     from combat_balancing_simulation.player_generator import equip_player_character
-    equip_player_character(player, pg, focus='technique')
+    equip_player_character(player, pg, focus=cls)
     pg.add_character(player)
     clear_screen()
 

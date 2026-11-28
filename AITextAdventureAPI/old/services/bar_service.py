@@ -1,4 +1,3 @@
-from tkinter import CURRENT
 from typing import List, Dict, Any
 from game import constants as const
 

@@ -49,7 +49,7 @@ HOSTILE_SEEDS = [
         'basic_attack': 'feedback loop', 'strong_attack': 'recursive collapse', 'player_abilities': ['dark_spirit_lv1_shade_whisper'],
         'base_str': 52, 'base_dex': 55, 'base_con': 60, 'base_int': 72, 'base_hp': 54000, 'base_ap': 460,
         'str_per_level': 6, 'dex_per_level': 6, 'con_per_level': 7, 'int_per_level': 9,
-        'resistances': ['dark', 'poison', 'ice'], 'immunities': ['confuse', 'petrify', 'silence'], 'weaknesses': ['light', 'fire']
+        'resistances': ['dark', 'continuous_damage', 'ice'], 'immunities': ['confuse', 'petrify', 'silence'], 'weaknesses': ['light', 'fire']
     }
 ]
 

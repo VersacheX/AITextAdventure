@@ -38,7 +38,11 @@ def player_class_of(player):
 
 
 def can_learn(player, ability, check_stats: bool = True) -> bool:
-	"""Class tree + element set (+ stat requirements). Works for seed dicts and PlayerAbility objects."""
+	"""Class tree + element set (+ stat requirements). Works for seed dicts and PlayerAbility objects.
+
+	Requirements use base stats only; gear and other bonuses never count
+	(design rule, IMPLEMENTATION_SPEC_custom_character_class.md section 6).
+	"""
 	get = (lambda k: ability.get(k)) if isinstance(ability, dict) else (lambda k: getattr(ability, k, None))
 	if get('non_player_ability'):
 		return False
@@ -546,7 +550,8 @@ def get_potential_player_abilities(player: Optional[object] = None) -> List[Dict
 	 Each requirement specifies per-ability-level stat minima; the effective
 	 required stat is (per_level_value * ability_level). For example a spirit
 	 ability with level2 requires int13*2 and con9*2.@@-< Not the actual formula but yeh.
-	 -actual formula currently --- required = int(per_level_val) + int((int(per_level_val) * ((level - 1)* 1.5)) **1.25)
+	 -actual formula currently --- required = int(per_level_val) + int((int(per_level_val) * ((level - 1)* PLAYER_REQUIREMENT_SCALE)) **1.25),
+	 where PLAYER_REQUIREMENT_SCALE = 2.1 (hostiles use a separate, lower scale).
 	- Only abilities for which the player meets all required stats are returned.
 	- We return all abilities the player is capable of using ignoring existing abilities and non-player abilities.
 	- player.abilities are PlayerAbility objects strongly typed; we check .id against seed ids.

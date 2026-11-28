@@ -640,7 +640,10 @@ def player_character_join(params, player_game):
 	if 'is_final_character' in params and params['is_final_character']:
 		player_game.add_final_character(params.get('dialog_id'))
 	else:
-		player_game.add_random_player_character(params.get('dialog_id'))
+		player_game.add_random_player_character(
+			params.get('dialog_id'),
+			exclude_custom_class=bool(params.get('exclude_custom_class')),
+		)
 
 def character_join(params, player_game):
 	char_id = params.get('character_id') 

@@ -760,8 +760,9 @@ TASKS = [
                 }
             },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'catalyst', 'standing_text': [
-                "I am the Catalyst. The fracture’s herald and harbinger.",
-                "You cannot stop the collapse, but you can beg for a swift end."
+                "You come before me... incomplete.",
+                "One of your number still wanders the rift. I will not waste the collapse on a fraction.",
+                "Find them. Then return, and be ended whole."
             ] } },
             { 'event_type': 'create_npc', 'params': { 'npc_id': 'final_character', 'location': None } },
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'final_character', 'standing_text': ['???'] } },
@@ -790,8 +791,7 @@ TASKS = [
             }},
 
             # Award next task
-            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch4_meet_final_character' } },
-            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch4_meet_catalyst' } }
+            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch4_meet_final_character' } }
         ]
     },
 
@@ -811,7 +811,10 @@ TASKS = [
             { 'event_type': 'set_npc_standing_text', 'params': { 'npc_id': 'final_character', 'standing_text': [
                 "I’m ready. Whatever’s tearing this place apart... We end it together."] } },
             { 'event_type': 'hide_npc', 'params': { 'npc_id': 'final_character'} },
-            { 'event_type': 'player_character_join', 'params': { 'dialog_id': 'final_character_ch4_join', 'is_final_character': True } }
+            { 'event_type': 'player_character_join', 'params': { 'dialog_id': 'final_character_ch4_join', 'is_final_character': True } },
+            # Catalyst's meet task is only awarded now, after the final character
+            # has joined -- see IMPLEMENTATION_SPEC_ch4_final_character_gate.md.
+            { 'event_type': 'award_task', 'params': { 'task_id': 'main_story_ch4_meet_catalyst' } }
         ]
     },
 

@@ -49,7 +49,7 @@ HOSTILE_SEEDS = [
         'basic_attack': 'precise strike', 'strong_attack': 'flurry of cuts', 'player_abilities': [],
         'base_str': 32, 'base_dex': 30, 'base_con': 26, 'base_int': 15, 'base_hp': 1800, 'base_ap': 70,
         'str_per_level': 4, 'dex_per_level': 4, 'con_per_level': 3, 'int_per_level': 2,
-        'resistances': [], 'immunities': ['slow'], 'weaknesses': ['light']
+        'resistances': [], 'immunities': [], 'weaknesses': ['light']
     }
 ]
 

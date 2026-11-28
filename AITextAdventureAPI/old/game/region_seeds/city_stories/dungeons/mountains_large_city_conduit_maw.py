@@ -72,7 +72,7 @@ HOSTILE_SEEDS: List[Dict] = [
         'base_hp': 170, 'base_ap': 6,
         'str_per_level': 1, 'dex_per_level': 3, 'con_per_level': 1, 'int_per_level': 0,
         'resistances': [],
-        'immunities': ['slow'],
+        'immunities': [],
         'weaknesses': ['electric', 'light'],
     },
     {

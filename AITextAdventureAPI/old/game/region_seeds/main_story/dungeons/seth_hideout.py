@@ -111,7 +111,7 @@ HOSTILE_SEEDS = [
         'con_per_level': 2,
         'int_per_level': 1,
         'resistances': ['earth'],
-        'immunities': ['poison'],
+        'immunities': ['continuous_damage'],
         'weaknesses': ['fire']
     },
 
@@ -141,7 +141,7 @@ HOSTILE_SEEDS = [
         'con_per_level': 1,
         'int_per_level': 0,
         'resistances': [],
-        'immunities': ['slow'],
+        'immunities': [],
         'weaknesses': ['fire']
     },
 
@@ -172,7 +172,7 @@ HOSTILE_SEEDS = [
         'int_per_level': 0,
         'resistances': ['earth'],
         'immunities': [],
-        'weaknesses': ['lightning']
+        'weaknesses': ['electric']
     },
 
     # Superrare — Gloomfang Stalker

@@ -2,7 +2,6 @@ from typing import Any, Dict, List, Set, Tuple, Optional
 import random
 import importlib
 
-from pydantic.types import T
 from game.objects.city import City, Tile
 from game.objects.item import Item
 from game.objects.task import Task, build_task_from_seed, SpecialTaskToType, TaskType
@@ -977,11 +976,20 @@ class PlayerGame:
 			initiate_dialog_to_player_game(params, self)
 			self.add_info_dialog_line(None, f'{p.name} has joined your party!')
 
-	def add_random_player_character(self, dialog_id: str):
+	def get_custom_character_classes(self) -> set:
+		"""Classes held by the player-named hero (characters with no npc_id)."""
+		return {
+			str(getattr(c, 'character_class', '') or '').lower()
+			for c in self.get_all_characters()
+			if not getattr(c, 'npc_id', None) and getattr(c, 'character_class', None)
+		}
+
+	def add_random_player_character(self, dialog_id: str, exclude_custom_class: bool = False):
 		seed = int(time.time() * 1000) % 2147483647
 		# optionally mix in random to reduce collisions when loop is fast
 		seed ^= random.getrandbits(31)
-		p = self.generate_player_character(seed=seed, level=self.get_max_character_level())
+		exclude = self.get_custom_character_classes() if exclude_custom_class else None
+		p = self.generate_player_character(seed=seed, level=self.get_max_character_level(), exclude_classes=exclude)
 		p_name = p.name
 		npc_id = next(player_npc.get('npc_id') for player_npc in const.PLAYER_NPCS if player_npc.get('name') == p_name)
 
@@ -1010,12 +1018,15 @@ class PlayerGame:
 		self.add_character(p)
 		self.add_info_dialog_line(None, f'{p.name} has joined your party!')
 
-	def generate_player_character(self, seed, level, character_npc_id = None):
+	def generate_player_character(self, seed, level, character_npc_id = None, exclude_classes=None):
 		rng = random.Random(seed)
-		
+
 		if not character_npc_id:
 			exist_character_names = [ch.name for ch in self.get_all_characters()]
 			candidates = [ch_key for ch_key in const.CHARACTER_CLASS_MAP.keys() if const.CHARACTER_CLASS_MAP[ch_key] not in exist_character_names]
+			if exclude_classes:
+				filtered = [ch_key for ch_key in candidates if ch_key not in exclude_classes]
+				candidates = filtered or candidates   # never leave the pick empty
 
 			atype = rng.choice(candidates)
 		else:
@@ -1074,13 +1085,10 @@ class PlayerGame:
 				# main five fallback by npc_id (technique/spirit/magic/tech/skill)
 				if cid in getattr(const, 'CHARACTER_CLASS_MAP', {}):
 					inferred = cid
-			if not inferred:
-				# final fallback: infer from first known ability type
-				for ab in (getattr(character, 'abilities', None) or []):
-					atype = getattr(getattr(ab, 'ability_type', None), 'value', None)
-					if atype:
-						inferred = str(atype).lower()
-						break
+			# No further fallback: a character with no npc_id/id and no map
+			# entry (the player-named hero, outside of the New Game class
+			# picker) stays classless rather than guessing from abilities --
+			# see IMPLEMENTATION_SPEC_custom_character_class.md §5.
 			if inferred:
 				character.character_class = inferred
 
@@ -2079,12 +2087,10 @@ class PlayerGame:
 			inferred = class_map.get(cid)
 			if not inferred and cid in getattr(const, 'CHARACTER_CLASS_MAP', {}):
 				inferred = cid
-			if not inferred and cid:
-				for ab in (getattr(ch, 'abilities', None) or []):
-					atype = getattr(getattr(ab, 'ability_type', None), 'value', None)
-					if atype:
-						inferred = str(atype).lower()
-						break
+			# No further fallback: a character with no map entry (the
+			# player-named hero on an older save) stays classless rather than
+			# guessing from abilities -- see
+			# IMPLEMENTATION_SPEC_custom_character_class.md §5.
 			if inferred:
 				ch.character_class = inferred
 
